@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Civic Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <h1>Civic Intelligence</h1>
+        <span>Skagit</span>
+      </header>
+      <nav class="tabs" aria-label="Panels">
+        <button class="tab active" data-panel="conversation">Conversation</button>
+        <button class="tab" data-panel="case-file">Case File</button>
+      </nav>
+      <section class="panels">
+        <section id="conversation" class="panel conversation-panel">
+          <div id="history" class="history"></div>
+          <form id="ask-form" class="ask-form">
+            <input id="question" name="question" value="Tell me about parcel P48165" autocomplete="off" required>
+            <button type="submit">Ask</button>
+            <details class="notify-panel">
+              <summary>Notify when complete (optional)</summary>
+              <div class="notify-fields">
+                <label>
+                  <span>Email</span>
+                  <input id="notify-email" type="email" autocomplete="email" placeholder="planner@example.gov">
+                </label>
+                <label>
+                  <span>Webhook</span>
+                  <input id="notify-webhook" type="url" placeholder="https://webhook.site/...">
+                </label>
+                <fieldset>
+                  <legend>Only notify if confidence is:</legend>
+                  <label><input id="conf-high" type="checkbox" checked> High</label>
+                  <label><input id="conf-medium" type="checkbox" checked> Medium</label>
+                  <label><input id="conf-low" type="checkbox"> Low</label>
+                </fieldset>
+              </div>
+            </details>
+          </form>
+          <section class="case-history">
+            <h2>Recent Cases</h2>
+            <div id="case-history-list" class="case-history-list"></div>
+          </section>
+        </section>
+        <section id="case-file" class="panel case-panel">
+          <div id="case-content" class="empty-state">No case file loaded.</div>
+        </section>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

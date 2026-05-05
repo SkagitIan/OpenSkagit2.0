@@ -1,0 +1,81 @@
+sources:
+  federal_usgs_elevation:
+    name: "USGS National Elevation Dataset"
+    type: arcgis_rest
+    base_url: "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer"
+    domains:
+      - topography
+      - elevation
+      - geology
+    supports:
+      - query_by_geometry
+    config:
+      layer_id: 0
+      in_sr: 102100
+      server_type: "ImageServer"
+      note: "Verified 2026-05-05. ImageServer returns elevation pixel values through identify."
+
+  federal_usgs_geology:
+    name: "USGS Geologic Map"
+    type: arcgis_rest
+    base_url: "https://mrdata.usgs.gov/services/geo-us-2014/MapServer"
+    domains:
+      - geology
+      - soils
+      - lithology
+    supports:
+      - query_by_geometry
+    status: "needs_verification"
+    config:
+      layer_id: 0
+      in_sr: 4326
+      status: "needs_verification"
+      note: "Last checked 2026-05-05. Service root returned non-JSON; FeatureServer variation also returned non-JSON."
+
+  federal_blm_land:
+    name: "BLM Federal Land Status"
+    type: arcgis_rest
+    base_url: "https://gis.blm.gov/arcgis/rest/services/lands/BLM_Natl_SMA_LimitedScale/MapServer"
+    domains:
+      - federal_land
+      - blm
+      - grazing
+    supports:
+      - query_by_geometry
+    config:
+      layer_id: 1
+      in_sr: 102100
+      admin_state_field: "ADMIN_ST"
+      note: "Verified 2026-05-05. Original lands_and_realty grazing endpoint returned 404; current national SMA limited-scale service is reachable."
+
+  federal_blm_surface:
+    name: "BLM Surface Management Agency"
+    type: arcgis_rest
+    base_url: "https://gis.blm.gov/arcgis/rest/services/lands/BLM_Natl_SMA_Cached_without_PriUnk/MapServer"
+    domains:
+      - federal_land
+      - land_ownership
+      - land_management
+    supports:
+      - query_by_geometry
+    config:
+      layer_id: 1
+      in_sr: 102100
+      agency_field: "ADMIN_AGENCY_CODE"
+      note: "Verified 2026-05-05. Original lands_and_realty surface endpoint returned 404; current national SMA cached service is reachable."
+
+  federal_usfs_boundaries:
+    name: "USFS National Forest Boundaries"
+    type: arcgis_rest
+    base_url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_ForestSystemBoundaries_01/MapServer"
+    domains:
+      - federal_land
+      - forest
+      - usfs
+    supports:
+      - query_by_geometry
+    config:
+      layer_id: 0
+      in_sr: 102100
+      forest_name_field: "forestname"
+      note: "Verified 2026-05-05. Original apps.fs.usda.gov/arcgis endpoint returned 403; current ArcX endpoint is reachable."

@@ -1,0 +1,11 @@
+name = "skagit-agent-worker"
+main = "src/index.ts"
+compatibility_date = "2026-05-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[vars]
+SKAGIT_PROPERTY_SERVICE = "https://www.skagitcounty.net/Search/Property/Webservice.asmx"
+SKAGIT_ADDRESS_LAYER = "https://gis.skagitcountywa.gov/arcgis/rest/services/Assessor/PropertyMap/MapServer/3"

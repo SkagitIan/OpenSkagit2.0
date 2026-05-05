@@ -1,0 +1,10 @@
+{
+  "question": "Is parcel P48165 a good land flip?",
+  "entity": "P48165",
+  "required_sources": ["skagit_parcels", "skagit_zoning"],
+  "min_evidence_count": 2,
+  "confidence_min": "medium",
+  "answer_must_contain": ["P48165"],
+  "answer_must_not_contain": ["I don't know", "unable to"],
+  "missing_domains_acceptable": ["taxes", "recorded_documents", "flood"]
+}

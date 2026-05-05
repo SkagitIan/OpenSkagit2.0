@@ -1,0 +1,425 @@
+openapi: 3.1.0
+info:
+  title: Skagit County ArcGIS REST Master Action
+  version: 1.0.0
+  description: >
+    Read-only Custom GPT action schema for querying Skagit County ArcGIS REST
+    services directly. Pair this schema with the generated layer catalog in
+    SKAGIT_ARCGIS_CUSTOM_GPT_TECH_DOC.md so the GPT can select the correct
+    folder, service, layer id, fields, and query style.
+servers:
+  - url: https://gis.skagitcountywa.gov/arcgis/rest/services
+paths:
+  /:
+    get:
+      operationId: listRoot
+      summary: List ArcGIS REST root folders
+      description: Returns the Skagit County ArcGIS REST root directory metadata.
+      parameters:
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: ArcGIS root metadata.
+  /{folder}:
+    get:
+      operationId: listFolderServices
+      summary: List services in a folder
+      description: Lists services available inside a Skagit County ArcGIS REST folder.
+      parameters:
+        - $ref: '#/components/parameters/folder'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: Folder metadata and services.
+  /{folder}/{service}/{serverType}:
+    get:
+      operationId: getServiceMetadata
+      summary: Get service metadata
+      description: Returns service-level metadata, including layers, tables, capabilities, supported formats, and spatial reference.
+      parameters:
+        - $ref: '#/components/parameters/folder'
+        - $ref: '#/components/parameters/service'
+        - $ref: '#/components/parameters/serverType'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: ArcGIS service metadata.
+  /{folder}/{service}/{serverType}/layers:
+    get:
+      operationId: getAllLayersAndTables
+      summary: Get all layers and tables for a service
+      description: Returns the ArcGIS all-layers metadata page for a MapServer or FeatureServer.
+      parameters:
+        - $ref: '#/components/parameters/folder'
+        - $ref: '#/components/parameters/service'
+        - $ref: '#/components/parameters/serverType'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: All layers and tables metadata.
+  /{folder}/{service}/{serverType}/{layerId}:
+    get:
+      operationId: getLayerMetadata
+      summary: Get individual layer or table metadata
+      description: Returns fields, geometry type, extents, query capabilities, domains, and display metadata for one layer/table.
+      parameters:
+        - $ref: '#/components/parameters/folder'
+        - $ref: '#/components/parameters/service'
+        - $ref: '#/components/parameters/serverType'
+        - $ref: '#/components/parameters/layerId'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: Layer or table metadata.
+  /{folder}/{service}/{serverType}/{layerId}/query:
+    get:
+      operationId: queryLayer
+      summary: Query any Skagit County ArcGIS layer or table
+      description: >
+        Executes an ArcGIS REST query against discovered MapServer or
+        FeatureServer layers/tables. Use the generated layer catalog to select
+        folder, service, serverType, layerId, field names, and query patterns.
+        Prefer narrow outFields, returnGeometry=false, and resultRecordCount
+        unless the user explicitly asks for geometry/map output.
+      parameters:
+        - $ref: '#/components/parameters/folder'
+        - $ref: '#/components/parameters/service'
+        - $ref: '#/components/parameters/serverType'
+        - $ref: '#/components/parameters/layerId'
+        - name: where
+          in: query
+          description: Standardized ArcGIS SQL where clause. Use exact field names from layer metadata. Default to 1=1 only for counts, metadata checks, or tiny result samples.
+          schema:
+            type: string
+            default: "1=1"
+        - name: objectIds
+          in: query
+          description: Comma-separated Object IDs to fetch directly.
+          schema:
+            type: string
+        - name: outFields
+          in: query
+          description: Comma-separated fields to return. Use only fields needed for the answer; use * only for debugging or when the user requests all attributes.
+          schema:
+            type: string
+            default: "*"
+        - name: returnGeometry
+          in: query
+          description: Whether to return geometry. Keep false for normal attribute answers; set true for map links, coordinates, intersections, or spatial follow-up work.
+          schema:
+            type: boolean
+            default: false
+        - name: geometry
+          in: query
+          description: ArcGIS geometry JSON or simple envelope/point syntax for spatial queries.
+          schema:
+            type: string
+        - name: geometryType
+          in: query
+          description: Type of geometry parameter.
+          schema:
+            type: string
+            enum: [esriGeometryPoint, esriGeometryMultipoint, esriGeometryPolyline, esriGeometryPolygon, esriGeometryEnvelope]
+        - name: inSR
+          in: query
+          description: Input spatial reference WKID for geometry, commonly 4326, 3857, 102100, 2285, or 102748 depending on the source.
+          schema:
+            type: string
+        - name: spatialRel
+          in: query
+          description: Spatial relationship for geometry queries.
+          schema:
+            type: string
+            enum: [esriSpatialRelIntersects, esriSpatialRelContains, esriSpatialRelWithin, esriSpatialRelTouches, esriSpatialRelOverlaps, esriSpatialRelCrosses, esriSpatialRelEnvelopeIntersects, esriSpatialRelIndexIntersects]
+            default: esriSpatialRelIntersects
+        - name: outSR
+          in: query
+          description: Output spatial reference WKID. Use 4326 for mobile-friendly longitude/latitude output.
+          schema:
+            type: string
+        - name: returnCountOnly
+          in: query
+          description: Return only the count of matching records.
+          schema:
+            type: boolean
+            default: false
+        - name: returnIdsOnly
+          in: query
+          description: Return only matching Object IDs. Useful for paging past maxRecordCount.
+          schema:
+            type: boolean
+            default: false
+        - name: returnExtentOnly
+          in: query
+          description: Return only the result extent.
+          schema:
+            type: boolean
+            default: false
+        - name: orderByFields
+          in: query
+          description: Comma-separated order by expressions, for example NAME ASC.
+          schema:
+            type: string
+        - name: groupByFieldsForStatistics
+          in: query
+          description: Fields to group statistics by.
+          schema:
+            type: string
+        - name: outStatistics
+          in: query
+          description: ArcGIS JSON statistics expression string.
+          schema:
+            type: string
+        - name: resultOffset
+          in: query
+          description: Pagination offset for advanced-query layers.
+          schema:
+            type: integer
+            minimum: 0
+        - name: resultRecordCount
+          in: query
+          description: Maximum records to return. Use small values for mobile answers.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2000
+            default: 25
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: ArcGIS feature set, IDs, count, or extent.
+  /{folder}/{service}/{serverType}/find:
+    get:
+      operationId: findInMapService
+      summary: Search text across fields in a MapServer
+      description: MapServer find operation for text search across one or more layers. Use when the user gives a loose name/address and the exact field is unknown.
+      parameters:
+        - $ref: '#/components/parameters/folder'
+        - $ref: '#/components/parameters/service'
+        - $ref: '#/components/parameters/serverType'
+        - name: searchText
+          in: query
+          required: true
+          description: Text to search for.
+          schema:
+            type: string
+        - name: contains
+          in: query
+          description: Whether searchText can match partial field values.
+          schema:
+            type: boolean
+            default: true
+        - name: searchFields
+          in: query
+          description: Optional comma-separated fields to search.
+          schema:
+            type: string
+        - name: layers
+          in: query
+          description: Optional comma-separated layer ids to search.
+          schema:
+            type: string
+        - name: returnGeometry
+          in: query
+          schema:
+            type: boolean
+            default: false
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: MapServer find results.
+components:
+  parameters:
+    folder:
+      name: folder
+      in: path
+      required: true
+      description: Skagit County REST folder.
+      schema:
+        type: string
+        enum:
+              - "Assessor"
+              - "Basemaps"
+              - "CommunityBasemaps"
+              - "Districts"
+              - "EPL"
+              - "GeoCode"
+              - "GeoData"
+              - "Geocortex"
+              - "Geoprocessing"
+              - "Health"
+              - "Images"
+              - "Incidents"
+              - "OpenData"
+              - "ParksFacilities"
+              - "Planning"
+              - "PublicWorks"
+              - "SCData"
+              - "Sheriff"
+              - "StoryMaps"
+              - "Test"
+              - "TransportationUtilities"
+              - "Utilities"
+    service:
+      name: service
+      in: path
+      required: true
+      description: "Service name without folder prefix. The enum lists the first 250 discovered services for UI help; use the layer catalog for the complete service list."
+      schema:
+        type: string
+        enum:
+              - "ActiveBuildingPermits"
+              - "AdvancedHQPrinting2020"
+              - "AdvancedSecureHQPrinting"
+              - "AssessorCustomLayers"
+              - "AssessorDataParcels"
+              - "AssessorDataPoints"
+              - "BallotDropBoxWebMap"
+              - "BareEarthPlaneAdjust"
+              - "BaseLayers"
+              - "BasicPrinting"
+              - "BuildAMap_Topo"
+              - "CemeteryDistrictsWebMap"
+              - "CityWardsWebMap"
+              - "ClosedandAbandonedLandfillsMap"
+              - "CommissionerDistrictWebMap"
+              - "ComprehensivePlanWebMap"
+              - "CongressionalDistrictsWebMap"
+              - "CountyBuildingsOnly"
+              - "CountyOwnedProperties"
+              - "CountyPropertiesOnly"
+              - "CrimeData"
+              - "CrimeRelatedIncidentsForAGOL"
+              - "CriticalAreas"
+              - "DraftSMP_Service"
+              - "EPL_Data_Map"
+              - "EPL_Display_Map"
+              - "EPL_Feature_Map"
+              - "Elections"
+              - "ElectionsVoteWA"
+              - "EnvironmentalCanineServicesSewageDetectionMap"
+              - "FidalgoParkRecDistrict"
+              - "FireDistrictsWebMap"
+              - "GeocodingTools"
+              - "Geometry"
+              - "GroupAWaterSystemsMap"
+              - "GroupAandBWells"
+              - "HistoryBasemap"
+              - "HistoryMap"
+              - "HospitalDistrictsWebMap"
+              - "InclusiveHirersMap"
+              - "LegislativeDistrictsWebMap"
+              - "LibraryDistrictsWebMap"
+              - "LibraryServiceAreasWebMap"
+              - "Lidar2016EarthSurface"
+              - "Lidar2016Hillshade"
+              - "MunicipalBoundaries"
+              - "NPDESPermitAreaMap"
+              - "NPDESProMapService"
+              - "OfflinePackaging"
+              - "Other"
+              - "ParcelAccuracyImprovement"
+              - "ParcelAccuracyImprovementLayers"
+              - "ParcelNumbersAllScales"
+              - "PermittedOutdoorBurningLocations"
+              - "PipelinesMap"
+              - "PortCommissionerDistrictsWebMap"
+              - "PrintingTools"
+              - "Property"
+              - "PropertyInfoWebMap"
+              - "PropertyMap"
+              - "PropertyMapMobile"
+              - "PropertyMap_CU_Inside"
+              - "PropertySalesData"
+              - "PublicSafety"
+              - "PublicWorks"
+              - "RSOForAGOL"
+              - "RasterUtilities"
+              - "RestrictedCountyBridges"
+              - "RoadCenterline"
+              - "RoadMaintenanceDistrictsWebMap"
+              - "RoadRoutesFT"
+              - "SchoolDistrictsWebMap"
+              - "SecureHQPrinting"
+              - "SecuredPrinting"
+              - "SkagitBasemap"
+              - "SkagitCounty1937"
+              - "SkagitCounty1969"
+              - "SkagitCounty1998"
+              - "SkagitCounty2001"
+              - "SkagitCounty2004"
+              - "SkagitCounty2005"
+              - "SkagitCounty2006"
+              - "SkagitCounty2007"
+              - "SkagitCounty2009"
+              - "SkagitCounty2011"
+              - "SkagitCounty2011_6inch"
+              - "SkagitCounty2013"
+              - "SkagitCounty2013_4inch"
+              - "SkagitCounty2015"
+              - "SkagitCounty2015_4inch"
+              - "SkagitCounty2017"
+              - "SkagitCounty2017_1foot"
+              - "SkagitCounty2017_4inch"
+              - "SkagitCounty2018_6inch"
+              - "SkagitCounty2019_12inch"
+              - "SkagitCounty2019_4inch"
+              - "SkagitCounty2019_9inch"
+              - "SkagitCounty2020_6inch"
+              - "SkagitCounty2021_3inch"
+              - "SkagitCounty2021_9inch"
+              - "SkagitCountyAerials"
+              - "SkagitCountyBigLakeWaterMitigationProgramWebMap"
+              - "SkagitCountyDikeDistrictAssessmentAreas"
+              - "SkagitCountyDrainDistrictAssessmentAreas"
+              - "SkagitCountyDrainageProjectsMap"
+              - "SkagitCountyEmergencyMap"
+              - "SkagitCountyFarmlandLegacyPropertiesWebMap"
+              - "SkagitCountyFishPassageProjects"
+              - "SkagitCountyInstreamFlowAreaWebMap"
+              - "SkagitCountyNoxiousWeedsWSDAWeedViewer"
+              - "SkagitCountyRestorationProjects"
+              - "SkagitCountyRoadProjects"
+              - "SkagitCountySewerDistrictsWebMap"
+              - "SkagitCountySurfaceWaterSourceLimitedStreamsWebMap"
+              - "SkagitRegionalAirportEnvironsMap"
+              - "SkagitRiverPlane"
+              - "SnowLoadZonesWebMap"
+              - "SnowPlowPriorityWebMap"
+              - "StormwaterMap"
+              - "SurveyControlMap"
+              - "TribalAreasForCrimeMap"
+              - "VSPSampleData"
+              - "VotingPrecinctsWebMap"
+              - "WatershedsLowFlowStreamsMap"
+              - "WatershedsMap"
+              - "ZoningLandUsePermits"
+    serverType:
+      name: serverType
+      in: path
+      required: true
+      description: ArcGIS server resource type.
+      schema:
+        type: string
+        enum:
+              - "FeatureServer"
+              - "GPServer"
+              - "GeometryServer"
+              - "ImageServer"
+              - "MapServer"
+    layerId:
+      name: layerId
+      in: path
+      required: true
+      description: Numeric ArcGIS layer or table id from the generated catalog.
+      schema:
+        type: integer
+        minimum: 0
+    format:
+      name: f
+      in: query
+      description: ArcGIS response format. Use json for GPT actions; geojson can be useful for map clients when supported.
+      schema:
+        type: string
+        enum: [json, pjson, geojson]
+        default: json
