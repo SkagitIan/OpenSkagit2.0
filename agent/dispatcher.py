@@ -1,32 +1,40 @@
 from agent.adapters import arcgis, federal, web
 from agent.catalog.context import source_supports_query
 from agent.catalog.sources import get_source, get_sources_for_domains
+from agent import query_log
 
 
-async def execute_step(step: dict) -> dict:
+async def execute_step(step: dict, job_id: str | None = None) -> dict:
+    started_at = query_log.start_timer()
     source = _select_source(step)
     if not source:
-        return {
+        result = {
             "success": False,
             "domain": step["domain"],
             "error": _source_error(step),
         }
+        _log_if_job(job_id, step, source, {}, result, started_at)
+        return result
 
     if step.get("domain") not in source.get("domains", []):
-        return {
+        result = {
             "success": False,
             "domain": step["domain"],
             "source_id": source["id"],
             "error": f"Source {source['id']} does not support domain: {step['domain']}",
         }
+        _log_if_job(job_id, step, source, {}, result, started_at)
+        return result
 
     if not source_supports_query(source, step["query_type"]):
-        return {
+        result = {
             "success": False,
             "domain": step["domain"],
             "source_id": source["id"],
             "error": f"Source {source['id']} does not support query_type: {step['query_type']}",
         }
+        _log_if_job(job_id, step, source, {}, result, started_at)
+        return result
 
     params = _build_params(step)
     source_type = source["type"]
@@ -42,13 +50,15 @@ async def execute_step(step: dict) -> dict:
     elif source_type == "rest_api":
         result = await _dispatch_rest_api(source, step, params)
     else:
-        return {
+        result = {
             "success": False,
             "domain": step["domain"],
             "error": f"Unknown source type: {source_type}",
         }
+        _log_if_job(job_id, step, source, params, result, started_at)
+        return result
 
-    return {
+    normalized = {
         "source_id": source["id"],
         "source_name": source["name"],
         "domain": step["domain"],
@@ -56,7 +66,13 @@ async def execute_step(step: dict) -> dict:
         "data": result.get("features", result.get("records", [])),
         "count": result.get("count", 0),
         "error": result.get("error"),
+        "source_url": result.get("source_url"),
+        "source_urls": result.get("source_urls", []),
+        "http_status": result.get("http_status"),
+        "raw_excerpt": result.get("raw_excerpt"),
     }
+    _log_if_job(job_id, step, source, params, result, started_at)
+    return normalized
 
 
 def _select_source(step: dict) -> dict | None:
@@ -71,6 +87,22 @@ def _source_error(step: dict) -> str:
     if step.get("source_id"):
         return f"No active source registered with source_id: {step['source_id']}"
     return f"No source registered for domain: {step['domain']}"
+
+
+def _log_if_job(job_id: str | None, step: dict, source: dict | None, params: dict, result: dict, started_at: float) -> None:
+    if not job_id:
+        return
+    try:
+        query_log.log_attempt(
+            job_id=job_id,
+            step=step,
+            source=source,
+            params=params,
+            result=result,
+            started_at=started_at,
+        )
+    except Exception:
+        pass
 
 
 async def _dispatch_rest_api(source: dict, step: dict, params: dict) -> dict:

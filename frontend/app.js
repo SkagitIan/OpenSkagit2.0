@@ -271,17 +271,19 @@ async function loadAdminPanel() {
   const root = document.getElementById('admin-content');
   root.innerHTML = '<div class="loading"><span class="spinner"></span><span>Loading admin data...</span></div>';
   try {
-    const [statsResponse, sourcesResponse, auditResponse] = await Promise.all([
+    const [statsResponse, sourcesResponse, auditResponse, queriesResponse] = await Promise.all([
       apiFetch('/admin/stats'),
       apiFetch('/admin/sources'),
-      apiFetch('/admin/audit?limit=25')
+      apiFetch('/admin/audit?limit=25'),
+      apiFetch('/admin/queries?limit=25')
     ]);
-    if (!statsResponse.ok || !sourcesResponse.ok || !auditResponse.ok) {
+    if (!statsResponse.ok || !sourcesResponse.ok || !auditResponse.ok || !queriesResponse.ok) {
       throw new Error('Admin access failed');
     }
     const stats = await statsResponse.json();
     const sources = await sourcesResponse.json();
     const audit = await auditResponse.json();
+    const queries = await queriesResponse.json();
     root.innerHTML = `
       <section>
         <h2>Query Stats</h2>
@@ -306,9 +308,102 @@ async function loadAdminPanel() {
           item.created_at, item.entity || '', truncate(item.question || '', 90), item.confidence || '', `${item.duration_ms || 0} ms`
         ]))}
       </section>
+      <section>
+        <h2>Query Diagnostics</h2>
+        <div id="query-diagnostics"></div>
+      </section>
     `;
+    renderQueryDiagnostics(queries.queries || []);
   } catch (error) {
     root.innerHTML = `<div class="empty-state">${escapeHtml(error.message)}</div>`;
+  }
+}
+
+function renderQueryDiagnostics(queries) {
+  const root = document.getElementById('query-diagnostics');
+  if (!root) return;
+  if (!queries.length) {
+    root.innerHTML = '<div class="empty-state">No query attempts logged.</div>';
+    return;
+  }
+  root.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Source</th>
+            <th>Domain</th>
+            <th>Status</th>
+            <th>Count</th>
+            <th>Duration</th>
+            <th>Error</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${queries.map(item => `
+            <tr class="query-row" data-query-id="${escapeHtml(item.id)}">
+              <td>${escapeHtml(item.created_at || '')}</td>
+              <td>${escapeHtml(item.source_name || item.source_id || '')}</td>
+              <td>${escapeHtml(item.domain || '')}</td>
+              <td>${escapeHtml(item.status || '')}</td>
+              <td>${escapeHtml(String(item.count ?? 0))}</td>
+              <td>${escapeHtml(String(item.duration_ms ?? 0))} ms</td>
+              <td>${escapeHtml(truncate(item.error || '', 90))}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div id="query-detail" class="query-detail empty-state">Select a query row to inspect params, URLs, raw excerpt, and result preview.</div>
+  `;
+  root.querySelectorAll('.query-row').forEach(row => {
+    row.addEventListener('click', () => loadQueryDetail(row.dataset.queryId));
+  });
+}
+
+async function loadQueryDetail(queryId) {
+  const detail = document.getElementById('query-detail');
+  if (!detail) return;
+  detail.className = 'query-detail loading';
+  detail.innerHTML = '<span class="spinner"></span><span>Loading query detail...</span>';
+  try {
+    const response = await apiFetch(`/admin/queries/${queryId}`);
+    if (!response.ok) throw new Error(`Query detail failed: ${response.status}`);
+    const item = await response.json();
+    detail.className = 'query-detail';
+    detail.innerHTML = `
+      <h3>${escapeHtml(item.source_name || item.source_id || 'Query')}</h3>
+      <div class="fields">
+        <div class="field"><span>Status</span><strong>${escapeHtml(item.status || '')}</strong></div>
+        <div class="field"><span>Count</span><strong>${escapeHtml(String(item.count ?? 0))}</strong></div>
+        <div class="field"><span>Duration</span><strong>${escapeHtml(String(item.duration_ms ?? 0))} ms</strong></div>
+        <div class="field"><span>URL</span><strong>${escapeHtml(item.source_url || '')}</strong></div>
+      </div>
+      <details open>
+        <summary>Error</summary>
+        <pre>${escapeHtml(item.error || 'No error recorded.')}</pre>
+      </details>
+      <details>
+        <summary>Query params</summary>
+        <pre>${escapeHtml(JSON.stringify(item.query_params || {}, null, 2))}</pre>
+      </details>
+      <details>
+        <summary>Source URLs</summary>
+        <pre>${escapeHtml(JSON.stringify(item.source_urls || [], null, 2))}</pre>
+      </details>
+      <details>
+        <summary>Raw excerpt</summary>
+        <pre>${escapeHtml(item.raw_excerpt || '')}</pre>
+      </details>
+      <details>
+        <summary>Result preview</summary>
+        <pre>${escapeHtml(JSON.stringify(item.result || {}, null, 2))}</pre>
+      </details>
+    `;
+  } catch (error) {
+    detail.className = 'query-detail empty-state';
+    detail.textContent = error.message;
   }
 }
 

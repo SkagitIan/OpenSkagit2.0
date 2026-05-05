@@ -131,6 +131,25 @@ SOURCE_VERIFIER_ALERT_ON_WARNING=false
 
 If you want authenticated sources verified, also set their API keys, for example `SAM_API_KEY`. Without those keys, authenticated sources are recorded as warnings rather than failures.
 
+## Cloudflare D1 Persistence
+
+Local development uses SQLite at `D1_LOCAL_PATH`. Production can use Cloudflare D1 through the D1 HTTP API by setting:
+
+```bash
+D1_ACCOUNT_ID=...
+D1_DATABASE_ID=...
+D1_API_TOKEN=...
+```
+
+Create and initialize the database with Wrangler:
+
+```bash
+npx wrangler d1 create openskagit
+npx wrangler d1 execute openskagit --remote --file catalog/schema.sql
+```
+
+The app persists source metadata, jobs, case files, audit logs, source verification runs, planner output, and capped per-source query diagnostics. It does not mirror full civic source datasets into D1.
+
 ## Sources requiring manual configuration
 
 The Skagit Auditor recorded-document search is an ASP.NET WebForms page. The search page and field names were discoverable, but a stable parcel-specific POST endpoint was not confirmed during Phase 2 source discovery, so `skagit_auditor` is seeded with `status: "needs_manual_config"` and an empty `config.endpoint`.

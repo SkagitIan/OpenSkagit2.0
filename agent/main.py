@@ -1,7 +1,6 @@
 import json
 import os
 import re
-import sqlite3
 import asyncio
 import hashlib
 import secrets
@@ -15,9 +14,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse, Response
 from pydantic import BaseModel, Field
 from fastapi.staticfiles import StaticFiles
-from agent import analyst, audit, case_file, config, dispatcher, export, jobs, notifier, pdf, planner
+from agent import analyst, audit, case_file, config, db, dispatcher, export, jobs, notifier, pdf, planner, query_log
 from agent.auth import require_admin, require_reader, require_writer
-from agent.catalog.sources import DB_PATH, get_sources_for_domains
+from agent.catalog.sources import get_sources_for_domains
 
 
 app = FastAPI(title="Civic Intelligence Agent", version="0.1.0")
@@ -144,17 +143,17 @@ async def export_case_file(case_file_id: str, format: str = "markdown", current_
 async def list_cases(limit: int = 20, offset: int = 0, current_key: dict = Depends(require_reader)):
     limit = max(1, min(limit, 100))
     offset = max(0, offset)
-    with _connect_cases() as conn:
-        rows = conn.execute(
-            """
-            SELECT id, entity, question, confidence, created_at
-            FROM case_files
-            ORDER BY created_at DESC
-            LIMIT ? OFFSET ?
-            """,
-            (limit, offset),
-        ).fetchall()
-    return {"cases": [dict(row) for row in rows]}
+    _ensure_case_schema()
+    rows = db.fetchall(
+        """
+        SELECT id, entity, question, confidence, created_at
+        FROM case_files
+        ORDER BY created_at DESC
+        LIMIT ? OFFSET ?
+        """,
+        (limit, offset),
+    )
+    return {"cases": rows}
 
 
 @app.get("/health")
@@ -180,33 +179,57 @@ async def admin_stats(days: int = 30, current_key: dict = Depends(require_admin)
 
 @app.get("/admin/sources")
 async def admin_sources(current_key: dict = Depends(require_admin)):
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    try:
-        rows = conn.execute("SELECT id, name, type, active FROM sources WHERE active = 1 ORDER BY id").fetchall()
-        result = []
-        for source in rows:
-            stats = conn.execute(
-                """
-                SELECT count(*) as n, max(created_at) as last_used
-                FROM audit_log
-                WHERE sources_queried LIKE ?
-                """,
-                (f'%"{source["id"]}"%',),
-            ).fetchone()
-            result.append(
-                {
-                    "id": source["id"],
-                    "name": source["name"],
-                    "type": source["type"],
-                    "active": bool(source["active"]),
-                    "query_count": stats["n"],
-                    "last_used": stats["last_used"],
-                }
-            )
-        return {"sources": result}
-    finally:
-        conn.close()
+    query_log.ensure_query_schema()
+    rows = db.fetchall("SELECT id, name, type, active FROM sources WHERE active = 1 ORDER BY id")
+    result = []
+    for source in rows:
+        stats = db.fetchone(
+            """
+            SELECT count(*) as n, max(created_at) as last_used
+            FROM queries
+            WHERE source_id = ?
+            """,
+            (source["id"],),
+        )
+        result.append(
+            {
+                "id": source["id"],
+                "name": source["name"],
+                "type": source["type"],
+                "active": bool(source["active"]),
+                "query_count": stats["n"],
+                "last_used": stats["last_used"],
+            }
+        )
+    return {"sources": result}
+
+
+@app.get("/admin/queries")
+async def admin_queries(
+    job_id: Optional[str] = None,
+    case_file_id: Optional[str] = None,
+    source_id: Optional[str] = None,
+    status: Optional[str] = None,
+    limit: int = 50,
+    offset: int = 0,
+    current_key: dict = Depends(require_admin),
+):
+    return query_log.list_queries(
+        job_id=job_id,
+        case_file_id=case_file_id,
+        source_id=source_id,
+        status=status,
+        limit=limit,
+        offset=offset,
+    )
+
+
+@app.get("/admin/queries/{query_id}")
+async def admin_query_detail(query_id: str, current_key: dict = Depends(require_admin)):
+    item = query_log.get_query(query_id)
+    if not item:
+        return JSONResponse({"success": False, "error": "Query not found"}, status_code=404)
+    return item
 
 
 @app.get("/admin/audit")
@@ -228,24 +251,19 @@ async def admin_audit(
         where.append("confidence = ?")
         params.append(confidence)
 
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    try:
-        sql_where = " AND ".join(where)
-        rows = conn.execute(
-            f"""
-            SELECT id, job_id, question, entity, confidence, sources_queried, duration_ms, created_at
-            FROM audit_log
-            WHERE {sql_where}
-            ORDER BY created_at DESC
-            LIMIT ? OFFSET ?
-            """,
-            params + [limit, offset],
-        ).fetchall()
-        total = conn.execute(f"SELECT count(*) as n FROM audit_log WHERE {sql_where}", params).fetchone()["n"]
-        return {"total": total, "limit": limit, "offset": offset, "entries": [dict(row) for row in rows]}
-    finally:
-        conn.close()
+    sql_where = " AND ".join(where)
+    rows = db.fetchall(
+        f"""
+        SELECT id, job_id, question, entity, confidence, sources_queried, duration_ms, created_at
+        FROM audit_log
+        WHERE {sql_where}
+        ORDER BY created_at DESC
+        LIMIT ? OFFSET ?
+        """,
+        params + [limit, offset],
+    )
+    total = db.fetchone(f"SELECT count(*) as n FROM audit_log WHERE {sql_where}", params)["n"]
+    return {"total": total, "limit": limit, "offset": offset, "entries": rows}
 
 
 @app.post("/admin/keys")
@@ -254,11 +272,10 @@ async def create_api_key(body: CreateKeyRequest, current_key: dict = Depends(req
         raise HTTPException(status_code=400, detail="Role must be reader, writer, or admin")
     raw_key = f"civ_{secrets.token_urlsafe(32)}"
     key_hash = hashlib.sha256(raw_key.encode()).hexdigest()
-    with sqlite3.connect(DB_PATH) as conn:
-        conn.execute(
-            "INSERT INTO api_keys (id, key_hash, name, role) VALUES (?, ?, ?, ?)",
-            (f"key_{uuid.uuid4().hex[:12]}", key_hash, body.name, body.role),
-        )
+    db.execute(
+        "INSERT INTO api_keys (id, key_hash, name, role) VALUES (?, ?, ?, ?)",
+        (f"key_{uuid.uuid4().hex[:12]}", key_hash, body.name, body.role),
+    )
     return {
         "key": raw_key,
         "name": body.name,
@@ -292,8 +309,9 @@ async def run_ask(
                 None,
             )
 
-        evidence, missing = await _collect_evidence(plan)
+        evidence, missing = await _collect_evidence(plan, job_id)
         cf = case_file.build(question, plan.get("entity"), evidence, missing)
+        cf["plan"] = plan
         try:
             answer = await analyst.respond(question, cf)
         except Exception:
@@ -312,6 +330,7 @@ async def run_ask(
         )
         cf["answer"] = answer
         _save_case_file(job_id, cf)
+        query_log.attach_case_file_id(job_id, cf["id"])
         duration_ms = int((time.monotonic() - start_ms) * 1000)
         if current_key:
             audit.log_query(
@@ -335,7 +354,7 @@ async def run_ask(
         return result
 
 
-async def _collect_evidence(plan: dict) -> tuple[list[dict], list[str]]:
+async def _collect_evidence(plan: dict, job_id: Optional[str] = None) -> tuple[list[dict], list[str]]:
     import asyncio
 
     evidence: list[dict] = []
@@ -363,7 +382,7 @@ async def _collect_evidence(plan: dict) -> tuple[list[dict], list[str]]:
     ordered_results: list[object] = []
 
     if parcel_steps:
-        parcel_result = await dispatcher.execute_step(parcel_steps[0])
+        parcel_result = await dispatcher.execute_step(parcel_steps[0], job_id=job_id)
         ordered_steps.append(parcel_steps[0])
         ordered_results.append(parcel_result)
         if isinstance(parcel_result, dict):
@@ -373,14 +392,14 @@ async def _collect_evidence(plan: dict) -> tuple[list[dict], list[str]]:
     if parcel_geometry:
         remaining_steps = [_with_geometry_if_needed(step, parcel_geometry) for step in remaining_steps]
 
-    tasks = [dispatcher.execute_step(step) for step in remaining_steps]
+    tasks = [dispatcher.execute_step(step, job_id=job_id) for step in remaining_steps]
     results = await asyncio.gather(*tasks, return_exceptions=True)
     ordered_steps.extend(remaining_steps)
     ordered_results.extend(results)
 
     for step, result in zip(ordered_steps, ordered_results):
         if isinstance(result, Exception):
-            missing.append(step["domain"])
+            missing.append(f"{step['domain']}: {result}")
             continue
         if result.get("success") and result.get("count", 0) > 0:
             records = _normalize_records(result.get("data", []))
@@ -406,7 +425,8 @@ async def _collect_evidence(plan: dict) -> tuple[list[dict], list[str]]:
                 }
             )
         else:
-            missing.append(result.get("domain") or step["domain"])
+            reason = result.get("error") if isinstance(result, dict) else None
+            missing.append(f"{result.get('domain') or step['domain']}: {reason}" if reason else result.get("domain") or step["domain"])
 
     return evidence, missing
 
@@ -506,67 +526,71 @@ def _response(
     }
 
 
-def _connect_cases() -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    with conn:
-        conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS case_files (
-              id TEXT PRIMARY KEY,
-              job_id TEXT NOT NULL,
-              question TEXT NOT NULL,
-              entity TEXT,
-              evidence TEXT NOT NULL,
-              missing TEXT NOT NULL,
-              confidence TEXT NOT NULL,
-              answer TEXT,
-              sources_queried TEXT NOT NULL,
-              created_at TEXT DEFAULT (datetime('now'))
-            )
-            """
+def _ensure_case_schema() -> None:
+    db.execute(
+        """
+        CREATE TABLE IF NOT EXISTS case_files (
+          id TEXT PRIMARY KEY,
+          job_id TEXT NOT NULL,
+          question TEXT NOT NULL,
+          entity TEXT,
+          plan TEXT,
+          evidence TEXT NOT NULL,
+          missing TEXT NOT NULL,
+          confidence TEXT NOT NULL,
+          answer TEXT,
+          sources_queried TEXT NOT NULL,
+          created_at TEXT DEFAULT (datetime('now'))
         )
-    return conn
+        """
+    )
+    if not db.using_d1():
+        columns = {row["name"] for row in db.fetchall("PRAGMA table_info(case_files)")}
+        if "plan" not in columns:
+            db.execute("ALTER TABLE case_files ADD COLUMN plan TEXT")
 
 
 def _save_case_file(job_id: str, cf: dict) -> None:
+    _ensure_case_schema()
     CASE_CACHE[cf["id"]] = cf
-    with _connect_cases() as conn:
-        conn.execute(
-            """
-            INSERT INTO case_files
-              (id, job_id, question, entity, evidence, missing, confidence, answer, sources_queried, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(id) DO UPDATE SET
-              answer=excluded.answer,
-              evidence=excluded.evidence,
-              missing=excluded.missing,
-              confidence=excluded.confidence,
-              sources_queried=excluded.sources_queried
-            """,
-            (
-                cf["id"],
-                job_id,
-                cf["question"],
-                cf.get("entity"),
-                json.dumps(cf.get("evidence", [])),
-                json.dumps(cf.get("missing", [])),
-                cf.get("confidence", "low"),
-                cf.get("answer"),
-                json.dumps(cf.get("sources_queried", [])),
-                cf.get("created_at"),
-            ),
-        )
+    db.execute(
+        """
+        INSERT INTO case_files
+          (id, job_id, question, entity, plan, evidence, missing, confidence, answer, sources_queried, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(id) DO UPDATE SET
+          answer=excluded.answer,
+          plan=excluded.plan,
+          evidence=excluded.evidence,
+          missing=excluded.missing,
+          confidence=excluded.confidence,
+          sources_queried=excluded.sources_queried
+        """,
+        (
+            cf["id"],
+            job_id,
+            cf["question"],
+            cf.get("entity"),
+            json.dumps(cf.get("plan", {})),
+            json.dumps(cf.get("evidence", [])),
+            json.dumps(cf.get("missing", [])),
+            cf.get("confidence", "low"),
+            cf.get("answer"),
+            json.dumps(cf.get("sources_queried", [])),
+            cf.get("created_at"),
+        ),
+    )
 
 
 def _load_case_file(case_file_id: str) -> Optional[dict]:
+    _ensure_case_schema()
     if case_file_id in CASE_CACHE:
         return CASE_CACHE[case_file_id]
-    with _connect_cases() as conn:
-        row = conn.execute("SELECT * FROM case_files WHERE id = ?", (case_file_id,)).fetchone()
+    row = db.fetchone("SELECT * FROM case_files WHERE id = ?", (case_file_id,))
     if not row:
         return None
     cf = dict(row)
+    cf["plan"] = json.loads(cf.get("plan") or "{}")
     cf["evidence"] = json.loads(cf.get("evidence") or "[]")
     cf["missing"] = json.loads(cf.get("missing") or "[]")
     cf["sources_queried"] = json.loads(cf.get("sources_queried") or "[]")

@@ -64,3 +64,59 @@ def test_job_returns_saved_result():
 def test_ask_requires_question():
     response = client.post("/ask", json={"context": {}}, headers=AUTH_HEADER)
     assert response.status_code == 422
+
+
+def test_admin_queries_returns_logged_attempts():
+    response = client.get("/admin/queries?limit=5", headers=AUTH_HEADER)
+    assert response.status_code == 200
+    data = response.json()
+    assert "queries" in data
+    assert "total" in data
+
+
+def test_ask_failed_source_writes_query_diagnostics():
+    plan = {
+        "entity": "Sedro-Woolley",
+        "entity_type": "municipality",
+        "steps": [
+            {
+                "step": 1,
+                "source_id": "sedro_woolley_permits",
+                "domain": "permits",
+                "query_type": "by_date",
+                "aggregate_mode": "count_by_status",
+                "status_filter": "active",
+                "reason": "Count active permits",
+            }
+        ],
+        "ambiguous": False,
+        "clarification_needed": None,
+    }
+    adapter_result = {
+        "success": False,
+        "records": [],
+        "count": 0,
+        "source_url": "https://sedro-woolley.portal.iworq.net/SEDRO-WOOLLEY/permits/601",
+        "raw_excerpt": "captcha required",
+        "error": "HTTP 403",
+    }
+    with patch("agent.main.planner.create_plan", new=AsyncMock(return_value=plan)):
+        with patch("agent.dispatcher.web.query", new=AsyncMock(return_value=adapter_result)):
+            response = client.post(
+                "/ask",
+                json={"question": "How many active permits are in Sedro-Woolley?"},
+                headers=AUTH_HEADER,
+            )
+
+    assert response.status_code == 200
+    job_id = response.json()["job_id"]
+    queries = client.get(f"/admin/queries?job_id={job_id}", headers=AUTH_HEADER)
+    assert queries.status_code == 200
+    items = queries.json()["queries"]
+    assert len(items) == 1
+    assert items[0]["source_id"] == "sedro_woolley_permits"
+    assert items[0]["status"] == "failed"
+
+    detail = client.get(f"/admin/queries/{items[0]['id']}", headers=AUTH_HEADER)
+    assert detail.status_code == 200
+    assert detail.json()["raw_excerpt"] == "captcha required"

@@ -160,6 +160,25 @@ Confirm an audit entry was created:
 sqlite3 catalog/local.db "SELECT question, confidence, duration_ms FROM audit_log LIMIT 5;"
 ```
 
+### Cloudflare D1 production storage
+
+For Railway or another Python host, keep local SQLite for development and use Cloudflare D1 in production by setting the D1 HTTP API variables:
+
+```bash
+D1_ACCOUNT_ID=<account-id>
+D1_DATABASE_ID=<database-id>
+D1_API_TOKEN=<api-token-with-d1-edit-access>
+```
+
+Create and initialize the remote database:
+
+```bash
+npx wrangler d1 create openskagit
+npx wrangler d1 execute openskagit --remote --file catalog/schema.sql
+```
+
+After these variables are present, the Python API writes to D1 instead of `D1_LOCAL_PATH`. The admin panel will show query diagnostics from the `queries` table, including source URL, params, count, duration, capped raw excerpt, and error.
+
 ## 9. Point GIS Sources at Your County
 
 Review `registry/SCHEMA.md` and copy the closest example from `registry/sources/` into `catalog/seeds/`. Edit the source IDs, names, `base_url`, domains, supported query modes, layer IDs, parcel field names, and spatial reference for your county.

@@ -12,7 +12,11 @@ from typing import Optional
 
 import httpx
 
-from agent.catalog.sources import DB_PATH, list_sources
+from agent import db
+from agent.catalog.sources import list_sources
+
+
+DB_PATH = db.DB_PATH
 
 
 DEFAULT_TIMEOUT_SECONDS = 20.0
@@ -216,6 +220,62 @@ def save_report(results: list[VerificationResult]) -> dict:
         "summary": summary,
         "results": [asdict(result) for result in results],
     }
+    if DB_PATH != db.DB_PATH:
+        _save_report_sqlite(report, results, run_id, checked_at, summary)
+        return report
+    db.execute(
+        """
+        INSERT INTO source_verification_runs
+          (id, status, checked_at, completed_at, total, ok, warning, failed, duration_ms, report)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            run_id,
+            summary["status"],
+            checked_at,
+            datetime.now(timezone.utc).isoformat(),
+            summary["total"],
+            summary["ok"],
+            summary["warning"],
+            summary["failed"],
+            summary.get("duration_ms"),
+            json.dumps(report),
+        ),
+    )
+    db.executemany(
+        """
+        INSERT INTO source_verification_results
+          (id, run_id, source_id, source_name, source_type, status, probe_url, http_status, latency_ms, detail, error, checked_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        [
+            (
+                f"svr_result_{uuid.uuid4().hex[:12]}",
+                run_id,
+                result.source_id,
+                result.source_name,
+                result.source_type,
+                result.status,
+                result.probe_url,
+                result.http_status,
+                result.latency_ms,
+                result.detail,
+                result.error,
+                result.checked_at,
+            )
+            for result in results
+        ],
+    )
+    return report
+
+
+def _save_report_sqlite(
+    report: dict,
+    results: list[VerificationResult],
+    run_id: str,
+    checked_at: str,
+    summary: dict,
+) -> None:
     with sqlite3.connect(DB_PATH) as conn:
         conn.execute(
             """
@@ -258,7 +318,6 @@ def save_report(results: list[VerificationResult]) -> dict:
                     result.checked_at,
                 ),
             )
-    return report
 
 
 def summarize(results: list[VerificationResult], duration_ms: Optional[int] = None) -> dict:
@@ -305,6 +364,39 @@ def print_table(results: list[VerificationResult], summary: dict) -> None:
 
 
 def _ensure_tables() -> None:
+    if DB_PATH == db.DB_PATH:
+        db.executescript(
+            """
+            CREATE TABLE IF NOT EXISTS source_verification_runs (
+              id TEXT PRIMARY KEY,
+              status TEXT NOT NULL,
+              checked_at TEXT NOT NULL,
+              completed_at TEXT,
+              total INTEGER NOT NULL,
+              ok INTEGER NOT NULL,
+              warning INTEGER NOT NULL,
+              failed INTEGER NOT NULL,
+              duration_ms INTEGER,
+              report TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS source_verification_results (
+              id TEXT PRIMARY KEY,
+              run_id TEXT NOT NULL,
+              source_id TEXT NOT NULL,
+              source_name TEXT NOT NULL,
+              source_type TEXT NOT NULL,
+              status TEXT NOT NULL,
+              probe_url TEXT,
+              http_status INTEGER,
+              latency_ms INTEGER,
+              detail TEXT,
+              error TEXT,
+              checked_at TEXT NOT NULL,
+              FOREIGN KEY(run_id) REFERENCES source_verification_runs(id)
+            );
+            """
+        )
+        return
     with sqlite3.connect(DB_PATH) as conn:
         conn.executescript(
             """

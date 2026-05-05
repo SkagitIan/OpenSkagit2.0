@@ -13,20 +13,36 @@ CREATE TABLE IF NOT EXISTS sources (
 CREATE TABLE IF NOT EXISTS queries (
   id TEXT PRIMARY KEY,
   job_id TEXT NOT NULL,
+  case_file_id TEXT,
   source_id TEXT NOT NULL,
+  source_name TEXT,
+  domain TEXT,
+  query_type TEXT,
   query_params TEXT NOT NULL,
   result TEXT,
   status TEXT DEFAULT 'pending',
+  success INTEGER DEFAULT 0,
+  count INTEGER DEFAULT 0,
+  source_url TEXT,
+  source_urls TEXT,
+  http_status INTEGER,
+  raw_excerpt TEXT,
   error TEXT,
   duration_ms INTEGER,
   created_at TEXT DEFAULT (datetime('now'))
 );
+
+CREATE INDEX IF NOT EXISTS idx_queries_job ON queries(job_id);
+CREATE INDEX IF NOT EXISTS idx_queries_case ON queries(case_file_id);
+CREATE INDEX IF NOT EXISTS idx_queries_source ON queries(source_id);
+CREATE INDEX IF NOT EXISTS idx_queries_status ON queries(status);
 
 CREATE TABLE IF NOT EXISTS case_files (
   id TEXT PRIMARY KEY,
   job_id TEXT NOT NULL,
   question TEXT NOT NULL,
   entity TEXT,
+  plan TEXT,
   evidence TEXT NOT NULL,
   missing TEXT NOT NULL,
   confidence TEXT NOT NULL,
