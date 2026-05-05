@@ -69,3 +69,32 @@ CREATE TABLE IF NOT EXISTS audit_log (
 
 CREATE INDEX IF NOT EXISTS idx_audit_created ON audit_log(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_audit_entity ON audit_log(entity);
+
+CREATE TABLE IF NOT EXISTS source_verification_runs (
+  id TEXT PRIMARY KEY,
+  status TEXT NOT NULL,
+  checked_at TEXT NOT NULL,
+  completed_at TEXT,
+  total INTEGER NOT NULL,
+  ok INTEGER NOT NULL,
+  warning INTEGER NOT NULL,
+  failed INTEGER NOT NULL,
+  duration_ms INTEGER,
+  report TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS source_verification_results (
+  id TEXT PRIMARY KEY,
+  run_id TEXT NOT NULL,
+  source_id TEXT NOT NULL,
+  source_name TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  status TEXT NOT NULL,
+  probe_url TEXT,
+  http_status INTEGER,
+  latency_ms INTEGER,
+  detail TEXT,
+  error TEXT,
+  checked_at TEXT NOT NULL,
+  FOREIGN KEY(run_id) REFERENCES source_verification_runs(id)
+);

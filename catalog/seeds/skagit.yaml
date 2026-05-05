@@ -50,3 +50,5 @@ sources:
       zone_field: "FLD_ZONE"
       description_field: "ZONE_SUBTY"
       in_sr: 102748
+      status: "needs_verification"
+      note: "Last checked 2026-05-05: FEMA NFHL endpoint returned 404."

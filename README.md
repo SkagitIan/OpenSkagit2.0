@@ -66,6 +66,71 @@ pytest agent/tests/ -v
 
 The live P48165 test is skipped unless `RUN_LIVE_GOLDEN=1` is set and the local Worker is running.
 
+## Nightly Source Verification
+
+The source verifier checks every active catalog source with a small real probe and records the run in the local SQLite catalog database. It is intended for nightly production monitoring, not mocked CI tests.
+
+Run it locally:
+
+```bash
+python -m agent.source_verifier
+```
+
+Useful options:
+
+```bash
+python -m agent.source_verifier --json
+python -m agent.source_verifier --source-ids skagit_parcels,skagit_zoning
+python -m agent.source_verifier --alert-webhook https://example.com/webhook
+```
+
+Environment variables:
+
+```bash
+SOURCE_VERIFIER_CONCURRENCY=8
+SOURCE_VERIFIER_TEST_PARCEL=P48165
+SOURCE_VERIFIER_SOURCE_IDS=
+SOURCE_VERIFIER_ALERT_WEBHOOK=
+SOURCE_VERIFIER_ALERT_ON_WARNING=false
+```
+
+The verifier exits with code `1` when any source fails, so Railway will mark that cron execution as failed. Warnings, such as missing optional API keys or manually configured web forms, do not fail the run.
+
+### Railway Cron Setup
+
+Create a second Railway service from this same repository for the verifier. Keep the existing web/API service start command unchanged.
+
+For the verifier service:
+
+```bash
+python -m agent.source_verifier
+```
+
+Set the Railway service type to Cron/Scheduled Job and use a nightly UTC schedule, for example:
+
+```txt
+0 10 * * *
+```
+
+Add the same required app variables as the API service, plus the verifier variables above. At minimum:
+
+```bash
+D1_LOCAL_PATH=/data/catalog.db
+SOURCE_VERIFIER_CONCURRENCY=8
+SOURCE_VERIFIER_TEST_PARCEL=P48165
+```
+
+Attach a Railway volume to the verifier service at `/data` if you want verification history to persist between runs. If the API service also needs to read the same verification tables, point both services at the same persistent database instead of each service's local filesystem.
+
+Optional alerting:
+
+```bash
+SOURCE_VERIFIER_ALERT_WEBHOOK=https://your-alert-webhook
+SOURCE_VERIFIER_ALERT_ON_WARNING=false
+```
+
+If you want authenticated sources verified, also set their API keys, for example `SAM_API_KEY`. Without those keys, authenticated sources are recorded as warnings rather than failures.
+
 ## Sources requiring manual configuration
 
 The Skagit Auditor recorded-document search is an ASP.NET WebForms page. The search page and field names were discoverable, but a stable parcel-specific POST endpoint was not confirmed during Phase 2 source discovery, so `skagit_auditor` is seeded with `status: "needs_manual_config"` and an empty `config.endpoint`.

@@ -16,7 +16,8 @@ sources:
       zone_field: "FLD_ZONE"
       description_field: "ZONE_SUBTY"
       in_sr: 102748
-      note: "Supersedes skagit_flood for federal flood data"
+      status: "needs_verification"
+      note: "Supersedes skagit_flood for federal flood data. Last checked 2026-05-05: endpoint returned 404."
 
   federal_usaspending:
     name: "USASpending.gov"

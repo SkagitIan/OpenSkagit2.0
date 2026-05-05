@@ -92,7 +92,7 @@ sources:
     config:
       layer_id: 3
       in_sr: 102100
-      habitat_field: "PHS_TYPE"
+      habitat_field: "PriorityArea_Desc"
       note: "Verified 2026-05-05. Original fortress.wa.gov DFW endpoint returned 404; current public PHS service is reachable."
 
   wa_sos_business:
