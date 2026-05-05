@@ -68,7 +68,15 @@ npx wrangler deploy
 cd ../..
 ```
 
-Record each deployed Worker URL in `.env` or Railway environment variables so the agent can call them.
+This deployment currently uses these Worker URLs:
+
+```text
+ARCGIS_WORKER_URL=https://arcgis-adapter.ian-larsen-1976.workers.dev
+WEB_WORKER_URL=https://web-adapter.ian-larsen-1976.workers.dev
+NOTIFY_WORKER_URL=https://notify-adapter.ian-larsen-1976.workers.dev
+```
+
+Record the deployed Worker URLs in `.env` or Railway environment variables so the agent can call them.
 
 ## 5. Deploy the Agent to Railway
 
