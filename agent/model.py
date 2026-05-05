@@ -19,7 +19,7 @@ def _resolve_model(model: Optional[str], env_var: str, default: str) -> str:
 async def call_model(
     system: str,
     user: str,
-    max_tokens: int = 1000,
+    max_tokens: int = 10000,
     model: Optional[str] = None,
 ) -> str:
     resolved = _resolve_model(model, "ANALYST_MODEL", DEFAULT_MODEL)
@@ -34,7 +34,7 @@ async def call_model_with_tools(
     system: str,
     user: str,
     tools: list[dict],
-    max_tokens: int = 2000,
+    max_tokens: int = 20000,
     model: Optional[str] = None,
 ) -> tuple[Optional[dict], Optional[str]]:
     """Call a model with tool definitions for structured output.
