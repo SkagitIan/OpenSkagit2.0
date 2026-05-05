@@ -10,6 +10,10 @@ interface WebRequest {
   params: Record<string, string>;
   response_format: "html_table" | "json" | "xml";
   extract_fields?: string[];
+  aggregate_mode?: "count_by_status";
+  status_filter?: string;
+  follow_pagination?: boolean;
+  max_pages?: number;
 }
 
 interface WebResponse {
@@ -17,6 +21,7 @@ interface WebResponse {
   records: Record<string, unknown>[];
   count: number;
   source_url: string;
+  source_urls?: string[];
   raw_excerpt?: string;
   error?: string;
 }
@@ -70,7 +75,8 @@ async function handleQuery(payload: WebRequest): Promise<WebResponse> {
       init.body = JSON.stringify(payload.params || {});
     }
 
-    const response = await fetchWithTimeout(target.toString(), init, 15000);
+    const firstUrl = target.toString();
+    const response = await fetchWithTimeout(firstUrl, init, 15000);
     const raw = await response.text();
     const raw_excerpt = raw.slice(0, 500);
 
@@ -79,18 +85,56 @@ async function handleQuery(payload: WebRequest): Promise<WebResponse> {
         success: false,
         records: [],
         count: 0,
-        source_url: target.toString(),
+        source_url: firstUrl,
         raw_excerpt,
         error: `HTTP ${response.status}`,
       };
     }
 
-    const records = parseRecords(raw, payload.response_format);
+    const sourceUrls = [firstUrl];
+    let records = parseRecords(raw, payload.response_format);
+    if (payload.follow_pagination && payload.response_format === "html_table") {
+      const maxPages = Math.max(1, Math.min(payload.max_pages ?? 50, 100));
+      const seen = new Set(sourceUrls);
+      let nextUrls = extractPaginationUrls(raw, firstUrl);
+      while (nextUrls.length > 0 && sourceUrls.length < maxPages) {
+        const next = nextUrls.find((url) => !seen.has(url));
+        if (!next) break;
+        seen.add(next);
+        const pageResponse = await fetchWithTimeout(next, { method: "GET" }, 15000);
+        const pageRaw = await pageResponse.text();
+        sourceUrls.push(next);
+        if (!pageResponse.ok) break;
+        records = records.concat(parseRecords(pageRaw, payload.response_format));
+        nextUrls = extractPaginationUrls(pageRaw, next);
+      }
+    }
+
+    if (payload.aggregate_mode === "count_by_status") {
+      const filtered = filterByStatus(records, payload.status_filter);
+      const summary = {
+        aggregate_mode: payload.aggregate_mode,
+        status_filter: payload.status_filter || "",
+        total_count: filtered.length,
+        records_scanned: records.length,
+        source_pages: sourceUrls.length,
+      };
+      return {
+        success: true,
+        records: [summary],
+        count: filtered.length,
+        source_url: firstUrl,
+        source_urls: sourceUrls,
+        raw_excerpt,
+      };
+    }
+
     return {
       success: true,
       records,
       count: records.length,
-      source_url: target.toString(),
+      source_url: firstUrl,
+      source_urls: sourceUrls,
       raw_excerpt,
     };
   } catch (error) {
@@ -140,6 +184,53 @@ function parseCells(row: string): string[] {
   );
 }
 
+function extractPaginationUrls(html: string, currentUrl: string): string[] {
+  const urls: string[] = [];
+  for (const match of html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>/gi)) {
+    const href = decodeHtml(match[1]);
+    if (!/[?&]page=\d+/i.test(href)) continue;
+    try {
+      urls.push(new URL(href, currentUrl).toString());
+    } catch {
+      // Ignore malformed links from public web systems.
+    }
+  }
+  return [...new Set(urls)].sort((left, right) => {
+    return pageNumber(left) - pageNumber(right);
+  });
+}
+
+function pageNumber(url: string): number {
+  return Number(new URL(url).searchParams.get("page") || "1");
+}
+
+function filterByStatus(records: Record<string, unknown>[], statusFilter?: string): Record<string, unknown>[] {
+  if (!statusFilter) return records;
+  const normalizedFilter = statusFilter.toLowerCase();
+  const statusKeys = ["status", "permit status", "main status"];
+  const filtered = records.filter((record) => {
+    const value = statusKeys
+      .map((key) => recordValue(record, key))
+      .find((candidate) => candidate);
+    if (!value) return false;
+    const normalizedValue = value.toLowerCase();
+    if (normalizedFilter === "active") {
+      return ["active", "open", "issued", "pending", "review"].some((term) =>
+        normalizedValue.includes(term),
+      );
+    }
+    return normalizedValue.includes(normalizedFilter);
+  });
+  return filtered.length > 0 ? filtered : records;
+}
+
+function recordValue(record: Record<string, unknown>, wantedKey: string): string {
+  for (const [key, value] of Object.entries(record)) {
+    if (key.toLowerCase() === wantedKey) return String(value ?? "").trim();
+  }
+  return "";
+}
+
 function stripHtml(value: string): string {
   return value
     .replace(/<[^>]+>/g, " ")
@@ -149,6 +240,15 @@ function stripHtml(value: string): string {
     .replace(/&gt;/g, ">")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function decodeHtml(value: string): string {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'");
 }
 
 async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs: number): Promise<Response> {

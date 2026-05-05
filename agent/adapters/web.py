@@ -25,6 +25,10 @@ async def query(source: dict, query_type: str, params: dict) -> dict:
         "query_type": config.get("query_type", "form_post"),
         "params": form_params,
         "response_format": config.get("response_format", "html_table"),
+        "aggregate_mode": params.get("_aggregate_mode") or None,
+        "status_filter": params.get("_status_filter") or None,
+        "follow_pagination": bool(params.get("_aggregate_mode")),
+        "max_pages": config.get("max_pages", 50),
     }
 
     try:

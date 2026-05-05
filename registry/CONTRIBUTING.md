@@ -13,8 +13,11 @@ Every source entry must include:
 - `domains`: Query domains this source answers, such as `parcels`, `zoning`, `wetlands`, `taxes`, or `spending`.
 - `supports`: Query methods the source supports, such as `by_parcel`, `by_geometry`, or `by_name`.
 - `config`: Adapter-specific settings. For ArcGIS this usually includes layer IDs, parcel fields, or spatial reference settings.
+- `config.capabilities`: Planner-facing metadata for scalable routing. Include jurisdiction, aliases, entity types, query modes, aggregate modes, count support, status fields, and concise usage notes when the source answers jurisdiction-specific questions such as permits.
 
 Use `catalog/seeds/skagit.yaml` as the reference style for ArcGIS sources and `catalog/seeds/skagit_web.yaml` as the reference style for web sources.
+
+For a new city permit source, add a `permits` source with a city `jurisdiction`, aliases users may type, query modes such as `by_date`, `by_address`, and `by_permit`, and `count_supported: true` only if citywide count questions can be answered reliably.
 
 ## Verification Before Submitting
 

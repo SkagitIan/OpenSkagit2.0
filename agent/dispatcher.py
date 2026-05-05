@@ -1,17 +1,33 @@
 from agent.adapters import arcgis, federal, web
-from agent.catalog.sources import get_sources_for_domains
+from agent.catalog.context import source_supports_query
+from agent.catalog.sources import get_source, get_sources_for_domains
 
 
 async def execute_step(step: dict) -> dict:
-    sources = get_sources_for_domains([step["domain"]])
-    if not sources:
+    source = _select_source(step)
+    if not source:
         return {
             "success": False,
             "domain": step["domain"],
-            "error": f"No source registered for domain: {step['domain']}",
+            "error": _source_error(step),
         }
 
-    source = sources[0]
+    if step.get("domain") not in source.get("domains", []):
+        return {
+            "success": False,
+            "domain": step["domain"],
+            "source_id": source["id"],
+            "error": f"Source {source['id']} does not support domain: {step['domain']}",
+        }
+
+    if not source_supports_query(source, step["query_type"]):
+        return {
+            "success": False,
+            "domain": step["domain"],
+            "source_id": source["id"],
+            "error": f"Source {source['id']} does not support query_type: {step['query_type']}",
+        }
+
     params = _build_params(step)
     source_type = source["type"]
 
@@ -41,6 +57,20 @@ async def execute_step(step: dict) -> dict:
         "count": result.get("count", 0),
         "error": result.get("error"),
     }
+
+
+def _select_source(step: dict) -> dict | None:
+    source_id = step.get("source_id")
+    if source_id:
+        return get_source(source_id)
+    sources = get_sources_for_domains([step["domain"]])
+    return sources[0] if sources else None
+
+
+def _source_error(step: dict) -> str:
+    if step.get("source_id"):
+        return f"No active source registered with source_id: {step['source_id']}"
+    return f"No source registered for domain: {step['domain']}"
 
 
 async def _dispatch_rest_api(source: dict, step: dict, params: dict) -> dict:
@@ -85,6 +115,8 @@ def _build_params(step: dict) -> dict:
             "start_date": step.get("start_date", ""),
             "end_date": step.get("end_date", ""),
             "search": step.get("search", ""),
+            "_aggregate_mode": step.get("aggregate_mode", ""),
+            "_status_filter": step.get("status_filter", ""),
         }
     if query_type == "by_permit":
         return {"permit_number": entity, "search": entity}

@@ -24,6 +24,8 @@ async def test_dispatcher_routes_arcgis():
                     "id": "skagit_parcels",
                     "name": "Skagit County Parcels",
                     "type": "arcgis_rest",
+                    "domains": ["parcels", "assessor"],
+                    "supports": ["query_by_parcel", "query_by_address"],
                     "base_url": "https://...",
                     "config": {"layer_id": 0},
                 }
@@ -89,3 +91,58 @@ def test_dispatcher_builds_web_friendly_permit_params():
         "search": "2026144",
     }
     assert _build_params({"query_type": "by_address", "entity": "286 Klinger"})["address"] == "286 Klinger"
+    assert _build_params(
+        {
+            "query_type": "by_date",
+            "aggregate_mode": "count_by_status",
+            "status_filter": "active",
+        }
+    )["_aggregate_mode"] == "count_by_status"
+
+
+@pytest.mark.asyncio
+async def test_dispatcher_rejects_unknown_source_id():
+    with patch("agent.dispatcher.get_source", return_value=None):
+        result = await execute_step(
+            {
+                "step": 1,
+                "source_id": "not_registered",
+                "domain": "permits",
+                "query_type": "by_date",
+                "reason": "...",
+                "entity": "Sedro-Woolley",
+                "entity_type": "municipality",
+            }
+        )
+
+    assert result["success"] is False
+    assert "No active source registered" in result["error"]
+
+
+@pytest.mark.asyncio
+async def test_dispatcher_rejects_unsupported_query_type():
+    with patch(
+        "agent.dispatcher.get_source",
+        return_value={
+            "id": "sedro_woolley_permits",
+            "name": "Sedro-Woolley iWorQ Permits",
+            "type": "web",
+            "domains": ["permits"],
+            "supports": ["query_by_date"],
+            "config": {},
+        },
+    ):
+        result = await execute_step(
+            {
+                "step": 1,
+                "source_id": "sedro_woolley_permits",
+                "domain": "permits",
+                "query_type": "by_parcel",
+                "reason": "...",
+                "entity": "P48165",
+                "entity_type": "parcel",
+            }
+        )
+
+    assert result["success"] is False
+    assert "does not support query_type" in result["error"]

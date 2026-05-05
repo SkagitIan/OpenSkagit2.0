@@ -6,7 +6,7 @@ import respx
 import yaml
 
 from agent.adapters.arcgis import query
-from agent.adapters.web import _build_form_params
+from agent.adapters.web import _build_form_params, query as web_query
 
 
 MOCK_ARCGIS_RESPONSE = {
@@ -108,3 +108,36 @@ def test_sedro_woolley_permit_source_seeded():
     assert "permits" in source["domains"]
     assert source["config"]["query_type"] == "query_string"
     assert source["config"]["permit_date_range_field"] == "permit_dt_range"
+    assert source["config"]["capabilities"]["jurisdiction"] == "Sedro-Woolley"
+    assert source["config"]["capabilities"]["count_supported"] is True
+
+
+@respx.mock
+@pytest.mark.asyncio
+async def test_web_query_sends_aggregate_options():
+    route = respx.post("http://localhost:8788/query").mock(
+        return_value=httpx.Response(200, json={"success": True, "records": [], "count": 0})
+    )
+    source = {
+        "id": "sedro_woolley_permits",
+        "config": {
+            "endpoint": "https://sedro-woolley.portal.iworq.net/SEDRO-WOOLLEY/permits/601",
+            "method": "GET",
+            "query_type": "query_string",
+            "response_format": "html_table",
+            "search_field_param": "searchField",
+            "search_param": "search",
+            "permit_date_range_field": "permit_dt_range",
+        },
+    }
+
+    await web_query(
+        source,
+        "query_by_date",
+        {"_aggregate_mode": "count_by_status", "_status_filter": "active"},
+    )
+
+    payload = route.calls.last.request.content
+    assert b'"aggregate_mode":"count_by_status"' in payload
+    assert b'"status_filter":"active"' in payload
+    assert b'"follow_pagination":true' in payload

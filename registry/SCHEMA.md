@@ -13,6 +13,13 @@ sources:
     config:
       layer: 0
       parcel_field: "PARCELID"
+      capabilities:
+        jurisdiction: "Example City"
+        jurisdiction_aliases: ["City of Example"]
+        entity_types: ["parcel"]
+        query_modes: ["by_parcel", "by_geometry"]
+        aggregate_modes: []
+        count_supported: false
 ```
 
 ## Fields
@@ -57,6 +64,17 @@ config:
   method: "GET"
   result_selector: "table.results"
 ```
+
+`config.capabilities`: Object. Optional but recommended for planner routing. It describes what the source can answer without exposing endpoint internals to the model.
+
+- `jurisdiction`: Human-readable city, county, state, or agency scope, such as `Sedro-Woolley` or `Skagit County`.
+- `jurisdiction_aliases`: Alternate names users may type.
+- `entity_types`: Entities accepted by the source, such as `parcel`, `address`, `permit`, `date_range`, or `municipality`.
+- `query_modes`: Planner-facing query modes. These should match the source `supports` values without the `query_` prefix.
+- `aggregate_modes`: Supported aggregate operations, such as `count_by_status`.
+- `count_supported`: Boolean. Set true when the source can support count-style questions.
+- `status_fields`: Field names that indicate status for count/filter questions.
+- `usage_notes`: Short planner-facing guidance for when to use the source.
 
 ## Review Standard
 

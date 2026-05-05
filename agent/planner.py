@@ -1,25 +1,29 @@
 import json
 import re
 
-from agent.catalog.sources import get_sources_for_domains
+from agent.catalog.context import (
+    build_catalog_context,
+    detect_jurisdiction,
+    find_catalog_sources,
+)
 from agent.model import call_model
 
 
-PLANNER_SYSTEM = """You are a civic evidence planner. Given a question about a parcel,
-address, or civic entity, return a JSON plan listing the evidence needed and which
-source domains to query.
+PLANNER_SYSTEM = """You are a civic evidence planner. Given a question and a compact
+catalog of active civic sources, return a JSON plan listing the evidence needed.
 
 Return ONLY valid JSON. No explanation. No markdown.
 
 Schema:
 {
   "entity": "string - the parcel ID, address, or entity extracted from the question",
-  "entity_type": "parcel | address | district | person | business",
+  "entity_type": "parcel | address | district | person | business | permit | municipality | county",
   "steps": [
     {
       "step": 1,
-      "domain": "string - one of the available domains",
-      "query_type": "by_parcel | by_address | by_geometry | by_owner | by_name | by_permit | by_date",
+      "source_id": "string - one of the catalog source_id values",
+      "domain": "string - one domain from the selected catalog source",
+      "query_type": "string - one query mode from the selected catalog source",
       "reason": "string - why this evidence matters for the question"
     }
   ],
@@ -27,68 +31,61 @@ Schema:
   "clarification_needed": null
 }
 
-If the question is ambiguous (no parcel ID, no address, unclear entity),
-set ambiguous to true and clarification_needed to a specific question to ask the user.
-
-Available domains: parcels, zoning, flood, assessor, ownership, planning,
-taxes, levy, delinquency, recorded_documents, ownership_history,
-easements, permits, federal_spending, federal_contractors,
-land_ownership, state_land, dnr, forest, forest_practices,
-wetlands, critical_areas, ecology, water_rights, water,
-roads, access, transportation, wildlife_habitat, fish_wildlife,
-topography, elevation, geology, federal_land, blm, usfs,
-business, corporations
-
-For investment or development questions, include taxes and recorded_documents steps.
-For federal land or spending questions, include federal_spending steps.
-For environmental or development feasibility questions, include:
-wetlands, critical_areas, and water_rights steps from WA Ecology.
-
-For questions about land near forests or federal land, include:
-federal_land steps from BLM or USFS.
-
-For questions about wildlife, habitat, or critical areas, include:
-wildlife_habitat from WA DFW.
-
-For topography or elevation questions, include: elevation from USGS.
-
-For state land ownership questions, include: land_ownership from WA DNR.
-
-Prefer state sources (wa_ecology_wetlands) over county sources
-(skagit_flood) when the domain overlaps - state sources have broader
-geographic coverage.
-Multi-source questions should produce 3-6 steps covering distinct domains."""
+Rules:
+- Use only source_id values, domains, and query_modes present in catalog_context.
+- Do not assume parcel lookup unless the selected source supports parcel entities.
+- If a required jurisdiction or entity is missing, set ambiguous to true and ask a precise clarification.
+- For count questions, prefer catalog sources with count_supported and aggregate_modes."""
 
 
 async def create_plan(question: str, context: dict) -> dict:
-    prompt = f"Question: {question}\nContext: {json.dumps(context)}"
+    catalog_context = build_catalog_context(question)
+    prompt = (
+        f"Question: {question}\n"
+        f"Context: {json.dumps(context)}\n"
+        f"Catalog context: {json.dumps(catalog_context)}"
+    )
     try:
         response = await call_model(system=PLANNER_SYSTEM, user=prompt, max_tokens=500)
         plan = json.loads(response)
-        return _augment_plan(question, plan)
+        return _augment_plan(question, plan, catalog_context)
     except Exception:
-        return _augment_plan(question, _fallback_plan(question, context))
+        return _augment_plan(question, _fallback_plan(question, context), catalog_context)
 
 
-def _augment_plan(question: str, plan: dict) -> dict:
+def _augment_plan(question: str, plan: dict, catalog_context: dict | None = None) -> dict:
     question_lower = question.lower()
     if plan.get("ambiguous"):
         return plan
     steps = plan.setdefault("steps", [])
-    domains = {step.get("domain") for step in steps}
+    sources = (catalog_context or build_catalog_context(question)).get("sources", [])
+    source_by_domain = {}
+    for source in sources:
+        for domain in source.get("domains", []):
+            source_by_domain.setdefault(domain, source)
+
+    for index, step in enumerate(steps, start=1):
+        step.setdefault("step", index)
+        if not step.get("source_id"):
+            source = source_by_domain.get(step.get("domain"))
+            if source:
+                step["source_id"] = source["source_id"]
 
     def add(domain: str, reason: str) -> None:
-        if domain in domains:
+        if any(step.get("domain") == domain for step in steps):
+            return
+        source = source_by_domain.get(domain)
+        if not source:
             return
         steps.append(
             {
                 "step": len(steps) + 1,
+                "source_id": source["source_id"],
                 "domain": domain,
-                "query_type": "by_parcel",
+                "query_type": _preferred_query_type(source, "by_parcel"),
                 "reason": reason,
             }
         )
-        domains.add(domain)
 
     if "wetland" in question_lower or "critical area" in question_lower:
         add("wetlands", "Check WA Ecology mapped wetlands")
@@ -108,6 +105,12 @@ def _fallback_plan(question: str, context: dict) -> dict:
     permit_match = re.search(r"\b20\d{5,}\b", question)
     entity = context.get("entity") or (match.group(0).upper() if match else "unknown")
     question_lower = question.lower()
+    wants_permits = "permit" in question_lower
+    wants_count = any(term in question_lower for term in ["how many", "count", "number of", "total"])
+    if wants_permits:
+        permit_plan = _fallback_permit_plan(question, context, permit_match, wants_count)
+        if permit_plan:
+            return permit_plan
     if "permit" in question_lower and permit_match:
         entity = context.get("entity") or permit_match.group(0)
     is_investment = any(word in question_lower for word in ["flip", "investment", "develop", "development"])
@@ -119,11 +122,11 @@ def _fallback_plan(question: str, context: dict) -> dict:
     wants_habitat = any(word in question_lower for word in ["wildlife", "habitat", "fish"])
     wants_elevation = any(word in question_lower for word in ["elevation", "topography", "slope"])
     wants_state_land = any(word in question_lower for word in ["state land", "dnr"])
-    wants_permits = "permit" in question_lower
     if wants_permits and permit_match:
         steps = [
             {
                 "step": 1,
+                "source_id": _first_source_id("permits"),
                 "domain": "permits",
                 "query_type": "by_permit",
                 "reason": "Find the matching Sedro-Woolley permit record",
@@ -133,12 +136,14 @@ def _fallback_plan(question: str, context: dict) -> dict:
         steps = [
             {
                 "step": 1,
+                "source_id": _first_source_id("parcels"),
                 "domain": "parcels",
                 "query_type": "by_parcel",
                 "reason": "Get basic parcel facts",
             },
             {
                 "step": 2,
+                "source_id": _first_source_id("zoning"),
                 "domain": "zoning",
                 "query_type": "by_parcel",
                 "reason": "Get zoning designation",
@@ -148,6 +153,7 @@ def _fallback_plan(question: str, context: dict) -> dict:
         steps.append(
             {
                 "step": len(steps) + 1,
+                "source_id": _first_source_id("permits"),
                 "domain": "permits",
                 "query_type": "by_address" if entity != "unknown" else "by_date",
                 "reason": "Check Sedro-Woolley permit records",
@@ -158,12 +164,14 @@ def _fallback_plan(question: str, context: dict) -> dict:
             [
                 {
                     "step": 3,
+                    "source_id": _first_source_id("taxes"),
                     "domain": "taxes",
                     "query_type": "by_parcel",
                     "reason": "Check tax burden and delinquency risk",
                 },
                 {
                     "step": 4,
+                    "source_id": _first_source_id("recorded_documents"),
                     "domain": "recorded_documents",
                     "query_type": "by_parcel",
                     "reason": "Check recent recorded-document activity",
@@ -175,12 +183,14 @@ def _fallback_plan(question: str, context: dict) -> dict:
             [
                 {
                     "step": len(steps) + 1,
+                    "source_id": _first_source_id("wetlands"),
                     "domain": "wetlands",
                     "query_type": "by_parcel",
                     "reason": "Check WA Ecology mapped wetlands",
                 },
                 {
                     "step": len(steps) + 2,
+                    "source_id": _first_source_id("water_rights"),
                     "domain": "water_rights",
                     "query_type": "by_parcel",
                     "reason": "Check WA Ecology water-rights records by location",
@@ -191,6 +201,7 @@ def _fallback_plan(question: str, context: dict) -> dict:
         steps.append(
             {
                 "step": len(steps) + 1,
+                "source_id": _first_source_id("federal_land"),
                 "domain": "federal_land",
                 "query_type": "by_parcel",
                 "reason": "Check nearby federal surface management boundaries",
@@ -200,6 +211,7 @@ def _fallback_plan(question: str, context: dict) -> dict:
         steps.append(
             {
                 "step": len(steps) + 1,
+                "source_id": _first_source_id("wildlife_habitat"),
                 "domain": "wildlife_habitat",
                 "query_type": "by_parcel",
                 "reason": "Check WA DFW priority habitat records",
@@ -209,6 +221,7 @@ def _fallback_plan(question: str, context: dict) -> dict:
         steps.append(
             {
                 "step": len(steps) + 1,
+                "source_id": _first_source_id("elevation"),
                 "domain": "elevation",
                 "query_type": "by_parcel",
                 "reason": "Check USGS elevation at the parcel",
@@ -218,6 +231,7 @@ def _fallback_plan(question: str, context: dict) -> dict:
         steps.append(
             {
                 "step": len(steps) + 1,
+                "source_id": _first_source_id("land_ownership"),
                 "domain": "land_ownership",
                 "query_type": "by_parcel",
                 "reason": "Check WA DNR land ownership records",
@@ -226,8 +240,6 @@ def _fallback_plan(question: str, context: dict) -> dict:
     for step in steps:
         step["entity"] = entity
         step["entity_type"] = "parcel"
-    for step in steps:
-        get_sources_for_domains([step["domain"]])
     return {
         "entity": entity,
         "entity_type": "parcel",
@@ -235,3 +247,88 @@ def _fallback_plan(question: str, context: dict) -> dict:
         "ambiguous": entity == "unknown",
         "clarification_needed": None if entity != "unknown" else "Which parcel ID should I look up?",
     }
+
+
+def _fallback_permit_plan(question: str, context: dict, permit_match: re.Match | None, wants_count: bool) -> dict | None:
+    permit_sources = find_catalog_sources(domain="permits")
+    if not permit_sources:
+        return None
+    jurisdiction = context.get("jurisdiction") or detect_jurisdiction(question, permit_sources)
+    if wants_count and not jurisdiction and len(permit_sources) > 1:
+        return {
+            "entity": "unknown",
+            "entity_type": "municipality",
+            "steps": [],
+            "ambiguous": True,
+            "clarification_needed": "Which jurisdiction should I use for active permits?",
+        }
+    source = _select_source(permit_sources, jurisdiction)
+    if not source:
+        return {
+            "entity": "unknown",
+            "entity_type": "municipality",
+            "steps": [],
+            "ambiguous": True,
+            "clarification_needed": "Which jurisdiction should I use for active permits?",
+        }
+    if wants_count:
+        entity = jurisdiction or source.get("jurisdiction") or "permits"
+        return {
+            "entity": entity,
+            "entity_type": "municipality",
+            "steps": [
+                {
+                    "step": 1,
+                    "source_id": source["source_id"],
+                    "domain": "permits",
+                    "query_type": _preferred_query_type(source, "by_date"),
+                    "aggregate_mode": "count_by_status",
+                    "status_filter": "active",
+                    "reason": f"Count active permits from {source['name']}",
+                }
+            ],
+            "ambiguous": False,
+            "clarification_needed": None,
+        }
+    if permit_match:
+        return {
+            "entity": permit_match.group(0),
+            "entity_type": "permit",
+            "steps": [
+                {
+                    "step": 1,
+                    "source_id": source["source_id"],
+                    "domain": "permits",
+                    "query_type": _preferred_query_type(source, "by_permit"),
+                    "reason": f"Find the matching permit record from {source['name']}",
+                }
+            ],
+            "ambiguous": False,
+            "clarification_needed": None,
+        }
+    return None
+
+
+def _select_source(sources: list[dict], jurisdiction: str | None) -> dict | None:
+    if jurisdiction:
+        normalized = re.sub(r"[^a-z0-9]+", " ", jurisdiction.lower()).strip()
+        for source in sources:
+            aliases = source.get("jurisdiction_aliases", []) + [source.get("jurisdiction", "")]
+            for alias in aliases:
+                if re.sub(r"[^a-z0-9]+", " ", alias.lower()).strip() == normalized:
+                    return source
+    if len(sources) == 1:
+        return sources[0]
+    return None
+
+
+def _preferred_query_type(source: dict, preferred: str) -> str:
+    query_modes = source.get("query_modes", [])
+    if preferred in query_modes:
+        return preferred
+    return query_modes[0] if query_modes else preferred
+
+
+def _first_source_id(domain: str) -> str | None:
+    sources = find_catalog_sources(domain=domain)
+    return sources[0]["source_id"] if sources else None

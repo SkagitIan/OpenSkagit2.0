@@ -44,3 +44,47 @@ sources:
       parcel_param: ""
       name_param: "ctl00$content$txtPartyName"
       file_number_param: "ctl00$content$txtFileNumber"
+
+  sedro_woolley_permits:
+    name: "Sedro-Woolley iWorQ Permits"
+    type: web
+    base_url: "https://sedro-woolley.portal.iworq.net/SEDRO-WOOLLEY/permits/601"
+    domains:
+      - permits
+    supports:
+      - query_by_date
+      - query_by_address
+      - query_by_permit
+    config:
+      endpoint: "https://sedro-woolley.portal.iworq.net/SEDRO-WOOLLEY/permits/601"
+      method: "GET"
+      query_type: "query_string"
+      response_format: "html_table"
+      search_field_param: "searchField"
+      search_param: "search"
+      start_date_param: "startDate"
+      end_date_param: "endDate"
+      permit_number_field: "permitnum_id"
+      permit_date_range_field: "permit_dt_range"
+      site_address_field: "text2"
+      detail_url_prefix: "https://sedro-woolley.portal.iworq.net/SEDRO-WOOLLEY/permit/601/"
+      capabilities:
+        jurisdiction: "Sedro-Woolley"
+        jurisdiction_aliases:
+          - "Sedro Woolley"
+          - "City of Sedro-Woolley"
+        entity_types:
+          - permit
+          - address
+          - date_range
+          - municipality
+        query_modes:
+          - by_date
+          - by_address
+          - by_permit
+        aggregate_modes:
+          - count_by_status
+        count_supported: true
+        status_fields:
+          - Status
+        usage_notes: "Use for Sedro-Woolley permit lookup and citywide permit counts. Citywide counts should use date-range search plus status aggregation."
