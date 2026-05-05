@@ -1,4 +1,4 @@
-const API_BASE = window.ENV_API_BASE || 'http://localhost:8000';
+const API_BASE = window.ENV_API_BASE || '';
 const history = [];
 
 function getApiKey() {
