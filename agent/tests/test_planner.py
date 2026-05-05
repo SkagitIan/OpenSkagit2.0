@@ -36,3 +36,13 @@ async def test_planner_handles_malformed_json():
     assert "steps" in plan
     assert "entity_type" in plan
     assert plan["entity"] == "P48165"
+
+
+@pytest.mark.asyncio
+async def test_fallback_planner_routes_permit_number_questions_to_permits():
+    with patch("agent.planner.call_model", new=AsyncMock(side_effect=Exception("model unavailable"))):
+        plan = await create_plan("Look up Sedro-Woolley permit 2026144", {})
+
+    assert plan["entity"] == "2026144"
+    assert plan["steps"][0]["domain"] == "permits"
+    assert plan["steps"][0]["query_type"] == "by_permit"

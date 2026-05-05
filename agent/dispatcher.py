@@ -70,11 +70,24 @@ def _build_params(step: dict) -> dict:
             "return_geometry": True,
         }
     if query_type == "by_address":
-        return {"where": f"SITEADDRESS LIKE '%{entity}%'", "out_fields": ["*"]}
+        return {
+            "address": entity,
+            "search": entity,
+            "where": f"SITEADDRESS LIKE '%{entity}%'",
+            "out_fields": ["*"],
+        }
     if query_type == "by_owner":
         return {"owner_name": entity}
     if query_type == "by_name":
         return {"name": entity, "owner_name": entity}
+    if query_type == "by_date":
+        return {
+            "start_date": step.get("start_date", ""),
+            "end_date": step.get("end_date", ""),
+            "search": step.get("search", ""),
+        }
+    if query_type == "by_permit":
+        return {"permit_number": entity, "search": entity}
     if query_type == "by_geometry":
         return {"geometry": step.get("geometry"), "out_fields": ["*"]}
     return {"where": "1=1", "return_count": 5, "out_fields": ["*"]}

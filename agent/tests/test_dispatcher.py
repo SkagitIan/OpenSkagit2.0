@@ -3,7 +3,7 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from agent.dispatcher import execute_step
+from agent.dispatcher import _build_params, execute_step
 
 
 MOCK_ARCGIS_SUCCESS = {
@@ -81,3 +81,11 @@ async def test_concurrent_steps_continue_on_partial_failure():
     assert call_count == 2
     assert not isinstance(results[0], Exception)
     assert isinstance(results[1], Exception)
+
+
+def test_dispatcher_builds_web_friendly_permit_params():
+    assert _build_params({"query_type": "by_permit", "entity": "2026144"}) == {
+        "permit_number": "2026144",
+        "search": "2026144",
+    }
+    assert _build_params({"query_type": "by_address", "entity": "286 Klinger"})["address"] == "286 Klinger"

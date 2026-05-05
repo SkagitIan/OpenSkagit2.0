@@ -37,6 +37,11 @@ async def query(source: dict, query_type: str, params: dict) -> dict:
 
 
 def _build_form_params(config: dict, query_type: str, params: dict) -> dict:
+    search_field_param = config.get("search_field_param")
+    search_param = config.get("search_param", "search")
+    start_date_param = config.get("start_date_param", "startDate")
+    end_date_param = config.get("end_date_param", "endDate")
+
     if query_type == "query_by_parcel":
         key = config.get("parcel_param", "parcel")
         result = {key: params.get("parcel_id", "")}
@@ -52,4 +57,36 @@ def _build_form_params(config: dict, query_type: str, params: dict) -> dict:
     if query_type == "query_by_name":
         key = config.get("name_param", "name")
         return {key: params.get("name", params.get("owner_name", ""))}
+    if query_type == "query_by_address":
+        if search_field_param and config.get("site_address_field"):
+            return {
+                search_field_param: config["site_address_field"],
+                search_param: params.get("address", params.get("search", "")),
+                start_date_param: params.get("start_date", ""),
+                end_date_param: params.get("end_date", ""),
+            }
+        key = config.get("address_param", "address")
+        return {key: params.get("address", params.get("search", ""))}
+    if query_type == "query_by_date":
+        if search_field_param and config.get("permit_date_range_field"):
+            return {
+                search_field_param: config["permit_date_range_field"],
+                search_param: params.get("search", ""),
+                start_date_param: params.get("start_date", ""),
+                end_date_param: params.get("end_date", ""),
+            }
+        return {
+            start_date_param: params.get("start_date", ""),
+            end_date_param: params.get("end_date", ""),
+        }
+    if query_type == "query_by_permit":
+        if search_field_param and config.get("permit_number_field"):
+            return {
+                search_field_param: config["permit_number_field"],
+                search_param: params.get("permit_number", params.get("search", "")),
+                start_date_param: params.get("start_date", ""),
+                end_date_param: params.get("end_date", ""),
+            }
+        key = config.get("permit_param", "permit")
+        return {key: params.get("permit_number", params.get("search", ""))}
     return params

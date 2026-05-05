@@ -19,7 +19,7 @@ Schema:
     {
       "step": 1,
       "domain": "string - one of the available domains",
-      "query_type": "by_parcel | by_address | by_geometry | by_owner | by_name",
+      "query_type": "by_parcel | by_address | by_geometry | by_owner | by_name | by_permit | by_date",
       "reason": "string - why this evidence matters for the question"
     }
   ],
@@ -105,8 +105,11 @@ def _augment_plan(question: str, plan: dict) -> dict:
 
 def _fallback_plan(question: str, context: dict) -> dict:
     match = re.search(r"\bP\d+\b", question, re.IGNORECASE)
+    permit_match = re.search(r"\b20\d{5,}\b", question)
     entity = context.get("entity") or (match.group(0).upper() if match else "unknown")
     question_lower = question.lower()
+    if "permit" in question_lower and permit_match:
+        entity = context.get("entity") or permit_match.group(0)
     is_investment = any(word in question_lower for word in ["flip", "investment", "develop", "development"])
     wants_environment = any(
         word in question_lower
@@ -116,20 +119,40 @@ def _fallback_plan(question: str, context: dict) -> dict:
     wants_habitat = any(word in question_lower for word in ["wildlife", "habitat", "fish"])
     wants_elevation = any(word in question_lower for word in ["elevation", "topography", "slope"])
     wants_state_land = any(word in question_lower for word in ["state land", "dnr"])
-    steps = [
-        {
-            "step": 1,
-            "domain": "parcels",
-            "query_type": "by_parcel",
-            "reason": "Get basic parcel facts",
-        },
-        {
-            "step": 2,
-            "domain": "zoning",
-            "query_type": "by_parcel",
-            "reason": "Get zoning designation",
-        },
-    ]
+    wants_permits = "permit" in question_lower
+    if wants_permits and permit_match:
+        steps = [
+            {
+                "step": 1,
+                "domain": "permits",
+                "query_type": "by_permit",
+                "reason": "Find the matching Sedro-Woolley permit record",
+            }
+        ]
+    else:
+        steps = [
+            {
+                "step": 1,
+                "domain": "parcels",
+                "query_type": "by_parcel",
+                "reason": "Get basic parcel facts",
+            },
+            {
+                "step": 2,
+                "domain": "zoning",
+                "query_type": "by_parcel",
+                "reason": "Get zoning designation",
+            },
+        ]
+    if wants_permits and not permit_match:
+        steps.append(
+            {
+                "step": len(steps) + 1,
+                "domain": "permits",
+                "query_type": "by_address" if entity != "unknown" else "by_date",
+                "reason": "Check Sedro-Woolley permit records",
+            }
+        )
     if is_investment:
         steps.extend(
             [
