@@ -1,12 +1,26 @@
 const API_BASE = window.ENV_API_BASE || 'http://localhost:8000';
 const history = [];
 
+function getApiKey() {
+  return localStorage.getItem('civic_api_key') || '';
+}
+
+async function apiFetch(path, options = {}) {
+  return fetch(`${API_BASE}${path}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-API-Key': getApiKey(),
+      ...(options.headers || {})
+    }
+  });
+}
+
 async function ask(question, notifyConfig) {
   const payload = { question, context: { county: 'skagit', state: 'wa' } };
   if (notifyConfig) payload.notify = notifyConfig;
-  const initial = await fetch(`${API_BASE}/ask`, {
+  const initial = await apiFetch('/ask', {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
     body: JSON.stringify(payload)
   });
   if (!initial.ok) throw new Error(`Request failed: ${initial.status}`);
@@ -18,7 +32,7 @@ async function ask(question, notifyConfig) {
 
 async function pollJob(jobId, maxAttempts = 20, intervalMs = 1000) {
   for (let i = 0; i < maxAttempts; i++) {
-    const response = await fetch(`${API_BASE}/job/${jobId}`);
+    const response = await apiFetch(`/job/${jobId}`);
     const data = await response.json();
     if (data.status === 'complete' || data.status === 'error') {
       return data;
@@ -125,7 +139,7 @@ function renderShareButton(caseFileId) {
 }
 
 async function exportCaseFile(caseFileId) {
-  const response = await fetch(`${API_BASE}/export/${caseFileId}?format=markdown`);
+  const response = await apiFetch(`/export/${caseFileId}?format=markdown`);
   const text = await response.text();
   const blob = new Blob([text], { type: 'text/markdown' });
   const url = URL.createObjectURL(blob);
@@ -137,8 +151,12 @@ async function exportCaseFile(caseFileId) {
 }
 
 async function loadHistory() {
+  if (!getApiKey()) {
+    renderSavedCases([]);
+    return;
+  }
   try {
-    const response = await fetch(`${API_BASE}/cases?limit=10`);
+    const response = await apiFetch('/cases?limit=10');
     const data = await response.json();
     renderSavedCases(data.cases || []);
   } catch (error) {
@@ -183,11 +201,129 @@ function renderSavedCases(cases) {
       ${showConfidence(item.confidence || 'low')}
     `;
     button.onclick = async () => {
-      const response = await fetch(`${API_BASE}/case/${item.id}`);
+      const response = await apiFetch(`/case/${item.id}`);
       renderCaseFile(await response.json());
     };
     root.appendChild(button);
   });
+}
+
+function checkAuth() {
+  if (!getApiKey()) {
+    showApiKeyModal();
+    return;
+  }
+  checkAdminAccess();
+}
+
+function showApiKeyModal() {
+  document.getElementById('api-key-input').value = getApiKey();
+  document.getElementById('api-key-modal').classList.remove('hidden');
+}
+
+function hideApiKeyModal() {
+  document.getElementById('api-key-modal').classList.add('hidden');
+}
+
+async function loadTenantConfig() {
+  try {
+    const response = await fetch(`${API_BASE}/config`);
+    if (!response.ok) return;
+    const tenant = await response.json();
+    document.title = tenant.display_name || 'Civic Intelligence';
+    document.getElementById('tenant-title').textContent = tenant.display_name || 'Civic Intelligence';
+    document.getElementById('tenant-tagline').textContent = tenant.tagline || '';
+    if (tenant.primary_color) {
+      document.documentElement.style.setProperty('--brand', tenant.primary_color);
+    }
+  } catch (error) {
+    return;
+  }
+}
+
+async function checkAdminAccess() {
+  try {
+    const response = await apiFetch('/admin/stats');
+    document.getElementById('admin-link').classList.toggle('hidden', !response.ok);
+  } catch (error) {
+    document.getElementById('admin-link').classList.add('hidden');
+  }
+}
+
+async function showAdminPanel() {
+  document.querySelector('.panels').classList.add('admin-mode');
+  document.getElementById('conversation').classList.remove('active-mobile');
+  document.getElementById('case-file').classList.remove('active-mobile');
+  document.getElementById('admin-panel').classList.add('active-mobile');
+  document.getElementById('main-link').classList.remove('hidden');
+  document.querySelectorAll('.tab').forEach(item => item.classList.remove('active'));
+  await loadAdminPanel();
+}
+
+function showWorkspace() {
+  document.querySelector('.panels').classList.remove('admin-mode');
+  document.getElementById('admin-panel').classList.remove('active-mobile');
+  document.getElementById('conversation').classList.add('active-mobile');
+  document.getElementById('main-link').classList.add('hidden');
+}
+
+async function loadAdminPanel() {
+  const root = document.getElementById('admin-content');
+  root.innerHTML = '<div class="loading"><span class="spinner"></span><span>Loading admin data...</span></div>';
+  try {
+    const [statsResponse, sourcesResponse, auditResponse] = await Promise.all([
+      apiFetch('/admin/stats'),
+      apiFetch('/admin/sources'),
+      apiFetch('/admin/audit?limit=25')
+    ]);
+    if (!statsResponse.ok || !sourcesResponse.ok || !auditResponse.ok) {
+      throw new Error('Admin access failed');
+    }
+    const stats = await statsResponse.json();
+    const sources = await sourcesResponse.json();
+    const audit = await auditResponse.json();
+    root.innerHTML = `
+      <section>
+        <h2>Query Stats</h2>
+        <div class="metric-grid">
+          <div><span>Total queries</span><strong>${stats.total_queries}</strong></div>
+          <div><span>High</span><strong>${stats.by_confidence.high || 0}</strong></div>
+          <div><span>Medium</span><strong>${stats.by_confidence.medium || 0}</strong></div>
+          <div><span>Low</span><strong>${stats.by_confidence.low || 0}</strong></div>
+          <div><span>Avg response</span><strong>${stats.avg_duration_ms} ms</strong></div>
+        </div>
+        <div class="admin-list">${(stats.top_entities || []).map(item => `<span>${escapeHtml(item.entity)} (${item.count})</span>`).join('') || '<span>No entities yet</span>'}</div>
+      </section>
+      <section>
+        <h2>Source Health</h2>
+        ${renderTable(['Source', 'Type', 'Queries', 'Last used'], (sources.sources || []).map(item => [
+          item.name, item.type, item.query_count, item.last_used || 'Never'
+        ]))}
+      </section>
+      <section>
+        <h2>Recent Audit Log</h2>
+        ${renderTable(['Time', 'Entity', 'Question', 'Confidence', 'Duration'], (audit.entries || []).map(item => [
+          item.created_at, item.entity || '', truncate(item.question || '', 90), item.confidence || '', `${item.duration_ms || 0} ms`
+        ]))}
+      </section>
+    `;
+  } catch (error) {
+    root.innerHTML = `<div class="empty-state">${escapeHtml(error.message)}</div>`;
+  }
+}
+
+function renderTable(headers, rows) {
+  if (!rows.length) return '<div class="empty-state">No records.</div>';
+  return `
+    <div class="table-wrap">
+      <table>
+        <thead><tr>${headers.map(item => `<th>${escapeHtml(item)}</th>`).join('')}</tr></thead>
+        <tbody>
+          ${rows.map(row => `<tr>${row.map(cell => `<td>${escapeHtml(String(cell ?? ''))}</td>`).join('')}</tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
 }
 
 function renderEvidenceCard(item) {
@@ -280,6 +416,9 @@ document.getElementById('ask-form').addEventListener('submit', async event => {
 
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
+    document.querySelector('.panels').classList.remove('admin-mode');
+    document.getElementById('admin-panel').classList.remove('active-mobile');
+    document.getElementById('main-link').classList.add('hidden');
     document.querySelectorAll('.tab').forEach(item => item.classList.remove('active'));
     tab.classList.add('active');
     document.querySelectorAll('.panel').forEach(panel => panel.classList.remove('active-mobile'));
@@ -287,5 +426,19 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
+document.getElementById('api-key-form').addEventListener('submit', event => {
+  event.preventDefault();
+  localStorage.setItem('civic_api_key', document.getElementById('api-key-input').value.trim());
+  hideApiKeyModal();
+  checkAdminAccess();
+  loadHistory();
+});
+
+document.getElementById('change-key').addEventListener('click', showApiKeyModal);
+document.getElementById('admin-link').addEventListener('click', showAdminPanel);
+document.getElementById('main-link').addEventListener('click', showWorkspace);
+
 document.getElementById('conversation').classList.add('active-mobile');
+loadTenantConfig();
+checkAuth();
 loadHistory();

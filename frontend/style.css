@@ -7,6 +7,7 @@
   --green: #157347;
   --amber: #9a6500;
   --red: #b3261e;
+  --brand: #1f4d5a;
 }
 
 * {
@@ -179,7 +180,7 @@ button {
   border: 0;
   border-radius: 8px;
   padding: 0 16px;
-  background: #1f4d5a;
+  background: var(--brand);
   color: #fff;
   cursor: pointer;
 }
@@ -188,8 +189,62 @@ button {
   min-height: 30px;
   padding: 0 10px;
   background: #ffffff;
-  color: #1f4d5a;
+  color: var(--brand);
   border: 1px solid var(--line);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.topbar {
+  height: auto;
+  min-height: 62px;
+  gap: 16px;
+}
+
+.tagline {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgb(24 32 38 / 0.42);
+}
+
+.modal-box {
+  width: min(420px, 100%);
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgb(0 0 0 / 0.22);
+}
+
+.modal-box label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.modal-box button {
+  min-height: 42px;
 }
 
 .case-history {
@@ -229,6 +284,87 @@ button {
 .case-panel {
   overflow: auto;
   background: var(--panel);
+}
+
+.admin-panel {
+  grid-column: 1 / -1;
+  overflow: auto;
+  background: var(--panel);
+}
+
+.admin-mode {
+  grid-template-columns: 1fr;
+}
+
+.admin-mode > .conversation-panel,
+.admin-mode > .case-panel {
+  display: none;
+}
+
+.admin-content {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.metric-grid div,
+.admin-list span {
+  display: grid;
+  gap: 3px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.metric-grid span {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.metric-grid strong {
+  font-size: 22px;
+}
+
+.admin-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
 .case-content,
@@ -387,7 +523,7 @@ pre {
   }
 
   .tab.active {
-    border-bottom-color: #1f4d5a;
+    border-bottom-color: var(--brand);
   }
 
   .panels {
@@ -405,5 +541,10 @@ pre {
 
   .case-panel.active-mobile {
     display: block;
+  }
+
+  .admin-panel.active-mobile {
+    display: block;
+    height: calc(100vh - 105px);
   }
 }

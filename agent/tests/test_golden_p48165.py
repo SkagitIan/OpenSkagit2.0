@@ -20,6 +20,7 @@ def test_live_p48165_matches_golden_fixture():
     response = client.post(
         "/ask",
         json={"question": fixture["question"], "context": {"county": "skagit", "state": "wa"}},
+        headers={"X-API-Key": "dev-admin-key-change-in-production"},
     )
     assert response.status_code == 200
     data = response.json()

@@ -1,0 +1,20 @@
+tenant:
+  id: "skagit"
+  name: "Skagit County"
+  display_name: "Skagit County Civic Intelligence"
+  tagline: "Ask questions about public parcels, permits, and records."
+  primary_county: "skagit"
+  state: "wa"
+  contact_email: ""
+  logo_url: ""
+  gis_overrides:
+    base_domain: "gis.skagitcounty.net"
+  features:
+    notifications: true
+    export: true
+    history: true
+    admin_panel: true
+    public_registry: false
+  branding:
+    primary_color: "#1a5276"
+    font: "system-ui"

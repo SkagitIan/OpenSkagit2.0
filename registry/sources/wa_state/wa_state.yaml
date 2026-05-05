@@ -1,0 +1,114 @@
+sources:
+  wa_dnr_ownership:
+    name: "WA DNR Land Ownership"
+    type: arcgis_rest
+    base_url: "https://gis.dnr.wa.gov/site3/rest/services/Public_Boundaries/WADNR_PUBLIC_Cadastre_OpenData/MapServer"
+    domains:
+      - land_ownership
+      - state_land
+      - dnr
+    supports:
+      - query_by_geometry
+      - query_by_attribute
+    config:
+      layer_id: 6
+      in_sr: 102100
+      owner_field: "PARCEL_NM"
+      note: "Verified 2026-05-05. DNR Managed Land Parcels layer."
+
+  wa_dnr_forest:
+    name: "WA DNR Forest Practices"
+    type: arcgis_rest
+    base_url: "https://gis.dnr.wa.gov/site2/rest/services/Public_Forest_Practices/WADNR_PUBLIC_FP_FPA/MapServer"
+    domains:
+      - forest
+      - timber
+      - forest_practices
+    supports:
+      - query_by_geometry
+    config:
+      layer_id: 4
+      in_sr: 102100
+      note: "Verified 2026-05-05. Original site3 Forest_Practices endpoint returned no layers; current public FPA service uses site2."
+
+  wa_ecology_wetlands:
+    name: "WA Ecology Wetlands"
+    type: arcgis_rest
+    base_url: "https://gis.ecology.wa.gov/serverext/rest/services/GIS/CoastalAtlas/MapServer"
+    domains:
+      - wetlands
+      - critical_areas
+      - ecology
+    supports:
+      - query_by_geometry
+    config:
+      layer_id: 83
+      in_sr: 102100
+      wetland_type_field: "WETLAND_TYPE"
+      note: "Verified 2026-05-05. Original fortress.wa.gov wetlands endpoint returned 404; current Ecology Coastal Atlas WA_NWI_SEA layer is reachable."
+
+  wa_ecology_water_rights:
+    name: "WA Ecology Water Rights"
+    type: arcgis_rest
+    base_url: "https://gis.ecology.wa.gov/serverext/rest/services/WR/Ecology_Water_Resources_Web_Map_Service/MapServer"
+    domains:
+      - water_rights
+      - water
+      - ecology
+    supports:
+      - query_by_geometry
+      - query_by_attribute
+    config:
+      layer_id: 1
+      in_sr: 102100
+      note: "Verified 2026-05-05. Original fortress.wa.gov water rights endpoint returned 404; current Water Resources web map service layer 1 accepts geometry queries."
+
+  wa_dot_roads:
+    name: "WA DOT State Roads"
+    type: arcgis_rest
+    base_url: "https://data.wsdot.wa.gov/arcgis/rest/services/Shared/CountyBoundaries/MapServer"
+    domains:
+      - roads
+      - access
+      - transportation
+    supports:
+      - query_by_geometry
+      - query_by_attribute
+    config:
+      layer_id: 0
+      in_sr: 102100
+      note: "Verified 2026-05-05. Brief URL is County Boundaries, not a state roads layer."
+
+  wa_dfw_habitat:
+    name: "WA DFW Priority Habitats"
+    type: arcgis_rest
+    base_url: "https://geodataservices.wdfw.wa.gov/arcgis/rest/services/PHSOnTheWeb/PHSOnTheWebPublic/MapServer"
+    domains:
+      - wildlife_habitat
+      - critical_areas
+      - fish_wildlife
+    supports:
+      - query_by_geometry
+    config:
+      layer_id: 3
+      in_sr: 102100
+      habitat_field: "PHS_TYPE"
+      note: "Verified 2026-05-05. Original fortress.wa.gov DFW endpoint returned 404; current public PHS service is reachable."
+
+  wa_sos_business:
+    name: "WA Secretary of State Business Search"
+    type: web
+    base_url: "https://ccfs.sos.wa.gov"
+    domains:
+      - business
+      - corporations
+      - llc
+      - registered_agents
+    supports:
+      - query_by_name
+      - query_by_ubi
+    status: "needs_manual_config"
+    config:
+      endpoint: ""
+      status: "needs_manual_config"
+      note: "Web form search. Requires manual endpoint discovery."
