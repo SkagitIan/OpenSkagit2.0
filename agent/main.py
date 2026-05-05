@@ -14,7 +14,7 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse, Response
 from pydantic import BaseModel, Field
-
+from fastapi.staticfiles import StaticFiles
 from agent import analyst, audit, case_file, config, dispatcher, export, jobs, notifier, pdf, planner
 from agent.auth import require_admin, require_reader, require_writer
 from agent.catalog.sources import DB_PATH, get_sources_for_domains
@@ -572,3 +572,5 @@ def _load_case_file(case_file_id: str) -> Optional[dict]:
     cf["sources_queried"] = json.loads(cf.get("sources_queried") or "[]")
     CASE_CACHE[case_file_id] = cf
     return cf
+
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
