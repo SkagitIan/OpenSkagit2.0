@@ -1,334 +1,286 @@
+"""Civic evidence planner.
+
+The planner takes a natural-language question and produces a structured
+evidence-gathering plan. It works by sending the *complete* source catalog
+to a capable LLM and asking it to call a structured tool — no string matching,
+no keyword switches, no scoring-based truncation.
+
+Model selection
+---------------
+Set the ``PLANNER_MODEL`` environment variable to control which model is used.
+Prefix the model name with the provider:
+
+    PLANNER_MODEL=claude-opus-4-20250514          # Anthropic (default)
+    PLANNER_MODEL=google/gemini-2.5-pro-preview-05-06   # Google Gemini
+    PLANNER_MODEL=openai/gpt-4o                  # OpenAI
+
+All three providers are supported via ``model.call_model_with_tools``.
+
+Fallback
+--------
+If the model call fails for any reason (network error, API quota, malformed
+response) the planner returns an ``ambiguous`` plan asking the user to clarify.
+There is intentionally no string-matching fallback — if the LLM cannot plan,
+we surface that rather than silently doing the wrong thing.
+"""
+
 import json
-import re
 
-from agent.catalog.context import (
-    build_catalog_context,
-    detect_jurisdiction,
-    find_catalog_sources,
-)
-from agent.model import call_model
+from agent.catalog.context import build_full_catalog_context
+from agent.model import call_model_with_tools
 
 
-PLANNER_SYSTEM = """You are a civic evidence planner. Given a question and a compact
-catalog of active civic sources, return a JSON plan listing the evidence needed.
+# ---------------------------------------------------------------------------
+# Tool definition — the planner is forced to call this
+# ---------------------------------------------------------------------------
 
-Return ONLY valid JSON. No explanation. No markdown.
-
-Schema:
-{
-  "entity": "string - the parcel ID, address, or entity extracted from the question",
-  "entity_type": "parcel | address | district | person | business | permit | municipality | county",
-  "steps": [
-    {
-      "step": 1,
-      "source_id": "string - one of the catalog source_id values",
-      "domain": "string - one domain from the selected catalog source",
-      "query_type": "string - one query mode from the selected catalog source",
-      "reason": "string - why this evidence matters for the question"
-    }
-  ],
-  "ambiguous": false,
-  "clarification_needed": null
+PLAN_TOOL = {
+    "name": "create_evidence_plan",
+    "description": (
+        "Create a structured, step-by-step plan to gather the evidence needed "
+        "to answer the user's civic question. Use only source_id values, domains, "
+        "and query_modes that appear in the catalog provided."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "entity": {
+                "type": "string",
+                "description": (
+                    "The primary entity extracted from the question: a parcel ID "
+                    "(e.g. P48165), a street address, a person/business name, a "
+                    "permit number, or a jurisdiction name. Use 'unknown' only if "
+                    "the question is genuinely ambiguous."
+                ),
+            },
+            "entity_type": {
+                "type": "string",
+                "enum": [
+                    "parcel",
+                    "address",
+                    "district",
+                    "person",
+                    "business",
+                    "permit",
+                    "municipality",
+                    "county",
+                ],
+                "description": "The type of the primary entity.",
+            },
+            "steps": {
+                "type": "array",
+                "description": "Ordered list of evidence-gathering steps.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "step": {
+                            "type": "integer",
+                            "description": "1-based step number.",
+                        },
+                        "source_id": {
+                            "type": "string",
+                            "description": "Exact source_id from the catalog.",
+                        },
+                        "domain": {
+                            "type": "string",
+                            "description": "Domain to query on this source.",
+                        },
+                        "query_type": {
+                            "type": "string",
+                            "description": "Query mode to use (must be listed in the source's query_modes).",
+                        },
+                        "status_filter": {
+                            "type": "string",
+                            "description": (
+                                "Optional status value to filter by "
+                                "(e.g. 'Open', 'Active', 'Issued'). "
+                                "Use only values found in the source's status_fields."
+                            ),
+                        },
+                        "aggregate_mode": {
+                            "type": "string",
+                            "description": (
+                                "Optional aggregation mode "
+                                "(e.g. 'count_by_status'). "
+                                "Use only values found in the source's aggregate_modes."
+                            ),
+                        },
+                        "reason": {
+                            "type": "string",
+                            "description": "One sentence explaining why this evidence is needed.",
+                        },
+                    },
+                    "required": ["source_id", "domain", "query_type", "reason"],
+                },
+            },
+            "ambiguous": {
+                "type": "boolean",
+                "description": (
+                    "True if the question cannot be answered without more information. "
+                    "When true, steps should be empty and clarification_needed must be set."
+                ),
+            },
+            "clarification_needed": {
+                "type": ["string", "null"],
+                "description": "A single, precise question to ask the user when ambiguous is true.",
+            },
+        },
+        "required": ["entity", "entity_type", "steps", "ambiguous"],
+    },
 }
 
-Rules:
-- Use only source_id values, domains, and query_modes present in catalog_context.
-- Do not assume parcel lookup unless the selected source supports parcel entities.
-- If a required jurisdiction or entity is missing, set ambiguous to true and ask a precise clarification.
-- For count questions, prefer catalog sources with count_supported and aggregate_modes."""
 
+# ---------------------------------------------------------------------------
+# System prompt
+# ---------------------------------------------------------------------------
+
+PLANNER_SYSTEM = """\
+You are a civic intelligence planner for Skagit County, Washington.
+
+Your job is to understand the user's question and create a precise plan to \
+gather the evidence needed to answer it. You will be given a complete catalog \
+of all available data sources.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 1 — UNDERSTAND INTENT (do not skip)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Before selecting sources, reason through:
+  • What is the user actually trying to learn?
+  • What entity is involved? (parcel ID, address, name, permit number, jurisdiction)
+  • What is the entity type?
+  • Are there implicit steps? (e.g. a wetland question implicitly needs geometry first)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 2 — SELECT SOURCES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Use ONLY source_id values, domains, and query_modes that appear in the \
+catalog. Never invent source IDs.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+QUERY TYPE REFERENCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+by_parcel    — you have a parcel ID (e.g. P48165)
+by_address   — you have a street address
+by_geometry  — spatial overlay; REQUIRES a parcel step first to obtain geometry
+by_date      — jurisdiction-wide or date-range search
+by_permit    — you have a specific permit number
+by_name      — searching by owner name or business name
+by_owner     — searching by owner name
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DEPENDENCY RULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Spatial overlays (wetlands, flood, zoning, habitat, water rights) need \
+parcel geometry. Always add a parcels step first when those domains are needed.
+• Do NOT add a parcels step unless geometry or basic parcel data is actually \
+needed for the question.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STATUS AND AGGREGATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• When filtering by status ("open", "active", "issued"), set status_filter \
+using a value from the source's status_fields.
+• When counting ("how many", "count", "number of"), set aggregate_mode \
+using a value from the source's aggregate_modes.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AMBIGUITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Set ambiguous=true when:
+  • No entity can be determined and none is in context
+  • The question spans multiple jurisdictions and the catalog has a source \
+for each — ask which jurisdiction to use
+Ask exactly ONE precise clarifying question.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXAMPLE INTENT → PLAN MAPPINGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"open permits in Sedro-Woolley"
+  → entity: "Sedro-Woolley", entity_type: municipality
+  → step: sedro_woolley_permits, domain: permits, query_type: by_date,
+          status_filter: <check source status_fields>, reason: list open permits citywide
+
+"tax history for parcel P48165"
+  → entity: "P48165", entity_type: parcel
+  → step: skagit_treasurer, domain: taxes, query_type: by_parcel,
+          reason: retrieve tax payment and levy history
+
+"who owns 123 Main St Burlington"
+  → entity: "123 Main St Burlington", entity_type: address
+  → step: skagit_parcels, domain: parcels, query_type: by_address,
+          reason: identify owner from parcel record
+
+"are there wetlands near parcel P48165"
+  → entity: "P48165", entity_type: parcel
+  → step 1: skagit_parcels, domain: parcels, query_type: by_parcel,
+             reason: get parcel geometry for spatial query
+  → step 2: wa_ecology_wetlands, domain: wetlands, query_type: by_geometry,
+             reason: check for mapped wetlands overlapping this parcel
+
+"how many permits were issued in Sedro-Woolley this year"
+  → entity: "Sedro-Woolley", entity_type: municipality
+  → step: sedro_woolley_permits, domain: permits, query_type: by_date,
+          aggregate_mode: count_by_status, reason: count issued permits year-to-date
+
+"recorded documents on parcel P48165"
+  → entity: "P48165", entity_type: parcel
+  → step: skagit_auditor, domain: recorded_documents, query_type: by_parcel,
+          reason: find deeds, easements, and other recorded instruments
+
+"is XYZ Holdings LLC registered in Washington"
+  → entity: "XYZ Holdings LLC", entity_type: business
+  → step: wa_sos_business, domain: business, query_type: by_name,
+          reason: check WA Secretary of State business registry
+"""
+
+
+# ---------------------------------------------------------------------------
+# Public API
+# ---------------------------------------------------------------------------
 
 async def create_plan(question: str, context: dict) -> dict:
-    catalog_context = build_catalog_context(question)
-    prompt = (
-        f"Question: {question}\n"
-        f"Context: {json.dumps(context)}\n"
-        f"Catalog context: {json.dumps(catalog_context)}"
+    """Create an evidence-gathering plan for the given question.
+
+    Returns a plan dict with keys: entity, entity_type, steps, ambiguous,
+    clarification_needed.
+    """
+    catalog = build_full_catalog_context()
+    user_prompt = (
+        f"Question: {question}\n\n"
+        f"Prior context (may contain entity, jurisdiction, or session info):\n"
+        f"{json.dumps(context)}\n\n"
+        f"Available sources (complete catalog — use only these):\n"
+        f"{catalog}"
     )
-    try:
-        response = await call_model(system=PLANNER_SYSTEM, user=prompt, max_tokens=500)
-        plan = json.loads(response)
-        return _augment_plan(question, plan, catalog_context)
-    except Exception:
-        return _augment_plan(question, _fallback_plan(question, context), catalog_context)
 
+    plan_input, _text = await call_model_with_tools(
+        system=PLANNER_SYSTEM,
+        user=user_prompt,
+        tools=[PLAN_TOOL],
+        max_tokens=2000,
+    )
 
-def _augment_plan(question: str, plan: dict, catalog_context: dict | None = None) -> dict:
-    question_lower = question.lower()
-    if plan.get("ambiguous"):
-        return plan
-    steps = plan.setdefault("steps", [])
-    sources = (catalog_context or build_catalog_context(question)).get("sources", [])
-    source_by_domain = {}
-    for source in sources:
-        for domain in source.get("domains", []):
-            source_by_domain.setdefault(domain, source)
+    if not plan_input:
+        return _cannot_plan()
 
-    for index, step in enumerate(steps, start=1):
-        step.setdefault("step", index)
-        if not step.get("source_id"):
-            source = source_by_domain.get(step.get("domain"))
-            if source:
-                step["source_id"] = source["source_id"]
-
-    def add(domain: str, reason: str) -> None:
-        if any(step.get("domain") == domain for step in steps):
-            return
-        source = source_by_domain.get(domain)
-        if not source:
-            return
-        steps.append(
-            {
-                "step": len(steps) + 1,
-                "source_id": source["source_id"],
-                "domain": domain,
-                "query_type": _preferred_query_type(source, "by_parcel"),
-                "reason": reason,
-            }
-        )
-
-    if "wetland" in question_lower or "critical area" in question_lower:
-        add("wetlands", "Check WA Ecology mapped wetlands")
-    if "water right" in question_lower:
-        add("water_rights", "Check WA Ecology water-rights records by location")
-    if any(term in question_lower for term in ["federal land", "blm", "usfs", "national forest"]):
-        add("federal_land", "Check nearby federal surface management boundaries")
-    if any(term in question_lower for term in ["wildlife", "habitat", "fish"]):
-        add("wildlife_habitat", "Check WA DFW priority habitat records")
-    if any(term in question_lower for term in ["elevation", "topography", "slope"]):
-        add("elevation", "Check USGS elevation at the parcel")
+    plan = dict(plan_input)
+    steps = plan.get("steps") or []
+    for i, step in enumerate(steps, start=1):
+        step.setdefault("step", i)
+    plan["steps"] = steps
     return plan
 
 
-def _fallback_plan(question: str, context: dict) -> dict:
-    match = re.search(r"\bP\d+\b", question, re.IGNORECASE)
-    permit_match = re.search(r"\b20\d{5,}\b", question)
-    entity = context.get("entity") or (match.group(0).upper() if match else "unknown")
-    question_lower = question.lower()
-    wants_permits = "permit" in question_lower
-    wants_count = any(term in question_lower for term in ["how many", "count", "number of", "total"])
-    if wants_permits:
-        permit_plan = _fallback_permit_plan(question, context, permit_match, wants_count)
-        if permit_plan:
-            return permit_plan
-    if "permit" in question_lower and permit_match:
-        entity = context.get("entity") or permit_match.group(0)
-    is_investment = any(word in question_lower for word in ["flip", "investment", "develop", "development"])
-    wants_environment = any(
-        word in question_lower
-        for word in ["wetland", "critical area", "environment", "develop", "development", "feasibility"]
-    )
-    wants_federal_land = any(word in question_lower for word in ["federal land", "blm", "usfs", "national forest"])
-    wants_habitat = any(word in question_lower for word in ["wildlife", "habitat", "fish"])
-    wants_elevation = any(word in question_lower for word in ["elevation", "topography", "slope"])
-    wants_state_land = any(word in question_lower for word in ["state land", "dnr"])
-    if wants_permits and permit_match:
-        steps = [
-            {
-                "step": 1,
-                "source_id": _first_source_id("permits"),
-                "domain": "permits",
-                "query_type": "by_permit",
-                "reason": "Find the matching Sedro-Woolley permit record",
-            }
-        ]
-    else:
-        steps = [
-            {
-                "step": 1,
-                "source_id": _first_source_id("parcels"),
-                "domain": "parcels",
-                "query_type": "by_parcel",
-                "reason": "Get basic parcel facts",
-            },
-            {
-                "step": 2,
-                "source_id": _first_source_id("zoning"),
-                "domain": "zoning",
-                "query_type": "by_parcel",
-                "reason": "Get zoning designation",
-            },
-        ]
-    if wants_permits and not permit_match:
-        steps.append(
-            {
-                "step": len(steps) + 1,
-                "source_id": _first_source_id("permits"),
-                "domain": "permits",
-                "query_type": "by_address" if entity != "unknown" else "by_date",
-                "reason": "Check Sedro-Woolley permit records",
-            }
-        )
-    if is_investment:
-        steps.extend(
-            [
-                {
-                    "step": 3,
-                    "source_id": _first_source_id("taxes"),
-                    "domain": "taxes",
-                    "query_type": "by_parcel",
-                    "reason": "Check tax burden and delinquency risk",
-                },
-                {
-                    "step": 4,
-                    "source_id": _first_source_id("recorded_documents"),
-                    "domain": "recorded_documents",
-                    "query_type": "by_parcel",
-                    "reason": "Check recent recorded-document activity",
-                },
-            ]
-        )
-    if wants_environment:
-        steps.extend(
-            [
-                {
-                    "step": len(steps) + 1,
-                    "source_id": _first_source_id("wetlands"),
-                    "domain": "wetlands",
-                    "query_type": "by_parcel",
-                    "reason": "Check WA Ecology mapped wetlands",
-                },
-                {
-                    "step": len(steps) + 2,
-                    "source_id": _first_source_id("water_rights"),
-                    "domain": "water_rights",
-                    "query_type": "by_parcel",
-                    "reason": "Check WA Ecology water-rights records by location",
-                },
-            ]
-        )
-    if wants_federal_land:
-        steps.append(
-            {
-                "step": len(steps) + 1,
-                "source_id": _first_source_id("federal_land"),
-                "domain": "federal_land",
-                "query_type": "by_parcel",
-                "reason": "Check nearby federal surface management boundaries",
-            }
-        )
-    if wants_habitat:
-        steps.append(
-            {
-                "step": len(steps) + 1,
-                "source_id": _first_source_id("wildlife_habitat"),
-                "domain": "wildlife_habitat",
-                "query_type": "by_parcel",
-                "reason": "Check WA DFW priority habitat records",
-            }
-        )
-    if wants_elevation:
-        steps.append(
-            {
-                "step": len(steps) + 1,
-                "source_id": _first_source_id("elevation"),
-                "domain": "elevation",
-                "query_type": "by_parcel",
-                "reason": "Check USGS elevation at the parcel",
-            }
-        )
-    if wants_state_land:
-        steps.append(
-            {
-                "step": len(steps) + 1,
-                "source_id": _first_source_id("land_ownership"),
-                "domain": "land_ownership",
-                "query_type": "by_parcel",
-                "reason": "Check WA DNR land ownership records",
-            }
-        )
-    for step in steps:
-        step["entity"] = entity
-        step["entity_type"] = "parcel"
+def _cannot_plan() -> dict:
+    """Returned when the model fails to produce a usable plan."""
     return {
-        "entity": entity,
+        "entity": "unknown",
         "entity_type": "parcel",
-        "steps": steps,
-        "ambiguous": entity == "unknown",
-        "clarification_needed": None if entity != "unknown" else "Which parcel ID should I look up?",
+        "steps": [],
+        "ambiguous": True,
+        "clarification_needed": (
+            "I wasn't able to determine how to answer that question. "
+            "Could you provide more detail — for example, a parcel ID, "
+            "street address, permit number, or specific location?"
+        ),
     }
-
-
-def _fallback_permit_plan(question: str, context: dict, permit_match: re.Match | None, wants_count: bool) -> dict | None:
-    permit_sources = find_catalog_sources(domain="permits")
-    if not permit_sources:
-        return None
-    jurisdiction = context.get("jurisdiction") or detect_jurisdiction(question, permit_sources)
-    if wants_count and not jurisdiction and len(permit_sources) > 1:
-        return {
-            "entity": "unknown",
-            "entity_type": "municipality",
-            "steps": [],
-            "ambiguous": True,
-            "clarification_needed": "Which jurisdiction should I use for active permits?",
-        }
-    source = _select_source(permit_sources, jurisdiction)
-    if not source:
-        return {
-            "entity": "unknown",
-            "entity_type": "municipality",
-            "steps": [],
-            "ambiguous": True,
-            "clarification_needed": "Which jurisdiction should I use for active permits?",
-        }
-    if wants_count:
-        entity = jurisdiction or source.get("jurisdiction") or "permits"
-        return {
-            "entity": entity,
-            "entity_type": "municipality",
-            "steps": [
-                {
-                    "step": 1,
-                    "source_id": source["source_id"],
-                    "domain": "permits",
-                    "query_type": _preferred_query_type(source, "by_date"),
-                    "aggregate_mode": "count_by_status",
-                    "status_filter": "active",
-                    "reason": f"Count active permits from {source['name']}",
-                }
-            ],
-            "ambiguous": False,
-            "clarification_needed": None,
-        }
-    if permit_match:
-        return {
-            "entity": permit_match.group(0),
-            "entity_type": "permit",
-            "steps": [
-                {
-                    "step": 1,
-                    "source_id": source["source_id"],
-                    "domain": "permits",
-                    "query_type": _preferred_query_type(source, "by_permit"),
-                    "reason": f"Find the matching permit record from {source['name']}",
-                }
-            ],
-            "ambiguous": False,
-            "clarification_needed": None,
-        }
-    return None
-
-
-def _select_source(sources: list[dict], jurisdiction: str | None) -> dict | None:
-    if jurisdiction:
-        normalized = re.sub(r"[^a-z0-9]+", " ", jurisdiction.lower()).strip()
-        for source in sources:
-            aliases = source.get("jurisdiction_aliases", []) + [source.get("jurisdiction", "")]
-            for alias in aliases:
-                if re.sub(r"[^a-z0-9]+", " ", alias.lower()).strip() == normalized:
-                    return source
-    if len(sources) == 1:
-        return sources[0]
-    return None
-
-
-def _preferred_query_type(source: dict, preferred: str) -> str:
-    query_modes = source.get("query_modes", [])
-    if preferred in query_modes:
-        return preferred
-    return query_modes[0] if query_modes else preferred
-
-
-def _first_source_id(domain: str) -> str | None:
-    sources = find_catalog_sources(domain=domain)
-    return sources[0]["source_id"] if sources else None

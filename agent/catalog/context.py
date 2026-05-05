@@ -9,6 +9,16 @@ from agent.catalog.sources import list_sources
 COUNT_TERMS = {"count", "counts", "how many", "number of", "total"}
 
 
+def build_full_catalog_context() -> str:
+    """Return the complete catalog of all active sources as a JSON string.
+
+    No scoring, no truncation. Used by the LLM planner so it can reason
+    over every available source when forming an evidence plan.
+    """
+    summaries = [_summarize_source(source) for source in list_sources()]
+    return json.dumps({"sources": summaries}, indent=2)
+
+
 def build_catalog_context(question: str, max_sources: int = 8) -> dict:
     """Return a compact, model-safe catalog subset for planning."""
     summaries = [_summarize_source(source) for source in list_sources()]
