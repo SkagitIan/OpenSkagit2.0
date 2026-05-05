@@ -49,6 +49,9 @@ def _build_form_params(config: dict, query_type: str, params: dict) -> dict:
     if query_type == "query_by_parcel":
         key = config.get("parcel_param", "parcel")
         result = {key: params.get("parcel_id", "")}
+        # ASMX endpoints use a ResultType param to select which data tab to return.
+        if config.get("result_type_param") and config.get("result_type"):
+            result[config["result_type_param"]] = config["result_type"]
         if config.get("searchby_param") and config.get("parcel_searchby_value"):
             result[config["searchby_param"]] = config["parcel_searchby_value"]
         return result

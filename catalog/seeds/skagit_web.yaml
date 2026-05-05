@@ -1,8 +1,51 @@
 sources:
-  skagit_treasurer:
-    name: "Skagit County Treasurer"
+  # ---------------------------------------------------------------------------
+  # Skagit County Assessor — Tax & Assessment History
+  # POST to Webservice.asmx/fillPage with ResultType="History"
+  # Returns a table of annual assessment and tax values going back to 1991:
+  # VALUE YEAR | TAX YEAR | BUILDING | LAND MARKET | MARKET TOTAL |
+  # LAND ASSESSED | ASSESSED TOTAL | TAX
+  # ---------------------------------------------------------------------------
+  skagit_assessor_history:
+    name: "Skagit County Assessment History"
     type: web
-    base_url: "https://www.skagitcounty.net/Departments/Treasurer"
+    base_url: "https://www.skagitcounty.net/Search/Property"
+    domains:
+      - tax_history
+      - valuation_history
+      - assessment_history
+    supports:
+      - query_by_parcel
+    config:
+      endpoint: "https://www.skagitcounty.net/Search/Property/Webservice.asmx/fillPage"
+      method: "POST"
+      query_type: "json_post"
+      response_format: "asmx_html_table"
+      parcel_param: "sValue"
+      result_type_param: "ResultType"
+      result_type: "History"
+      capabilities:
+        entity_types:
+          - parcel
+        query_modes:
+          - by_parcel
+        usage_notes: >
+          Skagit County Assessor property portal — Assessment History tab.
+          Returns annual assessed values, market values, and tax amounts for
+          a parcel going back to 1991. Use for tax history, valuation trend,
+          or historical assessment questions.
+
+  # ---------------------------------------------------------------------------
+  # Skagit County Assessor — Current Year Tax Statement
+  # POST to Webservice.asmx/fillPage with ResultType="Taxes"
+  # Returns the current year tax statement: district levy breakdown with rates
+  # and amounts, installment due dates and PAID status, special assessments,
+  # total taxes due, and summary values.
+  # ---------------------------------------------------------------------------
+  skagit_assessor_taxes:
+    name: "Skagit County Property Tax Detail"
+    type: web
+    base_url: "https://www.skagitcounty.net/Search/Property"
     domains:
       - taxes
       - levy
@@ -10,18 +53,141 @@ sources:
       - assessments
     supports:
       - query_by_parcel
-      - query_by_owner
     config:
-      endpoint: "https://www.skagitcounty.net/Search/Property/"
+      endpoint: "https://www.skagitcounty.net/Search/Property/Webservice.asmx/fillPage"
       method: "POST"
-      query_type: "form_post"
-      response_format: "html_table"
-      parcel_param: "ctl00$content$pid"
-      owner_param: "tbAuto"
-      searchby_param: "searchby"
-      parcel_searchby_value: "propid"
-      owner_searchby_value: "owner"
+      query_type: "json_post"
+      response_format: "asmx_html_table"
+      parcel_param: "sValue"
+      result_type_param: "ResultType"
+      result_type: "Taxes"
+      capabilities:
+        entity_types:
+          - parcel
+        query_modes:
+          - by_parcel
+        usage_notes: >
+          Skagit County Assessor property portal — Taxes tab.
+          Returns the current year tax statement including levy district
+          breakdown (rates and amounts per district), installment payment
+          status (PAID / unpaid), special assessments and fees, and total
+          taxes due. Use for current tax burden, delinquency, or levy
+          district questions.
 
+  # ---------------------------------------------------------------------------
+  # Skagit County Assessor — Sales & Transfer History
+  # POST to Webservice.asmx/fillPage with ResultType="Sales"
+  # Returns each recorded sale: sale date, taxable selling price, deed type,
+  # seller, buyer, auditor file number, excise number.
+  # ---------------------------------------------------------------------------
+  skagit_assessor_sales:
+    name: "Skagit County Property Sales History"
+    type: web
+    base_url: "https://www.skagitcounty.net/Search/Property"
+    domains:
+      - sales_history
+      - ownership_transfers
+      - excise
+    supports:
+      - query_by_parcel
+    config:
+      endpoint: "https://www.skagitcounty.net/Search/Property/Webservice.asmx/fillPage"
+      method: "POST"
+      query_type: "json_post"
+      response_format: "asmx_html_table"
+      parcel_param: "sValue"
+      result_type_param: "ResultType"
+      result_type: "Sales"
+      capabilities:
+        entity_types:
+          - parcel
+        query_modes:
+          - by_parcel
+        usage_notes: >
+          Skagit County Assessor property portal — Sales/Transfers tab.
+          Returns all recorded sales and ownership transfers for a parcel:
+          sale date, taxable selling price, deed type, seller and buyer
+          names, auditor file number, and excise number. Use for ownership
+          history, sale price, or deed type questions.
+
+  # ---------------------------------------------------------------------------
+  # Skagit County Assessor — Improvements / Building Detail
+  # POST to Webservice.asmx/fillPage with ResultType="Improvements"
+  # Returns building segment details: year built, style, square footage,
+  # basement, garage, bedrooms, bathrooms, foundation, exterior, roof, HVAC.
+  # ---------------------------------------------------------------------------
+  skagit_assessor_improvements:
+    name: "Skagit County Property Improvements"
+    type: web
+    base_url: "https://www.skagitcounty.net/Search/Property"
+    domains:
+      - improvements
+      - buildings
+      - structure
+    supports:
+      - query_by_parcel
+    config:
+      endpoint: "https://www.skagitcounty.net/Search/Property/Webservice.asmx/fillPage"
+      method: "POST"
+      query_type: "json_post"
+      response_format: "asmx_html_table"
+      parcel_param: "sValue"
+      result_type_param: "ResultType"
+      result_type: "Improvements"
+      capabilities:
+        entity_types:
+          - parcel
+        query_modes:
+          - by_parcel
+        usage_notes: >
+          Skagit County Assessor property portal — Improvements tab.
+          Returns building segment data for each structure on the parcel:
+          year built, building style, above-grade living area, basement
+          area, garage area, bedrooms, bathrooms, foundation, exterior
+          walls, roof covering, and HVAC. Use for building characteristic
+          or improvement questions.
+
+  # ---------------------------------------------------------------------------
+  # Skagit County Assessor — County-Level Permit Records
+  # POST to Webservice.asmx/fillPage with ResultType="Permits"
+  # Returns permits recorded by the county assessor for a parcel: permit
+  # number, application date, type, status, description, and dates.
+  # NOTE: These are county building permits, distinct from Sedro-Woolley
+  # city permits (sedro_woolley_permits).
+  # ---------------------------------------------------------------------------
+  skagit_assessor_permits:
+    name: "Skagit County Assessor Permit Records"
+    type: web
+    base_url: "https://www.skagitcounty.net/Search/Property"
+    domains:
+      - county_permits
+      - building_permits
+    supports:
+      - query_by_parcel
+    config:
+      endpoint: "https://www.skagitcounty.net/Search/Property/Webservice.asmx/fillPage"
+      method: "POST"
+      query_type: "json_post"
+      response_format: "asmx_html_table"
+      parcel_param: "sValue"
+      result_type_param: "ResultType"
+      result_type: "Permits"
+      capabilities:
+        entity_types:
+          - parcel
+        query_modes:
+          - by_parcel
+        usage_notes: >
+          Skagit County Assessor property portal — Permits tab.
+          Returns county-level building permits associated with a parcel:
+          permit number, application date, permit type, status, description,
+          applicant, and completion date. These are unincorporated county
+          permits. For Sedro-Woolley city permits use sedro_woolley_permits.
+
+  # ---------------------------------------------------------------------------
+  # Skagit County Auditor — Recorded Documents
+  # NOTE: Endpoint not yet fully configured — needs manual discovery.
+  # ---------------------------------------------------------------------------
   skagit_auditor:
     name: "Skagit County Auditor"
     type: web
@@ -35,7 +201,6 @@ sources:
       - query_by_parcel
       - query_by_name
       - query_by_date
-    status: "needs_manual_config"
     config:
       endpoint: ""
       method: "POST"
@@ -44,7 +209,23 @@ sources:
       parcel_param: ""
       name_param: "ctl00$content$txtPartyName"
       file_number_param: "ctl00$content$txtFileNumber"
+      capabilities:
+        entity_types:
+          - parcel
+          - name
+          - date_range
+        query_modes:
+          - by_parcel
+          - by_name
+          - by_date
+        usage_notes: >
+          Skagit County Auditor recorded documents search. Returns deeds,
+          easements, liens, and other recorded instruments. Endpoint requires
+          manual configuration — currently non-functional.
 
+  # ---------------------------------------------------------------------------
+  # Sedro-Woolley iWorQ Permits
+  # ---------------------------------------------------------------------------
   sedro_woolley_permits:
     name: "Sedro-Woolley iWorQ Permits"
     type: web
@@ -87,4 +268,47 @@ sources:
         count_supported: true
         status_fields:
           - Status
-        usage_notes: "Use for Sedro-Woolley permit lookup and citywide permit counts. Citywide counts should use date-range search plus status aggregation."
+        usage_notes: >
+          Sedro-Woolley city permit portal (iWorQ). Use for city-issued
+          permit lookup by address, permit number, or date range. Supports
+          citywide permit counts with status aggregation. For county-wide
+          unincorporated area permits use skagit_assessor_permits.
+
+  # ---------------------------------------------------------------------------
+  # Skagit County Comparable Sales (PropertySales)
+  # Session-based multi-step form. Direct endpoint for comparison table:
+  # GET /Search/PropertySales/SelectedResults.aspx?wc='EXCISE_PARCELID',...
+  # The search step (POST to /Search/PropertySales) is required to discover
+  # comp excise numbers before calling SelectedResults.
+  # ---------------------------------------------------------------------------
+  skagit_sales_comps:
+    name: "Skagit County Comparable Sales"
+    type: web
+    base_url: "https://www.skagitcounty.net/Search/PropertySales"
+    domains:
+      - comparable_sales
+      - sales_comps
+      - market_analysis
+    supports:
+      - query_by_parcel
+    config:
+      endpoint: "https://www.skagitcounty.net/Search/PropertySales"
+      method: "GET"
+      query_type: "query_string"
+      response_format: "html_table"
+      parcel_param: "id"
+      capabilities:
+        entity_types:
+          - parcel
+        query_modes:
+          - by_parcel
+        usage_notes: >
+          Skagit County Assessor comparable sales search. Searches for
+          recently sold properties similar to a subject parcel by use type,
+          neighborhood, price range, square footage, year built, and quality.
+          The search form auto-populates default comp parameters from the
+          subject parcel. Returns a side-by-side comparison table showing
+          sale price, price per sq ft, year built, living area, bedrooms,
+          bathrooms, garage, and acreage for each comp and the subject.
+          Use for investment analysis, market value estimation, or comp
+          questions. Requires a parcel ID.

@@ -200,10 +200,30 @@ EXAMPLE INTENT → PLAN MAPPINGS
   → step: sedro_woolley_permits, domain: permits, query_type: by_date,
           status_filter: <check source status_fields>, reason: list open permits citywide
 
-"tax history for parcel P48165"
+"tax history for parcel P48165" / "assessment history" / "what were taxes in prior years"
   → entity: "P48165", entity_type: parcel
-  → step: skagit_treasurer, domain: taxes, query_type: by_parcel,
-          reason: retrieve tax payment and levy history
+  → step: skagit_assessor_history, domain: tax_history, query_type: by_parcel,
+          reason: retrieve annual assessment and tax values going back to 1991
+
+"what are current taxes on parcel P48165" / "tax breakdown" / "levy districts" / "is tax delinquent"
+  → entity: "P48165", entity_type: parcel
+  → step: skagit_assessor_taxes, domain: taxes, query_type: by_parcel,
+          reason: retrieve current year tax statement with district levy breakdown
+
+"building details" / "year built" / "square footage" / "improvements" / "structure"
+  → entity: "P48165", entity_type: parcel
+  → step: skagit_assessor_improvements, domain: improvements, query_type: by_parcel,
+          reason: retrieve building characteristics from assessor
+
+"sales history" / "who sold it" / "when was it last sold" / "what did it sell for"
+  → entity: "P48165", entity_type: parcel
+  → step: skagit_assessor_sales, domain: sales_history, query_type: by_parcel,
+          reason: retrieve recorded sale and transfer history from assessor
+
+"comparable sales" / "comps" / "what are similar properties selling for" / "market value estimate"
+  → entity: "P48165", entity_type: parcel
+  → step: skagit_sales_comps, domain: comparable_sales, query_type: by_parcel,
+          reason: find comparable recently sold properties for market analysis
 
 "who owns 123 Main St Burlington"
   → entity: "123 Main St Burlington", entity_type: address

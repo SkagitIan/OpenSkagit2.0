@@ -9,6 +9,9 @@ import uuid
 from datetime import datetime, timezone
 from typing import Optional
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse, Response
@@ -442,7 +445,13 @@ def _with_geometry_if_needed(step: dict, geometry: dict) -> dict:
     if step.get("query_type") != "by_parcel":
         return step
     sources = get_sources_for_domains([step["domain"]])
-    if not sources or sources[0].get("config", {}).get("parcel_field"):
+    if not sources:
+        return step
+    source = sources[0]
+    # Only upgrade to geometry for arcgis_rest sources — web sources use parcel ID directly.
+    if source.get("type") != "arcgis_rest":
+        return step
+    if source.get("config", {}).get("parcel_field"):
         return step
     return {**step, "query_type": "by_geometry", "geometry": geometry}
 
@@ -597,4 +606,5 @@ def _load_case_file(case_file_id: str) -> Optional[dict]:
     CASE_CACHE[case_file_id] = cf
     return cf
 
-app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
+if os.path.isdir("frontend"):
+    app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")

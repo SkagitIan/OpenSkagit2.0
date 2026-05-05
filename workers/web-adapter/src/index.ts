@@ -8,7 +8,7 @@ interface WebRequest {
   method: "GET" | "POST";
   query_type: "form_post" | "query_string" | "json_post";
   params: Record<string, string>;
-  response_format: "html_table" | "json" | "xml";
+  response_format: "html_table" | "asmx_html_table" | "json" | "xml";
   extract_fields?: string[];
   aggregate_mode?: "count_by_status";
   status_filter?: string;
@@ -157,6 +157,17 @@ function parseRecords(raw: string, format: WebRequest["response_format"]): Recor
     return [data];
   }
   if (format === "html_table") return parseHtmlTable(raw);
+  if (format === "asmx_html_table") {
+    // Skagit County ASP.NET web services return {"d": "<HTML fragment>"}.
+    // Unwrap the JSON envelope, then parse all HTML tables inside.
+    try {
+      const envelope = JSON.parse(raw);
+      const html = typeof envelope?.d === "string" ? envelope.d : raw;
+      return parseAllHtmlTables(html);
+    } catch {
+      return parseAllHtmlTables(raw);
+    }
+  }
   return [];
 }
 
@@ -176,6 +187,54 @@ export function parseHtmlTable(html: string): Record<string, unknown>[] {
     });
     return record;
   });
+}
+
+/**
+ * Parse all <table> blocks from an HTML fragment and merge their rows into a
+ * single flat record list. Each table that has a header row produces typed
+ * records; label/value two-column tables are collapsed into a single object.
+ * Used for ASMX responses that embed multiple data sections in one HTML blob.
+ */
+export function parseAllHtmlTables(html: string): Record<string, unknown>[] {
+  const tables = [...html.matchAll(/<table\b[\s\S]*?<\/table>/gi)].map((m) => m[0]);
+  if (tables.length === 0) return [];
+
+  const all: Record<string, unknown>[] = [];
+
+  for (const table of tables) {
+    const rows = [...table.matchAll(/<tr\b[\s\S]*?<\/tr>/gi)].map((m) => m[0]);
+    if (rows.length === 0) continue;
+
+    const headerCells = parseCells(rows[0]);
+    const dataRows = rows.slice(1).filter((r) => parseCells(r).some((v) => v));
+
+    // Two-column label/value tables (e.g. property summary sidebar) → single record
+    if (headerCells.length === 0 || (headerCells.length === 2 && dataRows.length > 2)) {
+      const record: Record<string, unknown> = {};
+      for (const row of rows) {
+        const cells = parseCells(row);
+        if (cells.length === 2 && cells[0]) {
+          record[cells[0]] = cells[1] ?? "";
+        }
+      }
+      if (Object.keys(record).length > 0) all.push(record);
+      continue;
+    }
+
+    // Standard header + data rows
+    if (dataRows.length === 0) continue;
+    const headers = headerCells.map((v, i) => v || `column_${i + 1}`);
+    for (const row of dataRows) {
+      const values = parseCells(row);
+      const record: Record<string, unknown> = {};
+      headers.forEach((h, i) => {
+        record[h] = values[i] ?? "";
+      });
+      all.push(record);
+    }
+  }
+
+  return all;
 }
 
 function parseCells(row: string): string[] {
