@@ -6,6 +6,7 @@ from agent.main import app
 
 
 client = TestClient(app)
+AUTH_HEADER = {"X-API-Key": "dev-admin-key-change-in-production"}
 
 
 def test_health():
@@ -31,6 +32,7 @@ def test_ask_returns_job_id():
         response = client.post(
             "/ask",
             json={"question": "Tell me about parcel P48165", "context": {"county": "skagit"}},
+            headers=AUTH_HEADER,
         )
     assert response.status_code == 200
     data = response.json()
@@ -52,13 +54,13 @@ def test_job_returns_saved_result():
         "error": None,
     }
     with patch("agent.main.run_ask", new=AsyncMock(return_value=mock_response)):
-        response = client.post("/ask", json={"question": "Tell me about parcel P48165"})
+        response = client.post("/ask", json={"question": "Tell me about parcel P48165"}, headers=AUTH_HEADER)
     job_id = response.json()["job_id"]
-    job = client.get(f"/job/{job_id}")
+    job = client.get(f"/job/{job_id}", headers=AUTH_HEADER)
     assert job.status_code == 200
     assert job.json()["status"] == "complete"
 
 
 def test_ask_requires_question():
-    response = client.post("/ask", json={"context": {}})
+    response = client.post("/ask", json={"context": {}}, headers=AUTH_HEADER)
     assert response.status_code == 422

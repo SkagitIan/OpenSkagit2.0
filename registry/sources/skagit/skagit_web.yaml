@@ -1,0 +1,46 @@
+sources:
+  skagit_treasurer:
+    name: "Skagit County Treasurer"
+    type: web
+    base_url: "https://www.skagitcounty.net/Departments/Treasurer"
+    domains:
+      - taxes
+      - levy
+      - delinquency
+      - assessments
+    supports:
+      - query_by_parcel
+      - query_by_owner
+    config:
+      endpoint: "https://www.skagitcounty.net/Search/Property/"
+      method: "POST"
+      query_type: "form_post"
+      response_format: "html_table"
+      parcel_param: "ctl00$content$pid"
+      owner_param: "tbAuto"
+      searchby_param: "searchby"
+      parcel_searchby_value: "propid"
+      owner_searchby_value: "owner"
+
+  skagit_auditor:
+    name: "Skagit County Auditor"
+    type: web
+    base_url: "https://www.skagitcounty.net/Departments/AuditorRecording"
+    domains:
+      - recorded_documents
+      - ownership_history
+      - easements
+      - deeds
+    supports:
+      - query_by_parcel
+      - query_by_name
+      - query_by_date
+    status: "needs_manual_config"
+    config:
+      endpoint: ""
+      method: "POST"
+      query_type: "form_post"
+      response_format: "html_table"
+      parcel_param: ""
+      name_param: "ctl00$content$txtPartyName"
+      file_number_param: "ctl00$content$txtFileNumber"

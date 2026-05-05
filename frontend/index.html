@@ -9,8 +9,15 @@
   <body>
     <main class="shell">
       <header class="topbar">
-        <h1>Civic Intelligence</h1>
-        <span>Skagit</span>
+        <div>
+          <h1 id="tenant-title">Civic Intelligence</h1>
+          <p id="tenant-tagline" class="tagline">Ask questions about public records.</p>
+        </div>
+        <div class="top-actions">
+          <button id="admin-link" class="secondary-action hidden" type="button">Admin</button>
+          <button id="main-link" class="secondary-action hidden" type="button">Workspace</button>
+          <button id="change-key" class="secondary-action" type="button">Change API key</button>
+        </div>
       </header>
       <nav class="tabs" aria-label="Panels">
         <button class="tab active" data-panel="conversation">Conversation</button>
@@ -50,8 +57,21 @@
         <section id="case-file" class="panel case-panel">
           <div id="case-content" class="empty-state">No case file loaded.</div>
         </section>
+        <section id="admin-panel" class="panel admin-panel">
+          <div id="admin-content" class="admin-content"></div>
+        </section>
       </section>
     </main>
+    <div id="api-key-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="api-key-title">
+      <form id="api-key-form" class="modal-box">
+        <h2 id="api-key-title">API Key</h2>
+        <label>
+          <span>Key</span>
+          <input id="api-key-input" type="password" autocomplete="off" required>
+        </label>
+        <button type="submit">Save key</button>
+      </form>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
