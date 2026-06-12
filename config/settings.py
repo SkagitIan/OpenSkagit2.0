@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    "django.contrib.gis",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
@@ -86,14 +85,6 @@ DATABASES = {
         conn_max_age=600,
     )
 }
-# Upgrade to PostGIS backend when running against PostgreSQL
-if DATABASES["default"].get("ENGINE") == "django.db.backends.postgresql":
-    DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"
-
-# GDAL library path — set on Railway or systems where GDAL is not on the default path
-if os.environ.get("GDAL_LIBRARY_PATH"):
-    GDAL_LIBRARY_PATH = os.environ["GDAL_LIBRARY_PATH"]
-
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
