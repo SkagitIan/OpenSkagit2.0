@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}OpenSkagit — Ask{% endblock %}
+
+{% block content %}
+<main class="shell">
+  <header class="topbar">
+    <div>
+      <h1 id="tenant-title">Civic Intelligence</h1>
+      <p id="tenant-tagline" class="tagline">Ask questions about public records.</p>
+    </div>
+    <div class="top-actions">
+      <button class="secondary-action" type="button">Admin</button>
+      <button class="secondary-action" type="button">Workspace</button>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Panels">
+    <button class="tab active" type="button">Conversation</button>
+    <button class="tab" type="button">Case File</button>
+  </nav>
+
+  <section class="panels">
+    <section class="panel conversation-panel active-mobile">
+      <div class="history">
+        <div class="bubble agent">OpenSkagit is ready. Ask anything about Skagit County.</div>
+      </div>
+      <form class="ask-form">
+        <input name="question" value="" autocomplete="off" placeholder="Ask anything about Skagit County…">
+        <button type="button">Ask</button>
+        <details class="notify-panel">
+          <summary>Notify when complete (optional)</summary>
+          <div class="notify-fields">
+            <label>
+              <span>Email</span>
+              <input type="email" autocomplete="email" placeholder="planner@example.gov">
+            </label>
+            <label>
+              <span>Webhook</span>
+              <input type="url" placeholder="https://webhook.site/...">
+            </label>
+            <fieldset>
+              <legend>Only notify if confidence is:</legend>
+              <label><input type="checkbox" checked> High</label>
+              <label><input type="checkbox" checked> Medium</label>
+              <label><input type="checkbox"> Low</label>
+            </fieldset>
+          </div>
+        </details>
+      </form>
+      <section class="case-history">
+        <h2>Recent Cases</h2>
+        <div class="case-history-list">
+          <button class="history-case" type="button">
+            <span>P48165 wetlands review</span>
+            <span class="muted">Draft</span>
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <section class="panel case-panel">
+      <div class="case-content">
+        <div class="case-head">
+          <div>
+            <span class="label">Case File</span>
+            <h1>Parcel P48165</h1>
+          </div>
+          <span class="confidence medium">Medium</span>
+        </div>
+        <h2>Evidence</h2>
+        <div class="evidence-list">
+          <article class="evidence-card">
+            <h3>Public records workspace</h3>
+            <div class="fields">
+              <div class="field">
+                <span>Status</span>
+                <strong>Infrastructure ready</strong>
+              </div>
+              <div class="field">
+                <span>Deployment</span>
+                <strong>Railway Django app</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
+{% endblock %}
