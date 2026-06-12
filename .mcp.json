@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "django": {
+      "type": "stdio",
+      "command": "C:\\Users\\ian\\Desktop\\Factory\\.venv\\Scripts\\python.exe",
+      "args": ["C:\\Users\\ian\\Desktop\\Factory\\OpenSkagit-railway\\mcp_django.py"],
+      "env": {
+        "DJANGO_SETTINGS_MODULE": "config.settings"
+      }
+    }
+  }
+}
