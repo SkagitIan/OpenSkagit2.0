@@ -7,3 +7,5 @@ python-dotenv
 psycopg[binary]
 bs4
 pydantic
+duckdb>=1.1
+openai-agents>=0.3

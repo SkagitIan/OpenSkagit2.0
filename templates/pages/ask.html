@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load core_extras %}
+
+{% block title %}Ask — OpenSkagit{% endblock %}
+
+{% block content %}
+<div class="os-home">
+
+  <!-- ── NAV ── -->
+  <header class="os-nav">
+    <a href="/" class="os-nav__logo">
+      <svg width="34" height="34" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 20 L20 4 A16 16 0 0 1 36 20 Z" fill="#1AACB0"/>
+        <path d="M20 20 L36 20 A16 16 0 0 1 20 36 Z" fill="#5BBB2F"/>
+        <path d="M20 20 L20 36 A16 16 0 0 1 4 20 Z" fill="#3B82C4"/>
+        <path d="M20 20 L4 20 A16 16 0 0 1 20 4 Z" fill="#F5A623"/>
+        <polygon points="13,27 20,15 27,27" fill="white" opacity="0.95"/>
+        <circle cx="20" cy="20" r="2.5" fill="white"/>
+      </svg>
+      OpenSkagit
+    </a>
+    <nav class="os-nav__links" aria-label="Site">
+      <a href="/#tools">Tools</a>
+      <a href="/#data">Data</a>
+      <a href="/#about">About</a>
+      <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <a href="/" class="os-btn os-btn--ghost">← Home</a>
+  </header>
+
+  <!-- ── PAGE ── -->
+  <div class="os-ask-page">
+
+    <div class="os-ask-page__header">
+      <div>
+        <h1 class="os-ask-page__h1">Ask the data</h1>
+        <p class="os-ask-page__sub">Query Skagit County public records with AI, or write DuckDB SQL directly.</p>
+      </div>
+    </div>
+
+    <div class="os-ask-workspace">
+
+      <!-- ── LEFT: AI PROMPT ── -->
+      <section class="os-ask-ai">
+        <h2 class="os-ask-panel-title">AI analysis</h2>
+
+        <form method="post" action="{% url 'ask' %}" class="os-ask-ai__form">
+          {% csrf_token %}
+          <textarea
+            name="prompt"
+            rows="5"
+            class="os-ask-textarea"
+            placeholder="Find parcels over 10 acres with public utilities. Show neighborhood, owner, and assessed value."
+          >{{ prompt }}</textarea>
+
+          {% if starter_prompts %}
+          <div class="os-chips os-chips--sm">
+            <span class="os-chip-label">Try:</span>
+            {% for item in starter_prompts %}
+              <a href="{% url 'ask' %}?prompt={{ item|urlencode }}" class="os-chip">{{ item }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <button type="submit" class="os-btn os-btn--teal">Run AI analysis</button>
+        </form>
+
+        {% if answer %}
+        <div class="os-ask-answer">
+          <div class="os-ask-answer__label">Answer</div>
+          <p class="os-ask-answer__text">{{ answer }}</p>
+        </div>
+        {% endif %}
+
+        {% if analysis and analysis.sql %}
+        <details class="os-ask-details" open>
+          <summary>Generated SQL &amp; reality checks</summary>
+          <div class="os-ask-details__body">
+            <pre class="os-ask-pre">{{ analysis.sql }}</pre>
+            {% if analysis.reality_checks %}
+            <ul class="os-ask-checks">
+              {% for check in analysis.reality_checks %}
+                <li>{{ check }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        </details>
+        {% endif %}
+
+        {% if result and result.rows %}
+        <div class="os-ask-results">
+          <div class="os-ask-results__meta">{{ result.rows|length }} row{{ result.rows|length|pluralize }}</div>
+          <div class="os-ask-table-wrap">
+            <table class="os-ask-table">
+              <thead>
+                <tr>
+                  {% for column in result.columns %}
+                    <th>{{ column }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in result.rows %}
+                  <tr>
+                    {% for column in result.columns %}
+                      <td>{{ row|dict_value:column }}</td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if error and not answer %}
+        <div class="os-ask-error">{{ error }}</div>
+        {% endif %}
+      </section>
+
+      <!-- ── RIGHT: SQL EDITOR ── -->
+      <aside class="os-ask-sql-panel">
+        <h2 class="os-ask-panel-title">DuckDB SQL</h2>
+
+        <form method="post" action="{% url 'ask_sql' %}" class="os-ask-sql__form">
+          {% csrf_token %}
+          <input type="hidden" name="prompt" value="{{ prompt }}">
+          <textarea
+            name="sql"
+            rows="14"
+            class="os-ask-textarea os-ask-textarea--mono"
+            placeholder="SELECT neighborhood_description, COUNT(*) AS parcels&#10;FROM assessor_rollup&#10;GROUP BY 1&#10;ORDER BY parcels DESC&#10;LIMIT 25"
+          >{{ sql }}</textarea>
+          <button type="submit" class="os-btn os-btn--slate w-full">Run SQL</button>
+        </form>
+
+        <div class="os-ask-sql-hint">
+          Allowed: <code>SELECT</code> / <code>WITH</code>,
+          <code>CREATE TEMP TABLE/VIEW AS SELECT</code>,
+          <code>DROP</code> of <code>temp_</code> or <code>analysis_</code> objects.
+          Persistent tables are read-only.
+        </div>
+
+        {% if error %}
+        <div class="os-ask-error">{{ error }}</div>
+        {% endif %}
+
+        {% if result and result.rows and not answer %}
+        <div class="os-ask-results os-ask-results--inline">
+          <div class="os-ask-results__meta">{{ result.rows|length }} row{{ result.rows|length|pluralize }}</div>
+          <div class="os-ask-table-wrap">
+            <table class="os-ask-table">
+              <thead>
+                <tr>
+                  {% for column in result.columns %}
+                    <th>{{ column }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in result.rows %}
+                  <tr>
+                    {% for column in result.columns %}
+                      <td>{{ row|dict_value:column }}</td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endif %}
+      </aside>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}

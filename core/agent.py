@@ -1,0 +1,564 @@
+from __future__ import annotations
+
+import os
+import re
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+import duckdb
+
+from .duck import connect, database_path
+
+READ_ONLY_TABLES = {
+    "assessor_rollup",
+    "improvements",
+    "land",
+    "sales",
+    "code_descriptions",
+    "code_mappings",
+    "primary_use_codes",
+}
+
+ANALYSIS_RULES = """
+Default OpenSkagit analysis rules:
+- For market value, regression, comparable-sale, and IAAO analysis, use only valid sales unless the user explicitly asks otherwise.
+  SQL: sales.sale_type = 'VALID SALE'
+- For residential property analysis, filter assessor_rollup.proptype = 'R'.
+  Residential means homes, houses, SFR, condos, residential neighborhoods, or dwelling-focused questions.
+- For commercial property analysis, filter assessor_rollup.proptype = 'C'.
+  Commercial means retail, office, industrial, business, income property, or commercial-use questions.
+- For recent sales, default to sales.sale_date_iso >= '2024-01-01' unless the user provides a different date range.
+- Prefer exact mapped codes from code_mappings over text matching descriptions.
+- If applying one of these defaults would materially change the analysis and the user's intent is ambiguous, state the default in the answer.
+""".strip()
+
+
+@dataclass
+class QueryResult:
+    columns: list[str]
+    rows: list[dict[str, Any]]
+
+
+@dataclass
+class AnalysisResponse:
+    answer: str
+    result: QueryResult | None = None
+    sql: str | None = None
+    reality_checks: list[str] | None = None
+
+
+@dataclass(frozen=True)
+class ResolvedTerm:
+    category: str
+    code: str
+    description: str
+    filter_expression: str
+    display_column: str
+
+
+CODE_FILTERS = {
+    "improvement_type": ("improvements.imprv_det_type_cd", "improvements.imprv_det_type_description"),
+    "improvement_class": ("improvements.imprv_det_class_cd", "improvements.imprv_det_class_description"),
+    "condition": ("improvements.condition_cd", "improvements.condition_description"),
+    "land_use": ("assessor_rollup.land_use_code", "assessor_rollup.land_use_description"),
+    "neighborhood": ("assessor_rollup.neighborhood_code_id", "assessor_rollup.neighborhood_description"),
+    "utilities": ("assessor_rollup.utilities_codes", "assessor_rollup.utilities_description"),
+}
+
+LAND_USE_ALIASES = {
+    "910": {
+        "rec lot", "rec lots", "recreational lot", "recreational lots",
+        "recreation lot", "recreation lots", "unimproved", "unimproved land",
+        "undeveloped", "undeveloped land", "vacant lot", "vacant lots", "raw land",
+    },
+    "190": {"vacation cabin", "vacation cabins", "cabin lot", "cabin lots"},
+    "740": {"recreational activities", "recreational activity"},
+}
+
+
+def schema_summary(db_path: Path | None = None, conn: duckdb.DuckDBPyConnection | None = None) -> str:
+    db_path = db_path or database_path()
+    close_when_done = conn is None
+    active = conn or connect(db_path, read_only=True)
+    try:
+        parts: list[str] = [
+            "This is a DuckDB database of Skagit County public records. Use the *_description columns for human-readable analysis. Do not infer meanings from raw codes when mapped columns exist.",
+            "",
+            "assessor_rollup key columns:",
+            "parcel_number, legal_description, situs_street_name, situs_city_state_zip, owner_name, owner_city, owner_state, owner_zip, "
+            "neighborhood_code_id, neighborhood_description, land_use_code, land_use_description, utilities_codes, utilities_description, "
+            "assessed_value_num, taxable_value_num, total_market_value_num, acres_num, sale_price_num, sale_date_iso, year_built, living_area",
+            "",
+            "improvements key columns:",
+            "parcelnumber, description, building_style, comment, imprv_det_type_cd, imprv_det_type_description, "
+            "imprv_det_class_cd, imprv_det_class_description, condition_cd, condition_description, calc_area, "
+            "imprv_val_num, living_area_num, actual_year_built, effective_yr_blt",
+            "",
+            "land key columns:",
+            "parcelnumber, land_type, appr_meth, size_acres_num, market_value_num, open_space_use_code_desc, land_seg_comment",
+            "",
+            "sales key columns:",
+            "parcel_number, seller_name, buyer_name, sale_price_num, sale_date_iso, sale_type, deed_type, reval_area",
+            "",
+            "code_mappings columns:",
+            "category, code, description, source. Categories include improvement_type, improvement_class, condition, land_use, neighborhood, utilities.",
+            "",
+            "Analysis guidance:",
+            "- You may use SELECT/WITH and CREATE TEMP TABLE/VIEW ... AS SELECT for multi-step analysis.",
+            "- Prefer mapped code filters from the analysis context. For example, use imprv_det_type_cd = 'AGAR' for attached garage when that mapping is present.",
+            "- For land-use intent, inspect code_mappings category land_use and filter on assessor_rollup.land_use_code when an exact county code applies.",
+            "- For IAAO-style fairness checks, use valid recent sales, sale-to-assessed ratios, medians, dispersion, and neighborhood cohorts.",
+            "",
+            "Mapping guidance:",
+            "- Rec lots, vacant lots, undeveloped land, and unimproved land should use land_use_code = '910' when the county mapping is present.",
+            "- Vacation/cabin property should use land_use_code = '190' when the county mapping is present.",
+            "- Do not infer physical land features from designations such as TREES or FOREST unless the user explicitly asks for forestry/open-space designations.",
+            "- Public sewer/power/water should use utilities_description LIKE '%Sewer%', '%Power%', '%Public water%' instead of raw markers like *SEW.",
+            "- Neighborhood filtering should use neighborhood_code_id or neighborhood_description, not the raw neighborhood_code field.",
+            "- Join assessor_rollup.parcel_number to improvements.parcelnumber or land.parcelnumber when detail tables are needed.",
+        ]
+        try:
+            mapping_examples = active.execute(
+                """
+                SELECT category, code, description
+                FROM code_mappings
+                WHERE category IN ('utilities', 'condition')
+                   OR code IN ('AGAR', 'CCP', 'MSA', 'MSG', '190', '740', '910')
+                ORDER BY category, code
+                LIMIT 80
+                """
+            ).fetchall()
+        except duckdb.Error:
+            mapping_examples = []
+        if mapping_examples:
+            parts.append("")
+            parts.append("Useful mapping examples:")
+            parts.extend(f"{row[0]}:{row[1]} = {row[2]}" for row in mapping_examples)
+        return "\n".join(parts)
+    finally:
+        if close_when_done:
+            active.close()
+
+
+def analysis_context(
+    question: str,
+    db_path: Path | None = None,
+    conn: duckdb.DuckDBPyConnection | None = None,
+) -> str:
+    resolved = resolve_terms(question, db_path, conn=conn)
+    relevant_definitions = relevant_code_definitions(question, db_path, conn=conn)
+    parts = [
+        schema_summary(db_path, conn=conn),
+        "",
+        ANALYSIS_RULES,
+        "",
+        "Resolved mapping terms from code_mappings:",
+    ]
+    if resolved:
+        for term in resolved:
+            parts.append(
+                f"- {term.category}:{term.code} = {term.description}; "
+                f"preferred filter: {term.filter_expression}; display: {term.display_column}"
+            )
+    else:
+        parts.append("- None found. Use schema columns directly and avoid inventing codes.")
+    if relevant_definitions:
+        parts.extend(
+            [
+                "",
+                "Relevant code definitions from code_mappings:",
+            ]
+        )
+        parts.extend(
+            f"- {term.category}:{term.code} = {term.description}; filter: {term.filter_expression}"
+            for term in relevant_definitions
+        )
+    parts.extend(
+        [
+            "",
+            "Required planning step before SQL:",
+            "- Translate the user request into tables, joins, filters, metrics, and assumptions.",
+            "- If a resolved mapping term exists, use its preferred code filter instead of text-searching descriptions.",
+            "- Ask one focused follow-up only when a missing choice materially changes the result.",
+            "- Otherwise choose a conservative default and state it in the answer.",
+            "",
+            "Reality-check expectations after query execution:",
+            "- Mention small sample sizes, empty comparison groups, null-heavy fields, duplicate sale risk, and approximate validity filters.",
+            "- Do not overstate grouped comparisons as full regressions.",
+        ]
+    )
+    return "\n".join(parts)
+
+
+def relevant_code_definitions(
+    question: str,
+    db_path: Path | None = None,
+    limit: int = 140,
+    conn: duckdb.DuckDBPyConnection | None = None,
+) -> list[ResolvedTerm]:
+    categories = _contextual_mapping_categories(question)
+    if not categories:
+        return []
+
+    db_path = db_path or database_path()
+    close_when_done = conn is None
+    active = conn or connect(db_path, read_only=True)
+    try:
+        try:
+            rows = active.execute(
+                """
+                SELECT category, code, description
+                FROM code_mappings
+                WHERE category IN (SELECT unnest(?))
+                ORDER BY category, code
+                LIMIT ?
+                """,
+                (categories, limit),
+            ).fetchall()
+        except duckdb.Error:
+            return []
+    finally:
+        if close_when_done:
+            active.close()
+
+    definitions: list[ResolvedTerm] = []
+    for category, code, description in rows:
+        if category not in CODE_FILTERS or not code or not description:
+            continue
+        code_column, _display_column = CODE_FILTERS[str(category)]
+        definitions.append(
+            ResolvedTerm(
+                category=str(category),
+                code=str(code),
+                description=str(description),
+                filter_expression=_mapping_filter_expression(str(category), code_column, str(code)),
+                display_column=CODE_FILTERS[str(category)][1],
+            )
+        )
+    return definitions
+
+
+def _contextual_mapping_categories(question: str) -> list[str]:
+    tokens = set(_tokens(question))
+    categories: list[str] = []
+    if tokens & {"land", "lot", "lots", "parcel", "parcels", "use", "vacation", "cabin", "rec", "recreational", "unimproved", "undeveloped", "vacant", "forest", "trees"}:
+        categories.append("land_use")
+    if tokens & {"utility", "utilities", "sewer", "power", "water", "well", "septic"}:
+        categories.append("utilities")
+    if tokens & {"neighborhood", "area", "city"}:
+        categories.append("neighborhood")
+    return categories
+
+
+def resolve_terms(
+    question: str,
+    db_path: Path | None = None,
+    limit: int = 12,
+    conn: duckdb.DuckDBPyConnection | None = None,
+) -> list[ResolvedTerm]:
+    db_path = db_path or database_path()
+    normalized_question = _normalize_for_match(question)
+    question_tokens = set(_tokens(question))
+    close_when_done = conn is None
+    active = conn or connect(db_path, read_only=True)
+    try:
+        try:
+            rows = active.execute(
+                """
+                SELECT category, code, description
+                FROM code_mappings
+                ORDER BY
+                    CASE WHEN source = 'manual' THEN 0 ELSE 1 END,
+                    LENGTH(description) DESC,
+                    category,
+                    code
+                """
+            ).fetchall()
+        except duckdb.Error:
+            return []
+    finally:
+        if close_when_done:
+            active.close()
+
+    matches: list[tuple[int, ResolvedTerm]] = []
+    seen: set[tuple[str, str]] = set()
+    for category, code, description in rows:
+        if category not in CODE_FILTERS or not code or not description:
+            continue
+        score = _mapping_match_score(str(category), normalized_question, question_tokens, str(code), str(description))
+        if score <= 0:
+            continue
+        key = (str(category), str(code))
+        if key in seen:
+            continue
+        seen.add(key)
+        code_column, display_column = CODE_FILTERS[str(category)]
+        matches.append(
+            (
+                score,
+                ResolvedTerm(
+                    category=str(category),
+                    code=str(code),
+                    description=str(description),
+                    filter_expression=_mapping_filter_expression(str(category), code_column, str(code)),
+                    display_column=display_column,
+                ),
+            )
+        )
+
+    matches.sort(key=lambda item: (-item[0], item[1].category, item[1].code))
+    return [term for _, term in matches[:limit]]
+
+
+def _mapping_filter_expression(category: str, code_column: str, code: str) -> str:
+    escaped = code.replace("'", "''")
+    if category == "utilities":
+        return f"contains(string_split({code_column}, ', '), '{escaped}')"
+    return f"{code_column} = '{escaped}'"
+
+
+def _mapping_match_score(category: str, question: str, question_tokens: set[str], code: str, description: str) -> int:
+    code_norm = _normalize_for_match(code)
+    desc_norm = _normalize_for_match(description)
+    desc_tokens = _tokens(description)
+    alias_score = _land_use_alias_score(question, code) if category == "land_use" else 0
+    if alias_score:
+        return alias_score
+    if code_norm and re.search(rf"(?<![a-z0-9]){re.escape(code_norm)}(?![a-z0-9])", question):
+        return 100
+    if len(desc_norm) >= 3 and desc_norm in question:
+        return 90 + min(len(desc_tokens), 9)
+    if 1 < len(desc_tokens) <= 4 and all(len(token) >= 3 for token in desc_tokens) and set(desc_tokens).issubset(question_tokens):
+        return 70 + len(desc_tokens)
+    return 0
+
+
+def _land_use_alias_score(question: str, code: str) -> int:
+    aliases = LAND_USE_ALIASES.get(code)
+    if not aliases:
+        return 0
+    for alias in aliases:
+        alias_norm = _normalize_for_match(alias)
+        if alias_norm and re.search(rf"(?<![a-z0-9]){re.escape(alias_norm)}(?![a-z0-9])", question):
+            return 95
+    return 0
+
+
+def _normalize_for_match(value: str) -> str:
+    return " ".join(_tokens(value))
+
+
+def _tokens(value: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+", value.lower())
+
+
+def execute_readonly_sql(sql: str, limit: int = 200, db_path: Path | None = None) -> QueryResult:
+    if not is_safe_select(sql):
+        raise ValueError("Only a single read-only SELECT query is allowed.")
+    db_path = db_path or database_path()
+    conn = connect(db_path, read_only=True)
+    try:
+        return _execute_select(conn, sql, limit)
+    finally:
+        conn.close()
+
+
+def execute_analysis_sql(
+    sql: str,
+    limit: int = 200,
+    db_path: Path | None = None,
+    conn: duckdb.DuckDBPyConnection | None = None,
+) -> QueryResult:
+    if not is_safe_analysis_sql(sql):
+        raise ValueError("Only SELECT/WITH, CREATE TEMP TABLE/VIEW ... AS SELECT, and DROP of temp_ or analysis_ objects are allowed.")
+    close_when_done = conn is None
+    active = conn or connect(db_path or database_path(), read_only=is_safe_select(sql))
+    try:
+        stripped = _strip_sql(sql)
+        if is_safe_select(stripped):
+            return _execute_select(active, stripped, limit)
+        cursor = active.execute(stripped)
+        if cursor.description:
+            return _cursor_to_result(cursor, limit)
+        return QueryResult(columns=["status"], rows=[{"status": "Analysis statement completed."}])
+    finally:
+        if close_when_done:
+            active.close()
+
+
+def _execute_select(conn: duckdb.DuckDBPyConnection, sql: str, limit: int) -> QueryResult:
+    wrapped = f"SELECT * FROM ({_strip_sql(sql)}) LIMIT ?"
+    cursor = conn.execute(wrapped, (limit,))
+    return _cursor_to_result(cursor, limit)
+
+
+def _cursor_to_result(cursor: duckdb.DuckDBPyConnection, limit: int) -> QueryResult:
+    columns = [column[0] for column in cursor.description] if cursor.description else []
+    rows = cursor.fetchmany(limit)
+    return QueryResult(columns=columns, rows=[dict(zip(columns, row)) for row in rows])
+
+
+def result_reality_checks(result: QueryResult | None) -> list[str]:
+    if result is None:
+        return ["No query result was produced."]
+    if not result.rows:
+        return ["The query returned no rows; filters may be too narrow or joins may have removed all records."]
+
+    warnings: list[str] = []
+    row_count = len(result.rows)
+    if row_count < 10:
+        warnings.append(f"Only {row_count} result rows were returned; treat conclusions as directional.")
+
+    for column in result.columns:
+        null_count = sum(1 for row in result.rows if row.get(column) in (None, ""))
+        if row_count and null_count / row_count >= 0.3:
+            warnings.append(f"Column {column} is null or blank in at least 30% of returned rows.")
+
+    for price_column in ["sale_price_num", "median_sale_price", "avg_sale_price"]:
+        if price_column not in result.columns:
+            continue
+        values = [
+            row.get(price_column)
+            for row in result.rows
+            if isinstance(row.get(price_column), int | float)
+        ]
+        if values and (min(values) <= 0 or max(values) > 10_000_000):
+            warnings.append(f"Column {price_column} has values outside a normal residential sale range.")
+
+    return warnings[:6]
+
+
+def is_safe_select(sql: str) -> bool:
+    stripped = _strip_sql(sql)
+    if not re.match(r"(?is)^(select|with)\b", stripped):
+        return False
+    if ";" in stripped:
+        return False
+    forbidden = r"\b(insert|update|delete|drop|alter|create|attach|detach|pragma|vacuum|copy|install|load|export|import)\b"
+    return re.search(forbidden, stripped, flags=re.IGNORECASE) is None
+
+
+def is_safe_analysis_sql(sql: str) -> bool:
+    stripped = _strip_sql(sql)
+    if not stripped or ";" in stripped:
+        return False
+    if is_safe_select(stripped):
+        return True
+    if re.match(r"(?is)^create\s+(temporary|temp)\s+(table|view)\s+[a-z_][a-z0-9_]*\s+as\s+(select|with)\b", stripped):
+        return not _contains_persistent_mutation(stripped)
+    drop_match = re.match(r"(?is)^drop\s+(table|view)\s+(if\s+exists\s+)?([a-z_][a-z0-9_]*)$", stripped)
+    if drop_match:
+        name = drop_match.group(3).lower()
+        return name.startswith("analysis_") or name.startswith("temp_")
+    return False
+
+
+def _contains_persistent_mutation(sql: str) -> bool:
+    forbidden = r"\b(insert|update|delete|alter|attach|detach|pragma|vacuum|copy|install|load|export|import)\b"
+    if re.search(forbidden, sql, flags=re.IGNORECASE):
+        return True
+    return bool(re.search(r"(?is)\bcreate\s+(?!temporary\b|temp\b)", sql))
+
+
+def _strip_sql(sql: str) -> str:
+    return sql.strip().rstrip(";").strip()
+
+
+def answer_question(question: str) -> AnalysisResponse:
+    try:
+        from agents import Agent, MaxTurnsExceeded, Runner, function_tool
+    except Exception:
+        return AnalysisResponse(
+            "The OpenAI Agents SDK is not installed. Run: pip install openai-agents  "
+            "then set OPENAI_API_KEY in .env and try again.",
+            None,
+        )
+
+    if not os.environ.get("OPENAI_API_KEY"):
+        return AnalysisResponse(
+            "OPENAI_API_KEY is not set. Add it to .env to enable AI analysis.",
+            None,
+        )
+
+    db_path = database_path()
+    last_result: QueryResult | None = None
+    last_sql: str | None = None
+    analysis_conn = connect(db_path)
+    resolved_terms = resolve_terms(question, db_path, conn=analysis_conn)
+
+    @function_tool
+    def get_analysis_context() -> str:
+        """Return DuckDB schema, resolved code_mappings terms, and planning rules for this question."""
+        return analysis_context(question, db_path, conn=analysis_conn)
+
+    @function_tool
+    def run_analysis_query(sql: str) -> dict[str, Any]:
+        """Run a guarded DuckDB analysis statement. Allows SELECT and CREATE TEMP TABLE/VIEW AS SELECT."""
+        nonlocal last_result, last_sql
+        last_sql = sql
+        last_result = execute_analysis_sql(sql, db_path=db_path, conn=analysis_conn)
+        checks = result_reality_checks(last_result)
+        return {
+            "columns": last_result.columns,
+            "row_count": len(last_result.rows),
+            "rows": last_result.rows,
+            "reality_checks": checks,
+            "instruction": "Use these rows and reality checks to continue the analysis or answer. Keep tool calls focused.",
+        }
+
+    model = os.environ.get("OPENAI_MODEL", "gpt-4.1")
+    agent = Agent(
+        name="OpenSkagit DuckDB analyst",
+        model=model,
+        instructions=(
+            "You analyze Skagit County public records using DuckDB. "
+            "The database contains assessor, property, permit, and related county data. "
+            "Call get_analysis_context once before querying to understand the schema and available code mappings. "
+            "First make an internal structured plan: resolved terms, tables, joins, filters, metrics, and assumptions. "
+            "If a resolved mapping term is present, use its preferred code filter; do not text-search its description. "
+            "You may run multiple guarded analysis queries. "
+            "Allowed SQL: SELECT/WITH, CREATE TEMP TABLE/VIEW ... AS SELECT, and dropping temp_ or analysis_ objects. "
+            "Never modify persistent tables. Always prefer mapped readable fields such as land_use_description, "
+            "neighborhood_description, utilities_description, imprv_det_type_description, and condition_description. "
+            "For regression-style questions, compute transparent DuckDB aggregates and explain limitations. "
+            "Answer from query results, keep answers concise, and state your assumptions."
+        ),
+        tools=[get_analysis_context, run_analysis_query],
+    )
+    try:
+        result = Runner.run_sync(agent, question, max_turns=20)
+    except MaxTurnsExceeded:
+        if last_result is not None:
+            return AnalysisResponse(
+                "The agent ran too many tool steps; here are the latest query results. "
+                "Try asking a narrower question.",
+                last_result,
+                last_sql,
+                result_reality_checks(last_result),
+            )
+        return AnalysisResponse(
+            "The agent ran too many steps without producing an answer. Try a narrower question.",
+            None,
+        )
+    except Exception as exc:
+        return AnalysisResponse(
+            f"Analysis failed: {type(exc).__name__}: {exc}",
+            last_result,
+            last_sql,
+            result_reality_checks(last_result),
+        )
+    finally:
+        analysis_conn.close()
+
+    checks = result_reality_checks(last_result)
+    footer_parts: list[str] = []
+    if resolved_terms:
+        footer_parts.append(
+            "Resolved mappings: "
+            + ", ".join(f"{term.category}:{term.code} ({term.description})" for term in resolved_terms[:5])
+        )
+    if last_sql:
+        footer_parts.append("Reality checks: " + " ".join(checks))
+    footer = "\n\n" + "\n".join(footer_parts) if footer_parts else ""
+    return AnalysisResponse(str(result.final_output) + footer, last_result, last_sql, checks)
