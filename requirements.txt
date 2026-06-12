@@ -4,5 +4,6 @@ dj-database-url
 whitenoise
 django-environ
 python-dotenv
+psycopg[binary]
 bs4
 pydantic
