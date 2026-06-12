@@ -1,13 +1,11 @@
 {
-  "$schema": "https://railway.app/railway.schema.json",
+  "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "python catalog/seeds/seed.py --env local && uvicorn agent.main:app --host 0.0.0.0 --port $PORT",
-    "healthcheckPath": "/health",
-    "healthcheckTimeout": 10,
+    "startCommand": "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn config.wsgi:application",
     "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 3
+    "restartPolicyMaxRetries": 10
   }
 }

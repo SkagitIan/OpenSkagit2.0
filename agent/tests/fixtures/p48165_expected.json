@@ -1,9 +1,0 @@
-{
-  "question": "Tell me about parcel P48165",
-  "entity": "P48165",
-  "required_sources": ["skagit_parcels"],
-  "required_evidence_fields": ["PARCELID", "OwnerName"],
-  "confidence_min": "medium",
-  "answer_must_contain": ["P48165"],
-  "answer_must_not_contain": ["I don't know", "unable to", "no information"]
-}

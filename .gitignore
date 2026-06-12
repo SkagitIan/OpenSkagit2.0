@@ -1,32 +1,16 @@
-# Secrets and local environment
-.env
-.env.*
-!.env.example
-
 # Python
 __pycache__/
-*.py[cod]
-.pytest_cache/
-pytest-cache-files-*/
+*.pyc
+
+# Environments
+.env
 .venv/
-venv/
 
-# Local databases and runtime state
-*.db
-*.sqlite
-*.sqlite3
-*.sqlite-shm
-*.sqlite-wal
-*.log
+# Django
+db.sqlite3
+staticfiles/
 
-# Node and Cloudflare local state
-node_modules/
-.wrangler/
-
-# OS and editor files
+# OS / Editor
 .DS_Store
 Thumbs.db
 .vscode/
-
-# Scratch clones/backups
-OpenSkagit/
