@@ -1,274 +1,280 @@
 {% extends "base.html" %}
 
-{% block title %}OpenSkagit — Know your county.{% endblock %}
+{% block title %}OpenSkagit — Skagit Valley is an open book.{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #042C53; }</style>
+{% endblock %}
 
 {% block content %}
-<div class="os-home">
+<div class="os-home-v2">
 
-  <!-- ── NAV ── -->
-  <header class="os-nav">
-    <a href="/" class="os-nav__logo">
-      <svg width="34" height="34" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <path d="M20 20 L20 4 A16 16 0 0 1 36 20 Z" fill="#1AACB0"/>
-        <path d="M20 20 L36 20 A16 16 0 0 1 20 36 Z" fill="#5BBB2F"/>
-        <path d="M20 20 L20 36 A16 16 0 0 1 4 20 Z" fill="#3B82C4"/>
-        <path d="M20 20 L4 20 A16 16 0 0 1 20 4 Z" fill="#F5A623"/>
-        <polygon points="13,27 20,15 27,27" fill="white" opacity="0.95"/>
-        <circle cx="20" cy="20" r="2.5" fill="white"/>
+  <!-- NAV -->
+  <header class="os-nav-v2">
+    <a href="/" class="os-nav-v2__logo">
+      <svg width="26" height="26" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+        <path d="M30,30 C20,20 5,15 10,5 C20,-5 35,15 30,30" fill="#5BBB2F"/>
+        <path d="M30,30 C40,20 55,15 58,27 C62,40 40,42 30,30" fill="#3B82C4"/>
+        <path d="M30,30 C40,40 45,55 35,58 C20,62 18,42 30,30" fill="#F5A623"/>
+        <path d="M30,30 C18,38 3,43 2,32 C0,18 20,16 30,30" fill="#1AACB0"/>
+        <circle cx="30" cy="30" r="9" fill="#042C53"/>
+        <path d="M24,33 L30,24 L36,33 Z" fill="white"/>
       </svg>
       OpenSkagit
     </a>
-    <nav class="os-nav__links" aria-label="Site">
-      <a href="#tools">Tools</a>
-      <a href="#data">Data</a>
-      <a href="#about">About</a>
-      <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
+    <nav class="os-nav-v2__links" aria-label="Site navigation">
+      <a href="#">Cities</a>
+      <a href="#">Parcels</a>
+      <a href="#">Taxes</a>
+      <a href="#">Permits</a>
+      <a href="#">GIS</a>
+      <a href="#">About</a>
     </nav>
-    <a href="/app/" class="os-btn">Open app →</a>
   </header>
 
-  <!-- ── HERO ── -->
-  <section class="os-hero" id="ask">
-    <!-- Topographic contour background -->
-    <div class="os-hero__bg" aria-hidden="true">
-      <svg viewBox="0 0 1200 580" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="860" cy="225" rx="22"  ry="14"  stroke="#1AACB0" stroke-width="1.3" opacity="0.22" transform="rotate(-22, 860, 225)"/>
-        <ellipse cx="860" cy="225" rx="50"  ry="34"  stroke="#1AACB0" stroke-width="1.2" opacity="0.20" transform="rotate(-20, 860, 225)"/>
-        <ellipse cx="858" cy="228" rx="86"  ry="57"  stroke="#1AACB0" stroke-width="1.2" opacity="0.17" transform="rotate(-17, 858, 228)"/>
-        <ellipse cx="856" cy="232" rx="129" ry="86"  stroke="#1AACB0" stroke-width="1.1" opacity="0.15" transform="rotate(-15, 856, 232)"/>
-        <ellipse cx="853" cy="237" rx="178" ry="119" stroke="#1AACB0" stroke-width="1.1" opacity="0.13" transform="rotate(-13, 853, 237)"/>
-        <ellipse cx="850" cy="243" rx="233" ry="156" stroke="#1AACB0" stroke-width="1.0" opacity="0.11" transform="rotate(-11, 850, 243)"/>
-        <ellipse cx="847" cy="249" rx="295" ry="196" stroke="#1AACB0" stroke-width="1.0" opacity="0.10" transform="rotate(-9,  847, 249)"/>
-        <ellipse cx="844" cy="256" rx="363" ry="241" stroke="#1AACB0" stroke-width="1.0" opacity="0.09" transform="rotate(-7,  844, 256)"/>
-        <ellipse cx="841" cy="263" rx="437" ry="290" stroke="#1AACB0" stroke-width="1.0" opacity="0.08" transform="rotate(-5,  841, 263)"/>
-        <ellipse cx="838" cy="270" rx="517" ry="342" stroke="#1AACB0" stroke-width="1.0" opacity="0.07" transform="rotate(-3,  838, 270)"/>
-        <ellipse cx="835" cy="278" rx="603" ry="398" stroke="#1AACB0" stroke-width="1.0" opacity="0.06" transform="rotate(-1,  835, 278)"/>
-        <ellipse cx="832" cy="286" rx="695" ry="458" stroke="#1AACB0" stroke-width="1.0" opacity="0.05" transform="rotate(1,   832, 286)"/>
+  <!-- HERO -->
+  <section class="os-hero-v2">
+    <div class="os-hero-v2__mountains" aria-hidden="true">
+      <svg viewBox="0 0 680 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,80 L100,50 L180,62 L260,28 L320,44 L390,14 L450,32 L510,48 L570,34 L630,52 L680,60 L680,90 L0,90 Z" fill="#1AACB0" opacity="0.07"/>
       </svg>
     </div>
-
-    <div class="os-hero__content">
-      <h1 class="os-hero__h1">Know your<br>county.</h1>
-      <p class="os-hero__sub">OpenSkagit turns Skagit County's scattered public records into tools anyone can use — parcels, permits, taxes, land use, and more.</p>
-
-      <form class="os-ask-form" method="get" action="/app/">
-        <div class="os-ask-form__wrap">
+    <div class="os-hero-v2__inner">
+      <h1 class="os-hero-v2__h1">
+        Skagit Valley is an open book.<br>
+        <span>It just hasn't been written in plain English.</span>
+      </h1>
+      <form class="os-hero-v2__form" method="get" action="/app/">
+        <div class="os-hero-v2__input-wrap">
+          <svg class="os-hero-v2__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="6.5" cy="6.5" r="5" stroke="#1AACB0" stroke-width="1.5"/>
+            <path d="M10.5 10.5 L14 14" stroke="#1AACB0" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
           <input
             type="text"
             name="q"
-            id="hero-ask"
-            class="os-ask-input"
-            placeholder="Ask anything about Skagit County…"
+            id="hero-query"
+            class="os-hero-v2__input"
             autocomplete="off"
             spellcheck="false"
+            aria-label="Ask anything about Skagit County"
           >
-          <button type="submit" class="os-ask-btn">Ask →</button>
+          <button type="submit" class="os-hero-v2__btn">Ask the Valley →</button>
         </div>
       </form>
-
-      <div class="os-chips" role="group" aria-label="Example questions">
-        <span class="os-chip-label">Try:</span>
-        <button class="os-chip" type="button" data-fill="hero-ask">Who owns the parcel at 1234 Cook Rd?</button>
-        <button class="os-chip" type="button" data-fill="hero-ask">What's in the Lyman UGA?</button>
-        <button class="os-chip" type="button" data-fill="hero-ask">Permits filed in Burlington this year</button>
-        <button class="os-chip" type="button" data-fill="hero-ask">Taxing districts overlapping parcel P48165</button>
-      </div>
+    </div>
+    <div class="os-hero-v2__bridge">
+      ↓ or see what the Valley is already asking itself
     </div>
   </section>
 
-  <!-- ── TOOL CARDS ── -->
-  <section class="os-tools" id="tools">
-    <span class="os-section-label">What's here</span>
-    <h2 class="os-section-h2">Everything you need to understand Skagit.</h2>
-    <div class="os-tools__grid">
-
-      <a class="os-tool-card" href="/parcels/">
-        <div class="os-tool-card__dot" style="background:#5BBB2F"></div>
-        <p class="os-tool-card__title">Parcels</p>
-        <p class="os-tool-card__desc">Owner, size, use code, assessed value, and full history for every parcel in the county.</p>
-      </a>
-
-      <a class="os-tool-card" href="/taxing-districts/">
-        <div class="os-tool-card__dot" style="background:#3B82C4"></div>
-        <p class="os-tool-card__title">Taxing Districts</p>
-        <p class="os-tool-card__desc">Who's taxing what. Overlapping districts, tax rates, and levy breakdowns by parcel.</p>
-      </a>
-
-      <a class="os-tool-card" href="/finance/">
-        <div class="os-tool-card__dot" style="background:#F5A623"></div>
-        <p class="os-tool-card__title">Public Finance</p>
-        <p class="os-tool-card__desc">Levies, debt, and budget context for every taxing authority in Skagit County.</p>
-      </a>
-
-      <a class="os-tool-card" href="/permits/">
-        <div class="os-tool-card__dot" style="background:#1AACB0"></div>
-        <p class="os-tool-card__title">Permits &amp; Development</p>
-        <p class="os-tool-card__desc">What's being built, where, and by whom. Active and historical permit data.</p>
-      </a>
-
-      <a class="os-tool-card" href="/gis/">
-        <div class="os-tool-card__dot" style="background:#3B82C4"></div>
-        <p class="os-tool-card__title">GIS Explorer</p>
-        <p class="os-tool-card__desc">Interactive map layers: zoning, flood zones, infrastructure, UGAs, and more.</p>
-      </a>
-
-      <a class="os-tool-card os-tool-card--featured" href="/app/">
-        <div class="os-tool-card__dot" style="background:#3D4D5C"></div>
-        <p class="os-tool-card__title">Ask AI</p>
-        <p class="os-tool-card__desc">Natural language queries across all data sources. Ask in plain English, get a real answer.</p>
-      </a>
-
+  <!-- THE CURRENT -->
+  <section class="os-current">
+    <div class="os-current__header">
+      <div class="os-current__live-group">
+        <span class="os-current__pulse" aria-hidden="true"></span>
+        <span class="os-current__label">The Current</span>
+        <span class="os-current__subtitle">— the Valley, thinking out loud</span>
+      </div>
+      <span class="os-current__counter">
+        <span id="current-count">1,247</span> questions answered
+      </span>
     </div>
-  </section>
 
-  <!-- ── MISSION ── -->
-  <section class="os-mission">
-    <p>Skagit County generates a huge amount of public data.</p>
-    <p>Most of it lives in formats nobody can actually use.</p>
-    <p>OpenSkagit changes that.</p>
-  </section>
-
-  <!-- ── AUDIENCE TILES ── -->
-  <section class="os-audiences" id="about">
-    <span class="os-section-label">Who it's for</span>
-    <h2 class="os-section-h2">Built for everyone who works with Skagit.</h2>
-    <div class="os-audiences__grid">
-
-      <div class="os-audience-card">
-        <span class="os-audience-card__role" style="background:rgba(26,172,176,0.1);color:#1AACB0">Resident</span>
-        <p class="os-audience-card__desc">Understand who owns the land around you, what's being built nearby, and how your property taxes are spent.</p>
-        <p class="os-audience-card__q" style="border-color:#1AACB0">"Who owns the parcel at 1234 Cook Rd?"</p>
-      </div>
-
-      <div class="os-audience-card">
-        <span class="os-audience-card__role" style="background:rgba(91,187,47,0.1);color:#4a9a20">Local Leader</span>
-        <p class="os-audience-card__desc">Track development trends in your district and understand the full fiscal picture at a glance.</p>
-        <p class="os-audience-card__q" style="border-color:#5BBB2F">"What's happening to development in my district?"</p>
-      </div>
-
-      <div class="os-audience-card">
-        <span class="os-audience-card__role" style="background:rgba(59,130,196,0.1);color:#3B82C4">Researcher</span>
-        <p class="os-audience-card__desc">Cross-reference data layers and export structured results for deeper analysis.</p>
-        <p class="os-audience-card__q" style="border-color:#3B82C4">"Show taxing district overlap vs. housing density"</p>
-      </div>
-
-      <div class="os-audience-card">
-        <span class="os-audience-card__role" style="background:rgba(245,166,35,0.1);color:#c4830a">County Employee</span>
-        <p class="os-audience-card__desc">Surface records faster and answer constituent questions without digging through legacy systems.</p>
-        <p class="os-audience-card__q" style="border-color:#F5A623">"What parcels are flagged for reassessment this cycle?"</p>
-      </div>
-
+    <div class="os-current__filters" role="group" aria-label="Filter by category">
+      <button class="os-filter-pill os-filter-pill--active" data-filter="all">All</button>
+      <button class="os-filter-pill" data-filter="finance">Finance</button>
+      <button class="os-filter-pill" data-filter="permits">Permits</button>
+      <button class="os-filter-pill" data-filter="parcels">Parcels</button>
+      <button class="os-filter-pill" data-filter="districts">Districts</button>
+      <button class="os-filter-pill" data-filter="gis">GIS</button>
+      <button class="os-filter-pill" data-filter="planning">Planning</button>
     </div>
-  </section>
 
-  <!-- ── DATA FRESHNESS ── -->
-  <section class="os-freshness" id="data">
-    <span class="os-section-label">Live data</span>
-    <h2 class="os-section-h2">Connected to the source.</h2>
-    <div class="os-feed">
+    <div class="os-current__feed">
 
-      <div class="os-feed-item">
-        <div class="os-feed-item__dot" style="background:#1AACB0"></div>
-        <span class="os-feed-item__text">3 new building permits filed in Mount Vernon</span>
-        <span class="os-feed-item__time">Jun 11, 2026</span>
-      </div>
-
-      <div class="os-feed-item">
-        <div class="os-feed-item__dot" style="background:#5BBB2F"></div>
-        <span class="os-feed-item__text">Assessor roll updated — 2025 assessed values published</span>
-        <span class="os-feed-item__time">Jun 2026</span>
-      </div>
-
-      <div class="os-feed-item">
-        <div class="os-feed-item__dot" style="background:#3B82C4"></div>
-        <span class="os-feed-item__text">7 parcel ownership transfers recorded in Burlington</span>
-        <span class="os-feed-item__time">Jun 10, 2026</span>
-      </div>
-
-      <div class="os-feed-item">
-        <div class="os-feed-item__dot" style="background:#F5A623"></div>
-        <span class="os-feed-item__text">2026 levy rates certified for 42 taxing districts</span>
-        <span class="os-feed-item__time">May 2026</span>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── PIPELINE ── -->
-  <section class="os-pipeline">
-    <span class="os-section-label">How it works</span>
-    <h2 class="os-section-h2">Real data, not a 2019 archive.</h2>
-    <div class="os-pipeline__flow">
-
-      <div class="os-pipeline__step">
-        <div class="os-pipeline__icon">🏛️</div>
-        <span class="os-pipeline__step-label">County sources</span>
-        <span class="os-pipeline__step-detail">Assessor, auditor,<br>planning, GIS</span>
-      </div>
-
-      <div class="os-pipeline__arrow">→</div>
-
-      <div class="os-pipeline__step">
-        <div class="os-pipeline__icon">⚙️</div>
-        <span class="os-pipeline__step-label">Structured pipeline</span>
-        <span class="os-pipeline__step-detail">Normalized,<br>cross-referenced</span>
-      </div>
-
-      <div class="os-pipeline__arrow">→</div>
-
-      <div class="os-pipeline__step">
-        <div class="os-pipeline__icon">
-          <svg width="28" height="28" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <path d="M20 20 L20 4 A16 16 0 0 1 36 20 Z" fill="#1AACB0"/>
-            <path d="M20 20 L36 20 A16 16 0 0 1 20 36 Z" fill="#5BBB2F"/>
-            <path d="M20 20 L20 36 A16 16 0 0 1 4 20 Z" fill="#3B82C4"/>
-            <path d="M20 20 L4 20 A16 16 0 0 1 20 4 Z" fill="#F5A623"/>
-            <polygon points="13,27 20,15 27,27" fill="white" opacity="0.95"/>
-          </svg>
+      <article class="os-current-card os-current-card--finance" data-category="finance" style="opacity:1">
+        <div class="os-current-card__top">
+          <span class="os-current-card__cat os-current-card__cat--finance">Finance</span>
+          <div class="os-current-card__top-right">
+            <span class="os-current-card__new">new</span>
+            <span class="os-current-card__time">2 min ago</span>
+          </div>
         </div>
-        <span class="os-pipeline__step-label">OpenSkagit</span>
-        <span class="os-pipeline__step-detail">Search, map,<br>query, analyze</span>
-      </div>
+        <p class="os-current-card__q">Why did the port levy increase in 2024?</p>
+        <p class="os-current-card__a">The Port of Skagit raised its general levy 4.2% this year, driven by capital project debt service for the new marine terminal. A typical parcel contributes about $34/year to this district.</p>
+        <span class="os-current-card__source">Skagit County Treasurer · DOR Levy Certification</span>
+      </article>
 
-      <div class="os-pipeline__arrow">→</div>
+      <article class="os-current-card os-current-card--permits" data-category="permits" style="opacity:1">
+        <div class="os-current-card__top">
+          <span class="os-current-card__cat os-current-card__cat--permits">Permits</span>
+          <span class="os-current-card__time">8 min ago</span>
+        </div>
+        <p class="os-current-card__q">How many permits filed in Sedro-Woolley this month?</p>
+        <p class="os-current-card__a">14 permits since June 1 — 9 residential additions, 3 commercial tenant improvements, 2 accessory structures. Activity is concentrated in the downtown UGA.</p>
+        <span class="os-current-card__source">City of Sedro-Woolley · iWorQ Permit System</span>
+      </article>
 
-      <div class="os-pipeline__step">
-        <div class="os-pipeline__icon">👤</div>
-        <span class="os-pipeline__step-label">You</span>
-        <span class="os-pipeline__step-detail">Browser, API,<br>plain language</span>
-      </div>
+      <article class="os-current-card os-current-card--parcels" data-category="parcels" style="opacity:.85">
+        <div class="os-current-card__top">
+          <span class="os-current-card__cat os-current-card__cat--parcels">Parcels</span>
+          <span class="os-current-card__time">14 min ago</span>
+        </div>
+        <p class="os-current-card__q">Who owns the parcel at Cook Rd and Hwy 20?</p>
+        <p class="os-current-card__a">4.3 acres held by Skagit Land Holdings LLC, assessed at $1.2M, zoned Rural Industrial. Last transferred 2019. No active permits on file.</p>
+        <span class="os-current-card__source">Skagit County Assessor · CMAS</span>
+      </article>
+
+      <article class="os-current-card os-current-card--districts" data-category="districts" style="opacity:.72">
+        <div class="os-current-card__top">
+          <span class="os-current-card__cat os-current-card__cat--districts">Districts</span>
+          <span class="os-current-card__time">22 min ago</span>
+        </div>
+        <p class="os-current-card__q">How many taxing districts touch a Burlington parcel?</p>
+        <p class="os-current-card__a">A typical Burlington parcel overlaps 11 taxing districts — state, county, city, school, fire, port, library, hospital, EMS, cemetery, and flood control. Each levies independently.</p>
+        <span class="os-current-card__source">Skagit County Assessor · District Crosswalk</span>
+      </article>
+
+      <article class="os-current-card os-current-card--planning" data-category="planning" style="opacity:.55">
+        <div class="os-current-card__top">
+          <span class="os-current-card__cat os-current-card__cat--planning">Planning</span>
+          <span class="os-current-card__time">31 min ago</span>
+        </div>
+        <p class="os-current-card__q">What does the comp plan say about housing near Burlington?</p>
+        <p class="os-current-card__a">The 2024 Comp Plan designates the Burlington UGA for medium-density residential growth, targeting 1,200 new units by 2044 along transit corridors.</p>
+        <span class="os-current-card__source">Skagit County Planning · 2024 Comp Plan Update</span>
+      </article>
+
+      <article class="os-current-card os-current-card--gis" data-category="gis" style="opacity:.40">
+        <div class="os-current-card__top">
+          <span class="os-current-card__cat os-current-card__cat--gis">GIS</span>
+          <span class="os-current-card__time">45 min ago</span>
+        </div>
+        <p class="os-current-card__q">What's in the floodplain near the river in Concrete?</p>
+        <p class="os-current-card__a">14 parcels in Concrete intersect the FEMA 100-year floodplain. 9 have structures. 6 are Zone AE with mandatory flood insurance requirements.</p>
+        <span class="os-current-card__source">Skagit County GIS · FEMA FIRM</span>
+      </article>
+
+    </div>
+
+    <div class="os-current__loadmore">
+      <a href="#" class="os-current__loadmore-link">Load more ↓</a>
+    </div>
+  </section>
+
+  <!-- FEATURE CARDS -->
+  <section class="os-features">
+    <div class="os-features__grid">
+
+      <a href="#" class="os-feature-card" style="border-top-color:#5BBB2F">
+        <p class="os-feature-card__q">Who owns what, and what's it worth?</p>
+        <p class="os-feature-card__label">Parcels &amp; assessments</p>
+      </a>
+
+      <a href="#" class="os-feature-card" style="border-top-color:#F5A623">
+        <p class="os-feature-card__q">What are my taxes actually funding?</p>
+        <p class="os-feature-card__label">Taxes &amp; districts</p>
+      </a>
+
+      <a href="#" class="os-feature-card" style="border-top-color:#3B82C4">
+        <p class="os-feature-card__q">Why is this being built here?</p>
+        <p class="os-feature-card__label">Permits &amp; development</p>
+      </a>
+
+      <a href="#" class="os-feature-card" style="border-top-color:#1AACB0">
+        <p class="os-feature-card__q">How does land use shape my community?</p>
+        <p class="os-feature-card__label">GIS &amp; zoning</p>
+      </a>
+
+      <a href="#" class="os-feature-card" style="border-top-color:#3D4D5C">
+        <p class="os-feature-card__q">How are local decisions being made?</p>
+        <p class="os-feature-card__label">Government trends</p>
+      </a>
 
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
-  <footer class="os-footer">
-    <a href="/" class="os-footer__logo">
-      <svg width="26" height="26" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <path d="M20 20 L20 4 A16 16 0 0 1 36 20 Z" fill="#1AACB0"/>
-        <path d="M20 20 L36 20 A16 16 0 0 1 20 36 Z" fill="#5BBB2F"/>
-        <path d="M20 20 L20 36 A16 16 0 0 1 4 20 Z" fill="#3B82C4"/>
-        <path d="M20 20 L4 20 A16 16 0 0 1 20 4 Z" fill="#F5A623"/>
-        <polygon points="13,27 20,15 27,27" fill="white" opacity="0.95"/>
-      </svg>
-      OpenSkagit
-    </a>
-    <nav class="os-footer__links" aria-label="Footer">
-      <a href="#about">About</a>
-      <a href="#data">Data Sources</a>
+  <!-- CITY PILLS -->
+  <section class="os-cities">
+    <span class="os-cities__label">Browse by place</span>
+    <div class="os-cities__pills">
+      <a href="#" class="os-city-pill">Sedro-Woolley</a>
+      <a href="#" class="os-city-pill">Burlington</a>
+      <a href="#" class="os-city-pill">Mount Vernon</a>
+      <a href="#" class="os-city-pill">Anacortes</a>
+      <a href="#" class="os-city-pill">Concrete</a>
+      <a href="#" class="os-city-pill">La Conner</a>
+      <a href="#" class="os-city-pill">Hamilton</a>
+      <a href="#" class="os-city-pill">Lyman</a>
+    </div>
+  </section>
+
+  <!-- MISSION STRIP -->
+  <section class="os-mission-v2">
+    <div class="os-mission-v2__inner">
+      <p>Skagit County generates a huge amount of public data.</p>
+      <p class="os-mission-v2__muted">Most of it lives in formats nobody can actually use.</p>
+      <p class="os-mission-v2__cta">OpenSkagit changes that.</p>
+      <p class="os-mission-v2__sources">Skagit County Assessor · GIS Services · County Finance Records</p>
+      <p class="os-mission-v2__not-ai">Not AI guessing. AI reading.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="os-footer-v2">
+    <span class="os-footer-v2__built">Built in Skagit Valley</span>
+    <nav class="os-footer-v2__links" aria-label="Footer navigation">
+      <a href="#">About</a>
+      <a href="#">Data sources</a>
       <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
       <a href="mailto:hello@openskagit.org">Contact</a>
-      <span class="os-footer__copy">Built in Skagit Valley</span>
     </nav>
   </footer>
 
 </div>
 
 <script>
-  document.querySelectorAll('.os-chip[data-fill]').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const input = document.getElementById(chip.dataset.fill);
-      if (input) { input.value = chip.textContent.trim(); input.focus(); }
+  // Rotating placeholder
+  const questions = [
+    "Why did my property taxes go up this year?",
+    "What's being built in Burlington right now?",
+    "Which taxing districts overlap my Sedro-Woolley parcel?",
+    "Where is permit activity concentrated in 2025?",
+    "What does my tax bill actually pay for?",
+    "How has assessed value changed along the Anacortes waterfront?",
+    "What does the comprehensive plan say about housing near Burlington?",
+    "Show me development patterns along Highway 20"
+  ];
+  const input = document.getElementById('hero-query');
+  let qIdx = 0;
+  input.placeholder = questions[0];
+  setInterval(() => {
+    input.style.opacity = '0';
+    setTimeout(() => {
+      qIdx = (qIdx + 1) % questions.length;
+      input.placeholder = questions[qIdx];
+      input.style.opacity = '1';
+    }, 350);
+  }, 3200);
+
+  // Live counter
+  let count = 1247;
+  const counterEl = document.getElementById('current-count');
+  setInterval(() => {
+    count++;
+    counterEl.textContent = count.toLocaleString();
+  }, 9000);
+
+  // Category filter
+  document.querySelectorAll('.os-filter-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.os-filter-pill').forEach(p => p.classList.remove('os-filter-pill--active'));
+      pill.classList.add('os-filter-pill--active');
+      const filter = pill.dataset.filter;
+      document.querySelectorAll('.os-current-card').forEach(card => {
+        card.hidden = filter !== 'all' && card.dataset.category !== filter;
+      });
     });
   });
 </script>
