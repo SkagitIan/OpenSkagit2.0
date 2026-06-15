@@ -1,374 +1,682 @@
 {
-  "0279": {
-    "mcag": "0279",
+  "0158": {
+    "mcag": "0158",
+    "entity_key": "SKAGIT_COUNTY",
     "common_name": "Skagit County",
     "type": "county",
-    "blurb": "Provides county-wide services including the Sheriff's Office, District Court, Public Health, Public Works roads, and general government operations.",
-    "budget": {
-      "total_revenue": 138500000,
-      "total_expenditure": 131200000,
-      "surplus_deficit": 7300000,
-      "top_expenditures": [
-        {"category": "Public Safety", "amount": 42000000},
-        {"category": "General Government", "amount": 28000000},
-        {"category": "Transportation", "amount": 22000000}
-      ],
-      "property_tax_pct_of_revenue": 24
-    },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0279",
-    "data_year": 2023
+    "blurb": "Provides county-wide services including courts, elections, roads, public health, sheriff, and social services.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0158",
+    "data_year": null
+  },
+  "2834": {
+    "mcag": "2834",
+    "entity_key": "MEDIC1",
+    "common_name": "Skagit County Medic 1",
+    "type": "ems",
+    "blurb": "Operates paramedic and advanced life support emergency medical services throughout Skagit County.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2834",
+    "data_year": null
+  },
+  "0628": {
+    "mcag": "0628",
+    "entity_key": "ANACORTES",
+    "common_name": "City of Anacortes",
+    "type": "city",
+    "blurb": "Provides city services to Anacortes residents including police, fire, parks, and utilities.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0628",
+    "data_year": null
+  },
+  "0633": {
+    "mcag": "0633",
+    "entity_key": "BURLINGTON",
+    "common_name": "City of Burlington",
+    "type": "city",
+    "blurb": "Provides city services to Burlington residents including police, streets, parks, and planning.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0633",
+    "data_year": null
+  },
+  "0636": {
+    "mcag": "0636",
+    "entity_key": "CONCRETE",
+    "common_name": "Town of Concrete",
+    "type": "city",
+    "blurb": "Provides municipal services to the Town of Concrete including water, streets, and local government.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0636",
+    "data_year": null
+  },
+  "0638": {
+    "mcag": "0638",
+    "entity_key": "HAMILTON",
+    "common_name": "Town of Hamilton",
+    "type": "city",
+    "blurb": "Provides municipal services to the small Town of Hamilton on the Skagit River.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0638",
+    "data_year": null
+  },
+  "0640": {
+    "mcag": "0640",
+    "entity_key": "LACONNER",
+    "common_name": "Town of La Conner",
+    "type": "city",
+    "blurb": "Provides municipal services to the Town of La Conner including planning, streets, and local government.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0640",
+    "data_year": null
+  },
+  "0642": {
+    "mcag": "0642",
+    "entity_key": "LYMAN",
+    "common_name": "Town of Lyman",
+    "type": "city",
+    "blurb": "Provides municipal services to the small Town of Lyman.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0642",
+    "data_year": null
+  },
+  "0644": {
+    "mcag": "0644",
+    "entity_key": "MOUNT_VERNON",
+    "common_name": "City of Mount Vernon",
+    "type": "city",
+    "blurb": "Provides city services to Mount Vernon residents including police, fire, parks, planning, and streets.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0644",
+    "data_year": null
   },
   "0647": {
     "mcag": "0647",
+    "entity_key": "SEDRO_WOOLLEY",
     "common_name": "City of Sedro-Woolley",
     "type": "city",
     "blurb": "Provides city services to Sedro-Woolley residents including police, streets, parks, and planning.",
-    "budget": {
-      "total_revenue": 28400000,
-      "total_expenditure": 27100000,
-      "surplus_deficit": 1300000,
-      "top_expenditures": [
-        {"category": "Public Safety", "amount": 9200000},
-        {"category": "Transportation", "amount": 4100000},
-        {"category": "General Government", "amount": 3800000}
-      ],
-      "property_tax_pct_of_revenue": 18
-    },
+    "budget": null,
     "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0647",
-    "data_year": 2023
-  },
-  "0026": {
-    "mcag": "0026",
-    "common_name": "City of Anacortes",
-    "type": "city",
-    "blurb": "Provides municipal services to Anacortes including police, fire, utilities, parks, and transportation.",
-    "budget": {
-      "total_revenue": 72000000,
-      "total_expenditure": 68500000,
-      "surplus_deficit": 3500000,
-      "top_expenditures": [
-        {"category": "Utilities", "amount": 22000000},
-        {"category": "Public Safety", "amount": 14000000},
-        {"category": "Transportation", "amount": 9000000}
-      ],
-      "property_tax_pct_of_revenue": 12
-    },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0026",
-    "data_year": 2023
-  },
-  "0073": {
-    "mcag": "0073",
-    "common_name": "City of Burlington",
-    "type": "city",
-    "blurb": "Provides city services to Burlington residents including police, public works, parks, and planning.",
-    "budget": {
-      "total_revenue": 31200000,
-      "total_expenditure": 29800000,
-      "surplus_deficit": 1400000,
-      "top_expenditures": [
-        {"category": "Public Safety", "amount": 10500000},
-        {"category": "Transportation", "amount": 5200000},
-        {"category": "General Government", "amount": 4100000}
-      ],
-      "property_tax_pct_of_revenue": 16
-    },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0073",
-    "data_year": 2023
-  },
-  "0405": {
-    "mcag": "0405",
-    "common_name": "City of Mount Vernon",
-    "type": "city",
-    "blurb": "Provides municipal services to Mount Vernon as the Skagit County seat, including police, fire, utilities, parks, and economic development.",
-    "budget": {
-      "total_revenue": 89000000,
-      "total_expenditure": 84500000,
-      "surplus_deficit": 4500000,
-      "top_expenditures": [
-        {"category": "Public Safety", "amount": 28000000},
-        {"category": "Utilities", "amount": 21000000},
-        {"category": "Transportation", "amount": 12000000}
-      ],
-      "property_tax_pct_of_revenue": 14
-    },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0405",
-    "data_year": 2023
-  },
-  "0182": {
-    "mcag": "0182",
-    "common_name": "City of Concrete",
-    "type": "city",
-    "blurb": "Provides municipal services to the Town of Concrete including streets, public safety, and general government.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0182",
     "data_year": null
   },
-  "0258": {
-    "mcag": "0258",
-    "common_name": "City of Hamilton",
-    "type": "city",
-    "blurb": "Provides municipal services to the Town of Hamilton.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0258",
-    "data_year": null
-  },
-  "0302": {
-    "mcag": "0302",
-    "common_name": "City of Lyman",
-    "type": "city",
-    "blurb": "Provides municipal services to the Town of Lyman.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0302",
-    "data_year": null
-  },
-  "0319": {
-    "mcag": "0319",
-    "common_name": "City of Anacortes (formerly La Conner area)",
-    "type": "city",
-    "blurb": "Town of La Conner provides municipal services to La Conner residents.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0319",
-    "data_year": null
-  },
-  "1322": {
-    "mcag": "1322",
-    "common_name": "Anacortes School District",
+  "2014": {
+    "mcag": "2014",
+    "entity_key": "BURLINGTON_SD",
+    "common_name": "Burlington-Edison Schools",
     "type": "school",
-    "blurb": "Operates K-12 public schools serving the Anacortes community, including Anacortes High School.",
+    "blurb": "Operates Burlington-Edison School District, serving students in Burlington and Edison.",
     "budget": {
-      "total_revenue": 62000000,
-      "total_expenditure": 60500000,
-      "surplus_deficit": 1500000,
+      "total_revenue": 72922652.31,
+      "total_expenditure": 69644357.95,
+      "surplus_deficit": 3278294.36,
+      "property_tax_revenue": 14243993.36,
+      "property_tax_pct_of_revenue": 19.5,
       "top_expenditures": [
-        {"category": "Instruction", "amount": 34000000},
-        {"category": "Support Services", "amount": 16000000},
-        {"category": "Other Student Support", "amount": 5000000}
-      ],
-      "property_tax_pct_of_revenue": 22
+        {
+          "category": "Teaching & Learning",
+          "amount": 46095398.51
+        },
+        {
+          "category": "Support Services",
+          "amount": 12619983.9
+        },
+        {
+          "category": "Other",
+          "amount": 10928975.54
+        }
+      ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1322",
-    "data_year": 2023
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2014",
+    "data_year": 2025
   },
-  "1326": {
-    "mcag": "1326",
-    "common_name": "Burlington-Edison School District",
+  "2015": {
+    "mcag": "2015",
+    "entity_key": "SEDRO_SD",
+    "common_name": "Sedro-Woolley Schools",
     "type": "school",
-    "blurb": "Operates K-12 public schools serving Burlington and Edison, including Burlington-Edison High School.",
+    "blurb": "Operates Sedro-Woolley School District, serving students in Sedro-Woolley and surrounding communities.",
     "budget": {
-      "total_revenue": 85000000,
-      "total_expenditure": 83000000,
-      "surplus_deficit": 2000000,
+      "total_revenue": 95436756.14,
+      "total_expenditure": 90964982.2,
+      "surplus_deficit": 4471773.94,
+      "property_tax_revenue": 15868140.96,
+      "property_tax_pct_of_revenue": 16.6,
       "top_expenditures": [
-        {"category": "Instruction", "amount": 47000000},
-        {"category": "Support Services", "amount": 21000000},
-        {"category": "Central Administration", "amount": 6000000}
-      ],
-      "property_tax_pct_of_revenue": 20
+        {
+          "category": "Teaching & Learning",
+          "amount": 61765970.99
+        },
+        {
+          "category": "Support Services",
+          "amount": 18122102.44
+        },
+        {
+          "category": "Other",
+          "amount": 11076908.77
+        }
+      ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1326",
-    "data_year": 2023
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2015",
+    "data_year": 2025
   },
-  "1327": {
-    "mcag": "1327",
-    "common_name": "Concrete School District",
+  "2016": {
+    "mcag": "2016",
+    "entity_key": "CONCRETE_SD",
+    "common_name": "Concrete Schools",
     "type": "school",
-    "blurb": "Operates K-12 public schools serving the Upper Skagit Valley, including Concrete High School.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1327",
-    "data_year": null
-  },
-  "1328": {
-    "mcag": "1328",
-    "common_name": "Mount Vernon School District",
-    "type": "school",
-    "blurb": "Operates K-12 public schools serving Mount Vernon, including Mount Vernon High School.",
+    "blurb": "Operates Concrete School District, serving students in Concrete and the upper Skagit Valley.",
     "budget": {
-      "total_revenue": 132000000,
-      "total_expenditure": 128000000,
-      "surplus_deficit": 4000000,
+      "total_revenue": 14816427.31,
+      "total_expenditure": 12438011.21,
+      "surplus_deficit": 2378416.1,
+      "property_tax_revenue": 2466051.0,
+      "property_tax_pct_of_revenue": 16.6,
       "top_expenditures": [
-        {"category": "Instruction", "amount": 73000000},
-        {"category": "Support Services", "amount": 32000000},
-        {"category": "Central Administration", "amount": 9000000}
-      ],
-      "property_tax_pct_of_revenue": 21
+        {
+          "category": "Teaching & Learning",
+          "amount": 7142934.93
+        },
+        {
+          "category": "Support Services",
+          "amount": 3736162.7
+        },
+        {
+          "category": "Other",
+          "amount": 1558913.58
+        }
+      ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1328",
-    "data_year": 2023
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2016",
+    "data_year": 2025
   },
-  "1329": {
-    "mcag": "1329",
-    "common_name": "Sedro-Woolley School District",
+  "2017": {
+    "mcag": "2017",
+    "entity_key": "ANACORTES_SD",
+    "common_name": "Anacortes Schools",
     "type": "school",
-    "blurb": "Operates K-12 public schools serving Sedro-Woolley and surrounding areas, including Sedro-Woolley High School.",
+    "blurb": "Operates Anacortes School District, serving students on Fidalgo Island.",
     "budget": {
-      "total_revenue": 98000000,
-      "total_expenditure": 95000000,
-      "surplus_deficit": 3000000,
+      "total_revenue": 61089505.23,
+      "total_expenditure": 53013964.7,
+      "surplus_deficit": 8075540.53,
+      "property_tax_revenue": 17003305.44,
+      "property_tax_pct_of_revenue": 27.8,
       "top_expenditures": [
-        {"category": "Instruction", "amount": 54000000},
-        {"category": "Support Services", "amount": 24000000},
-        {"category": "Central Administration", "amount": 7000000}
-      ],
-      "property_tax_pct_of_revenue": 19
+        {
+          "category": "Teaching & Learning",
+          "amount": 35739712.98
+        },
+        {
+          "category": "Support Services",
+          "amount": 11266109.48
+        },
+        {
+          "category": "Other",
+          "amount": 6008142.24
+        }
+      ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1329",
-    "data_year": 2023
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2017",
+    "data_year": 2025
   },
-  "1330": {
-    "mcag": "1330",
-    "common_name": "La Conner School District",
+  "2018": {
+    "mcag": "2018",
+    "entity_key": "LACONNER_SD",
+    "common_name": "La Conner Schools",
     "type": "school",
-    "blurb": "Operates K-12 public schools serving La Conner and surrounding Swinomish area.",
+    "blurb": "Operates La Conner School District, serving students in La Conner and Swinomish area.",
+    "budget": {
+      "total_revenue": 17957419.91,
+      "total_expenditure": 13793292.7,
+      "surplus_deficit": 4164127.21,
+      "property_tax_revenue": 2475613.05,
+      "property_tax_pct_of_revenue": 13.8,
+      "top_expenditures": [
+        {
+          "category": "Teaching & Learning",
+          "amount": 8698727.16
+        },
+        {
+          "category": "Support Services",
+          "amount": 3335278.13
+        },
+        {
+          "category": "Other",
+          "amount": 1759287.41
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2018",
+    "data_year": 2025
+  },
+  "2019": {
+    "mcag": "2019",
+    "entity_key": "CONWAY_SD",
+    "common_name": "Conway Schools",
+    "type": "school",
+    "blurb": "Operates Conway School District, serving students in the Conway and Fir Island area.",
+    "budget": {
+      "total_revenue": 8869359.8,
+      "total_expenditure": 8393989.96,
+      "surplus_deficit": 475369.84,
+      "property_tax_revenue": 1907058.76,
+      "property_tax_pct_of_revenue": 21.5,
+      "top_expenditures": [
+        {
+          "category": "Teaching & Learning",
+          "amount": 6082430.99
+        },
+        {
+          "category": "Support Services",
+          "amount": 1724914.43
+        },
+        {
+          "category": "Other",
+          "amount": 586644.54
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2019",
+    "data_year": 2025
+  },
+  "2020": {
+    "mcag": "2020",
+    "entity_key": "MOUNTVERNON_SD",
+    "common_name": "Mount Vernon Schools",
+    "type": "school",
+    "blurb": "Operates Mount Vernon School District, the largest district in Skagit County.",
+    "budget": {
+      "total_revenue": 159805404.02,
+      "total_expenditure": 142021049.33,
+      "surplus_deficit": 17784354.69,
+      "property_tax_revenue": 30788572.42,
+      "property_tax_pct_of_revenue": 19.3,
+      "top_expenditures": [
+        {
+          "category": "Teaching & Learning",
+          "amount": 91734789.51
+        },
+        {
+          "category": "Support Services",
+          "amount": 25520519.76
+        },
+        {
+          "category": "Other",
+          "amount": 24765740.06
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2020",
+    "data_year": 2025
+  },
+  "2037": {
+    "mcag": "2037",
+    "entity_key": "DARRINGTON_SD",
+    "common_name": "Darrington Schools",
+    "type": "school",
+    "blurb": "Operates Darrington School District, serving students in the Darrington community.",
+    "budget": {
+      "total_revenue": 11863157.48,
+      "total_expenditure": 10571042.19,
+      "surplus_deficit": 1292115.29,
+      "property_tax_revenue": 905828.16,
+      "property_tax_pct_of_revenue": 7.6,
+      "top_expenditures": [
+        {
+          "category": "Teaching & Learning",
+          "amount": 6796046.01
+        },
+        {
+          "category": "Support Services",
+          "amount": 2768978.27
+        },
+        {
+          "category": "Other",
+          "amount": 1006017.91
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2037",
+    "data_year": 2025
+  },
+  "0454": {
+    "mcag": "0454",
+    "entity_key": "LACONNER_LIB",
+    "common_name": "La Conner Library",
+    "type": "library",
+    "blurb": "Provides public library services to La Conner and surrounding communities.",
     "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1330",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0454",
     "data_year": null
   },
-  "2279": {
-    "mcag": "2279",
-    "common_name": "Skagit County Fire District 1",
-    "type": "fire",
-    "blurb": "Provides fire suppression, EMS, and rescue services to unincorporated areas of southern Skagit County.",
+  "1143": {
+    "mcag": "1143",
+    "entity_key": "DARRINGTON_LIB",
+    "common_name": "Darrington Library",
+    "type": "library",
+    "blurb": "Provides public library services to Darrington and surrounding communities.",
     "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2279",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1143",
     "data_year": null
   },
-  "2280": {
-    "mcag": "2280",
-    "common_name": "Skagit County Fire District 2",
-    "type": "fire",
-    "blurb": "Provides fire and EMS services to the Concrete and Upper Skagit area.",
+  "2922": {
+    "mcag": "2922",
+    "entity_key": "UPPER_SKAGIT_LIB",
+    "common_name": "Upper Skagit Library",
+    "type": "library",
+    "blurb": "Provides public library services to upper Skagit communities including Concrete and Rockport.",
     "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2280",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2922",
     "data_year": null
   },
-  "2281": {
-    "mcag": "2281",
-    "common_name": "Skagit County Fire District 3",
-    "type": "fire",
-    "blurb": "Provides fire and EMS services to the Burlington area and surroundings.",
+  "3101": {
+    "mcag": "3101",
+    "entity_key": "CENTRAL_SKAGIT_LIB",
+    "common_name": "Central Skagit Library",
+    "type": "library",
+    "blurb": "Provides public library services to central Skagit County communities.",
     "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2281",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=3101",
     "data_year": null
   },
-  "2282": {
-    "mcag": "2282",
-    "common_name": "Skagit County Fire District 4",
-    "type": "fire",
-    "blurb": "Provides fire and EMS services to the La Conner and Swinomish area.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2282",
-    "data_year": null
-  },
-  "2283": {
-    "mcag": "2283",
-    "common_name": "Skagit County Fire District 5",
-    "type": "fire",
-    "blurb": "Provides fire and EMS services to communities in the Bow-Edison area.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2283",
-    "data_year": null
-  },
-  "2284": {
-    "mcag": "2284",
-    "common_name": "Skagit County Fire District 6",
-    "type": "fire",
-    "blurb": "Provides fire and EMS services to communities in the Lyman-Hamilton area.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2284",
-    "data_year": null
-  },
-  "2285": {
-    "mcag": "2285",
-    "common_name": "Skagit County Fire District 7",
-    "type": "fire",
-    "blurb": "Provides fire and EMS services to northern Skagit County communities.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2285",
-    "data_year": null
-  },
-  "2286": {
-    "mcag": "2286",
-    "common_name": "Skagit County Fire District 8",
-    "type": "fire",
-    "blurb": "Provides fire and EMS services to the Alger and Blanchard area.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2286",
-    "data_year": null
-  },
-  "4279": {
-    "mcag": "4279",
+  "1487": {
+    "mcag": "1487",
+    "entity_key": "HOSP1",
     "common_name": "Skagit Regional Health",
     "type": "hospital",
-    "blurb": "Operates Skagit Valley Hospital and related health facilities providing medical care throughout Skagit County.",
-    "budget": {
-      "total_revenue": 385000000,
-      "total_expenditure": 372000000,
-      "surplus_deficit": 13000000,
-      "top_expenditures": [
-        {"category": "Patient Care Services", "amount": 280000000},
-        {"category": "Administration", "amount": 52000000},
-        {"category": "Facilities & Support", "amount": 30000000}
-      ],
-      "property_tax_pct_of_revenue": 3
-    },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=4279",
-    "data_year": 2023
-  },
-  "5279": {
-    "mcag": "5279",
-    "common_name": "North Central Regional Library",
-    "type": "library",
-    "blurb": "Operates public libraries serving Skagit, Okanogan, and Chelan counties with books, digital resources, and community programs.",
-    "budget": {
-      "total_revenue": 18500000,
-      "total_expenditure": 17800000,
-      "surplus_deficit": 700000,
-      "top_expenditures": [
-        {"category": "Library Services", "amount": 11000000},
-        {"category": "Facilities", "amount": 3500000},
-        {"category": "Administration", "amount": 2000000}
-      ],
-      "property_tax_pct_of_revenue": 68
-    },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=5279",
-    "data_year": 2023
-  },
-  "6279": {
-    "mcag": "6279",
-    "common_name": "Port of Skagit",
-    "type": "port",
-    "blurb": "Manages the Skagit Regional Airport (BVS), industrial properties, and promotes economic development in Skagit County.",
-    "budget": {
-      "total_revenue": 14200000,
-      "total_expenditure": 13500000,
-      "surplus_deficit": 700000,
-      "top_expenditures": [
-        {"category": "Airport Operations", "amount": 5500000},
-        {"category": "Industrial Properties", "amount": 3200000},
-        {"category": "Economic Development", "amount": 2100000}
-      ],
-      "property_tax_pct_of_revenue": 28
-    },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=6279",
-    "data_year": 2023
-  },
-  "7279": {
-    "mcag": "7279",
-    "common_name": "Skagit Conservation District",
-    "type": "other",
-    "blurb": "Helps landowners protect soil, water, and natural resources through voluntary technical and financial assistance programs.",
+    "blurb": "Operates Skagit Regional Health, the main hospital system serving Skagit County.",
     "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=7279",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1487",
     "data_year": null
   },
-  "8279": {
-    "mcag": "8279",
-    "common_name": "Skagit County EMS",
-    "type": "ems",
-    "blurb": "Coordinates emergency medical services and provides advanced life support across Skagit County.",
+  "1488": {
+    "mcag": "1488",
+    "entity_key": "HOSP2",
+    "common_name": "Island Health",
+    "type": "hospital",
+    "blurb": "Operates Island Health (formerly Skagit County Public Hospital District No. 2), serving Anacortes and the islands.",
     "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=8279",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1488",
+    "data_year": null
+  },
+  "1489": {
+    "mcag": "1489",
+    "entity_key": "HOSP304",
+    "common_name": "United General District 304",
+    "type": "hospital",
+    "blurb": "Operates United General District 304, providing hospital services to upper Skagit communities.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1489",
+    "data_year": null
+  },
+  "1281": {
+    "mcag": "1281",
+    "entity_key": "FIRE1",
+    "common_name": "Fire District 1",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 1.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1281",
+    "data_year": null
+  },
+  "1282": {
+    "mcag": "1282",
+    "entity_key": "FIRE2",
+    "common_name": "Fire District 2",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 2.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1282",
+    "data_year": null
+  },
+  "1283": {
+    "mcag": "1283",
+    "entity_key": "FIRE3",
+    "common_name": "Fire District 3",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 3.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1283",
+    "data_year": null
+  },
+  "1284": {
+    "mcag": "1284",
+    "entity_key": "FIRE4",
+    "common_name": "Fire District 4",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 4.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1284",
+    "data_year": null
+  },
+  "1285": {
+    "mcag": "1285",
+    "entity_key": "FIRE5",
+    "common_name": "Fire District 5",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 5.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1285",
+    "data_year": null
+  },
+  "1286": {
+    "mcag": "1286",
+    "entity_key": "FIRE6",
+    "common_name": "Fire District 6",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 6.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1286",
+    "data_year": null
+  },
+  "0366": {
+    "mcag": "0366",
+    "entity_key": "FIRE7",
+    "common_name": "Fire District 7 (Lake Cavanaugh)",
+    "type": "fire",
+    "blurb": "Provides fire protection for the Lake Cavanaugh area.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0366",
+    "data_year": null
+  },
+  "1287": {
+    "mcag": "1287",
+    "entity_key": "FIRE8",
+    "common_name": "Fire District 8",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 8.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1287",
+    "data_year": null
+  },
+  "1288": {
+    "mcag": "1288",
+    "entity_key": "FIRE9",
+    "common_name": "Fire District 9 (Big Lake)",
+    "type": "fire",
+    "blurb": "Provides fire protection for the Big Lake area.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1288",
+    "data_year": null
+  },
+  "2571": {
+    "mcag": "2571",
+    "entity_key": "FIRE10",
+    "common_name": "Fire District 10",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 10.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2571",
+    "data_year": null
+  },
+  "2572": {
+    "mcag": "2572",
+    "entity_key": "FIRE11",
+    "common_name": "Fire District 11 (Mt. Erie)",
+    "type": "fire",
+    "blurb": "Provides fire protection for the Mt. Erie area.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2572",
+    "data_year": null
+  },
+  "2573": {
+    "mcag": "2573",
+    "entity_key": "FIRE12",
+    "common_name": "Fire District 12",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 12.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2573",
+    "data_year": null
+  },
+  "2574": {
+    "mcag": "2574",
+    "entity_key": "FIRE13",
+    "common_name": "Fire District 13",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 13.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2574",
+    "data_year": null
+  },
+  "2204": {
+    "mcag": "2204",
+    "entity_key": "FIRE14",
+    "common_name": "Fire District 14",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 14.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2204",
+    "data_year": null
+  },
+  "2576": {
+    "mcag": "2576",
+    "entity_key": "FIRE15",
+    "common_name": "Fire District 15 (Lake McMurray)",
+    "type": "fire",
+    "blurb": "Provides fire protection for the Lake McMurray area.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2576",
+    "data_year": null
+  },
+  "2205": {
+    "mcag": "2205",
+    "entity_key": "FIRE16",
+    "common_name": "Fire District 16",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 16.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2205",
+    "data_year": null
+  },
+  "2578": {
+    "mcag": "2578",
+    "entity_key": "FIRE17",
+    "common_name": "Fire District 17",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 17.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2578",
+    "data_year": null
+  },
+  "2580": {
+    "mcag": "2580",
+    "entity_key": "FIRE19",
+    "common_name": "Fire District 19",
+    "type": "fire",
+    "blurb": "Provides fire protection and emergency response services for Fire District 19.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2580",
+    "data_year": null
+  },
+  "3293": {
+    "mcag": "3293",
+    "entity_key": "SCRFA",
+    "common_name": "Skagit Regional Fire Authority",
+    "type": "fire",
+    "blurb": "A consolidated fire agency serving multiple districts in Skagit County.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=3293",
+    "data_year": null
+  },
+  "1756": {
+    "mcag": "1756",
+    "entity_key": "PORT_ANACORTES",
+    "common_name": "Port of Anacortes",
+    "type": "port",
+    "blurb": "Operates the Port of Anacortes, including the oil refinery terminal, marina, and industrial properties.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1756",
+    "data_year": null
+  },
+  "1757": {
+    "mcag": "1757",
+    "entity_key": "PORT_SKAGIT",
+    "common_name": "Port of Skagit County",
+    "type": "port",
+    "blurb": "Operates the Port of Skagit County, supporting industrial, commercial, and agricultural uses.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1757",
+    "data_year": null
+  },
+  "0059": {
+    "mcag": "0059",
+    "entity_key": "CEM1",
+    "common_name": "Cemetery District 1",
+    "type": "cemetery",
+    "blurb": "Maintains public cemeteries in Cemetery District 1.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0059",
+    "data_year": null
+  },
+  "0060": {
+    "mcag": "0060",
+    "entity_key": "CEM2",
+    "common_name": "Cemetery District 2 (Fern Hill)",
+    "type": "cemetery",
+    "blurb": "Maintains public cemeteries in Cemetery District 2 (Fern Hill).",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0060",
+    "data_year": null
+  },
+  "0061": {
+    "mcag": "0061",
+    "entity_key": "CEM3",
+    "common_name": "Cemetery District 3 (Edens)",
+    "type": "cemetery",
+    "blurb": "Maintains public cemeteries in Cemetery District 3 (Edens).",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0061",
+    "data_year": null
+  },
+  "2470": {
+    "mcag": "2470",
+    "entity_key": "CEM4",
+    "common_name": "Cemetery District 4",
+    "type": "cemetery",
+    "blurb": "Maintains public cemeteries in Cemetery District 4.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2470",
+    "data_year": null
+  },
+  "0287": {
+    "mcag": "0287",
+    "entity_key": "CEM5",
+    "common_name": "Cemetery District 5 (Forest Park)",
+    "type": "cemetery",
+    "blurb": "Maintains Forest Park Cemetery (Cemetery District 5).",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0287",
+    "data_year": null
+  },
+  "2894": {
+    "mcag": "2894",
+    "entity_key": "CEM6",
+    "common_name": "Cemetery District 6",
+    "type": "cemetery",
+    "blurb": "Maintains public cemeteries in Cemetery District 6.",
+    "budget": null,
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2894",
     "data_year": null
   }
 }
