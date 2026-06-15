@@ -8,6 +8,13 @@
   --amber: #9a6500;
   --red: #b3261e;
   --brand: #1f4d5a;
+  /* shared os- design tokens */
+  --os-teal:      #1AACB0;
+  --os-teal-dk:   #0f9ca0;
+  --os-slate:     #3D4D5C;
+  --os-off-white: #f7f9fb;
+  --os-border:    #e0e8ec;
+  --os-muted:     #6b7a87;
 }
 
 * {
