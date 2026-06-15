@@ -605,7 +605,7 @@ pre {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(16px, 4vw, 56px);
+  padding: 0 max(24px, calc((100vw - 1100px) / 2));
   background: var(--os-navy);
 }
 
@@ -666,7 +666,7 @@ pre {
 .os-hero-v2__inner {
   position: relative;
   z-index: 1;
-  padding: 36px clamp(20px, 5vw, 40px) 30px;
+  padding: 36px max(24px, calc((100vw - 1100px) / 2)) 30px;
 }
 
 .os-hero-v2__h1 {
@@ -755,7 +755,7 @@ pre {
 
 .os-current {
   background: var(--os-current);
-  padding: 22px 26px 28px;
+  padding: 22px max(26px, calc((100vw - 1100px) / 2)) 28px;
 }
 
 @media (max-width: 640px) {
@@ -975,7 +975,7 @@ pre {
 
 .os-features {
   background: #f7f9fb;
-  padding: 20px clamp(16px, 4vw, 40px);
+  padding: 20px max(24px, calc((100vw - 1100px) / 2));
 }
 
 .os-features__grid {
@@ -1023,7 +1023,7 @@ pre {
 
 .os-cities {
   background: #f7f9fb;
-  padding: 14px clamp(16px, 4vw, 40px) 22px;
+  padding: 14px max(24px, calc((100vw - 1100px) / 2)) 22px;
   border-top: 0.5px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -1101,7 +1101,7 @@ pre {
 
 .os-footer-v2 {
   background: #060F18;
-  padding: 18px clamp(16px, 4vw, 40px);
+  padding: 18px max(24px, calc((100vw - 1100px) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
