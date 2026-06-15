@@ -27,7 +27,7 @@ def group_levy_rows(rows):
         status = row.get("reporting_status", "")
         if status == "state_levy":
             key = "__STATE__"
-            label = "Washington State"
+            label = "WA State School Levy"
             mcag = None
         elif status == "needs_review":
             key = "__OTHER__"
