@@ -138,14 +138,10 @@ def get_agency_crosswalk(mcag):
 
 
 def get_county_total_for_mcag(mcag):
-    """Return the county-wide sum of total_tax for a given MCAG across all parcels."""
+    """Return the county-wide total for a given MCAG from the pre-computed summary table."""
     with connection.cursor() as cursor:
         cursor.execute(
-            """
-            SELECT COALESCE(SUM(total_tax), 0)
-            FROM v_parcel_tax_summary
-            WHERE mcag = %s
-            """,
+            "SELECT COALESCE(county_total, 0) FROM skagit_agency_totals WHERE mcag = %s",
             [mcag],
         )
         row = cursor.fetchone()
