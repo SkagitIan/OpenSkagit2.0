@@ -1,0 +1,85 @@
+<div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+
+  {% if error %}
+    <p class="text-red-500 text-sm">{{ error }}</p>
+  {% else %}
+
+  <!-- Back link -->
+  <button
+    type="button"
+    onclick="document.getElementById('agency-panel').innerHTML=''"
+    class="text-xs text-teal-600 hover:text-teal-800 mb-4 inline-flex items-center gap-1"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+    </svg>
+    Back to your bill
+  </button>
+
+  <!-- Agency name -->
+  <h3 class="text-lg font-semibold text-gray-900 mb-1" style="font-family:'DM Sans',sans-serif;">{{ common_name }}</h3>
+  {% if blurb %}
+  <p class="text-sm text-gray-600 mb-5">{{ blurb }}</p>
+  {% endif %}
+
+  {% if budget %}
+  <!-- Financial stats -->
+  <div class="grid grid-cols-3 gap-3 mb-5">
+    <div class="bg-gray-50 rounded-lg p-3 text-center">
+      <p class="text-xs text-gray-500 mb-1">Total Revenue</p>
+      <p class="text-base font-semibold text-gray-900">{{ revenue_fmt }}</p>
+    </div>
+    <div class="bg-gray-50 rounded-lg p-3 text-center">
+      <p class="text-xs text-gray-500 mb-1">Total Spent</p>
+      <p class="text-base font-semibold text-gray-900">{{ spent_fmt }}</p>
+    </div>
+    <div class="bg-gray-50 rounded-lg p-3 text-center">
+      <p class="text-xs text-gray-500 mb-1">{% if surplus_positive %}Surplus{% else %}Deficit{% endif %}</p>
+      <p class="text-base font-semibold {% if surplus_positive %}text-teal-700{% else %}text-red-600{% endif %}">{{ surplus_fmt }}</p>
+    </div>
+  </div>
+
+  <!-- Top expenditures -->
+  {% if top_expenditures %}
+  <div class="mb-5">
+    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Top Spending Categories</p>
+    <div class="space-y-2">
+      {% for exp in top_expenditures %}
+      <div class="flex items-center gap-3">
+        <span class="text-sm text-gray-700 flex-1">{{ exp.category }}</span>
+        <span class="text-sm font-medium text-gray-900">{{ exp.amount_fmt }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if property_tax_pct %}
+  <p class="text-xs text-gray-500 mb-4">Property taxes make up <span class="font-medium text-gray-700">{{ property_tax_pct }}%</span> of this agency's revenue.</p>
+  {% endif %}
+  {% endif %}
+
+  <!-- Your share -->
+  {% if your_amount_fmt %}
+  <div class="bg-teal-50 rounded-lg px-4 py-3 mb-4">
+    <p class="text-sm text-teal-900">
+      Your share: <span class="font-semibold">{{ your_amount_fmt }}</span>
+      {% if county_total_fmt %}of the <span class="font-semibold">{{ county_total_fmt }}</span> they collected countywide{% endif %}
+    </p>
+  </div>
+  {% endif %}
+
+  <!-- SAO link -->
+  {% if sao_fit_url %}
+  <a
+    href="{{ sao_fit_url }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-xs text-teal-600 hover:text-teal-800 hover:underline inline-flex items-center gap-1"
+  >
+    {% if budget and data_year %}Source: SAO FIT {{ data_year }} →{% else %}See full financials →{% endif %}
+  </a>
+  {% endif %}
+
+  {% endif %}
+</div>

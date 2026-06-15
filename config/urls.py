@@ -7,6 +7,7 @@ def health(request):
 
 urlpatterns = [
     path("", include("core.urls")),
+    path("tax/", include("taxtool.urls")),
     path("admin/", admin.site.urls),
     path("health/", health),
 ]
