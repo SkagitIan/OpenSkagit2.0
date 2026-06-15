@@ -46,12 +46,21 @@ def _expose_postgres_tables(conn: duckdb.DuckDBPyConnection) -> None:
     """Create local DuckDB views that alias every Postgres table without a prefix."""
     try:
         tables = conn.execute(
-            "SELECT table_name FROM information_schema.tables WHERE table_schema = 'pg'"
+            """
+            SELECT table_schema, table_name
+            FROM pg.information_schema.tables
+            WHERE table_schema NOT IN ('information_schema', 'pg_catalog')
+              AND table_type IN ('BASE TABLE', 'VIEW')
+            ORDER BY table_schema, table_name
+            """
         ).fetchall()
     except duckdb.Error:
         return
-    for (table_name,) in tables:
+    for schema_name, table_name in tables:
         try:
-            conn.execute(f'CREATE OR REPLACE VIEW "{table_name}" AS SELECT * FROM pg."{table_name}"')
+            conn.execute(
+                f'CREATE OR REPLACE VIEW "{table_name}" AS '
+                f'SELECT * FROM pg."{schema_name}"."{table_name}"'
+            )
         except duckdb.Error:
             pass
