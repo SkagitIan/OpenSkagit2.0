@@ -44,7 +44,7 @@
         Skagit Valley is an open book.<br>
         <span>It just hasn't been written in plain English.</span>
       </h1>
-      <form class="os-hero-v2__form" method="get" action="/app/">
+      <form class="os-hero-v2__form" method="get" action="{% url 'ask' %}">
         <div class="os-hero-v2__input-wrap">
           <svg class="os-hero-v2__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <circle cx="6.5" cy="6.5" r="5" stroke="#1AACB0" stroke-width="1.5"/>
@@ -52,7 +52,7 @@
           </svg>
           <input
             type="text"
-            name="q"
+            name="prompt"
             id="hero-query"
             class="os-hero-v2__input"
             autocomplete="off"

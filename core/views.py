@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotAllowed
+from django.urls import reverse
+from django.utils.http import urlencode
+from django.shortcuts import redirect
 
 STARTER_PROMPTS = [
     "How many parcels are in each city?",
@@ -16,7 +19,11 @@ def home(request):
 
 
 def app(request):
-    return render(request, "pages/app.html")
+    prompt = request.GET.get("prompt", request.GET.get("q", "")).strip()
+    url = reverse("ask")
+    if prompt:
+        url = f"{url}?{urlencode({'prompt': prompt})}"
+    return redirect(url)
 
 
 def ask(request):
