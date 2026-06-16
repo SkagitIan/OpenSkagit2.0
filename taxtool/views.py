@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from core.views import CITY_PAGES
+
 from .queries import (
     search_parcels,
     get_parcel,
@@ -19,7 +21,7 @@ from .utils import (
 
 
 def tax_home(request):
-    return render(request, "taxtool/base.html")
+    return render(request, "taxtool/base.html", {"city_pages": CITY_PAGES})
 
 
 def tax_search(request):

@@ -1,45 +1,93 @@
 {% extends "base.html" %}
 {% block title %}Property Tax Transparency — OpenSkagit{% endblock %}
 
+{% block extra_head %}
+<style>body { background: #042C53; }</style>
+{% endblock %}
+
 {% block content %}
-<div class="min-h-screen bg-gray-50 flex flex-col">
+<div class="os-tax-v2">
 
-  <div id="main-content" class="flex-1 flex flex-col items-center justify-center px-4 py-16">
-    <div class="w-full max-w-xl">
-      <p class="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-3 text-center">Skagit County</p>
-      <h1 class="text-3xl font-semibold text-gray-900 text-center mb-2" style="font-family:'DM Sans',sans-serif;">
-        Where did my property taxes go?
-      </h1>
-      <p class="text-gray-500 text-center mb-8 text-sm">Enter your address or parcel number to see your 2025 tax bill broken down by agency.</p>
+  <header class="os-nav-v2">
+    <a href="/" class="os-nav-v2__logo">
+      <svg width="26" height="26" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+        <path d="M30,30 C20,20 5,15 10,5 C20,-5 35,15 30,30" fill="#5BBB2F"/>
+        <path d="M30,30 C40,20 55,15 58,27 C62,40 40,42 30,30" fill="#3B82C4"/>
+        <path d="M30,30 C40,40 45,55 35,58 C20,62 18,42 30,30" fill="#F5A623"/>
+        <path d="M30,30 C18,38 3,43 2,32 C0,18 20,16 30,30" fill="#1AACB0"/>
+        <circle cx="30" cy="30" r="9" fill="#042C53"/>
+        <path d="M24,33 L30,24 L36,33 Z" fill="white"/>
+      </svg>
+      OpenSkagit
+    </a>
+    <nav class="os-nav-v2__links" aria-label="Site navigation">
+      <details class="os-nav-v2__menu">
+        <summary>Cities</summary>
+        <div class="os-nav-v2__dropdown">
+          {% for item in city_pages %}
+            <a href="{% url 'city' item.slug %}">{{ item.name }}</a>
+          {% endfor %}
+        </div>
+      </details>
+      <a href="#">Parcels</a>
+      <a href="{% url 'tax_home' %}" aria-current="page">Taxes</a>
+      <a href="#">Permits</a>
+      <a href="#">GIS</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
 
-      <div class="relative">
-        <input
-          id="tax-search"
-          type="text"
-          name="q"
-          autocomplete="off"
-          placeholder="123 Main St or parcel number"
-          hx-get="{% url 'tax_search' %}"
-          hx-trigger="keyup changed delay:300ms"
-          hx-target="#suggestions"
-          hx-swap="innerHTML"
-          hx-include="#tax-search"
-          class="w-full text-base px-5 py-4 pr-12 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white placeholder-gray-400"
-        >
-        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
-          </svg>
+  <div id="main-content">
+    <section class="os-tax-hero">
+      <div class="os-tax-hero__mountains" aria-hidden="true">
+        <svg viewBox="0 0 680 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0,80 L100,50 L180,62 L260,28 L320,44 L390,14 L450,32 L510,48 L570,34 L630,52 L680,60 L680,90 L0,90 Z" fill="#1AACB0" opacity="0.07"/>
+        </svg>
+      </div>
+      <div class="os-tax-hero__inner">
+        <p class="os-tax-hero__eyebrow">Skagit County</p>
+        <h1 class="os-tax-hero__h1">Where did my property taxes go?</h1>
+        <p class="os-tax-hero__sub">Enter your address or parcel number to see your 2025 tax bill broken down by agency.</p>
+
+        <div class="os-tax-hero__search">
+          <div class="os-tax-hero__search-wrap">
+            <svg class="os-tax-hero__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="6.5" cy="6.5" r="5" stroke="#1AACB0" stroke-width="1.5"/>
+              <path d="M10.5 10.5 L14 14" stroke="#1AACB0" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input
+              id="tax-search"
+              type="text"
+              name="q"
+              autocomplete="off"
+              placeholder="123 Main St or parcel number"
+              hx-get="{% url 'tax_search' %}"
+              hx-trigger="keyup changed delay:300ms"
+              hx-target="#suggestions"
+              hx-swap="innerHTML"
+              hx-include="#tax-search"
+              class="os-tax-hero__input"
+            >
+          </div>
+          <div id="suggestions" class="os-tax-suggestions"></div>
         </div>
 
-        <div id="suggestions" class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden empty:hidden"></div>
+        <p class="os-tax-hero__hint">
+          83,000+ parcels · Data from Skagit County Assessor &amp; SAO Financial Intelligence Tool
+        </p>
       </div>
-
-      <p class="text-center text-xs text-gray-400 mt-6">
-        83,000+ parcels · Data from Skagit County Assessor &amp; SAO Financial Intelligence Tool
-      </p>
-    </div>
+    </section>
   </div>
+
+  <footer class="os-footer-v2">
+    <span class="os-footer-v2__built">Built in Skagit Valley</span>
+    <nav class="os-footer-v2__links" aria-label="Footer navigation">
+      <a href="#">About</a>
+      <a href="#">Data sources</a>
+      <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:hello@openskagit.org">Contact</a>
+    </nav>
+  </footer>
 
 </div>
 {% endblock %}

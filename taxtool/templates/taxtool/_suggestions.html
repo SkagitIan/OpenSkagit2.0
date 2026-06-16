@@ -5,14 +5,14 @@
     hx-get="{% url 'tax_parcel' p.parcel_number %}"
     hx-target="#main-content"
     hx-swap="outerHTML"
-    class="w-full text-left px-5 py-3 hover:bg-teal-50 focus:bg-teal-50 focus:outline-none border-b border-gray-100 last:border-0 transition-colors"
+    class="os-tax-suggestion"
   >
-    <div class="text-sm font-medium text-gray-900">
+    <div class="os-tax-suggestion__addr">
       {{ p.situs_street_number }} {{ p.situs_street_name }}{% if p.situs_city_state_zip %}, {{ p.situs_city_state_zip }}{% endif %}
     </div>
-    <div class="text-xs text-gray-400 mt-0.5">{{ p.parcel_number }}</div>
+    <div class="os-tax-suggestion__parcel">{{ p.parcel_number }}</div>
   </button>
   {% endfor %}
 {% elif q|length >= 2 %}
-  <div class="px-5 py-4 text-sm text-gray-500">No parcels found for "{{ q }}"</div>
+  <div class="os-tax-suggestions__empty">No parcels found for "{{ q }}"</div>
 {% endif %}
