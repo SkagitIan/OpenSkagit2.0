@@ -2277,6 +2277,18 @@ pre {
 .os-tax-bar__seg:hover { opacity: 0.82; }
 .os-tax-bar__seg:disabled { cursor: default; }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .os-tax-agency-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 28px; }
 
 .os-tax-agency-row {
