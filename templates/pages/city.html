@@ -98,6 +98,15 @@
         </p>
       </div>
 
+      <div class="os-land-ledger__filterbar" role="group" aria-label="Land use filter">
+        <span>Show only</span>
+        <button type="button" class="os-ll-filter-btn is-active" data-land-filter="all">All parcels</button>
+        <button type="button" class="os-ll-filter-btn" data-land-filter="residential">Residential</button>
+        <button type="button" class="os-ll-filter-btn" data-land-filter="commercial">Commercial</button>
+        <button type="button" class="os-ll-filter-btn" data-land-filter="industrial">Industrial</button>
+        <button type="button" class="os-ll-filter-btn" data-land-filter="vacant_other">Vacant &amp; other</button>
+      </div>
+
       <div class="os-land-ledger__body">
         <div class="os-land-ledger__map-wrap">
           <div id="os-ll-map" class="os-land-ledger__map" aria-label="Sedro-Woolley parcel map"></div>
@@ -108,6 +117,20 @@
             <span><i style="background:#1aacb0"></i>Very high</span>
           </div>
           <div class="os-land-ledger__loading" id="os-ll-loading">Loading parcels&hellip;</div>
+
+          <div class="os-ll-intro" id="os-ll-intro">
+            <div class="os-ll-intro__card">
+              <p class="os-ll-intro__eyebrow">Before you explore</p>
+              <h3>How to read this map</h3>
+              <ul>
+                <li>Color shows each parcel&rsquo;s <strong>current property tax per acre</strong> &mdash; red is low, teal is very high.</li>
+                <li>Click any parcel, then try a scenario to see what a different use could generate.</li>
+                <li>Every number comes from real Skagit County Assessor data for Sedro-Woolley itself &mdash; not an outside benchmark.</li>
+                <li>This is a <strong>planning estimate, not a prediction</strong>. See &ldquo;How these numbers are calculated&rdquo; below the map for the full method.</li>
+              </ul>
+              <button type="button" id="os-ll-intro-dismiss" class="os-ll-intro__btn">Got it &mdash; show me the map</button>
+            </div>
+          </div>
         </div>
 
         <aside class="os-land-ledger__panel" id="os-ll-panel">
@@ -147,6 +170,32 @@
           </p>
         </aside>
       </div>
+
+      <details class="os-ll-methodology">
+        <summary>How these numbers are calculated</summary>
+        <div class="os-ll-methodology__grid">
+          <div>
+            <h4>Where the boundaries and taxes come from</h4>
+            <p>Parcel shapes are Skagit County&rsquo;s own GIS parcel layer. Acreage, current land use, and current taxes are the Skagit County Assessor&rsquo;s data for each active parcel inside Sedro-Woolley city limits.</p>
+          </div>
+          <div>
+            <h4>How a scenario&rsquo;s tax/acre is set</h4>
+            <p>For each scenario, we take the <strong>citywide median tax per acre</strong> already produced by similar parcels in Sedro-Woolley today &mdash; e.g. Small Multifamily uses the median for existing 2&ndash;4 and 5+ unit households. Townhomes applies a 25% discount to that multifamily median. Mixed-Use blends the multifamily and commercial/retail medians. Nothing is borrowed from another city.</p>
+          </div>
+          <div>
+            <h4>The gain formula</h4>
+            <p><code>annual gain = (scenario tax/acre &minus; current tax/acre) &times; acres</code>, then <code>10-year gain = annual gain &times; 10 &times; 50% buildout factor</code>. The 50% factor assumes only half of a parcel&rsquo;s potential is realized within 10 years.</p>
+          </div>
+          <div>
+            <h4>Total vs. City-only revenue</h4>
+            <p>Total public revenue is the full property tax bill (city, county, schools, fire, hospital, etc.). City-only revenue multiplies that by each parcel&rsquo;s actual share that flows to the City of Sedro-Woolley, computed from its specific tax levy code.</p>
+          </div>
+          <div>
+            <h4>The citywide number</h4>
+            <p>The headline figure sums the 10-year gain for every visible parcel where at least one scenario would outperform its current tax/acre &mdash; it updates as you change the revenue view or the land-use filter.</p>
+          </div>
+        </div>
+      </details>
     </section>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="{% static 'js/land_ledger.js' %}" defer></script>

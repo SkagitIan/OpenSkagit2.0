@@ -58,6 +58,23 @@ def category_for(land_use):
     return "other"
 
 
+def group_for(land_use):
+    """Broad filter bucket: residential / commercial / industrial / vacant_other."""
+    if not land_use:
+        return "vacant_other"
+    code = land_use.strip().lstrip("(").split(")")[0].strip()
+    if not code.isdigit():
+        return "vacant_other"
+    code_int = int(code)
+    if 100 <= code_int < 200:
+        return "residential"
+    if 500 <= code_int < 700:
+        return "commercial"
+    if 200 <= code_int < 500:
+        return "industrial"
+    return "vacant_other"
+
+
 def load_env():
     env_file = BASE_DIR / ".env"
     if env_file.exists():
@@ -174,6 +191,7 @@ def main():
             "acres": round(acres, 3),
             "land_use": (row["land_use"] or "").strip(),
             "category": category,
+            "land_use_group": group_for(row["land_use"]),
             "current_tax": round(total_tax, 2),
             "tax_per_acre": round(tax_per_acre, 2),
             "city_tax_pct": round(city_share.get(pnum, 0.0) * 100, 2),

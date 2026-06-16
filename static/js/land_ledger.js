@@ -25,11 +25,17 @@
   var result10yrEl = document.getElementById("os-ll-result-10yr");
 
   var toggleButtons = section.querySelectorAll("[data-revenue-view]");
+  var filterButtons = section.querySelectorAll("[data-land-filter]");
+
+  var introEl = document.getElementById("os-ll-intro");
+  var introDismissBtn = document.getElementById("os-ll-intro-dismiss");
+  var INTRO_SEEN_KEY = "os_ll_intro_seen";
 
   var COLORS = { low: "#7a1f1f", medium: "#c9772e", high: "#5bbb2f", veryHigh: "#1aacb0" };
 
   var state = {
     revenueView: "total",
+    landFilter: "all",
     metadata: null,
     breakpoints: null,
     selectedFeature: null,
@@ -38,6 +44,10 @@
     geoLayer: null,
     activeLayer: null,
   };
+
+  function matchesFilter(props) {
+    return state.landFilter === "all" || props.land_use_group === state.landFilter;
+  }
 
   function money(n) {
     var sign = n < 0 ? "-" : "";
@@ -85,6 +95,7 @@
     var total = 0;
     state.geoLayer.eachLayer(function (layer) {
       var props = layer.feature.properties;
+      if (!matchesFilter(props)) return;
       var gainPerAcre = bestGainPerAcre(props);
       if (gainPerAcre > 0) {
         var annual = gainPerAcre * props.acres * revenueMultiplier(props);
@@ -94,9 +105,17 @@
     return total;
   }
 
+  var FILTER_LABELS = {
+    all: "underused land inside existing city limits",
+    residential: "underused residential land",
+    commercial: "underused commercial land",
+    industrial: "underused industrial land",
+    vacant_other: "underused vacant and other land",
+  };
+
   function renderBigNumber() {
     bigNumberEl.textContent = money(citywideOpportunity()) + " over " + state.metadata.horizon_years + " years";
-    captionEl.textContent = "Based on underused land inside existing city limits (" +
+    captionEl.textContent = "Based on " + FILTER_LABELS[state.landFilter] + " (" +
       (state.revenueView === "city" ? "City-only revenue" : "Total public revenue") + ").";
   }
 
@@ -136,6 +155,7 @@
   }
 
   function selectFeature(layer) {
+    if (!matchesFilter(layer.feature.properties)) return;
     if (state.activeLayer) {
       state.geoLayer.resetStyle(state.activeLayer);
     }
@@ -162,12 +182,35 @@
   }
 
   function styleFeature(feature) {
+    var visible = matchesFilter(feature.properties);
     return {
-      color: "rgba(255,255,255,0.25)",
-      weight: 0.6,
+      color: visible ? "rgba(61,77,92,0.45)" : "rgba(61,77,92,0.08)",
+      weight: 0.7,
       fillColor: colorFor(feature.properties.tax_per_acre),
-      fillOpacity: 0.65,
+      fillOpacity: visible ? 0.7 : 0.04,
     };
+  }
+
+  function applyFilter() {
+    state.geoLayer.eachLayer(function (layer) {
+      if (layer !== state.activeLayer) {
+        state.geoLayer.resetStyle(layer);
+      }
+    });
+    if (state.activeLayer && !matchesFilter(state.activeLayer.feature.properties)) {
+      deselectFeature();
+    }
+    renderBigNumber();
+  }
+
+  function deselectFeature() {
+    if (state.activeLayer) {
+      state.geoLayer.resetStyle(state.activeLayer);
+    }
+    state.activeLayer = null;
+    state.selectedFeature = null;
+    state.selectedScenarioKey = null;
+    parcelDetailEl.hidden = true;
   }
 
   toggleButtons.forEach(function (btn) {
@@ -182,6 +225,28 @@
       }
     });
   });
+
+  filterButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      state.landFilter = btn.getAttribute("data-land-filter");
+      Array.prototype.forEach.call(filterButtons, function (b) {
+        b.classList.toggle("is-active", b === btn);
+      });
+      applyFilter();
+    });
+  });
+
+  if (introEl) {
+    var introAlreadySeen = false;
+    try { introAlreadySeen = localStorage.getItem(INTRO_SEEN_KEY) === "1"; } catch (e) {}
+    if (introAlreadySeen) {
+      introEl.hidden = true;
+    }
+    introDismissBtn.addEventListener("click", function () {
+      introEl.hidden = true;
+      try { localStorage.setItem(INTRO_SEEN_KEY, "1"); } catch (e) {}
+    });
+  }
 
   fetch(geojsonUrl)
     .then(function (res) { return res.json(); })
@@ -198,9 +263,10 @@
       };
 
       state.map = L.map("os-ll-map", { scrollWheelZoom: false });
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
         attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
         maxZoom: 19,
+        detectRetina: true,
       }).addTo(state.map);
 
       state.geoLayer = L.geoJSON(data, {
@@ -208,7 +274,9 @@
         onEachFeature: function (feature, layer) {
           layer.on("click", function () { selectFeature(layer); });
           layer.on("mouseover", function () {
-            if (layer !== state.activeLayer) layer.setStyle({ weight: 1.5, color: "#ffffff" });
+            if (layer !== state.activeLayer && matchesFilter(feature.properties)) {
+              layer.setStyle({ weight: 2, color: "#3D4D5C" });
+            }
           });
           layer.on("mouseout", function () {
             if (layer !== state.activeLayer) state.geoLayer.resetStyle(layer);
