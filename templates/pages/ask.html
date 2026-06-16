@@ -1,180 +1,138 @@
 {% extends "base.html" %}
 {% load core_extras %}
 
-{% block title %}Ask — OpenSkagit{% endblock %}
+{% block title %}Ask the Valley - OpenSkagit{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #042C53; }</style>
+{% endblock %}
 
 {% block content %}
-<div class="os-home">
+<div class="os-home-v2 os-ask-v2">
 
-  <!-- ── NAV ── -->
-  <header class="os-nav">
-    <a href="/" class="os-nav__logo">
-      <svg width="34" height="34" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <path d="M20 20 L20 4 A16 16 0 0 1 36 20 Z" fill="#1AACB0"/>
-        <path d="M20 20 L36 20 A16 16 0 0 1 20 36 Z" fill="#5BBB2F"/>
-        <path d="M20 20 L20 36 A16 16 0 0 1 4 20 Z" fill="#3B82C4"/>
-        <path d="M20 20 L4 20 A16 16 0 0 1 20 4 Z" fill="#F5A623"/>
-        <polygon points="13,27 20,15 27,27" fill="white" opacity="0.95"/>
-        <circle cx="20" cy="20" r="2.5" fill="white"/>
+  <header class="os-nav-v2">
+    <a href="/" class="os-nav-v2__logo">
+      <svg width="26" height="26" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+        <path d="M30,30 C20,20 5,15 10,5 C20,-5 35,15 30,30" fill="#5BBB2F"/>
+        <path d="M30,30 C40,20 55,15 58,27 C62,40 40,42 30,30" fill="#3B82C4"/>
+        <path d="M30,30 C40,40 45,55 35,58 C20,62 18,42 30,30" fill="#F5A623"/>
+        <path d="M30,30 C18,38 3,43 2,32 C0,18 20,16 30,30" fill="#1AACB0"/>
+        <circle cx="30" cy="30" r="9" fill="#042C53"/>
+        <path d="M24,33 L30,24 L36,33 Z" fill="white"/>
       </svg>
       OpenSkagit
     </a>
-    <nav class="os-nav__links" aria-label="Site">
-      <a href="/#tools">Tools</a>
-      <a href="/#data">Data</a>
+    <nav class="os-nav-v2__links" aria-label="Site navigation">
+      <a href="/#cities">Cities</a>
+      <a href="/#parcels">Parcels</a>
+      <a href="/#taxes">Taxes</a>
+      <a href="/#permits">Permits</a>
       <a href="/#about">About</a>
-      <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
     </nav>
-    <a href="/" class="os-btn os-btn--ghost">← Home</a>
   </header>
 
-  <!-- ── PAGE ── -->
-  <div class="os-ask-page">
-
-    <div class="os-ask-page__header">
-      <div>
-        <h1 class="os-ask-page__h1">Ask the data</h1>
-        <p class="os-ask-page__sub">Query Skagit County public records with AI, or write DuckDB SQL directly.</p>
+  <main class="os-ask-v2__main">
+    <section class="os-ask-v2__hero">
+      <div class="os-ask-v2__mountains" aria-hidden="true">
+        <svg viewBox="0 0 680 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0,80 L100,50 L180,62 L260,28 L320,44 L390,14 L450,32 L510,48 L570,34 L630,52 L680,60 L680,90 L0,90 Z" fill="#1AACB0" opacity="0.08"/>
+        </svg>
       </div>
-    </div>
 
-    <div class="os-ask-workspace">
+      <div class="os-ask-v2__intro">
+        <p class="os-ask-v2__eyebrow">Public records, in plain English</p>
+        <h1>Ask the Valley</h1>
+        <p>Ask about Skagit County parcels, assessments, sales, taxes, land use, and public records. OpenSkagit will look across the data and answer in normal language.</p>
+      </div>
 
-      <!-- ── LEFT: AI PROMPT ── -->
-      <section class="os-ask-ai">
-        <h2 class="os-ask-panel-title">AI analysis</h2>
+      <section class="os-ask-v2__chat" aria-label="Ask OpenSkagit">
+        <div class="os-ask-v2__thread">
+          <article class="os-ask-v2__message os-ask-v2__message--agent">
+            <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
+            <div class="os-ask-v2__bubble">
+              <p>What would you like to understand about Skagit County?</p>
+            </div>
+          </article>
 
-        <form method="post" action="{% url 'ask' %}" class="os-ask-ai__form">
+          {% if prompt %}
+          <article class="os-ask-v2__message os-ask-v2__message--user">
+            <div class="os-ask-v2__bubble">
+              <p>{{ prompt }}</p>
+            </div>
+          </article>
+          {% endif %}
+
+          {% if answer %}
+          <article class="os-ask-v2__message os-ask-v2__message--agent">
+            <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
+            <div class="os-ask-v2__bubble">
+              <p>{{ answer|linebreaksbr }}</p>
+            </div>
+          </article>
+          {% endif %}
+
+          {% if error and not answer %}
+          <article class="os-ask-v2__message os-ask-v2__message--agent">
+            <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
+            <div class="os-ask-v2__bubble os-ask-v2__bubble--error">
+              <p>{{ error }}</p>
+            </div>
+          </article>
+          {% endif %}
+        </div>
+
+        {% if result and result.rows %}
+        <div class="os-ask-v2__results">
+          <div class="os-ask-v2__results-meta">{{ result.rows|length }} matching record{{ result.rows|length|pluralize }}</div>
+          <div class="os-ask-v2__table-wrap">
+            <table class="os-ask-v2__table">
+              <thead>
+                <tr>
+                  {% for column in result.columns %}
+                    <th>{{ column }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in result.rows %}
+                  <tr>
+                    {% for column in result.columns %}
+                      <td>{{ row|dict_value:column }}</td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'ask' %}" class="os-ask-v2__form">
           {% csrf_token %}
           <textarea
             name="prompt"
-            rows="5"
-            class="os-ask-textarea"
-            placeholder="Find parcels over 10 acres with public utilities. Show neighborhood, owner, and assessed value."
+            rows="3"
+            class="os-ask-v2__input"
+            placeholder="Ask about a parcel, neighborhood, tax district, sale trend, or property value..."
           >{{ prompt }}</textarea>
-
-          {% if starter_prompts %}
-          <div class="os-chips os-chips--sm">
-            <span class="os-chip-label">Try:</span>
-            {% for item in starter_prompts %}
-              <a href="{% url 'ask' %}?prompt={{ item|urlencode }}" class="os-chip">{{ item }}</a>
-            {% endfor %}
-          </div>
-          {% endif %}
-
-          <button type="submit" class="os-btn os-btn--teal">Run AI analysis</button>
+          <button type="submit" class="os-ask-v2__submit">Ask</button>
         </form>
-
-        {% if answer %}
-        <div class="os-ask-answer">
-          <div class="os-ask-answer__label">Answer</div>
-          <p class="os-ask-answer__text">{{ answer }}</p>
-        </div>
-        {% endif %}
-
-        {% if analysis and analysis.sql %}
-        <details class="os-ask-details" open>
-          <summary>Generated SQL &amp; reality checks</summary>
-          <div class="os-ask-details__body">
-            <pre class="os-ask-pre">{{ analysis.sql }}</pre>
-            {% if analysis.reality_checks %}
-            <ul class="os-ask-checks">
-              {% for check in analysis.reality_checks %}
-                <li>{{ check }}</li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-          </div>
-        </details>
-        {% endif %}
-
-        {% if result and result.rows %}
-        <div class="os-ask-results">
-          <div class="os-ask-results__meta">{{ result.rows|length }} row{{ result.rows|length|pluralize }}</div>
-          <div class="os-ask-table-wrap">
-            <table class="os-ask-table">
-              <thead>
-                <tr>
-                  {% for column in result.columns %}
-                    <th>{{ column }}</th>
-                  {% endfor %}
-                </tr>
-              </thead>
-              <tbody>
-                {% for row in result.rows %}
-                  <tr>
-                    {% for column in result.columns %}
-                      <td>{{ row|dict_value:column }}</td>
-                    {% endfor %}
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        {% endif %}
-
-        {% if error and not answer %}
-        <div class="os-ask-error">{{ error }}</div>
-        {% endif %}
       </section>
+    </section>
 
-      <!-- ── RIGHT: SQL EDITOR ── -->
-      <aside class="os-ask-sql-panel">
-        <h2 class="os-ask-panel-title">DuckDB SQL</h2>
-
-        <form method="post" action="{% url 'ask_sql' %}" class="os-ask-sql__form">
-          {% csrf_token %}
-          <input type="hidden" name="prompt" value="{{ prompt }}">
-          <textarea
-            name="sql"
-            rows="14"
-            class="os-ask-textarea os-ask-textarea--mono"
-            placeholder="SELECT neighborhood_description, COUNT(*) AS parcels&#10;FROM assessor_rollup&#10;GROUP BY 1&#10;ORDER BY parcels DESC&#10;LIMIT 25"
-          >{{ sql }}</textarea>
-          <button type="submit" class="os-btn os-btn--slate w-full">Run SQL</button>
-        </form>
-
-        <div class="os-ask-sql-hint">
-          Allowed: <code>SELECT</code> / <code>WITH</code>,
-          <code>CREATE TEMP TABLE/VIEW AS SELECT</code>,
-          <code>DROP</code> of <code>temp_</code> or <code>analysis_</code> objects.
-          Persistent tables are read-only.
-        </div>
-
-        {% if error %}
-        <div class="os-ask-error">{{ error }}</div>
-        {% endif %}
-
-        {% if result and result.rows and not answer %}
-        <div class="os-ask-results os-ask-results--inline">
-          <div class="os-ask-results__meta">{{ result.rows|length }} row{{ result.rows|length|pluralize }}</div>
-          <div class="os-ask-table-wrap">
-            <table class="os-ask-table">
-              <thead>
-                <tr>
-                  {% for column in result.columns %}
-                    <th>{{ column }}</th>
-                  {% endfor %}
-                </tr>
-              </thead>
-              <tbody>
-                {% for row in result.rows %}
-                  <tr>
-                    {% for column in result.columns %}
-                      <td>{{ row|dict_value:column }}</td>
-                    {% endfor %}
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        {% endif %}
-      </aside>
-
-    </div>
-  </div>
-
+    {% if starter_prompts %}
+    <section class="os-ask-v2__suggestions" aria-label="Suggested questions">
+      <div class="os-ask-v2__suggestions-head">
+        <span class="os-current__pulse" aria-hidden="true"></span>
+        <h2>Try a question</h2>
+      </div>
+      <div class="os-ask-v2__suggestion-grid">
+        {% for item in starter_prompts %}
+          <a href="{% url 'ask' %}?prompt={{ item|urlencode }}" class="os-ask-v2__suggestion">{{ item }}</a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </main>
 </div>
 {% endblock %}
