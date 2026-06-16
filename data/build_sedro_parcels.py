@@ -206,19 +206,23 @@ def main():
 
     scenarios = {
         "small_infill": {
-            "label": "Small Infill",
+            "label": "Add a Home",
+            "description": "One new single-family home, like the houses already on most Sedro-Woolley blocks.",
             "tax_per_acre": round(sfr_median, 2),
         },
         "townhomes": {
             "label": "Townhomes",
+            "description": "A few attached homes sharing walls, each with its own entrance — less dense than an apartment building.",
             "tax_per_acre": round(multi_median * 0.75, 2),
         },
         "small_multifamily": {
-            "label": "Small Multifamily",
+            "label": "Small Apartment Building",
+            "description": "A small multifamily building such as a fourplex or a small apartment complex.",
             "tax_per_acre": round(multi_median, 2),
         },
         "mixed_use": {
-            "label": "Mixed-Use",
+            "label": "Shops + Apartments",
+            "description": "Ground-floor shops or offices with apartments above — sometimes called mixed-use.",
             "tax_per_acre": round((retail_median + multi_median) / 2, 2),
         },
     }

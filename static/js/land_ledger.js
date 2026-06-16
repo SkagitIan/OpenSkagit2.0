@@ -18,6 +18,7 @@
   var factTaxAcreEl = document.getElementById("os-ll-fact-tax-acre");
   var underperformEl = document.getElementById("os-ll-underperform");
   var scenarioButtonsEl = document.getElementById("os-ll-scenario-buttons");
+  var scenarioDescriptionEl = document.getElementById("os-ll-scenario-description");
   var resultEl = document.getElementById("os-ll-result");
   var resultCurrentEl = document.getElementById("os-ll-result-current");
   var resultScenarioEl = document.getElementById("os-ll-result-scenario");
@@ -121,18 +122,21 @@
 
   function renderScenarioButtons(props) {
     scenarioButtonsEl.innerHTML = "";
+    scenarioDescriptionEl.textContent = "Click a scenario above to see what it means and what it could generate.";
     var scenarios = state.metadata.scenarios;
     Object.keys(scenarios).forEach(function (key) {
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "os-ll-scenario-btn";
       btn.textContent = scenarios[key].label;
+      btn.title = scenarios[key].description;
       btn.dataset.scenarioKey = key;
       btn.addEventListener("click", function () {
         state.selectedScenarioKey = key;
         Array.prototype.forEach.call(scenarioButtonsEl.children, function (c) {
           c.classList.toggle("is-active", c === btn);
         });
+        scenarioDescriptionEl.textContent = scenarios[key].label + ": " + scenarios[key].description;
         renderResult(props, key);
       });
       scenarioButtonsEl.appendChild(btn);
