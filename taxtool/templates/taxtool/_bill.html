@@ -1,100 +1,112 @@
 {% load taxtool_extras %}
-<div id="main-content" class="os-tax-workspace-wrap">
-  <div class="os-tax-workspace">
+<div id="main-content">
+  <section class="os-tax-results">
 
-    {% if error %}
-      <p class="os-tax-error">{{ error }}</p>
-    {% endif %}
+    <div class="os-tax-results__top">
+      {% if error %}
+        <p class="os-tax-error">{{ error }}</p>
+      {% endif %}
 
-    <!-- Back link -->
-    <button
-      type="button"
-      hx-get="{% url 'tax_home' %}"
-      hx-target="body"
-      hx-swap="innerHTML"
-      class="os-tax-back"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-      </svg>
-      Search again
-    </button>
+      <!-- Back link -->
+      <button
+        type="button"
+        hx-get="{% url 'tax_home' %}"
+        hx-target="body"
+        hx-swap="innerHTML"
+        class="os-tax-back"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Search again
+      </button>
+    </div>
 
     {% if parcel %}
-    <!-- Header -->
-    <div>
-      <p class="os-tax-bill__eyebrow">{{ parcel.parcel_number }}</p>
-      <h2 class="os-tax-bill__address">
-        {{ parcel.situs_street_number }} {{ parcel.situs_street_name }}{% if parcel.situs_city_state_zip %}, {{ parcel.situs_city_state_zip }}{% endif %}
-      </h2>
-      {% if parcel.owner_name %}
-      <p class="os-tax-bill__owner">{{ parcel.owner_name }}</p>
-      {% endif %}
-    </div>
+    <div class="os-tax-grid" style="margin-top:20px;">
 
-    <!-- Total -->
-    <p class="os-tax-bill__total-label">Your 2025 property tax</p>
-    <p class="os-tax-bill__total">{{ total_fmt }}</p>
+      <div class="os-tax-card os-tax-bill-card">
+        <!-- Header -->
+        <div>
+          <p class="os-tax-bill__eyebrow">{{ parcel.parcel_number }}</p>
+          <h2 class="os-tax-bill__address">
+            {{ parcel.situs_street_number }} {{ parcel.situs_street_name }}{% if parcel.situs_city_state_zip %}, {{ parcel.situs_city_state_zip }}{% endif %}
+          </h2>
+          {% if parcel.owner_name %}
+          <p class="os-tax-bill__owner">{{ parcel.owner_name }}</p>
+          {% endif %}
+        </div>
 
-    <!-- Stacked bar -->
-    {% if grouped %}
-    <div class="os-tax-bar">
-      {% for group in grouped %}
-      <button
-        type="button"
-        style="width: {{ group.pct|pct_width }}; background-color: {{ group.color }};"
-        hx-get="{% url 'tax_agency' group.mcag|default:'__none__' %}?your_amount={{ group.total|floatformat:2 }}"
-        hx-target="#agency-panel"
-        hx-swap="innerHTML"
-        title="{{ group.label }}: {{ group.total_fmt }} ({{ group.pct_fmt }})"
-        class="os-tax-bar__seg"
-        {% if not group.mcag %}disabled{% endif %}
-      >
-        <span class="sr-only">{{ group.label }}: {{ group.total_fmt }}</span>
-      </button>
-      {% endfor %}
-    </div>
+        <!-- Total -->
+        <p class="os-tax-bill__total-label">Your 2025 property tax</p>
+        <p class="os-tax-bill__total">{{ total_fmt }}</p>
 
-    <!-- Agency list -->
-    <div class="os-tax-agency-list" id="agency-list">
-      {% for group in grouped %}
-      <button
-        type="button"
-        class="os-tax-agency-row"
-        hx-get="{% url 'tax_agency' group.mcag|default:'__none__' %}?your_amount={{ group.total|floatformat:2 }}"
-        hx-target="#agency-panel"
-        hx-swap="innerHTML"
-        {% if not group.mcag %}disabled{% endif %}
-      >
-        <span class="os-tax-agency-row__dot" style="background-color: {{ group.color }};"></span>
-        <span class="os-tax-agency-row__name">{{ group.label }}</span>
-        <span class="os-tax-agency-row__amount">{{ group.total_fmt }}</span>
-        <span class="os-tax-agency-row__pct">{{ group.pct_fmt }}</span>
-      </button>
-      {% endfor %}
-    </div>
+        {% if grouped %}
+        <!-- Stacked bar -->
+        <div class="os-tax-bar">
+          {% for group in grouped %}
+          <button
+            type="button"
+            style="width: {{ group.pct|pct_width }}; background-color: {{ group.color }};"
+            hx-get="{% url 'tax_agency' group.mcag|default:'__none__' %}?your_amount={{ group.total|floatformat:2 }}"
+            hx-target="#agency-panel"
+            hx-swap="innerHTML"
+            title="{{ group.label }}: {{ group.total_fmt }} ({{ group.pct_fmt }})"
+            class="os-tax-bar__seg"
+            {% if not group.mcag %}disabled{% endif %}
+          >
+            <span class="sr-only">{{ group.label }}: {{ group.total_fmt }}</span>
+          </button>
+          {% endfor %}
+        </div>
 
-    <!-- Comparison medians -->
-    <div class="os-tax-medians">
-      {% if levy_code_median_fmt %}
-      <p>Median tax in your levy code ({{ parcel.levy_code }}): <strong>{{ levy_code_median_fmt }}</strong></p>
-      {% endif %}
-      {% if county_median_fmt %}
-      <p>Skagit County median: <strong>{{ county_median_fmt }}</strong></p>
-      {% endif %}
+        <!-- Agency list -->
+        <div class="os-tax-agency-list" id="agency-list">
+          {% for group in grouped %}
+          <button
+            type="button"
+            class="os-tax-agency-row"
+            hx-get="{% url 'tax_agency' group.mcag|default:'__none__' %}?your_amount={{ group.total|floatformat:2 }}"
+            hx-target="#agency-panel"
+            hx-swap="innerHTML"
+            {% if not group.mcag %}disabled{% endif %}
+          >
+            <span class="os-tax-agency-row__dot" style="background-color: {{ group.color }};"></span>
+            <span class="os-tax-agency-row__name">{{ group.label }}</span>
+            <span class="os-tax-agency-row__amount">{{ group.total_fmt }}</span>
+            <span class="os-tax-agency-row__pct">{{ group.pct_fmt }}</span>
+          </button>
+          {% endfor %}
+        </div>
+
+        <!-- Comparison medians -->
+        <div class="os-tax-medians">
+          {% if levy_code_median_fmt %}
+          <p>Median tax in your levy code ({{ parcel.levy_code }}): <strong>{{ levy_code_median_fmt }}</strong></p>
+          {% endif %}
+          {% if county_median_fmt %}
+          <p>Skagit County median: <strong>{{ county_median_fmt }}</strong></p>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="os-tax-card os-tax-agency-card">
+        <!-- Loading skeleton (hidden by default, shown via JS during agency fetch) -->
+        <div id="agency-loading" style="display:none" class="os-tax-loading">
+          <div class="os-tax-loading__bar" style="width:48%"></div>
+          <div class="os-tax-loading__bar" style="width:100%"></div>
+          <div class="os-tax-loading__bar" style="width:75%"></div>
+        </div>
+
+        <!-- Agency detail panel -->
+        <div id="agency-panel">
+          <p class="os-tax-agency-card__empty">Click an agency above to see where the money goes.</p>
+        </div>
+      </div>
+
     </div>
     {% endif %}
-    {% endif %}
-
-    <!-- Loading skeleton (hidden by default, shown via JS during agency fetch) -->
-    <div id="agency-loading" style="display:none" class="os-tax-loading">
-      <div class="os-tax-loading__bar" style="width:48%"></div>
-      <div class="os-tax-loading__bar" style="width:100%"></div>
-      <div class="os-tax-loading__bar" style="width:75%"></div>
-    </div>
-
-    <!-- Agency detail panel -->
-    <div id="agency-panel"></div>
 
     <script>
     (function () {
@@ -119,5 +131,5 @@
     })();
     </script>
 
-  </div>
+  </section>
 </div>

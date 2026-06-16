@@ -621,6 +621,13 @@ pre {
   letter-spacing: -0.01em;
 }
 
+.os-nav-v2__logo-img {
+  display: block;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
 .os-nav-v2__links {
   display: flex;
   align-items: center;
@@ -737,6 +744,14 @@ pre {
   position: relative;
   z-index: 1;
   padding: 36px max(24px, calc((100vw - 1100px) / 2)) 30px;
+}
+
+.os-hero-v2__mark {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 22px;
+  object-fit: contain;
 }
 
 .os-hero-v2__h1 {
@@ -2201,21 +2216,50 @@ pre {
   color: rgba(255, 255, 255, 0.36);
 }
 
-/* ── WORKSPACE (results card) ── */
+/* ── RESULTS (full-width section, light) ── */
 
-.os-tax-workspace-wrap {
-  width: min(640px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 0 0 80px;
+.os-tax-results {
+  background: var(--os-off-white);
+  color: #182026;
+  padding: 40px max(24px, calc((100vw - 1100px) / 2)) 90px;
 }
 
-.os-tax-workspace {
-  overflow: hidden;
-  border-radius: 14px;
+.os-tax-results__top {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.os-tax-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  align-items: start;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 860px) {
+  .os-tax-grid { grid-template-columns: 1fr; }
+}
+
+.os-tax-card {
   background: #ffffff;
-  color: #182026;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
-  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid var(--os-border);
+  border-radius: 10px;
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.os-tax-agency-card { position: sticky; top: 70px; }
+
+@media (max-width: 860px) {
+  .os-tax-agency-card { position: static; }
+}
+
+.os-tax-agency-card__empty {
+  padding: 36px 8px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--os-muted);
 }
 
 .os-tax-back {
@@ -2342,12 +2386,6 @@ pre {
 }
 
 /* ── AGENCY PANEL ── */
-
-.os-tax-agency-panel {
-  margin-top: 18px;
-  padding-top: 24px;
-  border-top: 1px solid var(--os-border);
-}
 
 .os-tax-agency-panel__back {
   display: inline-flex;

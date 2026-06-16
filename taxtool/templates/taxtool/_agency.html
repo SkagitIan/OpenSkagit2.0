@@ -7,7 +7,7 @@
   <!-- Back link -->
   <button
     type="button"
-    onclick="document.getElementById('agency-panel').innerHTML=''"
+    onclick="document.getElementById('agency-panel').innerHTML='<p class=&quot;os-tax-agency-card__empty&quot;>Click an agency above to see where the money goes.</p>'"
     class="os-tax-agency-panel__back"
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,7 +45,7 @@
     <p class="os-tax-expenditures__label">Top Spending Categories</p>
     {% for exp in top_expenditures %}
     <div class="os-tax-expenditure">
-      <span class="os-tax-expenditure__cat">{{ exp.category }}</span>
+      <span class="os-tax-expenditure__cat">{{ exp.name }}</span>
       <span class="os-tax-expenditure__amt">{{ exp.amount_fmt }}</span>
     </div>
     {% endfor %}
