@@ -4,6 +4,9 @@
 
 {% block extra_head %}
 <style>body { background: #042C53; }</style>
+{% if city.slug == "sedro-woolley" %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -73,6 +76,81 @@
         </section>
       </div>
     </section>
+
+    {% if city.slug == "sedro-woolley" %}
+    {% load static %}
+    <section class="os-land-ledger" id="land-ledger" data-geojson-url="{% static 'data/sedro_woolley_parcels.geojson' %}">
+      <div class="os-land-ledger__head">
+        <p class="os-land-ledger__eyebrow">The Land Ledger</p>
+        <h2>What if Sedro-Woolley got more value from the land it already serves?</h2>
+        <p class="os-land-ledger__subtext">Click any parcel. Test a future use. See the public revenue difference.</p>
+      </div>
+
+      <div class="os-land-ledger__toolbar">
+        <div class="os-land-ledger__revenue-toggle" role="group" aria-label="Revenue view">
+          <span>Revenue view</span>
+          <button type="button" class="os-ll-toggle-btn is-active" data-revenue-view="total">Total public revenue</button>
+          <button type="button" class="os-ll-toggle-btn" data-revenue-view="city">City-only revenue</button>
+        </div>
+        <p class="os-land-ledger__revenue-note">
+          <strong>Total public revenue</strong> = all property taxes the parcel generates.
+          <strong>City revenue</strong> = the estimated Sedro-Woolley share only.
+        </p>
+      </div>
+
+      <div class="os-land-ledger__body">
+        <div class="os-land-ledger__map-wrap">
+          <div id="os-ll-map" class="os-land-ledger__map" aria-label="Sedro-Woolley parcel map"></div>
+          <div class="os-land-ledger__legend">
+            <span><i style="background:#7a1f1f"></i>Low tax/acre</span>
+            <span><i style="background:#c9772e"></i>Medium</span>
+            <span><i style="background:#5bbb2f"></i>High</span>
+            <span><i style="background:#1aacb0"></i>Very high</span>
+          </div>
+          <div class="os-land-ledger__loading" id="os-ll-loading">Loading parcels&hellip;</div>
+        </div>
+
+        <aside class="os-land-ledger__panel" id="os-ll-panel">
+          <div class="os-ll-panel__citywide" id="os-ll-citywide">
+            <p class="os-ll-panel__eyebrow">Citywide opportunity</p>
+            <p class="os-ll-panel__big-number" id="os-ll-big-number">&mdash;</p>
+            <p class="os-ll-panel__caption">Based on underused land inside existing city limits, over 10 years.</p>
+          </div>
+
+          <div class="os-ll-panel__parcel" id="os-ll-parcel-detail" hidden>
+            <p class="os-ll-panel__eyebrow">Current parcel</p>
+            <h3 id="os-ll-parcel-address">&mdash;</h3>
+            <dl class="os-ll-parcel-facts">
+              <div><dt>Parcel</dt><dd id="os-ll-fact-parcel">&mdash;</dd></div>
+              <div><dt>Acres</dt><dd id="os-ll-fact-acres">&mdash;</dd></div>
+              <div><dt>Current use</dt><dd id="os-ll-fact-use">&mdash;</dd></div>
+              <div><dt>Current taxes</dt><dd id="os-ll-fact-taxes">&mdash;</dd></div>
+              <div><dt>Tax / acre</dt><dd id="os-ll-fact-tax-acre">&mdash;</dd></div>
+            </dl>
+            <p class="os-ll-panel__underperform" id="os-ll-underperform" hidden>
+              This parcel is underperforming compared to similar land inside Sedro-Woolley.
+            </p>
+
+            <p class="os-ll-panel__scenario-label">What if it became&hellip;</p>
+            <div class="os-ll-scenario-buttons" id="os-ll-scenario-buttons"></div>
+
+            <div class="os-ll-panel__result" id="os-ll-result" hidden>
+              <div class="os-ll-result__row"><span>Current</span><strong id="os-ll-result-current">&mdash;</strong></div>
+              <div class="os-ll-result__row"><span>Scenario</span><strong id="os-ll-result-scenario">&mdash;</strong></div>
+              <div class="os-ll-result__row os-ll-result__row--gain"><span>Annual gain</span><strong id="os-ll-result-annual">&mdash;</strong></div>
+              <div class="os-ll-result__row os-ll-result__row--gain"><span>10-year gain</span><strong id="os-ll-result-10yr">&mdash;</strong></div>
+            </div>
+          </div>
+
+          <p class="os-ll-panel__guardrail">
+            This is a planning estimate, not a prediction. It compares today&rsquo;s parcel revenue with current Sedro-Woolley tax productivity patterns. Assumes half the parcel&rsquo;s potential is realized over 10 years.
+          </p>
+        </aside>
+      </div>
+    </section>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{% static 'js/land_ledger.js' %}" defer></script>
+    {% endif %}
 
     <section class="os-city-prompts">
       <div class="os-city-prompts__head">

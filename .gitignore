@@ -14,3 +14,7 @@ staticfiles/
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Large raw data dumps (not needed at runtime; regenerate static/data/*.geojson from these)
+data/parcels-shp.zip
+data/skagitassessorsdata.zip
