@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}{{ city.name }} - OpenSkagit{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #042C53; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="os-home-v2 os-city-page" style="--city-accent: {{ city.accent }};">
+
+  <header class="os-nav-v2">
+    <a href="/" class="os-nav-v2__logo">
+      <svg width="26" height="26" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+        <path d="M30,30 C20,20 5,15 10,5 C20,-5 35,15 30,30" fill="#5BBB2F"/>
+        <path d="M30,30 C40,20 55,15 58,27 C62,40 40,42 30,30" fill="#3B82C4"/>
+        <path d="M30,30 C40,40 45,55 35,58 C20,62 18,42 30,30" fill="#F5A623"/>
+        <path d="M30,30 C18,38 3,43 2,32 C0,18 20,16 30,30" fill="#1AACB0"/>
+        <circle cx="30" cy="30" r="9" fill="#042C53"/>
+        <path d="M24,33 L30,24 L36,33 Z" fill="white"/>
+      </svg>
+      OpenSkagit
+    </a>
+    <nav class="os-nav-v2__links" aria-label="Site navigation">
+      <details class="os-nav-v2__menu">
+        <summary>Cities</summary>
+        <div class="os-nav-v2__dropdown">
+          {% for item in city_pages %}
+            <a href="{% url 'city' item.slug %}">{{ item.name }}</a>
+          {% endfor %}
+        </div>
+      </details>
+      <a href="/#parcels">Parcels</a>
+      <a href="/#taxes">Taxes</a>
+      <a href="/#permits">Permits</a>
+      <a href="/#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="os-city-hero">
+      <div class="os-city-hero__mountains" aria-hidden="true">
+        <svg viewBox="0 0 680 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0,80 L100,50 L180,62 L260,28 L320,44 L390,14 L450,32 L510,48 L570,34 L630,52 L680,60 L680,90 L0,90 Z" fill="#1AACB0" opacity="0.08"/>
+        </svg>
+      </div>
+      <div class="os-city-hero__inner">
+        <p class="os-city-hero__eyebrow">Browse by place</p>
+        <h1>{{ city.name }}</h1>
+        <p>{{ city.tagline }}</p>
+        <form class="os-city-hero__form" method="get" action="{% url 'ask' %}">
+          <input type="text" name="prompt" value="Show me public records for {{ city.name }}" aria-label="Ask about {{ city.name }}">
+          <button type="submit">Ask</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="os-city-overview">
+      <div class="os-city-overview__intro">
+        <span class="os-current__pulse" aria-hidden="true"></span>
+        <h2>{{ city.name }} workspace</h2>
+        <p>{{ city.summary }}</p>
+      </div>
+
+      <div class="os-city-lanes">
+        <section class="os-city-lane" style="border-left-color:#5BBB2F">
+          <span>Questions</span>
+          <h3>Local answers</h3>
+          <p>New answers can be tagged with <strong>{{ city.name }}</strong> so they roll up into this town page.</p>
+        </section>
+        <section class="os-city-lane" style="border-left-color:#3B82C4">
+          <span>Maps</span>
+          <h3>Place layers</h3>
+          <p>Future parcel, zoning, floodplain, permit, and district maps can be organized here.</p>
+        </section>
+        <section class="os-city-lane" style="border-left-color:#F5A623">
+          <span>Data</span>
+          <h3>Town records</h3>
+          <p>Assessments, sales, taxes, permits, and public datasets can be filtered by city tag.</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="os-city-prompts">
+      <div class="os-city-prompts__head">
+        <h2>Start with {{ city.name }}</h2>
+      </div>
+      <div class="os-city-prompts__grid">
+        {% for prompt in city_prompts %}
+          <a href="{% url 'ask' %}?prompt={{ prompt|urlencode }}" class="os-city-prompt">{{ prompt }}</a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="os-city-switcher" aria-label="Other cities">
+      <span>Other Skagit places</span>
+      <div>
+        {% for item in city_pages %}
+          <a href="{% url 'city' item.slug %}" {% if item.slug == city.slug %}aria-current="page"{% endif %}>{{ item.name }}</a>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+</div>
+{% endblock %}

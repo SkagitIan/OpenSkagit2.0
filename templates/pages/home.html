@@ -23,7 +23,14 @@
       OpenSkagit
     </a>
     <nav class="os-nav-v2__links" aria-label="Site navigation">
-      <a href="#">Cities</a>
+      <details class="os-nav-v2__menu">
+        <summary>Cities</summary>
+        <div class="os-nav-v2__dropdown">
+          {% for item in city_pages %}
+            <a href="{% url 'city' item.slug %}">{{ item.name }}</a>
+          {% endfor %}
+        </div>
+      </details>
       <a href="#">Parcels</a>
       <a href="#">Taxes</a>
       <a href="#">Permits</a>
@@ -196,17 +203,12 @@
   </section>
 
   <!-- CITY PILLS -->
-  <section class="os-cities">
+  <section class="os-cities" id="cities">
     <span class="os-cities__label">Browse by place</span>
     <div class="os-cities__pills">
-      <a href="#" class="os-city-pill">Sedro-Woolley</a>
-      <a href="#" class="os-city-pill">Burlington</a>
-      <a href="#" class="os-city-pill">Mount Vernon</a>
-      <a href="#" class="os-city-pill">Anacortes</a>
-      <a href="#" class="os-city-pill">Concrete</a>
-      <a href="#" class="os-city-pill">La Conner</a>
-      <a href="#" class="os-city-pill">Hamilton</a>
-      <a href="#" class="os-city-pill">Lyman</a>
+      {% for item in city_pages %}
+        <a href="{% url 'city' item.slug %}" class="os-city-pill">{{ item.name }}</a>
+      {% endfor %}
     </div>
   </section>
 

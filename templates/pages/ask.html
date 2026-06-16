@@ -23,7 +23,14 @@
       OpenSkagit
     </a>
     <nav class="os-nav-v2__links" aria-label="Site navigation">
-      <a href="/#cities">Cities</a>
+      <details class="os-nav-v2__menu">
+        <summary>Cities</summary>
+        <div class="os-nav-v2__dropdown">
+          {% for item in city_pages %}
+            <a href="{% url 'city' item.slug %}">{{ item.name }}</a>
+          {% endfor %}
+        </div>
+      </details>
       <a href="/#parcels">Parcels</a>
       <a href="/#taxes">Taxes</a>
       <a href="/#permits">Permits</a>

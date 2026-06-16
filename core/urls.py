@@ -7,6 +7,7 @@ urlpatterns = [
     path("app/", views.app, name="app"),
     path("ask/", views.ask, name="ask"),
     path("ask/sql/", views.ask_sql, name="ask_sql"),
+    path("cities/<slug:slug>/", views.city, name="city"),
 
     path("login/", auth_views.LoginView.as_view(
         template_name="auth/login.html"
