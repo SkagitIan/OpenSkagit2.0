@@ -5,9 +5,28 @@
     "common_name": "Skagit County",
     "type": "county",
     "blurb": "Provides county-wide services including courts, elections, roads, public health, sheriff, and social services.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0158",
-    "data_year": null
+    "budget": {
+      "total_revenue": 272412923.0,
+      "total_expenditure": 231531345.0,
+      "surplus_deficit": 40881578.0,
+      "property_tax_pct_of_revenue": 40.0,
+      "top_expenditures": [
+        {
+          "name": "General Government",
+          "amount": 66886195.0
+        },
+        {
+          "name": "Public Safety",
+          "amount": 59971409.0
+        },
+        {
+          "name": "Transportation",
+          "amount": 33951552.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0158",
+    "data_year": 2024
   },
   "2834": {
     "mcag": "2834",
@@ -16,7 +35,7 @@
     "type": "ems",
     "blurb": "Operates paramedic and advanced life support emergency medical services throughout Skagit County.",
     "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2834",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2834",
     "data_year": null
   },
   "0628": {
@@ -25,9 +44,28 @@
     "common_name": "City of Anacortes",
     "type": "city",
     "blurb": "Provides city services to Anacortes residents including police, fire, parks, and utilities.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0628",
-    "data_year": null
+    "budget": {
+      "total_revenue": 93162051.0,
+      "total_expenditure": 72438670.0,
+      "surplus_deficit": 20723381.0,
+      "property_tax_pct_of_revenue": 26.7,
+      "top_expenditures": [
+        {
+          "name": "Utilities",
+          "amount": 35369529.0
+        },
+        {
+          "name": "Public Safety",
+          "amount": 19350521.0
+        },
+        {
+          "name": "General Government",
+          "amount": 6873561.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0628",
+    "data_year": 2024
   },
   "0633": {
     "mcag": "0633",
@@ -35,9 +73,28 @@
     "common_name": "City of Burlington",
     "type": "city",
     "blurb": "Provides city services to Burlington residents including police, streets, parks, and planning.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0633",
-    "data_year": null
+    "budget": {
+      "total_revenue": 41443435.0,
+      "total_expenditure": 29580870.0,
+      "surplus_deficit": 11862565.0,
+      "property_tax_pct_of_revenue": 45.6,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 14470977.0
+        },
+        {
+          "name": "Utilities",
+          "amount": 4688890.0
+        },
+        {
+          "name": "General Government",
+          "amount": 4255388.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0633",
+    "data_year": 2024
   },
   "0636": {
     "mcag": "0636",
@@ -45,9 +102,28 @@
     "common_name": "Town of Concrete",
     "type": "city",
     "blurb": "Provides municipal services to the Town of Concrete including water, streets, and local government.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0636",
-    "data_year": null
+    "budget": {
+      "total_revenue": 3942112.0,
+      "total_expenditure": 2071835.0,
+      "surplus_deficit": 1870277.0,
+      "property_tax_pct_of_revenue": 39.2,
+      "top_expenditures": [
+        {
+          "name": "Utilities",
+          "amount": 666308.0
+        },
+        {
+          "name": "General Government",
+          "amount": 410891.0
+        },
+        {
+          "name": "Public Safety",
+          "amount": 393579.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0636",
+    "data_year": 2024
   },
   "0638": {
     "mcag": "0638",
@@ -55,9 +131,28 @@
     "common_name": "Town of Hamilton",
     "type": "city",
     "blurb": "Provides municipal services to the small Town of Hamilton on the Skagit River.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0638",
-    "data_year": null
+    "budget": {
+      "total_revenue": 867632.0,
+      "total_expenditure": 712955.0,
+      "surplus_deficit": 154677.0,
+      "property_tax_pct_of_revenue": 54.7,
+      "top_expenditures": [
+        {
+          "name": "General Government",
+          "amount": 401802.0
+        },
+        {
+          "name": "Utilities",
+          "amount": 135094.0
+        },
+        {
+          "name": "Public Safety",
+          "amount": 82465.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0638",
+    "data_year": 2024
   },
   "0640": {
     "mcag": "0640",
@@ -65,9 +160,28 @@
     "common_name": "Town of La Conner",
     "type": "city",
     "blurb": "Provides municipal services to the Town of La Conner including planning, streets, and local government.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0640",
-    "data_year": null
+    "budget": {
+      "total_revenue": 6287153.0,
+      "total_expenditure": 4971918.0,
+      "surplus_deficit": 1315235.0,
+      "property_tax_pct_of_revenue": 30.4,
+      "top_expenditures": [
+        {
+          "name": "Utilities",
+          "amount": 2121945.0
+        },
+        {
+          "name": "Natural and Economic Environment",
+          "amount": 1064794.0
+        },
+        {
+          "name": "Public Safety",
+          "amount": 609836.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0640",
+    "data_year": 2024
   },
   "0642": {
     "mcag": "0642",
@@ -75,9 +189,28 @@
     "common_name": "Town of Lyman",
     "type": "city",
     "blurb": "Provides municipal services to the small Town of Lyman.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0642",
-    "data_year": null
+    "budget": {
+      "total_revenue": 469885.0,
+      "total_expenditure": 339770.0,
+      "surplus_deficit": 130115.0,
+      "property_tax_pct_of_revenue": 40.8,
+      "top_expenditures": [
+        {
+          "name": "General Government",
+          "amount": 133259.0
+        },
+        {
+          "name": "Utilities",
+          "amount": 93292.0
+        },
+        {
+          "name": "Natural and Economic Environment",
+          "amount": 76319.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0642",
+    "data_year": 2024
   },
   "0644": {
     "mcag": "0644",
@@ -85,9 +218,28 @@
     "common_name": "City of Mount Vernon",
     "type": "city",
     "blurb": "Provides city services to Mount Vernon residents including police, fire, parks, planning, and streets.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0644",
-    "data_year": null
+    "budget": {
+      "total_revenue": 94741988.0,
+      "total_expenditure": 70217669.0,
+      "surplus_deficit": 24524319.0,
+      "property_tax_pct_of_revenue": 35.0,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 25332356.0
+        },
+        {
+          "name": "Utilities",
+          "amount": 22177418.0
+        },
+        {
+          "name": "Transportation",
+          "amount": 7780085.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0644",
+    "data_year": 2024
   },
   "0647": {
     "mcag": "0647",
@@ -95,9 +247,28 @@
     "common_name": "City of Sedro-Woolley",
     "type": "city",
     "blurb": "Provides city services to Sedro-Woolley residents including police, streets, parks, and planning.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0647",
-    "data_year": null
+    "budget": {
+      "total_revenue": 31540804.0,
+      "total_expenditure": 21062392.0,
+      "surplus_deficit": 10478412.0,
+      "property_tax_pct_of_revenue": 39.5,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 8902720.0
+        },
+        {
+          "name": "Utilities",
+          "amount": 7997726.0
+        },
+        {
+          "name": "General Government",
+          "amount": 1370165.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0647",
+    "data_year": 2024
   },
   "2014": {
     "mcag": "2014",
@@ -126,7 +297,7 @@
         }
       ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2014",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2014",
     "data_year": 2025
   },
   "2015": {
@@ -156,7 +327,7 @@
         }
       ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2015",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2015",
     "data_year": 2025
   },
   "2016": {
@@ -186,7 +357,7 @@
         }
       ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2016",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2016",
     "data_year": 2025
   },
   "2017": {
@@ -216,7 +387,7 @@
         }
       ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2017",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2017",
     "data_year": 2025
   },
   "2018": {
@@ -246,7 +417,7 @@
         }
       ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2018",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2018",
     "data_year": 2025
   },
   "2019": {
@@ -276,7 +447,7 @@
         }
       ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2019",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2019",
     "data_year": 2025
   },
   "2020": {
@@ -306,7 +477,7 @@
         }
       ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2020",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2020",
     "data_year": 2025
   },
   "2037": {
@@ -336,7 +507,7 @@
         }
       ]
     },
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2037",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2037",
     "data_year": 2025
   },
   "0454": {
@@ -345,9 +516,20 @@
     "common_name": "La Conner Library",
     "type": "library",
     "blurb": "Provides public library services to La Conner and surrounding communities.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0454",
-    "data_year": null
+    "budget": {
+      "total_revenue": 412100.0,
+      "total_expenditure": 397226.0,
+      "surplus_deficit": 14874.0,
+      "property_tax_pct_of_revenue": 74.6,
+      "top_expenditures": [
+        {
+          "name": "Culture and Recreation",
+          "amount": 397226.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0454",
+    "data_year": 2024
   },
   "1143": {
     "mcag": "1143",
@@ -355,9 +537,20 @@
     "common_name": "Darrington Library",
     "type": "library",
     "blurb": "Provides public library services to Darrington and surrounding communities.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1143",
-    "data_year": null
+    "budget": {
+      "total_revenue": 29978.0,
+      "total_expenditure": 11355.0,
+      "surplus_deficit": 18623.0,
+      "property_tax_pct_of_revenue": 38.4,
+      "top_expenditures": [
+        {
+          "name": "Culture and Recreation",
+          "amount": 11355.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1143",
+    "data_year": 2024
   },
   "2922": {
     "mcag": "2922",
@@ -365,9 +558,20 @@
     "common_name": "Upper Skagit Library",
     "type": "library",
     "blurb": "Provides public library services to upper Skagit communities including Concrete and Rockport.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2922",
-    "data_year": null
+    "budget": {
+      "total_revenue": 459772.0,
+      "total_expenditure": 654686.0,
+      "surplus_deficit": -194914.0,
+      "property_tax_pct_of_revenue": 81.9,
+      "top_expenditures": [
+        {
+          "name": "Culture and Recreation",
+          "amount": 654686.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2922",
+    "data_year": 2024
   },
   "3101": {
     "mcag": "3101",
@@ -375,9 +579,20 @@
     "common_name": "Central Skagit Library",
     "type": "library",
     "blurb": "Provides public library services to central Skagit County communities.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=3101",
-    "data_year": null
+    "budget": {
+      "total_revenue": 1302253.0,
+      "total_expenditure": 1393998.0,
+      "surplus_deficit": -91745.0,
+      "property_tax_pct_of_revenue": 73.0,
+      "top_expenditures": [
+        {
+          "name": "Culture and Recreation",
+          "amount": 1393998.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/3101",
+    "data_year": 2024
   },
   "1487": {
     "mcag": "1487",
@@ -385,9 +600,20 @@
     "common_name": "Skagit Regional Health",
     "type": "hospital",
     "blurb": "Operates Skagit Regional Health, the main hospital system serving Skagit County.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1487",
-    "data_year": null
+    "budget": {
+      "total_revenue": 707204522.0,
+      "total_expenditure": 684051574.0,
+      "surplus_deficit": 23152948.0,
+      "property_tax_pct_of_revenue": 0.7,
+      "top_expenditures": [
+        {
+          "name": "Social Services",
+          "amount": 684051574.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1487",
+    "data_year": 2024
   },
   "1488": {
     "mcag": "1488",
@@ -395,9 +621,24 @@
     "common_name": "Island Health",
     "type": "hospital",
     "blurb": "Operates Island Health (formerly Skagit County Public Hospital District No. 2), serving Anacortes and the islands.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1488",
-    "data_year": null
+    "budget": {
+      "total_revenue": 124014040.0,
+      "total_expenditure": 119412507.0,
+      "surplus_deficit": 4601533.0,
+      "property_tax_pct_of_revenue": 5.0,
+      "top_expenditures": [
+        {
+          "name": "Social Services",
+          "amount": 114716469.0
+        },
+        {
+          "name": "Miscellaneous Expenses",
+          "amount": 4696038.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1488",
+    "data_year": 2024
   },
   "1489": {
     "mcag": "1489",
@@ -405,9 +646,20 @@
     "common_name": "United General District 304",
     "type": "hospital",
     "blurb": "Operates United General District 304, providing hospital services to upper Skagit communities.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1489",
-    "data_year": null
+    "budget": {
+      "total_revenue": 5693673.0,
+      "total_expenditure": 6545517.0,
+      "surplus_deficit": -851844.0,
+      "property_tax_pct_of_revenue": 17.1,
+      "top_expenditures": [
+        {
+          "name": "Social Services",
+          "amount": 6545517.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1489",
+    "data_year": 2024
   },
   "1281": {
     "mcag": "1281",
@@ -415,9 +667,20 @@
     "common_name": "Fire District 1",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 1.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1281",
-    "data_year": null
+    "budget": {
+      "total_revenue": 81937.0,
+      "total_expenditure": 80758.0,
+      "surplus_deficit": 1179.0,
+      "property_tax_pct_of_revenue": 65.8,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 80758.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1281",
+    "data_year": 2024
   },
   "1282": {
     "mcag": "1282",
@@ -425,9 +688,20 @@
     "common_name": "Fire District 2",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 2.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1282",
-    "data_year": null
+    "budget": {
+      "total_revenue": 714704.0,
+      "total_expenditure": 359574.0,
+      "surplus_deficit": 355130.0,
+      "property_tax_pct_of_revenue": 80.5,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 359574.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1282",
+    "data_year": 2024
   },
   "1283": {
     "mcag": "1283",
@@ -435,9 +709,20 @@
     "common_name": "Fire District 3",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 3.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1283",
-    "data_year": null
+    "budget": {
+      "total_revenue": 1095388.0,
+      "total_expenditure": 607583.0,
+      "surplus_deficit": 487805.0,
+      "property_tax_pct_of_revenue": 81.2,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 607583.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1283",
+    "data_year": 2024
   },
   "1284": {
     "mcag": "1284",
@@ -445,9 +730,20 @@
     "common_name": "Fire District 4",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 4.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1284",
-    "data_year": null
+    "budget": {
+      "total_revenue": 376116.0,
+      "total_expenditure": 207829.0,
+      "surplus_deficit": 168287.0,
+      "property_tax_pct_of_revenue": 94.2,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 207829.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1284",
+    "data_year": 2024
   },
   "1285": {
     "mcag": "1285",
@@ -455,9 +751,20 @@
     "common_name": "Fire District 5",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 5.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1285",
-    "data_year": null
+    "budget": {
+      "total_revenue": 501868.0,
+      "total_expenditure": 304811.0,
+      "surplus_deficit": 197057.0,
+      "property_tax_pct_of_revenue": 78.7,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 304811.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1285",
+    "data_year": 2024
   },
   "1286": {
     "mcag": "1286",
@@ -465,9 +772,20 @@
     "common_name": "Fire District 6",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 6.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1286",
-    "data_year": null
+    "budget": {
+      "total_revenue": 1550987.0,
+      "total_expenditure": 1056839.0,
+      "surplus_deficit": 494148.0,
+      "property_tax_pct_of_revenue": 93.3,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 1056839.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1286",
+    "data_year": 2024
   },
   "0366": {
     "mcag": "0366",
@@ -475,9 +793,20 @@
     "common_name": "Fire District 7 (Lake Cavanaugh)",
     "type": "fire",
     "blurb": "Provides fire protection for the Lake Cavanaugh area.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0366",
-    "data_year": null
+    "budget": {
+      "total_revenue": 201753.0,
+      "total_expenditure": 97581.0,
+      "surplus_deficit": 104172.0,
+      "property_tax_pct_of_revenue": 77.8,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 97581.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0366",
+    "data_year": 2024
   },
   "1287": {
     "mcag": "1287",
@@ -485,9 +814,20 @@
     "common_name": "Fire District 8",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 8.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1287",
-    "data_year": null
+    "budget": {
+      "total_revenue": 1672762.0,
+      "total_expenditure": 1036078.0,
+      "surplus_deficit": 636684.0,
+      "property_tax_pct_of_revenue": 93.4,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 1036078.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1287",
+    "data_year": 2024
   },
   "1288": {
     "mcag": "1288",
@@ -495,9 +835,20 @@
     "common_name": "Fire District 9 (Big Lake)",
     "type": "fire",
     "blurb": "Provides fire protection for the Big Lake area.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1288",
-    "data_year": null
+    "budget": {
+      "total_revenue": 598522.0,
+      "total_expenditure": 317370.0,
+      "surplus_deficit": 281152.0,
+      "property_tax_pct_of_revenue": 89.6,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 317370.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1288",
+    "data_year": 2024
   },
   "2571": {
     "mcag": "2571",
@@ -505,9 +856,20 @@
     "common_name": "Fire District 10",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 10.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2571",
-    "data_year": null
+    "budget": {
+      "total_revenue": 460429.0,
+      "total_expenditure": 400345.0,
+      "surplus_deficit": 60084.0,
+      "property_tax_pct_of_revenue": 92.2,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 400345.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2571",
+    "data_year": 2023
   },
   "2572": {
     "mcag": "2572",
@@ -515,9 +877,20 @@
     "common_name": "Fire District 11 (Mt. Erie)",
     "type": "fire",
     "blurb": "Provides fire protection for the Mt. Erie area.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2572",
-    "data_year": null
+    "budget": {
+      "total_revenue": 713115.0,
+      "total_expenditure": 636238.0,
+      "surplus_deficit": 76877.0,
+      "property_tax_pct_of_revenue": 98.0,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 636238.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2572",
+    "data_year": 2024
   },
   "2573": {
     "mcag": "2573",
@@ -525,9 +898,20 @@
     "common_name": "Fire District 12",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 12.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2573",
-    "data_year": null
+    "budget": {
+      "total_revenue": 225725.0,
+      "total_expenditure": 186934.0,
+      "surplus_deficit": 38791.0,
+      "property_tax_pct_of_revenue": 90.4,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 186934.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2573",
+    "data_year": 2024
   },
   "2574": {
     "mcag": "2574",
@@ -535,9 +919,20 @@
     "common_name": "Fire District 13",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 13.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2574",
-    "data_year": null
+    "budget": {
+      "total_revenue": 1691565.0,
+      "total_expenditure": 1599903.0,
+      "surplus_deficit": 91662.0,
+      "property_tax_pct_of_revenue": 31.7,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 1599903.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2574",
+    "data_year": 2024
   },
   "2204": {
     "mcag": "2204",
@@ -546,7 +941,7 @@
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 14.",
     "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2204",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2204",
     "data_year": null
   },
   "2576": {
@@ -555,9 +950,20 @@
     "common_name": "Fire District 15 (Lake McMurray)",
     "type": "fire",
     "blurb": "Provides fire protection for the Lake McMurray area.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2576",
-    "data_year": null
+    "budget": {
+      "total_revenue": 279054.0,
+      "total_expenditure": 130948.0,
+      "surplus_deficit": 148106.0,
+      "property_tax_pct_of_revenue": 29.4,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 130948.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2576",
+    "data_year": 2024
   },
   "2205": {
     "mcag": "2205",
@@ -566,7 +972,7 @@
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 16.",
     "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2205",
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2205",
     "data_year": null
   },
   "2578": {
@@ -575,9 +981,20 @@
     "common_name": "Fire District 17",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 17.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2578",
-    "data_year": null
+    "budget": {
+      "total_revenue": 192276.0,
+      "total_expenditure": 214879.0,
+      "surplus_deficit": -22603.0,
+      "property_tax_pct_of_revenue": 93.5,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 214879.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2578",
+    "data_year": 2024
   },
   "2580": {
     "mcag": "2580",
@@ -585,9 +1002,20 @@
     "common_name": "Fire District 19",
     "type": "fire",
     "blurb": "Provides fire protection and emergency response services for Fire District 19.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2580",
-    "data_year": null
+    "budget": {
+      "total_revenue": 76280.0,
+      "total_expenditure": 58845.0,
+      "surplus_deficit": 17435.0,
+      "property_tax_pct_of_revenue": 91.1,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 58845.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2580",
+    "data_year": 2023
   },
   "3293": {
     "mcag": "3293",
@@ -595,9 +1023,20 @@
     "common_name": "Skagit Regional Fire Authority",
     "type": "fire",
     "blurb": "A consolidated fire agency serving multiple districts in Skagit County.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=3293",
-    "data_year": null
+    "budget": {
+      "total_revenue": 253512.0,
+      "total_expenditure": 205255.0,
+      "surplus_deficit": 48257.0,
+      "property_tax_pct_of_revenue": 93.4,
+      "top_expenditures": [
+        {
+          "name": "Public Safety",
+          "amount": 205255.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/3293",
+    "data_year": 2024
   },
   "1756": {
     "mcag": "1756",
@@ -605,9 +1044,20 @@
     "common_name": "Port of Anacortes",
     "type": "port",
     "blurb": "Operates the Port of Anacortes, including the oil refinery terminal, marina, and industrial properties.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1756",
-    "data_year": null
+    "budget": {
+      "total_revenue": 27252366.0,
+      "total_expenditure": 22016488.0,
+      "surplus_deficit": 5235878.0,
+      "property_tax_pct_of_revenue": 6.5,
+      "top_expenditures": [
+        {
+          "name": "Transportation",
+          "amount": 22016488.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1756",
+    "data_year": 2024
   },
   "1757": {
     "mcag": "1757",
@@ -615,9 +1065,24 @@
     "common_name": "Port of Skagit County",
     "type": "port",
     "blurb": "Operates the Port of Skagit County, supporting industrial, commercial, and agricultural uses.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=1757",
-    "data_year": null
+    "budget": {
+      "total_revenue": 22200466.0,
+      "total_expenditure": 17616599.0,
+      "surplus_deficit": 4583867.0,
+      "property_tax_pct_of_revenue": 35.4,
+      "top_expenditures": [
+        {
+          "name": "Transportation",
+          "amount": 17585963.0
+        },
+        {
+          "name": "Miscellaneous Expenses",
+          "amount": 30636.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/1757",
+    "data_year": 2024
   },
   "0059": {
     "mcag": "0059",
@@ -625,9 +1090,20 @@
     "common_name": "Cemetery District 1",
     "type": "cemetery",
     "blurb": "Maintains public cemeteries in Cemetery District 1.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0059",
-    "data_year": null
+    "budget": {
+      "total_revenue": 84948.0,
+      "total_expenditure": 94084.0,
+      "surplus_deficit": -9136.0,
+      "property_tax_pct_of_revenue": 54.2,
+      "top_expenditures": [
+        {
+          "name": "Utilities",
+          "amount": 94084.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0059",
+    "data_year": 2024
   },
   "0060": {
     "mcag": "0060",
@@ -635,9 +1111,20 @@
     "common_name": "Cemetery District 2 (Fern Hill)",
     "type": "cemetery",
     "blurb": "Maintains public cemeteries in Cemetery District 2 (Fern Hill).",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0060",
-    "data_year": null
+    "budget": {
+      "total_revenue": 205233.0,
+      "total_expenditure": 221623.0,
+      "surplus_deficit": -16390.0,
+      "property_tax_pct_of_revenue": 73.3,
+      "top_expenditures": [
+        {
+          "name": "Utilities",
+          "amount": 221623.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0060",
+    "data_year": 2024
   },
   "0061": {
     "mcag": "0061",
@@ -645,9 +1132,20 @@
     "common_name": "Cemetery District 3 (Edens)",
     "type": "cemetery",
     "blurb": "Maintains public cemeteries in Cemetery District 3 (Edens).",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0061",
-    "data_year": null
+    "budget": {
+      "total_revenue": 21097.0,
+      "total_expenditure": 8005.0,
+      "surplus_deficit": 13092.0,
+      "property_tax_pct_of_revenue": 82.3,
+      "top_expenditures": [
+        {
+          "name": "Utilities",
+          "amount": 8005.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0061",
+    "data_year": 2024
   },
   "2470": {
     "mcag": "2470",
@@ -655,9 +1153,20 @@
     "common_name": "Cemetery District 4",
     "type": "cemetery",
     "blurb": "Maintains public cemeteries in Cemetery District 4.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2470",
-    "data_year": null
+    "budget": {
+      "total_revenue": 34513.0,
+      "total_expenditure": 31539.0,
+      "surplus_deficit": 2974.0,
+      "property_tax_pct_of_revenue": 81.7,
+      "top_expenditures": [
+        {
+          "name": "Utilities",
+          "amount": 31539.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2470",
+    "data_year": 2024
   },
   "0287": {
     "mcag": "0287",
@@ -665,9 +1174,20 @@
     "common_name": "Cemetery District 5 (Forest Park)",
     "type": "cemetery",
     "blurb": "Maintains Forest Park Cemetery (Cemetery District 5).",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=0287",
-    "data_year": null
+    "budget": {
+      "total_revenue": 24143.0,
+      "total_expenditure": 23855.0,
+      "surplus_deficit": 288.0,
+      "property_tax_pct_of_revenue": 61.6,
+      "top_expenditures": [
+        {
+          "name": "Utilities",
+          "amount": 23855.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/0287",
+    "data_year": 2024
   },
   "2894": {
     "mcag": "2894",
@@ -675,8 +1195,19 @@
     "common_name": "Cemetery District 6",
     "type": "cemetery",
     "blurb": "Maintains public cemeteries in Cemetery District 6.",
-    "budget": null,
-    "sao_fit_url": "https://portal.sao.wa.gov/FIT/ReportsByEntity?mcag=2894",
-    "data_year": null
+    "budget": {
+      "total_revenue": 17362.0,
+      "total_expenditure": 18243.0,
+      "surplus_deficit": -881.0,
+      "property_tax_pct_of_revenue": 83.1,
+      "top_expenditures": [
+        {
+          "name": "Utilities",
+          "amount": 18243.0
+        }
+      ]
+    },
+    "sao_fit_url": "https://portal.sao.wa.gov/FIT/explore/government/2894",
+    "data_year": 2023
   }
 }
