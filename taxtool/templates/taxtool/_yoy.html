@@ -1,0 +1,90 @@
+{% load taxtool_extras %}
+<div class="os-tax-agency-panel">
+
+  <!-- Back button -->
+  <button
+    type="button"
+    onclick="document.getElementById('agency-panel').innerHTML='<p class=&quot;os-tax-agency-card__empty&quot;>Click an agency above to see where the money goes.</p>'"
+    class="os-tax-agency-panel__back"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+    </svg>
+    Back to your bill
+  </button>
+
+  {% if error %}
+    <p class="os-tax-error">{{ error }}</p>
+
+  {% elif no_history %}
+    <h3 class="os-tax-agency-panel__name">Property Tax History</h3>
+    <p class="os-tax-agency-panel__blurb">No multi-year history is available for this parcel.</p>
+
+  {% else %}
+
+  <h3 class="os-tax-agency-panel__name">Property Tax History</h3>
+
+  {% if latest %}
+  <!-- Most recent YoY explanation -->
+  <p class="os-tax-yoy-summary">
+    Your {{ latest.year_b }} tax was <strong>{{ latest.tax_b_fmt }}</strong> —
+    <span class="{% if latest.delta_positive %}os-tax-yoy--up{% else %}os-tax-yoy--down{% endif %}">{{ latest.delta_fmt }} ({{ latest.delta_pct_fmt }})</span>
+    from {{ latest.year_a }}.
+  </p>
+
+  <p class="os-tax-expenditures__label" style="margin-top:16px; margin-bottom:8px;">Why it changed</p>
+
+  <div class="os-tax-stats" style="grid-template-columns: 1fr 1fr; margin-bottom:20px;">
+    <!-- Value driver -->
+    <div class="os-tax-stat" style="text-align:left;">
+      <p class="os-tax-stat__label">Assessed value</p>
+      <p style="margin:4px 0 0; font-size:12px; color:#374149; line-height:1.4;">
+        {{ latest.val_a_fmt }} → <strong>{{ latest.val_b_fmt }}</strong>
+      </p>
+      <p style="margin:2px 0 0; font-size:12px; color:var(--os-muted);">
+        {{ latest.delta_val_fmt }} ({{ latest.delta_val_pct_fmt }})
+      </p>
+      <p style="margin:8px 0 0; font-size:14px; font-weight:700; color:{% if latest.value_effect_positive %}#b3261e{% else %}var(--os-teal-dk){% endif %};">
+        {{ latest.value_effect_fmt }} to bill
+      </p>
+    </div>
+    <!-- Rate driver -->
+    <div class="os-tax-stat" style="text-align:left;">
+      <p class="os-tax-stat__label">Effective levy rate</p>
+      <p style="margin:4px 0 0; font-size:12px; color:#374149; line-height:1.4;">
+        {{ latest.rate_a_fmt }} → <strong>{{ latest.rate_b_fmt }}</strong><span style="font-size:11px;"> per $1,000</span>
+      </p>
+      <p style="margin:2px 0 0; font-size:12px; color:var(--os-muted);">
+        {{ latest.rate_delta_fmt }}
+      </p>
+      <p style="margin:8px 0 0; font-size:14px; font-weight:700; color:{% if latest.rate_effect_positive %}#b3261e{% else %}var(--os-teal-dk){% endif %};">
+        {{ latest.rate_effect_fmt }} to bill
+      </p>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- History table -->
+  <p class="os-tax-expenditures__label" style="margin-bottom:8px;">Year-by-Year History</p>
+  <div class="os-tax-history-table">
+    <div class="os-tax-history-row os-tax-history-row--header">
+      <span>Year</span>
+      <span>Assessed</span>
+      <span>Tax</span>
+      <span>Change</span>
+    </div>
+    {% for row in history_rows %}
+    <div class="os-tax-history-row">
+      <span class="os-tax-history-row__year">{{ row.tax_year }}</span>
+      <span class="os-tax-history-row__value">{{ row.total_value_fmt }}</span>
+      <span class="os-tax-history-row__tax">{{ row.tax_amount_fmt }}</span>
+      <span class="os-tax-history-row__delta {% if row.delta_positive == True %}os-tax-history-row__delta--up{% elif row.delta_positive == False %}os-tax-history-row__delta--down{% endif %}">
+        {{ row.delta_fmt }}{% if row.delta_pct_fmt %} <span style="font-size:10px;">({{ row.delta_pct_fmt }})</span>{% endif %}
+      </span>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% endif %}
+
+</div>

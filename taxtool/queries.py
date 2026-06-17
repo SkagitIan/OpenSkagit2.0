@@ -118,6 +118,24 @@ def get_county_median():
         return row[0] if row and row[0] is not None else None
 
 
+def get_parcel_history(parcel_number):
+    """Return assessed-value/tax history rows, most recent first, excluding zero/null values."""
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            SELECT tax_year, total_value, tax_amount, building_value, land_value
+            FROM skagit_parcel_history
+            WHERE parcel_number = %s
+              AND tax_amount IS NOT NULL AND tax_amount > 0
+              AND total_value IS NOT NULL AND total_value > 0
+            ORDER BY tax_year DESC
+            LIMIT 20
+            """,
+            [parcel_number],
+        )
+        return _dictfetchall(cursor)
+
+
 def get_agency_crosswalk(mcag):
     """Return the crosswalk row for a given MCAG (sao_legal_name, sao_fit_url)."""
     with connection.cursor() as cursor:

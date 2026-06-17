@@ -10,11 +10,15 @@ from .queries import (
     get_county_median,
     get_agency_crosswalk,
     get_county_total_for_mcag,
+    get_parcel_history,
 )
 from .utils import (
     group_levy_rows,
     format_currency,
     format_amount_short,
+    format_delta_currency,
+    format_delta_pct,
+    compute_yoy_breakdown,
     get_agency_color,
     get_agency_info,
 )
@@ -59,6 +63,62 @@ def tax_parcel(request, parcel_number):
         "total_fmt": format_currency(parcel.get("total_taxes")),
         "levy_code_median_fmt": format_currency(levy_code_median) if levy_code_median else None,
         "county_median_fmt": format_currency(county_median) if county_median else None,
+    })
+
+
+def tax_yoy(request, parcel_number):
+    parcel = get_parcel(parcel_number)
+    if not parcel:
+        return render(request, "taxtool/_yoy.html", {"error": "Parcel not found.", "parcel_number": parcel_number})
+
+    history = get_parcel_history(parcel_number)
+    if not history:
+        return render(request, "taxtool/_yoy.html", {"parcel": parcel, "no_history": True})
+
+    breakdowns = compute_yoy_breakdown(history)
+
+    latest_ctx = None
+    if breakdowns:
+        b = breakdowns[0]
+        rate_delta = b["rate_b"] - b["rate_a"]
+        rate_delta_sign = "+" if rate_delta >= 0 else "-"
+        latest_ctx = {
+            "year_b": b["year_b"],
+            "year_a": b["year_a"],
+            "tax_b_fmt": format_currency(b["tax_b"]),
+            "tax_a_fmt": format_currency(b["tax_a"]),
+            "delta_fmt": format_delta_currency(b["delta_tax"]),
+            "delta_pct_fmt": format_delta_pct(b["delta_pct"]),
+            "delta_positive": b["delta_tax"] >= 0,
+            "val_b_fmt": format_currency(b["val_b"]),
+            "val_a_fmt": format_currency(b["val_a"]),
+            "delta_val_fmt": format_delta_currency(b["delta_val"]),
+            "delta_val_pct_fmt": format_delta_pct(b["delta_val_pct"]),
+            "rate_a_fmt": f"{b['rate_a']:.2f}",
+            "rate_b_fmt": f"{b['rate_b']:.2f}",
+            "rate_delta_fmt": f"{rate_delta_sign}{abs(rate_delta):.2f} per $1,000",
+            "value_effect_fmt": format_delta_currency(b["value_effect"]),
+            "value_effect_positive": b["value_effect"] >= 0,
+            "rate_effect_fmt": format_delta_currency(b["rate_effect"]),
+            "rate_effect_positive": b["rate_effect"] >= 0,
+        }
+
+    history_rows = []
+    for i, row in enumerate(history):
+        bd = breakdowns[i] if i < len(breakdowns) else None
+        history_rows.append({
+            "tax_year": row["tax_year"],
+            "total_value_fmt": format_currency(row["total_value"]),
+            "tax_amount_fmt": format_currency(row["tax_amount"]),
+            "delta_fmt": format_delta_currency(bd["delta_tax"]) if bd else "",
+            "delta_pct_fmt": format_delta_pct(bd["delta_pct"]) if bd else "",
+            "delta_positive": bd["delta_tax"] >= 0 if bd else None,
+        })
+
+    return render(request, "taxtool/_yoy.html", {
+        "parcel": parcel,
+        "latest": latest_ctx,
+        "history_rows": history_rows,
     })
 
 

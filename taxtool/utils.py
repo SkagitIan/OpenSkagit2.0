@@ -80,6 +80,75 @@ def format_amount_short(amount):
     return f"${int(n):,}"
 
 
+def format_delta_currency(amount):
+    """Format as +$3,285 or -$1,234 with explicit sign."""
+    if amount is None:
+        return "—"
+    try:
+        n = float(amount)
+        if n >= 0:
+            return f"+${int(round(n)):,}"
+        return f"-${int(round(abs(n))):,}"
+    except (TypeError, ValueError):
+        return "—"
+
+
+def format_delta_pct(pct):
+    """Format as +8.5% or -3.2% with explicit sign."""
+    if pct is None:
+        return ""
+    try:
+        n = float(pct)
+        if n >= 0:
+            return f"+{n:.1f}%"
+        return f"-{abs(n):.1f}%"
+    except (TypeError, ValueError):
+        return ""
+
+
+def compute_yoy_breakdown(history_rows):
+    """
+    Given history rows (desc order by tax_year), return list of YoY dicts, most recent first.
+    Uses symmetric (Divisia) decomposition: value_effect + rate_effect ≈ delta_tax.
+    """
+    results = []
+    rows = list(history_rows)
+    for i in range(len(rows) - 1):
+        b = rows[i]       # newer year
+        a = rows[i + 1]   # older year
+        try:
+            tax_b = float(b["tax_amount"])
+            tax_a = float(a["tax_amount"])
+            val_b = float(b["total_value"])
+            val_a = float(a["total_value"])
+        except (TypeError, ValueError):
+            continue
+        if tax_a <= 0 or val_a <= 0 or val_b <= 0:
+            continue
+        delta_tax = tax_b - tax_a
+        rate_a = tax_a / val_a * 1000   # effective $/1,000 of assessed value
+        rate_b = tax_b / val_b * 1000
+        value_effect = (val_b - val_a) * (rate_a + rate_b) / 2 / 1000
+        rate_effect = (rate_b - rate_a) * (val_a + val_b) / 2 / 1000
+        results.append({
+            "year_b": b["tax_year"],
+            "year_a": a["tax_year"],
+            "tax_b": tax_b,
+            "tax_a": tax_a,
+            "delta_tax": delta_tax,
+            "delta_pct": delta_tax / tax_a * 100,
+            "val_b": val_b,
+            "val_a": val_a,
+            "delta_val": val_b - val_a,
+            "delta_val_pct": (val_b - val_a) / val_a * 100,
+            "rate_a": rate_a,
+            "rate_b": rate_b,
+            "value_effect": value_effect,
+            "rate_effect": rate_effect,
+        })
+    return results
+
+
 def get_agency_color(agency_type):
     """Return hex color for a given agency type string."""
     return TYPE_COLORS.get(str(agency_type).lower(), TYPE_COLORS["other"])
