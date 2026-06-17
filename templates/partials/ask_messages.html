@@ -1,0 +1,36 @@
+{% load core_extras %}
+
+{% if prompt %}
+<article class="os-ask-v2__message os-ask-v2__message--user">
+  <div class="os-ask-v2__bubble">
+    <p>{{ prompt }}</p>
+  </div>
+</article>
+{% endif %}
+
+{% if answer %}
+<article class="os-ask-v2__message os-ask-v2__message--agent">
+  <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
+  <div class="os-ask-v2__bubble">
+    <p>{{ answer|linebreaksbr }}</p>
+  </div>
+</article>
+{% endif %}
+
+{% if error and not answer %}
+<article class="os-ask-v2__message os-ask-v2__message--agent">
+  <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
+  <div class="os-ask-v2__bubble os-ask-v2__bubble--error">
+    <p>{{ error }}</p>
+  </div>
+</article>
+{% endif %}
+
+{% if result and result.rows %}
+<article class="os-ask-v2__message os-ask-v2__message--agent">
+  <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
+  <div class="os-ask-v2__bubble">
+    <p>Found {{ result.rows|length }} matching record{{ result.rows|length|pluralize }}.</p>
+  </div>
+</article>
+{% endif %}

@@ -119,7 +119,7 @@ def ask(request):
             result = analysis.result
             sql = analysis.sql or ""
 
-    return render(request, "pages/ask.html", {
+    context = {
         "answer": answer,
         "analysis": analysis,
         "result": result,
@@ -128,7 +128,12 @@ def ask(request):
         "error": error,
         "starter_prompts": STARTER_PROMPTS,
         "city_pages": CITY_PAGES,
-    })
+    }
+
+    if request.headers.get("HX-Request") == "true":
+        return render(request, "partials/ask_messages.html", context)
+
+    return render(request, "pages/ask.html", context)
 
 
 def ask_sql(request):
