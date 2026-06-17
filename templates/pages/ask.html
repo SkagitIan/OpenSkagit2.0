@@ -82,8 +82,8 @@
         </div>
 
         {% if result and result.rows %}
-        <div class="os-ask-v2__results">
-          <div class="os-ask-v2__results-meta">{{ result.rows|length }} matching record{{ result.rows|length|pluralize }}</div>
+        <details class="os-ask-v2__results">
+          <summary>View {{ result.rows|length }} matching record{{ result.rows|length|pluralize }}</summary>
           <div class="os-ask-v2__table-wrap">
             <table class="os-ask-v2__table">
               <thead>
@@ -104,7 +104,7 @@
               </tbody>
             </table>
           </div>
-        </div>
+        </details>
         {% endif %}
 
         <form method="post" action="{% url 'ask' %}" class="os-ask-v2__form">

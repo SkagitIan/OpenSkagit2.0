@@ -2462,12 +2462,17 @@ pre {
   color: #173544;
 }
 
-.os-ask-v2__results-meta {
-  padding: 12px 14px;
-  border-bottom: 1px solid #dce8ec;
-  color: #657988;
+.os-ask-v2__results summary {
+  padding: 10px 14px;
+  color: #3d5968;
   font-size: 13px;
   font-weight: 700;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.os-ask-v2__results[open] summary {
+  border-bottom: 1px solid #dce8ec;
 }
 
 .os-ask-v2__table-wrap {
