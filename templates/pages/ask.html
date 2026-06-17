@@ -87,11 +87,12 @@
           {% csrf_token %}
           <textarea
             name="prompt"
-            rows="3"
+            rows="2"
             class="os-ask-v2__input"
-            placeholder="Ask about a parcel, neighborhood, tax district, sale trend, or property value..."
+            placeholder="Ask about a parcel, neighborhood, sale, tax district..."
           >{{ prompt }}</textarea>
           <button type="submit" class="os-ask-v2__submit">Ask</button>
+          <p class="os-ask-v2__hint">Enter to ask, Shift+Enter for a new line.</p>
           <p class="os-ask-v2__loading">OpenSkagit is checking the records…</p>
         </form>
       </section>
@@ -122,6 +123,13 @@
 
   const input = form.querySelector("[name=prompt]");
   const button = form.querySelector("button[type=submit]");
+
+  input.addEventListener("keydown", function (event) {
+    if (event.key !== "Enter" || event.shiftKey) return;
+
+    event.preventDefault();
+    form.requestSubmit();
+  });
 
   function messageHtml(text, type) {
     const article = document.createElement("article");
