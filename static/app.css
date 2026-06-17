@@ -2454,6 +2454,19 @@ pre {
   background: #179ca0;
 }
 
+.os-ask-v2__loading {
+  display: none;
+  grid-column: 1 / -1;
+  margin: -4px 0 0;
+  color: #557181;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.os-ask-v2__loading.htmx-request {
+  display: block;
+}
+
 .os-ask-v2__results {
   margin: 0 16px 16px;
   border: 1px solid #dce8ec;

@@ -54,31 +54,7 @@
             </div>
           </article>
 
-          {% if prompt %}
-          <article class="os-ask-v2__message os-ask-v2__message--user">
-            <div class="os-ask-v2__bubble">
-              <p>{{ prompt }}</p>
-            </div>
-          </article>
-          {% endif %}
-
-          {% if answer %}
-          <article class="os-ask-v2__message os-ask-v2__message--agent">
-            <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
-            <div class="os-ask-v2__bubble">
-              <p>{{ answer|linebreaksbr }}</p>
-            </div>
-          </article>
-          {% endif %}
-
-          {% if error and not answer %}
-          <article class="os-ask-v2__message os-ask-v2__message--agent">
-            <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
-            <div class="os-ask-v2__bubble os-ask-v2__bubble--error">
-              <p>{{ error }}</p>
-            </div>
-          </article>
-          {% endif %}
+          {% include "partials/ask_messages.html" %}
         </div>
 
         {% if result and result.rows %}
@@ -107,7 +83,11 @@
         </details>
         {% endif %}
 
-        <form method="post" action="{% url 'ask' %}" class="os-ask-v2__form">
+        <form method="post" action="{% url 'ask' %}" class="os-ask-v2__form"
+          hx-post="{% url 'ask' %}"
+          hx-target=".os-ask-v2__thread"
+          hx-swap="beforeend"
+          hx-indicator=".os-ask-v2__loading">
           {% csrf_token %}
           <textarea
             name="prompt"
@@ -116,6 +96,7 @@
             placeholder="Ask about a parcel, neighborhood, tax district, sale trend, or property value..."
           >{{ prompt }}</textarea>
           <button type="submit" class="os-ask-v2__submit">Ask</button>
+          <p class="os-ask-v2__loading htmx-indicator">OpenSkagit is checking the records…</p>
         </form>
       </section>
     </section>
