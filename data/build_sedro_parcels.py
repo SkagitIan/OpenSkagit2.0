@@ -3,16 +3,17 @@ build_sedro_parcels.py
 =======================
 One-shot data prep for the Sedro-Woolley "Land Ledger" parcel scenario map.
 
-Reads the Skagit County parcel boundary shapefile (data/parcels-shp.zip,
-already unzipped into data/parcels-shp/), reprojects geometry from
-WA State Plane North (EPSG:2926, feet) to WGS84 lon/lat, and joins it
-against skagit_parcels + the tax breakdown views + parcel_primary_zoning
-for parcels inside the Sedro-Woolley city limits.
+Queries parcel geometry directly from gis_skagit_parcels (PostGIS), joins
+against skagit_parcels + v_parcel_tax_summary + parcel_primary_zoning for
+parcels inside Sedro-Woolley city limits, and writes a GeoJSON file used
+by the Land Ledger map.
 
-Scenarios are now filtered by what each parcel's zoning district actually
-permits (Title 17 SWMC) rather than by assessor land-use codes.
+No local shapefiles required — runs entirely from the database.
 
 Run from project root:
+    python data/build_sedro_parcels.py
+
+Or from Railway web service Console:
     python data/build_sedro_parcels.py
 """
 
@@ -22,11 +23,8 @@ import statistics
 from pathlib import Path
 
 import psycopg
-import shapefile
-from pyproj import Transformer
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SHP_PATH = BASE_DIR / "data" / "parcels-shp" / "Parcels.shp"
 OUT_PATH = BASE_DIR / "static" / "data" / "sedro_woolley_parcels.geojson"
 
 CITY_MCAG = "0647"
@@ -253,25 +251,17 @@ def fetch_zoning(conn):
     }
 
 
-def load_geometries():
-    sf = shapefile.Reader(str(SHP_PATH))
-    transformer = Transformer.from_crs("EPSG:2926", "EPSG:4326", always_xy=True)
-
-    def reproject(coords):
-        if isinstance(coords[0], (int, float)):
-            x, y = transformer.transform(coords[0], coords[1])
-            return [round(x, 7), round(y, 7)]
-        return [reproject(c) for c in coords]
-
-    geoms = {}
-    for sr in sf.iterShapeRecords():
-        pid = sr.record["PARCELID"]
-        if not pid:
-            continue
-        gi = sr.shape.__geo_interface__
-        gi = {"type": gi["type"], "coordinates": reproject(gi["coordinates"])}
-        geoms[pid] = gi
-    return geoms
+def fetch_geometries(conn):
+    """Pull parcel geometry from PostGIS, reprojected to WGS84, as GeoJSON dicts."""
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT parcel_id,
+               ST_AsGeoJSON(ST_Transform(geometry, 4326), 7)::json AS geom
+        FROM gis_skagit_parcels
+        WHERE citydistrict ILIKE '%Sedro%'
+          AND geometry IS NOT NULL
+    """)
+    return {r[0]: r[1] for r in cur.fetchall()}
 
 
 def median_tax_per_acre(parcels, category):
@@ -296,8 +286,8 @@ def main():
     zoning = fetch_zoning(conn)
     print(f"  {len(zoning)} parcels with zone data")
 
-    print("Loading parcel geometry from shapefile...")
-    geoms = load_geometries()
+    print("Loading parcel geometry from PostGIS...")
+    geoms = fetch_geometries(conn)
 
     parcels = {}
     unzoned = 0
