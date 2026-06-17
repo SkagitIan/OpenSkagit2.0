@@ -98,13 +98,13 @@
         </p>
       </div>
 
-      <div class="os-land-ledger__filterbar" role="group" aria-label="Land use filter">
-        <span>Show only</span>
-        <button type="button" class="os-ll-filter-btn is-active" data-land-filter="all">All parcels</button>
-        <button type="button" class="os-ll-filter-btn" data-land-filter="residential">Residential</button>
-        <button type="button" class="os-ll-filter-btn" data-land-filter="commercial">Commercial</button>
+      <div class="os-land-ledger__filterbar" role="group" aria-label="Zoning filter">
+        <span>Filter by zone</span>
+        <button type="button" class="os-ll-filter-btn is-active" data-land-filter="all">All zones</button>
+        <button type="button" class="os-ll-filter-btn" data-land-filter="residential">Residential <span class="os-ll-filter-hint">R-1 · R-5 · R-7 · R-15</span></button>
+        <button type="button" class="os-ll-filter-btn" data-land-filter="commercial">Commercial <span class="os-ll-filter-hint">CBD · MC</span></button>
         <button type="button" class="os-ll-filter-btn" data-land-filter="industrial">Industrial</button>
-        <button type="button" class="os-ll-filter-btn" data-land-filter="vacant_other">Vacant &amp; other</button>
+        <button type="button" class="os-ll-filter-btn" data-land-filter="public">Public &amp; Open Space</button>
       </div>
 
       <div class="os-land-ledger__body">
@@ -146,10 +146,12 @@
             <dl class="os-ll-parcel-facts">
               <div><dt>Parcel</dt><dd id="os-ll-fact-parcel">&mdash;</dd></div>
               <div><dt>Acres</dt><dd id="os-ll-fact-acres">&mdash;</dd></div>
-              <div><dt>Current use</dt><dd id="os-ll-fact-use">&mdash;</dd></div>
+              <div><dt>Zoning</dt><dd id="os-ll-fact-zone">&mdash;</dd></div>
+              <div><dt>Assessor use</dt><dd id="os-ll-fact-use">&mdash;</dd></div>
               <div><dt>Current taxes</dt><dd id="os-ll-fact-taxes">&mdash;</dd></div>
               <div><dt>Tax / acre</dt><dd id="os-ll-fact-tax-acre">&mdash;</dd></div>
             </dl>
+            <p class="os-ll-zone-description" id="os-ll-zone-description" hidden></p>
             <p class="os-ll-panel__underperform" id="os-ll-underperform" hidden>
               This parcel is underperforming compared to similar land inside Sedro-Woolley.
             </p>
@@ -177,7 +179,11 @@
         <div class="os-ll-methodology__grid">
           <div>
             <h4>Where the boundaries and taxes come from</h4>
-            <p>Parcel shapes are Skagit County&rsquo;s own GIS parcel layer. Acreage, current land use, and current taxes are the Skagit County Assessor&rsquo;s data for each active parcel inside Sedro-Woolley city limits.</p>
+            <p>Parcel shapes are Skagit County&rsquo;s own GIS parcel layer. Acreage, current use, and taxes are from the Skagit County Assessor for each active parcel inside Sedro-Woolley city limits. <strong>Zoning districts</strong> come from the Washington Zoning Atlas spatial database, joined to each parcel by area overlap.</p>
+          </div>
+          <div>
+            <h4>Why zoning determines which scenarios appear</h4>
+            <p>Each parcel only shows development scenarios that its zoning district actually permits under <strong>Title 17 of the Sedro-Woolley Municipal Code</strong>. An R-1 parcel won&rsquo;t show &ldquo;Shops + Apartments&rdquo; because that&rsquo;s not legal there. A CBD parcel won&rsquo;t show &ldquo;Add a Home&rdquo; for the same reason. The scenarios reflect real legal ceilings, not just physical ones.</p>
           </div>
           <div>
             <h4>How a scenario&rsquo;s tax/acre is set</h4>
