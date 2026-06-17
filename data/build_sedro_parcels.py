@@ -6,13 +6,11 @@ One-shot data prep for the Sedro-Woolley "Land Ledger" parcel scenario map.
 Reads the Skagit County parcel boundary shapefile (data/parcels-shp.zip,
 already unzipped into data/parcels-shp/), reprojects geometry from
 WA State Plane North (EPSG:2926, feet) to WGS84 lon/lat, and joins it
-against skagit_parcels + the tax breakdown views for parcels inside the
-Sedro-Woolley city limits (city_district = 'Sedro Woolley').
+against skagit_parcels + the tax breakdown views + parcel_primary_zoning
+for parcels inside the Sedro-Woolley city limits.
 
-Computes, per land-use scenario category, the citywide median tax/acre,
-then writes a single GeoJSON FeatureCollection (with an extra top-level
-"metadata" key carrying the scenario medians and the citywide headline
-number) to static/data/sedro_woolley_parcels.geojson.
+Scenarios are now filtered by what each parcel's zoning district actually
+permits (Title 17 SWMC) rather than by assessor land-use codes.
 
 Run from project root:
     python data/build_sedro_parcels.py
@@ -35,7 +33,129 @@ CITY_MCAG = "0647"
 BUILDOUT_FACTOR = 0.5
 HORIZON_YEARS = 10
 
-# land_use codes -> scenario category, keyed by the leading numeric code
+# Which scenario keys are legally plausible per zone (Title 17 SWMC).
+# Scenarios not in a zone's list are hidden in the UI for that parcel.
+ZONE_SCENARIOS = {
+    "R-1":  ["small_infill"],
+    "R-5":  ["small_infill"],
+    "R-7":  ["small_infill", "townhomes"],
+    "R-15": ["small_infill", "townhomes"],
+    "CBD":  ["small_multifamily", "mixed_use"],
+    "MC":   ["townhomes", "small_multifamily", "mixed_use"],
+    "I":    ["mixed_use"],
+    "P":    [],
+    "OS":   [],
+}
+
+# Natural-language zone descriptions grounded in Title 17 SWMC intent language.
+ZONE_DESCRIPTIONS = {
+    "R-1": {
+        "label": "Residential 1 — Environmentally Constrained",
+        "description": (
+            "Low-density single-family areas within or adjacent to environmentally "
+            "sensitive land — wetlands, steep slopes, floodplains, or similar critical "
+            "areas. Development is limited to protect these natural systems. Large lots, "
+            "no multifamily, no subdivision to urban densities. The ceiling here is set "
+            "by ecology, not just policy."
+        ),
+    },
+    "R-5": {
+        "label": "Residential 5",
+        "description": (
+            "Single-family neighborhoods on the city's edges where terrain is rolling "
+            "or land transitions to the surrounding rural county. Minimum 5,000 sq ft "
+            "lots. New homes and accessory dwelling units are the primary uses. "
+            "Not designed for multifamily apartment buildings."
+        ),
+    },
+    "R-7": {
+        "label": "Residential 7 — Historic Grid Neighborhoods",
+        "description": (
+            "The historic, walkable core of Sedro-Woolley — the grid-street blocks "
+            "platted over a century ago with 7,000 sq ft lots. The code's explicit "
+            "intent is to 'encourage continuation of this traditional pattern.' Houses "
+            "sit close to the street. Duplexes and accessory dwelling units are "
+            "typically permitted. Most amenable to gentle infill while keeping "
+            "neighborhood character intact."
+        ),
+    },
+    "R-15": {
+        "label": "Residential 15",
+        "description": (
+            "Newer residential areas with larger 15,000 sq ft lots. The code requires "
+            "grid-style streets (not cul-de-sacs), conventional neighborhood scale, and "
+            "buildings that match the look of existing houses. Intended to avoid large "
+            "apartment blocks disconnected from the rest of the community. Townhomes "
+            "may be permitted; large apartment complexes are not."
+        ),
+    },
+    "CBD": {
+        "label": "Central Business District",
+        "description": (
+            "Downtown Sedro-Woolley — the commercial and civic core along Woodworth "
+            "and Metcalf Streets. Ground-floor retail, restaurants, offices, and "
+            "services are primary uses; residential above commercial is encouraged. "
+            "Buildings are expected at or near the sidewalk. The highest allowable "
+            "density and widest mix of uses in the city."
+        ),
+    },
+    "MC": {
+        "label": "Mixed Commercial",
+        "description": (
+            "Commercial corridors at the city's entrances and along major roads — "
+            "particularly the Highway 20 and Cook Road corridors. The code's intent is "
+            "an 'attractive and welcoming appearance to visitors,' managing traffic, and "
+            "encouraging walking alongside commercial activity. Both commercial uses and "
+            "residential uses (apartments, mixed-use buildings) are permitted."
+        ),
+    },
+    "I": {
+        "label": "Industrial",
+        "description": (
+            "Lands set aside for manufacturing, warehousing, distribution, and business "
+            "park uses to 'enhance the city's economic base in a manner that minimizes "
+            "impacts to surrounding nonindustrial zones.' Commercial and residential "
+            "uses are permitted only at limited scale so the majority of this land "
+            "stays available for job-producing industrial development."
+        ),
+    },
+    "P": {
+        "label": "Public",
+        "description": (
+            "Land owned or reserved for civic, governmental, educational, utility, or "
+            "institutional purposes — schools, city hall, fire stations, wastewater "
+            "treatment, and similar facilities. Private development is generally not "
+            "permitted. These parcels represent stable, non-developable baseline land."
+        ),
+    },
+    "OS": {
+        "label": "Open Space",
+        "description": (
+            "Parks, natural areas, and protected open land. Development is not "
+            "permitted. These parcels contribute green infrastructure and stormwater "
+            "management but generate minimal property tax revenue by design."
+        ),
+    },
+}
+
+
+def zone_group_for(zone_id):
+    """Broad filter bucket derived from zone code (used in place of assessor group)."""
+    if not zone_id:
+        return "other"
+    z = zone_id.upper().strip()
+    if z in ("R-1", "R-5", "R-7", "R-15") or z.startswith("R-") or "RESIDENTIAL" in z:
+        return "residential"
+    if z in ("CBD", "MC") or "COMMERCIAL" in z or "BUSINESS" in z:
+        return "commercial"
+    if z == "I" or "INDUSTRIAL" in z:
+        return "industrial"
+    if z in ("P", "OS") or "PUBLIC" in z or "OPEN" in z or "PARK" in z:
+        return "public"
+    return "other"
+
+
+# Legacy assessor-code helpers kept for the category field (used in median calc).
 SFR_CODES = {"110", "111", "112", "113", "180", "181", "182", "185"}
 MULTI_CODES = {"120", "130", "140", "150"}
 RETAIL_CODES = {"510", "520", "530", "540", "550", "560", "580", "590",
@@ -58,23 +178,6 @@ def category_for(land_use):
     return "other"
 
 
-def group_for(land_use):
-    """Broad filter bucket: residential / commercial / industrial / vacant_other."""
-    if not land_use:
-        return "vacant_other"
-    code = land_use.strip().lstrip("(").split(")")[0].strip()
-    if not code.isdigit():
-        return "vacant_other"
-    code_int = int(code)
-    if 100 <= code_int < 200:
-        return "residential"
-    if 500 <= code_int < 700:
-        return "commercial"
-    if 200 <= code_int < 500:
-        return "industrial"
-    return "vacant_other"
-
-
 def load_env():
     env_file = BASE_DIR / ".env"
     if env_file.exists():
@@ -83,6 +186,12 @@ def load_env():
             if line and not line.startswith("#") and "=" in line:
                 k, v = line.split("=", 1)
                 os.environ.setdefault(k.strip(), v.strip())
+
+
+def connect():
+    """Connect using NEW_DATABASE_URL if set, otherwise DATABASE_URL."""
+    url = os.environ.get("NEW_DATABASE_URL") or os.environ["DATABASE_URL"]
+    return psycopg.connect(url.replace("postgres://", "postgresql://", 1))
 
 
 def fetch_parcel_rows(conn):
@@ -130,6 +239,20 @@ def fetch_city_share(conn, parcel_numbers):
     return share
 
 
+def fetch_zoning(conn):
+    """Return {parcel_id: {zone_id, zone_name, waza_general}} from parcel_primary_zoning."""
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT parcel_id, zone_id, zone_name, waza_general
+        FROM parcel_primary_zoning
+        WHERE citydistrict ILIKE '%Sedro%'
+    """)
+    return {
+        r[0]: {"zone_id": r[1], "zone_name": r[2], "waza_general": r[3]}
+        for r in cur.fetchall()
+    }
+
+
 def load_geometries():
     sf = shapefile.Reader(str(SHP_PATH))
     transformer = Transformer.from_crs("EPSG:2926", "EPSG:4326", always_xy=True)
@@ -160,8 +283,7 @@ def median_tax_per_acre(parcels, category):
 
 def main():
     load_env()
-    database_url = os.environ["DATABASE_URL"].replace("postgres://", "postgresql://", 1)
-    conn = psycopg.connect(database_url)
+    conn = connect()
 
     print("Loading parcel attributes from skagit_parcels...")
     rows = fetch_parcel_rows(conn)
@@ -170,10 +292,15 @@ def main():
     print("Loading per-parcel city tax share...")
     city_share = fetch_city_share(conn, set(rows.keys()))
 
+    print("Loading zoning from parcel_primary_zoning...")
+    zoning = fetch_zoning(conn)
+    print(f"  {len(zoning)} parcels with zone data")
+
     print("Loading parcel geometry from shapefile...")
     geoms = load_geometries()
 
     parcels = {}
+    unzoned = 0
     for pnum, row in rows.items():
         geom = geoms.get(pnum)
         if geom is None:
@@ -185,18 +312,26 @@ def main():
         street = " ".join(
             s for s in [row["situs_street_number"], row["situs_street_name"]] if s
         ).strip()
+        z = zoning.get(pnum) or {}
+        zone_id = z.get("zone_id") or None
+        zone_name = z.get("zone_name") or None
+        if not zone_id:
+            unzoned += 1
         parcels[pnum] = {
             "parcel_number": pnum,
             "address": street or None,
             "acres": round(acres, 3),
             "land_use": (row["land_use"] or "").strip(),
             "category": category,
-            "land_use_group": group_for(row["land_use"]),
+            "zone_id": zone_id,
+            "zone_name": zone_name,
+            "zone_group": zone_group_for(zone_id),
             "current_tax": round(total_tax, 2),
             "tax_per_acre": round(tax_per_acre, 2),
             "city_tax_pct": round(city_share.get(pnum, 0.0) * 100, 2),
             "geometry": geom,
         }
+    print(f"  {unzoned} parcels had no zone match")
 
     print(f"  {len(parcels)} parcels matched to geometry")
 
@@ -255,6 +390,8 @@ def main():
         "metadata": {
             "city": "Sedro-Woolley",
             "scenarios": scenarios,
+            "zone_scenarios": ZONE_SCENARIOS,
+            "zone_descriptions": ZONE_DESCRIPTIONS,
             "buildout_factor": BUILDOUT_FACTOR,
             "horizon_years": HORIZON_YEARS,
             "citywide_opportunity_10yr": round(citywide_opportunity, 2),

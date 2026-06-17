@@ -14,6 +14,8 @@
   var factParcelEl = document.getElementById("os-ll-fact-parcel");
   var factAcresEl = document.getElementById("os-ll-fact-acres");
   var factUseEl = document.getElementById("os-ll-fact-use");
+  var factZoneEl = document.getElementById("os-ll-fact-zone");
+  var factZoneDescEl = document.getElementById("os-ll-zone-description");
   var factTaxesEl = document.getElementById("os-ll-fact-taxes");
   var factTaxAcreEl = document.getElementById("os-ll-fact-tax-acre");
   var underperformEl = document.getElementById("os-ll-underperform");
@@ -47,7 +49,7 @@
   };
 
   function matchesFilter(props) {
-    return state.landFilter === "all" || props.land_use_group === state.landFilter;
+    return state.landFilter === "all" || props.zone_group === state.landFilter;
   }
 
   function money(n) {
@@ -82,14 +84,25 @@
     return state.revenueView === "city" ? props.city_tax_pct / 100 : 1;
   }
 
+  function allowedScenarioKeys(props) {
+    var zoneScenarios = state.metadata.zone_scenarios;
+    var zoneId = props.zone_id;
+    if (zoneId && zoneScenarios && zoneScenarios[zoneId]) {
+      return zoneScenarios[zoneId];
+    }
+    return Object.keys(state.metadata.scenarios);
+  }
+
   function bestGainPerAcre(props) {
     var scenarios = state.metadata.scenarios;
+    var allowed = allowedScenarioKeys(props);
     var best = -Infinity;
-    Object.keys(scenarios).forEach(function (key) {
+    allowed.forEach(function (key) {
+      if (!scenarios[key]) return;
       var gain = scenarios[key].tax_per_acre - props.tax_per_acre;
       if (gain > best) best = gain;
     });
-    return best;
+    return best === -Infinity ? 0 : best;
   }
 
   function citywideOpportunity() {
@@ -108,10 +121,10 @@
 
   var FILTER_LABELS = {
     all: "underused land inside existing city limits",
-    residential: "underused residential land",
-    commercial: "underused commercial land",
+    residential: "underused residential land (R-1, R-5, R-7, R-15)",
+    commercial: "underused commercial land (CBD, Mixed Commercial)",
     industrial: "underused industrial land",
-    vacant_other: "underused vacant and other land",
+    public: "public and open space land",
   };
 
   function renderBigNumber() {
@@ -124,7 +137,15 @@
     scenarioButtonsEl.innerHTML = "";
     scenarioDescriptionEl.textContent = "Click a scenario above to see what it means and what it could generate.";
     var scenarios = state.metadata.scenarios;
-    Object.keys(scenarios).forEach(function (key) {
+    var allowed = allowedScenarioKeys(props);
+
+    if (allowed.length === 0) {
+      scenarioDescriptionEl.textContent = "No development scenarios apply to this zone — this land is reserved for public or open-space use.";
+      return;
+    }
+
+    allowed.forEach(function (key) {
+      if (!scenarios[key]) return;
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "os-ll-scenario-btn";
@@ -178,6 +199,17 @@
     factUseEl.textContent = props.land_use || "Unclassified";
     factTaxesEl.textContent = moneyExact(props.current_tax);
     factTaxAcreEl.textContent = moneyExact(props.tax_per_acre) + "/acre";
+
+    var zoneDescs = state.metadata.zone_descriptions || {};
+    var zoneId = props.zone_id;
+    var zoneInfo = zoneId ? zoneDescs[zoneId] : null;
+    if (factZoneEl) {
+      factZoneEl.textContent = (zoneInfo ? zoneInfo.label : zoneId) || "Unknown";
+    }
+    if (factZoneDescEl) {
+      factZoneDescEl.textContent = zoneInfo ? zoneInfo.description : "";
+      factZoneDescEl.hidden = !zoneInfo;
+    }
 
     underperformEl.hidden = !(props.tax_per_acre < state.breakpoints.p50);
 
