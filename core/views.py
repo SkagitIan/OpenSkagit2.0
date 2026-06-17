@@ -1,5 +1,8 @@
+import json
+
 from django.shortcuts import render
-from django.http import Http404, HttpResponseNotAllowed
+from django.http import Http404, HttpResponseNotAllowed, StreamingHttpResponse
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.http import urlencode
 from django.shortcuts import redirect
@@ -100,6 +103,42 @@ def app(request):
     if prompt:
         url = f"{url}?{urlencode({'prompt': prompt})}"
     return redirect(url)
+
+
+def _sse(event, data):
+    return f"event: {event}\ndata: {json.dumps(data)}\n\n"
+
+
+def ask_stream(request):
+    prompt = request.GET.get("prompt", "").strip()
+
+    def events():
+        if not prompt:
+            html = render_to_string("partials/ask_messages.html", {"error": "Please enter a question."})
+            yield _sse("answer", {"html": html})
+            yield _sse("done", {})
+            return
+
+        yield _sse("status", {"message": "thinking"})
+        yield _sse("status", {"message": "querying"})
+        yield _sse("status", {"message": "summarizing"})
+
+        from .agent import answer_question
+
+        analysis = answer_question(prompt)
+        html = render_to_string("partials/ask_messages.html", {
+            "answer": analysis.answer,
+            "analysis": analysis,
+            "result": analysis.result,
+            "sql": analysis.sql or "",
+        })
+        yield _sse("answer", {"html": html})
+        yield _sse("done", {})
+
+    response = StreamingHttpResponse(events(), content_type="text/event-stream")
+    response["Cache-Control"] = "no-cache"
+    response["X-Accel-Buffering"] = "no"
+    return response
 
 
 def ask(request):
