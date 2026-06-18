@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    "django.contrib.gis",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
@@ -93,12 +92,6 @@ DATABASES = {
         conn_max_age=600,
     )
 }
-
-if DATABASES["default"]["ENGINE"] in {
-    "django.db.backends.postgresql",
-    "django.db.backends.postgresql_psycopg2",
-}:
-    DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
