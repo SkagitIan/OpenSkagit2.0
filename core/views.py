@@ -1,7 +1,6 @@
 import json
-from datetime import date, timedelta
-from pathlib import Path
 
+from django.db import connection
 from django.shortcuts import render
 from django.http import Http404, HttpResponseNotAllowed, StreamingHttpResponse
 from django.template.loader import render_to_string
@@ -148,67 +147,34 @@ def _format_money(value):
     return f"${int(round(float(value))):,}"
 
 
-def _geojson_parcel_count(city_slug):
-    if city_slug != "sedro-woolley":
-        return None
-    try:
-        from django.conf import settings
-
-        data_path = Path(settings.BASE_DIR) / "static/data/sedro_woolley_parcels.geojson"
-        data = json.loads(data_path.read_text())
-    except (OSError, json.JSONDecodeError):
-        return None
-    return data.get("metadata", {}).get("parcel_count")
-
-
 def city_stats(city_page):
     stats = {
-        "parcel_count": _geojson_parcel_count(city_page["slug"]),
+        "parcel_count": None,
         "recent_sales_90": None,
         "avg_home_value": None,
         "avg_home_sale_price": None,
     }
     try:
-        from .duck import connect, database_path
-
-        conn = connect(database_path(), read_only=True)
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT
+                    parcel_count,
+                    recent_sales_90,
+                    avg_home_value,
+                    avg_home_sale_price
+                FROM v_city_stats
+                WHERE slug = %s
+                """,
+                [city_page["slug"]],
+            )
+            row = cursor.fetchone()
     except Exception:
         return stats
 
-    city_match = f"%{city_page['name'].upper()}%"
-    ninety_days_ago = date.today() - timedelta(days=90)
-    try:
-        row = conn.execute(
-            """
-            WITH city_parcels AS (
-              SELECT parcel_number, proptype, total_market_value_num
-              FROM assessor_rollup
-              WHERE upper(coalesce(situs_city_state_zip, '')) LIKE ?
-            ),
-            city_sales AS (
-              SELECT p.proptype, s.sale_price_num, s.sale_date_iso
-              FROM sales s
-              JOIN city_parcels p ON p.parcel_number = s.parcel_number
-              WHERE s.sale_price_num IS NOT NULL
-                AND s.sale_price_num > 0
-                AND coalesce(s.sale_type, '') = 'VALID SALE'
-            )
-            SELECT
-              (SELECT count(*) FROM city_parcels) AS parcel_count,
-              (SELECT count(*) FROM city_sales WHERE sale_date_iso >= ?) AS recent_sales_90,
-              (SELECT avg(total_market_value_num) FROM city_parcels WHERE proptype = 'R' AND total_market_value_num > 0) AS avg_home_value,
-              (SELECT avg(sale_price_num) FROM city_sales WHERE proptype = 'R') AS avg_home_sale_price
-            """,
-            (city_match, ninety_days_ago.isoformat()),
-        ).fetchone()
-    except Exception:
-        row = None
-    finally:
-        conn.close()
-
     if row:
         stats.update({
-            "parcel_count": row[0] or stats["parcel_count"],
+            "parcel_count": row[0],
             "recent_sales_90": row[1],
             "avg_home_value": row[2],
             "avg_home_sale_price": row[3],
@@ -222,7 +188,7 @@ def city_stat_cards(city_page):
         {"label": "Parcels", "value": _format_number(stats["parcel_count"])},
         {"label": "90-day sales", "value": _format_number(stats["recent_sales_90"])},
         {"label": "Avg home value", "value": _format_money(stats["avg_home_value"])},
-        {"label": "Avg sale price", "value": _format_money(stats["avg_home_sale_price"])},
+        {"label": "Avg 90-day sale", "value": _format_money(stats["avg_home_sale_price"])},
     ]
 
 
