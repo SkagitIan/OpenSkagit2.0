@@ -1,0 +1,86 @@
+<section class="os-current">
+  <div class="os-current__header">
+    <div class="os-current__live-group">
+      <span class="os-current__pulse" aria-hidden="true"></span>
+      <span class="os-current__label">The Current</span>
+      <span class="os-current__subtitle">- the Valley, thinking out loud</span>
+    </div>
+    <span class="os-current__counter">
+      <span id="{{ current_count_id|default:'current-count' }}">{{ current_count }}</span> questions answered
+    </span>
+  </div>
+
+  <div class="os-current__filters" role="group" aria-label="Filter by category">
+    <button class="os-filter-pill os-filter-pill--active" data-filter="all">All</button>
+    <button class="os-filter-pill" data-filter="finance">Finance</button>
+    <button class="os-filter-pill" data-filter="permits">Permits</button>
+    <button class="os-filter-pill" data-filter="parcels">Parcels</button>
+    <button class="os-filter-pill" data-filter="districts">Districts</button>
+    <button class="os-filter-pill" data-filter="gis">GIS</button>
+    <button class="os-filter-pill" data-filter="planning">Planning</button>
+  </div>
+
+  <div class="os-current__feed">
+    {% for topic in current_topics %}
+      <article class="os-current-card os-current-card--{{ topic.category }}" data-category="{{ topic.category }}" style="opacity:{{ topic.opacity|default:'1' }}">
+        <div class="os-current-card__top">
+          <span class="os-current-card__cat os-current-card__cat--{{ topic.category }}">{{ topic.category|title }}</span>
+          {% if topic.is_new %}
+            <div class="os-current-card__top-right">
+              <span class="os-current-card__new">new</span>
+              <span class="os-current-card__time">{{ topic.time }}</span>
+            </div>
+          {% else %}
+            <span class="os-current-card__time">{{ topic.time }}</span>
+          {% endif %}
+        </div>
+        <p class="os-current-card__q">{{ topic.question }}</p>
+        <p class="os-current-card__a">{{ topic.answer }}</p>
+        <span class="os-current-card__source">{{ topic.source }}</span>
+      </article>
+    {% empty %}
+      <article class="os-current-card" style="opacity:1">
+        <div class="os-current-card__top">
+          <span class="os-current-card__cat">Updates</span>
+        </div>
+        <p class="os-current-card__q">No city-tagged topics yet.</p>
+        <p class="os-current-card__a">When questions are tagged for this city, they will appear here using the same Current feed format.</p>
+        <span class="os-current-card__source">OpenSkagit</span>
+      </article>
+    {% endfor %}
+  </div>
+
+  {% if show_current_load_more %}
+    <div class="os-current__loadmore">
+      <a href="#" class="os-current__loadmore-link">Load more</a>
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  document.querySelectorAll('.os-current').forEach(section => {
+    if (section.dataset.currentReady === 'true') return;
+    section.dataset.currentReady = 'true';
+
+    section.querySelectorAll('.os-filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        section.querySelectorAll('.os-filter-pill').forEach(item => item.classList.remove('os-filter-pill--active'));
+        pill.classList.add('os-filter-pill--active');
+        const filter = pill.dataset.filter;
+        section.querySelectorAll('.os-current-card').forEach(card => {
+          card.hidden = filter !== 'all' && card.dataset.category !== filter;
+        });
+      });
+    });
+  });
+
+  const counterEl = document.getElementById('current-count');
+  if (counterEl && counterEl.dataset.liveCounter !== 'true') {
+    counterEl.dataset.liveCounter = 'true';
+    let count = Number(counterEl.textContent.replace(/,/g, '')) || 0;
+    setInterval(() => {
+      count++;
+      counterEl.textContent = count.toLocaleString();
+    }, 9000);
+  }
+</script>

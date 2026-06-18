@@ -44,38 +44,18 @@
         <p class="os-city-hero__eyebrow">Browse by place</p>
         <h1>{{ city.name }}</h1>
         <p>{{ city.tagline }}</p>
-        <form class="os-city-hero__form" method="get" action="{% url 'ask' %}">
-          <input type="text" name="prompt" value="Show me public records for {{ city.name }}" aria-label="Ask about {{ city.name }}">
-          <button type="submit">Ask</button>
-        </form>
+        <div class="os-city-hero__stats" aria-label="{{ city.name }} city stats">
+          {% for stat in city_stat_cards %}
+            <div class="os-city-stat">
+              <span>{{ stat.label }}</span>
+              <strong>{{ stat.value }}</strong>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </section>
 
-    <section class="os-city-overview">
-      <div class="os-city-overview__intro">
-        <span class="os-current__pulse" aria-hidden="true"></span>
-        <h2>{{ city.name }} workspace</h2>
-        <p>{{ city.summary }}</p>
-      </div>
-
-      <div class="os-city-lanes">
-        <section class="os-city-lane" style="border-left-color:#5BBB2F">
-          <span>Questions</span>
-          <h3>Local answers</h3>
-          <p>New answers can be tagged with <strong>{{ city.name }}</strong> so they roll up into this town page.</p>
-        </section>
-        <section class="os-city-lane" style="border-left-color:#3B82C4">
-          <span>Maps</span>
-          <h3>Place layers</h3>
-          <p>Future parcel, zoning, floodplain, permit, and district maps can be organized here.</p>
-        </section>
-        <section class="os-city-lane" style="border-left-color:#F5A623">
-          <span>Data</span>
-          <h3>Town records</h3>
-          <p>Assessments, sales, taxes, permits, and public datasets can be filtered by city tag.</p>
-        </section>
-      </div>
-    </section>
+    {% include "partials/current_feed.html" with current_count_id="city-current-count" %}
 
     {% if city.slug == "sedro-woolley" %}
     {% load static %}

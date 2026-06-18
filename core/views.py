@@ -1,4 +1,6 @@
 import json
+from datetime import date, timedelta
+from pathlib import Path
 
 from django.shortcuts import render
 from django.http import Http404, HttpResponseNotAllowed, StreamingHttpResponse
@@ -75,9 +77,162 @@ CITY_PAGES = [
     },
 ]
 
+CURRENT_TOPICS = [
+    {
+        "category": "finance",
+        "time": "2 min ago",
+        "is_new": True,
+        "question": "Why did the port levy increase in 2024?",
+        "answer": "The Port of Skagit raised its general levy 4.2% this year, driven by capital project debt service for the new marine terminal. A typical parcel contributes about $34/year to this district.",
+        "source": "Skagit County Treasurer - DOR Levy Certification",
+        "tags": [],
+        "opacity": "1",
+    },
+    {
+        "category": "permits",
+        "time": "8 min ago",
+        "question": "How many permits filed in Sedro-Woolley this month?",
+        "answer": "14 permits since June 1 - 9 residential additions, 3 commercial tenant improvements, 2 accessory structures. Activity is concentrated in the downtown UGA.",
+        "source": "City of Sedro-Woolley - iWorQ Permit System",
+        "tags": ["sedro-woolley"],
+        "opacity": "1",
+    },
+    {
+        "category": "parcels",
+        "time": "14 min ago",
+        "question": "Who owns the parcel at Cook Rd and Hwy 20?",
+        "answer": "4.3 acres held by Skagit Land Holdings LLC, assessed at $1.2M, zoned Rural Industrial. Last transferred 2019. No active permits on file.",
+        "source": "Skagit County Assessor - CMAS",
+        "tags": ["sedro-woolley"],
+        "opacity": ".85",
+    },
+    {
+        "category": "districts",
+        "time": "22 min ago",
+        "question": "How many taxing districts touch a Burlington parcel?",
+        "answer": "A typical Burlington parcel overlaps 11 taxing districts - state, county, city, school, fire, port, library, hospital, EMS, cemetery, and flood control. Each levies independently.",
+        "source": "Skagit County Assessor - District Crosswalk",
+        "tags": ["burlington"],
+        "opacity": ".72",
+    },
+    {
+        "category": "planning",
+        "time": "31 min ago",
+        "question": "What does the comp plan say about housing near Burlington?",
+        "answer": "The 2024 Comp Plan designates the Burlington UGA for medium-density residential growth, targeting 1,200 new units by 2044 along transit corridors.",
+        "source": "Skagit County Planning - 2024 Comp Plan Update",
+        "tags": ["burlington"],
+        "opacity": ".55",
+    },
+    {
+        "category": "gis",
+        "time": "45 min ago",
+        "question": "What's in the floodplain near the river in Concrete?",
+        "answer": "14 parcels in Concrete intersect the FEMA 100-year floodplain. 9 have structures. 6 are Zone AE with mandatory flood insurance requirements.",
+        "source": "Skagit County GIS - FEMA FIRM",
+        "tags": ["concrete"],
+        "opacity": ".40",
+    },
+]
+
+
+def _format_number(value):
+    if value is None:
+        return "-"
+    return f"{int(round(float(value))):,}"
+
+
+def _format_money(value):
+    if value is None:
+        return "-"
+    return f"${int(round(float(value))):,}"
+
+
+def _geojson_parcel_count(city_slug):
+    if city_slug != "sedro-woolley":
+        return None
+    try:
+        from django.conf import settings
+
+        data_path = Path(settings.BASE_DIR) / "static/data/sedro_woolley_parcels.geojson"
+        data = json.loads(data_path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return None
+    return data.get("metadata", {}).get("parcel_count")
+
+
+def city_stats(city_page):
+    stats = {
+        "parcel_count": _geojson_parcel_count(city_page["slug"]),
+        "recent_sales_90": None,
+        "avg_home_value": None,
+        "avg_home_sale_price": None,
+    }
+    try:
+        from .duck import connect, database_path
+
+        conn = connect(database_path(), read_only=True)
+    except Exception:
+        return stats
+
+    city_match = f"%{city_page['name'].upper()}%"
+    ninety_days_ago = date.today() - timedelta(days=90)
+    try:
+        row = conn.execute(
+            """
+            WITH city_parcels AS (
+              SELECT parcel_number, proptype, total_market_value_num
+              FROM assessor_rollup
+              WHERE upper(coalesce(situs_city_state_zip, '')) LIKE ?
+            ),
+            city_sales AS (
+              SELECT p.proptype, s.sale_price_num, s.sale_date_iso
+              FROM sales s
+              JOIN city_parcels p ON p.parcel_number = s.parcel_number
+              WHERE s.sale_price_num IS NOT NULL
+                AND s.sale_price_num > 0
+                AND coalesce(s.sale_type, '') = 'VALID SALE'
+            )
+            SELECT
+              (SELECT count(*) FROM city_parcels) AS parcel_count,
+              (SELECT count(*) FROM city_sales WHERE sale_date_iso >= ?) AS recent_sales_90,
+              (SELECT avg(total_market_value_num) FROM city_parcels WHERE proptype = 'R' AND total_market_value_num > 0) AS avg_home_value,
+              (SELECT avg(sale_price_num) FROM city_sales WHERE proptype = 'R') AS avg_home_sale_price
+            """,
+            (city_match, ninety_days_ago.isoformat()),
+        ).fetchone()
+    except Exception:
+        row = None
+    finally:
+        conn.close()
+
+    if row:
+        stats.update({
+            "parcel_count": row[0] or stats["parcel_count"],
+            "recent_sales_90": row[1],
+            "avg_home_value": row[2],
+            "avg_home_sale_price": row[3],
+        })
+    return stats
+
+
+def city_stat_cards(city_page):
+    stats = city_stats(city_page)
+    return [
+        {"label": "Parcels", "value": _format_number(stats["parcel_count"])},
+        {"label": "90-day sales", "value": _format_number(stats["recent_sales_90"])},
+        {"label": "Avg home value", "value": _format_money(stats["avg_home_value"])},
+        {"label": "Avg sale price", "value": _format_money(stats["avg_home_sale_price"])},
+    ]
+
 
 def home(request):
-    return render(request, "pages/home.html", {"city_pages": CITY_PAGES})
+    return render(request, "pages/home.html", {
+        "city_pages": CITY_PAGES,
+        "current_topics": CURRENT_TOPICS,
+        "current_count": "1,247",
+        "show_current_load_more": True,
+    })
 
 
 def city(request, slug):
@@ -90,10 +245,18 @@ def city(request, slug):
         f"Which tax districts overlap {city_page['name']} parcels?",
         f"What public records are available for {city_page['name']}?",
     ]
+    current_topics = [
+        topic for topic in CURRENT_TOPICS
+        if city_page["slug"] in topic.get("tags", [])
+    ]
     return render(request, "pages/city.html", {
         "city": city_page,
         "city_pages": CITY_PAGES,
         "city_prompts": city_prompts,
+        "city_stat_cards": city_stat_cards(city_page),
+        "current_topics": current_topics,
+        "current_count": f"{len(current_topics):,}",
+        "show_current_load_more": False,
     })
 
 
