@@ -24,5 +24,6 @@ Required variables:
 - `ALLOWED_HOSTS`
 - `CSRF_TRUSTED_ORIGINS`
 - `DATABASE_URL` when using Railway Postgres
+- `POSTGIS_DATABASE_URL` or `NEW_DATABASE_URL` for the migrated Railway PostGIS database. When either is set, Django uses it before `DATABASE_URL` and switches to the GeoDjango PostGIS backend.
 
 Static files are served by WhiteNoise and collected into `staticfiles/`.

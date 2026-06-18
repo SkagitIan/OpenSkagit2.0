@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.gis",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
@@ -80,12 +81,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
+DATABASE_URL = (
+    os.getenv("NEW_DATABASE_URL")
+    or os.getenv("POSTGIS_DATABASE_URL")
+    or os.getenv("DATABASE_URL")
+)
+
 DATABASES = {
-    "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+    "default": dj_database_url.parse(
+        DATABASE_URL or f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600,
     )
 }
+
+if DATABASES["default"]["ENGINE"] in {
+    "django.db.backends.postgresql",
+    "django.db.backends.postgresql_psycopg2",
+}:
+    DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"

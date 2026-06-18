@@ -24,11 +24,15 @@ def connect(path: Path | None = None, *, read_only: bool = False) -> duckdb.Duck
     """
     Returns a DuckDB connection.
 
-    If DATABASE_URL is set, DuckDB attaches Railway Postgres by default and
+    If a Railway database URL is set, DuckDB attaches Postgres by default and
     exposes every table unqualified (no schema prefix needed in SQL). Set
     DUCKDB_USE_POSTGRES=false only when intentionally using a local .duckdb file.
     """
-    pg_url = os.environ.get("DATABASE_URL", "").replace("postgres://", "postgresql://", 1)
+    pg_url = (
+        os.environ.get("NEW_DATABASE_URL")
+        or os.environ.get("POSTGIS_DATABASE_URL")
+        or os.environ.get("DATABASE_URL", "")
+    ).replace("postgres://", "postgresql://", 1)
     use_pg = _use_postgres_by_default(pg_url)
 
     if pg_url and use_pg:
