@@ -252,11 +252,11 @@
 
   Promise.all([
     fetch(summaryUrl).then(function (res) {
-      if (!res.ok) throw new Error("summary not ready");
+      if (!res.ok) throw new Error("summary request failed with HTTP " + res.status);
       return res.json();
     }),
     fetch(parcelsUrl).then(function (res) {
-      if (!res.ok) throw new Error("parcels not ready");
+      if (!res.ok) throw new Error("parcels request failed with HTTP " + res.status);
       return res.json();
     })
   ]).then(function (responses) {
@@ -313,7 +313,7 @@
     renderBigNumber();
     loadingEl.hidden = true;
   }).catch(function (err) {
-    loadingEl.textContent = "Land Ledger data has not been rebuilt yet. Run python manage.py rebuild_land_ledger --city sedro-woolley.";
+    loadingEl.textContent = "Land Ledger data could not be loaded. Check the Land Ledger API response for this city.";
     console.error("Land Ledger: failed to load database-backed parcel data", err);
   });
 })();
