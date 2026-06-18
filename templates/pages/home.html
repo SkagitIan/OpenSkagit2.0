@@ -49,24 +49,6 @@
         Skagit Valley is an open book.<br>
         <span>It just hasn't been written in plain English.</span>
       </h1>
-      <form class="os-hero-v2__form" method="get" action="{% url 'ask' %}">
-        <div class="os-hero-v2__input-wrap">
-          <svg class="os-hero-v2__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <circle cx="6.5" cy="6.5" r="5" stroke="#1AACB0" stroke-width="1.5"/>
-            <path d="M10.5 10.5 L14 14" stroke="#1AACB0" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <input
-            type="text"
-            name="prompt"
-            id="hero-query"
-            class="os-hero-v2__input"
-            autocomplete="off"
-            spellcheck="false"
-            aria-label="Ask anything about Skagit County"
-          >
-          <button type="submit" class="os-hero-v2__btn">Ask the Valley →</button>
-        </div>
-      </form>
     </div>
     <div class="os-hero-v2__bridge">
       ↓ or see what the Valley is already asking itself
@@ -235,29 +217,6 @@
 </div>
 
 <script>
-  // Rotating placeholder
-  const questions = [
-    "Why did my property taxes go up this year?",
-    "What's being built in Burlington right now?",
-    "Which taxing districts overlap my Sedro-Woolley parcel?",
-    "Where is permit activity concentrated in 2025?",
-    "What does my tax bill actually pay for?",
-    "How has assessed value changed along the Anacortes waterfront?",
-    "What does the comprehensive plan say about housing near Burlington?",
-    "Show me development patterns along Highway 20"
-  ];
-  const input = document.getElementById('hero-query');
-  let qIdx = 0;
-  input.placeholder = questions[0];
-  setInterval(() => {
-    input.style.opacity = '0';
-    setTimeout(() => {
-      qIdx = (qIdx + 1) % questions.length;
-      input.placeholder = questions[qIdx];
-      input.style.opacity = '1';
-    }, 350);
-  }, 3200);
-
   // Live counter
   let count = 1247;
   const counterEl = document.getElementById('current-count');
