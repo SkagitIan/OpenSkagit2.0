@@ -238,6 +238,30 @@ def _json_value(value):
     return float(value)
 
 
+LAND_LEDGER_JSON_FIELDS = {
+    "allowed_scenarios",
+    "policy_scenarios",
+    "scenario_results",
+    "benchmark_source",
+    "exclusion_reasons",
+    "model_flags",
+    "diagnostics",
+    "scenario_definitions",
+    "zone_descriptions",
+    "scenario_totals",
+    "exclusion_counts",
+}
+
+
+def _land_ledger_value(key, value):
+    if key in LAND_LEDGER_JSON_FIELDS and isinstance(value, str):
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError:
+            return value
+    return _json_value(value)
+
+
 def land_ledger_summary(request, city_slug):
     if city_slug not in CITY_CONFIGS:
         raise Http404("City not found")
@@ -265,7 +289,7 @@ def land_ledger_summary(request, city_slug):
                 "message": "Land Ledger has not been rebuilt for this city yet.",
             }, status=404)
         cols = [col[0] for col in cursor.description]
-    payload = {key: _json_value(value) for key, value in zip(cols, row)}
+    payload = {key: _land_ledger_value(key, value) for key, value in zip(cols, row)}
     payload["ready"] = True
     return JsonResponse(payload)
 
@@ -297,7 +321,7 @@ def land_ledger_parcels(request, city_slug):
     features = []
     for row in rows:
         geometry = row.pop("geometry")
-        properties = {key: _json_value(value) for key, value in row.items()}
+        properties = {key: _land_ledger_value(key, value) for key, value in row.items()}
         features.append({
             "type": "Feature",
             "geometry": geometry,
