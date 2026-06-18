@@ -146,11 +146,13 @@ def ask(request):
     analysis = None
     result = None
     sql = ""
-    prompt = request.GET.get("prompt", "").strip()
+    prompt = ""
+    composer_prompt = request.GET.get("prompt", "").strip()
     error = None
 
     if request.method == "POST":
         prompt = request.POST.get("prompt", "").strip()
+        composer_prompt = ""
         if prompt:
             from .agent import answer_question
             analysis = answer_question(prompt)
@@ -164,6 +166,7 @@ def ask(request):
         "result": result,
         "sql": sql,
         "prompt": prompt,
+        "composer_prompt": composer_prompt,
         "error": error,
         "starter_prompts": STARTER_PROMPTS,
         "city_pages": CITY_PAGES,
