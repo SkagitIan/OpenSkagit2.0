@@ -1603,7 +1603,7 @@ pre {
   display: grid;
   grid-template-columns: 1fr 340px;
   gap: 16px;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 @media (max-width: 900px) {
@@ -1889,6 +1889,10 @@ pre {
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-bottom: 14px;
+}
+
+.os-ll-scenario-buttons[hidden] {
+  display: none;
 }
 
 .os-ll-scenario-btn {

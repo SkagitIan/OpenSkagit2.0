@@ -25,12 +25,10 @@
   var scenarioButtonsEl = document.getElementById("os-ll-scenario-buttons");
   var scenarioDescriptionEl = document.getElementById("os-ll-scenario-description");
   var resultEl = document.getElementById("os-ll-result");
-  var resultCurrentEl = document.getElementById("os-ll-result-current");
   var resultScenarioEl = document.getElementById("os-ll-result-scenario");
-  var resultValueEl = document.getElementById("os-ll-result-value");
-  var resultUnitsEl = document.getElementById("os-ll-result-units");
   var resultAnnualEl = document.getElementById("os-ll-result-annual");
   var result10yrEl = document.getElementById("os-ll-result-10yr");
+  var residentialSummaryEl = document.getElementById("os-ll-residential-summary");
 
   var toggleButtons = section.querySelectorAll("[data-revenue-view]");
   var modelButtons = section.querySelectorAll("[data-model-view]");
@@ -39,7 +37,7 @@
   var introEl = document.getElementById("os-ll-intro");
   var introDismissBtn = document.getElementById("os-ll-intro-dismiss");
   var INTRO_SEEN_KEY = "os_ll_intro_seen";
-  var COLORS = { low: "#7a1f1f", medium: "#c9772e", high: "#5bbb2f", veryHigh: "#1aacb0" };
+  var COLORS = { low: "#8d2f2f", typical: "#d39b3d", high: "#2f8f69", excluded: "#9aa5ad" };
 
   var state = {
     revenueView: "city",
@@ -54,8 +52,8 @@
     activeLayer: null,
   };
 
-  function matchesFilter(props) {
-    return state.landFilter === "all" || props.zone_group === state.landFilter;
+  function matchesFilter() {
+    return true;
   }
 
   function money(n) {
@@ -81,14 +79,17 @@
 
   function colorFor(taxPerAcre) {
     var bp = state.breakpoints;
-    if (taxPerAcre < bp.p25) return COLORS.low;
-    if (taxPerAcre < bp.p50) return COLORS.medium;
-    if (taxPerAcre < bp.p75) return COLORS.high;
-    return COLORS.veryHigh;
+    if (taxPerAcre < bp.p33) return COLORS.low;
+    if (taxPerAcre < bp.p66) return COLORS.typical;
+    return COLORS.high;
   }
 
   function revenueMultiplier(props) {
     return state.revenueView === "city" ? (props.city_tax_pct || 0) / 100 : 1;
+  }
+
+  function cityRevenuePerAcre(props) {
+    return (props.tax_per_acre || 0) * ((props.city_tax_pct || 0) / 100);
   }
 
   function titleize(value) {
@@ -97,97 +98,49 @@
       .replace(/\b\w/g, function (letter) { return letter.toUpperCase(); });
   }
 
-  function scenarioKeysFor(props) {
-    if (!props.zone_id) return [];
-    return state.modelView === "policy" ? (props.policy_scenarios || []) : (props.allowed_scenarios || []);
-  }
-
-  function citywideOpportunity() {
-    var total = 0;
-    state.geoLayer.eachLayer(function (layer) {
-      var props = layer.feature.properties;
-      if (!matchesFilter(props)) return;
-      var value;
-      if (state.revenueView === "city") {
-        value = state.modelView === "policy" ? props.city_policy_opportunity_10yr : props.city_current_opportunity_10yr;
-      } else {
-        value = state.modelView === "policy" ? props.policy_opportunity_10yr : props.current_opportunity_10yr;
-      }
-      total += Math.max(0, value || 0);
+  function bestScenario(props) {
+    var results = props.scenario_results || {};
+    var current = (props.allowed_scenarios || [])
+      .map(function (key) { return { key: key, result: results[key], kind: "current" }; })
+      .filter(function (item) { return item.result; });
+    var policy = (props.policy_scenarios || [])
+      .map(function (key) { return { key: key, result: results[key], kind: "policy" }; })
+      .filter(function (item) { return item.result; });
+    var candidates = current.length ? current : policy;
+    candidates.sort(function (a, b) {
+      return (b.result.city_ten_year_gain || 0) - (a.result.city_ten_year_gain || 0);
     });
-    return total;
+    return candidates[0] || null;
   }
-
-  var FILTER_LABELS = {
-    all: "land inside existing city limits",
-    residential: "residentially zoned land",
-    commercial: "commercially zoned land",
-    industrial: "industrially zoned land",
-    public: "public and open-space land",
-  };
 
   function renderBigNumber() {
-    bigNumberEl.textContent = money(citywideOpportunity()) + " over " + state.metadata.horizon_years + " years";
-    captionEl.textContent = "Scenario-based estimate for " + FILTER_LABELS[state.landFilter] + " (" +
-      (state.revenueView === "city" ? "City-only revenue" : "Total public revenue") + ", " +
-      (state.modelView === "policy" ? "policy-change scenarios" : "current-zoning scenarios") + ").";
+    bigNumberEl.textContent = "Click a parcel";
+    captionEl.textContent = "See what each parcel contributes to the city today.";
   }
 
   function renderScenarioButtons(props) {
     scenarioButtonsEl.innerHTML = "";
+    scenarioButtonsEl.hidden = true;
     resultEl.hidden = true;
-    scenarioDescriptionEl.textContent = "Click a scenario above to see what it means and what it could generate.";
-
-    var definitions = state.metadata.scenario_definitions || {};
-    var keys = scenarioKeysFor(props);
-    if (keys.length === 0) {
+    var scenario = bestScenario(props);
+    if (!scenario) {
       var reasons = props.exclusion_reasons || (props.benchmark_source && props.benchmark_source.exclusion_reasons);
       scenarioDescriptionEl.textContent = reasons && reasons.length
-        ? "Excluded from modeled opportunity: " + reasons.map(titleize).join(", ") + "."
-        : "No development scenarios apply in this model for this parcel.";
+        ? "Not modeled for development opportunity. Reason: " + titleize(reasons[0]) + ". Still shown because it affects current city revenue."
+        : "Not modeled for development opportunity. Still shown because it affects current city revenue.";
       return;
     }
-
-    keys.forEach(function (key) {
-      var definition = definitions[key];
-      var result = props.scenario_results && props.scenario_results[key];
-      if (!definition || !result) return;
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "os-ll-scenario-btn";
-      btn.textContent = definition.label || result.label;
-      btn.title = definition.description || result.description || "";
-      btn.dataset.scenarioKey = key;
-      btn.addEventListener("click", function () {
-        state.selectedScenarioKey = key;
-        Array.prototype.forEach.call(scenarioButtonsEl.children, function (child) {
-          child.classList.toggle("is-active", child === btn);
-        });
-        scenarioDescriptionEl.textContent = (definition.label || result.label) + ": " + (definition.description || result.description || "");
-        renderResult(props, key);
-      });
-      scenarioButtonsEl.appendChild(btn);
-    });
-
-    if (!scenarioButtonsEl.children.length) {
-      scenarioDescriptionEl.textContent = "No benchmark is available yet for this zone and scenario.";
-    }
+    state.selectedScenarioKey = scenario.key;
+    scenarioDescriptionEl.textContent = "Potential scenario: " + scenario.result.label + ".";
+    renderResult(props, scenario.key);
   }
 
   function renderResult(props, scenarioKey) {
-    var mult = revenueMultiplier(props);
     var scenario = props.scenario_results && props.scenario_results[scenarioKey];
     if (!scenario) return;
-    resultCurrentEl.textContent = moneyExact(props.tax_per_acre * mult) + "/acre";
-    resultScenarioEl.textContent = moneyExact(scenario.tax_per_acre * mult) + "/acre";
-    resultValueEl.textContent = moneyExact(scenario.added_assessed_value || 0);
-    resultUnitsEl.textContent = scenario.modeled_units
-      ? Number(scenario.modeled_units).toLocaleString(undefined, { maximumFractionDigits: 1 })
-      : "n/a";
-    var annual = state.revenueView === "city" ? scenario.city_annual_gain : scenario.annual_gain;
-    var tenYear = state.revenueView === "city" ? scenario.city_ten_year_gain : scenario.ten_year_gain;
-    resultAnnualEl.textContent = (annual >= 0 ? "+" : "") + moneyExact(annual);
-    result10yrEl.textContent = (tenYear >= 0 ? "+" : "") + moneyExact(tenYear);
+    resultScenarioEl.textContent = scenario.label;
+    resultAnnualEl.textContent = "+" + moneyExact(scenario.city_annual_gain || 0);
+    result10yrEl.textContent = "+" + moneyExact(scenario.city_ten_year_gain || 0);
     resultEl.hidden = false;
   }
 
@@ -206,12 +159,13 @@
     factParcelEl.textContent = props.parcel_number;
     factAcresEl.textContent = Number(props.acres || 0).toFixed(2);
     factUseEl.textContent = props.land_use || "Unclassified";
-    factTaxesEl.textContent = moneyExact(props.current_tax);
-    factTaxAcreEl.textContent = moneyExact(props.tax_per_acre) + "/acre";
-    factProductivityEl.textContent = props.productivity_percentile == null
-      ? "Unavailable"
-      : titleize(props.productivity_label) + " (" + Math.round(props.productivity_percentile * 100) + "th pct.)";
-    factEligibilityEl.textContent = props.model_flags && props.model_flags.eligible ? "Eligible" : "Excluded";
+    var cityTax = (props.current_tax || 0) * ((props.city_tax_pct || 0) / 100);
+    var cityTaxPerAcre = cityRevenuePerAcre(props);
+    var comparison = cityTaxPerAcre < state.breakpoints.p33 ? "Low" : (cityTaxPerAcre < state.breakpoints.p66 ? "Typical" : "High");
+    factTaxesEl.textContent = moneyExact(cityTax);
+    factTaxAcreEl.textContent = moneyExact(cityTaxPerAcre) + "/acre";
+    factProductivityEl.textContent = comparison;
+    factEligibilityEl.textContent = bestScenario(props) ? "Eligible for scenario" : "Not modeled";
 
     var zoneDescs = state.metadata.zone_descriptions || {};
     var zoneInfo = props.zone_id ? zoneDescs[props.zone_id] : null;
@@ -219,19 +173,20 @@
     factZoneDescEl.textContent = zoneInfo ? zoneInfo.description : "";
     factZoneDescEl.hidden = !zoneInfo;
     underperformEl.textContent = props.model_flags && props.model_flags.eligible
-      ? "This parcel has at least one modeled revenue scenario."
-      : "This parcel is mapped for productivity, but excluded from modeled opportunity totals.";
+      ? "This parcel may reasonably produce more city revenue under the model."
+      : "This parcel is mapped for current city revenue, but not counted as a development opportunity.";
     underperformEl.hidden = false;
     renderScenarioButtons(props);
   }
 
   function styleFeature(feature) {
     var visible = matchesFilter(feature.properties);
+    var modeled = Boolean(bestScenario(feature.properties));
     return {
       color: visible ? "rgba(61,77,92,0.45)" : "rgba(61,77,92,0.08)",
       weight: 0.7,
-      fillColor: colorFor(feature.properties.tax_per_acre),
-      fillOpacity: visible ? 0.7 : 0.04,
+      fillColor: modeled ? colorFor(cityRevenuePerAcre(feature.properties)) : COLORS.excluded,
+      fillOpacity: visible ? (modeled ? 0.72 : 0.42) : 0.04,
     };
   }
 
@@ -316,12 +271,11 @@
     };
 
     var taxPerAcreValues = data.features
-      .map(function (feature) { return feature.properties.tax_per_acre || 0; })
+      .map(function (feature) { return cityRevenuePerAcre(feature.properties); })
       .sort(function (a, b) { return a - b; });
     state.breakpoints = {
-      p25: percentile(taxPerAcreValues, 0.25),
-      p50: percentile(taxPerAcreValues, 0.5),
-      p75: percentile(taxPerAcreValues, 0.75),
+      p33: percentile(taxPerAcreValues, 0.33),
+      p66: percentile(taxPerAcreValues, 0.66),
     };
 
     state.map = L.map("os-ll-map", { scrollWheelZoom: false });
@@ -347,6 +301,15 @@
     }).addTo(state.map);
 
     state.map.fitBounds(state.geoLayer.getBounds(), { padding: [16, 16] });
+    var residentialTotal = (summary.scenario_totals && summary.scenario_totals.small_infill || 0) +
+      (summary.scenario_totals && summary.scenario_totals.townhomes || 0) +
+      (summary.scenario_totals && summary.scenario_totals.small_multifamily || 0);
+    var cityRatio = summary.current_opportunity_10yr
+      ? (summary.city_current_opportunity_10yr || 0) / summary.current_opportunity_10yr
+      : 0;
+    if (residentialSummaryEl && residentialTotal && cityRatio) {
+      residentialSummaryEl.textContent = money(residentialTotal * cityRatio) + " more city revenue";
+    }
     renderBigNumber();
     loadingEl.hidden = true;
   }).catch(function (err) {
