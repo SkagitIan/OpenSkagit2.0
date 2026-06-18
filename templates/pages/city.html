@@ -4,9 +4,7 @@
 
 {% block extra_head %}
 <style>body { background: #042C53; }</style>
-{% if city.slug == "sedro-woolley" %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -57,12 +55,16 @@
 
     {% include "partials/current_feed.html" with current_count_id="city-current-count" %}
 
-    {% if city.slug == "sedro-woolley" %}
     {% load static %}
-    <section class="os-land-ledger" id="land-ledger" data-geojson-url="{% static 'data/sedro_woolley_parcels.geojson' %}">
+    <section
+      class="os-land-ledger"
+      id="land-ledger"
+      data-parcels-url="{% url 'land_ledger_parcels' city.slug %}"
+      data-summary-url="{% url 'land_ledger_summary' city.slug %}"
+    >
       <div class="os-land-ledger__head">
         <p class="os-land-ledger__eyebrow">The Land Ledger</p>
-        <h2>What if Sedro-Woolley got more value from the land it already serves?</h2>
+        <h2>What if {{ city.name }} got more value from the land it already serves?</h2>
         <p class="os-land-ledger__subtext">Click any parcel. Test a future use. See the public revenue difference.</p>
       </div>
 
@@ -72,9 +74,14 @@
           <button type="button" class="os-ll-toggle-btn is-active" data-revenue-view="total">Total public revenue</button>
           <button type="button" class="os-ll-toggle-btn" data-revenue-view="city">City-only revenue</button>
         </div>
+        <div class="os-land-ledger__revenue-toggle" role="group" aria-label="Opportunity model">
+          <span>Opportunity model</span>
+          <button type="button" class="os-ll-toggle-btn is-active" data-model-view="current">Current zoning</button>
+          <button type="button" class="os-ll-toggle-btn" data-model-view="policy">Policy change</button>
+        </div>
         <p class="os-land-ledger__revenue-note">
           <strong>Total public revenue</strong> = all property taxes the parcel generates.
-          <strong>City revenue</strong> = the estimated Sedro-Woolley share only.
+          <strong>City revenue</strong> = the estimated {{ city.name }} share only.
         </p>
       </div>
 
@@ -89,7 +96,7 @@
 
       <div class="os-land-ledger__body">
         <div class="os-land-ledger__map-wrap">
-          <div id="os-ll-map" class="os-land-ledger__map" aria-label="Sedro-Woolley parcel map"></div>
+          <div id="os-ll-map" class="os-land-ledger__map" aria-label="{{ city.name }} parcel map"></div>
           <div class="os-land-ledger__legend">
             <span><i style="background:#7a1f1f"></i>Low tax/acre</span>
             <span><i style="background:#c9772e"></i>Medium</span>
@@ -105,7 +112,7 @@
               <ul>
                 <li>Color shows each parcel&rsquo;s <strong>current property tax per acre</strong> &mdash; red is low, teal is very high.</li>
                 <li>Click any parcel, then try a scenario to see what a different use could generate.</li>
-                <li>Every number comes from real Skagit County Assessor data for Sedro-Woolley itself &mdash; not an outside benchmark.</li>
+                <li>Every number comes from real Skagit County Assessor data for {{ city.name }} itself &mdash; not an outside benchmark.</li>
                 <li>This is a <strong>planning estimate, not a prediction</strong>. See &ldquo;How these numbers are calculated&rdquo; below the map for the full method.</li>
               </ul>
               <button type="button" id="os-ll-intro-dismiss" class="os-ll-intro__btn">Got it &mdash; show me the map</button>
@@ -133,7 +140,7 @@
             </dl>
             <p class="os-ll-zone-description" id="os-ll-zone-description" hidden></p>
             <p class="os-ll-panel__underperform" id="os-ll-underperform" hidden>
-              This parcel is underperforming compared to similar land inside Sedro-Woolley.
+              This parcel is underperforming compared to similar land inside {{ city.name }}.
             </p>
 
             <p class="os-ll-panel__scenario-label">What if it became&hellip;</p>
@@ -149,7 +156,7 @@
           </div>
 
           <p class="os-ll-panel__guardrail">
-            This is a planning estimate, not a prediction. It compares today&rsquo;s parcel revenue with current Sedro-Woolley tax productivity patterns. Assumes half the parcel&rsquo;s potential is realized over 10 years.
+            This is a planning estimate, not a prediction. It compares today&rsquo;s parcel revenue with current {{ city.name }} tax productivity patterns. Assumes half the parcel&rsquo;s potential is realized over 10 years.
           </p>
         </aside>
       </div>
@@ -159,15 +166,15 @@
         <div class="os-ll-methodology__grid">
           <div>
             <h4>Where the boundaries and taxes come from</h4>
-            <p>Parcel shapes are Skagit County&rsquo;s own GIS parcel layer. Acreage, current use, and taxes are from the Skagit County Assessor for each active parcel inside Sedro-Woolley city limits. <strong>Zoning districts</strong> come from the Washington Zoning Atlas spatial database, joined to each parcel by area overlap.</p>
+            <p>Parcel shapes are Skagit County&rsquo;s own GIS parcel layer. Acreage, current use, and taxes are from the Skagit County Assessor for each active parcel inside {{ city.name }} city limits. <strong>Zoning districts</strong> come from the Washington Zoning Atlas spatial database, joined to each parcel by parcel ID and area overlap.</p>
           </div>
           <div>
             <h4>Why zoning determines which scenarios appear</h4>
-            <p>Each parcel only shows development scenarios that its zoning district actually permits under <strong>Title 17 of the Sedro-Woolley Municipal Code</strong>. An R-1 parcel won&rsquo;t show &ldquo;Shops + Apartments&rdquo; because that&rsquo;s not legal there. A CBD parcel won&rsquo;t show &ldquo;Add a Home&rdquo; for the same reason. The scenarios reflect real legal ceilings, not just physical ones.</p>
+            <p>Each parcel only shows development scenarios that its zoning district actually permits under current local zoning. An R-1 parcel won&rsquo;t show &ldquo;Shops + Apartments&rdquo; because that&rsquo;s not legal there. A CBD parcel won&rsquo;t show &ldquo;Add a Home&rdquo; for the same reason. The scenarios reflect real legal ceilings, not just physical ones.</p>
           </div>
           <div>
             <h4>How a scenario&rsquo;s tax/acre is set</h4>
-            <p>For each scenario, we take the <strong>citywide median tax per acre</strong> already produced by similar parcels in Sedro-Woolley today &mdash; e.g. Small Multifamily uses the median for existing 2&ndash;4 and 5+ unit households. Townhomes applies a 25% discount to that multifamily median. Mixed-Use blends the multifamily and commercial/retail medians. Nothing is borrowed from another city.</p>
+            <p>For each scenario, we take the <strong>zone-aware median tax per acre</strong> already produced by similar parcels in {{ city.name }} today. If a zone has too few examples, the model falls back to compatible local zones, then citywide examples.</p>
           </div>
           <div>
             <h4>The gain formula</h4>
@@ -175,7 +182,7 @@
           </div>
           <div>
             <h4>Total vs. City-only revenue</h4>
-            <p>Total public revenue is the full property tax bill (city, county, schools, fire, hospital, etc.). City-only revenue multiplies that by each parcel&rsquo;s actual share that flows to the City of Sedro-Woolley, computed from its specific tax levy code.</p>
+            <p>Total public revenue is the full property tax bill (city, county, schools, fire, hospital, etc.). City-only revenue multiplies that by each parcel&rsquo;s actual share that flows to {{ city.name }}, computed from its specific tax levy code.</p>
           </div>
           <div>
             <h4>The citywide number</h4>
@@ -186,7 +193,6 @@
     </section>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="{% static 'js/land_ledger.js' %}" defer></script>
-    {% endif %}
 
     <section class="os-city-prompts">
       <div class="os-city-prompts__head">

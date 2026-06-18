@@ -4,7 +4,8 @@
   var section = document.getElementById("land-ledger");
   if (!section) return;
 
-  var geojsonUrl = section.getAttribute("data-geojson-url");
+  var parcelsUrl = section.getAttribute("data-parcels-url");
+  var summaryUrl = section.getAttribute("data-summary-url");
   var loadingEl = document.getElementById("os-ll-loading");
   var bigNumberEl = document.getElementById("os-ll-big-number");
   var captionEl = document.querySelector(".os-ll-panel__caption");
@@ -28,16 +29,17 @@
   var result10yrEl = document.getElementById("os-ll-result-10yr");
 
   var toggleButtons = section.querySelectorAll("[data-revenue-view]");
+  var modelButtons = section.querySelectorAll("[data-model-view]");
   var filterButtons = section.querySelectorAll("[data-land-filter]");
 
   var introEl = document.getElementById("os-ll-intro");
   var introDismissBtn = document.getElementById("os-ll-intro-dismiss");
   var INTRO_SEEN_KEY = "os_ll_intro_seen";
-
   var COLORS = { low: "#7a1f1f", medium: "#c9772e", high: "#5bbb2f", veryHigh: "#1aacb0" };
 
   var state = {
     revenueView: "total",
+    modelView: "current",
     landFilter: "all",
     metadata: null,
     breakpoints: null,
@@ -54,7 +56,7 @@
 
   function money(n) {
     var sign = n < 0 ? "-" : "";
-    n = Math.abs(n);
+    n = Math.abs(n || 0);
     if (n >= 1000000) return sign + "$" + (n / 1000000).toFixed(1) + "M";
     if (n >= 1000) return sign + "$" + Math.round(n).toLocaleString();
     return sign + "$" + Math.round(n);
@@ -62,10 +64,11 @@
 
   function moneyExact(n) {
     var sign = n < 0 ? "-" : "";
-    return sign + "$" + Math.round(Math.abs(n)).toLocaleString();
+    return sign + "$" + Math.round(Math.abs(n || 0)).toLocaleString();
   }
 
   function percentile(sorted, p) {
+    if (!sorted.length) return 0;
     var idx = (sorted.length - 1) * p;
     var lo = Math.floor(idx), hi = Math.ceil(idx);
     if (lo === hi) return sorted[lo];
@@ -81,28 +84,12 @@
   }
 
   function revenueMultiplier(props) {
-    return state.revenueView === "city" ? props.city_tax_pct / 100 : 1;
+    return state.revenueView === "city" ? (props.city_tax_pct || 0) / 100 : 1;
   }
 
-  function allowedScenarioKeys(props) {
-    var zoneScenarios = state.metadata.zone_scenarios;
-    var zoneId = props.zone_id;
-    if (zoneId && zoneScenarios && zoneScenarios[zoneId]) {
-      return zoneScenarios[zoneId];
-    }
-    return Object.keys(state.metadata.scenarios);
-  }
-
-  function bestGainPerAcre(props) {
-    var scenarios = state.metadata.scenarios;
-    var allowed = allowedScenarioKeys(props);
-    var best = -Infinity;
-    allowed.forEach(function (key) {
-      if (!scenarios[key]) return;
-      var gain = scenarios[key].tax_per_acre - props.tax_per_acre;
-      if (gain > best) best = gain;
-    });
-    return best === -Infinity ? 0 : best;
+  function scenarioKeysFor(props) {
+    if (!props.zone_id) return [];
+    return state.modelView === "policy" ? (props.policy_scenarios || []) : (props.allowed_scenarios || []);
   }
 
   function citywideOpportunity() {
@@ -110,80 +97,81 @@
     state.geoLayer.eachLayer(function (layer) {
       var props = layer.feature.properties;
       if (!matchesFilter(props)) return;
-      var gainPerAcre = bestGainPerAcre(props);
-      if (gainPerAcre > 0) {
-        var annual = gainPerAcre * props.acres * revenueMultiplier(props);
-        total += annual * state.metadata.horizon_years * state.metadata.buildout_factor;
-      }
+      var value = state.modelView === "policy" ? props.policy_opportunity_10yr : props.current_opportunity_10yr;
+      total += Math.max(0, value || 0) * revenueMultiplier(props);
     });
     return total;
   }
 
   var FILTER_LABELS = {
-    all: "underused land inside existing city limits",
-    residential: "underused residential land (R-1, R-5, R-7, R-15)",
-    commercial: "underused commercial land (CBD, Mixed Commercial)",
-    industrial: "underused industrial land",
-    public: "public and open space land",
+    all: "land inside existing city limits",
+    residential: "residentially zoned land",
+    commercial: "commercially zoned land",
+    industrial: "industrially zoned land",
+    public: "public and open-space land",
   };
 
   function renderBigNumber() {
     bigNumberEl.textContent = money(citywideOpportunity()) + " over " + state.metadata.horizon_years + " years";
     captionEl.textContent = "Based on " + FILTER_LABELS[state.landFilter] + " (" +
-      (state.revenueView === "city" ? "City-only revenue" : "Total public revenue") + ").";
+      (state.revenueView === "city" ? "City-only revenue" : "Total public revenue") + ", " +
+      (state.modelView === "policy" ? "policy change" : "current zoning") + ").";
   }
 
   function renderScenarioButtons(props) {
     scenarioButtonsEl.innerHTML = "";
+    resultEl.hidden = true;
     scenarioDescriptionEl.textContent = "Click a scenario above to see what it means and what it could generate.";
-    var scenarios = state.metadata.scenarios;
-    var allowed = allowedScenarioKeys(props);
 
-    if (allowed.length === 0) {
-      scenarioDescriptionEl.textContent = "No development scenarios apply to this zone — this land is reserved for public or open-space use.";
+    var definitions = state.metadata.scenario_definitions || {};
+    var keys = scenarioKeysFor(props);
+    if (keys.length === 0) {
+      scenarioDescriptionEl.textContent = props.zone_id
+        ? "No development scenarios apply in this model for this zone."
+        : "Zoning is unavailable for this parcel, so it is excluded from opportunity totals.";
       return;
     }
 
-    allowed.forEach(function (key) {
-      if (!scenarios[key]) return;
+    keys.forEach(function (key) {
+      var definition = definitions[key];
+      var result = props.scenario_results && props.scenario_results[key];
+      if (!definition || !result) return;
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "os-ll-scenario-btn";
-      btn.textContent = scenarios[key].label;
-      btn.title = scenarios[key].description;
+      btn.textContent = definition.label || result.label;
+      btn.title = definition.description || result.description || "";
       btn.dataset.scenarioKey = key;
       btn.addEventListener("click", function () {
         state.selectedScenarioKey = key;
-        Array.prototype.forEach.call(scenarioButtonsEl.children, function (c) {
-          c.classList.toggle("is-active", c === btn);
+        Array.prototype.forEach.call(scenarioButtonsEl.children, function (child) {
+          child.classList.toggle("is-active", child === btn);
         });
-        scenarioDescriptionEl.textContent = scenarios[key].label + ": " + scenarios[key].description;
+        scenarioDescriptionEl.textContent = (definition.label || result.label) + ": " + (definition.description || result.description || "");
         renderResult(props, key);
       });
       scenarioButtonsEl.appendChild(btn);
     });
+
+    if (!scenarioButtonsEl.children.length) {
+      scenarioDescriptionEl.textContent = "No benchmark is available yet for this zone and scenario.";
+    }
   }
 
   function renderResult(props, scenarioKey) {
     var mult = revenueMultiplier(props);
-    var scenario = state.metadata.scenarios[scenarioKey];
-    var currentTotal = props.tax_per_acre * props.acres * mult;
-    var scenarioTotal = scenario.tax_per_acre * props.acres * mult;
-    var annualGain = scenarioTotal - currentTotal;
-    var tenYearGain = annualGain * state.metadata.horizon_years * state.metadata.buildout_factor;
-
+    var scenario = props.scenario_results && props.scenario_results[scenarioKey];
+    if (!scenario) return;
     resultCurrentEl.textContent = moneyExact(props.tax_per_acre * mult) + "/acre";
     resultScenarioEl.textContent = moneyExact(scenario.tax_per_acre * mult) + "/acre";
-    resultAnnualEl.textContent = (annualGain >= 0 ? "+" : "") + moneyExact(annualGain);
-    result10yrEl.textContent = (tenYearGain >= 0 ? "+" : "") + moneyExact(tenYearGain);
+    resultAnnualEl.textContent = (scenario.annual_gain >= 0 ? "+" : "") + moneyExact(scenario.annual_gain * mult);
+    result10yrEl.textContent = (scenario.ten_year_gain >= 0 ? "+" : "") + moneyExact(scenario.ten_year_gain * mult);
     resultEl.hidden = false;
   }
 
   function selectFeature(layer) {
     if (!matchesFilter(layer.feature.properties)) return;
-    if (state.activeLayer) {
-      state.geoLayer.resetStyle(state.activeLayer);
-    }
+    if (state.activeLayer) state.geoLayer.resetStyle(state.activeLayer);
     state.activeLayer = layer;
     layer.setStyle({ weight: 3, color: "#ffffff", dashArray: null });
     layer.bringToFront();
@@ -191,29 +179,20 @@
     var props = layer.feature.properties;
     state.selectedFeature = props;
     state.selectedScenarioKey = null;
-
     parcelDetailEl.hidden = false;
     addressEl.textContent = props.address || "(no address on file)";
     factParcelEl.textContent = props.parcel_number;
-    factAcresEl.textContent = props.acres.toFixed(2);
+    factAcresEl.textContent = Number(props.acres || 0).toFixed(2);
     factUseEl.textContent = props.land_use || "Unclassified";
     factTaxesEl.textContent = moneyExact(props.current_tax);
     factTaxAcreEl.textContent = moneyExact(props.tax_per_acre) + "/acre";
 
     var zoneDescs = state.metadata.zone_descriptions || {};
-    var zoneId = props.zone_id;
-    var zoneInfo = zoneId ? zoneDescs[zoneId] : null;
-    if (factZoneEl) {
-      factZoneEl.textContent = (zoneInfo ? zoneInfo.label : zoneId) || "Unknown";
-    }
-    if (factZoneDescEl) {
-      factZoneDescEl.textContent = zoneInfo ? zoneInfo.description : "";
-      factZoneDescEl.hidden = !zoneInfo;
-    }
-
+    var zoneInfo = props.zone_id ? zoneDescs[props.zone_id] : null;
+    factZoneEl.textContent = (zoneInfo ? zoneInfo.label : props.zone_id) || "Zoning unavailable";
+    factZoneDescEl.textContent = zoneInfo ? zoneInfo.description : "";
+    factZoneDescEl.hidden = !zoneInfo;
     underperformEl.hidden = !(props.tax_per_acre < state.breakpoints.p50);
-
-    resultEl.hidden = true;
     renderScenarioButtons(props);
   }
 
@@ -229,9 +208,7 @@
 
   function applyFilter() {
     state.geoLayer.eachLayer(function (layer) {
-      if (layer !== state.activeLayer) {
-        state.geoLayer.resetStyle(layer);
-      }
+      if (layer !== state.activeLayer) state.geoLayer.resetStyle(layer);
     });
     if (state.activeLayer && !matchesFilter(state.activeLayer.feature.properties)) {
       deselectFeature();
@@ -240,9 +217,7 @@
   }
 
   function deselectFeature() {
-    if (state.activeLayer) {
-      state.geoLayer.resetStyle(state.activeLayer);
-    }
+    if (state.activeLayer) state.geoLayer.resetStyle(state.activeLayer);
     state.activeLayer = null;
     state.selectedFeature = null;
     state.selectedScenarioKey = null;
@@ -252,81 +227,101 @@
   toggleButtons.forEach(function (btn) {
     btn.addEventListener("click", function () {
       state.revenueView = btn.getAttribute("data-revenue-view");
-      Array.prototype.forEach.call(toggleButtons, function (b) {
-        b.classList.toggle("is-active", b === btn);
+      Array.prototype.forEach.call(toggleButtons, function (item) {
+        item.classList.toggle("is-active", item === btn);
       });
       renderBigNumber();
-      if (state.selectedFeature && state.selectedScenarioKey) {
-        renderResult(state.selectedFeature, state.selectedScenarioKey);
-      }
+      if (state.selectedFeature && state.selectedScenarioKey) renderResult(state.selectedFeature, state.selectedScenarioKey);
+    });
+  });
+
+  modelButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      state.modelView = btn.getAttribute("data-model-view");
+      Array.prototype.forEach.call(modelButtons, function (item) {
+        item.classList.toggle("is-active", item === btn);
+      });
+      renderBigNumber();
+      if (state.selectedFeature) renderScenarioButtons(state.selectedFeature);
     });
   });
 
   filterButtons.forEach(function (btn) {
     btn.addEventListener("click", function () {
       state.landFilter = btn.getAttribute("data-land-filter");
-      Array.prototype.forEach.call(filterButtons, function (b) {
-        b.classList.toggle("is-active", b === btn);
+      Array.prototype.forEach.call(filterButtons, function (item) {
+        item.classList.toggle("is-active", item === btn);
       });
       applyFilter();
     });
   });
 
-  if (introEl) {
+  if (introEl && introDismissBtn) {
     var introAlreadySeen = false;
     try { introAlreadySeen = localStorage.getItem(INTRO_SEEN_KEY) === "1"; } catch (e) {}
-    if (introAlreadySeen) {
-      introEl.hidden = true;
-    }
+    introEl.hidden = introAlreadySeen;
     introDismissBtn.addEventListener("click", function () {
       introEl.hidden = true;
       try { localStorage.setItem(INTRO_SEEN_KEY, "1"); } catch (e) {}
     });
   }
 
-  fetch(geojsonUrl)
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      state.metadata = data.metadata;
-
-      var taxPerAcreValues = data.features
-        .map(function (f) { return f.properties.tax_per_acre; })
-        .sort(function (a, b) { return a - b; });
-      state.breakpoints = {
-        p25: percentile(taxPerAcreValues, 0.25),
-        p50: percentile(taxPerAcreValues, 0.5),
-        p75: percentile(taxPerAcreValues, 0.75),
-      };
-
-      state.map = L.map("os-ll-map", { scrollWheelZoom: false });
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-        attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-        maxZoom: 19,
-        detectRetina: true,
-      }).addTo(state.map);
-
-      state.geoLayer = L.geoJSON(data, {
-        style: styleFeature,
-        onEachFeature: function (feature, layer) {
-          layer.on("click", function () { selectFeature(layer); });
-          layer.on("mouseover", function () {
-            if (layer !== state.activeLayer && matchesFilter(feature.properties)) {
-              layer.setStyle({ weight: 2, color: "#3D4D5C" });
-            }
-          });
-          layer.on("mouseout", function () {
-            if (layer !== state.activeLayer) state.geoLayer.resetStyle(layer);
-          });
-        },
-      }).addTo(state.map);
-
-      state.map.fitBounds(state.geoLayer.getBounds(), { padding: [16, 16] });
-
-      renderBigNumber();
-      loadingEl.hidden = true;
+  Promise.all([
+    fetch(summaryUrl).then(function (res) {
+      if (!res.ok) throw new Error("summary not ready");
+      return res.json();
+    }),
+    fetch(parcelsUrl).then(function (res) {
+      if (!res.ok) throw new Error("parcels not ready");
+      return res.json();
     })
-    .catch(function (err) {
-      loadingEl.textContent = "Could not load parcel data.";
-      console.error("Land Ledger: failed to load parcel geojson", err);
-    });
+  ]).then(function (responses) {
+    var summary = responses[0];
+    var data = responses[1];
+    state.metadata = {
+      scenario_definitions: summary.scenario_definitions || {},
+      zone_descriptions: summary.zone_descriptions || {},
+      buildout_factor: Number(summary.buildout_factor || 0.5),
+      horizon_years: Number(summary.horizon_years || 10),
+      diagnostics: summary.diagnostics || {},
+    };
+
+    var taxPerAcreValues = data.features
+      .map(function (feature) { return feature.properties.tax_per_acre || 0; })
+      .sort(function (a, b) { return a - b; });
+    state.breakpoints = {
+      p25: percentile(taxPerAcreValues, 0.25),
+      p50: percentile(taxPerAcreValues, 0.5),
+      p75: percentile(taxPerAcreValues, 0.75),
+    };
+
+    state.map = L.map("os-ll-map", { scrollWheelZoom: false });
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+      attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+      maxZoom: 19,
+      detectRetina: true,
+    }).addTo(state.map);
+
+    state.geoLayer = L.geoJSON(data, {
+      style: styleFeature,
+      onEachFeature: function (feature, layer) {
+        layer.on("click", function () { selectFeature(layer); });
+        layer.on("mouseover", function () {
+          if (layer !== state.activeLayer && matchesFilter(feature.properties)) {
+            layer.setStyle({ weight: 2, color: "#3D4D5C" });
+          }
+        });
+        layer.on("mouseout", function () {
+          if (layer !== state.activeLayer) state.geoLayer.resetStyle(layer);
+        });
+      },
+    }).addTo(state.map);
+
+    state.map.fitBounds(state.geoLayer.getBounds(), { padding: [16, 16] });
+    renderBigNumber();
+    loadingEl.hidden = true;
+  }).catch(function (err) {
+    loadingEl.textContent = "Land Ledger data has not been rebuilt yet. Run python manage.py rebuild_land_ledger --city sedro-woolley.";
+    console.error("Land Ledger: failed to load database-backed parcel data", err);
+  });
 })();
