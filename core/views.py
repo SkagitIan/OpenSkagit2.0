@@ -246,7 +246,10 @@ def land_ledger_summary(request, city_slug):
             """
             SELECT city_slug, city_name, parcel_count, zoned_count,
                    unknown_zone_count, current_opportunity_10yr,
-                   policy_opportunity_10yr, diagnostics, scenario_definitions,
+                   policy_opportunity_10yr, city_current_opportunity_10yr,
+                   city_policy_opportunity_10yr, eligible_parcel_count,
+                   excluded_parcel_count, scenario_totals, exclusion_counts,
+                   assumption_version, diagnostics, scenario_definitions,
                    zone_descriptions, buildout_factor, horizon_years, rebuilt_at
             FROM land_ledger_city_summary
             WHERE city_slug = %s
@@ -276,8 +279,11 @@ def land_ledger_parcels(request, city_slug):
             SELECT
                 parcel_number, address, acres, land_use, category, zone_id,
                 zone_name, zone_group, current_tax, tax_per_acre, city_tax_pct,
-                allowed_scenarios, policy_scenarios, scenario_results,
-                current_opportunity_10yr, policy_opportunity_10yr,
+                productivity_percentile, productivity_label, allowed_scenarios,
+                policy_scenarios, scenario_results, current_opportunity_10yr,
+                policy_opportunity_10yr, city_current_opportunity_10yr,
+                city_policy_opportunity_10yr, exclusion_reasons, model_flags,
+                assumption_version,
                 benchmark_source, ST_AsGeoJSON(geometry, 7)::json AS geometry
             FROM land_ledger_parcels
             WHERE city_slug = %s

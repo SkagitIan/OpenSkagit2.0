@@ -1851,6 +1851,7 @@ pre {
   justify-content: space-between;
   gap: 10px;
   font-size: 13px;
+  align-items: flex-start;
 }
 
 .os-ll-parcel-facts dt {
@@ -1862,6 +1863,7 @@ pre {
   color: rgba(255, 255, 255, 0.85);
   font-weight: 600;
   text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .os-ll-panel__underperform {
@@ -1944,6 +1946,7 @@ pre {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  gap: 12px;
   padding: 4px 0;
   color: rgba(255, 255, 255, 0.6);
   font-size: 13px;
@@ -1952,6 +1955,8 @@ pre {
 .os-ll-result__row strong {
   color: #ffffff;
   font-size: 14px;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .os-ll-result__row--gain strong {

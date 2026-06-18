@@ -19,12 +19,16 @@
   var factZoneDescEl = document.getElementById("os-ll-zone-description");
   var factTaxesEl = document.getElementById("os-ll-fact-taxes");
   var factTaxAcreEl = document.getElementById("os-ll-fact-tax-acre");
+  var factProductivityEl = document.getElementById("os-ll-fact-productivity");
+  var factEligibilityEl = document.getElementById("os-ll-fact-eligibility");
   var underperformEl = document.getElementById("os-ll-underperform");
   var scenarioButtonsEl = document.getElementById("os-ll-scenario-buttons");
   var scenarioDescriptionEl = document.getElementById("os-ll-scenario-description");
   var resultEl = document.getElementById("os-ll-result");
   var resultCurrentEl = document.getElementById("os-ll-result-current");
   var resultScenarioEl = document.getElementById("os-ll-result-scenario");
+  var resultValueEl = document.getElementById("os-ll-result-value");
+  var resultUnitsEl = document.getElementById("os-ll-result-units");
   var resultAnnualEl = document.getElementById("os-ll-result-annual");
   var result10yrEl = document.getElementById("os-ll-result-10yr");
 
@@ -38,7 +42,7 @@
   var COLORS = { low: "#7a1f1f", medium: "#c9772e", high: "#5bbb2f", veryHigh: "#1aacb0" };
 
   var state = {
-    revenueView: "total",
+    revenueView: "city",
     modelView: "current",
     landFilter: "all",
     metadata: null,
@@ -87,6 +91,12 @@
     return state.revenueView === "city" ? (props.city_tax_pct || 0) / 100 : 1;
   }
 
+  function titleize(value) {
+    return String(value || "")
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, function (letter) { return letter.toUpperCase(); });
+  }
+
   function scenarioKeysFor(props) {
     if (!props.zone_id) return [];
     return state.modelView === "policy" ? (props.policy_scenarios || []) : (props.allowed_scenarios || []);
@@ -97,8 +107,13 @@
     state.geoLayer.eachLayer(function (layer) {
       var props = layer.feature.properties;
       if (!matchesFilter(props)) return;
-      var value = state.modelView === "policy" ? props.policy_opportunity_10yr : props.current_opportunity_10yr;
-      total += Math.max(0, value || 0) * revenueMultiplier(props);
+      var value;
+      if (state.revenueView === "city") {
+        value = state.modelView === "policy" ? props.city_policy_opportunity_10yr : props.city_current_opportunity_10yr;
+      } else {
+        value = state.modelView === "policy" ? props.policy_opportunity_10yr : props.current_opportunity_10yr;
+      }
+      total += Math.max(0, value || 0);
     });
     return total;
   }
@@ -113,9 +128,9 @@
 
   function renderBigNumber() {
     bigNumberEl.textContent = money(citywideOpportunity()) + " over " + state.metadata.horizon_years + " years";
-    captionEl.textContent = "Based on " + FILTER_LABELS[state.landFilter] + " (" +
+    captionEl.textContent = "Scenario-based estimate for " + FILTER_LABELS[state.landFilter] + " (" +
       (state.revenueView === "city" ? "City-only revenue" : "Total public revenue") + ", " +
-      (state.modelView === "policy" ? "policy change" : "current zoning") + ").";
+      (state.modelView === "policy" ? "policy-change scenarios" : "current-zoning scenarios") + ").";
   }
 
   function renderScenarioButtons(props) {
@@ -126,9 +141,10 @@
     var definitions = state.metadata.scenario_definitions || {};
     var keys = scenarioKeysFor(props);
     if (keys.length === 0) {
-      scenarioDescriptionEl.textContent = props.zone_id
-        ? "No development scenarios apply in this model for this zone."
-        : "Zoning is unavailable for this parcel, so it is excluded from opportunity totals.";
+      var reasons = props.exclusion_reasons || (props.benchmark_source && props.benchmark_source.exclusion_reasons);
+      scenarioDescriptionEl.textContent = reasons && reasons.length
+        ? "Excluded from modeled opportunity: " + reasons.map(titleize).join(", ") + "."
+        : "No development scenarios apply in this model for this parcel.";
       return;
     }
 
@@ -164,8 +180,14 @@
     if (!scenario) return;
     resultCurrentEl.textContent = moneyExact(props.tax_per_acre * mult) + "/acre";
     resultScenarioEl.textContent = moneyExact(scenario.tax_per_acre * mult) + "/acre";
-    resultAnnualEl.textContent = (scenario.annual_gain >= 0 ? "+" : "") + moneyExact(scenario.annual_gain * mult);
-    result10yrEl.textContent = (scenario.ten_year_gain >= 0 ? "+" : "") + moneyExact(scenario.ten_year_gain * mult);
+    resultValueEl.textContent = moneyExact(scenario.added_assessed_value || 0);
+    resultUnitsEl.textContent = scenario.modeled_units
+      ? Number(scenario.modeled_units).toLocaleString(undefined, { maximumFractionDigits: 1 })
+      : "n/a";
+    var annual = state.revenueView === "city" ? scenario.city_annual_gain : scenario.annual_gain;
+    var tenYear = state.revenueView === "city" ? scenario.city_ten_year_gain : scenario.ten_year_gain;
+    resultAnnualEl.textContent = (annual >= 0 ? "+" : "") + moneyExact(annual);
+    result10yrEl.textContent = (tenYear >= 0 ? "+" : "") + moneyExact(tenYear);
     resultEl.hidden = false;
   }
 
@@ -186,13 +208,20 @@
     factUseEl.textContent = props.land_use || "Unclassified";
     factTaxesEl.textContent = moneyExact(props.current_tax);
     factTaxAcreEl.textContent = moneyExact(props.tax_per_acre) + "/acre";
+    factProductivityEl.textContent = props.productivity_percentile == null
+      ? "Unavailable"
+      : titleize(props.productivity_label) + " (" + Math.round(props.productivity_percentile * 100) + "th pct.)";
+    factEligibilityEl.textContent = props.model_flags && props.model_flags.eligible ? "Eligible" : "Excluded";
 
     var zoneDescs = state.metadata.zone_descriptions || {};
     var zoneInfo = props.zone_id ? zoneDescs[props.zone_id] : null;
     factZoneEl.textContent = (zoneInfo ? zoneInfo.label : props.zone_id) || "Zoning unavailable";
     factZoneDescEl.textContent = zoneInfo ? zoneInfo.description : "";
     factZoneDescEl.hidden = !zoneInfo;
-    underperformEl.hidden = !(props.tax_per_acre < state.breakpoints.p50);
+    underperformEl.textContent = props.model_flags && props.model_flags.eligible
+      ? "This parcel has at least one modeled revenue scenario."
+      : "This parcel is mapped for productivity, but excluded from modeled opportunity totals.";
+    underperformEl.hidden = false;
     renderScenarioButtons(props);
   }
 

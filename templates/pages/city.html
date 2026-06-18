@@ -65,14 +65,14 @@
       <div class="os-land-ledger__head">
         <p class="os-land-ledger__eyebrow">The Land Ledger</p>
         <h2>What if {{ city.name }} got more value from the land it already serves?</h2>
-        <p class="os-land-ledger__subtext">Click any parcel. Test a future use. See the public revenue difference.</p>
+        <p class="os-land-ledger__subtext">Click any parcel. See current tax productivity, then test only the scenarios this model treats as plausible.</p>
       </div>
 
       <div class="os-land-ledger__toolbar">
         <div class="os-land-ledger__revenue-toggle" role="group" aria-label="Revenue view">
           <span>Revenue view</span>
-          <button type="button" class="os-ll-toggle-btn is-active" data-revenue-view="total">Total public revenue</button>
-          <button type="button" class="os-ll-toggle-btn" data-revenue-view="city">City-only revenue</button>
+          <button type="button" class="os-ll-toggle-btn is-active" data-revenue-view="city">City-only revenue</button>
+          <button type="button" class="os-ll-toggle-btn" data-revenue-view="total">Total public revenue</button>
         </div>
         <div class="os-land-ledger__revenue-toggle" role="group" aria-label="Opportunity model">
           <span>Opportunity model</span>
@@ -80,8 +80,8 @@
           <button type="button" class="os-ll-toggle-btn" data-model-view="policy">Policy change</button>
         </div>
         <p class="os-land-ledger__revenue-note">
-          <strong>Total public revenue</strong> = all property taxes the parcel generates.
-          <strong>City revenue</strong> = the estimated {{ city.name }} share only.
+          <strong>City revenue</strong> is the default because it is the portion {{ city.name }} can budget.
+          <strong>Total public revenue</strong> includes all overlapping taxing districts.
         </p>
       </div>
 
@@ -111,8 +111,8 @@
               <h3>How to read this map</h3>
               <ul>
                 <li>Color shows each parcel&rsquo;s <strong>current property tax per acre</strong> &mdash; red is low, teal is very high.</li>
-                <li>Click any parcel, then try a scenario to see what a different use could generate.</li>
-                <li>Every number comes from real Skagit County Assessor data for {{ city.name }} itself &mdash; not an outside benchmark.</li>
+            <li>Click any parcel, then try an eligible scenario to see modeled added assessed value and tax revenue.</li>
+            <li>Many parcels are intentionally excluded because they are already small lots, public/open space, current-use farm, too small, too large, or otherwise outside the model.</li>
                 <li>This is a <strong>planning estimate, not a prediction</strong>. See &ldquo;How these numbers are calculated&rdquo; below the map for the full method.</li>
               </ul>
               <button type="button" id="os-ll-intro-dismiss" class="os-ll-intro__btn">Got it &mdash; show me the map</button>
@@ -122,7 +122,7 @@
 
         <aside class="os-land-ledger__panel" id="os-ll-panel">
           <div class="os-ll-panel__citywide" id="os-ll-citywide">
-            <p class="os-ll-panel__eyebrow">Citywide opportunity</p>
+            <p class="os-ll-panel__eyebrow">Modeled revenue opportunity</p>
             <p class="os-ll-panel__big-number" id="os-ll-big-number">&mdash;</p>
             <p class="os-ll-panel__caption">Based on underused land inside existing city limits, over 10 years.</p>
           </div>
@@ -137,26 +137,30 @@
               <div><dt>Assessor use</dt><dd id="os-ll-fact-use">&mdash;</dd></div>
               <div><dt>Current taxes</dt><dd id="os-ll-fact-taxes">&mdash;</dd></div>
               <div><dt>Tax / acre</dt><dd id="os-ll-fact-tax-acre">&mdash;</dd></div>
+              <div><dt>Productivity</dt><dd id="os-ll-fact-productivity">&mdash;</dd></div>
+              <div><dt>Model status</dt><dd id="os-ll-fact-eligibility">&mdash;</dd></div>
             </dl>
             <p class="os-ll-zone-description" id="os-ll-zone-description" hidden></p>
             <p class="os-ll-panel__underperform" id="os-ll-underperform" hidden>
               This parcel is underperforming compared to similar land inside {{ city.name }}.
             </p>
 
-            <p class="os-ll-panel__scenario-label">What if it became&hellip;</p>
+            <p class="os-ll-panel__scenario-label">Eligible scenarios</p>
             <div class="os-ll-scenario-buttons" id="os-ll-scenario-buttons"></div>
             <p class="os-ll-scenario-description" id="os-ll-scenario-description">Click a scenario above to see what it means and what it could generate.</p>
 
             <div class="os-ll-panel__result" id="os-ll-result" hidden>
               <div class="os-ll-result__row"><span>Current</span><strong id="os-ll-result-current">&mdash;</strong></div>
               <div class="os-ll-result__row"><span>Scenario</span><strong id="os-ll-result-scenario">&mdash;</strong></div>
+              <div class="os-ll-result__row"><span>Added value</span><strong id="os-ll-result-value">&mdash;</strong></div>
+              <div class="os-ll-result__row"><span>Modeled units</span><strong id="os-ll-result-units">&mdash;</strong></div>
               <div class="os-ll-result__row os-ll-result__row--gain"><span>Annual gain</span><strong id="os-ll-result-annual">&mdash;</strong></div>
               <div class="os-ll-result__row os-ll-result__row--gain"><span>10-year gain</span><strong id="os-ll-result-10yr">&mdash;</strong></div>
             </div>
           </div>
 
           <p class="os-ll-panel__guardrail">
-            This is a planning estimate, not a prediction. It compares today&rsquo;s parcel revenue with current {{ city.name }} tax productivity patterns. Assumes half the parcel&rsquo;s potential is realized over 10 years.
+            This is a planning estimate, not a prediction. Map color shows current tax productivity; opportunity totals come from explicit scenario assumptions, parcel eligibility rules, local levy rates, and a 50% 10-year buildout factor.
           </p>
         </aside>
       </div>
@@ -169,24 +173,24 @@
             <p>Parcel shapes are Skagit County&rsquo;s own GIS parcel layer. Acreage, current use, and taxes are from the Skagit County Assessor for each active parcel inside {{ city.name }} city limits. <strong>Zoning districts</strong> come from the Washington Zoning Atlas spatial database, joined to each parcel by parcel ID and area overlap.</p>
           </div>
           <div>
-            <h4>Why zoning determines which scenarios appear</h4>
-            <p>Each parcel only shows development scenarios that its zoning district actually permits under current local zoning. An R-1 parcel won&rsquo;t show &ldquo;Shops + Apartments&rdquo; because that&rsquo;s not legal there. A CBD parcel won&rsquo;t show &ldquo;Add a Home&rdquo; for the same reason. The scenarios reflect real legal ceilings, not just physical ones.</p>
+            <h4>Why scenarios appear</h4>
+            <p>Each parcel is screened by zoning, current use, parcel size, taxable baseline, and model exclusions. Current zoning scenarios are legally allowed today. Policy-change scenarios are shown separately when a plausible use would require rezoning or upzoning.</p>
           </div>
           <div>
-            <h4>How a scenario&rsquo;s tax/acre is set</h4>
-            <p>For each scenario, we take the <strong>zone-aware median tax per acre</strong> already produced by similar parcels in {{ city.name }} today. If a zone has too few examples, the model falls back to compatible local zones, then citywide examples.</p>
+            <h4>What the map color means</h4>
+            <p>Map color is current fiscal productivity: each parcel&rsquo;s current property tax per acre compared with other parcels in the same city. It helps identify low-productivity land, but it is not the revenue forecast.</p>
           </div>
           <div>
             <h4>The gain formula</h4>
-            <p><code>annual gain = (scenario tax/acre &minus; current tax/acre) &times; acres</code>, then <code>10-year gain = annual gain &times; 10 &times; 50% buildout factor</code>. The 50% factor assumes only half of a parcel&rsquo;s potential is realized within 10 years.</p>
+            <p>Each eligible scenario estimates added assessed value from units, acreage, or commercial reuse assumptions. <code>annual gain = added assessed value / 1000 &times; levy rate</code>, then <code>10-year gain = annual gain &times; 10 &times; 50% buildout factor</code>.</p>
           </div>
           <div>
             <h4>Total vs. City-only revenue</h4>
-            <p>Total public revenue is the full property tax bill (city, county, schools, fire, hospital, etc.). City-only revenue multiplies that by each parcel&rsquo;s actual share that flows to {{ city.name }}, computed from its specific tax levy code.</p>
+            <p>Total public revenue is the full property tax bill across all overlapping districts. City-only revenue uses the estimated {{ city.name }} share and is the default headline view.</p>
           </div>
           <div>
             <h4>The citywide number</h4>
-            <p>The headline figure sums the 10-year gain for every visible parcel where at least one scenario would outperform its current tax/acre &mdash; it updates as you change the revenue view or the land-use filter.</p>
+            <p>The headline figure sums modeled 10-year gains for visible eligible parcels only. Excluded parcels stay on the productivity map, but do not contribute to the opportunity total.</p>
           </div>
         </div>
       </details>

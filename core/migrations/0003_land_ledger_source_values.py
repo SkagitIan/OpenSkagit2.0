@@ -1,73 +1,7 @@
 from django.db import migrations
 
 
-CREATE_SQL = """
-CREATE EXTENSION IF NOT EXISTS postgis;
-
-CREATE TABLE IF NOT EXISTS land_ledger_parcels (
-    city_slug TEXT NOT NULL,
-    city_name TEXT NOT NULL,
-    parcel_number TEXT NOT NULL,
-    address TEXT,
-    acres NUMERIC,
-    land_use TEXT,
-    category TEXT,
-    zone_id TEXT,
-    zone_name TEXT,
-    zone_group TEXT,
-    current_tax NUMERIC,
-    tax_per_acre NUMERIC,
-    city_tax_pct NUMERIC,
-    productivity_percentile NUMERIC,
-    productivity_label TEXT,
-    allowed_scenarios JSONB NOT NULL DEFAULT '[]'::jsonb,
-    policy_scenarios JSONB NOT NULL DEFAULT '[]'::jsonb,
-    scenario_results JSONB NOT NULL DEFAULT '{}'::jsonb,
-    current_opportunity_10yr NUMERIC NOT NULL DEFAULT 0,
-    policy_opportunity_10yr NUMERIC NOT NULL DEFAULT 0,
-    city_current_opportunity_10yr NUMERIC NOT NULL DEFAULT 0,
-    city_policy_opportunity_10yr NUMERIC NOT NULL DEFAULT 0,
-    exclusion_reasons JSONB NOT NULL DEFAULT '[]'::jsonb,
-    model_flags JSONB NOT NULL DEFAULT '{}'::jsonb,
-    assumption_version TEXT,
-    benchmark_source JSONB NOT NULL DEFAULT '{}'::jsonb,
-    geometry geometry(MultiPolygon, 4326),
-    rebuilt_at TIMESTAMPTZ NOT NULL,
-    PRIMARY KEY (city_slug, parcel_number)
-);
-
-CREATE INDEX IF NOT EXISTS land_ledger_parcels_city_idx
-    ON land_ledger_parcels (city_slug);
-
-CREATE INDEX IF NOT EXISTS land_ledger_parcels_zone_idx
-    ON land_ledger_parcels (city_slug, zone_id);
-
-CREATE INDEX IF NOT EXISTS land_ledger_parcels_geom_idx
-    ON land_ledger_parcels USING GIST (geometry);
-
-CREATE TABLE IF NOT EXISTS land_ledger_city_summary (
-    city_slug TEXT PRIMARY KEY,
-    city_name TEXT NOT NULL,
-    parcel_count INTEGER NOT NULL DEFAULT 0,
-    zoned_count INTEGER NOT NULL DEFAULT 0,
-    unknown_zone_count INTEGER NOT NULL DEFAULT 0,
-    current_opportunity_10yr NUMERIC NOT NULL DEFAULT 0,
-    policy_opportunity_10yr NUMERIC NOT NULL DEFAULT 0,
-    city_current_opportunity_10yr NUMERIC NOT NULL DEFAULT 0,
-    city_policy_opportunity_10yr NUMERIC NOT NULL DEFAULT 0,
-    eligible_parcel_count INTEGER NOT NULL DEFAULT 0,
-    excluded_parcel_count INTEGER NOT NULL DEFAULT 0,
-    scenario_totals JSONB NOT NULL DEFAULT '{}'::jsonb,
-    exclusion_counts JSONB NOT NULL DEFAULT '{}'::jsonb,
-    assumption_version TEXT,
-    diagnostics JSONB NOT NULL DEFAULT '{}'::jsonb,
-    scenario_definitions JSONB NOT NULL DEFAULT '{}'::jsonb,
-    zone_descriptions JSONB NOT NULL DEFAULT '{}'::jsonb,
-    buildout_factor NUMERIC NOT NULL DEFAULT 0.5,
-    horizon_years INTEGER NOT NULL DEFAULT 10,
-    rebuilt_at TIMESTAMPTZ NOT NULL
-);
-
+VIEW_SQL = """
 CREATE OR REPLACE VIEW v_land_ledger_source AS
 WITH city_map(city_slug, city_name, district_name, city_mcag) AS (
     VALUES
@@ -161,37 +95,20 @@ LEFT JOIN LATERAL (
 ) spatial_zone ON true;
 """
 
-DROP_SQL = """
-DROP VIEW IF EXISTS v_land_ledger_source;
-DROP TABLE IF EXISTS land_ledger_city_summary;
-DROP TABLE IF EXISTS land_ledger_parcels;
-"""
 
-
-def run_statements(schema_editor, sql):
+def recreate_source_view(apps, schema_editor):
+    if schema_editor.connection.vendor != "postgresql":
+        return
     with schema_editor.connection.cursor() as cursor:
-        for statement in sql.split(";"):
-            if statement.strip():
-                cursor.execute(statement)
-
-
-def create_land_ledger_schema(apps, schema_editor):
-    if schema_editor.connection.vendor != "postgresql":
-        return
-    run_statements(schema_editor, CREATE_SQL)
-
-
-def drop_land_ledger_schema(apps, schema_editor):
-    if schema_editor.connection.vendor != "postgresql":
-        return
-    run_statements(schema_editor, DROP_SQL)
+        cursor.execute("DROP VIEW IF EXISTS v_land_ledger_source")
+        cursor.execute(VIEW_SQL)
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("core", "0001_city_stat_views"),
+        ("core", "0002_land_ledger_tables"),
     ]
 
     operations = [
-        migrations.RunPython(create_land_ledger_schema, drop_land_ledger_schema),
+        migrations.RunPython(recreate_source_view, recreate_source_view),
     ]
