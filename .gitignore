@@ -9,6 +9,7 @@ __pycache__/
 # Django
 db.sqlite3
 staticfiles/
+output/assessor_sync_reports/
 
 # OS / Editor
 .DS_Store

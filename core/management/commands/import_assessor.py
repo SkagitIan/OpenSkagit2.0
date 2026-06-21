@@ -287,14 +287,19 @@ def _create_or_replace_table(cursor, table_name: str, columns: list[str], extras
     )
 
 
-def _create_indexes(cursor, table_name: str, columns: set[str]) -> None:
+def _create_indexes(
+    cursor,
+    table_name: str,
+    columns: set[str],
+    logical_table_name: str | None = None,
+) -> None:
     index_map = {
         "assessor_rollup": ["parcel_number", "owner_name", "situs_street_name", "land_use_code", "neighborhood_code"],
         "sales":           ["parcel_number", "sale_date_iso"],
         "land":            ["parcelnumber"],
         "improvements":    ["parcelnumber"],
     }
-    for col in index_map.get(table_name, []):
+    for col in index_map.get(logical_table_name or table_name, []):
         if col not in columns:
             continue
         cursor.execute(
@@ -302,7 +307,16 @@ def _create_indexes(cursor, table_name: str, columns: set[str]) -> None:
         )
 
 
-def _import_dataset(cursor, zf: zipfile.ZipFile, member_name: str, table_name: str, mappings: dict, log) -> tuple[int, int]:
+def _import_dataset(
+    cursor,
+    zf: zipfile.ZipFile,
+    member_name: str,
+    table_name: str,
+    mappings: dict,
+    log,
+    target_table_name: str | None = None,
+) -> tuple[int, int]:
+    physical_table_name = target_table_name or table_name
     with zf.open(member_name) as raw:
         text = io.TextIOWrapper(raw, encoding="utf-8", errors="replace", newline="")
         reader = csv.reader(text, delimiter="|")
@@ -310,12 +324,12 @@ def _import_dataset(cursor, zf: zipfile.ZipFile, member_name: str, table_name: s
         columns = unique_columns(source_headers)
         extras = _extra_columns(table_name)
 
-        _create_or_replace_table(cursor, table_name, columns, extras)
+        _create_or_replace_table(cursor, physical_table_name, columns, extras)
 
         insert_cols = columns + [name for name, _ in extras]
         placeholders = ", ".join("%s" for _ in insert_cols)
         quoted_cols = ", ".join(f'"{c}"' for c in insert_cols)
-        sql = f'INSERT INTO "{table_name}" ({quoted_cols}) VALUES ({placeholders})'
+        sql = f'INSERT INTO "{physical_table_name}" ({quoted_cols}) VALUES ({placeholders})'
 
         count = 0
         warnings = 0
@@ -334,7 +348,7 @@ def _import_dataset(cursor, zf: zipfile.ZipFile, member_name: str, table_name: s
         if batch:
             cursor.executemany(sql, batch)
 
-        _create_indexes(cursor, table_name, set(insert_cols))
+        _create_indexes(cursor, physical_table_name, set(insert_cols), logical_table_name=table_name)
         return count, warnings
 
 
