@@ -1,0 +1,1398 @@
+{
+  "version": "1.1",
+  "note": "Catalog of civic discovery probes for the OpenSkagit assessor/GIS database. Each entry is a metadata template; the discovery agent generates the query, runs it, and attaches a 'rows' array at runtime. 'signal' describes the data pattern in plain terms (no hard-coded column names) so the agent can map it to the live schema. 'quality_rules' guard against false positives and overclaims; 'minimum_evidence' gates whether a probe may produce a publishable idea; 'publish_rules' must all pass before an idea enters 'ideas'; 'reject_rules' push candidates into 'rejected_ideas'. Treat all outputs as leads unless evidence is strong. Probes flagged in 'avoid' as needing data beyond core assessor tables (GIS overlays, ACS, permits, tax/payment, history snapshots) should be skipped or degraded gracefully if that source is unavailable.",
+  "probes": [
+    {
+      "probe": "value_per_acre_outliers",
+      "description": "high tax productivity parcels, filtered to sane acreage bands",
+      "civic_question": "Which parcels produce the most assessed value per acre, and where are they?",
+      "signal": "total assessed value divided by acreage, ranked descending, clipped to reasonable acreage bands to drop slivers and giant rural tracts",
+      "good_for": ["land use efficiency", "Strong Towns value-per-acre", "downtown vitality"],
+      "avoid": ["comparing improved and unimproved parcels in the same band", "treating high $/acre as 'good' without land-use context"],
+      "quality_rules": [
+        "Clip to defined acreage bands before ranking; slivers and common-area fragments produce false $/acre spikes.",
+        "Rank within a single land-use class; a retail block and a utility substation are not one cohort.",
+        "Exclude current-use, exempt, water, and ROW parcels from 'productivity' claims unless the idea is explicitly about them."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must rank within a land-use cohort, not across all uses.",
+        "Must report the acreage band used so readers can judge the cut.",
+        "Frame as where land works hardest, not as a verdict on under- or over-development."
+      ],
+      "reject_rules": [
+        "Top rows are slivers, common areas, or condo artifacts.",
+        "Cohort mixes unlike land uses.",
+        "Finding rests on a single parcel."
+      ]
+    },
+    {
+      "probe": "land_vs_improvement_imbalance",
+      "description": "land value much higher than building value",
+      "civic_question": "Where is the land worth far more than what sits on it?",
+      "signal": "land value / improvement value ratio, surfaced where land dominates and improvement is minimal",
+      "good_for": ["redevelopment potential", "infill opportunity", "underutilization"],
+      "avoid": ["assuming owner intent to develop", "flagging parks, easements, or common-area parcels as 'underused'"],
+      "quality_rules": [
+        "A high land/improvement ratio is normal for parking, ag, and holding land; separate these before calling a parcel underused.",
+        "Exclude common-area, ROW, and water parcels where improvement value is structurally near zero.",
+        "Do not infer intent to develop or to speculate from the ratio alone."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must group by land use or area rather than listing raw extremes.",
+        "Must note plausible benign explanations such as parking, ag, or conservation.",
+        "Frame as a redevelopment lead, not a judgment."
+      ],
+      "reject_rules": [
+        "Evidence is dominated by parcels with structurally zero improvement (water, ROW, common area).",
+        "Idea asserts speculation or hoarding without ownership or holding-period evidence.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "zoning_land_use_mismatch",
+      "description": "zoning category differs from actual assessor land use",
+      "civic_question": "Where does the zoning on the books not match how land is actually used?",
+      "signal": "join zoning layer to assessor land-use code; surface rows where the two disagree by category",
+      "good_for": ["zoning reform", "nonconforming use", "rezone candidates"],
+      "avoid": ["assuming mismatch is illegal", "ignoring legal nonconforming and pending rezones"],
+      "quality_rules": [
+        "Treat mismatches as planning questions, not violations.",
+        "Separate legal nonconforming use, pending rezones, public uses, and mixed-use parcels where possible.",
+        "Do not compare broad zoning labels to assessor land-use labels without category grouping."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must frame the mismatch as a land-use or planning pattern.",
+        "Must avoid implying illegality or owner fault.",
+        "Must identify what zoning or land-use category drives the pattern."
+      ],
+      "reject_rules": [
+        "Claim treats mismatch as illegal.",
+        "Finding depends on one parcel.",
+        "Zoning and land-use labels are too ambiguous to compare."
+      ]
+    },
+    {
+      "probe": "sale_assessment_gap",
+      "description": "recent sale price far above or below assessed value",
+      "civic_question": "Where are market prices diverging from assessed values?",
+      "signal": "recent qualified sale price / assessed value at time of sale; surface large deviations either direction",
+      "good_for": ["tax fairness", "housing pressure", "assessment lag"],
+      "avoid": ["accusing assessor error from one sale", "including non-arm's-length or unqualified sales"],
+      "quality_rules": [
+        "Exclude tiny parcels, water areas, rights-of-way, and common-area artifacts from publishable assessment-gap claims unless the idea is explicitly about data quality.",
+        "Do not infer tax fairness, under-taxation, or assessor error from individual sale ratios.",
+        "Separate vacant/unimproved land from improved residential or commercial property before comparing ratios."
+      ],
+      "minimum_evidence": {
+        "min_rows": 25,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true,
+        "requires_recent_window": true
+      },
+      "publish_rules": [
+        "Must describe a pattern across a cohort, not a single extreme sale.",
+        "Must state whether the pattern is by land use, neighborhood, sale period, or property type.",
+        "Must include a next check before publication."
+      ],
+      "reject_rules": [
+        "Main evidence comes from tiny parcels or parcel artifacts.",
+        "Claim implies assessor error or tax unfairness without cohort support.",
+        "Finding depends on one sale."
+      ]
+    },
+    {
+      "probe": "vacant_high_value_land",
+      "description": "valuable land with little/no improvement value",
+      "civic_question": "Where is high-value land sitting empty?",
+      "signal": "high land value combined with near-zero improvement value",
+      "good_for": ["infill", "housing capacity", "speculation watch"],
+      "avoid": ["counting protected open space or critical-area parcels as 'empty'"],
+      "quality_rules": [
+        "Confirm 'vacant' from near-zero improvement value, not just a land-use label.",
+        "Exclude conservation, current-use, ROW, water, and common-area parcels from 'empty valuable land' claims.",
+        "Do not imply land banking or speculation without ownership or holding-period evidence."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must distinguish developable vacant land from protected or unbuildable land.",
+        "Must group by area or zoning to show a pattern.",
+        "Frame as infill opportunity, not neglect."
+      ],
+      "reject_rules": [
+        "Parcels are protected, current-use, or physically unbuildable.",
+        "Claim asserts speculation without holding evidence.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "low_tax_high_service_land",
+      "description": "low tax yield parcels in service-heavy areas",
+      "civic_question": "Which low-yield parcels sit in the most service-intensive areas?",
+      "signal": "low total tax/value parcels located inside dense or high-service districts (city core, urban fire/sewer)",
+      "good_for": ["fiscal sustainability", "service cost equity"],
+      "avoid": ["ignoring exempt parcels that deliver public benefit", "treating low yield as waste"],
+      "quality_rules": [
+        "Exempt and public parcels often show low yield by design; flag them separately rather than calling them waste.",
+        "Service intensity here is a district/density proxy, not a measured cost; label it as such.",
+        "Do not imply a parcel should be taxed more or be developed."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must state the service-intensity proxy used.",
+        "Must separate exempt/public parcels from private low-yield parcels.",
+        "Frame as a fiscal-pattern lead, not a recommendation to tax or develop."
+      ],
+      "reject_rules": [
+        "Evidence is mostly exempt or public land treated as waste.",
+        "Service cost asserted as a dollar figure without cost data.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "city_boundary_contrast",
+      "description": "similar parcels just inside/outside city limits",
+      "civic_question": "How do comparable parcels differ on either side of a city line?",
+      "signal": "pair parcels of similar land use/size that straddle a municipal boundary; compare value, tax, zoning",
+      "good_for": ["annexation analysis", "service/tax tradeoffs", "boundary equity"],
+      "avoid": ["over-matching dissimilar parcels", "ignoring different service packages"],
+      "quality_rules": [
+        "Match parcels on land use, size, and rough vintage before comparing across the line.",
+        "Different service packages explain part of any tax gap; note this rather than implying unfairness.",
+        "Avoid pairing parcels from very different neighborhoods just because they straddle a boundary."
+      ],
+      "minimum_evidence": {
+        "min_rows": 8,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must describe the matching criteria used for the comparison.",
+        "Must attribute differences to plausible causes (services, zoning), not motive.",
+        "Frame as a tradeoff comparison, not a fairness verdict."
+      ],
+      "reject_rules": [
+        "Compared parcels are not actually comparable.",
+        "Claim implies one jurisdiction is cheating residents.",
+        "Based on a single pair."
+      ]
+    },
+    {
+      "probe": "floodplain_tax_exposure",
+      "description": "assessed value in flood/critical-area overlays",
+      "civic_question": "How much assessed value sits inside flood and critical-area overlays?",
+      "signal": "sum assessed value of parcels intersecting FEMA flood / critical-area GIS layers, by district",
+      "good_for": ["climate risk", "hazard mitigation planning", "tax base risk"],
+      "avoid": ["implying every flood-zone parcel is at imminent risk", "ignoring elevation/dike protection"],
+      "quality_rules": [
+        "Overlay intersection is approximate at parcel edges; treat boundary parcels as uncertain.",
+        "Distinguish flood-zone presence from actual risk (dikes, elevation); do not equate them.",
+        "Aggregate value; do not single out individual owners' exposure."
+      ],
+      "minimum_evidence": {
+        "min_rows": 25,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must report exposure as a district or area aggregate.",
+        "Must name the overlay layer and its date.",
+        "Frame as exposure, not predicted loss."
+      ],
+      "reject_rules": [
+        "Claim predicts inundation or loss for specific parcels.",
+        "Boundary-overlap parcels drive the result without a buffer check.",
+        "Overlay layer is unknown or undated."
+      ]
+    },
+    {
+      "probe": "school_or_fire_district_burden",
+      "description": "parcel/tax patterns by district",
+      "civic_question": "How do tax patterns and value differ across school and fire districts?",
+      "signal": "aggregate value and effective tax by school/fire district; compare per-parcel and per-value rates",
+      "good_for": ["district equity", "levy planning", "service funding"],
+      "avoid": ["comparing rates without service-level context"],
+      "quality_rules": [
+        "Effective-rate differences reflect different service levels and voter-approved levies; note this.",
+        "Compare within comparable district types; do not put school rates against fire rates directly.",
+        "Do not imply a district is mismanaged from rate alone."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 3,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must compare like district types.",
+        "Must pair each rate with its service or levy context.",
+        "Frame as a funding pattern, not a verdict."
+      ],
+      "reject_rules": [
+        "Rates compared without service context.",
+        "Claim implies mismanagement.",
+        "Fewer than a few districts compared."
+      ]
+    },
+    {
+      "probe": "recent_sales_by_neighborhood",
+      "description": "market pressure by neighborhood",
+      "civic_question": "Which neighborhoods are seeing the most sales activity and price movement?",
+      "signal": "count and median price of qualified sales in a recent window, grouped by neighborhood",
+      "good_for": ["housing pressure", "displacement watch", "market trends"],
+      "avoid": ["reading thin-sample neighborhoods as trends"],
+      "quality_rules": [
+        "Use qualified arm's-length sales only; drop family transfers and non-market sales.",
+        "Suppress neighborhoods below a minimum sale count to avoid thin-sample swings.",
+        "Use median over mean to limit distortion from a single high sale."
+      ],
+      "minimum_evidence": {
+        "min_rows": 20,
+        "min_distinct_groups": 3,
+        "requires_recent_window": true,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must state the time window and the sale count per neighborhood.",
+        "Must suppress or label thin-sample neighborhoods.",
+        "Frame as market activity, not a guaranteed price direction."
+      ],
+      "reject_rules": [
+        "Neighborhood has too few sales to be stable.",
+        "Unqualified sales included.",
+        "Time window not stated."
+      ]
+    },
+    {
+      "probe": "public_land_tax_base",
+      "description": "tax-exempt or publicly held land by city/district",
+      "civic_question": "How much land and value is publicly held or tax-exempt, by area?",
+      "signal": "share of parcel count, acreage, and value flagged exempt or public-owned, grouped by city/district",
+      "good_for": ["tax base composition", "service cost vs base"],
+      "avoid": ["framing exempt land as lost revenue without weighing public benefit"],
+      "quality_rules": [
+        "Exempt status is intentional; present as composition, not lost revenue.",
+        "Separate publicly owned from privately owned exempt (nonprofit) parcels where possible.",
+        "Do not imply exempt land should be taxed."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must present as share of base by area.",
+        "Must distinguish public vs nonprofit exempt where the data allows.",
+        "Frame neutrally as tax-base composition."
+      ],
+      "reject_rules": [
+        "Framed as revenue lost to exemptions.",
+        "Public and nonprofit exempt conflated when they could be separated.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "zoning_capacity_vs_current_use",
+      "description": "parcels where current use is below zoning capacity",
+      "civic_question": "Where is current use well below what zoning would allow?",
+      "signal": "compare allowed density/intensity from zoning to current improvement intensity per parcel",
+      "good_for": ["housing capacity", "infill", "GMA growth targets"],
+      "avoid": ["ignoring infrastructure, access, and critical-area constraints"],
+      "quality_rules": [
+        "Zoned capacity is a theoretical max, not buildable yield; label it as such.",
+        "Exclude parcels constrained by critical areas, access, or fragmentation before claiming capacity.",
+        "Do not imply owners are obligated to build."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must state that capacity is zoned theoretical, not net buildable.",
+        "Must note major known constraints.",
+        "Frame as a capacity lead for planning."
+      ],
+      "reject_rules": [
+        "Capacity reported as buildable without a constraint check.",
+        "Claim asserts owners should develop.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "assessment_ratio_by_neighborhood",
+      "description": "sales-ratio spread across neighborhoods",
+      "civic_question": "Does the assessed-to-sale ratio vary systematically between neighborhoods?",
+      "signal": "median assessed/sale ratio per neighborhood from qualified sales; compare dispersion",
+      "good_for": ["assessment equity", "horizontal uniformity", "ratio study"],
+      "avoid": ["drawing conclusions from neighborhoods with few sales"],
+      "quality_rules": [
+        "Use qualified sales only and a recent window for the ratio.",
+        "Suppress neighborhoods below a minimum sale count; small samples create fake spread.",
+        "Report as an indicator, not a formal ratio study or a finding of inequity."
+      ],
+      "minimum_evidence": {
+        "min_rows": 30,
+        "min_distinct_groups": 3,
+        "requires_recent_window": true,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must report sale counts per neighborhood.",
+        "Must frame as a uniformity indicator that a formal study would need to confirm.",
+        "Must avoid claiming intentional inequity."
+      ],
+      "reject_rules": [
+        "Neighborhood sale counts too low to be stable.",
+        "Presented as a finished ratio study.",
+        "Claims deliberate inequity."
+      ]
+    },
+    {
+      "probe": "assessment_regressivity",
+      "description": "lower-value homes assessed at a higher share of market",
+      "civic_question": "Are lower-priced homes assessed closer to (or above) market than higher-priced ones?",
+      "signal": "regress assessed/sale ratio against sale price; surface the slope and tails",
+      "good_for": ["tax fairness", "regressivity", "policy review"],
+      "avoid": ["claiming regressivity without a proper ratio study", "conflating with neighborhood quality"],
+      "quality_rules": [
+        "Regressivity requires a price-versus-ratio relationship across many sales, never a handful.",
+        "Use qualified sales and a recent window; control for property type where possible.",
+        "Frame strictly as a lead for a formal ratio study; do not state regressivity as fact."
+      ],
+      "minimum_evidence": {
+        "min_rows": 100,
+        "requires_recent_window": true,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must report sample size and the direction of the price-ratio relationship.",
+        "Must label as preliminary, pending a formal IAAO-style study.",
+        "Must avoid asserting assessor intent."
+      ],
+      "reject_rules": [
+        "Sample too small for a credible slope.",
+        "Stated as confirmed regressivity.",
+        "Property types mixed without note."
+      ]
+    },
+    {
+      "probe": "exemption_concentration",
+      "description": "senior/disabled/nonprofit exemptions clustered by district",
+      "civic_question": "Where are property-tax exemptions concentrated?",
+      "signal": "count and value of exemption types grouped by district/neighborhood",
+      "good_for": ["tax base erosion", "senior housing patterns", "equity"],
+      "avoid": ["implying exemptions are abuse", "naming individuals"],
+      "quality_rules": [
+        "Exemptions are lawful programs; present concentration as a demographic or program pattern, not abuse.",
+        "Aggregate by district; never name or profile individual exemption holders.",
+        "Separate exemption types (senior/disabled vs nonprofit), since they mean different things."
+      ],
+      "minimum_evidence": {
+        "min_rows": 20,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must aggregate, with no individuals named.",
+        "Must separate exemption types.",
+        "Frame as a program or equity pattern."
+      ],
+      "reject_rules": [
+        "Implies exemption abuse or fraud.",
+        "Identifies individuals.",
+        "Exemption types lumped together."
+      ]
+    },
+    {
+      "probe": "tax_exempt_acreage_share",
+      "description": "share of land area off the rolls per area",
+      "civic_question": "What fraction of land is off the tax rolls in each city or district?",
+      "signal": "exempt acreage / total acreage by jurisdiction",
+      "good_for": ["tax base composition", "service cost analysis"],
+      "avoid": ["ignoring the public function of exempt land"],
+      "quality_rules": [
+        "Off-the-rolls acreage is mostly intentional public or conservation land; present it neutrally.",
+        "Water, ROW, and tideland acreage can distort the share; note their inclusion.",
+        "Do not frame the share as a problem to fix."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must state what land categories the exempt acreage includes.",
+        "Must present as composition by jurisdiction.",
+        "Frame neutrally."
+      ],
+      "reject_rules": [
+        "Framed as land that should be taxed.",
+        "Water/ROW distortions left unaddressed.",
+        "Single jurisdiction with no comparison."
+      ]
+    },
+    {
+      "probe": "value_growth_hotspots",
+      "description": "largest year-over-year assessed value change",
+      "civic_question": "Where is assessed value rising fastest?",
+      "signal": "year-over-year change in assessed value by parcel/neighborhood, ranked",
+      "good_for": ["displacement risk", "market pressure", "reval impact"],
+      "avoid": ["reading a revaluation-cycle catch-up as real-time appreciation"],
+      "quality_rules": [
+        "Revaluation cycles cause step changes unrelated to current market; separate reval years.",
+        "Use percent and absolute change together; small bases inflate percentages.",
+        "Frame as where assessments rose, not as proof of displacement."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "min_distinct_groups": 2,
+        "requires_recent_window": true,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must note whether a revaluation occurred in the window.",
+        "Must show both percent and absolute change.",
+        "Frame as a growth/pressure lead, with displacement raised only as a question."
+      ],
+      "reject_rules": [
+        "Change is a reval artifact mistaken for appreciation.",
+        "Percentage spikes driven by tiny bases.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "underbuilt_commercial_corridors",
+      "description": "commercial-zoned parcels with low improvement value",
+      "civic_question": "Which commercial corridors are underbuilt relative to their zoning?",
+      "signal": "commercial-zoned parcels with low improvement value or single-story footprints along key corridors",
+      "good_for": ["economic development", "downtown infill", "corridor planning"],
+      "avoid": ["assuming owner intent", "flagging working low-rise businesses as failures"],
+      "quality_rules": [
+        "Low improvement value can be a healthy small business; do not call it failure.",
+        "Confirm commercial zoning and corridor location, not just a label.",
+        "Do not infer owner intent or imply blight."
+      ],
+      "minimum_evidence": {
+        "min_rows": 8,
+        "min_distinct_groups": 1,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must tie parcels to a named corridor or area.",
+        "Must frame as infill potential, not decline.",
+        "Must avoid blight language without condition data."
+      ],
+      "reject_rules": [
+        "Working low-rise businesses framed as failures.",
+        "Parcels not actually on a commercial corridor.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "surface_parking_value",
+      "description": "large low-improvement commercial parcels near the core",
+      "civic_question": "How much prime near-core land is surface parking or pavement?",
+      "signal": "commercial parcels with high land value, very low improvement value, and large footprint near downtown",
+      "good_for": ["land use efficiency", "downtown activation"],
+      "avoid": ["misclassifying legitimately needed parking or staging land"],
+      "quality_rules": [
+        "Confirm low improvement plus large footprint near the core; do not assume use from a label.",
+        "Some parking is required or genuinely needed; do not imply it must be redeveloped.",
+        "Exclude structured-parking and mixed-use parcels."
+      ],
+      "minimum_evidence": {
+        "min_rows": 5,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must locate parcels relative to the core or downtown.",
+        "Frame as a land-efficiency lead, not a demand to build.",
+        "Must acknowledge legitimate parking needs."
+      ],
+      "reject_rules": [
+        "Parcels are structured parking or mixed-use.",
+        "Claim asserts parcels must be redeveloped.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "aging_housing_stock",
+      "description": "improvement year-built distribution by area",
+      "civic_question": "Where is the housing stock oldest and likely due for reinvestment?",
+      "signal": "distribution of improvement year-built by neighborhood/district",
+      "good_for": ["housing condition", "rehab/weatherization programs"],
+      "avoid": ["equating age with disrepair", "ignoring remodels not reflected in year-built"],
+      "quality_rules": [
+        "Year-built misses remodels and additions; age is not condition.",
+        "Aggregate distributions by area; do not flag individual homes as old or distressed.",
+        "Do not imply disrepair, code issues, or owner neglect."
+      ],
+      "minimum_evidence": {
+        "min_rows": 30,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must present age as an area distribution.",
+        "Must state that age does not equal condition.",
+        "Frame as a reinvestment or program-targeting lead."
+      ],
+      "reject_rules": [
+        "Individual homes labeled distressed from age.",
+        "Disrepair claimed without condition data.",
+        "Remodel limitation ignored."
+      ]
+    },
+    {
+      "probe": "mobile_home_park_exposure",
+      "description": "manufactured-housing communities by value and district",
+      "civic_question": "Where are manufactured-housing communities, and what is their exposure?",
+      "signal": "parcels classed as manufactured-home parks; value, district, and sale activity",
+      "good_for": ["affordable housing preservation", "displacement watch"],
+      "avoid": ["stigmatizing residents", "assuming sale means closure"],
+      "quality_rules": [
+        "Treat residents as a vulnerable population; never stigmatize or name them.",
+        "A park sale or value change is not a closure; do not imply displacement without more.",
+        "Confirm park classification rather than inferring it from value alone."
+      ],
+      "minimum_evidence": {
+        "min_rows": 5,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must aggregate at the park or community level.",
+        "Must frame as a preservation or affordability lead.",
+        "Must avoid predicting closure or displacement from value alone."
+      ],
+      "reject_rules": [
+        "Predicts closure or displacement from a single signal.",
+        "Stigmatizing framing of residents.",
+        "Misclassified parcels."
+      ]
+    },
+    {
+      "probe": "multifamily_supply_by_district",
+      "description": "multifamily parcels counted and valued by area",
+      "civic_question": "How is multifamily housing distributed across the county?",
+      "signal": "count and value of multifamily-classed parcels grouped by city/district",
+      "good_for": ["housing supply", "zoning analysis"],
+      "avoid": ["treating parcel count as unit count without a unit field"],
+      "quality_rules": [
+        "Parcel count is not unit count without a unit field; label which you actually have.",
+        "Confirm multifamily classification; mixed-use can be miscounted.",
+        "Aggregate by district; avoid single-building claims."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must state whether counts are parcels or units.",
+        "Must aggregate by district.",
+        "Frame as a supply-distribution lead."
+      ],
+      "reject_rules": [
+        "Parcel count presented as unit count.",
+        "Mixed-use miscounted as multifamily.",
+        "Single-building basis."
+      ]
+    },
+    {
+      "probe": "adu_potential_parcels",
+      "description": "single-family lots large enough for an ADU under zoning",
+      "civic_question": "How many lots could plausibly add an accessory dwelling unit?",
+      "signal": "single-family parcels meeting minimum lot-size/coverage thresholds for ADUs under current code",
+      "good_for": ["gentle density", "housing capacity"],
+      "avoid": ["ignoring utility, access, and critical-area limits that block real feasibility"],
+      "quality_rules": [
+        "Lot-size eligibility is necessary, not sufficient; utilities, access, and critical areas gate real feasibility.",
+        "Use current code thresholds; do not assume future upzones.",
+        "Frame as theoretical capacity, never as a development plan for any parcel."
+      ],
+      "minimum_evidence": {
+        "min_rows": 20,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must label results as theoretical eligibility, not feasibility.",
+        "Must note the constraints that were not checked.",
+        "Frame as a capacity estimate for planning."
+      ],
+      "reject_rules": [
+        "Eligibility presented as buildable feasibility.",
+        "Constraints unacknowledged.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "subdivision_potential_parcels",
+      "description": "lots exceeding minimum size that could split",
+      "civic_question": "Which parcels are large enough to subdivide under current zoning?",
+      "signal": "parcels whose acreage exceeds the minimum lot size by a margin allowing a split",
+      "good_for": ["housing capacity", "growth modeling"],
+      "avoid": ["ignoring easements, critical areas, and access requirements"],
+      "quality_rules": [
+        "Acreage over the minimum is necessary, not sufficient; easements, access, and critical areas constrain splits.",
+        "Use current minimum lot sizes per zone; do not assume rezones.",
+        "Frame as theoretical split capacity, not a plat plan."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must label as theoretical capacity.",
+        "Must note unchecked constraints.",
+        "Frame as a planning-capacity lead."
+      ],
+      "reject_rules": [
+        "Theoretical split treated as guaranteed.",
+        "Constraints ignored.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "current_use_enrollment",
+      "description": "ag/timber/open-space current-use parcels and deferral",
+      "civic_question": "How much land is enrolled in current-use (open space/ag/timber) programs?",
+      "signal": "parcels flagged in current-use programs; deferred vs market value, by district",
+      "good_for": ["farmland preservation", "tax base tradeoff", "GMA"],
+      "avoid": ["framing deferral as a loophole", "ignoring the public conservation purpose"],
+      "quality_rules": [
+        "Deferral is a lawful conservation program; never frame it as a loophole or evasion.",
+        "Compare deferred vs market value as program scale, not as lost revenue.",
+        "Aggregate by district; avoid singling out enrolled owners."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must present enrollment as program scale by area.",
+        "Must frame deferral as intended conservation policy.",
+        "Must avoid lost-revenue framing."
+      ],
+      "reject_rules": [
+        "Framed as a loophole or evasion.",
+        "Identifies individual owners negatively.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "ag_land_conversion_pressure",
+      "description": "farmland near city/UGA edge with high value-per-acre",
+      "civic_question": "Where is farmland under the most conversion pressure?",
+      "signal": "ag-classed parcels adjacent to city limits or UGA with elevated value/acre or recent sales",
+      "good_for": ["farmland loss", "GMA", "edge planning"],
+      "avoid": ["assuming a sale equals conversion", "ignoring current-use protections"],
+      "quality_rules": [
+        "Proximity and value/acre indicate pressure, not actual conversion; a sale is not a conversion.",
+        "Current-use enrollment lowers assessed value; account for it before reading 'high value'.",
+        "Frame as a watch list, not a prediction of farmland loss."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must frame as conversion pressure, not conversion.",
+        "Must account for current-use effects on value.",
+        "Frame as a monitoring lead."
+      ],
+      "reject_rules": [
+        "Sale interpreted as conversion.",
+        "Current-use value distortion ignored.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "uga_capacity_vs_use",
+      "description": "Urban Growth Area parcels underutilized vs zoning",
+      "civic_question": "Is the UGA actually absorbing growth, or sitting underused?",
+      "signal": "parcels inside UGA boundaries with current use below zoned capacity",
+      "good_for": ["GMA growth targets", "infill", "buildable lands"],
+      "avoid": ["ignoring infrastructure phasing and ownership fragmentation"],
+      "quality_rules": [
+        "UGA boundary intersection is approximate; treat edge parcels as uncertain.",
+        "Capacity is zoned theoretical; infrastructure phasing and ownership fragmentation limit real absorption.",
+        "Frame as a buildable-lands question, not a verdict on growth management."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must label capacity as theoretical.",
+        "Must note infrastructure and fragmentation caveats.",
+        "Frame as a GMA monitoring lead."
+      ],
+      "reject_rules": [
+        "Theoretical capacity treated as ready supply.",
+        "Edge parcels drive the result without a check.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "floodplain_residential_value",
+      "description": "residential improvement value inside FEMA flood zones",
+      "civic_question": "How many homes and how much improvement value sit in flood zones?",
+      "signal": "residential improvement value for parcels intersecting FEMA flood layers",
+      "good_for": ["climate risk", "buyout/mitigation planning", "insurance context"],
+      "avoid": ["implying all flood-zone homes face imminent loss", "ignoring dike protection and base flood elevation"],
+      "quality_rules": [
+        "Overlay intersection at parcel edges is uncertain; flag boundary parcels.",
+        "Flood-zone presence is not imminent risk; dikes and elevation matter.",
+        "Aggregate; do not publish individual homeowners' exposure."
+      ],
+      "minimum_evidence": {
+        "min_rows": 20,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must aggregate exposure by area.",
+        "Must name the flood layer and its date.",
+        "Frame as exposure, not predicted damage."
+      ],
+      "reject_rules": [
+        "Predicts loss for specific homes.",
+        "Boundary overlaps unaddressed.",
+        "Layer unknown or undated."
+      ]
+    },
+    {
+      "probe": "critical_area_development",
+      "description": "improvements overlapping wetlands/steep slopes/habitat",
+      "civic_question": "Where do existing improvements overlap mapped critical areas?",
+      "signal": "improved parcels whose footprint intersects critical-area GIS layers",
+      "good_for": ["environmental review", "hazard awareness"],
+      "avoid": ["assuming a violation from overlap alone", "ignoring legal nonconforming and buffer rules"],
+      "quality_rules": [
+        "Overlap with a critical-area layer is not a violation; buffers and legal nonconforming status exist.",
+        "Overlay edges are imprecise; treat slivers of overlap as uncertain.",
+        "Never imply wrongdoing or illegal development."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must frame overlaps as review questions, not violations.",
+        "Must note overlay precision limits.",
+        "Frame as an environmental-review lead."
+      ],
+      "reject_rules": [
+        "Overlap presented as a violation.",
+        "Sliver overlaps drive the result.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "tidal_delta_exposure",
+      "description": "low-elevation Skagit delta/estuary parcels",
+      "civic_question": "What value sits on low-lying delta and estuary land?",
+      "signal": "parcels at low elevation near tidal/estuary GIS extents; assessed value summed by area",
+      "good_for": ["climate adaptation", "dike district planning", "restoration siting"],
+      "avoid": ["making precise inundation claims without elevation/LiDAR data"],
+      "quality_rules": [
+        "Without elevation/LiDAR, do not make inundation claims; proximity is a proxy.",
+        "Dike and tide-gate protection changes real exposure; note it.",
+        "Aggregate value; avoid singling out parcels."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must label as proximity-based exposure, not inundation.",
+        "Must mention protection infrastructure where relevant.",
+        "Frame as an adaptation-planning lead."
+      ],
+      "reject_rules": [
+        "Specific inundation predicted without elevation data.",
+        "Protection infrastructure ignored.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "dike_drainage_district_base",
+      "description": "assessed value within diking/drainage districts",
+      "civic_question": "What tax base sits behind dikes and inside drainage districts?",
+      "signal": "sum assessed value of parcels inside diking/drainage district boundaries",
+      "good_for": ["flood infrastructure funding", "special-district equity"],
+      "avoid": ["assuming uniform risk across a district"],
+      "quality_rules": [
+        "A district boundary defines who pays, not uniform risk; do not equate the two.",
+        "Present as the base supporting the district, not as risk per parcel.",
+        "Aggregate within district boundaries."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 1,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must present as a district tax-base aggregate.",
+        "Must avoid implying uniform per-parcel risk.",
+        "Frame as an infrastructure-funding lead."
+      ],
+      "reject_rules": [
+        "Risk asserted uniformly across the district.",
+        "Individual parcels singled out for risk.",
+        "No aggregation."
+      ]
+    },
+    {
+      "probe": "wildfire_interface_value",
+      "description": "parcels in the wildland-urban interface",
+      "civic_question": "How much value sits in the wildfire interface zone?",
+      "signal": "parcels intersecting WUI / fire-hazard GIS layers; value and count by fire district",
+      "good_for": ["fire risk", "fire district funding", "mitigation grants"],
+      "avoid": ["overstating risk without fuel, slope, and access data"],
+      "quality_rules": [
+        "WUI layer membership is not a risk score; fuels, slope, and access determine real risk.",
+        "Overlay edges are imprecise; treat boundary parcels as uncertain.",
+        "Aggregate; do not assign risk to named owners."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must aggregate value within the WUI layer by district.",
+        "Must state that membership is not measured risk.",
+        "Frame as a mitigation or funding lead."
+      ],
+      "reject_rules": [
+        "Risk overstated from layer membership alone.",
+        "Boundary parcels drive the result.",
+        "Individuals singled out."
+      ]
+    },
+    {
+      "probe": "levy_rate_comparison",
+      "description": "total levy rate by levy code area",
+      "civic_question": "How does the combined levy rate vary across the county, and why?",
+      "signal": "total levy rate per levy code area, with the district stack that composes it",
+      "good_for": ["tax transparency", "Where-Does-My-Tax-Money-Go", "equity"],
+      "avoid": ["comparing headline rates without the underlying service mix"],
+      "quality_rules": [
+        "The headline rate hides the district stack and voter-approved levies; always show the components.",
+        "Compare areas with similar service mixes, not raw rates across unlike places.",
+        "Do not imply any area is overcharged from the rate alone."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 3,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must break the rate into its district components.",
+        "Must compare like service mixes.",
+        "Frame as a transparency lead, not a verdict."
+      ],
+      "reject_rules": [
+        "Rates compared without a component breakdown.",
+        "Implies overcharging.",
+        "Too few areas compared."
+      ]
+    },
+    {
+      "probe": "district_value_per_capita",
+      "description": "assessed value per resident by district",
+      "civic_question": "How much taxable value backs each resident, by district?",
+      "signal": "district assessed value divided by ACS population for the same geography",
+      "good_for": ["fiscal capacity", "equity across districts"],
+      "avoid": ["using ACS at small geographies with large margins of error", "stale population estimates"],
+      "quality_rules": [
+        "ACS population at small geographies has large margins of error; report the MOE or suppress.",
+        "District and ACS geographies rarely align perfectly; note the approximation.",
+        "Frame as a fiscal-capacity indicator, not precise per-person wealth."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 3,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must report the ACS margin of error or suppress unstable estimates.",
+        "Must note geography-matching limits.",
+        "Frame as a capacity indicator."
+      ],
+      "reject_rules": [
+        "Small-area ACS used without MOE.",
+        "Geography mismatch ignored.",
+        "Presented as an exact per-person figure."
+      ]
+    },
+    {
+      "probe": "revenue_concentration_top_parcels",
+      "description": "top parcels' share of a district's tax base",
+      "civic_question": "How dependent is each district on a handful of large taxpayers?",
+      "signal": "share of total district value held by the top N parcels/owners",
+      "good_for": ["fiscal resilience", "single-payer risk", "budget planning"],
+      "avoid": ["naming or profiling individual owners carelessly", "privacy overreach"],
+      "quality_rules": [
+        "Owner-name normalization is noisy; verify the grouping before claiming concentration.",
+        "Aggregate concentration is publishable; naming or profiling owners is not.",
+        "Concentration is a resilience question, not evidence of favoritism."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must report the top-N share, not individual identities.",
+        "Must note owner-normalization uncertainty.",
+        "Frame as a fiscal-resilience lead."
+      ],
+      "reject_rules": [
+        "Names or profiles specific taxpayers.",
+        "Concentration claimed without an owner-dedup check.",
+        "Single-district anecdote."
+      ]
+    },
+    {
+      "probe": "new_construction_value_added",
+      "description": "improvement value from recent new construction",
+      "civic_question": "Where is new construction adding the most assessed value?",
+      "signal": "improvement value tied to a new-construction flag or recent build year, grouped by area",
+      "good_for": ["growth tracking", "revenue forecasting"],
+      "avoid": ["confusing revaluation increases with genuine new construction"],
+      "quality_rules": [
+        "Separate genuine new-construction value from revaluation increases.",
+        "Use the new-construction flag or build year, not raw value change.",
+        "Aggregate by area; avoid single-project claims unless verified."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "min_distinct_groups": 2,
+        "requires_recent_window": true,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must isolate new-construction value, not reval.",
+        "Must state the time window.",
+        "Frame as a growth or revenue lead."
+      ],
+      "reject_rules": [
+        "Reval increases counted as new construction.",
+        "Window unstated.",
+        "Single-project basis without verification."
+      ]
+    },
+    {
+      "probe": "permit_to_assessment_lag",
+      "description": "permits issued vs assessed improvement change",
+      "civic_question": "How long after a permit does assessed value catch up?",
+      "signal": "match issued permits (iWorQ) to subsequent improvement-value changes; measure the lag",
+      "good_for": ["assessment timeliness", "growth visibility"],
+      "avoid": ["expecting alignment within a single cycle", "ignoring permits that never build"],
+      "quality_rules": [
+        "Permit and assessment cycles differ; do not treat normal lag as a problem.",
+        "Match permits to parcels carefully; iWorQ-to-parcel joins can misalign.",
+        "Some permits never build; absence of value change is not always a lag."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "requires_recent_window": true,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must describe the permit-to-parcel match method.",
+        "Must frame lag as expected cycle behavior unless extreme.",
+        "Frame as a process-visibility lead."
+      ],
+      "reject_rules": [
+        "Normal cycle lag framed as failure.",
+        "Permit-parcel matches unreliable.",
+        "Non-building permits counted as lag."
+      ]
+    },
+    {
+      "probe": "stalled_development",
+      "description": "permits issued but no improvement value added",
+      "civic_question": "Which permitted projects show no sign of being built?",
+      "signal": "parcels with issued building permits but flat improvement value after a reasonable window",
+      "good_for": ["development pipeline", "vacancy/blight watch"],
+      "avoid": ["assuming a stall before normal assessment lag has passed"],
+      "quality_rules": [
+        "Wait past a normal assessment cycle before calling a project stalled.",
+        "Confirm the permit ties to the parcel and is a building permit, not a minor or utility permit.",
+        "Do not imply owner fault or financial trouble."
+      ],
+      "minimum_evidence": {
+        "min_rows": 8,
+        "requires_recent_window": true,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must show the wait exceeds normal lag.",
+        "Must restrict to building permits matched to parcels.",
+        "Frame as a pipeline lead, not blame."
+      ],
+      "reject_rules": [
+        "Flagged before normal lag elapses.",
+        "Permit type or match is wrong.",
+        "Implies owner fault."
+      ]
+    },
+    {
+      "probe": "ownership_concentration",
+      "description": "many parcels under one owner entity",
+      "civic_question": "Who controls the most parcels, and where?",
+      "signal": "group parcels by normalized owner name/entity; count holdings and value by area",
+      "good_for": ["landlord concentration", "market power", "land banking"],
+      "avoid": ["noisy name matching", "treating distinct LLCs as separate without dedup"],
+      "quality_rules": [
+        "Normalize owner names before grouping; raw strings both over- and under-merge entities.",
+        "Distinct LLCs may share a beneficial owner you cannot see; do not overstate certainty.",
+        "Concentration is a market-structure question, not proof of wrongdoing."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must describe the name-normalization method and its limits.",
+        "Must frame as a concentration pattern, not collusion.",
+        "Frame as a market-structure lead."
+      ],
+      "reject_rules": [
+        "Grouping rests on un-normalized names.",
+        "Claims hidden common ownership as fact.",
+        "Single-owner anecdote."
+      ]
+    },
+    {
+      "probe": "out_of_area_ownership",
+      "description": "owner mailing address outside county/state",
+      "civic_question": "How much property is owned from outside the area?",
+      "signal": "compare owner mailing address geography to parcel location",
+      "good_for": ["absentee ownership", "second-home patterns"],
+      "avoid": ["PO boxes and property managers inflating the count", "equating out-of-area with neglect"],
+      "quality_rules": [
+        "Mailing address is not residence; PO boxes and property managers inflate absentee counts.",
+        "Out-of-area ownership is not neglect or wrongdoing.",
+        "Aggregate by area; avoid targeting individuals."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must note the mailing-address limitation.",
+        "Must aggregate by area.",
+        "Frame as an ownership-pattern lead."
+      ],
+      "reject_rules": [
+        "Mailing address treated as proof of an absentee owner.",
+        "Implies neglect from out-of-area status.",
+        "Individuals targeted."
+      ]
+    },
+    {
+      "probe": "institutional_footprint",
+      "description": "churches, hospitals, schools \u2014 land and value share",
+      "civic_question": "What footprint do anchor institutions hold in each community?",
+      "signal": "parcels classed institutional/nonprofit; land, value, and acreage share by area",
+      "good_for": ["tax base composition", "anchor-institution planning"],
+      "avoid": ["implying exemption is improper", "lumping unlike institutions together"],
+      "quality_rules": [
+        "Institutional exemption is lawful; present footprint as composition, not lost revenue.",
+        "Do not lump unlike institutions (hospital vs church vs school) without grouping.",
+        "Aggregate; avoid singling out one institution unless it is the clear, verified story."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must group by institution type.",
+        "Must present as base composition.",
+        "Frame neutrally."
+      ],
+      "reject_rules": [
+        "Framed as revenue lost to exemptions.",
+        "Institution types lumped together.",
+        "Unverified single-institution claim."
+      ]
+    },
+    {
+      "probe": "trust_reservation_land_context",
+      "description": "parcels within trust or reservation boundaries",
+      "civic_question": "How does land within reservation/trust boundaries sit relative to county rolls?",
+      "signal": "parcels intersecting Swinomish / Upper Skagit / Sauk-Suiattle boundary layers; tax status context",
+      "good_for": ["jurisdictional context", "tax base understanding"],
+      "avoid": ["misstating sovereignty or tax status", "treating this as a fairness gap"],
+      "quality_rules": [
+        "Tribal trust and reservation land has distinct sovereign tax status; state it accurately or omit.",
+        "Do not frame trust-land tax status as a gap, loophole, or unfairness.",
+        "Defer to authoritative boundary and status sources; flag uncertainty."
+      ],
+      "minimum_evidence": {
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must state tax and jurisdiction status accurately and neutrally.",
+        "Must rely on authoritative boundary data.",
+        "Frame as context, not a fairness comparison."
+      ],
+      "reject_rules": [
+        "Misstates sovereignty or tax status.",
+        "Frames trust land as a fairness gap.",
+        "Boundary or status data is uncertain."
+      ]
+    },
+    {
+      "probe": "annexation_candidates",
+      "description": "county parcels adjacent to or inside a UGA, unannexed",
+      "civic_question": "Which county parcels are logical annexation candidates for a city?",
+      "signal": "parcels inside or abutting a UGA but outside city limits",
+      "good_for": ["city growth planning", "service provision"],
+      "avoid": ["assuming residents want annexation", "ignoring fiscal impact on the city"],
+      "quality_rules": [
+        "Adjacency to a UGA is a planning signal, not resident or city intent.",
+        "Annexation changes services and taxes both ways; note this rather than implying it is obviously good.",
+        "Confirm parcels are unannexed and within or abutting the UGA."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must frame as candidates by geography, not an endorsement.",
+        "Must note service and tax tradeoffs.",
+        "Frame as a planning lead."
+      ],
+      "reject_rules": [
+        "Implies residents want annexation.",
+        "Parcels not actually adjacent or unannexed.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "low_density_service_cost",
+      "description": "low-density parcels far from the service core",
+      "civic_question": "Where does scattered low-density development likely cost more to serve than it returns?",
+      "signal": "low value-per-acre parcels at distance from the urban core / utility extents (density + distance proxy)",
+      "good_for": ["Strong Towns", "fiscal sustainability", "growth pattern"],
+      "avoid": ["claiming exact service cost without infrastructure cost data — this is a proxy only"],
+      "quality_rules": [
+        "This is a density-and-distance proxy, never a measured service cost; label it explicitly.",
+        "Rural low density can be appropriate; do not imply it is a fiscal failure.",
+        "Exclude current-use, conservation, and exempt parcels from cost framing."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must state that cost is a proxy, with no dollar figure implied.",
+        "Must exclude protected and exempt parcels from the cost framing.",
+        "Frame as a fiscal-pattern lead for further study."
+      ],
+      "reject_rules": [
+        "Proxy presented as a dollar service cost.",
+        "Rural land framed as failure without cost data.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "waterfront_premium",
+      "description": "water-adjacent parcels and their value premium",
+      "civic_question": "How large is the waterfront value premium, and who holds it?",
+      "signal": "compare value/acre of water-adjacent parcels to comparable inland parcels",
+      "good_for": ["land economics", "recreation access equity"],
+      "avoid": ["conflating view parcels with actual frontage", "ignoring shoreline regulation effects"],
+      "quality_rules": [
+        "Separate true frontage from view-only parcels; they carry different premiums.",
+        "Shoreline regulation and access limits affect value; note them.",
+        "Match to comparable inland parcels before stating a premium."
+      ],
+      "minimum_evidence": {
+        "min_rows": 15,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must define frontage vs view in the comparison.",
+        "Must describe the inland comparison group.",
+        "Frame as a land-economics or access-equity lead."
+      ],
+      "reject_rules": [
+        "View and frontage conflated.",
+        "No comparable inland group.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "small_lot_high_value",
+      "description": "tiny parcels with outsized value",
+      "civic_question": "Which small lots punch far above their size in value?",
+      "signal": "low acreage parcels in the top value/acre tier (downtown, waterfront)",
+      "good_for": ["land use efficiency", "downtown economics"],
+      "avoid": ["condo and common-area parcel artifacts skewing results"],
+      "quality_rules": [
+        "Condo, common-area, and unit parcels create false small-lot/high-value artifacts; exclude them.",
+        "Confirm the parcel is a real standalone lot, not a fractional interest.",
+        "Frame as a land-efficiency observation, not a target."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must exclude condo and common-area artifacts.",
+        "Must group by area or use.",
+        "Frame as an efficiency lead."
+      ],
+      "reject_rules": [
+        "Results dominated by condo or common-area parcels.",
+        "Fractional-interest parcels included.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "large_lot_low_value",
+      "description": "big acreage with low total value",
+      "civic_question": "Where is large acreage carrying very low value?",
+      "signal": "high-acreage parcels in the bottom value tier (timber, undeveloped, current use)",
+      "good_for": ["open space", "current-use review", "land banking watch"],
+      "avoid": ["ignoring current-use deferral that intentionally lowers assessed value"],
+      "quality_rules": [
+        "Current-use and timber deferral intentionally lower assessed value; account for it before reading 'low value'.",
+        "Distinguish unbuildable or protected acreage from developable holdings.",
+        "Do not imply land banking without holding evidence."
+      ],
+      "minimum_evidence": {
+        "min_rows": 10,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must account for current-use deferral effects.",
+        "Must separate protected from developable acreage.",
+        "Frame as an open-space or holding lead."
+      ],
+      "reject_rules": [
+        "Deferral-lowered value read as a finding.",
+        "Speculation asserted without evidence.",
+        "Single-parcel basis."
+      ]
+    },
+    {
+      "probe": "neighborhood_value_inequality",
+      "description": "dispersion of assessed value within neighborhoods",
+      "civic_question": "How unequal is property value within and across neighborhoods?",
+      "signal": "value dispersion (e.g., Gini or quintile spread) by neighborhood",
+      "good_for": ["equity mapping", "investment targeting"],
+      "avoid": ["treating assessed value as a direct measure of resident wealth"],
+      "quality_rules": [
+        "Assessed value is not resident wealth or income; do not equate them.",
+        "Suppress neighborhoods with too few parcels for a stable dispersion measure.",
+        "Frame dispersion as a mapping observation, not a social judgment."
+      ],
+      "minimum_evidence": {
+        "min_rows": 30,
+        "min_distinct_groups": 3,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must state that assessed value is not wealth.",
+        "Must suppress thin neighborhoods.",
+        "Frame as an equity-mapping lead."
+      ],
+      "reject_rules": [
+        "Value dispersion presented as wealth inequality.",
+        "Thin neighborhoods drive the result.",
+        "Single-neighborhood basis."
+      ]
+    },
+    {
+      "probe": "rent_burden_overlay",
+      "description": "ACS rent burden vs multifamily value by tract",
+      "civic_question": "Do high rent-burden areas align with the multifamily stock that serves them?",
+      "signal": "overlay ACS rent-burden by tract with multifamily parcel value/location",
+      "good_for": ["affordability", "housing policy targeting"],
+      "avoid": ["ACS small-area margins of error", "tract boundaries not matching neighborhoods"],
+      "quality_rules": [
+        "ACS tract estimates carry large margins of error; report MOE or suppress unstable tracts.",
+        "Tract boundaries seldom match neighborhoods or parcels; note the approximation.",
+        "Frame alignment as a question, not a causal link between supply and burden."
+      ],
+      "minimum_evidence": {
+        "min_distinct_groups": 3,
+        "requires_cohort_summary": true,
+        "requires_cross_check": true
+      },
+      "publish_rules": [
+        "Must report ACS margins or suppress shaky tracts.",
+        "Must note geography-matching limits.",
+        "Frame as an affordability lead, not causation."
+      ],
+      "reject_rules": [
+        "Unstable ACS tracts used without MOE.",
+        "Causal supply-burden link asserted.",
+        "Geography mismatch ignored."
+      ]
+    },
+    {
+      "probe": "parcel_data_quality_gaps",
+      "description": "parcels missing land use, zoning, or value fields",
+      "civic_question": "Where is the assessment data incomplete in ways that affect fairness or analysis?",
+      "signal": "parcels with null or default values in land use, zoning, area, or value fields",
+      "good_for": ["data integrity", "fair assessment", "pipeline QA"],
+      "avoid": ["treating valid nulls (common areas, ROW) as errors"],
+      "quality_rules": [
+        "Many nulls are valid (common areas, ROW, water, new parcels); separate expected nulls from true gaps.",
+        "Frame as internal QA, not as evidence of unfair assessment, unless gaps cluster meaningfully.",
+        "Aggregate gap rates by field and area; avoid singling out parcels."
+      ],
+      "minimum_evidence": {
+        "min_rows": 20,
+        "min_distinct_groups": 2,
+        "requires_cohort_summary": true
+      },
+      "publish_rules": [
+        "Must distinguish valid nulls from real gaps.",
+        "Must report gap rates by field and area.",
+        "Frame as a data-integrity lead."
+      ],
+      "reject_rules": [
+        "Valid nulls counted as errors.",
+        "Implies unfair assessment without clustering evidence.",
+        "Single-parcel basis."
+      ]
+    }
+  ]
+}
