@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.apps import apps
+from django.db import models
 
 from .models import (
     AssessorSyncChange,
@@ -10,6 +12,9 @@ from .models import (
 
 
 class ReadOnlyAuditAdmin(admin.ModelAdmin):
+    list_per_page = 50
+    show_full_result_count = False
+
     def has_add_permission(self, request):
         return False
 
@@ -18,6 +23,19 @@ class ReadOnlyAuditAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+class GenericReadOnlyTableAdmin(ReadOnlyAuditAdmin):
+    def get_list_display(self, request):
+        fields = [
+            field.name
+            for field in self.model._meta.fields
+            if not isinstance(field, models.JSONField) and field.name != "geometry"
+        ]
+        return tuple(fields[:6] or [self.model._meta.pk.name])
+
+    def get_readonly_fields(self, request, obj=None):
+        return tuple(field.name for field in self.model._meta.fields)
 
 
 class AssessorSyncFileInline(admin.TabularInline):
@@ -145,3 +163,8 @@ class CurrentDraftAdmin(admin.ModelAdmin):
             "fields": ("probe_metadata", "raw_payload", "created_at", "updated_at"),
         }),
     )
+
+
+for model in apps.get_app_config("core").get_models():
+    if not admin.site.is_registered(model):
+        admin.site.register(model, GenericReadOnlyTableAdmin)
