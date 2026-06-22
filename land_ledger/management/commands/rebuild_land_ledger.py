@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from core.land_ledger import CITY_CONFIGS, rebuild_land_ledger
+from land_ledger.services import CITY_CONFIGS, rebuild_land_ledger
 
 
 class Command(BaseCommand):

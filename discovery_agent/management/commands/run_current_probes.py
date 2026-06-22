@@ -8,7 +8,7 @@ from typing import Any
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
-from core.management.commands.discover_current_test import (
+from discovery_agent.management.commands.discover_current_test import (
     SUPPORTED_PROBES,
     annotate_records,
     build_editor_prompt,
@@ -20,7 +20,7 @@ from core.management.commands.discover_current_test import (
     rows_for_sql,
     summarize_missing_columns,
 )
-from core.models import CurrentDraft
+from discovery_agent.models import CurrentDraft
 
 
 ARTIFACT_TERMS = (

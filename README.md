@@ -7,11 +7,14 @@ Fresh Django/Railway foundation for OpenSkagit.
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+copy .env.example .env
+# Set NEW_DATABASE_URL, POSTGIS_DATABASE_URL, or DATABASE_URL to the PostGIS database.
 .\.venv\Scripts\python.exe manage.py migrate
 .\.venv\Scripts\python.exe manage.py runserver 8004
 ```
 
 The local `.env` file is loaded with `load_dotenv()` from `config/settings.py`.
+SQLite fallback has been removed; OpenSkagit expects PostgreSQL/PostGIS in every environment.
 
 ## Railway
 
@@ -23,8 +26,7 @@ Required variables:
 - `DEBUG=false`
 - `ALLOWED_HOSTS`
 - `CSRF_TRUSTED_ORIGINS`
-- `DATABASE_URL` when using Railway Postgres
-- `POSTGIS_DATABASE_URL` or `NEW_DATABASE_URL` for the migrated Railway PostGIS database. When either is set, Django uses it before `DATABASE_URL` and switches to the GeoDjango PostGIS backend.
+- `NEW_DATABASE_URL`, `POSTGIS_DATABASE_URL`, or `DATABASE_URL` pointing at the Railway PostGIS database. Django checks them in that order.
 
 Static files are served by WhiteNoise and collected into `staticfiles/`.
 

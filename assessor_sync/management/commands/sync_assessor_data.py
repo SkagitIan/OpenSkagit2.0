@@ -14,7 +14,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.db import connection, transaction
 
-from core.management.commands.import_assessor import (
+from assessor_sync.management.commands.import_assessor import (
     COUNTY_ZIP_URL,
     DATASETS,
     _import_code_descriptions,

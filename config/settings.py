@@ -3,6 +3,7 @@ import os
 import dj_database_url
 import environ
 from dotenv import load_dotenv
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
@@ -29,6 +30,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "core",
     "taxtool",
+    "land_ledger",
+    "assessor_sync",
+    "ask_agent",
+    "discovery_agent",
 ]
 
 MIDDLEWARE = [
@@ -86,9 +91,15 @@ DATABASE_URL = (
     or os.getenv("DATABASE_URL")
 )
 
+if not DATABASE_URL:
+    raise ImproperlyConfigured(
+        "OpenSkagit requires NEW_DATABASE_URL, POSTGIS_DATABASE_URL, or DATABASE_URL. "
+        "SQLite fallback has been removed."
+    )
+
 DATABASES = {
     "default": dj_database_url.parse(
-        DATABASE_URL or f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        DATABASE_URL,
         conn_max_age=600,
     )
 }

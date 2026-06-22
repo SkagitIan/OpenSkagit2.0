@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.db import connection
 
-from core.land_ledger import ASSUMPTION_VERSION, CITY_CONFIGS, rebuild_land_ledger
+from land_ledger.services import ASSUMPTION_VERSION, CITY_CONFIGS, rebuild_land_ledger
 
 
 class Command(BaseCommand):
