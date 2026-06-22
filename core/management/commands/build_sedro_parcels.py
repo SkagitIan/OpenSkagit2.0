@@ -28,7 +28,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Import the script as a module so we don't duplicate logic.
         # sys.path already includes the project root when manage.py runs.
-        script_path = Path(__file__).resolve().parents[4] / "data" / "build_sedro_parcels.py"
+        from django.conf import settings
+        script_path = settings.BASE_DIR / "data" / "build_sedro_parcels.py"
         spec = importlib.util.spec_from_file_location("build_sedro_parcels", script_path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)

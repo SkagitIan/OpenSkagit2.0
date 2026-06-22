@@ -19,3 +19,17 @@ Thumbs.db
 # Large raw data dumps (not needed at runtime; regenerate static/data/*.geojson from these)
 data/parcels-shp.zip
 data/skagitassessorsdata.zip
+data/10yr_levy_mapping.csv
+data/2025schedule01.csv
+data/NONSCHOOL.har
+data/discovery_probes (1).json
+data/skagit_agency_json_builder.ipynb
+
+# Local one-off notebooks/scripts and design exports
+data/downloadassessor.py
+data/inspect_schema.py
+data/parse_har.py
+data/skagit_tax_load.py
+7422a400-f244-47c2-a473-52b7e6e0df45.png
+OpenSkagit civic data platform branding - Claude.html
+TASKS.md
