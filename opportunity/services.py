@@ -207,6 +207,15 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
         "COALESCE(z.zone_id, '') NOT ILIKE '%%-NRL%%'",
         "COALESCE(z.zone_name, '') NOT ILIKE '%%Natural Resource%%'",
         BUILDER_ZONE_EXCLUSION_SQL,
+        """
+        EXISTS (
+            SELECT 1
+            FROM tax_delinquency_taxstatement current_statement
+            WHERE current_statement.parcel_number = t.parcel_number
+              AND current_statement.tax_year = EXTRACT(YEAR FROM CURRENT_DATE)::int
+              AND current_statement.delinquent_installment_count > 0
+        )
+        """,
     ]
     if improved == "vacant":
         where.append("COALESCE(p.building_value, 0) <= 10000")
