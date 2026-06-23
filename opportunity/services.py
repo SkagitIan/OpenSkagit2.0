@@ -229,6 +229,10 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
                p.situs_city_state_zip AS city, p.owner_name, p.acres, z.zone_id, z.zone_name,
                z.waza_general, z.waza_specific, z.reference_url,
                p.assessed_value, p.impr_land_value, p.unimpr_land_value, p.building_value,
+               COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0) AS land_value,
+               CASE WHEN COALESCE(p.assessed_value, 0) <= 0 THEN NULL
+                    ELSE (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.assessed_value, 0) * 100
+               END AS land_value_pct,
                p.land_use, p.utilities, p.owner_city, p.owner_state, p.year_built,
                split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code,
                due.years_delinquent, due.current_year_count, due.total_due, due.oldest_due_date,
@@ -238,8 +242,21 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
                     ELSE (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0)
                END AS land_building_ratio,
                ST_Y(ST_Centroid(g.geometry)) AS lat, ST_X(ST_Centroid(g.geometry)) AS lng,
-               due.lead_score * 100 + LEAST(due.total_due / 1000, 50) + due.years_delinquent * 20
-                 + CASE WHEN COALESCE(p.building_value, 0) <= 10000 THEN 20 ELSE 0 END AS score
+               due.years_delinquent * 220
+                 + due.current_year_count * 35
+                 + due.lead_score * 25
+                 + LEAST((COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / 10000, 100)
+                 + CASE
+                     WHEN COALESCE(p.building_value, 0) <= 0
+                       AND (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) > 0 THEN 90
+                     WHEN (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0) >= 2 THEN 60
+                     WHEN (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0) >= 1 THEN 30
+                     ELSE 0
+                   END
+                 + CASE WHEN p.utilities ILIKE '%%SEW%%' THEN 25 ELSE 0 END
+                 + CASE WHEN p.utilities ILIKE '%%WTR-P%%' THEN 15 ELSE 0 END
+                 + LEAST(COALESCE(hist.value_5yr_growth_pct, 0), 100) / 4
+                 - CASE WHEN COALESCE(p.building_value, 0) > 500000 THEN 35 ELSE 0 END AS score
         FROM due
         JOIN skagit_parcels p ON p.parcel_number = due.parcel_number
         LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
@@ -266,7 +283,7 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
           AND due.total_due >= %s
           AND (%s = 0 OR COALESCE(p.building_value, 0) = 0
                OR (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0) >= %s)
-        ORDER BY score DESC NULLS LAST, due.total_due DESC NULLS LAST
+        ORDER BY score DESC NULLS LAST, due.years_delinquent DESC, due.total_due DESC NULLS LAST
         LIMIT %s
     """
     return [_format_delinquency(row) for row in _fetch(sql, [list(VACANT_OR_DWELLING_CODES), list(NON_BUILDER_CODES | EXEMPT_OR_COMMON_AREA_CODES), min_years, min_due, min_land_ratio, min_land_ratio, limit])]
@@ -597,11 +614,15 @@ def _base_row(row: dict[str, Any], opportunity_type: str) -> dict[str, Any]:
 def _format_delinquency(row: dict[str, Any]) -> dict[str, Any]:
     item = _base_row(row, "Delinquent Tax Pressure")
     growth = _decimal(row.get("value_5yr_growth_pct"))
-    growth_phrase = f", {growth:.0f}% five-year value growth" if growth is not None else ""
+    growth_phrase = f"; assessed value is up {growth:.0f}% since 2020" if growth is not None else ""
     years_phrase = _delinquent_years_phrase(row.get("years_delinquent"), row.get("current_year_count"))
+    land_signal = _land_building_signal(row)
+    zoning = row.get("zone_id") or row.get("zone_name") or "unknown zoning"
+    utilities = utility_phrase(row.get("utilities"))
+    use = _land_use_label(row.get("land_use"))
     item["why_it_ranks"] = (
-        f"{years_phrase}; unpaid tax balance appears in the current statement window; "
-        f"a {ratio(row.get('land_building_ratio'))} land-to-building value ratio{growth_phrase}."
+        f"Tax pressure: {years_phrase}. Dirt signal: {land_signal}. "
+        f"Use/zone: {use} in {zoning}. Site signal: {utilities}{growth_phrase}."
     )
     item["recent_document_url"] = _recent_document_url(row)
     item["risk_flags"] = risk_flags(
@@ -782,6 +803,34 @@ def _delinquent_years_phrase(years_delinquent: Any, current_year_count: Any) -> 
     if has_current:
         return "current-year delinquent balance"
     return "tax delinquency signal"
+
+
+def _land_building_signal(row: dict[str, Any]) -> str:
+    land_value = _decimal(row.get("land_value"))
+    if land_value is None:
+        land_value = (_decimal(row.get("impr_land_value")) or Decimal("0")) + (_decimal(row.get("unimpr_land_value")) or Decimal("0"))
+    building_value = _decimal(row.get("building_value")) or Decimal("0")
+    land_pct = _decimal(row.get("land_value_pct"))
+    pct_phrase = f", {_percent(land_pct)} of assessed value" if land_pct is not None else ""
+    if land_value > 0 and building_value <= 0:
+        return f"land-only value of {money(land_value)}{pct_phrase}"
+    if building_value <= 0:
+        return "no building value reported"
+    return f"{money(land_value)} land vs {money(building_value)} building ({ratio(land_value / building_value)} land/building{pct_phrase})"
+
+
+def _land_use_label(value: str | None) -> str:
+    text = value or ""
+    if ")" in text:
+        return text.split(")", 1)[1].strip() or text
+    return text or "unknown use"
+
+
+def _percent(value: Any) -> str:
+    amount = _decimal(value)
+    if amount is None:
+        return "unknown"
+    return f"{amount:.0f}%"
 
 
 def filter_query(filters: dict[str, str]) -> str:
