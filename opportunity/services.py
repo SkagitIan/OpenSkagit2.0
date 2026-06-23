@@ -52,7 +52,7 @@ class OpportunityTab:
 
 
 TABS = [
-    OpportunityTab("delinquent-tax-pressure", "Delinquent Tax Pressure", "Parcels where unpaid taxes may signal owner pressure or a need to resolve carrying costs.", "Signals show delinquent tax years and total amount due; sorted by tax pressure and redevelopment relevance."),
+    OpportunityTab("delinquent-tax-pressure", "Delinquent Tax Pressure", "Parcels where unpaid taxes may signal owner pressure or a need to resolve carrying costs.", "Signals show delinquent tax years and estimated past-due amount; sorted by tax pressure and redevelopment relevance."),
     OpportunityTab("vacant-buildable-lots", "Vacant Buildable Lots", "Residentially zoned parcels with little or no building value where a straightforward build may be possible.", "Signals show utility and frontage clues; sorted toward urban vacant lots with better service signals."),
     OpportunityTab("possible-lot-splits", "Possible Lot Splits", "Large residential lots that stand out against smaller nearby or same-zone lots and may have extra land capacity.", "Signals show theoretical capacity screens, not approved yield; sorted by oversize lots versus nearby median lots."),
     OpportunityTab("teardown-candidates", "Teardown Candidates", "Single-family parcels where the land value is high and the existing main dwelling appears low-value or obsolete.", "Signals show main dwelling condition/year and land-building ratio; manufactured homes, recent homes, and good-condition homes are excluded."),
@@ -189,7 +189,7 @@ def tab_counts(filters: dict[str, str]) -> dict[str, str]:
 
 
 def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[str, Any]]:
-    min_years = _int_filter(filters.get("min_years"), 1)
+    min_years = _int_filter(filters.get("min_years"), 0)
     min_due = _decimal_filter(filters.get("min_due"), Decimal("0"))
     min_land_ratio = _decimal_filter(filters.get("min_land_ratio"), Decimal("0"))
     improved = filters.get("improved", "")
@@ -207,7 +207,6 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
         "COALESCE(z.zone_id, '') NOT ILIKE '%%-NRL%%'",
         "COALESCE(z.zone_name, '') NOT ILIKE '%%Natural Resource%%'",
         BUILDER_ZONE_EXCLUSION_SQL,
-        "t.tax_year >= EXTRACT(YEAR FROM CURRENT_DATE)::int - 1",
     ]
     if improved == "vacant":
         where.append("COALESCE(p.building_value, 0) <= 10000")
@@ -225,6 +224,13 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
                    COUNT(DISTINCT t.tax_year) FILTER (WHERE t.tax_year >= EXTRACT(YEAR FROM CURRENT_DATE)::int) AS current_year_count,
                    array_agg(DISTINCT t.tax_year ORDER BY t.tax_year DESC) AS past_due_years,
                    SUM(t.total_due) AS total_due,
+                   SUM(
+                     CASE
+                       WHEN t.tax_year >= EXTRACT(YEAR FROM CURRENT_DATE)::int
+                         THEN COALESCE(inst.delinquent_installment_amount, t.total_due, 0)
+                       ELSE COALESCE(t.total_due, 0)
+                     END
+                   ) AS past_due_amount,
                    MAX(CASE t.lead_level
                      WHEN 'severe' THEN 5 WHEN 'serious' THEN 4 WHEN 'behind' THEN 3
                      WHEN 'one_late' THEN 2 WHEN 'watch' THEN 1 ELSE 0 END) AS lead_score,
@@ -232,6 +238,12 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
             FROM tax_delinquency_taxstatement t
             JOIN skagit_parcels p ON p.parcel_number = t.parcel_number
             LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
+            LEFT JOIN LATERAL (
+                SELECT SUM(NULLIF(regexp_replace(value->>'amount', '[^0-9.]', '', 'g'), '')::numeric) AS delinquent_installment_amount
+                FROM jsonb_array_elements(COALESCE(t.raw_data->'installments', '[]'::jsonb)) AS value
+                WHERE value->>'is_delinquent' = 'true'
+                  AND COALESCE(value->>'is_unpaid', 'true') = 'true'
+            ) inst ON true
             WHERE {" AND ".join(where)}
             GROUP BY t.parcel_number
         )
@@ -247,7 +259,7 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
                END AS land_value_pct,
                p.land_use, p.utilities, p.owner_city, p.owner_state, p.year_built,
                split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code,
-               due.years_delinquent, due.current_year_count, due.past_due_years, due.total_due, due.oldest_due_date,
+               due.years_delinquent, due.current_year_count, due.past_due_years, due.total_due, due.past_due_amount, due.oldest_due_date,
                sale.recording_number, sale.deed_type, sale.deed_date_iso, sale.sale_date_iso, sale.sale_price_num,
                hist.value_5yr_growth_pct,
                CASE WHEN COALESCE(p.building_value, 0) <= 0 THEN NULL
@@ -292,10 +304,10 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
             LIMIT 1
         ) sale ON true
         WHERE due.years_delinquent >= %s
-          AND due.total_due >= %s
+          AND due.past_due_amount >= %s
           AND (%s = 0 OR COALESCE(p.building_value, 0) = 0
                OR (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0) >= %s)
-        ORDER BY score DESC NULLS LAST, due.years_delinquent DESC, due.total_due DESC NULLS LAST
+        ORDER BY score DESC NULLS LAST, due.years_delinquent DESC, due.past_due_amount DESC NULLS LAST
         LIMIT %s
     """
     return [_format_delinquency(row) for row in _fetch(sql, [list(VACANT_OR_DWELLING_CODES), list(NON_BUILDER_CODES | EXEMPT_OR_COMMON_AREA_CODES), min_years, min_due, min_land_ratio, min_land_ratio, limit])]
@@ -664,9 +676,9 @@ def _format_delinquency(row: dict[str, Any]) -> dict[str, Any]:
     item["why_it_ranks"] = (
         f"{years_phrase}. {use} in {zoning}{growth_phrase}."
     )
-    amount = _decimal(row.get("total_due"))
+    amount = _decimal(row.get("past_due_amount") or row.get("total_due"))
     if amount:
-        item["signal_labels"] = [f"{money(amount)} due"]
+        item["signal_labels"] = [f"{money(amount)} past due"]
     item["recent_document_url"] = _recent_document_url(row)
     item["risk_flags"] = risk_flags(
         "No parcel geometry" if not item["map_url"] else None,
