@@ -155,6 +155,14 @@ def utility_phrase(value: str | None) -> str:
     return f"{', '.join(labels[:-1])} and {labels[-1]} indicated"
 
 
+def feature_labels(row: dict[str, Any]) -> list[str]:
+    labels = utility_labels(row.get("utilities"))
+    frontage = _decimal(row.get("effective_frontage") or row.get("actual_frontage"))
+    if frontage:
+        labels.append(f"{frontage:.0f} ft frontage")
+    return labels
+
+
 def fetch_tab_rows(
     tab_key: str,
     filters: dict[str, str],
@@ -213,6 +221,7 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
             SELECT t.parcel_number,
                    COUNT(DISTINCT t.tax_year) FILTER (WHERE t.tax_year < EXTRACT(YEAR FROM CURRENT_DATE)::int) AS years_delinquent,
                    COUNT(DISTINCT t.tax_year) FILTER (WHERE t.tax_year >= EXTRACT(YEAR FROM CURRENT_DATE)::int) AS current_year_count,
+                   array_agg(DISTINCT t.tax_year ORDER BY t.tax_year DESC) AS past_due_years,
                    SUM(t.total_due) AS total_due,
                    MAX(CASE t.lead_level
                      WHEN 'severe' THEN 5 WHEN 'serious' THEN 4 WHEN 'behind' THEN 3
@@ -226,7 +235,8 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
         )
         SELECT p.parcel_number,
                concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
-               p.situs_city_state_zip AS city, p.owner_name, p.acres, z.zone_id, z.zone_name,
+               COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
+               p.owner_name, p.acres, z.zone_id, z.zone_name,
                z.waza_general, z.waza_specific, z.reference_url,
                p.assessed_value, p.impr_land_value, p.unimpr_land_value, p.building_value,
                COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0) AS land_value,
@@ -235,7 +245,7 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
                END AS land_value_pct,
                p.land_use, p.utilities, p.owner_city, p.owner_state, p.year_built,
                split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code,
-               due.years_delinquent, due.current_year_count, due.total_due, due.oldest_due_date,
+               due.years_delinquent, due.current_year_count, due.past_due_years, due.total_due, due.oldest_due_date,
                sale.recording_number, sale.deed_type, sale.deed_date_iso, sale.sale_date_iso, sale.sale_price_num,
                hist.value_5yr_growth_pct,
                CASE WHEN COALESCE(p.building_value, 0) <= 0 THEN NULL
@@ -295,7 +305,8 @@ def vacant_buildable_lots(filters: dict[str, str], limit: int) -> list[dict[str,
     sql = f"""
         SELECT p.parcel_number,
                concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
-               p.situs_city_state_zip AS city, p.owner_name, p.acres, z.zone_id, z.zone_name,
+               COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
+               p.owner_name, p.acres, z.zone_id, z.zone_name,
                z.waza_general, z.waza_specific, z.reference_url,
                z.jurisdiction, p.assessed_value, p.impr_land_value, p.unimpr_land_value,
                p.building_value, p.land_use, p.utilities,
@@ -375,10 +386,11 @@ def possible_lot_splits(filters: dict[str, str], limit: int) -> list[dict[str, A
         )
         SELECT p.parcel_number,
                concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
-               p.situs_city_state_zip AS city, p.owner_name, p.acres, z.zone_id, z.zone_name,
+               COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
+               p.owner_name, p.acres, z.zone_id, z.zone_name,
                z.waza_general, z.waza_specific, z.reference_url,
                z.jurisdiction, p.assessed_value, p.impr_land_value, p.unimpr_land_value,
-               p.building_value, p.land_use, p.year_built,
+               p.building_value, p.land_use, p.utilities, p.year_built,
                split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code,
                c.neighbor_count, c.nearby_median_acres,
                floor(p.acres / NULLIF(c.nearby_median_acres, 0))::integer AS estimated_lot_count,
@@ -426,7 +438,8 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
     sql = f"""
         SELECT p.parcel_number,
                concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
-               p.situs_city_state_zip AS city, p.owner_name, p.acres, z.zone_id, z.zone_name,
+               COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
+               p.owner_name, p.acres, z.zone_id, z.zone_name,
                z.waza_general, z.waza_specific, z.reference_url,
                p.assessed_value, p.impr_land_value, p.unimpr_land_value, p.building_value,
                p.land_use, p.year_built, p.eff_year_built,
@@ -446,7 +459,10 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
         LEFT JOIN LATERAL (
             SELECT
                 COUNT(*) AS improvement_count,
-                (array_agg(NULLIF(building_style, '') ORDER BY imprv_val_num DESC NULLS LAST))[1] AS primary_style,
+                (array_agg(
+                    COALESCE(NULLIF(trim(imprv_det_type_description), ''), NULLIF(trim(imprv_det_type_cd), ''), NULLIF(trim(building_style), ''))
+                    ORDER BY imprv_val_num DESC NULLS LAST
+                ))[1] AS primary_style,
                 (array_agg(NULLIF(condition_description, '') ORDER BY imprv_val_num DESC NULLS LAST))[1] AS primary_condition,
                 (array_agg(NULLIF(imprv_det_class_description, '') ORDER BY imprv_val_num DESC NULLS LAST))[1] AS primary_quality,
                 (array_agg(NULLIF(effective_yr_blt, '')::numeric ORDER BY imprv_val_num DESC NULLS LAST))[1] AS primary_effective_year,
@@ -454,6 +470,10 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
                 (array_agg(living_area_num ORDER BY imprv_val_num DESC NULLS LAST))[1] AS primary_living_area
             FROM improvements i
             WHERE i.parcelnumber = p.parcel_number
+              AND trim(COALESCE(i.imprv_det_type_cd, '')) IN (
+                  'MA', 'MA2', 'MA1.5F', 'MA-SPLIT', 'UF2', 'UF1.5F',
+                  'BMF', 'BMU', 'BMG', 'MW', 'SW', 'DW'
+              )
         ) i ON true
         WHERE p.inactive_date IS NULL
           AND COALESCE(p.assessed_value, 0) > 0
@@ -470,6 +490,7 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
           AND COALESCE(z.zone_name, '') NOT ILIKE '%%Natural Resource%%'
           AND {BUILDER_ZONE_EXCLUSION_SQL}
           AND {RESIDENTIAL_ZONE_SQL}
+          AND COALESCE(i.improvement_count, 0) > 0
         ORDER BY score DESC NULLS LAST
         LIMIT %s
     """
@@ -482,7 +503,8 @@ def assemblage_opportunities(filters: dict[str, str], limit: int) -> list[dict[s
         WITH candidates AS (
             SELECT p.parcel_number, p.owner_name,
                    concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
-                   p.situs_city_state_zip AS city, p.acres, p.assessed_value, p.impr_land_value,
+                   COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
+                   p.acres, p.assessed_value, p.impr_land_value,
                    p.unimpr_land_value, p.building_value, p.land_use, z.zone_id, z.zone_name,
                    z.waza_general, z.waza_specific, z.reference_url, g.geometry,
                    split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code,
@@ -590,7 +612,10 @@ def _base_row(row: dict[str, Any], opportunity_type: str) -> dict[str, Any]:
         "acres_fmt": acres(row.get("acres")),
         "land_use": row.get("land_use") or "",
         "land_use_code": row.get("land_use_code") or land_use_code(row.get("land_use")),
+        "current_use": _land_use_label(row.get("land_use")),
         "utilities": row.get("utilities") or "",
+        "feature_labels": feature_labels(row),
+        "past_due_years": row.get("past_due_years") or [],
         "effective_frontage": row.get("effective_frontage"),
         "actual_frontage": row.get("actual_frontage"),
         "zoning": row.get("zone_id") or row.get("zone_name") or "Unknown zoning",
