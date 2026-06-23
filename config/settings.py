@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "land_ledger",
     "assessor_sync",
     "tax_delinquency",
+    "opportunity",
     "ask_agent",
     "discovery_agent",
 ]
@@ -116,6 +117,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+OPPORTUNITY_DASHBOARD_PASSWORD = env("OPPORTUNITY_DASHBOARD_PASSWORD", default="opportunity" if DEBUG else "")
 CSRF_TRUSTED_ORIGINS = [
     o for o in env("CSRF_TRUSTED_ORIGINS", default="").split(",") if o
 ]
