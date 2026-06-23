@@ -127,15 +127,8 @@
               <th>Parcel</th>
               <th><a href="{{ sort_links|dict_value:'location' }}">Location</a></th>
               <th><a href="{{ sort_links|dict_value:'zone' }}">Zone</a></th>
-              {% if selected_tab == "delinquent-tax-pressure" %}
-                <th>Past Due</th>
-                <th>Current Use</th>
-              {% elif selected_tab == "vacant-buildable-lots" or selected_tab == "possible-lot-splits" %}
-                <th>Current Use</th>
-                <th>Features</th>
-              {% else %}
-                <th>Why It Ranks</th>
-              {% endif %}
+              <th>Current Use</th>
+              <th>Signals</th>
               <th><a href="{{ sort_links|dict_value:'risk' }}">Risk Flags</a></th>
               <th><a href="{{ sort_links|dict_value:'assessed' }}">Values</a></th>
               <th>Map</th>
@@ -157,27 +150,22 @@
                     </div>
                   </details>
                 </td>
-                {% if selected_tab == "delinquent-tax-pressure" %}
-                  <td data-label="Past Due">
+                <td data-label="Current Use">{{ row.current_use }}</td>
+                <td data-label="Signals">
+                  {% if selected_tab == "delinquent-tax-pressure" %}
                     {% for year in row.past_due_years %}
                       <span class="opp-pill {% if year == 2025 %}opp-pill--yellow{% elif year == 2024 %}opp-pill--orange{% elif year <= 2023 %}opp-pill--red{% else %}opp-pill--current{% endif %}">{{ year }}</span>
                     {% empty %}
                       <span class="opp-muted">n/a</span>
                     {% endfor %}
-                  </td>
-                  <td data-label="Current Use">{{ row.current_use }}</td>
-                {% elif selected_tab == "vacant-buildable-lots" or selected_tab == "possible-lot-splits" %}
-                  <td data-label="Current Use">{{ row.current_use }}</td>
-                  <td data-label="Features">
-                    {% for feature in row.feature_labels %}
-                      <span class="opp-pill opp-pill--feature">{{ feature }}</span>
+                  {% else %}
+                    {% for signal in row.signal_labels %}
+                      <span class="opp-pill opp-pill--feature">{{ signal }}</span>
                     {% empty %}
-                      <span class="opp-muted">No feature signal</span>
+                      <span class="opp-muted">No signal</span>
                     {% endfor %}
-                  </td>
-                {% else %}
-                  <td data-label="Why It Ranks">{{ row.why_it_ranks }}</td>
-                {% endif %}
+                  {% endif %}
+                </td>
                 <td data-label="Risk Flags" class="opp-risk-cell">
                   {% if row.recent_document_url %}
                     <a class="opp-flag opp-flag-link" href="{{ row.recent_document_url }}" target="_blank" rel="noopener">Recent recorded deed</a>
@@ -217,9 +205,9 @@
                   {% for year in row.past_due_years|slice:":3" %}
                     <span class="opp-pill {% if year == 2025 %}opp-pill--yellow{% elif year == 2024 %}opp-pill--orange{% elif year <= 2023 %}opp-pill--red{% else %}opp-pill--current{% endif %}">{{ year }}</span>
                   {% endfor %}
-                {% elif selected_tab == "vacant-buildable-lots" or selected_tab == "possible-lot-splits" %}
-                  {% for feature in row.feature_labels|slice:":3" %}
-                    <span class="opp-pill opp-pill--feature">{{ feature }}</span>
+                {% else %}
+                  {% for signal in row.signal_labels|slice:":3" %}
+                    <span class="opp-pill opp-pill--feature">{{ signal }}</span>
                   {% endfor %}
                 {% endif %}
                 {% if row.recent_document_url %}
@@ -232,42 +220,28 @@
             </summary>
             <div class="opp-mobile-body">
               <dl>
-                {% if selected_tab == "delinquent-tax-pressure" %}
-                  <div>
-                    <dt>Past Due</dt>
-                    <dd>
+                <div>
+                  <dt>Current Use</dt>
+                  <dd>{{ row.current_use }}</dd>
+                </div>
+                <div>
+                  <dt>Signals</dt>
+                  <dd>
+                    {% if selected_tab == "delinquent-tax-pressure" %}
                       {% for year in row.past_due_years %}
                         <span class="opp-pill {% if year == 2025 %}opp-pill--yellow{% elif year == 2024 %}opp-pill--orange{% elif year <= 2023 %}opp-pill--red{% else %}opp-pill--current{% endif %}">{{ year }}</span>
                       {% empty %}
                         <span class="opp-muted">n/a</span>
                       {% endfor %}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>Current Use</dt>
-                    <dd>{{ row.current_use }}</dd>
-                  </div>
-                {% elif selected_tab == "vacant-buildable-lots" or selected_tab == "possible-lot-splits" %}
-                  <div>
-                    <dt>Current Use</dt>
-                    <dd>{{ row.current_use }}</dd>
-                  </div>
-                  <div>
-                    <dt>Features</dt>
-                    <dd>
-                      {% for feature in row.feature_labels %}
-                        <span class="opp-pill opp-pill--feature">{{ feature }}</span>
+                    {% else %}
+                      {% for signal in row.signal_labels %}
+                        <span class="opp-pill opp-pill--feature">{{ signal }}</span>
                       {% empty %}
-                        <span class="opp-muted">No feature signal</span>
+                        <span class="opp-muted">No signal</span>
                       {% endfor %}
-                    </dd>
-                  </div>
-                {% else %}
-                  <div>
-                    <dt>Why</dt>
-                    <dd>{{ row.why_it_ranks }}</dd>
-                  </div>
-                {% endif %}
+                    {% endif %}
+                  </dd>
+                </div>
                 <div>
                   <dt>Risk Flags</dt>
                   <dd class="opp-risk-cell">

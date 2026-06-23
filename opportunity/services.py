@@ -615,6 +615,7 @@ def _base_row(row: dict[str, Any], opportunity_type: str) -> dict[str, Any]:
         "current_use": _land_use_label(row.get("land_use")),
         "utilities": row.get("utilities") or "",
         "feature_labels": feature_labels(row),
+        "signal_labels": [],
         "past_due_years": row.get("past_due_years") or [],
         "effective_frontage": row.get("effective_frontage"),
         "actual_frontage": row.get("actual_frontage"),
@@ -666,6 +667,7 @@ def _format_vacant(row: dict[str, Any]) -> dict[str, Any]:
     item = _base_row(row, "Vacant Buildable Lot")
     frontage = _decimal(row.get("effective_frontage") or row.get("actual_frontage"))
     frontage_phrase = f", {frontage:.0f} ft frontage" if frontage else ""
+    item["signal_labels"] = feature_labels(row)
     item["why_it_ranks"] = (
         f"{acres(row.get('acres'))} {row.get('land_use') or 'vacant parcel'} with "
         f"{utility_phrase(row.get('utilities'))}{frontage_phrase}, residential zoning, "
@@ -689,6 +691,10 @@ def _format_lot_split(row: dict[str, Any]) -> dict[str, Any]:
     estimated_lots = row.get("estimated_lot_count") or 0
     frontage = _decimal(row.get("effective_frontage") or row.get("actual_frontage"))
     frontage_phrase = f", {frontage:.0f} ft frontage" if frontage else ""
+    item["signal_labels"] = feature_labels(row) + [
+        f"~{estimated_lots} lots",
+        f"{acres(row.get('nearby_median_acres'))} nearby median",
+    ]
     item["why_it_ranks"] = (
         f"{acres(row.get('acres'))} in residential zoning; nearby lots average "
         f"{acres(row.get('nearby_median_acres'))}; estimated capacity is about {estimated_lots} median-size lots"
@@ -716,6 +722,13 @@ def _format_teardown(row: dict[str, Any]) -> dict[str, Any]:
     if row.get("building_value"):
         land_building_ratio = ((row.get("impr_land_value") or 0) + (row.get("unimpr_land_value") or 0)) / row.get("building_value")
     ratio_phrase = f", land is {ratio(land_building_ratio)} building value" if land_building_ratio is not None else ""
+    item["signal_labels"] = [
+        str(style),
+        str(condition).lower(),
+        f"year {year}",
+    ]
+    if land_building_ratio is not None:
+        item["signal_labels"].append(f"{ratio(land_building_ratio)} land/building")
     item["why_it_ranks"] = (
         f"{money(land_value)} in land value, {money(row.get('building_value'))} in building value, "
         f"{style} in {condition.lower()}, built/effective year {year}{ratio_phrase}."
