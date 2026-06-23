@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "taxtool",
     "land_ledger",
     "assessor_sync",
+    "tax_delinquency",
     "ask_agent",
     "discovery_agent",
 ]

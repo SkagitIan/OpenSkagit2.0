@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Tax Delinquency Monitor{% endblock %}
+
+{% block content %}
+<style>
+  .td-shell { min-height: 100vh; background: #eef2f4; color: #182026; }
+  .td-topbar { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 18px 24px; background: #fff; border-bottom: 1px solid #d7dde2; }
+  .td-topbar h1 { font-size: 20px; margin: 0; }
+  .td-topbar p { margin: 4px 0 0; color: #67717a; font-size: 13px; }
+  .td-wrap { max-width: 1320px; margin: 0 auto; padding: 20px; }
+  .td-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .td-card { background: #fff; border: 1px solid #d7dde2; border-radius: 8px; padding: 14px; }
+  .td-card h2 { margin: 0 0 10px; font-size: 14px; color: #3D4D5C; }
+  .td-metric { font-size: 26px; font-weight: 700; }
+  .td-muted { color: #67717a; font-size: 13px; }
+  .td-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+  .td-tabs a { color: #1f4d5a; border: 1px solid #d7dde2; background: #fff; border-radius: 8px; padding: 8px 10px; text-decoration: none; font-size: 13px; }
+  .td-tabs a.active { background: #1f4d5a; color: #fff; border-color: #1f4d5a; }
+  .td-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .td-table th, .td-table td { text-align: left; padding: 9px 8px; border-bottom: 1px solid #e0e8ec; vertical-align: top; }
+  .td-table th { color: #3D4D5C; background: #f8fafb; font-size: 12px; }
+  .td-level { display: inline-block; border-radius: 999px; padding: 3px 8px; font-size: 12px; background: #edf4f5; color: #1f4d5a; }
+  .td-level.severe, .td-level.serious { background: #fdeeee; color: #b3261e; }
+  .td-level.behind { background: #fff4df; color: #9a6500; }
+  .td-section-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr); gap: 16px; }
+  @media (max-width: 900px) {
+    .td-grid, .td-section-grid { grid-template-columns: 1fr; }
+    .td-topbar { align-items: flex-start; flex-direction: column; }
+  }
+</style>
+
+<div class="td-shell">
+  <header class="td-topbar">
+    <div>
+      <h1>Tax Delinquency Monitor</h1>
+      <p>Staff-only public-record cache for Skagit tax statement balances.</p>
+    </div>
+    <a href="/admin/">Django admin</a>
+  </header>
+
+  <main class="td-wrap">
+    <section class="td-grid">
+      <div class="td-card">
+        <h2>Active Parcels</h2>
+        <div class="td-metric">{{ active_parcel_total }}</div>
+        <div class="td-muted">From skagit_parcels</div>
+      </div>
+      <div class="td-card">
+        <h2>Parcel Coverage</h2>
+        <div class="td-metric">{{ parcel_coverage }}</div>
+        <div class="td-muted">{{ statement_total }} statement rows cached</div>
+      </div>
+      <div class="td-card">
+        <h2>Actionable Leads</h2>
+        <div class="td-metric">{{ leads|length }}</div>
+        <div class="td-muted">Default excludes one-late parcels</div>
+      </div>
+      <div class="td-card">
+        <h2>Open Errors</h2>
+        <div class="td-metric">{{ error_count }}</div>
+        <div class="td-muted">Unresolved fetch/parse failures</div>
+      </div>
+    </section>
+
+    <nav class="td-tabs">
+      {% for key, label in levels %}
+        <a class="{% if selected_level == key %}active{% endif %}" href="?level={{ key }}">{{ label }}</a>
+      {% endfor %}
+    </nav>
+
+    <section class="td-section-grid">
+      <div class="td-card">
+        <h2>Past Due Account Leads</h2>
+        <table class="td-table">
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Parcel</th>
+              <th>Account</th>
+              <th>Years</th>
+              <th>Total Due</th>
+              <th>Oldest Due</th>
+              <th>Owner / Situs</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for lead in leads %}
+              <tr>
+                <td><span class="td-level {{ lead.max_lead_level }}">{{ lead.max_lead_level }}</span></td>
+                <td>{{ lead.parcel_number }}</td>
+                <td>{{ lead.tax_account_number|default:"" }}</td>
+                <td>{{ lead.year_list }}</td>
+                <td>{{ lead.total_due_fmt }}</td>
+                <td>{{ lead.oldest_due_date|default:"" }}</td>
+                <td>{{ lead.owner_name|default:"" }}<br><span class="td-muted">{{ lead.situs_address|default:"" }}</span></td>
+              </tr>
+            {% empty %}
+              <tr><td colspan="7">No accounts in this bucket yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <aside>
+        <div class="td-card">
+          <h2>Due Buckets</h2>
+          <table class="td-table">
+            <tbody>
+              {% for level, row in due_by_level.items %}
+                <tr>
+                  <td><span class="td-level {{ level }}">{{ level }}</span></td>
+                  <td>{{ row.count }}</td>
+                  <td>{{ row.total_due }}</td>
+                </tr>
+              {% empty %}
+                <tr><td>No due balances cached.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="td-card" style="margin-top:16px;">
+          <h2>Recent Runs</h2>
+          <table class="td-table">
+            <tbody>
+              {% for run in runs %}
+                <tr>
+                  <td>{{ run.run_type }}<br><span class="td-muted">{{ run.started_at }}</span></td>
+                  <td>{{ run.status }}</td>
+                  <td>{{ run.statements_saved }} saved<br>{{ run.errors }} errors</td>
+                </tr>
+              {% empty %}
+                <tr><td>No runs yet.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="td-card" style="margin-top:16px;">
+          <h2>Open Errors</h2>
+          <table class="td-table">
+            <tbody>
+              {% for error in errors %}
+                <tr>
+                  <td>{{ error.parcel_number }} {{ error.tax_year|default:"" }}<br><span class="td-muted">{{ error.error_type }}</span></td>
+                  <td>{{ error.message|truncatechars:80 }}</td>
+                </tr>
+              {% empty %}
+                <tr><td>No unresolved errors.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </section>
+  </main>
+</div>
+{% endblock %}

@@ -10,6 +10,7 @@ urlpatterns = [
     path("", include("ask_agent.urls")),
     path("", include("land_ledger.urls")),
     path("tax/", include("taxtool.urls")),
+    path("staff/tax-delinquency/", include("tax_delinquency.urls")),
     path("admin/", admin.site.urls),
     path("health/", health),
 ]

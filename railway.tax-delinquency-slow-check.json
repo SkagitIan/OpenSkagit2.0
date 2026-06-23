@@ -1,0 +1,11 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "python manage.py migrate && python manage.py slow_check_tax_statements --years 2023 2024 2025 2026 --cycle-hours ${TAX_DELINQUENCY_CYCLE_HOURS:-168} --start-after-hours ${TAX_DELINQUENCY_START_AFTER_HOURS:-168}",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}
