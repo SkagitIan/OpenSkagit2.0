@@ -33,6 +33,7 @@
   .opp-wrap { max-width: 1420px; margin: 0 auto; padding: 14px 20px 20px; }
   .opp-card { background: #fff; border: 1px solid var(--os-border); border-radius: 8px; padding: 14px; }
   .opp-card h2 { margin: 0 0 10px; font-size: 14px; color: var(--os-slate); }
+  .opp-tab-note { margin: -2px 0 12px; color: var(--os-muted); font-size: 13px; line-height: 1.4; }
   .opp-muted { color: var(--os-muted); font-size: 13px; }
   .opp-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 12px; }
   .opp-tabs a { color: var(--os-slate); border: 1px solid var(--os-border); background: #fff; border-radius: 8px; padding: 8px 10px; text-decoration: none; font-size: 13px; }
@@ -120,6 +121,7 @@
 
     <section class="opp-card">
       <h2>{{ selected_tab_obj.label }}</h2>
+      <p class="opp-tab-note">{{ selected_tab_obj.note }}</p>
       <div class="opp-table-wrap">
         <table class="opp-table">
           <thead>
@@ -157,6 +159,9 @@
                       <span class="opp-pill {% if year == 2025 %}opp-pill--yellow{% elif year == 2024 %}opp-pill--orange{% elif year <= 2023 %}opp-pill--red{% else %}opp-pill--current{% endif %}">{{ year }}</span>
                     {% empty %}
                       <span class="opp-muted">n/a</span>
+                    {% endfor %}
+                    {% for signal in row.signal_labels %}
+                      <span class="opp-pill opp-pill--feature">{{ signal }}</span>
                     {% endfor %}
                   {% else %}
                     {% for signal in row.signal_labels %}
@@ -205,6 +210,9 @@
                   {% for year in row.past_due_years|slice:":3" %}
                     <span class="opp-pill {% if year == 2025 %}opp-pill--yellow{% elif year == 2024 %}opp-pill--orange{% elif year <= 2023 %}opp-pill--red{% else %}opp-pill--current{% endif %}">{{ year }}</span>
                   {% endfor %}
+                  {% for signal in row.signal_labels|slice:":1" %}
+                    <span class="opp-pill opp-pill--feature">{{ signal }}</span>
+                  {% endfor %}
                 {% else %}
                   {% for signal in row.signal_labels|slice:":3" %}
                     <span class="opp-pill opp-pill--feature">{{ signal }}</span>
@@ -232,6 +240,9 @@
                         <span class="opp-pill {% if year == 2025 %}opp-pill--yellow{% elif year == 2024 %}opp-pill--orange{% elif year <= 2023 %}opp-pill--red{% else %}opp-pill--current{% endif %}">{{ year }}</span>
                       {% empty %}
                         <span class="opp-muted">n/a</span>
+                      {% endfor %}
+                      {% for signal in row.signal_labels %}
+                        <span class="opp-pill opp-pill--feature">{{ signal }}</span>
                       {% endfor %}
                     {% else %}
                       {% for signal in row.signal_labels %}

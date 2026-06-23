@@ -73,6 +73,10 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertEqual(services._value_history_phrase(Decimal("70")), "; assessed value up 70% since 2020")
         self.assertEqual(services._value_history_phrase(Decimal("1")), "; assessed value roughly flat since 2020")
 
+    def test_improvement_label_translates_assessor_codes(self):
+        self.assertEqual(services._improvement_label("MA1.5F"), "one-and-a-half-story dwelling")
+        self.assertEqual(services._improvement_label("MAIN AREA"), "main dwelling area")
+
 
 @override_settings(ROOT_URLCONF="config.urls", OPPORTUNITY_DASHBOARD_PASSWORD="letmein")
 class OpportunityAccessTests(TestCase):

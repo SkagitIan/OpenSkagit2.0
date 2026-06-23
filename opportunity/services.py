@@ -14,6 +14,7 @@ AUDITOR_RECORDING_SEARCH_URL = "https://www.skagitcounty.net/Search/Recording/de
 AUDITOR_DOCUMENT_URL = "https://www.skagitcounty.net/AuditorRecording/Documents/RecordedDocuments/{year}/{month}/{day}/{recording_number}.pdf"
 RECENT_RECORDING_DAYS = 90
 SFR_OR_MOBILE_CODES = {"110", "111", "112", "113", "180", "185"}
+SFR_TEARDOWN_CODES = {"110", "111", "112", "113"}
 VACANT_BUILDABLE_CODES = {"910", "911", "912"}
 VACANT_OR_DWELLING_CODES = VACANT_BUILDABLE_CODES | SFR_OR_MOBILE_CODES
 PUBLIC_OR_CIVIC_CODES = {"0", "450", "480", "670", "680", "760", "930", "970"}
@@ -47,13 +48,14 @@ class OpportunityTab:
     key: str
     label: str
     description: str
+    note: str
 
 
 TABS = [
-    OpportunityTab("delinquent-tax-pressure", "Delinquent Tax Pressure", "Parcels where unpaid taxes may signal owner pressure or a need to resolve carrying costs."),
-    OpportunityTab("vacant-buildable-lots", "Vacant Buildable Lots", "Residentially zoned parcels with little or no building value where a straightforward build may be possible."),
-    OpportunityTab("possible-lot-splits", "Possible Lot Splits", "Large residential lots that stand out against smaller nearby or same-zone lots and may have extra land capacity."),
-    OpportunityTab("teardown-candidates", "Teardown Candidates", "Single-family or manufactured-home parcels where the land value is high and the existing structure appears low-value or obsolete."),
+    OpportunityTab("delinquent-tax-pressure", "Delinquent Tax Pressure", "Parcels where unpaid taxes may signal owner pressure or a need to resolve carrying costs.", "Signals show delinquent tax years and total amount due; sorted by tax pressure and redevelopment relevance."),
+    OpportunityTab("vacant-buildable-lots", "Vacant Buildable Lots", "Residentially zoned parcels with little or no building value where a straightforward build may be possible.", "Signals show utility and frontage clues; sorted toward urban vacant lots with better service signals."),
+    OpportunityTab("possible-lot-splits", "Possible Lot Splits", "Large residential lots that stand out against smaller nearby or same-zone lots and may have extra land capacity.", "Signals show theoretical capacity screens, not approved yield; sorted by oversize lots versus nearby median lots."),
+    OpportunityTab("teardown-candidates", "Teardown Candidates", "Single-family parcels where the land value is high and the existing main dwelling appears low-value or obsolete.", "Signals show main dwelling condition/year and land-building ratio; manufactured homes, recent homes, and good-condition homes are excluded."),
 ]
 TAB_LOOKUP = {tab.key: tab for tab in TABS}
 DEFAULT_TAB = TABS[0].key
@@ -446,13 +448,19 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
                split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code,
                i.improvement_count, i.primary_style, i.primary_condition, i.primary_quality,
                i.primary_effective_year, i.primary_actual_year, i.primary_living_area,
+               (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0) AS teardown_ratio,
+               COALESCE(i.primary_effective_year, p.eff_year_built, p.year_built, 9999) AS teardown_year,
+               lower(COALESCE(i.primary_condition, 'unknown')) AS teardown_condition,
                ST_Y(ST_Centroid(g.geometry)) AS lat, ST_X(ST_Centroid(g.geometry)) AS lng,
-               COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0) - COALESCE(p.building_value, 0)
-                 + CASE WHEN COALESCE(i.primary_effective_year, p.eff_year_built, p.year_built, 9999) < 1975 THEN 50000 ELSE 0 END
-                 + CASE WHEN lower(COALESCE(i.primary_condition, '')) IN ('poor', 'fair', 'low') THEN 40000 ELSE 0 END
-                 - CASE WHEN lower(COALESCE(i.primary_condition, '')) IN ('good', 'very good', 'excellent') THEN 60000 ELSE 0 END
-                 - CASE WHEN COALESCE(i.primary_living_area, 0) > 2500 THEN 50000 ELSE 0 END
-                 + COALESCE(p.acres, 0) * 20000 AS score
+               (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0))
+                 + LEAST(((COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0)) * 25000, 250000)
+                 + CASE WHEN lower(COALESCE(i.primary_condition, '')) IN ('poor', 'low') THEN 90000
+                        WHEN lower(COALESCE(i.primary_condition, '')) = 'fair' THEN 65000
+                        ELSE 20000 END
+                 + CASE WHEN COALESCE(i.primary_effective_year, p.eff_year_built, p.year_built, 9999) < 1960 THEN 80000
+                        WHEN COALESCE(i.primary_effective_year, p.eff_year_built, p.year_built, 9999) < 1975 THEN 50000
+                        ELSE 15000 END
+                 - COALESCE(p.building_value, 0) AS score
         FROM skagit_parcels p
         LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
@@ -472,7 +480,7 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
             WHERE i.parcelnumber = p.parcel_number
               AND trim(COALESCE(i.imprv_det_type_cd, '')) IN (
                   'MA', 'MA2', 'MA1.5F', 'MA-SPLIT', 'UF2', 'UF1.5F',
-                  'BMF', 'BMU', 'BMG', 'MW', 'SW', 'DW'
+                  'BMF', 'BMU', 'BMG'
               )
         ) i ON true
         WHERE p.inactive_date IS NULL
@@ -491,10 +499,18 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
           AND {BUILDER_ZONE_EXCLUSION_SQL}
           AND {RESIDENTIAL_ZONE_SQL}
           AND COALESCE(i.improvement_count, 0) > 0
+          AND (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0) >= 3
+          AND (
+              (lower(COALESCE(i.primary_condition, '')) IN ('poor', 'fair', 'low')
+               AND COALESCE(i.primary_effective_year, p.eff_year_built, p.year_built, 9999) <= 1989)
+              OR
+              (lower(COALESCE(i.primary_condition, '')) IN ('average', 'unknown', '')
+               AND COALESCE(i.primary_effective_year, p.eff_year_built, p.year_built, 9999) <= 1975)
+          )
         ORDER BY score DESC NULLS LAST
         LIMIT %s
     """
-    return [_format_teardown(row) for row in _fetch(sql, [min_land_value, max_building, list(SFR_OR_MOBILE_CODES), list(NON_BUILDER_CODES), limit])]
+    return [_format_teardown(row) for row in _fetch(sql, [min_land_value, max_building, list(SFR_TEARDOWN_CODES), list(NON_BUILDER_CODES), limit])]
 
 
 def assemblage_opportunities(filters: dict[str, str], limit: int) -> list[dict[str, Any]]:
@@ -648,6 +664,9 @@ def _format_delinquency(row: dict[str, Any]) -> dict[str, Any]:
     item["why_it_ranks"] = (
         f"{years_phrase}. {use} in {zoning}{growth_phrase}."
     )
+    amount = _decimal(row.get("total_due"))
+    if amount:
+        item["signal_labels"] = [f"{money(amount)} due"]
     item["recent_document_url"] = _recent_document_url(row)
     item["risk_flags"] = risk_flags(
         "No parcel geometry" if not item["map_url"] else None,
@@ -692,7 +711,7 @@ def _format_lot_split(row: dict[str, Any]) -> dict[str, Any]:
     frontage = _decimal(row.get("effective_frontage") or row.get("actual_frontage"))
     frontage_phrase = f", {frontage:.0f} ft frontage" if frontage else ""
     item["signal_labels"] = feature_labels(row) + [
-        f"~{estimated_lots} lots",
+        f"~{estimated_lots} theoretical max",
         f"{acres(row.get('nearby_median_acres'))} nearby median",
     ]
     item["why_it_ranks"] = (
@@ -717,7 +736,7 @@ def _format_teardown(row: dict[str, Any]) -> dict[str, Any]:
     year = row.get("primary_effective_year") or row.get("eff_year_built") or row.get("year_built") or "unknown year"
     land_value = (row.get("impr_land_value") or 0) + (row.get("unimpr_land_value") or 0)
     condition = row.get("primary_condition") or "unknown condition"
-    style = row.get("primary_style") or "primary improvement"
+    style = _improvement_label(row.get("primary_style"))
     land_building_ratio = None
     if row.get("building_value"):
         land_building_ratio = ((row.get("impr_land_value") or 0) + (row.get("unimpr_land_value") or 0)) / row.get("building_value")
@@ -735,8 +754,6 @@ def _format_teardown(row: dict[str, Any]) -> dict[str, Any]:
     )
     item["risk_flags"] = risk_flags(
         "Missing build year" if not row.get("year_built") and not row.get("eff_year_built") and not row.get("primary_effective_year") else None,
-        "Recent structure" if (row.get("primary_effective_year") or row.get("year_built") or 0) >= 1990 else None,
-        "Good-condition structure" if str(condition).lower() in {"good", "very good", "excellent"} else None,
         "Large structure" if (row.get("primary_living_area") or 0) > 2500 else None,
         "No improvement detail" if not row.get("improvement_count") else None,
         "Natural resource zoning" if is_natural_resource_zone(row.get("zone_id"), row.get("zone_name"), row.get("waza_general")) else None,
@@ -860,6 +877,26 @@ def _land_use_label(value: str | None) -> str:
     if ")" in text:
         return text.split(")", 1)[1].strip() or text
     return text or "unknown use"
+
+
+def _improvement_label(value: str | None) -> str:
+    text = (value or "").strip()
+    if not text:
+        return "main dwelling area"
+    key = text.upper()
+    labels = {
+        "MA": "main dwelling area",
+        "MAIN AREA": "main dwelling area",
+        "MA2": "two-story main dwelling",
+        "MA1.5F": "one-and-a-half-story dwelling",
+        "MA-SPLIT": "split-level dwelling",
+        "UF2": "upper-floor living area",
+        "UF1.5F": "upper-floor living area",
+        "BMF": "finished basement area",
+        "BMU": "unfinished basement area",
+        "BMG": "basement garage area",
+    }
+    return labels.get(key, text.lower())
 
 
 def _percent(value: Any) -> str:
