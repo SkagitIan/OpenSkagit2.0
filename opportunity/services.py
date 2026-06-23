@@ -54,7 +54,6 @@ TABS = [
     OpportunityTab("vacant-buildable-lots", "Vacant Buildable Lots", "Residentially zoned parcels with little or no building value where a straightforward build may be possible."),
     OpportunityTab("possible-lot-splits", "Possible Lot Splits", "Large residential lots that stand out against smaller nearby or same-zone lots and may have extra land capacity."),
     OpportunityTab("teardown-candidates", "Teardown Candidates", "Single-family or manufactured-home parcels where the land value is high and the existing structure appears low-value or obsolete."),
-    OpportunityTab("assemblage-opportunities", "Assemblage Opportunities", "Nearby parcels, often under common ownership, that may become more useful or valuable as a combined site."),
 ]
 TAB_LOOKUP = {tab.key: tab for tab in TABS}
 DEFAULT_TAB = TABS[0].key
@@ -170,8 +169,6 @@ def fetch_tab_rows(
         rows = _dedupe_rows(possible_lot_splits(filters, raw_limit))
     elif tab_key == "teardown-candidates":
         rows = _dedupe_rows(teardown_candidates(filters, raw_limit))
-    elif tab_key == "assemblage-opportunities":
-        rows = _dedupe_rows(assemblage_opportunities(filters, raw_limit))
     else:
         rows = _dedupe_rows(delinquent_tax_pressure(filters, raw_limit))
     return _sort_rows(rows, sort, direction)[:limit]
@@ -200,6 +197,7 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
         "COALESCE(z.zone_id, '') NOT ILIKE '%%-NRL%%'",
         "COALESCE(z.zone_name, '') NOT ILIKE '%%Natural Resource%%'",
         BUILDER_ZONE_EXCLUSION_SQL,
+        "t.tax_year >= EXTRACT(YEAR FROM CURRENT_DATE)::int - 1",
     ]
     if improved == "vacant":
         where.append("COALESCE(p.building_value, 0) <= 10000")
@@ -213,7 +211,8 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
     sql = f"""
         WITH due AS (
             SELECT t.parcel_number,
-                   COUNT(DISTINCT t.tax_year) AS years_delinquent,
+                   COUNT(DISTINCT t.tax_year) FILTER (WHERE t.tax_year < EXTRACT(YEAR FROM CURRENT_DATE)::int) AS years_delinquent,
+                   COUNT(DISTINCT t.tax_year) FILTER (WHERE t.tax_year >= EXTRACT(YEAR FROM CURRENT_DATE)::int) AS current_year_count,
                    SUM(t.total_due) AS total_due,
                    MAX(CASE t.lead_level
                      WHEN 'severe' THEN 5 WHEN 'serious' THEN 4 WHEN 'behind' THEN 3
@@ -232,7 +231,7 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
                p.assessed_value, p.impr_land_value, p.unimpr_land_value, p.building_value,
                p.land_use, p.utilities, p.owner_city, p.owner_state, p.year_built,
                split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code,
-               due.years_delinquent, due.total_due, due.oldest_due_date,
+               due.years_delinquent, due.current_year_count, due.total_due, due.oldest_due_date,
                sale.recording_number, sale.deed_type, sale.deed_date_iso, sale.sale_date_iso, sale.sale_price_num,
                hist.value_5yr_growth_pct,
                CASE WHEN COALESCE(p.building_value, 0) <= 0 THEN NULL
@@ -599,8 +598,9 @@ def _format_delinquency(row: dict[str, Any]) -> dict[str, Any]:
     item = _base_row(row, "Delinquent Tax Pressure")
     growth = _decimal(row.get("value_5yr_growth_pct"))
     growth_phrase = f", {growth:.0f}% five-year value growth" if growth is not None else ""
+    years_phrase = _delinquent_years_phrase(row.get("years_delinquent"), row.get("current_year_count"))
     item["why_it_ranks"] = (
-        f"{row.get('years_delinquent')} delinquent tax year(s), {money(row.get('total_due'))} owed, "
+        f"{years_phrase}; unpaid tax balance appears in the current statement window; "
         f"a {ratio(row.get('land_building_ratio'))} land-to-building value ratio{growth_phrase}."
     )
     item["recent_document_url"] = _recent_document_url(row)
@@ -768,6 +768,20 @@ def _date_value(value: Any) -> date | None:
         return date.fromisoformat(str(value)[:10])
     except ValueError:
         return None
+
+
+def _delinquent_years_phrase(years_delinquent: Any, current_year_count: Any) -> str:
+    prior_years = int(years_delinquent or 0)
+    has_current = bool(current_year_count or 0)
+    if prior_years and has_current:
+        unit = "year" if prior_years == 1 else "years"
+        return f"{prior_years} prior delinquent tax {unit} plus current-year balance"
+    if prior_years:
+        unit = "year" if prior_years == 1 else "years"
+        return f"{prior_years} prior delinquent tax {unit}"
+    if has_current:
+        return "current-year delinquent balance"
+    return "tax delinquency signal"
 
 
 def filter_query(filters: dict[str, str]) -> str:

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}OpenSkagit — Skagit Valley is an open book.{% endblock %}
+{% block title %}OpenSkagit - Skagit Valley is an open book.{% endblock %}
 
 {% block extra_head %}
 <style>body { background: #042C53; }</style>
@@ -9,7 +9,6 @@
 {% block content %}
 <div class="os-home-v2">
 
-  <!-- NAV -->
   <header class="os-nav-v2">
     <a href="/" class="os-nav-v2__logo">
       <img src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png" alt="" width="26" height="26" class="os-nav-v2__logo-img">
@@ -24,15 +23,10 @@
           {% endfor %}
         </div>
       </details>
-      <a href="#">Parcels</a>
       <a href="{% url 'tax_home' %}">Taxes</a>
-      <a href="#">Permits</a>
-      <a href="#">GIS</a>
-      <a href="#">About</a>
     </nav>
   </header>
 
-  <!-- HERO -->
   <section class="os-hero-v2">
     <div class="os-hero-v2__mountains" aria-hidden="true">
       <svg viewBox="0 0 680 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -51,77 +45,11 @@
       </h1>
     </div>
     <div class="os-hero-v2__bridge">
-      ↓ or see what the Valley is already asking itself
+      See what the Valley is already asking itself
     </div>
   </section>
 
-  <!-- THE CURRENT -->
   {% include "partials/current_feed.html" %}
 
-  <!-- FEATURE CARDS -->
-  <section class="os-features">
-    <div class="os-features__grid">
-
-      <a href="#" class="os-feature-card" style="border-top-color:#5BBB2F">
-        <p class="os-feature-card__q">Who owns what, and what's it worth?</p>
-        <p class="os-feature-card__label">Parcels &amp; assessments</p>
-      </a>
-
-      <a href="#" class="os-feature-card" style="border-top-color:#F5A623">
-        <p class="os-feature-card__q">What are my taxes actually funding?</p>
-        <p class="os-feature-card__label">Taxes &amp; districts</p>
-      </a>
-
-      <a href="#" class="os-feature-card" style="border-top-color:#3B82C4">
-        <p class="os-feature-card__q">Why is this being built here?</p>
-        <p class="os-feature-card__label">Permits &amp; development</p>
-      </a>
-
-      <a href="#" class="os-feature-card" style="border-top-color:#1AACB0">
-        <p class="os-feature-card__q">How does land use shape my community?</p>
-        <p class="os-feature-card__label">GIS &amp; zoning</p>
-      </a>
-
-      <a href="#" class="os-feature-card" style="border-top-color:#3D4D5C">
-        <p class="os-feature-card__q">How are local decisions being made?</p>
-        <p class="os-feature-card__label">Government trends</p>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- CITY PILLS -->
-  <section class="os-cities" id="cities">
-    <span class="os-cities__label">Browse by place</span>
-    <div class="os-cities__pills">
-      {% for item in city_pages %}
-        <a href="{% url 'city' item.slug %}" class="os-city-pill">{{ item.name }}</a>
-      {% endfor %}
-    </div>
-  </section>
-
-  <!-- MISSION STRIP -->
-  <section class="os-mission-v2">
-    <div class="os-mission-v2__inner">
-      <p>Skagit County generates a huge amount of public data.</p>
-      <p class="os-mission-v2__muted">Most of it lives in formats nobody can actually use.</p>
-      <p class="os-mission-v2__cta">OpenSkagit changes that.</p>
-      <p class="os-mission-v2__sources">Skagit County Assessor · GIS Services · County Finance Records</p>
-      <p class="os-mission-v2__not-ai">Not AI guessing. AI reading.</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="os-footer-v2">
-    <span class="os-footer-v2__built">Built in Skagit Valley</span>
-    <nav class="os-footer-v2__links" aria-label="Footer navigation">
-      <a href="#">About</a>
-      <a href="#">Data sources</a>
-      <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
-      <a href="mailto:hello@openskagit.org">Contact</a>
-    </nav>
-  </footer>
-
 </div>
-
 {% endblock %}

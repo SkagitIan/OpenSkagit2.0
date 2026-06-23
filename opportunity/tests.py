@@ -58,6 +58,13 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertTrue(services._recent_document_url(recent, today=date(2026, 6, 23)))
         self.assertEqual(services._recent_document_url(old, today=date(2026, 6, 23)), "")
 
+    def test_delinquent_years_phrase_separates_current_year_balance(self):
+        self.assertEqual(
+            services._delinquent_years_phrase(1, 1),
+            "1 prior delinquent tax year plus current-year balance",
+        )
+        self.assertEqual(services._delinquent_years_phrase(0, 1), "current-year delinquent balance")
+
 
 @override_settings(ROOT_URLCONF="config.urls", OPPORTUNITY_DASHBOARD_PASSWORD="letmein")
 class OpportunityAccessTests(TestCase):
@@ -81,7 +88,7 @@ class OpportunityAccessTests(TestCase):
     def test_correct_password_can_load_dashboard(self, fetch_tab_rows, tab_counts):
         response = self.client.post(reverse("opportunity_dashboard"), {"password": "letmein"})
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Where is the hidden land value?")
+        self.assertContains(response, "Delinquent Tax Pressure")
 
 
 @tag("opportunity_live")

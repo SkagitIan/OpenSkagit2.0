@@ -30,11 +30,7 @@
   .opp-lock-card input:focus { border-color: #1AACB0; outline: none; box-shadow: 0 0 0 3px rgba(26,172,176,.14); }
   .opp-lock-card button { margin-top: 12px; min-height: 38px; border: 1px solid #1AACB0; border-radius: 6px; background: #1AACB0; color: #fff; padding: 6px 12px; cursor: pointer; width: 100%; }
   .opp-error { color: #b3261e; margin-top: 10px; font-size: 13px; }
-  .opp-topbar { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 22px 24px; background: #042C53; border-bottom: 1px solid rgba(255,255,255,.08); color: #fff; }
-  .opp-topbar h1 { font-size: 20px; margin: 0; }
-  .opp-topbar p { margin: 4px 0 0; color: rgba(255,255,255,.68); font-size: 13px; }
-  .opp-topbar a { color: #1AACB0; text-decoration: none; font-weight: 700; }
-  .opp-wrap { max-width: 1420px; margin: 0 auto; padding: 12px 20px 20px; }
+  .opp-wrap { max-width: 1420px; margin: 0 auto; padding: 14px 20px 20px; }
   .opp-card { background: #fff; border: 1px solid var(--os-border); border-radius: 8px; padding: 14px; }
   .opp-card h2 { margin: 0 0 10px; font-size: 14px; color: var(--os-slate); }
   .opp-muted { color: var(--os-muted); font-size: 13px; }
@@ -60,24 +56,30 @@
   .opp-risk-cell .opp-flag:nth-child(5n+5) { background: rgba(179,38,30,.1); color: #8b241f; border-color: rgba(179,38,30,.2); }
   .opp-flag-link { font-weight: 700; }
   .opp-map { color: var(--os-teal-dk); font-weight: 600; }
+  .opp-mobile-list { display: none; }
+  .opp-mobile-row { background: #fff; border: 1px solid var(--os-border); border-radius: 8px; margin-bottom: 8px; }
+  .opp-mobile-row summary { display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; padding: 10px; cursor: pointer; list-style: none; }
+  .opp-mobile-row summary::-webkit-details-marker { display: none; }
+  .opp-mobile-id { font-weight: 800; color: var(--os-teal-dk); }
+  .opp-mobile-location { color: #182026; font-size: 13px; }
+  .opp-mobile-zone { color: var(--os-slate); font-size: 12px; font-weight: 700; text-align: right; }
+  .opp-mobile-risk { grid-column: 1 / -1; }
+  .opp-mobile-body { border-top: 1px solid var(--os-border); padding: 10px; }
+  .opp-mobile-body dl { margin: 0; display: grid; gap: 8px; }
+  .opp-mobile-body dt { font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--os-muted); }
+  .opp-mobile-body dd { margin: 2px 0 0; }
   .opp-pager { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 14px; }
   .opp-pager a, .opp-pager span { border: 1px solid var(--os-border); border-radius: 8px; padding: 8px 10px; text-decoration: none; color: var(--os-teal-dk); background: #fff; }
   .opp-pager span { color: var(--os-muted); }
   @media (max-width: 900px) {
-    .opp-topbar { align-items: flex-start; flex-direction: column; }
     .opp-zone div { max-width: calc(100vw - 72px); }
   }
   @media (max-width: 760px) {
     .opp-wrap { padding: 10px; }
     .opp-card { padding: 0; border: 0; background: transparent; }
     .opp-card h2 { padding: 0 2px; }
-    .opp-table-wrap { overflow: visible; }
-    .opp-table { min-width: 0; border-collapse: separate; border-spacing: 0 10px; }
-    .opp-table thead { display: none; }
-    .opp-table, .opp-table tbody, .opp-table tr, .opp-table td { display: block; width: 100%; }
-    .opp-table tr { background: #fff; border: 1px solid var(--os-border); border-radius: 8px; padding: 8px 10px; }
-    .opp-table td { border: 0; padding: 8px 0; }
-    .opp-table td::before { content: attr(data-label); display: block; margin-bottom: 3px; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--os-muted); }
+    .opp-table-wrap { display: none; }
+    .opp-mobile-list { display: block; }
     .opp-zone div { box-shadow: none; max-width: 100%; }
   }
 </style>
@@ -101,14 +103,6 @@
   </div>
 {% else %}
 <div class="opp-shell">
-  <header class="opp-topbar">
-    <div>
-      <h1>Where is the hidden land value?</h1>
-      <p>Ranked parcel opportunities for builders, developers, and land investors.</p>
-    </div>
-    <a href="/admin/">Django admin</a>
-  </header>
-
   <main class="opp-wrap">
     <nav class="opp-tabs">
       {% for tab in tabs %}
@@ -117,7 +111,6 @@
         </a>
       {% endfor %}
     </nav>
-    <p class="opp-definition">{{ selected_tab_obj.description }}</p>
 
     <section class="opp-card">
       <h2>{{ selected_tab_obj.label }}</h2>
@@ -175,6 +168,78 @@
             {% endfor %}
           </tbody>
         </table>
+      </div>
+      <div class="opp-mobile-list">
+        {% for row in rows %}
+          <details class="opp-mobile-row">
+            <summary>
+              <span>
+                <a class="opp-mobile-id" href="{{ row.parcel_url }}" target="_blank" rel="noopener">{{ row.parcel_number }}</a><br>
+                <span class="opp-mobile-location">{{ row.location }}</span>
+              </span>
+              <span class="opp-mobile-zone">{{ row.zoning }}</span>
+              <span class="opp-mobile-risk">
+                {% if row.recent_document_url %}
+                  <a class="opp-flag opp-flag-link" href="{{ row.recent_document_url }}" target="_blank" rel="noopener">Recent deed</a>
+                {% endif %}
+                {% for flag in row.risk_flags|slice:":2" %}
+                  <span class="opp-flag">{{ flag }}</span>
+                {% endfor %}
+              </span>
+            </summary>
+            <div class="opp-mobile-body">
+              <dl>
+                <div>
+                  <dt>Why</dt>
+                  <dd>{{ row.why_it_ranks }}</dd>
+                </div>
+                <div>
+                  <dt>Risk Flags</dt>
+                  <dd class="opp-risk-cell">
+                    {% if row.recent_document_url %}
+                      <a class="opp-flag opp-flag-link" href="{{ row.recent_document_url }}" target="_blank" rel="noopener">Recent recorded deed</a>
+                    {% endif %}
+                    {% for flag in row.risk_flags %}
+                      <span class="opp-flag">{{ flag }}</span>
+                    {% empty %}
+                      {% if not row.recent_document_url %}<span class="opp-muted">No obvious flags</span>{% endif %}
+                    {% endfor %}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Zone</dt>
+                  <dd>
+                    <details class="opp-zone">
+                      <summary>{{ row.zoning }}</summary>
+                      <div>
+                        {{ row.zone_definition }}
+                        {% if row.zone_url %}
+                          <br><a href="{{ row.zone_url }}" target="_blank" rel="noopener">Source</a>
+                        {% endif %}
+                      </div>
+                    </details>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Values</dt>
+                  <dd>Assessed {{ row.assessed_value_fmt }}<br><span class="opp-muted">Land {{ row.land_value_fmt }} / Building {{ row.building_value_fmt }} / {{ row.acres_fmt }}</span></dd>
+                </div>
+                <div>
+                  <dt>Map</dt>
+                  <dd>
+                    {% if row.map_url %}
+                      <a class="opp-map" href="{{ row.map_url }}" target="_blank" rel="noopener">Map</a>
+                    {% else %}
+                      <span class="opp-muted">No geometry</span>
+                    {% endif %}
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </details>
+        {% empty %}
+          <div class="opp-mobile-row"><div class="opp-mobile-body">No candidates found for this opportunity type.</div></div>
+        {% endfor %}
       </div>
       <nav class="opp-pager">
         {% if has_previous %}
