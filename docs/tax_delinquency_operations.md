@@ -10,6 +10,8 @@ The staff-only monitor is mounted at:
 
 It requires `is_staff=True`. The default lead view excludes parcels with only one late installment. Those rows are still cached and visible through the `One late` tab.
 
+Backfill and slow-check jobs only consider active residential parcels where `skagit_parcels.proptype = 'R'` and `assessed_value > 500`.
+
 ## Backfill On Railway
 
 Create a Railway service that uses:

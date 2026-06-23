@@ -15,9 +15,17 @@ def default_years() -> list[int]:
     return list(range(2023, timezone.localdate().year + 1))
 
 
-def active_parcel_count() -> int:
+ELIGIBLE_PARCEL_WHERE = """
+    inactive_date IS NULL
+    AND proptype = 'R'
+    AND assessed_value IS NOT NULL
+    AND assessed_value > 500
+"""
+
+
+def eligible_parcel_count() -> int:
     with connection.cursor() as cursor:
-        cursor.execute("SELECT COUNT(*) FROM skagit_parcels WHERE inactive_date IS NULL")
+        cursor.execute(f"SELECT COUNT(*) FROM skagit_parcels WHERE {ELIGIBLE_PARCEL_WHERE}")
         return cursor.fetchone()[0]
 
 
@@ -29,7 +37,11 @@ def iter_active_parcels(limit: int | None = None, offset: int = 0, parcel_number
             owner_name,
             CONCAT_WS(' ', situs_street_number, situs_street_name, situs_city_state_zip) AS situs_address
         FROM skagit_parcels
-        WHERE inactive_date IS NULL
+        WHERE
+            inactive_date IS NULL
+            AND proptype = 'R'
+            AND assessed_value IS NOT NULL
+            AND assessed_value > 500
     """
     params = []
     if parcel_number:

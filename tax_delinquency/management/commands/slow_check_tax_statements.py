@@ -6,7 +6,7 @@ import time
 from django.core.management.base import BaseCommand
 
 from tax_delinquency.models import TaxStatementRun
-from tax_delinquency.sync import active_parcel_count, default_years, sync_statements
+from tax_delinquency.sync import default_years, eligible_parcel_count, sync_statements
 
 
 class Command(BaseCommand):
@@ -30,7 +30,7 @@ class Command(BaseCommand):
             time.sleep(seconds)
 
         while True:
-            parcel_count = options["limit"] if options["limit"] is not None else active_parcel_count()
+            parcel_count = options["limit"] if options["limit"] is not None else eligible_parcel_count()
             statement_count = max(1, parcel_count * len(years))
             delay = options["delay"]
             if delay is None:

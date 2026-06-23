@@ -21,6 +21,21 @@ def active_parcel_total():
         return cursor.fetchone()[0]
 
 
+def eligible_parcel_total():
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            SELECT COUNT(*)
+            FROM skagit_parcels
+            WHERE inactive_date IS NULL
+              AND proptype = 'R'
+              AND assessed_value IS NOT NULL
+              AND assessed_value > 500
+            """
+        )
+        return cursor.fetchone()[0]
+
+
 def fmt_money(value):
     if value is None:
         return "$0.00"
@@ -96,6 +111,7 @@ def dashboard(request):
 
     context = {
         "active_parcel_total": active_parcel_total(),
+        "eligible_parcel_total": eligible_parcel_total(),
         "statement_total": TaxStatement.objects.count(),
         "parcel_coverage": TaxStatement.objects.values("parcel_number").distinct().count(),
         "level_counts": level_counts,
