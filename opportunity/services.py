@@ -196,7 +196,6 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
     place = filters.get("place", "")
     where = [
         "p.inactive_date IS NULL",
-        "t.total_due > 0",
         "COALESCE(p.assessed_value, 0) > 0",
         "COALESCE(p.neighborhood_code, '') NOT ILIKE '%%COMAREA%%'",
         "COALESCE(p.exemptions, '') NOT ILIKE '%%COMAREA%%'",
@@ -207,15 +206,7 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
         "COALESCE(z.zone_id, '') NOT ILIKE '%%-NRL%%'",
         "COALESCE(z.zone_name, '') NOT ILIKE '%%Natural Resource%%'",
         BUILDER_ZONE_EXCLUSION_SQL,
-        """
-        EXISTS (
-            SELECT 1
-            FROM tax_delinquency_taxstatement current_statement
-            WHERE current_statement.parcel_number = t.parcel_number
-              AND current_statement.tax_year = EXTRACT(YEAR FROM CURRENT_DATE)::int
-              AND current_statement.delinquent_installment_count > 0
-        )
-        """,
+        "current_statement.parcel_number IS NOT NULL",
     ]
     if improved == "vacant":
         where.append("COALESCE(p.building_value, 0) <= 10000")
@@ -227,34 +218,43 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
         where.append("COALESCE(z.jurisdiction, z.citydistrict, p.city_district, '') = ''")
 
     sql = f"""
-        WITH due AS (
-            SELECT t.parcel_number,
-                   COUNT(DISTINCT t.tax_year) FILTER (WHERE t.tax_year < EXTRACT(YEAR FROM CURRENT_DATE)::int) AS years_delinquent,
-                   COUNT(DISTINCT t.tax_year) FILTER (WHERE t.tax_year >= EXTRACT(YEAR FROM CURRENT_DATE)::int) AS current_year_count,
-                   array_agg(DISTINCT t.tax_year ORDER BY t.tax_year DESC) AS past_due_years,
-                   SUM(t.total_due) AS total_due,
-                   SUM(
-                     CASE
-                       WHEN t.tax_year >= EXTRACT(YEAR FROM CURRENT_DATE)::int
-                         THEN COALESCE(inst.delinquent_installment_amount, t.total_due, 0)
-                       ELSE COALESCE(t.total_due, 0)
-                     END
-                   ) AS past_due_amount,
-                   MAX(CASE t.lead_level
+        WITH current_statement AS (
+            SELECT t.parcel_number, t.tax_year, t.raw_data, t.total_due, t.lead_level, t.oldest_due_date
+            FROM tax_delinquency_taxstatement t
+            WHERE t.tax_year = EXTRACT(YEAR FROM CURRENT_DATE)::int
+              AND (
+                jsonb_array_length(COALESCE(t.raw_data->'delinquent_rows', '[]'::jsonb)) > 0
+                OR t.delinquent_installment_count > 0
+              )
+        ),
+        due AS (
+            SELECT current_statement.parcel_number,
+                   COUNT(*) FILTER (WHERE due_rows.tax_year < EXTRACT(YEAR FROM CURRENT_DATE)::int) AS years_delinquent,
+                   COUNT(*) FILTER (WHERE due_rows.tax_year >= EXTRACT(YEAR FROM CURRENT_DATE)::int) AS current_year_count,
+                   array_agg(due_rows.tax_year ORDER BY due_rows.tax_year DESC) AS past_due_years,
+                   SUM(due_rows.amount) AS total_due,
+                   SUM(due_rows.amount) AS past_due_amount,
+                   MAX(CASE current_statement.lead_level
                      WHEN 'severe' THEN 5 WHEN 'serious' THEN 4 WHEN 'behind' THEN 3
                      WHEN 'one_late' THEN 2 WHEN 'watch' THEN 1 ELSE 0 END) AS lead_score,
-                   MIN(t.oldest_due_date) AS oldest_due_date
-            FROM tax_delinquency_taxstatement t
-            JOIN skagit_parcels p ON p.parcel_number = t.parcel_number
+                   MIN(current_statement.oldest_due_date) AS oldest_due_date
+            FROM current_statement
+            JOIN skagit_parcels p ON p.parcel_number = current_statement.parcel_number
             LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
-            LEFT JOIN LATERAL (
-                SELECT SUM(NULLIF(regexp_replace(value->>'amount', '[^0-9.]', '', 'g'), '')::numeric) AS delinquent_installment_amount
-                FROM jsonb_array_elements(COALESCE(t.raw_data->'installments', '[]'::jsonb)) AS value
-                WHERE value->>'is_delinquent' = 'true'
+            JOIN LATERAL (
+                SELECT (value->>'year')::int AS tax_year,
+                       NULLIF(regexp_replace(value->>'total', '[^0-9.]', '', 'g'), '')::numeric AS amount
+                FROM jsonb_array_elements(COALESCE(current_statement.raw_data->'delinquent_rows', '[]'::jsonb)) AS value
+                UNION ALL
+                SELECT current_statement.tax_year AS tax_year,
+                       NULLIF(regexp_replace(value->>'amount', '[^0-9.]', '', 'g'), '')::numeric AS amount
+                FROM jsonb_array_elements(COALESCE(current_statement.raw_data->'installments', '[]'::jsonb)) AS value
+                WHERE jsonb_array_length(COALESCE(current_statement.raw_data->'delinquent_rows', '[]'::jsonb)) = 0
+                  AND value->>'is_delinquent' = 'true'
                   AND COALESCE(value->>'is_unpaid', 'true') = 'true'
-            ) inst ON true
+            ) due_rows ON true
             WHERE {" AND ".join(where)}
-            GROUP BY t.parcel_number
+            GROUP BY current_statement.parcel_number
         )
         SELECT p.parcel_number,
                concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,

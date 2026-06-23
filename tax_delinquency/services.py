@@ -81,6 +81,31 @@ def value_after_label(text: str, label: str) -> Decimal | None:
     return parse_money(match.group(1)) if match else None
 
 
+def parse_delinquent_rows(soup: BeautifulSoup) -> list[dict]:
+    table = soup.find("table", {"id": "tblDelinquent"})
+    if not table:
+        return []
+    rows = []
+    for row in table.find_all("tr"):
+        cells = [cell.get_text(" ", strip=True) for cell in row.find_all("td")]
+        if len(cells) != 5 or not cells[0].isdigit():
+            continue
+        year = int(cells[0])
+        total = parse_money(cells[4])
+        if total is None or total <= 0:
+            continue
+        rows.append(
+            {
+                "year": year,
+                "taxes": money_as_string(parse_money(cells[1])),
+                "interest": money_as_string(parse_money(cells[2])),
+                "penalty": money_as_string(parse_money(cells[3])),
+                "total": money_as_string(total),
+            }
+        )
+    return rows
+
+
 def parse_due_date(tax_year: int, due_by: str) -> date | None:
     match = re.search(r"([A-Z]+)\s+(\d{1,2})", due_by.upper())
     if not match:
@@ -96,6 +121,7 @@ def classify_statement(parsed: dict, today: date | None = None) -> dict:
     total_due = parse_money(parsed.get("total_due"))
     amount_paid = parse_money(parsed.get("amount_paid"))
     tax_year = parsed.get("tax_year")
+    delinquent_rows = parsed.get("delinquent_rows") or []
 
     status = "unknown"
     if total_due is not None:
@@ -129,6 +155,9 @@ def classify_statement(parsed: dict, today: date | None = None) -> dict:
 
     if total_due and total_due > 0 and tax_year and int(tax_year) < today.year and delinquent_count == 0:
         delinquent_count = 1
+    if delinquent_rows:
+        delinquent_count = max(delinquent_count, len(delinquent_rows))
+        delinquent_dates = delinquent_dates or [date(int(row["year"]), 1, 1) for row in delinquent_rows]
 
     lead_level = "unknown"
     if total_due is not None:
@@ -165,6 +194,7 @@ def parse_statement(html: str, source_url: str, today: date | None = None) -> di
     parcel_match = re.search(r"Parcel ID:\s*([A-Z0-9-]+)", text)
     xref_match = re.search(r"Xref ID:\s*([0-9-]+)", text)
     levy_match = re.search(r"Levy Code:\s*([0-9A-Z-]+)", text)
+    delinquent_rows = parse_delinquent_rows(soup)
 
     installments = []
     for match in re.finditer(
@@ -195,6 +225,7 @@ def parse_statement(html: str, source_url: str, today: date | None = None) -> di
         "total_due": money_as_string(value_after_label(text, f"{tax_year} Total Due")) if tax_year else None,
         "amount_paid": money_as_string(value_after_label(text, f"{tax_year} Amount Paid")) if tax_year else None,
         "installments": installments,
+        "delinquent_rows": delinquent_rows,
         "source_url": source_url,
         "source_fetched_at": timezone.now().isoformat(),
     }
