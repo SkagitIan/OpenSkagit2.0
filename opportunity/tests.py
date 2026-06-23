@@ -65,6 +65,14 @@ class OpportunityHelperTests(SimpleTestCase):
         )
         self.assertEqual(services._delinquent_years_phrase(0, 1), "current-year delinquent balance")
 
+    def test_location_adds_city_without_zip_noise(self):
+        self.assertEqual(services._city_label("Mount Vernon, WA 98273"), "Mount Vernon")
+        self.assertEqual(services._location_label("1725 S 30TH STREET", "Mount Vernon"), "1725 S 30TH STREET, Mount Vernon")
+
+    def test_value_history_phrase_is_compact(self):
+        self.assertEqual(services._value_history_phrase(Decimal("70")), "; assessed value up 70% since 2020")
+        self.assertEqual(services._value_history_phrase(Decimal("1")), "; assessed value roughly flat since 2020")
+
 
 @override_settings(ROOT_URLCONF="config.urls", OPPORTUNITY_DASHBOARD_PASSWORD="letmein")
 class OpportunityAccessTests(TestCase):

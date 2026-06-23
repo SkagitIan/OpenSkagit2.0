@@ -579,11 +579,12 @@ def _base_row(row: dict[str, Any], opportunity_type: str) -> dict[str, Any]:
     map_url = f"https://www.google.com/maps/search/?api=1&query={lat},{lng}" if lat is not None and lng is not None else ""
     land_value = (row.get("impr_land_value") or 0) + (row.get("unimpr_land_value") or 0)
     address = (row.get("address") or "").strip()
+    city = _city_label(row.get("city"))
     return {
         "parcel_number": row.get("parcel_number"),
         "parcel_url": ASSESSOR_DETAIL_URL.format(parcel_number=row.get("parcel_number")),
-        "location": address or "n/a",
-        "city": row.get("city") or "",
+        "location": _location_label(address, city),
+        "city": city,
         "owner": row.get("owner_name") or "",
         "acres": row.get("acres"),
         "acres_fmt": acres(row.get("acres")),
@@ -614,15 +615,12 @@ def _base_row(row: dict[str, Any], opportunity_type: str) -> dict[str, Any]:
 def _format_delinquency(row: dict[str, Any]) -> dict[str, Any]:
     item = _base_row(row, "Delinquent Tax Pressure")
     growth = _decimal(row.get("value_5yr_growth_pct"))
-    growth_phrase = f"; assessed value is up {growth:.0f}% since 2020" if growth is not None else ""
+    growth_phrase = _value_history_phrase(growth)
     years_phrase = _delinquent_years_phrase(row.get("years_delinquent"), row.get("current_year_count"))
-    land_signal = _land_building_signal(row)
     zoning = row.get("zone_id") or row.get("zone_name") or "unknown zoning"
-    utilities = utility_phrase(row.get("utilities"))
     use = _land_use_label(row.get("land_use"))
     item["why_it_ranks"] = (
-        f"Tax pressure: {years_phrase}. Dirt signal: {land_signal}. "
-        f"Use/zone: {use} in {zoning}. Site signal: {utilities}{growth_phrase}."
+        f"{years_phrase}. {use} in {zoning}{growth_phrase}."
     )
     item["recent_document_url"] = _recent_document_url(row)
     item["risk_flags"] = risk_flags(
@@ -831,6 +829,35 @@ def _percent(value: Any) -> str:
     if amount is None:
         return "unknown"
     return f"{amount:.0f}%"
+
+
+def _city_label(value: str | None) -> str:
+    text = (value or "").strip()
+    if not text:
+        return ""
+    first = text.split(",", 1)[0].strip()
+    return first or text
+
+
+def _location_label(address: str, city: str) -> str:
+    if address and city:
+        return f"{address}, {city}"
+    if address:
+        return address
+    if city:
+        return city
+    return "n/a"
+
+
+def _value_history_phrase(growth: Any) -> str:
+    amount = _decimal(growth)
+    if amount is None:
+        return ""
+    if amount >= 5:
+        return f"; assessed value up {amount:.0f}% since 2020"
+    if amount <= -5:
+        return f"; assessed value down {abs(amount):.0f}% since 2020"
+    return "; assessed value roughly flat since 2020"
 
 
 def filter_query(filters: dict[str, str]) -> str:
