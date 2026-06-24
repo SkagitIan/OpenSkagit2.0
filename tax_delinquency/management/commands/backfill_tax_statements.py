@@ -20,6 +20,7 @@ class Command(BaseCommand):
         parser.add_argument("--stale-hours", type=float, default=None)
         parser.add_argument("--force", action="store_true")
         parser.add_argument("--timeout", type=int, default=int(os.getenv("TAX_DELINQUENCY_TIMEOUT", "20")))
+        parser.add_argument("--workers", type=int, default=int(os.getenv("TAX_DELINQUENCY_WORKERS", "1")))
 
     def handle(self, *args, **options):
         years = options["years"] or default_years()
@@ -33,6 +34,7 @@ class Command(BaseCommand):
             stale_hours=options["stale_hours"],
             force=options["force"],
             timeout=options["timeout"],
+            workers=options["workers"],
             stdout=self.stdout,
         )
         self.stdout.write(

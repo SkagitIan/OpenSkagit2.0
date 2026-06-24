@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta
 from decimal import Decimal
+from typing import Any
 
 from django.db import connection
 from django.utils import timezone
@@ -123,6 +125,18 @@ def record_error(run: TaxStatementRun, parcel_number: str, tax_year: int, source
     )
 
 
+def fetch_statement_task(task: tuple[dict[str, Any], int], timeout: int, delay: float) -> tuple[dict[str, Any], int, dict | None, Exception | None]:
+    parcel, tax_year = task
+    try:
+        parsed = fetch_statement(parcel["parcel_number"], tax_year, timeout=timeout)
+        return parcel, tax_year, parsed, None
+    except Exception as exc:
+        return parcel, tax_year, None, exc
+    finally:
+        if delay:
+            time.sleep(delay)
+
+
 def sync_statements(
     *,
     run_type: str,
@@ -134,9 +148,11 @@ def sync_statements(
     stale_hours: float | None = None,
     force: bool = False,
     timeout: int = 20,
+    workers: int = 1,
     stdout=None,
 ) -> TaxStatementRun:
     years = years or default_years()
+    workers = max(1, int(workers or 1))
     stale_after = timezone.now() - timedelta(hours=stale_hours) if stale_hours else None
     run = TaxStatementRun.objects.create(
         run_type=run_type,
@@ -149,27 +165,39 @@ def sync_statements(
             "stale_hours": stale_hours,
             "force": force,
             "timeout": timeout,
+            "workers": workers,
         },
     )
 
     try:
+        tasks = []
         for parcel in iter_active_parcels(limit=limit, offset=offset, parcel_number=parcel_number):
             run.parcels_considered += 1
             for tax_year in years:
                 if should_skip_statement(parcel["parcel_number"], tax_year, stale_after, force):
                     run.statements_skipped += 1
-                    continue
-                run.statements_attempted += 1
-                try:
-                    parsed = fetch_statement(parcel["parcel_number"], tax_year, timeout=timeout)
-                    save_statement(parsed, parcel, run)
-                    run.statements_saved += 1
-                except Exception as exc:
+                else:
+                    run.statements_attempted += 1
+                    tasks.append((parcel, tax_year))
+            if (run.statements_attempted + run.statements_skipped) % 100 == 0:
+                run.save()
+
+        if stdout and workers > 1:
+            stdout.write(f"Fetching {len(tasks)} statements with {workers} workers.")
+
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            results = executor.map(lambda task: fetch_statement_task(task, timeout, delay), tasks)
+            for index, (parcel, tax_year, parsed, exc) in enumerate(results, 1):
+                if exc:
                     run.errors += 1
                     record_error(run, parcel["parcel_number"], tax_year, "", exc)
                     if stdout:
                         stdout.write(f"{parcel['parcel_number']} {tax_year} ERROR {exc}")
-                if (run.statements_attempted + run.statements_skipped) % 100 == 0:
+                else:
+                    save_statement(parsed, parcel, run)
+                    run.statements_saved += 1
+
+                if (index + run.statements_skipped) % 100 == 0:
                     run.save()
                     if stdout:
                         stdout.write(
@@ -177,7 +205,6 @@ def sync_statements(
                             f"parcels={run.parcels_considered} attempted={run.statements_attempted} "
                             f"saved={run.statements_saved} skipped={run.statements_skipped} errors={run.errors}"
                         )
-                time.sleep(delay)
         run.status = TaxStatementRun.Status.SUCCESS
     except KeyboardInterrupt:
         run.status = TaxStatementRun.Status.STOPPED

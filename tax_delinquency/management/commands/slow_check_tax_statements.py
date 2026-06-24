@@ -20,6 +20,7 @@ class Command(BaseCommand):
         parser.add_argument("--stale-hours", type=float, default=None)
         parser.add_argument("--start-after-hours", type=float, default=float(os.getenv("TAX_DELINQUENCY_START_AFTER_HOURS", "0")))
         parser.add_argument("--timeout", type=int, default=int(os.getenv("TAX_DELINQUENCY_TIMEOUT", "20")))
+        parser.add_argument("--workers", type=int, default=int(os.getenv("TAX_DELINQUENCY_WORKERS", "1")))
         parser.add_argument("--once", action="store_true")
 
     def handle(self, *args, **options):
@@ -39,7 +40,7 @@ class Command(BaseCommand):
 
             self.stdout.write(
                 f"Starting slow check years={years} parcels={parcel_count} "
-                f"cycle_hours={options['cycle_hours']} delay={delay:.2f}s"
+                f"cycle_hours={options['cycle_hours']} delay={delay:.2f}s workers={options['workers']}"
             )
             run = sync_statements(
                 run_type=TaxStatementRun.RunType.SLOW_CHECK,
@@ -49,6 +50,7 @@ class Command(BaseCommand):
                 stale_hours=stale_hours,
                 force=False,
                 timeout=options["timeout"],
+                workers=options["workers"],
                 stdout=self.stdout,
             )
             self.stdout.write(
