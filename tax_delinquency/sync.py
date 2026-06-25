@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import time
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta
 from decimal import Decimal
 from typing import Any
 
-from django.db import connection
+from django.db import OperationalError, close_old_connections, connection
 from django.utils import timezone
 
 from .models import TaxStatement, TaxStatementError, TaxStatementRun
@@ -114,6 +114,34 @@ def save_statement(parsed: dict, parcel: dict, run: TaxStatementRun) -> TaxState
     return statement
 
 
+def save_statement_with_retry(parsed: dict, parcel: dict, run: TaxStatementRun, attempts: int = 3) -> TaxStatement:
+    last_error = None
+    for attempt in range(1, attempts + 1):
+        try:
+            close_old_connections()
+            return save_statement(parsed, parcel, run)
+        except OperationalError as exc:
+            last_error = exc
+            close_old_connections()
+            if attempt == attempts:
+                break
+            time.sleep(attempt * 2)
+    raise last_error
+
+
+def save_run_progress(run: TaxStatementRun, attempts: int = 3) -> None:
+    for attempt in range(1, attempts + 1):
+        try:
+            close_old_connections()
+            run.save()
+            return
+        except OperationalError:
+            close_old_connections()
+            if attempt == attempts:
+                raise
+            time.sleep(attempt * 2)
+
+
 def record_error(run: TaxStatementRun, parcel_number: str, tax_year: int, source_url: str, exc: Exception):
     TaxStatementError.objects.create(
         run=run,
@@ -180,29 +208,37 @@ def sync_statements(
                     run.statements_attempted += 1
                     tasks.append((parcel, tax_year))
             if (run.statements_attempted + run.statements_skipped) % 100 == 0:
-                run.save()
+                save_run_progress(run)
 
         if stdout and workers > 1:
             stdout.write(f"Fetching {len(tasks)} statements with {workers} workers.")
 
         with ThreadPoolExecutor(max_workers=workers) as executor:
-            results = executor.map(lambda task: fetch_statement_task(task, timeout, delay), tasks)
-            for index, (parcel, tax_year, parsed, exc) in enumerate(results, 1):
+            futures = [executor.submit(fetch_statement_task, task, timeout, delay) for task in tasks]
+            total_tasks = len(futures)
+            for index, future in enumerate(as_completed(futures), 1):
+                parcel, tax_year, parsed, exc = future.result()
                 if exc:
                     run.errors += 1
                     record_error(run, parcel["parcel_number"], tax_year, "", exc)
                     if stdout:
                         stdout.write(f"{parcel['parcel_number']} {tax_year} ERROR {exc}")
                 else:
-                    save_statement(parsed, parcel, run)
-                    run.statements_saved += 1
+                    try:
+                        save_statement_with_retry(parsed, parcel, run)
+                        run.statements_saved += 1
+                    except Exception as save_exc:
+                        run.errors += 1
+                        record_error(run, parcel["parcel_number"], tax_year, "", save_exc)
+                        if stdout:
+                            stdout.write(f"{parcel['parcel_number']} {tax_year} SAVE ERROR {save_exc}")
 
                 if (index + run.statements_skipped) % 100 == 0:
-                    run.save()
+                    save_run_progress(run)
                     if stdout:
                         stdout.write(
                             "progress "
-                            f"parcels={run.parcels_considered} attempted={run.statements_attempted} "
+                            f"completed={index}/{total_tasks} parcels={run.parcels_considered} attempted={run.statements_attempted} "
                             f"saved={run.statements_saved} skipped={run.statements_skipped} errors={run.errors}"
                         )
         run.status = TaxStatementRun.Status.SUCCESS
@@ -215,5 +251,5 @@ def sync_statements(
         raise
     finally:
         run.finished_at = timezone.now()
-        run.save()
+        save_run_progress(run)
     return run
