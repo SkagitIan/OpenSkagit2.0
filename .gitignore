@@ -10,6 +10,7 @@ __pycache__/
 db.sqlite3
 staticfiles/
 output/assessor_sync_reports/
+django-runserver-*.log
 
 # OS / Editor
 .DS_Store

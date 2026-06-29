@@ -10,6 +10,8 @@ from django.views.decorators.http import require_POST
 from .ai_search import (
     FEEDBACK_REASONS,
     display_rows_for_search,
+    ensure_ai_search_worker,
+    recent_searches_for_user,
     record_search_feedback,
     saved_searches_for_user,
     start_ai_opportunity_search,
@@ -135,6 +137,7 @@ def ai_search(request):
             "active_nav": "ai_search",
             "prompt": prompt,
             "error": error,
+            "recent_searches": recent_searches_for_user(request.user, limit=10),
             "saved_searches": saved_searches_for_user(request.user, limit=8),
             "disclaimer": DISCLAIMER,
         },
@@ -145,6 +148,8 @@ def ai_search(request):
 def ai_search_detail(request, search_id):
     search = get_object_or_404(OpportunitySearch, pk=search_id, user=request.user)
     is_pending = search.status == OpportunitySearch.STATUS_DRAFT
+    if is_pending:
+        ensure_ai_search_worker(search)
     view_mode = _view_mode(request.GET.get("view", "list"))
     page = _positive_int(request.GET.get("page"), 1)
     all_rows = [] if is_pending else display_rows_for_search(search, request.user)
@@ -160,6 +165,7 @@ def ai_search_detail(request, search_id):
             "active_nav": "ai_search",
             "search": search,
             "rows": rows,
+            "display_result_count": len(all_rows),
             "view_mode": view_mode,
             "page": page,
             "has_previous": has_previous,

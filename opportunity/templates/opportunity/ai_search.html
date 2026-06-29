@@ -9,7 +9,7 @@
   <div>
     <p class="pb-kicker">AI Search</p>
     <h1>Search opportunities in plain English</h1>
-    <p class="pb-muted">Describe the parcel pattern you want. Parcel Book will translate it into a guarded PostGIS search and cache the results for review.</p>
+    <p class="pb-muted">Describe the parcel pattern you want. Parcel Book will look for likely matches and keep the results here for review.</p>
   </div>
   <a class="pb-button secondary" href="{% url 'opportunity_explore' %}">Browse standard tabs</a>
 </div>
@@ -31,7 +31,41 @@
 
 <section class="pb-panel pb-saved-search-panel">
   <div class="pb-section-head">
-    <h2>Saved AI searches</h2>
+    <h2>Recent AI searches</h2>
+  </div>
+  <div class="pb-result-list">
+    {% for search in recent_searches %}
+      <article class="pb-saved-search-row">
+        <div>
+          <a class="pb-card-title" href="{% url 'opportunity_ai_search_detail' search.pk %}">{{ search.title|default:"Finding target parcels" }}</a>
+          <div class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</div>
+          {% if search.status == "draft" %}
+            <span class="pb-pill">Finding parcels</span>
+          {% elif search.status == "error" %}
+            <span class="pb-flag">Needs another try</span>
+          {% elif search.is_saved %}
+            <span class="pb-chip">Saved opportunity</span>
+          {% endif %}
+        </div>
+        <div class="pb-list-values">
+          {% if search.status == "draft" %}
+            <strong>...</strong>
+            <span>working</span>
+          {% else %}
+            <strong>{{ search.result_count }}</strong>
+            <span>result{{ search.result_count|pluralize }}</span>
+          {% endif %}
+        </div>
+      </article>
+    {% empty %}
+      <p class="pb-muted">Your AI searches will appear here while they run and after they finish.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="pb-panel pb-saved-search-panel">
+  <div class="pb-section-head">
+    <h2>Saved opportunities</h2>
   </div>
   <div class="pb-result-list">
     {% for search in saved_searches %}
@@ -42,11 +76,11 @@
         </div>
         <div class="pb-list-values">
           <strong>{{ search.result_count }}</strong>
-          <span>cached results</span>
+          <span>result{{ search.result_count|pluralize }}</span>
         </div>
       </article>
     {% empty %}
-      <p class="pb-muted">Saved AI searches will appear here.</p>
+      <p class="pb-muted">Saved opportunities will appear here.</p>
     {% endfor %}
   </div>
 </section>

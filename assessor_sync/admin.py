@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from .models import AssessorSyncChange, AssessorSyncFile, AssessorSyncReport, AssessorSyncRun
+from .models import (
+    AssessorSyncChange,
+    AssessorSyncFile,
+    AssessorSyncReport,
+    AssessorSyncRun,
+    AuditorRecording,
+    AuditorSyncQuery,
+)
 
 
 class ReadOnlyAuditAdmin(admin.ModelAdmin):
@@ -97,3 +104,56 @@ class AssessorSyncReportAdmin(ReadOnlyAuditAdmin):
     list_display = ("id", "run", "created_at")
     search_fields = ("report_text",)
     readonly_fields = ("id", "run", "report_text", "created_at")
+
+
+@admin.register(AuditorRecording)
+class AuditorRecordingAdmin(ReadOnlyAuditAdmin):
+    list_display = ("recording_number", "recorded_date", "document_type", "signal_group", "parcel_number", "last_seen_at")
+    list_filter = ("document_type", "signal_group", "recorded_date")
+    search_fields = ("recording_number", "parcel_number", "grantor", "grantee", "legal")
+    readonly_fields = (
+        "id",
+        "recording_number",
+        "recorded_date",
+        "document_type",
+        "signal_group",
+        "grantor",
+        "grantee",
+        "filer",
+        "comment",
+        "legal",
+        "parcel_number",
+        "parcel_text",
+        "assessor_url",
+        "pdf_url",
+        "reference_url",
+        "raw_row",
+        "first_seen_run",
+        "last_seen_run",
+        "first_seen_at",
+        "last_seen_at",
+    )
+
+
+@admin.register(AuditorSyncQuery)
+class AuditorSyncQueryAdmin(ReadOnlyAuditAdmin):
+    list_display = ("id", "run", "document_type", "start_date", "end_date", "status", "parsed_count", "inserted_count", "updated_count")
+    list_filter = ("status", "capped", "document_type", "created_at")
+    search_fields = ("document_type", "error")
+    readonly_fields = (
+        "id",
+        "run",
+        "document_type",
+        "start_date",
+        "end_date",
+        "result_count",
+        "parsed_count",
+        "page_count",
+        "inserted_count",
+        "updated_count",
+        "status",
+        "capped",
+        "error",
+        "created_at",
+        "finished_at",
+    )

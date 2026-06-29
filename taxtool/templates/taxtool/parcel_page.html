@@ -2,7 +2,7 @@
 {% block title %}Property Tax Report - OpenSkagit{% endblock %}
 
 {% block extra_head %}
-<style>body { background: #f5f9fd; }</style>
+<style>body { background: #f6f8f8; }</style>
 {% endblock %}
 
 {% block content %}
@@ -21,11 +21,9 @@
           {% endfor %}
         </div>
       </details>
-      <a href="#">Parcels</a>
       <a href="{% url 'tax_home' %}" aria-current="page">Taxes</a>
-      <a href="#">Permits</a>
-      <a href="#">GIS</a>
-      <a href="#">About</a>
+      <a href="/#places">Places</a>
+      <a href="mailto:ian@openskagit.com">Contact</a>
     </nav>
   </header>
 
@@ -34,10 +32,10 @@
   <footer class="os-footer-v2">
     <span class="os-footer-v2__built">Built in Skagit Valley</span>
     <nav class="os-footer-v2__links" aria-label="Footer navigation">
-      <a href="#">About</a>
-      <a href="#">Data sources</a>
+      <a href="/">OpenSkagit</a>
+      <a href="{% url 'tax_home' %}">Tax tool</a>
       <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
-      <a href="mailto:hello@openskagit.org">Contact</a>
+      <a href="mailto:ian@openskagit.com">Contact</a>
     </nav>
   </footer>
 </div>

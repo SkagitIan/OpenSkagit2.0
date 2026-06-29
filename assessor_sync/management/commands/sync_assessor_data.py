@@ -6,14 +6,19 @@ import tempfile
 import urllib.request
 import zipfile
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
-from typing import Iterable
+from typing import Any, Iterable
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.db import connection, transaction
 
+from assessor_sync.auditor import (
+    CORE_INVESTOR_DOCUMENT_TYPES,
+    AuditorRecording,
+    AuditorRecordingClient,
+)
 from assessor_sync.management.commands.import_assessor import (
     COUNTY_ZIP_URL,
     DATASETS,
@@ -45,6 +50,9 @@ TABLES = (
     ),
 )
 REPORT_ROW_LIMIT = 200
+AUDITOR_RECORDING_TABLE = "auditor_recordings"
+AUDITOR_DEFAULT_BACKFILL_DAYS = 7
+AUDITOR_MAX_PAGES_PER_TYPE = 25
 AUDIT_EXCLUDED_COLUMNS = {
     # The assessor export appears to churn AID values across most parcels, which
     # creates huge audit rows without useful Parcel Book signal.
@@ -85,6 +93,16 @@ COMPACT_AUDIT_COLUMNS = {
         "imprv_det_type_description",
         "imprv_val",
         "imprv_val_num",
+    ),
+    AUDITOR_RECORDING_TABLE: (
+        "recording_number",
+        "recorded_date",
+        "document_type",
+        "signal_group",
+        "grantor",
+        "grantee",
+        "parcel_number",
+        "pdf_url",
     ),
 }
 
@@ -175,6 +193,36 @@ def column_type_map(cursor, table_name: str) -> dict[str, str]:
     return {name: data_type for name, data_type in cursor.fetchall()}
 
 
+def _parse_iso_date(value: str | None) -> date | None:
+    if not value:
+        return None
+    try:
+        return date.fromisoformat(value)
+    except ValueError as exc:
+        raise CommandError(f"Invalid date {value!r}; expected YYYY-MM-DD.") from exc
+
+
+def _changed_fields(old: dict[str, Any], new: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    fields: dict[str, dict[str, Any]] = {}
+    for key, new_value in new.items():
+        old_value = old.get(key)
+        if _normalize_audit_value(old_value) != _normalize_audit_value(new_value):
+            fields[key] = {"old": old_value, "new": new_value}
+    return fields
+
+
+def _normalize_audit_value(value: Any) -> Any:
+    if isinstance(value, str):
+        return " ".join(value.split())
+    if isinstance(value, date):
+        return value.isoformat()
+    if isinstance(value, dict):
+        return {key: _normalize_audit_value(item) for key, item in sorted(value.items())}
+    if isinstance(value, list):
+        return [_normalize_audit_value(item) for item in value]
+    return value
+
+
 class Command(BaseCommand):
     help = "Nightly Skagit County assessor download, diff, upsert, and report."
 
@@ -191,6 +239,15 @@ class Command(BaseCommand):
             type=int,
             default=14,
             help="Keep row-level assessor_sync_changes for this many latest successful runs.",
+        )
+        parser.add_argument("--skip-auditor", action="store_true", help="Skip Skagit County auditor recording checks.")
+        parser.add_argument("--auditor-start-date", help="Auditor recording start date in YYYY-MM-DD format.")
+        parser.add_argument("--auditor-end-date", help="Auditor recording end date in YYYY-MM-DD format.")
+        parser.add_argument(
+            "--auditor-backfill-days",
+            type=int,
+            default=AUDITOR_DEFAULT_BACKFILL_DAYS,
+            help="Initial auditor backfill window when no prior successful auditor query exists.",
         )
 
     def handle(self, *args, **options):
@@ -226,6 +283,8 @@ class Command(BaseCommand):
                     with connection.cursor() as cursor:
                         stats = self._sync_zip(cursor, run_id, zip_path)
 
+                auditor_summary = self._sync_auditor_recordings(run_id, options)
+
                 finished = datetime.now(UTC)
                 summary = {
                     "zip_sha256": zip_hash,
@@ -233,6 +292,7 @@ class Command(BaseCommand):
                     "finished_at": finished.isoformat(),
                     "files_changed": sum(1 for item in file_changes if item["changed"]),
                     "tables": stats,
+                    "auditor": auditor_summary,
                 }
 
                 report = self._build_report(run_id, started, finished, summary, file_changes)
@@ -337,8 +397,60 @@ class Command(BaseCommand):
             )
             """
         )
+        cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS auditor_recordings (
+                id BIGSERIAL PRIMARY KEY,
+                recording_number TEXT NOT NULL UNIQUE,
+                recorded_date DATE,
+                document_type TEXT NOT NULL,
+                signal_group TEXT NOT NULL,
+                grantor TEXT NOT NULL DEFAULT '',
+                grantee TEXT NOT NULL DEFAULT '',
+                filer TEXT NOT NULL DEFAULT '',
+                comment TEXT NOT NULL DEFAULT '',
+                legal TEXT NOT NULL DEFAULT '',
+                parcel_number TEXT NOT NULL DEFAULT '',
+                parcel_text TEXT NOT NULL DEFAULT '',
+                assessor_url TEXT NOT NULL DEFAULT '',
+                pdf_url TEXT NOT NULL DEFAULT '',
+                reference_url TEXT NOT NULL DEFAULT '',
+                raw_row JSONB NOT NULL DEFAULT '{}'::jsonb,
+                first_seen_run_id BIGINT REFERENCES assessor_sync_runs(id) ON DELETE SET NULL,
+                last_seen_run_id BIGINT REFERENCES assessor_sync_runs(id) ON DELETE SET NULL,
+                first_seen_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                last_seen_at TIMESTAMPTZ NOT NULL DEFAULT now()
+            )
+            """
+        )
+        cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS auditor_sync_queries (
+                id BIGSERIAL PRIMARY KEY,
+                run_id BIGINT NOT NULL REFERENCES assessor_sync_runs(id) ON DELETE CASCADE,
+                document_type TEXT NOT NULL,
+                start_date DATE NOT NULL,
+                end_date DATE NOT NULL,
+                result_count INTEGER NOT NULL DEFAULT 0,
+                parsed_count INTEGER NOT NULL DEFAULT 0,
+                page_count INTEGER NOT NULL DEFAULT 0,
+                inserted_count INTEGER NOT NULL DEFAULT 0,
+                updated_count INTEGER NOT NULL DEFAULT 0,
+                status TEXT NOT NULL DEFAULT 'running',
+                capped BOOLEAN NOT NULL DEFAULT false,
+                error TEXT NOT NULL DEFAULT '',
+                created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                finished_at TIMESTAMPTZ
+            )
+            """
+        )
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_assessor_sync_files_file_name ON assessor_sync_files (file_name, id DESC)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_assessor_sync_changes_run_table ON assessor_sync_changes (run_id, table_name, change_type)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_auditor_recordings_parcel ON auditor_recordings (parcel_number)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_auditor_recordings_recorded ON auditor_recordings (recorded_date DESC)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_auditor_recordings_signal ON auditor_recordings (signal_group, recorded_date DESC)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_auditor_sync_queries_run ON auditor_sync_queries (run_id, document_type)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_auditor_sync_queries_success ON auditor_sync_queries (status, end_date DESC)")
 
     def _start_run(self, cursor, source_url: str) -> int:
         cursor.execute(
@@ -740,6 +852,317 @@ class Command(BaseCommand):
         cursor.execute("DROP TABLE IF EXISTS tmp_assessor_sync_keys")
         return applied
 
+    def _sync_auditor_recordings(self, run_id: int, options: dict) -> dict[str, Any]:
+        if options["skip_auditor"]:
+            return {"enabled": False, "status": "skipped", "queries": [], "inserted": 0, "updated": 0, "errors": 0}
+
+        start_date, end_date = self._auditor_date_window(options)
+        summary: dict[str, Any] = {
+            "enabled": True,
+            "status": "success",
+            "start_date": start_date.isoformat(),
+            "end_date": end_date.isoformat(),
+            "document_types": len(CORE_INVESTOR_DOCUMENT_TYPES),
+            "queries": [],
+            "result_count": 0,
+            "parsed_count": 0,
+            "inserted": 0,
+            "updated": 0,
+            "errors": 0,
+            "capped": 0,
+            "by_signal_group": {},
+        }
+
+        client = AuditorRecordingClient()
+        for document_type in CORE_INVESTOR_DOCUMENT_TYPES:
+            query_id: int | None = None
+            try:
+                with connection.cursor() as cursor:
+                    query_id = self._start_auditor_query(cursor, run_id, document_type, start_date, end_date)
+
+                self.stdout.write(f"Checking auditor recordings: {document_type} ({start_date} to {end_date})")
+                records, query_meta = client.search(document_type, start_date, end_date, max_pages=AUDITOR_MAX_PAGES_PER_TYPE)
+                with transaction.atomic():
+                    with connection.cursor() as cursor:
+                        upsert_stats = self._upsert_auditor_recordings(cursor, run_id, records)
+                        self._finish_auditor_query(
+                            cursor,
+                            query_id,
+                            "success",
+                            result_count=int(query_meta.get("result_count") or 0),
+                            parsed_count=len(records),
+                            page_count=int(query_meta.get("pages") or 0),
+                            inserted_count=upsert_stats["inserted"],
+                            updated_count=upsert_stats["updated"],
+                            capped=bool(query_meta.get("capped")),
+                        )
+
+                item = {
+                    "document_type": document_type,
+                    "status": "success",
+                    "result_count": int(query_meta.get("result_count") or 0),
+                    "parsed_count": len(records),
+                    "page_count": int(query_meta.get("pages") or 0),
+                    "inserted": upsert_stats["inserted"],
+                    "updated": upsert_stats["updated"],
+                    "capped": bool(query_meta.get("capped")),
+                }
+                summary["queries"].append(item)
+                summary["result_count"] += item["result_count"]
+                summary["parsed_count"] += item["parsed_count"]
+                summary["inserted"] += item["inserted"]
+                summary["updated"] += item["updated"]
+                summary["capped"] += 1 if item["capped"] else 0
+                for group, count in upsert_stats.get("inserted_by_signal_group", {}).items():
+                    summary["by_signal_group"].setdefault(group, 0)
+                    summary["by_signal_group"][group] += count
+            except Exception as exc:
+                summary["status"] = "partial_failure"
+                summary["errors"] += 1
+                summary["queries"].append(
+                    {
+                        "document_type": document_type,
+                        "status": "failed",
+                        "result_count": 0,
+                        "parsed_count": 0,
+                        "page_count": 0,
+                        "inserted": 0,
+                        "updated": 0,
+                        "capped": False,
+                        "error": str(exc)[:1000],
+                    }
+                )
+                if query_id is not None:
+                    with connection.cursor() as cursor:
+                        self._finish_auditor_query(cursor, query_id, "failed", error=str(exc)[:1000])
+                self.stdout.write(self.style.WARNING(f"Auditor query failed for {document_type}: {exc}"))
+
+        return summary
+
+    def _auditor_date_window(self, options: dict) -> tuple[date, date]:
+        today = datetime.now(UTC).date()
+        end_date = _parse_iso_date(options.get("auditor_end_date")) or today
+        explicit_start = _parse_iso_date(options.get("auditor_start_date"))
+        if explicit_start:
+            return explicit_start, end_date
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT max(end_date)
+                FROM auditor_sync_queries
+                WHERE status = 'success'
+                """
+            )
+            latest = cursor.fetchone()[0]
+        if latest:
+            return latest, end_date
+
+        backfill_days = max(0, int(options.get("auditor_backfill_days") or AUDITOR_DEFAULT_BACKFILL_DAYS))
+        return end_date - timedelta(days=backfill_days), end_date
+
+    def _start_auditor_query(self, cursor, run_id: int, document_type: str, start_date: date, end_date: date) -> int:
+        cursor.execute(
+            """
+            INSERT INTO auditor_sync_queries (run_id, document_type, start_date, end_date)
+            VALUES (%s, %s, %s, %s)
+            RETURNING id
+            """,
+            (run_id, document_type, start_date, end_date),
+        )
+        return int(cursor.fetchone()[0])
+
+    def _finish_auditor_query(
+        self,
+        cursor,
+        query_id: int,
+        status: str,
+        result_count: int = 0,
+        parsed_count: int = 0,
+        page_count: int = 0,
+        inserted_count: int = 0,
+        updated_count: int = 0,
+        capped: bool = False,
+        error: str = "",
+    ) -> None:
+        cursor.execute(
+            """
+            UPDATE auditor_sync_queries
+            SET result_count = %s,
+                parsed_count = %s,
+                page_count = %s,
+                inserted_count = %s,
+                updated_count = %s,
+                status = %s,
+                capped = %s,
+                error = %s,
+                finished_at = now()
+            WHERE id = %s
+            """,
+            (result_count, parsed_count, page_count, inserted_count, updated_count, status, capped, error, query_id),
+        )
+
+    def _upsert_auditor_recordings(self, cursor, run_id: int, records: list[AuditorRecording]) -> dict[str, int]:
+        inserted = 0
+        updated = 0
+        inserted_by_signal_group: dict[str, int] = {}
+        seen: set[str] = set()
+        for record in records:
+            if not record.recording_number or record.recording_number in seen:
+                continue
+            seen.add(record.recording_number)
+            incoming = self._auditor_record_row(record)
+            cursor.execute(
+                """
+                SELECT recording_number, recorded_date, document_type, signal_group, grantor, grantee, filer,
+                       comment, legal, parcel_number, parcel_text, assessor_url, pdf_url, reference_url, raw_row
+                FROM auditor_recordings
+                WHERE recording_number = %s
+                """,
+                (record.recording_number,),
+            )
+            row = cursor.fetchone()
+            if row is None:
+                self._insert_auditor_recording(cursor, run_id, incoming)
+                self._record_auditor_change(cursor, run_id, record.recording_number, "insert", {}, None, record.compact_dict())
+                inserted += 1
+                inserted_by_signal_group.setdefault(record.signal_group or "other", 0)
+                inserted_by_signal_group[record.signal_group or "other"] += 1
+                continue
+
+            existing = self._auditor_existing_row_dict(row)
+            changed_fields = _changed_fields(existing, incoming)
+            if changed_fields:
+                self._update_auditor_recording(cursor, run_id, incoming)
+                self._record_auditor_change(
+                    cursor,
+                    run_id,
+                    record.recording_number,
+                    "update",
+                    changed_fields,
+                    None,
+                    record.compact_dict(),
+                )
+                updated += 1
+            else:
+                cursor.execute(
+                    """
+                    UPDATE auditor_recordings
+                    SET last_seen_run_id = %s, last_seen_at = now()
+                    WHERE recording_number = %s
+                    """,
+                    (run_id, record.recording_number),
+                )
+        return {"inserted": inserted, "updated": updated, "inserted_by_signal_group": inserted_by_signal_group}
+
+    def _auditor_record_row(self, record: AuditorRecording) -> dict[str, Any]:
+        return {
+            "recording_number": record.recording_number,
+            "recorded_date": record.recorded_date,
+            "document_type": record.document_type,
+            "signal_group": record.signal_group,
+            "grantor": record.grantor,
+            "grantee": record.grantee,
+            "filer": record.filer,
+            "comment": record.comment,
+            "legal": record.legal,
+            "parcel_number": record.parcel_number,
+            "parcel_text": record.parcel_text,
+            "assessor_url": record.assessor_url,
+            "pdf_url": record.pdf_url,
+            "reference_url": record.reference_url,
+            "raw_row": record.raw_row,
+        }
+
+    def _auditor_existing_row_dict(self, row) -> dict[str, Any]:
+        keys = (
+            "recording_number",
+            "recorded_date",
+            "document_type",
+            "signal_group",
+            "grantor",
+            "grantee",
+            "filer",
+            "comment",
+            "legal",
+            "parcel_number",
+            "parcel_text",
+            "assessor_url",
+            "pdf_url",
+            "reference_url",
+            "raw_row",
+        )
+        return dict(zip(keys, row, strict=True))
+
+    def _insert_auditor_recording(self, cursor, run_id: int, row: dict[str, Any]) -> None:
+        cursor.execute(
+            """
+            INSERT INTO auditor_recordings (
+                recording_number, recorded_date, document_type, signal_group, grantor, grantee, filer,
+                comment, legal, parcel_number, parcel_text, assessor_url, pdf_url, reference_url, raw_row,
+                first_seen_run_id, last_seen_run_id
+            )
+            VALUES (
+                %(recording_number)s, %(recorded_date)s, %(document_type)s, %(signal_group)s, %(grantor)s,
+                %(grantee)s, %(filer)s, %(comment)s, %(legal)s, %(parcel_number)s, %(parcel_text)s,
+                %(assessor_url)s, %(pdf_url)s, %(reference_url)s, %(raw_row)s::jsonb, %(run_id)s, %(run_id)s
+            )
+            """,
+            row | {"raw_row": json.dumps(row["raw_row"], default=str), "run_id": run_id},
+        )
+
+    def _update_auditor_recording(self, cursor, run_id: int, row: dict[str, Any]) -> None:
+        cursor.execute(
+            """
+            UPDATE auditor_recordings
+            SET recorded_date = %(recorded_date)s,
+                document_type = %(document_type)s,
+                signal_group = %(signal_group)s,
+                grantor = %(grantor)s,
+                grantee = %(grantee)s,
+                filer = %(filer)s,
+                comment = %(comment)s,
+                legal = %(legal)s,
+                parcel_number = %(parcel_number)s,
+                parcel_text = %(parcel_text)s,
+                assessor_url = %(assessor_url)s,
+                pdf_url = %(pdf_url)s,
+                reference_url = %(reference_url)s,
+                raw_row = %(raw_row)s::jsonb,
+                last_seen_run_id = %(run_id)s,
+                last_seen_at = now()
+            WHERE recording_number = %(recording_number)s
+            """,
+            row | {"raw_row": json.dumps(row["raw_row"], default=str), "run_id": run_id},
+        )
+
+    def _record_auditor_change(
+        self,
+        cursor,
+        run_id: int,
+        recording_number: str,
+        change_type: str,
+        changed_fields: dict[str, Any],
+        old_row: dict[str, Any] | None,
+        new_row: dict[str, Any] | None,
+    ) -> None:
+        cursor.execute(
+            """
+            INSERT INTO assessor_sync_changes
+                (run_id, table_name, record_key, change_type, changed_fields, old_row, new_row)
+            VALUES (%s, %s, %s, %s, %s::jsonb, %s::jsonb, %s::jsonb)
+            """,
+            (
+                run_id,
+                AUDITOR_RECORDING_TABLE,
+                recording_number,
+                change_type,
+                json.dumps(changed_fields, default=str),
+                json.dumps(old_row, default=str) if old_row is not None else None,
+                json.dumps(new_row, default=str) if new_row is not None else None,
+            ),
+        )
+
     def _prune_sync_changes(self, cursor, retain_success_runs: int, current_run_id: int) -> int:
         if retain_success_runs < 1:
             retain_success_runs = 1
@@ -788,6 +1211,14 @@ class Command(BaseCommand):
                 f"- {table.report_label}: {stats.get('inserted', 0):,} new, "
                 f"{stats.get('updated', 0):,} changed, {stats.get('staged_rows', 0):,} rows checked"
             )
+        auditor = summary.get("auditor") or {}
+        if auditor.get("enabled"):
+            lines.append(
+                f"- auditor recordings: {auditor.get('inserted', 0):,} new, "
+                f"{auditor.get('updated', 0):,} changed, {auditor.get('parsed_count', 0):,} parsed"
+            )
+        elif auditor.get("status") == "skipped":
+            lines.append("- auditor recordings: skipped")
 
         changed_files = [row for row in file_changes if row["changed"]]
         lines.extend(["", "## Files Changed Since Last Run", ""])
@@ -803,7 +1234,43 @@ class Command(BaseCommand):
         lines.extend(self._report_samples(run_id, "assessor_rollup", "update", "Parcel Records Changed"))
         lines.extend(self._report_samples(run_id, "land", "update", "Land Records Changed"))
         lines.extend(self._report_samples(run_id, "improvements", "update", "Improvement Records Changed"))
+        lines.extend(self._auditor_report_sections(run_id, summary.get("auditor") or {}))
         return "\n".join(lines) + "\n"
+
+    def _auditor_report_sections(self, run_id: int, auditor: dict[str, Any]) -> list[str]:
+        lines = ["", "## Auditor Recording Queries", ""]
+        if not auditor.get("enabled"):
+            lines.append("- Skipped.")
+            return lines
+
+        lines.append(
+            f"- Window: {auditor.get('start_date')} to {auditor.get('end_date')}; "
+            f"{auditor.get('document_types', 0):,} document types checked."
+        )
+        lines.append(
+            f"- Results: {auditor.get('result_count', 0):,} reported, {auditor.get('parsed_count', 0):,} parsed, "
+            f"{auditor.get('inserted', 0):,} new, {auditor.get('updated', 0):,} changed."
+        )
+        if auditor.get("errors"):
+            lines.append(f"- Warnings: {auditor.get('errors', 0):,} auditor query error(s).")
+        if auditor.get("capped"):
+            lines.append(f"- Warnings: {auditor.get('capped', 0):,} auditor query page cap(s) reached.")
+
+        groups = auditor.get("by_signal_group") or {}
+        lines.extend(["", "## New Auditor Recordings By Signal Group", ""])
+        if groups:
+            for group, count in sorted(groups.items()):
+                lines.append(f"- {group}: {count:,}")
+        else:
+            lines.append("- None.")
+
+        lines.extend(self._report_samples(run_id, AUDITOR_RECORDING_TABLE, "insert", "New Auditor Recordings"))
+        failed = [item for item in auditor.get("queries", []) if item.get("status") == "failed"]
+        if failed:
+            lines.extend(["", "## Auditor Query Errors", ""])
+            for item in failed[:20]:
+                lines.append(f"- {item.get('document_type')}: {item.get('error') or 'unknown error'}")
+        return lines
 
     def _report_samples(self, run_id: int, table_name: str, change_type: str, title: str) -> list[str]:
         with connection.cursor() as cursor:
@@ -858,6 +1325,12 @@ class Command(BaseCommand):
                 f"{new_row.get('sale_date_iso') or new_row.get('sale_date') or 'unknown date'}, "
                 f"${new_row.get('sale_price') or new_row.get('sale_price_num') or 'unknown'}, "
                 f"{new_row.get('seller_name') or 'unknown seller'} to {new_row.get('buyer_name') or 'unknown buyer'}"
+            )
+        if table_name == AUDITOR_RECORDING_TABLE:
+            return (
+                f"{new_row.get('recorded_date') or 'unknown date'}, {new_row.get('document_type') or 'unknown document'}, "
+                f"{new_row.get('grantor') or 'unknown grantor'} to {new_row.get('grantee') or 'unknown grantee'}, "
+                f"parcel {new_row.get('parcel_number') or 'unknown'}, {new_row.get('pdf_url') or 'no PDF link'}"
             )
         if table_name == "assessor_rollup":
             address = " ".join(

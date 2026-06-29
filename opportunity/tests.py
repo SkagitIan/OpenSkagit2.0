@@ -152,6 +152,17 @@ class OpportunityHelperTests(SimpleTestCase):
         filtered = apply_prompt_result_filters("large homes in Conway suitable for senior community conversion", rows)
         self.assertEqual([row["parcel_number"] for row in filtered], ["P1"])
 
+    def test_ai_search_bare_recreation_land_filters_bad_asset_classes(self):
+        rows = [
+            {"parcel_number": "P1", "land_use_code": "911", "current_use": "(911) UNDEVELOPED LAND", "land_use": "(911) UNDEVELOPED LAND", "acres": 1.2, "map_url": "map"},
+            {"parcel_number": "P2", "land_use_code": "", "current_use": "MH LEASED PROPERTY", "land_use": "MH LEASED PROPERTY", "acres": 0, "map_url": ""},
+            {"parcel_number": "P3", "land_use_code": "140", "current_use": "CONDOMINIUM COMMON AREA", "land_use": "(140) CONDOMINIUM", "acres": 0.4, "map_url": "map"},
+            {"parcel_number": "P4", "land_use_code": "670", "current_use": "GOVERNMENTAL SERVICES", "land_use": "(670) GOVERNMENTAL SERVICES", "acres": 1.0, "map_url": "map"},
+            {"parcel_number": "P5", "land_use_code": "110", "current_use": "(110) HOUSEHOLD SFR", "land_use": "(110) HOUSEHOLD SFR", "acres": 0.8, "map_url": "map"},
+        ]
+        filtered = apply_prompt_result_filters("Recreation or Small Bare Land Parcels with Utilities Under $200K Assessed Value", rows)
+        self.assertEqual([row["parcel_number"] for row in filtered], ["P1"])
+
 
 @override_settings(ROOT_URLCONF="config.urls")
 class OpportunityAuthTests(TestCase):
@@ -240,6 +251,18 @@ class OpportunityAISearchTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Search opportunities in plain English")
 
+    def test_ai_search_page_lists_unsaved_pending_searches(self):
+        OpportunitySearch.objects.create(
+            user=self.user,
+            prompt="large homes in Conway",
+            status=OpportunitySearch.STATUS_DRAFT,
+        )
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_ai_search"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "large homes in Conway")
+        self.assertContains(response, "Finding parcels")
+
     @patch("opportunity.views.start_ai_opportunity_search")
     def test_ai_search_post_redirects_to_pending_result(self, start_ai_opportunity_search):
         search = OpportunitySearch.objects.create(
@@ -264,7 +287,7 @@ class OpportunityAISearchTests(TestCase):
         self.client.login(username="user", password="pass")
         response = self.client.get(reverse("opportunity_ai_search_detail", args=[search.pk]))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Building your AI search")
+        self.assertContains(response, "Finding target parcels")
         self.assertNotContains(response, "No parcels matched this AI search.")
 
     def test_ai_search_detail_is_private_to_owner(self):

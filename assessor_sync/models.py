@@ -69,3 +69,72 @@ class AssessorSyncReport(models.Model):
 
     def __str__(self):
         return f"Report for run {self.run_id}"
+
+
+class AuditorRecording(models.Model):
+    recording_number = models.TextField(unique=True)
+    recorded_date = models.DateField(blank=True, null=True)
+    document_type = models.TextField()
+    signal_group = models.TextField()
+    grantor = models.TextField(blank=True)
+    grantee = models.TextField(blank=True)
+    filer = models.TextField(blank=True)
+    comment = models.TextField(blank=True)
+    legal = models.TextField(blank=True)
+    parcel_number = models.TextField(blank=True)
+    parcel_text = models.TextField(blank=True)
+    assessor_url = models.TextField(blank=True)
+    pdf_url = models.TextField(blank=True)
+    reference_url = models.TextField(blank=True)
+    raw_row = models.JSONField(default=dict)
+    first_seen_run = models.ForeignKey(
+        AssessorSyncRun,
+        on_delete=models.DO_NOTHING,
+        db_column="first_seen_run_id",
+        related_name="first_seen_auditor_recordings",
+        blank=True,
+        null=True,
+    )
+    last_seen_run = models.ForeignKey(
+        AssessorSyncRun,
+        on_delete=models.DO_NOTHING,
+        db_column="last_seen_run_id",
+        related_name="last_seen_auditor_recordings",
+        blank=True,
+        null=True,
+    )
+    first_seen_at = models.DateTimeField()
+    last_seen_at = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = "auditor_recordings"
+        ordering = ["-recorded_date", "-id"]
+
+    def __str__(self):
+        return f"{self.recording_number} {self.document_type}"
+
+
+class AuditorSyncQuery(models.Model):
+    run = models.ForeignKey(AssessorSyncRun, on_delete=models.DO_NOTHING, db_column="run_id", related_name="auditor_queries")
+    document_type = models.TextField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+    result_count = models.IntegerField()
+    parsed_count = models.IntegerField()
+    page_count = models.IntegerField()
+    inserted_count = models.IntegerField()
+    updated_count = models.IntegerField()
+    status = models.TextField()
+    capped = models.BooleanField()
+    error = models.TextField(blank=True)
+    created_at = models.DateTimeField()
+    finished_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "auditor_sync_queries"
+        ordering = ["-created_at", "document_type"]
+
+    def __str__(self):
+        return f"{self.document_type} {self.start_date} to {self.end_date}"

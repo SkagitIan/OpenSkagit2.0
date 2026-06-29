@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Property Tax Transparency — OpenSkagit{% endblock %}
+{% block title %}Property Tax Transparency - OpenSkagit{% endblock %}
 
 {% block extra_head %}
-<style>body { background: #042C53; }</style>
+<style>body { background: #f6f8f8; }</style>
 {% endblock %}
 
 {% block content %}
-<div class="os-tax-v2">
+<div class="os-tax-v2 os-tax-v2--home">
 
   <header class="os-nav-v2">
     <a href="/" class="os-nav-v2__logo">
@@ -22,31 +22,24 @@
           {% endfor %}
         </div>
       </details>
-      <a href="#">Parcels</a>
       <a href="{% url 'tax_home' %}" aria-current="page">Taxes</a>
-      <a href="#">Permits</a>
-      <a href="#">GIS</a>
-      <a href="#">About</a>
+      <a href="/#places">Places</a>
+      <a href="mailto:ian@openskagit.com">Contact</a>
     </nav>
   </header>
 
   <div id="main-content">
     <section class="os-tax-hero">
-      <div class="os-tax-hero__mountains" aria-hidden="true">
-        <svg viewBox="0 0 680 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <path d="M0,80 L100,50 L180,62 L260,28 L320,44 L390,14 L450,32 L510,48 L570,34 L630,52 L680,60 L680,90 L0,90 Z" fill="#1AACB0" opacity="0.07"/>
-        </svg>
-      </div>
       <div class="os-tax-hero__inner">
         <p class="os-tax-hero__eyebrow">Skagit County</p>
         <h1 class="os-tax-hero__h1">Where did my property taxes go?</h1>
-        <p class="os-tax-hero__sub">Enter your address or parcel number to see your 2025 tax bill broken down by agency.</p>
+        <p class="os-tax-hero__sub">Enter an address or parcel number to see the current tax bill broken down by agency.</p>
 
         <div class="os-tax-hero__search">
           <div class="os-tax-hero__search-wrap">
             <svg class="os-tax-hero__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <circle cx="6.5" cy="6.5" r="5" stroke="#1AACB0" stroke-width="1.5"/>
-              <path d="M10.5 10.5 L14 14" stroke="#1AACB0" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10.5 10.5 L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
             <input
               id="tax-search"
@@ -66,7 +59,7 @@
         </div>
 
         <p class="os-tax-hero__hint">
-          83,000+ parcels · Data from Skagit County Assessor &amp; SAO Financial Intelligence Tool
+          83,000+ parcels. Data from Skagit County Assessor and SAO Financial Intelligence Tool.
         </p>
       </div>
     </section>
@@ -75,10 +68,10 @@
   <footer class="os-footer-v2">
     <span class="os-footer-v2__built">Built in Skagit Valley</span>
     <nav class="os-footer-v2__links" aria-label="Footer navigation">
-      <a href="#">About</a>
-      <a href="#">Data sources</a>
+      <a href="/">OpenSkagit</a>
+      <a href="{% url 'tax_home' %}">Tax tool</a>
       <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
-      <a href="mailto:hello@openskagit.org">Contact</a>
+      <a href="mailto:ian@openskagit.com">Contact</a>
     </nav>
   </footer>
 

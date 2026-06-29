@@ -4,33 +4,30 @@
     <p class="os-tax-error">{{ error }}</p>
   {% else %}
 
-  <!-- Back link -->
   <button
     type="button"
-    onclick="document.getElementById('agency-panel').innerHTML='<p>Click a taxing district to see its spending categories and financial snapshot.</p>'"
+    onclick="document.getElementById('agency-panel').innerHTML='<p class=&quot;os-tax-agency-card__empty&quot;>Choose a taxing district to see spending categories and financial context.</p>'"
     class="os-tax-agency-panel__back"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
     </svg>
     Close detail
   </button>
 
-  <!-- Agency name -->
   <h3 class="os-tax-agency-panel__name">{{ common_name }}</h3>
   {% if blurb %}
   <p class="os-tax-agency-panel__blurb">{{ blurb }}</p>
   {% endif %}
 
   {% if budget %}
-  <!-- Financial stats -->
   <div class="os-tax-stats">
     <div class="os-tax-stat">
-      <p class="os-tax-stat__label">Total Revenue</p>
+      <p class="os-tax-stat__label">Total revenue</p>
       <p class="os-tax-stat__value">{{ revenue_fmt }}</p>
     </div>
     <div class="os-tax-stat">
-      <p class="os-tax-stat__label">Total Spent</p>
+      <p class="os-tax-stat__label">Total spent</p>
       <p class="os-tax-stat__value">{{ spent_fmt }}</p>
     </div>
     <div class="os-tax-stat">
@@ -39,10 +36,9 @@
     </div>
   </div>
 
-  <!-- Top expenditures -->
   {% if top_expenditures %}
   <div class="os-tax-expenditures">
-    <p class="os-tax-expenditures__label">Top Spending Categories</p>
+    <p class="os-tax-expenditures__label">Top spending categories</p>
     {% for exp in top_expenditures %}
     <div class="os-tax-expenditure">
       <span class="os-tax-expenditure__cat">{{ exp.name }}</span>
@@ -57,7 +53,6 @@
   {% endif %}
   {% endif %}
 
-  <!-- Your share -->
   {% if your_amount_fmt %}
   <div class="os-tax-share">
     <p>
@@ -67,10 +62,9 @@
   </div>
   {% endif %}
 
-  <!-- SAO link -->
   {% if sao_fit_url %}
   <a href="{{ sao_fit_url }}" target="_blank" rel="noopener noreferrer" class="os-tax-source-link">
-    {% if budget and data_year %}Source: SAO FIT {{ data_year }} →{% else %}See full financials →{% endif %}
+    {% if budget and data_year %}Source: SAO FIT {{ data_year }} ->{% else %}See full financials ->{% endif %}
   </a>
   {% endif %}
 

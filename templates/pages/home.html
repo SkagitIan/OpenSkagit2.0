@@ -1,15 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}OpenSkagit - Skagit Valley is an open book.{% endblock %}
-
-{% block extra_head %}
-<style>body { background: #042C53; }</style>
-{% endblock %}
+{% block title %}OpenSkagit | Skagit Valley. Understood.{% endblock %}
 
 {% block content %}
-<div class="os-home-v2">
-
-  <header class="os-nav-v2">
+<div class="os-home-simple">
+  <header class="os-nav-v2 os-home-simple__nav">
     <a href="/" class="os-nav-v2__logo">
       <img src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png" alt="" width="26" height="26" class="os-nav-v2__logo-img">
       OpenSkagit
@@ -27,29 +22,128 @@
     </nav>
   </header>
 
-  <section class="os-hero-v2">
-    <div class="os-hero-v2__mountains" aria-hidden="true">
-      <svg viewBox="0 0 680 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0,80 L100,50 L180,62 L260,28 L320,44 L390,14 L450,32 L510,48 L570,34 L630,52 L680,60 L680,90 L0,90 Z" fill="#1AACB0" opacity="0.07"/>
-      </svg>
-    </div>
-    <div class="os-hero-v2__inner">
-      <img
-        src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png"
-        alt="OpenSkagit"
-        class="os-hero-v2__mark"
-      >
-      <h1 class="os-hero-v2__h1">
-        Skagit Valley is an open book.<br>
-        <span>It just hasn't been written in plain English.</span>
-      </h1>
-    </div>
-    <div class="os-hero-v2__bridge">
-      See what the Valley is already asking itself
-    </div>
-  </section>
+  <main>
+    <section class="os-home-simple__hero">
+      <div class="os-home-simple__container">
+        <img
+          src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png"
+          alt="OpenSkagit logo"
+          class="os-home-simple__mark"
+          loading="lazy"
+        >
 
-  {% include "partials/current_feed.html" %}
+        <h1>Skagit <span>Valley</span>. Understood.</h1>
+        <p class="os-home-simple__lede">
+          OpenSkagit is the thinking layer for Skagit Valley, turning fragmented local information into clear answers,
+          practical context, and shareable reports grounded in real data.
+        </p>
 
+        <div class="os-home-simple__actions" aria-label="Primary actions">
+          <a href="#purpose" class="os-home-simple__button os-home-simple__button--primary">See the mission</a>
+          <a href="{% url 'tax_home' %}" class="os-home-simple__button">Explore taxes</a>
+        </div>
+
+        <div class="os-home-simple__question" role="status" aria-live="polite">
+          <span class="os-home-simple__pulse"></span>
+          <span id="hero-question-text">What is changing in Skagit, and where is it happening?</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="purpose" class="os-home-simple__section" aria-label="OpenSkagit purpose">
+      <div class="os-home-simple__container">
+        <div class="os-home-simple__section-head">
+          <p>How it works</p>
+          <h2>Built from public data. Organized by place.</h2>
+          <span>
+            OpenSkagit connects public records across parcels, neighborhoods, and districts so local patterns are visible,
+            understandable, and easier to act on.
+          </span>
+        </div>
+
+        <div class="os-home-simple__cards">
+          <article>
+            <div class="os-home-simple__icon" aria-hidden="true">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+              </svg>
+            </div>
+            <h3>Collect and connect</h3>
+            <p>Records from permits, land use, assessments, and civic activity are normalized into one coherent local system.</p>
+          </article>
+
+          <article>
+            <div class="os-home-simple__icon os-home-simple__icon--blue" aria-hidden="true">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 01.553-.894L9 2m0 18l6-3m-6 3V2m6 15l5.447-2.724A1 1 0 0021 13.382V2.618a1 1 0 00-.553-.894L15 0m0 17V0m0 0L9 3" />
+              </svg>
+            </div>
+            <h3>Map the signals</h3>
+            <p>Every record is tied to place, making it easier to spot where growth, risk, and policy pressure are concentrating.</p>
+          </article>
+
+          <article>
+            <div class="os-home-simple__icon os-home-simple__icon--gold" aria-hidden="true">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4V9m3 10H6a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3>Explain clearly</h3>
+            <p>Raw tables are translated into plain-language insights with transparent logic and clear local context.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="places" class="os-home-simple__places" aria-label="City pages">
+      <div class="os-home-simple__container">
+        <div class="os-home-simple__section-head">
+          <p>Places</p>
+          <h2>Follow the Valley city by city.</h2>
+        </div>
+        <div class="os-home-simple__city-list">
+          {% for item in city_pages %}
+            <a href="{% url 'city' item.slug %}" style="--city-accent: {{ item.accent }}">
+              <strong>{{ item.name }}</strong>
+              <span>{{ item.tagline }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="os-home-simple__contact">
+      <div class="os-home-simple__container os-home-simple__contact-inner">
+        <h2>Contact OpenSkagit</h2>
+        <p>For collaborations, data questions, or local briefings, reach out directly.</p>
+        <a href="mailto:ian@openskagit.com" class="os-home-simple__button os-home-simple__button--primary">ian@openskagit.com</a>
+      </div>
+    </section>
+  </main>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const heroQuestionText = document.getElementById("hero-question-text");
+    const heroQuestions = [
+      "What is changing in Skagit, and where is it happening?",
+      "How do policy decisions show up across neighborhoods?",
+      "Which local signals matter most right now?"
+    ];
+
+    if (!heroQuestionText || heroQuestions.length < 2) {
+      return;
+    }
+
+    let heroIndex = 0;
+    setInterval(function() {
+      heroIndex = (heroIndex + 1) % heroQuestions.length;
+      heroQuestionText.classList.add("is-hiding");
+      setTimeout(function() {
+        heroQuestionText.textContent = heroQuestions[heroIndex];
+        heroQuestionText.classList.remove("is-hiding");
+      }, 220);
+    }, 4200);
+  });
+</script>
 {% endblock %}

@@ -3,12 +3,12 @@
 {% block title %}{{ city.name }} - OpenSkagit{% endblock %}
 
 {% block extra_head %}
-<style>body { background: #042C53; }</style>
+<style>body { background: #f6f8f8; }</style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 {% endblock %}
 
 {% block content %}
-<div class="os-home-v2 os-city-page" style="--city-accent: {{ city.accent }};">
+<div class="os-city-page" style="--city-accent: {{ city.accent }};">
 
   <header class="os-nav-v2">
     <a href="/" class="os-nav-v2__logo">
@@ -24,20 +24,15 @@
           {% endfor %}
         </div>
       </details>
-      <a href="/#parcels">Parcels</a>
       <a href="{% url 'tax_home' %}">Taxes</a>
-      <a href="/#permits">Permits</a>
-      <a href="/#about">About</a>
+      <a href="#land-ledger">Land Ledger</a>
+      <a href="#city-prompts">Ask</a>
+      <a href="/#places">Places</a>
     </nav>
   </header>
 
   <main>
     <section class="os-city-hero">
-      <div class="os-city-hero__mountains" aria-hidden="true">
-        <svg viewBox="0 0 680 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <path d="M0,80 L100,50 L180,62 L260,28 L320,44 L390,14 L450,32 L510,48 L570,34 L630,52 L680,60 L680,90 L0,90 Z" fill="#1AACB0" opacity="0.08"/>
-        </svg>
-      </div>
       <div class="os-city-hero__inner">
         <p class="os-city-hero__eyebrow">Browse by place</p>
         <h1>{{ city.name }}</h1>
@@ -52,8 +47,6 @@
         </div>
       </div>
     </section>
-
-    {% include "partials/current_feed.html" with current_count_id="city-current-count" %}
 
     {% load static %}
     <section
@@ -102,16 +95,16 @@
 
           <div class="os-ll-panel__parcel" id="os-ll-parcel-detail" hidden>
             <p class="os-ll-panel__eyebrow">Current parcel</p>
-            <h3 id="os-ll-parcel-address">&mdash;</h3>
+            <h3 id="os-ll-parcel-address">-</h3>
             <dl class="os-ll-parcel-facts">
-              <div><dt>Parcel</dt><dd id="os-ll-fact-parcel">&mdash;</dd></div>
-              <div><dt>Acres</dt><dd id="os-ll-fact-acres">&mdash;</dd></div>
-              <div><dt>Zoning</dt><dd id="os-ll-fact-zone">&mdash;</dd></div>
-              <div><dt>Assessor use</dt><dd id="os-ll-fact-use">&mdash;</dd></div>
-              <div><dt>City revenue</dt><dd id="os-ll-fact-taxes">&mdash;</dd></div>
-              <div><dt>City revenue / acre</dt><dd id="os-ll-fact-tax-acre">&mdash;</dd></div>
-              <div><dt>Compared with city</dt><dd id="os-ll-fact-productivity">&mdash;</dd></div>
-              <div><dt>Opportunity status</dt><dd id="os-ll-fact-eligibility">&mdash;</dd></div>
+              <div><dt>Parcel</dt><dd id="os-ll-fact-parcel">-</dd></div>
+              <div><dt>Acres</dt><dd id="os-ll-fact-acres">-</dd></div>
+              <div><dt>Zoning</dt><dd id="os-ll-fact-zone">-</dd></div>
+              <div><dt>Assessor use</dt><dd id="os-ll-fact-use">-</dd></div>
+              <div><dt>City revenue</dt><dd id="os-ll-fact-taxes">-</dd></div>
+              <div><dt>City revenue / acre</dt><dd id="os-ll-fact-tax-acre">-</dd></div>
+              <div><dt>Compared with city</dt><dd id="os-ll-fact-productivity">-</dd></div>
+              <div><dt>Opportunity status</dt><dd id="os-ll-fact-eligibility">-</dd></div>
             </dl>
             <p class="os-ll-zone-description" id="os-ll-zone-description" hidden></p>
             <p class="os-ll-panel__underperform" id="os-ll-underperform" hidden>
@@ -123,9 +116,9 @@
             <p class="os-ll-scenario-description" id="os-ll-scenario-description">The parcel will show a scenario here if the model treats it as eligible.</p>
 
             <div class="os-ll-panel__result" id="os-ll-result" hidden>
-              <div class="os-ll-result__row"><span>Potential scenario</span><strong id="os-ll-result-scenario">&mdash;</strong></div>
-              <div class="os-ll-result__row os-ll-result__row--gain"><span>Estimated city gain / year</span><strong id="os-ll-result-annual">&mdash;</strong></div>
-              <div class="os-ll-result__row os-ll-result__row--gain"><span>Estimated 10-year city gain</span><strong id="os-ll-result-10yr">&mdash;</strong></div>
+              <div class="os-ll-result__row"><span>Potential scenario</span><strong id="os-ll-result-scenario">-</strong></div>
+              <div class="os-ll-result__row os-ll-result__row--gain"><span>Estimated city gain / year</span><strong id="os-ll-result-annual">-</strong></div>
+              <div class="os-ll-result__row os-ll-result__row--gain"><span>Estimated 10-year city gain</span><strong id="os-ll-result-10yr">-</strong></div>
             </div>
           </div>
 
@@ -168,7 +161,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="{% static 'js/land_ledger.js' %}" defer></script>
 
-    <section class="os-city-prompts">
+    <section class="os-city-prompts" id="city-prompts">
       <div class="os-city-prompts__head">
         <h2>Start with {{ city.name }}</h2>
       </div>
@@ -188,5 +181,15 @@
       </div>
     </section>
   </main>
+
+  <footer class="os-footer-v2">
+    <span class="os-footer-v2__built">Built in Skagit Valley</span>
+    <nav class="os-footer-v2__links" aria-label="Footer navigation">
+      <a href="/">OpenSkagit</a>
+      <a href="{% url 'tax_home' %}">Tax tool</a>
+      <a href="#land-ledger">Land Ledger</a>
+      <a href="mailto:ian@openskagit.com">Contact</a>
+    </nav>
+  </footer>
 </div>
 {% endblock %}

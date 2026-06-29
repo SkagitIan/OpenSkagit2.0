@@ -33,6 +33,21 @@ _ACTIVE_SEARCH_IDS: set[int] = set()
 _ACTIVE_SEARCH_LOCK = threading.Lock()
 RESIDENTIAL_DWELLING_CODES = {"110", "111", "112", "113", "120", "130", "180", "181", "182", "185", "190"}
 NONRESIDENTIAL_LAND_USE_PREFIXES = ("2", "3", "4", "5", "6", "7", "8")
+BARE_RECREATION_TERMS = {"bare", "raw", "unimproved", "undeveloped", "recreation", "recreational", "camp", "camping"}
+LAND_ASSET_TERMS = {"land", "lot", "lots", "parcel", "parcels", "acreage", "acres"}
+BAD_BARE_LAND_TEXT = (
+    "MH LEASED",
+    "LEASED PROPERTY",
+    "CONDO",
+    "CONDOMINIUM",
+    "COMMON AREA",
+    "PUBLIC",
+    "GOVERNMENT",
+    "SCHOOL",
+    "CHURCH",
+    "CEMETERY",
+    "MOORAGE",
+)
 DWELLING_ASSET_TERMS = {
     "home",
     "homes",
@@ -155,6 +170,11 @@ def start_refresh_opportunity_search(search: OpportunitySearch) -> OpportunitySe
     search.save(update_fields=["status", "error", "updated_at"])
     transaction.on_commit(lambda: _start_ai_search_worker(search.pk))
     return search
+
+
+def ensure_ai_search_worker(search: OpportunitySearch) -> None:
+    if search.status == OpportunitySearch.STATUS_DRAFT:
+        _start_ai_search_worker(search.pk)
 
 
 def _start_ai_search_worker(search_id: int) -> None:
@@ -312,15 +332,23 @@ def saved_searches_for_user(user, limit: int | None = None):
     return qs[:limit] if limit else qs
 
 
+def recent_searches_for_user(user, limit: int | None = None):
+    qs = OpportunitySearch.objects.filter(user=user).order_by("-updated_at", "-created_at")
+    return qs[:limit] if limit else qs
+
+
 def display_rows_for_search(search: OpportunitySearch, user) -> list[dict[str, Any]]:
     rows = copy.deepcopy(search.result_rows or [])
+    rows = apply_prompt_result_filters(search.prompt, rows)
     return mark_saved(rows, user)
 
 
 def apply_prompt_result_filters(prompt: str, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    if not _requires_dwelling_asset(prompt):
-        return rows
-    return [row for row in rows if _has_dwelling_evidence(row)]
+    if _requires_bare_recreation_land(prompt):
+        rows = [row for row in rows if _has_bare_recreation_land_evidence(row)]
+    if _requires_dwelling_asset(prompt):
+        rows = [row for row in rows if _has_dwelling_evidence(row)]
+    return rows
 
 
 def record_search_feedback(
@@ -513,9 +541,7 @@ def _fallback_result_row(parcel_number: str, raw: dict[str, Any]) -> dict[str, A
 
 
 def _generate_search_plan(prompt: str, model: str) -> SearchPlan:
-    from openai import OpenAI
-
-    response = OpenAI().responses.create(
+    response = _openai_client().responses.create(
         model=model,
         input=_build_plan_prompt(prompt),
         temperature=0.1,
@@ -525,9 +551,7 @@ def _generate_search_plan(prompt: str, model: str) -> SearchPlan:
 
 
 def _review_search_plan(prompt: str, plan: SearchPlan, model: str) -> SearchPlan:
-    from openai import OpenAI
-
-    response = OpenAI().responses.create(
+    response = _openai_client().responses.create(
         model=model,
         input=_build_plan_review_prompt(prompt, plan),
         temperature=0.05,
@@ -537,9 +561,7 @@ def _review_search_plan(prompt: str, plan: SearchPlan, model: str) -> SearchPlan
 
 
 def _generate_search_from_plan(prompt: str, plan: SearchPlan, model: str, error_feedback: str = "") -> GeneratedSearch:
-    from openai import OpenAI
-
-    response = OpenAI().responses.create(
+    response = _openai_client().responses.create(
         model=model,
         input=_build_generation_prompt(prompt, plan=plan, error_feedback=error_feedback),
         temperature=0.1,
@@ -802,6 +824,8 @@ Rules:
 - Utilities tokens include PWR, PWR-U, SEP, SEW, WTR-P, WTR-W, NONE.
 - skagit_parcels.land_use often looks like '(911) UNDEVELOPED LAND INCORPORATED'; parse the code with split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1).
 - For no-home or vacant-like intent, use conservative screening signals such as low/zero p.building_value and/or NOT EXISTS main dwelling improvements.
+- For bare land, raw land, undeveloped land, recreation land, camp/camping land, or small recreational parcel intent, exclude MH LEASED PROPERTY, leased manufactured-home land, condos, condominium/common-area parcels, public/civic/government/school/church/cemetery parcels, public open-space zoning, zero-acre/no-geometry records, and parcels with residential dwelling evidence.
+- MH LEASED PROPERTY means leased manufactured homes are present on land that may not show normal MA dwelling improvements; do not treat it as bare land.
 - Separate asset intent from zoning suitability. If the user asks for homes, houses, dwellings, residences, or residential buildings, the parcel must have residential dwelling evidence first; compatible commercial/mixed zoning alone is not enough.
 - Residential dwelling evidence usually means land-use code in 110, 111, 112, 113, 120, 130, 180, 181, 182, 185, or 190, or a main dwelling improvement such as MA, MA2, MA1.5F, UF2, UF1.5F, BMF, BMU, or BMG.
 - If the user asks for large homes/houses, do not return retail, restaurant, governmental, miscellaneous service, industrial, natural-resource, church, or personal-property parcels unless the prompt explicitly asks for those nonresidential conversions.
@@ -855,6 +879,13 @@ def _mark_error(search: OpportunitySearch, error: str, model: str = "") -> Oppor
 
 def _search_model() -> str:
     return os.environ.get("OPPORTUNITY_SEARCH_MODEL") or os.environ.get("OPENAI_MODEL") or "gpt-4.1-mini"
+
+
+def _openai_client():
+    from openai import OpenAI
+
+    timeout = float(os.environ.get("OPPORTUNITY_SEARCH_TIMEOUT", "75"))
+    return OpenAI(timeout=timeout)
 
 
 def _strip_sql(sql: str) -> str:
@@ -952,6 +983,8 @@ def _merged_assumptions(prompt: str, assumptions: list[str]) -> list[str]:
     merged = [str(item) for item in assumptions if str(item).strip()]
     if _requires_dwelling_asset(prompt):
         merged.append("Because the prompt asks for homes or residential buildings, results are filtered to parcels with residential dwelling evidence; zoning suitability is treated as secondary.")
+    if _requires_bare_recreation_land(prompt):
+        merged.append("Because the prompt asks for bare/recreation land, results exclude leased manufactured-home, condo/common-area, public/civic/open-space, and existing dwelling parcels.")
     return merged
 
 
@@ -960,6 +993,10 @@ def _intent_context(prompt: str) -> str:
     if _requires_dwelling_asset(prompt):
         lines.append(
             "Detected residential dwelling asset intent. Require residential land_use_code or main dwelling improvements; exclude purely commercial/service/government/resource parcels unless explicitly requested."
+        )
+    if _requires_bare_recreation_land(prompt):
+        lines.append(
+            "Detected bare/recreation land intent. Exclude MH leased property, condominium/common-area parcels, public/civic/open-space parcels, zero-acre/no-geometry records, and parcels with residential dwelling evidence. Treat private vacant/undeveloped land as the core asset."
         )
     if _tokens(prompt) & {"senior", "seniors", "adult", "adults", "elder", "elderly", "assisted", "community", "communities"}:
         lines.append(
@@ -973,6 +1010,35 @@ def _intent_context(prompt: str) -> str:
 def _requires_dwelling_asset(prompt: str) -> bool:
     tokens = _tokens(prompt)
     return bool(tokens & DWELLING_ASSET_TERMS) and not bool(tokens & EXPLICIT_NONRESIDENTIAL_TERMS)
+
+
+def _requires_bare_recreation_land(prompt: str) -> bool:
+    tokens = _tokens(prompt)
+    has_land_intent = bool(tokens & LAND_ASSET_TERMS)
+    has_bare_or_recreation_intent = bool(tokens & BARE_RECREATION_TERMS)
+    return has_land_intent and has_bare_or_recreation_intent and not _requires_dwelling_asset(prompt)
+
+
+def _has_bare_recreation_land_evidence(row: dict[str, Any]) -> bool:
+    code = str(row.get("land_use_code") or "").strip()
+    text = " ".join(
+        str(row.get(key) or "")
+        for key in ("land_use", "current_use", "zoning", "zone_name", "waza_general")
+    ).upper()
+    if any(term in text for term in BAD_BARE_LAND_TEXT):
+        return False
+    if _has_dwelling_evidence(row):
+        return False
+    if is_public_or_civic_land_use(row.get("land_use")) or is_public_or_open_space_zone(row.get("waza_general")):
+        return False
+    if not row.get("map_url") and _coerce_number(row.get("acres")) in (None, 0):
+        return False
+    acres_value = _coerce_number(row.get("acres"))
+    if acres_value is not None and acres_value <= 0:
+        return False
+    if code in {"0", "140", "150", "160", "500", "670", "680", "760", "930", "970"}:
+        return False
+    return True
 
 
 def _has_dwelling_evidence(row: dict[str, Any]) -> bool:

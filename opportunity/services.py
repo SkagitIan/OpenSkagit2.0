@@ -1035,6 +1035,10 @@ def sync_summary_has_activity(summary: dict[str, Any] | None) -> bool:
     tables = (summary or {}).get("tables", {})
     if int((summary or {}).get("files_changed") or 0) > 0:
         return True
+    auditor = (summary or {}).get("auditor") or {}
+    for key in ("inserted", "updated", "errors"):
+        if int(auditor.get(key) or 0) > 0:
+            return True
     for table in tables.values():
         table = table or {}
         for key in ("applied_rows", "inserted", "updated", "deleted", "warnings"):
@@ -1046,11 +1050,12 @@ def sync_summary_has_activity(summary: dict[str, Any] | None) -> bool:
 def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
     summary = run.summary or {}
     tables = summary.get("tables", {})
+    auditor = summary.get("auditor", {}) or {}
     sales_summary = tables.get("sales", {}) or {}
     new_sales = int(sales_summary.get("inserted") or 0)
     signal_tables = ("sales", "land", "improvements")
     parcel_signals = sum(int((tables.get(table) or {}).get("applied_rows") or 0) for table in signal_tables)
-    new_filings = new_sales
+    new_filings = int(auditor.get("inserted") or 0) if auditor.get("enabled") else new_sales
     watchlist_changes = 0
 
     try:
@@ -1070,7 +1075,21 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
         )
         if sales_rows:
             new_sales = int(sales_rows[0].get("new_sales") or new_sales)
-            new_filings = int(sales_rows[0].get("new_filings") or 0)
+            if not auditor.get("enabled"):
+                new_filings = int(sales_rows[0].get("new_filings") or 0)
+
+        auditor_rows = _fetch(
+            """
+            SELECT COUNT(*) AS new_filings
+            FROM assessor_sync_changes
+            WHERE run_id = %s
+              AND table_name = 'auditor_recordings'
+              AND change_type = 'insert'
+            """,
+            [run.pk],
+        )
+        if auditor_rows and int(auditor_rows[0].get("new_filings") or 0) > 0:
+            new_filings = int(auditor_rows[0].get("new_filings") or 0)
 
         parcel_rows = _fetch(
             """
@@ -1079,11 +1098,12 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
                 CASE
                   WHEN table_name IN ('land', 'improvements') THEN split_part(record_key, '|', 1)
                   WHEN table_name = 'sales' THEN split_part(record_key, '|', 2)
+                  WHEN table_name = 'auditor_recordings' THEN new_row->>'parcel_number'
                   ELSE ''
                 END AS parcel_number
               FROM assessor_sync_changes
               WHERE run_id = %s
-                AND table_name IN ('land', 'improvements', 'sales')
+                AND table_name IN ('land', 'improvements', 'sales', 'auditor_recordings')
             )
             SELECT COUNT(*) AS parcel_signals
             FROM normalized
@@ -1103,11 +1123,12 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
                     CASE
                       WHEN table_name IN ('land', 'improvements') THEN split_part(record_key, '|', 1)
                       WHEN table_name = 'sales' THEN split_part(record_key, '|', 2)
+                      WHEN table_name = 'auditor_recordings' THEN new_row->>'parcel_number'
                       ELSE ''
                     END AS parcel_number
                   FROM assessor_sync_changes
                   WHERE run_id = %s
-                    AND table_name IN ('land', 'improvements', 'sales')
+                    AND table_name IN ('land', 'improvements', 'sales', 'auditor_recordings')
                 )
                 SELECT COUNT(*) AS watchlist_changes
                 FROM normalized
@@ -1206,13 +1227,16 @@ def generate_sync_narrative_for_report(report_id: int, force: bool = False):
 
 
 def build_sync_narrative_prompt(report_text: str, summary: dict[str, Any]) -> str:
+    auditor = (summary or {}).get("auditor") or {}
     return (
         "You are writing the morning Parcel Book data brief for a real estate opportunity dashboard. "
         "Use simple, plain English. Be specific, but do not overclaim. Mention that these are public-record "
-        "changes and screening signals, not approvals. Return compact JSON with keys: headline, narrative, bullets. "
+        "changes and screening signals, not approvals. If auditor recordings are present, explain them as filing "
+        "metadata and links, not legal conclusions. Return compact JSON with keys: headline, narrative, bullets. "
         "bullets must be an array of exactly 3 short strings. Return only the JSON object, with no markdown fences, "
         "no prose before it, and no prose after it.\n\n"
         f"Assessor sync summary JSON:\n{json.dumps(summary, default=str)[:6000]}\n\n"
+        f"Auditor sync summary JSON:\n{json.dumps(auditor, default=str)[:4000]}\n\n"
         f"Latest admin assessor sync report:\n{report_text[:12000]}"
     )
 
@@ -1241,20 +1265,29 @@ def parse_sync_narrative_response(text: str) -> dict[str, Any]:
 
 def fallback_sync_narrative(summary: dict[str, Any]) -> dict[str, Any]:
     tables = (summary or {}).get("tables", {})
+    auditor = (summary or {}).get("auditor") or {}
     files_changed = int((summary or {}).get("files_changed") or 0)
     updated = sum(int((table or {}).get("updated") or 0) for table in tables.values())
     inserted = sum(int((table or {}).get("inserted") or 0) for table in tables.values())
     applied = sum(int((table or {}).get("applied_rows") or 0) for table in tables.values())
+    auditor_inserted = int(auditor.get("inserted") or 0)
+    auditor_updated = int(auditor.get("updated") or 0)
+    auditor_errors = int(auditor.get("errors") or 0)
+    auditor_phrase = (
+        f" Auditor recording checks found {auditor_inserted:,} new filing(s) and {auditor_updated:,} changed filing(s)."
+        if auditor.get("enabled")
+        else ""
+    )
     return {
         "headline": "Latest assessor sync is ready",
         "narrative": (
             f"The latest assessor sync found {files_changed:,} changed source file(s) and applied "
-            f"{applied:,} public-record updates. Parcel Book is using those changes as screening signals only."
+            f"{applied:,} public-record updates.{auditor_phrase} Parcel Book is using those changes as screening signals only."
         ),
         "bullets": [
             f"{updated:,} existing records updated",
-            f"{inserted:,} new records inserted",
-            "Review high-signal parcels before relying on them for due diligence",
+            f"{inserted + auditor_inserted:,} new records inserted",
+            f"{auditor_errors:,} auditor query warning(s)" if auditor_errors else "Review high-signal parcels before relying on them for due diligence",
         ],
         "generated": False,
     }

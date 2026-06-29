@@ -8,8 +8,7 @@
 <div class="pb-page-head">
   <div>
     <p class="pb-kicker">AI Search</p>
-    <h1>{{ search.title|default:"AI opportunity search" }}</h1>
-    <p class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</p>
+    <h1>{{ search.title|default:"Finding target parcels" }}</h1>
   </div>
   <div class="pb-view-toggle" aria-label="View">
     <a class="{% if view_mode == 'list' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=list">List</a>
@@ -23,19 +22,33 @@
     <div class="pb-working">
       <span class="pb-page-spinner" aria-hidden="true"></span>
       <div>
-        <strong>Building your AI search...</strong>
-        <p class="pb-muted">The prompt has been saved and the AI is generating, validating, and running a safe PostGIS query.</p>
+        <strong>Finding target parcels...</strong>
+        <p class="pb-muted">Your search is saved. You can leave this page and come back from Recent AI searches while Parcel Book looks for likely matches.</p>
       </div>
     </div>
     <div class="pb-card-actions">
-      <button class="pb-button secondary" type="button" disabled>Working</button>
+      <button class="pb-button secondary" type="button" disabled>Finding parcels</button>
     </div>
   {% elif search.status == "error" %}
-    <div class="pb-error">{{ search.error }}</div>
+    <div class="pb-error">
+      Parcel Book couldn't finish this search. Try refreshing it, or adjust the wording and run it again.
+    </div>
+    <div class="pb-card-actions">
+      <form class="pb-loading-form" method="post" action="{% url 'opportunity_ai_search_refresh' search.pk %}" data-loading-label="Trying again...">
+        {% csrf_token %}
+        <button class="pb-button secondary pb-loading-button" type="submit">
+          <span class="pb-button-label">Try again</span>
+          <span class="pb-button-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+    </div>
   {% else %}
     <div>
-      <strong>{{ search.result_count }} cached result{{ search.result_count|pluralize }}</strong>
-      <p class="pb-muted">Saved results are a snapshot. Refresh reruns the same prompt against current data.</p>
+      <strong>{{ display_result_count }} result{{ display_result_count|pluralize }}</strong>
+      <p class="pb-muted"><span class="pb-query-label">Search:</span> {{ search.prompt }}</p>
+      {% if search.criteria_summary %}
+        <p class="pb-muted">{{ search.criteria_summary }}</p>
+      {% endif %}
     </div>
     <div class="pb-card-actions">
       {% if not search.is_saved %}
@@ -55,52 +68,15 @@
       </form>
     </div>
   {% endif %}
-  {% if search.assumptions %}
-    <div class="pb-assumptions">
-      {% for assumption in search.assumptions %}
+  {% if search.assumptions and not is_pending and search.status != "error" %}
+    <div class="pb-assumptions pb-assumptions-compact">
+      {% for assumption in search.assumptions|slice:":2" %}
         <span class="pb-flag">{{ assumption }}</span>
       {% endfor %}
     </div>
   {% endif %}
-</section>
-
-{% if search.search_plan %}
-  <section class="pb-panel pb-plan-panel">
-    <div class="pb-section-head">
-      <h2>Search interpretation</h2>
-    </div>
-    <div class="pb-plan-grid">
-      <div>
-        <strong>Looking for</strong>
-        <p>{{ search.search_plan.asset_intent|default:"Parcel opportunity" }}</p>
-      </div>
-      <div>
-        <strong>Hard filters</strong>
-        {% for item in search.search_plan.hard_filters %}<span class="pb-pill">{{ item }}</span>{% empty %}<p class="pb-muted">None listed.</p>{% endfor %}
-      </div>
-      <div>
-        <strong>Ranked by</strong>
-        {% for item in search.search_plan.soft_rankers %}<span class="pb-pill">{{ item }}</span>{% empty %}<p class="pb-muted">None listed.</p>{% endfor %}
-      </div>
-      <div>
-        <strong>Excluded</strong>
-        {% for item in search.search_plan.exclusions %}<span class="pb-flag">{{ item }}</span>{% empty %}<p class="pb-muted">No explicit exclusions.</p>{% endfor %}
-      </div>
-    </div>
-    {% if search.result_diagnostics.warnings %}
-      <div class="pb-diagnostics">
-        <strong>Result notes</strong>
-        {% for warning in search.result_diagnostics.warnings %}
-          <span class="pb-flag">{{ warning }}</span>
-        {% endfor %}
-      </div>
-    {% endif %}
-  </section>
-{% endif %}
-
-{% if not is_pending %}
-<section class="pb-panel">
-  <div class="pb-feedback">
+  {% if not is_pending and search.status != "error" %}
+  <div class="pb-feedback pb-feedback-compact">
     <strong>Was this a good match?</strong>
     <form method="post" action="{% url 'opportunity_ai_search_feedback' search.pk %}">
       {% csrf_token %}
@@ -116,6 +92,9 @@
       <input name="comment" placeholder="Optional note">
     </form>
   </div>
+</section>
+
+<section class="pb-panel">
 
   {% if view_mode == "map" %}
     <div class="pb-map-view">
