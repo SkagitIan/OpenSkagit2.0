@@ -986,7 +986,7 @@ def latest_assessor_sync_summary(user=None) -> dict[str, Any]:
         run = AssessorSyncRun.objects.order_by("-started_at").first()
         if not run:
             return {"has_run": False, "metrics": [], "changes": []}
-        report = AssessorSyncReport.objects.select_related("run").filter(run=run).order_by("-created_at").first()
+        report = latest_nonempty_sync_report(AssessorSyncReport)
         tables = (run.summary or {}).get("tables", {})
         applied = sum(int((table or {}).get("applied_rows") or 0) for table in tables.values())
         inserted = sum(int((table or {}).get("inserted") or 0) for table in tables.values())
@@ -1010,11 +1010,37 @@ def latest_assessor_sync_summary(user=None) -> dict[str, Any]:
                 {"label": "Watchlist changes", "value": f"{sync_counts['watchlist_changes']:,}", "accent": "purple", "note": since_text},
             ],
             "totals": {"applied": applied, "inserted": inserted, "updated": updated, "warnings": warnings},
-            "narrative": sync_narrative_dict(report, run.summary or {}) if report else fallback_sync_narrative(run.summary or {}),
+            "narrative": sync_narrative_dict(report, report.run.summary or {}) if report else fallback_sync_narrative(run.summary or {}),
             "changes": changes,
         }
     except Exception:
         return {"has_run": False, "metrics": [], "changes": []}
+
+
+def latest_nonempty_sync_report(AssessorSyncReport):
+    reports = (
+        AssessorSyncReport.objects.select_related("run")
+        .filter(run__status="success")
+        .order_by("-run__started_at", "-created_at")[:30]
+    )
+    fallback = None
+    for report in reports:
+        fallback = fallback or report
+        if sync_summary_has_activity(report.run.summary or {}):
+            return report
+    return fallback
+
+
+def sync_summary_has_activity(summary: dict[str, Any] | None) -> bool:
+    tables = (summary or {}).get("tables", {})
+    if int((summary or {}).get("files_changed") or 0) > 0:
+        return True
+    for table in tables.values():
+        table = table or {}
+        for key in ("applied_rows", "inserted", "updated", "deleted", "warnings"):
+            if int(table.get(key) or 0) > 0:
+                return True
+    return False
 
 
 def latest_sync_metric_counts(run, user=None) -> dict[str, int]:

@@ -19,7 +19,18 @@
 </div>
 
 <section class="pb-panel pb-ai-summary">
-  {% if search.status == "error" %}
+  {% if is_pending %}
+    <div class="pb-working">
+      <span class="pb-page-spinner" aria-hidden="true"></span>
+      <div>
+        <strong>Building your AI search...</strong>
+        <p class="pb-muted">The prompt has been saved and the AI is generating, validating, and running a safe PostGIS query.</p>
+      </div>
+    </div>
+    <div class="pb-card-actions">
+      <button class="pb-button secondary" type="button" disabled>Working</button>
+    </div>
+  {% elif search.status == "error" %}
     <div class="pb-error">{{ search.error }}</div>
   {% else %}
     <div>
@@ -35,9 +46,12 @@
       {% else %}
         <span class="pb-chip">Saved opportunity</span>
       {% endif %}
-      <form method="post" action="{% url 'opportunity_ai_search_refresh' search.pk %}">
+      <form class="pb-loading-form" method="post" action="{% url 'opportunity_ai_search_refresh' search.pk %}" data-loading-label="Refreshing...">
         {% csrf_token %}
-        <button class="pb-button secondary" type="submit">Refresh results</button>
+        <button class="pb-button secondary pb-loading-button" type="submit">
+          <span class="pb-button-label">Refresh results</span>
+          <span class="pb-button-spinner" aria-hidden="true"></span>
+        </button>
       </form>
     </div>
   {% endif %}
@@ -84,6 +98,7 @@
   </section>
 {% endif %}
 
+{% if not is_pending %}
 <section class="pb-panel">
   <div class="pb-feedback">
     <strong>Was this a good match?</strong>
@@ -205,6 +220,28 @@
     {% if has_next %}<a class="pb-button secondary" href="{{ next_url }}">Next</a>{% endif %}
   </div>
 </section>
+{% endif %}
+
+{% if is_pending %}
+<script>
+  window.setTimeout(function () {
+    window.location.reload();
+  }, 3000);
+</script>
+{% endif %}
+
+<script>
+  document.querySelectorAll(".pb-loading-form").forEach(function (form) {
+    form.addEventListener("submit", function () {
+      var button = form.querySelector(".pb-loading-button");
+      if (!button) return;
+      button.disabled = true;
+      button.classList.add("is-loading");
+      var label = button.querySelector(".pb-button-label");
+      if (label) label.textContent = form.dataset.loadingLabel || "Working...";
+    });
+  });
+</script>
 
 {% include "opportunity/_chrome_close.html" %}
 {% endblock %}

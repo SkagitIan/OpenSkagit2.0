@@ -1,6 +1,7 @@
 import os
 from datetime import date
 from decimal import Decimal
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
@@ -92,6 +93,31 @@ class OpportunityHelperTests(SimpleTestCase):
         )
         self.assertIn("2 changed source file", narrative["narrative"])
         self.assertEqual(len(narrative["bullets"]), 3)
+
+    def test_latest_nonempty_sync_report_skips_empty_latest_report(self):
+        empty_latest = SimpleNamespace(run=SimpleNamespace(summary={"files_changed": 0, "tables": {"sales": {"applied_rows": 0}}}))
+        prior_active = SimpleNamespace(run=SimpleNamespace(summary={"files_changed": 1, "tables": {"sales": {"inserted": 2}}}))
+
+        class FakeReportQuery:
+            def __init__(self, reports):
+                self.reports = reports
+
+            def select_related(self, *_args):
+                return self
+
+            def filter(self, **_kwargs):
+                return self
+
+            def order_by(self, *_args):
+                return self
+
+            def __getitem__(self, item):
+                return self.reports[item]
+
+        class FakeReport:
+            objects = FakeReportQuery([empty_latest, prior_active])
+
+        self.assertIs(services.latest_nonempty_sync_report(FakeReport), prior_active)
 
     def test_ai_search_response_parser_requires_structured_json(self):
         parsed = parse_generated_search_response(
@@ -214,19 +240,32 @@ class OpportunityAISearchTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Search opportunities in plain English")
 
-    @patch("opportunity.views.run_ai_opportunity_search")
-    def test_ai_search_post_redirects_to_cached_result(self, run_ai_opportunity_search):
+    @patch("opportunity.views.start_ai_opportunity_search")
+    def test_ai_search_post_redirects_to_pending_result(self, start_ai_opportunity_search):
         search = OpportunitySearch.objects.create(
             user=self.user,
             prompt="large parcels",
             title="Large parcels",
-            status=OpportunitySearch.STATUS_READY,
+            status=OpportunitySearch.STATUS_DRAFT,
         )
-        run_ai_opportunity_search.return_value = search
+        start_ai_opportunity_search.return_value = search
         self.client.login(username="user", password="pass")
         response = self.client.post(reverse("opportunity_ai_search"), {"prompt": "large parcels"})
         self.assertRedirects(response, reverse("opportunity_ai_search_detail", args=[search.pk]))
-        run_ai_opportunity_search.assert_called_once_with(self.user, "large parcels")
+        start_ai_opportunity_search.assert_called_once_with(self.user, "large parcels")
+
+    def test_ai_search_detail_shows_pending_state(self):
+        search = OpportunitySearch.objects.create(
+            user=self.user,
+            prompt="large parcels",
+            title="Large parcels",
+            status=OpportunitySearch.STATUS_DRAFT,
+        )
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_ai_search_detail", args=[search.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Building your AI search")
+        self.assertNotContains(response, "No parcels matched this AI search.")
 
     def test_ai_search_detail_is_private_to_owner(self):
         search = OpportunitySearch.objects.create(

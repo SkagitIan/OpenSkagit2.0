@@ -19,11 +19,14 @@
 </div>
 
 <section class="pb-panel">
-  <form class="pb-ai-inline" method="post" action="{% url 'opportunity_ai_search' %}">
+  <form class="pb-ai-inline pb-loading-form" method="post" action="{% url 'opportunity_ai_search' %}" data-loading-label="Starting...">
     {% csrf_token %}
     <label for="ai-prompt">AI opportunity search</label>
     <input id="ai-prompt" name="prompt" placeholder="Describe any parcel pattern in plain English">
-    <button class="pb-button" type="submit">Search</button>
+    <button class="pb-button pb-loading-button" type="submit">
+      <span class="pb-button-label">Search</span>
+      <span class="pb-button-spinner" aria-hidden="true"></span>
+    </button>
   </form>
 
   <form class="pb-filter" method="get">
@@ -175,6 +178,19 @@
     {% if has_next %}<a class="pb-button secondary" href="{{ next_url }}">Next</a>{% endif %}
   </div>
 </section>
+
+<script>
+  document.querySelectorAll(".pb-loading-form").forEach(function (form) {
+    form.addEventListener("submit", function () {
+      var button = form.querySelector(".pb-loading-button");
+      if (!button) return;
+      button.disabled = true;
+      button.classList.add("is-loading");
+      var label = button.querySelector(".pb-button-label");
+      if (label) label.textContent = form.dataset.loadingLabel || "Working...";
+    });
+  });
+</script>
 
 {% include "opportunity/_chrome_close.html" %}
 {% endblock %}

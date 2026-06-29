@@ -1,6 +1,7 @@
 {% include "opportunity/_styles.html" %}
 <div class="pb">
   <div class="pb-shell">
+    <input class="pb-nav-toggle" type="checkbox" id="pb-nav-toggle" aria-hidden="true">
     <aside class="pb-sidebar">
       <div class="pb-brand">
         <img src="https://res.cloudinary.com/dq0l2n3zr/image/upload/v1753214772/openskagit_logo_mark_koy5zh.png" alt="">
@@ -22,14 +23,14 @@
         <div>Screening signals only.</div>
       </div>
     </aside>
+    <label class="pb-nav-backdrop" for="pb-nav-toggle" aria-label="Close navigation"></label>
     <section class="pb-main">
       <header class="pb-topbar">
-        <nav class="pb-topnav" aria-label="Primary">
-          <a href="{% url 'opportunity_home' %}" class="{% if active_nav == 'overview' %}active{% endif %}">Dashboard</a>
-          <a href="{% url 'opportunity_explore' %}" class="{% if active_nav == 'opportunities' %}active{% endif %}">Search</a>
-          <a href="{% url 'opportunity_ai_search' %}" class="{% if active_nav == 'ai_search' %}active{% endif %}">AI Search</a>
-          <a href="{% url 'opportunity_watchlist' %}" class="{% if active_nav == 'watchlist' %}active{% endif %}">Lists</a>
-        </nav>
+        <label class="pb-menu-button" for="pb-nav-toggle" aria-label="Open navigation" role="button" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
         <div class="pb-user">
           <span>{{ request.user.get_username }}</span>
           <form method="post" action="{% url 'opportunity_logout' %}">

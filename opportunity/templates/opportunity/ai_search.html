@@ -16,12 +16,15 @@
 
 <section class="pb-panel">
   {% if error %}<div class="pb-error">{{ error }}</div>{% endif %}
-  <form class="pb-ai-form" method="post">
+  <form class="pb-ai-form pb-loading-form" method="post" data-loading-label="Starting AI search...">
     {% csrf_token %}
     <label for="prompt">Natural-language search</label>
     <textarea id="prompt" name="prompt" rows="4" placeholder="Describe acreage, location, zoning, tax, utility, value, improvement, sale, or other parcel signals.">{{ prompt }}</textarea>
     <div class="pb-card-actions">
-      <button class="pb-button" type="submit">Run AI search</button>
+      <button class="pb-button pb-loading-button" type="submit">
+        <span class="pb-button-label">Run AI search</span>
+        <span class="pb-button-spinner" aria-hidden="true"></span>
+      </button>
     </div>
   </form>
 </section>
@@ -47,6 +50,19 @@
     {% endfor %}
   </div>
 </section>
+
+<script>
+  document.querySelectorAll(".pb-loading-form").forEach(function (form) {
+    form.addEventListener("submit", function () {
+      var button = form.querySelector(".pb-loading-button");
+      if (!button) return;
+      button.disabled = true;
+      button.classList.add("is-loading");
+      var label = button.querySelector(".pb-button-label");
+      if (label) label.textContent = form.dataset.loadingLabel || "Working...";
+    });
+  });
+</script>
 
 {% include "opportunity/_chrome_close.html" %}
 {% endblock %}

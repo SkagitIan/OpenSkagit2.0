@@ -11,9 +11,9 @@ from .ai_search import (
     FEEDBACK_REASONS,
     display_rows_for_search,
     record_search_feedback,
-    refresh_opportunity_search,
-    run_ai_opportunity_search,
     saved_searches_for_user,
+    start_ai_opportunity_search,
+    start_refresh_opportunity_search,
 )
 from .models import OpportunitySavedParcel, OpportunitySearch
 from .services import (
@@ -125,7 +125,7 @@ def ai_search(request):
         if not prompt:
             error = "Enter a natural-language search first."
         else:
-            search = run_ai_opportunity_search(request.user, prompt)
+            search = start_ai_opportunity_search(request.user, prompt)
             return redirect("opportunity_ai_search_detail", search_id=search.pk)
 
     return render(
@@ -144,9 +144,10 @@ def ai_search(request):
 @login_required(login_url=reverse_lazy("opportunity_login"))
 def ai_search_detail(request, search_id):
     search = get_object_or_404(OpportunitySearch, pk=search_id, user=request.user)
+    is_pending = search.status == OpportunitySearch.STATUS_DRAFT
     view_mode = _view_mode(request.GET.get("view", "list"))
     page = _positive_int(request.GET.get("page"), 1)
-    all_rows = display_rows_for_search(search, request.user)
+    all_rows = [] if is_pending else display_rows_for_search(search, request.user)
     for row in all_rows:
         row["ai_search"] = search
     rows = all_rows[(page - 1) * PAGE_SIZE:page * PAGE_SIZE]
@@ -165,6 +166,7 @@ def ai_search_detail(request, search_id):
             "has_next": has_next,
             "previous_url": _search_page_url(search, page - 1, view_mode) if has_previous else "",
             "next_url": _search_page_url(search, page + 1, view_mode) if has_next else "",
+            "is_pending": is_pending,
             "feedback_reasons": FEEDBACK_REASONS,
             "disclaimer": DISCLAIMER,
         },
@@ -183,7 +185,7 @@ def save_ai_search(request, search_id):
 @require_POST
 def refresh_ai_search(request, search_id):
     search = get_object_or_404(OpportunitySearch, pk=search_id, user=request.user)
-    search = refresh_opportunity_search(search)
+    search = start_refresh_opportunity_search(search)
     return redirect("opportunity_ai_search_detail", search_id=search.pk)
 
 

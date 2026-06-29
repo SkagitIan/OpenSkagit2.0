@@ -4,12 +4,13 @@ import copy
 import json
 import os
 import re
+import threading
 from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
 from typing import Any
 
-from django.db import DatabaseError, connection
+from django.db import DatabaseError, close_old_connections, connection, transaction
 
 from .models import OpportunitySearch, OpportunitySearchFeedback
 from .services import (
@@ -28,6 +29,8 @@ from .services import (
 
 DEFAULT_RESULT_LIMIT = 200
 FEEDBACK_REASONS = OpportunitySearchFeedback.REASON_CHOICES
+_ACTIVE_SEARCH_IDS: set[int] = set()
+_ACTIVE_SEARCH_LOCK = threading.Lock()
 RESIDENTIAL_DWELLING_CODES = {"110", "111", "112", "113", "120", "130", "180", "181", "182", "185", "190"}
 NONRESIDENTIAL_LAND_USE_PREFIXES = ("2", "3", "4", "5", "6", "7", "8")
 DWELLING_ASSET_TERMS = {
@@ -134,6 +137,51 @@ class SearchPlan:
 
 class OpportunitySearchError(ValueError):
     pass
+
+
+def start_ai_opportunity_search(user, prompt: str) -> OpportunitySearch:
+    prompt = (prompt or "").strip()
+    if not prompt:
+        raise OpportunitySearchError("Enter a natural-language search first.")
+
+    search = OpportunitySearch.objects.create(user=user, prompt=prompt, status=OpportunitySearch.STATUS_DRAFT)
+    transaction.on_commit(lambda: _start_ai_search_worker(search.pk))
+    return search
+
+
+def start_refresh_opportunity_search(search: OpportunitySearch) -> OpportunitySearch:
+    search.status = OpportunitySearch.STATUS_DRAFT
+    search.error = ""
+    search.save(update_fields=["status", "error", "updated_at"])
+    transaction.on_commit(lambda: _start_ai_search_worker(search.pk))
+    return search
+
+
+def _start_ai_search_worker(search_id: int) -> None:
+    with _ACTIVE_SEARCH_LOCK:
+        if search_id in _ACTIVE_SEARCH_IDS:
+            return
+        _ACTIVE_SEARCH_IDS.add(search_id)
+    worker = threading.Thread(target=_run_ai_search_worker, args=(search_id,), daemon=True)
+    worker.start()
+
+
+def _run_ai_search_worker(search_id: int) -> None:
+    close_old_connections()
+    try:
+        search = OpportunitySearch.objects.select_related("user").get(pk=search_id)
+        refresh_opportunity_search(search)
+    except Exception as exc:
+        OpportunitySearch.objects.filter(pk=search_id).update(
+            status=OpportunitySearch.STATUS_ERROR,
+            error=_friendly_error(exc)[:2000],
+            result_rows=[],
+            result_count=0,
+        )
+    finally:
+        close_old_connections()
+        with _ACTIVE_SEARCH_LOCK:
+            _ACTIVE_SEARCH_IDS.discard(search_id)
 
 
 def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | None = None) -> OpportunitySearch:
