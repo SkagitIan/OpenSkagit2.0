@@ -1,0 +1,394 @@
+Chapter 14.10 GENERAL PROVISIONS
+
+             Division 1 Zoning and Land Uses
+
+         Chapter 14.10
+GENERAL PROVISIONS
+
+             Sections:
+
+              14.10.010    Purpose.
+
+              14.10.020    Applicability.
+
+              14.10.030    Zoning established.
+
+              14.10.040    Split zoning.
+
+              14.10.050    Use tables
+
+              14.10.060    Uses allowed in all zones.
+
+              14.10.070    Uses prohibited in all zones.
+
+              14.10.080    Uses prohibited outside of fire district.
+
+              14.10.090    Uses not specifically identified.
+
+              14.10.095    Extension of sewer prohibited into rural and resource areas.
+
+              14.10.100    Dimensional standards—Measurement and application.
+
+        14.10.010  Purpose.
+
+             The regulations are intended to carry out the goals and policies of the Skagit County  Comprehensive Plan . This Chapter is intended to benefit the public as a whole and not any specific  person  or group of  persons . (Ord. O20250005 § 2 (Exh. A))
+
+        14.10.020  Applicability.
+
+             (1)    This Chapter applies to all  zones  established within unincorporated Skagit County and any  project permit  or  project permit  application.
+
+             (2)    This Chapter applies to the entirety of Division 1 of this Title. (Ord. O20250005 § 2 (Exh. A))
+
+        14.10.030  Zoning established.
+
+             (1)    Skagit County is hereby divided into  zones  to carry out the policies and objectives of the  Comprehensive Plan . Division 1 of this Title describes the land uses that are allowed and prohibited within each  zone .
+
+             (2)    Zoning Map. The official zoning map delineating the boundaries between  zones  and showing the zoning of specific parcels of land, together with the explanatory matter thereon, is hereby adopted by reference and declared a part of this Title. The current official zoning map must be kept on file by the County in the office of the  Department  and is the final authority as to the current  zone  boundaries.
+
+             (3)    Zoning Map Available to Public. The official zoning map must be permanently displayed at a location available to the public.
+
+             (4)    Zoning Map Amendments. The  zones  may be redefined from time to time by adoption of amendments (rezones) to the zoning map, in accordance with the procedures in SCC Chapter  14.08 , Legislative Procedures, by a map or maps showing the geographical area and location of said amendments. Changes to the zoning map must be consistent with the  Comprehensive Plan  land use designations.
+
+             (5)    Zoning Boundaries. When uncertainty exists as to boundaries of any land use  zone  shown on the official zoning map, the following rules of construction apply:
+
+             (a)    Where two different  zones  are separated by a  road , the actual centerline of the  right-of-way  must be construed to be the  zone  boundary.
+
+             (b)    Where  zone  boundaries are indicated on such maps as approximately following the  lot  or tract lines, the actual  lot  tract line must be construed to be the boundaries of such  zone .
+
+             (c)    Where a  zone  boundary on the official zoning map divides a parcel, the location of such district boundary thereon must be determined by use of the scale appearing on the zoning map.
+
+             (d)     Zone  boundaries indicated as following shorelines must be construed to follow such shorelines, and in case of change in the shoreline, must be construed as moving with the actual shoreline, except in cases where a government meander line exists, in which case the shoreline must be measured from the meander line.
+
+             (e)    Boundaries indicated as following railroad lines must be construed to be the centerline of the  right-of-way .
+
+             (f)    Where a public  street  or alley is officially vacated or abandoned, the regulations applicable to the abutting property to which the vacated portion reverts apply to such vacated or abandoned  street  or alley.
+
+             (g)    When an uncertainty exists that cannot be resolved by the  application  of the foregoing rules, the  Director  must determine the location of such  zone  boundaries by written decision. (Ord. O20250005 § 2 (Exh. A))
+
+        14.10.040  Split zoning.
+
+             (1)    If a single  lot  is divided into multiple  zones , each separately zoned portion of the  lot  may be developed, subdivided, or used consistent with the applicable  zone ’s regulations.
+
+             (2)    Development on the  lot  must comply with the requirements of the  zone  in which the development is located.
+
+             (3)    Each separately zoned portion of the  lot  is treated as a separate  lot  for meeting all applicable code requirements (e.g., minimum  lot  size). (Ord. O20250005 § 2 (Exh. A))
+
+        14.10.050  Use tables
+
+             (1)    The use tables in the chapters in Division 1 specify whether a use is allowed in a  zone .
+
+             (2)    The symbols in each cell have the meanings shown below.
+
+                      Table 14.10.050-1 Key to the Use Tables
+
+                         Code
+
+                         Explanation
+
+                         P
+
+                         The use is permitted.  Permitted uses  are those that do not require discretionary land use approval permits, but may require  building permits ,  shoreline permits , or other land use review.
+
+                         AC
+
+                         The use is permitted, but only as an accessory to a  principal use .
+
+                         AD
+
+                         The use may be allowed by an administrative special use permit.
+
+                         HE
+
+                         The use may be allowed by a Hearing Examiner special use permit.
+
+                         X
+
+                         Where the table cell is blank or includes an “X,” the use is prohibited in the  zone .
+
+             (3)    No use specifically identified as allowed in any  zone  may be allowed in another  zone  where that use is not specifically identified.
+
+             (4)    Where a use qualifies as both an allowed use and a prohibited use, the use is prohibited. (Ord. O20250005 § 2 (Exh. A))
+
+        14.10.060  Uses allowed in all zones.
+
+             (1)    Unless more specifically stated elsewhere, the uses in the following table are allowed in all  zones  at the level of review noted. For development standards for these uses, see the standards chapter listed.
+
+                         Use
+
+                         Standards
+
+                         Review
+
+                          Drainage maintenance
+
+                         SCC Chapter  14.18
+
+                         P
+
+                          Net metering system , solar
+
+                         SCC Chapter  14.18
+
+                         P
+
+                         Outdoor public musical, entertainments, amusements, and assemblies (single events)
+
+                         SCC Chapter  9.08
+
+                         See SCC Chapter  9.08
+
+                          Public use
+
+                         SCC Chapter  14.18
+
+                         —
+
+                         —minor
+
+                         P
+
+                         —expansion of existing major  public use  up to 3,000 sf
+
+                         AD
+
+                         —new major  public use  or expansion of existing of 3,000 sf or greater
+
+                         HE
+
+                          Recycling drop box facility
+
+                         SCC Chapter  14.18
+
+                         P
+
+                          Repair ,  replacement , and maintenance of water lines with an inside diameter of 12 inches or less
+
+                         SCC Chapter  14.18
+
+                         P
+
+                          Transit stop
+
+                         SCC Chapter  14.18
+
+                         P
+
+                          Utility development
+
+                         SCC Chapter  14.18
+
+                         —
+
+                         —minor
+
+                         AD
+
+                         —major
+
+                         HE
+
+                         Wireless facilities
+
+                         SCC Chapter  14.59
+
+                         —
+
+                         —small wireless facilities
+
+                         AD
+
+                         —macro cell towers
+
+                         HE
+
+                         —collocation of cell towers
+
+                         P
+
+             (Ord. O20260004 § 1 (Att. 2); Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.10.070  Uses prohibited in all zones.
+
+             (1)    In addition to any use that is prohibited by SCC  14.10.090 (1) or other provisions of Skagit County Code, this Section describes additional uses that are expressly prohibited in all  zones .
+
+             (2)    Consistent with SCC  14.09.320 , a violation of this Section is a Class 1 civil infraction and is subject to the other penalties in SCC Chapter  14.09 .
+
+             (3)    The following uses are explicitly prohibited in all zones:
+
+             (a)    Major regional  utility development ;
+
+             (b)    Marijuana production or processing in a  greenhouse  or any translucent  structure ;
+
+             (c)    Marijuana collective garden;
+
+             (d)    Marijuana cooperative;
+
+             (e)     Mitigation bank ;
+
+             (f)    Outdoor growing of marijuana.
+
+             (4)     Recreational Vehicles .
+
+             (a)    It is unlawful to use a  recreational vehicle  as a  dwelling unit .
+
+             (b)    It is unlawful to occupy a  recreational vehicle  for more than 180  days  in any 12-month period.
+
+             (c)    It is unlawful to maintain more than one occupied  recreational vehicle  on any  lot  without a special use permit for that purpose.
+
+             (d)    It is unlawful to maintain more than two  recreational vehicles  on any  lot  without a special use permit for that purpose.
+
+             (5)    Storage in  Setbacks  and Rights-of-Way.
+
+             (a)    It is unlawful to store any material or vehicle in public rights-of-way.
+
+             (b)    It is unlawful to place a vehicle that is not currently licensed and registered in a  setback .
+
+             (6)    Storage of  Junk . No  person  may use more than 500 square feet of a  lot  or parcel of land for the depositing, sorting, refining, baling, dismantling, or storage of  junk  except when conducted entirely within an enclosed  structure . (Ord. O20250005 § 2 (Exh. A))
+
+        14.10.080  Uses prohibited outside of fire district.
+
+             (1)    No  building permit  may be issued for any  structure  that is not within the boundaries of a Skagit County Fire District.
+
+             (2)    Exceptions. Notwithstanding the general rule:
+
+             (a)    A  building permit  may be issued if the  Director  determines that the  building  is a necessary component of the resource base of the  zone .
+
+             (b)    A  building permit  may be issued for a nonresidential, noncommercial  structure  if it is necessary to convey utilities, radio transmission, etc. (e.g., radio towers or transmission or water lines).
+
+             (c)    In  zones  other than IF-NRL, a  building permit  may be issued for a single-family dwelling or accessory  building  if it meets all of the following or comparable alternative fire protection requirements as determined by the Fire Marshal:
+
+             (i)    Approved noncombustible roofing materials must be used.
+
+             (ii)    Slash abatement within 200 feet of any portion of the exterior of the  structure .
+
+             (iii)    A safety  zone  cleared of flammable vegetation 30 feet from any portion of the exterior of the  structure  on level ground and 100 feet downhill on sloped ground.
+
+             (iv)     Building  sprinklers are installed per National Fire Protection Association 13D (NFPA 13D).
+
+             (v)    Exception:  Buildings  of 800 square feet or less that are:
+
+             (A)    Unheated separate accessory  structures  to a full-time  dwelling unit  20 feet from all other  buildings ; or
+
+             (B)    A  building  used as a vacation  cabin  and not as a full-time residence.
+
+             (vi)    There is availability of 300 gallons of water on site, 400 feet of one-inch fire hose, and an internal combustion engine powered pump.
+
+             (d)    On saltwater islands, a  building permit  may be issued for a single-family dwelling or accessory  building  if it meets all of the following or comparable alternative fire protection requirements as determined by the Fire Marshal:
+
+             (i)    Approved noncombustible roofing materials must be used.
+
+             (ii)    Slash abatement within 200 feet of any portion of the exterior of the  structure .
+
+             (iii)    A safety  zone  cleared of flammable vegetation 30 feet from any portion of the exterior of the  structure  on level ground and 100 feet downhill on sloped ground.
+
+             (iv)    There is availability of 300 gallons of water on site, 400 feet of one-inch fire hose, and an internal combustion engine powered pump, or an equivalent system as approved by the Skagit County Fire Marshal.
+
+             (v)     Building  sprinklers are installed per National Fire Protection Association 13D (NFPA 13D).
+
+             (e)    Exceptions from the sprinkling requirement in this Subsection may be provided if:
+
+             (i)    The  lot  was a  legal lot  prior to the adoption of interim controls on June 11, 1990; and
+
+             (ii)    The proposed single-family dwelling or accessory  building  does not exceed 1,500 square feet of heated  structure . (Ord. O20250005 § 2 (Exh. A))
+
+        14.10.090  Uses not specifically identified.
+
+             (1)    Only a use listed within a given  zone  is allowed in that  zone , except that a substantially similar use may be allowed per this Section.
+
+             (2)    When a use is not specifically identified in this Division, the  Director  may authorize the use if the  Director  makes all of the following findings:
+
+             (a)    The proposed use is similar to other uses listed in the  zone  in which the use is proposed to be located;
+
+             (b)    The proposed use substantially meets the intent of and is consistent with the goals, objectives and policies of the  Comprehensive Plan ;
+
+             (c)    The proposed use meets the stated purpose and general intent of the  zone  in which the use is proposed to be located;
+
+             (d)    The proposed use would not adversely impact the public health, safety and general welfare of the residents of the County; and
+
+             (e)    The proposed use shares characteristics common with and not of greater intensity, density or more environmental impact than those uses listed in the  zone  in which it is to be located. (Ord. O20250005 § 2 (Exh. A))
+
+        14.10.095  Extension of sewer prohibited into rural and resource areas.
+
+             Extension of sewer service is prohibited outside of  urban growth areas , except in those limited circumstances shown to be necessary to protect basic public health and safety and the environment and when such services are financially supportable at rural densities and do not permit urban densities. (Ord. O20250005 § 2 (Exh. A))
+
+        14.10.100  Dimensional standards—Measurement and application.
+
+             (1)    The  dimensional standards  tables in the chapters in Division 1 specify numeric standards for dimensional parameters.
+
+             (2)    The symbols and abbreviations in the tables have the meanings shown below, in addition to the meanings shown in SCC  14.04.030 .
+
+                      Table 14.10.100-1 Key to the  Dimensional Standards  Tables
+
+                          Code
+
+                          Explanation
+
+                         ac
+
+                         Acres or as rounded to a fraction of a section, e.g., 10 acres or 1/64th of a section; 40 acres or 1/16th of a section
+
+                         ft
+
+                         Feet
+
+                         sf
+
+                         Square feet
+
+                         *
+
+                         See the code section for the  zone  for detailed limits
+
+                         -
+
+                         No limit or inapplicable (when alone in a table cell)
+
+             (3)     Lot  Size.
+
+             (a)     Lot  size is measured as the total horizontal square footage area within property lines, excluding  tidelands .  Lot  size may include the portion of the property that was dedicated for public or private  street  right(s)-of-way.
+
+             (b)    The minimum  lot  size shown in the  dimensional standards  tables is the minimum for an ordinary  land division ; smaller  lot  sizes may be available with special  land divisions  (SCC Chapter  14.76 ), a  CaRD  (SCC Chapter  14.78 ), or a  binding site plan  (SCC Chapter  14.79 ).
+
+             (c)    In certain  zones , the  Director  may reduce the minimum  lot  size required for a  lot  for a public safety facility to accommodate its financing, ownership, and development.
+
+             (i)    The  lot  size adjustment may be no greater than what is required to accommodate that particular safety facility and to reduce the impacts to rural or  natural resource lands .
+
+             (ii)    This exception applies in the following zones:  Rural Village  Residential; Rural Intermediate; Rural Reserve;  Agriculture —Natural Resource Lands; Secondary Forest— Natural Resource Lands ; Industrial Forest— Natural Resource Lands ; and Rural Resource— Natural Resource Lands .
+
+             (iii)    A qualifying public safety facility includes fire halls, emergency medical, law enforcement substations and training stations, flood control facilities and other similar facilities owned or operated by the County or a district or private service provider holding a franchise or long-term lease agreement with the County. Such facilities must be dedicated to providing emergency responses to the general public.
+
+             (iv)    Once such a  lot  is created, it may not be converted to residential use unless the minimum  lot  size for the  zone  is amended and the  lot  sized for the public safety facility becomes a conforming  lot  size for residential development.
+
+             (4)     Setbacks .
+
+             (a)     Setbacks  are for both principal and accessory  structures  unless otherwise specified.
+
+             (b)     Setbacks  from NRL  zones  are required per SCC  14.38.060 .
+
+             (5)    Maximum  Building  Height.
+
+             (a)    Determination of Height.
+
+             (i)    For most  structures , height is determined by the vertical  distance  measured from the average elevation of the area occupied by the  structure  to the highest point of the  structure  or roof for flat roofs, and the average height of the roof on gable, shed, hip or other peaked roofs.
+
+             (ii)    For an antenna, height is determined by the vertical  distance  measured from the base of the antenna support  structure  at  grade  to the highest point of the  structure , even if said highest point is an antenna. If the support  structure  is on a sloped  grade , then the average between the highest and lowest  grades  must be used in calculating the antenna height.
+
+             (b)    Exemption. The following  structures  are exempt from the maximum height limits:
+
+             (i)    Flagpoles;
+
+             (ii)    Ham radio antennas;
+
+             (iii)     Church  steeples;
+
+             (iv)    Water towers;
+
+             (v)     Meteorological towers ;
+
+             (vi)    Fire towers.
+
+             (c)    Properties within the Airport Environs Overlay (AEO) may have further limitations on height pursuant to SCC  14.14.100 .
+
+             (d)    The height of wireless facilities is regulated in SCC Chapter  14.59 .
+
+             (e)    In the AVR and AEO  zones , maximum height should be determined using the datum of mean sea level elevation, unless otherwise specified. (Ord. O20250005 § 2 (Exh. A))

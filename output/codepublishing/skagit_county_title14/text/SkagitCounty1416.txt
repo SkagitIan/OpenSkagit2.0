@@ -1,0 +1,1038 @@
+Chapter 14.16 MUNICIPAL UGA ZONES AND USES
+
+         Chapter 14.16
+MUNICIPAL UGA ZONES AND USES
+
+             Sections:
+
+              14.16.010    Applicability.
+
+              14.16.020    Allowed uses.
+
+              14.16.030    Dimensional standards.
+
+              14.16.100    Anacortes UGA Urban Development (A-UD).
+
+              14.16.200    Burlington UGA Urban Development (B-UD).
+
+              14.16.300    La Conner UGA Urban Development (LC-UD).
+
+              14.16.400    Hamilton Urban Reserve (H-URv).
+
+              14.16.500    Mount Vernon UGA Urban Development (MV-UD).
+
+              14.16.600    Swinomish UGA Residential (R).
+
+              14.16.700    Urban Reserve Commercial-Industrial (URC-I).
+
+              14.16.800    Urban Reserve Public—Open Space (URP-OS).
+
+              14.16.900    Urban Reserve Residential (URR).
+
+        14.16.010  Applicability.
+
+             (1)    This Chapter applies to the following zones:
+
+             (a)    Anacortes UGA Urban Development district (A-UD);
+
+             (b)    Burlington UGA Urban Development district (B-UD);
+
+             (c)    La Conner UGA Urban Development district (LC-UD);
+
+             (d)    Hamilton Urban Reserve (H-URv);
+
+             (e)    Mount Vernon UGA Urban Development district (MV-UD);
+
+             (f)    Swinomish UGA Residential district (R);
+
+             (g)    Urban Reserve Commercial—Industrial (URC-I);
+
+             (h)    Urban Reserve Public— Open Space  (URP-OS);
+
+             (i)    Urban Reserve Residential (URR).
+
+             (Ord. O20250005 § 2 (Exh. A))
+
+        14.16.020  Allowed uses.
+
+             (1)    The uses shown in the table below are allowed in the specified  zones . For development standards for these uses, see the use section in SCC Chapter  14.18 .
+
+                      Table 14.16.020-1 Allowed Uses in the Municipal UGA  Zones
+
+                         H-URv
+
+                         R
+
+                         URC-I
+
+                         URP-OS
+
+                         URR
+
+                          Residential Uses
+
+                         Single-family residence
+
+                         P
+
+                         P
+
+                         P
+
+                          Accessory dwelling unit
+
+                         P
+
+                         P
+
+                         P
+
+                          Co-housing as part of a CaRD
+
+                         HE
+
+                          Co-living housing
+
+                         P
+
+                         Duplex
+
+                         P
+
+                          Loft living quarters
+
+                         P
+
+                         Caretaker  dwelling unit
+
+                         P
+
+                          Owner operator/caretaker quarters
+
+                         AC
+
+                          Manufactured or mobile home park
+
+                         HE
+
+                          Permanent supportive housing
+
+                         P
+
+                          Residential accessory use
+
+                         P
+
+                         P
+
+                          Temporary manufactured home
+
+                         P
+
+                         P
+
+                          Commercial/Retail Uses
+
+                          Animal clinic/hospital
+
+                         AD
+
+                         Art gallery/studio
+
+                         P
+
+                          Asphalt/concrete batching or recycling ,  temporary
+
+                         HE
+
+                          Bed and breakfast
+
+                         AD
+
+                         HE
+
+                         AD
+
+                         Business/professional office
+
+                         P
+
+                          Display gardens
+
+                         HE
+
+                          Family day care provider
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Group care facility
+
+                         AD
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Group care facility , adult
+
+                         AD
+
+                         HE
+
+                          Home-Based Business  1
+
+                         P
+
+                         P
+
+                          P
+
+                          Home-Based Business  2
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Home-Based Business  3
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         Inpatient substance abuse and mental health facilities
+
+                         HE
+
+                          Institutional camp/retreat
+
+                         HE
+
+                          Kennel , boarding
+
+                         AD
+
+                          Kennel , day-use
+
+                         HE
+
+                         P
+
+                         HE
+
+                          Kennel , limited
+
+                         HE
+
+                         AD
+
+                         HE
+
+                         Limited event venues
+
+                         AD
+
+                         P
+
+                         AD
+
+                         AD
+
+                         Marijuana production/processing facility
+
+                         HE
+
+                         Marijuana retail facility
+
+                         AD
+
+                          Marina , ≤ 20 slips
+
+                         HE
+
+                          Marina , primitive
+
+                         HE
+
+                          Mini-storage
+
+                         P
+
+                         Restaurant
+
+                         P
+
+                         Retail and service business, large
+
+                         P
+
+                         Retail and service business, small
+
+                         P
+
+                          Small-scale production or manufacture
+
+                         P
+
+                          Vehicle repair garage
+
+                         P
+
+                          Community/Public Uses
+
+                          Cemetery
+
+                         HE
+
+                          Church
+
+                         HE
+
+                         HE
+
+                          Community club/grange hall
+
+                         P
+
+                         HE
+
+                          Historic site open to the public
+
+                         P
+
+                         P
+
+                         P
+
+                         HE
+
+                          Interpretive/information center
+
+                         P
+
+                          Museum
+
+                         P
+
+                          Preschool
+
+                         HE
+
+                         P
+
+                         HE
+
+                          Natural Resource Uses
+
+                          Agriculture
+
+                         P
+
+                         P
+
+                          Agricultural accessory use
+
+                         P
+
+                         P
+
+                          Agricultural processing facility
+
+                         P
+
+                         Aquaculture
+
+                         P
+
+                          Farm-based business
+
+                         P
+
+                          Forestry
+
+                         P
+
+                         P
+
+                          Forestry-based business
+
+                         HE
+
+                         P
+
+                          Habitat enhancement/restoration project
+
+                         P
+
+                         P
+
+                         P
+
+                          Natural resource support services
+
+                         P
+
+                          Natural resources training/research facility
+
+                         AD
+
+                          Nursery/greenhouse , retail
+
+                         AD
+
+                         P
+
+                         HE
+
+                          Nursery/greenhouse , wholesale
+
+                         AD
+
+                         P
+
+                         HE
+
+                          Seasonal roadside stand  ≤ 300 sf
+
+                         P
+
+                         AD
+
+                         AD
+
+                          Seasonal roadside stand  &gt; 300 sf and ≤ 2,000 sf
+
+                         AD
+
+                         HE
+
+                          Seasonal roadside stand  &gt; 2,000 sf
+
+                         HE
+
+                          Park/Recreational Uses
+
+                         Active  recreation facility
+
+                         AD
+
+                         HE
+
+                         HE
+
+                          Campground , developed
+
+                         HE
+
+                         HE
+
+                          Campground , primitive
+
+                         P
+
+                         HE
+
+                         AD
+
+                          Golf course
+
+                         HE
+
+                         HE
+
+                         Outdoor recreational facilities
+
+                         AD
+
+                          Park , community
+
+                         HE
+
+                         P
+
+                         HE
+
+                          Park , recreation  open space
+
+                         P
+
+                          Park , regional
+
+                         P
+
+                         HE
+
+                          Park , specialized recreational area
+
+                         AD
+
+                         P
+
+                         HE
+
+                          Racetrack , indoor
+
+                         AD
+
+                         HE
+
+                          Regional equestrian events center
+
+                         HE
+
+                          Stables and riding club
+
+                         AD
+
+                         AD
+
+                          Trail
+
+                         AD
+
+                         P
+
+                         AD
+
+                          Trailhead , primary and secondary
+
+                         AD
+
+                         P
+
+                         AD
+
+                          Storage Uses
+
+                         Indoor or  outdoor storage  facilities
+
+                         P
+
+                          Vehicle storage facility
+
+                         HE
+
+                          Transportation Uses
+
+                          Vehicle charging station
+
+                         P
+
+                         AC
+
+                          Vehicle fueling station
+
+                         P
+
+                          Utility Uses
+
+                         Recycling drop-box facility
+
+                         AC
+
+                         AC
+
+                         P
+
+                         Water diversion  structure
+
+                         AD
+
+             Notes:
+
+             1.    Key to the Use Tables can be found in SCC  14.10.050 .
+
+             2.    Uses allowed in all  zones  can be found in SCC  14.10.060 .
+
+             3.    Uses prohibited in all  zones  can be found in SCC  14.10.070 .
+
+             (Ord. O20260004 § 1 (Att. 2); Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.16.030  Dimensional standards.
+
+                      Table 14.16.030-1  Dimensional Standards  in the Municipal UGA  Zones
+
+                         H-URv
+
+                         R
+
+                         URC-I
+
+                         URP-OS
+
+                         URR
+
+                           Lot  Dimensions
+
+                         Minimum  lot  size (ac)
+
+                         40
+
+                         *
+
+                         5
+
+                         5
+
+                         5
+
+                         Minimum  lot width  (ft)
+
+                         400
+
+                         75
+
+                         –
+
+                         –
+
+                         150
+
+                           Lot Coverage
+
+                         Maximum  lot coverage  (%)
+
+                         *
+
+                         35
+
+                         50
+
+                         50
+
+                         35
+
+                          Minimum  Setbacks  (principal use)
+
+                         Front (ft)
+
+                         50
+
+                         *
+
+                         35
+
+                         35
+
+                         20
+
+                         Interior side (ft)
+
+                         50
+
+                         8*
+
+                         15 1
+
+                         *
+
+                         8
+
+                         Rear (ft)
+
+                         50
+
+                         25
+
+                         20 1
+
+                         *
+
+                         10
+
+                          Minimum  Setbacks  (accessory use)
+
+                         Front (ft)
+
+                         50
+
+                         35
+
+                         20
+
+                         35
+
+                         25
+
+                         Interior side (ft)
+
+                         50
+
+                         8
+
+                         15 1
+
+                         *
+
+                         8 2
+
+                         Rear (ft)
+
+                         50
+
+                         *
+
+                         20 1
+
+                         *
+
+                         10 2
+
+                           Building  Size Limits
+
+                         Maximum height (ft)
+
+                         40
+
+                         40
+
+                         40
+
+                         40
+
+                         40
+
+                          Density
+
+                         Maximum density (primary du per  lot )
+
+                         –
+
+                         –
+
+                         –
+
+                         –
+
+                         1
+
+             Notes:
+
+             1.    When adjacent to other commercially zoned  lots , the minimum  setback  is zero.
+
+             2.    A three-foot  setback  is permitted for nonresidential  structures  when there is an alley along the rear property line and the  structure  is 1,000 square feet or less in size and 16 feet or less in height.
+
+             3.    Values marked with an asterisk (*) are specified within the individual sections for each zoning district of this chapter. Refer to the corresponding sections below for specific  setback  requirements.
+
+             (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.16.100  Anacortes UGA Urban Development (A-UD).
+
+             (1)    Purpose. The purpose of the Anacortes UGA Urban Development district is to permit development in the unincorporated UGA of the  City  of Anacortes, including  subdivision  of property and the issuance of  project permits , consistent with the Growth Management Act requirements for provision of  urban services  by the  City  of Anacortes. The  City  of Anacortes has already made adequate provision for  urban services , including sewer, within the Anacortes UGA Urban Development district. The  city  comprehensive plan has also identified the appropriate  city  land use designation and  development regulations  that should be applied to those areas upon annexation.
+
+             (2)     Permitted Uses . The County must accept an  application  for, and approve a permit for, a  subdivision  and/or development of any  legal lot  located within this UGA Urban Development district, provided the proposed  subdivision  or development is consistent with the use,  lot  size and other development standards for the  zone  that has been identified by the  city  for the parcel that is the subject of the  application .
+
+             (3)     Application  Review.
+
+             (a)    An  application  for a short plat or  subdivision  must follow the procedures and requirements for short plats or  subdivisions  in SCC Chapter  14.74 .
+
+             (b)    An  application  for development that does not require a short plat or  subdivision  may be processed as a Type 2 review, pursuant to SCC  14.06.150 , unless the proposed use or development requires Hearing Examiner review pursuant to the applicable  city  regulation, in which case the  application  must be processed as a Type 3 review, pursuant to SCC  14.06.150 .
+
+             (c)    SCC Chapters  14.24 ,  Critical Areas , and 16.12, State Environmental Policy Act, apply in place of any  city  regulation covering the same topic. (Ord. O20250005 § 2 (Exh. A))
+
+        14.16.200  Burlington UGA Urban Development (B-UD).
+
+             (1)    Purpose. The purpose of the Burlington UGA Urban Development district is to permit development in a portion of the unincorporated UGA of the  City  of Burlington, including  subdivision  of property and the issuance of  project permits , consistent with the Growth Management Act requirements for provision of  urban services  by the  City  of Burlington. The  City  of Burlington has already made adequate provision for  urban services , including sewer, within the portion of the Burlington UGA zoned Burlington Urban Development district. The  city  comprehensive plan has also identified the appropriate  city  land use designation and  development regulations  that should be applied to those areas upon annexation.
+
+             (2)     Permitted Uses . The County must accept an  application  for, and approve a permit for, a  subdivision  and/or development of any  legal lot  located within this UGA Urban Development district, provided the proposed  subdivision  or development is consistent with the use,  lot  size, and other development standards for the  zone  that has been identified by the  city  for the parcel that is the subject of the  application .
+
+             (3)     Application  Review.
+
+             (a)    An  application  for a short plat or  subdivision  must follow the procedures and requirements for short plats or  subdivisions  in SCC Chapter  14.74 .
+
+             (b)    An  application  for development that does not require a short plat or  subdivision  may be processed as a Type 2 review, pursuant to SCC  14.06.150 , unless the proposed use or development requires Hearing Examiner review pursuant to the applicable  city  regulation, in which case the  application  must be processed as a Type 3 review, pursuant to SCC  14.06.150 .
+
+             (c)    SCC Chapters  14.24 ,  Critical Areas , and 16.12, State Environmental Policy Act, apply in place of any  city  regulation covering the same topic. (Ord. O20250005 § 2 (Exh. A))
+
+        14.16.300  La Conner UGA Urban Development (LC-UD).
+
+             (1)    Purpose. The purpose of the La Conner UGA Urban Development district is to permit development in the unincorporated UGA of the Town of La Conner, including  subdivision  of property and the issuance of  project permits , consistent with the Growth Management Act requirements for provision of  urban services  by the Town of La Conner. The Town of La Conner has already made adequate provision for  urban services , including sewer, within the La Conner UGA Urban Development district. The town  comprehensive plan  has also identified the appropriate  city  land use designation and  development regulations  that should be applied to those areas upon annexation.
+
+             (2)     Permitted Uses . The County must accept an  application  for, and approve a permit for, a  subdivision  and/or development of any  legal lot  located within this UGA Urban Development district, provided the proposed  subdivision  or development is consistent with the use,  lot  size, and other development standards for the  zone  that has been identified by the town for the parcel that is the subject of the  application .
+
+             (3)     Application  Review.
+
+             (a)    An  application  for a short plat or  subdivision  must follow the procedures and requirements for short plats or  subdivisions  in SCC Chapter  14.74 .
+
+             (b)    An  application  for development that does not require a short plat or  subdivision  may be processed as a Type 2 review, pursuant to SCC  14.06.150 , unless the proposed use or development requires Hearing Examiner review pursuant to the applicable  city  regulation, in which case the  application  must be processed as a Type 3 review, pursuant to SCC  14.06.150 .
+
+             (c)    SCC Chapters  14.24 ,  Critical Areas , and 16.12, State Environmental Policy Act, apply in place of any town regulation covering the same topic. (Ord. O20250005 § 2 (Exh. A))
+
+        14.16.400  Hamilton Urban Reserve (H-URv).
+
+             (1)    Purpose. The purpose of this district is to protect land presently utilized for resource-related purposes on the outer edge of the Hamilton  Urban Growth Area  from premature  land division  and development that would preclude efficient transition to urban development. These lands are identified as potential future additions to the  urban growth area  which will be added to the  urban growth area  as needed, through amendments to the Skagit County Comprehensive Land Use Map and the Hamilton Subarea Plan. It is also the intent of this district to allow smaller scale resource-related activities to continue to occur until such time as the land is added to an  urban growth area  as long as those activities do not conflict with future use of the land for urban development.
+
+             (2)    Allowed Uses. In addition to the uses in SCC  14.16.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses .
+
+             (i)    Commercial  greenhouse  operations that are an integral part of a local soil-based commercial  agriculture  operation.
+
+             (ii)    Individual or multiple  farm  composting as an incidental agricultural operation to a working  farm  with no net loss of soil. The composting operation must be managed according to an approved nutrient management plan in conjunction with the local Conservation District and Natural Resources Conservation Service (NRCS) standards and all applicable environmental,  solid waste , access and health regulations. Such use must not generate traffic uncommon to a  farm operation .
+
+             (iii)    Extraction of gravel and rock for  road  and  trail  construction and maintenance purposes, and the operation of rock crushers, all providing the material is used on the same owners’ property, on three acres or less.
+
+             (iv)    On-site sorting, bagging, storage, and similar wholesale processing activities of agricultural products that are predominantly grown on site or produced principally from the entire commercial  farm operation . Such activities must be limited to those which are integrally related to the agricultural production and harvesting process.
+
+             (v)    Operation of scaling stations, log dumps and sorting areas, and forest industry residue dumping areas; provided, that any such use within 1,000 feet of any residential use  zone ,  park , or recreation area must be  temporary  and less than 12 months’ duration.
+
+             (vi)    Operation of sawmills, chippers, shake and shingle mills, forest industry equipment maintenance  buildings , and storage yards; provided, that such uses are  temporary  and are located on the property for no longer than 12 months’ duration.
+
+             (vii)    Water diversion  structures  and  impoundments  related to resource management and on-site  wetland  restoration/enhancement projects.
+
+             (b)    Hearing Examiner Uses.
+
+             (i)    Extraction of gravel and rock for  road  and  trail  construction and maintenance purposes, and the operation of rock crushers, all providing the material is used on the same owners’ property, on more than three acres.
+
+             (ii)     Impoundments  for public drinking water; provided, that analysis determines a need that cannot be otherwise met and where no other viable site is available.
+
+             (3)     Dimensional Standards .
+
+             (a)    Maximum  Lot Coverage .
+
+             (i)    For  greenhouses , the maximum  lot coverage  is 35 percent.
+
+             (ii)    For all other uses, the maximum  lot coverage  is 10 percent or 10,000 square feet, whichever is greater. (Ord. O20250005 § 2 (Exh. A))
+
+        14.16.500  Mount Vernon UGA Urban Development (MV-UD).
+
+             (1)    Purpose. The purpose of the Mount Vernon UGA Urban Development district is to permit development in a portion of the unincorporated UGA of the  City  of Mount Vernon, including  subdivision  of property and the issuance of  project permits , consistent with the Growth Management Act requirements for provision of  urban services  by the  City  of Mount Vernon. The  city  comprehensive plan has also identified the appropriate  city  land use designation and  development regulations  that should be applied to those areas upon annexation.
+
+             (2)     Permitted Uses . The County must accept an  application  for, and approve a permit for a  subdivision  and/or development of any  legal lot  located within this UGA Urban Development district, provided the proposed  subdivision  or development is consistent with the use,  lot  size and other development standards for the  zone  that has been identified by the  city  for the parcel that is the subject of the  application .
+
+             (3)     Application  Review.
+
+             (a)    An  application  for a short plat or  subdivision  must follow the procedures and requirements for short plats or  subdivisions  in SCC Chapter  14.74 .
+
+             (b)    An  application  for development that does not require a short plat or  subdivision  may be processed as a Type 2 review, pursuant to SCC  14.06.150 , unless the proposed use or development requires Hearing Examiner review pursuant to the applicable  city  regulation, in which case the  application  must be processed as a Type 3 review, pursuant to SCC  14.06.150 .
+
+             (c)    SCC Chapters  14.24 ,  Critical Areas , and 16.12, State Environmental Policy Act, apply in place of any  city  regulation covering the same topic. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.16.600  Swinomish UGA Residential (R).
+
+             (1)    Purpose. The purpose of this  zone  is to provide for and protect privately owned fee simple land located within the Swinomish  Urban Growth Area  for development. The densities allowed in this  zone  are designed to meet contemporary  building  and living standards for single-family dwellings and other related uses.
+
+             (2)    Allowed Uses. In addition to the uses in SCC  14.16.020 , the following uses are allowed in this zone:
+
+             (a)     Accessory Uses .
+
+             (i)    Accessory  buildings  and  structures , provided they are within the required  setbacks  and they are at least 10 feet from each other and the main  building  if detached, that they are no more than one story in height, and that they do not occupy more than 50 percent of the rear yard.
+
+             (ii)     Buildings  used for the housing of animals or fowl. Such  buildings  must not exceed 36 square feet in  floor area  when located on a  lot  of less than one-half acre. The  building  must not be located closer than 25 feet to a property line, except by mutual recorded agreement of adjacent  property owners .
+
+             (3)     Dimensional Standards . In addition to  dimensional standards  in Table 14.16.030-1, the following  dimensional standards  apply in this zone:
+
+             (a)    Minimum  Lot  Size. The minimum  lot  size is determined by the following table:
+
+                         Land Use
+
+                         Sewer
+
+                         Minimum  Lot  Size
+
+                         Single-Family Residence
+
+                         Private
+
+                         12,500 sf
+
+                         Single-Family Residence
+
+                         Public
+
+                         8,400 sf
+
+                         Duplex
+
+                         Either
+
+                         13,000 sf
+
+             (b)     Setbacks .
+
+             (i)    Primary  Structures .
+
+             (A)    Front: 35 feet; 25 feet on  minor access  and dead-end  streets .
+
+             (ii)    Accessory  Structures .
+
+             (A)    Interior side: eight feet, a three-foot  setback  is permitted for nonresidential  structures  when the accessory  building  is a minimum of 75 feet from the front property line or when there is an alley along the rear property line; provided, that the  structure  is 1,000 square feet or less in size and 16 feet or less in height.
+
+             (B)    Rear yard: 25 feet, a three-foot  setback  is permitted for nonresidential  structures  when the accessory  building  is a minimum of 75 feet from the front property line or when there is an alley along the rear property line; provided, that the  structure  is 1,000 square feet or less in size and 16 feet or less in height.
+
+             (4)    Duplexes are only allowed when approved as part of a  subdivision . Duplexes may not be built on more than 10 percent of the available  lots  in any plat or  subdivision  unless specific approval for a greater number of duplexes is obtained as a part of the plat approval. The approved number of duplex  lots  must be inscribed on the face of the plat. The allowable number of duplex  lots  may not exceed the following numbers without the specific approval of the Board of County Commissioners.
+
+                     Table 14.16.600-1 Allowable Duplex  Lots
+
+                         Number of  Lots
+
+                         Number of Duplex  Lots
+
+                         Less than 8  lots
+
+                         0 Duplex  Lots
+
+                         8—15  lots
+
+                         1 Duplex  Lot
+
+                         16—25  lots
+
+                         2 Duplex  Lots
+
+                         26—35  lots
+
+                         3 Duplex  Lots
+
+                         35  lots  and over
+
+                         As determined by the Planning  Director  in accordance with the same formula.
+
+             (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.16.700  Urban Reserve Commercial-Industrial (URC-I).
+
+             (1)    Purpose. The purpose of the Urban Reserve Commercial-Industrial district is to allow for limited commercial, industrial, or other nonresidential uses of the land in certain unincorporated UGAs at lower than urban intensities and without requiring the provision of  urban services  and/or utilities. The Urban Reserve Commercial-Industrial district is also intended to reserve the remainder of the land for more intensive urban commercial/industrial development in the future. More intensive development than that allowed under the Urban Reserve Commercial-Industrial district will require annexation to the appropriate jurisdiction or will require approval of an  urban reserve development permit .
+
+             (2)    Allowed Uses. In addition to the uses in SCC  14.16.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses .
+
+             (i)    Outside sales of new and used vehicles, boats and mobile homes or equipment.
+
+             (ii)    Production,  repair , and servicing of specialized tools and equipment.
+
+             (iii)    Warehouses and distribution and wholesale uses.
+
+             (3)     Dimensional Standards . The  dimensional standards  in this Section and Table 14.16.030-1 apply unless the project receives an  urban reserve development permit , in which case the development standards, design standards, landscaping, parking, and signage standards from the applicable  city  code in whose UGA the project is located apply.
+
+             (a)    Minimum  Lot  Size. No  variances  to this minimum  lot  size requirement may be granted.
+
+             (b)    Maximum Size Limits. Total  gross building area  of primary and  accessory uses  must not exceed 5,000 square feet of new construction per parcel, calculated on a cumulative basis after August 26, 2003.
+
+             (4)    Additional Requirements.
+
+             (a)    Pedestrian Circulation. Pedestrian walkways must be provided between parking areas and the uses served by that parking.
+
+             (5)    Infrastructure Development Standards.  Subdivisions  of land,  building permits , and land use actions which are allowed by this Section must meet those development standards for infrastructure established by SCC Chapter  14.74  and applicable generally to land outside the unincorporated UGAs and the following additional requirements:
+
+             (a)    If  public water service  is available, as a condition of any  development approval  in the unincorporated UGA, the  property owner  must obtain a certificate of water availability for the proposed use from a public water utility, and connect to the water system.
+
+             (b)    Any short plat,  subdivision ,  binding site plan , or other  subdivision  of land to the rural densities or sizes permitted in this Section without obtaining an  urban reserve development permit  must contain a notation on the face of the short plat,  subdivision ,  binding site plan , or other  subdivision  of land that identifies an area within the parcel where  structures  are not permitted to accommodate future rights-of-way for urban transportation infrastructure and utilities that will be required when the property is further subdivided and developed at urban densities and land uses.
+
+             (i)    This area of restriction may be modified administratively, at the request of the  property owner , without requiring an amendment to the short plat,  subdivision ,  binding site plan , or other  subdivision  of land.
+
+             (ii)    The County must consult with the  city  in whose UGA the property is located and base its determination of the appropriate location and width of these reserve areas on the  development regulations  and planning documents of the  city  in whose UGA the property is located.
+
+             (iii)    The note on the face of the short plat,  subdivision ,  binding site plan , or other  subdivision  of land must specify that when the property is further divided for urban densities and land uses and when  dedication  of rights-of-way for  roads  and utilities is completed as part of that future  subdivision  and urban  development approval , the permanent  structures  restriction contained in the initial short plat,  subdivision ,  binding site plan , or other  subdivision  of land expires and must be replaced with that future  dedication .
+
+             (c)    Nothing in this Section precludes Skagit County from requiring that additional infrastructure, including transportation, fire, police, and  parks , be provided as a condition of a specific development on a case-by-case basis, pursuant to  SEPA , special studies, or other requirements and standards, under the process for approval provided in Skagit County  development regulations  for all developments. Skagit County must consider applicable municipalities’ capital facilities plans for public facilities and services, together with all relevant facts, in establishing the conditions for approval.
+
+             (d)    Maximum Wastewater Output. The proposed use or expansion added since August 26, 2003, may generate an increase in wastewater output no greater than that generated by an equivalent single-family residential unit (ERU). For purposes of this Subsection, an ERU is defined as a  structure  or facility that does not exceed 20 fixture units under the Uniform Plumbing Code as adopted by Skagit County. The County may not permit a nonresidential development in this  zone  that exceeds 20 fixture units, unless the proposed use and associated wastewater generation is approved pursuant to an  Urban Reserve Development Permit .
+
+             (e)    In accordance with the Growth Management Act and the Skagit County  Comprehensive Plan , cities are the units of local government most able to provide  urban services , including services necessary to treat wastewater in this district. In the event that off-site treatment of wastewater is desired, such treatment services must be provided by the appropriate  city  government. (Ord. O20260004 § 1 (Att. A); Ord. O20250005 § 2 (Exh. A))
+
+        14.16.800  Urban Reserve Public—Open Space (URP-OS).
+
+             (1)    Purpose. The purpose of the Urban Reserve Public— Open Space  district is to allow for the  dedication  or use of land for public purposes,  open space , recreation, the development of recreational facilities, the enjoyment of scenic amenities, and the protection of environmentally sensitive areas in certain unincorporated UGAs. More intensive uses will require annexation to the appropriate jurisdiction, or approval of an  urban reserve development permit .
+
+             (2)    Allowed Uses. In addition to the uses in SCC  14.16.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses . Reserved.
+
+             (b)    Administrative Special Uses.
+
+             (i)    Expansion of existing inpatient substance abuse and mental health facilities.
+
+             (3)     Dimensional Standards . The  dimensional standards  in this Section and Table 14.13.030-1 apply unless the project receives an  urban reserve development permit , in which case the development standards, design standards, landscaping, parking, and signage standards from the applicable  city  code in whose UGA the project is located apply.
+
+             (a)     Setbacks .
+
+             (i)    Interior Side.
+
+             (A)    Zero on interior  lot  lines adjacent to other public designations.
+
+             (B)    Fifteen feet on  lot  lines adjacent to other land use designations.
+
+             (ii)    Rear.
+
+             (A)    Zero on interior  lot  lines adjacent to other public designations.
+
+             (B)    Twenty feet on  lot  lines adjacent to other land use designations.
+
+             (b)    Minimum  Lot  Size. Five acres or 1/128th of section; unless the owner has obtained an  urban reserve development permit , pursuant to SCC Chapter  14.57 . No  variances  to this minimum  lot  size requirement may be granted. Existing  lots  smaller than this minimum  lot  size shall be subject to the provisions of Chapter  14.70  SCC.
+
+             (c)    Maximum Size Limits. Total  gross building area  of primary and  accessory uses  shall not exceed 5,000 square feet of new construction per parcel, calculated on a cumulative basis after August 26, 2003, unless the owner has obtained an  urban reserve development permit .
+
+             (4)    Infrastructure Development Standards.  Land divisions ,  building permits , and land use actions allowed by this Section must comply with infrastructure development standards in this Title and applicable generally to land outside the unincorporated UGAs and the following additional requirements:
+
+             (a)    If  public water service  is available, as a condition of any  development approval  in the unincorporated UGA, the  property owner  must obtain a certificate of water availability for the proposed use from a public water utility, and connect to the water system.
+
+             (b)    Any  land division  to the rural densities and sizes permitted for this  zone  without obtaining an  urban reserve development permit  must contain a notation on the face of the short plat,  subdivision , or  binding site plan  that identifies an area within the parcel where  structures  are not permitted to accommodate future rights-of-way for urban transportation infrastructure and utilities that will be required when the property is further subdivided and developed at urban densities and land uses.
+
+             (i)    This area of restriction may be modified administratively, at the request of the  property owner , without requiring an amendment to the short plat,  subdivision ,  binding site plan , or other  subdivision  of land.
+
+             (ii)    The County must consult with the  city  in whose UGA the property is located and base its determination of the appropriate location and width of these reserve areas on the  development regulations  and planning documents of the  city  in whose UGA the property is located.
+
+             (iii)    The conditions of the short plat,  subdivision ,  binding site plan , or other  subdivision  of land must specify that when the property is further subdivided for urban densities and land uses and when  dedication  of rights-of-way for  roads  and utilities is completed as part of that future  subdivision  and urban  development approval , the permanent  structures  restriction contained in the initial short plat,  subdivision ,  binding site plan , or other  subdivision  of land expires and must be replaced with that future  dedication .
+
+             (c)    Nothing in this Section precludes Skagit County from requiring that additional infrastructure, including transportation, fire, police, and  parks , be provided as a condition of a specific development on a case-by-case basis, pursuant to  SEPA , special studies, or other requirements and standards, under the process for approval provided in Skagit County  development regulations  for all developments. Skagit County must consider applicable municipalities’ capital facilities plans for public facilities and services, together with all relevant facts, in establishing the conditions for approval, as provided by County ordinance.
+
+             (d)    Maximum Wastewater Output. The proposed use or expansion added since August 26, 2003, must generate an increase in wastewater output no greater than that generated by an equivalent single-family residential unit (ERU). For purposes of this Subsection, an ERU is defined as a  structure  or facility that does not exceed 20 fixture units under the Uniform Plumbing Code as adopted by Skagit County. The County must not permit a nonresidential development that exceeds 20 fixture units, unless the proposed use and associated wastewater generation is approved pursuant to an  urban reserve development permit .
+
+             (e)    In accordance with the Growth Management Act and the Skagit County  Comprehensive Plan , cities are the units of local government most able to provide  urban services , including services necessary to treat wastewater in this district. In the event that off-site treatment of wastewater is desired, such treatment services must be provided by the appropriate  city  government.
+
+             (f)    Pedestrian Circulation. Pedestrian walkways must be provided between parking areas and the uses served by that parking. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.16.900  Urban Reserve Residential (URR).
+
+             (1)    Purpose. The purpose of the Urban Reserve Residential district is to allow for the residential use of land in certain unincorporated UGAs at lower than urban densities and without requiring the provision of  urban services  and/or utilities. It is also intended to reserve the remainder of the land for more intensive urban residential development in the future. More intensive development than that allowed under the Urban Reserve Residential district requires annexation to the appropriate jurisdiction or requires approval of an  urban reserve development permit .
+
+             (2)     Dimensional Standards . The  dimensional standards  in this Section and Table 14.16.030-1 apply unless the project receives an  urban reserve development permit , in which case the development standards, design standards, landscaping, parking, and signage standards from the applicable  city  code in whose UGA the project is located apply.
+
+             (a)    Minimum  Lot Width . If subject of an  urban reserve development permit , the only minimum requirement is that it be sufficient to provide adequate access and utilities.
+
+             (b)    Minimum  Lot  Size. No  variances  to this minimum  lot  size requirement may be granted.
+
+             (3)    Infrastructure Development Standards.  Subdivisions  of land,  building permits , and land use actions which are allowed by this Section must meet those development standards for infrastructure established by SCC Chapter  14.18  and applicable generally to land outside the unincorporated UGAs and the following additional requirements:
+
+             (a)    In accordance with the Growth Management Act and the Skagit County  Comprehensive Plan , cities are the units of local government most able to provide  urban services , including services necessary to treat wastewater in this district. In the event that off-site treatment of wastewater is desired, such treatment services must be provided by the appropriate  city  government.
+
+             (b)    If  public water service  is available, as a condition of any  development approval  in the unincorporated UGA, the  property owner  must obtain a certificate of water availability for the proposed use from a public water utility, and connect to the water system.
+
+             (c)    Any short plat or other  subdivision  of land to the rural densities permitted in this Section without obtaining an  urban reserve development permit  must contain a notation on the face of the short plat or  subdivision  that identifies an area within the parcel where  structures  are not permitted to accommodate future rights-of-way for urban transportation infrastructure and utilities that will be required when the property is further subdivided and developed at urban densities and land uses.
+
+             (i)    This area of restriction may be modified administratively, at the request of the  property owner , without requiring an amendment to the short plat or other  subdivision  of land.
+
+             (ii)    The County must consult with the  city  in whose UGA the property is located and base its determination of the appropriate location and width of these reserve areas on the  development regulations  and planning documents of the  city  in whose UGA the property is located.
+
+             (iii)    The note on the face of the short plat or other  subdivision  of land must specify that when the property is further subdivided for urban densities and land uses and when  dedication  of rights-of-way for  roads  and utilities is completed as part of that future  subdivision  and urban  development approval , the permanent  structures  restriction contained in the initial short plat,  subdivision ,  binding site plan , or other  subdivision  of land expires and must be replaced with that future  dedication .
+
+             (d)    Nothing in this Section precludes Skagit County from requiring that additional infrastructure, including transportation, fire, police, and  parks , be provided as a condition of a specific development on a case-by-case basis, pursuant to  SEPA , special studies, or other requirements and standards, under the process for approval provided in Skagit County  development regulations  for all developments. Skagit County must consider applicable municipalities’ capital facilities plans for public facilities and services, together with all relevant facts, in establishing the conditions for approval, as provided by County ordinance.
+
+             (e)    Maximum Wastewater Output. For any proposed nonresidential use or expansion added since August 26, 2003, the proposed use must generate an increase in wastewater output no greater than that generated by an equivalent single-family residential unit (ERU). For purposes of this Subsection, an ERU is defined as a  structure  or facility that does not exceed 20 fixture units under the Uniform Plumbing Code as adopted by Skagit County. The County must not permit a nonresidential development that exceeds 20 fixture units, unless the proposed use and associated wastewater generation is approved pursuant to an  urban reserve development permit .
+
+             (4)    Mobile Homes and Manufactured Housing in URR  Zone . Mobile homes and manufactured housing units in the URR  zone , that are not located within a sales  lot , must meet the requirements for a “designated manufactured home” set forth in RCW  35.63.160 (2) and  35A.63.160 (2), set forth in Subsections (4)(a) through (4)(d) of this Section and must further comply with the additional requirements authorized by RCW  36.01.255 , set forth in Subsections (4)(e) and (4)(f) of this Section.
+
+             (a)    Be constructed after June 15, 1976, in accordance with State and Federal requirements for manufactured homes or mobile homes;
+
+             (b)    Have at least two fully enclosed parallel sections each of not less than 12 feet wide by 36 feet long;
+
+             (c)    Be originally constructed with, and currently possess, a composition or wood shake or shingle, coated metal, or similar roof of nominal 3:12 pitch;
+
+             (d)    Have exterior siding similar in appearance to siding materials commonly used on conventional site-built International  Building  Codes single-family residences;
+
+             (e)    Be set upon a permanent foundation, as specified by the manufacturer, and the space from the bottom of the home to the ground must be enclosed by concrete or an approved concrete product which can be either load-bearing or decorative; and
+
+             (f)    Be thermally equivalent to the State Energy Code. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))

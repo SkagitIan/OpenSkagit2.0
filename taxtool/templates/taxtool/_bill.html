@@ -1,149 +1,286 @@
 {% load taxtool_extras %}
 <div id="main-content">
-  <section class="os-tax-results">
-
-    <div class="os-tax-results__top">
+  <section class="os-tax-results os-tax-report">
+    <div class="os-tax-report__top">
       {% if error %}
         <p class="os-tax-error">{{ error }}</p>
       {% endif %}
 
-      <!-- Back link -->
-      <button
-        type="button"
-        hx-get="{% url 'tax_home' %}"
-        hx-target="body"
-        hx-swap="innerHTML"
-        class="os-tax-back"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-        </svg>
+      <a href="{% url 'tax_home' %}" class="os-tax-back">
+        <span aria-hidden="true">&larr;</span>
         Search again
-      </button>
+      </a>
     </div>
 
     {% if parcel %}
-    <div class="os-tax-grid" style="margin-top:20px;">
+    <article class="os-tax-report__shell">
+      <header class="os-tax-parcel-banner">
+        <div class="os-tax-parcel-banner__body">
+          <p class="os-tax-parcel-banner__eyebrow">Property tax report</p>
+          <h1>{{ parcel.situs_street_number }} {{ parcel.situs_street_name }}{% if parcel.situs_city_state_zip %},<br>{{ parcel.situs_city_state_zip }}{% endif %}</h1>
+          <div class="os-tax-parcel-meta">
+            <span class="os-tax-parcel-pill">Parcel {{ parcel.parcel_number }}</span>
+          </div>
+        </div>
+      </header>
 
-      <div class="os-tax-card os-tax-bill-card">
-        <!-- Header -->
-        <div>
-          <p class="os-tax-bill__eyebrow">{{ parcel.parcel_number }}</p>
-          <h2 class="os-tax-bill__address">
-            {{ parcel.situs_street_number }} {{ parcel.situs_street_name }}{% if parcel.situs_city_state_zip %}, {{ parcel.situs_city_state_zip }}{% endif %}
-          </h2>
-          {% if parcel.owner_name %}
-          <p class="os-tax-bill__owner">{{ parcel.owner_name }}</p>
+      <p class="os-tax-scroll-note">Scroll to see why <span aria-hidden="true">&darr;</span></p>
+
+      <section class="os-tax-story-card os-tax-story-card--hero">
+        <div class="os-tax-hero-copy">
+          {% if latest_change %}
+          {% if latest_change.delta_zero %}
+          <h2>Your tax bill stayed about the same this year.</h2>
+          {% else %}
+          <h2>Your tax bill went {{ latest_change.direction }} <span class="{% if latest_change.delta_positive %}os-tax-headline-up{% else %}os-tax-headline-down{% endif %}">{{ latest_change.delta_abs_fmt }}</span> this year.</h2>
           {% endif %}
-        </div>
-
-        <!-- Total -->
-        <p class="os-tax-bill__total-label">Your 2025 property tax</p>
-        <p class="os-tax-bill__total">{{ total_fmt }}</p>
-
-        {% if grouped %}
-        <!-- Stacked bar -->
-        <div class="os-tax-bar">
-          {% for group in grouped %}
-          <button
-            type="button"
-            style="width: {{ group.pct|pct_width }}; background-color: {{ group.color }};"
-            hx-get="{% url 'tax_agency' group.mcag|default:'__none__' %}?your_amount={{ group.total|floatformat:2 }}"
-            hx-target="#agency-panel"
-            hx-swap="innerHTML"
-            title="{{ group.label }}: {{ group.total_fmt }} ({{ group.pct_fmt }})"
-            class="os-tax-bar__seg"
-            {% if not group.mcag %}disabled{% endif %}
-          >
-            <span class="sr-only">{{ group.label }}: {{ group.total_fmt }}</span>
-          </button>
-          {% endfor %}
-        </div>
-
-        <!-- Agency list -->
-        <div class="os-tax-agency-list" id="agency-list">
-          {% for group in grouped %}
-          <button
-            type="button"
-            class="os-tax-agency-row"
-            hx-get="{% url 'tax_agency' group.mcag|default:'__none__' %}?your_amount={{ group.total|floatformat:2 }}"
-            hx-target="#agency-panel"
-            hx-swap="innerHTML"
-            {% if not group.mcag %}disabled{% endif %}
-          >
-            <span class="os-tax-agency-row__dot" style="background-color: {{ group.color }};"></span>
-            <span class="os-tax-agency-row__name">{{ group.label }}</span>
-            <span class="os-tax-agency-row__amount">{{ group.total_fmt }}</span>
-            <span class="os-tax-agency-row__pct">{{ group.pct_fmt }}</span>
-          </button>
-          {% endfor %}
-        </div>
-
-        <!-- Comparison medians -->
-        <div class="os-tax-medians">
-          {% if levy_code_median_fmt %}
-          <p>Median tax in your levy code ({{ parcel.levy_code }}): <strong>{{ levy_code_median_fmt }}</strong></p>
+          {% else %}
+          <h2>Your property tax bill is {{ total_fmt }}.</h2>
           {% endif %}
-          {% if county_median_fmt %}
-          <p>Skagit County median: <strong>{{ county_median_fmt }}</strong></p>
-          {% endif %}
+          <p class="os-tax-kicker">Your {{ parcel.tax_year|default:"current" }} property tax:</p>
+          <p class="os-tax-big-number">{{ total_fmt }}</p>
         </div>
 
-        <!-- History button -->
-        <button
-          type="button"
-          hx-get="{% url 'tax_yoy' parcel.parcel_number %}"
-          hx-target="#agency-panel"
-          hx-swap="innerHTML"
-          class="os-tax-history-btn"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="flex-shrink:0">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-          </svg>
-          Tax history &amp; trends
-        </button>
+        {% if latest_change %}
+        <div class="os-tax-reason-card os-tax-reason-card--primary">
+          <span class="os-tax-step__num">Why</span>
+          <div class="os-tax-step__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 10.5V20h12v-9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 8.5V5h2v5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="os-tax-step__body">
+            <h3>Main reason: assessed value changed</h3>
+            {% if exemption_context.has_exemption %}
+            <p>Your property value moved from {{ latest_change.value_old_fmt }} to {{ latest_change.value_new_fmt }}. Because this parcel has an exemption, the current bill is also affected by taxable value. The rate change shown below is an estimate based on available assessed-value history.</p>
+            {% else %}
+            <p>Your property value moved from {{ latest_change.value_old_fmt }} to {{ latest_change.value_new_fmt }}, changing your bill by <strong class="{% if latest_change.value_effect_positive %}os-tax-up{% else %}os-tax-down{% endif %}">{{ latest_change.value_effect_fmt }}</strong>. The effective tax rate changed your bill by <strong class="{% if latest_change.rate_effect_positive %}os-tax-up{% else %}os-tax-down{% endif %}">{{ latest_change.rate_effect_fmt }}</strong>.</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="os-tax-why os-tax-why--inside">
+          {% if exemption_context.has_exemption %}
+          <div class="os-tax-exemption-card">
+            <div>
+              <span>Exemption</span>
+              <h3>{{ exemption_context.card_title }}</h3>
+              <p>{{ exemption_context.card_body }}</p>
+              {% if exemption_context.estimated_tax_relief_fmt %}
+              <p class="os-tax-exemption-card__note">Estimated bill reduction from the exempted value: about <strong>{{ exemption_context.estimated_tax_relief_fmt }}</strong>.</p>
+              {% endif %}
+            </div>
+            <dl>
+              <div>
+                <dt>Assessed value</dt>
+                <dd>{{ exemption_context.assessed_value_fmt }}</dd>
+              </div>
+              <div>
+                <dt>Taxable value</dt>
+                <dd>{{ exemption_context.taxable_value_fmt }}</dd>
+              </div>
+              <div>
+                <dt>Exempted value</dt>
+                <dd>{{ exemption_context.exempted_value_fmt }}</dd>
+              </div>
+            </dl>
+          </div>
+          {% endif %}
+          <div class="os-tax-step">
+            <span class="os-tax-step__num">1</span>
+            <div class="os-tax-step__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 10.5V20h12v-9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 8.5V5h2v5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="os-tax-step__body">
+              <h2>Home value went {{ latest_change.value_direction }}</h2>
+              <p>Your home's assessed value changed from {{ latest_change.value_old_fmt }} to {{ latest_change.value_new_fmt }}.</p>
+            </div>
+            <div class="os-tax-step__effect">
+              <strong>{{ latest_change.value_delta_fmt }} ({{ latest_change.value_delta_pct_fmt }})</strong>
+              {% if exemption_context.has_exemption %}
+              <span>{{ latest_change.value_effect_fmt }} estimated effect</span>
+              {% else %}
+              <span>{{ latest_change.value_effect_fmt }} to your bill</span>
+              {% endif %}
+            </div>
+          </div>
+          <div class="os-tax-step os-tax-step--rate">
+            <span class="os-tax-step__num">2</span>
+            <div class="os-tax-step__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 17 17 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="7.5" cy="7.5" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="16.5" cy="16.5" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="os-tax-step__body">
+              <h2>Tax rate changed</h2>
+              {% if exemption_context.has_exemption %}
+              <p>The assessed-value effective rate went from {{ latest_change.rate_old_fmt }} to {{ latest_change.rate_new_fmt }} per $1,000 of value. Exemptions can also change taxable value.</p>
+              {% else %}
+              <p>The effective rate went from {{ latest_change.rate_old_fmt }} to {{ latest_change.rate_new_fmt }} per $1,000 of value.</p>
+              {% endif %}
+            </div>
+            <div class="os-tax-step__effect">
+              <strong>{{ latest_change.rate_delta_fmt }}</strong>
+              {% if exemption_context.has_exemption %}
+              <span>{{ latest_change.rate_effect_fmt }} estimated effect</span>
+              {% else %}
+              <span>{{ latest_change.rate_effect_fmt }} to your bill</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% elif tax_shock %}
+        <p class="os-tax-reason">{{ tax_shock.reason }}</p>
+        {% else %}
+        <p class="os-tax-reason">Year-over-year history is not available for this parcel yet.</p>
         {% endif %}
-      </div>
+      </section>
 
-      <div class="os-tax-card os-tax-agency-card">
-        <!-- Loading skeleton (hidden by default, shown via JS during agency fetch) -->
-        <div id="agency-loading" style="display:none" class="os-tax-loading">
-          <div class="os-tax-loading__bar" style="width:48%"></div>
-          <div class="os-tax-loading__bar" style="width:100%"></div>
-          <div class="os-tax-loading__bar" style="width:75%"></div>
+      <section class="os-tax-story-card os-tax-money">
+        <div>
+          <h2>Where your money went</h2>
+          <p>Your tax dollar supports the services you use every day.</p>
+          {% if exemption_context.has_exemption %}
+          <p class="os-tax-section-note">{{ exemption_context.money_note }}</p>
+          {% endif %}
         </div>
-
-        <!-- Agency detail panel -->
-        <div id="agency-panel">
-          <p class="os-tax-agency-card__empty">Click an agency above to see where the money goes.</p>
+        <div class="os-tax-money__content">
+          <div class="os-tax-donut" style="background: conic-gradient({{ agency_donut.gradient }});">
+            <span>{{ total_fmt }}</span>
+          </div>
+          <div class="os-tax-agency-details os-tax-agency-details--inline">
+            {% for group in agency_donut.groups %}
+            <button
+              type="button"
+              class="os-tax-agency-row"
+              {% if group.mcag %}
+              hx-get="{% url 'tax_agency' group.mcag %}?your_amount={{ group.total|floatformat:2 }}"
+              hx-target="#agency-panel"
+              hx-swap="innerHTML"
+              {% else %}
+              disabled
+              {% endif %}
+            >
+              <span class="os-tax-agency-row__dot" style="background-color: {{ group.color }};"></span>
+              <span class="os-tax-agency-row__name">{{ group.label }}</span>
+              <span class="os-tax-agency-row__amount">{{ group.total_fmt }}</span>
+              <span class="os-tax-agency-row__pct">{{ group.donut_pct_fmt }}</span>
+            </button>
+            {% endfor %}
+          </div>
         </div>
-      </div>
+        <div id="agency-panel" class="os-tax-agency-detail-slot">
+          <p>Click a taxing district to see its spending categories and financial snapshot.</p>
+        </div>
+      </section>
 
-    </div>
+      <section class="os-tax-story-card os-tax-compare">
+        <div>
+          <h2>How you compare</h2>
+          <p>{{ exemption_context.comparison_intro }}</p>
+        </div>
+        <div class="os-tax-rate-report" aria-label="Effective tax rate comparison">
+          <div class="os-tax-rate-verdict os-tax-rate-verdict--{{ comparison.verdict_tone }}">
+            <span>Rate check</span>
+            <strong>{{ comparison.verdict }}</strong>
+            <p>{{ comparison.verdict_detail }}</p>
+          </div>
+          <div class="os-tax-rate-cards">
+            {% if comparison.your %}
+            <div class="os-tax-rate-card os-tax-rate-card--you">
+              <span>Your property</span>
+              <strong>{{ comparison.your.short_rate_fmt }}</strong>
+              <em>per $1,000</em>
+            </div>
+            {% endif %}
+            {% if comparison.county %}
+            <div class="os-tax-rate-card">
+              <span>County median</span>
+              <strong>{{ comparison.county.short_rate_fmt }}</strong>
+              <em>{{ comparison.county.delta_fmt }} vs you</em>
+            </div>
+            {% endif %}
+          </div>
+          <p class="os-tax-rate-guide__note">{{ exemption_context.comparison_note }}</p>
+        </div>
+      </section>
+
+      {% if history_story %}
+      <section class="os-tax-story-card os-tax-history">
+        <h2>Your tax story</h2>
+        <p>This property's tax bill is {{ history_story.growth_text }}.</p>
+        {% if exemption_context.has_exemption %}
+        <p class="os-tax-section-note">{{ exemption_context.history_note }}</p>
+        {% endif %}
+        <div class="os-tax-line-chart">
+          <div class="os-tax-chart-legend">
+            <span><i class="os-tax-chart-legend__value"></i>Assessed value, left axis</span>
+            <span><i class="os-tax-chart-legend__tax"></i>Tax bill, right axis</span>
+          </div>
+          <svg viewBox="0 0 760 300" role="img" aria-label="Property tax and assessed value history from {{ history_story.first_year }} to {{ history_story.latest_year }}">
+            {% for tick in history_story.axis_rows %}
+            <line class="os-tax-chart-grid" x1="{{ history_story.plot_left }}" y1="{{ tick.y }}" x2="{{ history_story.plot_right }}" y2="{{ tick.y }}"></line>
+            <text class="os-tax-chart-axis os-tax-chart-axis--left" x="{{ history_story.plot_left|add:'-10' }}" y="{{ tick.y|add:'4' }}">{{ tick.value_label }}</text>
+            <text class="os-tax-chart-axis os-tax-chart-axis--right" x="{{ history_story.plot_right|add:'10' }}" y="{{ tick.y|add:'4' }}">{{ tick.tax_label }}</text>
+            {% endfor %}
+            <line class="os-tax-chart-axis-line" x1="{{ history_story.plot_left }}" y1="{{ history_story.plot_top }}" x2="{{ history_story.plot_left }}" y2="{{ history_story.plot_bottom }}"></line>
+            <line class="os-tax-chart-axis-line" x1="{{ history_story.plot_right }}" y1="{{ history_story.plot_top }}" x2="{{ history_story.plot_right }}" y2="{{ history_story.plot_bottom }}"></line>
+            <line class="os-tax-chart-axis-line" x1="{{ history_story.plot_left }}" y1="{{ history_story.plot_bottom }}" x2="{{ history_story.plot_right }}" y2="{{ history_story.plot_bottom }}"></line>
+            <polyline class="os-tax-line-chart__value" points="{{ history_story.value_polyline }}"></polyline>
+            <polyline class="os-tax-line-chart__tax" points="{{ history_story.tax_polyline }}"></polyline>
+            {% for point in history_story.tax_points %}
+            <circle class="os-tax-line-chart__tax-hit" cx="{{ point.x }}" cy="{{ point.y }}" r="11">
+              <title>{{ point.year }} details&#10;Assessed value: {{ point.value_fmt }}&#10;Tax bill: {{ point.tax_fmt }}</title>
+            </circle>
+            <circle class="os-tax-line-chart__tax-dot" cx="{{ point.x }}" cy="{{ point.y }}" r="4"></circle>
+            {% endfor %}
+            {% for point in history_story.value_points %}
+            <text class="os-tax-chart-year" x="{{ point.x }}" y="{{ history_story.plot_bottom|add:'26' }}">{{ point.year }}</text>
+            {% endfor %}
+          </svg>
+        </div>
+        <p class="os-tax-footnote">Amounts are rounded. Assessed value uses the left axis; tax bill uses the right axis. Hover a blue tax-bill point for exact figures.</p>
+      </section>
+      {% endif %}
+
+      <section class="os-tax-story-card os-tax-data-sources">
+        <h2>Data sources</h2>
+        <div class="os-tax-data-sources__grid">
+          <div>
+            <strong><a href="{{ data_sources.skagit_property_search_url }}" target="_blank" rel="noopener">Skagit County Property Search</a></strong>
+            <p>Current parcel roll, exemption code, assessed value, taxable value, tax bill, and parcel tax history. This page shows {{ data_sources.current_bill_fmt }} for tax year {{ data_sources.bill_year }}{% if data_sources.payable_year %}, payable in {{ data_sources.payable_year }}{% endif %}.</p>
+          </div>
+          <div>
+            <strong><a href="{{ data_sources.sao_fit_url }}" target="_blank" rel="noopener">Washington State Auditor FIT</a></strong>
+            <p>Financial Intelligence Tool data for local government revenue, spending, and top expenditure categories. Agency-specific reports open from the taxing-district rows above when available.</p>
+          </div>
+          <div>
+            <strong><a href="{{ data_sources.dor_skagit_url }}" target="_blank" rel="noopener">Washington DOR Skagit County reports</a></strong>
+            <p>Department of Revenue county property-tax administration reports and review materials for Skagit County.</p>
+          </div>
+          <div>
+            <strong><a href="{{ data_sources.dor_levy_limit_url }}" target="_blank" rel="noopener">Washington DOR levy guidance</a></strong>
+            <p>Background on how property-tax levy limits and rates work. Agency rows use the parcel levy summary for tax year {{ data_sources.bill_year }}. {% if data_sources.agency_adjusted %}Raw agency detail summed to {{ data_sources.agency_source_total_fmt }}, so rows were proportionally reconciled to the displayed bill; difference {{ data_sources.agency_difference_fmt }}.{% else %}Agency detail reconciled to the displayed bill before rounding.{% endif %}</p>
+          </div>
+          <div>
+            <strong><a href="{{ data_sources.dor_senior_exemption_url }}" target="_blank" rel="noopener">Washington DOR senior/disabled exemption</a></strong>
+            <p>State guidance for property-tax exemptions available to seniors, people retired due to disability, and veterans with disabilities.</p>
+          </div>
+          <div>
+            <strong><a href="{{ data_sources.dor_exemptions_url }}" target="_blank" rel="noopener">Washington DOR exemptions and deferrals</a></strong>
+            <p>General state guidance for property-tax exemption and deferral programs that can affect taxable value.</p>
+          </div>
+        </div>
+      </section>
+    </article>
     {% endif %}
-
-    <script>
-    (function () {
-      var panel   = document.getElementById('agency-panel');
-      var loading = document.getElementById('agency-loading');
-      document.body.addEventListener('htmx:beforeRequest', function (e) {
-        if (e.detail.target === panel) {
-          loading.style.display = 'block';
-          e.detail.elt.style.opacity = '0.45';
-        }
-      });
-      document.body.addEventListener('htmx:afterSwap', function (e) {
-        if (e.detail.target === panel) {
-          loading.style.display = 'none';
-        }
-      });
-      document.body.addEventListener('htmx:afterRequest', function (e) {
-        if (e.detail.target === panel) {
-          e.detail.elt.style.opacity = '1';
-        }
-      });
-    })();
-    </script>
-
   </section>
 </div>

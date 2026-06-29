@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OpenSkagit turns local public information into clear answers, context, and source-grounded reporting for Skagit Valley.">
+  <title>OpenSkagit | Skagit Valley. Understood.</title>
+  <meta property="og:title" content="OpenSkagit | Skagit Valley. Understood.">
+  <meta property="og:description" content="OpenSkagit turns local public information into clear answers, context, and source-grounded reporting for Skagit Valley.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#2E3D49">
+  <link rel="icon" href="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png" sizes="any">
+  <link rel="apple-touch-icon" href="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            os: {
+              lime: '#7DB61C',
+              sky: '#0071BC',
+              gold: '#FDB913',
+              teal: '#00828A',
+              charcoal: '#2E3D49'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #f0f4f3 50%, #f5f7f6 100%);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(72px);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-question-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background-color: #ffffff;
+      border: 2px solid #00828a;
+      box-shadow: 0 12px 40px rgba(16, 24, 40, 0.18);
+      padding: 0.75rem 1.6rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      color: #1f2937;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hero-question-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 45px rgba(16, 24, 40, 0.22);
+    }
+
+    .hero-question-text {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .hero-question-text.is-hiding {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+  </style>
+</head>
+<body class="text-gray-900 antialiased min-h-screen">
+  <main>
+    <section class="relative overflow-hidden bg-gradient-to-b from-os-teal/10 via-white to-white py-16 sm:py-24">
+      <div class="orb w-80 h-80 bg-os-lime/30 -left-24 -top-10"></div>
+      <div class="orb w-72 h-72 bg-os-sky/20 right-0 bottom-0"></div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="text-center space-y-6">
+          <div class="inline-flex items-center justify-center">
+            <img
+              src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png"
+              alt="OpenSkagit logo"
+              class="h-20 w-20 object-contain"
+              loading="lazy"
+            >
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+            Skagit <span class="text-os-lime">Valley</span>. Understood.
+          </h1>
+
+          <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+            OpenSkagit is the thinking layer for Skagit Valley, turning fragmented local information into clear answers,
+            practical context, and shareable reports grounded in real data.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="#purpose" class="inline-flex items-center px-6 py-3 bg-os-teal text-white rounded-xl font-semibold shadow-lg hover:bg-os-teal/90 transition-colors">
+              See the mission
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+            <a href="mailto:ian@openskagit.com" class="inline-flex items-center px-6 py-3 bg-white text-os-teal border border-os-teal/30 rounded-xl font-semibold shadow-sm hover:border-os-teal/60 transition-colors">
+              Contact Ian
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="flex justify-center">
+            <div class="hero-question-pill inline-flex items-center space-x-3" role="status" aria-live="polite">
+              <span class="w-2 h-2 bg-os-lime rounded-full animate-pulse"></span>
+              <span id="hero-question-text" class="hero-question-text">What is changing in Skagit, and where is it happening?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="purpose" class="py-16 bg-gray-50" aria-label="OpenSkagit purpose">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <p class="text-sm uppercase tracking-[0.4em] text-slate-400">How it works</p>
+          <h2 class="text-3xl font-bold text-gray-900 mt-3">Built from public data. Organized by place.</h2>
+          <p class="text-gray-600 mt-3">
+            OpenSkagit connects public records across parcels, neighborhoods, and districts so local patterns are visible,
+            understandable, and easier to act on.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <article class="card-hover rounded-2xl border border-os-teal/20 bg-gradient-to-br from-os-teal/10 to-white p-6 shadow-sm">
+            <div class="w-11 h-11 bg-white/85 rounded-xl border border-os-teal/20 flex items-center justify-center text-os-teal mb-4">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Collect and connect</h3>
+            <p class="text-sm leading-relaxed text-slate-700">
+              Records from permits, land use, assessments, and civic activity are normalized into one coherent local system.
+            </p>
+          </article>
+
+          <article class="card-hover rounded-2xl border border-os-sky/25 bg-gradient-to-br from-os-sky/10 to-white p-6 shadow-sm">
+            <div class="w-11 h-11 bg-white/90 rounded-xl border border-os-sky/25 flex items-center justify-center text-os-sky mb-4">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 01.553-.894L9 2m0 18l6-3m-6 3V2m6 15l5.447-2.724A1 1 0 0021 13.382V2.618a1 1 0 00-.553-.894L15 0m0 17V0m0 0L9 3" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Map the signals</h3>
+            <p class="text-sm leading-relaxed text-slate-700">
+              Every record is tied to place, making it easier to spot where growth, risk, and policy pressure are concentrating.
+            </p>
+          </article>
+
+          <article class="card-hover rounded-2xl border border-os-gold/30 bg-gradient-to-br from-os-gold/15 to-white p-6 shadow-sm">
+            <div class="w-11 h-11 bg-white/85 rounded-xl border border-os-gold/30 flex items-center justify-center text-os-gold mb-4">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4V9m3 10H6a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Explain clearly</h3>
+            <p class="text-sm leading-relaxed text-slate-700">
+              Raw tables are translated into plain-language insights with transparent logic and clear local context.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-16 bg-gradient-to-b from-white to-os-teal/10">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white border border-os-teal/20 rounded-2xl shadow-xl p-8 md:p-10 text-center space-y-4">
+          <h2 class="text-3xl font-bold text-gray-900">Contact OpenSkagit</h2>
+          <p class="text-gray-700">
+            For collaborations, data questions, or local briefings, reach out directly.
+          </p>
+          <a href="mailto:ian@openskagit.com" class="inline-flex items-center px-6 py-3 bg-os-teal text-white rounded-xl font-semibold shadow-md hover:bg-os-teal/90 transition-colors">
+            ian@openskagit.com
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const heroQuestionText = document.getElementById('hero-question-text');
+      const heroQuestions = [
+        'What is changing in Skagit, and where is it happening?',
+        'How do policy decisions show up across neighborhoods?',
+        'Which local signals matter most right now?'
+      ];
+
+      if (heroQuestionText && heroQuestions.length > 1) {
+        let heroIndex = 0;
+        setInterval(function() {
+          heroIndex = (heroIndex + 1) % heroQuestions.length;
+          heroQuestionText.classList.add('is-hiding');
+          setTimeout(function() {
+            heroQuestionText.textContent = heroQuestions[heroIndex];
+            heroQuestionText.classList.remove('is-hiding');
+          }, 220);
+        }, 4200);
+      }
+
+      const cards = document.querySelectorAll('.card-hover');
+      if ('IntersectionObserver' in window && cards.length) {
+        const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+        cards.forEach(function(card) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(18px)';
+          card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+          observer.observe(card);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

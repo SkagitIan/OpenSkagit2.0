@@ -87,6 +87,31 @@ class TaxStatement(models.Model):
         return f"{self.parcel_number} {self.tax_year}"
 
 
+class TaxStatementCheck(models.Model):
+    parcel_number = models.TextField(db_index=True)
+    tax_year = models.IntegerField(db_index=True)
+    status = models.CharField(max_length=24, choices=TaxStatement.Status.choices, default=TaxStatement.Status.UNKNOWN)
+    total_due = models.DecimalField(max_digits=12, decimal_places=2, blank=True, null=True)
+    source_fetched_at = models.DateTimeField(db_index=True)
+    last_run = models.ForeignKey(TaxStatementRun, on_delete=models.SET_NULL, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["parcel_number", "tax_year"],
+                name="uniq_tax_statement_check_parcel_year",
+            )
+        ]
+        indexes = [
+            models.Index(fields=["source_fetched_at", "parcel_number"]),
+        ]
+
+    def __str__(self):
+        return f"{self.parcel_number} {self.tax_year} checked"
+
+
 class TaxStatementError(models.Model):
     run = models.ForeignKey(TaxStatementRun, on_delete=models.SET_NULL, blank=True, null=True)
     parcel_number = models.TextField(db_index=True)

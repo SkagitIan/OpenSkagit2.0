@@ -1,0 +1,130 @@
+Chapter 14.01 HOW TO USE THE UNIFIED DEVELOPMENT CODE
+
+         Chapter 14.01
+HOW TO USE THE UNIFIED DEVELOPMENT CODE
+
+             Sections:
+
+              14.01.010    About the Code.
+
+              14.01.020    Orientation to SCC Title 14.
+
+              14.01.030    Example—Establishing a commercial or special use.
+
+              14.01.040    Example—Building a home or ADU.
+
+        14.01.010  About the Code.
+
+             (1)    The Unified Development Code (SCC Title  14 ) is intended to consolidate most of the regulations that govern land use in unincorporated Skagit County in a single title of the County Code.
+
+             (2)    In addition to SCC Title  14 , land uses and developments in Skagit County are regulated by:
+
+             (a)    SCC Title  12 , Health, Welfare, and Sanitation, which includes regulations for water systems, septic systems, and food establishments;
+
+             (b)    SCC Title  15 ,  Buildings  and Construction, which includes the County’s adoption of the International  Building  Code and related standardized codes, as well as rules for  building  and  road  addresses;
+
+             (c)    SCC Title  16 , Environment, which includes the County’s implementation of the State Environmental Policy Act (SEPA), as well as water  pollution  controls.
+
+             (3)    The instructions in this Chapter are summaries only and not a comprehensive guide to how the code is interpreted and applied. (Ord. O20250005 § 2 (Exh. A))
+
+        14.01.020  Orientation to SCC Title 14.
+
+             The first few Chapters of SCC Title  14  help the reader understand the terms used throughout (SCC Chapter  14.04 , Definitions) and the processes for applying for permits (SCC Chapter  14.06 ).
+
+             (1)    Division 1, Zoning and Land Uses, contains several fundamental chapters:
+
+             (a)    SCC Chapter  14.10 , General Provisions, includes lists of uses allowed and prohibited in all  zones .
+
+             (b)    SCC Chapters  14.11  through  14.16  describe the County’s  zones . Each chapter lists:
+
+             (i)    The uses allowed in each  zone ;
+
+             (ii)    The  dimensional standards  (e.g.,  setbacks ,  lot  size, height limits) for each  zone ;
+
+             (iii)    Additional uses and restrictions for each  zone .
+
+             (c)    SCC Chapter  14.18  describes regulations for each type of use.
+
+             (2)    Division 2, Project Design Standards, includes regulations that apply to many different kinds of uses, including  fences , landscaping, parking,  setbacks , and  signs .
+
+             (3)    Division 3, Land Management, includes chapters on  land clearing  and  stormwater  management, as well as special provisions that apply to  natural resource lands  (those that are zoned for  agriculture ,  forestry , or  mineral  resource).
+
+             (4)    Division 4,  Critical Areas  and Shorelines, is reserved for recodification of the County’s rules governing  critical areas  (e.g., streams,  wetlands ,  frequently flooded areas ), as well as shorelines.
+
+             (5)    Division 5, Special Permits, includes chapters on permits that are not frequently needed, such as special use permits, master planned resorts,  essential public facilities , and  variances .
+
+             (6)    Division 6, Public Facilities, regulates how and when infrastructure is constructed, especially for commercial uses, and how impact fees are set.
+
+             (7)    Division 7,  Land Division  and Boundaries, includes rules for subdividing land and adjusted  lot  boundaries. Importantly, SCC Chapter  14.70  describes how the County determines whether your existing  lot  was properly created and whether it is eligible to be bought and sold or developed. (Ord. O20250005 § 2 (Exh. A))
+
+        14.01.030  Example—Establishing a commercial or special use.
+
+             (1)    To understand the code that governs a commercial, industrial, or special use, an  applicant  should review:
+
+             (a)    The standards in SCC Chapter  14.70  that determine whether your  lot  was properly divided.
+
+             (b)    The specific chapter for your  zone  in Division 1, which contains:
+
+             (i)    Uses allowed in the  zone ;
+
+             (ii)     Dimensional standards  applicable within the  zone ;
+
+             (iii)    Special conditions applicable to the  zone .
+
+             (c)    The rules for any applicable  overlay zone  in SCC Chapter  14.14 .
+
+             (d)    The section for your proposed use in SCC Chapter  14.18 , which may contain:
+
+             (i)    Restrictions and criteria for the use applicable to all  zones ;
+
+             (ii)    Special restrictions on the use that apply only in certain  zones .
+
+             (e)    The requirements for a special use permit in SCC Chapter  14.51  (SCC Chapter 14.52 for  mining ), if one is required for your use.
+
+             (f)    The general  performance standards  (SCC Chapter  14.20 ).
+
+             (g)    The requirements for landscaping (SCC Chapter  14.25 ).
+
+             (h)    The requirements for parking (SCC Chapter  14.26 ).
+
+             (i)    The limitations on  signs  (SCC Chapter  14.29 ).
+
+             (j)    The rules for protection of  critical areas  (SCC Chapter  14.24 ) that may exist on or near your  lot .
+
+             (k)    The rules for shorelines (SCC Chapter  14.48 ) and flood damage prevention (SCC Chapter  14.34 ), if they apply to the location of your  lot .
+
+             (l)    The rules you need to follow before you start  clearing  your  lot  (SCC Chapter  14.30 ).
+
+             (m)    How to manage  stormwater  from your construction (SCC Chapter  14.32 ).
+
+             (n)    The process of applying for a permit (SCC Chapter  14.06 ).
+
+             (2)    Do not forget: the health code, administered by the County Health  Department , governs food establishments (SCC Chapter  12.36 ) and  solid waste  handling (SCC Chapter  12.16 ).
+
+             (3)    If you are renovating or expanding an existing  structure  that was legally constructed, or a land use that was legally established, but no longer meets current code, see the rules for  nonconforming  uses and  structures  (SCC Chapter  14.07 ). (Ord. O20250005 § 2 (Exh. A))
+
+        14.01.040  Example—Building a home or ADU.
+
+             (1)    To understand the code that governs the construction of a typical residence in Skagit County, an  applicant  should review:
+
+             (a)    The standards in SCC Chapter  14.70  that determine whether your  lot  was properly divided.
+
+             (b)    The specific chapter for your  zone  in Division 1 (usually SCC Chapter  14.11 ), which contains  dimensional standards  and may include special conditions for your  zone .
+
+             (c)    The rules for any applicable  overlay zone  in SCC Chapter  14.14 .
+
+             (d)    The standards for your type of residence in SCC Chapter  14.18  Part I, which may contain special conditions for your proposed residence.
+
+             (e)    How the  setbacks  prescribed for your  zone  are applied to your  lot  (SCC Chapter  14.28 ).
+
+             (f)    The rules for protection of  critical areas  (SCC Chapter  14.24 ) that may exist on or near your  lot .
+
+             (g)    The rules for shorelines (SCC Chapter  14.48 ) and flood damage prevention (SCC Chapter  14.34 ), if they apply to the location of your  lot .
+
+             (h)    The rules you need to follow before you start  clearing  your  lot  (SCC Chapter  14.30 ).
+
+             (i)    How to manage  stormwater  from your construction (SCC Chapter  14.32 ).
+
+             (2)    Do not forget: availability of sewer and water services for a new home is essential! Those matters are governed by the health code in SCC Chapters  12.05  and  12.48  and administered by the County Health  Department .
+
+             (3)    If you are renovating an existing home that was legally constructed but no longer meets current code, see the rules for  nonconforming  uses and  structures  (SCC Chapter  14.07 ). (Ord. O20250005 § 2 (Exh. A))

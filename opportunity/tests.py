@@ -8,6 +8,8 @@ from django.test import SimpleTestCase, TestCase, override_settings, tag
 from django.urls import reverse
 
 from . import services
+from .ai_search import OpportunitySearchError, apply_prompt_result_filters, parse_generated_search_response, validate_search_sql
+from .models import OpportunitySearch, OpportunitySearchFeedback
 
 
 class OpportunityHelperTests(SimpleTestCase):
@@ -77,30 +79,186 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertEqual(services._improvement_label("MA1.5F"), "one-and-a-half-story dwelling")
         self.assertEqual(services._improvement_label("MAIN AREA"), "main dwelling area")
 
+    def test_sync_narrative_response_parser(self):
+        parsed = services.parse_sync_narrative_response(
+            '{"headline":"Fresh assessor changes","narrative":"Several records changed overnight.","bullets":["Sales changed","Land changed","Review before use"]}'
+        )
+        self.assertEqual(parsed["headline"], "Fresh assessor changes")
+        self.assertEqual(len(parsed["bullets"]), 3)
 
-@override_settings(ROOT_URLCONF="config.urls", OPPORTUNITY_DASHBOARD_PASSWORD="letmein")
-class OpportunityAccessTests(TestCase):
+    def test_sync_narrative_fallback_is_plain_english(self):
+        narrative = services.fallback_sync_narrative(
+            {"files_changed": 2, "tables": {"sales": {"updated": 3, "inserted": 1, "applied_rows": 4}}}
+        )
+        self.assertIn("2 changed source file", narrative["narrative"])
+        self.assertEqual(len(narrative["bullets"]), 3)
+
+    def test_ai_search_response_parser_requires_structured_json(self):
+        parsed = parse_generated_search_response(
+            '{"title":"Large parcels","criteria_summary":"Over 40 acres","assumptions":["screening only"],'
+            '"sql":"SELECT p.parcel_number FROM skagit_parcels p WHERE p.acres > %s","params":[40]}'
+        )
+        self.assertEqual(parsed["title"], "Large parcels")
+        self.assertEqual(parsed["params"], [40])
+
+    def test_ai_search_sql_validator_allows_safe_select(self):
+        sql = "SELECT p.parcel_number FROM skagit_parcels p WHERE p.inactive_date IS NULL AND p.acres > %s"
+        self.assertEqual(validate_search_sql(sql, [10]), sql)
+
+    def test_ai_search_sql_validator_rejects_mutation(self):
+        with self.assertRaises(OpportunitySearchError):
+            validate_search_sql("DELETE FROM skagit_parcels WHERE parcel_number = %s", ["P1"])
+
+    def test_ai_search_sql_validator_rejects_unapproved_table(self):
+        with self.assertRaises(OpportunitySearchError):
+            validate_search_sql("SELECT parcel_number FROM auth_user")
+
+    def test_ai_search_sql_validator_checks_params(self):
+        with self.assertRaises(OpportunitySearchError):
+            validate_search_sql("SELECT p.parcel_number FROM skagit_parcels p WHERE p.acres > %s", [])
+
+    def test_ai_search_home_intent_filters_nonresidential_results(self):
+        rows = [
+            {"parcel_number": "P1", "land_use_code": "110", "current_use": "(110) HOUSEHOLD SFR OUTSIDE CITY"},
+            {"parcel_number": "P2", "land_use_code": "580", "current_use": "(580) RETAIL TRADE, EATING & DRINKING"},
+            {"parcel_number": "P3", "land_use_code": "670", "current_use": "(670) GOVERNMENTAL SERVICES"},
+        ]
+        filtered = apply_prompt_result_filters("large homes in Conway suitable for senior community conversion", rows)
+        self.assertEqual([row["parcel_number"] for row in filtered], ["P1"])
+
+
+@override_settings(ROOT_URLCONF="config.urls")
+class OpportunityAuthTests(TestCase):
     def setUp(self):
         User = get_user_model()
-        self.staff = User.objects.create_user("staff", password="pass", is_staff=True)
         self.user = User.objects.create_user("user", password="pass", is_staff=False)
 
-    def test_anonymous_user_sees_password_gate(self):
-        response = self.client.get(reverse("opportunity_dashboard"))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Enter the shared password")
+    def test_anonymous_routes_redirect_to_parcel_book_login(self):
+        targets = [
+            reverse("opportunity_home"),
+            reverse("opportunity_explore"),
+            reverse("opportunity_watchlist"),
+            reverse("opportunity_parcel_detail", args=["P12345"]),
+        ]
+        for target in targets:
+            response = self.client.get(target)
+            self.assertEqual(response.status_code, 302)
+            self.assertIn(reverse("opportunity_login"), response["Location"])
 
-    def test_wrong_password_stays_locked(self):
-        response = self.client.post(reverse("opportunity_dashboard"), {"password": "wrong"})
+    @patch("opportunity.views.dashboard_context", return_value={"tabs": services.TABS, "watchlist": [], "sync": {"metrics": [], "changes": []}})
+    def test_logged_in_user_can_load_dashboard(self, dashboard_context):
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_home"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "That password did not work.")
+        self.assertContains(response, "What's Hot Right Now")
 
-    @patch("opportunity.views.tab_counts", return_value={tab.key: 0 for tab in services.TABS})
+    @patch("opportunity.views.tab_counts", return_value={tab.key: "" for tab in services.TABS})
     @patch("opportunity.views.fetch_tab_rows", return_value=[])
-    def test_correct_password_can_load_dashboard(self, fetch_tab_rows, tab_counts):
-        response = self.client.post(reverse("opportunity_dashboard"), {"password": "letmein"})
+    def test_logged_in_user_can_load_explore(self, fetch_tab_rows, tab_counts):
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_explore"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Delinquent Tax Pressure")
+        self.assertContains(response, "Explore parcel signals")
+
+    @patch("opportunity.views.parcel_detail", return_value=None)
+    def test_unknown_parcel_returns_404(self, parcel_detail):
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_parcel_detail", args=["P404"]))
+        self.assertEqual(response.status_code, 404)
+
+
+@override_settings(ROOT_URLCONF="config.urls")
+class OpportunityWatchlistTests(TestCase):
+    def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create_user("user", password="pass")
+        self.other = User.objects.create_user("other", password="pass")
+
+    def test_save_is_idempotent(self):
+        self.client.login(username="user", password="pass")
+        url = reverse("opportunity_save")
+        self.client.post(url, {"parcel_number": "P100387", "source_tab": "delinquent-tax-pressure"})
+        self.client.post(url, {"parcel_number": "P100387", "source_tab": "delinquent-tax-pressure"})
+        from .models import OpportunitySavedParcel
+
+        self.assertEqual(OpportunitySavedParcel.objects.filter(user=self.user, parcel_number="P100387").count(), 1)
+
+    def test_unsave_removes_only_current_user_row(self):
+        from .models import OpportunitySavedParcel
+
+        OpportunitySavedParcel.objects.create(user=self.user, parcel_number="P100387")
+        OpportunitySavedParcel.objects.create(user=self.other, parcel_number="P100387")
+        self.client.login(username="user", password="pass")
+        self.client.post(reverse("opportunity_save"), {"parcel_number": "P100387", "action": "unsave"})
+        self.assertFalse(OpportunitySavedParcel.objects.filter(user=self.user, parcel_number="P100387").exists())
+        self.assertTrue(OpportunitySavedParcel.objects.filter(user=self.other, parcel_number="P100387").exists())
+
+    @patch("opportunity.views.watchlist_rows", return_value=[])
+    def test_users_can_load_only_their_watchlist_page(self, watchlist_rows):
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_watchlist"))
+        self.assertEqual(response.status_code, 200)
+        watchlist_rows.assert_called_once_with(self.user)
+
+
+@override_settings(ROOT_URLCONF="config.urls")
+class OpportunityAISearchTests(TestCase):
+    def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create_user("user", password="pass")
+        self.other = User.objects.create_user("other", password="pass")
+
+    def test_ai_search_page_loads_for_logged_in_user(self):
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_ai_search"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Search opportunities in plain English")
+
+    @patch("opportunity.views.run_ai_opportunity_search")
+    def test_ai_search_post_redirects_to_cached_result(self, run_ai_opportunity_search):
+        search = OpportunitySearch.objects.create(
+            user=self.user,
+            prompt="large parcels",
+            title="Large parcels",
+            status=OpportunitySearch.STATUS_READY,
+        )
+        run_ai_opportunity_search.return_value = search
+        self.client.login(username="user", password="pass")
+        response = self.client.post(reverse("opportunity_ai_search"), {"prompt": "large parcels"})
+        self.assertRedirects(response, reverse("opportunity_ai_search_detail", args=[search.pk]))
+        run_ai_opportunity_search.assert_called_once_with(self.user, "large parcels")
+
+    def test_ai_search_detail_is_private_to_owner(self):
+        search = OpportunitySearch.objects.create(
+            user=self.user,
+            prompt="large parcels",
+            title="Large parcels",
+            status=OpportunitySearch.STATUS_READY,
+            result_rows=[],
+        )
+        self.client.login(username="other", password="pass")
+        response = self.client.get(reverse("opportunity_ai_search_detail", args=[search.pk]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_user_can_save_ai_search(self):
+        search = OpportunitySearch.objects.create(user=self.user, prompt="large parcels")
+        self.client.login(username="user", password="pass")
+        response = self.client.post(reverse("opportunity_ai_search_save", args=[search.pk]))
+        self.assertRedirects(response, reverse("opportunity_ai_search_detail", args=[search.pk]))
+        search.refresh_from_db()
+        self.assertIsNotNone(search.saved_at)
+
+    def test_user_can_leave_search_feedback(self):
+        search = OpportunitySearch.objects.create(user=self.user, prompt="large parcels")
+        self.client.login(username="user", password="pass")
+        response = self.client.post(
+            reverse("opportunity_ai_search_feedback", args=[search.pk]),
+            {"rating": "bad", "reason_code": "too_broad", "comment": "Lots of noise"},
+        )
+        self.assertRedirects(response, reverse("opportunity_ai_search_detail", args=[search.pk]))
+        feedback = OpportunitySearchFeedback.objects.get(search=search, user=self.user)
+        self.assertEqual(feedback.rating, "bad")
+        self.assertEqual(feedback.reason_code, "too_broad")
 
 
 @tag("opportunity_live")
@@ -116,10 +274,10 @@ class OpportunityLiveQueryTests(TestCase):
             "parcel_number",
             "location",
             "zoning",
-            "why_it_ranks",
+            "current_use",
             "risk_flags",
             "map_url",
-            "score",
+            "signal_labels",
         }
         for tab in services.TABS:
             rows = services.fetch_tab_rows(tab.key, {}, limit=1)

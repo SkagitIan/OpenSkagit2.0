@@ -1,0 +1,776 @@
+Chapter 14.13 NATURAL RESOURCE ZONES AND USES
+
+         Chapter 14.13
+NATURAL RESOURCE ZONES AND USES
+
+             Sections:
+
+              14.13.010    Applicability.
+
+              14.13.020    Allowed uses.
+
+              14.13.030    Dimensional standards.
+
+              14.13.100    Agricultural—Natural Resource Lands (Ag-NRL).
+
+              14.13.200    Industrial Forest—Natural Resource Lands (IF-NRL).
+
+              14.13.300    Secondary Forest—Natural Resource Lands (SF-NRL).
+
+              14.13.400    Rural Resource—Natural Resource Lands (RRc-NRL).
+
+        14.13.010  Applicability.
+
+             (1)    This Chapter applies to the following zones:
+
+             (a)    Agricultural— Natural Resource Lands  (Ag-NRL).
+
+             (b)    Industrial Forest— Natural Resource Lands  (IF-NRL).
+
+             (c)    Secondary Forest— Natural Resource Lands  (SF-NRL).
+
+             (d)    Rural Resource— Natural Resource Lands  (RRc-NRL). (Ord. O20250005 § 2 (Exh. A))
+
+        14.13.020  Allowed uses.
+
+             (1)    The uses shown in the table below are allowed in the  zones  to which this Chapter applies. For development standards for these uses, see the use section in SCC Chapter  14.18 .
+
+                      Table 14.13.020-1 Allowed Uses in the Natural Resource  Zones
+
+                         Ag-NRL
+
+                         IF-NRL
+
+                         SF-NRL
+
+                         RRc-NRL
+
+                          Residential Uses
+
+                         Single-family residence
+
+                         AC
+
+                         P
+
+                         P
+
+                         P
+
+                          Accessory dwelling unit
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Residential accessory use
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Temporary manufactured home
+
+                         P
+
+                         P
+
+                         P
+
+                         Co-housing, as part of a  CaRD
+
+                         P
+
+                         P
+
+                         P
+
+                         HE
+
+                          Seasonal worker housing
+
+                         HE
+
+                         HE
+
+                          Commercial Uses
+
+                          Animal clinic/hospital
+
+                         AD
+
+                         AD
+
+                          Asphalt/concrete batching or recycling ,  temporary
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Family day care provider
+
+                         P
+
+                         P
+
+                         P
+
+                          Bed and breakfast
+
+                         AD
+
+                         AD
+
+                          Historic sites  open to the public
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Home-Based Business  1
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Home-Based Business  2
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Home-Based Business  3
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Kennel , boarding
+
+                         HE
+
+                          Kennel , limited
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         AD
+
+                         Limited event venues
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         Marijuana production/processing facility
+
+                         AD
+
+                          Marina , primitive, with ≤ 3 slips
+
+                         HE
+
+                          Marina , primitive, with ≤ 10 slips with no conversion of resource land
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Natural Resource Uses
+
+                          Agriculture
+
+                         P
+
+                         P
+
+                          Agricultural accessory use
+
+                         P
+
+                         P
+
+                          Agricultural processing facility
+
+                         P
+
+                         P
+
+                         Agricultural slaughtering facilities
+
+                         AD
+
+                         AD
+
+                          Agritourism  1
+
+                         P
+
+                         P
+
+                          Agritourism  2
+
+                         AD
+
+                         AD
+
+                          Agritourism  3
+
+                         HE
+
+                         HE
+
+                          Anaerobic digester , when accessory to an agricultural use
+
+                         P
+
+                         HE
+
+                          Anaerobic digester , when not accessory to an agricultural use
+
+                         HE
+
+                         HE
+
+                         Aquaculture
+
+                         P
+
+                          Concentrated animal feeding operation
+
+                         HE
+
+                         HE
+
+                          Farm-based business
+
+                         P
+
+                         P
+
+                          Forestry
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Forestry-based business
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Habitat enhancement/restoration project
+
+                         HE
+
+                         P
+
+                         P
+
+                         P
+
+                          Manure lagoon
+
+                         P
+
+                         HE
+
+                          Natural resources training/research facility
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Nursery/greenhouse , retail
+
+                         AD
+
+                         AD
+
+                          Nursery/greenhouse , wholesale
+
+                         P
+
+                         AD
+
+                         AD
+
+                          Seasonal roadside stand  ≤ 300 sf
+
+                         P
+
+                         P
+
+                          Seasonal roadside stand  &gt; 300 sf and ≤ 2,000 sf
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Seasonal roadside stand  &gt; 2,000 sf and ≤ 5,000 sf
+
+                         HE
+
+                         AD
+
+                         AD
+
+                          Park/Recreational Uses
+
+                          Campground , primitive
+
+                         P
+
+                         P
+
+                         P
+
+                          Off-road vehicle use areas and trails
+
+                         HE
+
+                         HE
+
+                          Outdoor outfitters enterprises
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Shooting club  (outdoor)
+
+                         HE
+
+                          Park , regional
+
+                         AD
+
+                          Park , recreation  open space
+
+                         AD
+
+                          Stables and riding club
+
+                         AD
+
+                          Shooting club , outdoor
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Trail , nonmotorized
+
+                         AD
+
+                         P
+
+                         AD
+
+                         AD
+
+                          Trail , other than nonmotorized
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Trailhead , primary and secondary
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Transportation Uses
+
+                          Aircraft landing field
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Vehicle charging station
+
+                         P
+
+             Notes:
+
+             1.    Key to the Use Tables can be found in SCC  14.10.050 .
+
+             2.    Uses allowed in all  zones  can be found in SCC  14.10.060 .
+
+             3.    Uses prohibited in all  zones  can be found in SCC  14.10.070 .
+
+             (Ord. O20260004 § 1 (Att. 2); Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.13.030  Dimensional standards.
+
+                      Table 14.13.030-1  Dimensional Standards  in the Natural Resource  Zones
+
+                         Ag-NRL
+
+                         IF-NRL
+
+                         SF-NRL
+
+                         RRc-NRL
+
+                           Lot  Dimensions
+
+                         Minimum  lot  size (ac)
+
+                         40
+
+                         80
+
+                         20
+
+                         40
+
+                         Minimum  lot width  (ft)
+
+                         400
+
+                         400
+
+                         400
+
+                           Lot Coverage
+
+                         Maximum  lot coverage  (%)
+
+                         –
+
+                         –
+
+                         –
+
+                         *
+
+                          Minimum  Setbacks  (residential uses)
+
+                         Front (ft)
+
+                         *
+
+                         100
+
+                         100
+
+                         50
+
+                         Interior Side (ft)
+
+                         8
+
+                         100
+
+                         100
+
+                         50
+
+                         Rear (ft)
+
+                         35
+
+                         100
+
+                         100
+
+                         50
+
+                          Minimum  Setbacks  (nonresidential uses)
+
+                         Front (ft)
+
+                         35
+
+                         100
+
+                         100
+
+                         50
+
+                         Interior side (ft)
+
+                         15
+
+                         100
+
+                         100
+
+                         50
+
+                         Rear (ft)
+
+                         35
+
+                         100
+
+                         100
+
+                         50
+
+                           Building  Size Limits
+
+                         Maximum height (ft)
+
+                         40
+
+                         40
+
+                         40
+
+                         40
+
+             Notes:
+
+             1.    Values marked with an asterisk (*) are specified within the individual sections for each zoning district of this Chapter. Refer to the corresponding sections below for specific  setback  requirements.
+
+             (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.13.100  Agricultural—Natural Resource Lands (Ag-NRL).
+
+             (1)    Purpose. The purpose of the Agricultural— Natural Resource Lands  district is to provide land for continued farming activities, conserve agricultural land, and reaffirm agricultural use, activities and operations as the primary use of the district. Nonagricultural uses are allowed only as  accessory uses  to the primary use of the land for agricultural purposes. The district is composed mainly of low flat land with highly productive soil and is the very essence of the County’s farming heritage and character.
+
+             (2)    Allowed Uses. In addition to the uses in SCC  14.13.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses .
+
+             (i)    Commercial  greenhouse  operations that are an integral part of a local soil-based commercial  agriculture  operation.
+
+             (ii)    Individual or multiple  farm  composting as an incidental agricultural operation to a working  farm  with no net loss of soil. The composting operation must be managed according to an approved nutrient management plan in conjunction with the local Conservation District and Natural Resources Conservation Service (NRCS) standards and all applicable environmental,  solid waste , access and health regulations. Such use must not generate traffic uncommon to a  farm operation .
+
+             (iii)    On-site sorting, bagging, storage, and similar wholesale processing activities of agricultural products that are predominantly grown on site or produced principally from the entire commercial  farm operation . Such activities are limited to those which are integrally related to the agricultural production and harvesting process.
+
+             (iv)    Water diversion  structures  and  impoundments  related to resource management.
+
+             (b)    Administrative Special Uses.
+
+             (i)     Greenhouse  operations that are not integral to a local soil-based commercial agricultural operation.  Greenhouses  operating in the Ag-NRL  zone  as an administrative special use, if they cease operation, must be required to return the land to its former state or otherwise place the land in agricultural production.
+
+             (c)    Hearing Examiner Special Uses.
+
+             (i)    Expansion of existing natural resource industrial zoned  agricultural support service  businesses, provided the expansion is limited to only the area necessary for the business; and also provided, that any conversion of agricultural land is minimized to the greatest extent possible.
+
+             (3)    Prohibited Uses.
+
+             (a)    Regularly occurring celebratory gatherings, weddings, parties, music venues, concerts or similar uses that cause the property to act as a limited event venue or event venue.
+
+             (b)    Restaurants, not including farm-to-table activities as  Agritourism  1 or 2.
+
+             (4)     Dimensional Standards . In addition to  dimensional standards  in Table 14.13.030-1, the following  dimensional standards  apply in this zone:
+
+             (a)     Setbacks .
+
+             (i)    Front: 35 feet minimum, 200 feet maximum from public  road .
+
+             (A)    Unless specified below or elsewhere in this Chapter, no portion of a  structure  may be located closer than 35 feet from the front  lot  line and no portion of a  structure  may be located further than 200 feet from the front  lot  line.
+
+             (B)    If a parcel is located such that no portion or developable portion of the property is within 200 feet of a public  road , the maximum 200-foot  setback  must be measured from the front property line.
+
+             (C)    The maximum  setback  may be waived by the  Director  where  critical areas , preventing the placement of  residential structures , are located within the 200-foot  setback  area. The maximum  setback  may also be waived by the  Director  in cases where nonfloodplain or nonprime agricultural land is located on the  lot  outside of the  setback  area, which would provide for a more appropriate placement of  residential structures . The  Director  may also waive the 200-foot maximum  setback  in cases where a parcel is a flag  lot  or landlocked  lot  as defined in SCC  14.28.060 (4), and no developable area exists within 200 feet of a public  road .
+
+             (D)    In cases where a residence exists outside the  setback  area, residential accessory  structures  may be placed outside the  setback  area if located in accordance with the siting criteria outlined in this Section.
+
+             (5)    Siting Criteria for Nonagricultural  Structures . In addition to the  dimensional standards  above, new nonagricultural  structures  are required to comply with the following provisions:
+
+             (a)    Siting of all nonagricultural  structures  in the Agricultural— Natural Resource Lands  district must minimize potential impacts on agricultural activities consistent with this Subsection (4).
+
+             (b)    Nonagricultural  structures  and development must be contained within the developed area of the parcel. “Developed area” includes areas covered with nonagricultural  structures , lawn, gravel, concrete, asphalt, parking areas,  driveways , septic systems, and landscaping, but does not include fields, farmed areas, or areas available to be farmed. Unless substantial evidence is provided indicating the location is not feasible, wells must also be located within the developed area whenever possible. Wells located outside of the developed area must be sited to minimize potential impacts on agricultural activities.
+
+             (c)    New nonagricultural  structures  must be clustered and located no more than 35 feet from existing, compatible  buildings . If a  driveway  is needed between  buildings  for access, the  distance  between  buildings  may be increased to a maximum of 50 feet to allow for the  driveway .  Driveways , whether existing or new, must be shared whenever possible.
+
+             (d)    When the subject parcel has an existing nonagricultural developed area larger than one acre, the developed area may not be enlarged.
+
+             (e)    When the subject parcel has an existing nonagricultural developed area less than one acre and there is insufficient developed area for the proposed  building , the total developed area may be expanded in the minimum amount necessary but may not exceed a maximum of one acre in size.
+
+             (f)    When the subject parcel has no existing nonagricultural developed area, all nonagricultural development (including  structures , parking areas,  driveways , septic systems, wells, and landscaping, etc.) must share a common access and must be clustered within a one-acre area located at a corner of the parcel. If any adjacent parcel has a more intensive zoning designation (e.g., allows greater residential development potential), the selected corner must be adjacent to the parcel with more intensive zoning designation; in the alternative, if there is existing development on adjacent parcels, the selected corner must be the one nearest the adjacent development.
+
+             (g)    A  site plan  for any nonagricultural development must include adjacent parcels and must show the location of existing  structures  on the subject and adjacent parcels, including the current use of existing  structures  (e.g., dwelling, shop/garage, dairy barn). (Ord. O20260004 § 1 (Att. 2); Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.13.200  Industrial Forest—Natural Resource Lands (IF-NRL).
+
+             (1)    Purpose. The purpose of the Industrial Forest— Natural Resource Lands  district is to ensure that  forest lands  of  long-term commercial significance  are conserved and managed to provide sustainable forest yields, job stability, ecological values and the continuation of a viable commercial forest industry in Skagit County. Conservation of forest resources must be ensured through measures designed to prevent incompatible development on or adjacent to resource lands. Forest activities do not constitute a  nuisance  if conducted in accordance with the State Forest Practice Rules and Regulations, WAC Title  222 .
+
+             (2)    This  zone  applies to all land zoned Industrial Forest and to all fee simple ownerships within National Forests.
+
+             (3)    Allowed Uses. In addition to the uses in SCC  14.13.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses .
+
+             (i)    Extraction of gravel and rock for the purpose of forest  road  construction and/or maintenance, and the operation of rock crushers, provided the material and equipment is used within the Industrial Forest or Secondary Forest— Natural Resource Lands  zones, or on same forest owners’ property.
+
+             (ii)    Management and propagation of fish and wildlife.
+
+             (iii)    Nonresidential  structures  which are accessory to forest management activities (i.e.,  temporary  watchman quarters, equipment shop or storage  structures ).
+
+             (iv)    Operations of scaling stations, log dumps, sorting and storage areas, forest industry residue dumping areas; provided, that any such use within 1,000 feet of any residential use district,  park  or recreation area must be  temporary  and less than 12 months in duration.
+
+             (v)    Operation of sawmills, chippers, shake and shingle mills, forest industry equipment maintenance  buildings  and storage yards; provided, that such uses are  temporary  and are located on the property for no longer than 12 months’ duration.
+
+             (vi)    Storage of explosives for resource management use per adopted IBC and IFC, when located at least 300 feet from property boundary or public  road  right-of-way.
+
+             (vii)     Temporary  use of  recreational vehicles  only where it is in conjunction with an active forest practice  application .  Temporary  use of  recreational vehicles  is only allowed under this Subsection where such  recreational vehicle  is used as  temporary  living quarters for  trail  crews, fire crews, nursery crews, logging crews, maintenance crews or watchman, and where such use occurs for less than six months per year.
+
+             (viii)    Water diversion  structures  and  impoundments  related to resource management and on-site  wetland  restoration/enhancement projects.
+
+             (b)    Administrative Special Uses. Reserved.
+
+             (c)    Hearing Examiner Special Uses.
+
+             (i)    Storage of explosives for commercial purposes when located at least 600 feet from property boundary or public  road  right-of-way.
+
+             (4)    A single-family residence or  residential accessory use  in this  zone  is allowed only when all of the following criteria are met:
+
+             (a)    The residence is located within 200 feet of an existing County  road  or State highway;
+
+             (b)    The residence is located within the existing, as of July 26, 2005, boundaries of a fire district;
+
+             (c)    The residence is an  accessory use  to  timber  resource management activities;
+
+             (d)    Ingress and egress for fire vehicles meets the standards of the International Fire Code Section 503, as amended;
+
+             (e)    There is a 200-foot slash abatement maintained around the exterior portion of the dwelling;
+
+             (f)    There is a safety  zone  cleared of flammable vegetation 30 feet from any portion of the exterior of any  structure  on level ground and 100 feet downhill on sloped ground;
+
+             (g)    The dwelling or any accessory  structure  is constructed of a noncombustible roofing material; and
+
+             (h)    There is availability of 300 gallons of water on site, 400 feet of one-inch fire hose with nozzle, and an internal combustion engine powered pump. (Ord. O20250005 § 2 (Exh. A))
+
+        14.13.300  Secondary Forest—Natural Resource Lands (SF-NRL).
+
+             (1)    Purpose. The purpose of the Secondary Forest—  Natural Resource Lands  (SF-NRL) district is to provide a transitional area between the Industrial Forest— Natural Resource Lands  zone and Rural zoned lands designated primarily for residential use and other nonforestry uses. The SF-NRL  zone  also provides a  zone  where smaller scale  timber  and other resource management activities can occur while providing protection from encroachment of residential activity that may encumber standard  forest practices .
+
+             (2)    Allowed Uses. In addition to the uses in SCC  14.13.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses .
+
+             (i)    Extraction of gravel and rock for the purpose of forest  road  construction and/or maintenance, and the operation of rock crushers, provided the material and equipment is used within the Industrial Forest or Secondary Forest— Natural Resource Lands  zone, or on same forest owners’ property.
+
+             (ii)    Management and propagation of fish and wildlife.
+
+             (iii)    Nonresidential  structures  which are accessory to forest management activities (i.e.,  temporary  watchman quarters, equipment shop or storage  structures ).
+
+             (iv)    Operations of scaling stations, log dumps, sorting and storage areas, forest industry residue dumping areas; provided, any such use within 1,000 feet of any residential use district,  park  or recreation area must be  temporary  and less than 12 months in duration.
+
+             (v)    Operation of sawmills, chippers, shake and shingle mills, forest industry equipment maintenance  buildings  and storage yards; provided, that such uses are  temporary  and are located on the property for no longer than 12 months’ duration.
+
+             (vi)    Storage of explosives for resource management use per adopted IBC and IFC, when located at least 300 feet from property boundary or public  road  right-of-way.
+
+             (vii)     Temporary  use of  recreational vehicles  only where it is in conjunction with an active forest practice  application .  Temporary  use of  recreational vehicles  is only allowed under this Subsection where such  recreational vehicle  is used as  temporary  living quarters for  trail  crews, fire crews, nursery crews, logging crews, maintenance crews or watchman, and where such use occurs for less than six months per year.
+
+             (viii)    Water diversion  structures  and  impoundments  related to resource management and (on-site)  wetland  restoration/enhancement projects.
+
+             (b)    Administrative Special Uses. Reserved.
+
+             (c)    Hearing Examiner Special Uses.
+
+             (i)    Storage of explosives for commercial purposes when located at least 600 feet from property boundary or public  road  right-of-way.
+
+             (3)     Dimensional Standards . In addition to  dimensional standards  in Table 14.13.030-1, the following  dimensional standards  apply in this zone:
+
+             (a)    Access frontage: 100 feet. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.13.400  Rural Resource—Natural Resource Lands (RRc-NRL).
+
+             (1)    Purpose. The purpose of the Rural Resource— Natural Resource Lands  district is to recognize and encourage the conservation of those lands which have the characteristics of both long-term commercially significant  agriculture  and  forestry  either on site or on adjacent sites. These are lands generally not managed as industrial resource lands, because of less productive soils, parcel size and/or geographic location, but are managed on a smaller scale and provide support for the industrial natural resource land base. It is the intent of this district to restrict incompatible nonresource-related uses and to retain a long-term, commercially significant natural resource land base.
+
+             (2)    Allowed Uses. In addition to the uses in SCC  14.13.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses .
+
+             (i)    Commercial  greenhouse  operations that are an integral part of a local soil-based commercial  agriculture  operation.
+
+             (ii)    Commercial uses supporting resource uses, such as packing, first stage processing and processing that provides added value to resource products as long as there is no permanent conversion of the  forest land .
+
+             (iii)    Individual or multiple  farm  composting as an incidental agricultural operation to a working  farm  with no net loss of soil. The composting operation must be managed according to an approved nutrient management plan in conjunction with the local Conservation District and Natural Resources Conservation Service (NRCS) standards and all applicable environmental,  solid waste , access and health regulations. Such use may not generate traffic uncommon to a  farm operation .
+
+             (iv)    Extraction of gravel and rock on three acres or less for the purpose of forest  road  construction and/or maintenance, and the operation of rock crushers, provided the material and equipment is used within the Rural Resource— Natural Resource Lands  zone, or on same forest owners’ property.
+
+             (v)    Operation of scaling stations, log dumps and sorting areas, and forest industry residue dumping areas; provided, that any such use within 1,000 feet of any residential use  zone ,  park , or recreation area is  temporary  and less than 12 months’ duration.
+
+             (vi)    Operation of sawmills, chippers, shake and shingle mills, forest industry equipment maintenance  buildings , and storage yards; provided, that such uses are  temporary  and are located on the property for no longer than 12 months’ duration.
+
+             (vii)    Water diversion  structures  and  impoundments  related to resource management and on-site  wetland  restoration/enhancement projects.
+
+             (b)    Administrative Special Uses. Reserved.
+
+             (c)    Hearing Examiner Special Uses.
+
+             (i)    Extraction of gravel and rock on more than three acres for the purpose of forest  road  construction and/or maintenance, and the operation of rock crushers, provided the material and equipment is used within the Rural Resource— Natural Resource Lands  zone, or on same forest owners’ property.
+
+             (ii)     Impoundments  for public drinking water; provided, that analysis determines a need that cannot be otherwise met and where no other viable site is available.
+
+             (iii)    Storage of explosives for commercial purposes when located at least 600 feet from property boundary or public  road  right-of-way.
+
+             (3)     Dimensional Standards . In addition to  dimensional standards  in Table 14.13.030-1, the following  dimensional standards  apply in this zone:
+
+             (a)    Maximum  Lot Coverage .
+
+             (i)    Greenhouses: 35 percent.
+
+             (ii)    All other uses: 10 percent or 10,000 square feet, whichever is greater. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))

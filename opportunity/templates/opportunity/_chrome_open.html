@@ -1,0 +1,41 @@
+{% include "opportunity/_styles.html" %}
+<div class="pb">
+  <div class="pb-shell">
+    <aside class="pb-sidebar">
+      <div class="pb-brand">
+        <img src="https://res.cloudinary.com/dq0l2n3zr/image/upload/v1753214772/openskagit_logo_mark_koy5zh.png" alt="">
+        <span>PARCEL BOOK</span>
+      </div>
+      <nav class="pb-nav" aria-label="Parcel Book">
+        <a href="{% url 'opportunity_home' %}" class="{% if active_nav == 'overview' %}active{% endif %}">Overview</a>
+        <a href="{% url 'opportunity_ai_search' %}" class="{% if active_nav == 'ai_search' %}active{% endif %}">AI Search</a>
+        <span class="pb-nav-label">Opportunity Types</span>
+        <a href="{% url 'opportunity_explore' %}?tab=delinquent-tax-pressure" class="{% if active_tab == 'delinquent-tax-pressure' %}active{% endif %}">Delinquent Tax Pressure</a>
+        <a href="{% url 'opportunity_explore' %}?tab=vacant-buildable-lots" class="{% if active_tab == 'vacant-buildable-lots' %}active{% endif %}">Vacant Buildable Lots</a>
+        <a href="{% url 'opportunity_explore' %}?tab=possible-lot-splits" class="{% if active_tab == 'possible-lot-splits' %}active{% endif %}">Possible Lot Splits</a>
+        <a href="{% url 'opportunity_explore' %}?tab=teardown-candidates" class="{% if active_tab == 'teardown-candidates' %}active{% endif %}">Teardown Candidates</a>
+        <a href="{% url 'opportunity_watchlist' %}" class="{% if active_nav == 'watchlist' %}active{% endif %}">Watchlist</a>
+        <a href="{% url 'opportunity_home' %}#data-sources" class="{% if active_nav == 'data' %}active{% endif %}">Data Sources</a>
+      </nav>
+      <div class="pb-side-foot">
+        <div>Data updated from county assessor and auditor records.</div>
+        <div>Screening signals only.</div>
+      </div>
+    </aside>
+    <section class="pb-main">
+      <header class="pb-topbar">
+        <nav class="pb-topnav" aria-label="Primary">
+          <a href="{% url 'opportunity_home' %}" class="{% if active_nav == 'overview' %}active{% endif %}">Dashboard</a>
+          <a href="{% url 'opportunity_explore' %}" class="{% if active_nav == 'opportunities' %}active{% endif %}">Search</a>
+          <a href="{% url 'opportunity_ai_search' %}" class="{% if active_nav == 'ai_search' %}active{% endif %}">AI Search</a>
+          <a href="{% url 'opportunity_watchlist' %}" class="{% if active_nav == 'watchlist' %}active{% endif %}">Lists</a>
+        </nav>
+        <div class="pb-user">
+          <span>{{ request.user.get_username }}</span>
+          <form method="post" action="{% url 'opportunity_logout' %}">
+            {% csrf_token %}
+            <button class="pb-link-button" type="submit">Log out</button>
+          </form>
+        </div>
+      </header>
+      <main class="pb-content">

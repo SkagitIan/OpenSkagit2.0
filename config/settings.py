@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "opportunity",
     "ask_agent",
     "discovery_agent",
+    "zoning_mcp",
 ]
 
 MIDDLEWARE = [

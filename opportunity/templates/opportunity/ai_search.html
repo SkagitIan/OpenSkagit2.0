@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Parcel Book AI Search{% endblock %}
+
+{% block content %}
+{% include "opportunity/_chrome_open.html" %}
+
+<div class="pb-page-head">
+  <div>
+    <p class="pb-kicker">AI Search</p>
+    <h1>Search opportunities in plain English</h1>
+    <p class="pb-muted">Describe the parcel pattern you want. Parcel Book will translate it into a guarded PostGIS search and cache the results for review.</p>
+  </div>
+  <a class="pb-button secondary" href="{% url 'opportunity_explore' %}">Browse standard tabs</a>
+</div>
+
+<section class="pb-panel">
+  {% if error %}<div class="pb-error">{{ error }}</div>{% endif %}
+  <form class="pb-ai-form" method="post">
+    {% csrf_token %}
+    <label for="prompt">Natural-language search</label>
+    <textarea id="prompt" name="prompt" rows="4" placeholder="Describe acreage, location, zoning, tax, utility, value, improvement, sale, or other parcel signals.">{{ prompt }}</textarea>
+    <div class="pb-card-actions">
+      <button class="pb-button" type="submit">Run AI search</button>
+    </div>
+  </form>
+</section>
+
+<section class="pb-panel pb-saved-search-panel">
+  <div class="pb-section-head">
+    <h2>Saved AI searches</h2>
+  </div>
+  <div class="pb-result-list">
+    {% for search in saved_searches %}
+      <article class="pb-saved-search-row">
+        <div>
+          <a class="pb-card-title" href="{% url 'opportunity_ai_search_detail' search.pk %}">{{ search.title|default:"AI opportunity search" }}</a>
+          <div class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</div>
+        </div>
+        <div class="pb-list-values">
+          <strong>{{ search.result_count }}</strong>
+          <span>cached results</span>
+        </div>
+      </article>
+    {% empty %}
+      <p class="pb-muted">Saved AI searches will appear here.</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% include "opportunity/_chrome_close.html" %}
+{% endblock %}

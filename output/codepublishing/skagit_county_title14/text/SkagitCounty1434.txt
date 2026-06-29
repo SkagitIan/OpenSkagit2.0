@@ -1,0 +1,808 @@
+Chapter 14.34 FLOOD DAMAGE PREVENTION
+
+         Chapter 14.34
+FLOOD DAMAGE PREVENTION
+
+             Sections:
+
+              14.34.005    Definitions.
+
+              14.34.010    Statutory authorization.
+
+              14.34.020    Findings of fact.
+
+              14.34.030    Statement of purpose.
+
+              14.34.040    Methods of reducing flood losses.
+
+              14.34.050    Basis for establishing areas of special flood hazard.
+
+              14.34.055    Protected review area.
+
+              14.34.060    Compliance.
+
+              14.34.070    Abrogation and greater restrictions.
+
+              14.34.080    Interpretation.
+
+              14.34.090    Warning and disclaimer of liability.
+
+              14.34.100    Floodplain project permits.
+
+              14.34.110    Applications.
+
+              14.34.120    Director—Duties.
+
+              14.34.130    Variances and appeals.
+
+              14.34.140    Elevation and floodproofing certification required.
+
+              14.34.150    General standards for special flood hazard areas.
+
+              14.34.160    Specific standards for construction in special flood hazard areas.
+
+              14.34.170    Standards for construction in shallow flooding areas (AO Zones).
+
+              14.34.180    Standards for construction in special flood risk zones.
+
+              14.34.190    Standards for development activities in floodways.
+
+              14.34.200    Encroachment standards for development activities in areas where no floodway is established.
+
+              14.34.210    Standards for construction in coastal high hazard areas.
+
+              14.34.220    Habitat protection standards.
+
+              14.34.230    Livestock flood sanctuary areas (“critter pads”).
+
+              14.34.240    Severability.
+
+              Appendix    A     Repealed.
+
+        14.34.005  Definitions.
+
+             The definitions in this Section apply throughout this Chapter and control over any conflicting definitions in SCC  14.04.020 .
+
+             “Agricultural  building ” means a  structure  designed and constructed to house  farm  implements, hay, grain, poultry, livestock or other horticultural products. This  structure  may not be a place of human habitation nor a place of employment, nor may it be a place used by the public.
+
+             “Base flood” means a flood having a one percent chance of being equaled or exceeded in any given year.
+
+             “Base flood elevation” or “BFE” means the height of the base flood in relation to the National Geodetic Vertical Datum of 1929. Also defined as the elevation shown on the Flood Insurance Rate Map for  Zones  AE, AH, A1-A30, AR, V, and V1-V30 that indicates the water surface elevation resulting from a flood that has a one percent chance of equaling or exceeding that level in any given year.
+
+             “Basement” means any area of the  building , including any sunken room or sunken portion of a room, having its floor below ground level (subgrade) on all sides.
+
+             “Breakaway wall” means a wall or partition located below base flood elevation and designed to break away under high tides or wave action without causing damage to the structural system or elements of the  building . Such walls must be designed for not less than 10 pounds per square foot or more than 20 pounds per square foot on the vertical projected area.
+
+             “Critter pad” means a livestock flood sanctuary area.
+
+             “Development” means construction or exterior alteration of  structures , dredging, drilling, dumping, filling, earth movement,  clearing  or removal of vegetation (except activities meeting the definition of  forest practices ), storage of materials or equipment in a designated floodway, or other site disturbance, other than internal logging  roads , which either requires a permit, approval or authorization from the County or is proposed by a public agency.
+
+             “Elevate” means to raise a  building  (without a basement) above ground level by foundation walls, shear walls, posts, piers, pilings or columns.
+
+             “Elevation certificate” means a certified record of the actual elevation of a  structure  in relation to mean sea level of the lowest habitable floor or horizontal supporting member.
+
+             “Encroachment” means any fill,  structure ,  building , use,  accessory use , or development in the floodplain or  watercourse  that, combined with all other existing development, increases the base flood elevation more than one foot at any point. Encroachments are prohibited in regulatory floodways.
+
+             “Flood” or “flooding” means a general and  temporary  condition of partial or complete inundation of normally dry land areas from:
+
+             (1)    The overflow of inland or tidal waters;
+
+             (2)    The unusual and rapid accumulation of runoff or  surface waters  from any source.
+
+             “Flood Insurance Rate Map” or “FIRM” means the official map on which the Federal Insurance Administration has delineated both the areas of special flood hazards and the risk premium  zones  applicable to the community.
+
+             “Flood Insurance Study” means the official report provided by the Federal Insurance Administration that includes flood profiles, the flood boundary floodway map, and the water surface elevation of the base flood.
+
+             “Floodplain management” means a long-term local government program to reduce flood damages to life and property and to minimize public expenses due to floods through a comprehensive system of planning,  development regulations ,  building  standards, structural works, and monitoring and warning systems.
+
+             “Floodway” means the river channel and adjacent overbank areas through which the base flood is discharged without cumulatively increasing the water surface elevation more than one foot. Floodways identified on flood boundary and floodway maps (FBFM) become “regulatory floodways” within which encroachment or obstructions are prohibited.
+
+             “Lowest floor” means the lowest floor of the lowest enclosed area (including a basement). An unfinished or flood-resistant enclosure, usable solely for parking of vehicles,  building  access, or storage in an area other than a basement area, is not considered a  building ’s lowest floor if such enclosure is not built so as to render the  structure  in violation of requirements.
+
+             “Manufactured home” means a  structure  built on a permanent chassis, transported to its site in one or more sections, and affixed to a permanent foundation. “Manufactured home” does not include  recreational vehicles .
+
+             “New construction” means a  structure  for which the start of construction commenced on or after the effective date of the ordinance codified in this Chapter.
+
+             “Professional engineer” means a  person  who is qualified to practice civil engineering as attested by the engineer’s legal registration as a professional engineer in the State of Washington.
+
+             “Repetitive loss  structure ” means a National Flood Insurance Program (NFIP) insured  structure  that has had at least two paid flood losses of more than $1,000 each in any 10-year period since 1978.
+
+             “Special flood hazard area” or “SFHA” means an area having special flood, mudflow, or flood-related erosion hazards, and shown on a Flood Hazard Boundary Map or Flood Insurance Rate Map as  Zone  A, AO, A1-A30, AH, V, or V1-V30. Specific  zones  are defined as follows:
+
+              Zone  A. The lowest floor elevation is required and the base flood elevations (BFEs) are not provided.
+
+              Zone  A1-A30. The lowest floor elevation is required and the BFEs are provided.
+
+              Zone  AH. Shallow water depths (ponding) and/or unpredictable flow paths between one and three feet occur. BFEs are provided.
+
+              Zone  AO. Shallow water paths (sheet flow) and/or unpredictable flow paths between one and three feet occur. BFEs are not provided. Base flood depths may be provided.
+
+              Zone  V. An area that is inundated by tidal floods with velocity (coastal high hazard area). BFEs are not provided.
+
+              Zone  V1-V30. Identical to V  Zone , but BFEs are provided.
+
+             “ Substantial damage ” means damage of any origin sustained by a  structure  whereby the cost of restoring the  structure  to its before damaged condition would equal or exceed 50 percent of the market value of the  structure  before the damage occurred.
+
+             “Substantial improvement” means any  remodel , addition, or other improvement of a  building  when the cost of which as calculated cumulatively with any other activity occurring during the previous 10 years and the total of all improvements or  repairs  equals or exceeds 50 percent of the market value of the  building  before start of construction of the improvement. The term includes  buildings  which have incurred  substantial damage  of any origin sustained by a  building  when the cost of restoring the  building  to its pre-damaged condition as calculated cumulatively with any previous  restoration  would equal or exceed 50 percent of the market value before the damage occurred. Substantial improvement does not include any project for improvement of a  building  to correct existing violations of State or local health, sanitary or safety code specifications which have been previously identified by the local code enforcement official and which are the minimum necessary to assure safe living conditions. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part))
+
+        14.34.010  Statutory authorization.
+
+             The Legislature of the State of Washington has in Chapter  36.70  RCW delegated the responsibility to local governmental units to adopt regulations designed to promote the public health, safety, and general welfare of its citizens. Therefore, the County of Skagit, State of Washington, does ordain the provisions set forth in this Chapter. (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.020  Findings of fact.
+
+             (1)    The special flood hazard areas of Skagit County are subject to periodic inundation, which results in loss of life and property, health and safety hazards, disruption of commerce and governmental services, extraordinary public expenditures for flood protection and relief, and impairment of the tax base, all of which adversely affect the public health, safety and general welfare.
+
+             (2)    These flood losses are caused by the cumulative effect of obstructions in areas of special flood hazard, which increase flood heights and velocities, and when inadequately anchored, damage uses in other areas. Uses that are inadequately floodproofed, elevated or otherwise protected from flood damage also contribute to the flood loss. (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.030  Statement of purpose.
+
+             It is the purpose of this Chapter to promote the public health, safety, and general welfare, and to minimize public and private losses due to flood conditions in specific areas by provisions designed:
+
+             (1)    To protect human life and health;
+
+             (2)    To minimize expenditure of public money and costly flood control projects;
+
+             (3)    To minimize the need for rescue and relief efforts associated with flooding and generally undertaken at the expense of the general public;
+
+             (4)    To minimize prolonged business interruption;
+
+             (5)    To minimize damage to public facilities and utilities such as water and gas mains, electric, telephone and sewer lines,  streets  and bridges located in areas of special flood hazard;
+
+             (6)    To help maintain a stable tax base by providing for the sound use and development of areas of special flood hazard so as to minimize future flood blight areas;
+
+             (7)    To ensure that potential buyers are notified that property is in an area of special flood hazard;
+
+             (8)    To ensure that those who occupy the areas of special flood hazard assume responsibility for their actions;
+
+             (9)    To retain the natural channel, shoreline, and floodplain creation processes and other natural floodplain functions that protect, create, and maintain habitat for threatened and  endangered species ;
+
+             (10)    To prevent or minimize loss of hydraulic, geomorphic, and ecological functions of floodplains and stream channels.
+
+             It is the purpose of this Chapter to protect the public health, safety and welfare in those areas subject to periodic inundation due to flooding, and to minimize losses due to flood conditions in the specific areas subject to this Chapter by utilizing the methods and provisions set forth herein. (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.040  Methods of reducing flood losses.
+
+             In order to accomplish its purpose, this Chapter and SCC Chapters  14.32  and  14.48  include methods and provisions for:
+
+             (1)    Restricting or prohibiting uses which are dangerous to health, safety, and property due to water or erosion hazards, or which result in damaging increases in erosion or in flood heights or velocities;
+
+             (2)    Requiring that uses vulnerable to floods, including facilities which serve such uses, be protected against flood damage at the time of initial construction;
+
+             (3)    Controlling the alteration of natural floodplains, stream channels, and natural protective barriers, which help accommodate or channel floodwaters;
+
+             (4)    Controlling filling,  grading , dredging, and other development which may increase flood damage; and
+
+             (5)    Preventing or regulating the construction of flood barriers which will unnaturally divert floodwaters or which may increase flood hazards in other areas. (Ord. O20250005 § 2 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.050  Basis for establishing areas of special flood hazard.
+
+             (1)    The special flood hazard areas (SFHA) identified by the Federal Insurance Administration in a scientific and technical engineering report entitled “Flood Insurance Study for the Unincorporated Areas of Skagit County, Washington,” dated January 3, 1985, with accompanying flood insurance rate and floodway maps and subsequent revisions, is hereby adopted by reference and declared to be a part of this Chapter. The Flood Insurance Study is on file with Skagit County Planning and Development Services.
+
+             (2)    All new hydrologic and hydraulic flood studies conducted pursuant to this Section shall consider future conditions and the cumulative effects from anticipated future land use changes in accordance with Regional Guidance for Hydrologic and Hydraulic Studies in Support of the Model Ordinance for Floodplain Management under the National Flood Insurance Program and the  Endangered Species  Act, FEMA Region X, 2010. If there is an existing study that meets the rest of this Chapter’s criteria, it may be used, even if it does not account for future conditions. (Ord. O20250005 § 2 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.055  Protected review area.
+
+             The protected review area is comprised of, and shall be the greater of, those lands that lie within the boundaries of the floodway, the riparian habitat  zone  (RHZ), and the channel migration area (CMA). The riparian habitat  zone  and channel migration area are defined as follows:
+
+             (1)    The “riparian habitat  zone ” includes streams,  natural watercourses  and adjacent land areas within the special flood hazard area (SFHA), but not  artificial watercourses . The width of the RHZ shall be 250 feet from all waters of the State (as defined under WAC  222-16-030 ) within the SFHA.
+
+             (2)    The “channel migration area (CMA)” shall be the channel migration  zone  plus 50 feet, where such migration  zones  have been delineated on a map or maps that have been adopted by Skagit County for regulatory purposes. When such maps become adopted, they shall be incorporated as a part of this Chapter and shall be used in accordance with this Section.
+
+             (a)    Exception. Maintained levees subject to annual Corps of Engineers inspections shall be deemed to be the boundaries of the channel migration area. (Ord. O20200003 (Att. A); Ord. O20110008 (part))
+
+        14.34.060  Compliance.
+
+             Any construction, location, extension, conversion, or alteration of a  structure  or land identified in a special flood hazard area shall fully comply within the requirements of this Chapter, RCW Chapter  86.16 , and WAC Chapter  173-158 . (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.070  Abrogation and greater restrictions.
+
+             This Chapter is not intended to repeal, abrogate, or impair any existing easements, covenants, or deed restrictions. However, where this Chapter and another chapter, ordinance, easement, covenant, or deed restriction conflict or overlap, whichever imposes the more stringent restrictions shall prevail. (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.080  Interpretation.
+
+             In the interpretation and  application  of this Chapter, all provisions shall be:
+
+             (1)    Considered as minimum requirements;
+
+             (2)    Liberally construed in favor of the governing body; and
+
+             (3)    Deemed neither to limit nor repeal any other powers granted under State statutes. (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.090  Warning and disclaimer of liability.
+
+             The degree of flood protection required by this Chapter is considered reasonable for regulatory purposes and is based on scientific and engineering considerations. Larger floods can and will occur on rare occasions. Flood heights may be increased by manmade or natural causes. This Chapter does not imply that land outside the areas of special flood hazards or uses permitted within such areas will be free from flooding or flood damages. This Chapter shall not create liability on the part of Skagit County, any officer or employee thereof, or the Federal Insurance Administration, for any flood damages that result from reliance on this Chapter or any  administrative decision  lawfully made thereunder. (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.100  Floodplain project permits.
+
+             A floodplain  project permit , processed per SCC Chapter  14.06 , must be obtained prior to construction or development on any property within a special flood hazard area as established in SCC  14.34.050 . The permit is required for all  structures  and development activities, as well as those activities listed in Subsection (1) of this Section that may or may not otherwise require a  project permit .
+
+             (1)    Activities.
+
+             (a)    Septic tanks and drain fields.
+
+             (b)    Dumping or storage of  hazardous waste .
+
+             (c)    Utility and  road  maintenance work not exempted pursuant to Subsection (2) of this Section.
+
+             (2)    Exemptions. The following activities are exempt from the requirement to obtain a floodplain project permit:
+
+             (a)    Routine maintenance of landscaping that does not involve  grading , excavation, or filling.
+
+             (b)    Removal of noxious weeds and  hazard trees  and  replacement  of nonnative vegetation with  native vegetation , provided the  applicant  complies with SCC Chapter  14.24 ,  Critical Areas  Ordinance.
+
+             (c)    Normal maintenance of  structures , such as re-roofing and replacing siding, provided such work does not require a  building permit  and does not qualify as a substantial improvement.
+
+             (d)    Normal maintenance of utilities and facilities, such as replacing downed power lines and  repair  or  replacement  of underground facilities; provided, that all  native vegetation  disturbed by the maintenance activity is restored; and provided further, that this exemption does not apply to new construction or to an expansion of utility facilities.
+
+             (e)    Normal  street  and  road  maintenance, including filling potholes, repaving, and installing  signs  and traffic signals, but does not include expansion of gravel or paved areas.
+
+             (f)    Normal maintenance of a levee or other flood control facility prescribed in the operations and maintenance plan for the levee or flood control facility.
+
+             (g)    Planting, harvesting, livestock management, and other normal  farm  or agricultural practices and activities, other than  structures  and filling for structural support; provided, that compliance with SCC Chapter  14.24 ,  Critical Areas  Ordinance, is met.
+
+             (h)    The lawful operation and maintenance of public and private  diking and drainage systems  which protect life and property along the Skagit and Samish Rivers and tidal estuaries in Skagit County. (Ord. O20250005 § 2 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.110  Applications.
+
+             An  application  for a flood permit must include the following:
+
+             (1)    Vicinity map.
+
+             (2)    Description of the project.
+
+             (3)    Provide a  site plan  drawn to scale that demonstrates the location and dimensions of the property, existing or proposed  structures , fill and/or excavations, storage of material,  drainage facilities , suspected  critical areas  per SCC Chapter  14.24 , and private or public utilities including sewage. The  site plan  must also include the following information:
+
+             (a)    The elevations and boundaries of the 10-, 50-, and 100-year floods, where such information is available.
+
+             (b)    The boundaries of both the SFHA as defined in SCC  14.34.050 , and the protected review area as defined in SCC  14.34.055 , where applicable.
+
+             (c)    Areas of compensatory storage per SCC  14.34.150 (4), where applicable.
+
+             (4)    Floodproofing verification when required per SCC  14.34.140 .
+
+             (5)    Description of the extent to which any  watercourse  will be altered or relocated as a result of proposed development.
+
+             (6)    Where a permit is required for the  repair , reconstruction or addition to any repetitive loss  structure , such  structure  must meet the provisions of SCC  14.34.140 ,  14.34.160 (1) and (3), and  14.34.170 . Value for the  structure  must be demonstrated by the current tax assessed value or by private appraisal at the expense of the  applicant . Construction costs must be demonstrated by a properly prepared construction bid from a currently licensed contractor or the valuation used by the  Director  for determining  building permit  fees.
+
+             (7)    Habitat impact assessment checklist or, if within the protected review area, a fish and wildlife habitat conservation area  site assessment  prepared consistent with SCC  14.24.520  and  14.34.220 (1).
+
+             (8)    Notice on title pursuant to SCC  14.34.150 (5).
+
+             (9)    The  Director  may require additional information when deemed necessary to determine the degree of flood protection required.
+
+             (10)    Permit fees must be paid at the time  application  is submitted as prescribed in the  Department ’s adopted fee schedule. The Skagit County Board of County Commissioners may waive, by resolution, all permit fees for the  repair  of flood damages incurred during a local, State or Federally declared disaster. To be eligible for a fee waiver, the permit  applicant  must provide access to the  structure  for the purposes of damage assessment by County personnel under the direction of the  Director ; or provide damage assessment reports prepared by the American Red Cross, FEMA, SBA, or a licensed insurance adjuster. The permit fee waiver applies only to that construction or  repair  that is necessary for  restoration  to pre-flood conditions. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A); Ord. O20240005 § 1 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.120  Director—Duties.
+
+             (1)    Duties of the  Director  or designee shall include but not be limited to:
+
+             (a)    Reviewing all  project permits  to determine that the permit requirements of this Chapter have been satisfied;
+
+             (b)    Reviewing all  project permits  to determine that all necessary permits have been obtained from those Federal, State or local governmental agencies from which prior approval is required;
+
+             (c)    Reviewing all  project permits  to determine if the proposed development is located in the floodway and, if located in the floodway, assuring that the encroachment provisions of SCC  14.34.190 (1) are met;
+
+             (d)    Maintain for public inspection all records pertaining to the provisions of this Chapter;
+
+             (e)    Submit reports as required for the National Flood Insurance Program.
+
+             (2)    Use of Other Base Flood Data.
+
+             (a)    When base flood elevation data has not been provided in accordance with SCC  14.34.050 , the  Director  or designee shall obtain, review, and reasonably utilize any base flood elevation and floodway data available from a Federal, State, or other source, in order to administer SCC  14.34.160 ,  14.34.170 ,  14.34.180  and  14.34.190 .
+
+             (3)    Information to Be Obtained and Maintained. The  Director  shall obtain and maintain for public inspection:
+
+             (a)    Elevation certificates per SCC  14.34.140 ;
+
+             (b)    Floodproofing certificates per SCC  14.34.140 ;
+
+             (c)    Professional engineer’s or architect’s certification of compliance to design standards when required by this Chapter;
+
+             (d)    All records pertaining to the provisions of this Chapter.
+
+             (4)    Alteration of  Watercourses . The  Director  or designee shall:
+
+             (a)    Notify adjacent communities and the  Department  of  Ecology  prior to any alteration or relocation of a  watercourse  when proposed and submit evidence of such notification to the Federal Insurance Administration;
+
+             (b)    Require that maintenance be provided within the altered or relocated portion of said  watercourse  so that the flood carrying capacity is not diminished.
+
+             (5)    Interpretation of FIRM Boundaries.
+
+             (a)    The  Director  or designee shall make interpretations where needed, as to approximate field location of the boundaries of the areas of special flood hazards (for example, where there appears to be a conflict between a mapped boundary and actual field conditions). The  person  contesting the location of the boundary shall be given a reasonable opportunity to  appeal  the interpretation as provided in SCC  14.34.130 . (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.130  Variances and appeals.
+
+             (1)     Appeals .
+
+             (a)    When it is alleged there is an error in any requirement, decision, or determination made by the  Director  in the enforcement or administration of this Chapter, those aggrieved, or any citizen, may  appeal  such decision as provided in Chapter  14.06  SCC (Permit Procedures).
+
+             (2)     Variances .
+
+             (a)    Requests for  variances  from the provisions of this Chapter must be considered pursuant to SCC Chapter  14.58  (Variances). There must be a showing of good and sufficient cause that failure to grant the  variance  would result in exceptional hardship to the  applicant .  Variances  may only be issued upon a determination that the  variance  is the minimum necessary to afford relief of exceptional hardship.
+
+             (b)    Limitations.  Variances  shall be limited solely to the consideration of:
+
+             (i)    Elevation requirements for first floor construction;
+
+             (ii)    Elevation requirements for floodproofing; and
+
+             (iii)    The type and extent of required floodproofing.
+
+             (c)    A granting of any  variance  shall not result in:
+
+             (i)    Increased flood heights;
+
+             (ii)    Additional threats to public safety;
+
+             (iii)    Extraordinary public expense;
+
+             (iv)    Creation of  nuisances ;
+
+             (v)    Fraud on or victimization of the public;
+
+             (vi)    Conflicts with other existing local laws or ordinances;
+
+             (vii)    Adverse effects to species protected under the  Endangered Species  Act.
+
+             (d)    Notification. All decisions to grant a  variance  pursuant to this Chapter shall contain notification to the  applicant  that:
+
+             (i)    The issuance of a  variance  may result in increased premium rates for flood insurance.
+
+             (ii)    Construction below base flood elevation increases risks to life and property. (Ord. O20250005 § 2 (Exh. A); Ord. O20240005 § 1 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.140  Elevation and floodproofing certification required.
+
+             Where new construction or substantial improvements of any residential, commercial, industrial or other nonresidential use  structure  is located in an area where base flood elevation data has been provided, the following provisions apply:
+
+             (1)    Responsibility. The proponent of a project shall provide required certification data to the  Director . All elevation and floodproofing data specified must be certified by a  professional land surveyor  where the project is located within A1-A10, A12, A14, A16, A18, A21-A22, and all V  zones .
+
+             (2)    Form. Elevation or floodproofing certificates shall be on forms as required by FEMA. Forms shall be available from the  Director .
+
+             (3)    Minimum Information.
+
+             (a)    Actual elevation of the lowest floor (including basement).
+
+             (b)    Actual elevation of the next highest floor to which the  building  has been floodproofed.
+
+             (c)    Actual elevation of lowest horizontal member in V  zones .
+
+             (d)    Actual elevation of lowest mechanical equipment.
+
+             (e)    Actual number of flood vents and square footage vents cover.
+
+             (4)    Alternate Methods. Where an alternate method of floodproofing nonresidential use  structures  is proposed, it shall be certified and demonstrated that flood damages will not occur.
+
+             (5)    Agricultural and Utility  Buildings . Agricultural and utility  buildings  classified as U occupancies under the provisions of the currently adopted  Building  Code and constructed in accordance with the wet floodproofing standards of SCC  14.34.160 (4) shall not require elevation certificates. (Ord. O20260004 § 1 (Att. 2); Ord. O20240005 § 1 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.34.150  General standards for special flood hazard areas.
+
+             In all areas of special flood hazard the following standards are required:
+
+             (1)    Siting of  Structures . If a  lot  has a buildable site out of the SFHA, all new  structures  must be located in that area. If the  lot  is fully within the SFHA,  structures  must be located to have the least impact on habitat as possible by locating  structures  as far from the water body as possible or placing the  structures  on the highest ground on the  lot . All new  structures  shall be set back from the protected review area a minimum of 15 feet, unless the  applicant  can demonstrate that the  structure  is not likely to adversely affect species protected under the  Endangered Species  Act, as demonstrated through the habitat impact assessment process set forth in SCC  14.34.220 .
+
+             (2)     Stormwater . Construction in the SFHA shall incorporate low impact development techniques where technically feasible to minimize or avoid  stormwater  effects, such as those described in the Technical Guidance Manual for Puget Sound.
+
+             (3)     Impervious Surfaces . Creation of new  impervious surfaces  shall not exceed 10 percent of the surface area of the portion of the  lot  in the SFHA unless it is demonstrated that there will be no net increase in the rate and volume of  stormwater  surface runoff that will leave the site or that the impact is mitigated.
+
+             (4)    Floodplain Storage. Any loss of floodplain storage shall be avoided, rectified or compensated for within the SFHA.
+
+             (a)    Exception: Areas located landward of maintained levees subject to annual Corps of Engineers inspections, and not hydraulically connected to the source of flooding, need not provide compensatory storage.
+
+             (5)    Notice on Title. The  applicant  for a floodplain  project permit  shall record on the title to the property, on a form approved by the  Director , a notice that a portion of the property is in the SFHA. A final recorded  land division  pursuant to Chapter  14.74  SCC shall include a notice that a portion of the property is in the SFHA.
+
+             (6)    Anchoring.
+
+             (a)    All new construction and substantial improvements shall be anchored to prevent flotation, collapse or lateral movement of the  structure .
+
+             (b)    All manufactured homes must be placed on a permanent foundation and be anchored to prevent flotation, collapse or lateral movement, and shall be installed to minimize flood damage. Independent footings supporting manufactured homes shall be placed a minimum of 12 inches below pre-development  grade  before any fill is installed. Fill shall be protected from erosion.
+
+             (c)    All propane (LPG) and home heating oil tanks located above-ground shall be adequately supported and anchored to the ground in such a way that will prevent collapse, overturning, displacement or flotation resulting from floodwaters or waterborne debris.
+
+             (7)     Recreational Vehicles .
+
+             (a)     Recreational vehicles  shall not be used as permanent  dwelling units .
+
+             (b)    When located in special flood hazard areas designated as A, A1-A10, A12, A14, A16, A18, A21-A22, V1, V4, AO and AH, the vehicle shall:
+
+             (i)    Be on site for fewer than 180 consecutive  days ; or
+
+             (ii)    Be fully licensed and ready for highway use without the requirement for special highway permits, be on its wheels or jacking system, be attached to the site only by quick disconnect type utilities and security devices, and have no permanently attached additions.
+
+             (8)    Construction Materials and Methods.
+
+             (a)    Where construction occurs below the BFE, all new construction and substantial improvements shall be constructed with materials and utility equipment resistant to flood damage including, but not limited to, studs and wall plates, wall sheathing, insulation, interior wall finishes, exterior wall finishes or siding, etc., as designated as acceptable in FEMA Technical Bulletin 2.
+
+             (b)    All new construction and substantial improvements shall be constructed using methods and practices that minimize flood damage.
+
+             (c)    Accessory  Structures  (Detached Garages and Small Storage  Structures ).
+
+             (i)    Accessory  structures  used solely for parking of vehicles or limited storage may be constructed such that the floor is below the BFE, provided the  structure  is designed and constructed in accordance with the following requirements:
+
+             (A)    Use of the accessory  structure  must be limited to parking of vehicles or limited storage;
+
+             (B)    The portions of the accessory  structure  located below the BFE must be built using flood resistant materials as designated as acceptable in FEMA Technical Bulletin 2;
+
+             (C)    The accessory  structure  must be adequately anchored to prevent flotation, collapse, and lateral movement;
+
+             (D)    Any machinery or equipment servicing the accessory  structure  must be elevated or floodproofed to or above the BFE;
+
+             (E)    The accessory  structure  must comply with floodway encroachment provisions;
+
+             (F)    The accessory  structure  must be designed to allow for the automatic entry and exit of floodwaters;
+
+             (G)    The  structure  must have low damage potential;
+
+             (H)    If the  structure  is converted to another use, it must be brought into full compliance with the standards governing such use; and
+
+             (I)    The  structure  cannot be used for human habitation.
+
+             (d)    Electrical, heating, ventilation, plumbing, and air conditioning equipment and other service facilities shall be designed and/or otherwise elevated to a level of one foot above base flood elevation or located so as to prevent water from entering or accumulating within the components during conditions of flooding. Ducts that serve mechanical equipment shall be elevated and located so that the entire duct is at least one foot above the base flood elevation or located so as to prevent water from entering or accumulating within the ducts during conditions of flooding.
+
+             (e)     Buildings  utilizing crawl space construction, where any portion of the crawl space is below the  grade  on all sides, shall meet the following requirements as excerpted from FEMA Technical Bulletin 11-01, which is hereby adopted by reference:
+
+             (i)    Crawl space construction is not permitted in V  zones .
+
+             (ii)    Crawl space construction is not permitted in  zones  A0 and A1-A30 where velocities exceed five feet per second, unless it can be shown through engineering analysis that the structural components will resist flotation, collapse and lateral movement from hydrodynamic and hydrostatic loads, including the effects of buoyancy.
+
+             (iii)    The interior  grade  of a crawl space must not be more than two feet below the lowest adjacent exterior  grade .
+
+             (iv)    The height of the crawl space, measured from the interior  grade  of the crawl space to the top of the foundation wall, must not exceed four feet at any point. The height measured from the crawl space  grade  to the top of the next higher floor shall not exceed five feet at any point.
+
+             (v)    There must be an adequate  drainage  system that removes floodwaters from the interior area of the crawl space, within a reasonable time, after a flood event.
+
+             (9)    Utilities.
+
+             (a)    All new and  replacement  water supply systems must be designed to minimize or eliminate infiltration of floodwaters into the systems;
+
+             (b)    Water wells for potable water must not be located in the floodway;
+
+             (c)    New and  replacement  sanitary sewage systems must be designed to minimize or eliminate infiltration of floodwaters into the systems and  discharge  from the systems into floodwaters;
+
+             (d)    On-site disposal systems must be located to avoid impairment to them or contamination from them during flooding.
+
+             (10)     Subdivision  Proposals.
+
+             (a)    All  subdivision  proposals shall be consistent with the need to minimize flood damage;
+
+             (b)    All  subdivision  proposals shall have public utilities and facilities such as sewer, gas, electrical, and water systems located and constructed to minimize flood damage;
+
+             (c)    All  subdivision  proposals shall have adequate  drainage  provided to reduce exposure to flood damage; and
+
+             (d)    Where base flood elevation data has not been provided or is not available from another authoritative source, it shall be provided by the proponent, generated for  subdivision  proposals and other proposed developments which contain at least 50  lots  or five acres, whichever is less.
+
+             (e)    The final recorded  land division  pursuant to Chapter  14.74  SCC shall include a notice that part of the property is in the SFHA.
+
+             (11)    Review of  Building Permits . Where flood elevation data is not available as in an unnumbered A  zone ,  applications  for  building permits  must be reviewed to assure that proposed construction will be reasonably safe from flooding. The test of reasonableness is a local judgment and includes use of historical data, high water marks, photographs of past flooding, etc., where available. Where data cannot be reasonably obtained the lowest floor must be elevated at least two feet above the highest  adjacent grade  in these  zones .
+
+             (12)    Storage of Materials and Equipment.
+
+             (a)    The storage or processing of materials that could be injurious to human, animal, or plant life if release due to damage from flooding is prohibited in the special flood hazard areas.
+
+             (b)    Storage of other material or equipment may be allowed if not subject to damage by floods and if firmly anchored to prevent flotation, or if readily removable from the area within the time available after flood warning. (Ord. O20260004 § 1 (Att. 2); Ord. O20240005 § 1 (Exh. A); Ord. O20200003 (Att. A); Ord. O20120005; Ord. O20110008 (part): Ord. O20070002 (part): Ord. O20020010 (part); Ord. O20020003 (part); Ord. 17938 Attch. F (part), 2000. Formerly 14.34.160)
+
+        14.34.160  Specific standards for construction in special flood hazard areas.
+
+             In all areas of special flood hazard where base flood elevation data has been provided as set forth in SCC  14.34.050  or  14.34.120 (2), the following provisions are required in addition to the general regulations per SCC  14.34.150 :
+
+             (1)    Residential Construction.
+
+             (a)    New construction and substantial improvement of any  residential structure  shall have the finished floor elevation of the lowest floor elevated one foot or more above the base flood elevation. Fully enclosed areas below the lowest floor that are subject to flooding are prohibited from occupancy and shall be designed to automatically equalize hydrostatic flood forces on exterior walls by allowing for the entry and exit of floodwaters. Designs for meeting this requirement must either be certified by a registered professional engineer or architect licensed in the State of Washington or must meet or exceed the following minimum criteria:
+
+             (i)    A minimum of two openings having a total net area of not less than one square inch for every square foot of enclosed area subject to flooding shall be provided.
+
+             (ii)    The bottom of all openings shall be no higher than one foot above finished  grade .
+
+             (iii)    Openings may be equipped with screens, louvers, or other coverings or devices; provided, that they permit the automatic entry and exit of floodwaters.
+
+             (2)    All new or substantially improved manufactured homes to be placed or substantially improved within flood hazard  zones  where base flood elevation data is provided shall be elevated on a permanent foundation such that finished floor elevation of the lowest floor of the manufactured home is one foot or more above the base flood elevation and be securely anchored to an adequately anchored foundation system in accordance with the provisions of SCC  14.34.150 (6)(b).
+
+             (3)    Nonresidential Construction.
+
+             (a)    New construction and substantial improvements of any commercial, industrial or other nonresidential use  structure  shall either have the finished floor elevation of the lowest floor elevated one foot or more above the base flood elevation or, together with attendant utility and sanitary facilities, shall:
+
+             (i)    Be floodproofed so that below one foot above the base flood elevation the  structure  is watertight with walls substantially impermeable to the passage of water.
+
+             (ii)    Have structural components capable of resisting hydrostatic and hydrodynamic loads and effects of buoyancy.
+
+             (iii)    Be certified by a registered professional engineer or architect licensed in the State of Washington that the design and methods of construction are in accordance with accepted standards of practice for meeting provisions of this Subsection based on their development and/or review of the structural design, specifications and plans. Such certifications shall be provided to the official as set forth in SCC  14.34.140 .
+
+             (iv)    Nonresidential use  structures  that are elevated, not floodproofed, must meet the standards for space below the lowest floor as set forth in Subsection (1) of this Section.
+
+             (v)     Applicants  floodproofing nonresidential use  buildings  shall be notified that flood insurance premiums will be based on rates that are one foot below the floodproofed level (e.g., a  building  constructed to the base flood level will be rated as one foot below that level).
+
+             (4)    Wet Floodproofing Standards for Agricultural and Utility Use  Structures .
+
+             (a)    New construction or substantial improvements of any agricultural  building  or utility use  structure , when not meeting floodproofing or elevation requirements of Subsection (3) of this Section, must:
+
+             (i)    Not be used for human habitation.
+
+             (ii)    Be anchored to prevent flotation, collapse or lateral movement.
+
+             (iii)    Use flood-resistant materials below the BFE.
+
+             (iv)    Be limited to parking and limited storage.
+
+             (v)    Have a low potential for structural damage from inundation, scouring, velocities or debris impact.
+
+             (vi)    Be designed and oriented to automatically allow the free passage of floodwater through the  structure  in a manner affording minimum damage to the  structure  or its contents.
+
+             (vii)    All electrical and mechanical equipment permanently affixed to the  structure  is elevated one foot above base flood elevation; or be made waterproof by accepted systems to the appropriate code.
+
+             (viii)    When valuation of the  structure  exceeds $50,000, the provisions in Subsections (4)(a)(i), (ii) and (iii) of this Section shall be verified by a currently registered professional engineer or architect licensed in the State of Washington. The valuation used shall be that currently used by the  Director  for determining  building permit  fees.
+
+             (5)    Critical facilities should be afforded additional flood protection due to their nature. Construction of new critical facilities should be, to the extent possible, located outside the limits of the 100-year floodplain as identified on the County’s FIRM. Construction of new critical facilities may be permissible within the 100-year frequency floodplain if no feasible alternative site is available. When allowed, critical facilities constructed within the 100-year frequency floodplain shall have the lowest floor elevated to three or more feet above the level of the 100-year frequency flood. Floodproofing and sealing measures shall be taken to ensure that toxic substances will not be displaced by or released into floodwaters. Access routes elevated to or above the level of the 100-year frequency flood shall be provided to all critical facilities to the extent possible. (Ord. O20250005 § 2 (Exh. A); Ord. O20240005 § 1 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000. Formerly 14.34.170)
+
+        14.34.170  Standards for construction in shallow flooding areas (AO Zones).
+
+             Shallow flooding  zones  (AO  Zones ) appear on the Flood Insurance Rate Maps with flood depth designations from one to three feet above ground and in some areas with water velocities indicated. In these areas, the following provisions apply:
+
+             (1)    New construction and substantial improvements of  residential structures  within AO  Zones  shall have the lowest floor elevated above the highest  adjacent grade  of the  building  site, and at least one foot or more above the flood depth number specified on the Flood Insurance Rate Map (FIRM).
+
+             (2)    If located in an AO  Zone  with water velocities of five feet per second or greater, or within 200 feet from the outside toe of a  dike , nonresidential  buildings  shall be constructed to the standards of Subsections (3)(a) through (3)(f) of this Section.
+
+             (3)    Where velocities of five feet per second or greater are listed in an AO  Zone , new  structures  between 200 and 500 feet of the outside toe of any  dike  shall be constructed to the following standards in addition to those listed in Subsection (1) of this Section:
+
+             (a)    All  buildings  or  structures  shall be elevated so that the lowest horizontal supporting members are located no lower than one foot or more above the base flood elevation level. All space below such supporting members shall remain open so as not to impede the flow of water. Exception: breakaway walls provided for in Subsection (3)(e) of this Section may be used.
+
+             (b)    All  buildings  or  structures  shall be securely anchored on pilings or columns.
+
+             (c)    Pilings or columns used as structural support shall be designed and anchored so as to withstand all applied loads of the base flood flow.
+
+             (d)    Structural fill shall be allowed below the level of the existing  grade  only and shall be designed by and installed under the direction of a registered professional engineer or architect licensed in the State of Washington.
+
+             (e)    Breakaway walls shall be allowed below the base flood elevation.
+
+             (f)    Compliance with the provisions of Subsections (3)(c) and (3)(e) of this Section shall be certified by a registered professional engineer or architect.
+
+             (4)    Where velocities of five feet per second or greater are listed in an AO  Zone , new  structures  greater than 500 feet of the outside toe of any  dike  shall not be constructed with a crawl space below the BFE unless it can be shown through engineering analysis that the structural components are capable of resisting the effects of buoyancy as well as hydrostatic and hydrodynamic loads.
+
+             (5)    New construction and substantial improvements of nonresidential (commercial and industrial)  structures  within AO  Zones  shall:
+
+             (a)    Have the lowest floor elevated above the highest  adjacent grade  of the  building  site, and at least one foot or more above the depth number specified on the FIRM; or
+
+             (b)    Together with attendant utility and sanitary facilities be completely floodproofed to one foot or more above the base flood elevation; any space below that level is watertight with walls substantially impermeable to the passage of water; structural components shall have the capability of resisting hydrostatic and hydrodynamic loads and the effects of buoyancy. If this method is used, compliance shall be certified by a registered professional engineer or architect.
+
+             (6)    Require adequate  drainage  paths around  structures  on slopes to guide floodwater around and away from proposed  structures . (Ord. O20260004 § 1 (Att. 2); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000. Formerly 14.34.180)
+
+        14.34.180  Standards for construction in special flood risk zones.
+
+             The following construction standards are required in special flood risk  zones , defined as an area within the 100-year floodplain, lying between the landward toe of the  dikes  and levees along the Skagit River and a line 500 feet landward thereof.
+
+             (1)    New construction and substantial improvements of residential and nonresidential  structures  within special flood risk  zones  must have the lowest horizontal supporting member elevated one foot or more above the base flood elevation and must be constructed according to the standards provided in SCC  14.34.170 (2)(a) through (2)(f).
+
+             (2)    Regardless of method of construction, critical facilities are prohibited in the special flood risk  zones .
+
+             (3)    There must be no fill or new construction within the channel of Gages Slough. (Ord. O20250005 § 2 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000. Formerly 14.34.190)
+
+        14.34.190  Standards for development activities in floodways.
+
+             Located within areas of special flood hazard established in SCC  14.34.050  are areas designated as floodways. Since the floodway is an extremely hazardous area due to the velocity of floodwater that carries debris, potential projectiles, and erosion potential, the following provisions apply:
+
+             (1)    Prohibit encroachments including fill, new construction, substantial improvements, and other development, unless certification by a registered professional engineer licensed in the State of Washington is provided demonstrating, through hydrologic and hydraulic analyses performed in accordance with standard engineering practice as well as the “Procedures for No-Rise Certification” as published by FEMA, that the proposed encroachment would not result in any increase in flood levels during the occurrence of the base flood  discharge . Additionally, Skagit County reserves the right to have this analysis reviewed by a qualified third party to be selected by the County. The cost of such review, if any, shall be the responsibility of the  applicant .
+
+             (2)    Construction or reconstruction,  repair  or  replacement  of  residential structures  is prohibited in floodways except for:
+
+             (a)     Repairs , reconstruction, or improvements to a  structure  which do not increase the ground  floor area  provided the cost of such reconstruction,  repair , or improvement shall be calculated cumulatively with any other activity occurring during the previous 10 years and the total of all improvements or  repairs  shall not exceed 50 percent of the market value of the  structure  as established in the first year of the 10-year period.
+
+             (i)    Work done on  structures  to comply with existing health, sanitary, or safety codes when determined by the  Director , or to  structures  identified as historic places, may be excluded in the 50 percent determination.
+
+             (b)     Repairs , reconstruction,  replacement , or improvements to existing farmhouse  structures  located in designated floodways and which are located on lands designated as agricultural lands of  long-term commercial significance  under RCW  36.70A.170  shall be permitted subject to the following. For the purposes of this Section, “farmhouse” means a single-family dwelling located on a  farm  site within  Agricultural Natural Resource Lands , as identified in Skagit County’s  Comprehensive Plan , where resulting agricultural products are not produced for the primary consumption or use by the occupants and the  farm  owner.
+
+             (i)    The new farmhouse is a  replacement  for an existing farmhouse on the same  farm  site;
+
+             (ii)    There is no potential  building  site for a  replacement  farmhouse on the same  farm  outside the designated floodway;
+
+             (iii)     Repairs , reconstruction, or improvements for a farmhouse shall not increase the total square footage of encroachment of the existing farmhouse;
+
+             (iv)    A  replacement  farmhouse shall not exceed the total square footage of the encroachment of the  structure  it is replacing;
+
+             (v)    A farmhouse being replaced shall be removed, in its entirety, including foundation, from the floodway within 90  days  after occupancy of a new farmhouse;
+
+             (vi)    For substantial improvements, and  replacement  farmhouses, the elevation of the lowest floor of the improvement and farmhouse respectively, including basement, is one foot higher than the base flood elevation;
+
+             (vii)    New and  replacement  water supply systems are designed to eliminate or minimize infiltration of floodwaters into the system;
+
+             (viii)    New and  replacement  sanitary sewerage systems are designed and located to eliminate or minimize infiltration of floodwater into the system and  discharge  from the system into the floodwaters; and
+
+             (ix)    All other utilities and connections to public utilities are designed, constructed, and located to eliminate or minimize flood damage.
+
+             (3)    For all  substantial damage  to  residential structures  located in a designated floodway and damaged by flooding or flood-related erosion, the  Department  of  Ecology  is authorized to assess the risk of harm to life and property posed by the specific conditions of the floodway and, based upon scientific analysis of depth, velocity, and flood-related erosion, will exercise best professional judgment in recommending to the Skagit County  Building  Official,  repair ,  replacement , or relocation of such damaged  structures  consistent with WAC  173-158-076 . The effect of the  Department ’s recommendation to allow  repair  or  replacement  of a flood-damaged residence within the designated floodway is a waiver of the floodway prohibition. The  property owner  is responsible for submitting to Skagit County and the  Department  of  Ecology  all information necessary to complete the assessment. Without favorable recommendation from the  Department  of  Ecology  for the  repair  or  replacement  of a substantially damaged  residential structure  located in the regulatory floodway, no  repair  or  replacement  is allowed per WAC  173-158-070 (1).
+
+             (4)     Recreational vehicles  placed in the floodway shall meet the following requirements:
+
+             (a)    Be fully licensed and ready for highway use without the requirement for special highway permits, be towable by a regular duty truck without the requirement for special licenses, be on its wheels or jacking system, and have no permanently attached additions.
+
+             (b)    Shall not be placed in the floodway from November through April of any calendar year.
+
+             (i)    Exception.  Recreational vehicles  are allowed to be placed for weekend and holiday use for a period not to exceed 14  days .
+
+             (5)    Water wells shall not be installed in the floodway, except as provided for in RCW  86.16.041 .
+
+             (6)    All new construction and substantial improvements shall comply with all applicable flood hazard reduction provisions of SCC  14.34.150  through  14.34.200 . (Ord. O20260004 § 1 (Att. 2); Ord. O20240005 § 1 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20090011 Attch. 2 (part); Ord. O20070002 (part): Ord. O20020010 (part); Ord. O20020003 (part); Ord. 17938 Attch. F (part), 2000. Formerly 14.34.200)
+
+        14.34.200  Encroachment standards for development activities in areas where no floodway is established.
+
+             In areas where a regulatory floodway has not been designated, the cumulative effect of any proposed development, where combined with all other existing and anticipated development, shall not increase the water surface elevation of the base flood more than one foot at any point. (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. O20020010 (part); Ord. O20020003 (part); Ord. 17938 Attch. F (part), 2000. Formerly 14.34.210)
+
+        14.34.210  Standards for construction in coastal high hazard areas.
+
+             In addition to the requirements of this Section, development and construction must also comply with flood requirements specified in the applicable  building  code, including V-Zone construction methods for projects located in Coastal A  Zones . See the International Residential Code R322 or the International  Building  Code 1612.
+
+              Coastal high hazard areas  (V  Zones ) are located within the areas of special flood hazard established in SCC  14.34.050 .  Coastal high hazard areas  (V  Zones ) have special flood hazards associated with high velocity waters and tidal surges, and, therefore, the following provisions shall apply in these areas:
+
+             (1)    All new construction and substantial improvements in  Zones  V1-V4 shall be elevated on pilings and columns so that:
+
+             (a)    The bottom of the lowest horizontal structural member of the lowest floor (excluding the pilings or columns) is elevated one foot or more above the base flood level; and
+
+             (b)    The pile or column foundation and  structure  attached thereto is anchored to resist flotation, collapse and lateral movement due to the effects of wind and water loads acting simultaneously on all  building  components. Wind and water loading values shall each have a one percent chance of being equaled or exceeded in any given year (100-year mean recurrence interval); a registered professional engineer or architect shall develop or review the structural design in accordance with the most recent edition of the Coastal Construction Manual as published by FEMA, specifications and plans for the construction and shall certify that the design and methods of construction to be used are in accordance with accepted standards of practice for meeting the provisions of Subsection (1)(a) of this Section. Skagit County reserves the right to have this analysis reviewed by a qualified third party to be selected by the County. The cost of such review, if any, shall be the responsibility of the  applicant .
+
+             (2)    Obtain the elevation in relation to NGVD ’29 of the bottom of the lowest horizontal structural member of the lowest floor of all new and substantially improved  structures  in  Zones  V1-V4 and whether or not such  structures  contain a basement. The local administrator shall maintain a record of all such information.
+
+             (3)    All new construction shall be located landward of the reach of extreme high tide.
+
+             (4)    Provide that all new construction and substantial improvements have the space below the lowest floor either free of obstruction or constructed with non-supporting breakaway walls, open wood lattice work, or insect screening intended to collapse under wind and water loads without causing collapse, displacement, or other structural damage to the elevated portion of the  building  or supporting foundation system. For the purpose of this Section, a breakaway wall shall have a design safe loading resistance of not less than 10 and no more than 20 pounds per square foot. Use of breakaway walls which exceed a design safe loading resistance of 20 pounds per square foot, either by design or when so required by local or State codes, may be permitted only if a registered professional engineer or architect licensed in the State of Washington certifies that the designs proposed meet the following conditions:
+
+             (a)    Breakaway wall collapse shall result from a water load less than that which would occur during the base flood; and
+
+             (b)    The elevated portion of the  building  and supporting foundation system shall not be subject to collapse, displacement, or other structural damage due to the effects of wind and water loads acting simultaneously on all  building  components (structural and nonstructural). Maximum wind and water loading values to be used in this determination shall each have a one percent chance of being equaled or exceeded in any given year (100-year mean recurrence interval).
+
+             (5)    If breakaway walls are utilized, such enclosed space shall be usable solely for parking of vehicles,  building  access, or storage. Such space shall not be used for human habitation.
+
+             (6)    Prohibit the use of fill for structural support of the  building .
+
+             (7)    Prohibit manmade alterations to the natural landscape, which would increase potential flood damage. (Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000. Formerly 14.34.220)
+
+        14.34.220  Habitat protection standards.
+
+             (1)    Habitat Impact Assessment. Unless exempted pursuant to Subsection (2) of this Section, a floodplain  project permit  application shall include an assessment of the impact of the project on water quality and aquatic and riparian habitat of salmon and orca species protected under the  Endangered Species  Act. The process for meeting this assessment requirement is as follows:
+
+             (a)    If the proposed development is within the protected review area, as defined in SCC  14.34.055 , a fish and wildlife habitat conservation area (FWHCA)  site assessment  will be required pursuant to SCC  14.24.520 . If the proposed development is not within the protected review area, but within the SFHA, the  applicant  shall submit a SFHA habitat impact assessment checklist to determine whether a FWHCA  site assessment  pursuant to SCC  14.24.520  is required. This checklist will evaluate habitat  functions and values  present on-site and the potential impacts to these  functions and values  based on the project description.  Department  staff will determine whether an FWHCA  site assessment  is necessary based on review of a completed checklist.
+
+             (b)    In lieu of an FWHCA  site assessment  or SFHA habitat impact assessment checklist pursuant to Subsection (1)(a) of this Section, the  applicant  may comply with the habitat impact assessment requirements of this Section by providing one of the following:
+
+             (i)    A biological evaluation or assessment covering protected salmon and orca species that has been approved by the U.S. Fish and Wildlife Service or the National Marine Fisheries Service.
+
+             (ii)    Documentation that the appropriate State or Federal agency has determined that the activity fits within a habitat conservation plan covering protected salmon and orca species approved pursuant to Section 10 of the  Endangered Species  Act (ESA).
+
+             (iii)    Documentation that the appropriate State or Federal agency has determined that the activity fits within Section 4(d) of the ESA relating to protected salmon and orca species.
+
+             (2)    Exemptions from Habitat Impact Assessments. The following activities are exempt from the requirement to provide a habitat impact assessment or habitat  mitigation plan ; however, an exemption from the assessment requirements of this Chapter does not exempt an  applicant  from complying with the provisions of Chapter  14.24  SCC,  Critical Areas  Ordinance.
+
+             (a)     Repairs  or remodeling of an existing  structure ; provided, that the  repairs  or remodeling are not a substantial improvement or a  repair  of  substantial damage .
+
+             (b)    Expansion of an existing  structure  that is no greater than 200 square feet or 10 percent, whichever is greater, beyond its existing footprint; provided, that the  repairs  or remodeling are not a substantial improvement or a  repair  of  substantial damage . This measurement is counted cumulatively from the effective date of the ordinance codified in this Chapter.
+
+             (c)    Activities with the sole purpose of creating, restoring or enhancing natural functions associated with floodplains, streams,  lakes , estuaries, marine areas, habitat, and  riparian areas  that meet Federal and State standards, provided the activities do not include  structures ,  grading , fill, or  impervious surfaces .
+
+             (d)    Development of  open space  and recreational facilities, such as  parks  and  trails , that do not include  structures ,  grading , fill,  impervious surfaces  or removal of more than five percent of the  native vegetation  on that portion of the property in the regulatory floodplain.
+
+             (3)    Habitat  Mitigation Plan . If the assessment conducted under Subsection (1) of this Section concludes that the project is expected to have an adverse effect on water quality and/or aquatic or riparian habitat or habitat functions associated with species protected under the  Endangered Species  Act, the  applicant  shall provide a plan to mitigate those impacts, in accordance with Chapter  14.24  SCC,  Critical Areas  Ordinance.
+
+             (4)    Final approval of the project or occupancy approval shall not be provided until all work identified in the evaluation, assessment, or  mitigation plan  has been completed and implemented or the  applicant  has provided the necessary assurance that any unfinished portions of the project will be completed. (Ord. O20240005 § 1 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part))
+
+        14.34.230  Livestock flood sanctuary areas (“critter pads”).
+
+             For the purposes of providing livestock flood sanctuary areas, critter pads are permitted in any special flood hazard area except when located within the regulatory floodway. Construction of such pads must be consistent with the specifications in this Section.
+
+             (1)    Site Selection.
+
+             (a)    Property must be located in the 100-year floodplain and conveniently located within an established farmland that contains domestic livestock.
+
+             (b)    Portions of the property used as livestock pasture must be located in the 100-year floodplain as identified on the official Flood Insurance Rate Map (FIRM) for Skagit County. Construction is not permitted in the regulatory floodway.
+
+             (c)    No portion of the pad may be allowed within 100 feet of the top of a riverbank or within a  wetland  area as defined by SCC Chapter  14.24 . Less than a 100-foot  setback  may be allowed if mitigation is performed which provides an equivalent or greater vegetative  buffer  along the river or stream corridor.
+
+             (d)    The pad must be located on the property away from areas of high velocity flows so as to minimize impacts to the site, upstream and downstream properties, and natural resources.
+
+             (e)    No pad may be located nearer than half the height of the pad (H/2) to any property line. No portion of the pad may abut any property line.  Setback  distances from all property lines must be measured at right angles from the property line to the toe of the pad.
+
+             (2)    Site Preparation.
+
+             (a)    Erosion control must be established around the perimeter of the work site per SCC Chapter  14.32 .
+
+             (b)    The foundation area of the pad must be stripped of existing surface vegetation to a minimum depth of four inches and stockpiled on site. If this material is to be stockpiled for more than 24 hours, it must be covered or stabilized using erosion control methods. This material must be replaced on the surface of the pad when revegetated and reseeded.
+
+             (3)    Soil Material for Pad.
+
+             (a)    Soil may be extracted from nonsensitive areas on site; it must not be taken from  wetlands  or other sensitive areas other than  frequently flooded areas .
+
+             (b)    Detrimental amounts of organic material are not permitted in fills. Imported fill material must be obtained from an approved or permitted site.
+
+             (4)    Placement of Fill.
+
+             (a)    The maximum soil layer thickness (lift) prior to compaction shall not exceed two feet.
+
+             (b)    Compaction may be performed by the routing back and forth of construction equipment.
+
+             (5)    Pad Surfacing.
+
+             (a)    Disturbed areas of soil on the upper surface of the pad must be reseeded with a mixture of perennial ryegrass and creeping fescue or other plant material.
+
+             (b)    Side slopes must be no steeper than two horizontal to one vertical (2:1).
+
+             (c)    Side slopes must be protected by placing erosion control fabric, reseeding, and planting native woody vegetation in accordance with biotechnical bank stabilization techniques described in the construction specifications.
+
+             (d)    Newly planted vegetation used for side slope stabilization may require  temporary  fencing along the length of the toe of the slope until such time as the vegetation has established itself.
+
+             (e)    The surface of the pad must be compacted soil and low grasses. A straw covering must be spread over the surface prior to intended use. The straw and manure collected on the surface during the emergency use must be removed and treated as animal waste following the flood event.
+
+             (f)    Ramp slopes must be no steeper than eight horizontal to one vertical (8:1).
+
+             (g)    The ramp may be constructed of concrete, wood or earth material. The upper surface of the pad area must be enclosed by a  fence .
+
+             (6)    Size Limitations.
+
+             (a)    The maximum size of the pad must not exceed 50 square feet per animal unit (1,000 pounds) plus the area created by adding 14 feet of width along two sides to be used for  farm  vehicle access.
+
+             (b)    The width of the pad as measured perpendicular to the flooding source (river, stream or  lake ) must not exceed 15 percent of the total floodplain width of the property.
+
+             (7)    Agreements.
+
+             (a)    Any  application  for the construction of a critter pad must include written legal agreements between Skagit County and the  applicant  that provide for the following:
+
+             (i)    Construction and maintenance of the pad must be performed according to  best management practices .
+
+             (ii)     Applicants  accept the flood impacts and new delineation of floodway/floodplain that may occur as a result of construction of such pad.
+
+             (iii)    The construction of  buildings  or  structures  on the pad for use other than livestock shelter is prohibited. Livestock shelters may be permitted only through the Planning and Development Services permit process.
+
+             (b)    When agricultural land containing critter pads is to be converted to any non-AG use, the County must require that all critter pads be removed. As a condition of a land use conversion from  agriculture  use, all critter pad material must be removed and the pad area restored to its previous ground level. An inspection and sign-off by a County  Building  Official is required before any  building permits  are issued for the portion of the property that formerly contained the critter pad.
+
+             (8)    Permit  Application . In addition to the Planning and Development Services special flood hazard area  project permit  application, any  applicant  proposing the construction of a critter pad must also provide the following information:
+
+             (a)     Site plan  indicating the location of property lines, total square foot area of existing  buildings , total square foot area of land within property lines, proposed square foot area of the pad, proposed location of the pad in reference to property lines, identified sensitive areas (critical areas) and any ground elevation reference marks.
+
+             (b)    Description or type of farming activity. Number and type of livestock.
+
+             (c)    Identify amount, type and source of fill material to be used and whether it is obtained on or off site.
+
+             (d)    Construction schedule and methods including erosion control methods to be used during construction.
+
+             (e)    Completed design specifications per this Chapter.
+
+             (f)    Any signed legal agreements required per this Chapter.
+
+             (9)    Approval to Start Construction.
+
+             (a)    The construction of any critter pad must not commence until such time as the  Director  finds that the work described in an  application  for a permit and the plans, specifications and other data filed therewith conform to the requirements of this Chapter and other pertinent laws and ordinances and that the fees required for the permit have been paid.
+
+             (b)    The  Director  must inspect construction for which a permit is issued. The  person  causing the work to be done must notify the  Director  in writing or by telephone when such permitted work is ready for inspection. It is the duty of the permit  applicant  to cause the work to remain accessible and exposed for inspection.
+
+             (10)    Inspections Required.
+
+             (a)    After removal of the topsoil and prior to fill material being placed.
+
+             (b)    During or after the placement of erosion control devices.
+
+             (c)    After final completion and prior to using.
+
+             (11)    Design Specifications. The following information is intended to assist the designer with meeting the dimensional requirements for the construction of a critter pad:
+
+             (a)    Height (h): Base flood elevation is considered minimum height. Recommended height is one foot above base flood elevation.
+
+             (b)    Net Area (An): The net area (An) is a product of the width perpendicular to flood flow (Wp) and the length parallel to the flood flow (Lp). The net area should be no greater than 50 square feet per animal unit (1,000 pounds). An additional area no greater than 25 percent of the calculated area will be allowed in order to accommodate herd growth.
+
+             (c)    Gross Area (Ag): The gross area is the product of (Wp + 14 feet) and (Lp + 14 feet). A strip no greater than 14 feet wide will be permitted along one length and one width in order to provide vehicle access.
+
+             (d)    Side Slopes (Z): Side slopes for fill should be 2:1 or greater.
+
+             (e)    Base Area (Ab): The base area is the product of the base width (Wb) and base length (Lb) or the total footprint of the pad at  grade . This area should equal the sum of the gross area (Ag) plus the horizontal area of the side slopes and should not exceed two percent of the total area (At).
+
+             (f)    Floodplain width covered by pad (FWp): The width of floodplain covered by the pad should be less than 15 percent of the total floodplain width (FWt) of the property.
+
+             (g)    Ramp Length (Rl): The ramp length should not exceed 500 feet and should have a minimum slope of 8:1. If the ramp is constructed on fill, it should run parallel to flood flow. If the ramp is built using piling construction, it may be built either parallel or perpendicular to flow.
+
+             (h)    Ramp Width (RW): The width of the ramp should be no greater than 18 feet.
+
+             (i)    Total Area (At): The total area is the area that is occupied by all  structures  or improvements (including pad) on the entire property. The total area must not exceed five percent of the area of the property.
+
+             (j)     Distance  (D): The shortest  distance  from the base of the pad to an adjacent river, stream,  lake  or property line. (Ord. O20250005 § 2 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000. Formerly 14.34.220)
+
+        14.34.240  Severability.
+
+             (1)    If any section, clause, sentence, or phrase of this Chapter is held to be invalid or unconstitutional by any court of competent jurisdiction, then said holding shall in no way affect the validity of the remaining portions of this Chapter. (Ord. O20200003 (Att. A))
+
+        APPENDIX A  Chapter 14.34 SCC Construction Specifications for Critter Pads (Livestock Flood Sanctuary Areas)
+
+              Repealed by Ord. O20250005.  (Ord. O20240005 § 1 (Exh. A); Ord. O20200003 (Att. A); Ord. O20110008 (part): Ord. O20070009 (part); Ord. O20070002 (part))

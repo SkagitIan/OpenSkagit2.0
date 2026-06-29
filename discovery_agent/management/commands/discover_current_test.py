@@ -414,6 +414,72 @@ def summarize_records(records: list[dict[str, Any]]) -> dict[str, Any]:
     return summary
 
 
+def summarize_cohorts(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    cohort_fields = ["land_use", "zoning", "zoning_general"]
+    metric_fields = [
+        "sale_to_assessment_ratio",
+        "value_per_acre",
+        "land_to_improvement_ratio",
+        "assessed_value",
+        "sale_price",
+    ]
+    summaries: list[dict[str, Any]] = []
+    for cohort_field in cohort_fields:
+        groups: dict[str, list[dict[str, Any]]] = {}
+        for row in records:
+            value = row.get(cohort_field)
+            if value in (None, ""):
+                continue
+            groups.setdefault(str(value), []).append(row)
+        for cohort_value, rows in groups.items():
+            metrics: dict[str, dict[str, float | None]] = {}
+            for metric_field in metric_fields:
+                values = [
+                    float(row[metric_field])
+                    for row in rows
+                    if row.get(metric_field) is not None
+                ]
+                if not values:
+                    continue
+                metrics[metric_field] = {
+                    "median": percentile(values, 0.5),
+                    "p95": percentile(values, 0.95),
+                    "max": max(values),
+                }
+            examples = []
+            for row in rows[:3]:
+                examples.append({
+                    "parcel_id": row.get("parcel_id"),
+                    "address": row.get("address"),
+                    "land_use": row.get("land_use"),
+                    "zoning": row.get("zoning"),
+                    "sale_to_assessment_ratio": row.get("sale_to_assessment_ratio"),
+                    "value_per_acre": row.get("value_per_acre"),
+                    "land_to_improvement_ratio": row.get("land_to_improvement_ratio"),
+                })
+            summaries.append({
+                "cohort_field": cohort_field,
+                "cohort": cohort_value,
+                "row_count": len(rows),
+                "metrics": metrics,
+                "example_rows": examples,
+            })
+    summaries.sort(
+        key=lambda item: (
+            item["row_count"],
+            max(
+                (
+                    metric.get("median") or 0
+                    for metric in item.get("metrics", {}).values()
+                ),
+                default=0,
+            ),
+        ),
+        reverse=True,
+    )
+    return summaries[:12]
+
+
 def build_qa_flags(records: list[dict[str, Any]]) -> list[str]:
     flags: list[str] = []
     artifact_rows = [row for row in records if row.get("artifact_flags")]
@@ -450,6 +516,7 @@ def parse_model_json(text: str) -> Any:
 
 def build_editor_prompt(probe_meta: dict[str, Any], records: list[dict[str, Any]]) -> str:
     summary = summarize_records(records)
+    cohort_summaries = summarize_cohorts(records)
     qa_flags = build_qa_flags(records)
     caveats = [
         "Treat very small acreage ratios as outlier leads that need verification, not standalone conclusions.",
@@ -470,6 +537,9 @@ Probe metadata:
 Computed summary:
 {json.dumps(json_ready(summary), indent=2)}
 
+Cohort summaries and concrete examples:
+{json.dumps(json_ready(cohort_summaries), indent=2)}
+
 QA flags:
 {json.dumps(qa_flags, indent=2)}
 
@@ -484,6 +554,9 @@ Rules:
 - Reject trivia.
 - Do not turn extreme per-acre math into a publishable conclusion unless the acreage context supports it.
 - The publish_score must reflect civic relevance, surprise, evidence strength, and plain-English clarity.
+- The short_answer must be specific: include concrete cohort names, at least one metric/range/count, and where possible a parcel/address/zoning anchor from the rows.
+- Avoid vague countywide answers like "some parcels" or "certain land uses" unless the sentence immediately names the exact groups and values.
+- The data_used field must name the row count plus the strongest cohorts/examples, not just say "provided rows."
 - Return only ideas with publish_score >= 75 in "ideas"; put weaker or risky concepts in "rejected_ideas".
 
 Return JSON only:

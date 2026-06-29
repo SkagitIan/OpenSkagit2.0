@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Parcel Book Login{% endblock %}
+
+{% block content %}
+{% include "opportunity/_styles.html" %}
+<div class="pb">
+  <div class="pb-login">
+    <section class="pb-login-card">
+      <div class="pb-brand" style="color:#0b1b2c;margin-bottom:16px;">
+        <img src="https://res.cloudinary.com/dq0l2n3zr/image/upload/v1753214772/openskagit_logo_mark_koy5zh.png" alt="">
+        <span>PARCEL BOOK</span>
+      </div>
+      <p class="pb-kicker">OpenSkagit opportunity intelligence</p>
+      <h1>Sign in</h1>
+      <p class="pb-muted">Use your OpenSkagit account to review parcel signals, save opportunities, and track public-record changes.</p>
+      {% if form.errors %}
+        <p class="pb-error">That username and password did not match.</p>
+      {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <label>
+          Username
+          {{ form.username }}
+        </label>
+        <label>
+          Password
+          {{ form.password }}
+        </label>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button class="pb-button" type="submit">Log in</button>
+      </form>
+      <p class="pb-disclaimer">Parcel Book is private screening software. No public signup is available in V1.</p>
+    </section>
+  </div>
+</div>
+{% endblock %}

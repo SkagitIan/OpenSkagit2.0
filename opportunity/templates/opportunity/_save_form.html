@@ -1,0 +1,17 @@
+<form method="post" action="{% url 'opportunity_save' %}">
+  {% csrf_token %}
+  <input type="hidden" name="parcel_number" value="{{ row.parcel_number }}">
+  <input type="hidden" name="source_tab" value="{{ row.source_tab }}">
+  <input type="hidden" name="next" value="{{ request.get_full_path }}">
+  {% if row.is_saved %}
+    <input type="hidden" name="action" value="unsave">
+    <button class="pb-icon-button pb-save saved" type="submit" title="Remove from watchlist" aria-label="Remove {{ row.parcel_number }} from watchlist">
+      <span aria-hidden="true">&#9829;</span>
+    </button>
+  {% else %}
+    <input type="hidden" name="action" value="save">
+    <button class="pb-icon-button pb-save" type="submit" title="Save parcel" aria-label="Save {{ row.parcel_number }}">
+      <span aria-hidden="true">&#9825;</span>
+    </button>
+  {% endif %}
+</form>

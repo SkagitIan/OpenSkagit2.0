@@ -7,6 +7,14 @@
       "env": {
         "DJANGO_SETTINGS_MODULE": "config.settings"
       }
+    },
+    "zoning-mcp": {
+      "type": "stdio",
+      "command": "C:\\Users\\ian\\Desktop\\Factory\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "zoning_mcp.mcp_server"],
+      "env": {
+        "DJANGO_SETTINGS_MODULE": "config.settings"
+      }
     }
   }
 }

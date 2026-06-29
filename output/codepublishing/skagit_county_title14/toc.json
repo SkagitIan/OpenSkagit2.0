@@ -1,0 +1,2547 @@
+{
+  "page_count": 51,
+  "section_count": 622,
+  "pages": [
+    "SkagitCounty1401.html",
+    "SkagitCounty1402.html",
+    "SkagitCounty1404.html",
+    "SkagitCounty1406.html",
+    "SkagitCounty1407.html",
+    "SkagitCounty1408.html",
+    "SkagitCounty1409.html",
+    "SkagitCounty1410.html",
+    "SkagitCounty1411.html",
+    "SkagitCounty1412.html",
+    "SkagitCounty1413.html",
+    "SkagitCounty1414.html",
+    "SkagitCounty1415.html",
+    "SkagitCounty1416.html",
+    "SkagitCounty1418.html",
+    "SkagitCounty1420.html",
+    "SkagitCounty1422.html",
+    "SkagitCounty1424.html",
+    "SkagitCounty1425.html",
+    "SkagitCounty1426.html",
+    "SkagitCounty1427.html",
+    "SkagitCounty1428.html",
+    "SkagitCounty1429.html",
+    "SkagitCounty1430.html",
+    "SkagitCounty1432.html",
+    "SkagitCounty1434.html",
+    "SkagitCounty1436.html",
+    "SkagitCounty1438.html",
+    "SkagitCounty1440.html",
+    "SkagitCounty1441.html",
+    "SkagitCounty1442.html",
+    "SkagitCounty1443.html",
+    "SkagitCounty1444.html",
+    "SkagitCounty1448.html",
+    "SkagitCounty1451.html",
+    "SkagitCounty1452.html",
+    "SkagitCounty1453.html",
+    "SkagitCounty1454.html",
+    "SkagitCounty1456.html",
+    "SkagitCounty1457.html",
+    "SkagitCounty1458.html",
+    "SkagitCounty1459.html",
+    "SkagitCounty1462.html",
+    "SkagitCounty1466.html",
+    "SkagitCounty1468.html",
+    "SkagitCounty1470.html",
+    "SkagitCounty1472.html",
+    "SkagitCounty1474.html",
+    "SkagitCounty1476.html",
+    "SkagitCounty1478.html",
+    "SkagitCounty1479.html"
+  ],
+  "sections": [
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1401.html#14.01",
+      "label": "Chapter 14.01 HOW TO USE THE UNIFIED DEVELOPMENT CODE"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1401.html#14.01.010",
+      "label": "14.01.010 About the Code"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1401.html#14.01.020",
+      "label": "14.01.020 Orientation to SCC Title 14"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1401.html#14.01.030",
+      "label": "14.01.030 Example &mdash; Establishing a commercial or special use"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1401.html#14.01.040",
+      "label": "14.01.040 Example &mdash; Building a home or ADU"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02",
+      "label": "Chapter 14.02 GENERAL PROVISIONS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02.010",
+      "label": "14.02.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02.020",
+      "label": "14.02.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02.030",
+      "label": "14.02.030 Administration"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02.040",
+      "label": "14.02.040 Rules of interpretation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02.050",
+      "label": "14.02.050 Electronic communication"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02.060",
+      "label": "14.02.060 Fees"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02.070",
+      "label": "14.02.070 Office of Hearing Examiner"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02.080",
+      "label": "14.02.080 Planning Commission"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1402.html#14.02.090",
+      "label": "14.02.090 Records of survey"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1404.html#14.04",
+      "label": "Chapter 14.04 DEFINITIONS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1404.html#14.04.010",
+      "label": "14.04.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1404.html#14.04.020",
+      "label": "14.04.020 Definitions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1404.html#14.04.030",
+      "label": "14.04.030 Symbols"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06",
+      "label": "Chapter 14.06 PERMIT PROCEDURES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.110",
+      "label": "14.06.110 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.120",
+      "label": "14.06.120 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.130",
+      "label": "14.06.130 Information and interpretation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.140",
+      "label": "14.06.140 Lot certification"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.150",
+      "label": "14.06.150 Types of review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.160",
+      "label": "14.06.160 Consolidation of review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.170",
+      "label": "14.06.170 Timing of review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.180",
+      "label": "14.06.180 Site plan review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.190",
+      "label": "14.06.190 Vesting"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.210",
+      "label": "14.06.210 Preapplication requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.220",
+      "label": "14.06.220 Preapplication conference"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.230",
+      "label": "14.06.230 Application contents"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.240",
+      "label": "14.06.240 Application revision"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.250",
+      "label": "14.06.250 Application withdrawal"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.260",
+      "label": "14.06.260 Application expiration, extension, and suspension"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.300",
+      "label": "14.06.300 Foundation of review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.310",
+      "label": "14.06.310 Review for completeness"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.315",
+      "label": "14.06.315 Requests for additional information or corrections"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.320",
+      "label": "14.06.320 Public notices"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.330",
+      "label": "14.06.330 Notice of application"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.340",
+      "label": "14.06.340 Public comment"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.350",
+      "label": "14.06.350 Staff report"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.360",
+      "label": "14.06.360 Notice of public hearing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.370",
+      "label": "14.06.370 Predecision open-record public hearing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.375",
+      "label": "14.06.375 Closed-record review of recommendation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.380",
+      "label": "14.06.380 Decision"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.390",
+      "label": "14.06.390 Notice of decision"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.410",
+      "label": "14.06.410 Local appeal"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.420",
+      "label": "14.06.420 Appeal hearing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.430",
+      "label": "14.06.430 Remand"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.440",
+      "label": "14.06.440 Reconsideration"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.450",
+      "label": "14.06.450 Exhaustion of administrative remedies"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.510",
+      "label": "14.06.510 Permit term, extension, and expiration"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.520",
+      "label": "14.06.520 Permit revision"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.530",
+      "label": "14.06.530 Assurance devices"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1406.html#14.06.540",
+      "label": "14.06.540 Permit suspension or revocation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1407.html#14.07",
+      "label": "Chapter 14.07 NONCONFORMING USES AND STRUCTURES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1407.html#14.07.010",
+      "label": "14.07.010 Intent"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1407.html#14.07.020",
+      "label": "14.07.020 General rule"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1407.html#14.07.030",
+      "label": "14.07.030 Enlargement, alteration, expansion, or change of nonconforming uses"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1407.html#14.07.040",
+      "label": "14.07.040 Enlargement, alteration, reconstruction of nonconforming buildings and structures"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1407.html#14.07.050",
+      "label": "14.07.050 Abandonment"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1407.html#14.07.060",
+      "label": "14.07.060 Procedure for verifying abandonment"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08",
+      "label": "Chapter 14.08 LEGISLATIVE PROCEDURES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.010",
+      "label": "14.08.010 Intent"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.020",
+      "label": "14.08.020 Comprehensive Plan, zoning map, or development regulations &mdash; Amendments"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.030",
+      "label": "14.08.030 Petitions &mdash; Filing requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.040",
+      "label": "14.08.040 Petitions &mdash; Docketing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.050",
+      "label": "14.08.050 Petitions &mdash; Environmental review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.060",
+      "label": "14.08.060 Petitions &mdash; Approval criteria for map amendments and rezones"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.070",
+      "label": "14.08.070 Public participation requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.080",
+      "label": "14.08.080 Review by Planning Commission"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.090",
+      "label": "14.08.090 Review and decisions by Board"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.100",
+      "label": "14.08.100 Emergency or interim regulations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1408.html#14.08.110",
+      "label": "14.08.110 Appeal"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09",
+      "label": "Chapter 14.09 ENFORCEMENT PROCEDURES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.110",
+      "label": "14.09.110 Policy"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.120",
+      "label": "14.09.120 Violations defined &mdash; Joint and several liability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.130",
+      "label": "14.09.130 Criminal offenses defined"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.140",
+      "label": "14.09.140 Enforcement and abatement authorized"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.210",
+      "label": "14.09.210 Investigation &mdash; Right of entry"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.220",
+      "label": "14.09.220 Administrative orders &mdash; Stop work order &mdash; Service"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.275",
+      "label": "14.09.275 Special use permits in Ag-NRL"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.285",
+      "label": "14.09.285 Critical areas and ongoing agriculture"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.290",
+      "label": "14.09.290 Appeals"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.310",
+      "label": "14.09.310 Voluntary compliance agreement"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.320",
+      "label": "14.09.320 Civil infraction"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.330",
+      "label": "14.09.330 Civil penalty"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.340",
+      "label": "14.09.340 Abatement"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.350",
+      "label": "14.09.350 Permit suspension or revocation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.360",
+      "label": "14.09.360 Denial of permit application"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.370",
+      "label": "14.09.370 Remedies for land division violations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.380",
+      "label": "14.09.380 Settlement"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1409.html#14.09.390",
+      "label": "14.09.390 Alternative remedies"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10",
+      "label": "Chapter 14.10 GENERAL PROVISIONS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.010",
+      "label": "14.10.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.020",
+      "label": "14.10.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.030",
+      "label": "14.10.030 Zoning established"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.040",
+      "label": "14.10.040 Split zoning"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.050",
+      "label": "14.10.050 Use tables"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.060",
+      "label": "14.10.060 Uses allowed in all zones"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.070",
+      "label": "14.10.070 Uses prohibited in all zones"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.080",
+      "label": "14.10.080 Uses prohibited outside of fire district"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.090",
+      "label": "14.10.090 Uses not specifically identified"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.095",
+      "label": "14.10.095 Extension of sewer prohibited into rural and resource areas"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1410.html#14.10.100",
+      "label": "14.10.100 Dimensional standards &mdash; Measurement and application"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11",
+      "label": "Chapter 14.11 RURAL MIXED-USE ZONES AND USES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11.010",
+      "label": "14.11.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11.020",
+      "label": "14.11.020 Allowed uses"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11.030",
+      "label": "14.11.030 Dimensional standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11.100",
+      "label": "14.11.100 Rural Intermediate (RI)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11.200",
+      "label": "14.11.200 Rural Reserve (RRv)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11.300",
+      "label": "14.11.300 Rural Village Residential (RVR)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11.400",
+      "label": "14.11.400 Rural Center (RC)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11.500",
+      "label": "14.11.500 Rural Village Commercial (RVC)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1411.html#14.11.600",
+      "label": "14.11.600 Public Open Space of Regional/Statewide Importance (OSRSI)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12",
+      "label": "Chapter 14.12 RURAL COMMERCIAL/INDUSTRIAL ZONES AND USES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12.010",
+      "label": "14.12.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12.020",
+      "label": "14.12.020 Allowed uses"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12.030",
+      "label": "14.12.030 Dimensional standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12.100",
+      "label": "14.12.100 Rural Business (RB)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12.200",
+      "label": "14.12.200 Rural Freeway Service (RFS)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12.300",
+      "label": "14.12.300 Small-Scale Business (SSB)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12.400",
+      "label": "14.12.400 Natural Resource Industrial (NRI)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12.500",
+      "label": "14.12.500 Rural Marine Industrial (RMI)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1412.html#14.12.600",
+      "label": "14.12.600 Small-Scale Recreation and Tourism (SRT)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1413.html#14.13",
+      "label": "Chapter 14.13 NATURAL RESOURCE ZONES AND USES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1413.html#14.13.010",
+      "label": "14.13.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1413.html#14.13.020",
+      "label": "14.13.020 Allowed uses"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1413.html#14.13.030",
+      "label": "14.13.030 Dimensional standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1413.html#14.13.100",
+      "label": "14.13.100 Agricultural &mdash; Natural Resource Lands (Ag-NRL)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1413.html#14.13.200",
+      "label": "14.13.200 Industrial Forest &mdash; Natural Resource Lands (IF-NRL)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1413.html#14.13.300",
+      "label": "14.13.300 Secondary Forest &mdash; Natural Resource Lands (SF-NRL)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1413.html#14.13.400",
+      "label": "14.13.400 Rural Resource &mdash; Natural Resource Lands (RRc-NRL)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1414.html#14.14",
+      "label": "Chapter 14.14 OVERLAY ZONES AND USES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1414.html#14.14.010",
+      "label": "14.14.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1414.html#14.14.100",
+      "label": "14.14.100 Airport Environs Overlay"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1414.html#14.14.200",
+      "label": "14.14.200 Guemes Island Overlay"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1414.html#14.14.300",
+      "label": "14.14.300 Mineral Resource Overlay"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15",
+      "label": "Chapter 14.15 BAYVIEW RIDGE UGA ZONES AND USES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.010",
+      "label": "14.15.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.020",
+      "label": "14.15.020 Allowed uses"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.030",
+      "label": "14.15.030 Dimensional standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.040",
+      "label": "14.15.040 Street standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.050",
+      "label": "14.15.050 Stormwater"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.060",
+      "label": "14.15.060 Sanitary sewer service"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.070",
+      "label": "14.15.070 Water service"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.080",
+      "label": "14.15.080 Subdivisions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.100",
+      "label": "14.15.100 Aviation Related (AVR)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.200",
+      "label": "14.15.200 Aviation Related &mdash; Limited (AVR-L)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.300",
+      "label": "14.15.300 Bayview Ridge Light Industrial (BR-LI)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.400",
+      "label": "14.15.400 Bayview Ridge Heavy Industrial (BR-HI)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1415.html#14.15.500",
+      "label": "14.15.500 Bayview Ridge Residential (BR-R)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16",
+      "label": "Chapter 14.16 MUNICIPAL UGA ZONES AND USES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.010",
+      "label": "14.16.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.020",
+      "label": "14.16.020 Allowed uses"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.030",
+      "label": "14.16.030 Dimensional standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.100",
+      "label": "14.16.100 Anacortes UGA Urban Development (A-UD)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.200",
+      "label": "14.16.200 Burlington UGA Urban Development (B-UD)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.300",
+      "label": "14.16.300 La Conner UGA Urban Development (LC-UD)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.400",
+      "label": "14.16.400 Hamilton Urban Reserve (H-URv)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.500",
+      "label": "14.16.500 Mount Vernon UGA Urban Development (MV-UD)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.600",
+      "label": "14.16.600 Swinomish UGA Residential (R)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.700",
+      "label": "14.16.700 Urban Reserve Commercial-Industrial (URC-I)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.800",
+      "label": "14.16.800 Urban Reserve Public &mdash; Open Space (URP-OS)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1416.html#14.16.900",
+      "label": "14.16.900 Urban Reserve Residential (URR)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18",
+      "label": "Chapter 14.18 USE STANDARDS AND USE DEFINITIONS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.100",
+      "label": "14.18.100 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.102",
+      "label": "14.18.102 Single-family residence"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.104",
+      "label": "14.18.104 Residential accessory use"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.106",
+      "label": "14.18.106 Accessory dwelling unit"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.110",
+      "label": "14.18.110 Caretaker dwelling unit"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.112",
+      "label": "14.18.112 Co-housing as part of a CaRD"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.114",
+      "label": "14.18.114 Co-living housing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.120",
+      "label": "14.18.120 Emergency housing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.122",
+      "label": "14.18.122 Emergency shelter"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.124",
+      "label": "14.18.124 Employee housing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.130",
+      "label": "14.18.130 Loft living quarters"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.140",
+      "label": "14.18.140 Manufactured or mobile home park"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.142",
+      "label": "14.18.142 Middle housing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.150",
+      "label": "14.18.150 Owner operator/caretaker quarters"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.160",
+      "label": "14.18.160 Permanent supportive housing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.170",
+      "label": "14.18.170 Seasonal worker housing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.180",
+      "label": "14.18.180 Temporary manufactured home"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.182",
+      "label": "14.18.182 Transitional housing"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.210",
+      "label": "14.18.210 Animal clinic/hospital"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.214",
+      "label": "14.18.214 Animal preserve"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.216",
+      "label": "14.18.216 Asphalt/concrete batching or recycling"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.218",
+      "label": "14.18.218 Automobile wrecking"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.220",
+      "label": "14.18.220 Bed and breakfast"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.224",
+      "label": "14.18.224 Billboard"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.226",
+      "label": "14.18.226 Business/professional office"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.230",
+      "label": "14.18.230 Car wash"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.234",
+      "label": "14.18.234 Commercial boathouse"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.240",
+      "label": "14.18.240 Day care center"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.244",
+      "label": "14.18.244 Display gardens"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.246",
+      "label": "14.18.246 Family day care provider"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.248",
+      "label": "14.18.248 Fish hatchery"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.250",
+      "label": "14.18.250 Group care facility"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.252",
+      "label": "14.18.252 Home-based business"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.254",
+      "label": "14.18.254 Institutional camp/retreat"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.256",
+      "label": "14.18.256 Kennel"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.258",
+      "label": "14.18.258 Hotel/motel"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.260",
+      "label": "14.18.260 Laundromat"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.261",
+      "label": "14.18.261 Limited event venues"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.262",
+      "label": "14.18.262 Marijuana facility"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.264",
+      "label": "14.18.264 Marina"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.266",
+      "label": "14.18.266 Mini-storage"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.268",
+      "label": "14.18.268 Moorage"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.269",
+      "label": "14.18.269 Mortuary"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.270",
+      "label": "14.18.270 Outpatient medical and health care service"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.272",
+      "label": "14.18.272 Overnight lodging and related services for visitors to the rural area"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.280",
+      "label": "14.18.280 Restaurant"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.282",
+      "label": "14.18.282 Retail food market and convenience store"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.284",
+      "label": "14.18.284 Retail and service business"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.286",
+      "label": "14.18.286 Small-scale production or manufacture"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.294",
+      "label": "14.18.294 Vehicle repair garage"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.310",
+      "label": "14.18.310 Cemetery"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.320",
+      "label": "14.18.320 Church"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.324",
+      "label": "14.18.324 Community club/grange hall"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.326",
+      "label": "14.18.326 Conference center"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.330",
+      "label": "14.18.330 Historic site open to the public"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.340",
+      "label": "14.18.340 Hospital"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.350",
+      "label": "14.18.350 Interpretive/information center"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.360",
+      "label": "14.18.360 Museum"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.370",
+      "label": "14.18.370 Public use"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.380",
+      "label": "14.18.380 Preschool"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.402",
+      "label": "14.18.402 Agriculture"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.403",
+      "label": "14.18.403 Agricultural accessory use"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.404",
+      "label": "14.18.404 Agricultural processing facility"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.405",
+      "label": "14.18.405 Agricultural slaughtering facility"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.406",
+      "label": "14.18.406 Agricultural support service"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.407",
+      "label": "14.18.407 Agritourism"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.408",
+      "label": "14.18.408 Anaerobic digester"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.420",
+      "label": "14.18.420 Farm-based business"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.422",
+      "label": "14.18.422 Forestry"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.424",
+      "label": "14.18.424 Forestry-based business"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.430",
+      "label": "14.18.430 Habitat enhancement/restoration project"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.442",
+      "label": "14.18.442 Manure lagoon"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.444",
+      "label": "14.18.444 Mitigation bank"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.452",
+      "label": "14.18.452 Natural resource support services"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.454",
+      "label": "14.18.454 Natural resources training/research facility"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.456",
+      "label": "14.18.456 Nursery/greenhouse"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.462",
+      "label": "14.18.462 Seasonal roadside stand"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.512",
+      "label": "14.18.512 Campground"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.532",
+      "label": "14.18.532 Golf course"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.552",
+      "label": "14.18.552 Off-road vehicle use areas and trails"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.554",
+      "label": "14.18.554 Outdoor outfitters enterprise"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.556",
+      "label": "14.18.556 Outdoor recreational equipment rental and/or guide services"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.560",
+      "label": "14.18.560 Park"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.572",
+      "label": "14.18.572 Racetrack"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.574",
+      "label": "14.18.574 Recreation facility"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.576",
+      "label": "14.18.576 Regional equestrian events center"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.582",
+      "label": "14.18.582 Shooting club"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.584",
+      "label": "14.18.584 Stables and riding club"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.592",
+      "label": "14.18.592 Trail"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.594",
+      "label": "14.18.594 Trailhead"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.612",
+      "label": "14.18.612 Commercial equipment storage"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.642",
+      "label": "14.18.642 Hazardous waste storage"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.650",
+      "label": "14.18.650 Outdoor storage"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.660",
+      "label": "14.18.660 Petroleum products and gas storage &mdash; Bulk"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.690",
+      "label": "14.18.690 Vehicle storage facility"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.720",
+      "label": "14.18.720 Aircraft hangar"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.722",
+      "label": "14.18.722 Aircraft landing field"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.760",
+      "label": "14.18.760 Park and ride"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.780",
+      "label": "14.18.780 Transit station"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.782",
+      "label": "14.18.782 Transit stop"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.790",
+      "label": "14.18.790 Vehicle charging station"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.792",
+      "label": "14.18.792 Vehicle fueling station"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.820",
+      "label": "14.18.820 Drainage maintenance"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.830",
+      "label": "14.18.830 Impoundment"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.840",
+      "label": "14.18.840 Net metering system"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.860",
+      "label": "14.18.860 Recycling drop box facility"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.862",
+      "label": "14.18.862 Repair, replacement, and maintenance of water lines"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.870",
+      "label": "14.18.870 Utility development"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1418.html#14.18.890",
+      "label": "14.18.890 Water diversion structure"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1420.html#14.20",
+      "label": "Chapter 14.20 GENERAL PERFORMANCE STANDARDS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1420.html#14.20.010",
+      "label": "14.20.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1420.html#14.20.020",
+      "label": "14.20.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1420.html#14.20.030",
+      "label": "14.20.030 Vibration"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1420.html#14.20.040",
+      "label": "14.20.040 Heat, glare, and steam"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1420.html#14.20.050",
+      "label": "14.20.050 Electrical disturbance"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1420.html#14.20.060",
+      "label": "14.20.060 Noise"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1422.html#14.22",
+      "label": "Chapter 14.22 FENCES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1422.html#14.22.010",
+      "label": "14.22.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1422.html#14.22.020",
+      "label": "14.22.020 Requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1422.html#14.22.030",
+      "label": "14.22.030 Prohibited materials"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24",
+      "label": "Chapter 14.24 CRITICAL AREAS ORDINANCE"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.010",
+      "label": "14.24.010 Introduction"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.020",
+      "label": "14.24.020 Title and purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.030",
+      "label": "14.24.030 Authority"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.040",
+      "label": "14.24.040 Applicability, jurisdiction and coordination"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.050",
+      "label": "14.24.050 Resource information and maps"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.060",
+      "label": "14.24.060 Authorizations required &mdash; Development permits"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.070",
+      "label": "14.24.070 Activities allowed without standard review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.080",
+      "label": "14.24.080 Standard critical areas review and site assessment procedures"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.090",
+      "label": "14.24.090 Protected critical areas (PCA) requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.100",
+      "label": "14.24.100 Critical areas determination, authorization, and conditions of approval"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.110",
+      "label": "14.24.110 County regulation of forest practices for the protection of critical areas"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.120",
+      "label": "14.24.120 Ongoing agriculture"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.130",
+      "label": "14.24.130 Hazard tree removal"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.140",
+      "label": "14.24.140 Reasonable use exception"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.150",
+      "label": "14.24.150 Variances"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.160",
+      "label": "14.24.160 Public notice and records"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.170",
+      "label": "14.24.170 Incentives"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.200",
+      "label": "14.24.200 Wetland designations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.210",
+      "label": "14.24.210 Wetland classification"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.220",
+      "label": "14.24.220 Wetland report requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.230",
+      "label": "14.24.230 Wetland protection standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.240",
+      "label": "14.24.240 Wetland performance-based buffer alternatives and mitigation standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.250",
+      "label": "14.24.250 Wetland alternative compensation projects"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.300",
+      "label": "14.24.300 Critical aquifer recharge areas (CARA) intent"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.310",
+      "label": "14.24.310 Critical aquifer recharge areas designations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.320",
+      "label": "14.24.320 Critical aquifer recharge area standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.330",
+      "label": "14.24.330 Critical aquifer recharge areas site assessment requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.340",
+      "label": "14.24.340 Critical aquifer recharge area protection plans"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.350",
+      "label": "14.24.350 Instream-flow rules"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.360",
+      "label": "14.24.360 Flow-sensitive basin water withdrawal mitigation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.370",
+      "label": "14.24.370 Delineation of flow-sensitive basins"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.380",
+      "label": "14.24.380 Seawater intrusion areas"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.400",
+      "label": "14.24.400 Geologically hazardous areas designations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.410",
+      "label": "14.24.410 Geologically hazardous areas known or suspected risk"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.420",
+      "label": "14.24.420 Geologically hazardous areas site assessment requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.430",
+      "label": "14.24.430 Geologically hazardous area mitigation standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.500",
+      "label": "14.24.500 Fish and wildlife habitat conservation area designations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.510",
+      "label": "14.24.510 Fish and wildlife habitat conservation area water type classification"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.520",
+      "label": "14.24.520 Fish and wildlife habitat conservation area site assessment requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.530",
+      "label": "14.24.530 Fish and wildlife habitat conservation area protection standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.540",
+      "label": "14.24.540 Fish and wildlife habitat conservation area performance-based buffer alternatives and mitigation standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.600",
+      "label": "14.24.600 Frequently flooded areas designations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.610",
+      "label": "14.24.610 Frequently flooded areas initial project review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.620",
+      "label": "14.24.620 Frequently flooded areas development requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.630",
+      "label": "14.24.630 Frequently flooded areas protection standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.700",
+      "label": "14.24.700 Compliance tracking"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.710",
+      "label": "14.24.710 Fees"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.720",
+      "label": "14.24.720 Director"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.730",
+      "label": "14.24.730 Appeals from the Director"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1424.html#14.24.740",
+      "label": "14.24.740 Interdisciplinary team"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25",
+      "label": "Chapter 14.25 LANDSCAPING"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.010",
+      "label": "14.25.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.020",
+      "label": "14.25.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.030",
+      "label": "14.25.030 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.040",
+      "label": "14.25.040 General standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.050",
+      "label": "14.25.050 Type I, property lines other than street frontage"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.060",
+      "label": "14.25.060 Type II, property lines other than street frontage"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.070",
+      "label": "14.25.070 Type III, street frontage"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.080",
+      "label": "14.25.080 Type III, street frontage in RVC in Alger"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.090",
+      "label": "14.25.090 Type IV, parking areas"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1425.html#14.25.100",
+      "label": "14.25.100 Type V, industrial adjoining residential in Bayview Ridge"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1426.html#14.26",
+      "label": "Chapter 14.26 PARKING"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1426.html#14.26.010",
+      "label": "14.26.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1426.html#14.26.020",
+      "label": "14.26.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1426.html#14.26.030",
+      "label": "14.26.030 General requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1426.html#14.26.040",
+      "label": "14.26.040 Minimum spaces required"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1426.html#14.26.050",
+      "label": "14.26.050 Maximum spaces allowed"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1427.html#14.27",
+      "label": "Chapter 14.27 PIPELINE SAFETY"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1427.html#14.27.010",
+      "label": "14.27.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1427.html#14.27.020",
+      "label": "14.27.020 Pipeline consultation area"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1427.html#14.27.030",
+      "label": "14.27.030 Requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1427.html#14.27.040",
+      "label": "14.27.040 Call-before-you-dig still required"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28",
+      "label": "Chapter 14.28 SETBACKS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.010",
+      "label": "14.28.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.020",
+      "label": "14.28.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.030",
+      "label": "14.28.030 Setback requirement"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.040",
+      "label": "14.28.040 Setback exemptions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.050",
+      "label": "14.28.050 Types of setbacks"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.060",
+      "label": "14.28.060 Typical lot configurations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.070",
+      "label": "14.28.070 Allowed projections into setbacks"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.080",
+      "label": "14.28.080 Agreement in lieu of setback"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.110",
+      "label": "14.28.110 Sight triangle at intersections"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1428.html#14.28.120",
+      "label": "14.28.120 Exclusion from easements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29",
+      "label": "Chapter 14.29 SIGNS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.010",
+      "label": "14.29.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.020",
+      "label": "14.29.020 Definitions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.030",
+      "label": "14.29.030 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.040",
+      "label": "14.29.040 Maintenance, removal, and nonconforming signs"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.050",
+      "label": "14.29.050 General sign regulations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.060",
+      "label": "14.29.060 Exempt signs"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.070",
+      "label": "14.29.070 Prohibited signs"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.080",
+      "label": "14.29.080 On-premises signs"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.090",
+      "label": "14.29.090 Commercial business signs"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.100",
+      "label": "14.29.100 Signs advertising industrial businesses"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1429.html#14.29.110",
+      "label": "14.29.110 Off-premises signs"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1430.html#14.30",
+      "label": "Chapter 14.30 LAND DISTURBANCE"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1430.html#14.30.010",
+      "label": "14.30.010 Purpose and intent"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1430.html#14.30.020",
+      "label": "14.30.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1430.html#14.30.030",
+      "label": "14.30.030 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1430.html#14.30.040",
+      "label": "14.30.040 Development standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1430.html#14.30.050",
+      "label": "14.30.050 Performance and securities"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1430.html#14.30.060",
+      "label": "14.30.060 Inspections"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1430.html#14.30.070",
+      "label": "14.30.070 Archaeological and historical resources"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32",
+      "label": "Chapter 14.32 STORMWATER MANAGEMENT"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.010",
+      "label": "14.32.010 Policy"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.020",
+      "label": "14.32.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.030",
+      "label": "14.32.030 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.040",
+      "label": "14.32.040 Stormwater management manual"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.050",
+      "label": "14.32.050 Projects within the NPDES permit area &mdash; Nonresidential projects outside of the NPDES permit area"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.060",
+      "label": "14.32.060 Residential projects outside the NPDES permit area"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.070",
+      "label": "14.32.070 Experimental best management practices (BMPs)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.080",
+      "label": "14.32.080 Land uses and pollutant generating sources"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.090",
+      "label": "14.32.090 Adjustments and exceptions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.100",
+      "label": "14.32.100 Critical drainage areas"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.110",
+      "label": "14.32.110 Basin planning"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.120",
+      "label": "14.32.120 General stormwater management standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.130",
+      "label": "14.32.130 Erosion and sediment control"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.140",
+      "label": "14.32.140 Low-impact development (LID) techniques and facilities"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.150",
+      "label": "14.32.150 Stormwater conveyance"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.160",
+      "label": "14.32.160 Final inspections and approval"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.170",
+      "label": "14.32.170 Operation and maintenance"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1432.html#14.32.180",
+      "label": "14.32.180 Severability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34",
+      "label": "Chapter 14.34 FLOOD DAMAGE PREVENTION"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.005",
+      "label": "14.34.005 Definitions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.010",
+      "label": "14.34.010 Statutory authorization"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.020",
+      "label": "14.34.020 Findings of fact"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.030",
+      "label": "14.34.030 Statement of purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.040",
+      "label": "14.34.040 Methods of reducing flood losses"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.050",
+      "label": "14.34.050 Basis for establishing areas of special flood hazard"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.055",
+      "label": "14.34.055 Protected review area"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.060",
+      "label": "14.34.060 Compliance"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.070",
+      "label": "14.34.070 Abrogation and greater restrictions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.080",
+      "label": "14.34.080 Interpretation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.090",
+      "label": "14.34.090 Warning and disclaimer of liability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.100",
+      "label": "14.34.100 Floodplain project permits"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.110",
+      "label": "14.34.110 Applications"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.120",
+      "label": "14.34.120 Director &mdash; Duties"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.130",
+      "label": "14.34.130 Variances and appeals"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.140",
+      "label": "14.34.140 Elevation and floodproofing certification required"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.150",
+      "label": "14.34.150 General standards for special flood hazard areas"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.160",
+      "label": "14.34.160 Specific standards for construction in special flood hazard areas"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.170",
+      "label": "14.34.170 Standards for construction in shallow flooding areas (AO Zones)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.180",
+      "label": "14.34.180 Standards for construction in special flood risk zones"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.190",
+      "label": "14.34.190 Standards for development activities in floodways"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.200",
+      "label": "14.34.200 Encroachment standards for development activities in areas where no floodway is established"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.210",
+      "label": "14.34.210 Standards for construction in coastal high hazard areas"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.220",
+      "label": "14.34.220 Habitat protection standards"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.230",
+      "label": "14.34.230 Livestock flood sanctuary areas (&ldquo;critter pads&rdquo;)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#14.34.240",
+      "label": "14.34.240 Severability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1434.html#APPENDIX A",
+      "label": "APPENDIX A Chapter 14.34 SCC Construction Specifications for Critter Pads (Livestock Flood Sanctuary Areas)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1436.html#14.36",
+      "label": "Chapter 14.36 PUBLIC WORKS STANDARDS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1438.html#14.38",
+      "label": "Chapter 14.38 NATURAL RESOURCE LANDS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1438.html#14.38.010",
+      "label": "14.38.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1438.html#14.38.020",
+      "label": "14.38.020 Policy"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1438.html#14.38.030",
+      "label": "14.38.030 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1438.html#14.38.040",
+      "label": "14.38.040 No nuisance"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1438.html#14.38.050",
+      "label": "14.38.050 Title notice"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1438.html#14.38.060",
+      "label": "14.38.060 Setbacks"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1438.html#14.38.070",
+      "label": "14.38.070 Seller disclosure"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1440.html#14.40",
+      "label": "Chapter 14.40 CRITICAL AREAS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1441.html#14.41",
+      "label": "Chapter 14.41 AQUIFER RECHARGE AREAS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1442.html#14.42",
+      "label": "Chapter 14.42 FISH AND WILDLIFE HCAs AND WETLANDS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1443.html#14.43",
+      "label": "Chapter 14.43 FREQUENTLY FLOODED AREAS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1444.html#14.44",
+      "label": "Chapter 14.44 GEOHAZARD AREAS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1448.html#14.48",
+      "label": "Chapter 14.48 SHORELINES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1448.html#14.48.010",
+      "label": "14.48.010 Shoreline Management Master Program"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1451.html#14.51",
+      "label": "Chapter 14.51 SPECIAL USE PERMITS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1451.html#14.51.010",
+      "label": "14.51.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1451.html#14.51.020",
+      "label": "14.51.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1451.html#14.51.030",
+      "label": "14.51.030 Types of special use permit"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1451.html#14.51.040",
+      "label": "14.51.040 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1451.html#14.51.050",
+      "label": "14.51.050 Review criteria"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1451.html#14.51.060",
+      "label": "14.51.060 Decisions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1451.html#14.51.070",
+      "label": "14.51.070 Revocation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1451.html#14.51.080",
+      "label": "14.51.080 Annual self-certification"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1452.html#14.52",
+      "label": "Chapter 14.52 SPECIAL USE PERMITS FOR MINING"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1452.html#14.52.010",
+      "label": "14.52.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1452.html#14.52.030",
+      "label": "14.52.030 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1452.html#14.52.040",
+      "label": "14.52.040 Review criteria"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1452.html#14.52.050",
+      "label": "14.52.050 Operating standards or requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1453.html#14.53",
+      "label": "Chapter 14.53 DEVELOPMENT AGREEMENTS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1453.html#14.53.010",
+      "label": "14.53.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1453.html#14.53.020",
+      "label": "14.53.020 Development agreements &mdash; Basic requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1453.html#14.53.030",
+      "label": "14.53.030 Development standards to be addressed in development agreements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1453.html#14.53.040",
+      "label": "14.53.040 Procedures"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1453.html#14.53.050",
+      "label": "14.53.050 Effect of development agreement"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1454.html#14.54",
+      "label": "Chapter 14.54 ESSENTIAL PUBLIC FACILITIES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1454.html#14.54.010",
+      "label": "14.54.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1454.html#14.54.020",
+      "label": "14.54.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1454.html#14.54.030",
+      "label": "14.54.030 When allowed"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1454.html#14.54.040",
+      "label": "14.54.040 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1454.html#14.54.050",
+      "label": "14.54.050 Initial determination"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1454.html#14.54.060",
+      "label": "14.54.060 Public notice"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1454.html#14.54.070",
+      "label": "14.54.070 Review criteria"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1454.html#14.54.080",
+      "label": "14.54.080 Conditions of approval"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56",
+      "label": "Chapter 14.56 MASTER PLANNED RESORTS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.010",
+      "label": "14.56.010 Purpose."
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.020",
+      "label": "14.56.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.030",
+      "label": "14.56.030 Allowable uses"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.040",
+      "label": "14.56.040 Minimum standards for master planned resorts (MPRs)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.050",
+      "label": "14.56.050 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.060",
+      "label": "14.56.060 Master plan requirements."
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.065",
+      "label": "14.56.065 Formal site-specific Comprehensive Plan amendment process."
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.070",
+      "label": "14.56.070 SEPA environmental review."
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.080",
+      "label": "14.56.080 Project permit"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.090",
+      "label": "14.56.090 Modifications and amendments to adopted master plans."
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.100",
+      "label": "14.56.100 New master plan for an existing resort."
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.110",
+      "label": "14.56.110 Decision-making authority"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.120",
+      "label": "14.56.120 Criteria for approval"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1456.html#14.56.130",
+      "label": "14.56.130 Time limits for approved developments."
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1457.html#14.57",
+      "label": "Chapter 14.57 URBAN RESERVE DEVELOPMENT PERMIT (URDP)"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1457.html#14.57.010",
+      "label": "14.57.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1457.html#14.57.020",
+      "label": "14.57.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1457.html#14.57.030",
+      "label": "14.57.030 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1457.html#14.57.040",
+      "label": "14.57.040 Review criteria"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1458.html#14.58",
+      "label": "Chapter 14.58 VARIANCES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1458.html#14.58.010",
+      "label": "14.58.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1458.html#14.58.020",
+      "label": "14.58.020 Applicability &mdash; Types of variances"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1458.html#14.58.030",
+      "label": "14.58.030 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1458.html#14.58.040",
+      "label": "14.58.040 Review criteria"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1458.html#14.58.050",
+      "label": "14.58.050 Decision"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59",
+      "label": "Chapter 14.59 WIRELESS FACILITIES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.010",
+      "label": "14.59.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.020",
+      "label": "14.59.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.025",
+      "label": "14.59.025 Definitions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.030",
+      "label": "14.59.030 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.035",
+      "label": "14.59.035 Effect of permit"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.040",
+      "label": "14.59.040 Ordinary maintenance or repair"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.050",
+      "label": "14.59.050 Design requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.060",
+      "label": "14.59.060 Construction requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.070",
+      "label": "14.59.070 Safety and due care"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.080",
+      "label": "14.59.080 Interference"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.090",
+      "label": "14.59.090 Compliance with permit"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.100",
+      "label": "14.59.100 Restoration"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.110",
+      "label": "14.59.110 Radio frequency emissions report"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.120",
+      "label": "14.59.120 Inspections"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.130",
+      "label": "14.59.130 Maintenance"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.140",
+      "label": "14.59.140 Requirements for siting on County property, other than rights-of-way"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.150",
+      "label": "14.59.150 General requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.160",
+      "label": "14.59.160 Timing of decisions &mdash; Federal shot clocks"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.170",
+      "label": "14.59.170 Macro cell towers"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.180",
+      "label": "14.59.180 Small wireless facilities"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1459.html#14.59.190",
+      "label": "14.59.190 Miscellaneous"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62",
+      "label": "Chapter 14.62 CONCURRENCY"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.010",
+      "label": "14.62.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.020",
+      "label": "14.62.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.025",
+      "label": "14.62.025 Definitions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.030",
+      "label": "14.62.030 Concurrency facilities and services"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.040",
+      "label": "14.62.040 Project concurrency review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.050",
+      "label": "14.62.050 Phased development"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.060",
+      "label": "14.62.060 Concurrency determination &mdash; Transportation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.070",
+      "label": "14.62.070 Concurrency determination &mdash; Non-transportation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.080",
+      "label": "14.62.080 Certificate of capacity"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.090",
+      "label": "14.62.090 Facility capacity fees"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.100",
+      "label": "14.62.100 Development within municipal UGAs"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1462.html#14.62.110",
+      "label": "14.62.110 Annual concurrency assessment"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1466.html#14.66",
+      "label": "Chapter 14.66 PUBLIC WORKS STANDARDS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1466.html#14.66.010",
+      "label": "14.66.010 Roads"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1466.html#14.66.020",
+      "label": "14.66.020 Stormwater"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1466.html#14.66.030",
+      "label": "14.66.030 Sanitary sewer"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1466.html#14.66.040",
+      "label": "14.66.040 Water system"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68",
+      "label": "Chapter 14.68 IMPACT FEES"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.010",
+      "label": "14.68.010 Findings and authority"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.020",
+      "label": "14.68.020 Assessment of impact fees"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.025",
+      "label": "14.68.025 Definitions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.030",
+      "label": "14.68.030 Collection within municipal UGAs and special purpose districts"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.040",
+      "label": "14.68.040 Exemptions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.050",
+      "label": "14.68.050 Credits"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.060",
+      "label": "14.68.060 Tax adjustments"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.070",
+      "label": "14.68.070 Appeals"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.080",
+      "label": "14.68.080 Authorization for interlocal agreements and the establishment of impact fee accounts"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.090",
+      "label": "14.68.090 Refunds"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.100",
+      "label": "14.68.100 Use of funds"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.110",
+      "label": "14.68.110 Review"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.120",
+      "label": "14.68.120 Impact fees and administrative fees"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.130",
+      "label": "14.68.130 Independent fee calculations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1468.html#14.68.140",
+      "label": "14.68.140 Existing authority unimpaired"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70",
+      "label": "Chapter 14.70 LEGAL LOTS AND ELIGIBILITY FOR DEVELOPMENT"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70.010",
+      "label": "14.70.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70.020",
+      "label": "14.70.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70.030",
+      "label": "14.70.030 Deprecated terms"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70.040",
+      "label": "14.70.040 Determination of legal lot"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70.050",
+      "label": "14.70.050 Eligibility for project permits"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70.060",
+      "label": "14.70.060 Exception from minimum lot size requirement"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70.070",
+      "label": "14.70.070 Exception for specified nonresidential permits"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70.080",
+      "label": "14.70.080 Lot aggregation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1470.html#14.70.090",
+      "label": "14.70.090 Reasonable use exception"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1472.html#14.72",
+      "label": "Chapter 14.72 BOUNDARY LINE ADJUSTMENTS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1472.html#14.72.010",
+      "label": "14.72.010 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1472.html#14.72.020",
+      "label": "14.72.020 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1472.html#14.72.030",
+      "label": "14.72.030 Review criteria"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1472.html#14.72.040",
+      "label": "14.72.040 Limitations on boundary line adjustments"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1472.html#14.72.050",
+      "label": "14.72.050 Approval"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1472.html#14.72.060",
+      "label": "14.72.060 Recording"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74",
+      "label": "Chapter 14.74 LAND DIVISIONS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.010",
+      "label": "14.74.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.020",
+      "label": "14.74.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.030",
+      "label": "14.74.030 Types of land divisions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.040",
+      "label": "14.74.040 Eligibility for division"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.050",
+      "label": "14.74.050 General requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.090",
+      "label": "14.74.090 Violations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.100",
+      "label": "14.74.100 Preliminary approval &mdash; Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.110",
+      "label": "14.74.110 Preliminary approval &mdash; Review criteria"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.120",
+      "label": "14.74.120 Preliminary approval &mdash; Revisions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.130",
+      "label": "14.74.130 Preliminary approval &mdash; Duration of validity"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.140",
+      "label": "14.74.140 Construction plan approval"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.200",
+      "label": "14.74.200 Final approval &mdash; Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.210",
+      "label": "14.74.210 Final approval &mdash; Review criteria"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.220",
+      "label": "14.74.220 Final approval &mdash; Recording"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.300",
+      "label": "14.74.300 Alterations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1474.html#14.74.400",
+      "label": "14.74.400 Vacations"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1476.html#14.76",
+      "label": "Chapter 14.76 STANDARDS FOR SPECIAL LAND DIVISIONS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1476.html#14.76.200",
+      "label": "14.76.200 One-acre segregation for agricultural land preservation"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1476.html#14.76.300",
+      "label": "14.76.300 One-acre-lot Urban Reserve Residential (URR) land divisions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1476.html#14.76.400",
+      "label": "14.76.400 Unit lot subdivisions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78",
+      "label": "Chapter 14.78 STANDARDS FOR CaRD LAND DIVISIONS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.010",
+      "label": "14.78.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.020",
+      "label": "14.78.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.030",
+      "label": "14.78.030 What is a CaRD?"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.040",
+      "label": "14.78.040 Where is a CaRD allowed?"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.050",
+      "label": "14.78.050 Density and open space limits"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.060",
+      "label": "14.78.060 Design requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.070",
+      "label": "14.78.070 Lot size requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.080",
+      "label": "14.78.080 Setbacks"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.090",
+      "label": "14.78.090 Open space requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1478.html#14.78.100",
+      "label": "14.78.100 Open space types"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1479.html#14.79",
+      "label": "Chapter 14.79 BINDING SITE PLANS"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1479.html#14.79.010",
+      "label": "14.79.010 Purpose"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1479.html#14.79.020",
+      "label": "14.79.020 Applicability"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1479.html#14.79.030",
+      "label": "14.79.030 General provisions"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1479.html#14.79.040",
+      "label": "14.79.040 Application requirements"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1479.html#14.79.050",
+      "label": "14.79.050 Review criteria"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1479.html#14.79.060",
+      "label": "14.79.060 Recording and binding effect"
+    },
+    {
+      "href": "/WA/SkagitCounty/#!/SkagitCounty14/SkagitCounty1479.html#14.79.070",
+      "label": "14.79.070 Site improvements required prior to approval of building permit"
+    }
+  ]
+}

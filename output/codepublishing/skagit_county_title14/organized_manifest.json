@@ -1,0 +1,10 @@
+{
+  "input_dir": "output\\codepublishing\\skagit_county_title14",
+  "jurisdiction": "skagit_county",
+  "title": "Title 14 Unified Development Code",
+  "pages": 51,
+  "sections": 570,
+  "tables": 41,
+  "sections_path": "output\\codepublishing\\skagit_county_title14\\sections.jsonl",
+  "tables_path": "output\\codepublishing\\skagit_county_title14\\tables.json"
+}

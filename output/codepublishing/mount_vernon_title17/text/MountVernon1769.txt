@@ -1,0 +1,1202 @@
+Chapter 17.69 PLANNED UNIT DEVELOPMENTS
+
+         Chapter 17.69
+PLANNED UNIT DEVELOPMENTS
+
+             Sections:
+
+              17.69.010    Purpose.
+
+              17.69.020    Scope.
+
+              17.69.030    Minimum lot areas, lot size, ranges of lot sizes, and density.
+
+              17.69.035    Accessory uses.
+
+              17.69.040    Predesign development meeting, preapplication conference and neighborhood meeting.
+
+              17.69.050    Design assistance.
+
+              17.69.060    Design evaluation checklist.
+
+              17.69.070    Application contents and fees.
+
+              17.69.080    Innovative residential development.
+
+              17.69.090    Modification of permitted uses – Commercial uses.
+
+              17.69.100    Modification of permitted uses – Multifamily units.
+
+              17.69.110    Modification of permitted uses – Duplex units.
+
+              17.69.120    Modification of development standards.
+
+              17.69.130    Open space requirements.
+
+              17.69.135    Phasing.
+
+              17.69.140    Preliminary approval criteria.
+
+              17.69.150    Preliminary PUD review process.
+
+              17.69.160    Authority to approve, condition or deny preliminary PUD.
+
+              17.69.170    Performance guarantees – PUD agreement.
+
+              17.69.180    Modifications to an approved preliminary or final PUD.
+
+              17.69.190    Building and occupancy permits – Issuance after final PUD approval.
+
+              17.69.200    Final PUD plan requirements.
+
+              17.69.210    Time limitation on final PUD submittal.
+
+              17.69.220    Filing of final PUD plan.
+
+        17.69.010  Purpose.
+
+             The purpose of this chapter is to implement the goals and policies of the Mount Vernon comprehensive plan by promoting creativity in site layout and design, allowing flexibility in the application of the standards for residential and mixed residential/commercial development to protect and enhance environmental features, and provide other public benefits. This chapter provides performance criteria to encourage flexibility in the choice of the types of living units available to the public through a discretionary planned unit development (PUD) process. More specifically, it is the purpose of this chapter to:
+
+             A. Allow development of land with physical constraints, while at the same time preserving the natural characteristics of a site, including topography, native vegetation, wildlife habitat, environmentally sensitive areas, and other natural amenities of value to the community;
+
+             B. Create and/or preserve open space for recreation and aesthetic enjoyment of residents and employees;
+
+             C. Provide for the management and control of stormwater;
+
+             D. Permit developers to use innovative methods and approaches not available under conventional zoning methods to facilitate the construction of a variety of housing types and densities serving the diverse housing needs of Mount Vernon residents to promote the housing goals and policies of the Mount Vernon comprehensive plan;
+
+             E. Provide for the economic provision of public facilities and services by allowing choices in the layout of streets, utility networks, and other public improvements through innovative site design;
+
+             F. Ensure that proposals are contextually appropriate and integrate appropriately with surrounding established neighborhoods. (Ord. 3504 § 4, 2010).
+
+        17.69.020  Scope.
+
+             A. This chapter shall apply to all permitted uses within the R-1, 7.0, R-1, 5.0, R-1, 4.0, and R-2 residential districts and constitutes a “floating” overlay zone over these districts; provided, however, this chapter permits the development of limited multifamily and duplex housing and limited commercial development in the above specified residential zones, so long as the requirements of this chapter are satisfied.
+
+             1. This chapter may be applied where adequate vacant land exists to meet the standards and criteria of this chapter.
+
+             B. The PUD process provides an alternative to traditional development under prescriptive zoning and subdivision standards. The performance standards associated with a PUD allow for departure from strict compliance with zoning and subdivision development standards. However, all proposed PUD development standards that depart from strict compliance with zoning and subdivision standards must demonstrate that they allow for better design and are in the public interest.
+
+             C. A PUD application must be processed with either an application for short subdivision or standard subdivision approval. The scope of this chapter is to allow more innovative ways of designing such development applications, enabling applicants to take advantage of incentives, including flexible zoning standards, in exchange for public benefits.
+
+             D. PUDs are not intended to provide infill housing on smaller parcels in established residential areas of the city.
+
+             E. Chapter  17.73  MVMC authorizes specific deviations from the requirements of this chapter when an applicant chooses to utilize Chapter  17.73  MVMC. As such, the provisions of Chapter  17.73  MVMC supersede the provisions of this chapter when there is a conflict. (Ord. 3802 § 42, 2019).
+
+        17.69.030  Minimum lot areas, lot size, ranges of lot sizes, and density.
+
+             A. The minimum lot area required for property proposed for a PUD shall be 10 gross acres.
+
+             B. The minimum lot size for all lots created through a PUD process with single-family detached residential homes shall be equal to or larger than the sizes listed within the table below:
+
+                         Zoning Designation
+
+                         Minimum Lot Size
+
+                         R-1, 7.0
+
+                         4,500 square feet
+
+                         R-1, 5.0
+
+                         5,000 square feet
+
+                         R-1, 4.0
+
+                         6,000 square feet
+
+             C. The minimum lot size for all lots created through a PUD process with duplex homes shall be 6,500 square feet if both units comprising a single duplex are located on the same lot. If an applicant chooses to locate the individual duplex units on their own platted lot (this means they would need to be constructed as townhouse style units, see Chapter  17.06  MVMC for a definition of this) each unit shall be located on a lot no smaller than 2,000 square feet.
+
+             D. The minimum lot size for all lots created through a PUD process for multifamily units that are condominimized shall be 8,000 square feet. If the applicant chooses to locate the individual multifamily units on their own platted lots, which means they would have to be townhouse style units, each lot shall be no smaller than 2,000 square feet.
+
+             E. Twenty-five percent or more of the number of single-family detached residential lots that are created through a PUD/plat process shall be equal to or larger than the following lot sizes listed below:
+
+                         Zoning Designation
+
+                         Minimum Lot Size
+
+                         R-1, 7.0
+
+                         5,000 square feet
+
+                         R-1, 5.0
+
+                         7,000 square feet
+
+                         R-1, 4.0
+
+                         8,500 square feet
+
+             For example, if a 100 lot (single-family detached residential unit) PUD was located in the R-1, 4.0 zone, 25 or more of the lots created would have to be 8,500 square feet or larger in size.
+
+             F. The density of a PUD shall be expressed in dwelling units per acre (du/acre), and shall be computed the same way that density for standard or short subdivisions are. See the definition for “Density” within MVMC  17.06.040 . (Ord. 3504 § 4, 2010).
+
+        17.69.035  Accessory uses.
+
+             Permitted accessory uses within approved PUDs shall include:
+
+             A. Storage areas for items such as recreational vehicles, other vehicles, and boats. Storage areas shall not abut a public road and shall be screened on all sides with Type II landscaping as defined in Chapter  17.93  MVMC. Storage areas approved through a PUD can exceed the size and height restrictions normally associated with an accessory use so long as the provisions within this section are met. (Ord. 3504 § 4, 2010).
+
+        17.69.040  Predesign development meeting, preapplication conference and neighborhood meeting.
+
+             A. For the purposes of expediting applications and reducing development costs, the city of Mount Vernon requires a “predesign development” general information meeting. This meeting will provide input from relevant department staff regarding requirements needed for a proposed project, such as land use, site design, required improvements and conformance with the comprehensive plan, zoning ordinance and subdivision code. This approach offers a forum where information can be shared about the site and staff can guide the applicant through specific requirements prior to developing a detailed site plan. This informal process will help alert developers to potential issues prior to expending resources on plans that may need alterations to meet city regulations. The meeting will also provide details on the information needed for the required preapplication conference and will identify the PUD design standards contained in the design evaluation checklist.
+
+             B. Prior to filing any application, the applicant shall schedule, and the city shall conduct, a preapplication conference, pursuant to the provisions of MVMC  14.05.110 (B). To schedule a preapplication conference, the applicant shall submit to the community and economic development director all required application materials, including the design evaluation checklist and required forms, maps, site plans, landscaping plans, elevations, etc., so the city can advise the applicant whether there is sufficient information to constitute a complete application and to review the proposal in relationship to the comprehensive plan, approved subarea plan or neighborhood plan for the area, and specific city development objectives, policies, and plans for the area.
+
+             C. Prior to submission of a formal PUD application and after the completion of the preapplication meeting with the city, the applicant is required to conduct a neighborhood meeting to review the proposed project with property owners within 500 feet of the subject property. Comments received at the meeting shall be submitted to the city for consideration with the PUD application.
+
+             D. If, as a result of the neighborhood meeting, residents have questions or require additional information concerning the proposed PUD, they may request an informal meeting with the community and economic development director or the applicant by contacting the community and economic development department. (Ord. 3504 § 4, 2010).
+
+        17.69.050  Design assistance.
+
+             A. Design assistance is provided through the provision of the design evaluation checklist at the predesign meeting and a detailed review and evaluation of the proposal consistent with the standards contained in the checklist at the preapplication meeting. The review and evaluation of the proposal at the preapplication meeting shall be facilitated by a qualified, professional design review consultant retained by the city. The applicant can request that CEDD staff perform the design assistance at the preapplication meeting; however, it shall be the director’s decision as to whether or not a design review consultant is utilized. All expenses associated with the review and evaluation of the proposal by the design review consultant shall be borne by the applicant.
+
+             B. The design review consultant (consultant) or the CEDD director’s designee (designee) shall review the proposal for compliance with the standards contained in the design evaluation checklist prior to the preapplication meeting. The consultant or designee shall provide a preliminary assessment of the proposal’s compliance with the standards contained in the checklist to the applicant at the meeting. In addition, the consultant or designee may suggest alternative strategies that would allow the proposal to be modified in a manner that increases compliance with applicable standards. At the request of the applicant, the consultant or designee may schedule additional meetings to review revised plans for the proposal.
+
+             C. Upon submittal of a complete application, the design review consultant shall review the PUD design and shall prepare a written report to the director summarizing the proposal’s compliance or noncompliance with all of the applicable standards contained in the design evaluation checklist. In addition, the consultant shall preliminarily evaluate requests for bonus density consistent with the requirements of MVMC  17.69.090 . The consultant shall provide a written recommendation to the director summarizing the proposal’s compliance with the approval criteria contained in MVMC  17.69.140 . (Ord. 3504 § 4, 2010).
+
+        17.69.060  Design evaluation checklist.
+
+             Predesign development, preapplication review and the review of final PUD applications shall be guided by the standards contained in the following design evaluation checklist:
+
+                         PUD DESIGN EVALUATION CRITERIA CHECKLIST
+
+                          1: SITE ANALYSIS
+
+                         1.1
+
+                         The project is in conformance with the comprehensive plan and applicable sub-area plan(s).
+
+                         YES NO N/A
+
+                         1.2
+
+                         A preapplication consultation that included the preparation of a site analysis (prepared consistent with this design evaluation checklist) was an integral step in the site plan development process.
+
+                         YES NO N/A
+
+                         1.3
+
+                         The development does not encroach on any identified critical areas or their associated buffers.
+
+                         YES NO N/A
+
+                         1.4
+
+                         Soil conditions are suitable for the proposed development.
+
+                         YES NO N/A
+
+                         1.5
+
+                         The proposed design would avoid or minimize the potential for adverse environmental effects, such as flooding and sedimentation off site. Flood hazard area designations and regulations are identified and complied with, where applicable.
+
+                         YES NO N/A
+
+                         1.6
+
+                         Measures have been taken to minimize stormwater runoff and to detain the increment over the natural rate as close as possible to the point of origin consistent with the city’s adopted stormwater ordinance. If located within a floodplain, a flood protection strategy shall be proposed.
+
+                         YES NO N/A
+
+                          2: SUBDIVISION AND PUD LAYOUT
+
+                          2.1 RESPECT FOR NATURAL FEATURES/CONSTRAINTS
+
+                         a.
+
+                         The project design should avoid areas unsuitable for development. Existing elements of the landscape, such as views, trees and natural land contours can enhance the project and should be integrated into the design where possible.
+
+                         YES NO N/A
+
+                         b.
+
+                         To the greatest extent practicable, the natural features of the site, such as topographic variation, significant tree cover, and bodies of water are to be preserved and integrated into the site plan to minimize site development costs and provide amenity.
+
+                          A PUD can promote sensitive treatment of natural elements, including vegetation, waterways, and views through greater flexibility in the utilization of land. A PUD project provides flexibility in design, placement, and configuration of buildings, use of open space, circulation facilities, and parking areas to best utilize the potential of sites characterized by special features of geography, topography, size or shape, while at the same time maintaining substantially the same population density and area coverage permitted in traditional developments.
+
+                         YES NO N/A
+
+                         c.
+
+                         Landmarks should be incorporated into the site plan.
+
+                          A PUD can allow development while preserving significant natural features or historical character. Landmarks may include unique natural, cultural, or historic features.
+
+                         YES NO N/A
+
+                         d.
+
+                         The placement of the building sites should take advantage of sun angles, prevailing winds, tree stands, hills, and other natural conditions to save energy in heating and cooling.
+
+                          Passive strategies that take advantage of natural systems may include building orientation, planting of wind or summer sun blocking trees and other similar approaches.
+
+                         YES NO N/A
+
+                         e.
+
+                         Proposed building sites are to be oriented to on- and off-site views. Although not required legally, view blockage from off-site uses should be considered and, when possible, minimized.
+
+                         YES NO N/A
+
+                         f.
+
+                         Building sites should be arranged for some apparent purpose (to accommodate site topography, for example).
+
+                          Building site arrangement may be based on a variety of purposes, including: preservation of critical areas or environmentally sensitive land, accommodating topography such as steep slopes, maintaining view corridors, providing adequate vehicular and pedestrian access, or facilitating community interaction and privacy.
+
+                         YES NO N/A
+
+                         g.
+
+                         Building sites should be designed in discrete groups to encourage the creation of neighborhoods and promote a sense of community, while protecting privacy. This may be accomplished through pedestrian connection, the provision of common open space and/or amenities, and/or the use of open space to serve as a buffer between focused areas of residential development.
+
+                          PUD projects should promote innovative site and building design and should include architectural and site features that promote community interaction (such as porches, de-emphasized garages, sidewalks and pedestrian walkways, and common open spaces).
+
+                         YES NO N/A
+
+                         h.
+
+                         Building sites may be compactly grouped to provide more usable open space. Compactly grouped single-family detached and/or duplex development without the provision of accompanying open space and/or site amenities shall be prohibited. Lot size may be reduced, to allow for innovative development. However, the reduction in lot size must be accompanied by higher architectural and site design quality and the provision of increased amenities. Proposed PUD applications containing single-family detached lots that are 6,000 square feet in size or smaller shall provide the following additional materials as part of the preapplication process:
+
+                         I.    Detailed architectural plans for the house type to be established on the smaller lots. These plans shall include proposed architectural details, building materials, entrance and window orientation and off-street parking areas.
+
+                         II.    Detailed plans for landscaping, open space and recreational amenities serving the proposed lots.
+
+                          Compact development within the PUD shall provide open space for individual owners and/or the general public. The preserved open space shall serve several purposes such as providing recreational areas for the community or preserving a unique natural resource.
+
+                         YES NO N/A
+
+                         i.
+
+                         The project site shall be able to accommodate the type of dwelling unit or commercial facilities proposed and provide open space and/or amenities.
+
+                         YES NO N/A
+
+                         j.
+
+                         Safe play, sitting, and walking areas shall be provided and conveniently located within the PUD.
+
+                         YES NO N/A
+
+                         k.
+
+                         Transition shall be provided between different residential building types within a PUD. Typical transitions include landscaping, open space, common areas and grade separation.
+
+                         YES NO N/A
+
+                          2.2 SITE AND BUILDING LAYOUT AND DESIGN
+
+                         a.
+
+                         The site plan shall embody a coherent layout that can be easily understood by those who visit and live in the development.
+
+                          A PUD needs several elements to provide visitors and residents with a coherent layout, including, but not limited to, landscaping, architecture, pedestrian and vehicular circulation, and adequate signage. Landscaping must promote a coordinated appearance and break up continuous expanses of building and pavement. All buildings and structures of a site shall share a common architectural theme to ensure internal compatibility. The circulation system shall provide functional and visual links with the buildings of the site and must have linkages to outside development.
+
+                         YES NO N/A
+
+                         b.
+
+                         Units shall front on residential access streets and not on arterial roadways. Units that must abut arterial roadways due to site constraints shall be accessed from roadways other than the arterial.
+
+                         YES NO N/A
+
+                         c.
+
+                         Units shall overlook open space and not parking or road areas or other units or should be located in close (&lt; 300 feet) proximity and directly connected (via a pedestrian circulation system) to proposed site amenities.
+
+                         YES NO N/A
+
+                         d.
+
+                         The proposed site layout shall facilitate trash removal and other similar utility services.
+
+                         YES NO N/A
+
+                         e.
+
+                         Utilities shall be placed to make their construction and maintenance economical and efficient.
+
+                         YES NO N/A
+
+                         f.
+
+                         Electric and telephone lines located within a project should be placed underground except under exceptional circumstances.
+
+                         YES NO N/A
+
+                         g.
+
+                         Electric and gas meters, transformers and other utilities shall be screened or located otherwise out of sight from roadways and public areas.
+
+                         YES NO N/A
+
+                         h.
+
+                         Common garbage storage areas shall be located and covered to avoid spreading odors. Garbage storage areas shall be screened ( Multifamily only ).
+
+                         YES NO N/A
+
+                         i.
+
+                         Outside storage should be provided for bikes, play equipment, lawn furniture, gardening supplies and barbeque equipment ( Multifamily only ).
+
+                         YES NO N/A
+
+                         j.
+
+                         Each unit entry must have some form of weather protection, such as an overhang or a porch, and a place to set packages down before entering the unit ( Multifamily only ).
+
+                         YES NO N/A
+
+                          2.3 PRIVACY/SECURITY
+
+                         a.
+
+                         Residents must have adequate privacy. The design of the site and individual units should promote security consistent with Crime Prevention Through Environmental Design (CPTED) strategies.
+
+                         YES NO N/A
+
+                         b.
+
+                         Units shall be screened or located to avoid glare from automobile headlights and direct street lighting ( Multifamily only ).
+
+                         YES NO N/A
+
+                         c.
+
+                         Housing units should be buffered from high traffic volumes to minimize the impact of noise and vibrations. In mixed-use development, commercial traffic circulation should incorporate traffic calming techniques to minimize noise and vibration.
+
+                         YES NO N/A
+
+                         d.
+
+                         There should be a minimal number of vehicular and pedestrian entrances to clusters of buildings. These entrances must be well-lit and defined ( Multifamily only ).
+
+                         YES NO N/A
+
+                         e.
+
+                         Parking areas and the walkways from parking to homes must be well-lit without producing glare ( Multifamily only ).
+
+                         YES NO N/A
+
+                         f.
+
+                         Units should be clustered in a way that would allow neighbors to observe other homes and aid in crime prevention consistent with Crime Prevention Through Environmental Design (CPTED) strategies.
+
+                          YES NO N/A
+
+                         g.
+
+                         Public spaces located near units should be visible from the units for security purposes and for watching children at play.
+
+                         YES NO N/A
+
+                         h.
+
+                         Each unit must have its own semi-public entrance area, such as a deck, patio, balcony, or yard, for the exclusive use of its residents. It shall be fenced, or otherwise screened for privacy ( Multifamily only ).
+
+                         YES NO N/A
+
+                          3: OPEN SPACE
+
+                         3.1
+
+                         There shall be a network of functional open space integrated into the site plan. Fifteen percent of the total gross PUD area shall be maintained for open space and at least 25 percent of the designated open space shall be reserved as usable open space that shall contain amenities such as play structures, benches or covered picnic areas. One of the usable open space areas on every PUD shall be no less than 8,000 s.f. in size. Trail systems must be included in every PUD that connect to existing or future trail systems, parks, or both.
+
+                          Open space within a PUD shall be an integrated part of the project rather than an isolated element of it. Significant environmental elements shall be incorporated into the design of the open space. Open space shall be adequate to provide areas for both active and passive recreational uses, areas of open space as a visual amenity and the use of open space for stormwater management.
+
+                          Usable open space area(s) shall be centrally located with convenient access for residents. They shall be large enough to accommodate both active and passive activities. The overarching objective is to create usable open space that is not fragmented.
+
+                         YES NO N/A
+
+                         3.2
+
+                         The development’s open space shall relate to (and where possible) connect to adjacent open space areas.
+
+                          Open space connections may be facilitated through trail corridors and/or contiguous undeveloped areas.
+
+                         YES NO N/A
+
+                         3.3
+
+                         The usable open space must be functional in terms of area, dimensions, and location.
+
+                         YES NO N/A
+
+                         3.4
+
+                         Open space areas may be characterized by the presence of protected critical areas and/or significant trees or other high-value environmental feature. Consistent with the requirements of MVMC  17.69.130  a portion of the total open space can be environmentally constrained land. Where possible, these environmentally constrained open space areas should be either accessible to pedestrians to the extent practical and/or visually accessible from connected open space areas and/or are interconnected in a manner that enhances environmental values.
+
+                         YES NO N/A
+
+                         3.5
+
+                         Open spaces shall be interconnected where possible.
+
+                         YES NO N/A
+
+                         3.6
+
+                         Provisions for the maintenance of common open space areas shall be identified.
+
+                         YES NO N/A
+
+                         3.7
+
+                         When connectivity with designated open space and recreational areas is not possible, small sitting areas with recreational equipment and benches should be located in each neighborhood.
+
+                         YES NO N/A
+
+                         3.8
+
+                         Larger areas that allow for recreational activities, such as swimming pools or soccer fields with area lighting, shall be carefully located and buffered to reduce any adverse impact on the surrounding area.
+
+                         YES NO N/A
+
+                         3.9
+
+                         Parking areas for recreational facilities shall be screened and buffered from surrounding residences, but shall be visible by community members using the recreational facilities to minimize opportunities for crime.
+
+                         YES NO N/A
+
+                          4: LANDSCAPING
+
+                          4.1 GENERAL
+
+                         a.
+
+                         To the greatest extent practicable, existing significant trees and plants should be preserved and incorporated into open space areas. Significant trees shall be defined as those existing trees with a diameter of 24 inches or greater diameter at breast height (DBH).
+
+                          YES NO N/A
+
+                         b.
+
+                         Proposed plants and trees shall be appropriate for their intended function.
+
+                         YES NO N/A
+
+                         c.
+
+                         If grass is inappropriate for an area, a textured hard surface material, such as paving stones, or light gravel interspersed with shrubs, may be used instead.
+
+                         YES NO N/A
+
+                         d.
+
+                         High quality topsoil should be saved and the site must be cleared of debris.
+
+                         YES NO N/A
+
+                         e.
+
+                         Slopes and cut-and-fill areas must be protected against erosion.
+
+                         YES NO N/A
+
+                          4.2 STREET TREES
+
+                         a.
+
+                         Street trees shall be provided.
+
+                         YES NO N/A
+
+                          4.3 BUFFERING
+
+                         a.
+
+                         Buffering shall be provided around the perimeter of the site where necessary to minimize adverse impacts, such as more intensive land uses, noise, lights, or traffic on higher-order streets.
+
+                         YES NO N/A
+
+                         b.
+
+                         Parking, garbage collection, utility, and loading and unloading areas associated with site amenities, multifamily residences and/or commercial development shall be provided with buffering.
+
+                         YES NO N/A
+
+                         c.
+
+                         Both trees and shrubs shall be provided in buffer areas.
+
+                         YES NO N/A
+
+                          4.4 PARKING LOTS
+
+                         a.
+
+                         Landscaping shall be provided in parking areas.
+
+                         YES NO N/A
+
+                         b.
+
+                         Plantings must be located so as not to obstruct drivers’ vision.
+
+                         YES NO N/A
+
+                          4.5 WALLS AND FENCES
+
+                         a.
+
+                         Walls and fences can be provided where necessary for privacy, security, screening, climate control, or to highlight a view.
+
+                         YES NO N/A
+
+                         b.
+
+                         The design and choice of material should: 1) serve the function for which the wall or fence is intended, 2) complement the character of the site and the type of building, and 3) facilitate easy and cost-efficient maintenance.
+
+                         YES NO N/A
+
+                         c.
+
+                         Privacy screening (fencing, trellis or arbors and/or landscaping) and window offsets shall be required when minimum setbacks are proposed.
+
+                         YES NO N/A
+
+                          4.6 PAVING AND STREET FURNITURE
+
+                         a.
+
+                         The various elements of street furniture shall be provided as necessary and located where needed.
+
+                          Pedestrian amenities shall be located on sidewalks, plazas, and other public spaces within a PUD. Street furniture includes, but is not limited to, benches, bollards, kiosks, drinking fountains, planters, bus shelters, trash receptacles, bike racks, and lighting fixtures. They shall be located where needed, such as benches at street corners and plazas, bollards where necessary to keep out vehicles but to allow pedestrian and bicycle access, bus shelters at major intersections, bike racks by recreational areas, and notice boards at public plazas and parks.
+
+                         YES NO N/A
+
+                         b.
+
+                         The design of street furniture must be coordinated with the character and style of the proposed architecture. The elements should be compatible with each other in form, material and finish.
+
+                         YES NO N/A
+
+                         c.
+
+                         The items selected must be durable and easy to maintain.
+
+                         YES NO N/A
+
+                          5: LAYOUT OF THE CIRCULATION SYSTEM
+
+                          5.1 STREETS
+
+                         a.
+
+                         The road system is to be designed to meet the projected traffic demand and the road network must consist of a hierarchy of roads designed according to function.
+
+                         YES NO N/A
+
+                         b.
+
+                         Roads within the development shall not extend more than 600 feet without an intersection except if constrained by critical area limitations and/or significant topographic variation. In the absence of a functional intersection, an open space area of similar dimension to a right-of-way shall be provided.
+
+                         YES NO N/A
+
+                         c.
+
+                         The network should follow the natural topography and preserve natural features of the site as much as possible. Alignments should be planned such that grading requirements are minimized.
+
+                         YES NO N/A
+
+                         d.
+
+                         Entry roads into the development shall be clearly visible from major arterial roads. Proper sight distances shall be provided at intersections.
+
+                         YES NO N/A
+
+                         e.
+
+                         Through traffic shall be directed around the development or channelized onto a central arterial and avoided on minor residential streets.
+
+                         YES NO N/A
+
+                         f.
+
+                         Automobile movement within the site shall be provided without having to use the peripheral road network.
+
+                         YES NO N/A
+
+                         g.
+
+                         The road system must provide adequate access to building sites for residents, visitors, deliveries, and garbage collection.
+
+                         YES NO N/A
+
+                         h.
+
+                         The edges of the roadways shall be landscaped. Sidewalks must be provided alongside the road, be set back sufficiently from the road and a landscaped planting strip between the road and the sidewalk shall be provided. A comprehensive project trail system may allow for the reduction of required sidewalks.
+
+                         YES NO N/A
+
+                          5.2 PEDESTRIAN AND BIKE PATHS
+
+                         a.
+
+                         Pedestrian and bicycle paths should be clearly separated from traffic.
+
+                         YES NO N/A
+
+                         b.
+
+                         Pedestrian and bicycle paths should be located to take advantage of topography, views, and the natural features of the site. Paths should connect with adjacent off-site paths when possible. Path networks as described in the recreation element of the comprehensive plan shall be facilitated when possible.
+
+                         YES NO N/A
+
+                         c.
+
+                         The pedestrian path system shall link building sites with parking areas (multifamily only), entrances to the development, open space, and recreational and other community facilities.
+
+                         YES NO N/A
+
+                         d.
+
+                         Paths shall be ramped and graded to facilitate the use of strollers, bicycles, and wheelchairs.
+
+                         YES NO N/A
+
+                          5.3 PARKING AREAS (MULTIFAMILY AND COMMERCIAL ONLY)
+
+                         a.
+
+                         The number of parking spaces must be sufficient to serve proposed buildings.
+
+                         YES NO N/A
+
+                         b.
+
+                         There must be sufficient distance between the entrance to the parking lot and the parking stalls.
+
+                         YES NO N/A
+
+                         c.
+
+                         The parking spaces shall be the appropriate size and within convenient walking distance of the buildings they are to serve.
+
+                         YES NO N/A
+
+                         d.
+
+                         Parking spaces and aisles must be angled and sized for convenient maneuvering.
+
+                         YES NO N/A
+
+                         e.
+
+                         Parking bays shall be provided with turnarounds so that cars can leave if the bay is filled.
+
+                         YES NO N/A
+
+                         f.
+
+                         The parking lots shall be broken up into smaller areas through the use of trees and landscaped islands.
+
+                         YES NO N/A
+
+                         g.
+
+                         Curbs must be used rather than wheelstops.
+
+                         YES NO N/A
+
+                         h.
+
+                         Sidewalks must be wide enough so that the car overhang does not block them. The overhang area shall be hard-landscaped rather than planted.
+
+                         YES NO N/A
+
+                         i.
+
+                         The parking lots must be buffered and screened from view. They shall be adequately lighted.
+
+                         YES NO N/A
+
+                          6: SIGNS AND LIGHTING
+
+                          6.1 SIGNS
+
+                         a.
+
+                         Signs must be easy to understand both by visitors and by those who live in the development.
+
+                         YES NO N/A
+
+                         b.
+
+                         The design of signs should relate to and complement other elements of the overall site design.
+
+                         YES NO N/A
+
+                         c.
+
+                         Signs must be placed where they are needed.
+
+                         YES NO N/A
+
+                          6.2 LIGHTING
+
+                         a.
+
+                         The lighting shall be appropriate for the purpose required, such as for safety or security. (For safety purposes, sufficient lighting should be provided at intersections and spaced along walkways. For security purposes, lighting should be provided at entryways and between buildings and parking areas.)
+
+                         YES NO N/A
+
+                         b.
+
+                         The spacing of the light standards shall be appropriate for their height. Pedestrian-scale standards shall be used where possible.
+
+                         YES NO N/A
+
+                         c.
+
+                         The standards must be suitable in size and style for the surroundings. (The maximum height should not exceed the maximum building height permitted, or 25 feet, whichever is less.)
+
+                         YES NO N/A
+
+                         d.
+
+                         Spotlights, if used, shall be placed on standards pointing toward the buildings without blinding residents, rather than on the buildings and directed outwards which would create dark shadows adjacent to the buildings.
+
+                         YES NO N/A
+
+             The city has a handbook that is available to potential applicants and the public that includes graphic illustrations, photographs and/or narrative text that illustrates the above-referenced standards. (Ord. 3504 § 4, 2010).
+
+        17.69.070  Application contents and fees.
+
+             A. After the preapplication conference, the applicant may file an application for a preliminary PUD with the community and economic development department together with the application fee and documents meeting the requirements set out in subsections B through F of this section. An applicant may submit applications for:
+
+             1. Preliminary PUD and preliminary plat together;
+
+             2. Preliminary PUD only;
+
+             3. Preliminary and final PUD plat simultaneously, provided all information required under this section and MVMC  17.69.200  is submitted;
+
+             4. Major modification to a PUD.
+
+             B. The PUD application shall be accompanied by a nonrefundable fee as set forth in Chapter  14.15  MVMC to reimburse the city of Mount Vernon for the costs of reviewing the application. Further provided, the applicant shall be responsible for additional processing costs incurred by the city in the event of additional staff time, consultant services, and public hearing costs over and above the initial application fee. All additional costs shall be paid within 30 days of notice by the city. Failure to provide payment to the city shall terminate processing of the application.
+
+             C. Written documents required with a PUD application are as follows:
+
+             1. Provide application forms:
+
+             a. Counter complete checklist, as prepared by the community and economic development department;
+
+             b. Master land use application form;
+
+             c. Submittal requirements for preliminary plat or short plat if the applicant wishes to process the preliminary plat with the preliminary PUD;
+
+             d. Submittal requirements for a substantial development permit if required by the shoreline master program ordinance;
+
+             e. SEPA environmental checklist pursuant to Chapter  43.21C  RCW; and
+
+             f. Ownership statement.
+
+             2. Provide legal description of the total site proposed for development, including a statement of present and proposed ownership and present and proposed zoning.
+
+             3. Provide statement of objectives to be achieved by the PUD through the particular approach proposed by the applicant. This statement shall include a description of the character of the proposed development and the rationale behind the assumptions and choices made by the applicant including consistency with the goals, objectives and criteria of the comprehensive plan and a detailed statement summarizing in written and graphic form how the development complies with the applicable provisions of this chapter.
+
+             4. Provide a table that summarizes all proposed modifications of development standards consistent with the requirements and limitations of MVMC  17.69.120 . The table shall contain the following information:
+
+             a. The development or zoning standard proposed to be modified;
+
+             b. The proposed modified standard; and
+
+             c. A narrative describing how the proposed modification allows for better design and would be in the public interest.
+
+             5. Provide a phasing plan and development schedule indicating the proposed phases including infrastructure and amenities to be installed within each phase, and approximate date when construction of the PUD or phases of the PUD can be expected to begin and be completed.
+
+             6. Provide statement of the applicant’s intentions with regard to the future selling or leasing of all or portions of the PUD, such as land areas, dwelling units, etc.
+
+             7. Provide quantitative data for the following:
+
+             a. Total number and type of dwelling units;
+
+             b. Parcel size;
+
+             c. Proposed lot coverage of buildings and structures;
+
+             d. Approximate gross and net residential densities;
+
+             e. Total amount of open spaces as defined by the Mount Vernon zoning code, including a separate figure for usable and common open spaces; and
+
+             f. Total amount of nonresidential construction, including a separate figure for commercial or institutional facilities.
+
+             8. Provide evidence of sewer availability.
+
+             9. Provide evidence of adequate water supply as required by RCW  19.27.097 .
+
+             10. For any PUD that contains proposed retail or other commercial uses intended to serve the residents of the PUD, a market analysis that includes the following information:
+
+             a. Provide the projected population in the PUD that would utilize the nonresidential uses;
+
+             b. Show evidence of the effective buying power of the residents of the PUD for nonresidential uses in a PUD; and
+
+             c. Show the net potential buying power for the nonresidential uses in the PUD and a recommendation regarding the types and sizes of uses.
+
+             11. Provide a copy of the summary of the preapplication conference and all information requested during the preapplication conference.
+
+             12. Provide copies or a summary of the comments received at the required neighborhood meeting.
+
+             D. Site plan and supporting maps necessary to show the major details of the proposed PUD are required with a PUD application, containing the following minimum information organized into one set of drawings:
+
+             1. The existing site conditions, including contours at two-foot intervals, watercourses, wetlands, unique natural features, steep slopes and forest cover.
+
+             2. Proposed lot sizes, lot lines and plot designs.
+
+             3. The location, typical floor plans and building elevations, floor area size and building envelopes of all existing and proposed buildings, structures and other improvements, including maximum heights, types of dwelling units, typical lot landscaping plans, density per type and nonresidential structures including commercial facilities; for proposals that include single-family residences on lots 6,000 square feet in size and smaller, multifamily residential development and/or commercial structures, detailed architectural plans will be required. These include: elevations illustrating window and door placement, building siting on proposed lots, site plans illustrating building-to-building relationships and proposed building materials.
+
+             4. The location, dimension and area (in acres or square feet) of all tracts or parcels to be conveyed, dedicated or reserved as common or usable open spaces, public parks, recreational areas, school sites, critical areas and their associated buffers, and similar public and semipublic uses.
+
+             5. The existing and proposed circulation system of all streets, including off-street parking areas, service areas, loading areas, transit stops existing and proposed and points of access, and road cross-sections identifying the size and location of the travel lanes, parking areas, planting strips, etc. Notations of proposed ownership, public or private, should be included where appropriate.
+
+             6. The existing and proposed pedestrian and bike circulation system, including its interrelationships with the vehicular circulation system, consistency with the city’s comprehensive plan and indicating proposed solutions to points of conflict.
+
+             7. The existing and general plans for utility systems, including sanitary sewers, storm sewers and water, electric, gas, cable television, fiber optic conduits, telephone lines, solid waste, and lighting.
+
+             8. A general landscape plan indicating the treatment of materials used for open spaces and buffers. This landscape plan should be in a general schematic form at this stage.
+
+             9. Enough information on land areas adjacent to the proposed PUD to indicate the relationships between the proposed development and existing and proposed adjacent areas, including land uses, zoning classifications, densities, circulation systems, public facilities and unique natural features of the landscape.
+
+             10. The proposed treatment and design of the perimeter of the PUD, including materials and techniques used such as screens, landscape buffers, fences and walls.
+
+             11. A proposed comprehensive sign plan showing the integration of signs into the frame-work of the building or buildings on the property.
+
+             12. The general design of all accessory uses on the property such as all private and public fencing, recreation facilities, service areas, critical areas fencing and signage, and enhancement areas.
+
+             E. Any additional information, as required by the community and economic development director, necessary to evaluate the proposed preliminary PUD, i.e., tree preservation plan, lighting plan, traffic study, etc.
+
+             F. Any other materials required per MVMC  14.05.210 (B).
+
+             G. Provisions for maintenance of all open spaces, critical areas and their associated buffers, and common property, including conditions whereby the city may enforce any provisions or requirements needed to ensure the meeting of PUD objectives. These provisions may include CC&Rs or restrictive covenants. The city may also consider phasing of a project, and/or requiring that the site developer be financially responsible for the maintenance of open space areas until a homeowner’s association is functioning and financially able to maintain these areas themselves. (Ord. 3504 § 4, 2010).
+
+        17.69.080  Innovative residential development.
+
+             A. Purpose.
+
+             1. More efficient use can be made of land, energy and resources and more livable development can be achieved when the designer has flexibility in residential types, placement and density. However, such flexibility must safeguard the public interest. Therefore, the city allows planned residences at varied densities where specified in the appropriate zones of the city.
+
+             2. Upon compliance with this chapter, the use of land may comply with the provisions in this section in lieu of the provisions of the zone where located.
+
+             3. It is intended that innovative residential developments encourage imaginative design to achieve these purposes. Therefore, incentives and flexibility may be allowed such as clustered housing, zero lot lines, condominium development, and mixed residential types. The city may approve the use of these tools as provided in this section as deemed reasonable and warranted by the excellence of the resulting design and its benefits to the community.
+
+             B. Techniques.
+
+             1. Clustered Housing. When residences are clustered in design groups in a planned unit development with common open space, the clustered housing may be designed with building locations, lot sizes, yards and/or density standards as prescribed on the plat or on plans for the planned unit development approved by the city.
+
+             2. Residential Types. To achieve the most efficient use and conservation of land, energy, resources, view and terrain, mixed residential types may be designated and allowed in innovative residential planned unit developments as prescribed in this chapter.
+
+             C. Neighborhood Context and Transitions. PUD proposals shall acknowledge surrounding established residential land use patterns and shall be designed in a manner that provides similar lot sizes and/or adequate buffer areas along the project perimeter. The purpose of this technique is to preserve existing neighborhood character and provide appropriate transitions in density.
+
+             1. Lots created that abut existing neighborhoods, where lots are equal to or greater than 9,600 square feet in size, shall be a minimum of 9,600 square feet in size, with a minimum lot width of 95 feet, where abutting lot widths exceed 95 feet. Lots smaller than 9,600 square feet can be created, as long as a 20-foot minimum forested buffer (as defined within MVMC  17.06.060 ) can be maintained or created between the newly created lots and existing lots. Building setbacks from the buffer shall be 10 feet except for accessory buildings.
+
+             2. Lots created that abut existing neighborhoods where the lots are less than 9,600 square feet in size shall match or be greater than the average lot size found on the abutting lots or shall establish or maintain a 20-foot minimum forested buffer between the newly created lots and existing lots.
+
+             3. Lots created that abut undeveloped residentially zoned land including UGA areas and areas outside of the UGA shall meet or exceed the minimum lot size as allowed by the zoning district for the abutting properties or shall establish or maintain a 20-foot minimum forested buffer between the newly created lots and undeveloped land.
+
+             4. Lots created that abut nonresidentially zoned land shall be required to create or maintain a 20-foot minimum forested buffer between the newly created lots and the nonresidentially zoned property.
+
+             5. Lots created around the perimeter of the PUD shall have a transition between existing and proposed roads and the lots. The transition area shall consist of landscaping and fencing or other innovative transitions that shall be a minimum of 15 feet in width that an applicant demonstrates meets the intent of this provision. Below is an illustration that shows perimeter lots:
+
+             D. Buyer Notification. The planned unit development plan shall note that the residences thereon constitute an innovative residential development and must be constructed as shown on the planned unit development plan. Building permits may be issued only for structure types and placements as shown on the planned unit development plan. Sales agreements and titles for land and residences sold in innovative residential developments shall note this restriction. (Ord. 3504 § 4, 2010).
+
+        17.69.090  Modification of permitted uses – Commercial uses.
+
+             A. A planned unit development may allow commercial uses in residential zones which are not otherwise permitted in the underlying use zone only under the following circumstances:
+
+             1. The use shall be part of a planned development in which not more than 10 percent of the gross floor area of the residential units (both single-family and multifamily) is devoted to a commercial use which is not otherwise permitted in the underlying use zone. For example, if a 100-unit development contained homes that all had a gross floor area of 2,000 square feet, a commercial use that was no larger than 20,000 square feet could be permitted. In measuring the square footage of the commercial use all features such as setbacks, access, parking and landscaping shall be included.
+
+             2. The use shall be supportive of and/or complementary to the other uses within a planned development and scaled to meet primarily the needs of the inhabitants of the project.
+
+             3. The use shall be compatible with the uses permitted on other properties in the surrounding area.
+
+             4. There is public benefit to be realized by allowing the proposed use.
+
+             B. Basis for Approval of Commercial Uses in Residential PUDs. Commercial uses may be located within the planned unit development when the proposed development includes residential use as an integral component of the planned development and when commercial uses are situated and developed in such a manner as to be compatible with any residential uses that are existing or which could be developed in the adjoining residentially zoned area.
+
+             C. In proposing a commercial use in a residential zone, the applicant shall establish specific community economic need for the use and facilities. The director of development services shall require a competent market analysis to demonstrate that need.
+
+             D. Building permits for commercial uses in residential PUD zoning districts may not be issued until at least two-thirds of all the proposed single-family detached residential units are completed, including issuance of final certificates of occupancy.
+
+             E. The commercial use shall meet the dimensional requirements applicable to the C-4 zoning district (setbacks, landscaping, parking, etc.). (Ord. 3775 § 8, 2019).
+
+        17.69.100  Modification of permitted uses – Multifamily units.
+
+             The placement of a limited number of multifamily units (as defined within MVMC  17.06.040 ) within a PUD is discretionary by the city council. The city council may allow limited multifamily uses in single-family residential zones which are not otherwise permitted in the underlying use zone only under the following circumstances:
+
+             A. The multifamily units shall be part of a planned development in which not more than 20 percent of the overall density of the single-family dwelling units that are allowed and could physically be platted as part of the entire PUD can be multifamily units. For example, if 100 single-family residential lots could be platted on a site, no more than 20 multifamily units can be constructed; which means that 80 single-family and 20 multifamily units would be permitted so long as the overall density is not exceeded; and so long as city council makes a finding that the multifamily units can be placed and designed in such a way as to preserve the single-family character of the PUD and the surrounding area.
+
+             B. The multifamily units shall meet the setbacks, land coverage, building height, distance between buildings, landscaping, parking and signage as required by Chapter  17.24  MVMC.
+
+             C. The multifamily units that are constructed must be condominimized per Chapter  64.34  RCW; or they must be townhome style units where each unit in a structure is on its own platted lot. See MVMC  17.69.030 (D) for the minimum lot sizes required.
+
+             D. No more than 30 multifamily units can be located in any one residential multifamily structure.
+
+             E. Building permits for multifamily uses in an approved PUD may not be issued until at least two-thirds of all the proposed single-family detached residential units are completed, including issuance of final certificates of occupancy. (Ord. 3504 § 4, 2010).
+
+        17.69.110  Modification of permitted uses – Duplex units.
+
+             The placement of a limited number of duplex units (as defined within MVMC  17.06.040 ) within a PUD is discretionary by the city council. The city council may allow limited duplex units in single-family residential zones as part of a PUD project only under the following circumstances:
+
+             A. The duplex units shall be part of a planned development in which not more than 10 percent of the overall number of single-family detached lots that could actually be platted as part of the entire PUD can be duplex units. For example, if 100 single-family detached residential lots could be platted on a site, no more than 10 duplex units (this equates to five duplex structures with each structure having two units) could be permitted so long as the city council makes a finding that the duplex units can be placed and designed in such a way as to preserve the single-family character of the PUD and the surrounding area.
+
+             B. The duplex units shall meet the lot area and width, setbacks, land coverage, building height, landscaping, parking and signage as required by Chapter  17.18  MVMC.
+
+             C. Building permits for duplexes in an approved PUD may not be issued until at least two-thirds of all the proposed single-family detached residential units are completed, including issuance of final certificates of occupancy. (Ord. 3504 § 4, 2010).
+
+        17.69.120  Modification of development standards.
+
+             A. The following development standards may be modified in approving a PUD application so long as the applicant specifically requests a modification and demonstrates that the modification meets the overall intent of the PUD. All modifications must be specifically approved by the city council within the resolution that approves the preliminary PUD/plat.
+
+             1. Required off-street parking spaces;
+
+             2. Landscaping requirements; and
+
+             3. Lot width.
+
+             B. Standards which may not be modified or altered are:
+
+             1. Height of building or structure in all residential zones;
+
+             2. Building setbacks cannot be modified to be less than that which Chapter  17.70  MVMC allows;
+
+             3. Lot size cannot be modified to be less than that which MVMC  17.69.030  allows;
+
+             4. Lot coverage cannot be modified to be more than that which Chapter  17.70  MVMC allows;
+
+             5. Shoreline regulations when the property is located in an area under the jurisdiction of the Mount Vernon shoreline master program;
+
+             6. Standards pertaining to development in environmentally sensitive areas; and
+
+             7. Regulations pertaining to nonconforming uses and public safety.
+
+             C. Basis for Approval of Alternative Development Standards. Approval of alternative development standards for PUDs differs from the variance procedure described in Chapter  17.105  MVMC in that rather than being based upon a hardship or unusual circumstance related to a specific property the approval of alternative development standards proposed by a planned unit development shall be based upon the criteria listed in this section. In evaluating a planned development which proposes to modify the development standards of the underlying use zone, the city shall consider and base its findings upon the ability of the proposal to satisfy the following criteria:
+
+             1. The proposed planned development shall be compatible with surrounding properties, especially related to:
+
+             a. Landscaping and buffering of buildings, parking, loading and storage areas;
+
+             b. Public safety;
+
+             c. Site access, on-site circulation and off-street parking;
+
+             d. Light and shadow impacts;
+
+             e. Generation of nuisance irritants such as noise, smoke, dust, odor, glare, vibration or other undesirable impacts; and
+
+             f. Architectural design of buildings and harmonious use of materials.
+
+             2. The unique characteristics of the subject property.
+
+             3. The unique characteristics of the proposed use(s).
+
+             4. The arrangement of buildings and open spaces as they relate to various uses within or adjacent to the planned development.
+
+             5. Public improvements proposed in connection with the planned development.
+
+             6. Preservation of unique natural features of the property.
+
+             7. The public benefit derived by allowing the proposed alteration of development standards. (Ord. 3504 § 4, 2010).
+
+        17.69.130  Open space requirements.
+
+             A. All PUDs shall be required to provide open space in the amount of 15 percent of the gross site area in the minimum types specified in subsection B of this section.
+
+             B. Any combination of open space types may be used to accomplish the total minimum area required to be reserved as follows:
+
+                     Table 17.69.130(1): Open Space Percent of Gross Area
+
+                         Category
+
+                         Land Area
+
+                         1.
+
+                         Common
+
+                         25% minimum
+
+                         2.
+
+                         Usable
+
+                         25% minimum
+
+                         3.
+
+                         Critical Areas and Buffers
+
+                         No maximum or minimum
+
+             C. For the purpose of this chapter, open space shall be described as follows:
+
+             1. Common Open Space. A parcel or parcels of land within the site designated for a PUD which is designed and intended for the use or enjoyment of the residents, owners, or users of the development. Common open space may contain such complementary structures and improvements as are necessary and appropriate for the benefit and enjoyment of the residents, owners, or users of the development. Common open space shall not include critical areas or their associated buffers as defined within Chapter  15.40  MVMC. Examples of common open space include landscape areas around the perimeter of the PUD, forested buffers, or storage areas for RVs, vehicles and/or boats that comply with MVMC  17.69.035 .
+
+             2. Usable Open Space. Areas which have appropriate topography (generally less than a 10 percent slope), soils, drainage, and size to be considered for development as active and passive recreation areas for all residents, owners, or users of the PUD. For a portion of a critical area buffer to be considered usable open space the applicant must demonstrate that the area to be counted is actually physically usable and that using said area is not in violation of federal, state, or city regulations. For example, a trail located at the edge of a buffer would be considered usable open space; however, only the square footage of the trail itself could be counted, not the entire buffer area in which it is located. Other than a trail system within a buffer it is highly unlikely that any other critical area or their associated buffers will be counted as usable open space. Examples of usable open space include parks with amenities such as play structures and benches and trail systems.
+
+             a. No fewer than one usable open space park or other similar recreational type area (that complies with the specifications outlined within subsection (C)(2) of this section), that is no less than 8,000 square feet in size, shall be located within every planned unit development.
+
+             b. Every planned unit development shall include a trail system that will at the time of development, or sometime in the future, connect to other trail systems or to park areas, or both if applicable.
+
+             3. Critical Areas and Buffers. Areas containing critical areas and their associated buffers as defined within Chapter  15.40  MVMC. (Ord. 3504 § 4, 2010).
+
+        17.69.135  Phasing.
+
+             If an applicant wishes to phase their PUD project the following minimum criteria shall be used in approving a phasing plan:
+
+             A. A phasing plan shall be reviewed and approved as part of the preliminary plat/preliminary PUD process. This means that the city council shall specifically approve the phasing plan as part of the preliminary plat/preliminary PUD process. If a project has already received preliminary plat and PUD approval and the applicant wishes to phase their project they will need to have a major modification approved through the hearing examiner and city council consistent with MVMC  17.69.180 (C).
+
+             B. To approve a phasing plan, each phase (at a minimum) shall include:
+
+             1. Infrastructure such as roads and utility systems to ensure enhanced circulation and public safety as determined by the public works director.
+
+             2. Common and usable open space areas shall be included within each phase proportionate with the size of each phase. For example, if 25 percent of the overall acreage of the plat/PUD is in a particular phase, 25 percent of both the common and usable open space areas shall be created/installed as part of that phase.
+
+             3. Commercial, multifamily, and duplex uses cannot be constructed within any phase until no fewer than two-thirds of the single-family detached residential homes are constructed and have received their final certificates of occupancy. (Ord. 3504 § 4, 2010).
+
+        17.69.140  Preliminary approval criteria.
+
+             The following criteria are the minimum measures by which each proposed PUD will be considered:
+
+             A. PUDs shall be given preliminary approval, including preliminary approval subject to conditions, upon finding by the city that all of the following have been satisfied:
+
+             1. The proposed PUD conforms to:
+
+             a. The Mount Vernon comprehensive plan;
+
+             b. All provisions of the Mount Vernon zoning code which are not proposed for modification;
+
+             c. All engineering design standards;
+
+             d. The critical areas ordinance; and
+
+             e. Any other applicable city, state or federal regulations, policies or plans, except those standards proposed for modification;
+
+             2. Utilities and other public services necessary to serve the needs of the proposed PUD shall be made available, including open spaces, drainage ways, streets, alleys, other public ways, potable water, transit facilities, sanitary sewers, parks, playgrounds, schools, sidewalks and other improvements that assure safe walking conditions for students who walk to and from school;
+
+             3. The probable significant adverse environmental impacts of the proposed PUD, together with any practical means of mitigating adverse impacts, have been considered such that the proposal will not have an unacceptable adverse effect upon the quality of the environment, in accordance with the State Environmental Policy Act, Chapter  43.21C  RCW;
+
+             4. Approving the proposed PUD will serve the public use and interest and adequate provision has been made for the public health, safety, and general welfare;
+
+             5. The proposed PUD satisfies all criteria set forth in MVMC  17.69.020  through  17.69.135 , as applicable; and
+
+             6. The proposed PUD will be superior to or more innovative than conventional development and will provide greater public benefit without additional probable significant adverse impacts to public health, safety or the environment, than available through the use of conventional zoning and/or development standards.
+
+             B. Notwithstanding approval criteria set forth in subsection A of this section, in accordance with RCW  58.17.120 , as now adopted and hereafter amended, a proposed PUD may be denied because of flood, inundation or swamp conditions. Where any portion of the proposed PUD lies within both a flood control zone, as specified by the critical areas ordinance and Chapter  86.16  RCW, and either the one percent flood hazard area or the regulatory floodway, the city shall not approve the PUD unless it imposes a condition requiring the applicant to comply with the critical areas ordinance and any written recommendations of the Washington Department of Ecology. In such cases, no development permit associated with the proposed PUD shall be issued by the city until flood control problems have been resolved.
+
+             C. Preliminary PUD approval does not constitute approval to obtain any building permits or begin construction of the project. (Ord. 3504 § 4, 2010).
+
+        17.69.150  Preliminary PUD review process.
+
+             A. The preliminary PUD application shall be reviewed as a Process IV application (hearing examiner recommendation and city council decision) pursuant to the provisions of Chapter  14.05  MVMC. All procedures for completeness, for administrative, hearing examiner and city council review and for notices of application, hearing and decision shall be governed by those provisions of the municipal code. In addition to those requirements, a sign measuring 44 inches by 44 inches, as provided by the community and economic development department and paid for by the applicant, shall be posted on the property providing notice of the pending land use action.
+
+             B. SEPA review shall be conducted concurrently with the PUD application as provided in Chapter  14.05  MVMC. (Ord. 3504 § 4, 2010).
+
+        17.69.160  Authority to approve, condition or deny preliminary PUD.
+
+             A. The hearing examiner may recommend approval, denial or approval with modifications or conditions deemed reasonable and necessary to protect the public interest, mitigate impacts of the proposed development, and to ensure compliance with the standards and criteria of this chapter and the policies of the comprehensive plan.
+
+             B. The hearing examiner recommendation shall include, at a minimum, findings and conclusions regarding the preliminary PUD’s compliance with design criteria and the appropriateness of any proposed modifications of development standards consistent with MVMC  17.69.120 . A preliminary PUD shall be recommended for approval if, together with reasonable modifications or conditions, the project is determined to comply with the requirements of these sections. A preliminary PUD shall be recommended for denial if, even with reasonable modifications or conditions, the project is determined to not comply with the requirements of these sections.
+
+             C. After receipt of a hearing examiner recommendation on the preliminary PUD pursuant to Chapter  14.05  MVMC, the city council shall conduct a closed record hearing at which it shall consider the findings, conclusions and recommendation of the hearing examiner. The hearing examiner recommendation notwithstanding, the city council shall have the right and ability, based exclusively on the record that was presented before the hearing examiner, to agree or disagree with the findings, conclusions and recommendation of the hearing examiner and shall further have the right and ability, based upon the record that was presented to the hearing examiner, to make such additional or different findings and conclusions that the city council believes are supported by evidence in that record.
+
+             D. Any decision of the city council on the preliminary PUD shall be final and no further local administrative appeal shall be permitted. This preliminary PUD decision of the city council may be appealed to superior court, pursuant to the requirements of Chapter  36.70C  RCW and Chapter  14.05  MVMC. (Ord. 3504 § 4, 2010).
+
+        17.69.170  Performance guarantees – PUD agreement.
+
+             To ensure that the development is carried out in accordance with the proposed design and the conditions of project approval, prior to or concurrent with final approval, the city shall require that the applicant enter into written agreement with the city, which agreement shall constitute covenants, conditions and restrictions (CC&Rs) binding upon all future purchasers, tenants and occupants of the PUD. Recordation of a signed PUD agreement shall be prior to or concurrent with final approval of the PUD. The PUD agreement may include as applicable, and without limitation, the following:
+
+             A. An adequate guarantee providing for the permanent preservation, retention and maintenance of all open space, critical areas and their associated buffers, and other public areas;
+
+             B. Where private reservation of open space area(s) are to be reserved and protected against building development, the applicant shall convey to the city an open space easement over such open space areas restricting the area against any future building or use except as is consistent with providing landscaped open space for the aesthetic and recreational enjoyment of the surrounding residences. Buildings or uses for noncommercial recreational or cultural purposes compatible with the open space objective may be permitted only where specifically authorized as part of the development plan;
+
+             C. The care and maintenance of open space reservations shall be assured either by establishment of an appropriate management organization for the project or by agreement with the city for establishment of a special service district for the project area on the basis of which the city shall provide the necessary maintenance service and levy the cost thereof as a special assessment on the tax bills of properties within the project area. The agreement shall provide the city with the right to carry out, and levy an assessment for the cost of, any maintenance as necessary if it is not otherwise taken care of to the satisfaction of the city. The manner of assuring maintenance and assessing such cost to individual properties shall be determined prior to the approval of the final PUD plans and shall be included in the title to each property;
+
+             D. Ownership and tax liability of private open space reservation shall be established in a manner acceptable to the city; and
+
+             E. The city may require that the site developer provide financial securities, in a form acceptable to the city, that would ensure that the open space areas on the project site are maintained in an acceptable manner as determined by the city. The terms and length of the financial securities shall be determined by the city to ensure that open space areas will be maintained. (Ord. 3504 § 4, 2010).
+
+        17.69.180  Modifications to an approved preliminary or final PUD.
+
+             A. Minor modifications to an approved preliminary or final PUD may be requested by the applicant and approved by the director of community and economic development subject to the provisions for Process II decisions in Chapter  14.05  MVMC. The city may only approve a minor modification if:
+
+             1. The change will not reduce by 10 percent or more any area of landscaping, open space, natural area or parking, so long as the minimum code requirements for these amenities are still met; and
+
+             2. The change will not have the effect of increasing the density; and
+
+             3. The change will not increase the total amount of floor area of a development by 10 percent or more; and
+
+             4. The change will not result in any structure, circulation or parking area being moved significantly in any direction; and
+
+             5. The change will not reduce any setback approved as part of the preliminary plan by more than 10 percent so long as the required minimum setback is met; and
+
+             6. The change will not result in a significant increase in the height of any structure as approved in the preliminary plan so long as the code requirements are still met; and
+
+             7. The change will not move or change the type of access; and
+
+             8. The change will not remove trees or modify other natural features that were to be preserved under the previous action; and
+
+             9. The change will not increase or create any adverse impacts or undesirable effects on the surrounding neighborhood.
+
+             B. Before approving a minor modification of an approved preliminary or final PUD, the director of community and economic development shall make written findings and conclusions that the following exist:
+
+             1. The modification will not violate the terms and agreements of the PUD approval and the intent of the original conditions of approval is not altered;
+
+             2. The modification will not cause the PUD to violate any applicable city policy or regulation; and
+
+             3. The modification will not be inconsistent or cause the preliminary or final PUD to be inconsistent with the decision of the city preliminarily or finally approving the application.
+
+             C. Modifications that do not comply with the items listed in subsections (A)(1) through (9) of this section, or which fail to satisfy the required findings contained in subsection B of this section, shall be processed as a new PUD application. (Ord. 3504 § 4, 2010).
+
+        17.69.190  Building and occupancy permits – Issuance after final PUD approval.
+
+             A. No building permit for a structure other than a temporary contractor’s office or temporary storage building shall be issued for a lot or parcel within an approved PUD prior to a determination by the fire chief or designee that adequate fire protection and access for construction needs exist.
+
+             B. No building permit for a structure other than a temporary contractor’s office, temporary storage building, or model homes shall be issued for a lot or parcel within an approved PUD until either:
+
+             1. All required improvements which will serve the subject lot or parcel have been constructed and the city has accepted a properly executed bill of sale for such improvements; or
+
+             2. All required improvements have been bonded or otherwise guaranteed; or
+
+             3. An improvement bond in an amount adequate, in the determination of the public works director, to guarantee construction of those required public improvements necessary to serve the lot or parcel for which a building permit is sought, has been accepted by the city.
+
+             C. No occupancy permit for a structure other than a temporary contractor’s office or other approved temporary building shall be issued for a structure on a lot or parcel within an approved PUD prior to final inspection and approval of all required improvements which will serve such lot or parcel to the satisfaction of the public works director and the city building official. (Ord. 3504 § 4, 2010).
+
+        17.69.200  Final PUD plan requirements.
+
+             A. The applicant must submit copies of the proposed final PUD plan to the director of community and economic development.
+
+             B. PUDs Consolidated with Subdivision or Short Subdivision Approval. Where the PUD is consolidated with a short subdivision or full subdivision, the applicant shall submit all information required for submittal under Chapters  16.08 ,  16.32 , and  14.05  MVMC, as applicable.
+
+             C. In cases where any restrictive deed covenants or CC&Rs will apply to lots or parcels within a PUD, a typewritten copy of such covenants, bearing all necessary signatures, shall be submitted along with the final plat. Where the recordation of specific deed restrictions or CC&R provisions has been required as a condition of PUD approval, the director of community and economic development shall approve and sign the deed restriction or CC&Rs prior to final PUD approval. The CC&Rs shall clearly delineate the provisions which the city has imposed as a condition of PUD approval and those provisions voluntarily imposed by the applicant/declarant for private purposes. The CC&Rs shall provide that the city will not enforce any private CC&R provisions.
+
+             D. Financial security(ies) as directed by the city shall be submitted to ensure the maintenance of the open space areas.
+
+             E. The final PUD plan shall be accompanied by a current (within 30 days) title company certification of:
+
+             1. The legal description of the total parcel subject to the application;
+
+             2. Those individuals or corporations holding an ownership interest and any security interest (such as deeds of trust or mortgages) or any other encumbrances affecting the title of said parcel. Such individuals or corporations shall sign and approve the final plan prior to final approval;
+
+             3. Any lands to be dedicated to the city shall be confirmed as being owned in fee title by the owner(s) signing the dedication certificate;
+
+             4. Any easements or restrictions affecting the property with a description of purpose and referenced by the auditor’s file number and/or recording number; and
+
+             5. If lands are to be dedicated or conveyed to the city as part of the proposal, an A.L.T.A. title policy may be required by the public works director.
+
+             F. The applicant shall submit for final approval any PUD agreement which may be required in conformance with MVMC  17.69.160 .
+
+             G. The final PUD plan shall be processed as a Process V application as set forth in Chapter  14.05  MVMC, the applicant shall submit all materials as outlined within Chapter  14.05  MVMC, and shall be approved by the city council upon satisfaction of all conditions of approval and all requirements as provided in this section. (Ord. 3504 § 4, 2010).
+
+        17.69.210  Time limitation on final PUD submittal.
+
+             A. Approval of a preliminary PUD shall expire unless the applicant submits a proposed final PUD with all supporting documents in proper form for final approval within five years after preliminary approval.
+
+             1. If the developer fails to receive approval within this period, the preliminary PUD approval shall expire. Any applicant who files a written request with the community and economic development department, at least 30 days before the expiration date, may be granted a one-year extension upon a showing that the applicant has attempted in good faith to complete the PUD within the five-year period. There shall be allowed only one such extension, and any such extensions shall be conditioned upon the PUD meeting all PUD and subdivision requirements which are in effect at the time the extension is granted; and any additional requirements which may be recommended by the community and economic development department at the time the extension is granted by the city council.
+
+             B. If an applicant wishes to exceed the five-year time limitation of preliminary PUD approval they will be required to enter into a development agreement with the city consistent with RCW  36.70B.170 (1). (Ord. 3504 § 4, 2010).
+
+        17.69.220  Filing of final PUD plan.
+
+             Upon review and approval of the final PUD, the director of community and economic development shall return the original to the applicant for recording. The final PUD plan shall be filed in accordance with the applicable procedures provided in MVMC Title  16 . (Ord. 3504 § 4, 2010).

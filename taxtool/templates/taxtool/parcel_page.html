@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Property Tax Report - OpenSkagit{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #f5f9fd; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="os-tax-v2 os-tax-v2--report-page">
+  <header class="os-nav-v2">
+    <a href="/" class="os-nav-v2__logo">
+      <img src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png" alt="" width="26" height="26" class="os-nav-v2__logo-img">
+      OpenSkagit
+    </a>
+    <nav class="os-nav-v2__links" aria-label="Site navigation">
+      <details class="os-nav-v2__menu">
+        <summary>Cities</summary>
+        <div class="os-nav-v2__dropdown">
+          {% for item in city_pages %}
+            <a href="{% url 'city' item.slug %}">{{ item.name }}</a>
+          {% endfor %}
+        </div>
+      </details>
+      <a href="#">Parcels</a>
+      <a href="{% url 'tax_home' %}" aria-current="page">Taxes</a>
+      <a href="#">Permits</a>
+      <a href="#">GIS</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  {% include "taxtool/_bill.html" %}
+
+  <footer class="os-footer-v2">
+    <span class="os-footer-v2__built">Built in Skagit Valley</span>
+    <nav class="os-footer-v2__links" aria-label="Footer navigation">
+      <a href="#">About</a>
+      <a href="#">Data sources</a>
+      <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:hello@openskagit.org">Contact</a>
+    </nav>
+  </footer>
+</div>
+{% endblock %}

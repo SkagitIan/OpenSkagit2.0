@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}Parcel Book AI Search Results{% endblock %}
+
+{% block content %}
+{% include "opportunity/_chrome_open.html" %}
+
+<div class="pb-page-head">
+  <div>
+    <p class="pb-kicker">AI Search</p>
+    <h1>{{ search.title|default:"AI opportunity search" }}</h1>
+    <p class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</p>
+  </div>
+  <div class="pb-view-toggle" aria-label="View">
+    <a class="{% if view_mode == 'list' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=list">List</a>
+    <a class="{% if view_mode == 'card' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=card">Card</a>
+    <a class="{% if view_mode == 'map' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=map">Map</a>
+  </div>
+</div>
+
+<section class="pb-panel pb-ai-summary">
+  {% if search.status == "error" %}
+    <div class="pb-error">{{ search.error }}</div>
+  {% else %}
+    <div>
+      <strong>{{ search.result_count }} cached result{{ search.result_count|pluralize }}</strong>
+      <p class="pb-muted">Saved results are a snapshot. Refresh reruns the same prompt against current data.</p>
+    </div>
+    <div class="pb-card-actions">
+      {% if not search.is_saved %}
+        <form method="post" action="{% url 'opportunity_ai_search_save' search.pk %}">
+          {% csrf_token %}
+          <button class="pb-button" type="submit">Save this opportunity</button>
+        </form>
+      {% else %}
+        <span class="pb-chip">Saved opportunity</span>
+      {% endif %}
+      <form method="post" action="{% url 'opportunity_ai_search_refresh' search.pk %}">
+        {% csrf_token %}
+        <button class="pb-button secondary" type="submit">Refresh results</button>
+      </form>
+    </div>
+  {% endif %}
+  {% if search.assumptions %}
+    <div class="pb-assumptions">
+      {% for assumption in search.assumptions %}
+        <span class="pb-flag">{{ assumption }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% if search.search_plan %}
+  <section class="pb-panel pb-plan-panel">
+    <div class="pb-section-head">
+      <h2>Search interpretation</h2>
+    </div>
+    <div class="pb-plan-grid">
+      <div>
+        <strong>Looking for</strong>
+        <p>{{ search.search_plan.asset_intent|default:"Parcel opportunity" }}</p>
+      </div>
+      <div>
+        <strong>Hard filters</strong>
+        {% for item in search.search_plan.hard_filters %}<span class="pb-pill">{{ item }}</span>{% empty %}<p class="pb-muted">None listed.</p>{% endfor %}
+      </div>
+      <div>
+        <strong>Ranked by</strong>
+        {% for item in search.search_plan.soft_rankers %}<span class="pb-pill">{{ item }}</span>{% empty %}<p class="pb-muted">None listed.</p>{% endfor %}
+      </div>
+      <div>
+        <strong>Excluded</strong>
+        {% for item in search.search_plan.exclusions %}<span class="pb-flag">{{ item }}</span>{% empty %}<p class="pb-muted">No explicit exclusions.</p>{% endfor %}
+      </div>
+    </div>
+    {% if search.result_diagnostics.warnings %}
+      <div class="pb-diagnostics">
+        <strong>Result notes</strong>
+        {% for warning in search.result_diagnostics.warnings %}
+          <span class="pb-flag">{{ warning }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </section>
+{% endif %}
+
+<section class="pb-panel">
+  <div class="pb-feedback">
+    <strong>Was this a good match?</strong>
+    <form method="post" action="{% url 'opportunity_ai_search_feedback' search.pk %}">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}">
+      <button class="pb-button secondary" type="submit" name="rating" value="good">Thumbs up</button>
+      <button class="pb-button secondary" type="submit" name="rating" value="bad">Thumbs down</button>
+      <select name="reason_code" aria-label="Feedback reason">
+        <option value="">Reason optional</option>
+        {% for value, label in feedback_reasons %}
+          <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+      <input name="comment" placeholder="Optional note">
+    </form>
+  </div>
+
+  {% if view_mode == "map" %}
+    <div class="pb-map-view">
+      <div class="pb-map-canvas">
+        {% for row in rows|slice:":18" %}
+          {% if row.map_url %}
+            <a class="pb-map-pin pb-map-pin-{{ forloop.counter }}" href="{{ row.map_url }}" target="_blank" rel="noopener" title="{{ row.location }}">
+              <span>{{ forloop.counter }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="pb-map-list">
+        {% for row in rows %}
+          <article class="pb-map-item">
+            <div>
+              <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
+              <div>{{ row.location }}</div>
+              <small>{{ row.zoning }} / {{ row.current_use }}</small>
+            </div>
+            <div class="pb-icon-actions">
+              {% if row.map_url %}<a class="pb-icon-button" href="{{ row.map_url }}" target="_blank" rel="noopener" title="Open map" aria-label="Open map for {{ row.parcel_number }}"><span class="pb-map-glyph"></span></a>{% endif %}
+              {% include "opportunity/_save_form.html" %}
+            </div>
+          </article>
+        {% empty %}
+          <p class="pb-muted">No parcels matched this AI search.</p>
+        {% endfor %}
+      </div>
+    </div>
+  {% elif view_mode == "card" %}
+    <div class="pb-grid">
+      {% for row in rows %}
+        <article class="pb-card">
+          <div class="pb-card-head">
+            <div>
+              <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
+              <div class="pb-card-location">{{ row.location }}</div>
+            </div>
+            <div class="pb-icon-actions">
+              {% if row.map_url %}<a class="pb-icon-button" href="{{ row.map_url }}" target="_blank" rel="noopener" title="Open map" aria-label="Open map for {{ row.parcel_number }}"><span class="pb-map-glyph"></span></a>{% endif %}
+              {% include "opportunity/_save_form.html" %}
+            </div>
+          </div>
+          <div>
+            <span class="pb-chip" title="{{ row.zone_definition }}">{{ row.zoning }}</span>
+            <span class="pb-chip">{{ row.current_use }}</span>
+          </div>
+          <div>
+            {% for signal in row.signal_labels %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
+          </div>
+          <div>
+            {% for flag in row.risk_flags %}<span class="pb-flag pb-flag-{{ forloop.counter }}">{{ flag }}</span>{% empty %}<span class="pb-muted">No obvious flags</span>{% endfor %}
+          </div>
+          <p class="pb-muted">Assessed {{ row.assessed_value_fmt }} / Land {{ row.land_value_fmt }} / Building {{ row.building_value_fmt }} / {{ row.acres_fmt }}</p>
+          <form class="pb-inline-feedback" method="post" action="{% url 'opportunity_ai_search_feedback' search.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+            <input type="hidden" name="parcel_number" value="{{ row.parcel_number }}">
+            <button type="submit" name="rating" value="good">Good match</button>
+            <button type="submit" name="rating" value="bad">Not right</button>
+          </form>
+        </article>
+      {% empty %}
+        <p class="pb-muted">No parcels matched this AI search.</p>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="pb-result-list">
+      {% for row in rows %}
+        <article class="pb-list-row">
+          <div>
+            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
+            <strong>{{ row.location }}</strong>
+            <span>{{ row.current_use }}</span>
+          </div>
+          <div>
+            <span class="pb-chip" title="{{ row.zone_definition }}">{{ row.zoning }}</span>
+            {% for signal in row.signal_labels|slice:":3" %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
+          </div>
+          <div class="pb-list-values">
+            <strong>{{ row.assessed_value_fmt }}</strong>
+            <span>{{ row.acres_fmt }}</span>
+          </div>
+          <div>
+            {% for flag in row.risk_flags|slice:":2" %}<span class="pb-flag pb-flag-{{ forloop.counter }}">{{ flag }}</span>{% empty %}<span class="pb-muted">No flags</span>{% endfor %}
+          </div>
+          <div class="pb-icon-actions">
+            {% if row.map_url %}<a class="pb-icon-button" href="{{ row.map_url }}" target="_blank" rel="noopener" title="Open map" aria-label="Open map for {{ row.parcel_number }}"><span class="pb-map-glyph"></span></a>{% endif %}
+            {% include "opportunity/_save_form.html" %}
+          </div>
+        </article>
+      {% empty %}
+        <p class="pb-muted">No parcels matched this AI search.</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="pb-pager">
+    {% if has_previous %}<a class="pb-button secondary" href="{{ previous_url }}">Previous</a>{% endif %}
+    <span class="pb-muted">Page {{ page }}</span>
+    {% if has_next %}<a class="pb-button secondary" href="{{ next_url }}">Next</a>{% endif %}
+  </div>
+</section>
+
+{% include "opportunity/_chrome_close.html" %}
+{% endblock %}

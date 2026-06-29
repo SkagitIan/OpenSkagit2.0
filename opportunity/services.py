@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import os
 from dataclasses import dataclass
 from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
@@ -23,9 +25,6 @@ EXEMPT_OR_COMMON_AREA_CODES = {"0", "140", "500", "970"}
 NON_BUILDER_CODES = PUBLIC_OR_CIVIC_CODES | RESOURCE_CODES
 URBAN_RESIDENTIAL_ZONE_GROUPS = {"LIR", "MR"}
 MIXED_OR_COMMERCIAL_REDEVELOPMENT_ZONE_GROUPS = {"MXU", "COM"}
-SORT_FIELDS = {"assessed", "zone", "risk", "location"}
-
-
 BUILDER_ZONE_EXCLUSION_SQL = """
   COALESCE(z.zone_id, '') <> 'R-A'
   AND COALESCE(z.zone_id, '') NOT ILIKE 'RR%%'
@@ -169,8 +168,6 @@ def fetch_tab_rows(
     tab_key: str,
     filters: dict[str, str],
     limit: int = ROW_LIMIT,
-    sort: str = "",
-    direction: str = "desc",
 ) -> list[dict[str, Any]]:
     raw_limit = limit if limit >= 1000 else limit * 5
     if tab_key == "vacant-buildable-lots":
@@ -181,7 +178,7 @@ def fetch_tab_rows(
         rows = _dedupe_rows(teardown_candidates(filters, raw_limit))
     else:
         rows = _dedupe_rows(delinquent_tax_pressure(filters, raw_limit))
-    return _sort_rows(rows, sort, direction)[:limit]
+    return rows[:limit]
 
 
 def tab_counts(filters: dict[str, str]) -> dict[str, str]:
@@ -612,19 +609,6 @@ def _dedupe_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return deduped
 
 
-def _sort_rows(rows: list[dict[str, Any]], sort: str, direction: str) -> list[dict[str, Any]]:
-    if sort not in SORT_FIELDS:
-        return rows
-    reverse = direction != "asc"
-    if sort == "assessed":
-        return sorted(rows, key=lambda row: row.get("assessed_value") or Decimal("0"), reverse=reverse)
-    if sort == "zone":
-        return sorted(rows, key=lambda row: (row.get("zoning") or "").lower(), reverse=reverse)
-    if sort == "risk":
-        return sorted(rows, key=lambda row: ", ".join(row.get("risk_flags") or []).lower(), reverse=reverse)
-    return sorted(rows, key=lambda row: (row.get("location") or "").lower(), reverse=reverse)
-
-
 def _fetch(sql: str, params: list[Any]) -> list[dict[str, Any]]:
     with connection.cursor() as cursor:
         cursor.execute(sql, params)
@@ -636,6 +620,7 @@ def _base_row(row: dict[str, Any], opportunity_type: str) -> dict[str, Any]:
     lat = row.get("lat")
     lng = row.get("lng")
     map_url = f"https://www.google.com/maps/search/?api=1&query={lat},{lng}" if lat is not None and lng is not None else ""
+    map_embed_url = f"https://maps.google.com/maps?q={lat},{lng}&z=17&output=embed" if lat is not None and lng is not None else ""
     land_value = (row.get("impr_land_value") or 0) + (row.get("unimpr_land_value") or 0)
     address = (row.get("address") or "").strip()
     city = _city_label(row.get("city"))
@@ -667,7 +652,10 @@ def _base_row(row: dict[str, Any], opportunity_type: str) -> dict[str, Any]:
         "building_value_fmt": money(row.get("building_value")),
         "score": int(row.get("score") or 0),
         "risk_flags": [],
+        "lat": lat,
+        "lng": lng,
         "map_url": map_url,
+        "map_embed_url": map_embed_url,
         "auditor_url": "",
         "auditor_label": "",
         "auditor_note": "",
@@ -927,6 +915,26 @@ def _percent(value: Any) -> str:
     return f"{amount:.0f}%"
 
 
+def _chart_bounds(values: list[Decimal]) -> tuple[Decimal, Decimal]:
+    low = min(values) if values else Decimal("0")
+    high = max(values) if values else Decimal("0")
+    if low == high:
+        padding = max(abs(high) * Decimal("0.1"), Decimal("1"))
+        return max(Decimal("0"), low - padding), high + padding
+    padding = (high - low) * Decimal("0.12")
+    return max(Decimal("0"), low - padding), high + padding
+
+
+def _chart_y(value: Decimal, low: Decimal, high: Decimal, top_pad: Decimal, plot_height: Decimal) -> Decimal:
+    if high == low:
+        return top_pad + (plot_height / 2)
+    return top_pad + plot_height - ((value - low) / (high - low) * plot_height)
+
+
+def _svg_number(value: Decimal) -> str:
+    return f"{value:.1f}"
+
+
 def _city_label(value: str | None) -> str:
     text = (value or "").strip()
     if not text:
@@ -954,6 +962,501 @@ def _value_history_phrase(growth: Any) -> str:
     if amount <= -5:
         return f"; assessed value down {abs(amount):.0f}% since 2020"
     return "; assessed value roughly flat since 2020"
+
+
+def saved_parcel_numbers(user) -> set[str]:
+    if not getattr(user, "is_authenticated", False):
+        return set()
+    from .models import OpportunitySavedParcel
+
+    return set(OpportunitySavedParcel.objects.filter(user=user).values_list("parcel_number", flat=True))
+
+
+def mark_saved(rows: list[dict[str, Any]], user) -> list[dict[str, Any]]:
+    saved = saved_parcel_numbers(user)
+    for row in rows:
+        row["is_saved"] = row.get("parcel_number") in saved
+    return rows
+
+
+def latest_assessor_sync_summary(user=None) -> dict[str, Any]:
+    try:
+        from assessor_sync.models import AssessorSyncChange, AssessorSyncReport, AssessorSyncRun
+
+        run = AssessorSyncRun.objects.order_by("-started_at").first()
+        if not run:
+            return {"has_run": False, "metrics": [], "changes": []}
+        report = AssessorSyncReport.objects.select_related("run").filter(run=run).order_by("-created_at").first()
+        tables = (run.summary or {}).get("tables", {})
+        applied = sum(int((table or {}).get("applied_rows") or 0) for table in tables.values())
+        inserted = sum(int((table or {}).get("inserted") or 0) for table in tables.values())
+        updated = sum(int((table or {}).get("updated") or 0) for table in tables.values())
+        warnings = sum(int((table or {}).get("warnings") or 0) for table in tables.values())
+        sync_counts = latest_sync_metric_counts(run, user)
+        since_text = sync_since_text(run)
+        changes = list(
+            AssessorSyncChange.objects.filter(run=run)
+            .values("table_name", "record_key", "change_type", "changed_fields", "created_at")
+            .order_by("-created_at")[:6]
+        )
+        return {
+            "has_run": True,
+            "run": run,
+            "tables": tables,
+            "metrics": [
+                {"label": "Parcel signals updated", "value": f"{sync_counts['parcel_signals']:,}", "accent": "teal", "note": since_text},
+                {"label": "New sales", "value": f"{sync_counts['new_sales']:,}", "accent": "gold", "note": since_text},
+                {"label": "New filings", "value": f"{sync_counts['new_filings']:,}", "accent": "red", "note": since_text},
+                {"label": "Watchlist changes", "value": f"{sync_counts['watchlist_changes']:,}", "accent": "purple", "note": since_text},
+            ],
+            "totals": {"applied": applied, "inserted": inserted, "updated": updated, "warnings": warnings},
+            "narrative": sync_narrative_dict(report, run.summary or {}) if report else fallback_sync_narrative(run.summary or {}),
+            "changes": changes,
+        }
+    except Exception:
+        return {"has_run": False, "metrics": [], "changes": []}
+
+
+def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
+    summary = run.summary or {}
+    tables = summary.get("tables", {})
+    sales_summary = tables.get("sales", {}) or {}
+    new_sales = int(sales_summary.get("inserted") or 0)
+    signal_tables = ("sales", "land", "improvements")
+    parcel_signals = sum(int((tables.get(table) or {}).get("applied_rows") or 0) for table in signal_tables)
+    new_filings = new_sales
+    watchlist_changes = 0
+
+    try:
+        sales_rows = _fetch(
+            """
+            SELECT
+              COUNT(*) FILTER (WHERE change_type = 'insert') AS new_sales,
+              COUNT(*) FILTER (
+                WHERE change_type = 'insert'
+                  AND COALESCE(NULLIF(new_row->>'recording_number', ''), NULLIF(new_row->>'excise_number', '')) IS NOT NULL
+              ) AS new_filings
+            FROM assessor_sync_changes
+            WHERE run_id = %s
+              AND table_name = 'sales'
+            """,
+            [run.pk],
+        )
+        if sales_rows:
+            new_sales = int(sales_rows[0].get("new_sales") or new_sales)
+            new_filings = int(sales_rows[0].get("new_filings") or 0)
+
+        parcel_rows = _fetch(
+            """
+            WITH normalized AS (
+              SELECT DISTINCT
+                CASE
+                  WHEN table_name IN ('land', 'improvements') THEN split_part(record_key, '|', 1)
+                  WHEN table_name = 'sales' THEN split_part(record_key, '|', 2)
+                  ELSE ''
+                END AS parcel_number
+              FROM assessor_sync_changes
+              WHERE run_id = %s
+                AND table_name IN ('land', 'improvements', 'sales')
+            )
+            SELECT COUNT(*) AS parcel_signals
+            FROM normalized
+            WHERE parcel_number <> ''
+            """,
+            [run.pk],
+        )
+        if parcel_rows:
+            parcel_signals = int(parcel_rows[0].get("parcel_signals") or parcel_signals)
+
+        saved = saved_parcel_numbers(user)
+        if saved:
+            watchlist_rows_count = _fetch(
+                """
+                WITH normalized AS (
+                  SELECT DISTINCT
+                    CASE
+                      WHEN table_name IN ('land', 'improvements') THEN split_part(record_key, '|', 1)
+                      WHEN table_name = 'sales' THEN split_part(record_key, '|', 2)
+                      ELSE ''
+                    END AS parcel_number
+                  FROM assessor_sync_changes
+                  WHERE run_id = %s
+                    AND table_name IN ('land', 'improvements', 'sales')
+                )
+                SELECT COUNT(*) AS watchlist_changes
+                FROM normalized
+                WHERE parcel_number = ANY(%s)
+                """,
+                [run.pk, list(saved)],
+            )
+            if watchlist_rows_count:
+                watchlist_changes = int(watchlist_rows_count[0].get("watchlist_changes") or 0)
+    except Exception:
+        pass
+
+    return {
+        "parcel_signals": parcel_signals,
+        "new_sales": new_sales,
+        "new_filings": new_filings,
+        "watchlist_changes": watchlist_changes,
+    }
+
+
+def sync_since_text(run) -> str:
+    stamp = run.finished_at or run.started_at
+    if not stamp:
+        return "latest sync"
+    return f"since {stamp:%b %-d} sync" if os.name != "nt" else f"since {stamp:%b %#d} sync"
+
+
+def sync_narrative_dict(report, summary: dict[str, Any] | None = None) -> dict[str, Any]:
+    from .models import ParcelBookSyncNarrative
+
+    narrative = ParcelBookSyncNarrative.objects.filter(assessor_sync_report=report).first()
+    if not narrative:
+        narrative = generate_sync_narrative_for_report(report.pk)
+    if narrative:
+        return {
+            "headline": narrative.headline,
+            "narrative": narrative.narrative,
+            "bullets": narrative.bullets or [],
+            "generated": narrative.generated_by_ai,
+            "model": narrative.model,
+        }
+    return fallback_sync_narrative(summary or getattr(report.run, "summary", {}) or {})
+
+
+def generate_sync_narrative_for_report(report_id: int, force: bool = False):
+    from assessor_sync.models import AssessorSyncReport
+    from .models import ParcelBookSyncNarrative
+
+    report = AssessorSyncReport.objects.select_related("run").get(pk=report_id)
+    existing = ParcelBookSyncNarrative.objects.filter(assessor_sync_report=report).first()
+    if existing and not force:
+        return existing
+
+    summary = report.run.summary or {}
+    model = os.environ.get("OPENAI_SYNC_NARRATIVE_MODEL", os.environ.get("OPENAI_MODEL", "gpt-4.1-mini"))
+    fallback = fallback_sync_narrative(summary)
+    payload = fallback | {"model": "", "generated_by_ai": False, "error": ""}
+
+    if not os.environ.get("OPENAI_API_KEY"):
+        payload["error"] = "OPENAI_API_KEY is not set."
+    else:
+        try:
+            from openai import OpenAI
+
+            response = OpenAI().responses.create(
+                model=model,
+                input=build_sync_narrative_prompt(report.report_text or "", summary),
+                temperature=0.2,
+                max_output_tokens=450,
+            )
+            parsed = parse_sync_narrative_response(response.output_text)
+            payload = {
+                "headline": parsed["headline"],
+                "narrative": parsed["narrative"],
+                "bullets": parsed["bullets"],
+                "model": model,
+                "generated_by_ai": True,
+                "error": "",
+            }
+        except Exception as exc:
+            payload["error"] = str(exc)[:1000]
+
+    narrative, _ = ParcelBookSyncNarrative.objects.update_or_create(
+        assessor_sync_report=report,
+        defaults={
+            "model": payload.get("model", ""),
+            "headline": payload["headline"],
+            "narrative": payload["narrative"],
+            "bullets": payload["bullets"],
+            "summary_snapshot": summary,
+            "generated_by_ai": payload.get("generated_by_ai", False),
+            "error": payload.get("error", ""),
+        },
+    )
+    return narrative
+
+
+def build_sync_narrative_prompt(report_text: str, summary: dict[str, Any]) -> str:
+    return (
+        "You are writing the morning Parcel Book data brief for a real estate opportunity dashboard. "
+        "Use simple, plain English. Be specific, but do not overclaim. Mention that these are public-record "
+        "changes and screening signals, not approvals. Return compact JSON with keys: headline, narrative, bullets. "
+        "bullets must be an array of exactly 3 short strings. Return only the JSON object, with no markdown fences, "
+        "no prose before it, and no prose after it.\n\n"
+        f"Assessor sync summary JSON:\n{json.dumps(summary, default=str)[:6000]}\n\n"
+        f"Latest admin assessor sync report:\n{report_text[:12000]}"
+    )
+
+
+def parse_sync_narrative_response(text: str) -> dict[str, Any]:
+    body = (text or "").strip()
+    if body.startswith("```"):
+        body = body.strip("`").strip()
+        if body.lower().startswith("json"):
+            body = body[4:].strip()
+    start = body.find("{")
+    end = body.rfind("}")
+    if start >= 0 and end > start:
+        body = body[start : end + 1]
+    parsed = json.loads(body)
+    fallback = fallback_sync_narrative({})
+    bullets = [str(item)[:180] for item in (parsed.get("bullets") or [])[:3]]
+    if len(bullets) != 3:
+        bullets = fallback["bullets"]
+    return {
+        "headline": str(parsed.get("headline") or fallback["headline"])[:140],
+        "narrative": str(parsed.get("narrative") or fallback["narrative"])[:900],
+        "bullets": bullets,
+    }
+
+
+def fallback_sync_narrative(summary: dict[str, Any]) -> dict[str, Any]:
+    tables = (summary or {}).get("tables", {})
+    files_changed = int((summary or {}).get("files_changed") or 0)
+    updated = sum(int((table or {}).get("updated") or 0) for table in tables.values())
+    inserted = sum(int((table or {}).get("inserted") or 0) for table in tables.values())
+    applied = sum(int((table or {}).get("applied_rows") or 0) for table in tables.values())
+    return {
+        "headline": "Latest assessor sync is ready",
+        "narrative": (
+            f"The latest assessor sync found {files_changed:,} changed source file(s) and applied "
+            f"{applied:,} public-record updates. Parcel Book is using those changes as screening signals only."
+        ),
+        "bullets": [
+            f"{updated:,} existing records updated",
+            f"{inserted:,} new records inserted",
+            "Review high-signal parcels before relying on them for due diligence",
+        ],
+        "generated": False,
+    }
+
+
+def dashboard_context(user) -> dict[str, Any]:
+    watchlist = watchlist_rows(user, limit=5)
+    return {
+        "watchlist": watchlist,
+        "sync": latest_assessor_sync_summary(user),
+        "tabs": TABS,
+    }
+
+
+def watchlist_rows(user, limit: int | None = None) -> list[dict[str, Any]]:
+    from .models import OpportunitySavedParcel
+
+    qs = OpportunitySavedParcel.objects.filter(user=user).order_by("-updated_at")
+    if limit:
+        qs = qs[:limit]
+    saved_items = list(qs)
+    rows = []
+    for saved in saved_items:
+        detail = parcel_summary(saved.parcel_number)
+        if detail:
+            detail["source_tab"] = saved.source_tab
+            detail["source_tab_label"] = TAB_LOOKUP.get(saved.source_tab, TABS[0]).label if saved.source_tab else "Saved Parcel"
+            detail["saved_at"] = saved.updated_at
+            detail["is_saved"] = True
+            rows.append(detail)
+    return rows
+
+
+def parcel_summary(parcel_number: str) -> dict[str, Any] | None:
+    detail = parcel_detail(parcel_number)
+    if not detail:
+        return None
+    return {
+        "parcel_number": detail["parcel_number"],
+        "parcel_url": detail["parcel_url"],
+        "detail_url_name": "opportunity_parcel_detail",
+        "location": detail["location"],
+        "zoning": detail["zoning"],
+        "zone_definition": detail["zone_definition"],
+        "current_use": detail["current_use"],
+        "assessed_value": detail["assessed_value"],
+        "assessed_value_fmt": detail["assessed_value_fmt"],
+        "land_value_fmt": detail["land_value_fmt"],
+        "building_value_fmt": detail["building_value_fmt"],
+        "acres_fmt": detail["acres_fmt"],
+        "map_url": detail["map_url"],
+        "signal_labels": detail["feature_labels"],
+        "risk_flags": detail["risk_flags"],
+    }
+
+
+def parcel_detail(parcel_number: str) -> dict[str, Any] | None:
+    sql = """
+        SELECT p.parcel_number,
+               concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
+               COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
+               p.owner_name, p.acres, p.land_use, p.utilities,
+               p.assessed_value, p.impr_land_value, p.unimpr_land_value, p.building_value,
+               p.taxable_value, p.total_market_value, p.total_taxes, p.sale_date, p.sale_price, p.sale_deed_type,
+               p.year_built, p.living_area, p.levy_code,
+               z.zone_id, z.zone_name, z.waza_general, z.waza_specific, z.reference_url,
+               ST_Y(ST_Centroid(g.geometry)) AS lat, ST_X(ST_Centroid(g.geometry)) AS lng
+        FROM skagit_parcels p
+        LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
+        LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
+        WHERE p.parcel_number = %s
+          AND p.inactive_date IS NULL
+        LIMIT 1
+    """
+    rows = _fetch(sql, [parcel_number.upper()])
+    if not rows:
+        return None
+    row = rows[0]
+    item = _base_row(row, "Parcel")
+    item.update(
+        {
+            "taxable_value_fmt": money(row.get("taxable_value")),
+            "market_value_fmt": money(row.get("total_market_value")),
+            "total_taxes_fmt": money(row.get("total_taxes")),
+            "sale_price_fmt": money(row.get("sale_price")),
+            "sale_date": row.get("sale_date"),
+            "sale_deed_type": row.get("sale_deed_type") or "",
+            "year_built": row.get("year_built") or "",
+            "living_area": row.get("living_area") or "",
+            "levy_code": row.get("levy_code") or "",
+            "feature_labels": feature_labels(row),
+            "risk_flags": risk_flags(
+                "No parcel geometry" if not item["map_url"] else None,
+                "Unknown zoning" if not row.get("zone_id") else None,
+                "No utility signal" if not utility_labels(row.get("utilities")) else None,
+                "Natural resource zoning" if is_natural_resource_zone(row.get("zone_id"), row.get("zone_name"), row.get("waza_general")) else None,
+            ),
+            "history": parcel_value_history(parcel_number),
+            "history_chart": parcel_value_history_chart(parcel_number),
+            "sales": parcel_recent_sales(parcel_number),
+            "tax_pressure": parcel_tax_pressure(parcel_number),
+            "sync_changes": parcel_sync_changes(parcel_number),
+        }
+    )
+    return item
+
+
+def parcel_value_history(parcel_number: str) -> list[dict[str, Any]]:
+    rows = _fetch(
+        """
+        SELECT tax_year, total_value, land_value, building_value, tax_amount
+        FROM skagit_parcel_history
+        WHERE parcel_number = %s
+        ORDER BY tax_year DESC
+        LIMIT 6
+        """,
+        [parcel_number.upper()],
+    )
+    for row in rows:
+        row["total_value_fmt"] = money(row.get("total_value"))
+        row["tax_amount_fmt"] = money(row.get("tax_amount"))
+    return rows
+
+
+def parcel_value_history_chart(parcel_number: str) -> dict[str, Any]:
+    rows = list(reversed(parcel_value_history(parcel_number)))
+    if not rows:
+        return {"points": [], "value_polyline": "", "tax_polyline": "", "has_data": False}
+
+    chart_width = Decimal("720")
+    chart_height = Decimal("280")
+    left_pad = Decimal("70")
+    right_pad = Decimal("76")
+    top_pad = Decimal("24")
+    bottom_pad = Decimal("42")
+    plot_width = chart_width - left_pad - right_pad
+    plot_height = chart_height - top_pad - bottom_pad
+
+    value_values = [_decimal(row.get("total_value")) or Decimal("0") for row in rows]
+    tax_values = [_decimal(row.get("tax_amount")) or Decimal("0") for row in rows]
+    value_min, value_max = _chart_bounds(value_values)
+    tax_min, tax_max = _chart_bounds(tax_values)
+
+    points = []
+    value_polyline = []
+    tax_polyline = []
+    count = len(rows)
+    for index, row in enumerate(rows):
+        x = left_pad + (plot_width * Decimal(index) / Decimal(max(count - 1, 1)))
+        value = _decimal(row.get("total_value")) or Decimal("0")
+        tax = _decimal(row.get("tax_amount")) or Decimal("0")
+        value_y = _chart_y(value, value_min, value_max, top_pad, plot_height)
+        tax_y = _chart_y(tax, tax_min, tax_max, top_pad, plot_height)
+        point = {
+            "tax_year": row.get("tax_year"),
+            "x": _svg_number(x),
+            "value_y": _svg_number(value_y),
+            "tax_y": _svg_number(tax_y),
+            "total_value": int(value),
+            "tax_amount": int(tax),
+            "total_value_fmt": money(value),
+            "tax_amount_fmt": money(tax),
+        }
+        points.append(point)
+        value_polyline.append(f"{point['x']},{point['value_y']}")
+        tax_polyline.append(f"{point['x']},{point['tax_y']}")
+
+    return {
+        "points": points,
+        "value_polyline": " ".join(value_polyline),
+        "tax_polyline": " ".join(tax_polyline),
+        "has_data": True,
+        "value_min_fmt": money(value_min),
+        "value_max_fmt": money(value_max),
+        "tax_min_fmt": money(tax_min),
+        "tax_max_fmt": money(tax_max),
+    }
+
+
+def parcel_recent_sales(parcel_number: str) -> list[dict[str, Any]]:
+    rows = _fetch(
+        """
+        SELECT sale_date_iso, sale_price_num, deed_type, buyer_name, seller_name
+        FROM sales
+        WHERE parcel_number = %s
+        ORDER BY sale_date_iso DESC NULLS LAST
+        LIMIT 5
+        """,
+        [parcel_number.upper()],
+    )
+    for row in rows:
+        row["sale_price_fmt"] = money(row.get("sale_price_num"))
+    return rows
+
+
+def parcel_tax_pressure(parcel_number: str) -> dict[str, Any] | None:
+    rows = _fetch(
+        """
+        SELECT raw_data->'delinquent_rows' AS delinquent_rows, total_due, source_fetched_at
+        FROM tax_delinquency_taxstatement
+        WHERE parcel_number = %s
+        ORDER BY tax_year DESC
+        LIMIT 1
+        """,
+        [parcel_number.upper()],
+    )
+    if not rows:
+        return None
+    row = rows[0]
+    delinquent_rows = row.get("delinquent_rows") or []
+    total = Decimal("0")
+    if isinstance(delinquent_rows, list):
+        for due in delinquent_rows:
+            total += _decimal(due.get("total")) or Decimal("0")
+    return {"rows": delinquent_rows, "total_fmt": money(total or row.get("total_due")), "source_fetched_at": row.get("source_fetched_at")}
+
+
+def parcel_sync_changes(parcel_number: str) -> list[dict[str, Any]]:
+    try:
+        from assessor_sync.models import AssessorSyncChange
+
+        return list(
+            AssessorSyncChange.objects.filter(record_key=parcel_number.upper())
+            .values("table_name", "change_type", "changed_fields", "created_at")
+            .order_by("-created_at")[:8]
+        )
+    except Exception:
+        return []
 
 
 def filter_query(filters: dict[str, str]) -> str:

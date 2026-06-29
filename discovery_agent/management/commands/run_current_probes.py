@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from getpass import getpass
 from typing import Any
 
@@ -57,6 +58,43 @@ def _artifact_based_reason(idea: dict[str, Any]) -> str:
     text = _idea_text(idea)
     if any(term in text for term in ARTIFACT_TERMS) and "data quality" not in text:
         return "Idea appears to rely on artifact-prone rows without framing the finding as data quality."
+    return ""
+
+
+def _specificity_reason(idea: dict[str, Any]) -> str:
+    short_answer = str(idea.get("short_answer", "")).strip()
+    source_data = str(idea.get("data_used", "")).strip()
+    combined = f"{short_answer} {source_data}"
+    if len(short_answer) < 80:
+        return "Short answer is too thin to be useful for staff review."
+    if not re.search(r"\d", combined):
+        return "Draft lacks concrete numeric evidence in the answer or source data."
+    named_anchor_terms = (
+        "parcel",
+        "zoning",
+        "zone",
+        "land use",
+        "unimproved",
+        "residential",
+        "commercial",
+        "industrial",
+        "agriculture",
+        "open space",
+        "governmental",
+        "outside city",
+        "inside city",
+    )
+    if not any(term in combined.lower() for term in named_anchor_terms):
+        return "Draft lacks a named cohort, place, zoning, land-use, or parcel anchor."
+    vague_phrases = (
+        "some parcels",
+        "certain parcels",
+        "certain land uses",
+        "various parcels",
+        "notable patterns",
+    )
+    if any(phrase in short_answer.lower() for phrase in vague_phrases):
+        return "Draft answer is too generic; it should name the specific cohorts and values."
     return ""
 
 
@@ -196,6 +234,8 @@ class Command(BaseCommand):
                 if not isinstance(idea, dict):
                     continue
                 rejection_reason = _artifact_based_reason(idea)
+                if not rejection_reason:
+                    rejection_reason = _specificity_reason(idea)
                 if not rejection_reason and _score(idea.get("publish_score")) < min_publish_score:
                     rejection_reason = f"publish_score below {min_publish_score}."
                 status = CurrentDraft.Status.REJECTED if rejection_reason else CurrentDraft.Status.DRAFT

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import TaxStatement, TaxStatementError, TaxStatementRun
+from .models import TaxStatement, TaxStatementCheck, TaxStatementError, TaxStatementRun
 
 
 @admin.register(TaxStatement)
@@ -33,6 +33,14 @@ class TaxStatementRunAdmin(admin.ModelAdmin):
     )
     list_filter = ("run_type", "status")
     ordering = ("-started_at",)
+
+
+@admin.register(TaxStatementCheck)
+class TaxStatementCheckAdmin(admin.ModelAdmin):
+    list_display = ("parcel_number", "tax_year", "status", "total_due", "source_fetched_at")
+    list_filter = ("tax_year", "status")
+    search_fields = ("parcel_number",)
+    ordering = ("-source_fetched_at", "parcel_number", "-tax_year")
 
 
 @admin.register(TaxStatementError)

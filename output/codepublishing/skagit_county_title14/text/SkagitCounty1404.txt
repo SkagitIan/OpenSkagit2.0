@@ -1,0 +1,724 @@
+Chapter 14.04 DEFINITIONS
+
+         Chapter 14.04
+DEFINITIONS
+
+             Sections:
+
+              14.04.010    Applicability.
+
+              14.04.020    Definitions.
+
+              14.04.030    Symbols.
+
+        14.04.010  Applicability.
+
+             The definitions of terms and symbols in this chapter apply throughout this Title unless the context plainly indicates otherwise. Definitions related to specific uses can be found in SCC Chapter 14.18—Use Standards. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A); Ord. O20070002 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.04.020  Definitions.
+
+             “ Accessory use ” means a use,  building  or  structure  which is dependent on, and subordinate or incidental to, and located on the same  lot  with a  principal use ,  building , or  structure .
+
+             “ Administrative decision ” means a decision by the  Director  related to a particular Code section that calls for an “ administrative decision ,” typically used in situations where no other discretionary review is needed or a preliminary decision related to a  project permit  application is desirable. See applicable type of review in SCC  14.06.150 .
+
+             “ Agricultural Natural Resource Land ” means land designated as Ag-NRL which is primarily devoted to the commercial production of horticultural (including fiber production such as hybrid cottonwoods), viticultural, floricultural, dairy, apiary, vegetable or animal products or of berries, grain, hay, straw, turf, seed, Christmas trees (not subject to the excise tax imposed by RCW  84.33.100  through  84.33.140 ), finfish in upland hatcheries, or livestock (including livestock raised for personal use), and that has  long-term commercial significance  for agricultural production. The Revised Code of Washington for 1997 has several definitions for  agriculture . The State Hydraulics Code (RCW Chapter  75.20 ) is necessary to implement the riparian protection section of the CAO; it requires the use of the definitions of  agriculture  as given in RCW  36.70A.030 (2) and  84.34.020 .
+
+             “ Agronomic rates ” means a quantity of animal waste, process wastewater, or other crop nutrients that, when added to the soil by mechanical means, will achieve crop production goals. The determination of agronomic rate must take into account the nutrient requirements of the crop production system, including crop nutrient requirements, amounts of nutrients applied as waste or wastewater and commercial fertilizer, amounts of irrigation water, amounts present in the soil, and losses of nutrients through denitrification, ammonia volatilization and leaching, and State water quality standards.
+
+             “ AKART ” means all known, available, and reasonable methods of prevention, control, and treatment. See also the State Water  Pollution  Control Act, RCW  90.48.010  and  90.48.520 .
+
+             “ Alteration, critical area ” means any human-induced change in an existing condition of a critical area or its  buffer . Alterations include, but are not limited to,  grading , filling, channelizing, dredging,  clearing  (vegetation), construction, compaction, excavation, or any other activity that changes the character of the critical area.
+
+             “ Alterations, structural ” means any change in the structural features or elements of a  building .
+
+             “ Anadromous fish ” means fish that spawn and rear in freshwater and mature in the marine environment.
+
+             “ Animal or poultry husbandry ” means the management or production of domesticated animals or fowl.
+
+             “ Appeal ” means a request for a review of the decision of the  decisionmaker  on a  project permit  application or other provision of this Title.
+
+             “ Appellate body ” means the  person  or board authorized to hear an  appeal  of a particular type of  project permit  per SCC  14.06.150 .
+
+             “ Applicant ” means a  person  who submits an  application .
+
+             “ Application ” means a written request or a form provided by the  Department  for a construction or land use action,  project permit , or permit for any activity that would alter or modify the legal description, use, or development of any parcel of land.
+
+             “ Aquifer ” means a geological formation, group of formations, or part of a formation that is capable of yielding a significant amount of water to a well or spring.
+
+             “ Aquifer vulnerability ” means the degree to which  groundwater  may become contaminated depending on the local hydrologic characteristics and amounts of potential  groundwater  contaminant present.
+
+             “ As-built record drawing ” means the final corrected drawings that accurately represent infrastructure of a project as constructed.
+
+             “ Best available science ” means current scientific information used in the process to designate, protect, or restore  critical areas  that is derived from a valid scientific process as defined by WAC  365-195-900  through  365-195-925 .
+
+             “ Best management practices ” means:
+
+             For  agriculture , practices or  structures  designed to reduce the quantities of  pollutants  such as sediment, nitrogen, phosphorus, and animal wastes that are washed by rain and snow melt from  farms  into nearby  surface waters  such as  lakes , creeks, streams, rivers, and estuaries. Agricultural BMPs can include fairly simple changes in practices such as fencing cows from streams to keep animal waste out, planting grass in gullies where water flows off a planted field to reduce the amount of sediment that runoff picks up as it flows to rivers and  lakes , reducing the amount of plowing in fields where row crops are planted to reduce soil erosion and nitrogen and phosphorus loss from fertilizers applied to the crop land. BMPs can also involve  building  structures, such as large animal waste storage tanks that allow farmers to choose when to spread manure on their fields as opposed to spreading it based on accumulated volume.
+
+             For  critical areas , physical or structural tools and/or management practices which, when used singularly or in combination, prevent or reduce adverse impacts to  critical areas  or their  buffers . When used in the context of agricultural activities, “BMPs” refers to the most current conservation practice standards developed by the Natural Resource Conservation Service (NRCS) and contained in the Field Office Technical Guide, or other practices identified by NRCS, an  NRCS technical service provider , or other  qualified professional  as adequately addressing the applicable resource impact issues to meet the requirements of the  Critical Areas  Ordinance, SCC Chapter  14.24 . In cases where new standards have been developed to address requirements under the  Endangered Species  Act, these new standards apply. Where no new standard has been developed, the existing NRCS standard applies. BMPs are used in various voluntary Federal programs that provide technical support and funding incentives.
+
+             For  stormwater , the schedule of activities, prohibition of practices, maintenance procedures, and structural and/or managerial practices approved by  Ecology  that, when used singly or in combination, prevent or reduce the release of  pollutants  and other adverse impacts to waters of Washington State.
+
+             “ Binding site plan ” means a drawing which identifies and shows the areas and locations of all  streets ,  roads , improvements, utilities,  open spaces , and any other matters specified by this Title; contains inscriptions or attachments setting forth such appropriate limitations and conditions for the use of the land as are established by the local government body having authority to approve the  site plan ; and contains provisions making any development conform with the  site plan . A  binding site plan  may be used to divide land.
+
+             “ BOCC ” means the Board of County Commissioners of Skagit County.
+
+             “ Bond ” means a financial guarantee, in the form of a surety  bond , assignment of funds, or irrevocable bank letter of credit, that guarantees compliance with applicable provisions of this Title.
+
+             “ Boundary line adjustment ” means an adjustment of the boundary lines between platted or unplatted  lots  or both that does not create an additional  lot  and is consistent with SCC Chapter  14.72 .
+
+             “ Buffer, critical area ” means an area that is contiguous to and protects a critical area which is required for the continued maintenance, functioning, and/or structural stability of a critical area.
+
+             “ Buffer, generally ” means an area contiguous with a critical area, natural resource land, or  urban growth area  that is required for the integrity, maintenance, function, and stability of the area or land.
+
+             “ Building ” means any  structure  used or intended for supporting or sheltering any use or occupancy.
+
+             “ Building footprint ” means the area of ground covered by a  building .
+
+             “ Building permit ” means a permit issued per SCC Chapter  15.04 , including a mobile home permit.
+
+             “ Cabin ” means a recreational  dwelling unit  used for short-term occupancy (in month-to-month or shorter increments) which may be fully plumbed, served with electrical power, and/or contain a kitchen and bathroom.
+
+             “ CaRD lot ” means a  lot  created through a  CaRD  land division.
+
+             “ City ” means  city  or town.
+
+             “ Clearing ” or “ land clearing ” means the surface removal of vegetation, except those regulated under WAC Title  222  or RCW Chapter  46.04 .
+
+             “ Closed-record appeal ” means an administrative  appeal  on the record to an  appellate body  following an  open-record hearing  where the  appeal  is on the record with no new evidence and only  appeal  argument allowed.
+
+             “ Coastal high hazard areas ” means special flood hazard areas along the coasts that have additional hazards due to wind and wave action. These areas are defined on Flood Insurance Rate Maps as  Zones  V, V1-V30 and VE.
+
+             “ Common area ” means land within or related to a development, not individually owned or dedicated for  public use , that is designed and intended for the common use or enjoyment of the residents and their guests of the development.
+
+             “ Community septic ” means a sewage disposal system that provides a collection network and disposal system for more than one single-family residence. See SCC Chapter  12.05 , On-Site Sewage Code—Rules and Regulations.
+
+             “ Compensatory mitigation ” means replacing project-induced critical area losses or impacts; includes, but is not limited to,  restoration , creation,  enhancement  or preservation.
+
+             “ Comprehensive Plan ” means the policies and proposals approved and recommended by the Planning Agency or initiated by the Board of County Commissioners (the Board) and approved by motion of the Board (1) as a beginning step in planning for the physical development of the County; (2) as the means for coordinating County programs and services; (3) as a source of reference to aid in developing, correlating and coordinating official regulations and controls; and (4) as a means for promoting the general welfare. Such plan must include the required elements set forth in RCW  36.70A.070  and may also include the optional elements set forth in RCW  36.70A.080 , which serves as a policy guide for the subsequent public and private development and  official controls  so as to present all proposed developments in a balanced and orderly relationship to existing physical features and governmental functions.
+
+             “ Comprehensive Plan amendment ” means an amendment or change to the text or maps of the  Comprehensive Plan .
+
+             “ Comprehensive Plan periodic update ” means the review, and, if needed, update of the  Comprehensive Plan  required at multi-year intervals by RCW  36.70A.130 .
+
+             “ Concentrated animal feeding operation ” means a  lot  or facility (other than aquatic) where more than 300 slaughter or feeder animals are confined and fed or maintained for a period of 45  days  or more in any 12-month period, and in which crops, vegetation, forage growth or post-harvest residues are not sustained in the normal  growing season .
+
+             “ Conservation and reserve development ” or “ CaRD ” means a  subdivision  created following the  CaRD  standards currently codified at SCC Chapter  14.78 .
+
+             “ Conservation easement ” means a nonpossessory property interest created for conservation purposes as permitted under State law, including RCW  64.04.130 .
+
+             “ Construction stormwater pollution prevention plan ” or “ CSWPPP ” means a written plan to implement measures to identify, prevent, and control the contamination of point source  discharge  of  stormwater .
+
+             “ Contaminant ” means any chemical, physical, biological or radiological substance that does not occur naturally in  groundwater  or that occurs at concentrations greater than those in natural levels.
+
+             “ Conversion, agricultural land ” means any activity that alters the landscape so as to preclude a parcel or a portion of a parcel from the reasonable possibility of agricultural production. This includes the construction of  structures  or infrastructure or any other alteration which would make agricultural production of a parcel or portion of a parcel technically or economically infeasible. Locating  structures  within an existing developed area used as a homesite, or within an area not more than one acre in size on vacant parcels, must not be considered conversion.
+
+             “ Conversion, forest land ” means a use other than commercial  timber  operations that is a bona fide conversion to an active use which is incompatible with  timber  growing, or where the landowner has declared a conversion as part of the forest practice  application  approved by the Washington State  Department  of Natural Resources (DNR).
+
+             “ Conversion Option Harvest Plan ” or “ COHP ” means a voluntary plan developed by the landowner and approved by the local government entity indicating the limits of harvest areas,  road  locations, and  open space .
+
+             “ County’s NPDES permit ” means the Western Washington Phase II Municipal  Stormwater  Permit, issued by the Washington State  Department  of  Ecology  pursuant to the Federal Clean Water Act.
+
+             “ County’s stormwater infrastructure ” means the County’s municipal separate storm sewer system (MS4), that is the conveyance, or system of conveyances, including  roads  with  drainage  systems, municipal  streets , catch basins, curbs, gutters, ditches, manmade channels, or storm drains, which is owned and operated by Skagit County and designed or used for collecting and conveying  stormwater .
+
+             “ Critical aquifer recharge areas ” or “ aquifer recharge areas ” means areas with a critical recharging effect on  aquifers  used for potable water, including areas where an  aquifer  that is a source of drinking water is vulnerable to contamination that would affect the potability of the water, or is susceptible to reduced recharge.
+
+             “ Critical areas ” means any of the following areas or ecosystems:  critical aquifer recharge areas ,  fish and wildlife habitat conservation areas ,  frequently flooded areas ,  geologically hazardous areas , and  wetlands , as defined in RCW Chapter  36.70A  and this Title.
+
+             “ Critical facility ” means a facility where safety from disaster is of paramount importance. Critical facilities include, but are not limited to, schools,  hospitals , police, fire, and emergency response installations, nursing homes, installations which produce, use, or store  hazardous materials  or  hazardous waste .
+
+             “ Date of decision ” means the date on which a  final decision  or determination occurs.
+
+             “ Days ” means calendar  days , not business or working  days , unless otherwise specified.
+
+             “ Decisionmaker ” means the  person  or body with the authority to grant or deny a permit per SCC  14.06.150 .
+
+             “ Dedication ” means the deliberate appropriation of land by an owner for any general and  public uses , reserving to himself no other rights than such as are compatible with the full exercise and enjoyment of the uses to which the property has been devoted.
+
+             “ Department ” means the Skagit County Planning and Development Services  Department .
+
+             “ Detention facilities ” means  stormwater  and  drainage facilities  designed to store runoff while gradually releasing it at a predetermined controlled rate.  Detention facilities  must include all appurtenances associated with their designed function, maintenance, and security.
+
+             “ Development approval ” means approval by Skagit County of a  project permit .
+
+             “ Development envelope ” means, generally, the portion of a  lot  which may be used for development; as applied to a  CaRD , the portion of a  lot  which may contain a single-family dwelling and accessory  structures .
+
+             “ Development proposal ” means a proposal for development requiring a permit from Skagit County.
+
+             “ Development regulation ” means a control placed on development or land use activities by a county or  city , including, but not limited to, zoning ordinances, critical area ordinances,  shoreline master programs ,  official controls , planned unit development ordinances,  subdivision  ordinances, and  binding site plan  ordinances together with any amendments thereto. A  development regulation  does not include a decision to approve a  project permit  application, as defined in RCW  36.70B.020 , even though the decision may be expressed in a resolution or ordinance of the legislative body of the county or  city .
+
+             “ Development review ” means all review from pre-application meetings through the rendering of a  final decision  pursuant to the provisions of the Skagit County Code.
+
+             “ Dike ” means a manmade embankment or revetment normally set back from the river bank or channel in the floodplain for the purpose of keeping floodwaters from inundating adjacent land; material is normally clay.
+
+             “ Diking ” means a system of levees or banks, usually constructed of earth to control or confine water and create a protection against tidal or floodwaters.
+
+             “ Diking and drainage system ” means any lawfully constructed combination of  dike , levee, and  drainage  which actually does or is designed to prevent inundation and facilitate  drainage  of land upland of the  ordinary high water mark .
+
+             “ Dimensional standards ” means  setbacks ,  lot coverage , maximum height, and other dimensional limitations. See SCC  14.10.100 .
+
+             “ Director ” means the  Director  of the Planning and Development Services  Department , or a designee of the  Director .
+
+             “ Discharge ” means runoff leaving a new development or redevelopment via overland flow, built conveyance systems, or infiltration facilities. A hydraulic rate of flow, specifically fluid flow; a volume of fluid passing a point per unit of time, commonly expressed as cubic feet per second, cubic meters per second, gallons per minute, gallons per day, or millions of gallons per day.
+
+             “ Distance ” means the length of a straight line between two or more points as measured on a horizontal plane.
+
+             “ Drainage ” means the collection, conveyance, containment, and/or  discharge  of surface and  stormwater  runoff.
+
+             “ Drainage facility ” has the same meaning as “ stormwater facility .”
+
+             “ Driveway ” means access to one or two individual  lots .
+
+             “ Dwelling unit ” means a single unit providing complete, independent living facilities for one or more  persons , including permanent provisions for living, sleeping, eating, cooking, and sanitation.
+
+             “ Attached dwelling unit ” means a  dwelling unit  separated by less than six feet from another  dwelling unit .
+
+             “ Detached dwelling unit ” means a  dwelling unit  separated by at least six feet from another  dwelling unit .
+
+             “ Efficiency dwelling unit ” means a  dwelling unit  having a total  floor area  of not less than 220 square feet. The unit must contain a separate closet; kitchen facilities including a kitchen sink, cooking appliance and refrigeration facilities, each having a clear working space of not less than 30 inches in front; and a separate bathroom including a toilet, sink, and bathtub and/or shower.
+
+             “ Ecology ” means the Washington State  Department  of  Ecology .
+
+             “ Enhancement ” means an action which improves the  functions and values  of a stream or  wetland .
+
+             “ Erosion hazard areas ” means those areas containing soils which, according to the United States  Department  of  Agriculture  Soil Conservation Service Soil Classification System, may experience severe to very severe erosion.
+
+             “ Essential public facilities ” means those facilities that are typically difficult to site, enumerated and regulated by SCC Chapter  14.54 .
+
+             “ Existing site conditions ” means the following:
+
+             (1)    For developed sites with  stormwater  and  drainage facilities  that have been constructed to meet the standards in the minimum requirements of this Title, “ existing site conditions ” means the existing conditions on the site.
+
+             (2)    For developed sites that do not have  stormwater  and  drainage facilities  that meet the minimum requirements of this Title, “ existing site conditions ” means the conditions that existed prior to local government adoption of a  stormwater  management program (August 2, 1983). If in question, the  existing site conditions  must be documented by aerial photograph records, or other appropriate means.
+
+             (3)    For all sites in water quality sensitive areas as identified under  Ecology  Minimum Requirement No. 7, Water Quality Sensitive Areas, “ existing site conditions ” means  undisturbed forest , for the purpose of calculating runoff characteristics.
+
+             (4)     Existing site conditions  on undeveloped sites are the existing conditions, except where  timber  harvest activities have preceded development regulated by this Title by less than six years, where  existing site conditions  must be considered  undisturbed forest .
+
+             “ Existing stormwater facilities ” means those facilities constructed or under permitted construction prior to the effective date of this Title.
+
+             “ Exotic ” means any species of plants or animals that is not indigenous to the area.
+
+             “ FAA ” means the Federal Aviation Administration.
+
+             “ Family ” means an individual; or two or more  persons  related by genetics, adoption, marriage, or other legal means; or a household with a group of unrelated  persons  living together. The term “ family ” includes living arrangements of any number of handicapped individuals living together in a single housekeeping unit who are protected by the provisions of the Federal Fair Housing Act and the Washington Housing Policy Act. “Handicap” has the definition in the Federal Fair Housing Act,  42  U.S.C.  3602 (h). An adult  family  home as defined and regulated pursuant to RCW Chapter  70.128  must be treated as a  family  for purposes of this Title.
+
+             “ Family member, immediate ” means individual(s) who is/are related by genetics, adoption, marriage, or other legal means.
+
+             “ Farm ” means land,  buildings  and machinery used in the commercial production of land-based  farm  products.
+
+             “ Farm operation ” means conditions or activities which occur on a  farm  in connection with the commercial production of land-based  farm  products, and includes, but is not limited to, market produce at roadside stands or  farm  markets; preparation for market, delivery to storage or to market, or to carriers for transportation to market; transportation of equipment; noise, dust, fumes, operation of machinery and irrigation pumps; ground and aerial seeding or spraying;  application  of chemical and organic fertilizers, conditioners, insecticides, pesticides and herbicides and associated drift of such materials; and the employment and use of labor.
+
+             “ Farm pond ” means a deepwater habitat created from a nonwetland site in connection with agricultural activities where the  pond  is smaller than five acres.
+
+             “ Farm-to-table event ” means an event focused on serving food and beverages primarily sourced from and for the purpose of promoting local  farms  and providers.
+
+             “ Farmers’ market ” means an open-air short-term market where produce and other related goods are sold. Does not include permanent physical  structures .
+
+             “ Fence ” means that which is constructed or composed of materials joined together in some definite manner in which the prime purpose is to separate, partition, enclose or screen.
+
+             “ Final decision ” means the  final decision  by the  decisionmaker  on a  project permit  per SCC  14.06.150 .
+
+             “ Fish and wildlife habitat conservation areas ” means areas that serve a critical role in sustaining needed habitats and species for the functional integrity of the ecosystem, and which, if altered, may reduce the likelihood that the species will persist over the long term. These areas may include, but are not limited to, rare or vulnerable ecological systems, communities, and habitat or habitat elements including seasonal ranges, breeding habitat, winter range, and movement corridors; and areas with high relative population density or species richness. Counties and cities may also designate locally important habitats and species. “Habitats of local importance” designated as  fish and wildlife habitat conservation areas  include those areas found to be locally important by counties and cities. “ Fish and wildlife habitat conservation areas ” does not include such artificial features or constructs as irrigation delivery systems, irrigation infrastructure, irrigation canals, or  drainage  ditches that lie within the boundaries of, and are maintained by, a port district or an irrigation district or company.
+
+             “ Floor area ” means the area included within the surrounding exterior walls of a  building  or portion thereof, exclusive of vent shafts and courts. The  floor area  of a  building  or portion thereof not provided with surrounding exterior walls is the usable area under the horizontal projection of the roof or floor above.
+
+             “ Flow-sensitive basin ” means a  watershed  drainage area, designated under SCC Chapter  14.24 , where water withdrawals could adversely affect aquatic resources.
+
+             “ Forest crop ” means a crop grown in a wooded area, including, but not limited to,  timber , ferns, moss, boughs, bark, berries, tree, nursery stock, and Christmas trees.
+
+             “ Forest land ” means land primarily devoted to growing trees for long-term commercial  timber  production on land that can be economically and practically managed for such production, including Christmas trees subject to the excise tax imposed under RCW  84.33.100  through  84.33.140  and that has  long-term commercial significance . In determining whether  forest land  is primarily devoted to growing trees for long-term commercial  timber  production on land that can be economically and practically managed for such production, the following factors must be considered:
+
+             (1)    The proximity of the land to urban, suburban, and rural settlements;
+
+             (2)    Surrounding parcel size and the compatibility and intensity of adjacent and nearby land uses;
+
+             (3)    Long-term local economic conditions that affect the ability to manage  timber  production;
+
+             (4)    The availability of public facilities and services conducive to conversion of  forest land  to other uses.
+
+             “ Forest land owner ” means any  person  in actual control of  forest land , whether such control is based either on legal or equitable title, or on any other interest entitling the holder to sell or otherwise dispose of any or all of the  timber  on such land in any manner; provided, that any lessee or other  person  in possession of  forest land  without legal or equitable title to such land must be excluded from the definition of “ forest land owner ” unless such lessee or other  person  has the right to sell or otherwise dispose of any or all of the  timber  located on such  forest land .
+
+             “ Forest practices ” means any activity conducted on or directly pertaining to  forest land  and related to growing, harvesting or processing  timber  as described in WAC Chapter  222-16 . This does not include the conversion of forested land to a use incompatible with growing  timber .
+
+             “ Forest, undisturbed ” means fir or mixed forest with good ground cover consisting of litter and brush and being protected from grazing.
+
+             “ Frequently flooded areas ” means lands in the floodplain subject to a one percent or greater chance of flooding in any given year, or within areas subject to flooding due to high  groundwater . These areas include, but are not limited to, streams, rivers,  lakes , coastal areas,  wetlands , and areas where high  groundwater  forms  ponds  on the ground surface.
+
+             “ Functions and values ” means the beneficial roles served by  critical areas  including, but not limited to, water quality protection and  enhancement ; fish and wildlife habitat; food chain support; flood storage, conveyance and attenuation; ground water recharge and  discharge ; erosion control; wave attenuation; protection from hazards; historical, archaeological, and aesthetic value protection; educational opportunities; and recreation. These beneficial roles are not listed in order of priority.
+
+             “ Geologically hazardous areas ” means areas that, because of their susceptibility to erosion, sliding, earthquake, or other geological events, are not suited to siting commercial, residential, or industrial development consistent with public health or safety concerns.
+
+             “ Grade ” means, for the purposes of SCC Chapter  14.34 , existing or natural ground elevation prior to development or final ground elevation after completion of approved filling or  grading  activity.
+
+             “ Adjacent grade ” means the average height of existing  grade  adjacent to a  building .
+
+             “ Grading ” means any excavating or filling or combination thereof.
+
+             “ Greenhouse ” means a  building  whose roof and sides are made largely of glass or other transparent or translucent material and in which the temperature and humidity can be regulated for the cultivation of delicate or out-of-season plants.
+
+             “ Gross building area ” means the total amount of enclosed space, whether inhabited or uninhabited, on a  lot .
+
+             “ Groundwater ” means water in a saturated  zone  or stratum beneath the surface of land or a  surface water  body.
+
+             “ Growing season ” means the portion of the year when soil temperatures are above biologic zero (41 degrees Fahrenheit) as defined by the Washington State  Wetlands  Identification and Delineation Manual, Washington State  Department  of  Ecology  Publication No. 96-94.
+
+             “ Habitat of local importance ” means and includes a seasonal range or habitat element with which a given species has a  primary association , and which, if altered, may reduce the likelihood that the species will maintain and reproduce over the long-term. These might include areas of high relative density or species richness, breeding habitat, winter range, and movement corridors. These might also include habitats that are of limited availability or high vulnerability to alteration, such as cliffs, talus, and  wetlands .
+
+             “ Hard surface ” means an  impervious surface , a  permeable pavement , or a vegetated roof.
+
+             “ Hazard tree ” means a tree found by an International Society of Arboriculture (ISA) Tree Risk Assessment Qualified (TRAQ) arborist, or other expert approved by the  Director , to have a structural defect, combination of defects or disease resulting in a structural defect that, under the normal range of environmental conditions at the site, will result in the loss of a major structural component of the tree in a manner that will:
+
+             (1)    Damage a  residential structure  or accessory  structure , place of employment or public assembly or approved parking for a  residential structure  or accessory  structure  or place of employment or public assembly;
+
+             (2)    Damage an approved  road  or utility facility; or
+
+             (3)    Prevent emergency access in the case of medical hardship.
+
+             “ Hazardous material ” means any material, including any substance, waste, or combination thereof, which because of its quantity, concentration, or physical, chemical, or infectious characteristics may cause, or significantly contribute to, a substantial present or potential hazard to human health, safety, property or the environment when improperly treated, stored, transported, disposed of, or otherwise managed, as defined under applicable State and Federal laws, rules, and regulations.
+
+             “ Hazardous waste ” means all dangerous waste (DW) and extremely  hazardous waste  (EHW) as defined in RCW  70.105.010 .
+
+             “ Hazardous waste storage ” means the holding of dangerous waste for a  temporary  period as regulated by the State of Washington Dangerous Waste Regulations, WAC Chapter  173-303 .
+
+             “ Hazardous waste treatment ” means the physical, chemical or biological processing of dangerous waste to make wastes nondangerous or less dangerous, safer for transport, amenable for energy or material resource recovery, amenable for storage or reduced in volume.
+
+             “ Hearing body ” means the  person  or board that conducts a  public hearing  per SCC Chapter  14.06 .
+
+             “ Historic site ” means both archaeological and  historic sites ,  structures , or development which contributes to Skagit County’s cultural and historic heritage, including, but not limited to, Indian and pioneer settlements, old  buildings , forts,  trails , landings, bridges, or the sites thereof, together with interpretive facilities.
+
+             “ Hydrogeological susceptibility ” means the degree to which  groundwater  may become contaminated depending on the local hydrologic characteristics.
+
+             “ Hydrogeology ” means the study of subsurface waters, their origin, occurrence, movement and quality.
+
+             “ Hydrograph ” means a graph of runoff rate, inflow rate, or  discharge  rate past a specific point over time.
+
+             “ Impervious surface ” means a nonvegetated surface area which either prevents or retards the entry of water into the soil mantle as under natural conditions prior to development. A nonvegetated surface area which causes water to run off the surface in greater quantities or at an increased rate of flow from the flow present under natural conditions prior to development. Common  impervious surfaces  include, but are not limited to, roof tops, walkways, patios,  driveways , parking  lots  or storage areas, concrete or asphalt paving, gravel  roads , packed earthen materials, and oiled, macadam or other surfaces which similarly impede the natural infiltration of  stormwater . Open, uncovered  retention/detention facilities  are not considered as  impervious surfaces  for the purposes of determining whether the thresholds for  application  of minimum requirements are exceeded. Open, uncovered  retention/detention facilities  must be considered  impervious surfaces  for purposes of runoff modeling.
+
+             “ In-kind compensation ” means to replace  critical areas  (e.g.,  wetlands ) with substitute  critical areas  (e.g.,  wetlands ) whose characteristics closely approximate those destroyed or degraded by a regulated activity.
+
+             “ Junk ” means any solid, nonorganic, nonputrescible  solid waste , including discarded or salvaged materials, scrap metals or other scrap material; used or scrap  building , plumbing, electrical, and heating materials; discarded household appliances, furnishings, and fixtures; or dismantled or demolished machinery including unlicensed and/or  inoperable vehicles .
+
+             “ Lake ” means a naturally or artificially created body of deep (generally greater than 6.6 feet) open water, 20 acres or greater, that persists throughout the year and meets the definitional criteria for a deepwater habitat. Portions of a  lake  that meet the definitional criteria for “ wetland ” are regulated under the  wetland  section of this Title.
+
+             “ Land disturbing activity ” means any activity that results in a change in the existing soil cover (both vegetative and nonvegetative) and/or the existing soil topography. Land disturbing activities include, but are not limited to,  clearing ,  grading , filling and excavation. Compaction that is associated with stabilization of  structures  and  road  construction is also considered  land disturbing activity . Vegetation maintenance practices, including landscape maintenance and gardening, are not considered  land disturbing activity .  Stormwater facility  maintenance is not considered  land disturbing activity  if conducted according to established standards and procedures.
+
+             “ Land division ” means the division of a  lot , tract, or parcel of land into two or more  lots , tracts, parcels, or other divisions of land for sale, development, or lease through any form of  subdivision  or  binding site plan .
+
+             “ Land use impact ” means the impact of a land use on adjacent  wetlands , based on the  land use impacts  in Table 8C-3 (as updated in 2014) of  Department  of  Ecology  Publication No. 05-06-008,  Wetlands  in Washington State, Volume 2, consisting of three levels:
+
+             Low impact land use: land uses which are associated with low levels of human disturbance or low habitat impacts, including, but not limited to, passive recreation,  open space , or forest management land uses.
+
+             Moderate impact land use: land uses which are associated with moderate levels of human disturbance or substantial habitat impacts including, but not limited to, low-density residential (no more than one home per one acre), active recreation, and moderate agricultural land uses.
+
+             High impact land use: land uses which are associated with high levels of human disturbance or substantial habitat impacts including, but not limited to, medium- and high-density residential (more than one home per one acre), multifamily residential, some agricultural practices, and commercial and industrial land uses.
+
+             “ Landslide ” means downslope movement of a mass of soil, or rock, including, but not limited to, rock falls, slumps, mud flows, debris flows, torrents, earth flows and avalanches.
+
+             “ Landslide hazard areas ” means areas potentially subject to risk of mass movement due to a combination of geologic, topographic, and hydrologic factors.
+
+             “ Large woody debris (LWD) recruitment ” means standing  timber  which has the potential, during the course of natural events, to contribute organic materials to the stream, thus providing stream bank protection and in-stream habitat. LWD includes woody material (logs, rootwads, etc.) that are greater than 10 centimeters in diameter and one meter or greater in length.
+
+             “ Legal lot ” means a  lot  that meets the criteria in SCC  14.70.040 .
+
+             “ Long-term commercial significance ” means and includes the growing capacity, productivity, and soil composition of the land for long-term commercial production, in consideration with the land’s proximity to population areas, and the possibility of more intense uses of the land.
+
+             “ Lot ” means a contiguous quantity of land in possession of, owned by or recorded as the property of a  person  and includes any individually numbered or separately designated parcels of property in an approved  subdivision  or development.
+
+             “ Building lot ” means a  lot  created for the purpose of  building  development under the intended use of the  zone .
+
+             “ Parent lot ” means a  lot  that has been divided into  unit lots  through a  unit lot subdivision .
+
+             “ Substandard lot ” means a  lot  that does not meet the minimum size or width requirements or is unable to meet the minimum  setback  requirements of the  zone .
+
+             “ Unit lot ” means a subdivided  lot  within a residential development as created from a  parent lot  and approved through the  unit lot subdivision  process.
+
+             “ Lot certification ” means a determination per SCC  14.06.140  whether a  lot  is eligible for conveyance or both conveyance and development.
+
+             “ Lot coverage ” means the percent of area of a  lot  that may have  buildings  located thereon.
+
+             “ Lot width ” means the length of the front  lot  line, or the  distance  between two side  lot  lines measured at the front  setback  line, whichever is greater.
+
+             “ Low-impact development  (LID)” means a  stormwater  and land use management strategy that strives to mimic pre-disturbance hydrologic processes of infiltration, filtration, storage, evaporation, and transpiration by emphasizing conservation, use of on-site natural features, site planning, and distributed  stormwater  management practices that are integrated into a project design.
+
+             “ Low-impact development best management practices  (LID BMP)” means distributed  stormwater  management practices, integrated into a project design, that emphasize pre-disturbance hydrologic processes of infiltration, filtration, storage, evaporation and transpiration.  LID BMPs  include, but are not limited to, bioretention, rain gardens,  permeable pavements , roof downspout controls, dispersion, soil quality and depth, vegetated roofs, minimum excavation foundations, and water reuse.
+
+             “ Marina ” means a public or private facility that provides vessel storage (wet or dry), launch areas, supplies, and services for recreational or commercial vessels.  Moorage  facilities for recreational  subdivisions  that provide no other services besides  moorage  are considered community docks.
+
+             “ Meteorological tower ” means a  temporary  tower that is primarily designed to measure wind speed and directions plus other data relevant to siting wind energy systems and which are erected for a period of 24 months or less.  Meteorological towers  do not include towers and equipment used by airports, the Washington  Department  of Transportation, or other similar entities to monitor weather conditions.
+
+             “ Mine hazard area ” means an area underlain by or affected by underground mine workings such as adits, tunnels, air shafts and those areas adjacent to  steep slopes  produced by open pit  mining  or quarrying, but excluding any areas where the mine workings have been properly stabilized and closed and made safe consistent with all applicable Federal, State and local laws.
+
+             “ Mineral ” means clay, coal, gravel, industrial  minerals , valuable metallic substances, sand, stone, and other similar solid materials or substances to be excavated from natural deposits on or in the earth for commercial, industrial, or construction use.
+
+             “ Mineral resource lands ” means lands containing  mineral  deposits, both active and inactive, that have a known or potential long-term significance for the extraction of  minerals  and which are in close, economic proximity to locations where the deposits are likely to be used.
+
+             “ Mining ” means the removal of naturally occurring metallic and nonmetallic  minerals  and other related materials from, on and beneath the earth’s surface. Normally, such removal is for commercial and construction purposes.  Mining  in general includes deep pit, open pit, or  surface mining , quarrying, and placer or hydraulic  mining .
+
+             “ Surface mining ” or “ open-pit mining ” involves either the removal of surface material (overburden) to enable the underlying  mineral  resources to be exposed and extracted (quarried) or the direct extraction of naturally occurring surface  minerals  and materials such as rock, sand, gravel and aggregate. Removal of sand from river bars is considered a  surface mining  activity.
+
+             “ Mining operations ” means all mine-related activities, including:
+
+             (1)    The  mining  or extraction of rock, stone, gravel, sand, earth, and other  minerals ;
+
+             (2)    Blasting, equipment maintenance, sorting, crushing, and loading;
+
+             (3)    On-site  mineral  processing including asphalt or concrete batching, asphalt or concrete recycling, and other aggregate recycling;
+
+             (4)    Transporting  minerals  to and from the mine, on-site  road  maintenance,  road  maintenance for  roads  used extensively for  surface mining  activities, traffic safety, and traffic control.
+
+             “ Minor access ” means  private roads  or  roads  listed as class 09 on the County  Road  Information System.
+
+             “ Minor leg(s) ” means, for a “T” or three-leg intersection, the leg of the intersection having the lowest traffic volume. For a four-leg intersection, the two legs having the lowest traffic volumes.
+
+             “ Mitigation banking ” means an approved program including the creation,  restoration , or  enhancement  of  wetland  or other aquatic habitats and their  functions and values  together with a program of administrative functions expressly for the purpose of providing  compensatory mitigation  in advance of proposed  discharges  into waters of the United States, including  wetlands , where mitigation cannot be achieved at the site of the impact.
+
+             “ Mitigation plan ” means a detailed plan indicating actions necessary to mitigate adverse impacts to  critical areas .
+
+             “ Modulation  (of a facade)” means stepping back or extending forward a portion of the facade or exterior wall.
+
+             “ Motorized vehicle recreation facility ” means a privately owned, publicly used outdoor facility for recreation with minimal associated  structures  and  buildings , which do not involve overnight stays, and include continuous operation of motorized vehicles as an inherent part of the facility’s operation. Examples include bumper boats, go-cart tracks, and bumper cars.
+
+             “ Native vegetation ” means, pursuant to the  NPDES permit , vegetation comprised of plant species other than noxious weeds that are indigenous to the coastal region of the Pacific Northwest and which reasonably could have been expected to occur naturally on the site. Examples include trees such as Douglas fir, western hemlock, western red cedar, alder, big-leaf maple, and vine maple; shrubs such as willow, elderberry, salmonberry, and salal; and herbaceous plants such as sword fern, foam flower, and fireweed.
+
+             “ Natural resource lands ” means the lands zoned “Natural resource land” identified in SCC  14.38.010 .
+
+             “ Nonconformance ” or “ nonconforming ” means any use, improvement or  structure  established in conformance with Skagit County rules and regulations in effect at the time of establishment that no longer conforms to the range of uses permitted in the site’s current  zone  or to the current development standards of the Code due to changes in the Code or its  application  to the  subject property .
+
+             “ Non-forestry use ” means an active use of land that is incompatible with  timber  growing.
+
+             “ Non-soil dependent ” means any use which is included in the definition of  agriculture , but which is not dependent on the use of native, indigenous soil or which does not allow continued and future use of the soil for growing crops.
+
+             “ NPDES permit ” means the permit that authorizes Skagit County to  discharge  surface water runoff to the waters of the State, known as the National  Pollutant  Discharge Elimination System (NPDES) and State Waste  Discharge  General Permit for  Discharge  from Small Municipal Separate Storm Sewers in Western Washington, and which is referred to throughout this Code as “the  County’s NPDES permit .”
+
+             “ NPDES permit area ” means the areas of unincorporated Skagit County where the  County’s NPDES permit  applies.
+
+             “ NRCS technical service provider ” means an individual, nonprofit organization, private entity or public agency that has been certified or “conditionally certified” by the Natural Resources Conservation Service to provide technical assistance on behalf of the United States  Department  of  Agriculture  in conservation planning and the design, layout, and checkout of approved conservation practices.
+
+             “ Nuisance ” means all violations of land use ordinances, statutes and regulations contained in this Code are hereby declared to be detrimental to the public health, safety and welfare and as such constitute  nuisances .
+
+             “ Off-site drainage analysis ” means a study of those land areas contributing surface runoff to a development site as well as a study of the existing and predicted impacts of surface runoff from the development site on properties and  drainage  features that have the potential to receive  stormwater  from the development site.
+
+             “ Off-site mitigation ” means to replace  critical areas ,  critical area buffers  or their functions or values away from the site on which the critical area or  buffer  has been adversely impacted by a regulated activity.
+
+             “ Off-street parking space ” means an area adequate for parking a vehicle, located totally outside of any  street  or alley  right-of-way .
+
+             “ Official controls ” means legislatively defined and enacted policies, standards, precise detailed maps and other criteria, all of which control the physical development of a county or any part thereof or any detail thereof. Such  official controls  may include but are not limited to ordinances establishing zoning,  subdivision  control, platting, and adoption of detailed maps.
+
+             “ Ongoing agriculture ” means the continuation of any existing agricultural activity on Agricultural— Natural Resource lands  or Rural Resource— Natural Resource lands , including crop rotations; provided, however, that for lands in RRc-NRL that are subject to the provisions of SCC  14.24.120 , any  property owner  who applies for and receives  CaRD  approval under SCC Chapter  14.78  is, at the time of  CaRD  approval, automatically subject to the  buffer  requirements of SCC  14.24.530  and is no longer subject to the provisions of SCC  14.24.120 . Activities undertaken for the first time after May 13, 1996, the date Skagit County adopted Ordinance 16156, the  Critical Areas  Ordinance, do not constitute “ ongoing agriculture ”; provided, that any lands that were fallow on May 13, 1996, but had been in agricultural production within five years prior to May 13, 1996, are considered “ ongoing agriculture ” for purposes of this definition. Activities that bring an area into agricultural use are not considered  ongoing agriculture . In addition, in order for parcels of land under 20 acres to qualify under this definition, they must meet the criteria of RCW  84.34.020 (2)(b) and (2)(c).
+
+             “ On-site compensation ” means to replace  critical areas  at the site on which a critical area has been impacted by a regulated activity.
+
+             “ Open-record hearing ” means a hearing, conducted by the  hearing body  or officer authorized by SCC  14.06.150  to conduct such hearings, that creates the record through testimony and submission of evidence and information.
+
+             “ Open-record appeal hearing ” means an  open-record hearing  held on an  appeal  if no  open-record pre-decision hearing  has been held on the  project permit .
+
+             “ Open-record pre-decision hearing ” means an  open-record hearing  held prior to the decision on a  project permit .
+
+             “ Open space ” means any land area, the preservation of which in its present use would conserve and enhance natural or scenic resources; or protect streams or water supplies; or promote conservation of soils,  wetlands , beaches or tidal marshes; or enhance the value to the public of abutting or neighboring  parks , forests, wildlife preserves, nature reservations, sanctuaries or other  open space ; or enhance recreation opportunities; or preserve  historic sites . In a  conservation and reserve development  (CaRD),  open space  is an area that meets the specific requirements of SCC Chapter  14.78 .
+
+             “ Private open space ” means privately owned land that has been or will be set aside by operation of the  Critical Areas  Ordinance, by voluntary conservation, or by land reserve easements. The current use  open space  taxation program includes properties utilized for  agriculture ,  timber , and  open space  uses as provided in RCW Chapter  84.24 .
+
+             “ Public open space ” means publicly owned land that has been or will be set aside for  open space  and recreational use.
+
+             “ Operation and maintenance of diking and drainage systems ” means the  clearing  of vegetation, the planting and maintenance of sod covering, the use of rock armor, floodwalls, sandbags, and other flood-fighting materials to prevent inundation, and the making of necessary  repairs  to restore existing  structures  and facilities, such as  dikes , levees, ditches, drains, and pump stations within specific areas identified under SCC  14.24.070 (2)(e).
+
+             “ Ordinary high water mark ” or “ OHWM ” means, on all  lakes , streams, and tidal water is that mark that will be found by examining the bed and banks and ascertaining where the presence and action of waters are so common and usual, and so long continued in all ordinary years, as to mark upon the soil a character distinct from that of the abutting upland, in respect to vegetation as that condition exists on June 1, 1971, or as it may naturally change thereafter; provided, that in any area where the  ordinary high water mark  cannot be found, the  ordinary high water mark  adjoining salt water is the line of mean higher high tide and the  ordinary high water mark  adjoining fresh water is the line of mean high water.
+
+             “ Out-of-kind compensation ” means to replace a critical area (e.g.,  wetland ) with a substitute critical area (e.g.,  wetland ) whose characteristics do not closely approximate those destroyed or degraded by a regulated activity.
+
+             “ Outdoor advertising ” means all publicly displayed messages, such as  signs , billboards, placards, pennants or posters, whose purpose is to provide official and commercial information, direction and advertising.
+
+             “ Outdoor working area ” means the area outside of any enclosed  structures  where commercial or industrial activities of a rural business historically, meaning over several successive years, and predominantly, meaning more than just incidental use, have been conducted.
+
+             “ Overlay zone ” means a  zone  which is applied to a given area in addition to an underlying or base  zone . Properties within an  overlay zone  are subject to the requirements of both the underlying  zone  and the  overlay zone .
+
+             “ Overload tolerance standard ” means the percent of total vehicle miles traveled (VMT) on the County  road  system that is allowed to exist on  roads  with an unmet improvement need. This is a part of the Birdsall LOS method. (For a detailed discussion of this concept, see Chapter V, Level of Service Standards, in the Transportation System Plan.)
+
+             “ Owner occupancy ” means a  property owner  as reflected in title records who makes his or her legal residence at the site as evidenced by filing an affidavit with the Skagit County Auditor’s Office and who resides at the site more than six months out of any given year.
+
+             “ Park model trailer ” means a type of  recreational vehicle  that is primarily designed to provide  temporary  living quarters for recreational, camping, or seasonal use that is built on a single chassis mounted on wheels, has a gross trailer area not exceeding 400 square feet (13.75 square meters) in set-up mode and is certified by the manufacturer as complying with ANSI A119.5.
+
+             “ Party of record ” means any  person  who has testified at a hearing or has submitted a written statement related to a  project permit  application and who provides the County with a complete address, or a  person  who has formally requested to receive information via a written statement with a complete mailing address within the official comment period.
+
+             “ Performance standards ” means criteria or limits related to critical area protection for a particular use or activity.  Performance standards  refer to the degree of allowed hazard, environmental damage,  nuisance  from smoke, dust, noise, glare, odor, erosion and sediment, runoff, liquid, solid, or airborne wastes, fumes or traffic or reduction in environmental  functions and values  resulting from a permitted land use activity.
+
+             “ Permeable pavement ” means pervious concrete, porous asphalt, permeable pavers or other forms of pervious or porous paving material intended to allow passage of water through the pavement section.
+
+             “ Permitted use ” means any use authorized or permitted alone or in conjunction with another use in a specified  zone  and subject to the limitations of the regulations of such  zone .
+
+             “ Person ” means an individual, corporation, partnership, association, or other legal entity.
+
+             “ Planned capacity ” means a measure of roadway traffic capacity based on safety and multimodal roadway use. Employed in the Birdsall method, it takes into consideration the paved width of the roadway and shoulders.  Planned capacity  is often much lower than the actual physical traffic capacity used in Highway Capacity Manual LOS methods.
+
+             “ Pollutant ” means anything which causes or contributes to  pollution , as defined under applicable State and Federal laws, rules, and regulations.
+
+             “ Pollution ” means contamination or other alteration of the physical, chemical, or biological properties of waters of the State.  Pollution  includes, but is not limited to, change in temperature, taste, color, turbidity, or odor of the waters, or such  discharge  of any liquid, gaseous, solid, radioactive, or other substance into any waters of the State as will or is likely to create a  nuisance  or render such waters harmful.
+
+             “ Pond ” means a naturally or artificially created body of deep (generally greater than 6.6 feet) open water, under 20 acres, that persists throughout the year and meets the definitional criteria for a deepwater habitat.  Farm ponds  are excluded from this definition.
+
+             “ Porosity ” means (1) the ratio, usually expressed as a percentage, of the total volume of voids of a given porous medium to the total volume of the porous medium; (2) the volume percentage of the total bulk not occupied by solid particles.
+
+             “ Potentiometric surface ” means an imaginary surface representing the static head of  groundwater  and defined by the level to which water will rise in a tightly cased well.
+
+             “ Pre-development conditions ” means site conditions as they existed prior to manmade alterations other than those alterations that have been made with a prior Skagit County approved  stormwater  drainage plan, or alterations that existed prior to the effective date of the ordinance codified in this Title.
+
+             “ Primary association ” means the fundamental link between a species and land or aquatic area where  anadromous fish , endangered, threatened or sensitive species breed or feed.
+
+             “ Primary or principal building or use ” means that  structure  or use for which a property is primarily used, that may be either permitted outright or through a special use process.
+
+             “ Primary surface ” means a surface longitudinally centered on a runway. When the runway has a specially prepared  hard surface , the  primary surface  extends 200 feet beyond each end of the runway; for military runways or when the runway has no specially prepared  hard surface  or planned  hard surface , the  primary surface  ends at each end of that runway. The elevation of any point on the  primary surface  is the same as the elevation of the nearest point on the runway along its length.
+
+             “ Principal use ” means a use, other than an  accessory use , that is allowed in the  zone  as a permitted or special use.
+
+             “ Private road ” means a  road  located within a tract or easement which is owned by a corporation, homeowners’ association, or held in common interest.
+
+             “ Professional land surveyor ” means a  person  who is qualified to practice land surveying as attested by the surveyor’s legal registration as a  professional land surveyor  in the State of Washington.
+
+             “ Project area ” means that portion of contiguous ownership, included in a  site plan , that is the subject of a  development proposal .
+
+             “ Project engineer ” means the professional engineer responsible for the design of the project, who will affix his/her seal on project plans and  drainage  analyses. The  project engineer  must be licensed in the State of Washington and qualified by experience or examination.
+
+             “ Project permit ” means a “ project permit ” as defined by RCW  36.70B.020 , or any other permit or authorization required by the  Department  for construction or exterior alteration of  structures  (including  building permits  and other permits issued pursuant to SCC Title  15 ), dredging, drilling, dumping, filling, earth movement,  clearing  or removal of vegetation, Class IV general  forest practices , Class III  forest practices  with  Conversion Option Harvest Plans  as defined in WAC Chapter  222-16 , or other site disturbance; but excluding the adoption or amendment of a  comprehensive plan , subarea plan, or  development regulations .
+
+             “ Propagation map ” means a map that shows signal strength and/or other engineering evidence from the proposed site in relation to existing and other proposed cell sites.
+
+             “ Property owner ” means any  person , agent, firm or corporation having a legal or equitable interest in the property.
+
+             “ Protected critical area ” or “ PCA ” means those  critical areas  and associated  buffers  located on a proposed project or activity site that have been identified and designated as  PCAs  through the  critical areas  site assessment and review process.  PCAs  must be put into separate tracts, easements, or  open space  designation, all with protective covenants, as part of a  development proposal  involving a  land division  (i.e.,  short subdivision ,  long subdivision , PUD,  binding site plan , or other form of multiple-lot  land division ). In the case of development proposed on preexisting  lots  where no division of land is involved,  PCAs  must be identified on  site plans  and protected by conditions of approval.  PCAs  must be clearly shown on the face of recorded plats and  site plans  and must be recorded with the County Auditor.  PCAs  can be included in the total acreage for development and may be used in  lot  area calculations.
+
+             “ Public gardens ” means ornamental  display gardens  or produce  farms  open to the public.
+
+             “ Public hearing ” means a hearing at which evidence is presented and testimony is taken.
+
+             “ Public services ” means and includes fire protection and suppression, law enforcement, public health, education, recreation, environmental protection, and other governmental services.
+
+             “ Public sewer system ” means a State-approved sewage disposal system which provides a collection network and disposal system and central sewage treatment facility for a single development, community, or region.
+
+             “ Public water service ” means water service from Skagit PUD or the  City  of Anacortes or another Group A community water system as defined in WAC  246-290-020 .
+
+             “ Qualified professional ” means a  person  with training and four years of work experience in the applicable field or critical area.
+
+             (1)    A  qualified professional  for  wetlands  must have a bachelor’s degree or equivalent in biology,  ecology , soil science, botany, or related field and relevant professional experience in functional assessment and mitigation techniques in Western Washington or comparable systems.
+
+             (2)    A  qualified professional  for  watercourses  and wildlife habitat conservation areas must have a bachelor’s degree or equivalent in wildlife biology,  ecology , fisheries, or closely related field and relevant professional experience in functional assessment and mitigation techniques.
+
+             (3)    A  qualified professional  for preparing geotechnical reports and geotechnical design recommendations must be a professional engineering geologist or civil engineer, licensed in the State of Washington, with relevant professional experience in geotechnical engineering, including experience with  landslide  evaluation.
+
+             (4)    A  qualified professional  for  critical aquifer recharge areas  must be a hydrogeologist, geologist, or professional engineer, licensed in the State of Washington, who has relevant professional experience analyzing geologic, hydrologic, and  groundwater  flow systems.
+
+             (5)    A  qualified professional  for  stormwater  management must be a geologist licensed in the State of Washington or a professional engineer and meet the applicable requirements specified in the  Stormwater Management Manual .
+
+             “ Reasonable alternative ” means, in the context of SCC Chapter  14.24 , those that are capable of being carried out, taking into consideration the overall project purposes, needs and objectives. In determining what is a “ reasonable alternative ” for a proposed development, alteration or activity, the  Department  may consider the purpose, effectiveness, engineering feasibility, commercial availability of technology,  best management practices , safety and cost of the alternative action or proposal.
+
+             “ Receiving waters ” means naturally and/or reconstructed naturally occurring  surface water  bodies, such as creeks, streams, rivers,  lakes ,  wetlands , estuaries, and marine waters, or  groundwater , to which a MS4  discharges .
+
+             “ Recreational vehicle ” means a  park  model RV, trailer, or a vehicle that is:
+
+             (1)    Built on a single chassis;
+
+             (2)    Four hundred square feet or less when measured at the largest horizontal projection;
+
+             (3)    Designed to be self-propelled or permanently towable by a light-duty truck; and
+
+             (4)    Designed not for use as a permanent dwelling but as  temporary  living quarters for recreational, camping, travel, or seasonal use.
+
+             “ Redivision ” means any new  land division  within a  lot  of an existing  land division .
+
+             “ Regulated wetland ” means a  wetland  area and associated  buffers  that would be or have been determined through a  site assessment  to be subject to the provisions of this Code.
+
+             “ Remodel ” means to renew, renovate or make over a part of an existing  building  for the purpose of its appearance or layout. “ Remodel ” may include  repair  or relocation of interior walls but does not include  repair ,  replacement  or relocation of any of the exterior floors, walls or roof.
+
+             “ Repair ” means the reconstruction of a part of an existing  building  for the purpose of its maintenance or as a result of damage.  Repair  may include  replacement  of individual components of an assembly, such as components of a wall or a roof, but does not include  replacement  of the entire assembly. Where  repair  is required to more than 75 percent of the assembly, the assembly is considered to be replaced.
+
+             “ Replacement ” means to put something new in place of something existing as a substitute, such as a  building  or  structure , or part of a  building  or  structure . When the value or extent of the work proposed, as determined by the  Department , exceeds 75 percent of the preconstruction value or extent of the  building ,  structure  or assembly, the  building ,  structure  or assembly is deemed to be completely replaced.
+
+             “ Request for investigation ” means the written statement filed as described in SCC Chapter  14.09 .
+
+             “Requirements (water quality)” means a set of predetermined  distances  (setbacks), design criteria and materials, and other  groundwater  protection measures such as disallowing the use of dry wells, etc.
+
+             “ Residential lot ” means a designated parcel, tract, or area of land established by plat,  subdivision , or as otherwise permitted by law, to be separately owned, used, developed, or built upon for residential use.
+
+             “ Residential structure ” means all  structures  serving or designed as a  dwelling unit , residence or for occupation by residents.
+
+             “ Resource management system plan ” or “ RMS plan ” means a plan that has been prepared in consultation with the Skagit Conservation District or the Natural Resources Conservation Service (NRCS), may or may not include enrollment in the Conservation Reserve  Enhancement  Program (CREP), and includes conservation practices and resource management objectives that meet the NRCS Field Office Technical Guide minimum resource protection standards of Section 4 thereof and quality criteria of Section 3 thereof for each natural resource (soil, water, animals, plants and air).
+
+             “ Restoration ” means measures taken to restore an altered or damaged natural feature including:
+
+             (1)    Active steps taken to restore damaged  wetlands , streams, protected habitat, or their  buffers  to the functioning condition that existed prior to an unauthorized alteration; and
+
+             (2)    Actions performed to reestablish structural and functional characteristics of the critical area that have been lost by alteration, past management activities, or catastrophic events.
+
+             “ Retention/detention facility ” means a type of  drainage facility  designed to either hold water for a considerable length of time and then release it by evaporation, plant transpiration, and/or infiltration into the ground; or to hold surface and  stormwater  runoff for a relatively shorter period of time and then release it to the surface and  stormwater  management system.
+
+             “ Review time period ” means the allowed time for review of a  project permit  application specified for each type of review in Table 14.06.150-1 and calculated by SCC  14.06.170 .
+
+             “ Rezone ” means a change in zoning from one  zone  to another.
+
+             “ Right-of-way ” means a strip of land dedicated for use as a public way.
+
+             “ Riparian area ” means an area adjacent to rivers and streams that contains elements of both aquatic and terrestrial ecosystems that mutually influence each other. Widths must be measured from the  ordinary high water mark  or from the top of bank if the  ordinary high water mark  cannot be identified. Riparian habitat areas include those  riparian areas  severely altered or damaged due to human development activities.
+
+             “ Road ” means “ street .”
+
+             “ Rural character ” means the patterns of land use and development established by a county in the rural element of its Comprehensive Plan:
+
+             (1)    In which  open space , the natural landscape, and vegetation predominate over the built environment;
+
+             (2)    That foster traditional rural lifestyles, rural-based economies, and opportunities to both live and work in rural areas;
+
+             (3)    That provide visual landscapes that are traditionally found in rural areas and communities;
+
+             (4)    That are compatible with the use of the land by wildlife and for fish and wildlife habitat;
+
+             (5)    That reduce the inappropriate conversion of undeveloped land into sprawling, low-density development;
+
+             (6)    That generally do not require the extension of urban government services; and
+
+             (7)    That are consistent with the protection of natural  surface water  flows and  groundwater  and  surface water  recharge and  discharge  areas.
+
+             “ Rural village ” means predominantly residential unincorporated rural communities or centers supported by limited commercial and compatible industrial, and community services which typically include a post office,  church , elementary school, fire hall, grocery store, service station, tavern, restaurant, or other small retail business catering to local rural needs. Compact development within designated boundaries distinguishes a village from surrounding undeveloped land.
+
+             “ Seismic hazard area ” means an area that is subject to severe risk of damage as a result of earthquake-induced ground shaking, slope failure, settlement, soil liquefaction, or surface faulting.
+
+             “ SEPA ” means the Washington State Environmental Policy Act, implemented locally by SCC Chapter  16.12 .
+
+             “ Setback ” means an exclusion area defined by SCC Chapter  14.28  or another section of this Title.
+
+             “ Shoreline Master Program ” or “ SMP ” means the County’s program adopted pursuant to the Shoreline Management Act, RCW Chapter  90.58 .  SMP  development regulations are found in SCC Chapter  14.48 .
+
+             “ Shoreline permit ” means a shoreline substantial development,  variance , conditional use permit, or revision authorized under the County’s  Shoreline Master Program , SCC Chapter  14.48 , or RCW Chapter  90.58 .
+
+             “ Shorelines of the State ” means the total of all shorelines and shorelines of Statewide significance within the State as defined in RCW  90.58.030 , also known as the Shoreline Management Act.
+
+             “ Sign ” means any display of letters, figures, designs, devices, pictures, logos, emblems, insignia, numbers, lines or colors or any combination thereof, visible to the public for the purpose of making anything known or attracting attention. The flag, emblem, insignia, poster or other display of a nation, political unit, educational, charitable, religious or similar group, campaign, nonprofit drive or event or the architectural features or characteristics of a  building  which do not have an advertising message on, or as an integral part, thereof are not included within the meaning of this definition.  Signs  only visible within the  structure  are not included within this definition.
+
+             “ Site assessment ” means a site-specific analysis which identifies the presence of  critical areas , classifies and designates the  critical areas , documents site conditions, analyzes impacts (including long-term impacts) due to short-term or ongoing disturbances, and identifies appropriate mitigation measures.  Site assessments  include  wetland  reports, hydrogeologic reports, geotechnical reports and habitat management plans.
+
+             “ Site plan ” means a scale drawing which shows the areas and locations of all  buildings ,  streets ,  roads , improvements, easements, utilities,  open spaces  and other principal development features for a specific parcel of property.
+
+             “ Site visit ” means a preliminary on-site inspection of an area where an activity has been proposed in order to determine the likelihood that critical area indicators are present. (See “ Site assessment .”)
+
+             “ Six-Year Transportation Improvement Program  (Six-Year TIP)” means a plan or schedule showing specific expenditures for transportation capital projects over a six-year period.
+
+             “ Skagit County Road Standards ” means the standards adopted by the Board of County Commissioners for all County  roads .
+
+             “ Soil dependent ” means any use that is included in the definition of  agriculture  which is dependent on the use of native, indigenous soil and which allows continued and future use of the soil for growing crops.
+
+             “ Soil Survey of Skagit County ” means the most recent U.S.  Department  of  Agriculture  Comprehensive  Soil Survey of Skagit County . The survey provides detailed soils information useful for  wetland  detection, including information on soil hydrology and a series of maps using aerial photography.
+
+             “ Soils engineer ” means a practicing engineer licensed as a professional engineer in the State of Washington who has at least four years of professional employment as an engineer dealing with soil descriptions and characterizations.
+
+             “ Sole-source aquifer ” means an area designated as a  sole-source aquifer  by the Environmental Protection Agency pursuant to the Federal Safe Drinking Water Act.
+
+             “ Solid waste ” means all putrescible and nonputrescible solid and semisolid waste including garbage, ashes and sludge, industrial wastes, swill, demolition and construction wastes, and any other discarded materials.
+
+             “ Solid waste handling facility ” means a facility that manages, stores, collects, transports, treats, uses, processes or disposes of  solid waste , including the recovery and recycling of materials from  solid wastes , the recovery of energy resources from such wastes or the conversion of the energy in such wastes to more useful forms or combinations thereof.
+
+             Species.
+
+             “ Endangered species ” means any fish or wildlife species that is threatened with extinction throughout all or a significant portion of its range and is listed by the State or Federal government as an  endangered species .
+
+             “ Priority species ” means any fish or wildlife species requiring protective measures and/or management guidelines to ensure their persistence at genetically viable population levels as classified by the Washington  Department  of Fish and Wildlife, including endangered, threatened, sensitive, candidate and monitor species, and those of recreational, commercial, or tribal importance.
+
+             “ Threatened species ” means any fish or wildlife species that is likely to become an  endangered species  within the foreseeable future throughout a significant portion of its range without cooperative management or removal of threats, and is listed by the State or Federal government as a  threatened species .
+
+             “ Sprawl ” means the inappropriate conversion of undeveloped land into sprawling low-density development.
+
+             “ Standards, groundwater ” means standards established by EPA regulations and/or State of Washington regulations, which are represented by health-based numbers such as the maximum  contaminant  levels (MCL).
+
+             “ Steep slopes ” means slopes that meet the criteria listed in SCC Chapter  14.24 .
+
+             “ Stormwater ” means runoff during and following precipitation and snowmelt events, including surface runoff,  drainage , or interflow.
+
+             “ Stormwater facility ” means a constructed component of a  stormwater  drainage system designed or constructed to perform a particular function, or multiple functions.  Stormwater facilities  include, but are not limited to, pipes, swales, ditches, culverts,  street  gutters, detention  ponds , retention  ponds , constructed  wetlands , infiltration devices, catch basins, oil/water separators, and biofiltration swales.
+
+             “ Stormwater Management Manual ” means the County’s manual for design of  stormwater facilities , as adopted in SCC  14.32.040 .
+
+             “ Stormwater system ” means all natural and manmade systems that function together or independently to collect, store, purify,  discharge , and convey  stormwater . Included are all  stormwater  and  drainage facilities  as well as natural systems such as streams and creeks and all natural systems which convey, store, infiltrate, or divert  stormwater .
+
+             “ Stormwater treatment and flow control BMPs/facility ” means  detention facilities , treatment BMPs/facilities, bioretention, vegetated roofs, and  permeable pavements  that help meet Minimum Requirement No. 6 (treatment), Minimum Requirement No. 7 (flow control), or both.
+
+             “ Stream type map ” means a map displaying the  Department  of Natural Resources classification system developed for waters of the State as part of the State’s  forest practices  regulations. This classification system generally categorizes waters of the State according to domestic use, use by substantial numbers of anadromous or resident game fish, and significance for the protection of downstream water quality. The system is described in WAC  222-16-030 .
+
+             “ Streambank stabilization to protect designated agricultural lands ” means and includes, but is not limited to, log and debris removal, bank protection (including riprap, jetties, and groins), gravel removal and erosion control consistent with RCW  75.20.103 .
+
+             “ Street ” means a public or private thoroughfare which provides the principal access to abutting properties. Specific  street  designations are outlined in the  Skagit County Road Standards .
+
+             “ Structure ” means that which is built or constructed, an edifice or  building  of any kind, or any piece of work artificially built up or composed of parts joined together in some definite manner excluding  fences  under six feet in height.
+
+             “ Subdivision ” means a short or  long subdivision . The preferred term for any kind of division is “ land division .”
+
+             “ Final subdivision ” means the final drawing of the  subdivision  and  dedication  prepared for filing for record with the County Auditor and containing all elements of requirements set forth in this Title.
+
+             “ Long subdivision ” means the division of land into five or more  lots , tracts, parcels, sites, or divisions for the purpose of sale, lease, or development, and includes the resubdivision of land.
+
+             “ Preliminary subdivision ” means a neat and approximate drawing of a proposed  subdivision  showing the general layout of  streets  and alleys,  lots , blocks, and other elements of a  subdivision  consistent with the requirements of this Title. The  preliminary subdivision  must be the basis for the approval or disapproval of the general layout of the  subdivision .
+
+             “ Short subdivision ” means the division of land into four or fewer  lots , tracts, parcels, or sites for the purpose of sale, lease, or development.
+
+             “ Subject property ” means the tract of land that is the subject of the permit or approval action, as defined by the full legal description of all parcels involved in the proposed development.
+
+             “ Surface water ” means waters that flow over the land surface and frequently interact with  groundwater .
+
+             “ Temporary ,” as the term relates to premanufactured or site-built  structures , and  recreational vehicles  (including  park model trailers ), means occupied and existing on a  lot  for no more than 180  days  during any 12-month period unless otherwise stipulated through official approval.
+
+             “ Temporary manufactured home ” means the  temporary  placement of one manufactured home on a parcel with an existing residence to accommodate the housing needs of disabled or elderly  family  members or to house one  farm  worker and his/her immediate  family . Documentation of the need for nearby care or that the nature of the employee’s work requires said employee to be immediately available to the job site is required by a doctor and/or physician or by the  farm  owner/operator. This second  temporary  dwelling unit must be removed from the property when the  family  member or  farm  employee is no longer using the manufactured home.
+
+             “ Tideland ” means the land on the shore of marine water bodies between ordinary high water or near high water and the line of extreme low tide which is submerged daily by tides.
+
+             “ Timber ” means forest trees standing or down of a commercial species, including Christmas trees.
+
+             “ Timber land ” means any parcel of land that is five or more acres or multiple parcels of land that are contiguous and total five or more acres which is devoted primarily to the growth and harvest of  forest crops  for commercial purposes. A  timber  management plan must be filed with the County legislative authority at the time an  application  is made for classification as  timber land  pursuant to this Title, or when a sale or transfer of  timber land  occurs and a notice of classification continuance is signed.
+
+             “ TSM strategies ” means increased public facility service, ride-sharing programs, demand management, and other transportation systems management techniques.
+
+             “ Unit lot subdivision ” means a  land division  created by the division of a  parent lot  into two or more  unit lots  within a development, through the  unit lot subdivision  process.
+
+             “ Unlicensed/inoperable vehicle ” means an unlicensed or  inoperable vehicle , except a  farm  vehicle, or any vehicle stored in a legally constructed  building .
+
+             “ Urban governmental services ” or “ urban services ” means and includes those governmental services historically and typically delivered by cities, and include storm and sanitary sewer systems, domestic water systems,  street  cleaning services, fire and police protection services, public transit services, and other public utilities associated with urban areas and normally not associated with nonurban areas.
+
+             “ Urban growth ” means and refers to growth that makes intensive use of land for the location of  buildings ,  structures , and impermeable surfaces to such a degree as to be incompatible with the primary use of such land for the production of food, other agricultural products, or fiber, or the extraction of  mineral  resources, rural uses, rural development, and  natural resource lands  designated pursuant to RCW  36.70A.170 . A pattern of more intensive rural development, as provided in RCW  36.70A.070 (5)(d), is not  urban growth . When allowed to spread over wide areas,  urban growth  typically requires  urban governmental services . “Characterized by  urban growth ” refers to land having  urban growth  located on it, or to land located in relationship to an area with  urban growth  on it as to be appropriate for  urban growth .
+
+             “ Urban growth area ” means an area designated by a county pursuant to RCW  36.70A.110 .
+
+             “ Urban reserve development permit ” means a permit issued per SCC Chapter  14.57 .
+
+             “Use” means the specific purpose for which land or a  building  is designated, arranged, intended, or for which it is or may be occupied or maintained.
+
+             “ V-ditching ” means the practice of cutting ditches into a field after the crop has been harvested in the fall where necessary to drain surface and  groundwater  from the field during the winter months. This practice is necessary to allow sufficient time in the spring for the fields to dry out before planting and to prevent the inundation of overwintering crops. V-ditches are then plowed under when the field is planted in the spring.
+
+             “ Variance ” means a grant of relief from the requirements of this Code that permits construction in a manner that would otherwise be prohibited by this Code. See SCC Chapter  14.58 .
+
+             “ Volcanic hazard area ” means those areas subject to pyroclastic flows, lava flows, debris avalanches, and inundation by debris flows, mudflows, lahars or related flooding resulting from volcanic activity.
+
+             “ Water-dependent ” means a  structure  for commerce or industry which cannot exist in any other location and is dependent on the water by reason of the intrinsic nature of its operations.
+
+             “ Watercourse ” means all  artificial watercourses ,  modified natural watercourses , and  natural watercourses , as defined by this Section.
+
+             “ Artificial watercourse ” means ditches and other water conveyance systems, not constructed from  natural watercourses , which are artificially constructed and actively maintained for irrigation and  drainage .  Artificial watercourses  include lateral field ditches used to drain farmland where the ditch did not replace a  natural watercourse .
+
+             “ Modified natural watercourse ” means that segment of a natural stream that has been modified and is maintained by  diking  and  drainage  districts, and where such modification activity was done as a permitted activity that has undergone environmental review (SEPA and/or NEPA), and is in compliance with all necessary permits in effect at the time of its approval.
+
+             “ Natural watercourse ” means any stream in existence prior to settlement that originated from a natural source. An example of a  natural watercourse  is a stream that originates in the foothills, flows through agricultural and/or urban land, and empties into a saltwater bay or another  watercourse .
+
+             “ Watershed ” means a geographic region within which water drains into a particular river, stream or body of water.
+
+             “ Wellhead protection area ” means the surface and subsurface recharge area through which  contaminants  are likely to pass and eventually reach the point or points of withdrawal for a well(s), wellfield(s) or  surface water  that supplies a public water system, for which a wellhead protection program is required pursuant to WAC Chapter  246-290 .
+
+             “ Wetland ” or “ wetlands ” means areas that are inundated or saturated by  surface water  or  groundwater  at a frequency and duration sufficient to support, and that under normal circumstances do support, a prevalence of vegetation typically adapted for life in saturated soil conditions.  Wetlands  generally include swamps, marshes, bogs, and similar areas.  Wetlands  do not include those artificial  wetlands  intentionally created from nonwetland sites, including, but not limited to, irrigation and  drainage  ditches, grass-lined swales, canals,  detention facilities , wastewater treatment facilities,  farm ponds , and landscape amenities, or those  wetlands  created after July 1, 1990, that were unintentionally created as a result of the construction of a  road ,  street , or highway.  Wetlands  may include those artificial  wetlands  intentionally created from nonwetland areas created to mitigate conversion of  wetlands .
+
+             “ Wetland delineation ” means mapping  wetlands  and establishing a  wetland  edge or boundary in accordance with the manual adopted under RCW  36.70A.175  pursuant to RCW  90.58.380 .
+
+             “ Zone ” means a legislatively defined and enacted policy, including standards, a detailed map and other criteria, all of which control and define areas of physical development of the County or any part thereof or any detail thereof and which are classified by the zoning ordinance as available for certain uses and unavailable for certain other uses. (Ord. O20260004 § 1 (Att. 2); Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A); Ord. O20240010 § 1 (Att. 1); Ord. O20240005 § 1 (Exh. A); Ord. O20230007 § 1 (Att. 1); Ord. O20220012 § 1 (Att. 2); Ord. O20220011 § 1 (Att. 2); Ord. O20220008 § 1 (Att. 1); Ord. O20220006 § 1 (Att. 2); Ord. O20200003 (Att. A); Ord. O20180010 § 1; Ord. O20160004 § 6 (Att. 6); Ord. O20150006 § 2 (Att. A); Ord. O20150005 § 3 (Att. 1); Ord. O20150002 § 3 (Att. 2); Ord. O20110013 Attch. A (part); Ord. O20110007 Attch. 1 (part); Ord. O20110002 Attch. 2 (part); Ord. O20100002 Exh. 1 (part); Ord. O20090011 Attch. 2 (part); Ord. O20090010 Attch. 1 (part); Ord. O20080014 (part); Ord. O20080012 (part); Ord. O20080009 (part); Ord. O20080004 (part); Ord. O20070009 (part); Ord. O20070002 (part): Ord. O20060007 Exh. D § 1; Ord. O20050009 (part); Ord. O20050007 § 12; Ord. O20050003 (part); Ord. O20030021 (part); Ord. O20030020 (part); Ord. O20030014 (part); Ord. O20020011 (part); Ord. O20020010 (part); Ord. O20020003 (part); Ord. 18375 § 7, 2001; Ord. 18069 Appx. A (part), 2000; Ord. 17938 Attch. F (part), 2000)
+
+        14.04.030  Symbols.
+
+             (1)    “Less than” is indicated by the &lt; symbol.
+
+             (2)    “Less than or equal to” is indicated by the ≤ symbol.
+
+             (3)    “Greater than” is indicated by the &gt; symbol.
+
+             (4)    “Greater than or equal to” is indicated by the ≥ symbol. (Ord. O20240005 § 1 (Exh. A))

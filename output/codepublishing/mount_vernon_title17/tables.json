@@ -1,0 +1,1718 @@
+[
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1709.html",
+    "chapter_title": "Chapter 17.09 DISTRICTS ESTABLISHED – ZONING MAP",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.09.010 Districts established and designated.",
+    "rows": [
+      [
+        "ZONING DESIGNATION",
+        "COMPREHENSIVE PLAN DESIGNATION",
+        "MINIMUM NET DENSITY",
+        "MAXIMUM NET DENSITY (See Note 1)",
+        "MINIMUM LOT SIZE (See Note 2)"
+      ],
+      [
+        "RESIDENTIAL ZONING DISTRICTS:"
+      ],
+      [
+        "R-1, 7.0 Single-Family Residential",
+        "High Density Single-Family (SF-HI)",
+        "4.0 du/acre",
+        "7.26 du/acre",
+        "4,500 square feet"
+      ],
+      [
+        "R-1, 5.0 Single-Family Residential",
+        "High Density Single-Family (SF-HI)",
+        "4.0 du/acre",
+        "5.73 du/acre",
+        "6,000 square feet"
+      ],
+      [
+        "R-1, 4.0 Single-Family Residential",
+        "Medium Density Single-Family (SF-MED)",
+        "4.0 du/acre",
+        "4.54 du/acre",
+        "7,500 square feet"
+      ],
+      [
+        "R-1, 3.0 Single-Family Residential",
+        "Medium Density Single-Family (SF-MED)",
+        "3.23 du/acre (See the land use element of the comprehensive plan for minimum density policies)",
+        "3.23 du/acre",
+        "9,000 square feet"
+      ],
+      [
+        "R-2 Two-Family Residential District",
+        "Low Density Multifamily (MF-LO)",
+        "8.0 du/acre",
+        "10 du/acre",
+        "6,500 square feet for a duplex or townhouse unit"
+      ],
+      [
+        "R-3 Multifamily Residential District",
+        "Medium-High Density Multifamily (MF-MH)",
+        "10.0 du/acre",
+        "12 du/acre (Increased density up to a maximum of 15 du/acre may be achieved if at least 50% of the required parking spaces are located in an enclosed area beneath the habitable floors of the building or complex.)",
+        "N/A"
+      ],
+      [
+        "R-4 Multifamily Residential District",
+        "Medium-High Density Multifamily (MF-MH)",
+        "10.0 du/acre",
+        "15 du/acre (Increased density up to a maximum of 20 du/acre may be achieved if at least 50% of the required parking spaces are located in an enclosed area beneath the habitable floors of the building or complex.)",
+        "N/A"
+      ],
+      [
+        "R-A Residential Agricultural District",
+        "Agricultural with Density Transfer (AG)",
+        "1.24 du/acre (See the land use element of the comprehensive plan for minimum density policies)",
+        "1.24 du/acre",
+        "35,000 square feet"
+      ],
+      [
+        "COMMERCIAL, INDUSTRIAL, OFFICE, PUBLIC AND MISCELLANEOUS ZONING DISTRICTS:"
+      ],
+      [
+        "Public (P)",
+        "Government Center Churches Schools Community or Neighborhood Park Open Space Cemetery South Kincaid Subarea",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Residential Office District (R-O)",
+        "Residential Office/Professional Office",
+        "N/A",
+        "N/A",
+        "4,500 square feet"
+      ],
+      [
+        "Health Care Development District (HD)",
+        "Health Care Development",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Professional Office District (P-O)",
+        "Residential Office/Professional Office",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Mobile Home Park District (MHP)",
+        "High Density Single-Family (SF-HI)",
+        "8 double-width or 10 single-width manufactured homes per acre",
+        "8 double-width or 10 single-width manufactured homes per acre",
+        "5 acres"
+      ],
+      [
+        "Central Business District (C-1a)",
+        "Downtown Retail or South Kincaid Subarea (See note 3)",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Central Business District (C-1b)",
+        "Support Commercial",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Central Business District (C-1c)",
+        "South Kincaid Subarea",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "General Commercial District (C-2)",
+        "Retail Malls, General Commercial, and Commercial/Industrial (See note 4)",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Community Commercial District (C-3)",
+        "Community Retail, Mixed Use Center",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Neighborhood Commercial District (C-4)",
+        "Neighborhood Retail, Mixed Use Center",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Limited Commercial (LC)",
+        "Commercial/Limited Industrial Commercial/Industrial",
+        "N/A",
+        "N/A",
+        "6,000 square feet"
+      ],
+      [
+        "Commercial/Limited Industrial District (C-L)",
+        "Commercial/Limited Industrial Commercial/Industrial",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Light Manufacturing and Commercial District (M-1)",
+        "Commercial/Industrial Commercial/Limited Industrial",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Industrial District (M-2)",
+        "Commercial/Industrial",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      [
+        "Floodplain District (F-1)",
+        "Open Space/Cemetery",
+        "N/A",
+        "N/A",
+        "N/A"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1709.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon17100.html",
+    "chapter_title": "Chapter 17.100 WIRELESS TELECOMMUNICATIONS TOWERS AND ANTENNAS",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.100.070 Conditional use permits.",
+    "rows": [
+      [
+        "Off-Site Use/Designated Area",
+        "Separation Distance"
+      ],
+      [
+        "Single-family or duplex residential units 1",
+        "200 feet or 300% height of tower, whichever is greater"
+      ],
+      [
+        "Vacant single-family or duplex residentially zoned land which is either platted or has preliminary subdivision plan approval which is not expired",
+        "200 feet or 300% height of tower 2, whichever is greater"
+      ],
+      [
+        "Vacant unplatted residentially zoned lands 3",
+        "100 feet or 100% height of tower, whichever is greater"
+      ],
+      [
+        "Existing multifamily residential units greater than duplex units",
+        "100 feet or 100% height of tower, whichever is greater"
+      ],
+      [
+        "Nonresidentially zoned lands or nonresidential uses",
+        "None; only setbacks apply"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17100.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon17100.html",
+    "chapter_title": "Chapter 17.100 WIRELESS TELECOMMUNICATIONS TOWERS AND ANTENNAS",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "17.100.070 Conditional use permits.",
+    "rows": [
+      [
+        "(distances measured in linear feet)",
+        "Lattice",
+        "Guyed",
+        "Monopole 75 ft. in height or greater",
+        "Monopole less than 75 ft. in height"
+      ],
+      [
+        "Lattice",
+        "5,000",
+        "5,000",
+        "1,500",
+        "750"
+      ],
+      [
+        "Guyed",
+        "5,000",
+        "5,000",
+        "1,500",
+        "750"
+      ],
+      [
+        "Monopole 75 ft. in height or greater",
+        "1,500",
+        "1,500",
+        "1,500",
+        "750"
+      ],
+      [
+        "Monopole less than 75 ft. in height",
+        "750",
+        "750",
+        "750",
+        "750"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17100.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1715.html",
+    "chapter_title": "Chapter 17.15 R-1 SINGLE-FAMILY DETACHED RESIDENTIAL DISTRICT",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.15.020 Subdistricts – Lot area requirements.",
+    "rows": [
+      [
+        "ZONING DESIGNATION",
+        "COMPREHENSIVE PLAN DESIGNATION",
+        "MINIMUM NET DENSITY",
+        "MAXIMUM NET DENSITY (See Note 1)",
+        "MINIMUM LOT SIZE (See Note 2)"
+      ],
+      [
+        "R-1, 7.0 Single-Family Residential",
+        "High Density Single-Family (SF-HI)",
+        "4.0 du/acre",
+        "7.26 du/acre",
+        "4,500 square feet"
+      ],
+      [
+        "R-1, 5.0 Single-Family Residential",
+        "High Density Single-Family (SF-HI)",
+        "4.0 du/acre",
+        "5.73 du/acre",
+        "6,000 square feet"
+      ],
+      [
+        "R-1, 4.0 Single-Family Residential",
+        "Medium Density Single-Family (SF-MED)",
+        "4.0 du/acre",
+        "4.54 du/acre",
+        "7,500 square feet"
+      ],
+      [
+        "R-1, 3.0 Single-Family Residential",
+        "Medium Density Single-Family (SF-MED)",
+        "3.23 du/acre (See the land use element of the comprehensive plan for minimum and maximum density policies)",
+        "3.23 du/acre",
+        "9,000 square feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1715.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1715.html",
+    "chapter_title": "Chapter 17.15 R-1 SINGLE-FAMILY DETACHED RESIDENTIAL DISTRICT",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "17.15.050 Conditional uses.",
+    "rows": [
+      [
+        "Example:",
+        "20-acre site"
+      ],
+      [
+        "",
+        "6 acres of public right-of-way"
+      ],
+      [
+        "",
+        "4.5 acres of building footprint(s) of specialized housing for the elderly"
+      ],
+      [
+        "",
+        "2.5 acres of parking for the specialized housing for the elderly"
+      ],
+      [
+        "",
+        "4 acres of landscaping"
+      ],
+      [
+        "",
+        "0.5 acre of wetlands"
+      ],
+      [
+        "20-acre site minus 17.5 acres listed above = 2.5 net acres"
+      ],
+      [
+        "2.5 net acres x 8 = 20 units; which means that 10 duplexes could be constructed so long as all of the listed siting criteria are met."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1715.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1739.html",
+    "chapter_title": "Chapter 17.39 MHP MOBILE HOME PARK DISTRICT",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.39.070 Mobile homes – Lot requirements.",
+    "rows": [
+      [
+        "Type of Unit",
+        "Minimum Site Width"
+      ],
+      [
+        "Single (up to 12 feet wide)",
+        "38 feet"
+      ],
+      [
+        "Single (14 feet wide)",
+        "40 feet"
+      ],
+      [
+        "Double (12 feet wide, each side)",
+        "50 feet"
+      ],
+      [
+        "Double (14 feet wide, each side)",
+        "54 feet"
+      ],
+      [
+        "Triple",
+        "62 feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1739.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1739.html",
+    "chapter_title": "Chapter 17.39 MHP MOBILE HOME PARK DISTRICT",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "17.39.100 Mobile homes – Setback requirements.",
+    "rows": [
+      [
+        "Location",
+        "Minimum Setback"
+      ],
+      [
+        "Front",
+        "20 feet"
+      ],
+      [
+        "Rear",
+        "10 feet"
+      ],
+      [
+        "Side",
+        "5 feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1739.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1745.html",
+    "chapter_title": "Chapter 17.45 C-1 DOWNTOWN DISTRICTS",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.45.030 Permitted uses.",
+    "rows": [
+      [
+        "",
+        "",
+        "Subarea C-1a",
+        "Subarea C-1b",
+        "Subarea C-1c"
+      ],
+      [
+        "A.",
+        "Retail stores.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "B.",
+        "Personal services.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "C.",
+        "Office uses with 500 square feet or less at ground level.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "D.",
+        "Office uses with more than 500 square feet at ground level.",
+        "No*",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "E.",
+        "Banks and financial institutions.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "F.",
+        "Hotels.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "G.",
+        "Eating and drinking establishments.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "H.",
+        "Theaters.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "I.",
+        "Art galleries and museums.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "J.",
+        "Laundry and dry cleaning businesses.",
+        "No",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "K.",
+        "Day nurseries.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "L.",
+        "Commercial or public parking garages and/or commercial or public surface parking.",
+        "Yes",
+        "No",
+        "No"
+      ],
+      [
+        "M.",
+        "Single-family, duplex, and multifamily residential uses with ground-level residential units of 35 units or less.",
+        "No*",
+        "No*",
+        "Yes"
+      ],
+      [
+        "N.",
+        "Single-family, duplex, and multifamily residential uses without ground-level residential units of 35 units or less.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "O.",
+        "Printing operations.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "P.",
+        "Upholstery shops.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "Q.",
+        "Private and vocational schools.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "R.",
+        "Civic uses.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "S.",
+        "Mixed use and live-work buildings.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "T.",
+        "Public parks, plazas and other open spaces.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "U.",
+        "Emergency shelter for the homeless; provided an emergency shelter for the homeless shall not be located within a 1,000-foot radius of any other emergency shelter for the homeless and an existing shelter shall not expand the existing square footage of their facility to accommodate additional homeless, except that the hearing examiner may approve a location within a lesser distance or an increase in square footage of the existing facility to serve additional homeless if the applicant can demonstrate that such location will not be materially detrimental to neighboring properties due to excessive noise, lighting, or other interference with the peaceful use and possession of said neighboring properties; and provided further, an emergency shelter for the homeless shall have its occupancy set by the fire marshal and building official; and provided further, an emergency shelter for the homeless shall have any and all licenses as required by state and local law.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1745.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1745.html",
+    "chapter_title": "Chapter 17.45 C-1 DOWNTOWN DISTRICTS",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "17.45.050 Conditional uses.",
+    "rows": [
+      [
+        "",
+        "",
+        "",
+        "Subarea C-1a",
+        "Subarea C-1b",
+        "Subarea C-1c"
+      ],
+      [
+        "1.",
+        "Single-family, duplex, and multifamily residential uses without ground-level residential units of 36 units or more.",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "2.",
+        "Single-family, duplex, and multifamily residential uses with ground-level residential units of any number subject to the following additional conditional use criteria:",
+        "Yes",
+        "Yes",
+        "NA, an outright permitted use"
+      ],
+      [
+        "",
+        "a.",
+        "The ground-level multifamily units shall be set back a minimum of 10 feet from any abutting right-of-way except for alleys."
+      ],
+      [
+        "",
+        "b.",
+        "The ground-level entry to the multifamily units shall be elevated to provide visual separation from the abutting pedestrian way into the living space of the dwelling unit.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.",
+        "Office uses with 500 square feet or more at ground level subject to the following additional conditional use criteria:",
+        "Yes",
+        "NA, an outright permitted use",
+        "NA, an outright permitted use"
+      ],
+      [
+        "",
+        "a.",
+        "Ground-level window displays are provided to create pedestrian interest."
+      ],
+      [
+        "4.",
+        "Commercial or public parking garages and/or commercial or public surface parking subject to the following additional conditional use criteria:",
+        "NA, an outright permitted use",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "",
+        "a.",
+        "Curb cuts shall be minimized."
+      ],
+      [
+        "",
+        "b.",
+        "Surface parking shall have internal landscaping meeting the parking lot requirements found within Chapter 17.93 MVMC.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "c.",
+        "Surface parking shall be screened from streets and pedestrian ways.",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1745.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1769.html",
+    "chapter_title": "Chapter 17.69 PLANNED UNIT DEVELOPMENTS",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.69.030 Minimum lot areas, lot size, ranges of lot sizes, and density.",
+    "rows": [
+      [
+        "Zoning Designation",
+        "Minimum Lot Size"
+      ],
+      [
+        "R-1, 7.0",
+        "4,500 square feet"
+      ],
+      [
+        "R-1, 5.0",
+        "5,000 square feet"
+      ],
+      [
+        "R-1, 4.0",
+        "6,000 square feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1769.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1769.html",
+    "chapter_title": "Chapter 17.69 PLANNED UNIT DEVELOPMENTS",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "17.69.030 Minimum lot areas, lot size, ranges of lot sizes, and density.",
+    "rows": [
+      [
+        "Zoning Designation",
+        "Minimum Lot Size"
+      ],
+      [
+        "R-1, 7.0",
+        "5,000 square feet"
+      ],
+      [
+        "R-1, 5.0",
+        "7,000 square feet"
+      ],
+      [
+        "R-1, 4.0",
+        "8,500 square feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1769.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1769.html",
+    "chapter_title": "Chapter 17.69 PLANNED UNIT DEVELOPMENTS",
+    "table_index": 2,
+    "caption": "",
+    "nearest_heading": "17.69.060 Design evaluation checklist.",
+    "rows": [
+      [
+        "PUD DESIGN EVALUATION CRITERIA CHECKLIST"
+      ],
+      [
+        "1: SITE ANALYSIS"
+      ],
+      [
+        "1.1",
+        "The project is in conformance with the comprehensive plan and applicable sub-area plan(s).",
+        "YES NO N/A"
+      ],
+      [
+        "1.2",
+        "A preapplication consultation that included the preparation of a site analysis (prepared consistent with this design evaluation checklist) was an integral step in the site plan development process.",
+        "YES NO N/A"
+      ],
+      [
+        "1.3",
+        "The development does not encroach on any identified critical areas or their associated buffers.",
+        "YES NO N/A"
+      ],
+      [
+        "1.4",
+        "Soil conditions are suitable for the proposed development.",
+        "YES NO N/A"
+      ],
+      [
+        "1.5",
+        "The proposed design would avoid or minimize the potential for adverse environmental effects, such as flooding and sedimentation off site. Flood hazard area designations and regulations are identified and complied with, where applicable.",
+        "YES NO N/A"
+      ],
+      [
+        "1.6",
+        "Measures have been taken to minimize stormwater runoff and to detain the increment over the natural rate as close as possible to the point of origin consistent with the city’s adopted stormwater ordinance. If located within a floodplain, a flood protection strategy shall be proposed.",
+        "YES NO N/A"
+      ],
+      [
+        "2: SUBDIVISION AND PUD LAYOUT"
+      ],
+      [
+        "2.1 RESPECT FOR NATURAL FEATURES/CONSTRAINTS"
+      ],
+      [
+        "a.",
+        "The project design should avoid areas unsuitable for development. Existing elements of the landscape, such as views, trees and natural land contours can enhance the project and should be integrated into the design where possible.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "To the greatest extent practicable, the natural features of the site, such as topographic variation, significant tree cover, and bodies of water are to be preserved and integrated into the site plan to minimize site development costs and provide amenity. A PUD can promote sensitive treatment of natural elements, including vegetation, waterways, and views through greater flexibility in the utilization of land. A PUD project provides flexibility in design, placement, and configuration of buildings, use of open space, circulation facilities, and parking areas to best utilize the potential of sites characterized by special features of geography, topography, size or shape, while at the same time maintaining substantially the same population density and area coverage permitted in traditional developments.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "Landmarks should be incorporated into the site plan. A PUD can allow development while preserving significant natural features or historical character. Landmarks may include unique natural, cultural, or historic features.",
+        "YES NO N/A"
+      ],
+      [
+        "d.",
+        "The placement of the building sites should take advantage of sun angles, prevailing winds, tree stands, hills, and other natural conditions to save energy in heating and cooling. Passive strategies that take advantage of natural systems may include building orientation, planting of wind or summer sun blocking trees and other similar approaches.",
+        "YES NO N/A"
+      ],
+      [
+        "e.",
+        "Proposed building sites are to be oriented to on- and off-site views. Although not required legally, view blockage from off-site uses should be considered and, when possible, minimized.",
+        "YES NO N/A"
+      ],
+      [
+        "f.",
+        "Building sites should be arranged for some apparent purpose (to accommodate site topography, for example). Building site arrangement may be based on a variety of purposes, including: preservation of critical areas or environmentally sensitive land, accommodating topography such as steep slopes, maintaining view corridors, providing adequate vehicular and pedestrian access, or facilitating community interaction and privacy.",
+        "YES NO N/A"
+      ],
+      [
+        "g.",
+        "Building sites should be designed in discrete groups to encourage the creation of neighborhoods and promote a sense of community, while protecting privacy. This may be accomplished through pedestrian connection, the provision of common open space and/or amenities, and/or the use of open space to serve as a buffer between focused areas of residential development. PUD projects should promote innovative site and building design and should include architectural and site features that promote community interaction (such as porches, de-emphasized garages, sidewalks and pedestrian walkways, and common open spaces).",
+        "YES NO N/A"
+      ],
+      [
+        "h.",
+        "Building sites may be compactly grouped to provide more usable open space. Compactly grouped single-family detached and/or duplex development without the provision of accompanying open space and/or site amenities shall be prohibited. Lot size may be reduced, to allow for innovative development. However, the reduction in lot size must be accompanied by higher architectural and site design quality and the provision of increased amenities. Proposed PUD applications containing single-family detached lots that are 6,000 square feet in size or smaller shall provide the following additional materials as part of the preapplication process: I. Detailed architectural plans for the house type to be established on the smaller lots. These plans shall include proposed architectural details, building materials, entrance and window orientation and off-street parking areas. II. Detailed plans for landscaping, open space and recreational amenities serving the proposed lots. Compact development within the PUD shall provide open space for individual owners and/or the general public. The preserved open space shall serve several purposes such as providing recreational areas for the community or preserving a unique natural resource.",
+        "YES NO N/A"
+      ],
+      [
+        "i.",
+        "The project site shall be able to accommodate the type of dwelling unit or commercial facilities proposed and provide open space and/or amenities.",
+        "YES NO N/A"
+      ],
+      [
+        "j.",
+        "Safe play, sitting, and walking areas shall be provided and conveniently located within the PUD.",
+        "YES NO N/A"
+      ],
+      [
+        "k.",
+        "Transition shall be provided between different residential building types within a PUD. Typical transitions include landscaping, open space, common areas and grade separation.",
+        "YES NO N/A"
+      ],
+      [
+        "2.2 SITE AND BUILDING LAYOUT AND DESIGN"
+      ],
+      [
+        "a.",
+        "The site plan shall embody a coherent layout that can be easily understood by those who visit and live in the development. A PUD needs several elements to provide visitors and residents with a coherent layout, including, but not limited to, landscaping, architecture, pedestrian and vehicular circulation, and adequate signage. Landscaping must promote a coordinated appearance and break up continuous expanses of building and pavement. All buildings and structures of a site shall share a common architectural theme to ensure internal compatibility. The circulation system shall provide functional and visual links with the buildings of the site and must have linkages to outside development.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "Units shall front on residential access streets and not on arterial roadways. Units that must abut arterial roadways due to site constraints shall be accessed from roadways other than the arterial.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "Units shall overlook open space and not parking or road areas or other units or should be located in close (< 300 feet) proximity and directly connected (via a pedestrian circulation system) to proposed site amenities.",
+        "YES NO N/A"
+      ],
+      [
+        "d.",
+        "The proposed site layout shall facilitate trash removal and other similar utility services.",
+        "YES NO N/A"
+      ],
+      [
+        "e.",
+        "Utilities shall be placed to make their construction and maintenance economical and efficient.",
+        "YES NO N/A"
+      ],
+      [
+        "f.",
+        "Electric and telephone lines located within a project should be placed underground except under exceptional circumstances.",
+        "YES NO N/A"
+      ],
+      [
+        "g.",
+        "Electric and gas meters, transformers and other utilities shall be screened or located otherwise out of sight from roadways and public areas.",
+        "YES NO N/A"
+      ],
+      [
+        "h.",
+        "Common garbage storage areas shall be located and covered to avoid spreading odors. Garbage storage areas shall be screened ( Multifamily only ).",
+        "YES NO N/A"
+      ],
+      [
+        "i.",
+        "Outside storage should be provided for bikes, play equipment, lawn furniture, gardening supplies and barbeque equipment ( Multifamily only ).",
+        "YES NO N/A"
+      ],
+      [
+        "j.",
+        "Each unit entry must have some form of weather protection, such as an overhang or a porch, and a place to set packages down before entering the unit ( Multifamily only ).",
+        "YES NO N/A"
+      ],
+      [
+        "2.3 PRIVACY/SECURITY"
+      ],
+      [
+        "a.",
+        "Residents must have adequate privacy. The design of the site and individual units should promote security consistent with Crime Prevention Through Environmental Design (CPTED) strategies.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "Units shall be screened or located to avoid glare from automobile headlights and direct street lighting ( Multifamily only ).",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "Housing units should be buffered from high traffic volumes to minimize the impact of noise and vibrations. In mixed-use development, commercial traffic circulation should incorporate traffic calming techniques to minimize noise and vibration.",
+        "YES NO N/A"
+      ],
+      [
+        "d.",
+        "There should be a minimal number of vehicular and pedestrian entrances to clusters of buildings. These entrances must be well-lit and defined ( Multifamily only ).",
+        "YES NO N/A"
+      ],
+      [
+        "e.",
+        "Parking areas and the walkways from parking to homes must be well-lit without producing glare ( Multifamily only ).",
+        "YES NO N/A"
+      ],
+      [
+        "f.",
+        "Units should be clustered in a way that would allow neighbors to observe other homes and aid in crime prevention consistent with Crime Prevention Through Environmental Design (CPTED) strategies.",
+        "YES NO N/A"
+      ],
+      [
+        "g.",
+        "Public spaces located near units should be visible from the units for security purposes and for watching children at play.",
+        "YES NO N/A"
+      ],
+      [
+        "h.",
+        "Each unit must have its own semi-public entrance area, such as a deck, patio, balcony, or yard, for the exclusive use of its residents. It shall be fenced, or otherwise screened for privacy ( Multifamily only ).",
+        "YES NO N/A"
+      ],
+      [
+        "3: OPEN SPACE"
+      ],
+      [
+        "3.1",
+        "There shall be a network of functional open space integrated into the site plan. Fifteen percent of the total gross PUD area shall be maintained for open space and at least 25 percent of the designated open space shall be reserved as usable open space that shall contain amenities such as play structures, benches or covered picnic areas. One of the usable open space areas on every PUD shall be no less than 8,000 s.f. in size. Trail systems must be included in every PUD that connect to existing or future trail systems, parks, or both. Open space within a PUD shall be an integrated part of the project rather than an isolated element of it. Significant environmental elements shall be incorporated into the design of the open space. Open space shall be adequate to provide areas for both active and passive recreational uses, areas of open space as a visual amenity and the use of open space for stormwater management. Usable open space area(s) shall be centrally located with convenient access for residents. They shall be large enough to accommodate both active and passive activities. The overarching objective is to create usable open space that is not fragmented.",
+        "YES NO N/A"
+      ],
+      [
+        "3.2",
+        "The development’s open space shall relate to (and where possible) connect to adjacent open space areas. Open space connections may be facilitated through trail corridors and/or contiguous undeveloped areas.",
+        "YES NO N/A"
+      ],
+      [
+        "3.3",
+        "The usable open space must be functional in terms of area, dimensions, and location.",
+        "YES NO N/A"
+      ],
+      [
+        "3.4",
+        "Open space areas may be characterized by the presence of protected critical areas and/or significant trees or other high-value environmental feature. Consistent with the requirements of MVMC 17.69.130 a portion of the total open space can be environmentally constrained land. Where possible, these environmentally constrained open space areas should be either accessible to pedestrians to the extent practical and/or visually accessible from connected open space areas and/or are interconnected in a manner that enhances environmental values.",
+        "YES NO N/A"
+      ],
+      [
+        "3.5",
+        "Open spaces shall be interconnected where possible.",
+        "YES NO N/A"
+      ],
+      [
+        "3.6",
+        "Provisions for the maintenance of common open space areas shall be identified.",
+        "YES NO N/A"
+      ],
+      [
+        "3.7",
+        "When connectivity with designated open space and recreational areas is not possible, small sitting areas with recreational equipment and benches should be located in each neighborhood.",
+        "YES NO N/A"
+      ],
+      [
+        "3.8",
+        "Larger areas that allow for recreational activities, such as swimming pools or soccer fields with area lighting, shall be carefully located and buffered to reduce any adverse impact on the surrounding area.",
+        "YES NO N/A"
+      ],
+      [
+        "3.9",
+        "Parking areas for recreational facilities shall be screened and buffered from surrounding residences, but shall be visible by community members using the recreational facilities to minimize opportunities for crime.",
+        "YES NO N/A"
+      ],
+      [
+        "4: LANDSCAPING"
+      ],
+      [
+        "4.1 GENERAL"
+      ],
+      [
+        "a.",
+        "To the greatest extent practicable, existing significant trees and plants should be preserved and incorporated into open space areas. Significant trees shall be defined as those existing trees with a diameter of 24 inches or greater diameter at breast height (DBH).",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "Proposed plants and trees shall be appropriate for their intended function.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "If grass is inappropriate for an area, a textured hard surface material, such as paving stones, or light gravel interspersed with shrubs, may be used instead.",
+        "YES NO N/A"
+      ],
+      [
+        "d.",
+        "High quality topsoil should be saved and the site must be cleared of debris.",
+        "YES NO N/A"
+      ],
+      [
+        "e.",
+        "Slopes and cut-and-fill areas must be protected against erosion.",
+        "YES NO N/A"
+      ],
+      [
+        "4.2 STREET TREES"
+      ],
+      [
+        "a.",
+        "Street trees shall be provided.",
+        "YES NO N/A"
+      ],
+      [
+        "4.3 BUFFERING"
+      ],
+      [
+        "a.",
+        "Buffering shall be provided around the perimeter of the site where necessary to minimize adverse impacts, such as more intensive land uses, noise, lights, or traffic on higher-order streets.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "Parking, garbage collection, utility, and loading and unloading areas associated with site amenities, multifamily residences and/or commercial development shall be provided with buffering.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "Both trees and shrubs shall be provided in buffer areas.",
+        "YES NO N/A"
+      ],
+      [
+        "4.4 PARKING LOTS"
+      ],
+      [
+        "a.",
+        "Landscaping shall be provided in parking areas.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "Plantings must be located so as not to obstruct drivers’ vision.",
+        "YES NO N/A"
+      ],
+      [
+        "4.5 WALLS AND FENCES"
+      ],
+      [
+        "a.",
+        "Walls and fences can be provided where necessary for privacy, security, screening, climate control, or to highlight a view.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "The design and choice of material should: 1) serve the function for which the wall or fence is intended, 2) complement the character of the site and the type of building, and 3) facilitate easy and cost-efficient maintenance.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "Privacy screening (fencing, trellis or arbors and/or landscaping) and window offsets shall be required when minimum setbacks are proposed.",
+        "YES NO N/A"
+      ],
+      [
+        "4.6 PAVING AND STREET FURNITURE"
+      ],
+      [
+        "a.",
+        "The various elements of street furniture shall be provided as necessary and located where needed. Pedestrian amenities shall be located on sidewalks, plazas, and other public spaces within a PUD. Street furniture includes, but is not limited to, benches, bollards, kiosks, drinking fountains, planters, bus shelters, trash receptacles, bike racks, and lighting fixtures. They shall be located where needed, such as benches at street corners and plazas, bollards where necessary to keep out vehicles but to allow pedestrian and bicycle access, bus shelters at major intersections, bike racks by recreational areas, and notice boards at public plazas and parks.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "The design of street furniture must be coordinated with the character and style of the proposed architecture. The elements should be compatible with each other in form, material and finish.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "The items selected must be durable and easy to maintain.",
+        "YES NO N/A"
+      ],
+      [
+        "5: LAYOUT OF THE CIRCULATION SYSTEM"
+      ],
+      [
+        "5.1 STREETS"
+      ],
+      [
+        "a.",
+        "The road system is to be designed to meet the projected traffic demand and the road network must consist of a hierarchy of roads designed according to function.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "Roads within the development shall not extend more than 600 feet without an intersection except if constrained by critical area limitations and/or significant topographic variation. In the absence of a functional intersection, an open space area of similar dimension to a right-of-way shall be provided.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "The network should follow the natural topography and preserve natural features of the site as much as possible. Alignments should be planned such that grading requirements are minimized.",
+        "YES NO N/A"
+      ],
+      [
+        "d.",
+        "Entry roads into the development shall be clearly visible from major arterial roads. Proper sight distances shall be provided at intersections.",
+        "YES NO N/A"
+      ],
+      [
+        "e.",
+        "Through traffic shall be directed around the development or channelized onto a central arterial and avoided on minor residential streets.",
+        "YES NO N/A"
+      ],
+      [
+        "f.",
+        "Automobile movement within the site shall be provided without having to use the peripheral road network.",
+        "YES NO N/A"
+      ],
+      [
+        "g.",
+        "The road system must provide adequate access to building sites for residents, visitors, deliveries, and garbage collection.",
+        "YES NO N/A"
+      ],
+      [
+        "h.",
+        "The edges of the roadways shall be landscaped. Sidewalks must be provided alongside the road, be set back sufficiently from the road and a landscaped planting strip between the road and the sidewalk shall be provided. A comprehensive project trail system may allow for the reduction of required sidewalks.",
+        "YES NO N/A"
+      ],
+      [
+        "5.2 PEDESTRIAN AND BIKE PATHS"
+      ],
+      [
+        "a.",
+        "Pedestrian and bicycle paths should be clearly separated from traffic.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "Pedestrian and bicycle paths should be located to take advantage of topography, views, and the natural features of the site. Paths should connect with adjacent off-site paths when possible. Path networks as described in the recreation element of the comprehensive plan shall be facilitated when possible.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "The pedestrian path system shall link building sites with parking areas (multifamily only), entrances to the development, open space, and recreational and other community facilities.",
+        "YES NO N/A"
+      ],
+      [
+        "d.",
+        "Paths shall be ramped and graded to facilitate the use of strollers, bicycles, and wheelchairs.",
+        "YES NO N/A"
+      ],
+      [
+        "5.3 PARKING AREAS (MULTIFAMILY AND COMMERCIAL ONLY)"
+      ],
+      [
+        "a.",
+        "The number of parking spaces must be sufficient to serve proposed buildings.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "There must be sufficient distance between the entrance to the parking lot and the parking stalls.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "The parking spaces shall be the appropriate size and within convenient walking distance of the buildings they are to serve.",
+        "YES NO N/A"
+      ],
+      [
+        "d.",
+        "Parking spaces and aisles must be angled and sized for convenient maneuvering.",
+        "YES NO N/A"
+      ],
+      [
+        "e.",
+        "Parking bays shall be provided with turnarounds so that cars can leave if the bay is filled.",
+        "YES NO N/A"
+      ],
+      [
+        "f.",
+        "The parking lots shall be broken up into smaller areas through the use of trees and landscaped islands.",
+        "YES NO N/A"
+      ],
+      [
+        "g.",
+        "Curbs must be used rather than wheelstops.",
+        "YES NO N/A"
+      ],
+      [
+        "h.",
+        "Sidewalks must be wide enough so that the car overhang does not block them. The overhang area shall be hard-landscaped rather than planted.",
+        "YES NO N/A"
+      ],
+      [
+        "i.",
+        "The parking lots must be buffered and screened from view. They shall be adequately lighted.",
+        "YES NO N/A"
+      ],
+      [
+        "6: SIGNS AND LIGHTING"
+      ],
+      [
+        "6.1 SIGNS"
+      ],
+      [
+        "a.",
+        "Signs must be easy to understand both by visitors and by those who live in the development.",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "The design of signs should relate to and complement other elements of the overall site design.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "Signs must be placed where they are needed.",
+        "YES NO N/A"
+      ],
+      [
+        "6.2 LIGHTING"
+      ],
+      [
+        "a.",
+        "The lighting shall be appropriate for the purpose required, such as for safety or security. (For safety purposes, sufficient lighting should be provided at intersections and spaced along walkways. For security purposes, lighting should be provided at entryways and between buildings and parking areas.)",
+        "YES NO N/A"
+      ],
+      [
+        "b.",
+        "The spacing of the light standards shall be appropriate for their height. Pedestrian-scale standards shall be used where possible.",
+        "YES NO N/A"
+      ],
+      [
+        "c.",
+        "The standards must be suitable in size and style for the surroundings. (The maximum height should not exceed the maximum building height permitted, or 25 feet, whichever is less.)",
+        "YES NO N/A"
+      ],
+      [
+        "d.",
+        "Spotlights, if used, shall be placed on standards pointing toward the buildings without blinding residents, rather than on the buildings and directed outwards which would create dark shadows adjacent to the buildings.",
+        "YES NO N/A"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1769.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1769.html",
+    "chapter_title": "Chapter 17.69 PLANNED UNIT DEVELOPMENTS",
+    "table_index": 3,
+    "caption": "Table 17.69.130(1): Open Space Percent of Gross Area",
+    "nearest_heading": "17.69.130 Open space requirements.",
+    "rows": [
+      [
+        "",
+        "Category",
+        "Land Area"
+      ],
+      [
+        "1.",
+        "Common",
+        "25% minimum"
+      ],
+      [
+        "2.",
+        "Usable",
+        "25% minimum"
+      ],
+      [
+        "3.",
+        "Critical Areas and Buffers",
+        "No maximum or minimum"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1769.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1770.html",
+    "chapter_title": "Chapter 17.70 DESIGN REVIEW",
+    "table_index": 0,
+    "caption": "TABLE 17.70.060(E):",
+    "nearest_heading": "17.70.060 Approval authorities and processes.",
+    "rows": [
+      [
+        "TYPE OF PROPOSAL",
+        "RECOMMENDATION(S) MADE BY:",
+        "APPROVAL AUTHORITY"
+      ],
+      [
+        "Design review for residential structures identified in MVMC 17.70.020 (A), including requests for modifications and waivers",
+        "Not applicable",
+        "Director"
+      ],
+      [
+        "Design review for historic downtown and surrounding areas identified in MVMC 17.70.020 (B), including requests for modifications and waivers",
+        "Not applicable",
+        "Director"
+      ],
+      [
+        "Ordinary maintenance identified in MVMC 17.70.020 (C)",
+        "Not applicable",
+        "Director to confirm that the proposed project is ordinary maintenance and repairs not subject to design review"
+      ],
+      [
+        "Consolidated review of project permit applications including design review under MVMC 17.70.060 (D), including requests for modifications and waivers",
+        "Director (if not the approval authority)",
+        "Highest level of review authority for the consolidated permits"
+      ],
+      [
+        "Revision – Major under MVMC 17.70.090",
+        "Director (if not the approval authority)",
+        "Design review authority for the initial design review decision"
+      ],
+      [
+        "Revision – Minor under MVMC 17.70.090",
+        "Not applicable",
+        "Director"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1770.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1773.html",
+    "chapter_title": "Chapter 17.73 REGULATIONS TO ENCOURAGE AFFORDABLE HOUSING",
+    "table_index": 0,
+    "caption": "TABLE 1: AFFORDABLE HOUSING BONUS DENSITY IN SINGLE-FAMILY RESIDENTIAL ZONES",
+    "nearest_heading": "17.73.030 Encouraging affordable housing in single-family zones (R-1).",
+    "rows": [
+      [
+        "ZONING DESIGNATION",
+        "EXISTING REQUIREMENTS FROM CHAPTER 17.15 MVMC",
+        "AFFORDABLE HOUSING DENSITY BONUS",
+        "DENSITY BONUS PROVISIONS AND REQUIREMENTS"
+      ],
+      [
+        "R-1, 7.0 Single-Family Residential",
+        "Minimum and maximum density: 4.0 to 7.26 du/acre Minimum lot size: 4,500 sq. ft.",
+        "50% bonus density from 7.26 to 10.89 du/acre if 33.3% of the bonus units are affordable housing units",
+        "• No minimum lot sizes • Bonus units can be single-family, duplexes, townhouses, or multifamily • Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ],
+      [
+        "R-1, 5.0 Single-Family Residential",
+        "Minimum and maximum density: 4.0 to 5.73 du/acre Minimum lot size: 6,000 sq. ft.",
+        "50% bonus density from 5.73 to 8.60 du/acre if 33.3% of the bonus units are affordable housing units",
+        "• No minimum lot sizes • Bonus units can be single-family, duplexes, townhouses, or multifamily • Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ],
+      [
+        "R-1, 4.0 Single-Family Residential",
+        "Minimum and maximum density: 4.0 to 4.54 du/acre Minimum lot size: 7,500 sq. ft.",
+        "50% bonus density from 4.54 to 6.81 du/acre if 33.3% of the bonus units are affordable housing units",
+        "• No minimum lot sizes • Bonus units can be single-family, duplexes, townhouses, or multifamily • Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1773.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1773.html",
+    "chapter_title": "Chapter 17.73 REGULATIONS TO ENCOURAGE AFFORDABLE HOUSING",
+    "table_index": 1,
+    "caption": "TABLE 2: AFFORDABLE HOUSING BONUS DENSITY IN DUPLEX AND TOWNHOUSE RESIDENTIAL ZONE",
+    "nearest_heading": "17.73.040 Encouraging affordable housing in the duplex and townhouse zone (R-2).",
+    "rows": [
+      [
+        "ZONING DESIGNATION",
+        "REQUIREMENTS FROM CHAPTER 17.18 MVMC",
+        "AFFORDABLE HOUSING DENSITY BONUS",
+        "DENSITY BONUS PROVISIONS AND REQUIREMENTS"
+      ],
+      [
+        "R-2 Duplex and Townhome Residential Zone",
+        "Minimum and maximum density: 8.0 to 10.0 du/acre",
+        "Density doubles from 10.0 to 20.0 du/acre if 33.3% of the bonus units are affordable housing units",
+        "• Bonus units can be duplexes, townhouses, or multifamily • Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1773.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1773.html",
+    "chapter_title": "Chapter 17.73 REGULATIONS TO ENCOURAGE AFFORDABLE HOUSING",
+    "table_index": 2,
+    "caption": "TABLE 3: AFFORDABLE HOUSING BONUS DENSITY IN MULTIFAMILY RESIDENTIAL ZONES",
+    "nearest_heading": "17.73.050 Encouraging affordable housing in multifamily zones (R-3 and R-4).",
+    "rows": [
+      [
+        "ZONING DESIGNATION",
+        "REQUIREMENTS FROM CHAPTERS 17.24 and 17.27 MVMC",
+        "AFFORDABLE HOUSING DENSITY BONUS",
+        "DENSITY BONUS PROVISIONS AND REQUIREMENTS"
+      ],
+      [
+        "R-3 Multifamily Residential",
+        "Minimum and maximum density: 10 to 15 du/acre",
+        "Density doubles from 15 to 30 du/acre if 33.3% of the bonus units are affordable housing units",
+        "• Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ],
+      [
+        "R-4 Multifamily Residential",
+        "Minimum and maximum density: 10 to 20 du/acre",
+        "Density doubles from 20 to 40 du/acre if 33.3% of the bonus units are affordable housing units",
+        "• Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1773.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1773.html",
+    "chapter_title": "Chapter 17.73 REGULATIONS TO ENCOURAGE AFFORDABLE HOUSING",
+    "table_index": 3,
+    "caption": "TABLE 4: AFFORDABLE HOUSING BONUS DENSITY IN PLANNED UNIT DEVELOPMENTS",
+    "nearest_heading": "17.73.060 Encouraging affordable housing in planned unit developments.",
+    "rows": [
+      [
+        "ZONING DESIGNATION",
+        "REQUIREMENTS FROM CHAPTER 17.15 MVMC",
+        "AFFORDABLE HOUSING DENSITY BONUS",
+        "DENSITY BONUS PROVISIONS AND REQUIREMENTS"
+      ],
+      [
+        "R-1, 7.0 Single-Family Residential",
+        "Minimum and maximum density: 4.0 to 7.26 du/acre Minimum lot size: 4,500 sq. ft.",
+        "Density doubles from 7.26 to 14.52 du/acre if 33.3% of the bonus units are affordable housing units",
+        "• No minimum lot sizes • Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ],
+      [
+        "R-1, 5.0 Single-Family Residential",
+        "Minimum and maximum density: 4.0 to 5.73 du/acre Minimum lot size: 5,000 sq. ft.",
+        "Density doubles from 5.73 to 11.46 du/acre if 33% of the otherwise not allowed bonus units are occupied by those earning 80% AMI and below",
+        "• No minimum lot sizes • Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ],
+      [
+        "R-1, 4.0 Single-Family Residential",
+        "Minimum and maximum density: 4.0 to 4.54 du/acre Minimum lot size: 6,000 sq. ft.",
+        "Density doubles from 4.54 to 9.08 du/acre if 33% of the otherwise not allowed bonus units are occupied by those earning 80% AMI and below",
+        "• No minimum lot sizes • Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1773.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1773.html",
+    "chapter_title": "Chapter 17.73 REGULATIONS TO ENCOURAGE AFFORDABLE HOUSING",
+    "table_index": 4,
+    "caption": "TABLE 5: AFFORDABLE HOUSING INCREASE IN BUILDING STORIES AND HEIGHT COMMUNITY AND NEIGHBORHOOD COMMERCIAL ZONES",
+    "nearest_heading": "17.73.070 Encouraging affordable housing in downtown, community and neighborhood commercial zones (C-1, C-3 and C-4).",
+    "rows": [
+      [
+        "ZONING DESIGNATION",
+        "ADDITIONAL STORY AND HEIGHT",
+        "NUMBER OF AFFORDABLE HOUSING UNITS",
+        "REQUIRED ADDITIONAL REQUIREMENTS"
+      ],
+      [
+        "C-3 Community Commercial",
+        "Adding one additional building story in this zone means that structures can be 5 stories and 65 feet in height",
+        "33.3% of the bonus units that can be created as a result of adding an additional story to the building are affordable housing units",
+        "• Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ],
+      [
+        "C-4 Neighborhood Commercial",
+        "Adding one additional building story in this zone means that structures can be 4 stories and 55 feet in height",
+        "33.3% of the bonus units that can be created as a result of adding an additional story to the building are affordable housing units",
+        "• Covenants and agreements per MVMC 17.73.090 required • Density transitions and design standards per MVMC 17.73.100 required"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1773.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1784.html",
+    "chapter_title": "Chapter 17.84 PARKING AND LOADING",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.84.060 Parking space requirements.",
+    "rows": [
+      [
+        "Parking Area Dimensions"
+      ],
+      [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      [
+        "Parking Angle",
+        "Stall Width",
+        "Stall Depth",
+        "Aisle Width",
+        "Curb Length per Car",
+        "Unit Width"
+      ],
+      [
+        "1-Way Traffic",
+        "2-Way Traffic",
+        "1-Way Traffic",
+        "2-Way Traffic"
+      ],
+      [
+        "0°",
+        "8.0* 8.5",
+        "8.0* 8.5",
+        "12.0",
+        "20.0",
+        "20.0* 23.0",
+        "28.0** 29.0",
+        "36.0* 37.0"
+      ],
+      [
+        "30°",
+        "8.0* 9.0",
+        "14.9* 17.3",
+        "11.0",
+        "20.0",
+        "16.0* 18.0",
+        "40.9** 45.6",
+        "49.9** 54.6"
+      ],
+      [
+        "45°",
+        "8.0* 9.0",
+        "17.0* 19.8",
+        "12.0",
+        "20.0",
+        "11.3* 12.7",
+        "46.4** 51.6",
+        "53.9** 59.6"
+      ],
+      [
+        "60°",
+        "8.0* 9.0",
+        "17.9* 21.0",
+        "17.0",
+        "20.0",
+        "9.2* 10.4",
+        "53.2** 59.0",
+        "55.7** 62.0"
+      ],
+      [
+        "90°",
+        "8.0* 9.0",
+        "16.0* 19.0",
+        "23.0",
+        "24.0",
+        "8.0* 9.0",
+        "56.0* 61.0",
+        "57.0** 62.0"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1784.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1784.html",
+    "chapter_title": "Chapter 17.84 PARKING AND LOADING",
+    "table_index": 1,
+    "caption": "Table 1 Number of Accessible Parking Spaces",
+    "nearest_heading": "17.84.065 Accessible parking facilities.",
+    "rows": [
+      [
+        "Total Parking Spaces in Lot or Garage",
+        "Minimum Required Number of Accessible Spaces"
+      ],
+      [
+        "1 – 25",
+        "1"
+      ],
+      [
+        "26 – 50",
+        "2"
+      ],
+      [
+        "51 – 75",
+        "3"
+      ],
+      [
+        "76 – 100",
+        "4"
+      ],
+      [
+        "101 – 150",
+        "5"
+      ],
+      [
+        "151 – 200",
+        "6"
+      ],
+      [
+        "201 – 300",
+        "7"
+      ],
+      [
+        "301 – 400",
+        "8"
+      ],
+      [
+        "401 – 500",
+        "9"
+      ],
+      [
+        "501 – 1,000",
+        "2% of total spaces"
+      ],
+      [
+        "Over 1,000",
+        "20 spaces plus 1 space for every 100 spaces or fraction thereof, over 1,000"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1784.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1793.html",
+    "chapter_title": "Chapter 17.93 LANDSCAPING",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.93.020 General site landscaping.",
+    "rows": [
+      [
+        "Zoning Classification",
+        "Percent of Gross Site Area to Be Landscaped"
+      ],
+      [
+        "R-2, R-3, R-4, MHP",
+        "20%"
+      ],
+      [
+        "P, H-D, R-O, P-O",
+        "15%"
+      ],
+      [
+        "LC, C-2, C-3, C-4, C-L",
+        "10%"
+      ],
+      [
+        "M-1, M-2",
+        "7%"
+      ],
+      [
+        "F-1, Planned unit developments",
+        "To be determined by city council"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1793.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1793.html",
+    "chapter_title": "Chapter 17.93 LANDSCAPING",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "17.93.040 Screening requirements.",
+    "rows": [
+      [
+        "1. District in Which Development Is Proposed",
+        "District to Be Screened"
+      ],
+      [
+        "R-2, R-3, R-4, MHP, P, R-O, P-O, HD",
+        "All “R” zones, including MHP"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1793.html"
+  },
+  {
+    "jurisdiction": "mount_vernon",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "MountVernon1793.html",
+    "chapter_title": "Chapter 17.93 LANDSCAPING",
+    "table_index": 2,
+    "caption": "",
+    "nearest_heading": "17.93.040 Screening requirements.",
+    "rows": [
+      [
+        "1. District in Which Development Is Proposed",
+        "District to Be Screened"
+      ],
+      [
+        "LC, C-1, C-2, C-3, C-4, C-L, M-1, M-2",
+        "All “R” zones, including MHP"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1793.html"
+  }
+]

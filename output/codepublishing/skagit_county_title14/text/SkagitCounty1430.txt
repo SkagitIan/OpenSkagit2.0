@@ -1,0 +1,254 @@
+Chapter 14.30 LAND DISTURBANCE
+
+             Division 3 Land Management
+
+         Chapter 14.30
+LAND DISTURBANCE
+
+             Sections:
+
+              14.30.010    Purpose and intent.
+
+              14.30.020    Applicability.
+
+              14.30.030    Application requirements.
+
+              14.30.040    Development standards.
+
+              14.30.050    Performance and securities.
+
+              14.30.060    Inspections.
+
+              14.30.070    Archaeological and historical resources.
+
+        14.30.010  Purpose and intent.
+
+             (1)    The purpose of this Chapter is to regulate  land disturbing activity  and safeguard public health, safety, and welfare by:
+
+             (a)    Harmonizing the review for  stormwater  management,  forest practices , protection of  critical areas , floodplain management, shorelines, cultural resources, the  building  codes for  grading , and  SEPA ;
+
+             (b)    Promoting site planning that is consistent with natural topographical, vegetation and hydrological conditions, utilizing low impact development (LID) to the maximum practical extent;
+
+             (c)    Encouraging holistic site planning to reduce negative impacts to the community and the environment;
+
+             (d)    Preserving vegetation, including by preventing indiscriminate removal of vegetation and trees on undeveloped property, and where appropriate requiring commensurate replanting;
+
+             (e)    Requiring the implementation of  best management practices  (BMPs);
+
+             (f)    Addressing short-term  stormwater  impacts resulting from the actual land disturbance and the long-term  stormwater  impacts caused by loss of  native vegetation  and soils;
+
+             (g)    Protecting archaeological and historical resources pursuant to RCW Chapters  27.44  and  27.53 ;
+
+             (h)    Establishing administrative procedures to issue permits, approve plans, and inspect land disturbance activities; and
+
+             (i)    Minimizing the amount of time between land disturbance and the project completion. (Ord. O20250005 § 2 (Exh. A); Ord. O20220006 § 1 (Att. 2). Formerly 14.22.010)
+
+        14.30.020  Applicability.
+
+             (1)    Generally. This Chapter applies to all  land disturbing activity  including but not limited to  clearing ,  grading , excavation, trenching, fill, and  forest practices  subject to County jurisdiction. This Chapter does not apply to those activities identified in Subsection (3) of this Section.
+
+             (2)    Required Review and Permit. A land disturbance permit is required for all activities subject to this Chapter.
+
+             (3)    Exemptions. The following activities, when not otherwise associated with a  building permit  or a shoreline substantial development permit, are exempt from the requirements of this Chapter:
+
+             (a)    Except as provided in Subsections (3)(b) and (3)(c) of this Section, cumulative  land disturbing activity  over a five-year period, totaling:
+
+             (i)    Less than 7,000 square feet of land disturbance and 2,000 square feet of  hard surface  area within the  NPDES permit area ; or
+
+             (ii)    Less than 14,000 square feet of land disturbance and 4,000 square feet of  hard surface  area outside the  NPDES permit area  cumulatively without triggering thresholds in SCC Chapter  14.32 ;
+
+             (b)     Grading  or excavation that meets all of the following:
+
+             (i)    Does not obstruct or modify  drainage ;
+
+             (ii)    Trenching that is less than four feet deep;
+
+             (iii)    Does not create a slope greater than five feet in height and not steeper than one and one-half horizontal feet to one vertical foot (66.6 percent or 33.7 degrees);
+
+             (iv)    Does not exceed 100 cubic yards of excavated material;
+
+             (v)    Over a five-year period, does not exceed 2,000 square feet of impervious area or 7,000 square feet of land disturbance;
+
+             (vi)    Does not require floodplain review under SCC Chapter  14.24 ; and
+
+             (vii)    Is not within a critical area or its  buffers , unless  critical areas  review of the project and areas of land disturbance have been approved;
+
+             (c)    Fill that meets all of the following:
+
+             (i)    Does not obstruct or modify  drainage ;
+
+             (ii)    Does not exceed feet in depth;
+
+             (iii)    Is placed on natural terrain with a slope of less than 12 percent;
+
+             (iv)    Does not exceed 100 cubic yards;
+
+             (v)    Is not more than one foot and is intended to support a  structure , other than a  structure  less than 200 square feet;
+
+             (vi)    Over a five-year period, does not exceed 2,000 square feet of impervious area or 7,000 square feet of land disturbance;
+
+             (vii)    Does not require floodplain review under SCC Chapter  14.24 ;
+
+             (viii)    Is not within a critical area or its  buffers , unless  critical areas  review of the project and areas of land disturbance have been approved;
+
+             (d)    Site investigations performed under the direction of a  qualified professional  that do not create permanent impacts such as surveys, soil borings, test pits, soil logs, site evaluations, percolation tests and other related activities;
+
+             (e)     Forest practices  not subject to County jurisdiction under RCW  76.09.240 ;
+
+             (f)     Cemetery  graves;
+
+             (g)    Refuse disposal sites controlled by and in compliance with other regulations;
+
+             (h)    Excavations for well or utility trenches;
+
+             (i)     Mining , quarrying, excavating, processing or stockpiling rock, sand, gravel, aggregate, or clay controlled by and in compliance with other regulations when such operations do not affect the lateral support of, or significantly increase stresses in, soil on adjoining properties as managed by DNR and  Department  of  Ecology ;
+
+             (j)    The following agricultural activities in accordance with SCC  14.24.120 :
+
+             (i)    Tilling, soil preparation, fallow rotation, planting, harvesting and other commercial agricultural activities involving working the land; provided, that any new development activities must comply with all applicable provisions of SCC Chapter  14.24 ;
+
+             (ii)    Maintenance or  repair  of existing agricultural facilities including  stormwater facilities ,  drainage  ditches, and  ponds ;
+
+             (iii)    New construction and enlargement of existing agricultural  drainage  ditches that require 500 cubic yards or less of  grading ; provided, that the new or enlarged ditches:
+
+             (A)    Do not adversely impact upstream or downstream properties; and
+
+             (B)    Are not located within 300 feet of  wetlands ,  fish and wildlife habitat conservation areas , and  erosion hazard areas ;
+
+             (k)    The removal of plants designated as noxious or invasive weeds while protecting native plants and native soils;
+
+             (l)    Vegetation maintenance practices, including landscape maintenance and gardening;
+
+             (m)     Stormwater facility  maintenance if conducted according to established standards and procedures and consistent with the operations and maintenance plan for the facility, including:
+
+             (i)     Land disturbing activity  associated with public improvements and maintenance by Skagit County within the existing  right-of-way , except this does not include activities that expand into a critical area or associated  buffer , including, but not limited to:
+
+             (ii)    Roadside ditch cleaning if the ditch does not contain fish;
+
+             (iii)    Pavement  repair  and repaving;
+
+             (iv)    Normal  grading  of gravel shoulders;
+
+             (v)    Maintenance of culverts;
+
+             (vi)    Maintenance of flood control or other approved  stormwater facilities ;
+
+             (vii)    Routing  clearing  within  road  right-of-way; and
+
+             (viii)    Emergency action necessary to protect public safety or private or public property from imminent danger; and
+
+             (n)     Private road  maintenance that does not change  road  dimensions, surface material, or  drainage ;
+
+             (o)    Stock piling of material for  drainage ,  dike  districts and Skagit County Public Works for  repairs  and maintenance. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A); Ord. O20240005 § 1 (Exh. A); Ord. O20230007 § 1 (Att. 1); Ord. O20220006 § 1 (Att. 2). Formerly 14.22.020)
+
+        14.30.030  Application requirements.
+
+             (1)    Review of  land disturbing activity  requires the  applicant  to submit:
+
+             (a)    A narrative of the project that includes the following information:
+
+             (i)     Existing site conditions ;
+
+             (ii)    Development goals of proposed work;
+
+             (iii)    Specific work to be accomplished;
+
+             (iv)    A time schedule for  land clearing  activities;
+
+             (v)    A  stormwater  pollution prevention plan (SWPPP) that identifies measures to protect the site, adjacent properties, and downstream areas from potential adverse impacts;
+
+             (vi)    The estimated cubic yards of earthwork and square footage of land disturbance area involved; and
+
+             (vii)    If excavated material is to be disposed off site, a description of the location and the route to the disposal site;
+
+             (b)    A  site plan  for the project proposal including a map to scale showing areas to be cleared or graded, known  critical areas  and existing site  drainage  patterns, sediment and erosion control measures, existing developed areas and those anticipated for future development;
+
+             (c)    Demonstration of compliance with all applicable development standards listed in SCC  14.30.040 ; and
+
+             (d)    Any other items that may be required by the  Director .
+
+             (2)    An  application  for a forest practice subject to Skagit County jurisdiction must also include the following:
+
+             (a)    A completed “ Forest Practices  Conversion  Application ” form provided by the  Department ; and
+
+             (b)    A  site plan  that includes the location of existing and proposed skid  roads , haul  roads , and landings within the  project area .
+
+             (3)    By submitting an  application  under this Section, the  applicant  consents to entry upon the subject site by the County during regular business hours for the purposes of making inspections to verify information provided by the  applicant  and to ensure that work is being performed in accordance with the requirements of this Chapter. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A); Ord. O20220006 § 1 (Att. 2). Formerly 14.22.030)
+
+        14.30.040  Development standards.
+
+             (1)    A land disturbance  application  may be approved, conditionally approved, or denied subject to the type of review specified in SCC  14.06.150 .
+
+             (a)    The  application  must be denied if it fails to comply with the requirements of this Title or RCW Chapter  76.09 .
+
+             (b)    Conditions of approval may include:
+
+             (i)    Inspection by the  applicant ’s certified erosion and sediment control lead prior to land disturbing activities;
+
+             (ii)    The establishment of financial securities in the form of performance and maintenance  bonds  or other surety instruments; and
+
+             (iii)    Any other conditions as deemed necessary by the  Director .
+
+             (2)    Activities subject to this Chapter must comply with all applicable Federal, State, and local laws and regulations, including the following:
+
+             (a)    SCC Chapter  14.24 ,  Critical Areas .
+
+             (b)    SCC Chapter  14.48 , Shorelines.
+
+             (c)    SCC Chapter  14.32 ,  Stormwater  Management.
+
+             (d)    SCC Chapter  14.34 , Flood Damage Prevention.
+
+             (e)    SCC Chapter  14.66 , Public Works Standards.
+
+             (f)    SCC Chapter  15.04 , International Codes.
+
+             (g)    SCC Chapter  16.12 , State Environmental Policy Act.
+
+             (3)    The  decisionmaker  on the  application  may require additional or more stringent standards than those specified in this Chapter to the extent necessary to protect the public health, safety, and welfare or to mitigate any adverse impacts from land disturbing activities. The  decisionmaker  must provide written findings of fact related to the additional requirements to the  applicant .
+
+             (4)    The decision under Subsection (1) or (3) of this Section is appealable under SCC Chapter  14.06 .
+
+             (5)    Prior to beginning field work the  applicant  must:
+
+             (a)    Clearly mark all  critical areas  and associated  buffers , landing areas, tree retention areas,  native vegetation  areas for  stormwater  dispersion/infiltration, and harvest/cutting/preserved areas boundaries with construction fencing or other approved method that clearly shows their boundaries; and
+
+             (b)    The location of marked areas must be noted on any future  site plan . (Ord. O20250005 § 2 (Exh. A); Ord. O20240005 § 1 (Exh. A); Ord. O20220006 § 1 (Att. 2). Formerly 14.22.040)
+
+        14.30.050  Performance and securities.
+
+             (1)    The  Director  may require the  applicant  to establish a financial security which may be acceptable to the County at its sole discretion.
+
+             (2)    The security must be in an amount of at least the County’s estimate of the cost of correcting or eliminating hazardous conditions that reasonably may occur, and ensuring compliance with the stipulations of the permit and the approved plans. (Ord. O20250005 § 2 (Exh. A); Ord. O20220006 § 1 (Att. 2). Formerly 14.22.050)
+
+        14.30.060  Inspections.
+
+             A land disturbance permit requires inspections to ensure that all work on a site is completed pursuant to the approved permit and requirements of this Chapter. (Ord. O20250005 § 2 (Exh. A); Ord. O20220006 § 1 (Att. 2). Formerly 14.22.060)
+
+        14.30.070  Archaeological and historical resources.
+
+             (1)    The purpose of this Section is to avoid the destruction of or damage to any site having historic or cultural values as identified by the appropriate agencies, including but not limited to affected Indian Tribes and the Washington State  Department  of Archaeology and Historic Preservation (DAHP).
+
+             (2)    Archaeological sites are subject to the provisions of RCW Chapters  27.53  and  27.44 .
+
+             (3)    Consistent with RCW  27.53.060 , if historical, cultural, or archaeological sites or artifacts of potential significance are discovered during land disturbing activities:
+
+             (a)    Work on the development site must stop immediately;
+
+             (b)    The project proponent or responsible party must report the discovery to the County immediately;
+
+             (c)    Skagit County shall notify DAHP, the affected tribes, and other appropriate agencies of the discovery; and
+
+             (d)    The project proponent or responsible party must retain a professional archaeologist to conduct an immediate  site assessment  and determine the significance of the discovery.
+
+             (A)    If a negative determination is received, i.e., the find is not significant, the work may resume after consultation with the State and the affected Tribes.
+
+             (B)    If a positive determination is received, work on the site must remain stopped and the project proponent or responsible party may not resume development activities without authorization from DAHP.
+
+             (4)    Consistent with RCW  68.50.645 , if human skeletal remains are discovered during land disturbing activities:
+
+             (a)    All activity must cease and the area of the find will be protected from further disturbance;
+
+             (b)    The project proponent or responsible party must report the discovery to local law enforcement and the County Medical Examiner or Coroner immediately; and
+
+             (c)    The County Medical Examiner or Coroner may assume jurisdiction over the human skeletal remains and make a determination of whether those remains are forensic or nonforensic; nonforensic remains must be reported to DAHP, who will then take jurisdiction of the remains. (Ord. O20250005 § 2 (Exh. A); Ord. O20220006 § 1 (Att. 2). Formerly 14.22.070)

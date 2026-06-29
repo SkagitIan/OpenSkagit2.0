@@ -1,0 +1,392 @@
+Chapter 14.08 LEGISLATIVE PROCEDURES
+
+         Chapter 14.08
+LEGISLATIVE PROCEDURES
+
+             Sections:
+
+              14.08.010    Intent.
+
+              14.08.020    Comprehensive Plan, zoning map, or development regulations—Amendments.
+
+              14.08.030    Petitions—Filing requirements.
+
+              14.08.040    Petitions—Docketing.
+
+              14.08.050    Petitions—Environmental review.
+
+              14.08.060    Petitions—Approval criteria for map amendments and rezones.
+
+              14.08.070    Public participation requirements.
+
+              14.08.080    Review by Planning Commission.
+
+              14.08.090    Review and decisions by Board.
+
+              14.08.100    Emergency or interim regulations.
+
+              14.08.110    Appeal.
+
+        14.08.010  Intent.
+
+             The intent of this Chapter is to establish roles and responsibilities of Planning and Development Services staff (“ Department ”), the Planning Commission (“Commission”) and the Board of County Commissioners (“Board”) relating to adoption of the  Comprehensive Plan , subarea plans, functional plans,  development regulations  found in SCC Title  14  and amendments thereto pursuant to the requirements of Chapters  36.70  and  36.70A  RCW. This Chapter shall not apply to review of  project permits , or the amendment of County-wide Planning Policies. The responsibilities and procedures for review of  project permits  are governed by the provisions of Chapter  14.06  SCC. (Ord. O20240005 § 1 (Exh. A); Ord. O20070009 (part); Ord. 17938 Attch. F (part), 2000)
+
+        14.08.020  Comprehensive Plan, zoning map, or development regulations—Amendments.
+
+             (1)    An amendment to the  Comprehensive Plan  or the zoning map requires a petition; docketing by the Board of County Commissioners;  public hearing , review, and recommendation by the Planning Commission; and final approval by the Board of County Commissioners.
+
+             (2)    A petition is one or more of the following types:
+
+             (a)    An amendment to  Comprehensive Plan  policies;
+
+             (b)    An amendment to the  Comprehensive Plan  map;
+
+             (c)    A  rezone  permitted by an existing  Comprehensive Plan  map designation; and
+
+             (d)    An amendment to  development regulations .
+
+             (3)    All amendments to the  Comprehensive Plan  map require a simultaneous  rezone .
+
+             (4)    Each petition type above is a legislative matter, except a  rezone  that is permitted by an existing  Comprehensive Plan  designation and does not require a simultaneous amendment to the  Comprehensive Plan  is a quasi-judicial matter.
+
+             (5)    The County must adopt all amendments to the  Comprehensive Plan  simultaneously each year, and may not adopt amendments more frequently than once per year, except for amendments that qualify for one of the exceptions in RCW  36.70A.130 (2)(a).
+
+             (6)    The Board may accept petitions for  development regulation  amendments as part of the annual docketing process, or may itself initiate the process of adopting or amending  development regulations  at any time. (Ord. O20160004 § 6 (Att. 6))
+
+        14.08.030  Petitions—Filing requirements.
+
+             (1)    Who May File.
+
+             (a)    Any interested  person  or entity may file any petition except a petition to modify a UGA boundary, or the  Comprehensive Plan  map within a UGA.
+
+             (b)    A petition to modify a UGA boundary, or the  Comprehensive Plan  map within a UGA, may be filed only by the affected jurisdiction (city/town for municipal UGA, tribe for tribal UGA, Skagit County for the Bayview Ridge UGA).
+
+             (2)    When to File.
+
+             (a)    A petition must be submitted on or before the last business day of July, except that a County-initiated petition is not subject to this deadline.
+
+             (b)    A petition for a  rezone , or for a map amendment not involving a UGA boundary change, may be considered only once between each  Comprehensive Plan periodic update  unless the  applicant  demonstrates a substantial change in circumstances. In no case may a petition be considered in consecutive years.
+
+             (c)    A petition for a map amendment involving a change to a given UGA’s boundary may be considered only once between each  Comprehensive Plan periodic update , unless the  applicant  demonstrates one or more of the following:
+
+             (i)    The boundary change is necessary to make minor technical corrections to a UGA boundary (without increasing the UGA’s buildable land development capacity by more than one percent) due to a mapping error or to be more consistent with identifiable physical boundaries such as natural features,  roads , or special purpose districts;
+
+             (ii)    The boundary change is the result of an emergency  Comprehensive Plan amendment  by the affected jurisdiction in accordance with RCW  36.70A.130 (2)(b);
+
+             (iii)    The boundary change is necessary to comply with changes to State or Federal laws, regulations or standards;
+
+             (iv)    The boundary change is required as part of a compliance order from the Western Washington Growth Management Hearings Board or court of higher authority;
+
+             (v)    The boundary change will permanently preserve a substantial land area containing one or more significant natural or cultural feature(s) as  open space  (including, but limited to, landforms, rivers, bodies of water, historic properties, archaeological resources, unique wildlife habitat, and fish and wildlife conservation areas), as determined by the respective legislative bodies of the County and the municipality or municipalities immediately adjacent to the proposed expansion, will provide separation between urban and rural areas, and will not result in a significant increase to population or employment capacity;
+
+             (vi)    There is less than 50 percent remaining of the vacant and buildable land base (residential, commercial, or industrial, respectively) that was designated within the incorporated and unincorporated areas of the particular UGA based on the last residential population and/or commercial/industrial land sub-allocation, or through any subsequent expansion of the UGA boundaries;
+
+             (vii)    The inability to reach the 50 percent threshold is accounted for by one or more of the following:
+
+             (A)    A small number of parcels within the UGA that account for a significant portion of remaining buildable lands for which it can be clearly demonstrated that they are not likely to develop in the planning horizon of the existing boundary;
+
+             (B)    An assessment that concludes there is a deficiency of larger parcels within that UGA to accommodate the remaining commercial or industrial growth projected for that UGA;
+
+             (C)    Other documented local circumstances that relate to the land market factors relevant to UGA expansion or reduction;
+
+             (D)    The expansion will allow the development of a school, K-12, public or private and the expansion area is adjacent to an existing UGA and will be designated and zoned exclusively for that use and will not add any residential, commercial, or industrial capacity to the affected UGA.
+
+             (3)    How to File.
+
+             (a)    A petition must be filed with the  Department  on forms provided by the  Department .
+
+             (b)    A petition must be filed with all fees required by the adopted fee schedule.
+
+             (c)    A County-initiated petition does not require a written petition or fees.
+
+             (4)    Contents of Petition.
+
+             (a)    A petition for amendment of the  Comprehensive Plan , or for amendment of the  development regulations , must include the following:
+
+             (i)    A detailed statement of what is proposed to be changed and why;
+
+             (ii)    A statement of anticipated impacts to be caused by the change, including geographic area affected and issues presented;
+
+             (iii)    A demonstration of why existing  Comprehensive Plan  policies should not continue to be in effect or why existing policies no longer apply;
+
+             (iv)    A statement of how the amendment complies with the  Comprehensive Plan ’s community vision statements, goals, objectives, and policy directives;
+
+             (v)    A statement of how adopted functional plans and Capital Facilities Plans support the change;
+
+             (vi)    A statement of how the change affects implementing  development regulations  in SCC Title  14  and the necessary changes to bring the implementing  development regulations  into compliance with the plan;
+
+             (vii)    A summary of any public review of the recommended change.
+
+             (b)    A petition for a  rezone  or amendment of the  Comprehensive Plan  map must also include a detailed description of how the map amendment complies with:
+
+             (i)    The land use designation criteria in the  Comprehensive Plan ; and
+
+             (ii)    Approval criteria for map amendments and  rezones  in SCC  14.08.060 ;
+
+             (c)    A petition for amendment of the  Comprehensive Plan  map to a commercial or industrial designation (other than a petition for a change in a UGA boundary) must also include:
+
+             (i)    A detailed  development proposal  that is consistent with the applicable designation criteria; and
+
+             (ii)    A one inch equals 100 feet map showing the  subject property  and property lines and land use designations for all properties within 500 feet of the site.
+
+             (d)    A petition for amendment of the  Comprehensive Plan  map to a Master Planned Resort designation must also include all of the elements required by SCC Chapter  14.56 .
+
+             (e)    A petition for a  rezone  or amendment of the  Comprehensive Plan  map to a new Small Scale Recreation and Tourism designation must also include:
+
+             (i)    A  site plan  showing the location of all uses;
+
+             (ii)    A demonstration that the location of the Small Scale Recreation or Tourism uses is based upon the scenic and/or natural features of the land that support the need for a rural location and setting;
+
+             (iii)    A demonstration that the proposed expansion of an existing recreational or tourist use is a logical expansion and is compatible with existing uses on the site;
+
+             (iv)    Measures to protect or minimize adverse impacts on prime soils,  drainage , traffic generation, visual impact, noise, and other relevant criteria, and to preserve the existing  rural character  of the area;
+
+             (v)    Measures to ensure the protection of  critical areas , as provided in RCW  36.70A.060 ,  frequently flooded areas , and  surface water  and ground water resources including sole source  aquifers ;
+
+             (vi)    Measures to ensure protection from conflicts with the use of  agriculture , forest, and  mineral resource lands  of  long-term commercial significance  designated under RCW  36.70A.170 ;
+
+             (vii)    Measures to protect or mitigate adverse impacts on Rural Intermediate,  Urban Growth Areas , or  Rural Village  Residential-designated lands. (Ord. O20260004 § 1 (Att. 2); Ord. O20160004 § 6 (Att. 6))
+
+        14.08.040  Petitions—Docketing.
+
+             (1)    The  Department  must review all new petitions and any petitions deferred from the previous year’s docket, and forward a recommendation to the Board as to which petitions should be included in the next year’s docket.
+
+             (2)    In making its docket recommendation, the  Department  must consider whether:
+
+             (a)    The petition complies with the filing requirements;
+
+             (b)    The petition, in light of all proposed amendments being considered for inclusion in the
+
+                 year’s docket, can be reasonably reviewed within the staffing and operational budget allocated to the  Department  by the Board;
+
+             (c)    The proposed amendment, to be adopted, would not require additional amendments to the  Comprehensive Plan  or  development regulations  not addressed in the  application , and is consistent with other goals, objectives and policies adopted by the Board;
+
+             (d)    The proposed amendment raises policy, land use, or scheduling issues that would more appropriately be addressed as part of an ongoing or planned work program, or as part of a regular review cycle;
+
+             (e)    Some legal or procedural flaw in the petition would prevent its legal implementation; or
+
+             (f)    The petition lacks sufficient information or adequate detail to review and assess whether or not the proposal meets the applicable approval criteria. A determination that the proposal contains sufficient information and adequate detail for the purpose of docketing does not preclude the  Department  from requesting additional information at any later time.
+
+             (3)    Following receipt of the  Department ’s docket recommendation, the Board must hold a  public hearing  to allow  applicants  and the public to comment on the  Department ’s recommendation. The Board must subsequently consider the  Department ’s recommendation and the public comment and decide which petitions to include as part of the annual docket.
+
+             (4)    The Board must include, exclude, or defer each petition.
+
+             (a)    Include. The Board’s decision to include a petition in the docket is procedural only and does not constitute a decision by the Board as to whether the amendment will ultimately be approved.
+
+             (b)    Exclude. The Board’s decision to exclude a petition from the docket terminates the petition without prejudice to the  applicant  or the proposal. The  applicant  may request a refund of the unused portion of any  application  fees, and may request the same, or similar amendment as part of a future amendment or review cycle.
+
+             (c)    Defer. The Board’s decision to defer a petition means the petition may be considered for docketing in the next annual amendment cycle.
+
+             (5)    The petitions included in the docket must be processed according to the remaining sections of this Chapter, including public review and comment and Planning Commission recommendation, and final Board action to approve, approve with modifications, defer to a subsequent amendment cycle, or deny each petition. (Ord. O20160004 § 6 (Att. 6))
+
+        14.08.050  Petitions—Environmental review.
+
+             (1)    After the Board establishes the year’s docket of  Comprehensive Plan amendments , the County must complete environmental review of all of the proposed amendments, consistent with the requirements of RCW Chapter  43.21C  and SCC Chapter  16.12 . For a site-specific  Comprehensive Plan amendment , the  applicant  must submit a complete environmental checklist to the County and required fees.
+
+             (2)    After receipt and review of the environmental checklist(s) for each of the docketed  Comprehensive Plan amendments , the  Department  must issue threshold determination(s) on the docket of amendments.
+
+             (3)    Any environmental review must consolidate, as much as practical, site-specific  SEPA  review with review of the entire docket of proposed  Comprehensive Plan amendments  to ensure adequate consideration of cumulative effects of the proposed amendments.
+
+             (4)    A petition that is carried over from a previous year’s docket to the next docket does not require a new  SEPA  checklist and fee, and is not required to be considered in the same environmental document as other proposals in the same docket. However, the  Department  may require additional  SEPA  analysis to assess the cumulative impacts of the various proposals constituting a docket. (Ord. O20160004 § 6 (Att. 6))
+
+        14.08.060  Petitions—Approval criteria for map amendments and rezones.
+
+             (1)    A  rezone  or amendment of the  Comprehensive Plan  map must be consistent with the requirements of the Skagit County  Comprehensive Plan , including any applicable designation criteria.
+
+             (2)    A change to a rural or natural resource land map designation must also be supported by and dependent on population forecasts and allocated nonurban population distributions, existing rural area and natural resource land densities and infill opportunities.
+
+             (3)    Site-specific proposals to de-designate  natural resource lands  must be deferred until a comprehensive Countywide analysis is conducted. A change from a natural resource land map designation must also recognize that natural resource land designations were intended to be long-term designations and must be supported by and dependent on one or more of the following:
+
+             (a)    A change in circumstances pertaining to the  Comprehensive Plan  or public policy;
+
+             (b)    A change in circumstances beyond the control of the landowner pertaining to the  subject property ;
+
+             (c)    An error in initial designation;
+
+             (d)    New information on natural resource land or critical area status.
+
+             (4)    A change to a UGA boundary must be supported by and dependent on the following analyses:
+
+             (a)    Population forecasts and allocated urban population distributions, existing urban densities and infill opportunities, phasing and availability of adequate services, proximity to designated  natural resource lands  and the presence of  critical areas .
+
+             (b)    Documented consistency of the proposed UGA expansion with Countywide Planning Policy 1.1 and the adopted 20-year population and employment allocation, including identification of any allocated but undesignated forecast population or employment.
+
+             (c)    Planning and analysis sufficient to update and confirm the development capacity analysis for buildable land within the existing UGA for residential, commercial, and/or industrial lands, which takes into account all development approved within the overall UGA since the last UGA expansion. Minimum requirements for UGA buildable lands development capacity analyses include the following steps:
+
+             (i)    Define vacant and underutilized (but likely to redevelop) parcels by  zone .
+
+             (ii)    Deduct from the gross land capacity by  zone  the following lands not available to accommodate future population or employment:
+
+             (A)     Critical areas  (and  buffers  as appropriate);
+
+             (B)    Future roads/rights-of-way needs;
+
+             (C)    Future public or quasi-public facilities needs;
+
+             (D)    Remaining lands likely to be held off the market (e.g., market or other factors).
+
+             (iii)    Apply the minimum (or average achieved) density or intensity of use in each  zone  to the remaining net developable acres.
+
+             (iv)    Apply appropriate household size and/or employee land intensity standards to the output to determine total UGA population or employment capacity.
+
+             (d)    A comparative evaluation of potential areas for UGA expansion, including:
+
+             (i)    Planning and zoning regulations currently in place;
+
+             (ii)    An evaluation of how a full range of urban-level infrastructure and services would be provided within potential expansion areas, including appropriate capital facility analysis; and
+
+             (iii)    An evaluation of  reasonable alternatives , other than expanding the UGA, to accommodate the forecast UGA population or employment allocation, including consideration of  development regulation  amendments to allow for increased densities and intensities of use in the existing UGA. Consideration of  reasonable alternatives  to UGA expansion must be within the discretion afforded to local governments by RCW  36.70A.110 (2) to make choices about accommodating growth.
+
+             (e)    Documentation of the proposed UGA expansion for consistency with any applicable inter-local agreement between the affected municipality and the County.
+
+             (f)    A review of the planning and zoning regulations and any incentive programs in place to determine expected densities in the existing UGA consistent with the GMA, as interpreted by the Growth Management Hearings Board, and the adopted  Comprehensive Plan .
+
+             (g)    Prior to altering  urban growth areas , or as part of a periodic update, a climate impact analysis must be completed. The climate impact analysis must evaluate the  greenhouse  gas (GHG) and vehicle miles traveled (VMT) impacts associated with the proposed change and consider climate vulnerability and resilience scenarios created by the change. The analysis must also consider the GHG and VMT impacts associated with other feasible alternatives for accommodating projected growth. Preference must be given to alternatives that reduce per capita VMT and GHG emissions and changes that increase climate resilience and protect vulnerable populations and overburdened communities.
+
+             (5)    A change to a UGA boundary must meet the following requirements:
+
+             (a)    Sufficient land area must be included in the UGAs to accommodate the adopted 20-year population and employment forecast allocation in Countywide Planning Policy 1. The extent of a UGA boundary expansion must be sufficient to provide a minimum 10- and a maximum 20-year supply of vacant and buildable lands within the UGA.
+
+             (b)    In evaluating potential changes to a particular UGA boundary, the County must consider Countywide implications for other UGAs and their population and employment sub-allocations.
+
+             (c)    In cases of residential lands proposed for inclusion within a UGA, annexation or incorporation should be encouraged to occur if immediately feasible, or an interlocal agreement must be executed between the municipality and County regarding the timing and conditions of future annexation and provision of  urban services .
+
+             (d)    The UGA expansion may not include areas that are designated as  natural resource lands  (agricultural, forest, or rural resource) unless:
+
+             (i)    The jurisdiction has an adopted transfer of development rights program in place and an agreement with the property owner(s) that will allow for continuation of the natural resource land activities on said lands following UGA designation; or
+
+             (ii)    Said lands have been redesignated to an appropriate nonresource land use designation consistent with the applicable provisions of the Skagit County  Comprehensive Plan , Skagit County Code, and RCW Chapter  36.70A .
+
+             (e)    The County and petitioner must conduct early and continuous public involvement when establishing, expanding, or adjusting UGAs, and must do so jointly when appropriate. Residents and  property owners  of unincorporated areas shall be consulted and actively involved in the process affecting them.
+
+             (f)    The County must make best efforts to coordinate UGA boundary change proposals with the affected municipality(ies), including the preparation of joint staff recommendations where possible. Unless waived by the affected municipality(ies), such municipality(ies) must be given at least 60  days ’ notice of the proposal prior to a County hearing thereon. (Ord. O20250005 § 2 (Exh. A); Ord. O20160004 § 6 (Att. 6))
+
+        14.08.070  Public participation requirements.
+
+             (1)    This Section addresses the creation and roles of Citizen Advisory Committees (CACs) and Technical Advisory Committees (TACs), and provides for public notification requirements in addition to any such requirements otherwise required by this Chapter.
+
+             (2)    Unless exempted by this Section, the Board shall establish 1 or more CACs or TACs, as appropriate, to participate and assist in the initial development of  Comprehensive Plan  elements, subarea plans and functional plans. The Board shall seek to have a variety of interests represented on such committees.
+
+             (3)    A CAC or TAC may be initiated by 1 of the following methods:
+
+             (a)    The Board may establish one by resolution; or
+
+             (b)    Any citizen may request the Board to consider calling for a new CAC or TAC relating to a GMA purpose. The Board will take public comment on the request. If the Board is convinced that a new CAC or TAC would be useful, the Board may authorize its formation by resolution.
+
+             (4)    The BCC may establish a procedure for taking  applications  and selecting membership to the CAC or TAC, including establishing a term of service and a method of reappointment (if any) or  replacement  of members. The BCC may also establish by resolution rules of procedure and time frames for recommendations by a CAC or TAC.
+
+             (5)    CACs and TACs shall follow the requirements of Chapter  42.30  RCW, Open Public Meetings Act. All meetings of the CAC or TAC shall be open to the public and held at a site and times when the working public can attend. The CAC and TAC shall establish and publish a schedule of meeting  days , times and locations for main group and subcommittee meetings and shall keep minutes of committee and subcommittee meetings.
+
+             (6)    A County staff  person  will be assigned to each CAC and TAC, and will provide staff support and maintain a copy of the record of such committee or subcommittee.
+
+             (7)    Notwithstanding the procedure outlined in this Section, if the Board determines that time constraints imposed by orders from the Western Washington Growth Management Hearings Board or other legal requirements likely cannot be met if a CAC or TAC is established and utilized as provided in this Section, the Board need not honor a request to form the CAC or TAC, even if it would be useful to do so.
+
+             (8)    The Board may forward a CAC or TAC recommendation to the Planning Commission, or it may make suggested changes to such recommendation and either remand it to the CAC or TAC for further consideration, or forward the CAC or TAC recommendation to the Planning Commission with the Board’s suggested changes.
+
+             (9)    Public Notification—General Legislative Proposals. Where public notice is otherwise required by this Chapter, information regarding any legislative proposal shall also be broadly disseminated to the public using 1 or more of the following methods as determined to be appropriate for the specific proposal by the  Director  or Board:
+
+             (a)    Publishing an additional paid public notice sufficient to inform the public of the nature of the proposal, the date and time of the  public hearing , the appropriate contact name and number, and the availability of relevant draft documents;
+
+             (b)    Distributing a press release to the newspaper of general circulation, or radio station in the County,  city , or general area where the proposal is located or that will be affected by the proposal;
+
+             (c)    Notifying individuals or groups with known interest in the type of proposal being considered, or who have requested to be notified in relation to a specific legislative proposal. The  Department  may charge a subscription fee for the administration of mailing lists of  persons  or groups requesting to be notified in writing, when such notification has also been published in the newspaper of general circulation;
+
+             (d)    Placing notices in appropriate regional, neighborhood, ethnic, or trade journals; and
+
+             (e)    Publishing notice in agency newsletters or sending notice to agency mailing lists, including general lists or lists for specific proposals or subject areas.
+
+             (10)    Public Notification—Site-Specific Comprehensive Plan/Zoning Map Amendments. Where public notice is otherwise required by this Chapter, for site-specific legislative proposals, such notice shall be mailed directly to the owners of the affected properties, and to all  property owners  within 300 feet of the  subject property .
+
+             (11)    Public Participation. In addition to public notice as otherwise required by this Chapter, the public shall have the opportunity to participate in County legislative matters via public hearing(s), written comment, and other forums as appropriate. (Ord. O20240005 § 1 (Exh. A); Ord. O20090011 Attch. 2 (part); Ord. O20070009 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.08.080  Review by Planning Commission.
+
+             (1)    Prior to Planning Commission review, the  Department  shall prepare a staff report on any proposed plans, amendments or  development regulations  summarizing the comments and recommendations of any Citizen Advisory Committee or Technical Advisory Committee as provided in the Skagit County Growth Management Act Public Participation Program as amended, County  departments , affected agencies and special districts, and evaluating the proposed plan’s, plan amendment’s, or  development regulations ’ consistency with adopted County plans and regulations. The staff report shall include findings, conclusions and proposed recommendations for disposition of the proposed plan, plan amendment or  development regulations . The staff report, together with proposed drafts of the plan, plan amendment or  development regulations , shall be available to the public a minimum of 15 calendar  days  before a  public hearing  on the proposed plan, plan amendment, or  development regulations .
+
+             (2)    Unless adopted as an interim ordinance under the provisions of RCW  36.70A.390 , the Commission shall hold at least 1  public hearing  on a proposed plan, plan amendment or  development regulation  at the beginning of its deliberations prior to forwarding a recommendation to the Board for action.
+
+             (3)    Notice of the  public hearing  shall indicate the time, place and purpose of the  public hearing , and shall be published in the official newspaper of the County at least 15  days  prior to the hearing.
+
+             (4)    The Commission shall consider public comments and deliberate on the proposed plan, plan amendment or  development regulation . At the completion of its deliberations, the Commission shall vote to recommend adopting, not adopting or amending the proposed plan, plan amendments or  development regulation .
+
+             (5)    Commission recommendation to the Board on any plan, plan amendment or  development regulation  shall be by affirmative vote of not less than 5 members, a majority of the total membership of 9 members, of the Commission. Recommendations shall be by a recorded motion which shall incorporate the findings of fact of the Commission and the reasons for its recommendation, and the motion shall refer expressly to any maps, descriptive material and other matters intended by the Commission to constitute the recommendation. The indication of approval by the Commission shall be recorded on any map and descriptive material, as applicable, by the signatures of the chairperson and the secretary of the Commission.
+
+             (6)    All or any part of a plan,  development regulation  or amendment thereto shall be recommended for approval by the Commission only if it is consistent with the community vision statements, goals, objectives, and the policy directives of the  Comprehensive Plan  and the proposal preserves the integrity of the  Comprehensive Plan  and assures its systematic execution.
+
+             (7)    Any Commission recommendation on a proposed plan, regulation or amendment thereto shall include a discussion of whether the proposal is supported by capital facility and functional plans; whether the proposal is consistent with the requirements of the Growth Management Act, (Chapter  36.70A  RCW), the Countywide Planning Policies and other applicable provisions of the  Comprehensive Plan ; and whether the proposal bears a substantial relationship to the public general health, safety, morals or welfare. For proposed  Comprehensive Plan  map changes, the Commission recommendation shall also include findings of fact and conclusions on whether the proposal is justified by changed or changing conditions; whether the proposal would create an isolated land use designation (spot  zone ) unrelated to adjacent designations; and whether the proposal will be compatible with neighboring properties and not adversely affect the value of those properties.
+
+             (8)    A copy of any plan, plan amendment or  development regulation  recommendation, together with the recorded motion shall be submitted to the Board not later than 14  days  following the date the recorded motion is signed by the chairperson of the Commission, together with the statement of findings and conclusions.
+
+             (9)    Any report or recommendation from the Commission, whether on a proposal initiated by it, whether on a matter referred back to it by the Board for further report, or whether on a matter initiated by the Board, shall be advisory only and the final determination shall rest with the Board. (Ord. O20090011 Attch. 2 (part); Ord. 17938 Attch. F (part), 2000)
+
+        14.08.090  Review and decisions by Board.
+
+             (1)    Upon receipt of a recommendation on all or any part of a plan, plan amendment or  development regulation  from the Planning Commission, the Board shall consider and take action on the recommendation at a public meeting.
+
+             (2)    If the Board agrees with the recommendation of the Planning Commission on a proposed plan, plan amendment, or  development regulation , it shall take action consistent with the Commission’s recommendation as prescribed below:
+
+             (a)    Provided that the plan, plan amendment, or  development regulation  desired by the Board conforms substantially to the proposal as originally initiated and made available for public comment, the Board may take final action with no further process. For purposes of this Section, an additional opportunity for public comment is not required if:
+
+             (i)    An environmental impact statement (EIS) has been prepared under Chapter  43.21C  RCW for the pending resolution or ordinance and the proposed change is within the range of alternatives considered in the environmental impact statement;
+
+             (ii)    The proposed change is within the scope of the alternatives available for public comment;
+
+             (iii)    The proposed change only corrects typographical errors, corrects cross-references, makes address or name changes, or clarifies language of a proposed ordinance or resolution without changing its effect;
+
+             (iv)    The proposed change is to a resolution or ordinance making a capital budget decision as provided in RCW  36.70A.120 ; or
+
+             (v)    The proposed change is to a resolution or ordinance enacting a moratorium or interim control adopted under RCW  36.70A.390 .
+
+             (b)    In cases where a recommendation for adoption includes a substantial change to the proposal, and the Board desires to consider the change, the Board shall allow additional public comment opportunity prior to final action. The Board may choose any 1 or more of the following options to provide such opportunity:
+
+             (i)    Board initiation of an additional written public comment period with Board review of public comments;
+
+             (ii)    Board initiation of 1 or more  public hearings ;
+
+             (iii)    Remand of issue(s) to the  Department  or the Planning Commission for additional work, study, review, or refinement;
+
+             (iv)    Remand of issue(s) to the Planning Commission for an additional written public comment period;
+
+             (v)    Remand of issue(s) to the Planning Commission for additional public hearing(s) and recommendations.
+
+             (3)    If the Board authorizes further public comment and consideration consistent with the procedures for changes to plans, plan amendments, or  development regulations  as described in Subsection (2)(b) of this Section, notice as required in SCC  14.08.080 (3) shall be provided. If the Board chooses not to remand an issue, it shall adopt its own findings of fact and a statement setting forth the factors considered in the public comment or at the hearing and its own analysis of findings considered by it to be controlling.
+
+             (4)    If the Board does not agree, either in whole or in part, with the recommendation of the Planning Commission, or if the Planning Commission forwards an action without an official recommendation, on a proposed plan, plan amendment, or  development regulation , the Board shall proceed as follows:
+
+             (a)    Provided that the plan, plan amendment, or  development regulation  desired by the Board conforms to the proposal as initiated and made available for public comment, the Board may take final action with no further process.
+
+             (b)    In cases where the Board desires to retain the status quo and reject any or all changes in their entirety, the Board may take final action with no further process.
+
+             (c)    In cases where the Board wishes to consider a substantial change to the proposal the Board shall allow additional public comment opportunity prior to final action. The Board may choose any 1 or more of the following options to provide such opportunity:
+
+             (i)    Board initiation of an additional written public comment period with Board review of public comments;
+
+             (ii)    Board initiation of 1 or more  public hearings ;
+
+             (iii)    Remand of issue(s) to the  Department  or the Planning Commission for additional work, study, review, or refinement;
+
+             (iv)    Remand of issue(s) to the Planning Commission for an additional written public comment period;
+
+             (v)    Remand of issue(s) to the Planning Commission for additional public hearing(s) and recommendations.
+
+             (5)    Final Disposition of Annual Docket. The Board must take action on the current year’s docket before establishing a subsequent docket. The Board’s decision to either approve, deny, or defer action on plans or plan amendments terminates that year’s docket. Initiation of any new docket(s) must be established as required in SCC  14.08.030 .
+
+             (6)    The Board may defer action on any specific plan or plan amendment to a future docket if:
+
+             (a)    Additional time is needed to analyze the impacts of the proposal;
+
+             (b)    Delaying action on the proposal would unfairly delay action on other proposals that are otherwise ready for a decision;
+
+             (c)    Approval of the proposal depends on the implementation of other rules, standards or policies that either do not exist or are not official by the time the Board is ready to make its decision on the annual docket; or
+
+             (d)    The Board determines that the proposed plan or plan amendment is more appropriately considered during a subsequent amendment process. (Ord. O20110007 Attch. 1 (part); Ord. O20090011 Attch. 2 (part); Ord. O20070009 (part): Ord. 17938 Attch. F (part), 2000)
+
+        14.08.100  Emergency or interim regulations.
+
+             The provisions of RCW  36.70A.390  for emergency or interim maps or regulations or moratoria, if applicable, shall supersede the requirements of this Chapter. (Ord. 17938 Attch. F (part), 2000)
+
+        14.08.110  Appeal.
+
+             (1)    Any action to review the  final decision  of the Board on a plan, plan amendment or  development regulation  that is subject to the jurisdiction of the Growth Management Hearings Boards shall be processed according to the law governing such challenges.
+
+             (2)    If the decision of the Board is not subject to the jurisdiction of the Growth Management hearings Board,  appeals  shall proceed according to the applicable RCW. (Ord. 17938 Attch. F (part), 2000)

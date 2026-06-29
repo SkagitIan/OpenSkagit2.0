@@ -1,0 +1,658 @@
+Chapter 14.59 WIRELESS FACILITIES
+
+         Chapter 14.59
+WIRELESS FACILITIES
+
+             Sections:
+
+              14.59.010    Purpose.
+
+              14.59.020    Applicability.
+
+              14.59.025    Definitions.
+
+              14.59.030    Application requirements.
+
+              14.59.035    Effect of permit.
+
+              14.59.040    Ordinary maintenance or repair.
+
+              14.59.050    Design requirements.
+
+              14.59.060    Construction requirements.
+
+              14.59.070    Safety and due care.
+
+              14.59.080    Interference.
+
+              14.59.090    Compliance with permit.
+
+              14.59.100    Restoration.
+
+              14.59.110    Radio frequency emissions report.
+
+              14.59.120    Inspections.
+
+              14.59.130    Maintenance.
+
+              14.59.140    Requirements for siting on County property, other than rights-of-way.
+
+              14.59.150    General requirements.
+
+              14.59.160    Timing of decisions—Federal shot clocks.
+
+              14.59.170    Macro cell towers.
+
+              14.59.180    Small wireless facilities.
+
+              14.59.190    Miscellaneous.
+
+        14.59.010  Purpose.
+
+             The standards in this Chapter are necessary to protect the public health, safety, and welfare, to protect property values, and minimize visual impact while furthering the development of enhanced wireless services in the County. These standards are designed to comply with Federal law. The Board of County Commissioners finds that the promulgation of this Chapter is warranted and necessary:
+
+             (1)    To manage the location of macro cell towers, antennas, and small wireless facilities in the County;
+
+             (2)    To protect the community’s visual quality while facilitating the reasonable and balanced provision of wireless services by minimizing the visual impact of wireless facilities on the community, particularly in and near residential  zones  and in and along highly visible corridors;
+
+             (3)    To establish clear guidelines, standards, and an orderly process for review intended to facilitate the deployment of wireless equipment that is necessary to provide advanced communication services to the County, its residents, businesses, and community at large;
+
+             (4)    To promote and encourage collocation rather than construction of additional single-use macro cell towers and to reduce the number of such  structures  needed in the future; and
+
+             (5)    To provide regulations which are specifically not intended to, and will not be interpreted or applied to: (a) prohibit or effectively prohibit the provision of wireless services; (b) discriminate among functionally equivalent service providers; or (c) regulate wireless facilities and transmission equipment on the basis of the environmental effects of radio frequency emissions to the extent that such emissions comply with the standards established by the Federal Communications Commission. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.020  Applicability.
+
+             (1)    This Chapter applies to all new towers, poles, antennas, equipment, and small wireless facilities.
+
+             (a)    New towers or poles exceeding the maximum height limitation of the affected  zone  require a special use permit and  building permit .
+
+             (b)    New antenna arrays meeting the requirements of this Chapter require a  building permit .
+
+             (c)    Antennas attached to utility poles and streetlights in the  right-of-way  must not extend more than 10 feet above the highest point of the  structure .
+
+             (2)    Exempt Facilities. The following are exempt from this Chapter:
+
+             (a)    FCC-licensed amateur (ham) radio facilities;
+
+             (b)    Satellite earth stations, dishes and/or antennas used for private television reception;
+
+             (c)    A wireless facility installed upon the declaration of a state of emergency by the Federal, State, or local government, or a written determination of public necessity by the County; except that such facility must (i) comply with all Federal and State requirements; and (ii) will be exempt from the provisions of this Chapter for up to 30  days  after the declaration of the state of emergency;
+
+             (d)    Antennas attached to existing  structures  (such as commercial  buildings , houses or apartments) for internet purposes and used solely for occupants of the  building  to which the antennas are attached as long as the height limitations of the  zone  are not exceeded;
+
+             (e)    County facilities, equipment, and services, including, but not limited to, those involving sheriff, fire, public health, and safety; and
+
+             (f)    Fixed wireless broadband service. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.025  Definitions.
+
+             The definitions in this Section apply throughout this Chapter and control over any conflicting definitions in SCC  14.04.020 .
+
+             “Antenna” means an exterior transmitting or receiving device mounted on or in a tower, pole,  building  or other  structure , and which is used in communications, that sends or receives wireless signals, radio frequencies, or other communications signals.
+
+             “Antenna array” means a single or group of antenna elements, not including small wireless antennas, and associated mounting hardware, transmission lines, remote radio units, or other appurtenances which share a common attachment device such as a mounting frame or mounting support  structure  for the sole purpose of transmitting or receiving wireless signals.
+
+             “Antenna support  structure ” means any pole, telescoping mast, tower, tripod or other  structure  that supports a device used in the transmitting or receiving of radio frequency signals.
+
+             “Camouflage” means disguised, hidden, or integrated with an existing  structure  or landscape so as to be significantly screened from view.
+
+             “Cell site” or “site” means a tract or parcel of land that contains the wireless facility services, including any antenna, support  structure , accessory  buildings  and parking, and may include other uses associated with and ancillary to wireless facilities.
+
+             “Collocation” means (1) mounting or installing antenna on a preexisting  structure ; and/or (2) modifying a  structure  for the purpose of mounting or installing an antenna facility on that  structure .
+
+             “Eligible collocation or modification request” means any request for collocation or modification of an existing tower,  building , or  structure  that does not result in a substantial change as provided in SCC  14.59.160 (1). Modification may include removal or  replacement  of transmission equipment.
+
+             “Eligible facilities request” means any request for modification of an existing tower or base station that does not substantially change the physical dimensions of such tower or base station, involving: (1) collocation of new transmission equipment; (2) removal of transmission equipment; or (3)  replacement  of transmission equipment.
+
+             “FCC” means the Federal Communications Commission.
+
+             “Macro cell tower” means a  structure  built for the sole or primary purpose of supporting a wireless facility that does not meet the definition of “small wireless facilities.” A macro cell tower may be a monopole, lattice tower, or a guyed tower that provides broad coverage at a height that provides a clear view over the surrounding  buildings  and terrain. Macro cell towers typically cover large geographic areas and are generally capable of hosting multiple providers.
+
+             “Mount” means the  structure  or surface upon which personal wireless service facilities are mounted. There are generally three types of mounts:
+
+                 “Building-mounted” means a wireless facility service mount fixed to the roof or side of a  building ;
+
+                 “Ground-mounted” means a wireless facility service mount fixed to the ground, such as a tower;
+
+                 “Structure-mounted” means a wireless facility service fixed to a  structure  other than a  building , such as light standards, utility poles, and bridges.
+
+             “Ordinary maintenance and  repair ” includes inspection, testing, or  repair  that maintains functional capacity and aesthetics of the wireless facilities and the associated  structure , pole or tower, and that does not involve disturbing any portion of the  right-of-way .
+
+             “Pole” means a legally constructed pole, such as a utility, lighting or similar pole made of wood, concrete, metal or other material, located or to be located within or outside of the  right-of-way .
+
+             “Provider” means a wireless facility service provider or wireless infrastructure provider and includes any  person  that owns or operates wireless facilities within or outside of the  right-of-way .
+
+             “Screening” means fencing, earth berming, trees, and other vegetation.
+
+             “Small wireless facilities” means equipment that meets the following criteria: (1) the facilities: (a) are mounted on  structures  50 feet or less in height including their antennas, or (b) are mounted on  structures  no more than 10 percent taller than other adjacent  structures , or (c) do not extend existing  structures  on which they are located to a height of more than 50 feet or by more than 10 percent, whichever is greater; (2) each antenna associated with the deployment, excluding associated antenna equipment, is no more than three cubic feet in volume; (3) all other wireless equipment associated with the  structure , including the wireless equipment associated with the antenna and any preexisting associated equipment on the  structure , is no more than 28 cubic feet in volume; (4) the facilities do not require antenna  structure  registration under Federal law; (5) the facilities are not located on Tribal land as defined under Federal law; and (6) the facilities do not result in human exposure to radio frequency radiation in excess of the applicable safety standards specified under Federal law.
+
+             “Stealth” means a design that minimizes the visual impact of wireless facilities by camouflaging, disguising, screening or blending them into the surrounding environment. Examples of stealth design include, but are not limited to, facilities disguised as trees (monopines), flagpoles, utility and light poles, bell towers, clock towers, ball field lights and architecturally screened roof-mounted antennas or flush-mounted antennas that are either painted to match or enclosed in an architecturally applicable box.
+
+             “Tower” means any  structure  that is designed and constructed primarily for the purpose of supporting one or more antennas, including self-supporting lattice towers, guy towers, or monopole towers. The term encompasses wireless facilities, microwave towers, common-carrier towers, cellular telephone towers, personal communications services towers, alternative tower  structures , and the like.
+
+             “Tower site” means a portion of a larger parcel that may be utilized for other  principal uses . “Tower site” may mean a parcel of land smaller than the minimum  lot  size required in the  zone  completely contained within a  lot  meeting the requirements of the  zone  for the purposes of locating a communication tower.
+
+             “Transmission equipment” means equipment that facilitates transmission for any FCC-licensed or authorized wireless service, including, but not limited to, radio transceivers, antennas, microwave dishes, coaxial or fiber-optic cable, and regular and backup power supplies. The term includes equipment associated with wireless services including, but not limited to, private, broadcast, and public safety services, as well as unlicensed wireless services and fixed wireless services such as microwave backhaul.
+
+             “Wireless facilities” or “wireless service facilities” means an unstaffed facility or equipment for the transmission or reception of radio frequency (RF) signals or other wireless communications or other signals (including, but not limited to, cellular and internet services) for commercial communications purposes, typically consisting of a group of antennas, a pole, tower or base station, transmission cables and other transmission equipment, backup power supplies, power transfer switches, cutoff switches, electric meters, coaxial cables, fiber-optic cables, wires, telecommunications demarcation boxes and related materials and equipment and equipment cabinets, and including small wireless facilities.
+
+             “Wireless infrastructure provider” means a  person  or entity, other than a wireless services provider, that builds or installs towers, wireless transmission equipment, wireless facilities, poles or wireless support  structures .
+
+             “Wireless services” means any wireless services using licensed or unlicensed spectrum, whether at a fixed location or mobile, provided to the public.
+
+             “Wireless services provider” means a  person  or entity who provides wireless services. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.030  Application requirements.
+
+             (1)    Procedures Generally. The requirements of SCC Chapter  14.06 , Permit Procedures, apply to any  application  under this Section insofar as they do not conflict with this Section or any requirements imposed under State or Federal law.
+
+             (2)     Application  Requirements for Proposed Towers, Antennas, Equipment and Small Wireless Facilities. The provider must submit a complete  application  form provided by the  Department , and supporting documents as required below, containing sufficient information to determine compliance with adopted rules and regulations as outlined in this Chapter and the remainder of Skagit County Code. In addition to the requirements set forth elsewhere in this Section, at the discretion of the  Director , all  applicants  will be required to submit, as applicable, any combination of  site plans , surveys, maps, reports, or written narratives necessary to convey the following information:
+
+             (a)    Parcel Description. Legal description of the parcel, including assessor account number and property identification number.
+
+             (b)    Owner Approval. Written approval from the owner of any land, pole, or other support  structure  allowing the attachment or use of such property.
+
+             (c)    Photo Simulations. Photo simulations of the existing site and proposed facilities from all adjacent properties and public rights-of-way at a radius of one mile from the proposed wireless service facilities. Photo simulations must be made from a range of elevations of surrounding areas. The photo simulation must be coded to a scaled vicinity map.
+
+             (d)     Site Plan . A scaled  site plan  showing the location, point of reference, type, height and longitude and latitude of the proposed towers and antennas, existing  buildings , on-site land uses and zoning, adjacent land uses and zoning, adjacent roadway rights-of-way, parking areas if applicable, proposed means of access,  setbacks  from property lines and the approximate  distance  between the proposed tower and the property lines. The method of fencing and, if applicable, the method of camouflage, noise screening, and illumination must be indicated. The  application  must also include elevation drawings of the proposed tower and any other proposed  structures .
+
+             (e)    Landscaping Plan. A landscaping plan indicating the specific placement of the facility on the site. Trees and other significant site features, the type and location of plant materials used to screen the facility, and the proposed color(s) of the facility must also be indicated.
+
+             (f)    Service Area Map. A current map showing the location of the proposed tower, the locations and service areas of other wireless service facilities operated by the provider and those proposed by the  applicant  that are close enough to impact service within the County.
+
+             (g)    Collocation Statement. A signed statement by the  applicant  or owner, as applicable, that states whether construction of the tower will accommodate collocation of additional antenna(s) for future users. In addition, the  applicant  or owner must include a signed statement that it will diligently negotiate in good faith to facilitate collocation of additional wireless service facilities by other providers on the tower or within the same site location. Also, a narrative of an attempt to collocate must be included which shows the  applicant  has made a diligent attempt to mount the facilities on an existing tower or  structure  that is within a one-mile radius of the chosen site.
+
+             (h)    Environmental Documentation. Copies of any environmental documents if required by any Federal or State agency. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.035  Effect of permit.*
+
+             A permit from the County authorizes an  applicant  to undertake only the activities specified in the  application  and permit, and in accordance with this Chapter. A permit does not authorize attachment to or use of existing poles or other  structures  in the  right-of-way . A permit does not create a property right for the  applicant . The provider must not interfere with other uses or users of the  right-of-way . (Ord. O20250005 § 2 (Exh. A))
+
+             *    Code reviser’s note: Ord. O20250005 adds this Section as 14.59.030. It has been editorially renumbered to avoid duplication of numbering.
+
+        14.59.040  Ordinary maintenance or repair.
+
+             (1)    A County permit is not required for ordinary maintenance or  repair . The provider or other  person  performing the ordinary maintenance or  repair  must obtain any other permit required by applicable laws.
+
+             (2)     Application  Fees and  Bonds . All  applications  pursuant to this Section must be accompanied by the requisite fees required by the County. Unless otherwise agreed to in writing by the County, the  applicant  must provide a performance or construction  bond  or other form of surety acceptable to the County equal to at least 125 percent of the estimated cost of the work on public property before commencing work. The  bond  will be released after County inspection and completion of construction to the County’s satisfaction. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.050  Design requirements.
+
+             (1)    Justification. At the time of filing an  application , an  applicant  must provide a clear and complete written analysis that includes design drawings explaining how the proposed design complies with the applicable design standards under this Section to the maximum extent feasible. A complete design justification must identify all applicable design standards under this Section and provide a factually detailed reason why the proposed design either complies or cannot feasibly comply.
+
+             (2)    Requirements.
+
+             (a)    Nonwooden poles must be painted a color that best allows them to blend into the surroundings. The use of grays, blues, greens, bronze, browns, or other site-specific colors are encouraged and may be appropriate; however, each case will be evaluated individually.
+
+             (b)    Antennas on or above a tower or  structure  are subject to the following requirements:
+
+             (i)    Compatibility. The antenna must be architecturally compatible with the  building  or wall on which it is mounted, and designed and located so as to minimize any adverse aesthetic impact.
+
+             (ii)    Height. The antenna must be no taller than the minimum height required to function satisfactorily unless it is approved in writing by the County.
+
+             (iii)    Roof Mounting. The antenna may be mounted on the roof of a  building  if the following additional criteria are satisfied:
+
+             (A)    It is not technically possible or aesthetically desirable to mount the antenna on a wall;
+
+             (B)    No portion of the antenna or base station causes the height of the  building  to exceed the limitations set forth herein; and
+
+             (C)    Roof-mounted antennas are completely screened from view by materials that are consistent and compatible with the design, color, and materials of the  building .
+
+             (c)    Equipment shelters and cabinets and other on-the-ground ancillary equipment must be screened with landscaping (except for those in the  right-of-way ) or with another design as required by the County Code. Alternatively, where feasible, and if more compatible with the surrounding environment, the  applicant  must incorporate the cabinet and other equipment into the base of a new pole (for example, for a small wireless facility), provided there is adequate space in the  right-of-way .
+
+             (d)    Security lighting for the equipment shelters or cabinets and other on the ground ancillary equipment is allowed, as long as it complies with the County Code.
+
+             (e)    All towers, poles, antennas, and related equipment must meet current standards and regulations of the  FAA , the FCC, and any other agency of the Federal or State government with relevant regulatory authority.
+
+             (f)    To ensure the structural integrity of macro cell towers and poles, the towers and poles must be maintained in compliance with industry standards and applicable codes.
+
+             (g)    No facilities may bear any signage or advertisement(s) other than signage required by law or expressly permitted or required by the County.
+
+             (h)    All towers, poles, antennas and related equipment in or near residential  zones  must be sited and designed to minimize adverse visual impacts on surrounding properties and the traveling public to the greatest extent reasonably possible, consistent with the proper functioning of the towers, poles, antennas and related equipment. Such towers, poles, antennas, and equipment must be integrated through location and design to blend in with the existing characteristics of the site. Such towers, poles, antennas and equipment enclosures must also be designed to either resemble the surrounding landscape and other natural features where located in proximity to natural surroundings, or be reasonably compatible with the built environment, through matching and complementary existing  structures  and specific design considerations such as architectural designs, height, scale, color and texture or be reasonably consistent with other uses and improvements permitted in the relevant  zone .
+
+             (i)    The  applicant  must use stealth design to the maximum extent feasible unless otherwise approved by the County. Stealth and concealment techniques must be appropriate given the proposed location, design, visual environment, and nearby uses,  structures , and natural features. Stealth design must be designed and constructed to substantially conform to surrounding  building  designs or natural settings. Stealth design that relies on screening to reduce visual impact must screen all substantial portions of the facilities and equipment from view.
+
+             (j)    The  applicant  must provide a visual simulation of the facilities and other appropriate graphics to demonstrate the visual impact on the view of the County’s foothills, mountains and  open space  areas as viewed from major transportation corridors or  public open space . Due consideration must be given so that the placement of towers and wireless service facilities does not obstruct or diminish those views.
+
+             (k)    Antenna arrays are permitted in any  zone  if they are located upon an existing  structure  (except on single-family houses, apartments or duplexes) that provides sufficient elevation for the array’s operation without the necessity of constructing a tower, pole, or other apparatus to extend the antenna array more than 10 feet above the  structure . If any tower, pole or other apparatus exceeding the height extension of 10 feet is needed to achieve the desired elevation, then a special use permit and, if applicable, height  variance , is required.
+
+             (l)    All pole-mounted transmission and reception equipment must be mounted as close as technically possible to the pole to reduce the overall visual profile to the maximum extent feasible subject to applicable safety codes.
+
+             (3)    Site Design Flexibility. Individual sites vary in the location of adjacent  buildings , existing trees, topography, and other local variables. If certain design standards could result in a project that could have been less intrusive if the location of the various elements of the project could have been placed in more appropriate locations within a given site, then the  Department  must consider such request. The tower, pole, equipment, and facilities may be installed to best camouflage, disguise, or conceal them, to make them more closely compatible with and blend into the setting or host  structure , upon approval by the County. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.060  Construction requirements.
+
+             (1)    The  applicant  must construct and install all facilities, equipment and  structures  to the manufacturer’s specifications and to withstand wind speed as required by the County Code.
+
+             (2)    The  applicant  must, to the extent feasible, design new poles to (a) match the existing light fixtures and other poles, and (b) serve a dual purpose (for example, a new light fixture, flag pole or banner display).
+
+             (3)    As-Builts and Maps. The provider must furnish to the County paper and electronic maps showing the location of its equipment in the  right-of-way  or on other public property and as-builts after construction is completed.
+
+             (4)    Locates. Before beginning any excavation in the  right-of-way , the permittee must comply with the requirements of the Washington Utility Notification Center. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.070  Safety and due care.
+
+             The permittee must employ due care during installation, maintenance or any other work and must comply with all safety and construction requirements of applicable laws, County guidelines, standards and practices and any additional commonly accepted safety standards. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.080  Interference.
+
+             The provider’s facilities, equipment and  structures  may not physically interfere with any existing facilities, equipment, or  structures  in the  right-of-way , and they must locate their lines and equipment in such a manner as not to interfere with the usual traffic patterns (vehicular or pedestrian) or with the rights or reasonable convenience of owners of property that abut any  right-of-way . (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.090  Compliance with permit.
+
+             All construction practices and activities must be in accordance with the permit and approved final plans and specifications. The  applicant  must provide the County and its representatives access to the work site and any information required by the County to ensure compliance with such requirements. All facilities or equipment that do not comply with the permit, the approved plans and specifications for the work, or the requirements of this Section will be removed at the sole expense of the permittee. The County may stop work to ensure compliance with the provisions of this Section. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.100  Restoration.
+
+             (1)    The provider, or its agent or contractor, must restore,  repair , and replace any portion of the  right-of-way  or other public property that is damaged or disturbed by the provider’s wireless facilities or work in or adjacent to the  right-of-way  or other public property.
+
+             (2)    If the provider, its agent, or contractor fails to timely restore,  repair , or replace the  right-of-way  or other public property, the County or its contractor may do so and the provider must pay the County’s costs and expenses in completing the  restoration ,  repair  or  replacement , including reasonable attorneys’ fees and expenses. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.110  Radio frequency emissions report.
+
+             A written report will be prepared and signed by an independent, licensed engineer or qualified employee of the provider which assesses whether the proposed wireless facilities demonstrate compliance with the latest radio frequency emissions limits provided by the FCC. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.120  Inspections.
+
+             (1)    The County may conduct an inspection of new and existing towers, antenna support  structures , equipment, and facilities upon reasonable notice to the owner or operator to determine compliance with this Section and applicable law and to prevent structural and equipment failures and accidents that may cause damage, injuries or  nuisances  to the public. Inspections may be made to determine compliance with construction standards set forth in this Code, Federal and State laws, and applicable industry standards.
+
+             (2)    If, upon inspection, the County concludes that a tower, antenna support  structure , equipment, or facilities fail to comply with applicable law or standards and constitute a danger to  persons  or property, then the owner or operator must bring such into compliance within 60  days  of the County providing written notice of the noncompliance. Failure to timely bring such into compliance within said 60  days  will be grounds for removal at the owner’s or operator’s expense. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.130  Maintenance.
+
+             In order to not constitute a  nuisance  to or a danger to the life or property of any  person  or the public, the tower, antenna support  structure , equipment, and facilities must at all times be kept and maintained in good condition, order and  repair . (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.140  Requirements for siting on County property, other than rights-of-way.
+
+             (1)    Applicability. This Section applies to all  applications  to use County property. For purposes of this Section, “County property” means any property owned or leased by the County, but does not include any  right-of-way .
+
+             (2)    Standards for Siting on County Property. The Board of Commissioners reserves the right to and may deny the use of any or all County-owned property by any or all  applicants  for use of County property as siting locations. Consideration of the decision to allow the use of County property that is owned or otherwise controlled by Skagit County by rent, lease, rights-of-way, easement, etc., will be subject to the following requirements:
+
+             (a)    Priority of Use. Where Skagit County property is sought to be utilized by an  applicant  for the siting of wireless service facilities, priority will be given to the following entities in descending order:
+
+             (i)    Skagit County;
+
+             (ii)    Public safety agencies including law enforcement, fire, and ambulance services which are not part of Skagit County, and private entities with a public safety agreement with Skagit County;
+
+             (iii)    Other governmental agencies; and
+
+             (iv)    The  applicant  and other entities providing or using wireless services.
+
+             (b)    Minimum Requirements for Siting on County Property. The placement of wireless service facilities on County property, in addition to the other requirements of this Section, must meet the following minimum requirements:
+
+             (i)    The facilities must not interfere with: (A) the purpose for which the County property is intended; or (B) other users who have a higher priority as discussed under Subsection (2)(a) of this Section; and
+
+             (ii)    The  applicant  must:
+
+             (A)    Commit to a lease agreement that includes equitable compensation for the County;
+
+             (B)    Obtain adequate liability insurance;
+
+             (C)    Submit a letter of credit, performance  bond  or other security acceptable to the County to cover the costs of removing the wireless facilities;
+
+             (D)    Reimburse the County for any related costs that the County incurs because of the presence of the  applicant ’s facilities; and
+
+             (E)    Obtain all necessary land use approvals.
+
+             (c)    Special Requirements for Public Utility  Structures  or Facilities. The County’s public utility  structures  and facilities represent a large public investment. Protection of the County’s public utility  structures  and facilities is of prime importance to the County. For these reasons, the placement of wireless service facilities on public utility  structures  or facilities on County property may be allowed if and only if the County is fully satisfied that the following requirements are met:
+
+             (i)    There is sufficient room on the  structure  and/or on the grounds to accommodate the provider’s wireless service facilities;
+
+             (ii)    The presence of the provider’s wireless service facilities will not increase the maintenance cost to the County;
+
+             (iii)    The presence of the provider’s wireless service facilities will not be harmful to the safety of County workers maintaining the public utility  structures  or facilities, nor be harmful to the safety of the  applicant ’s workers; and
+
+             (iv)    The intended use will cause no interference with the primary purpose of the public utility  structures  or facilities. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.150  General requirements.
+
+             The following general requirements apply to all wireless service facilities and their supporting structures:
+
+             (1)     Building Permits  Required.  Building permits  are required for all towers, poles, antennas, equipment, small wireless facilities, and collocation or expansion projects located within any  zone .
+
+             (2)    Noise Regulations. Noise from air conditioners or other equipment associated with wireless service facilities and appurtenant  structures  must not exceed permissible levels at the adjacent residential property line, except for emergency situations requiring the use of a backup generator where the noise standards may be exceeded on a  temporary  basis.
+
+             (3)    No Advertising. No advertising or similar materials may be attached to the tower, antenna support  structure  or facilities.
+
+             (4)    Frequency Interference. Antennas may not cause localized interference with the reception or transmission of any other communications signals including, but not limited to, public safety, broadcast television, cable television, or radio broadcast signals.
+
+             (5)    Landscaping and Screening. The visual impacts of wireless service facilities must be mitigated through landscaping or other screening. The County may waive that requirement for those sides of the facility that are not in public view.
+
+             (a)    A row of evergreen trees a minimum of 10 feet tall at planting and a maximum of six feet apart must be planted around the perimeter of the  fence , or other approved landscaping or screening plan. The intent is for the immediate screening of towers.
+
+             (b)    A continuous hedge at least 36 inches high at planting capable of growing to at least 48 inches in height within 18 months must be planted in front of the tree line referenced in Subsection (5)(a) of this Section.
+
+             (c)    In the event that landscaping is not maintained at the required level, the County, after giving 30  days ’ advance written notice, must maintain or establish the landscaping and bill both the  property owner  and provider for such costs until such costs are paid in full.
+
+             (6)    Site Location/Integrity. Site location and development must preserve the preexisting character of the site as much as possible. Existing vegetation should be preserved or improved, and disturbance of the existing topography of the site should be minimized unless such disturbance would result in less visual impact of the site on the surrounding area.
+
+             (7)    Financial Security. The  application  for any tower, equipment, or facilities must be accompanied by a letter of credit, performance  bond , or other security in an amount to be determined by the County, which may be drawn upon by the County as necessary to cover the costs of removal of the tower, equipment, or facilities.
+
+             (8)    Historic Documentation. If applicable, a letter of permission must be provided from the designated County official if the site is on a national landmark or located in a historic district.
+
+             (9)    County Recommendation. If the  applicant  proposes to use County property, a letter of recommendation must be provided from the  Director  of the  Parks  and Recreation  Department , Public Works  Department  or other applicable  department .
+
+             (10)    Fencing. Security fencing no less than six feet in height with access through a locked gate must be required around each tower and its related equipment and support  structures .
+
+             (11)    Required Parking. If the cell site is not fully automated, adequate parking must be provided for maintenance workers. If the site is automated, other arrangements for adequate off-street parking must be made and documentation thereof provided to the County. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.160  Timing of decisions—Federal shot clocks.
+
+             (1)    Eligible Facilities Request. The County will approve any eligible facilities request as required by Federal law. An eligible facilities request is a request to modify an existing tower or base station without a substantial change (as defined in  47  CFR  1.6100 , as may be amended) to the physical dimensions of such tower or base station.
+
+             (a)     Application  Review.
+
+             (i)     Application .
+
+             (A)    The  Department  will prepare and make publicly available an  application  form for an eligible facilities request.
+
+             (B)    The  applicant  must include the information necessary to determine whether the  application  is an eligible facilities request. The  applicant  is not required to submit any other documentation intended to illustrate the need for any such wireless facilities or to justify the business decision to modify such wireless facilities.
+
+             (ii)    Review. Upon submission of an  application  for an eligible facilities request pursuant to this Subsection, the County must review such  application , make its  final decision  to approve or disapprove the  application , and advise the  applicant  in writing of its  final decision .
+
+             (iii)    Time Frame for Review. The County must complete the review within 60  days  of the date on which an  applicant  satisfies both of the following criteria: (A) the  applicant  takes the first procedural step required to obtain the necessary permit under SCC Chapter  14.06 , Permit Procedures; and (B) the  applicant  submits written documentation that addresses the eligible facilities request criteria and indicates that the proposed modification will not cause a substantial change to an existing  structure .
+
+             (iv)    Tolling of the Time Frame for Review.
+
+             (A)    The 60-day review period is tolled only by mutual agreement between the County and the  applicant , or where the County determines that the  application  is incomplete.
+
+             (B)    Time will toll for incompleteness if the County, within 30  days  of receipt of the  application , provides written notice to the  applicant  specifically delineating all missing documents or information required in the  application .
+
+             (I)    The time frame for review begins running again when the  applicant  makes a supplemental submission in response to the notice of incompleteness.
+
+             (II)    Following a supplemental submission, the County will notify the  applicant  within 10  days  if the supplemental submission did not provide the information identified in the original notice delineating missing information.
+
+             (III)    The time frame is tolled in the case of second or subsequent notices pursuant to the procedures identified in this Subsection.
+
+             (IV)    Second or subsequent notices of incompleteness may not specify missing documents or information that was not delineated in the original notice of incompleteness.
+
+             (C)    Failure to Act. The  application  for an eligible facilities request will be deemed granted if the County fails to approve or deny a complete  application  within the time frame for review, including any tolling, provided the  applicant  notifies the County in writing after the review period has expired.
+
+             (2)    Small Wireless Facilities—Collocation on Existing  Structures .
+
+             (a)     Application  Review.
+
+             (i)     Application . The  Department  will prepare and make publicly available an  application  form, which the  applicant  must use.
+
+             (ii)    Review. Upon submission of an  application  for collocation of small wireless facilities on an existing  structure  pursuant to this Subsection (2), the County must review such  application , make its  final decision  to approve or deny the  application , and advise the  applicant  in writing of its  final decision .
+
+             (iii)    Time Frame for Review. The County must complete the review within 60  days  of the date on which an  application  is submitted. The County must notify the  applicant  within 10  days  if the  application  is incomplete. The first time the County provides notice of incompleteness, a new 60-day time frame will commence upon resubmission of the  application .
+
+             (iv)    Tolling of the Time Frame for Review.
+
+             (A)    The time for review may be tolled only by mutual agreement between the County and the  applicant , or in cases where the County determines upon a resubmission that the  application  is incomplete.
+
+             (B)    The time frame is tolled in the case of subsequent notices of incompleteness. Subsequent notices of incompleteness may not specify missing documents or information that was not delineated in the original notice of incompleteness.
+
+             (v)    Failure to Act. If the County fails to approve or deny a complete  application  under this Subsection (2) within the time frame for review (including any additional time provided or any tolling), the  applicant  may pursue judicial relief.
+
+             (3)    Small Wireless Facilities—Deployment on a New  Structure .
+
+             (a)     Application  Review.
+
+             (i)     Application . The  Department  will prepare and make publicly available an  application  form, which the  applicant  must use.
+
+             (ii)    Review. Upon submission of an  application  for the deployment of small wireless facilities on a new  structure  pursuant to this Subsection (3), the County must review such  application , make its  final decision  to approve or deny the  application , and advise the  applicant  in writing of its  final decision .
+
+             (iii)    Time Frame for Review. The County must complete the review within 90  days  of the date on which an  application  is submitted. The County must notify the  applicant  within 10  days  if the  application  is incomplete. The first time the County provides notice of incompleteness, a new 90-day time frame will commence upon resubmission of the  application .
+
+             (iv)    Tolling of the Time Frame for Review.
+
+             (A)    The time frame for review may be tolled only by mutual agreement between the County and the  applicant , or in cases where the County determines upon a resubmission that the  application  is incomplete.
+
+             (B)    The time frame is tolled in the case of subsequent notices of incompleteness. Subsequent notices of incompleteness may not specify missing documents or information that was not delineated in the original notice of incompleteness.
+
+             (v)    Failure to Act. If the County fails to approve or deny a complete  application  under this Subsection (3) within the time frame for review, including any additional time provided or any tolling, the  applicant  may pursue judicial relief.
+
+             (4)    Collocation  Applications  for Other Than Small Wireless Facilities Using an Existing  Structure . The following time frames apply to  applications  for collocations other than small wireless facilities using an existing structure:
+
+             (a)     Application  Review.
+
+             (i)     Application .
+
+             (A)    The  Department  will prepare and make publicly available an  application  form for collocations other than small wireless facilities using an existing  structure .
+
+             (B)    The  applicant  must include the information necessary to determine whether an  application  is a collocation request other than small wireless facilities using an existing  structure .
+
+             (ii)    Review. Upon submission of an  application  for a request pursuant to this Subsection (4), the County must review such  application , make its  final decision  to approve or disapprove the  application , and advise the  applicant  in writing of its  final decision .
+
+             (iii)    Time Frame for Review. The County must complete the review of the  application  within 90  days  of the date on which an  applicant  submits an  application , subject to the tolling provisions below.
+
+             (iv)    Tolling of the Time Frame for Review.
+
+             (A)    The 90-day review period may be tolled only by mutual agreement between the County and the  applicant , or where the County determines that the  application  is incomplete.
+
+             (B)    Time will toll for incompleteness if the County, within 30  days  of submission of the  application , provides written notice to the  applicant  specifically delineating all missing documents or information required in the  application .
+
+             (C)    The time frame for review begins running again when the  applicant  makes a supplemental submission in response to the notice of incompleteness.
+
+             (D)    Following a supplemental submission, the County will notify the  applicant  within 10  days  if the supplemental submission did not provide the information identified in the original notice delineating missing information.
+
+             (I)    The time frame is tolled in the case of second or subsequent notices pursuant to the procedures identified in this Subsection (4).
+
+             (II)    Second or subsequent notices of incompleteness may not specify missing documents or information that was not delineated in the original notice of incompleteness.
+
+             (v)    Failure to Act. If the County fails to approve or deny a complete  application  under this Subsection (4) within the time frame for review, including any tolling, the  applicant  may pursue judicial relief.
+
+             (5)     Application  to Deploy a Facility Other Than a Small Wireless Facility Using a New  Structure —New Macro Cell Tower. The following time frames apply to  applications  to deploy a facility other than a small wireless facility using a new  structure .
+
+             (a)     Application  Review.
+
+             (i)     Application .
+
+             (A)    The  Department  will prepare and make publicly available an  application  form to deploy a facility other than a small wireless facility using a new  structure .
+
+             (B)    The  applicant  must include the information necessary to determine whether an  application  is a request for deployment of a facility other than a small wireless facility using a new  structure .
+
+             (ii)    Review. Upon receipt of an  application  for a request to deploy a facility other than a small wireless facility using a new  structure  pursuant to this Subsection (5), the County must review such  application , make its  final decision  to approve or disapprove the  application , and advise the  applicant  in writing of its  final decision .
+
+             (iii)    Time Frame for Review. The County must complete the review of the  application  within 150  days  of the date on which an  applicant  submits an  application  seeking approval of a request to deploy a facility other than a small wireless facility using a new  structure , subject to the tolling provisions below.
+
+             (iv)    Tolling of the Time Frame for Review.
+
+             (A)    The 150-day review period may be tolled only by mutual agreement between the County and the  applicant , or where the County determines that the  application  is incomplete.
+
+             (B)    Time will toll for incompleteness if the County, within 30  days  of receipt of the  application , provides written notice to the  applicant  specifically delineating all missing documents or information required in the  application .
+
+             (I)    The time frame for review begins running again when the  applicant  makes a supplemental submission in response to notice of incompleteness.
+
+             (II)    Following a supplemental submission, the County will notify the  applicant  within 10  days  if the supplemental submission did not provide the information identified in the original notice delineating missing information.
+
+             (III)    The time frame is tolled in the case of second or subsequent notices pursuant to the procedures identified in this Subsection (5).
+
+             (IV)    Second or subsequent notices of incompleteness may not specify missing documents or information that was not delineated in the original notice of incompleteness.
+
+             (v)    Failure to Act. If the County fails to approve or deny a complete  application  under this Subsection (5) within the time frame for review, including any tolling, the  applicant  may pursue judicial relief. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.170  Macro cell towers.
+
+             In addition to the other requirements in this Section, the following apply to macro cell towers:
+
+             (1)    Permits Required. No  person  may develop, construct, or operate a macro cell tower or related equipment for commercial purposes upon any tract of land or on any  building  or  structure  within the zoning jurisdiction of the County prior to approval of its  application  for a Hearing Examiner special use permit and other requisite permits by the County and issuance of the permits by the County.  Applicants  must submit their  application  for the requisite permits to the  Department  and must pay a filing fee as set forth in SCC Chapter  14.06 .
+
+             (2)    Compliance. Macro cell towers used for commercial purposes must meet the requirements of TIA 222 Rev H, as it may be revised from time to time, and documentation evidencing such compliance must be submitted with the special use permit  application . Included in the submittal must be a Washington-licensed PE stamped foundation and structural drawing as well as a PE stamped structural analysis (the loaded tower drawing with all antennas and hardware in place and the wind loading calculations). Upon completion of construction, the macro cell tower will be inspected by a third-party professional at the expense of the tower owner.
+
+             (3)    Approval Criteria. In addition to other requirements of the County Code, the  decisionmaker  must consider the following approval criteria in determining whether to recommend approval of a special use permit and, if applicable, height variance:
+
+             (a)    Nature of uses on adjacent and nearby properties;
+
+             (b)    Surrounding tree coverage and foliage;
+
+             (c)    Design of the macro cell tower that has the effect of reducing or eliminating visual obtrusiveness;
+
+             (d)    No existing  structures  are located within the geographic area which meet the  applicant ’s engineering requirements;
+
+             (e)    Existing  structures  do not have sufficient structural strength to support the  applicant ’s proposed antennas and related equipment; and
+
+             (f)    The  applicant  demonstrates that there are other limiting factors not enumerated herein that render existing towers, poles and other  structures  unsuitable.
+
+             (4)     Setback  Requirements.
+
+             (a)     Setback  requirements must be measured from the base of the tower to the property line of the tract of land on which it is located.
+
+             (b)    The tower  structure  must be set back from property lines as required by that  zone , if any, or a minimum of one foot for every foot of tower height, whichever produces the greater  setback  (and, at the written request of the County, provide additional  setbacks  for the length of any guy wires on all sides of a macro cell tower), unless:
+
+             (i)    The  setback  is waived in writing by the owner of the adjacent property and that waiver is filed with the County; or
+
+             (ii)    The macro cell tower is constructed with breakpoint design technology. If the tower has been constructed using breakpoint design technology, the minimum  setback  distance must be equal to 110 percent of the  distance  from the top of the  structure  to the breakpoint level of the  structure , or the applicable  zone ’s minimum side  setback  requirements, whichever is greater. For example, on a 100-foot-tall monopole with a breakpoint at 80 feet, the minimum  setback  distance would be 22 feet (110 percent of 20 feet, the  distance  from the top of the monopole to the breakpoint) or the minimum side yard  setback  requirements for that  zone , whichever is greater. If an  applicant  proposes to use breakpoint design technology to reduce the required  setback , the issuance of a permit for the tower must be conditioned upon approval of the tower design by a Washington-licensed professional engineer.
+
+             (5)    Separation Requirements. Macro cell towers must meet the following minimum separation requirements from other macro cell towers:
+
+             (a)    Monopole tower  structures  must be separated from all other towers, whether monopole, self-supporting lattice or guyed, by a minimum of one-half mile.
+
+             (b)    Self-supporting lattice or guyed towers must be separated from all other self-supporting lattice or guyed towers by a minimum of one mile.
+
+             (6)    Illumination and Security  Fences .
+
+             (a)    Macro cell towers, depending upon their height, must not be artificially lighted except as required by the  FAA . In cases where there are residential zoned properties located within a  distance  of 300 percent of the height of the tower, any tower subject to this Section must be equipped with lighting that minimizes its effect on residential zoned properties.
+
+             (b)    All self-supporting lattice or guyed towers must be enclosed within a security  fence  or other  structure  designed to preclude unauthorized access. Monopole towers must be designed and constructed in a manner which will preclude, to the extent practical, unauthorized climbing of said  structure .
+
+             (7)    Exterior Finish. Macro cell towers must have an exterior finish which enhances compatibility with adjacent land uses, subject to review and approval by the  decisionmaker  as part of the  application  approval process.
+
+             (8)    Notice. For purposes of this Section, any permit must require an  applicant  to notify surrounding  property owners  located within one mile of the legal boundary of the real property where the macro cell tower is to be located. An  applicant  or its designee must provide that list to the County.
+
+             (9)    Preferred Macro Cell Tower Locations. All new macro cell towers are permitted only after applying the following siting priorities, ordered from most-preferred to least-preferred:
+
+             (a)    Industrial  zones ;
+
+             (b)    Manufacturing  zones ;
+
+             (c)    Commercial  zones ;
+
+             (d)    Other nonresidential and nonagricultural  zones ;
+
+             (e)    Parcels of land in residential  zones ;
+
+             (f)    Parcels of land in agricultural  zones ; and
+
+             (g)    Designated historic districts.
+
+             (10)    Alternative Sites Analysis. The  applicant  for a macro cell tower must, as necessary, address siting preferences in an alternative sites analysis.
+
+             (a)    For a macro cell tower, the  applicant  must address the County’s preferred tower locations with a detailed explanation justifying why a site of higher priority was not selected. The County’s macro cell tower location preferences must be addressed in a clear and complete written alternative sites analysis that shows at least three higher ranked, alternative sites that are in the geographic range of the service coverage objectives of the  applicant , together with a factually detailed and meaningful comparative analysis between each alternative candidate and the proposed site that explains the substantive reasons why the  applicant  rejected the alternative candidate.
+
+             (b)    A complete alternative sites analysis provided under this Subsection (10) may include less than three alternative sites so long as the  applicant  provides a factually detailed written rationale for why it could not identify at least three potentially available, higher ranked, alternative sites.
+
+             (c)    For purposes of disqualifying potential collocations or alternative sites for the failure to meet the  applicant ’s service coverage or capacity objectives the  applicant  will provide: (i) a description of its objective, whether it be to address a deficiency in coverage or capacity; (ii) detailed maps or other exhibits with clear and concise data to illustrate that the objective is not met using the alternative (whether it be a collocation or a more preferred location); and (iii) a description of why the alternative (collocation or a more preferred location) does not meet the objective.
+
+             (11)    Engineer’s Certification. Upon completion of construction of a macro cell tower and prior to the commencement of use, a Washington-licensed engineer’s certification must be provided that indicates that the tower is structurally sound and in conformance with all FCC and  FAA  requirements and applicable safety standards.
+
+             (12)    Certificate of Completion and Compliance.
+
+             (a)    A certificate of completion will only be granted upon satisfactory evidence that the construction and installation were done in substantial compliance with the approved plans and photo simulations.
+
+             (b)    If it is found that the macro cell tower, equipment or facilities do not substantially comply with the approved plans and photo simulations, the provider must make any and all such changes required to promptly bring them into compliance. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.180  Small wireless facilities.
+
+             (1)    Agreement. Prior to installing in the  right-of-way  any small wireless facilities, or any pole built for the sole or primary purpose of supporting small wireless facilities, a  person  must enter into an agreement with the County expressly authorizing the small wireless facilities or pole proposed to be installed.
+
+             (2)    General Terms.
+
+             (a)    The initial term of an agreement may not exceed 10 years. The agreement may be renewed for an additional term subject to the mutual written agreement of the County and provider.
+
+             (b)    The agreement authorizes the provider’s nonexclusive use of the  right-of-way  for the sole purpose of constructing, installing, maintaining, modifying and operating small wireless facilities, including any pole built for the sole or primary purpose of supporting the small wireless facilities to provide the services expressly authorized in the agreement, subject to applicable laws and this Section. The agreement authorizes use only of the  right-of-way  in which the County has an actual interest. It is not a warranty of title or interest in any  right-of-way  and does not confer on the provider any interest in any particular location or to a superior or preferred location within the  right-of-way .
+
+             (c)    The provider must, at its sole cost and expense, keep and maintain its small wireless facilities and poles in the  right-of-way  in a safe condition and in good order and  repair  per the agreement between the County and provider.
+
+             (3)    Permit Required. No  person  may construct or install any small wireless facilities without first receiving a permit or combination of permits as required by the County Code. Notwithstanding the foregoing, in the event of an emergency, a provider or its duly authorized representative may commence work prior to obtaining a permit, provided the provider must contact the County prior to commencing the work and apply for a permit within 24 hours after commencing the emergency work. For purposes of this Subsection (3), an “emergency” means a circumstance in which immediate  repair  to damaged or malfunctioning facilities is necessary to restore lost service or prevent immediate harm to  persons  or property.
+
+             (4)    Batching. An  applicant  may simultaneously submit no more than five sites for small wireless facilities in a single, consolidated  application ; provided, that the proposed small wireless facilities are to be deployed on the same type of pole or  structure  using similar equipment within the County.
+
+             (5)    Design Standards. Subject to not exceeding the height limitation of the underlying  zone , all poles built for the sole or primary purpose of supporting small wireless facilities and the small wireless facilities may be approved through administrative review, subject to the wireless provider complying with reasonable and feasible considerations for the:
+
+             (a)    Height, shape, design and color for poles and related equipment;
+
+             (b)    Number, location and styles of poles that may be installed or used;
+
+             (c)    Aesthetic approach for different types of poles and related equipment;
+
+             (d)    Construction of each small wireless facility, including powering and metering;
+
+             (e)    Structural integrity;
+
+             (f)     Setbacks  for ground-mounted equipment;
+
+             (g)    Lighting, marking, and noise requirements; and
+
+             (h)    Use of decorative or stealth poles, where necessary.
+
+             (6)    Administrative Approval.
+
+             (a)    Small wireless facilities are allowed in all  zones , provided the  applicant  complies with all applicable Federal and State law, and the requirements of this Section.
+
+             (b)    Small wireless facilities in all  zones  are subject to approval via permits and administrative review unless their installation requires the construction of a new pole or  structure  exceeding the height limitation of the affected  zone  (in which instance an administrative special use permit and, if applicable, height  variance  may be required). A permit is required for  replacement  support  structures .
+
+             (7)    Site Development. All small wireless facilities are subject to the site development standards, permits, and  site plan  requirements. A site development  application  must contain the following information:
+
+             (a)    Construction drawings showing the proposed method of installation;
+
+             (b)    The manufacturer’s recommended installations, if any;
+
+             (c)    A diagram to scale showing the location of the small wireless facilities, property and  setback  lines, easements, power lines, all  structures , and the required landscaping, if applicable; and
+
+             (d)    Photo simulations that include to-scale visual simulations that show unobstructed before-and-after construction daytime and clear-weather views from at least four angles, together with a map that shows the location of each view, including all equipment and cabling.
+
+             (8)    Public Notice. For purposes of this Section, any  application  for a small wireless facility which includes a new or  replacement  pole, or  variance  or  appeal  of a request for a permit, requires public notice to all adjacent  property owners  and all owners of nearby properties.
+
+             (9)    Notification to Utilities. Prior to the installation or construction of a small wireless facility within the  right-of-way  or a utility easement, the  applicant  or provider must notify all utilities located within such  right-of-way  or utility easement regarding the use of the  right-of-way  or easement.
+
+             (10)    Accessory Equipment. In residential  zones , the provider must locate or place all accessory equipment in the base of the pole for a small wireless facility (where technically feasible), or in an existing  building , or underground, or in an equipment cabinet above ground that is:
+
+             (a)    Designed to blend in with existing surroundings, using architecturally compatible construction and colors; and
+
+             (b)    Located so as to be as unobtrusive as reasonably possible consistent with the proper functioning of the facilities.
+
+             (11)    Decorative Poles. An  applicant  may not install a small wireless facility on a decorative pole, or replace a decorative pole with a new decorative pole unless the County has determined, in its sole discretion, that each of the following conditions has been met:
+
+             (a)    The  application  qualifies for issuance of a permit; and
+
+             (b)    The attachments and  replacement  pole are in keeping with the design and color of the existing decorative pole. (Ord. O20250005 § 2 (Exh. A))
+
+        14.59.190  Miscellaneous.
+
+             (1)    Non-Use and Abandonment. No less than 30  days  prior to the date that a provider plans to abandon or discontinue operation of a facility, the provider must notify the County by certified U.S. mail of the proposed date of abandonment or discontinuation of operations. In the event that a provider fails to give notice, the facility will be considered abandoned upon the County’s discovery of discontinuation of operations. Upon such abandonment, the provider will have 60  days , or an additional period of time determined in the reasonable discretion of the County, within which to:
+
+             (a)    Reactivate the use of the facility or transfer the facility to another provider who makes actual use of the facility; or
+
+             (b)    Dismantle and remove the facilities. If the tower, antenna, foundation, equipment, and facilities are not removed within the 60-day time period, or an additional period of time allowed by the County, the County may remove such tower, antenna, foundation, equipment, and related facilities at the provider’s expense. If there are two or more providers collocating on a facility, then this provision will not become effective until all providers cease using the facility.
+
+             (2)    Independent Technical and Legal Review.
+
+             (a)    The County may retain the services of an independent technical expert and attorney of its choice to provide technical and legal evaluations of permit  applications . The third-party expert must have recognized qualifications in the field of engineering or wireless facilities regulations. The expert’s review may include, but is not limited to:
+
+             (i)    The accuracy and completeness of the items submitted with the  application ;
+
+             (ii)    The applicability of analysis and techniques and methodologies proposed by the  applicant ;
+
+             (iii)    The validity of conclusions reached by the  applicant ; and
+
+             (iv)    Whether the proposed tower, antenna support  structure , equipment and facilities comply with the applicable approval criteria set forth in this Section.
+
+             (b)    The  applicant  will pay the reasonable cost for any independent consultant fees through a deposit, estimated by the County, within 10  days  of the County’s request.
+
+             (i)    When the County requests such payment, the  application  will be deemed incomplete for purposes of  application  processing timelines until the deposit is received.
+
+             (ii)    In the event that such costs and fees do not exceed the deposit amount, the County will refund any unused portion within 30  days  after the final permit is released or, if no final permit is released, within 30  days  after the County receives a written request from the  applicant .
+
+             (iii)    If the costs and fees exceed the deposit amount, then the  applicant  must pay the difference to the County before the permit is issued. The independent consultant must provide an itemized description of the services provided and related fees and charges.
+
+             (3)    Insurance. No  person  may own or operate a tower, pole, antenna, equipment, or small wireless facilities in the  right-of-way  or on County property without having secured and at all times maintaining in place insurance coverage which conforms to the following:
+
+             (a)    Commercial general liability, automobile, employers’ liability, and umbrella insurance, each in the amount of at least $1,000,000 or, depending upon the project, a higher amount at the reasonable discretion of the Risk Manager of the County. Workers’ compensation insurance must meet State statutory requirements.
+
+             (b)    The commercial general liability and automobile insurance policies must specifically include the County and its officers, officials, employees, and agents as additional insureds.
+
+             (c)    All insurance policies must be issued by an agent or representative of an insurance company licensed to do business in the State with a Best’s rating of at least A-7 and must contain an endorsement obligating the insurance company to furnish the County Clerk with at least 30  days ’ prior written notice in advance of the modification or cancellation of the insurance, and the insurance must be replaced up to its original amount(s).
+
+             (4)    Indemnification. Each permit issued for a macro cell tower or small wireless facility or equipment located in the  right-of-way  or on County property includes as a condition that the  applicant  and provider must defend, indemnify and hold harmless the County and its officials, officers, agents, employees and contractors from any and all liability, damages, or charges (including attorneys’ fees and expenses) arising out of claims, suits, demands, or causes of action as a result of the permit process, a granted permit, installation, construction, location, performance, operation, maintenance,  repair ,  replacement , upgrade, removal or  restoration  of the macro cell tower or small wireless facility or equipment.
+
+             (5)    Applicability of State and Federal Law—Conflict With Other Sections of the County Code.
+
+             (a)    These tower and small wireless facilities regulations are subject to all applicable laws. If State or Federal law conflicts with these tower and small wireless facilities regulations in any material respect, and if such law preempts a provision in these tower and small wireless facilities regulations, then these tower and small wireless facilities regulations will be deemed amended to comply with applicable State or Federal law without further action by the County.
+
+             (b)    These tower and small wireless facilities regulations are in addition to other regulations in the County Code. In case of a conflict between these and other regulations, these tower and small wireless facilities regulations control.
+
+             (6)    Severability. The various parts, sentences, paragraphs, and provisions of this Section are severable. If any part, sentence, paragraph, or provision is adjudged unconstitutional or invalid by a court of competent jurisdiction, the remainder of this Section will not be affected thereby and will remain in full force and effect. (Ord. O20250005 § 2 (Exh. A))

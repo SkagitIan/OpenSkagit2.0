@@ -1,0 +1,483 @@
+{
+  "jurisdiction": "mount_vernon",
+  "title": "Title 17 Zoning",
+  "source": "https://www.codepublishing.com/WA/MountVernon/#!/MountVernon17/MountVernon17.html",
+  "discovered_from_har": null,
+  "preset": "mount_vernon_title17",
+  "jurisdiction_key": "mount_vernon",
+  "title_id": "MountVernon17",
+  "collected_at": "2026-06-29T16:42:36.943Z",
+  "page_count": 52,
+  "toc_page_count": 52,
+  "toc_section_count": 626,
+  "pages": [
+    {
+      "ref": "MountVernon1703.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1703.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.03 TITLE AND PURPOSE",
+      "text_length": 1048,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1706.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1706.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.06 DEFINITIONS",
+      "text_length": 57838,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1709.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1709.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.09 DISTRICTS ESTABLISHED – ZONING MAP",
+      "text_length": 16970,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17100.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17100.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.100 WIRELESS TELECOMMUNICATIONS TOWERS AND ANTENNAS",
+      "text_length": 54502,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17102.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17102.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.102 NONCONFORMING BUILDINGS OR USES",
+      "text_length": 9243,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17105.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17105.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.105 VARIANCES",
+      "text_length": 9095,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17108.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17108.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.108 CONDITIONAL USES AND ADMINISTRATIVE APPROVAL USES",
+      "text_length": 3673,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17111.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17111.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.111 AMENDMENTS AND RECLASSIFICATIONS",
+      "text_length": 6219,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17114.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17114.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.114 VIOLATIONS – PENALTY",
+      "text_length": 559,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17117.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17117.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.117 MISCELLANEOUS",
+      "text_length": 1110,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17118.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17118.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.118 MINIMUM RESIDENTIAL DENSITY",
+      "text_length": 2933,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17119.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17119.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.119 TRANSFER OR PURCHASE OF DEVELOPMENT RIGHTS (TDRs)",
+      "text_length": 9618,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1712.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1712.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.12 R-A RESIDENTIAL AGRICULTURAL DISTRICT",
+      "text_length": 8391,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1715.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1715.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.15 R-1 SINGLE-FAMILY DETACHED RESIDENTIAL DISTRICT",
+      "text_length": 18374,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1718.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1718.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.18 R-2 DUPLEX AND TOWNHOUSE RESIDENTIAL DISTRICT",
+      "text_length": 9444,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17200.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17200.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.200 ESSENTIAL PUBLIC FACILITIES",
+      "text_length": 32075,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1721.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1721.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.21 R-2A SINGLE-FAMILY ATTACHED TOWNHOUSE RESIDENTIAL DISTRICT",
+      "text_length": 193,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon17210.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon17210.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.210 TEMPORARY HOMELESS ENCAMPMENTS",
+      "text_length": 26669,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1724.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1724.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.24 R-3 MULTIFAMILY RESIDENTIAL DISTRICT",
+      "text_length": 11061,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1727.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1727.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.27 R-4 MULTIFAMILY RESIDENTIAL DISTRICT",
+      "text_length": 11495,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1730.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1730.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.30 P PUBLIC DISTRICT",
+      "text_length": 19380,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1733.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1733.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.33 R-O RESIDENTIAL OFFICE DISTRICT",
+      "text_length": 7521,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1735.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1735.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.35 HD HEALTH CARE DEVELOPMENT DISTRICT",
+      "text_length": 9247,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1736.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1736.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.36 P-O PROFESSIONAL OFFICE DISTRICT",
+      "text_length": 4051,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1739.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1739.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.39 MHP MOBILE HOME PARK DISTRICT",
+      "text_length": 9840,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1742.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1742.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.42 LC LIMITED COMMERCIAL DISTRICT",
+      "text_length": 5531,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1745.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1745.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.45 C-1 DOWNTOWN DISTRICTS",
+      "text_length": 15252,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1748.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1748.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.48 C-2 GENERAL COMMERCIAL DISTRICT",
+      "text_length": 8665,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1751.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1751.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.51 C-3 COMMUNITY COMMERCIAL DISTRICT",
+      "text_length": 9395,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1754.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1754.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.54 C-4 NEIGHBORHOOD COMMERCIAL DISTRICT",
+      "text_length": 17232,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1756.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1756.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.56 C-L COMMERCIAL/LIMITED INDUSTRIAL DISTRICT",
+      "text_length": 21984,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1757.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1757.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.57 M-1 LIGHT MANUFACTURING AND COMMERCIAL DISTRICT",
+      "text_length": 10315,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1760.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1760.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.60 M-2 INDUSTRIAL DISTRICT",
+      "text_length": 9723,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1763.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1763.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.63 F-1 FLOODPLAIN DISTRICT",
+      "text_length": 1330,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1766.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1766.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.66 HISTORIC OVERLAY DISTRICT AND HISTORIC STRUCTURES",
+      "text_length": 7758,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1767.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1767.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.67 PERMANENT SUPPORTIVE HOUSING",
+      "text_length": 8524,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1769.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1769.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.69 PLANNED UNIT DEVELOPMENTS",
+      "text_length": 87363,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1770.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1770.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.70 DESIGN REVIEW",
+      "text_length": 25249,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1772.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1772.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.72 PROVISIONS APPLICABLE TO ALL DISTRICTS",
+      "text_length": 22422,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1773.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1773.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.73 REGULATIONS TO ENCOURAGE AFFORDABLE HOUSING",
+      "text_length": 46829,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1775.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1775.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.75 FILING OF PLANS",
+      "text_length": 2515,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1778.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1778.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.78 DIMENSIONAL REQUIREMENTS",
+      "text_length": 7882,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1781.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1781.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.81 SPECIAL USES",
+      "text_length": 12469,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1784.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1784.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.84 PARKING AND LOADING",
+      "text_length": 28883,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1785.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1785.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.85 DUMPSTER AND RECYCLING STANDARDS",
+      "text_length": 3090,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1787.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1787.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.87 SIGNS",
+      "text_length": 42758,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1790.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1790.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.90 SITE PLAN REVIEW",
+      "text_length": 8785,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1791.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1791.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.91 MOBILE VENDORS",
+      "text_length": 14417,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1792.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1792.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.92 DEVELOPMENT AND PERMIT REQUIREMENTS FOR MOBILE FOOD VANS AND ESPRESSO STANDS",
+      "text_length": 5013,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1793.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1793.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.93 LANDSCAPING",
+      "text_length": 26223,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1796.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1796.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.96 HOME OCCUPATION PERMITS",
+      "text_length": 20061,
+      "section_anchors": []
+    },
+    {
+      "ref": "MountVernon1799.html",
+      "url": "https://www.codepublishing.com/WA/MountVernon/html/MountVernon17/MountVernon1799.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.99 FENCES AND WALLS",
+      "text_length": 7653,
+      "section_anchors": []
+    }
+  ]
+}

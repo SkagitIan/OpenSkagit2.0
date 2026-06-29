@@ -1,0 +1,154 @@
+Chapter 14.52 SPECIAL USE PERMITS FOR MINING
+
+         Chapter 14.52
+SPECIAL USE PERMITS FOR MINING
+
+             Sections:
+
+              14.52.010    Applicability.
+
+              14.52.030    Application requirements.
+
+              14.52.040    Review criteria.
+
+              14.52.050    Operating standards or requirements.
+
+        14.52.010  Applicability.
+
+             This Chapter applies to special use permits for  mining operations . (Ord. O20250005 § 2 (Exh. A))
+
+        14.52.030  Application requirements.
+
+             In addition to the requirements of SCC  14.06.230 , an  application  for a  mining operations  special use permit must include:
+
+             (1)    The following information on maps in an 11-inch by 17-inch format size:
+
+             (a)    A vicinity map with a north arrow indicating the area on which the extraction operation is proposed, including a legal description, showing  right-of-way  width of access  roads  to the proposed site from the nearest community and any  roads  proposed on the site, and showing zoning of adjacent properties and land uses within five miles of the area proposed for  mineral  extraction and related activities;
+
+             (b)    A pre-mining map drawn to scale with an appropriate scale bar showing the permit area and  buffers , elevations and contours, natural slopes and other  drainage  patterns, boundaries of municipalities, boundaries of property ownership, names and addresses of adjacent  property owners , locations of nearby mines, locations of all railroads, bridges, utility lines or other rights-of-way, locations and names of any streams and natural or artificial drain ways on or adjacent to the site, locations of  parks  and other significant features;
+
+             (c)    A reclamation sequence map drawn to scale with an appropriate scale bar covering the same area as the pre-mining map showing the permit area border and  buffers , excavation areas, location of all proposed access  roads  to be built, location of types of  setbacks  and beams, numbered segments and the direction of the sequence of  mining , soil storage areas and sequence of stripping, storing and  replacement  of mined segments, overburden storage areas and sequence of stripping, storing and  replacement  of overburden on mined segments, waste rock piles and how they will be reclaimed and stabilized, operation plant and processing areas, measures to be taken to adjacent surface area to prevent slumping or  landslides  on adjacent lands, location and description of  stormwater  and erosion control systems, including  drainage facilities  and settling  ponds  and estimated runoff served by individual facilities; and
+
+             (d)    A final reclamation map drawn to scale with an appropriate scale bar covering the same area as the pre-mining map permit area and  buffers , final elevations and contours, adjacent natural ground slopes, reclaimed  drainage  patterns, general topography, locations and names of any  roads , utility lines, rights-of-way, streams, bridges,  lakes , springs,  wetlands , location and depth of topsoil to be replaced after seedbed preparation, permanent  drainage  and water control systems, area to be revegetated and proposed species, two cross-sections (at right angles) with horizontal and vertical scales the same that show the original and final topography and the water table.
+
+             (2)    A report by a qualified geologist, hydrogeologist, or licensed engineer characterizing the area’s  groundwater  including, but not limited to, the following information:
+
+             (a)    A description of the geology and  hydrogeology  of the area including the delineation of  aquifer , aquitards, or aquicludes (confining layers), hydrogeologic cross-sections,  porosity  and horizontal and vertical permeability estimates;
+
+             (b)    Determination of the direction and velocity of  groundwater  movement, water table contour and  potentiometric surface  maps (for confined  aquifers ), if applicable; and
+
+             (c)    A map containing the limits of the mine,  buffer  zones, location of all  groundwater  wells within one mile  distance  down gradient from the property boundaries, location of all perennial streams and springs, and definition or specification of locations of  aquifer  recharge and  discharge  areas.
+
+             (3)    The estimated quantities of all materials to be extracted.
+
+             (4)    Identification of any possible areas on the project site that could include unique or rare occurrences of rocks,  minerals , or fossils that are of outstanding scientific significance. These areas must be delineated on the pre-mining map above and the proposal for preservation of the identified area(s) must be addressed.
+
+             (5)    An on-site study to determine appropriate mitigation requirements for noise, vibration, and dust levels. The study should specify what levels the  applicant  deems satisfactory to mitigate off-site disturbances.
+
+             (6)    An operations proposal detailing estimated frequency of blasting, estimated truckloads per day, what provisions for screening and fencing are proposed, and estimated hours of operation.
+
+             (7)    Identification and description of those  critical areas  designated and regulated by SCC Chapter  14.24 , together with any  critical areas  studies that may be required by SCC Chapter  14.24 .
+
+             (8)    A review from Skagit County Public Works  Department  or Washington State  Department  of Transportation demonstrating that  roads  or bridges are capable of sustaining the necessary traffic for the proposed  mineral  extraction operation, and that the proposed operation meets level-of-service, safety, and other standards as outlined in the Skagit County Transportation Systems Plan, the Skagit County  Comprehensive Plan , and applicable State and local regulations. (Ord. O20250005 § 2 (Exh. A))
+
+        14.52.040  Review criteria.
+
+             (1)    An  application  for a  mining  operation special use permit is subject to the type of review specified in SCC  14.06.150 .
+
+             (2)    An  application  for a  mining  operation special use permit must be consistent with the criteria for all special use permits found in SCC Chapter  14.51  and the following:
+
+             (a)    When reviewing an  application  for  mining operations  special use permit, the  decisionmaker  should recognize that  surface mining  is an essential economic activity and that it is not possible to extract  minerals  without producing some environmental impacts. The  decisionmaker  must consider all relevant evidence and conditions that will mitigate detrimental impacts to the environment and conditions that protect the general welfare, health and safety. The permit must be granted if the impacts are mitigatable. The burden of proof is on the  applicant . Mitigating conditions must be performance-based, objective standards that:
+
+             (i)    Are directly and proportionately related to limiting  surface mining  impacts;
+
+             (ii)    Are reasonable, practicable and generally capable of being achieved by the mine operator; and
+
+             (iii)    Take into consideration existing and available technologies applicable to  mining operations .
+
+             (b)    The  decisionmaker  must consider the requirements of this Chapter as minimum standards and may include appropriate site-specific conditions to protect public health, safety, and the environment and to ensure compliance with the operating standards in SCC  14.52.050 .
+
+             (c)    The  decisionmaker  must include appropriate site-specific conditions to mitigate existing and potential incompatibilities between the  mineral  extraction operation and adjacent parcels. Such limitations must reflect the differences in potential impacts based on the  mineral  extraction operation’s location in resource, rural or  urban growth areas  and recognize that the purpose of designating  mineral resource lands  is to conserve  mineral resource lands , allow continued operation of existing legally established  mining operations , and ensure that use of adjacent lands does not interfere with the extraction of  minerals . The Hearing Examiner must take into consideration the December 1997 publication  Best Management Practices  for Reclaiming Surface Mines in Washington and Oregon, published jointly by the Oregon  Department  of Geology and  Mineral  Industries and the Washington State  Department  of Natural Resources, Chapter 3, Operation and Reclamation Strategies, in determining appropriate mitigation requirements for operational impacts.
+
+             (d)    The  decisionmaker  must include appropriate site-specific conditions to mitigate  stormwater  runoff and erosion impact. The Hearing Examiner must take into consideration the December 1997 publication  Best Management Practices  for Reclaiming Surface Mines in Washington and Oregon, published jointly by the Oregon  Department  of Geology and  Mineral  Industries and the Washington State  Department  of Natural Resources, Chapter 2, Storm Water and Erosion Control, and the National  Pollutant  Discharge Elimination System (NPDES)  Surface Water  Protection requirements in determining appropriate conditions for mitigating  stormwater  and erosion impacts.
+
+             (e)    The  decisionmaker  must consider public interests such as fishing, boating, hiking, and camping when reviewing an  application  for a  mining operations  special use permit, and may impose mitigating measures as necessary and appropriate. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.52.050  Operating standards or requirements.
+
+             (1)    Responsibility. The landowner(s) and operator(s) are jointly responsible for the operation of a  mineral  extraction site.
+
+             (2)    Site Area and Width.
+
+             (a)    When the activity includes both extraction and on-site  mineral  crushing or  mineral  processing including asphalt or concrete batching and asphalt or concrete recycling, the site area must be a minimum of 20 acres.
+
+             (b)    There must be a minimum  lot width  of 500 feet for crushing or processing activities.
+
+             (c)    Operations that are limited to extraction and transportation must comply with  dimensional standards  of the underlying  zone .
+
+             (3)     Buffers .
+
+             (a)    A minimum 200-foot  buffer  is required between on-site crushing, processing, or recycling activities and adjacent properties for the site as a condition for the issuance of a  mining operations  special use permit.
+
+             (b)    Adjacent properties are required to maintain a 200-foot  buffer  from the  mineral  resource designated land or  sign  a  nuisance  waiver to reduce the 200-foot  buffer  per SCC  14.38.060 . In the case of a pre-existing  structure  located in the  buffer  of adjacent property, the required  buffer  must be established on the  mineral  resource designated land.
+
+             (c)    A minimum 100-foot  buffer  is required for the site where operations are limited to the extraction and transportation of  minerals . Once the extraction and transportation operations have been completed, the material in the  buffer  may be utilized during reclamation.
+
+             (4)    Maximum Permissible Noise Levels. Maximum permissible noise levels are set by the provisions of WAC Chapter  173-60 , Maximum Environmental Noise Levels.
+
+             (5)    Blasting. Blasting must be restricted to daylight hours when the  mineral  extraction operation is within one-quarter mile of a residential area with a greater density than one  dwelling unit  per 10 acres. The  decisionmaker  may otherwise set blasting hours and conditions based on site-specific circumstances. Except in the case of emergencies declared by civil authorities, blasts should be scheduled for regular and predictable times.
+
+             (6)    Vertical Limitations/Aquifer Protection.
+
+             (a)     Surface mining  must be vertically limited to only one  aquifer  unless approved by the Washington State  Department  of  Ecology . Hydrological barriers separating  aquifers  must not otherwise be disturbed.
+
+             (b)    Activities related to  mineral  extraction and processing operations in the vicinity of  aquifers  must provide safeguards including containment to prevent direct contamination to the open  aquifers  and indirect contamination through infiltration of  mining  operation  pollutants .
+
+             (c)    Imported material may not be used as a backfill for mine sites where an  aquifer  has been breached.
+
+             (d)    Disturbed  aquifers  should be reclaimed as  ponds  or  lakes  and/or  wetlands .
+
+             (e)    Additional  buffers  and  setbacks  may be required beyond those listed in Subsections (2) and (3) of this Section, if necessary, to prevent over-excavation when  mining  in an  aquifer .
+
+             (f)    All relevant provisions of the  Critical Areas  Ordinance, SCC Chapter  14.24 , for  aquifer  protection must be met.
+
+             (7)     Surface Water  Protection. All  mineral  and aggregate sites must meet the minimum requirements of SCC Chapter  14.32 , as well as all pertinent requirements of the Washington State  Department  of  Ecology , the  Department  of Natural Resources,  Department  of Fish and Wildlife and other State and Federal regulations regarding  surface water  protection.
+
+             (a)    Storage  pond  systems for holding processing waters must be designed to preclude untreated  discharge  to natural streams or  surface waters , unless the  discharges  are otherwise regulated and allowed by a State or Federal government agency.
+
+             (b)    The flow of natural runoff from extraction sites must be dispersed or regulated such that soil erosion on receiving lands is prevented.
+
+             (8)    Bench/Terrace.
+
+             (a)    Benches must be back-sloped and must be established at not more than 40-foot intervals to control surface  drainage  and debris.
+
+             (b)    Swales or ditches on benches must have a maximum gradient of five percent.
+
+             (9)    Reclamation. Reclamation of  surface mining  sites must be in accordance with the requirements of the State  Department  of Natural Resources. Reclamation activities may not allow land filling unless sites comply with WAC Chapters  173-304  and  173-351 , SCC Chapter  12.16 , and other relevant State and Federal regulations. If the operation is not subject to the State  Department  of Natural Resources permitting requirements, the following minimum standards apply. All reclaimed slopes must:
+
+             (a)    Have a varied steepness;
+
+             (b)    Have a natural appearance in both profile and plan view;
+
+             (c)    Have no large rectilinear topographic elements;
+
+             (d)    Not exceed two horizontal to one vertical except as necessary to blend with natural adjacent slopes;
+
+             (e)    Be compacted if significant back-filling is required to produce the final reclaimed slope;
+
+             (f)    Provide measures to establish a beneficial  wetland  where a  lake ,  pond  or swamp is created; and
+
+             (g)    Place topsoil and revegetate as necessary to stabilize slopes and control erosion.
+
+             (10)    Hours of Operation. Hours of operation must vary according to the location of the site as stated below and may be shortened by the  decisionmaker  based on site-specific circumstances:
+
+             (a)    Within designated  natural resource lands , the hours of operation may be unlimited. The  decisionmaker  may limit hours of operation to daylight hours or to such other reasonable limitation deemed necessary to address potential significant adverse impacts to existing adjacent land uses, on any portion of the  mining  site where  mining  activity is proposed to occur less than one-quarter mile from existing Rural Intermediate,  Rural Village , or  Urban Growth Area  designated lands;
+
+             (b)    Within rural lands, the hours of operation must be limited to dawn to dusk;
+
+             (c)    Within  urban growth areas  and  rural villages , the hours of operation must be from 8:00 a.m. to 5:00 p.m., Monday through Saturday; and
+
+             (d)    During emergencies, restrictions on hours of operation can be suspended by the Board of County Commissioners pursuant to the lawful procedures for declaring an emergency.
+
+             (11)    Chemical Leach  Mining . Chemical leach  mining  is prohibited.
+
+             (12)    Metals  Mining . Metals  mining  is regulated by RCW Chapter  78.56 , Metals  Mining  and Milling Act. (Ord. O20250005 § 2 (Exh. A))

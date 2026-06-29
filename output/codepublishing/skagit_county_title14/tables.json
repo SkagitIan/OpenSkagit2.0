@@ -1,0 +1,5741 @@
+[
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1406.html",
+    "chapter_title": "Chapter 14.06 PERMIT PROCEDURES",
+    "table_index": 0,
+    "caption": "Table 14.06.150-1: Types of Review",
+    "nearest_heading": "14.06.150 Types of review.",
+    "rows": [
+      [
+        "",
+        "Type 1 Director Decision Without Notice",
+        "Type 2 Director Decision With Notice",
+        "Type 3 Hearing Examiner Decision",
+        "Type 4 Board of County Commissioner Decision"
+      ],
+      [
+        "(1) Applications Subject to This Type of Review",
+        "• Accessory dwelling",
+        "• Administrative special use permit (SCC Chapter 14.51 )",
+        "• Critical areas variance to reduce a standard buffer width (SCC Chapter 14.24 )",
+        "• Development agreement (SCC Chapter 14.53 )"
+      ],
+      [
+        "",
+        "• Administrative decision",
+        "• Administrative variance (SCC Chapter 14.58 )",
+        "• Local essential public facility (SCC Chapter 14.54 )",
+        "• Regional essential public facility (SCC Chapter 14.54 )"
+      ],
+      [
+        "",
+        "• Administrative order (SCC Chapter 14.09 )",
+        "• Reasonable use exception (SCC Chapter 14.24 )",
+        "• Hearing Examiner special use permits (SCC Chapter 14.51 )",
+        "• Site-specific rezone authorized by the Comprehensive Plan"
+      ],
+      [
+        "",
+        "• Application expiration (SCC 14.06.260 )",
+        "• Director interpretation (SCC 14.06.130 )",
+        "• Mining operation special use permit (SCC Chapter 14.52 )",
+        ""
+      ],
+      [
+        "",
+        "• Boundary line adjustment (SCC Chapter 14.72 )",
+        "• SEPA threshold determination",
+        "• Hearing Examiner variance (SCC Chapter 14.58 )",
+        ""
+      ],
+      [
+        "",
+        "• Building permit (SCC Chapter 15.04 )",
+        "• Stormwater exception per SCC 14.32.090 (2)",
+        "• Revocation of an SUP (SCC 14.51.070 )",
+        ""
+      ],
+      [
+        "",
+        "• Critical areas review (SCC Chapter 14.24 )",
+        "",
+        "• Shoreline permit (SCC Chapter 14.48 )",
+        ""
+      ],
+      [
+        "",
+        "• Flood area development permit (SCC Chapter 14.34 )",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "• Hazard tree removal (SCC 14.24.130 )",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "• Land disturbance permit (SCC Chapter 14.30 )",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "• Lot certification (SCC 14.06.140 )",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "• Minor revision to permit (SCC 14.06.520 )",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "• Permit extension (SCC 14.06.510 )",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "• Shoreline exemption",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "• Stormwater adjustment per SCC 14.32.090 (1)",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "• Suspension or revocation of permit (SCC 14.06.540 )",
+        "",
+        "",
+        ""
+      ],
+      [
+        "(2) Pre-Application Conference",
+        "No",
+        "Yes, but can be waived",
+        "Yes, but can be waived",
+        "Yes, but can be waived"
+      ],
+      [
+        "(3) Notice of Application",
+        "No",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "(4) Comment Period 1",
+        "None",
+        "15 days",
+        "15 days",
+        "15 days"
+      ],
+      [
+        "(5) Recommendation By",
+        "None",
+        "None",
+        "Director",
+        "Hearing Examiner"
+      ],
+      [
+        "(6) Pre-Decision Open-Record Public Hearing",
+        "No",
+        "No",
+        "Yes, held by Hearing Examiner",
+        "Yes, held by Hearing Examiner"
+      ],
+      [
+        "(7) Decisionmaker",
+        "Director",
+        "Director",
+        "Hearing Examiner",
+        "Board of County Commissioners"
+      ],
+      [
+        "(8) Notice of Decision",
+        "No",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "(9) Review Time Period 2",
+        "65 days",
+        "100 days",
+        "170 days",
+        "170 days"
+      ],
+      [
+        "(10) Local Appeal Available To",
+        "Hearing Examiner",
+        "Hearing Examiner, then BOCC",
+        "Board of County Commissioners",
+        "None"
+      ],
+      [
+        "(11) Appeal Hearing",
+        "Open-record",
+        "Open-record before Hearing Examiner; closed-record before BOCC",
+        "Closed-record",
+        "None"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1406.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1406.html",
+    "chapter_title": "Chapter 14.06 PERMIT PROCEDURES",
+    "table_index": 1,
+    "caption": "Table 14.06.150-2: Types of Review for Land Divisions",
+    "nearest_heading": "14.06.150 Types of review.",
+    "rows": [
+      [
+        "",
+        "Type of Review"
+      ],
+      [
+        "Type",
+        "Number of Lots/Tracts/Parcels",
+        "Preliminary",
+        "Final",
+        "Alteration",
+        "Vacation"
+      ],
+      [
+        "Short subdivision",
+        "1–4",
+        "1",
+        "1",
+        "2",
+        "2"
+      ],
+      [
+        "Long subdivision",
+        "5 or more",
+        "3",
+        "1",
+        "2",
+        "2"
+      ],
+      [
+        "Binding site plan",
+        "1–8 (or in an existing development)",
+        "2",
+        "1",
+        "2",
+        "2"
+      ],
+      [
+        "Binding site plan",
+        "9 or more",
+        "3",
+        "1",
+        "2 (minor)",
+        "2"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1406.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1406.html",
+    "chapter_title": "Chapter 14.06 PERMIT PROCEDURES",
+    "table_index": 2,
+    "caption": "Table 14.06.510-1: Permit Expiration Timelines",
+    "nearest_heading": "14.06.510 Permit term, extension, and expiration.",
+    "rows": [
+      [
+        "Type of Permit",
+        "Initial Term",
+        "Number of Allowed Extensions",
+        "Length of Allowed Extension"
+      ],
+      [
+        "Boundary line adjustment",
+        "1 year to record",
+        "1",
+        "1 year"
+      ],
+      [
+        "Building permit",
+        "See SCC 15.04.030"
+      ],
+      [
+        "Critical areas variance",
+        "3 years to establish the use, per SCC 14.24.150 (6)"
+      ],
+      [
+        "Preliminary land division",
+        "Time to submit final land division is as set forth in SCC 14.74.130 and RCW 58.17.140"
+      ],
+      [
+        "Shoreline permit",
+        "See RCW 90.58.143 and WAC 173-27-090"
+      ],
+      [
+        "Special use permit",
+        "3 years to establish the use",
+        "1",
+        "1 year"
+      ],
+      [
+        "Variance",
+        "3 years to establish the use",
+        "1",
+        "1 year"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1406.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1406.html",
+    "chapter_title": "Chapter 14.06 PERMIT PROCEDURES",
+    "table_index": 3,
+    "caption": "Table 14.06.530-1: Maintenance Bond Default Amounts and Durations",
+    "nearest_heading": "14.06.530 Assurance devices.",
+    "rows": [
+      [
+        "Type of Construction",
+        "Default Amount",
+        "Duration"
+      ],
+      [
+        "Utilities/frontage/fixed assets",
+        "30% of value",
+        "1 year"
+      ],
+      [
+        "Landscaping",
+        "50% of cost of plants, irrigation, and labor",
+        "2 years"
+      ],
+      [
+        "Critical areas",
+        "50% of value",
+        "5 years"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1406.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1410.html",
+    "chapter_title": "Chapter 14.10 GENERAL PROVISIONS",
+    "table_index": 0,
+    "caption": "Table 14.10.050-1 Key to the Use Tables",
+    "nearest_heading": "14.10.050 Use tables",
+    "rows": [
+      [
+        "Code",
+        "Explanation"
+      ],
+      [
+        "P",
+        "The use is permitted. Permitted uses are those that do not require discretionary land use approval permits, but may require building permits, shoreline permits, or other land use review."
+      ],
+      [
+        "AC",
+        "The use is permitted, but only as an accessory to a principal use."
+      ],
+      [
+        "AD",
+        "The use may be allowed by an administrative special use permit."
+      ],
+      [
+        "HE",
+        "The use may be allowed by a Hearing Examiner special use permit."
+      ],
+      [
+        "X",
+        "Where the table cell is blank or includes an “X,” the use is prohibited in the zone."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1410.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1410.html",
+    "chapter_title": "Chapter 14.10 GENERAL PROVISIONS",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "14.10.060 Uses allowed in all zones.",
+    "rows": [
+      [
+        "Use",
+        "Standards",
+        "Review"
+      ],
+      [
+        "Drainage maintenance",
+        "SCC Chapter 14.18",
+        "P"
+      ],
+      [
+        "Net metering system, solar",
+        "SCC Chapter 14.18",
+        "P"
+      ],
+      [
+        "Outdoor public musical, entertainments, amusements, and assemblies (single events)",
+        "SCC Chapter 9.08",
+        "See SCC Chapter 9.08"
+      ],
+      [
+        "Public use",
+        "SCC Chapter 14.18",
+        "—"
+      ],
+      [
+        "—minor",
+        "",
+        "P"
+      ],
+      [
+        "—expansion of existing major public use up to 3,000 sf",
+        "",
+        "AD"
+      ],
+      [
+        "—new major public use or expansion of existing of 3,000 sf or greater",
+        "",
+        "HE"
+      ],
+      [
+        "Recycling drop box facility",
+        "SCC Chapter 14.18",
+        "P"
+      ],
+      [
+        "Repair, replacement, and maintenance of water lines with an inside diameter of 12 inches or less",
+        "SCC Chapter 14.18",
+        "P"
+      ],
+      [
+        "Transit stop",
+        "SCC Chapter 14.18",
+        "P"
+      ],
+      [
+        "Utility development",
+        "SCC Chapter 14.18",
+        "—"
+      ],
+      [
+        "—minor",
+        "",
+        "AD"
+      ],
+      [
+        "—major",
+        "",
+        "HE"
+      ],
+      [
+        "Wireless facilities",
+        "SCC Chapter 14.59",
+        "—"
+      ],
+      [
+        "—small wireless facilities",
+        "",
+        "AD"
+      ],
+      [
+        "—macro cell towers",
+        "",
+        "HE"
+      ],
+      [
+        "—collocation of cell towers",
+        "",
+        "P"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1410.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1410.html",
+    "chapter_title": "Chapter 14.10 GENERAL PROVISIONS",
+    "table_index": 2,
+    "caption": "Table 14.10.100-1 Key to the Dimensional Standards Tables",
+    "nearest_heading": "14.10.100 Dimensional standards—Measurement and application.",
+    "rows": [
+      [
+        "Code",
+        "Explanation"
+      ],
+      [
+        "ac",
+        "Acres or as rounded to a fraction of a section, e.g., 10 acres or 1/64th of a section; 40 acres or 1/16th of a section"
+      ],
+      [
+        "ft",
+        "Feet"
+      ],
+      [
+        "sf",
+        "Square feet"
+      ],
+      [
+        "*",
+        "See the code section for the zone for detailed limits"
+      ],
+      [
+        "-",
+        "No limit or inapplicable (when alone in a table cell)"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1410.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1411.html",
+    "chapter_title": "Chapter 14.11 RURAL MIXED-USE ZONES AND USES",
+    "table_index": 0,
+    "caption": "Table 14.11.020-1 Allowed Uses in the Rural Mixed-Use Zones",
+    "nearest_heading": "14.11.020 Allowed uses.",
+    "rows": [
+      [
+        "",
+        "RI",
+        "RRv",
+        "RVR",
+        "RC",
+        "RVC",
+        "RVC Alger",
+        "OSRSI"
+      ],
+      [
+        "Residential Uses"
+      ],
+      [
+        "Single-family residence",
+        "P",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Accessory dwelling unit",
+        "P",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Middle housing (2—4 units)",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Co-housing as part of a CaRD",
+        "P",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Loft living quarters",
+        "",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Owner operator/caretaker quarters",
+        "",
+        "",
+        "",
+        "AC",
+        "AC",
+        "AC",
+        ""
+      ],
+      [
+        "Emergency housing",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Emergency shelter",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Manufactured or mobile home park",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Permanent supportive housing",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Residential accessory use",
+        "P",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Seasonal worker housing",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Transitional housing",
+        "",
+        "",
+        "P",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Temporary manufactured home",
+        "P",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Commercial/Retail Uses"
+      ],
+      [
+        "Animal clinic/hospital",
+        "HE",
+        "HE",
+        "",
+        "HE",
+        "AD",
+        "AD",
+        ""
+      ],
+      [
+        "Animal preserve",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Asphalt/concrete batching or recycling, temporary",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Bed and breakfast",
+        "AD",
+        "AD",
+        "AD",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Business/professional office",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Display gardens",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Family day care provider",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Group care facility",
+        "HE",
+        "",
+        "",
+        "HE",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Group care facility, adult",
+        "HE",
+        "",
+        "",
+        "",
+        "AD",
+        "AD",
+        ""
+      ],
+      [
+        "Home-Based Business 1",
+        "P",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Home-Based Business 2",
+        "AD",
+        "AD",
+        "AD",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Home-Based Business 3",
+        "HE",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Kennel, boarding",
+        "HE",
+        "HE",
+        "HE",
+        "AD",
+        "AD",
+        "AD",
+        ""
+      ],
+      [
+        "Kennel, day-use",
+        "HE",
+        "AD",
+        "HE",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Kennel, limited",
+        "HE",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Laundromat",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Limited event venues",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "",
+        "AD"
+      ],
+      [
+        "Marijuana retail facility",
+        "",
+        "",
+        "",
+        "AD",
+        "AD",
+        "AD",
+        ""
+      ],
+      [
+        "Marina, ≤20 slips",
+        "HE",
+        "",
+        "",
+        "",
+        "HE",
+        "",
+        "HE"
+      ],
+      [
+        "Marina, > 20 slips",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Mini-storage",
+        "",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Mortuary",
+        "HE",
+        "",
+        "",
+        "",
+        "HE",
+        "",
+        ""
+      ],
+      [
+        "Outpatient medical and health care service",
+        "",
+        "",
+        "HE",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Overnight lodging and related services for visitors to the rural area",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Restaurant",
+        "",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Small retail and service business",
+        "",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Small-scale production or manufacture",
+        "",
+        "",
+        "",
+        "",
+        "AD",
+        "AD",
+        ""
+      ],
+      [
+        "Community/Public Uses"
+      ],
+      [
+        "Cemetery",
+        "HE",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Church",
+        "HE",
+        "HE",
+        "",
+        "HE",
+        "HE",
+        "HE",
+        ""
+      ],
+      [
+        "Community club/grange hall",
+        "HE",
+        "HE",
+        "HE",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Conference center",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Historic site open to the public",
+        "HE",
+        "HE",
+        "HE",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Interpretive/information center",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Museum",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Preschool",
+        "HE",
+        "",
+        "HE",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Natural Resource Uses"
+      ],
+      [
+        "Agriculture",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Agricultural accessory use",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Agricultural processing facility",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Agritourism 1",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Agritourism 2",
+        "AD",
+        "AD",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Agritourism 3",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Anaerobic digester",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Fish hatchery",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Forestry",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Habitat enhancement/restoration project",
+        "",
+        "P",
+        "P",
+        "P",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Manure lagoon",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Natural resource support services",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Natural resources training/research facility",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Nursery/greenhouse, retail",
+        "HE",
+        "X",
+        "",
+        "P",
+        "AD",
+        "AD",
+        ""
+      ],
+      [
+        "Nursery/greenhouse, wholesale",
+        "",
+        "HE",
+        "",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Seasonal roadside stand ≤ 300 sf",
+        "P",
+        "P",
+        "P",
+        "",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Seasonal roadside stand > 300 sf",
+        "HE",
+        "HE",
+        "",
+        "",
+        "AD",
+        "AD",
+        ""
+      ],
+      [
+        "Park/Recreational Uses"
+      ],
+      [
+        "Campground, destination",
+        "",
+        "AD",
+        "",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Campground, developed",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Campground, primitive",
+        "",
+        "AD",
+        "",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Golf course",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Off-road vehicle use areas and trails",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Outdoor outfitters enterprise",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Outdoor recreational facility",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Outdoor recreational equipment rental and/or guide services",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Park, community",
+        "HE",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Park, recreation open space",
+        "",
+        "AD",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Park, regional",
+        "",
+        "AD",
+        "AD",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Park, specialized recreational area",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        ""
+      ],
+      [
+        "Racetrack, recreational",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Shooting club, indoor",
+        "",
+        "",
+        "",
+        "",
+        "HE",
+        "HE",
+        ""
+      ],
+      [
+        "Shooting club, outdoor",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Stables and riding club",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Trail",
+        "AD",
+        "AD",
+        "AD",
+        "",
+        "AD",
+        "AD",
+        "P"
+      ],
+      [
+        "Trailhead, primary and secondary",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD"
+      ],
+      [
+        "Storage Uses"
+      ],
+      [
+        "Outdoor storage 1",
+        "",
+        "AD",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Outdoor storage 2",
+        "",
+        "AD",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Outdoor storage 3",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Outdoor storage 4",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Transportation Uses"
+      ],
+      [
+        "Aircraft landing field",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Vehicle charging station",
+        "",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        "AC"
+      ],
+      [
+        "Vehicle fueling station",
+        "",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Utility Uses"
+      ],
+      [
+        "Impoundment",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Impoundment > one acre-foot",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Recycling drop-box facility",
+        "AC",
+        "AC",
+        "AC",
+        "P",
+        "P",
+        "",
+        "AC"
+      ],
+      [
+        "Water diversion structure",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "AD"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1411.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1411.html",
+    "chapter_title": "Chapter 14.11 RURAL MIXED-USE ZONES AND USES",
+    "table_index": 1,
+    "caption": "Table 14.11.030-1 Dimensional Standards in the Rural Mixed-Use Zones",
+    "nearest_heading": "14.11.030 Dimensional standards.",
+    "rows": [
+      [
+        "",
+        "RI",
+        "RRv",
+        "RVR",
+        "RC",
+        "RVC",
+        "RVC Alger",
+        "OSRSI"
+      ],
+      [
+        "Lot Dimensions"
+      ],
+      [
+        "Minimum lot size (ac)",
+        "2.5",
+        "10",
+        "*",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Minimum lot width (ft)",
+        "150",
+        "150",
+        "*",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Lot Coverage"
+      ],
+      [
+        "Maximum lot coverage (%)",
+        "35",
+        "*",
+        "50",
+        "50",
+        "50",
+        "50",
+        "–"
+      ],
+      [
+        "Minimum Setbacks (principal use)"
+      ],
+      [
+        "Front (on minor access and dead-end streets )",
+        "25",
+        "25",
+        "25",
+        "–",
+        "–",
+        "–",
+        "35"
+      ],
+      [
+        "Front (on all other streets )",
+        "35",
+        "35",
+        "35",
+        "35",
+        "15",
+        "*",
+        "35"
+      ],
+      [
+        "Interior side",
+        "8",
+        "8",
+        "8",
+        "20",
+        "*",
+        "*",
+        "35"
+      ],
+      [
+        "Rear",
+        "25",
+        "25",
+        "25",
+        "20",
+        "*",
+        "*",
+        "35"
+      ],
+      [
+        "Minimum Setbacks (accessory use)"
+      ],
+      [
+        "Front",
+        "35",
+        "35",
+        "35",
+        "35",
+        "15",
+        "15",
+        "35"
+      ],
+      [
+        "Interior side (but see Note 1 for RI, RRv, RVR)",
+        "8",
+        "8",
+        "8",
+        "20",
+        "15",
+        "15",
+        "35"
+      ],
+      [
+        "Rear (but see Note 1 for RI, RRv, RVR)",
+        "25",
+        "25",
+        "25",
+        "*",
+        "20",
+        "20",
+        "35"
+      ],
+      [
+        "Building Size Limits"
+      ],
+      [
+        "Maximum height (ft)",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1411.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1412.html",
+    "chapter_title": "Chapter 14.12 RURAL COMMERCIAL/INDUSTRIAL ZONES AND USES",
+    "table_index": 0,
+    "caption": "Table 14.12.020-1 Allowed Uses in the Rural Commercial/Industrial Zones",
+    "nearest_heading": "14.12.020 Allowed uses.",
+    "rows": [
+      [
+        "",
+        "RB",
+        "RFS",
+        "SSB",
+        "NRI",
+        "RMI",
+        "SRT"
+      ],
+      [
+        "Residential Uses"
+      ],
+      [
+        "Owner operator/caretaker quarters",
+        "AC",
+        "AC",
+        "AC",
+        "AC",
+        "AC",
+        "AC"
+      ],
+      [
+        "Commercial/Retail Uses"
+      ],
+      [
+        "Animal clinic/hospital",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Animal preserve",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Asphalt/concrete batching or recycling, permanent",
+        "",
+        "",
+        "",
+        "HE",
+        "",
+        ""
+      ],
+      [
+        "Asphalt/concrete batching or recycling, temporary",
+        "",
+        "",
+        "",
+        "HE",
+        "",
+        ""
+      ],
+      [
+        "Bed and breakfast",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Billboard",
+        "",
+        "AD",
+        "",
+        "HE",
+        "",
+        ""
+      ],
+      [
+        "Business/professional office",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "AC"
+      ],
+      [
+        "Car wash",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Commercial boathouse",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Display gardens",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Hotel/motel",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Institutional camp/retreat",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Kennel, boarding",
+        "",
+        "AD",
+        "HE",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Kennel, day-use",
+        "",
+        "P",
+        "AD",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Kennel, limited",
+        "",
+        "",
+        "HE",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Limited event venues",
+        "AD",
+        "AD",
+        "AD",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Marijuana retail facility",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Marina, ≤ 20 or fewer slips",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Marina, > 20 slips",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Restaurant",
+        "",
+        "P",
+        "AC",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Restaurant, drive-in",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Retail food market and convenience store, including farmers market",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Small retail and service business",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Small-scale production or manufacture",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Vehicle repair garage",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Community/Public Uses"
+      ],
+      [
+        "Community club/grange hall",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Conference center",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Historic site open to the public",
+        "",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Interpretive/information center",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Museum",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Natural Resource Uses"
+      ],
+      [
+        "Agricultural processing facility",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Agricultural slaughtering facility",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Anaerobic digester",
+        "",
+        "",
+        "",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Habitat enhancement/restoration project",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Natural resource support services",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Nursery/greenhouse, retail",
+        "",
+        "",
+        "AD",
+        "AC",
+        "",
+        "AD"
+      ],
+      [
+        "Nursery/greenhouse, wholesale",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "AD"
+      ],
+      [
+        "Stockyard ≤ 40 acres",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Stockyard > 40 acres",
+        "",
+        "",
+        "",
+        "HE",
+        "",
+        ""
+      ],
+      [
+        "Park/Recreational Uses"
+      ],
+      [
+        "Campground, destination",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Campground, developed",
+        "",
+        "AD",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Campground, primitive",
+        "",
+        "AD",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Off-road vehicle use areas and trails",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Outdoor outfitters enterprise",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Outdoor recreational facility",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Outdoor recreational equipment rental and/or guide services",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Park, community",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Park, specialized recreational area",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Racetrack, recreational",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Shooting club, indoor",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Shooting club, outdoor",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Stables and riding club",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Trail",
+        "",
+        "AD",
+        "AD",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Trailhead, primary and secondary",
+        "",
+        "AD",
+        "AD",
+        "AD",
+        "",
+        "P"
+      ],
+      [
+        "Storage Uses"
+      ],
+      [
+        "Commercial equipment storage",
+        "",
+        "AD",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Hazardous waste storage",
+        "",
+        "",
+        "",
+        "AC",
+        "",
+        ""
+      ],
+      [
+        "Outdoor storage 1",
+        "",
+        "",
+        "",
+        "AC",
+        "",
+        ""
+      ],
+      [
+        "Outdoor storage 2",
+        "",
+        "",
+        "",
+        "AC",
+        "",
+        ""
+      ],
+      [
+        "Outdoor storage 3",
+        "",
+        "",
+        "",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Outdoor storage 4",
+        "",
+        "",
+        "",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Petroleum products and gas storage—bulk",
+        "",
+        "",
+        "",
+        "HE",
+        "",
+        ""
+      ],
+      [
+        "Vehicle storage facility",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Transportation Uses"
+      ],
+      [
+        "Park and ride",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Transit station",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Vehicle charging station",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Vehicle fueling station",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Utility Uses"
+      ],
+      [
+        "Impoundment > one acre-foot",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Recycling drop-box facility",
+        "P",
+        "P",
+        "P",
+        "P",
+        "AC",
+        "AC"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1412.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1412.html",
+    "chapter_title": "Chapter 14.12 RURAL COMMERCIAL/INDUSTRIAL ZONES AND USES",
+    "table_index": 1,
+    "caption": "Table 14.12.030-1 Dimensional Standards in the Rural Commercial/Industrial Zones",
+    "nearest_heading": "14.12.030 Dimensional standards.",
+    "rows": [
+      [
+        "",
+        "RB",
+        "RFS",
+        "SSB",
+        "NRI",
+        "RMI",
+        "SRT"
+      ],
+      [
+        "Lot Dimensions"
+      ],
+      [
+        "Minimum lot size (ac)",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Minimum lot width (ft)",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Lot Coverage"
+      ],
+      [
+        "Maximum lot coverage (%)",
+        "50",
+        "25",
+        "25",
+        "–",
+        "*",
+        "*"
+      ],
+      [
+        "Minimum Setbacks (principal use)"
+      ],
+      [
+        "Front",
+        "35",
+        "35",
+        "35",
+        "50",
+        "50",
+        "35"
+      ],
+      [
+        "Interior side",
+        "35",
+        "35",
+        "*",
+        "50",
+        "50",
+        "35"
+      ],
+      [
+        "Rear",
+        "35",
+        "35",
+        "*",
+        "50",
+        "50",
+        "35"
+      ],
+      [
+        "Building Size Limits"
+      ],
+      [
+        "Maximum height (ft)",
+        "40",
+        "40",
+        "50",
+        "50",
+        "50",
+        "50"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1412.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1412.html",
+    "chapter_title": "Chapter 14.12 RURAL COMMERCIAL/INDUSTRIAL ZONES AND USES",
+    "table_index": 2,
+    "caption": "",
+    "nearest_heading": "14.12.500 Rural Marine Industrial (RMI).",
+    "rows": [
+      [
+        "RMI Zoned Area",
+        "Maximum Lot Coverage",
+        "Maximum Impervious Surface"
+      ],
+      [
+        "Over 15 acres",
+        "115,000 sf",
+        "345,000 sf"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1412.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1412.html",
+    "chapter_title": "Chapter 14.12 RURAL COMMERCIAL/INDUSTRIAL ZONES AND USES",
+    "table_index": 3,
+    "caption": "",
+    "nearest_heading": "14.12.500 Rural Marine Industrial (RMI).",
+    "rows": [
+      [
+        "Upland RMI Parcel Area",
+        "Maximum Lot Coverage",
+        "Maximum Impervious Surface"
+      ],
+      [
+        "0—1.5 ac",
+        "23%",
+        "48%"
+      ],
+      [
+        "1.51—4.5 ac",
+        "18%",
+        "48%"
+      ],
+      [
+        "4.51—9.5 ac",
+        "16%",
+        "46%"
+      ],
+      [
+        "9.51—17.5 ac",
+        "15%",
+        "45%"
+      ],
+      [
+        "17.51—22.5 ac",
+        "13%",
+        "40%"
+      ],
+      [
+        "22.51—30.0 ac",
+        "12%",
+        "36%"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1412.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1412.html",
+    "chapter_title": "Chapter 14.12 RURAL COMMERCIAL/INDUSTRIAL ZONES AND USES",
+    "table_index": 4,
+    "caption": "",
+    "nearest_heading": "14.12.500 Rural Marine Industrial (RMI).",
+    "rows": [
+      [
+        "RMI Zoned Area, Before Exclusion",
+        "Maximum Lot Coverage, After Exclusions",
+        "Maximum Impervious Surface, After Exclusions"
+      ],
+      [
+        "More than 30 acres",
+        "5,000 sf per acre",
+        "15,000 sf per acre"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1412.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1413.html",
+    "chapter_title": "Chapter 14.13 NATURAL RESOURCE ZONES AND USES",
+    "table_index": 0,
+    "caption": "Table 14.13.020-1 Allowed Uses in the Natural Resource Zones",
+    "nearest_heading": "14.13.020 Allowed uses.",
+    "rows": [
+      [
+        "",
+        "Ag-NRL",
+        "IF-NRL",
+        "SF-NRL",
+        "RRc-NRL"
+      ],
+      [
+        "Residential Uses"
+      ],
+      [
+        "Single-family residence",
+        "AC",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Accessory dwelling unit",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Residential accessory use",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Temporary manufactured home",
+        "P",
+        "",
+        "P",
+        "P"
+      ],
+      [
+        "Co-housing, as part of a CaRD",
+        "P",
+        "P",
+        "P",
+        "HE"
+      ],
+      [
+        "Seasonal worker housing",
+        "",
+        "",
+        "HE",
+        "HE"
+      ],
+      [
+        "Commercial Uses"
+      ],
+      [
+        "Animal clinic/hospital",
+        "",
+        "",
+        "AD",
+        "AD"
+      ],
+      [
+        "Asphalt/concrete batching or recycling, temporary",
+        "HE",
+        "",
+        "HE",
+        "HE"
+      ],
+      [
+        "Family day care provider",
+        "P",
+        "",
+        "P",
+        "P"
+      ],
+      [
+        "Bed and breakfast",
+        "AD",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Historic sites open to the public",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Home-Based Business 1",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Home-Based Business 2",
+        "AD",
+        "AD",
+        "AD",
+        "AD"
+      ],
+      [
+        "Home-Based Business 3",
+        "",
+        "HE",
+        "HE",
+        "HE"
+      ],
+      [
+        "Kennel, boarding",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Kennel, limited",
+        "HE",
+        "HE",
+        "HE",
+        "AD"
+      ],
+      [
+        "Limited event venues",
+        "",
+        "AD",
+        "AD",
+        "AD"
+      ],
+      [
+        "Marijuana production/processing facility",
+        "AD",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Marina, primitive, with ≤ 3 slips",
+        "HE",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Marina, primitive, with ≤ 10 slips with no conversion of resource land",
+        "",
+        "HE",
+        "HE",
+        "HE"
+      ],
+      [
+        "Natural Resource Uses"
+      ],
+      [
+        "Agriculture",
+        "P",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Agricultural accessory use",
+        "P",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Agricultural processing facility",
+        "P",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Agricultural slaughtering facilities",
+        "AD",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Agritourism 1",
+        "P",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Agritourism 2",
+        "AD",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Agritourism 3",
+        "HE",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Anaerobic digester, when accessory to an agricultural use",
+        "P",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Anaerobic digester, when not accessory to an agricultural use",
+        "HE",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Aquaculture",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Concentrated animal feeding operation",
+        "HE",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Farm-based business",
+        "P",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Forestry",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Forestry-based business",
+        "",
+        "HE",
+        "HE",
+        "HE"
+      ],
+      [
+        "Habitat enhancement/restoration project",
+        "HE",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Manure lagoon",
+        "P",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Natural resources training/research facility",
+        "HE",
+        "HE",
+        "HE",
+        "HE"
+      ],
+      [
+        "Nursery/greenhouse, retail",
+        "",
+        "",
+        "AD",
+        "AD"
+      ],
+      [
+        "Nursery/greenhouse, wholesale",
+        "P",
+        "",
+        "AD",
+        "AD"
+      ],
+      [
+        "Seasonal roadside stand ≤ 300 sf",
+        "P",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Seasonal roadside stand > 300 sf and ≤ 2,000 sf",
+        "AD",
+        "",
+        "AD",
+        "AD"
+      ],
+      [
+        "Seasonal roadside stand > 2,000 sf and ≤ 5,000 sf",
+        "HE",
+        "",
+        "AD",
+        "AD"
+      ],
+      [
+        "Park/Recreational Uses"
+      ],
+      [
+        "Campground, primitive",
+        "",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Off-road vehicle use areas and trails",
+        "",
+        "HE",
+        "HE",
+        ""
+      ],
+      [
+        "Outdoor outfitters enterprises",
+        "HE",
+        "HE",
+        "HE",
+        "HE"
+      ],
+      [
+        "Shooting club (outdoor)",
+        "HE",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Park, regional",
+        "",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Park, recreation open space",
+        "",
+        "",
+        "AD",
+        ""
+      ],
+      [
+        "Stables and riding club",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Shooting club, outdoor",
+        "",
+        "HE",
+        "HE",
+        "HE"
+      ],
+      [
+        "Trail, nonmotorized",
+        "AD",
+        "P",
+        "AD",
+        "AD"
+      ],
+      [
+        "Trail, other than nonmotorized",
+        "AD",
+        "AD",
+        "AD",
+        "AD"
+      ],
+      [
+        "Trailhead, primary and secondary",
+        "AD",
+        "AD",
+        "AD",
+        "AD"
+      ],
+      [
+        "Transportation Uses"
+      ],
+      [
+        "Aircraft landing field",
+        "HE",
+        "HE",
+        "HE",
+        "HE"
+      ],
+      [
+        "Vehicle charging station",
+        "",
+        "P",
+        "",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1413.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1413.html",
+    "chapter_title": "Chapter 14.13 NATURAL RESOURCE ZONES AND USES",
+    "table_index": 1,
+    "caption": "Table 14.13.030-1 Dimensional Standards in the Natural Resource Zones",
+    "nearest_heading": "14.13.030 Dimensional standards.",
+    "rows": [
+      [
+        "",
+        "Ag-NRL",
+        "IF-NRL",
+        "SF-NRL",
+        "RRc-NRL"
+      ],
+      [
+        "Lot Dimensions"
+      ],
+      [
+        "Minimum lot size (ac)",
+        "40",
+        "80",
+        "20",
+        "40"
+      ],
+      [
+        "Minimum lot width (ft)",
+        "",
+        "400",
+        "400",
+        "400"
+      ],
+      [
+        "Lot Coverage"
+      ],
+      [
+        "Maximum lot coverage (%)",
+        "–",
+        "–",
+        "–",
+        "*"
+      ],
+      [
+        "Minimum Setbacks (residential uses)"
+      ],
+      [
+        "Front (ft)",
+        "*",
+        "100",
+        "100",
+        "50"
+      ],
+      [
+        "Interior Side (ft)",
+        "8",
+        "100",
+        "100",
+        "50"
+      ],
+      [
+        "Rear (ft)",
+        "35",
+        "100",
+        "100",
+        "50"
+      ],
+      [
+        "Minimum Setbacks (nonresidential uses)"
+      ],
+      [
+        "Front (ft)",
+        "35",
+        "100",
+        "100",
+        "50"
+      ],
+      [
+        "Interior side (ft)",
+        "15",
+        "100",
+        "100",
+        "50"
+      ],
+      [
+        "Rear (ft)",
+        "35",
+        "100",
+        "100",
+        "50"
+      ],
+      [
+        "Building Size Limits"
+      ],
+      [
+        "Maximum height (ft)",
+        "40",
+        "40",
+        "40",
+        "40"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1413.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1414.html",
+    "chapter_title": "Chapter 14.14 OVERLAY ZONES AND USES",
+    "table_index": 0,
+    "caption": "Table 14.14.100-1 ACZ-Specific Restrictions",
+    "nearest_heading": "14.14.100 Airport Environs Overlay.",
+    "rows": [
+      [
+        "ACZ",
+        "Additional Use Restrictions",
+        "Required Open Space"
+      ],
+      [
+        "1",
+        "No new structures or uses allowed (except aviation-related Port uses).",
+        "100%, except airport structures"
+      ],
+      [
+        "2",
+        "No multifamily dwellings, accessory dwelling units, temporary manufactured homes, day care, co-housing, churches, or bed and breakfasts allowed.",
+        "30%"
+      ],
+      [
+        "3S",
+        "n/a",
+        "15%"
+      ],
+      [
+        "3L",
+        "No accessory dwelling units, temporary manufactured homes, co-housing, or bed and breakfasts allowed.",
+        "15%"
+      ],
+      [
+        "4S",
+        "n/a",
+        "10%"
+      ],
+      [
+        "4L",
+        "n/a",
+        "10%"
+      ],
+      [
+        "5",
+        "n/a",
+        "30%"
+      ],
+      [
+        "6",
+        "Public and institutional uses (including churches) may not exceed a density of 100 people/acre.",
+        "10%"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1414.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1414.html",
+    "chapter_title": "Chapter 14.14 OVERLAY ZONES AND USES",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "14.14.100 Airport Environs Overlay.",
+    "rows": [
+      [
+        "ACZ",
+        "Requirement"
+      ],
+      [
+        "1",
+        "No documents required."
+      ],
+      [
+        "2",
+        "An avigation easement in favor of the Port of Skagit; and A notice and acknowledgment of airport and aircraft operations and a waiver of claims."
+      ],
+      [
+        "3—6",
+        "An avigation easement in favor of the Port of Skagit; and A notice and acknowledgment of airport and aircraft operations."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1414.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1415.html",
+    "chapter_title": "Chapter 14.15 BAYVIEW RIDGE UGA ZONES AND USES",
+    "table_index": 0,
+    "caption": "Table 14.15.020-1 Allowed Uses in the Bayview Ridge UGA Zones",
+    "nearest_heading": "14.15.020 Allowed uses.",
+    "rows": [
+      [
+        "",
+        "AVR",
+        "BR-LI",
+        "BR-HI",
+        "BR-R"
+      ],
+      [
+        "Residential Uses"
+      ],
+      [
+        "Single-family residence",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Accessory dwelling unit",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Middle housing (2—4 units)",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Owner operator/caretaker quarters",
+        "",
+        "AC",
+        "AC",
+        ""
+      ],
+      [
+        "Residential accessory use",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Commercial/Retail Uses"
+      ],
+      [
+        "Asphalt/concrete batching or recycling, temporary",
+        "",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Bed and breakfast",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Car wash",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Family day care provider",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Home-Based Business 1",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Home-Based Business 2",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Home-Based Business 3",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Limited event venues",
+        "P",
+        "P",
+        "P",
+        "AD"
+      ],
+      [
+        "Marijuana production/processing facility > 1,000 ft from a residential zone",
+        "",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Marijuana production/processing facility ≤ 1,000 ft from a residential zone",
+        "",
+        "AD",
+        "P",
+        ""
+      ],
+      [
+        "Mini-storage",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Restaurant",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Vehicle repair garage",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Community/Public Uses"
+      ],
+      [
+        "Church",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Historic site open to the public",
+        "",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Natural Resource Uses"
+      ],
+      [
+        "Anaerobic digester",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Habitat enhancement/restoration project",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Park/Recreational Uses"
+      ],
+      [
+        "Golf course",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Park, community",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Park, specialized recreational area",
+        "",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Racetrack, recreational",
+        "",
+        "HE",
+        "HE",
+        ""
+      ],
+      [
+        "Trail",
+        "AD",
+        "P",
+        "AD",
+        "P"
+      ],
+      [
+        "Trailhead, primary and secondary",
+        "AD",
+        "P",
+        "AD",
+        "P"
+      ],
+      [
+        "Storage Uses"
+      ],
+      [
+        "Outdoor storage 1",
+        "AD",
+        "AC",
+        "AC",
+        ""
+      ],
+      [
+        "Outdoor storage 2",
+        "AD",
+        "AC",
+        "AC",
+        ""
+      ],
+      [
+        "Outdoor storage 3",
+        "HE",
+        "",
+        "AC",
+        ""
+      ],
+      [
+        "Outdoor storage 4",
+        "HE",
+        "AD",
+        "AD",
+        ""
+      ],
+      [
+        "Transportation Uses"
+      ],
+      [
+        "Vehicle charging station",
+        "P",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Vehicle fueling station",
+        "",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Utility Uses"
+      ],
+      [
+        "Recycling drop-box facility",
+        "",
+        "P",
+        "P",
+        "AC"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1415.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1415.html",
+    "chapter_title": "Chapter 14.15 BAYVIEW RIDGE UGA ZONES AND USES",
+    "table_index": 1,
+    "caption": "Table 14.15.030-1 Dimensional Standards in the Bayview Ridge UGA Zones",
+    "nearest_heading": "14.15.030 Dimensional standards.",
+    "rows": [
+      [
+        "",
+        "AVR",
+        "BR-LI",
+        "BR-HI",
+        "BR-R"
+      ],
+      [
+        "Lot Dimensions"
+      ],
+      [
+        "Minimum lot size—single-family dwelling (sf)",
+        "–",
+        "–",
+        "–",
+        "6,000"
+      ],
+      [
+        "Minimum lot size—multifamily dwelling (sf per each 2 units)",
+        "–",
+        "–",
+        "–",
+        "8,400"
+      ],
+      [
+        "Minimum lot width —single-family dwelling (ft)",
+        "–",
+        "–",
+        "–",
+        "50"
+      ],
+      [
+        "Minimum lot width —multifamily dwelling (ft)",
+        "–",
+        "–",
+        "–",
+        "60"
+      ],
+      [
+        "Lot Coverage"
+      ],
+      [
+        "Maximum lot coverage (%)",
+        "–",
+        "–",
+        "–",
+        "65"
+      ],
+      [
+        "Minimum Setbacks (primary use)"
+      ],
+      [
+        "Front (ft)",
+        "–",
+        "35",
+        "35",
+        "*"
+      ],
+      [
+        "Interior Side (ft)",
+        "–",
+        "*",
+        "*",
+        "*"
+      ],
+      [
+        "Rear (ft)",
+        "–",
+        "*",
+        "*",
+        "20"
+      ],
+      [
+        "Minimum Setbacks (accessory use)"
+      ],
+      [
+        "Front (ft)",
+        "–",
+        "35",
+        "35",
+        "20"
+      ],
+      [
+        "Interior Side (ft)",
+        "–",
+        "*",
+        "*",
+        "*"
+      ],
+      [
+        "Rear (ft)",
+        "–",
+        "*",
+        "*",
+        "*"
+      ],
+      [
+        "Building Size Limits"
+      ],
+      [
+        "Maximum height (ft) (but see AEO, SCC 14.14.100 ) 2",
+        "–",
+        "*",
+        "50",
+        "40"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1415.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1415.html",
+    "chapter_title": "Chapter 14.15 BAYVIEW RIDGE UGA ZONES AND USES",
+    "table_index": 2,
+    "caption": "",
+    "nearest_heading": "14.15.500 Bayview Ridge Residential (BR-R).",
+    "rows": [
+      [
+        "Setback",
+        "House",
+        "Garage"
+      ],
+      [
+        "Road classes 09 and 19 (local neighborhood streets )",
+        "20",
+        "25"
+      ],
+      [
+        "Roads other than classes 09 and 19",
+        "35",
+        "40"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1415.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1416.html",
+    "chapter_title": "Chapter 14.16 MUNICIPAL UGA ZONES AND USES",
+    "table_index": 0,
+    "caption": "Table 14.16.020-1 Allowed Uses in the Municipal UGA Zones",
+    "nearest_heading": "14.16.020 Allowed uses.",
+    "rows": [
+      [
+        "",
+        "H-URv",
+        "R",
+        "URC-I",
+        "URP-OS",
+        "URR"
+      ],
+      [
+        "Residential Uses"
+      ],
+      [
+        "Single-family residence",
+        "P",
+        "P",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Accessory dwelling unit",
+        "P",
+        "P",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Co-housing as part of a CaRD",
+        "HE",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Co-living housing",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Duplex",
+        "",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Loft living quarters",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Caretaker dwelling unit",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Owner operator/caretaker quarters",
+        "",
+        "",
+        "AC",
+        "",
+        ""
+      ],
+      [
+        "Manufactured or mobile home park",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Permanent supportive housing",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Residential accessory use",
+        "P",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Temporary manufactured home",
+        "P",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Commercial/Retail Uses"
+      ],
+      [
+        "Animal clinic/hospital",
+        "",
+        "",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Art gallery/studio",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Asphalt/concrete batching or recycling, temporary",
+        "HE",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Bed and breakfast",
+        "AD",
+        "HE",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Business/professional office",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Display gardens",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Family day care provider",
+        "P",
+        "P",
+        "P",
+        "",
+        "P"
+      ],
+      [
+        "Group care facility",
+        "",
+        "AD",
+        "HE",
+        "HE",
+        "HE"
+      ],
+      [
+        "Group care facility, adult",
+        "",
+        "AD",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Home-Based Business 1",
+        "P",
+        "P",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Home-Based Business 2",
+        "AD",
+        "AD",
+        "",
+        "",
+        "AD"
+      ],
+      [
+        "Home-Based Business 3",
+        "HE",
+        "HE",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Inpatient substance abuse and mental health facilities",
+        "",
+        "",
+        "",
+        "HE",
+        ""
+      ],
+      [
+        "Institutional camp/retreat",
+        "",
+        "",
+        "",
+        "HE",
+        ""
+      ],
+      [
+        "Kennel, boarding",
+        "",
+        "",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Kennel, day-use",
+        "",
+        "HE",
+        "P",
+        "",
+        "HE"
+      ],
+      [
+        "Kennel, limited",
+        "",
+        "HE",
+        "AD",
+        "",
+        "HE"
+      ],
+      [
+        "Limited event venues",
+        "AD",
+        "",
+        "P",
+        "AD",
+        "AD"
+      ],
+      [
+        "Marijuana production/processing facility",
+        "",
+        "",
+        "HE",
+        "",
+        ""
+      ],
+      [
+        "Marijuana retail facility",
+        "",
+        "",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Marina, ≤ 20 slips",
+        "",
+        "",
+        "",
+        "HE",
+        ""
+      ],
+      [
+        "Marina, primitive",
+        "",
+        "HE",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Mini-storage",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Restaurant",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Retail and service business, large",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Retail and service business, small",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Small-scale production or manufacture",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Vehicle repair garage",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Community/Public Uses"
+      ],
+      [
+        "Cemetery",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Church",
+        "",
+        "",
+        "HE",
+        "",
+        "HE"
+      ],
+      [
+        "Community club/grange hall",
+        "",
+        "",
+        "P",
+        "",
+        "HE"
+      ],
+      [
+        "Historic site open to the public",
+        "P",
+        "",
+        "P",
+        "P",
+        "HE"
+      ],
+      [
+        "Interpretive/information center",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Museum",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Preschool",
+        "",
+        "HE",
+        "P",
+        "",
+        "HE"
+      ],
+      [
+        "Natural Resource Uses"
+      ],
+      [
+        "Agriculture",
+        "P",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Agricultural accessory use",
+        "P",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Agricultural processing facility",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Aquaculture",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Farm-based business",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Forestry",
+        "P",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Forestry-based business",
+        "HE",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Habitat enhancement/restoration project",
+        "P",
+        "P",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Natural resource support services",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Natural resources training/research facility",
+        "",
+        "",
+        "",
+        "AD",
+        ""
+      ],
+      [
+        "Nursery/greenhouse, retail",
+        "AD",
+        "",
+        "P",
+        "",
+        "HE"
+      ],
+      [
+        "Nursery/greenhouse, wholesale",
+        "AD",
+        "",
+        "P",
+        "",
+        "HE"
+      ],
+      [
+        "Seasonal roadside stand ≤ 300 sf",
+        "P",
+        "",
+        "",
+        "AD",
+        "AD"
+      ],
+      [
+        "Seasonal roadside stand > 300 sf and ≤ 2,000 sf",
+        "AD",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Seasonal roadside stand > 2,000 sf",
+        "",
+        "",
+        "",
+        "",
+        "HE"
+      ],
+      [
+        "Park/Recreational Uses"
+      ],
+      [
+        "Active recreation facility",
+        "",
+        "",
+        "AD",
+        "HE",
+        "HE"
+      ],
+      [
+        "Campground, developed",
+        "",
+        "HE",
+        "",
+        "HE",
+        ""
+      ],
+      [
+        "Campground, primitive",
+        "P",
+        "HE",
+        "",
+        "AD",
+        ""
+      ],
+      [
+        "Golf course",
+        "",
+        "HE",
+        "",
+        "HE",
+        ""
+      ],
+      [
+        "Outdoor recreational facilities",
+        "",
+        "",
+        "",
+        "AD",
+        ""
+      ],
+      [
+        "Park, community",
+        "",
+        "HE",
+        "",
+        "P",
+        "HE"
+      ],
+      [
+        "Park, recreation open space",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Park, regional",
+        "",
+        "",
+        "",
+        "P",
+        "HE"
+      ],
+      [
+        "Park, specialized recreational area",
+        "",
+        "",
+        "AD",
+        "P",
+        "HE"
+      ],
+      [
+        "Racetrack, indoor",
+        "",
+        "",
+        "AD",
+        "",
+        "HE"
+      ],
+      [
+        "Regional equestrian events center",
+        "",
+        "",
+        "",
+        "HE",
+        ""
+      ],
+      [
+        "Stables and riding club",
+        "AD",
+        "",
+        "",
+        "AD",
+        ""
+      ],
+      [
+        "Trail",
+        "AD",
+        "",
+        "",
+        "P",
+        "AD"
+      ],
+      [
+        "Trailhead, primary and secondary",
+        "AD",
+        "",
+        "",
+        "P",
+        "AD"
+      ],
+      [
+        "Storage Uses"
+      ],
+      [
+        "Indoor or outdoor storage facilities",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Vehicle storage facility",
+        "",
+        "",
+        "HE",
+        "",
+        ""
+      ],
+      [
+        "Transportation Uses"
+      ],
+      [
+        "Vehicle charging station",
+        "",
+        "",
+        "P",
+        "AC",
+        ""
+      ],
+      [
+        "Vehicle fueling station",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Utility Uses"
+      ],
+      [
+        "Recycling drop-box facility",
+        "AC",
+        "AC",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Water diversion structure",
+        "",
+        "",
+        "",
+        "AD",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1416.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1416.html",
+    "chapter_title": "Chapter 14.16 MUNICIPAL UGA ZONES AND USES",
+    "table_index": 1,
+    "caption": "Table 14.16.030-1 Dimensional Standards in the Municipal UGA Zones",
+    "nearest_heading": "14.16.030 Dimensional standards.",
+    "rows": [
+      [
+        "",
+        "H-URv",
+        "R",
+        "URC-I",
+        "URP-OS",
+        "URR"
+      ],
+      [
+        "Lot Dimensions"
+      ],
+      [
+        "Minimum lot size (ac)",
+        "40",
+        "*",
+        "5",
+        "5",
+        "5"
+      ],
+      [
+        "Minimum lot width (ft)",
+        "400",
+        "75",
+        "–",
+        "–",
+        "150"
+      ],
+      [
+        "Lot Coverage"
+      ],
+      [
+        "Maximum lot coverage (%)",
+        "*",
+        "35",
+        "50",
+        "50",
+        "35"
+      ],
+      [
+        "Minimum Setbacks (principal use)"
+      ],
+      [
+        "Front (ft)",
+        "50",
+        "*",
+        "35",
+        "35",
+        "20"
+      ],
+      [
+        "Interior side (ft)",
+        "50",
+        "8*",
+        "15 1",
+        "*",
+        "8"
+      ],
+      [
+        "Rear (ft)",
+        "50",
+        "25",
+        "20 1",
+        "*",
+        "10"
+      ],
+      [
+        "Minimum Setbacks (accessory use)"
+      ],
+      [
+        "Front (ft)",
+        "50",
+        "35",
+        "20",
+        "35",
+        "25"
+      ],
+      [
+        "Interior side (ft)",
+        "50",
+        "8",
+        "15 1",
+        "*",
+        "8 2"
+      ],
+      [
+        "Rear (ft)",
+        "50",
+        "*",
+        "20 1",
+        "*",
+        "10 2"
+      ],
+      [
+        "Building Size Limits"
+      ],
+      [
+        "Maximum height (ft)",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40"
+      ],
+      [
+        "Density"
+      ],
+      [
+        "Maximum density (primary du per lot )",
+        "–",
+        "–",
+        "–",
+        "–",
+        "1"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1416.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1416.html",
+    "chapter_title": "Chapter 14.16 MUNICIPAL UGA ZONES AND USES",
+    "table_index": 2,
+    "caption": "",
+    "nearest_heading": "14.16.600 Swinomish UGA Residential (R).",
+    "rows": [
+      [
+        "Land Use",
+        "Sewer",
+        "Minimum Lot Size"
+      ],
+      [
+        "Single-Family Residence",
+        "Private",
+        "12,500 sf"
+      ],
+      [
+        "Single-Family Residence",
+        "Public",
+        "8,400 sf"
+      ],
+      [
+        "Duplex",
+        "Either",
+        "13,000 sf"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1416.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1416.html",
+    "chapter_title": "Chapter 14.16 MUNICIPAL UGA ZONES AND USES",
+    "table_index": 3,
+    "caption": "Table 14.16.600-1 Allowable Duplex Lots",
+    "nearest_heading": "14.16.600 Swinomish UGA Residential (R).",
+    "rows": [
+      [
+        "Number of Lots",
+        "Number of Duplex Lots"
+      ],
+      [
+        "Less than 8 lots",
+        "0 Duplex Lots"
+      ],
+      [
+        "8—15 lots",
+        "1 Duplex Lot"
+      ],
+      [
+        "16—25 lots",
+        "2 Duplex Lots"
+      ],
+      [
+        "26—35 lots",
+        "3 Duplex Lots"
+      ],
+      [
+        "35 lots and over",
+        "As determined by the Planning Director in accordance with the same formula."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1416.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1418.html",
+    "chapter_title": "Chapter 14.18 USE STANDARDS AND USE DEFINITIONS",
+    "table_index": 0,
+    "caption": "Table 14.18.407-1",
+    "nearest_heading": "14.18.407 Agritourism.",
+    "rows": [
+      [
+        "Agritourism Type",
+        "Max No. Guests Allowed",
+        "Max No. Days Allowed Per Year 1"
+      ],
+      [
+        "Agritourism 1",
+        "50",
+        "10"
+      ],
+      [
+        "Agritourism 2",
+        "100",
+        "35"
+      ],
+      [
+        "Agritourism 3",
+        "As Conditioned 1",
+        "As Conditioned 1"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1418.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1418.html",
+    "chapter_title": "Chapter 14.18 USE STANDARDS AND USE DEFINITIONS",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "14.18.650 Outdoor storage.",
+    "rows": [
+      [
+        "Type",
+        "Materials",
+        "Volume",
+        "Potential Health Hazard"
+      ],
+      [
+        "Type 1",
+        "Natural",
+        "≤ 500 cubic yards",
+        "No"
+      ],
+      [
+        "Type 2",
+        "Any",
+        "≤ 50 cubic yards",
+        "Allowed"
+      ],
+      [
+        "Type 3",
+        "Natural",
+        "> 500 cubic yards",
+        "No"
+      ],
+      [
+        "Type 4",
+        "Any",
+        "> 50 cubic yards",
+        "Allowed"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1418.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1420.html",
+    "chapter_title": "Chapter 14.20 GENERAL PERFORMANCE STANDARDS",
+    "table_index": 0,
+    "caption": "Table 14.20.060-1 EDNA Classifications to Zone Mapping",
+    "nearest_heading": "14.20.060 Noise.",
+    "rows": [
+      [
+        "EDNA",
+        "Zones"
+      ],
+      [
+        "Class A",
+        "Residential zones RI, RVR, RRv, R, URR"
+      ],
+      [
+        "Class B",
+        "Commercial zones RVC, RC, RFS, SRT, SSB, RB, BR-LI, AVR, URC-I; Open Space zones OSRSI and URP-OS;"
+      ],
+      [
+        "Class C",
+        "Industrial zones NRI, RMI, BR-HI; Forestry zones IF-NRL, SF-NRL, RRc-NRL; Agricultural zone Ag-NRL"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1420.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1424.html",
+    "chapter_title": "Chapter 14.24 CRITICAL AREAS ORDINANCE*",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "14.24.230 Wetland protection standards.",
+    "rows": [
+      [
+        "Standard Buffers"
+      ],
+      [
+        "",
+        "Land Use Impact"
+      ],
+      [
+        "Wetland Rating",
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      [
+        "Category I",
+        "150 feet",
+        "225 feet",
+        "300 feet"
+      ],
+      [
+        "Category II",
+        "150 feet",
+        "225 feet",
+        "300 feet"
+      ],
+      [
+        "Category III",
+        "75 feet",
+        "110 feet",
+        "150 feet"
+      ],
+      [
+        "Category IV",
+        "25 feet",
+        "40 feet",
+        "50 feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1424.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1424.html",
+    "chapter_title": "Chapter 14.24 CRITICAL AREAS ORDINANCE*",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "14.24.230 Wetland protection standards.",
+    "rows": [
+      [
+        "Wetland Rating",
+        "Habitat Score",
+        "Land Use Impact"
+      ],
+      [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      [
+        "Category I",
+        "Standard Buffers Only"
+      ],
+      [
+        "Category II",
+        "8—9",
+        "150'",
+        "225'",
+        "300'"
+      ],
+      [
+        "",
+        "6—7",
+        "75'",
+        "110'",
+        "150'"
+      ],
+      [
+        "",
+        "3—5",
+        "50'",
+        "75'",
+        "100'"
+      ],
+      [
+        "Category III",
+        "8—9",
+        "150'",
+        "225'",
+        "300'"
+      ],
+      [
+        "",
+        "6—7",
+        "75'",
+        "110'",
+        "150'"
+      ],
+      [
+        "",
+        "3—5",
+        "40'",
+        "60'",
+        "80'"
+      ],
+      [
+        "Category IV",
+        "Standard Buffers Only"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1424.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1424.html",
+    "chapter_title": "Chapter 14.24 CRITICAL AREAS ORDINANCE*",
+    "table_index": 2,
+    "caption": "Table 14.24.380-1. Maximum pumping rates.",
+    "nearest_heading": "14.24.380 Seawater intrusion areas.",
+    "rows": [
+      [
+        "",
+        "Chloride level"
+      ],
+      [
+        "Location",
+        "0—24 ppm",
+        "25—99 ppm",
+        "100—250 ppm"
+      ],
+      [
+        "Less than 1/2 mile from the coast for areas in Subsection (1)(a) of this Section",
+        "3 gpm",
+        "2 gpm",
+        "1 gpm"
+      ],
+      [
+        "Or as determined or approved by a hydrogeologist engaged or employed by the County"
+      ],
+      [
+        "Less than 1/2 mile from the coast for islands in Subsection (1)(b) of this Section",
+        "3 gpm",
+        "2 gpm",
+        "1 gpm"
+      ],
+      [
+        "Greater than 1/2 mile from the coast for islands in Subsection (1)(b) of this Section",
+        "3 gpm",
+        "3 gpm",
+        "3 gpm"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1424.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1424.html",
+    "chapter_title": "Chapter 14.24 CRITICAL AREAS ORDINANCE*",
+    "table_index": 3,
+    "caption": "",
+    "nearest_heading": "14.24.530 Fish and wildlife habitat conservation area protection standards.",
+    "rows": [
+      [
+        "DNR Water Type",
+        "Riparian Buffer"
+      ],
+      [
+        "S",
+        "200 feet"
+      ],
+      [
+        "F",
+        "150 feet"
+      ],
+      [
+        "Np",
+        "100 feet"
+      ],
+      [
+        "Ns",
+        "100 feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1424.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1424.html",
+    "chapter_title": "Chapter 14.24 CRITICAL AREAS ORDINANCE*",
+    "table_index": 4,
+    "caption": "",
+    "nearest_heading": "14.24.530 Fish and wildlife habitat conservation area protection standards.",
+    "rows": [
+      [
+        "Shoreline Area Designations",
+        "Shoreline Buffer"
+      ],
+      [
+        "Natural",
+        "200 feet"
+      ],
+      [
+        "Conservancy",
+        "150 feet"
+      ],
+      [
+        "Rural",
+        "100 feet"
+      ],
+      [
+        "Rural Residential",
+        "100 feet"
+      ],
+      [
+        "Urban",
+        "140 feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1424.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1424.html",
+    "chapter_title": "Chapter 14.24 CRITICAL AREAS ORDINANCE*",
+    "table_index": 5,
+    "caption": "PERFORMANCE-BASED RIPARIAN STANDARDS* (These standards must be exceeded before additional activity can be permitted within the riparian zone.)",
+    "nearest_heading": "14.24.540 Fish and wildlife habitat conservation area performance-based buffer alternatives and mitigation standards.",
+    "rows": [
+      [
+        "Watertype",
+        "Performance Standards"
+      ],
+      [
+        "Type S",
+        "Maintain 95% of total LWD recruitment expected to enter the stream from a mature stand; and"
+      ],
+      [
+        "Maintain 85% of the trees which are greater than 24 inches DBH within 100 feet of stream; and"
+      ],
+      [
+        "Maintain an average of 75% canopy cover (based on canopy densitometer readings at stream edge)."
+      ],
+      [
+        "The applicant may further request some limited timber harvest of up to 30% of the merchantable timber within the outer 100 feet of any 200-foot required buffer provided the harvest:"
+      ],
+      [
+        "(a) Does not reduce the LWD and canopy requirements; and"
+      ],
+      [
+        "(b) The applicant will increase the total buffer size by 50 feet to mitigate for the limited timber harvest in the required buffer to provide additional wildlife habitat. The additional 50-foot buffer must retain a minimum of 50% of the total number of trees with 25% of the total trees left having a diameter at breast height (DBH—4-1/2 feet) greater than 12 inches; and"
+      ],
+      [
+        "(c) No more than 50% of the dominant trees in the outer 100 feet may be harvested."
+      ],
+      [
+        "Type F",
+        "Maintain 85% of total LWD recruitment expected to enter the stream from a mature stand; and"
+      ],
+      [
+        "Maintain 85% of the trees which are greater than 18 inches DBH within 100 feet of stream; and"
+      ],
+      [
+        "Maintain an average of 75% canopy cover (based on canopy densitometer readings at stream edge)."
+      ],
+      [
+        "Types Np and Ns",
+        "Maintain 50% of total LWD recruitment expected to enter the stream from a mature stand; and"
+      ],
+      [
+        "Maintain 85% of the trees which are greater than 24 inches DBH within 50 feet of stream; and"
+      ],
+      [
+        "Maintain an average of 75% canopy cover (based on canopy densitometer readings at stream edge)."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1424.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1426.html",
+    "chapter_title": "Chapter 14.26 PARKING",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "14.26.040 Minimum spaces required.",
+    "rows": [
+      [
+        "Use",
+        "Minimum Number of Spaces Required"
+      ],
+      [
+        "1. Single-Family Residence",
+        "2 per unit"
+      ],
+      [
+        "2. Single-Family Residence with ADU(s)",
+        "3 total for combination of primary unit and ADU(s)"
+      ],
+      [
+        "3. Duplex",
+        "2 per each dwelling unit"
+      ],
+      [
+        "4. Townhome",
+        "2 per each dwelling unit"
+      ],
+      [
+        "5. Bed and Breakfast",
+        "1 per guest room + 2 for residence"
+      ],
+      [
+        "6. Hotel/Motel",
+        "1 per bedroom"
+      ],
+      [
+        "7. Family Day Care Provider",
+        "2 per facility"
+      ],
+      [
+        "8. Day Care Center",
+        "2 per facility + 1 per 20 children"
+      ],
+      [
+        "9. Art Galleries and Studios",
+        "1 per 1,000 square feet"
+      ],
+      [
+        "10. Professional Offices/Services",
+        "1 per 300 square feet"
+      ],
+      [
+        "11. Marinas",
+        "1 per moorage slip"
+      ],
+      [
+        "12. Indoor Recreation/Cultural",
+        "1 per 300 square feet"
+      ],
+      [
+        "13. Primary/Junior High Schools",
+        "1 per classroom + 1 per 50 students"
+      ],
+      [
+        "14. High Schools",
+        "1 per classroom + 1 per 10 students"
+      ],
+      [
+        "15. Retail Stores",
+        "1 per 300 square feet"
+      ],
+      [
+        "16. Gasoline Service Stations (without retail stores)",
+        "5 + 1 per service bay"
+      ],
+      [
+        "17. Restaurants",
+        "1 per 75 square feet in dining or lounge areas"
+      ],
+      [
+        "18. Manufacturing Uses",
+        "1 per 1,000 square feet"
+      ],
+      [
+        "19. Warehousing",
+        "1 per 2,500 square feet"
+      ],
+      [
+        "20. Other uses not specified above",
+        "As determined by Director based on anticipated parking demand"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1426.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1432.html",
+    "chapter_title": "Chapter 14.32 STORMWATER MANAGEMENT*",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "14.32.150 Stormwater conveyance.",
+    "rows": [
+      [
+        "For Pipes: Inside Diameter (ID)",
+        "Easement Width"
+      ],
+      [
+        "ID ≤ 36\"",
+        "Depth to invert < 8':10' Depth to invert > 8':15'"
+      ],
+      [
+        "36\" < ID ≤ 60\"",
+        "Depth to invert < 8':10' Depth to invert > 8':15'"
+      ],
+      [
+        "ID > 60\"",
+        "ID plus 10'"
+      ],
+      [
+        "For Channels and Swales: Top Width of Channel (W)",
+        "Easement Width"
+      ],
+      [
+        "W ≤ 10'",
+        "W plus 10' on one side W if no access required"
+      ],
+      [
+        "10' < W ≤ 30'",
+        "W plus 15' on one side"
+      ],
+      [
+        "W > 30'",
+        "W plus 15' on both sides"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1432.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1454.html",
+    "chapter_title": "Chapter 14.54 ESSENTIAL PUBLIC FACILITIES",
+    "table_index": 0,
+    "caption": "Table 14.54.030-1 EPFs Allowed in Various Zones",
+    "nearest_heading": "14.54.030 When allowed.",
+    "rows": [
+      [
+        "Type of Use",
+        "AVR",
+        "BR-LI",
+        "BR-HI",
+        "IF-NRL",
+        "RFS",
+        "RVR",
+        "RRc-NRL",
+        "RRv",
+        "RI",
+        "SF-NRL"
+      ],
+      [
+        "Airports",
+        "R",
+        "",
+        "R",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "State educational facility",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        "R, L"
+      ],
+      [
+        "State or regional transportation facility as defined in RCW 47.06.140",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        "",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        "R, L"
+      ],
+      [
+        "Regional transit authority facility as defined in RCW 81.112.020",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "State/regional or local correctional facility",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        "R, L"
+      ],
+      [
+        "Solid waste handling facility",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        "",
+        "",
+        "R, L",
+        "",
+        "",
+        "R, L"
+      ],
+      [
+        "In-patient substance abuse, mental health, behavioral health, or secure community transition facility",
+        "",
+        "",
+        "",
+        "",
+        "R, L",
+        "",
+        "",
+        "R, L",
+        "",
+        ""
+      ],
+      [
+        "Power generation facility",
+        "",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        "",
+        "R, L",
+        "",
+        "",
+        "R, L"
+      ],
+      [
+        "Oil and gas extraction",
+        "",
+        "",
+        "",
+        "R, L",
+        "",
+        "",
+        "R, L",
+        "",
+        "",
+        "R, L"
+      ],
+      [
+        "Regional wastewater treatment facilities",
+        "",
+        "",
+        "R, L",
+        "",
+        "",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        "R, L"
+      ],
+      [
+        "Regional racetracks",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        "",
+        "",
+        "",
+        "R, L",
+        "",
+        ""
+      ],
+      [
+        "Fairgrounds",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "R, L",
+        "",
+        ""
+      ],
+      [
+        "Stadiums/arenas",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        "",
+        "",
+        "R, L",
+        "R, L",
+        "",
+        ""
+      ],
+      [
+        "Hospitals",
+        "",
+        "R, L",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "R, L",
+        "R, L",
+        ""
+      ],
+      [
+        "Regional performing center",
+        "",
+        "R",
+        "",
+        "",
+        "",
+        "R",
+        "",
+        "R",
+        "R",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1454.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1462.html",
+    "chapter_title": "Chapter 14.62 CONCURRENCY",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "14.62.040 Project concurrency review.",
+    "rows": [
+      [
+        "Location",
+        "County roads",
+        "Public water",
+        "Police",
+        "Fire",
+        "Sewer",
+        "Stormwater"
+      ],
+      [
+        "Bayview Ridge UGA",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "Big Lake Rural Village and Swinomish UGA",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "No",
+        "No"
+      ],
+      [
+        "Other rural areas",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "No",
+        "No"
+      ],
+      [
+        "Municipal UGAs where an urban reserve project permit is not required",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "No",
+        "No"
+      ],
+      [
+        "Municipal UGAs where an urban reserve project permit is required",
+        "See city requirements and SCC Chapter 14.57"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1462.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1462.html",
+    "chapter_title": "Chapter 14.62 CONCURRENCY",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "14.62.110 Annual concurrency assessment.",
+    "rows": [
+      [
+        "Facility/Service",
+        "Provider"
+      ],
+      [
+        "",
+        "Unincorporated Urban Growth Area",
+        "Rural"
+      ],
+      [
+        "Water",
+        "Water purveyors identified in Coordinated Water System Plan"
+      ],
+      [
+        "Sanitary Sewer",
+        "Municipal sewer service providers Skagit County Sewer District—1 for portions of Swinomish UGA City of Burlington—Bayview Ridge UGA",
+        "Big Lake Sewer District for Big Lake Rural Village only Whatcom County Water District No. 12 pursuant to existing sewer service contracts only"
+      ],
+      [
+        "Stormwater",
+        "County Public Works"
+      ],
+      [
+        "Police",
+        "County Sheriff"
+      ],
+      [
+        "Fire",
+        "Fire Districts"
+      ],
+      [
+        "Fairgrounds",
+        "County Parks Department"
+      ],
+      [
+        "General Government",
+        "County Administrator"
+      ],
+      [
+        "Parks",
+        "County Parks Department"
+      ],
+      [
+        "Public Safety (Jails)",
+        "County Sheriff"
+      ],
+      [
+        "Senior Centers",
+        "County Senior Services"
+      ],
+      [
+        "Solid Waste",
+        "County Public Works"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1462.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1470.html",
+    "chapter_title": "Chapter 14.70 LEGAL LOTS AND ELIGIBILITY FOR DEVELOPMENT",
+    "table_index": 0,
+    "caption": "Table 14.70.070-1 Allowed Nonresidential Uses",
+    "nearest_heading": "14.70.070 Exception for specified nonresidential permits.",
+    "rows": [
+      [
+        "",
+        "RI",
+        "RRv",
+        "RVR",
+        "URR",
+        "URC-I",
+        "URP-OS",
+        "BR-R"
+      ],
+      [
+        "Agriculture",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        "P",
+        "P"
+      ],
+      [
+        "Agricultural accessory use",
+        "P",
+        "P",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Agricultural processing facilities",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Animal preserve",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Caretaker dwelling unit for on-site resident park manager",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "AC",
+        ""
+      ],
+      [
+        "Cemetery",
+        "HE",
+        "HE",
+        "HE",
+        "HE",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Community club/grange hall",
+        "HE",
+        "HE",
+        "HE",
+        "HE",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Display gardens",
+        "",
+        "",
+        "",
+        "HE",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Forest practices",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Historic sites open to the public",
+        "HE",
+        "HE",
+        "HE",
+        "HE",
+        "P",
+        "P",
+        "P"
+      ],
+      [
+        "Impoundments greater than one acre-foot in size",
+        "HE",
+        "HE",
+        "HE",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Impoundment",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "HE",
+        ""
+      ],
+      [
+        "Interpretive center",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Limited event venues",
+        "",
+        "",
+        "",
+        "AD",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Manure lagoon",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Minor public use",
+        "HE",
+        "HE",
+        "HE",
+        "AD",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Minor utility development",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "P",
+        "AD"
+      ],
+      [
+        "Expansion of major public use up to 3,000 square feet",
+        "HE",
+        "HE",
+        "HE",
+        "AD",
+        "AD",
+        "",
+        ""
+      ],
+      [
+        "Outdoor recreational facility",
+        "HE",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Natural resources research/training facility",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "AD",
+        ""
+      ],
+      [
+        "Outdoor outfitters enterprises",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Outdoor recreational facilities",
+        "",
+        "HE",
+        "",
+        "",
+        "",
+        "AD",
+        ""
+      ],
+      [
+        "Parks, community",
+        "HE",
+        "HE",
+        "HE",
+        "HE",
+        "",
+        "P",
+        "HE"
+      ],
+      [
+        "Park, recreation open space",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Park, regional",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Parks, specialized recreational area",
+        "AD",
+        "AD",
+        "AD",
+        "",
+        "AD",
+        "P",
+        "AD"
+      ],
+      [
+        "Seasonal roadside stands under 300 square feet",
+        "",
+        "",
+        "",
+        "AD",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Trails",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "P",
+        "AD"
+      ],
+      [
+        "Primary and secondary trailheads",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "P",
+        "AD"
+      ],
+      [
+        "Water diversion structure",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "AD",
+        ""
+      ],
+      [
+        "Wireless facilities",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        "AD",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1470.html"
+  },
+  {
+    "jurisdiction": "skagit_county",
+    "title": "Title 14 Unified Development Code",
+    "chapter_ref": "SkagitCounty1478.html",
+    "chapter_title": "Chapter 14.78 STANDARDS FOR CaRD LAND DIVISIONS",
+    "table_index": 0,
+    "caption": "Table 14.78.050-1 CaRD Density and Open Space Limits",
+    "nearest_heading": "14.78.050 Density and open space limits.",
+    "rows": [
+      [
+        "Zone",
+        "Minimum Size for a CaRD",
+        "Maximum Residential Density",
+        "Maximum Units per Cluster Pod",
+        "Allowed Types of Open Space"
+      ],
+      [
+        "Ag-NRL",
+        "80 ac",
+        "1 du per 40 ac",
+        "6",
+        "Os-PA, Os-NRL, Os-RSV"
+      ],
+      [
+        "IF-NRL",
+        "160 ac",
+        "1 du per 80 ac",
+        "6",
+        "Os-PA, Os-NRL, Os-RSV"
+      ],
+      [
+        "SF-NRL",
+        "40 ac",
+        "1 du per 20 ac",
+        "6",
+        "Os-PA, Os-NRL, Os-RSV"
+      ],
+      [
+        "RRc-NRL",
+        "20 ac",
+        "1 du per 10 ac",
+        "14",
+        "Os-PA, Os-NRL, Os-RSV"
+      ],
+      [
+        "RI",
+        "5 ac",
+        "1 du per 2.5 ac",
+        "14",
+        "All"
+      ],
+      [
+        "RRv",
+        "10 ac",
+        "1 du per 5 ac",
+        "14",
+        "All"
+      ],
+      [
+        "RVR",
+        "5 ac",
+        "1 du per 2.5 ac",
+        "14",
+        "All"
+      ],
+      [
+        "RVR—Public Water",
+        "2 ac",
+        "1 du per 1 ac",
+        "14",
+        "All"
+      ],
+      [
+        "H-URv",
+        "20 ac",
+        "1 du per 10 ac",
+        "14",
+        "Os-PA, Os-UR, Os-RO, Os-RSV"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SkagitCounty/html/SkagitCounty14/SkagitCounty1478.html"
+  }
+]

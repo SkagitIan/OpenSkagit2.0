@@ -45,6 +45,48 @@ TABLES = (
     ),
 )
 REPORT_ROW_LIMIT = 200
+AUDIT_EXCLUDED_COLUMNS = {
+    # The assessor export appears to churn AID values across most parcels, which
+    # creates huge audit rows without useful Parcel Book signal.
+    "assessor_rollup": {"aid"},
+}
+COMPACT_AUDIT_COLUMNS = {
+    "assessor_rollup": (
+        "parcel_number",
+        "owner_name",
+        "situs_street_number",
+        "situs_street_name",
+        "situs_city_state_zip",
+        "land_use_code",
+        "land_use_description",
+        "assessed_value",
+        "total_market_value",
+        "acres",
+    ),
+    "sales": (
+        "saleid",
+        "parcel_number",
+        "recording_number",
+        "excise_number",
+        "sale_date",
+        "sale_date_iso",
+        "sale_price",
+        "sale_price_num",
+        "seller_name",
+        "buyer_name",
+        "deed_type",
+    ),
+    "land": ("parcelnumber", "prop_val_yr", "land_seg_id", "size_acres", "size_acres_num", "market_value", "market_value_num"),
+    "improvements": (
+        "parcelnumber",
+        "imprv_id",
+        "segment_id",
+        "imprv_det_type_cd",
+        "imprv_det_type_description",
+        "imprv_val",
+        "imprv_val_num",
+    ),
+}
 
 
 def quote_ident(value: str) -> str:
@@ -61,6 +103,17 @@ def row_json_expr(alias: str, excluded_columns: Iterable[str] = ()) -> str:
     for column in excluded_columns:
         expr += f" - '{column}'"
     return expr + ")"
+
+
+def compact_row_json_expr(alias: str, table_name: str, available_columns: Iterable[str]) -> str:
+    available = set(available_columns)
+    pairs = []
+    for column in COMPACT_AUDIT_COLUMNS.get(table_name, ()):
+        if column in available:
+            pairs.append(f"'{column}', {alias}.{quote_ident(column)}")
+    if not pairs:
+        return "'{}'::jsonb"
+    return f"jsonb_strip_nulls(jsonb_build_object({', '.join(pairs)}))"
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -133,6 +186,12 @@ class Command(BaseCommand):
             default=str(settings.BASE_DIR / "output" / "assessor_sync_reports"),
             help="Directory for Markdown reports. The report is also stored in Postgres.",
         )
+        parser.add_argument(
+            "--audit-retain-runs",
+            type=int,
+            default=14,
+            help="Keep row-level assessor_sync_changes for this many latest successful runs.",
+        )
 
     def handle(self, *args, **options):
         if connection.vendor != "postgresql":
@@ -181,9 +240,17 @@ class Command(BaseCommand):
                 report_path.write_text(report, encoding="utf-8")
 
                 with connection.cursor() as cursor:
-                    self._finish_run(cursor, run_id, "success", zip_hash, summary, str(report_path), report)
+                    report_id = self._finish_run(cursor, run_id, "success", zip_hash, summary, str(report_path), report)
+
+                narrative_status = self._create_parcel_book_narrative(report_id)
 
                 self.stdout.write(report)
+                if narrative_status:
+                    self.stdout.write(narrative_status)
+                with connection.cursor() as cursor:
+                    pruned_changes = self._prune_sync_changes(cursor, int(options["audit_retain_runs"]), run_id)
+                if pruned_changes:
+                    self.stdout.write(self.style.WARNING(f"Pruned {pruned_changes:,} old assessor sync audit row(s)."))
                 self.stdout.write(self.style.SUCCESS(f"Assessor sync complete. Report: {report_path}"))
         except Exception as exc:
             if run_id is not None:
@@ -289,7 +356,7 @@ class Command(BaseCommand):
         summary: dict,
         report_path: str,
         report: str,
-    ) -> None:
+    ) -> int:
         cursor.execute(
             """
             UPDATE assessor_sync_runs
@@ -303,9 +370,23 @@ class Command(BaseCommand):
             (status, zip_hash, json.dumps(summary), report_path, run_id),
         )
         cursor.execute(
-            "INSERT INTO assessor_sync_reports (run_id, report_text) VALUES (%s, %s)",
+            "INSERT INTO assessor_sync_reports (run_id, report_text) VALUES (%s, %s) RETURNING id",
             (run_id, report),
         )
+        return int(cursor.fetchone()[0])
+
+    def _create_parcel_book_narrative(self, report_id: int) -> str:
+        try:
+            from opportunity.services import generate_sync_narrative_for_report
+
+            narrative = generate_sync_narrative_for_report(report_id, force=True)
+            if narrative.generated_by_ai:
+                return self.style.SUCCESS(f"Parcel Book narrative created with {narrative.model}.")
+            if narrative.error:
+                return self.style.WARNING(f"Parcel Book fallback narrative stored: {narrative.error}")
+            return self.style.WARNING("Parcel Book fallback narrative stored.")
+        except Exception as exc:
+            return self.style.WARNING(f"Parcel Book narrative skipped: {exc}")
 
     def _record_file_hashes(self, cursor, run_id: int, zip_path: Path) -> list[dict]:
         cursor.execute(
@@ -396,7 +477,7 @@ class Command(BaseCommand):
         self._validate_key_columns(cursor, stage, table.key_columns)
 
         if not table_exists(cursor, target):
-            inserted = self._record_all_stage_rows(cursor, run_id, table, stage)
+            inserted = self._record_all_stage_rows(cursor, run_id, table, stage, table_columns(cursor, stage))
             cursor.execute(f"ALTER TABLE {quote_ident(stage)} RENAME TO {quote_ident(target)}")
             return {"inserted": inserted, "updated": 0, "promoted": True}
 
@@ -405,15 +486,19 @@ class Command(BaseCommand):
         target_columns = table_columns(cursor, target)
         stage_columns = table_columns(cursor, stage)
         excluded_target_columns = [col for col in target_columns if col not in stage_columns]
+        audit_excluded_columns = self._audit_excluded_columns(table, excluded_target_columns)
         insert_columns = [col for col in stage_columns if col != "id" and col in target_columns]
 
-        inserted, updated = self._create_changed_key_table(cursor, table, stage, excluded_target_columns)
-        self._record_new_rows(cursor, run_id, table, stage)
-        self._record_changed_rows(cursor, run_id, table, stage, excluded_target_columns)
+        inserted, updated = self._create_changed_key_table(cursor, table, stage, audit_excluded_columns)
+        self._record_new_rows(cursor, run_id, table, stage, stage_columns)
+        self._record_changed_rows(cursor, run_id, table, stage, audit_excluded_columns)
         applied = self._apply_new_and_changed_rows(cursor, table, stage, insert_columns, excluded_target_columns)
         cursor.execute("DROP TABLE IF EXISTS tmp_assessor_sync_keys")
 
         return {"inserted": inserted, "updated": updated, "applied_rows": applied, "promoted": False}
+
+    def _audit_excluded_columns(self, table: TableSync, excluded_target_columns: Iterable[str]) -> tuple[str, ...]:
+        return tuple(dict.fromkeys([*excluded_target_columns, *sorted(AUDIT_EXCLUDED_COLUMNS.get(table.table, set()))]))
 
     def _validate_key_columns(self, cursor, table_name: str, key_columns: tuple[str, ...]) -> None:
         columns = set(table_columns(cursor, table_name))
@@ -430,7 +515,15 @@ class Command(BaseCommand):
                     f"ALTER TABLE {quote_ident(target)} ADD COLUMN {quote_ident(column)} {data_type}"
                 )
 
-    def _record_all_stage_rows(self, cursor, run_id: int, table: TableSync, stage: str) -> int:
+    def _record_all_stage_rows(
+        self,
+        cursor,
+        run_id: int,
+        table: TableSync,
+        stage: str,
+        stage_columns: list[str],
+    ) -> int:
+        compact_new_row = compact_row_json_expr("s", table.table, stage_columns)
         cursor.execute(
             f"""
             INSERT INTO assessor_sync_changes
@@ -442,7 +535,7 @@ class Command(BaseCommand):
                 'insert',
                 '{{}}'::jsonb,
                 NULL,
-                {row_json_expr("s")}
+                {compact_new_row}
             FROM {quote_ident(stage)} s
             WHERE {key_expr("s", table.key_columns)} <> ''
             """,
@@ -468,7 +561,7 @@ class Command(BaseCommand):
         )
 
         target_hashes = self._combined_row_hashes(cursor, table.table, "t", table.key_columns, excluded_target_columns)
-        stage_hashes = self._combined_row_hashes(cursor, stage, "s", table.key_columns, ())
+        stage_hashes = self._combined_row_hashes(cursor, stage, "s", table.key_columns, excluded_target_columns)
 
         changed_keys: list[tuple[str, str]] = []
         inserted = 0
@@ -521,8 +614,16 @@ class Command(BaseCommand):
             for record_key, row_hashes in grouped.items()
         }
 
-    def _record_new_rows(self, cursor, run_id: int, table: TableSync, stage: str) -> int:
+    def _record_new_rows(
+        self,
+        cursor,
+        run_id: int,
+        table: TableSync,
+        stage: str,
+        stage_columns: list[str],
+    ) -> int:
         stage_key = key_expr("s", table.key_columns)
+        compact_new_row = compact_row_json_expr("s", table.table, stage_columns)
         cursor.execute(
             f"""
             INSERT INTO assessor_sync_changes
@@ -534,7 +635,7 @@ class Command(BaseCommand):
                 'insert',
                 '{{}}'::jsonb,
                 NULL,
-                {row_json_expr("s")}
+                {compact_new_row}
             FROM {quote_ident(stage)} s
             JOIN tmp_assessor_sync_keys k
               ON k.record_key = {stage_key}
@@ -592,8 +693,8 @@ class Command(BaseCommand):
                     FULL OUTER JOIN jsonb_each(new_row) n ON n.key = o.key
                     WHERE o.value IS DISTINCT FROM n.value
                 ), '{{}}'::jsonb),
-                old_row,
-                new_row
+                NULL,
+                NULL
             FROM diffs
             """,
             (run_id, table.table),
@@ -638,6 +739,30 @@ class Command(BaseCommand):
         applied = cursor.rowcount
         cursor.execute("DROP TABLE IF EXISTS tmp_assessor_sync_keys")
         return applied
+
+    def _prune_sync_changes(self, cursor, retain_success_runs: int, current_run_id: int) -> int:
+        if retain_success_runs < 1:
+            retain_success_runs = 1
+        cursor.execute(
+            """
+            WITH retained_runs AS (
+                SELECT id
+                FROM assessor_sync_runs
+                WHERE status = 'success'
+                ORDER BY started_at DESC, id DESC
+                LIMIT %s
+            )
+            DELETE FROM assessor_sync_changes c
+            WHERE c.run_id <> %s
+              AND NOT EXISTS (
+                  SELECT 1
+                  FROM retained_runs r
+                  WHERE r.id = c.run_id
+              )
+            """,
+            (retain_success_runs, current_run_id),
+        )
+        return cursor.rowcount
 
     def _build_report(
         self,
@@ -712,7 +837,7 @@ class Command(BaseCommand):
             lines.append("- None.")
             return lines
 
-        lines.append(f"Showing {len(rows):,} of {total:,}. Full details are stored in assessor_sync_changes.")
+        lines.append(f"Showing {len(rows):,} of {total:,}. Compact signal details are stored in assessor_sync_changes.")
         for record_key, changed_fields, new_row in rows:
             lines.append(f"- {record_key}: {self._sample_detail(table_name, change_type, changed_fields, new_row)}")
         return lines

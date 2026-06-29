@@ -1,0 +1,378 @@
+Chapter 17.09 DISTRICTS ESTABLISHED – ZONING MAP
+
+         Chapter 17.09
+DISTRICTS ESTABLISHED – ZONING MAP
+
+             Sections:
+
+              17.09.010    Districts established and designated.
+
+              17.09.020    Unclassified areas.
+
+              17.09.021    Annexation of property prezoned and located within urban growth areas (UGA).
+
+              17.09.030    Zoning maps and district boundaries.
+
+              17.09.040    Boundaries – Rules for interpretation.
+
+              17.09.050    Boundaries adopted and regulations established.
+
+              17.09.060    Conflict between zoning map and legal description of rezone ordinance.
+
+              17.09.070    Designation of special zoning categories and time limitations.
+
+              17.09.080    Zoning regulation interpretation.
+
+        17.09.010  Districts established and designated.
+
+             To classify, segregate and regulate the use of land, buildings and structures, the city is divided into the use districts identified in the following table. This table also identifies the comprehensive plan designation associated with each zoning district.
+
+                          ZONING DESIGNATION
+
+                          COMPREHENSIVE PLAN DESIGNATION
+
+                          MINIMUM NET DENSITY
+
+                          MAXIMUM NET DENSITY
+(See Note 1)
+
+                          MINIMUM LOT SIZE
+(See Note 2)
+
+                         RESIDENTIAL ZONING DISTRICTS:
+
+                         R-1, 7.0 Single-Family Residential
+
+                         High Density Single-Family (SF-HI)
+
+                         4.0 du/acre
+
+                         7.26 du/acre
+
+                         4,500 square feet
+
+                         R-1, 5.0 Single-Family Residential
+
+                         High Density Single-Family (SF-HI)
+
+                         4.0 du/acre
+
+                         5.73 du/acre
+
+                         6,000 square feet
+
+                         R-1, 4.0 Single-Family Residential
+
+                         Medium Density Single-Family (SF-MED)
+
+                         4.0 du/acre
+
+                         4.54 du/acre
+
+                         7,500 square feet
+
+                         R-1, 3.0 Single-Family Residential
+
+                         Medium Density Single-Family (SF-MED)
+
+                         3.23 du/acre
+
+                         (See the land use element of the comprehensive plan for minimum density policies)
+
+                         3.23 du/acre
+
+                         9,000 square feet
+
+                         R-2
+
+                         Two-Family Residential District
+
+                         Low Density Multifamily (MF-LO)
+
+                         8.0 du/acre
+
+                         10 du/acre
+
+                         6,500 square feet for a duplex or townhouse unit
+
+                         R-3
+
+                         Multifamily Residential District
+
+                         Medium-High Density Multifamily (MF-MH)
+
+                         10.0 du/acre
+
+                         12 du/acre
+
+                         (Increased density up to a maximum of 15 du/acre may be achieved if at least 50% of the required parking spaces are located in an enclosed area beneath the habitable floors of the building or complex.)
+
+                         N/A
+
+                         R-4
+
+                         Multifamily Residential District
+
+                         Medium-High Density Multifamily (MF-MH)
+
+                         10.0 du/acre
+
+                         15 du/acre
+
+                         (Increased density up to a maximum of 20 du/acre may be achieved if at least 50% of the required parking spaces are located in an enclosed area beneath the habitable floors of the building or complex.)
+
+                         N/A
+
+                         R-A
+
+                         Residential Agricultural District
+
+                         Agricultural with Density Transfer (AG)
+
+                         1.24 du/acre
+
+                         (See the land use element of the comprehensive plan for minimum density policies)
+
+                         1.24 du/acre
+
+                         35,000 square feet
+
+                          COMMERCIAL, INDUSTRIAL, OFFICE, PUBLIC AND MISCELLANEOUS ZONING DISTRICTS:
+
+                         Public (P)
+
+                         Government Center
+
+                         Churches
+
+                         Schools
+
+                         Community or Neighborhood Park
+
+                         Open Space
+
+                         Cemetery
+
+                         South Kincaid Subarea
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Residential Office District (R-O)
+
+                         Residential Office/Professional Office
+
+                         N/A
+
+                         N/A
+
+                         4,500 square feet
+
+                         Health Care Development District (HD)
+
+                         Health Care Development
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Professional Office District (P-O)
+
+                         Residential Office/Professional Office
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Mobile Home Park District (MHP)
+
+                         High Density Single-Family (SF-HI)
+
+                         8 double-width or 10 single-width manufactured homes per acre
+
+                         8 double-width or 10 single-width manufactured homes per acre
+
+                         5 acres
+
+                         Central Business District (C-1a)
+
+                         Downtown Retail or South Kincaid Subarea (See note 3)
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Central Business District (C-1b)
+
+                         Support Commercial
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Central Business District (C-1c)
+
+                         South Kincaid Subarea
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         General Commercial District (C-2)
+
+                         Retail Malls, General Commercial, and Commercial/Industrial (See note 4)
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Community Commercial District (C-3)
+
+                         Community Retail, Mixed Use Center
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Neighborhood Commercial District (C-4)
+
+                         Neighborhood Retail, Mixed Use Center
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Limited Commercial (LC)
+
+                         Commercial/Limited Industrial Commercial/Industrial
+
+                         N/A
+
+                         N/A
+
+                         6,000 square feet
+
+                         Commercial/Limited Industrial District (C-L)
+
+                         Commercial/Limited Industrial Commercial/Industrial
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Light Manufacturing and Commercial District (M-1)
+
+                         Commercial/Industrial Commercial/Limited Industrial
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Industrial District (M-2)
+
+                         Commercial/Industrial
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+                         Floodplain District (F-1)
+
+                         Open Space/Cemetery
+
+                         N/A
+
+                         N/A
+
+                         N/A
+
+             (1)    R-1, 4.0, R-1, 5.0, R-1, 7.0, R-2, R-3 and R-4 zones are all authorized through Chapters  17.73 , Regulations to Encourage Affordable Housing, and 17.119 MVMC, Transfer or Purchase of Development Rights, to increase the maximum densities outlined within this table.
+
+             (2)    R-1, 4.0, R-1, 5.0, R-1, 7.0, R-2, R-3 and R-4 zones are all authorized through Chapters  17.73 , Regulations to Encourage Affordable Housing, and 17.119 MVMC, Transfer or Purchase of Development Rights, to decrease minimum lot sizes outlined within this table.
+
+             (3)    C-1a zoned properties located south of Kincaid Street shall have a comprehensive plan designation of South Kincaid Subarea. All other C-1a zoned properties shall have a comprehensive plan designation of downtown retail.
+
+             (4)    South Kincaid Subarea comprehensive plan designation exists for general commercial (C-2) zoned property south of Kincaid Street, east of Interstate-5 and west of the railroad tracks. This is the only area that shall be zoned C-2 with a comprehensive plan designation of South Kincaid Subarea.
+
+             (Ord. 3855 § 3, 2022).
+
+        17.09.020  Unclassified areas.
+
+             All lands not classified according to the classifications designated in MVMC  17.09.010  on the official zoning maps and all lands, if any, of the city not shown on the officially adopted zoning maps shall be considered unclassified and, pending future classification, shall be subject to the restrictions and regulations of the R-1-4.0 district. All lands designated as urban growth areas are identified on the city’s comprehensive plan map with comprehensive plan designations only. The city council shall determine at the time of annexation which zoning designation these areas shall have. Until the urban growth areas are annexed into the city, these areas shall comply with the county zoning designations and their associated county zoning code. (Ord. 3429 § 45, 2008).
+
+        17.09.021  Annexation of property prezoned and located within urban growth areas (UGA).
+
+             All lands which have been included in the urban growth area (UGA) for the city of Mount Vernon and prezoned as designated on the official comprehensive land use plan, as adopted by Skagit County on June 1, 1997, and the city of Mount Vernon on April 14, 1998, pursuant to RCW  35.13.177  and  35.13.178 , shall be annexed with the zoning district classification as provided for in such comprehensive land use plan, as adopted or amended. (Ord. 3315, 2006; Ord. 3047 § 2, 2001).
+
+        17.09.030  Zoning maps and district boundaries.
+
+             The boundaries of the use districts shall be determined and defined or redefined from time to time by the adoption of zoning maps covering the city and showing the geographical area and location of said use districts. Each zoning map shall be, upon its final adoption, a part of this zoning title, and said map, and all notations, references and other information shown thereon thereafter shall be as much a part of this title as through all matters and information set forth on said map were fully described in this title. (Ord. 3315, 2006; Ord. 2352, 1989).
+
+        17.09.040  Boundaries – Rules for interpretation.
+
+             When uncertainty exists as to the boundaries of any use district shown on the zoning maps, the following rules of construction shall apply:
+
+             A. Where district boundaries are indicated as approximately following the centerline of streets, alleys or highways, the actual centerline shall be construed to be the boundary.
+
+             B. Where district boundaries are indicated as running approximately parallel to the centerline of a street, the boundary line shall be construed to be parallel to the centerline of the street.
+
+             C. Where a public street or alley is officially vacated or abandoned, the regulations applicable to the abutting property to which the vacated portion shall revert shall apply to such vacated or abandoned street or alley. If the abutting property on either side of the vacated or abandoned street or alley is of differing land use classifications, the vacated street or alley shall assume the abutting land use classification to the centerline of the vacated street or alley.
+
+             D. Public streets and alleys shall not be zoned.
+
+             E. Where the street layout actually on the ground varies from that shown on the zoning district maps, the designations shown on the maps shall be applied to the street as actually laid out so as to carry out the intent and purpose of the zoning plan of that district.
+
+             F. Where district boundaries are indicated as approximately following the lot or tract lines, the actual lot or tract line shall be construed to be the boundary of such use district.
+
+             G. Where a district boundary divides a tract in unsubdivided property, the location of such use district boundary, unless the same is indicated by dimensions thereon, shall be determined by use of the scale appearing on such zoning map.
+
+             H. Where a public street or alley is officially vacated or abandoned, the regulations applicable to the abutting property to which the vacated portion shall revert shall apply to such vacated or abandoned street or alley.
+
+             I. In case uncertainty exists which cannot be determined by application of the foregoing rules, the hearing examiner shall recommend, and the city council shall determine, the location of such use district boundaries. (Ord. 3429 § 46, 2008).
+
+        17.09.050  Boundaries adopted and regulations established.
+
+             The boundaries of the use districts as are shown upon any zoning map adopted by this title or amendments thereto are adopted and approved, and the regulations of this title governing the uses of land, buildings and structures, the height of buildings and structures, the sizes of yards about buildings and structures and other matters as herein set forth are established and declared to be in effect upon all land included within the boundaries of each and every use district shown upon each said zoning map. (Ord. 3315, 2006; Ord. 2352, 1989).
+
+        17.09.060  Conflict between zoning map and legal description of rezone ordinance.
+
+             If any conflict exists between the adopted zoning map of the city and the text of any rezone ordinance that contains a legal description prepared by a licensed professional surveyor, for any particular parcel of property, the rezone ordinance will govern. If the rezone ordinance legal description was not prepared by a licensed professional surveyor, the adopted map will govern. (Ord. 3315, 2006).
+
+        17.09.070  Designation of special zoning categories and time limitations.
+
+             Properties having a zoning category subject to a time limitation, such as a planned unit development (PUD) approval or reversionary zoning, and those properties under development agreements (as authorized in the RCW) shall be specially designated on the zoning map to indicate their special nature and give notice to the public that further inquiry into their zoning status is necessary. (Ord. 3429 § 47, 2008).
+
+        17.09.080  Zoning regulation interpretation.
+
+             A. Unclassified Uses. Upon inquiry by an applicant, an administrative interpretation shall be made by the community and economic development director to determine if a proposed use not specifically listed is allowed utilizing the criteria in subsection B of this section. Only uses listed within each zoning district as permitted, accessory, conditional or special uses are allowed unless an interpretation is made by the CEDD director. Should interpretation be made that a proposed, unlisted use not be allowed in a specific zoning district, the director shall indicate which zones, if any, do permit the use. If the community and economic development director’s interpretation indicates that an unlisted use is not consistent with the permitted, conditional or accessory uses in any district, or if a party does not concur with the permit type applied to a use, appeal may be made pursuant to Chapter  14.05  MVMC. Interpretations made by the community and economic development director shall be documented and kept on file in the department.
+
+             B. Criteria for Unclassified Uses. To make a determination that an unclassified use is permitted, conditionally or specially permitted or accessory, the community and economic development director must find that the use is:
+
+             1. In keeping with the purpose and intent of the zone, and consistent with the comprehensive plan policies; and
+
+             2. Similar in nature to, and no more intense than, a specifically listed permitted, conditional or accessory use. (Ord. 3429 § 48, 2008).

@@ -312,6 +312,84 @@ class SkagitLevyCrosswalk(models.Model):
         db_table = "skagit_levy_crosswalk"
 
 
+class SkagitLevyHistory(models.Model):
+    history_id = models.TextField(primary_key=True)
+    tax_year = models.IntegerField()
+    taxing_district_code = models.TextField()
+    county_code = models.TextField()
+    district_name = models.TextField()
+    levy_short = models.TextField(blank=True, null=True)
+    locally_assessed_value = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    levy_rate = models.DecimalField(max_digits=20, decimal_places=8, blank=True, null=True)
+    district_levy = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    highest_prior_levy = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    new_construction_assessed_value = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    prior_year_levy_rate = models.DecimalField(max_digits=20, decimal_places=8, blank=True, null=True)
+    prior_year_state_assessed_property = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    two_years_prior_state_assessed_property = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    two_years_prior_annexation_assessed_value = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    two_years_prior_annex_tax_due = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    two_years_prior_refund_tax_due = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    maximum_allowable_levy_101_calc = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    levy_name_canonical = models.TextField(blank=True, null=True)
+    entity_key = models.TextField(blank=True, null=True)
+    mcag = models.TextField(blank=True, null=True)
+    reporting_status = models.TextField(blank=True, null=True)
+    parent_mcag = models.TextField(blank=True, null=True)
+    sao_legal_name = models.TextField(blank=True, null=True)
+    review_needed = models.BooleanField(blank=True, null=True)
+    agency_common_name = models.TextField(blank=True, null=True)
+    agency_type = models.TextField(blank=True, null=True)
+    source_file = models.TextField(blank=True, null=True)
+    loaded_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "skagit_levy_history"
+
+
+class SkagitLevyHistoryJoined(models.Model):
+    history_id = models.TextField(primary_key=True)
+    tax_year = models.IntegerField()
+    taxing_district_code = models.TextField()
+    district_name = models.TextField()
+    levy_short = models.TextField(blank=True, null=True)
+    levy_rate = models.DecimalField(max_digits=20, decimal_places=8, blank=True, null=True)
+    district_levy = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    entity_key = models.TextField(blank=True, null=True)
+    mcag = models.TextField(blank=True, null=True)
+    parent_mcag = models.TextField(blank=True, null=True)
+    effective_mcag = models.TextField(blank=True, null=True)
+    reporting_status = models.TextField(blank=True, null=True)
+    sao_legal_name = models.TextField(blank=True, null=True)
+    sao_fit_url = models.TextField(blank=True, null=True)
+    review_needed = models.BooleanField(blank=True, null=True)
+    agency_common_name = models.TextField(blank=True, null=True)
+    agency_type = models.TextField(blank=True, null=True)
+    source_file = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "v_skagit_levy_history_joined"
+
+
+class SkagitAgencyLevyHistory(models.Model):
+    history_id = models.TextField(primary_key=True)
+    tax_year = models.IntegerField()
+    entity_key = models.TextField(blank=True, null=True)
+    effective_mcag = models.TextField(blank=True, null=True)
+    agency_name = models.TextField(blank=True, null=True)
+    reporting_status = models.TextField(blank=True, null=True)
+    agency_type = models.TextField(blank=True, null=True)
+    levy_line_count = models.IntegerField()
+    district_levy = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)
+    review_needed = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "v_skagit_agency_levy_history"
+
+
 class SkagitAgencyTotal(models.Model):
     mcag = models.TextField(primary_key=True)
     county_total = models.DecimalField(max_digits=20, decimal_places=4, blank=True, null=True)

@@ -17,11 +17,11 @@ Thumbs.db
 .vscode/
 
 # Large raw data dumps (not needed at runtime; regenerate static/data/*.geojson from these)
-data/parcels-shp.zip
-data/skagitassessorsdata.zip
+data/*.zip
+data/*.har
+data/*.xlsx
 data/10yr_levy_mapping.csv
 data/2025schedule01.csv
-data/NONSCHOOL.har
 data/discovery_probes (1).json
 data/skagit_agency_json_builder.ipynb
 

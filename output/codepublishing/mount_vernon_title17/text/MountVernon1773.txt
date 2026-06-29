@@ -1,0 +1,616 @@
+Chapter 17.73 REGULATIONS TO ENCOURAGE AFFORDABLE HOUSING
+
+         Chapter 17.73
+REGULATIONS TO ENCOURAGE AFFORDABLE HOUSING
+
+             Sections:
+
+              17.73.000    Purpose.
+
+              17.73.010    Definitions.
+
+              17.73.020    General provisions.
+
+              17.73.030    Encouraging affordable housing in single-family zones (R-1).
+
+              17.73.040    Encouraging affordable housing in the duplex and townhouse zone (R-2).
+
+              17.73.050    Encouraging affordable housing in multifamily zones (R-3 and R-4).
+
+              17.73.060    Encouraging affordable housing in planned unit developments.
+
+              17.73.070    Encouraging affordable housing in downtown, community and neighborhood commercial zones (C-1, C-3 and C-4).
+
+              17.73.080    Required affordable housing for rezones.
+
+              17.73.090    Required covenants and agreements.
+
+              17.73.100    Density transitions and design standards.
+
+              17.73.110    Accessory dwelling units.
+
+              17.73.130    Other affordable housing tools offered by the city.
+
+        17.73.000  Purpose.
+
+             The purpose of this chapter is to encourage long-term affordable single- and multifamily housing for those earning 80 percent of the area median income (AMI) and below in the zones listed within this chapter while ensuring neighborhood compatibility and quality living environments for all citizens. (Ord. 3802 § 3, 2019).
+
+        17.73.010  Definitions.
+
+             The following words when used in this chapter shall be defined as indicated below:
+
+             A. “Area median income” or “AMI” means an income estimate developed with U.S. Census data and an inflation factor based on the Congressional Budget Office (CBO) forecast of the national Consumer Price Index (CPI). The U.S. Department of Housing and Urban Development (HUD) calculates and releases this data on a yearly basis.
+
+             B. “Affordable housing” and “affordable housing unit” are the additional dwelling units authorized by this chapter of the MVMC and are further defined as:
+
+             1. Owner-Occupied. A primary residence for an owner-occupied dwelling unit reserved for occupancy by eligible households, and affordable to households whose household annual income does not exceed 80 percent of the Mount Vernon-Anacortes, WA, Metropolitan Statistical Area (MSA) median household income, adjusted for household size, as determined by the United States Department of Housing and Urban Development (HUD), with no more than 30 percent of the monthly household income being paid for monthly housing expenses. “Monthly housing expenses” defined as: mortgage, mortgage insurance, property taxes, property insurance, homeowners’ dues and a utility allowance.
+
+             2. Renter-Occupied. A primary residence for a renter-occupied dwelling unit reserved for occupancy by eligible households, and affordable to households whose household annual income does not exceed 80 percent of the Mount Vernon-Anacortes MSA median household income, adjusted for household size, as determined by HUD, with no more than 30 percent of the monthly household income being paid for monthly housing expenses (rent and utility allowance).
+
+             3. “Utility allowance” means an allowance approved by the city for basic utilities such as water, sewer, electricity, and gas payable by the renter, which unless otherwise approved in writing by the city shall be equal to the utility allowance published from time to time by the Skagit County housing authority for the type of unit, or, if the city determines that no reasonably comparable figures are available from the Skagit County housing authority, the utility allowance shall be such an amount as the city determines is an adequate allowance for basic utilities, to the extent that such items are not paid by the housing owner. The utility allowance shall not include telephone, internet/wireless, or cable TV services.
+
+             C. “Base units” are the number of dwelling units authorized by the underlying zoning of a site calculated using the density calculations found in Chapter  17.06  MVMC.
+
+             D. “Bonus units” are the additional dwelling units authorized through this chapter that are required to be affordable housing for the life of the project under which the base units and/or the bonus density units are used as dwelling units.
+
+             E. “Market rate units” are housing units that can be single-family, duplex, or multifamily structures that have no ownership or rent restrictions; which means the seller or landlord is free to sell or rent at whatever price they wish to. (Ord. 3802 § 3, 2019).
+
+        17.73.020  General provisions.
+
+             A. All of the below listed regulations shall apply to all new dwelling units created using the provisions of this chapter.
+
+             1. Affordable housing units shall be required to be created before, or at the same time, as the base units. Applicants will not be allowed to construct market rate units first and wait to construct the affordable housing units unless a development agreement containing enforceable terms to guarantee the construction of the affordable housing units is approved by the city council through a Type IV (quasi-judicial) process.
+
+             2. Developments using this chapter shall comply with the regulations of the zoning district within which a development is located unless this chapter specifically states otherwise.
+
+             3. Prior to the issuance of any building permits, the city shall review and approve the location and unit mix of the bonus (affordable housing) units to ensure compliance with the following standards:
+
+             a. The affordable housing units shall be intermingled with all other dwelling units in the development. This means that the affordable housing units are not allowed to be placed together in one isolated area of a plat, or on one particular floor of a multifamily structure.
+
+             b. The affordable housing units shall be available for occupancy in a time frame comparable to the availability of the rest of the dwelling units in the development.
+
+             c. The affordable housing units shall have floor areas that are no less than 30 percent smaller than the average floor areas for the market rate units within the same development. The floor areas being compared shall be for the same type of dwelling units, i.e., comparing market rate multi-family units to affordable multifamily units and market rate single-family units to affordable single-family units. For example, if the average floor area of the single-family detached units is 2,000 square feet then the affordable housing units are required to be 1,400 square feet or larger.
+
+             d. No less than 50 percent of the affordable housing units shall be required to have the same number of average bedrooms that the same type of market rate housing in the same development has. For example, if the average number of bedrooms for the multifamily units is three then no less than 50 percent of the affordable units will be required to have at least three bedrooms.
+
+             4. All properties with affordable housing units created under the provisions of this chapter shall record covenants and agreements and shall comply with the density transitions and design standards as prescribed in MVMC  17.73.090  and  17.73.100 .
+
+             5. If after completing the initial density calculations required to determine the number of affordable and market rate housing units the number of units to be created changes, the applicant shall be required to complete the same density steps to calculate the number of bonus units in total, and how many of the bonus units will be required to be affordable housing units. (Ord. 3802 § 3, 2019).
+
+        17.73.030  Encouraging affordable housing in single-family zones (R-1).
+
+             A. In each of the single-family zones listed below in Table 1 additional dwelling units may be created if a specified number of new homes are affordable housing units.
+
+                     TABLE 1: AFFORDABLE HOUSING BONUS DENSITY IN SINGLE-FAMILY
+RESIDENTIAL ZONES
+
+                         ZONING DESIGNATION
+
+                         EXISTING REQUIREMENTS FROM CHAPTER  17.15  MVMC
+
+                         AFFORDABLE HOUSING DENSITY BONUS
+
+                         DENSITY BONUS PROVISIONS AND REQUIREMENTS
+
+                         R-1, 7.0 Single-Family Residential
+
+                         Minimum and maximum density: 4.0 to 7.26 du/acre
+
+                         Minimum lot size: 4,500 sq. ft.
+
+                         50% bonus density from 7.26 to 10.89 du/acre if 33.3% of the bonus units are affordable housing units
+
+                         •    No minimum lot sizes
+
+                         •    Bonus units can be single-family, duplexes, townhouses, or multifamily
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+                         R-1, 5.0 Single-Family Residential
+
+                         Minimum and maximum density: 4.0 to 5.73 du/acre
+
+                         Minimum lot size: 6,000 sq. ft.
+
+                         50% bonus density from 5.73 to 8.60 du/acre if 33.3% of the bonus units are affordable housing units
+
+                         •    No minimum lot sizes
+
+                         •    Bonus units can be single-family, duplexes, townhouses, or multifamily
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+                         R-1, 4.0 Single-Family Residential
+
+                         Minimum and maximum density: 4.0 to 4.54 du/acre
+
+                         Minimum lot size: 7,500 sq. ft.
+
+                         50% bonus density from 4.54 to 6.81 du/acre if 33.3% of the bonus units are affordable housing units
+
+                         •    No minimum lot sizes
+
+                         •    Bonus units can be single-family, duplexes, townhouses, or multifamily
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+             B. Following are the steps to calculate the number of bonus units in total, and how many of the bonus units will be required to be affordable housing units. The steps listed below are required to be calculated in the order listed below. For added clarity, an illustrative example is also included.
+
+             The base density per Chapters  17.06  and  17.15  MVMC is calculated (assuming the maximum potential density per the underlying zoning designation).
+
+             1. The same density calculation is completed using the affordable housing bonus density (see the third column from the left in Table 1 above).
+
+             2. The base density (#1) is subtracted from the bonus density (#2). This is the number of bonus density units possible. When this calculation results in a fraction, the number of affordable housing units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             3. Thirty-three and three-tenths percent of the bonus units are required to be affordable housing units. When this calculation results in a fraction, the number of affordable housing units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             4. At the discretion of the developer, the remaining 66.6 percent of the bonus units can be market rate or affordable housing units.
+
+             5. Following is an example calculation using steps 1 to 5 above:
+
+             Assume a net site area: 8.73 acres that is zoned R-1, 7.0
+
+             Base Density Calculation: 8.73 acres x 7.26 du/acre = 63.38 single-family units
+
+             Bonus Density Calculation: 8.73 x 10.89 du/acre = 95.07 single-family units
+
+             Bonus Density: Difference between standard zoning and this chapter = 31.69 units
+
+             31.69 x 33.3% = 10.65, round up to 11 units. This means that 11 units are required to be affordable housing units and the additional 21 units are given to the developer to be market rate or affordable units, the developer gets to decide.
+
+             C. The dwelling units created shall:
+
+             1. Comply with the setbacks and lot coverage listed in Chapter  17.70  MVMC applicable to the type of unit (i.e., single-family, duplex, multifamily).
+
+             2. Multifamily structures shall comply with the land coverage, and distance between buildings as required by Chapter  17.24  MVMC.
+
+             3. Be limited to three stories but not more than 35 feet so long as the requirements of MVMC  17.73.100  are met.
+
+             4. But for the duplex exception listed below, the dwelling units from the base density calculation are required to be single-family detached units; however, there is no prescribed minimum lot size.
+
+             a. A maximum of 20 percent of the single-family detached units calculated from the base density can duplex units. For example, if 20 single-family homes were permitted, an applicant could create 16 single-family homes and two duplexes.
+
+             5. The bonus units can be single-family, duplexes, townhomes, or multifamily units. (Ord. 3802 § 3, 2019).
+
+        17.73.040  Encouraging affordable housing in the duplex and townhouse zone (R-2).
+
+             A. In the duplex and townhouse zone, listed below in Table 2, additional dwelling units may be created if a specified number of the new homes are affordable housing units.
+
+                     TABLE 2: AFFORDABLE HOUSING BONUS DENSITY IN DUPLEX
+AND TOWNHOUSE RESIDENTIAL ZONE
+
+                         ZONING DESIGNATION
+
+                         REQUIREMENTS FROM CHAPTER  17.18  MVMC
+
+                         AFFORDABLE HOUSING DENSITY BONUS
+
+                         DENSITY BONUS PROVISIONS AND REQUIREMENTS
+
+                         R-2 Duplex and Townhome Residential Zone
+
+                         Minimum and maximum density: 8.0 to 10.0 du/acre
+
+                         Density doubles from 10.0 to 20.0 du/acre if 33.3% of the bonus units are affordable housing units
+
+                         •    Bonus units can be duplexes, townhouses, or multifamily
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+             B. Following are the steps to calculate the number of bonus density units in total, and how many of the bonus units will be required to be affordable housing units. The below listed steps are required to be calculated in the order listed below. For added clarity, an illustrative example is also included.
+
+             1. The base density per Chapters  17.06  and  17.18  MVMC is calculated (assuming the maximum potential density per the underlying zoning designation).
+
+             2. The same density calculation is completed using the affordable housing bonus density (see the third column from the left in Table 2 above).
+
+             3. The base density (#1) is subtracted from the bonus density (#2). This is the number of bonus units possible. When this calculation results in a fraction, the number of affordable housing units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             4. Thirty-three and three-tenths percent of the bonus units are required to be affordable housing units. When this calculation results in a fraction, the number of affordable housing units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             5. At the discretion of the developer, the remaining 66.6 percent of the bonus units can be market rate or affordable housing units.
+
+             6. Following is an example calculation using steps 1 to 5 above:
+
+             Assume a net site area: 3.7 acres that is zoned R-2
+
+             Base Density Calculation: 3.7 acres x 10 du/acre = 37 units
+
+             Bonus Density Calculation: 3.7 x 20 du/acre = 74 units
+
+             Bonus Density: Difference between standard zoning and this chapter = 37 units
+
+             37 x 33.3% = 12.32. This means that 12 units are required to be affordable housing units and the remaining 25 units are given to the developer to be market rate or affordable units, the developer gets to decide.
+
+             C. The duplex and/or townhouse units/developments shall:
+
+             1. Comply with the setbacks listed in Chapter  17.70  MVMC.
+
+             2. Comply with the land coverage and parking as required by Chapter  17.18  MVMC.
+
+             3. Be limited to three stories but not more than 35 feet so long as the requirements of MVMC  17.73.100  are complied with.
+
+             4. The dwelling units from the base density calculation are required to be duplexes or townhomes; however, there is no prescribed minimum lot size.
+
+             5. The bonus units can be duplexes, townhomes, or multifamily units.
+
+             6. The creation of up to 35 dwelling units shall be an outright use and when 36 or more dwelling units are created they shall be permitted by a conditional use permit classified by Chapter  14.05  MVMC as a Type III permit. (Ord. 3802 § 3, 2019).
+
+        17.73.050  Encouraging affordable housing in multifamily zones (R-3 and R-4).
+
+             A. In the multifamily zones listed below in Table 3 additional dwelling units may be created if a specified number of the new homes are affordable housing units.
+
+                     TABLE 3: AFFORDABLE HOUSING BONUS DENSITY IN MULTIFAMILY RESIDENTIAL ZONES
+
+                         ZONING DESIGNATION
+
+                         REQUIREMENTS FROM CHAPTERS  17.24  and  17.27  MVMC
+
+                         AFFORDABLE HOUSING DENSITY BONUS
+
+                         DENSITY BONUS PROVISIONS AND REQUIREMENTS
+
+                         R-3 Multifamily Residential
+
+                         Minimum and maximum density: 10 to 15 du/acre
+
+                         Density doubles from 15 to 30 du/acre if 33.3% of the bonus units are affordable housing units
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+                         R-4 Multifamily Residential
+
+                         Minimum and maximum density: 10 to 20 du/acre
+
+                         Density doubles from 20 to 40 du/acre if 33.3% of the bonus units are affordable housing units
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+             B. Following are the steps to calculate the number of bonus density units in total, and how many of the bonus units will be required to be affordable housing units. The steps listed below are required to be calculated in the order listed below. For added clarity, an illustrative example is also included.
+
+             1. The base density per Chapters  17.06  and  17.24  or  17.27  MVMC (as applicable) is calculated (assuming the maximum potential density per the underlying zoning designation).
+
+             2. The same density calculation is completed using the affordable housing bonus density (see the third column from the left in Table 3 above).
+
+             3. The base density (#1) is subtracted from the bonus density (#2). This is the number of bonus density units possible. When this calculation results in a fraction, the number of affordable housing units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             4. Thirty-three and three-tenths percent of the bonus units are required to be affordable housing units. When this calculation results in a fraction, the number of affordable housing units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             5. At the discretion of the developer, the remaining 66.6 percent of the bonus density units can be market rate or affordable housing units.
+
+             6. Following is an example calculation using steps 1 to 5 above:
+
+             Assume a net site area: 5.5 acres that is zoned R-4
+
+             Base Density Calculation: 5.5 acres x 20 du/acre = 110 units
+
+             Bonus Density Calculation: 5.5 x 40 du/acre = 220 units
+
+             Bonus Density: Difference between standard zoning and this chapter = 110 units
+
+             110 x 33.3 = 36.63, round up to 37. This means that 37 units are required to be affordable housing units and the remaining 73 units are given to the developer to be market rate or affordable units, the developer gets to decide.
+
+             C. The multifamily units/developments shall:
+
+             1. Comply with the setbacks listed in Chapter  17.70  MVMC.
+
+             2. Comply with the land coverage, distance between buildings, and parking as required by Chapter  17.24  MVMC.
+
+             3. Be limited to four stories and 45 feet so long as the requirements of MVMC  17.73.100  are complied with.
+
+             4. The creation of up to 35 dwelling units shall be an outright use and when 36 or more dwelling units are created they shall be permitted by a conditional use permit classified by Chapter  14.05  MVMC as a Type III permit. (Ord. 3802 § 3, 2019).
+
+        17.73.060  Encouraging affordable housing in planned unit developments.
+
+             A. In each of the single-family zones listed below in Table 4 additional dwelling units may be created if the applicant uses the planned unit development process codified within Chapter  17.69  MVMC and if a certain number of the bonus dwelling units are affordable housing units.
+
+                     TABLE 4: AFFORDABLE HOUSING BONUS DENSITY IN PLANNED UNIT DEVELOPMENTS
+
+                         ZONING DESIGNATION
+
+                         REQUIREMENTS FROM CHAPTER  17.15  MVMC
+
+                         AFFORDABLE HOUSING DENSITY BONUS
+
+                         DENSITY BONUS PROVISIONS AND REQUIREMENTS
+
+                         R-1, 7.0 Single-Family Residential
+
+                         Minimum and maximum density: 4.0 to 7.26 du/acre
+
+                         Minimum lot size: 4,500 sq. ft.
+
+                         Density doubles from 7.26 to 14.52 du/acre if 33.3% of the bonus units are affordable housing units
+
+                         •    No minimum lot sizes
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+                         R-1, 5.0 Single-Family Residential
+
+                         Minimum and maximum density: 4.0 to 5.73 du/acre
+
+                         Minimum lot size: 5,000 sq. ft.
+
+                         Density doubles from 5.73 to 11.46 du/acre if 33% of the otherwise not allowed bonus units are occupied by those earning 80% AMI and below
+
+                         •    No minimum lot sizes
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+                         R-1, 4.0 Single-Family Residential
+
+                         Minimum and maximum density: 4.0 to 4.54 du/acre
+
+                         Minimum lot size: 6,000 sq. ft.
+
+                         Density doubles from 4.54 to 9.08 du/acre if 33% of the otherwise not allowed bonus units are occupied by those earning 80% AMI and below
+
+                         •    No minimum lot sizes
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+             B. PUDs incorporating bonus affordable housing units shall be allowed to have a minimum lot area for a proposed PUD of five gross acres, versus the 10 gross acres required per MVMC  17.69.030 (A).
+
+             C. PUDs incorporating bonus affordable housing units shall be exempt from complying with MVMC  17.69.030 (E).
+
+             D. PUDs incorporating bonus affordable housing units shall be required to comply with the neighborhood context and transitions codified in MVMC  17.69.080 (C) and the density transitions outlined below in MVMC  17.73.100 . Should there be a conflict between these two code sections the regulation that will provide the larger buffer shall be applied.
+
+             E. PUDs incorporating bonus affordable housing units within a PUD shall be exempted from complying with MVMC  17.69.100 , Modification of permitted uses – Multifamily units, and 17.69.110, Modification of permitted uses – Duplex units, and shall instead be required to comply with the following modified regulations:
+
+             1. The placement of multifamily and/or duplex units (as defined within Chapter  17.06  MVMC) within a PUD is discretionary by the city council. The city council may allow multifamily and duplex uses in single-family residential zones which are not otherwise permitted in the underlying zone so long as the requirements of this chapter and Chapter  17.69  MVMC are complied with.
+
+             2. The total multifamily and/or duplex units shall comprise no more than 50 percent of the overall number of single-family dwelling units that are allowed and could physically be platted as part of the entire PUD. For example, if 100 single-family residential lots could be platted on a site, no more than 50 multifamily or duplex units can be constructed; which means that 50 single-family and 50 multifamily units (or 50 single-family, 30 multi-family and 20 duplex units) would be permitted so long as the overall density is not exceeded; and so long as city council makes a finding that the multifamily and/or duplex units can be placed and designed in such a way as to preserve the single-family character of the PUD and the surrounding area.
+
+             3. The multifamily units shall:
+
+             a. Comply with the setbacks listed in Chapter  17.70  MVMC.
+
+             b. Comply with the land coverage, distance between buildings, landscaping, parking and signage as required by Chapter  17.24  MVMC.
+
+             c. Be limited to four stories and 45 feet so long as the requirements of MVMC  17.73.100  are complied with.
+
+             d. No more than 75 multifamily units can be located in any one residential multifamily structure.
+
+             4. The duplex units shall:
+
+             a. Comply with the setbacks listed in Chapter  17.70  MVMC.
+
+             b. Comply with the land coverage, distance between buildings, landscaping, parking and signage as required by Chapter  17.18  MVMC.
+
+             c. Be limited to three stories but not more than 35 feet so long as the requirements of MVMC  17.73.100  are complied with. (Ord. 3802 § 3, 2019).
+
+        17.73.070  Encouraging affordable housing in downtown, community and neighborhood commercial zones (C-1, C-3 and C-4).
+
+             A. In the community and neighborhood commercial zones listed below in Table 5 the maximum number of building stories and building height may be increased if a specified number of dwelling units that can be created as a result of the additional building story are affordable housing units.
+
+                     TABLE 5: AFFORDABLE HOUSING INCREASE IN BUILDING STORIES AND HEIGHT COMMUNITY AND NEIGHBORHOOD COMMERCIAL ZONES
+
+                         ZONING DESIGNATION
+
+                         ADDITIONAL STORY AND HEIGHT
+
+                         NUMBER OF AFFORDABLE HOUSING UNITS
+
+                         REQUIRED ADDITIONAL REQUIREMENTS
+
+                         C-3 Community Commercial
+
+                         Adding one additional building story in this zone means that structures can be 5 stories and 65 feet in height
+
+                         33.3% of the bonus units that can be created as a result of adding an additional story to the building are affordable housing units
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+                         C-4 Neighborhood Commercial
+
+                         Adding one additional building story in this zone means that structures can be 4 stories and 55 feet in height
+
+                         33.3% of the bonus units that can be created as a result of adding an additional story to the building are affordable housing units
+
+                         •    Covenants and agreements per MVMC  17.73.090  required
+
+                         •    Density transitions and design standards per MVMC  17.73.100  required
+
+             B. Following are the steps to calculate the number of bonus units in total, and how many of the bonus units will be required to be affordable housing units. The steps listed below are required to be calculated in the order listed below. For added clarity, an illustrative example is also included.
+
+             1. The number of dwelling units to be created without the additional building story and height is calculated.
+
+             2. The number of dwelling units to be created with the additional building story and height is calculated.
+
+             3. The number of dwelling units from calculation (#1) is subtracted from the number of units calculated in (#2). This is the number of bonus units possible. When this calculation results in a fraction, the number of affordable housing units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             4. Thirty-three and three-tenths of the bonus units are required to be affordable housing units. When this calculation results in a fraction, the number of affordable housing units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             5. At the discretion of the developer, the remaining 66.6 percent of the bonus units can be market rate or affordable housing units.
+
+             6. Following is an example calculation using steps 1 to 5 above:
+
+             Without the additional building story and height a structure will have 68 units
+
+             With the additional building story and height the structure will have 90 units
+
+             Bonus Units: Difference between with and without the additional story = 22 units
+
+             22 x 33.3% = 7.32. This means that seven units are required to be affordable housing units and the additional 15 units are given to the developer to be market rate or affordable units, the developer gets to decide. (Ord. 3802 § 3, 2019).
+
+        17.73.080  Required affordable housing for rezones.
+
+             All rezones approved after the effective date of the ordinance codified in this chapter shall be required to provide affordable dwelling units as a condition of the rezone.
+
+             A. This chapter shall apply to all zoning districts that allow the creation of dwelling units in any form, i.e., single-family, duplex, townhomes, stacked flats, apartments, condominiums, etc., and constitutes a floating overlay zone over these districts that shall be implemented when dwelling units are constructed following approval of a rezone.
+
+             1. All rezones shall be recorded with the Skagit County auditor and shall include the requirements of this chapter to ensure current and future property owners are fully aware of the requirements to create affordable housing units when development occurs on the property.
+
+             B. Following are the steps to calculate how many of the dwelling units will be required to be affordable housing units for rezoned properties. The steps listed below are required to be calculated in the order listed below. For added clarity, an illustrative example is also included.
+
+             1. The base density per the underlying, or pre-rezone, zoning designation in conjunction with Chapter  17.06  MVMC is calculated (assuming the maximum potential density per the pre-rezone zoning designation).
+
+             2. The same density calculation is completed assuming the maximum potential density per the zoning designation the site will be rezoned to.
+
+             3. The base density (#1) is subtracted from the rezone density (#2). This is the number of dwelling units possible because the site was rezoned. When this calculation results in a fraction, the number of dwelling units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             4. Thirty-three and three tenths percent of the dwelling units possible as a result of the site being rezoned (i.e., the number of units calculated in #3 above) are required to be affordable housing units. When this calculation results in a fraction, the number of affordable housing units shall be rounded up to the next whole number (unit) if the fraction of the whole number is at least 0.50.
+
+             5. At the discretion of the developer, the remaining 66.6 percent of the bonus units can be market rate or affordable housing units.
+
+             6. Following is an example calculation using steps 1 to 5 above:
+
+             Assume a net site area: 13.21 acres
+
+             Rezone: site is zoned public (P) and will be rezoned to multifamily residential (R-3).
+
+             Base Density Calculation: The base density of the public zone would be zero because this zone does not allow single-family, duplex, or multifamily units.
+
+             Density Calculation Following Rezone: 13.21 x 15 du/acre (because one-half of the required parking will be provided beneath the habitable floors) = 198.15 multifamily units
+
+             Density Attributed To Rezone: 198.15 multifamily units
+
+             198.15 x 33.3% = 65.98, round up to 66 units. This means that 66 units are required to be affordable housing units and the additional 132 units can be market rate or affordable units, the developer gets to decide.
+
+             C. All of the dwelling units created following the rezone shall:
+
+             1. Comply with the setbacks and lot coverage listed in Chapter  17.70  MVMC applicable to the type of unit (i.e., single-family, duplex, multifamily).
+
+             2. As applicable, comply with the land coverage, lot size, building height, distance between buildings required by the zoning district the site was rezoned to.
+
+             3. Comply with all of the general provisions outlined in MVMC  17.73.020 . (Ord. 3802 § 3, 2019).
+
+        17.73.090  Required covenants and agreements.
+
+             A. Covenants and Agreements Required. Prior to final plat approval for subdivisions, or issuance of a certificate of occupancy for projects that do not require a subdivision, all properties with affordable housing units created under the provision of this chapter shall, as applicable, record the below listed covenants and agreements with the Skagit County auditor.
+
+             B. Covenant and Agreement to Ensure Affordability. These covenants and agreements shall ensure the affordability of the housing units, whether they are rented or owned, by requiring these units to be affordable housing units in perpetuity.
+
+             1. “In perpetuity” means never ceasing and unlimited with respect to time. The covenant and agreement shall be in effect for the life of the project for which either the restricted units and/or the bonus density units are used as dwelling units.
+
+             2. The covenant and agreement shall be binding and shall run with the land.
+
+             3. The covenant and agreement shall be approved by the Mount Vernon city attorney in content and form; and the city council shall authorize the mayor to sign this document prior to recording. Following adoption of the ordinance codified in this chapter, the city shall prepare and keep on file covenant and agreement forms substantively meeting the requirements for these documents.
+
+             4. The covenant and agreement, at a minimum, shall include:
+
+             a. Price restrictions for both home ownership and rental units.
+
+             b. Homebuyer or tenant qualifications.
+
+             c. How income will be monitored.
+
+             d. For rental units, the content and form of yearly reports that will be required to be submitted to the city verifying income eligibility for affordable units.
+
+             e. For owned units, the content and form of reports required to be submitted to the city to verify income eligibility for affordable units when ownership changes.
+
+             f. Any other applicable topics necessary to monitor and enforce the affordability of the bonus units.
+
+             C. Covenant and Agreement for Landscape Buffers, Parking Facilities, Open Space Amenities, and Exterior of Buildings and Accessory Facilities. This covenant and agreement shall require property owners to maintain all landscaping and landscape buffers, open spaces with their associated improvements (e.g., benches, gazebos, etc.) parking lot striping, paint on curbs, signage, exterior walls and decorative components of structures, and accessory facilities (e.g., mail box covers).
+
+             1. The covenant shall be binding and shall run with the land.
+
+             2. The covenant and agreement shall be approved by the Mount Vernon city attorney in content and form; and the city council shall authorize the mayor to sign this document prior to recording. Following adoption of the ordinance codified in this chapter, the city shall prepare and keep on file covenant and agreement forms substantively meeting the requirements for this document.
+
+             3. The covenant and agreement, at a minimum, shall include:
+
+             a. Exhibit maps and detailed descriptions of all structures and improvements subject to the covenant and agreement.
+
+             b. Detailed outline of specific maintenance, repair, and replacement required for each improvement that is covered by the covenant and agreement.
+
+             c. Estimated maintenance and/or replacement schedule with approximate costs of such maintenance/replacement. (Ord. 3802 § 3, 2019).
+
+        17.73.100  Density transitions and design standards.
+
+             A. The purpose of the below listed landscaping buffers and height limitations is to preserve existing neighborhood character and to ensure existing neighborhoods and residential land use patterns have transitions in density and building heights as specified below.
+
+             1. Proposed lots shall be greater than or equal to the square footage and width found on all abutting property that is zoned or developed with residential structures with the following exceptions:
+
+             a. If the abutting property consists of lots that are more than 9,600 square feet in size and are more than 95 feet in width the proposed lots are allowed to be a maximum of 9,600 square feet and 95 feet in width instead of being required to match the abutting lot sizes and widths.
+
+             b. If the developer chooses to create a 20-foot minimum forested buffer tract (as defined within MVMC  17.06.060 ) between the existing and proposed lots the proposed lots shall not be required to have a minimum square footage or lot width.
+
+             2. Proposed lots and structures that abut non-residentially zoned or used land shall be required to create or maintain a 20-foot minimum forested buffer tract between the newly created lots and structures and the non-residentially zoned or used property.
+
+             3. All proposed structures shall be limited to the maximum number of stories and building height that abutting properties are allowed under their respective zoning code with the following exceptions:
+
+             a. Buildings that are proposed to be taller than the building height allowed under the respective zoning code for abutting structures shall observe an additional one-foot setback in addition to what the underlying zoning requires for each additional one foot of building height in excess of what the abutting property is allowed. Following is an example of how this height transition is applied.
+
+             Proposed is a multifamily structure that is 45 feet in height above average abutting grade that abuts single-family residential lots.
+
+             The abutting single-family residential lots have a maximum height of 35 feet per their underlying zoning found in Chapter  17.15  MVMC.
+
+             The difference between the proposed height and the allowed height of the abutting lots is 10 feet.
+
+             The proposed multifamily structure is required, per the underlying zoning, to observe a 20-foot rear yard setback. To have a structure that is 10 feet taller than structures on abutting properties are allowed, its rear yard setback is required to be increased from 20 to 30 feet.
+
+             Example Illustration of Additional Setback Required to Mitigate Additional Height Allowance
+
+             (Ord. 3802 § 3, 2019).
+
+        17.73.110  Accessory dwelling units.
+
+             A. Accessory dwelling units shall be outright permitted uses in the single-family and residential agricultural zoning districts codified within Chapters  17.15  and  17.12  MVMC.
+
+             B. Accessory dwelling units are required to comply with the below listed regulations:
+
+             1. An accessory dwelling unit may be established in an existing single-family dwelling unit or in a detached structure on a legal lot by any one or by a combination of the following methods:
+
+             a. Alteration of interior space of the dwelling; or
+
+             b. Conversion of an attic, basement, attached or detached private garage, or other previously uninhabited portion of a dwelling; or
+
+             c. Addition of attached living area onto an existing dwelling; or
+
+             d. Construction of a detached living area.
+
+             2. Each single-family dwelling on a legal building lot shall have not more than one accessory dwelling unit.
+
+             3. One of the dwelling units shall be occupied by one or more owners of the property as the owner’s permanent and principal residence. “Owners” shall include title holders and contract purchasers. The owner shall file a certification of owner-occupancy with the development services department prior to the issuance of the permit to establish an accessory dwelling unit.
+
+             4. The floor area of the accessory dwelling unit shall not exceed 1,000 square feet.
+
+             5. Three off-street parking spaces shall be provided for the principal and accessory dwelling unit to share. When the property abuts an alley, the off-street parking space for the accessory dwelling unit shall gain access from the alley, unless topography makes such access impossible.
+
+             6. The single-family appearance and character of the dwelling shall be maintained when viewed from the surrounding neighborhood. Only one entrance to the residential structure may be located on any street side of the structure; provided, that this limitation shall not affect the eligibility of a residential structure which has more than one entrance on the front or street side on the effective date of the ordinance codified in this chapter.
+
+             7. The accessory and principal dwelling unit shall comply with all applicable requirements of the building, fire and zoning codes in effect when a technically complete application for an accessory dwelling unit is submitted to the city.
+
+             8. The owner of a single-family dwelling with an accessory dwelling unit shall file an owner’s certificate of occupancy in a form acceptable to the city attorney no later than April 1st of each year. Any person who falsely certifies that he or she resides in a dwelling unit at the stated address to satisfy the requirements of this section shall be subject to the violation and penalty provisions of MVMC Title  19 .
+
+             9. A permit for an accessory dwelling unit shall not be transferable to any lot other than the lot described in the application.
+
+             10. All accessory dwelling units shall also be subject to the condition that such a permit shall automatically expire whenever:
+
+             a. The accessory dwelling unit is substantially altered and is thus no longer in conformance with the approved plans; or
+
+             b. The subject lot ceases to maintain at least three off-street parking spaces; or
+
+             c. The applicant ceases to own or reside in either the principal or the accessory dwelling unit.
+
+             11. The applicant shall execute a covenant and agreement that shall be approved by the Mount Vernon city attorney in content and form; that is required to be recorded with the Skagit County auditor, providing notice to future owners or long-term lessors of the subject lot that the existence of the accessory dwelling unit is predicated upon the occupancy of either the accessory dwelling unit or the principal dwelling by the person to whom the accessory dwelling unit permit has been issued. The covenant and agreement shall also require any owner of the property to notify a prospective buyer of the limitations of this section and to provide for the removal of improvements added to convert the premises to an accessory dwelling unit and the restoration of the site to a single-family dwelling in the event that any condition of approval is violated. (Ord. 3802 § 3, 2019).
+
+        17.73.130  Other affordable housing tools offered by the city.
+
+             A. See Chapter  16.34  MVMC that authorizes the platting and subsequent sale of duplex and townhouse units.
+
+             B. The creation of duplexes as an outright allowed use in the single-family residential districts codified in Chapter  17.15  MVMC.
+
+             C. The creation of additional dwelling units, and the ability to construct additional duplexes and multifamily structures through the planned unit development process codified in Chapter  17.69  MVMC.
+
+             D. The creation of permanent supporting housing facilities authorized in Chapter  17.67  MVMC. (Ord. 3802 § 3, 2019).

@@ -1,0 +1,10 @@
+{
+  "input_dir": "output\\codepublishing\\mount_vernon_title17",
+  "jurisdiction": "mount_vernon",
+  "title": "Title 17 Zoning",
+  "pages": 52,
+  "sections": 491,
+  "tables": 24,
+  "sections_path": "output\\codepublishing\\mount_vernon_title17\\sections.jsonl",
+  "tables_path": "output\\codepublishing\\mount_vernon_title17\\tables.json"
+}

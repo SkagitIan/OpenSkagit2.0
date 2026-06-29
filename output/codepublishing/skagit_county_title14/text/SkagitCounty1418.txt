@@ -1,0 +1,1668 @@
+Chapter 14.18 USE STANDARDS AND USE DEFINITIONS
+
+         Chapter 14.18
+USE STANDARDS AND USE DEFINITIONS
+
+             Sections:
+
+              14.18.100    Applicability.
+
+             Part I. Residential Uses
+
+              14.18.102    Single-family residence.
+
+              14.18.104    Residential accessory use.
+
+              14.18.106    Accessory dwelling unit.
+
+              14.18.110    Caretaker dwelling unit.
+
+              14.18.112    Co-housing as part of a CaRD.
+
+              14.18.114    Co-living housing.
+
+              14.18.120    Emergency housing.
+
+              14.18.122    Emergency shelter.
+
+              14.18.124    Employee housing.
+
+              14.18.130    Loft living quarters.
+
+              14.18.140    Manufactured or mobile home park.
+
+              14.18.142    Middle housing.
+
+              14.18.150    Owner operator/caretaker quarters.
+
+              14.18.160    Permanent supportive housing.
+
+              14.18.170    Seasonal worker housing.
+
+              14.18.180    Temporary manufactured home.
+
+              14.18.182    Transitional housing.
+
+             Part II. Commercial/Retail Uses
+
+              14.18.210    Animal clinic/hospital.
+
+              14.18.214    Animal preserve.
+
+              14.18.216    Asphalt/concrete batching or recycling.
+
+              14.18.218    Automobile wrecking.
+
+              14.18.220    Bed and breakfast.
+
+              14.18.224    Billboard.
+
+              14.18.226    Business/professional office.
+
+              14.18.230    Car wash.
+
+              14.18.234    Commercial boathouse.
+
+              14.18.240    Day care center.
+
+              14.18.244    Display gardens.
+
+              14.18.246    Family day care provider.
+
+              14.18.248    Fish hatchery.
+
+              14.18.250    Group care facility.
+
+              14.18.252    Home-based business.
+
+              14.18.254    Institutional camp/retreat.
+
+              14.18.256    Kennel.
+
+              14.18.258    Hotel/motel.
+
+              14.18.260    Laundromat.
+
+              14.18.261    Limited event venues.
+
+              14.18.262    Marijuana facility.
+
+              14.18.264    Marina.
+
+              14.18.266    Mini-storage.
+
+              14.18.268    Moorage.
+
+              14.18.269    Mortuary.
+
+              14.18.270    Outpatient medical and health care service.
+
+              14.18.272    Overnight lodging and related services for visitors to the rural area.
+
+              14.18.280    Restaurant.
+
+              14.18.282    Retail food market and convenience store.
+
+              14.18.284    Retail and service business.
+
+              14.18.286    Small-scale production or manufacture.
+
+              14.18.294    Vehicle repair garage.
+
+             Part III. Community/Public Uses
+
+              14.18.310    Cemetery.
+
+              14.18.320    Church.
+
+              14.18.324    Community club/grange hall.
+
+              14.18.326    Conference center.
+
+              14.18.330    Historic site open to the public.
+
+              14.18.340    Hospital.
+
+              14.18.350    Interpretive/information center.
+
+              14.18.360    Museum.
+
+              14.18.370    Public use.
+
+              14.18.380    Preschool.
+
+             Part IV. Natural Resource Uses
+
+              14.18.402    Agriculture.
+
+              14.18.403    Agricultural accessory use.
+
+              14.18.404    Agricultural processing facility.
+
+              14.18.405    Agricultural slaughtering facility.
+
+              14.18.406    Agricultural support service.
+
+              14.18.407    Agritourism.
+
+              14.18.408    Anaerobic digester.
+
+              14.18.420    Farm-based business.
+
+              14.18.422    Forestry.
+
+              14.18.424    Forestry-based business.
+
+              14.18.430    Habitat enhancement/restoration project.
+
+              14.18.442    Manure lagoon.
+
+              14.18.444    Mitigation bank.
+
+              14.18.452    Natural resource support services.
+
+              14.18.454    Natural resources training/research facility.
+
+              14.18.456    Nursery/greenhouse.
+
+              14.18.462    Seasonal roadside stand.
+
+             Part V. Parks and Recreation Uses
+
+              14.18.512    Campground.
+
+              14.18.532    Golf course.
+
+              14.18.552    Off-road vehicle use areas and trails.
+
+              14.18.554    Outdoor outfitters enterprise.
+
+              14.18.556    Outdoor recreational equipment rental and/or guide services.
+
+              14.18.560    Park.
+
+              14.18.572    Racetrack.
+
+              14.18.574    Recreation facility.
+
+              14.18.576    Regional equestrian events center.
+
+              14.18.582    Shooting club.
+
+              14.18.584    Stables and riding club.
+
+              14.18.592    Trail.
+
+              14.18.594    Trailhead.
+
+             Part VI. Storage Uses
+
+              14.18.612    Commercial equipment storage.
+
+              14.18.642    Hazardous waste storage.
+
+              14.18.650    Outdoor storage.
+
+              14.18.660    Petroleum products and gas storage—Bulk.
+
+              14.18.690    Vehicle storage facility.
+
+             Part VII. Transportation Uses
+
+              14.18.720    Aircraft hangar.
+
+              14.18.722    Aircraft landing field.
+
+              14.18.760    Park and ride.
+
+              14.18.780    Transit station.
+
+              14.18.782    Transit stop.
+
+              14.18.790    Vehicle charging station.
+
+              14.18.792    Vehicle fueling station.
+
+             Part VIII. Utility Uses
+
+              14.18.820    Drainage maintenance.
+
+              14.18.830    Impoundment.
+
+              14.18.840    Net metering system.
+
+              14.18.860    Recycling drop box facility.
+
+              14.18.862    Repair, replacement, and maintenance of water lines.
+
+              14.18.870    Utility development.
+
+              14.18.890    Water diversion structure.
+
+        14.18.100  Applicability.
+
+             The definitions and use standards in this chapter apply throughout this Title unless the context plainly indicates otherwise. Definitions not related to specific uses are located in SCC Chapter 14.04—Definitions or in other applicable chapters of this Title. Tables identifying allowed uses by  zone  are provided in SCC Chapters  14.11  through  14.16 . SCC Chapter  14.10  lists all uses that are permitted or prohibited in all  zones . (Ord. O20260004 § 1 (Att. 2))
+
+             Part I. Residential Uses
+
+        14.18.102  Single-family residence.
+
+             (1)    Definition. Reserved.
+
+             (2)    Limitations.
+
+             (a)    A single-family residence must be detached and constitute only a single  dwelling unit  (except as provided for with an attached ADU).
+
+             (b)    No more than one primary  dwelling unit  is permitted on any  legal lot .
+
+             (c)    A  recreational vehicle  does not qualify as a  dwelling unit .
+
+             (3)    Ag-NRL Restrictions. In the Ag-NRL zone:
+
+             (a)    A single-family residence is allowed only when accessory to an agricultural use, except when sited on a  legal lot  eligible for development per SCC  14.70.050  that is one acre or less. No conversion of agricultural land is allowed for  accessory uses .
+
+             (b)    An  applicant  for a single-family residence must:
+
+             (i)    Be engaged in the ongoing commercial production of crops or livestock;
+
+             (ii)    Submit a signed affidavit verifying that:
+
+             (A)    The  applicant  is the owner of the parcel;
+
+             (B)    The  applicant  has generated gross income of at least $100 per acre per year on average over the past three years through the  applicant ’s use of the subject parcel for the commercial production of crops or livestock on the subject parcel;
+
+             (C)    That the proposed single-family residence will be used only as accessory to the ongoing commercial production of crops or livestock;
+
+             (iii)    Record a title notice for the parcel, on forms provided by the  Department , that the single-family residence was permitted only as an accessory to the principal agricultural use.
+
+             (c)    An  applicant  seeking to rebuild or  remodel  an existing residence within an existing converted footprint is not required to comply with Subsection (3)(b) of this Section.
+
+             (4)    IF-NRL Restrictions. In the IF-NRL  zone , a single-family residence is allowed only when all of the following criteria are met:
+
+             (a)    The residence is located within 200 feet of an existing County  road  or State highway;
+
+             (b)    The residence is located within the existing, as of July 26, 2005, boundaries of a fire district;
+
+             (c)    The residence is an  accessory use  to  timber  resource management activities;
+
+             (d)    Ingress and egress for fire vehicles meets the standards of the International Fire Code Section 503, as amended;
+
+             (e)    A 200-foot slash abatement is maintained around the exterior portion of the dwelling;
+
+             (f)    A safety  zone  cleared of flammable vegetation is maintained 30 feet from any portion of the exterior of any  structure  on level ground and 100 feet downhill on sloped ground;
+
+             (g)    The dwelling or any accessory  structure  is constructed of a noncombustible roofing material; and
+
+             (h)    There is availability of 300 gallons of water on site, 400 feet of one-inch fire hose with nozzle, and an internal combustion engine powered pump. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.18.104  Residential accessory use.
+
+             (1)    A  residential accessory use  is an  accessory use  to a residence, including, but not limited to, the following:
+
+             (a)    Fallout/bomb shelter;
+
+             (b)     Impoundment  under one-acre foot in volume;
+
+             (c)    Keeping household pets;
+
+             (d)    Private pool, dock, boathouse, boat launch, pier;
+
+             (e)    Antenna for private telecommunications systems;
+
+             (f)    Storage of on-site yard maintenance equipment;
+
+             (g)     Agriculture  that is secondary to the residential use and allows no employees;
+
+             (h)    Community water and septic systems and  stormwater  detention  ponds  built as part of a  land division ;
+
+             (i)    Private  greenhouses ;
+
+             (j)    Miscellaneous residential support  buildings , such as a storage shed, workshop, garage, barn;
+
+             (k)    No more than one commercial vehicle that is one ton or more in size.
+
+             (2)    Ag-NRL Restrictions. In the Ag-NRL  zone , a  residential accessory use  is allowed only when accessory to an agricultural use. No conversion of agricultural land is allowed for  accessory uses .
+
+             (3)    IF-NRL Restrictions. In the IF-NRL  zone , a  residential accessory use  is allowed only when it meets the restrictive criteria for a single-family residence in that  zone . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.106  Accessory dwelling unit.
+
+             (1)    Definition. Separate living quarters located on the same  lot  and either detached from or included within a primary residence.
+
+             (2)    Requirements in All  Zones .
+
+             (a)    Size and Scale. The square footage of a newly constructed  accessory dwelling unit  may not exceed 1,200 square feet, excluding any garage area.
+
+             (b)    Location. The  accessory dwelling unit  may be attached to or included within the main unit of the primary residence, or located in a detached  structure . All requirements of SCC Title  15  regarding fire separation must be met.
+
+             (c)    Parking. Three  off-street parking spaces  must be provided for the combination of the primary residence and accessory dwelling unit(s).
+
+             (d)    An  accessory dwelling unit  must contain provisions for eating, sleeping, cooking, and sanitation.
+
+             (e)    Any  accessory dwelling unit  included within a primary residence may not have interconnected interior spaces.
+
+             (f)    Nonqualifying Uses.
+
+             (i)    A  recreational vehicle  is not allowed as an  accessory dwelling unit .
+
+             (ii)    A  park model trailer  is not allowed as an  accessory dwelling unit .
+
+             (3)    Additional Requirements in  Urban Growth Areas .
+
+             (a)    Two  accessory dwelling units  are permitted as accessory to a primary residence.
+
+             (b)    Connection to a  public sewer system  is required for two  accessory dwelling units . One  accessory dwelling unit  is permitted when connected to an on-site sewage system.
+
+             (c)    Existing legal  nonconforming  structures that do not meet  setbacks  or  lot coverage  requirements may be converted into  accessory dwelling units .
+
+             (d)     Accessory dwelling units  may be sited at  lot  lines that abut a public alley.
+
+             (e)    Off-street parking is not required for  accessory dwelling units  if within one-half mile walking  distance  of a major  transit stop .
+
+             (4)    Additional Requirements Outside  Urban Growth Areas .
+
+             (a)    One  accessory dwelling unit  is permitted as accessory to a primary residence.
+
+             (b)     Subdivision .  Accessory dwelling units  may not be subdivided or otherwise segregated in ownership from the principal unit of the primary dwelling, unless allowed by the zoning.
+
+             (c)    Location. Detached  accessory dwelling units  may be no more than 150 feet from the primary residence, unless a greater  distance  is necessary to protect  critical areas  or  natural resource lands , or existing development prevents the  accessory dwelling unit  from being placed within that  distance .
+
+             (d)    Entrances. The main unit of the primary dwelling containing the  accessory dwelling unit  may have only one obvious entrance visible to the  street  except where more than one entrance existed on or before adoption of the ordinance codified in this Section. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.18.110  Caretaker dwelling unit.
+
+             (1)    Definition. Reserved.
+
+             (2)    In the URP-OS  zone , the use is allowed only for an on-site resident  park  manager accessory to the primary  public use . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.112  Co-housing as part of a CaRD.
+
+             (1)    Definition. A type of residential community characterized by either attached or detached single-family  dwelling units  which may or may not be located on separate  lots , and includes a common  building , which may contain a large dining room, kitchen, lounges, meeting rooms, recreation and laundry facilities, storage, guest rooms, library, workshops, and/or childcare, to serve only the co-housing community.
+
+             (2)    Allowed only as part of a  CaRD  land division. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.114  Co-living housing.
+
+             (1)    Definition. A residential  building  with sleeping units that are independently rented, are lockable, and provide living and sleeping space, with shared kitchen facilities used by residents (consistent with RCW  36.70A.535 ). Bunkhouses, residential suites, and congregate housing are examples of  co-living housing  types.
+
+             (2)    For the purposes of this Section, a “sleeping unit” means an independently lockable rented or owned unit that provides living and sleeping space. A sleeping unit in  co-living housing  equals one-quarter of a one  dwelling unit  for the purpose of complying with density limits. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.120  Emergency housing.
+
+             (1)    Definition. A shelter supportive service that provides  temporary  indoor accommodations to address basic health, food, clothing and personal hygiene needs. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.122  Emergency shelter.
+
+             (1)    Definition. A facility providing  temporary  shelter, that can include day-only access and warming centers, that does not provide overnight accommodations. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.124  Employee housing.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.130  Loft living quarters.
+
+             (1)    Definition. One or more  dwelling units  above a commercial use.
+
+             (2)    Restrictions.
+
+             (a)    In the RVC  zone ,  loft living quarters  are limited to a single  dwelling unit  above each storefront.
+
+             (b)    In the RVC  zone  in Alger,  loft living quarters  are limited to four units, provided gross  floor area  is no more than 75 percent of the primary use gross  floor area . The size of each unit must meet, at a minimum, the definition of  efficiency dwelling unit . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.140  Manufactured or mobile home park.
+
+             (1)    Definition. A site containing spaces with required improvements and utilities that are leased for long-term placement of manufactured houses and that may include services and facilities for the residents.
+
+             (2)    In the RVR  zone , a manufactured or mobile home park:
+
+             (a)    Requires connection to  public water service ;
+
+             (b)    Requires connection to a  public sewer system ;
+
+             (c)    Is not permitted in a special flood hazard area. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.142  Middle housing.
+
+             (1)    Definition. A residential  building  that contains two or more attached, stacked, or clustered homes, excluding a single-family residence with one or more attached ADUs.
+
+             (2)    Types of  Middle Housing .
+
+             (a)    Duplex: a  building  containing two  dwelling units  separated from each other by an unpierced wall extending from ground to roof.
+
+             (b)    Triplex: a  building  containing three  dwelling units .
+
+             (c)    Fourplex: a  building  containing four  dwelling units .
+
+             (d)    Townhouse: a one-family dwelling in a row of at least three such units in which each unit has its own front and rear access to the outside, no unit is located over another unit, and each unit is separated from any other unit by one or more vertical common fire-resistant walls. Townhouses may be located on a separate (fee simple)  lot  or several units may be located on a common parcel.
+
+             (3)    The number of  dwelling units  in a given multifamily residential  building  is limited to the number listed in the allowed use table for the  zone .
+
+             (4)    In the RVR  zone , a duplex, triplex, or fourplex:
+
+             (a)    Requires connection to  public water service ;
+
+             (b)    Requires connection to a  public sewer system ;
+
+             (c)    Is not permitted in a special flood hazard area;
+
+             (d)    May not exceed 1,200 square feet per  dwelling unit , excluding any garage area. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.150  Owner operator/caretaker quarters.
+
+             (1)    Definition. One  dwelling unit , accessory to a primary use, for  persons  who live on premises for the necessary purposes of managing, operating, maintaining, or guarding a primary nonresidential use.
+
+             (2)    Quarters may be occupied by either the owner of the  principal use  and his/her immediate  family , or employees of the owner as well as their  immediate family members .
+
+             (3)    In the RB  zone , the use must be accessory to a business use. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.160  Permanent supportive housing.
+
+             (1)    Definition. Subsidized leased housing, utilizing admissions practices with lower barriers to entry than would be typical for other subsidized or unsubsidized rental housing and which is paired with on-site or off-site voluntary services. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.170  Seasonal worker housing.
+
+             (1)    Definition. Manufactured homes grouped together to provide  temporary  housing for seasonal workers.
+
+             (2)    No more than 10 manufactured homes are permitted under this use per property.
+
+             (3)    The homes may be occupied no longer than the  growing season . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.180  Temporary manufactured home.
+
+             (1)    Definition. The  temporary  placement of one manufactured home on a parcel with an existing residence to accommodate the housing needs of disabled or elderly  family  members or to house one  farm  worker and his/her immediate  family . Documentation of the need for nearby care or that the nature of the employee’s work requires said employee to be immediately available to the job site is required by a doctor and/or physician or by the  farm  owner/operator. This second  temporary  dwelling unit must be removed from the property when the  family  member or  farm  employee is no longer using the manufactured home.
+
+             (2)    Types. A  temporary manufactured home  use must be for one of the following purposes:
+
+             (a)    Disabled or elderly  family  members;
+
+             (b)    Accessory to  farm  dwelling unit.
+
+             (3)     Temporary Manufactured Home —Disabled or Elderly  Family  Members.
+
+             (a)    Definition. A  temporary manufactured home  to accommodate the housing needs of disabled or elderly  family  members:
+
+             (b)    Documentation of the need for nearby care is required from a doctor and/or physician.
+
+             (c)    Title Notice. The  applicant  must record a title notice with the County Auditor that contains the following language:
+
+             The above-referenced property contains a  temporary manufactured home  to accommodate the housing needs of disabled or elderly  family  member. This second  temporary  dwelling unit was approved pursuant to the Skagit County Code and must be removed from the property when the  family  member is no longer using the manufactured home.
+
+             (4)     Temporary Manufactured Home —Accessory to  Farm  Dwelling Unit.
+
+             (a)    Definition. A  temporary manufactured home  accessory to a  farm  dwelling unit on property meeting the definition of farmland in RCW  84.34.020  to accommodate agricultural workers and their families employed on the premises, as provided:
+
+             (b)    The property must meet the definition of farmland in RCW  84.34.020  (Open Space Taxation).
+
+             (c)    The  applicant  must demonstrate compliance with the  temporary  worker standards in Washington State law, including RCW Chapters  19.27 ,  43.22 ,  43.70 ,  49.17  and  70.114A .
+
+             (d)    Documentation that the nature of the employee’s work requires said employee to be immediately available to the job site is required from the  farm  owner/operator.
+
+             (e)    Title Notice. The  applicant  must record a title notice with the County Auditor that contains the following language:
+
+             The above-referenced property contains a  temporary manufactured home  to accommodate agricultural workers and their families employed on the premises. This second  temporary  dwelling unit was approved by a special use permit pursuant to the Skagit County Code and must be removed from the property when the  farm  employee is no longer using the manufactured home.
+
+             (5)    Limitations in the Ag-NRL  Zone . In the Ag-NRL  zone ,  temporary manufactured homes  may result in no conversion of agricultural land. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.182  Transitional housing.
+
+             (1)    Definition. A facility that provides housing and supportive service to facilitate movement of individuals and families experiencing homelessness into permanent housing. (Ord. O20250005 § 2 (Exh. A))
+
+             Part II. Commercial/Retail Uses
+
+        14.18.210  Animal clinic/hospital.
+
+             (1)    Definition. A  building  for medical or surgical treatment of animals.
+
+             (2)    An animal clinic  hospital  may include overnight animal stays.
+
+             (3)    Limitation in the SF-NRL and RRc-NRL  Zones .
+
+             (a)    Must be accessory to the existing resource base.
+
+             (b)    Any  structures  must be placed in currently developed areas.
+
+             (c)    No land may be taken out of resource production. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.214  Animal preserve.
+
+             (1)    Definition. A preserve for the public viewing of wild animals, either on foot or from the car, and either indoors or outdoors. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.216  Asphalt/concrete batching or recycling.
+
+             (1)    Definition. The mixing of asphalt or concrete from the raw ingredients for a discrete project in the vicinity of the batching operation.
+
+             (2)    Types.
+
+             (a)     Temporary . No longer than one year.
+
+             (b)    Permanent. All such uses other than a  temporary  use.
+
+             (3)    Limitation in the Ag-NRL, H-URv, RRc-NRL, and SF-NRL  Zones .
+
+             (a)    This use is allowed only if there is no other viable parcel of nonresource designated land to serve the purpose. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.218  Automobile wrecking.
+
+             (1)    Definition. Premises used for the commercial storage and/or sale of used automobile parts, or for the storage, dismantling, or abandonment of  junk , automobiles, trailers, machinery or parts thereof. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.18.220  Bed and breakfast.
+
+             (1)    Definition. A dwelling used to provide overnight guest lodging for compensation that usually provides a morning meal. Guest lodging may be in a separate  structure  from the main dwelling unless otherwise provided.
+
+             (2)    Standards. A  bed and breakfast  use must:
+
+             (a)    Be owner-occupied and managed;
+
+             (b)    Provide parking on site and a minimum of 10 feet away from neighboring residences;
+
+             (c)    Direct all lighting away from neighboring residences;
+
+             (d)    Demonstrate that its impacts will be no more obtrusive than a residence;
+
+             (e)    Provide no more than five bedrooms for guest use.
+
+             (3)    Limitations in the Ag-NRL  Zone .
+
+             (a)    The use must be accessory to an actively managed, ongoing agricultural operation.
+
+             (b)    No new  structures  may be constructed outside of the home for lodging purposes.
+
+             (4)    Limitations in the H-URv and RRc-NRL  Zones .
+
+             (a)    No new  structures  may be constructed or expanded in  building footprint  outside of the home for lodging purposes. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.224  Billboard.
+
+             (1)    Definition. Reserved.
+
+             (2)    Billboards are limited to one per  lot .
+
+             (3)    See SCC Chapter  14.29  for  sign  requirements related to billboards. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.226  Business/professional office.
+
+             (1)    Definition. Reserved.
+
+             (2)    In the NRI  zone , this use must be related to natural resource industries. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.230  Car wash.
+
+             (1)    Definition. Reserved.
+
+             (2)    Limitations in the BR-LI  Zone .
+
+             (a)    A car wash is permitted only adjacent to Peterson  Road . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.234  Commercial boathouse.
+
+             (1)    Definition. Any walled or covered  structure  built onshore or offshore for the wet or dry commercial storage,  repair , or  building  of watercraft or float planes. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.240  Day care center.
+
+             (1)    Definition. An establishment providing care for periods less than 24 hours for children, patients, convalescents, invalids, or aged  persons . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.244  Display gardens.
+
+             (1)    Definition. Horticultural gardens open to the public, including ornamental plants. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.246  Family day care provider.
+
+             (1)    Definition. An establishment for group care of nonresident adults or children which is accessory to a single-family residence that is the abode of the  person  or  persons  under whose direct care and supervision the clients are placed. Day care consists of both adult day care and child day care facilities, licensed by the State. A maximum of 12 adults or children in any 24-hour period, including children who reside at home, are permitted.
+
+             (2)    Limitations in the Ag-NRL  Zone .
+
+             (a)    No conversion of resource land is allowed. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.248  Fish hatchery.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.250  Group care facility.
+
+             (1)    Definition. An establishment providing full-time care for more than five patients, convalescents, invalids, or aged  persons , excluding:
+
+             (a)    Adult  family  homes regulated pursuant to RCW Chapter  70.128 ; and
+
+             (b)    Living quarters for unrelated, handicapped individuals protected under the Federal Fair Housing Amendments Act and RCW  35A.63.240 .
+
+             (2)    Types.
+
+             (a)    Adult group care facility: an establishment providing full-time care for more than five patients, convalescents, invalids, or aged  persons . Such establishment must be licensed by the State of Washington in accordance with current State statutes. Adult  family  homes regulated pursuant to RCW Chapter  70.128  and living quarters for unrelated, handicapped individuals protected under the Federal Fair Housing Amendments Act and RCW  35A.63.240  are not considered adult group care facilities for purposes of this Title.
+
+             (b)    Group care facility: living quarters for children or adults meeting applicable Federal and State standards that function as a single housekeeping unit and provide supporting services, including but not limited to counseling, rehabilitation, and medical supervision, not exceeding more than 20 residents and staff. If staffed by nonresident staff, each 24 staff hours per day equals one full-time residing staff member for purposes of determining number of staff. Adult  family  homes regulated pursuant to RCW Chapter  70.128  and living quarters for unrelated, handicapped individuals protected under the Federal Fair Housing Amendments Act and RCW  35A.63.240  are not considered a  group care facility  for purposes of this Title. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.252  Home-based business.
+
+             (1)    Definition. Home-based businesses are home occupations that remain incidental to the use of a residence for general dwelling purposes and are compatible with  rural character . Three categories of home-based businesses are defined:  Home-Based Business  1,  Home-Based Business  2, and  Home-Based Business  3.
+
+             (2)    Generally.
+
+             (a)    Home-based businesses established after June 1, 1997, may not be used as a justification for  Comprehensive Plan amendment  or  rezone  request.
+
+             (b)    The intent of each category of  home-based business  is to allow such businesses to operate within the limitations of each category. When the business grows beyond those limitations and the conditions included in any County approval, the business must apply for a higher level or category or relocate to a  zone  that would permit the activity.
+
+             (3)     Home-Based Business  1. The use must meet the following criteria:
+
+             (a)    Is carried out exclusively by a member or members of a  family  residing in the  dwelling unit ;
+
+             (b)    Is clearly incidental and secondary to the use of the property for dwelling purposes, with the  floor area  devoted to the home occupation not exceeding 25 percent of the living area of the  dwelling unit  (business activity may be conducted in  buildings  other than the dwelling; provided, that the size of such use does not exceed 25 percent of the living area of the  dwelling unit );
+
+             (c)    Has no outside storage, no outside  signs  of any size or type, nor other exterior indication of the home occupation or variation from the residential character of the property;
+
+             (d)    Does not require the installation of heavy equipment, large power tools or power sources not common to a residential dwelling;
+
+             (e)    Does not create a level of noise, vibration, smoke, dust, odors, heat or glare beyond that which is common to a residential area; and
+
+             (f)    Does not have clients come to the site.
+
+             (4)     Home-Based Business  2. The use must meet the following criteria:
+
+             (a)    Is carried out by a member or members of a  family  residing in the dwelling;
+
+             (b)    Is clearly incidental and secondary to the use of the property for dwelling purposes (business activity may be conducted in  buildings  other than the dwelling; provided, that the size of such use does not exceed 50 percent of the living area of the  dwelling unit );
+
+             (c)    Has no outside storage nor other exterior indication of the home occupation or variation from the residential character of the property with the exception of one  sign  not to exceed four square feet, provided such  sign  must not be illuminated;
+
+             (d)    Does not require the installation of heavy equipment, large power tools or power sources not common to a residential dwelling;
+
+             (e)    Does not create a level of electrical interference, line voltage fluctuation, noise, vibration, smoke, dust, odors, heat, glare, traffic and other environmental impacts beyond that which is common to a residential area;
+
+             (f)    Does not create a level of parking demand beyond that which is normal to a residential area;
+
+             (g)    May have clients come to the site.
+
+             (h)    Limitations in the Ag-NRL, IF-NRL, SF-NRL, and RRc-NRL  Zones . No conversion of resource land is allowed to accommodate the business activity.
+
+             (5)     Home-Based Business  3. The use must meet the following criteria:
+
+             (a)    Is carried out by a member or members of a  family  residing in the dwelling and may include up to three additional employees;
+
+             (b)    Is clearly incidental and secondary to the use of the property for dwelling purposes;
+
+             (c)    The business activity may be conducted in  buildings  other than the dwelling; provided, that the size of such  building  must be consistent with the residential area and such  building  is properly permitted for the use;
+
+             (d)    Has no outside storage nor other exterior indication of the home occupation or variation from the residential character of the property with the exception of one  sign  not to exceed four square feet, provided such  sign  must not be illuminated;
+
+             (e)    Does not create a level of electrical interference, line voltage fluctuation, noise, vibration, smoke, dust, odors, heat, glare, traffic and other environmental impacts beyond that which is common to a residential area;
+
+             (f)    Does not create a level of parking demand beyond that which is normal to a residential area;
+
+             (g)    May have clients come to the site.
+
+             (h)    Limitations in the Ag-NRL, IF-NRL, SF-NRL, and RRc-NRL  Zones . No conversion of resource land and no new  structures  are allowed to accommodate the business activity. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.254  Institutional camp/retreat.
+
+             (1)    Definition. An established group camp/retreat maintained for recreation, education, vacation, religious or other similar uses by organized groups that assume supervision of the camp activities.
+
+             (2)    Restrictions.
+
+             (a)    Camps/retreats must be nonresidential in nature and are allowed only  temporary  overnight stays.
+
+             (b)    Camps/retreats typically include group cooking and eating facilities. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.256  Kennel.
+
+             (1)    Definition. Any day-use  kennel , limited  kennel , or overnight boarding  kennel  operated as either a hobby or a business. A kennel-type  structure  does not, by itself, constitute a  kennel .
+
+             (2)    Types. A  kennel  can be one of the following  kennel  types:
+
+             (a)    Day-use kennel: any premises at which one or more dogs, cats, or both are kept during daytime hours for a commercial purpose including but not limited to grooming, training, and/or boarding.
+
+             (b)    Limited kennel: any premises at which one or more dogs, cats, or both are kept overnight for a commercial purpose including but not limited to breeding or selling. A single, incidental litter in a 12-month period is not a commercial purpose.
+
+             (c)    Overnight boarding kennel: any premises at which one or more dogs, cats, or both are kept overnight for the commercial purpose of boarding.
+
+             (3)    All  Kennels .
+
+             (a)    Areas used as part of a dog  kennel  operation must be composed of at least one-half of one acre for every five dogs (i.e., two and one-half acres of  kennel  area would be required for 25 dogs).
+
+             (b)    Any indoor or outdoor area to be occupied by  kennel  animals must be located at least 50 feet from any property line. A solid wood  fence  or continuous, nondeciduous vegetative barrier is required, each at least six feet in height, between any outdoor  kennel  use area and the  subject property  lines.  Fences  and continuous barriers will not be required in cases where  kennel  use areas are at least 500 feet from all  subject property  lines.
+
+             (c)    Parking for all  kennel  customers and employees must be fully contained on the  subject property  and may not include the use of any  road  right-of-way.
+
+             (d)    All lighting must be directed away from neighboring residences or businesses.
+
+             (e)    An approved waste disposal plan that complies with SCC Chapter  12.16  is required.
+
+             (f)     Kennel  animals must be contained on the  subject property . Outdoor  kennel  areas must be constructed with adequate materials and height so as to prevent animal escapement.
+
+             (g)    Any outdoor  kennel  use areas must be configured such that impacts to surrounding properties are minimized. All animals must be contained in enclosed  buildings  between the hours of 9:00 p.m. and 8:00 a.m. daily.
+
+             (h)    Only one  kennel , either day-use, limited, or overnight boarding, is allowed on any property at one time.
+
+             (i)    An emergency evacuation plan satisfactory to the  Department  is required.
+
+             (j)    An exercise plan satisfactory to the  Department  is required.
+
+             (k)    The  Department  may refuse issuance of a special use permit, or rescind an approved special use permit for a  kennel  if:
+
+             (i)    It is in violation of any of the provisions of SCC Chapter  7.02 ;
+
+             (ii)    If it is discovered that the  applicant  or operator has been convicted of animal cruelty as defined in RCW Chapter  16.52 .
+
+             (4)    Boarding  Kennel . A boarding  kennel  is also subject to the following criteria:
+
+             (a)    An overnight boarding  kennel  may not exceed 150 dogs or cats on site at any one time.
+
+             (b)    No commercial breeding or selling of dogs or cats may occur at an overnight boarding  kennel . A single, incidental litter in a 12-month period is not commercial breeding or selling.
+
+             (c)    An overnight boarding  kennel  may have animals kept during daytime and overnight hours and may also include additional related services including but not limited to training, grooming, and daily care.
+
+             (d)    Limitations in the RRc-NRL  Zone .
+
+             (i)    Must be accessory to the resource base;
+
+             (ii)    Any  structures  must be placed in currently developed areas; and
+
+             (iii)    No land may be taken out of resource production.
+
+             (5)    Day-Use  Kennel . A day-use  kennel  is also subject to the following criteria:
+
+             (a)    A day-use  kennel  may not exceed 25 dogs or cats on site at any one time.
+
+             (b)    No commercial breeding or selling of dogs or cats may occur at a day-use  kennel .
+
+             (c)    No overnight boarding of animals may occur at a day-use  kennel .
+
+             (6)    Limited  Kennel . A limited  kennel  is also subject to the following criteria:
+
+             (a)    A limited  kennel  may not exceed 25 dogs or cats over 16 weeks of age on site at any one time.
+
+             (b)    At no time may there be more than 50 dogs or cats of any age on site.
+
+             (c)    No dogs or cats may be commercially boarded at a limited  kennel .
+
+             (d)    A limited  kennel  may have animals kept during daytime and overnight hours and may also include additional related services including but not limited to selling, training, grooming, and daily care.
+
+             (e)    Limitations in the Ag-NRL, IF-NRL, SF-NRL, and RRc-NRL  Zones .
+
+             (i)    Must be accessory to an existing residence or natural resource operation.
+
+             (ii)    No resource land may be converted or taken out of production.
+
+             (iii)    Any  structures  must placed in currently developed areas.
+
+             (7)    Limitations by  Zone .
+
+             (a)    In the SSB  zone , the use is allowed only if accessory to an existing commercial use and only if the use is secondary and incidental to the primary SSB use. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.258  Hotel/motel.
+
+             (1)    Definition. A  building  in which there are guest rooms where lodging with or without meals is provided for compensation, where no provision is made for cooking in any room or suite. This definition applies to all operations with six or more guest rooms or where the operation is not owner-occupied or owner-managed.
+
+             (2)    Limitation in the RFS  Zone .
+
+             (a)     Hotel/motel  buildings may be no closer than 200 feet from agricultural zoned lands. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.260  Laundromat.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.261  Limited event venues.  1
+
+             (1)    Definition. Commercial use of a property for any musical, cultural, or social event held either indoors or outdoors.
+
+             (2)    Restrictions. The “limited event venues” use is also subject to the following criteria:
+
+             (a)    Events may occur on no more than 24 calendar  days  per year.
+
+             (b)    Parking for all events must be fully contained on the  subject property  and must not include the use of any  road  right-of-way.
+
+             (c)    The use must not create a detrimental level of electrical interference, line voltage fluctuation, noise, vibration, smoke, dust, odors, heat, glare, traffic or other environmental impacts on the surrounding area.
+
+             (d)    All lighting must directed away from neighboring residences or businesses.
+
+             (3)    Limitations in the IF-NRL and SF-NRL zones:
+
+             (a)    The limited event venue use must be related to the resource use.
+
+             (b)    No resource land may be converted.
+
+             (c)    No permanent  structures  may be constructed.
+
+             (4)    Events at permitted restaurants, churches, grange halls or community centers, and  parks  are not regulated as limited event venues. (Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A). Formerly 14.18.290)
+
+        14.18.262  Marijuana facility.
+
+             (1)    Definition. Any of the following types of marijuana facilities.
+
+             (2)    Types.
+
+             (a)    Marijuana cooperative: consistent with RCW Chapter  69.51A , a shared cooperative for acquiring and supplying the resources needed to produce and process marijuana for the medical use of the members of the cooperative.
+
+             (b)    Marijuana production facility: any land use involving the growing of marijuana, excluding marijuana cooperatives and marijuana grown at home for medical use consistent with State law.
+
+             (c)    Marijuana processing facility: any land use involving the processing of marijuana, excluding marijuana cooperatives and marijuana grown at home for medical use consistent with State law.
+
+             (d)    Marijuana production/processing facility: a marijuana production facility, or a marijuana processing facility, or any combination of the two.
+
+             (e)    Marijuana retail facility: any land use involving the sale or other provision of marijuana for use or consumption.
+
+             (3)    Characterization. Marijuana production and processing is an industrial use, not an agricultural use.
+
+             (4)    Limitations in the Ag-NRL  Zone .
+
+             (a)    The use may only be allowed in a  structure  existing as of January 1, 2014.
+
+             (5)    When Allowed.
+
+             (a)    Marijuana facilities are allowed only where explicitly identified in this Title; except that in municipal UGAs where a municipality’s  development regulations  apply, a  marijuana facility  must comply with the municipality’s  development regulations  instead of this Section.
+
+             (b)    Marijuana processing using hazardous or flammable solvents or gases is allowed only in BR-HI, only in a marijuana processing facility, and only in a professional-grade closed-loop extraction system that is designed to recover the chemicals and that is labeled for such use by the manufacturer.
+
+             (c)    Growing medical marijuana at home by individuals, when done consistent with State law, is allowed in all  zones .
+
+             (6)    When Prohibited.
+
+             (a)    Any growing or processing of marijuana or keeping marijuana plants when not in compliance with State law governing the growing of medical marijuana at home or without a current license from the State Liquor and Cannabis Board.
+
+             (b)    Any storage or growing of plants if any portion of such activity can be readily seen by normal unaided vision or readily smelled from a public place or the private property of another housing unit.
+
+             (7)    Requirements for All Marijuana Facilities.
+
+             (a)    A marijuana production or processing facility must employ ventilation systems such that no odors from the production or processing are detectable off the premises.
+
+             (b)    A  marijuana facility  that employs security cameras must aim those cameras so as to view only the facility property, not public rights-of-way or neighboring properties.
+
+             (c)    The Fire Marshal must notify the local fire district or other fire authority whenever the  Department  approves a permit for any marijuana production or processing facility.
+
+             (8)    A special use permit for a marijuana production/processing facility must:
+
+             (a)    Be conditioned on holding a current license from the State Liquor and Cannabis Board;
+
+             (b)    Address impacts on surrounding properties, including but not limited to the appropriate  distance  of the facility from residences, schools, daycare facilities, public  parks , other public facilities, and other marijuana facilities;
+
+             (c)    Include appropriate controls on odor;
+
+             (d)    Include appropriate screening or other requirements to avoid lighting impacts and the visual impacts of security fencing;
+
+             (e)    Include requirements for appropriate disposal of the waste and byproducts of production and processing;
+
+             (f)    Include protections against security cameras infringing on neighbors’ privacy;
+
+             (g)    Include any additional controls on hazardous processing methods with potential to injure neighboring properties;
+
+             (h)    Mitigate other impacts.
+
+             (9)    A special use permit for a marijuana retail facility must:
+
+             (a)    Be conditioned on holding a current license from the State Liquor and Cannabis Board;
+
+             (b)    Include appropriate conditions to avoid customer use of marijuana on site or in adjacent areas (e.g., security cameras,  fences , or site design);
+
+             (c)    Mitigate other impacts. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.264  Marina.
+
+             (1)    Definition. Freshwater or saltwater facilities that provide storage (wet and/or dry), launch areas, supplies, or services for pleasure and/or fishing craft.  Marinas  may be available to the general public through rental or fee agreements or they may be totally private, or for members of a yacht or country club, or a recreational  subdivision .
+
+             (a)    Foreshore  marinas  are located in intertidal (high tide to low tide) or offshore (low tide and seaward)  zones , along  lake  or river shores, and may be of open pile, floating or solid construction. Because of their location, foreshore  marinas  usually appropriate and utilize beaches and shoreline resources,  surface waters , and may require shore defense works on marine shores.
+
+             (b)    Backshore  marinas  are located landward of the high tide line or high water mark, or  lake  or river shores, and may require harbor and channel dredging, structural support works (bulkheads), and maintenance. Because of this location, offshore defense works are usually not required and beach and shoreline resources are not necessarily appropriated or altered.
+
+             (2)    Types.
+
+             (a)    Primitive:  marinas  which include minimal shoreside improvements, limited to toilet facilities, parking, and picnic benches.
+
+             (b)    Full-service: all other  marinas . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.266  Mini-storage.
+
+             (1)    Definition. A service use containing separate storage spaces that are leased or rented as individual units.
+
+             (2)     Mini-storage  does not include the conduct of business activities other than rental of storage units of the premises.
+
+             (3)     Mini-storage  may not have outside storage of property. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.268  Moorage.
+
+             (1)    Definition.  Moorage  may include  moorage  of marine vessels and  structures  associated with a  permitted use . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.269  Mortuary.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.270  Outpatient medical and health care service.
+
+             (1)    Definition. Services offered by or under the direction of a licensed medical or health care practitioner on an outpatient basis (no overnight stays), excluding institutional facilities such as  hospitals , skilled nursing facilities, or other long-term care facilities. Examples include but are not limited to:
+
+             (a)    Medical, dental, or physical therapy services offered in a clinic setting;
+
+             (b)    Outpatient pharmaceutical services in a pharmacy setting; and
+
+             (c)    Provision of medical supplies and durable medical equipment by registered providers of such services.
+
+             (2)    Restrictions.
+
+             (a)    In the RVR  zone ,  outpatient medical and health care services  are limited to total gross  floor area  of 6,000 square feet and accessory storage and noncommercial uses are limited to 1,500 square feet and the number of practitioners may not exceed 10. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.272  Overnight lodging and related services for visitors to the rural area.
+
+             (1)    Definition. Reserved.
+
+             (2)    Limitations in the RVC  Zone .
+
+             (a)    Overnight lodging facilities may not exceed 35 units. See SCC Chapter  14.11  for additional dimensional limitations.
+
+             (b)    Operators may not allow any  person  to occupy overnight lodging on the premises for more than four months in any year. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.280  Restaurant.
+
+             (1)    Definition. Reserved.
+
+             (2)    “Drive-in” restaurants are allowed only where specifically permitted. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.282  Retail food market and convenience store.
+
+             (1)    Definition. Includes farmers markets. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.284  Retail and service business.
+
+             (1)    Definition. Reserved.
+
+             (2)    Types.
+
+             (a)    Small.
+
+             (b)    Large.
+
+             (3)    Restrictions.
+
+             (a)    In the SSB  zone , retail sales are limited to products produced primarily on site or which are accessory to products produced on site. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.286  Small-scale production or manufacture.
+
+             (1)    Definition. Small-scale production of products and goods, including food products, furniture, apparel, artwork, metal products, and wood products. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.294  Vehicle repair garage.
+
+             (1)    Definition.  Repair  of vehicles, conducted inside a  building .
+
+             (2)    Limitations in the BR-LI  Zone .
+
+             (a)    A car wash is permitted only adjacent to Peterson  Road . (Ord. O20250005 § 2 (Exh. A))
+
+             Part III. Community/Public Uses
+
+        14.18.310  Cemetery.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.320  Church.
+
+             (1)    Definition. A place or  building  where religious services are conducted, and which may include, as  accessory uses , religious education, reading rooms, assembly rooms and a rectory or parsonage. This definition does not include facilities for training of religious orders. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.324  Community club/grange hall.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.326  Conference center.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.330  Historic site open to the public.
+
+             (1)    Definition. A  historic site  (as defined in SCC  14.04.020 ) that is open to the public during limited or unlimited hours.
+
+             (2)    Limitations in the Ag-NRL, IF-NRL, SF-NRL, and RRc-NRL  Zones .
+
+             (a)    The use must not interfere with the management of the resource land. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.340  Hospital.
+
+             (1)    Definition. A  building  designed and used for medical and surgical diagnosis, treatment, and housing of  persons , which may include overnight stay. Rest homes, nursing homes, convalescent homes and clinics are not included. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.350  Interpretive/information center.
+
+             (1)    Definition. Building(s) or site dedicated to public education or information, including tourist information, that focuses on local or area  ecology , natural history, human history, or other similar subjects.
+
+             (2)    An  interpretive/information center  may include a small store, cafeteria, and auditorium, but does not include overnight stays. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.360  Museum.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.370  Public use.
+
+             (1)    Definition. Government or quasi-government owned and operated facilities which are not utilities, including, but not limited to, primary and secondary schools, libraries, postal services, offices, training facilities, fire and police stations, and courts.
+
+             (2)    Types of  Public Use .
+
+             (a)    Major: public facilities that include 3,000 or more square feet of gross  floor area  or that utilize three or more full-time employees.
+
+             (b)    Minor: less intensive public facilities that include less than 3,000 square feet of gross  floor area  and that utilize two or fewer full-time employees.
+
+             (3)    Limitations in Ag-NRL, H-URv, IF-NRL, SF-NRL, and RRc-NRL  Zones .
+
+             (a)    Except as provided in Subsection (3)(b) of this Section, a  public use  must be designed to minimize the amount of resource lands utilized and complies with the following:
+
+             (i)    The use is located within the existing  building  envelope which may include the required landscaping of the existing use, or it will be sited on existing  impervious surface  or within existing  right-of-way ; and
+
+             (ii)    The  applicant  has proven that there is no other viable alternative to providing the expansion in the  zone  or on nonnatural resource lands.
+
+             (b)    A minor or major  public use  related to the provision of emergency services may be sited when there is no other viable parcel or nonresource designated land to serve the affected area. The  applicant  must demonstrate the need to locate the use in the  zone  or natural resource land and must provide analysis of alternatives to the development of the use within  zone  or the natural resource land. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.380  Preschool.
+
+             (1)    Definition. A school for children which is attended prior to kindergarten. (Ord. O20250005 § 2 (Exh. A))
+
+             Part IV. Natural Resource Uses
+
+        14.18.402  Agriculture.
+
+             (1)    Definition.  Agriculture  or agricultural activity is the use of land for commercial production of horticultural, viticultural, floricultural, dairy, apiary, vegetable, or animal products, or of berries, grain, hay, straw, turf, seed, cottonwood trees, Christmas trees (not subject to excise tax imposed by RCW  84.33.140 ), or livestock, including those activities directly pertaining to the production of crops or livestock including, but not limited to, cultivation, harvest, grazing, on-site animal waste storage and disposal, fertilization, the operation and maintenance of  farm  and stock  ponds ,  drainage  ditches, irrigation systems, and canals, and normal maintenance, operation and  repair  of existing serviceable  structures , facilities, or improved areas. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.403  Agricultural accessory use.
+
+             (1)    Definition. A use is considered accessory to an agricultural use if it is located on either the same  lot  or other  lots  that collectively or in singular comprise a  principal use  of a corporate  farm  or  farm  held or leased by a  farm  manager or his immediate  family . An  accessory use  to an agricultural use, includes, but is not limited to, the following:
+
+             (a)     Outdoor storage  of processed and unprocessed natural materials, waste materials, or other similar materials;
+
+             (b)     Impoundments  under one acre-foot in volume;
+
+             (c)     Farm  animal or horticultural viewing by the public;
+
+             (d)    U-pick sales to the public;
+
+             (e)    Storage of agricultural products, ingredients, packaging and/or equipment used on site;
+
+             (f)    Miscellaneous agricultural support  buildings , including barns, sheds, corrals,  farm  offices, and coops, which are used for on-site soil-dependent  agriculture ; and
+
+             (2)    An  agricultural accessory use  must predominantly serve the  principal use  of the  farm , but may also serve other  farms . (Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.18.404  Agricultural processing facility.
+
+             (1)    Definition. A facility which adds value to, refines, or processes raw agricultural goods, including, but not limited to, washing,  grading , sizing, drying, extracting, icing, producing ornamental agricultural products, sorting, cutting, pressing, bagging, freezing, canning, packaging, milling, crushing, brining, fermenting, aging, pasteurizing, preserving, storage, and bottling.
+
+             (2)    Storage, warehousing, and distributing products in conjunction with the agricultural processing activity occurring on the site is allowed. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.405  Agricultural slaughtering facility.
+
+             (1)    Definition. A facility which slaughters animals or fowl grown in commercial  agriculture  for processing and sales. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.406  Agricultural support service.
+
+             (1)    Definition. Any nonagricultural use which is directly related to  agriculture  and directly dependent upon  agriculture  for its existence. These support services generally exist off-site and within districts that are intended to facilitate the production, marketing and distribution of agricultural products.  Agricultural support services  are separate and distinct from  farm-based business  and  agritourism . (Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.18.407  Agritourism.
+
+             (1)    Definition.
+
+             (a)     Agritourism  provides opportunities for working  farms  and ranches to preserve and promote Skagit County’s agricultural lands.  Agritourism  allows for educational and experiential activities that are related to, and supportive of, agricultural production.  Agritourism  helps agricultural producers keep working lands in production by diversifying and enhancing their income.  Agritourism  activities must be secondary and related to an existing agricultural use.
+
+             (b)     Agritourism  is separate and distinct from farm-based businesses and  agricultural support services .
+
+             (c)    There are three categories of agritourism:  Agritourism  1,  Agritourism  2, and  Agritourism  3.
+
+             (2)    Purpose and Intent of Regulation.
+
+             (a)     Agritourism  in Skagit County is permitted, as set out in this Section, in order to help preserve working farmland, diversify  farm  income, increase public awareness and appreciation of  agriculture , and enhance  farm  viability.
+
+             (b)    The Skagit County Code places limitations on  agritourism  in order to:
+
+             (i)    Preserve the area’s rural agricultural character.
+
+             (ii)    Prevent the permanent conversion of farmland.
+
+             (iii)    Prevent interference with surrounding farming operations and practices.
+
+             (3)    Limitations on Use.
+
+             (a)    General Limitations— Performance Standards .
+
+             (i)     Agritourism  uses must be carried out by, and any  application  for a permit must be submitted by, the owner or operator of the working  farm  or ranch upon which it is located.
+
+             (ii)     Agritourism  uses must be secondary and related to an existing agricultural use.
+
+             (iii)     Agritourism  uses cannot degrade the surrounding area’s rural agricultural character.
+
+             (iv)     Agritourism  uses cannot result in the permanent conversion of farmland.
+
+             (v)     Agritourism  activities cannot unduly interfere with surrounding farming operations and practices.
+
+             (vi)    Parking for all guests and employees must meet the parking requirements in SCC Chapter  14.26 , and may not include the use of any  road  right-of-way. Parking for  agritourism  activities must not result in any conversion of agricultural land; this includes but is not limited to rock, gravel or other  impervious surfaces .
+
+             (vii)    Artificial lighting must be consistent with SCC  14.20.040 (3). Lighting studies may be required by the  Director .
+
+             (viii)    Noise generated from  agritourism  activities must be consistent with SCC  14.20.060 . Noise studies may be required by the  Director .
+
+             (ix)    Signage must comply with SCC Chapter  14.29 ,  Signs , unless noted elsewhere in this Section.
+
+             (x)     Agritourism  uses must demonstrate concurrency with the County  road  segment and  road  intersection level of service standards in SCC  14.62.060 .
+
+             (xi)    Access to and from a County  road  used by the public must be permitted by Public Works, including any conversion of a previously established  farm  access.
+
+             (xii)    Food trucks associated with  agritourism  activities should be accessory to the activity and must be  temporary .
+
+             (b)    Limitations Specific to Uses Classified as  Agritourism  2 or 3. In addition to all other requirements in SCC  14.18.407 , uses classified as  Agritourism  2 or 3 are subject to all the requirements of this Subsection (3)(b).
+
+             (i)    The  agritourism  use must be secondary to the existing and primary commercial agricultural use.
+
+             (ii)    The existing and primary commercial agricultural use must have generated an average gross income of at least $500 per acre per year over the previous three years, to be verified by the  Director .
+
+             (iii)    The  applicant  of an  Agritourism  2 and 3 use must comply with the annual self-certification requirements identified in SCC  14.51.080 .
+
+             (iv)    An  Agritourism  3 use cannot include farm-to-table activities.
+
+             (v)    Prior to any  application  for an  Agritourism  2 or 3 being granted, the  applicant  must  sign  an agreement, on a form provided by the  Director , that they will comply with all the requirements of SCC  14.18.407 .
+
+             (4)    Interpretation—Enforcement of Limitations.
+
+             (a)    In interpreting the requirements of this Section must be strictly construed.
+
+             (b)    In addition to any other means for ensuring compliance with this Section, Skagit County retains the authority to perform ongoing monitoring and evaluation of compliance with established conditions of approval.
+
+             (c)     Agritourism  special use permits are subject to SCC  14.51.070  and can be revoked if the  applicant  fails to meet conditions of the special use permit, including compliance with any requirement set forth in this Section.
+
+             (5)    The maximum number of guests and  days  allowed per year for  Agritourism  1,  Agritourism  2, and  Agritourism  3 are specified in the table below.
+
+                     Table 14.18.407-1
+
+                          Agritourism  Type
+
+                         Max No. Guests Allowed
+
+                         Max No.  Days  Allowed Per Year 1
+
+                          Agritourism  1
+
+                         50
+
+                         10
+
+                          Agritourism  2
+
+                         100
+
+                         35
+
+                          Agritourism  3
+
+                         As Conditioned 1
+
+                         As Conditioned 1
+
+             Notes:
+
+             1.    The maximum number of guests and number of  days  allowed per year for an  Agritourism  3 use will be based on the limits established in the conditions of approval of the Hearing Examiner special use permit.
+
+             (Ord. O20260003 § 1 (Att. 2))
+
+        14.18.408  Anaerobic digester.
+
+             (1)    Definition. A facility that generates power from the anaerobic “digestion” of primarily plant and animal waste from agricultural activities and meets the requirements in RCW  70.95.330 . (Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A). Formerly 14.18.407)
+
+        14.18.420  Farm-based business.
+
+             (1)    Definition. An on-farm commercial enterprise devoted to the direct marketing of unprocessed and/or value-added and soil-dependent agricultural products that are produced, processed, and sold on site. Farm-based businesses are intended to supplement  farm  income, improve the efficiency of farming, and provide employment to  farm  family members. Farm-based businesses are separate and distinct from  agriculture  support services and  agritourism .
+
+             (2)    Limitations. In all  zones , a farm-based business:
+
+             (a)    May be carried on exclusively by a member or members of a  family  residing on the  farm ; and
+
+             (b)    May employ no more than three nonresident full-time equivalent employees. (Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.18.422  Forestry.
+
+             (1)    Definition. Cultivation and harvest of forest products or any  forest crop , in accordance with the  Forest Practices  Act and any regulations adopted pursuant thereto. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.424  Forestry-based business.
+
+             (1)    Definition. A commercial enterprise devoted to the direct marketing of unprocessed and/or value-added and forestry-related products that are produced or processed on-site, and which may be sold on site.
+
+             (2)    Limitations. In all  zones , a  forestry-based business  may employ no more than three nonresident full-time equivalent employees. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.430  Habitat enhancement/restoration project.
+
+             (1)    Definition. Any project, including  mitigation banks , private projects or public projects, designed to create, restore and/or enhance habitat for fish, birds and/or mammals and includes the alteration of the landscape by excavation or sculpting of soil and/or the alteration of hydrology. This use does not include required on-site mitigation projects associated with permitted development activities pursuant to SCC Chapter  14.24  or projects consisting exclusively of planting vegetation.
+
+             (2)    In the Ag-NRL  zone , a  habitat enhancement/restoration project  that involves off-site  compensatory mitigation  is prohibited. “Off-site  compensatory mitigation ” means any action proposed on Ag-NRL  zone  lands as  compensatory mitigation  activities, actions, or environmental impacts occurring outside Skagit County Ag-NRL  zone  lands. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.442  Manure lagoon.
+
+             (1)    Definition. A lagoon for livestock and poultry waste.
+
+             (2)    Requirements.
+
+             (a)    A  manure lagoon  must follow construction and management guidelines set forth by USDA-NRCS. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.444  Mitigation bank.
+
+             (1)    Definition. A collection of existing, created, restored, or enhanced  wetlands  and their protective  buffers  that is created or established to provide mitigation credits to offset future adverse impacts to  wetlands  from approved projects elsewhere pursuant to the requirements of RCW Chapter  90.84  and WAC Chapter  173-700 .
+
+             (2)     Mitigation banks  are prohibited in all  zones . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.452  Natural resource support services.
+
+             (1)    Definition. Includes office uses and wholesale, retail and service businesses serving local natural resource industries, and sales, storage, parts and  repair  of equipment and supplies for natural resource industries. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.454  Natural resources training/research facility.
+
+             (1)    Definition. A facility dedicated to training and/or research that is directly related to a natural resource, a natural resource operation, or a natural resource industry. Natural resources consist of soil (including  minerals ), water, animals, plants and air. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.456  Nursery/greenhouse.
+
+             (1)    Definition. The storage, cultivation, or transplanting of live trees, shrubs, or plants offered for sale on or off the premises, including products used for gardening or landscaping.
+
+             (2)    Wholesale nurseries do not have associated sales  buildings , while retail nurseries may have associated sales  buildings .
+
+             (3)    Limitations in the Ag-NRL, SF-NRL, and RRc-NRL  Zones .
+
+             (a)    No permanent conversion of resource lands is allowed.
+
+             (b)    Upon cessation of the  greenhouse  operation, the land must be returned to its former state or otherwise placed in resource production. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.462  Seasonal roadside stand.
+
+             (1)    Definition. A small retail establishment dedicated exclusively to the sale of agricultural products and agricultural promotional items.
+
+             (2)    Requirements.
+
+             (a)    A  seasonal roadside stand  is allowed only as an accessory to an actively managed, ongoing agricultural operation.
+
+             (b)    A majority of the agricultural products must be grown on site or be a product of the primary agricultural operation located in Skagit County.
+
+             (c)    All agricultural promotional products must be accessory to the primary use of the stand for agricultural products and must be directly related to the agricultural operation and located solely within the stand.
+
+             (d)    Signage is allowed per SCC Chapter  14.29 . (Ord. O20250005 § 2 (Exh. A))
+
+             Part V.  Parks  and Recreation Uses
+
+        14.18.512  Campground.
+
+             (1)    Definition. An area of land developed for recreational use in  temporary  occupancy, such as two or more tents and/or  recreational vehicles .
+
+             (2)    Developed  Campground .
+
+             (a)    Definition. A developed  campground  is a  campground  with a moderate level of amenities, including any of the following: plumbed restrooms, individual campsites or  cabins  with sewer and water, a dump station, laundry facilities, sports courts, on-site offices, or picnic shelters.
+
+             (3)    Destination  Campground .
+
+             (a)    Definition. A destination  campground  is a  campground  with a high level of amenities, including the amenities of a developed  campground  and any of the following to serve the  campground  patrons:
+
+             (i)    Snack bars;
+
+             (ii)    Small retail shops;
+
+             (iii)    Restaurants;
+
+             (iv)    Recreation halls; or
+
+             (v)    Other similar activities.
+
+             (b)    In the Rural Reserve (RRV)  zone , a destination  campground  is only allowed if it existed as of May 17, 2009, and it is 30 acres or less.
+
+             (i)    A permitted “destination  campground ” is eligible for modifications to existing special use permit(s) if:
+
+             (A)    The total number of camp sites does not increase from what existed on May 17, 2009;
+
+             (B)    The footprint of the  campground  does not increase from what existed on May 17, 2009; and
+
+             (C)    The original permit conditions regarding perimeter  buffers  are met.
+
+             (ii)    All amenities listed for “ Campgrounds , developed” are allowed through the permit modification process. New amenities associated with the definition of “ Campground , destination” are not allowed. Additional minor improvements to the existing  campground  may also be allowed at the discretion of the  Director , provided the improvements do not constitute expansion or intensification or result in adverse impacts to the surrounding area.
+
+             (4)    Primitive  Campground .
+
+             (a)    Definition. A primitive  campground  is a  campground  with a minimal level of shared amenities, including vault or chemical toilets and garbage service, and which may include running water; does not include any amenities listed in developed  campground  or destination  campground .
+
+             (b)    A primitive  campground  must comply with SCC  14.10.070  (prohibitions on RV use as  dwelling unit ).
+
+             (c)    In the IF-NRL and H-URv  zones , a primitive  campground  is allowed only as long as there is no conversion of resource land and the  campground  does not interfere with resource management. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.532  Golf course.
+
+             (1)    Definition. A recreational facility designed and developed for golf activities.
+
+             (2)    A  golf course  may include as accessory uses:
+
+             (a)    A pro shop;
+
+             (b)    Snack bar (not including a restaurant); and
+
+             (c)    Caddy shack/maintenance  buildings .
+
+             (3)    In the BR-R  zone , a  golf course  may include a clubhouse and restaurant in conjunction with the  golf course . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.552  Off-road vehicle use areas and trails.
+
+             (1)    Definition. Designated areas and  trails  for off-road vehicles to serve more than immediate  family  living on the site.
+
+             (2)    Limitations in the IF-NRL and SF-NRL  Zones .
+
+             (a)    Such uses must be authorized by the State and must not interfere with normal forest management consistent with the  Forest Practices  Act. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.554  Outdoor outfitters enterprise.
+
+             (1)    Definition. Hunting, fishing, bird watching and similar outdoor outfitting enterprises, not including private hunting and fishing.
+
+             (2)    Outdoor outfitting opportunities may be provided by the landowner or members of his/her immediate  family  on a trip basis or through direct lease to a hunt club, individual or group or through sublease to a professional outdoor outfitter.
+
+             (3)    General Requirements.
+
+             (a)     Temporary  lodging may be allowed at  temporary  primitive  campgrounds  as regulated in each district, existing lodges/cabins, or approved  bed and breakfasts .
+
+             (b)    No more than five self-contained RVs may be allowed with such enterprises at any one time.
+
+             (c)     Temporary  lodging in a single location must not exceed 14  days  for any one individual, group or party.
+
+             (d)    At least seven  days  must pass before registered guests may return for lodging.
+
+             (e)    A  site plan  showing the location, size, access of proposed primitive campsites, existing lodges/cabins, and RV sites is required to be submitted with the special use  application .
+
+             (4)    Limitations in the Ag-NRL, IF-NRL, SF-NRL, and RRc-NRL  Zones .
+
+             (a)    An  outdoor outfitters enterprise  must remain incidental to the primary resource use of the land. “Incidental” means resulting in income and land use that supplements, but does not exceed, the primary use of the natural resource land for agricultural or  forestry  use.
+
+             (b)     Temporary  lodging is prohibited.
+
+             (c)    No net loss of designated resource land may occur. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.556  Outdoor recreational equipment rental and/or guide services.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.560  Park.
+
+             (1)    Community  Park .
+
+             (a)    Defined. A  park  planned to provide indoor and outdoor active and structured recreation opportunities primarily for organized activities and sports, although individual and  family  activities are also encouraged. Sports fields are often the central focus of the  park . The service area is typically a one- to two-mile radius in urban areas and can be up to 10 miles in rural areas. Appropriate facilities for community  parks  are listed in the Skagit County Comprehensive  Parks  and Recreation Plan.
+
+             (2)     Park , Recreation  Open Space .
+
+             (a)    Defined. A  park  defined in the Skagit County Comprehensive  Park  and Recreation Plan that includes undeveloped land primarily left in its natural condition and used for passive recreation purposes, creation of separation and seclusion and as  buffers  between urban uses. This type of land differs from other  open space  categories whose primary objective is to preserve wildlife habitat or agricultural farmland. Typical recreation  open space  includes coastal areas,  wetlands , steep hillsides, river corridor bluffs, view points or linear areas primarily designed to accommodate  trail  areas. These  parks  are designed to offer a greater level of solitude than day use  parks .
+
+             (3)    Regional  Park .
+
+             (a)    Defined. A  park  defined in the Skagit County Comprehensive  Parks  and Recreation Plan by large recreation areas that serve the residents of the entire County as well as residents from outside the immediate region. These  parks  generally exceed 100 acres in size and focus on unique features or facilities. Typically, regional  parks  provide areas for  trail  systems, picnicking, boating, fishing, swimming, environmental education, camping and hiking.
+
+             (4)     Park , Specialized Recreation Area.
+
+             (a)    Defined. Miscellaneous public recreation areas or land occupied by a specialized  recreation facility  as defined in the Skagit County Comprehensive  Parks  and Recreation Plan. These  parks  are generally focused around small or special interest landscaped areas, shoreline access sites, community gardens, single purpose sites used for sport fields, or sites occupied by recreation  buildings  such as community or senior centers. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.572  Racetrack.
+
+             (1)    Definition. A designated course designed to provide competitive racing for motor vehicles, motorcycles, bicycles, animals, etc.
+
+             (2)    Types of  Racetrack .
+
+             (a)    Indoor racetrack: a  racetrack  located inside a fully enclosed  structure .
+
+             (b)    Recreation racetrack: a race track that serves more than the people residing on site, does not include facilities for spectators, and is meant to serve the local area only.
+
+             (c)    Regional racetrack: a  racetrack  that provides facilities for spectators and that serves the regional area. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.574  Recreation facility.
+
+             (1)    Active  Recreation Facility .
+
+             (a)    Defined. Facilities usually of a formal nature and offering activities that are often performed with others, requiring equipment and taking place at prescribed places. This includes outdoor recreational facilities, as defined by this Chapter, plus other facilities such as go-cart tracks, paint ball courses and mini-golf utilized as businesses that might occur within an enclosed  structure . Not included in this category are outdoor race tracks or shooting ranges.
+
+             (2)    Outdoor  Recreation Facility .
+
+             (a)    Defined. A privately owned, publicly used outdoor facility for recreation, with minimal associated  structures  and  buildings , that relies on the natural environment and that does not involve overnight stays, or include continuous operation of motorized vehicles as an inherent part of the facility’s operation. Examples include public boat launches, U-fish  ponds , hot springs, and tennis courts for  public use . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.576  Regional equestrian events center.
+
+             (1)    Definition. A facility designed for spectator-oriented equestrian activities serving the region or State.
+
+             (2)    A  regional equestrian events center  may consist of:
+
+             (a)    A multi-use events center containing an equestrian arena, spectator seating, offices and meeting rooms, concession/kitchen area, and related restroom and parking facilities;
+
+             (b)    A lighted outdoor covered arena including protected area for spectators and equestrian tacking activities; barns to provide  temporary  stabling during equestrian events; and
+
+             (c)    An equestrian cross-country course and  trails  utilizing the site’s natural terrain. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.582  Shooting club.
+
+             (1)    Definition. An activity or use of land or a facility for the purposes of discharging firearms in any organized fashion, such as a club or group, as opposed to an individual’s periodic  discharge  of a firearm.
+
+             (2)    Types.
+
+             (a)    Indoor  shooting club .
+
+             (b)    Outdoor  shooting club .
+
+             (3)    In the IF-NRL, SF-NRL, and RRc-NRL zones:
+
+             (a)    No associated enclosed  structures  are allowed except as needed for emergency communication and safety equipment.
+
+             (b)    No conversion of resource land is allowed. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.584  Stables and riding club.
+
+             (1)    Definition. A facility designed for equestrian activities and events, including boarding, breeding and training facilities.
+
+             (2)    A  stables and riding club  may offer occasional spectator events but is intended primarily for routine daily equestrian activities.
+
+             (3)    Limitations in the H-URv and RRc-NRL  Zones .
+
+             (a)    The use must be accessory to the existing resource base.
+
+             (b)    No new  structures  may be constructed. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.592  Trail.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.594  Trailhead.
+
+             (1)    Definition. A  trail  access point.
+
+             (2)    Types of  Trailhead .
+
+             (a)    Primary trailhead: a staging area provided for  trail  access including  trail  orientation and information and that provides the necessary unloading features. Primary  trailheads  should have restrooms and trash receptacles.
+
+             (b)    Secondary trailhead:  trail  access points having limited development. Supporting features might include a small unpaved parking area and signage. (Ord. O20250005 § 2 (Exh. A))
+
+             Part VI. Storage Uses
+
+        14.18.612  Commercial equipment storage.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.642  Hazardous waste storage.
+
+             (1)    Definition. The holding of  hazardous waste  as regulated by the State of Washington Dangerous Waste Regulations, WAC Chapter  173-303 .
+
+             (2)    Restrictions.
+
+             (a)    The  hazardous waste  must be stored on the site on which it was generated.
+
+             (b)    The  hazardous waste  may be held only for a  temporary  period, until it can be properly disposed of. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.650  Outdoor storage.
+
+             (1)    Definition.  Outdoor storage  of various types of materials, not including:
+
+             (a)     Hazardous materials  as defined in SCC  14.04.020 ;
+
+             (b)     Junk  as defined in SCC  14.04.020  and as prohibited by SCC  14.10.070 ;
+
+             (c)    Vehicles.
+
+             (2)    Types.  Outdoor storage  consists of four types as described by the table below:
+
+                         Type
+
+                         Materials
+
+                         Volume
+
+                         Potential Health Hazard
+
+                         Type 1
+
+                         Natural
+
+                         ≤ 500 cubic yards
+
+                         No
+
+                         Type 2
+
+                         Any
+
+                         ≤ 50 cubic yards
+
+                         Allowed
+
+                         Type 3
+
+                         Natural
+
+                         &gt; 500 cubic yards
+
+                         No
+
+                         Type 4
+
+                         Any
+
+                         &gt; 50 cubic yards
+
+                         Allowed
+
+             (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.660  Petroleum products and gas storage—Bulk.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.690  Vehicle storage facility.
+
+             (1)    Definition. A commercial enterprise devoted to the storage of personal vehicles, including  unlicensed/inoperable vehicles .
+
+             (2)    Restrictions.
+
+             (a)    A  vehicle storage facility  does not include establishments where the  principal use  is the rental or sale of vehicles. (Ord. O20250005 § 2 (Exh. A))
+
+             Part VII. Transportation Uses
+
+        14.18.720  Aircraft hangar.
+
+             (1)    Definition. A  building  or  structure  used for the storage of aircraft and activities related thereto (i.e., offices, pilots’ lounge, waiting area, terminal area, shop area, assembly area). (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.722  Aircraft landing field.
+
+             (1)    Definition. An  aircraft landing field  for private, noncommercial use.
+
+             (2)    Limitation in the Ag-NRL, IF-NRL, SF-NRL, and RRc-NRL  Zones .
+
+             (a)    The use is allowed only as an accessory to the resource use.
+
+             (b)    The use is allowed only if there is no other viable alternative to providing the service on NRL lands. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.760  Park and ride.
+
+             (1)    Definition. A designated parking facility specifically intended for use by public transportation and ridesharing patrons. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.780  Transit station.
+
+             (1)    Definition. A dedicated transit facility located outside of the public  right-of-way  where several transit routes converge. A  transit station  is designed to accommodate several buses at once, and may include passenger shelters and waiting areas. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.782  Transit stop.
+
+             Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.790  Vehicle charging station.
+
+             (1)    Definition. A facility for the charging of vehicles designed for operation on ordinary  roads  carrying passengers or larger cargo, including a battery exchange station as defined in RCW  36.70A.695 .
+
+             (2)    Limitation in the IF-NRL  Zone .
+
+             (a)    The use must be accessory to a primary or secondary  trailhead  or regional  park .
+
+             (b)    No conversion of resource land is allowed.
+
+             (3)    Limitation in the SF-NRL  Zone .
+
+             (a)    The use must be accessory to a primary or secondary  trailhead  or  park . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.792  Vehicle fueling station.
+
+             (1)    Definition. A facility for the fueling of vehicles designed for operation on ordinary  roads  carrying passengers or larger cargo. (Ord. O20250005 § 2 (Exh. A))
+
+             Part VIII. Utility Uses
+
+        14.18.820  Drainage maintenance.
+
+             (1)    Definition. Any activity that is necessary to keep a  stormwater  and  drainage facility  in good working order so as to function as designed.
+
+             (2)    Requirements.
+
+             (a)    Maintenance must include complete reconstruction of a  stormwater  and  drainage facility  if reconstruction is needed in order to return the facility to good working order.
+
+             (b)    Maintenance must include the correction of any problem on the site property that may directly impair the functions of the  stormwater  and  drainage facilities . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.830  Impoundment.
+
+             (1)    Definition. A natural topographic depression, manmade excavation, or diked area, which is designed for livestock watering, irrigation, recreation, wildlife habitat, fish rearing, or property  enhancement .  Impoundments  do not include  stormwater  management  ponds . (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.840  Net metering system.
+
+             (1)    Definition. As defined in RCW  80.60.010 , a facility for the production of electrical energy that generates renewable energy, and that: (a) has an electrical generating capacity of not more than 100 kilowatts; (b) is located on the customer-generator’s premises; (c) operates in parallel with the electric utility’s transmission and distribution facilities; and (d) is intended primarily to offset part or all of the customer-generator’s requirements for electricity. For purposes of this Title,  net metering systems  are of two types:
+
+             (a)     Net metering system , solar: a  net metering system  that uses solar energy to generate electrical power.
+
+             (b)     Net metering system , wind: a  net metering system  that uses wind energy to generate power.
+
+             (2)    Requirements. Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.860  Recycling drop box facility.
+
+             (1)    Definition. A facility used for receiving residential-generated and consumer source-separated, nonputrescible recyclables such as the following: cardboard, paper, tin and/or aluminum cans, glass containers, and recyclable plastics.
+
+             (2)    Requirements.
+
+             (a)    Recyclables must be immediately deposited into covered container(s) that together do not exceed a total volume of 50 cubic yards.
+
+             (b)    Recycling drop box facilities must not be used for  outdoor storage , long-term storage, stockpiling, processing, or final disposal of waste; generate dust, fumes, odors, leachate, or similar  nuisances ; or attract pests.
+
+             (c)    Recycling drop box facilities must operate unmanned or manned by an attendant whose duties are limited to directing the deposit of waste, cleanup, and the removal of  solid waste  containers; and be designed to serve a small, local community.
+
+             (d)    Waste or recycling containers with a combined total volume of 10 cubic yards or less are not considered a land use regulated under this Title.
+
+             (e)    Where a  recycling drop box facility  is listed as an  accessory use , it must be accessory to a permitted public, institutional, commercial, or industrial use. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.862  Repair, replacement, and maintenance of water lines.
+
+             (1)    Definition. Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.870  Utility development.
+
+             (1)    Definition. Includes, but is not limited to, facilities and services that generate, transport, process, or store water, sewage,  solid waste , electrical energy, communications and pipelines for fuel, oil, natural gas, and petroleum products.
+
+             (2)    Types. A  utility development  is one of the following types:
+
+             (a)    Minor: an unmanned  utility development  designed to serve a small local community that would be considered a normal utility service for the area.
+
+             (b)    Major: a  utility development  that is not a minor  utility development  or a major regional  utility development .
+
+             (c)    Major regional: a  utility development  that is designed to serve a region.
+
+             (3)    Limitations in the Ag-NRL, H-URv, IF-NRL, SF-NRL, and RRc-NRL  Zones .
+
+             (a)    Except as provided in Subsection (3)(b) of this Section, a  utility development  must be designed to minimize the amount of resource lands utilized and comply with the following:
+
+             (i)    The use is located within the existing  building  envelope which may include the required landscaping of the existing use, or it will be sited on existing  impervious surface  or within existing  right-of-way ; and
+
+             (ii)    The  applicant  has proven that there is no other viable alternative to providing the expansion in the  zone  or on nonnatural resource lands.
+
+             (b)    A major  utility development  may be sited when there is no other viable parcel in the  zone  or nonresource designated land to serve the affected area. The  applicant  must demonstrate the need to locate the use in  zone  and must provide analysis of alternatives to the development of the use within the  zone .
+
+             (4)    Limitations in the Ag-NRL  Zone .
+
+             (a)    A minor  utility development  (including those that are a necessary part of a salmon recovery or  enhancement  project, including  stormwater  management projects) or a major  utility development  may be sited only when there is no other viable parcel of nonagricultural land to locate the project. Analysis of alternatives to the development of the utility in the natural resource land must be provided.
+
+             (b)    A major  utility development  involving the generation and/or storage of electricity is prohibited. (Ord. O20250005 § 2 (Exh. A))
+
+        14.18.890  Water diversion structure.
+
+             (1)    Definition. Reserved. (Ord. O20250005 § 2 (Exh. A))
+
+         1
+
+             Code reviser’s note: Ord. O20260003 adds this section as 14.18.262. It has been editorially renumbered to prevent duplication of numbering.

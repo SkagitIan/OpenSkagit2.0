@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Parcel Book Watchlist{% endblock %}
+
+{% block content %}
+{% include "opportunity/_chrome_open.html" %}
+
+<div class="pb-page-head">
+  <div>
+    <p class="pb-kicker">Watchlist</p>
+    <h1>Saved lists and parcels</h1>
+    <p class="pb-muted">Your private saved searches and parcels worth revisiting.</p>
+  </div>
+  <a class="pb-button secondary" href="{% url 'opportunity_explore' %}">Explore opportunities</a>
+</div>
+
+<section class="pb-panel">
+  <div class="pb-section-head">
+    <h2>Saved AI searches</h2>
+    <a class="pb-button secondary" href="{% url 'opportunity_ai_search' %}">New AI search</a>
+  </div>
+  <div class="pb-result-list">
+    {% for search in saved_searches %}
+      <article class="pb-saved-search-row">
+        <div>
+          <a class="pb-card-title" href="{% url 'opportunity_ai_search_detail' search.pk %}">{{ search.title|default:"AI opportunity search" }}</a>
+          <div class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</div>
+        </div>
+        <div class="pb-list-values">
+          <strong>{{ search.result_count }}</strong>
+          <span>cached results</span>
+        </div>
+      </article>
+    {% empty %}
+      <p class="pb-muted">Saved AI searches will appear here.</p>
+    {% endfor %}
+  </div>
+
+  <hr class="pb-rule">
+  <div class="pb-section-head">
+    <h2>Saved parcels</h2>
+  </div>
+  <div class="pb-grid">
+    {% for row in rows %}
+      <article class="pb-card">
+        <div class="pb-card-head">
+          <div>
+            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
+            <div class="pb-card-location">{{ row.location }}</div>
+          </div>
+          <strong>{{ row.assessed_value_fmt }}</strong>
+        </div>
+        <div>
+          <span class="pb-chip">{{ row.source_tab_label }}</span>
+          <span class="pb-chip" title="{{ row.zone_definition }}">{{ row.zoning }}</span>
+          <span class="pb-chip">{{ row.current_use }}</span>
+        </div>
+        <div>
+          {% for signal in row.signal_labels %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
+          {% for flag in row.risk_flags %}<span class="pb-flag pb-flag-{{ forloop.counter }}">{{ flag }}</span>{% empty %}<span class="pb-muted">No obvious flags</span>{% endfor %}
+        </div>
+        <p class="pb-muted">Land {{ row.land_value_fmt }} / Building {{ row.building_value_fmt }} / {{ row.acres_fmt }}</p>
+        <div class="pb-card-actions">
+          <a class="pb-button secondary" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">Details</a>
+          {% if row.map_url %}<a href="{{ row.map_url }}" target="_blank" rel="noopener">Map</a>{% endif %}
+          {% include "opportunity/_save_form.html" %}
+        </div>
+      </article>
+    {% empty %}
+      <p class="pb-muted">No saved parcels yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% include "opportunity/_chrome_close.html" %}
+{% endblock %}

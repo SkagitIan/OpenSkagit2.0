@@ -1,0 +1,1158 @@
+Chapter 14.11 RURAL MIXED-USE ZONES AND USES
+
+         Chapter 14.11
+RURAL MIXED-USE ZONES AND USES
+
+             Sections:
+
+              14.11.010    Applicability.
+
+              14.11.020    Allowed uses.
+
+              14.11.030    Dimensional standards.
+
+              14.11.100    Rural Intermediate (RI).
+
+              14.11.200    Rural Reserve (RRv).
+
+              14.11.300    Rural Village Residential (RVR).
+
+              14.11.400    Rural Center (RC).
+
+              14.11.500    Rural Village Commercial (RVC).
+
+              14.11.600    Public Open Space of Regional/Statewide Importance (OSRSI).
+
+        14.11.010  Applicability.
+
+             (1)    This Chapter applies to the following zones:
+
+             (a)    Rural Intermediate (RI);
+
+             (b)    Rural Reserve (RRv);
+
+             (c)     Rural Village  Residential (RVR);
+
+             (d)    Rural Center (RC);
+
+             (e)     Rural Village  Commercial (RVC);
+
+             (f)     Public Open Space  of Regional/Statewide Importance (OSRSI). (Ord. O20250005 § 2 (Exh. A))
+
+        14.11.020  Allowed uses.
+
+             (1)    The uses shown in the table below are allowed in the specified  zones . For development standards for these uses, see the use section in SCC Chapter  14.18 .
+
+                      Table 14.11.020-1 Allowed Uses in the Rural Mixed-Use  Zones
+
+                         RI
+
+                         RRv
+
+                         RVR
+
+                         RC
+
+                         RVC
+
+                         RVC Alger
+
+                         OSRSI
+
+                          Residential Uses
+
+                         Single-family residence
+
+                         P
+
+                         P
+
+                         P
+
+                          Accessory dwelling unit
+
+                         P
+
+                         P
+
+                         P
+
+                          Middle housing  (2—4 units)
+
+                         P
+
+                          Co-housing as part of a CaRD
+
+                         P
+
+                         P
+
+                         P
+
+                          Loft living quarters
+
+                         P
+
+                         P
+
+                         P
+
+                          Owner operator/caretaker quarters
+
+                         AC
+
+                         AC
+
+                         AC
+
+                          Emergency housing
+
+                         P
+
+                          Emergency shelter
+
+                         P
+
+                          Manufactured or mobile home park
+
+                         P
+
+                          Permanent supportive housing
+
+                         P
+
+                          Residential accessory use
+
+                         P
+
+                         P
+
+                         P
+
+                          Seasonal worker housing
+
+                         HE
+
+                         HE
+
+                          Transitional housing
+
+                         P
+
+                         P
+
+                          Temporary manufactured home
+
+                         P
+
+                         P
+
+                         P
+
+                          Commercial/Retail Uses
+
+                          Animal clinic/hospital
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         AD
+
+                         AD
+
+                          Animal preserve
+
+                         HE
+
+                         HE
+
+                          Asphalt/concrete batching or recycling ,  temporary
+
+                         HE
+
+                          Bed and breakfast
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         P
+
+                         Business/professional office
+
+                         P
+
+                          Display gardens
+
+                         HE
+
+                          Family day care provider
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Group care facility
+
+                         HE
+
+                         HE
+
+                          Group care facility , adult
+
+                         HE
+
+                         AD
+
+                         AD
+
+                          Home-Based Business  1
+
+                         P
+
+                         P
+
+                         P
+
+                          Home-Based Business  2
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Home-Based Business  3
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Kennel , boarding
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Kennel , day-use
+
+                         HE
+
+                         AD
+
+                         HE
+
+                         P
+
+                         P
+
+                         P
+
+                          Kennel , limited
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Laundromat
+
+                         P
+
+                         Limited event venues
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         Marijuana retail facility
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Marina , ≤20 slips
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Marina , &gt; 20 slips
+
+                          Mini-storage
+
+                         P
+
+                         P
+
+                         P
+
+                          Mortuary
+
+                         HE
+
+                         HE
+
+                          Outpatient medical and health care service
+
+                         HE
+
+                         P
+
+                         P
+
+                         P
+
+                         Overnight lodging and related services for visitors to the rural area
+
+                         P
+
+                         P
+
+                         Restaurant
+
+                         P
+
+                         P
+
+                         P
+
+                         Small retail and service business
+
+                         P
+
+                         P
+
+                         P
+
+                          Small-scale production or manufacture
+
+                         AD
+
+                         AD
+
+                          Community/Public Uses
+
+                          Cemetery
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Church
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Community club/grange hall
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         P
+
+                         P
+
+                         P
+
+                          Conference center
+
+                          Historic site open to the public
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Interpretive/information center
+
+                         P
+
+                          Museum
+
+                         P
+
+                          Preschool
+
+                         HE
+
+                         HE
+
+                         P
+
+                         P
+
+                         P
+
+                          Natural Resource Uses
+
+                          Agriculture
+
+                         P
+
+                         P
+
+                          Agricultural accessory use
+
+                         P
+
+                         P
+
+                          Agricultural processing facility
+
+                         P
+
+                          Agritourism  1
+
+                         P
+
+                         P
+
+                          Agritourism  2
+
+                         AD
+
+                         AD
+
+                          Agritourism  3
+
+                         HE
+
+                         HE
+
+                          Anaerobic digester
+
+                         HE
+
+                          Fish hatchery
+
+                         HE
+
+                         HE
+
+                          Forestry
+
+                         P
+
+                         P
+
+                          Habitat enhancement/restoration project
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Manure lagoon
+
+                         HE
+
+                          Natural resource support services
+
+                         P
+
+                         P
+
+                          Natural resources training/research facility
+
+                         HE
+
+                          Nursery/greenhouse , retail
+
+                         HE
+
+                         X
+
+                         P
+
+                         AD
+
+                         AD
+
+                          Nursery/greenhouse , wholesale
+
+                         HE
+
+                         P
+
+                          Seasonal roadside stand  ≤ 300 sf
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                         P
+
+                          Seasonal roadside stand  &gt; 300 sf
+
+                         HE
+
+                         HE
+
+                         AD
+
+                         AD
+
+                          Park/Recreational Uses
+
+                          Campground , destination
+
+                         AD
+
+                         AD
+
+                          Campground , developed
+
+                         HE
+
+                         AD
+
+                          Campground , primitive
+
+                         AD
+
+                         AD
+
+                          Golf course
+
+                         HE
+
+                          Off-road vehicle use areas and trails
+
+                         HE
+
+                          Outdoor outfitters enterprise
+
+                         HE
+
+                         Outdoor recreational facility
+
+                         HE
+
+                         HE
+
+                         AD
+
+                          Outdoor recreational equipment rental and/or guide services
+
+                          Park , community
+
+                         HE
+
+                         HE
+
+                         HE
+
+                         HE
+
+                          Park , recreation  open space
+
+                         AD
+
+                          Park , regional
+
+                         AD
+
+                         AD
+
+                          Park , specialized recreational area
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Racetrack , recreational
+
+                         HE
+
+                          Shooting club , indoor
+
+                         HE
+
+                         HE
+
+                          Shooting club , outdoor
+
+                         HE
+
+                          Stables and riding club
+
+                         HE
+
+                         HE
+
+                         AD
+
+                          Trail
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         P
+
+                          Trailhead , primary and secondary
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                         AD
+
+                          Storage Uses
+
+                          Outdoor storage  1
+
+                         AD
+
+                          Outdoor storage  2
+
+                         AD
+
+                          Outdoor storage  3
+
+                         HE
+
+                          Outdoor storage  4
+
+                         HE
+
+                          Transportation Uses
+
+                          Aircraft landing field
+
+                         HE
+
+                          Vehicle charging station
+
+                         P
+
+                         P
+
+                         P
+
+                         AC
+
+                          Vehicle fueling station
+
+                         P
+
+                         P
+
+                         P
+
+                          Utility Uses
+
+                          Impoundment
+
+                         HE
+
+                          Impoundment  &gt; one acre-foot
+
+                         HE
+
+                         HE
+
+                         Recycling drop-box facility
+
+                         AC
+
+                         AC
+
+                         AC
+
+                         P
+
+                         P
+
+                         AC
+
+                         Water diversion  structure
+
+                         AD
+
+             Notes:
+
+             1.    Key to the Use Tables can be found in SCC  14.10.050 .
+
+             2.    Uses allowed in all  zones  can be found in SCC  14.10.060 .
+
+             3.    Uses prohibited in all  zones  can be found in SCC  14.10.070 .
+
+             (Ord. O20260004 § 1 (Att. 2); Ord. O20260003 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.11.030  Dimensional standards.
+
+                      Table 14.11.030-1  Dimensional Standards  in the Rural Mixed-Use  Zones
+
+                         RI
+
+                         RRv
+
+                         RVR
+
+                         RC
+
+                         RVC
+
+                         RVC Alger
+
+                         OSRSI
+
+                           Lot  Dimensions
+
+                         Minimum  lot  size (ac)
+
+                         2.5
+
+                         10
+
+                         *
+
+                         –
+
+                         –
+
+                         –
+
+                         –
+
+                         Minimum  lot width  (ft)
+
+                         150
+
+                         150
+
+                         *
+
+                         –
+
+                         –
+
+                         –
+
+                         –
+
+                           Lot Coverage
+
+                         Maximum  lot coverage  (%)
+
+                         35
+
+                         *
+
+                         50
+
+                         50
+
+                         50
+
+                         50
+
+                         –
+
+                          Minimum  Setbacks  (principal use)
+
+                         Front (on  minor access  and dead-end  streets )
+
+                         25
+
+                         25
+
+                         25
+
+                         –
+
+                         –
+
+                         –
+
+                         35
+
+                         Front (on all other  streets )
+
+                         35
+
+                         35
+
+                         35
+
+                         35
+
+                         15
+
+                         *
+
+                         35
+
+                         Interior side
+
+                         8
+
+                         8
+
+                         8
+
+                         20
+
+                         *
+
+                         *
+
+                         35
+
+                         Rear
+
+                         25
+
+                         25
+
+                         25
+
+                         20
+
+                         *
+
+                         *
+
+                         35
+
+                          Minimum  Setbacks  (accessory use)
+
+                         Front
+
+                         35
+
+                         35
+
+                         35
+
+                         35
+
+                         15
+
+                         15
+
+                         35
+
+                         Interior side (but see Note 1 for RI, RRv, RVR)
+
+                         8
+
+                         8
+
+                         8
+
+                         20
+
+                         15
+
+                         15
+
+                         35
+
+                         Rear (but see Note 1 for RI, RRv, RVR)
+
+                         25
+
+                         25
+
+                         25
+
+                         *
+
+                         20
+
+                         20
+
+                         35
+
+                           Building  Size Limits
+
+                         Maximum height (ft)
+
+                         40
+
+                         40
+
+                         40
+
+                         40
+
+                         40
+
+                         40
+
+                         40
+
+             Notes:
+
+             1.    A three-foot  setback  is permitted for nonresidential  structures  when the accessory  building  is a minimum of 75 feet from the front property line or when there is an alley along the rear property line. In the RI and RVR  zones , the nonresidential  structure  must be less than 1,000 square feet in size and 16 feet or less in height.
+
+             2.    Values marked with an asterisk (*) are specified within the individual sections for each zoning district of this chapter. Refer to the corresponding sections below for specific  setback  requirements.
+
+             (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.11.100  Rural Intermediate (RI).
+
+             (1)    Purpose. The purpose of the Rural Intermediate district is to provide and protect land for residential living in a rural atmosphere, taking priority over, but not precluding, limited nonresidential uses appropriate to the density and character of this designation. Long-term  open space  retention and critical area protection are encouraged.  CaRDs  are the preferred development pattern within this district.
+
+             (2)    Allowed Uses. In addition to the uses in SCC  14.11.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses . Reserved.
+
+             (b)    Administrative Special Uses.
+
+             (i)    Institutional camps/retreats that existed prior to or on July 1, 1990, including  cabins  that may accommodate up to but not to exceed 250 beds and 10 RV sites, and common use facilities (e.g., dining, recreation) necessary to support the use, within the boundaries of the use that existed on July 1, 1990. (Ord. O20250005 § 2 (Exh. A))
+
+        14.11.200  Rural Reserve (RRv).
+
+             (1)    Purpose. The purpose of the Rural Reserve  zone  is to allow low-density development and to preserve the  open space  character of those areas not designated as resource lands or as  urban growth areas . Lands in this  zone  are transitional areas between resource lands and nonresource lands for those uses that require moderate acreage and provide residential and limited employment and service opportunities for rural residents. They establish long-term  open spaces  and critical area protection using  CaRDs  as the preferred residential development pattern.
+
+             (2)    Allowed Uses. In addition to the uses in SCC  14.11.020 , the following uses are allowed in this zone:
+
+             (a)    Reserved.
+
+             (3)     Dimensional Standards . In addition to  dimensional standards  in Table 14.11.030-1, the following  dimensional standards  apply in this zone:
+
+             (a)    Maximum  Lot Coverage .
+
+             (i)    Agricultural accessory or processing uses: 35 percent.
+
+             (ii)    All other uses: 20 percent or 5,000 square feet, whichever is greater, not to exceed 25,000 square feet. (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.11.300  Rural Village Residential (RVR).
+
+             (1)    Purpose. The purpose of the  Rural Village  Residential district is to preserve the residential character of those portions of  Rural Villages  designated for residential use, while allowing for limited nonresidential uses appropriate to the village through the special use permit process. Allowed densities within this district are based on the availability of public water and on environmental considerations.
+
+             (2)     Dimensional Standards . In addition to  dimensional standards  in Table 14.11.030-1, the following  dimensional standards  apply in this zone:
+
+             (a)    Minimum  Lot  Size.
+
+             (i)    Where  public water service  is provided, the minimum  lot  size is one acre.
+
+             (ii)    Where  public water service  is not provided, the minimum  lot  size is two and one-half acres.
+
+             (b)    Minimum  Lot Width .
+
+             (i)    Where  public water service  is provided, the minimum  lot width  is 75 feet.
+
+             (ii)    Where  public water service  is not provided, the minimum  lot  size is 150 feet.
+
+             (c)    Maximum Density.
+
+             (i)    Duplexes, triplexes, fourplexes, and  manufactured or mobile home parks  are limited to four  dwelling units  per acre.
+
+             (3)    Big  Lake  Rural Village Overlook  Golf Course  Property. The property that is commonly referred to as the Overlook  Golf Course  may only be developed at the following densities:
+
+             (a)    At one unit per five acres, or at a lower density, when the following condition is met:
+
+             (i)    The development is served by public water.
+
+             (b)    At a density between one unit per five acres and one unit per one acre when all of the following conditions are met:
+
+             (i)    The development is served by public water;
+
+             (ii)    The development is served by a  public sewer system ;
+
+             (iii)    The development is permitted as a long  CaRD  subdivision; and
+
+             (iv)    All  stormwater facilities  and  temporary  erosion/sedimentation control systems are designed to ensure no  pollution  to or degradation of Big  Lake .
+
+             (c)    The development standards described in Subsection (3)(b) of this Section do not apply if the property becomes part of the Mount Vernon  urban growth area . (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.11.400  Rural Center (RC).
+
+             (1)    Purpose. The Rural Center  zone  recognizes centers or clusters of small retail and service businesses that serve a limited area and rural population outside of established  urban growth areas  and  Rural Villages  as designated by the  Comprehensive Plan . Rural Centers are small-scale commercial clusters or individual uses are smaller in size and intensity than  Rural Villages , intended to serve, to a limited extent, the traveling public at existing crossroads.
+
+             (2)     Dimensional Standards . In addition to  dimensional standards  in Table 14.11.030-1, the following  dimensional standards  apply in this zone:
+
+             (a)    Maximum Size Limit.
+
+             (i)    Retail and service uses, including  mini-storage , may not exceed 3,000 square feet of gross  floor area  per  building , with a maximum of two  buildings  per parcel.  Buildings  may contain more than one business so long as the  building  falls within the above square footage limits.
+
+             (ii)    Fire stations, which may not exceed 8,000 square feet.
+
+             (iii)    Storage or other noncommercial uses that are accessory to the  permitted use  and do not exceed 50 percent of the square footage of the  permitted use  may not exceed a total of 1,500 square feet per parcel.
+
+             (b)     Setbacks .
+
+             (i)    Rear: If adjacent to an RVR, RI  zone , 20 feet, or the height of the back wall of the  building , whichever is greater. Otherwise, the  setback  is equal to the height of the back wall of the  building . (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.11.500  Rural Village Commercial (RVC).
+
+             (1)    Purpose. The  Rural Village  Commercial  zones  are located within each  Rural Village  identified in the  Comprehensive Plan . This  zone  provides an activity center where rural residents and others can gather, work, shop, entertain and reside. This  zone  is intended to provide for a range of commercial uses and services to meet the everyday needs of rural residents and natural resource industries, to provide employment opportunities for residents of the rural area, and to provide goods, services, and lodging for travelers and tourists to the area. Requirements specific to individual community plans may be incorporated in this Section.
+
+             (2)    “RVC Alger” in the use and  dimensional standards  tables indicates that portion of the RVC  zone  in Alger.
+
+             (3)    Allowed Uses. In addition to the uses in SCC  14.11.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses .
+
+             (i)    In the RVC  zone  in Alger, the following uses are allowed:
+
+             (A)    Continuation of existing residential uses.
+
+             (4)     Dimensional Standards . In addition to  dimensional standards  in Table 14.11.030-1, the following  dimensional standards  apply in this zone:
+
+             (a)     Setbacks .
+
+             (i)    Front  setbacks  in the  Rural Village  Commercial  zone  in Alger adjacent to Old Highway 99 and north of Alger Cain  Lake  Road are five feet for those RVC properties where the  right-of-way  is approximately 100 feet wide, provided there is an approved agreement for frontage improvements on Old Highway 99 consistent with the Village Concept Plan in the Alger Community Plan. The agreement must be signed by Skagit County and must include provisions for, at a minimum: landscaping,  stormwater  management, pathways,  driveways , and maintenance.
+
+             (ii)    Side and rear: None on interior  lots  adjacent to other commercial designations. Adjacent to other land use designations, the side  setback  is eight feet and the rear  setback  is 20 feet.
+
+             (b)    Maximum Size Limits.
+
+             (i)    Except for overnight lodging facilities and fire stations, total gross  floor area  of primary uses may not exceed 6,000 square feet per parcel.
+
+             (ii)    Fire stations may not exceed 8,000 square feet.
+
+             (iii)    Overnight lodging facilities may not exceed 12,000 square feet of gross  floor area  per parcel, including any related commercial services.
+
+             (iv)    Storage or other noncommercial uses that are accessory to the  permitted use , including  owner operator/caretaker quarters , up to a total of 1,500 square feet per parcel, are also permitted.
+
+             (5)    Pedestrian Circulation.
+
+             (a)    Pedestrian walkways must be provided between parking areas and the uses served by that parking.
+
+             (b)    Pedestrian facilities must be also provided as specified by an applicable  rural village  plan.
+
+             (c)    In the  Rural Village  Commercial  zone  in Alger, pedestrian and bike pathways at least five feet wide are required along the  street  frontage and between parking areas and the uses they serve.
+
+             (i)    Pathways may be surfaced with crushed rock, except for those portions covered by handicapped accessibility requirements.
+
+             (ii)    Pathways must include lighting that is full cut-off shielded and directed so that light does not migrate off site. Lighting must be pedestrian scale, with masts no higher than 12 feet and directed to sidewalks, paths, and parking areas.
+
+             (6)     Building  and Site Design. In the  Rural Village  Commercial  zone  in Alger:
+
+             (a)    New  structures  must be compatible with the design of one or more of the existing historic  structures , including the old Grange Hall, the Alger Improvement Association Community Hall, and the Alger Bar and Grill.
+
+             (b)    Parking areas must be located to the side or rear of  buildings . (Ord. O20260004 § 1 (Att. 2); Ord. O20250005 § 2 (Exh. A))
+
+        14.11.600  Public Open Space of Regional/Statewide Importance (OSRSI).
+
+             (1)    Purpose. The purpose of the  Public Open Space  zone is to provide for lands in public ownership that are dedicated or reserved for public purposes or enjoyment for recreation, scenic amenities, or for the protection of environmentally sensitive areas.
+
+             (2)    Included Areas. This  zone  encompasses  public open space  having statewide and regional importance, including, for example:
+
+             (a)    Deception Pass, Bayview, Larabee, Rasar, and Rockport State  parks ;
+
+             (b)    County  parks  including Sharpe  Park  and Montgomery-Duban Headlands, Howard Miller Steelhead  Park , and Pressentin  Park ;
+
+             (c)    Publicly owned portions of Burrows Island, Cypress Island, Hope Island, Huckleberry Island, Saddlebag Island, and Skagit Island;
+
+             (d)    Glacier Peak Wilderness, Noisy-Diobsud Wilderness, Mount Baker-Snoqualmie National Forest, North Cascades National  Park , and the Ross  Lake  National Recreation Area;
+
+             (e)    PUD No. 1 Judy Reservoir;
+
+             (f)    Portions of the Northern State Recreation Area;
+
+             (g)    Seattle  City  Light wildlife mitigation lands and  Endangered Species  Act lands;
+
+             (h)    Washington  Department  of Natural Resources natural resource conservation areas and natural area preserves and Skagit Wildlife Refuge are included in this district.
+
+             (3)    Allowed Uses. In addition to the uses in SCC  14.11.020 , the following uses are allowed in this zone:
+
+             (a)     Permitted Uses .
+
+             (i)     Parks  that showcase significant historic, archaeological, scientific, cultural and/or unique natural features, unusual landscape features such as cliffs and bluffs or natural processes on  wetlands  and tidal actions.
+
+             (ii)     Public open space  areas of regional and Statewide importance, including County, State and Federal  parks , recreational areas, and wildlife management areas, including those that provide linkages between neighborhood and community  parks .
+
+             (iii)    Educational enterprises designed to offer special access to natural resource-based and recreational opportunities on  lakes , creeks, streams, river corridors, shorelines, and areas with prominent views.
+
+             (b)    Administrative Special Uses.
+
+             (i)    In remote areas only, such as east of Concrete and on saltwater islands without ferry service,  employee housing  sufficient to operate the OSRSI operation.
+
+             (4)    Use Limitations.
+
+             (a)    There may be Federal or State regulations or limitations which may further limit the use of some facilities within the  zone , and Skagit County may not have jurisdiction over some State or Federal facilities within the  zone . (Ord. O20250005 § 2 (Exh. A))

@@ -9,7 +9,7 @@ from typing import Any
 from django.db import OperationalError, close_old_connections, connection
 from django.utils import timezone
 
-from .models import TaxStatement, TaxStatementError, TaxStatementRun
+from .models import TaxStatement, TaxStatementCheck, TaxStatementError, TaxStatementRun
 from .services import fetch_statement, parse_money
 
 
@@ -67,7 +67,13 @@ def iter_active_parcels(limit: int | None = None, offset: int = 0, parcel_number
 def should_skip_statement(parcel_number: str, tax_year: int, stale_after: timezone.datetime | None, force: bool) -> bool:
     if force or stale_after is None:
         return False
-    return TaxStatement.objects.filter(
+    if TaxStatement.objects.filter(
+        parcel_number=parcel_number,
+        tax_year=tax_year,
+        source_fetched_at__gte=stale_after,
+    ).exists():
+        return True
+    return TaxStatementCheck.objects.filter(
         parcel_number=parcel_number,
         tax_year=tax_year,
         source_fetched_at__gte=stale_after,
@@ -80,7 +86,52 @@ def parse_decimal_field(value):
     return parse_money(str(value))
 
 
-def save_statement(parsed: dict, parcel: dict, run: TaxStatementRun) -> TaxStatement:
+def compact_raw_data(parsed: dict) -> dict:
+    return {
+        "installments": parsed.get("installments") or [],
+        "delinquent_rows": parsed.get("delinquent_rows") or [],
+        "source_url": parsed.get("source_url"),
+        "source_fetched_at": parsed.get("source_fetched_at"),
+    }
+
+
+def should_persist_statement(parsed: dict) -> bool:
+    total_due = parse_decimal_field(parsed.get("total_due")) or Decimal("0")
+    status = parsed.get("status") or TaxStatement.Status.UNKNOWN
+    return status != TaxStatement.Status.PAID or total_due > 0
+
+
+def record_statement_check(parsed: dict, run: TaxStatementRun) -> None:
+    TaxStatementCheck.objects.update_or_create(
+        parcel_number=parsed["parcel_number"],
+        tax_year=parsed["tax_year"],
+        defaults={
+            "status": parsed.get("status") or TaxStatement.Status.UNKNOWN,
+            "total_due": parse_decimal_field(parsed.get("total_due")),
+            "source_fetched_at": datetime.fromisoformat(parsed["source_fetched_at"]),
+            "last_run": run,
+        },
+    )
+
+
+def discard_statement(parsed: dict, run: TaxStatementRun) -> None:
+    TaxStatement.objects.filter(
+        parcel_number=parsed["parcel_number"],
+        tax_year=parsed["tax_year"],
+    ).delete()
+    record_statement_check(parsed, run)
+    TaxStatementError.objects.filter(
+        parcel_number=parsed["parcel_number"],
+        tax_year=parsed["tax_year"],
+        resolved_at__isnull=True,
+    ).update(resolved_at=timezone.now())
+
+
+def save_statement(parsed: dict, parcel: dict, run: TaxStatementRun) -> TaxStatement | None:
+    if not should_persist_statement(parsed):
+        discard_statement(parsed, run)
+        return None
+
     oldest_due_date = parsed.get("oldest_due_date") or None
     defaults = {
         "tax_account_number": parsed.get("tax_account_number") or parcel.get("account_number"),
@@ -98,7 +149,7 @@ def save_statement(parsed: dict, parcel: dict, run: TaxStatementRun) -> TaxState
         "oldest_due_date": date.fromisoformat(oldest_due_date) if oldest_due_date else None,
         "source_url": parsed["source_url"],
         "source_fetched_at": datetime.fromisoformat(parsed["source_fetched_at"]),
-        "raw_data": parsed,
+        "raw_data": compact_raw_data(parsed),
         "last_run": run,
     }
     statement, _ = TaxStatement.objects.update_or_create(
@@ -106,6 +157,7 @@ def save_statement(parsed: dict, parcel: dict, run: TaxStatementRun) -> TaxState
         tax_year=parsed["tax_year"],
         defaults=defaults,
     )
+    record_statement_check(parsed, run)
     TaxStatementError.objects.filter(
         parcel_number=parsed["parcel_number"],
         tax_year=parsed["tax_year"],
@@ -114,7 +166,7 @@ def save_statement(parsed: dict, parcel: dict, run: TaxStatementRun) -> TaxState
     return statement
 
 
-def save_statement_with_retry(parsed: dict, parcel: dict, run: TaxStatementRun, attempts: int = 3) -> TaxStatement:
+def save_statement_with_retry(parsed: dict, parcel: dict, run: TaxStatementRun, attempts: int = 3) -> TaxStatement | None:
     last_error = None
     for attempt in range(1, attempts + 1):
         try:
@@ -225,8 +277,11 @@ def sync_statements(
                         stdout.write(f"{parcel['parcel_number']} {tax_year} ERROR {exc}")
                 else:
                     try:
-                        save_statement_with_retry(parsed, parcel, run)
-                        run.statements_saved += 1
+                        statement = save_statement_with_retry(parsed, parcel, run)
+                        if statement is None:
+                            run.statements_skipped += 1
+                        else:
+                            run.statements_saved += 1
                     except Exception as save_exc:
                         run.errors += 1
                         record_error(run, parcel["parcel_number"], tax_year, "", save_exc)
