@@ -1,6 +1,47 @@
 from django.db import models
 
 
+class LiveCheckRun(models.Model):
+    """Tracks each nightly run of check_watched_parcels."""
+
+    STATUS_RUNNING = "running"
+    STATUS_SUCCESS = "success"
+    STATUS_PARTIAL = "partial"
+    STATUS_FAILED = "failed"
+
+    started_at = models.DateTimeField()
+    finished_at = models.DateTimeField(blank=True, null=True)
+    status = models.TextField(default=STATUS_RUNNING)
+    summary = models.JSONField(default=dict)
+    error = models.TextField(blank=True)
+
+    class Meta:
+        db_table = "assessor_live_check_runs"
+        ordering = ["-started_at"]
+
+    def __str__(self):
+        return f"LiveCheckRun {self.pk} ({self.status})"
+
+
+class ParcelLiveSnapshot(models.Model):
+    """
+    Stores the last-known live API values for a parcel.
+    Only updated when data changes; used to diff against new fetches.
+    """
+
+    parcel_number = models.TextField(unique=True)
+    tracked_fields = models.JSONField(default=dict)
+    last_checked_at = models.DateTimeField()
+    last_changed_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        db_table = "assessor_parcel_live_snapshots"
+        ordering = ["-last_checked_at"]
+
+    def __str__(self):
+        return f"Snapshot {self.parcel_number}"
+
+
 class AssessorSyncRun(models.Model):
     started_at = models.DateTimeField()
     finished_at = models.DateTimeField(blank=True, null=True)

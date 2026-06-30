@@ -284,8 +284,12 @@ def _default_watchlist_email(context: dict) -> tuple[str, str]:
             detail = f'{p.get("document_type", "")} — {p.get("grantor", "")} to {p.get("grantee", "")}'
             pdf = f'<br><a href="{p["pdf_url"]}" style="color:#00828A;">View document</a>' if p.get("pdf_url") else ""
         else:
-            fields = p.get("changed_fields", {})
-            detail = ", ".join(fields.keys()) if fields else p.get("change_type", "")
+            ai_summary = p.get("ai_summary", "")
+            if ai_summary:
+                detail = ai_summary
+            else:
+                fields = p.get("changed_fields", {})
+                detail = ", ".join(fields.keys()) if fields else p.get("change_type", "")
             pdf = ""
         rows += f"""
         <tr>
