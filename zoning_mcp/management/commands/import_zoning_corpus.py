@@ -279,7 +279,10 @@ class Command(BaseCommand):
 
     def _parse_allowed_use_table(self, table: dict[str, Any]) -> list[ParsedUseRule]:
         caption = table.get("caption", "")
-        if "allowed" not in caption.lower() or "use" not in caption.lower():
+        heading = table.get("nearest_heading", "")
+        source_table = caption or heading
+        source_label = source_table.lower()
+        if "use" not in source_label or not any(term in source_label for term in ("allowed", "land use", "permitted")):
             return []
         rows = table.get("rows") or []
         if not rows:
@@ -287,8 +290,17 @@ class Command(BaseCommand):
         header_index = self._header_index(rows)
         if header_index is None:
             return []
-        headers = [normalize_zone_code(cell) for cell in rows[header_index][1:]]
-        if not any(headers):
+        zone_columns = []
+        reference_columns = []
+        for cell_index, cell in enumerate(rows[header_index][1:], start=1):
+            header_text = str(cell).strip().lower()
+            if any(term in header_text for term in ("reference", "limitation", "condition")):
+                reference_columns.append(cell_index)
+                continue
+            zone_code = normalize_zone_code(cell)
+            if zone_code:
+                zone_columns.append((cell_index, zone_code))
+        if not zone_columns:
             return []
 
         category = ""
@@ -297,20 +309,32 @@ class Command(BaseCommand):
             cells = [str(cell).strip() for cell in row]
             if not any(cells):
                 continue
-            if self._is_category_row(cells, len(headers) + 1):
+            status_cells = [cells[index] if index < len(cells) else "" for index, _ in zone_columns]
+            first_cell = cells[0] if cells else ""
+            if first_cell.lower().startswith("note:"):
+                continue
+            if self._is_category_row(cells, len(zone_columns) + 1) or (first_cell and not any(status_cells)):
+                if not self._looks_like_header(first_cell):
+                    category = first_cell
+                continue
+            if self._is_category_row(cells, len(zone_columns) + 1):
                 category = cells[0]
                 continue
-            use_name = self._truncate(cells[0], 240)
+            use_name = self._truncate(first_cell, 240)
             if not use_name or self._looks_like_header(use_name):
                 continue
-            for index, zone_code in enumerate(headers):
+            reference_note = " ".join(cells[index] for index in reference_columns if index < len(cells) and cells[index]).strip()
+            for cell_index, zone_code in zone_columns:
                 if not zone_code:
                     continue
-                raw_status = cells[index + 1] if index + 1 < len(cells) else ""
+                raw_status = cells[cell_index] if cell_index < len(cells) else ""
                 status, note = self._normalize_status(raw_status)
+                notes = f"Generated from imported Code Publishing table. {note}".strip()
+                if reference_note:
+                    notes = f"{notes} Reference: {reference_note}".strip()
                 parsed.append(
                     ParsedUseRule(
-                        source_table=caption,
+                        source_table=source_table,
                         source_url=self._table_source_url(table),
                         chapter_ref=table.get("chapter_ref", ""),
                         use_category=self._truncate(category, 160),
@@ -318,7 +342,7 @@ class Command(BaseCommand):
                         normalized_use_key=self._normalized_key(use_name),
                         zone_code=zone_code,
                         status=status,
-                        notes=f"Generated from imported Code Publishing table. {note}".strip(),
+                        notes=notes,
                     )
                 )
         return parsed
@@ -368,6 +392,10 @@ class Command(BaseCommand):
         return parsed
 
     def _parse_section_use_rules(self, jurisdiction: Jurisdiction, sections_path: Path) -> list[ParsedUseRule]:
+        if jurisdiction.key == "burlington":
+            return self._parse_burlington_use_sections(sections_path)
+        if jurisdiction.key == "sedro_woolley":
+            return self._parse_sedro_use_restriction_sections(sections_path)
         if jurisdiction.key != "mount_vernon":
             return []
         parsed = []
@@ -396,6 +424,74 @@ class Command(BaseCommand):
                             zone_code=zone_code,
                             status=status,
                             notes="Generated from imported Mount Vernon use section.",
+                        )
+                    )
+        return parsed
+
+    def _parse_burlington_use_sections(self, sections_path: Path) -> list[ParsedUseRule]:
+        parsed = []
+        with sections_path.open(encoding="utf-8") as handle:
+            for line in handle:
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                heading = row.get("heading", "")
+                lower_heading = heading.lower()
+                if "permitted primary uses" in lower_heading or "primary permitted uses" in lower_heading:
+                    status = "P"
+                    category = "Permitted primary uses"
+                elif "permitted accessory uses" in lower_heading or lower_heading.endswith(" accessory uses."):
+                    status = "AC"
+                    category = "Permitted accessory uses"
+                elif "conditional uses" in lower_heading:
+                    status = "CUP"
+                    category = "Conditional uses"
+                else:
+                    continue
+                zone_code = self._burlington_zone_from_chapter_title(row.get("chapter_title", ""))
+                if not zone_code:
+                    continue
+                for use_name in self._burlington_uses_from_section(row.get("text", "")):
+                    parsed.append(
+                        ParsedUseRule(
+                            source_table=heading,
+                            source_url=row.get("source_url", ""),
+                            chapter_ref=row.get("chapter_ref", ""),
+                            use_category=category,
+                            use_name=self._truncate(use_name, 240),
+                            normalized_use_key=self._normalized_key(use_name),
+                            zone_code=zone_code,
+                            status=status,
+                            notes="Generated from imported Burlington PDF use section.",
+                        )
+                    )
+        return parsed
+
+    def _parse_sedro_use_restriction_sections(self, sections_path: Path) -> list[ParsedUseRule]:
+        parsed = []
+        with sections_path.open(encoding="utf-8") as handle:
+            for line in handle:
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                heading = row.get("heading", "")
+                if "use restrictions" not in heading.lower():
+                    continue
+                zone_code = self._sedro_zone_from_chapter_title(row.get("chapter_title", ""))
+                if not zone_code:
+                    continue
+                for status, category, use_name in self._sedro_uses_from_restrictions(row.get("text", "")):
+                    parsed.append(
+                        ParsedUseRule(
+                            source_table=heading,
+                            source_url=row.get("source_url", ""),
+                            chapter_ref=row.get("chapter_ref", ""),
+                            use_category=self._truncate(category, 160),
+                            use_name=self._truncate(use_name, 240),
+                            normalized_use_key=self._normalized_key(use_name),
+                            zone_code=zone_code,
+                            status=status,
+                            notes="Generated from imported Sedro-Woolley use restriction section.",
                         )
                     )
         return parsed
@@ -429,6 +525,12 @@ class Command(BaseCommand):
         if not raw:
             return "X", "Blank source cell; treated as not listed as allowed."
         token = re.sub(r"[^A-Za-z]+", "", raw).upper()
+        if token.startswith("P"):
+            note = f"Source status: {raw}." if token != "P" else ""
+            return "P", note
+        if token.startswith("C"):
+            note = f"Source status: {raw}." if token not in {"C", "CU", "CUP"} else ""
+            return "CUP" if token.startswith("CU") else "C", note
         aliases = {
             "P": "P",
             "AC": "AC",
@@ -453,6 +555,87 @@ class Command(BaseCommand):
         if not match:
             return ""
         return normalize_zone_code(match.group(1))
+
+    def _sedro_zone_from_chapter_title(self, title: str) -> str:
+        parenthetical = re.findall(r"\(([A-Z][A-Z0-9-]*)\)", title)
+        if parenthetical:
+            return normalize_zone_code(parenthetical[-1])
+        after_chapter = re.sub(r"^Chapter\s+\d+\.\d+\s+", "", title, flags=re.IGNORECASE).strip()
+        match = re.match(r"([A-Z][A-Z0-9-]*)\b", after_chapter)
+        return normalize_zone_code(match.group(1)) if match else ""
+
+    def _burlington_zone_from_chapter_title(self, title: str) -> str:
+        after_chapter = re.sub(r"^Chapter\s+\d+\.\d+\s+", "", title, flags=re.IGNORECASE).strip()
+        match = re.match(r"([A-Z]+-\d+|[A-Z]{2,}|[A-Z]+)\b", after_chapter.upper())
+        if not match:
+            return ""
+        zone_code = match.group(1)
+        if zone_code in {"GENERAL", "LAND", "ACCESS", "PUBLIC", "NONCONFORMING", "ESSENTIAL", "AGRICULTURAL", "PLANNING", "HEARING", "AMENDMENTS"}:
+            return ""
+        return normalize_zone_code(zone_code)
+
+    def _burlington_uses_from_section(self, text: str) -> list[str]:
+        uses = []
+        current = ""
+        for line in [line.strip() for line in text.splitlines() if line.strip()]:
+            if line.startswith("(Ord."):
+                continue
+            match = re.match(r"^([A-Z]{1,2})\.\s+(.+)$", line)
+            if match:
+                if current:
+                    cleaned = self._clean_burlington_use_name(current)
+                    if self._looks_like_use(cleaned):
+                        uses.append(cleaned)
+                current = match.group(2)
+                continue
+            if current and not re.match(r"^\d+\.", line):
+                current = f"{current} {line}"
+        if current:
+            cleaned = self._clean_burlington_use_name(current)
+            if self._looks_like_use(cleaned):
+                uses.append(cleaned)
+        return uses
+
+    def _clean_burlington_use_name(self, value: str) -> str:
+        value = self._clean_use_name(value)
+        value = re.split(r",\s*subject to|,\s*all sizes|,\s*all types|,\s*small and medium scale", value, maxsplit=1, flags=re.IGNORECASE)[0]
+        value = re.sub(r"\s+", " ", value).strip(" .,;")
+        return value
+
+    def _sedro_uses_from_restrictions(self, text: str) -> list[tuple[str, str, str]]:
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        uses: list[tuple[str, str, str]] = []
+        current_status = ""
+        current_category = ""
+        for line in lines:
+            letter = re.match(r"^([A-Z])\.\s+(.+)$", line)
+            if letter:
+                label = letter.group(2).strip().rstrip(".")
+                lowered = label.lower()
+                if "permitted use" in lowered:
+                    current_status = "P"
+                    current_category = label
+                    continue
+                if "conditional use" in lowered:
+                    current_status = "CUP"
+                    current_category = label
+                    continue
+                if "prohibited use" in lowered:
+                    current_status = "X"
+                    current_category = label
+                    continue
+                if current_status in {"P", "CUP"}:
+                    cleaned = self._clean_use_name(label)
+                    if self._looks_like_use(cleaned):
+                        uses.append((current_status, current_category, cleaned))
+                continue
+
+            numbered = re.match(r"^(\d+)\.\s+(.+)$", line)
+            if numbered and current_status in {"P", "CUP"}:
+                cleaned = self._clean_use_name(numbered.group(2))
+                if self._looks_like_use(cleaned):
+                    uses.append((current_status, current_category, cleaned))
+        return uses
 
     def _uses_from_section_text(self, text: str) -> list[tuple[str, str]]:
         lines = [line.strip() for line in text.splitlines() if line.strip()]
@@ -488,16 +671,16 @@ class Command(BaseCommand):
         lowered = value.lower()
         if len(value) < 3 or lowered.startswith("repealed"):
             return False
-        if lowered.startswith(("the ", "all ", "adequate ", "individual ", "there shall", "a recreational", "no ")):
+        if lowered.startswith(("the ", "all ", "adequate ", "individual ", "there shall", "a recreational", "no ", "normal residential appurtenances", "normal commercial")):
             return False
         return True
 
     def _table_source_url(self, table: dict[str, Any]) -> str:
         url = table.get("source_url", "")
         heading = table.get("nearest_heading", "")
-        match = re.search(r"\b(14\.\d{2}\.\d{3})\b", heading)
+        match = re.search(r"\b(\d{2}\.\d{2}\.\d{3})\b", heading)
         return f"{url}#{match.group(1)}" if match and "#" not in url else url
 
     def _chapter_number(self, chapter: str) -> str:
-        match = re.search(r"\b(14\.\d{2})\b", chapter)
+        match = re.search(r"\b(\d{2}\.\d{2})\b", chapter)
         return match.group(1) if match else ""

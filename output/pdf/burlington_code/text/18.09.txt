@@ -1,0 +1,546 @@
+18.09.010 Applicability to development.
+A. A development or use shall not be undertaken on the shorelines in the city of Burlington
+unless it is consistent with the master program and the policies of the Act, whether or not a
+shoreline permit is required for such development or use. See definition of "development"
+in BMC § 18.03.040.
+B. Existing development is required to comply with the master program at the time of
+expansion or change of use or initiation of new forms of activity.
+C. If use or development is nonconforming, change of ownership will not require compliance
+with the master program unless the new owner/operator significantly expands the
+operations or initiates new forms of activity.
+D. The city will periodically review the cumulative effect of actions taken within the shoreline
+to ensure that the goal of no net loss of shoreline environmental functions is being met.
+E. The city, for the purposes of making administrative decisions and processing permits as
+may be required by the SMP, means the department of planning and community
+development and its director.
+F. The process of reviewing proposals shall be designed to assure that regulatory or
+administrative actions do not unconstitutionally infringe upon private property rights in
+accordance with WAC 173-26-186(5).
+(Ord. 1786 § 1, 2013)
+
+18.09.020 Applicability to substantial development.
+A. Shoreline Substantial Development Permits.
+1. A substantial development permit is not required for projects that are below the
+threshold levels established in WAC 173-27-040(2), Developments Exempt from
+Substantial Development Permit Requirement, as follows (see WAC citation for
+complete list):
+a. Any development of which the total cost or fair market value, whichever is
+higher, does not exceed $8,504, if such development does not materially
+interfere with the normal public use of the water or shorelines of the state. (Note:
+The state of Washington requires that every five years the dollar threshold for
+this exemption be adjusted for inflation by the Washington Office of Financial
+Management (OFM). The adjustment is based upon changes in the Consumer
+Price Index during that time period (see chapter 18.03 BMC, Definitions). The
+OFM must calculate the new dollar threshold and transmit it to the Office of the
+Code Reviser for publication in the Washington State Register at least one
+month before the new dollar threshold is to take effect. (WAC
+173-27-040(2)(a).) For purposes of determining whether or not a permit is
+required, the total cost or fair market value shall be based on the value of
+development that is occurring on shorelines of the state as defined in RCW
+90.58.030(2)(c). The total cost or fair market value of the development shall
+§ 18.09.020 SHORELINE MASTER PROGRAM § 18.09.020
+include the fair market value of any donated, contributed or found labor,
+equipment or materials;
+b. Normal maintenance or repair of existing structures or developments, including
+damage by accident, fire, or elements;
+c. Construction of the normal protective bulkhead common to single-family
+residences;
+d. Emergency construction necessary to protect property from damage by the
+elements;
+e. Construction and practices normal for farming, irrigation, and ranching
+activities, including agricultural service roads and utilities on shorelines, and the
+construction and maintenance of irrigation structures including but not limited
+to head gates, pumping facilities, and irrigation channels. A feedlot of any size,
+all processing plants, other activities of a commercial nature, alteration of the
+contour of the shorelines by leveling or filling other than that which results from
+normal cultivation, shall not be considered normal or necessary farming or
+ranching activities. A feedlot shall be an enclosure or facility used or capable of
+being used for feeding livestock hay, grain silage, or other livestock feed, but
+shall not include land for growing crops or vegetation for livestock feeding and/
+or grazing, nor shall it include normal livestock wintering operations;
+f. Construction or modification of navigational aids such as channel markers and
+anchor buoys;
+g. Construction on shorelines by an owner, lessee, or contract purchaser of a
+single-family residence for his own use or for the use of his family, which
+residence does not exceed a height of 35 feet above average grade level and
+which meets all the requirements of the state agency or local government having
+jurisdiction thereof, other than requirements imposed pursuant to this title;
+h. Construction of a dock, including a community dock, designed for pleasure craft
+only, for the private noncommercial use of the owner, lessee, or contract
+purchaser of single- and multiple-family residences. A "dock" is a landing and
+moorage facility for watercraft and does not include recreational decks, storage
+facilities or other appurtenances. This exception applies if the fair market value
+of the dock does not exceed $22,500 for docks that are constructed to replace
+existing docks, are of equal or less square footage than the existing dock being
+replaced, or $11,200 for all other docks constructed in freshwaters. However, if
+subsequent construction occurs within five years of completion of the prior
+construction, and the combined fair market value of the subsequent and prior
+construction exceeds the amount specified above, the subsequent construction
+shall be considered a substantial development for the purpose of this title;
+i. Operation, maintenance, or construction of canals, waterways, drains,
+reservoirs, or other facilities that now exist or are hereafter created or developed
+as a part of an irrigation system for the primary purpose of making use of system
+waters, including return flow and artificially stored ground water for the
+irrigation of lands;
+j. The marking of property lines or corners on state owned lands, when such
+marking does not significantly interfere with normal public use of the surface of
+the water;
+k. Operation and maintenance of any system of levees, ditches, drains, or other
+facilities existing on September 8, 1975, which were created, developed, or
+utilized primarily as a part of an agricultural drainage or diking system;
+l. Site exploration and investigation activities that are prerequisite to preparation
+of an application for development authorization under this title, if:
+i. The activity does not interfere with the normal public use of the surface
+waters;
+ii. The activity will have no significant adverse impact on the environment
+including, but not limited to, fish, wildlife, fish or wildlife habitat, water
+quality, and aesthetic values;
+iii. The activity does not involve the installation of a structure, and upon
+completion of the activity the vegetation and land configuration of the site
+are restored to conditions existing before the activity;
+iv. A private entity seeking development authorization under this section first
+posts a performance bond or provides other evidence of financial
+responsibility to the city of Burlington to ensure that the site is restored to
+preexisting conditions; and
+v. The activity is not subject to the permit requirements of RCW 90.58.550
+(oil or gas exploration);
+m. The process of removing or controlling an aquatic noxious weed, as defined in
+RCW 17.26.020, through the use of an herbicide or other treatment methods
+applicable to weed control that are recommended by a final environmental
+impact statement published by the Department of Agriculture or the Department
+jointly with other state agencies under chapter 43.21C RCW;
+n. Watershed restoration projects as defined in RCW 89.08.460 are exempt from
+the requirement to obtain a substantial development permit. Gages Slough is
+part of the watershed project approved by the Department of Ecology and its
+restoration is exempt from the permit requirement;
+o. Consistent with WAC 173-27-040, a public or private project that is designed to
+improve fish or wildlife habitat or fish passage, that conforms to the provisions
+of RCW 77.55.181, shall be exempt from the substantial development permit
+requirements of this chapter when all of the following apply:
+i. The project has been approved by the Department of Fish and Wildlife;
+ii. The project has received hydraulic project approval by the Department of
+Fish and Wildlife;
+iii. The city has determined that the project is substantially consistent with the
+master program.
+§ 18.09.020 SHORELINE MASTER PROGRAM § 18.09.020
+p. The external or internal retrofitting of an existing structure with the exclusive
+purpose of compliance with the Americans With Disabilities Act of 1990 or to
+otherwise provide physical access to the structure by individuals with
+disabilities.
+2. A shoreline substantial development permit application is a Type II permit, as per
+chapter 14A.05 BMC.
+3. The "effective date of a substantial development permit" is the date of filing. The date
+of filing is the date Ecology receives the city's final decision. The date of filing for a
+shoreline variance or conditional use permit is the date the decision of Ecology is
+transmitted by Ecology to the city. For substantial development permits
+simultaneously mailed with a CUP or variance to Ecology, the date of filing is the
+date that Ecology's decision on the CUP or variance is transmitted to the applicant
+and the city. The date of filing starts the two-year clock for beginning of construction
+and establishes the 21-day appeal period of the permit to the Shoreline Hearings
+Board. The two-year time period does not include periods of pendency for other
+related permits or legal actions.
+4. Appeal procedures for land use actions are outlined in BMC § 14A.05.190. After all
+local permit administrative appeals or reconsideration periods are complete and the
+permit documents are amended to incorporate any resulting changes, the city will mail
+the permit using return receipt requested mail to the Department of Ecology regional
+office and the Office of the Attorney General. Projects that require both conditional
+use permits and/or variances shall be mailed simultaneously with any substantial
+development permits for the project.
+5. The permit and documentation of the final local decision will be mailed together with
+the complete permit application; a findings and conclusion letter; a permit data form
+(cover sheet); and applicable SEPA documents.
+6. Time requirements for shoreline permits are as follows (see WAC 173-27-090 for
+complete language):
+a. Construction activities shall commence, or where no construction activities are
+involved, the use or activity shall commence within two years of the effective
+date of a substantial development permit.
+b. The period for commencement of construction or use may be extended once for
+a one-year period, if a request based on reasonable factors is filed before the
+expiration date and notice of the proposed extension is given to parties of record.
+c. The authorization to conduct development activities shall terminate five years
+after the effective date of a substantial development permit.
+d. The authorization period to conduct development activities may be extended
+once for a one-year period, if a request based on reasonable factors is filed
+before the expiration date and notice of the proposed extension is given to
+parties of record.
+e. The time periods in subsections (A)(4)(a) and (c) of this section do not include
+the time during which a use or activity was not actually pursued due to the
+pendency of administrative appeals or legal actions or due to the need to obtain
+any other government permits and approvals for the development that authorize
+the development to proceed, including all reasonably related administrative or
+legal actions on any such permits or approvals.
+f. It is the applicant's responsibility to inform local government of any legal
+actions or permits that may affect time periods established herein. The city may
+terminate the shoreline permit if the applicant fails to demonstrate good faith in
+obtaining all other necessary permits or resolve any legal actions in a timely
+manner.
+7. Permit review procedures shall be as follows:
+a. The planning and community development department maintains records of
+project review actions resulting in issuance of permits, including shoreline
+substantial development permits.
+b. Copies of Shoreline Management Act permit data sheet and transmittal letters
+forwarded to the Department of Ecology shall be utilized for evaluation of the
+potential cumulative effects of previous and proposed actions in shoreline areas.
+8. Appeals to the Shorelines Hearings Board shall be consistent with RCW 90.58.140.
+B. Conditional Use Permits.
+1. The purpose of a conditional use permit is to allow greater flexibility in administering
+the use regulations of the master program in a manner consistent with the policies of
+the SMA. Conditional use permits may also be granted in circumstances where denial
+of the permit would result in a thwarting of the policy enumerated in the SMA.
+2. A shoreline conditional use permit is a Type III permit, as per chapter 14A.05 BMC.
+3. The planning commission shall, following an open record public hearing, make a
+recommendation to the city council, who has the authority to make the final local
+decision.
+4. The application for a shoreline conditional use permit shall be processed pursuant to
+the legislative policies stated in the Shoreline Management Act, RCW 90.58.020
+(Legislative Findings – State Policy Enunciated – Use Preference) and the shoreline
+master program of the city of Burlington.
+5. The criteria for approving conditional uses shall be consistent with WAC173-27-160
+(Review Criteria for Conditional Use Permits) and include the following:
+a. That the proposed use is consistent with the policies of RCW 90.58.020, the
+master program, and the BMC;
+b. That the proposed use will not interfere with the normal public use of public
+shorelines;
+c. That the proposed use of the site and design of the project is compatible with
+other authorized uses within the area and with uses planned for the area under
+the comprehensive plan and the SMP;
+§ 18.09.020 SHORELINE MASTER PROGRAM § 18.09.020
+d. That the proposed use will cause no significant adverse effects to the shoreline
+environment in which it is to be located; and
+e. That the public interest suffers no substantial detrimental effect.
+6. Other uses that are not classified or set forth in the master program may be authorized
+as conditional uses; provided, that the applicant can demonstrate, in addition to the
+criteria set forth in subsection (B)(5)(a) of this section and RCW 90.58.020, that
+extraordinary circumstances preclude reasonable use of the property in a manner
+consistent with the permitted use regulations of the master program.
+7. When reviewing conditional use permit applications, consideration shall be given to
+the cumulative impact of like actions in the area. For example, if conditional use
+permits were granted for other developments in the area where similar circumstances
+exist, the total of the conditional uses shall also remain consistent with the policies of
+RCW 90.58.020 and shall not produce substantial adverse effects to the shoreline
+environment.
+8. Uses which are specifically prohibited or not allowed by the master program may not
+be authorized pursuant to either subsection (B)(5) or (6) of this section.
+C. Variances.
+1. The purpose of a variance permit is strictly limited to granting relief from specific
+bulk, dimensional or performance standards set forth in the applicable master program
+where there are extraordinary circumstances relating to the physical character or
+configuration of property. Shoreline variances should be granted in a circumstance
+where strict implementation of the master program would impose unnecessary
+hardships on the applicant or where denial of the permit would result in a thwarting
+of the policy enumerated in the SMA. In all instances, extraordinary circumstances
+should be shown, and the public interest shall suffer no substantial detrimental effect.
+2. A shoreline variance permit is a Type II permit, as per chapter 14A.05 BMC. The
+board of adjustment shall, following an open record public hearing, make a final local
+decision on the permit application.
+3. Variances for development that will be located landward of the ordinary high water
+mark may be authorized provided the applicant can demonstrate all of the following:
+a. That the strict application of the bulk, dimensional, or performance standards as
+set forth in the master program precludes or significantly interferes with a
+reasonable permitted use of the property.
+b. That the hardship is specifically related to the property and is the result of unique
+conditions, such as irregular lot shape, size, or natural features, in the application
+of the master program and not, for example, from deed restrictions or the
+applicant's own actions.
+c. That the design of the project will be compatible with other permitted activities
+in the area and will not cause adverse effects to adjacent properties or the
+shoreline environmental designation.
+d. That the variance authorized does not constitute a grant of special privilege not
+enjoyed by other properties in the area, and will be the minimum necessary to
+afford relief.
+e. That the public interest will suffer no substantial detrimental effect.
+4. Variances for development that will be located waterward of the OHWM may be
+authorized, provided the applicant can satisfy all of the criteria specified in
+subsections (C)(3)(b) through (e) of this section. The applicant must also demonstrate
+that the public rights of navigation and that the strict application of the bulk,
+dimensional, or performance standards set forth in the master program precludes all
+reasonable use of the property.
+5. In granting of all shoreline variances, consideration shall be given to the cumulative
+impact of additional requests or like actions in the area.
+6. Variances from the use regulations of the master program are prohibited.
+D. Developments Not Required to Obtain Shoreline Permits or Local Reviews. Requirements
+to obtain a substantial development permit, conditional use permit, variance, letter of
+exemption, or other review to implement the Shoreline Management Act do not apply to
+the following:
+1. Remedial actions. Pursuant to RCW 90.58.355, any person conducting a remedial
+action at a facility pursuant to a consent decree, order, or agreed order issued pursuant
+to chapter 70.105D RCW, or to the Department of Ecology when it conducts a
+remedial action under chapter 70.105D RCW.
+2. Boatyard improvements to meet NPDES permit requirements. Pursuant to RCW
+90.58.355, any person installing site improvements for storm water treatment in an
+existing boatyard facility to meet requirements of a national pollutant discharge
+elimination system storm water general permit.
+3. WSDOT facility maintenance and safety improvements. Pursuant to RCW 90.58.356,
+Washington State Department of Transportation projects and activities meeting the
+conditions of RCW 90.58.356 are not required to obtain a substantial development
+permit, conditional use permit, variance, letter of exemption, or other local review.
+4. Projects consistent with an environmental excellence program agreement pursuant to
+RCW 90.58.045.
+5. Projects authorized through the Energy Facility Site Evaluation Council process
+pursuant to chapter 80.50 RCW.
+E. Revisions to Permits.
+1. When an applicant seeks to revise a shoreline substantial development permit,
+conditional use permit, or variance, whether such permit or variance was granted
+under this SMP, or under the Skagit County SMP in effect prior to adoption of the
+Burlington SMP, the planning and community development department shall request
+from the applicant detailed plans and text describing the proposed changes to the
+project. If the staff determines that the proposed changes are within the general scope
+and intent of the original substantial development permit, conditional use permit or
+variance, as the case may be, the revision may be approved by the planning director,
+§ 18.09.020 SHORELINE MASTER PROGRAM § 18.09.020
+without the need for the applicant to file a new substantial development permit
+application, provided the development is consistent with the SMA, WAC 173-27-100
+(Revisions to Permits), and the master program.
+2. "Within the scope and intent of the original permit" means the following:
+a. No additional over-water construction will be involved, except that pier, dock,
+or float construction may be increased by 500 square feet or 10 percent from the
+provisions of the original permit, whichever is less.
+b. Lot coverage and height may be increased a maximum of 10 percent from the
+provisions of the original permit.
+c. Additional or revised landscaping is consistent with the conditions attached to
+the original permit and with the shoreline master program.
+d. The use authorized pursuant to the original permit is not changed.
+e. No adverse environmental impact will be caused by the project revision.
+f. The revised permit shall not authorize development to exceed height, lot
+coverage, setback, or any other requirements of the master program except as
+authorized under a variance granted as the original permit or a part thereof.
+3. If the revision, or the sum of the revision and any previously approved revisions, will
+violate the criteria specified above, the planning and community development
+department shall require the applicant to apply for a new shoreline substantial
+development or conditional use permit or variance, as appropriate, in the manner
+provided for herein.
+4. If proposed revisions to the original permit involve a conditional use or variance, the
+city shall submit the proposed revision to the DOE for review. The DOE shall respond
+with its final decision on the proposed revision request within 15 days of the date of
+receipt by the DOE (WAC 173-27-100(6)). The city shall notify parties of record of
+the DOE's final decision.
+5. Revisions to permits may be authorized after original permit authorization has expired
+under RCW 90.58.143. The purpose of such revisions shall be limited to authorization
+of changes which are consistent with this section and which would not require a
+permit for the development or change proposed under the terms of chapter 90.58
+RCW, this regulation and the local master program. If the proposed change
+constitutes substantial development then a new permit is required; provided, this
+subsection shall not be used to extend the time requirements or to authorize
+substantial development beyond the time limits of the original permit.
+6. The revision approval, including the revised site plans and text consistent with the
+provisions of WAC 173-27-180 as necessary to clearly indicate the authorized
+changes, and the final ruling on consistency with this section shall be filed with the
+DOE. In addition, the city shall notify parties of record of their action.
+7. The revised permit is effective immediately upon final decision by the city or, when
+appropriate under subsection (D)(4) of this section, upon final action by the DOE.
+8. Appeals shall be in accordance with RCW 90.58.180 and shall be filed within 21 days
+from the date of receipt of the city's action by the DOE or, when appropriate under
+subsection (D)(4) of this section, the date the DOE's final decision is transmitted to
+the city and the applicant. Appeals shall be based only upon contentions of
+noncompliance with the provision of subsection (D)(2) of this section. Construction
+undertaken pursuant to that portion of a revised permit not authorized under the
+original permit is at the applicant's own risk until the expiration of the appeals
+deadline. If an appeal is successful in proving that a revision is not within the scope
+and intent of the original permit, the decision shall have no bearing on the original
+permit.
+(Ord. 1786 § 1, 2013; Ord. 1924 § 1 (Exh. A), 2022)
+
+18.09.030 Statement of exemption.
+A. Whenever a development falls within the exemptions stated in BMC § 18.09.020(A)(1) and
+the development is subject to a U.S. Army Corps of Engineers Section 10 permit under the
+Rivers and Harbors Act of 1899, or a Section 404 permit under the Federal Water Pollution
+Control Act of 1972, the city shall prepare a letter addressed to the applicant and the
+department, exempting the development from the substantial development permit
+requirements of chapter 90.58 RCW. This exemption shall be in the form prescribed by
+WAC 173-27-050.
+B. A statement of exemption is also required for exempt work on levees.
+C. Exemptions shall be construed narrowly. Only those developments that meet the precise
+terms of one or more of the listed exemptions may be granted exemption from the
+substantial development permit process.
+D. An exemption from the substantial development permit process is not an exemption from
+compliance with the Act or the local master program, or from any other regulatory
+requirements. To be authorized, all uses and developments must be consistent with the
+policies and provisions of the applicable master program and the Shoreline Management
+Act. A development or use that is listed as a conditional use pursuant to the local master
+program or is an unlisted use must obtain a conditional use permit even though the
+development or use does not require a substantial development permit. When a
+development or use is proposed that does not comply with the bulk, dimensional and
+performance standards of the master program, such development or use can only be
+authorized by approval of a variance.
+E. The burden of proof that a development or use is exempt from the permit process is on the
+applicant.
+F. If any part of a proposed development is not eligible for exemption, then a substantial
+development permit is required for the entire proposed development project.
+G. Local government may attach conditions to the approval of exempted developments and/or
+uses as necessary to assure consistency of the project with the Act and the local master
+program.
+(Ord. 1786 § 1, 2013)
+
+18.09.040 Nonconforming uses, structures and lots.
+§ 18.09.040 SHORELINE MASTER PROGRAM § 18.09.040
+A. The following definitions and standards shall apply to nonconforming structures and uses
+regulated by this master program:
+1. "Nonconforming use or development" means a shoreline use or development that was
+lawfully constructed or established prior to the effective date of the city of Burlington
+shoreline master program or amendments thereto, but does not conform to current
+regulations or standards of the program.
+2. Structures that were legally established and are used for a conforming use but are
+nonconforming with regard to shoreline setback requirements may be maintained and
+repaired and may be enlarged or expanded; provided, that any such enlargement or
+expansion:
+a. Will not extend the footprint of the structure any closer to the shoreline or
+wetland than the current design;
+b. Will not interfere with or obstruct dedicated public access routes to the
+shoreline, per applicable requirements set out herein;
+c. Will meet any construction standards enacted by the city to protect adjacent
+flood risk reduction structures;
+d. Will be consistent with the current, or another authorized, conforming use; and
+e. Will adhere to underlying municipal code and building regulations.
+3. A "nonconforming lot" means a lot that met dimensional requirements of the
+applicable master program at the time of its establishment but now contains less than
+the required width, depth, or area due to subsequent changes to the master program.
+A nonconforming lot may be developed if permitted by other land use regulations of
+the city and so long as such development conforms to all other requirements of this
+master program and the Act.
+4. Uses and development that were legally established and are nonconforming with
+regard to the use regulations of the master program may continue as legal
+nonconforming uses. Such uses shall not be enlarged or expanded unless otherwise
+permitted by this SMP.
+5. A use that is listed as a shoreline conditional use but existed prior to adoption of the
+master program or any relevant amendment and for which a conditional use permit
+has not been obtained shall be considered a nonconforming use.
+6. A use that is listed as a shoreline conditional use but existed prior to the applicability
+of the master program to the site and for which a conditional use permit has not been
+obtained shall be considered a nonconforming use.
+7. A structure for which a variance has been issued shall be considered a legal
+nonconforming structure and the requirements of this section shall apply as they apply
+to preexisting nonconformities.
+8. A structure that is being used, or has been used, for a nonconforming use may be used
+for a different nonconforming use only upon the approval of a shoreline conditional
+use permit. A shoreline conditional use permit for any such new nonconforming use
+may be approved only upon a finding that:
+a. No reasonable alternative conforming use is practical; and
+b. The proposed use will be at least as consistent with the policies and provisions
+of the SMA and the master program and as compatible with the uses in the area
+as the preexisting use.
+In addition, such conditions may be attached to the permit as are deemed necessary to
+assure compliance with the above findings, the requirements of the master program
+and the Shoreline Management Act, and to assure that the use will not become a
+nuisance or a hazard.
+9. A nonconforming structure that is moved within the SMZ must be brought into
+conformance with the master program, unless such relocation is expressly authorized
+through previous agreement between the city and the property owner.
+10. If a nonconforming structure is damaged or partially destroyed to an extent not
+exceeding 50 percent of the assessed valuation of such structure as established by the
+most current Skagit County assessor's tax roll, it may be restored to its original
+condition, as authorized by the city's building official, and its immediately preceding
+or existing use at the time of partial destruction may be continued or resumed. Such
+damaged or destroyed building may be reconstructed to a size not to exceed the
+existing footprint at the time of the damage or destruction and within the height at the
+time of the damage or destruction, and except for the shoreline setback provision in
+subsection (A)(2) of this section, must conform to those specifications required by the
+current building code and applicable zoning requirements for reconstruction of
+nonconforming structures; provided, that:
+a. Application is made for the permits necessary to restore the development within
+six months of the date the damage occurred;
+b. All permits are obtained; and
+c. The restoration is started within one year and completed within two years of
+permit issuance.
+11. If a nonconforming use is discontinued for 12 consecutive months or for 12 months
+during any two-year period, the rights to such use shall expire and any subsequent use
+of such structure shall be conforming. A use authorized pursuant to subsection (A)(8)
+of this section shall be considered a legal nonconforming use for purposes of this
+section.
+12. An undeveloped lot, tract, parcel, site, or division of land located landward of the
+OHWM that was established in accordance with local and state subdivision
+requirements prior to the effective date of the city of Burlington shoreline master
+program, but does not conform to the present lot size standards or is not configured to
+allow for reasonable use that would meet current shoreline setback requirements, may
+be developed if permitted by other land use regulations of the BMC and so long as
+such development conforms to all other requirements of the master program and the
+SMA. In this case, a SMP variance shall be required.
+(Ord. 1786 § 1, 2013; Ord. 1924 § 1 (Exh. A), 2022)
+§ 18.09.050 SHORELINE MASTER PROGRAM § 18.09.080
+
+18.09.050 Enforcement.
+A. In the event of failure to comply with the plans approved by the city or with any conditions
+imposed upon the shoreline development permit, the permit shall immediately become void
+and any continuation of the use activity shall be construed as being in violation of BMC
+Title 17.
+B. Any person failing to conform to the terms of a permit issued in accordance with the SMP
+or who undertakes development on the shorelines of the state without first obtaining any
+permit required by the SMP shall be subject to a civil penalty as per RCW 90.58.210 and
+WAC 173-27-280.
+(Ord. 1786 § 1, 2013)
+
+18.09.060 Geographical jurisdiction.
+This master program shall apply to all lands and waters as defined by RCW 90.58.030 for the
+city of Burlington including the Skagit River Shoreline District and associated Gages Slough
+wetland corridor.
+The shoreline management zone extends a minimum of 200 feet upland from the line of the
+ordinary high water mark (OHWM) of the Skagit River or 200 feet from the edge of the
+floodway within the floodplain, whichever is greater. The floodway may be the area established
+by FEMA maps or by identifying the contiguous land upon which flood waters may be carried
+during periods of flooding that can occur with reasonable regularity, although not necessarily
+annually. These areas prone to flooding have been identified, under normal conditions, by
+changes in surface soil conditions or changes in types or quality of vegetative ground cover
+condition, topography, or other indicators of flooding. As of the date of writing of this shoreline
+master program, the jurisdictional map shall utilize the waterward top of levee as the edge of
+the floodway. The actual extent of shoreline jurisdiction will be determined on a case by case
+basis as needed. The shoreline management zone includes associated wetlands, but not wetland
+buffers beyond 200 feet of the floodway.
+(Ord. 1786 § 1, 2013)
+
+18.09.070 Applicability to persons.
+This master program shall apply to every person, individual, firm, partnership, association,
+organization, corporation, local or state government agency, public or municipal corporation, or
+other entity which develops, owns, leases or administers lands, wetlands, and waters which fall
+under the jurisdiction of the Shoreline Management Act. Nothing in this management program
+shall be construed as allowing any abridgment of private property rights.
+(Ord. 1786 § 1, 2013)
+
+18.09.080 Applicability to federal agencies (WAC 173-27-060).
+A. Direct federal agency activities in or affecting Washington's coastal zone shall be
+consistent to the maximum extent practicable with the enforceable policies of the most
+recent federally approved Washington State Coastal Zone Management Program pursuant
+to the Federal Coastal Zone Management Act, 16 U.S.C. 1451 et seq. (CZMA) and federal
+regulations adopted pursuant thereto.
+Washington's coastal zone, as established in the state's approved Coastal Zone
+Management Program, includes the following coastal counties: Whatcom, Skagit, San
+Juan, Island, Snohomish, King, Pierce, Thurston, Mason, Kitsap, Jefferson, Clallam, Grays
+Harbor, Pacific and Wahkiakum.
+The Shoreline Management Act is incorporated into the Washington State Coastal Zone
+Management Program and, thereby, those direct federal agency activities affecting the uses
+or resources subject to the Act must be consistent to the maximum extent practicable with
+the enforceable provisions of the Act, regulations adopted pursuant to the Act and the local
+master program.
+When the Department of Ecology receives a consistency determination for an activity
+proposed by the federal government, it shall request that local government review the
+proposal and provide the Department of Ecology with its views regarding the consistency
+of the activity or development project with the enforceable policies of the local master
+program.
+The CZMA federal consistency decision-making process for federal agency activities is
+prescribed in the Coastal Zone Management Act (16 U.S.C. 1456 (c)(1) and (2)), in federal
+regulations at 15 CFR Part 930, Subpart C, and in Washington's most recent federally
+approved CZM program document.
+B. Federal agency activities may be required by other federal laws to meet the permitting
+requirements of chapter 90.58 RCW.
+C. The policies and provisions of chapter 90.58 RCW, including the permit system, shall
+apply statewide to all nonfederal developments and uses undertaken on federal lands and
+on lands subject to nonfederal ownership, lease or easement, even though such lands may
+fall within the external boundaries of a federal ownership.
+(Ord. 1786 § 1, 2013)
+
+18.09.090 Applicability to other local, state, and federal laws.
+Obtaining a shoreline permit or letter of exemption for a development or use does not excuse the
+applicant from complying with any other local, regional, state, or federal laws applicable to such
+development or use.
+(Ord. 1786 § 1, 2013)
+
+18.09.100 Applicability to and conflicts with other local and state policies and.
+regulations.
+In the event that there are conflicts between the master program and other applicable state and
+local policies, regulations, and ordinances, the provisions of the master program shall prevail.
+(Ord. 1786 § 1, 2013)
+
+18.09.120 Liberal construction.
+This program is exempted from the rule of strict construction, and it shall be liberally construed
+to give full effect to the objectives and purposes for which it was enacted. (See also RCW
+90.58.900, Liberal Construction.)
+(Ord. 1786 § 1, 2013)
+§ 18.12.010 SHORELINE MASTER PROGRAM § 18.12.020

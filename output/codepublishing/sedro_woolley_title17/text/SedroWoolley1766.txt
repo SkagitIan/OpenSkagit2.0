@@ -1,0 +1,398 @@
+Chapter 17.66 FLOOD DAMAGE PREVENTION*
+
+         Chapter 17.66
+FLOOD DAMAGE PREVENTION*
+
+             Sections:
+
+              17.66.010    Findings of fact.
+
+              17.66.015    Statement of purpose.
+
+              17.66.020    Methods of reducing flood losses.
+
+              17.66.030    Definitions.
+
+              17.66.040    Lands to which this ordinance applies.
+
+              17.66.050    Basis for establishing the area of special flood hazard.
+
+              17.66.060    Penalties for noncompliance.
+
+              17.66.070    Abrogation and greater restrictions.
+
+              17.66.080    Interpretation.
+
+              17.66.090    Warning and disclaimer of liability.
+
+              17.66.100    Establishment of development permit.
+
+              17.66.110    Designation of the local administrator.
+
+              17.66.120    Duties and responsibilities of the local administrator.
+
+              17.66.130    Variance procedure.
+
+              17.66.140    General standards.
+
+              17.66.150    Specific standards.
+
+              17.66.160    Before regulatory floodway.
+
+              17.66.170    Floodways.
+
+              17.66.180    Standards for shallow flooding areas (AO zones).
+
+              17.66.190    Critical facility.
+
+             *    Prior ordinance history: Ords. 976, 986, 1080 and 1092.
+
+             Editor’s Note: The Zoning and Land Use Map is on file with the city clerk.
+
+        17.66.010  Findings of fact.
+
+             A.    The flood hazard areas of the city of Sedro-Woolley are subject to periodic inundation which results in loss of life and property, health, and safety hazards, disruption of commerce and governmental services, extraordinary public expenditures for flood protection and relief, and impairment of the tax base, all of which adversely affect the public health, safety, and general welfare.
+
+             B.    These flood losses are caused by the cumulative effect of obstructions in areas of special flood hazards which increase flood heights and velocities, and when inadequately anchored, damage uses in other areas. Uses that are inadequately floodproofed, elevated, or otherwise protected from flood damage also contribute to the flood loss. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.015  Statement of purpose.
+
+             It is the purpose of this chapter to promote the public health, safety, and general welfare, and to minimize public and private losses due to flood conditions in specific areas by provisions designed:
+
+             A.    To protect human life and health;
+
+             B.    To minimize expenditure of public money and costly flood control projects;
+
+             C.    To minimize the need for rescue and relief efforts associated with flooding and generally undertaken at the expense of the general public;
+
+             D.    To minimize prolonged business interruptions;
+
+             E.    To minimize damage to public facilities and utilities such as water and gas mains, electric, telephone and sewer lines, streets, and bridges located in areas of special flood hazard;
+
+             F.    To help maintain a stable tax base by providing for the sound use and development of areas of special flood hazard so as to minimize future flood blight areas;
+
+             G.    To ensure that potential buyers are notified that property is in an area of special flood hazard; and
+
+             H.    To ensure that those who occupy the areas of special flood hazard assume responsibility for their actions. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.020  Methods of reducing flood losses.
+
+             In order to accomplish its purposes, this chapter includes methods and provisions for:
+
+             A.    Restricting or prohibiting uses which are dangerous to health, safety, and property due to water or erosion hazards, or which result in damaging increases in erosion or in flood heights or velocities;
+
+             B.    Requiring that uses vulnerable to floods, including facilities which serve such uses, be protected against flood damage at the time of initial construction;
+
+             C.    Controlling the alteration of natural flood plains, stream channels, and natural protective barriers, which help accommodate or channel flood waters;
+
+             D.    Controlling filling, grading, dredging, and other development which may increase flood damage; and
+
+             E.    Preventing or regulating the construction of flood barriers which will unnaturally divert floodwaters or may increase flood hazards in other areas. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.030  Definitions.
+
+             Unless specifically defined below, words or phrases used in this ordinance shall be interpreted so as to give them the meaning they have in common usage and to give this ordinance its most reasonable application.
+
+             A.    “Appeal” means a request for a review of the interpretation of any provision of this ordinance or a request for a variance.
+
+             B.    “Area of shallow flooding” means a designated AO, or AH zone on the flood insurance rate map (FIRM). The base flood depths range from one to three feet; a clearly defined channel does not exist; the path of flooding is unpredictable and indeterminate; and, velocity flow may be evident. AO is characterized as sheet flow and AH indicates ponding.
+
+             C.    “Area of special flood hazard” means the land in the flood plain within a community subject to a one percent or greater chance of flooding in any given year. Designation on maps always includes the letters A or V.
+
+             D.    “Base flood” means the flood having a one percent chance of being equaled or exceeded in any given year. Also referred to as the “one hundred year flood.” Designation on maps always includes the letters A or V.
+
+             E.    “Basement” means any area of the building having its floor subgrade (below ground level) on all sides.
+
+             F.    “Breakaway wall” means a wall that is not part of the structural support of the building and is intended through its design and construction to collapse under specific lateral loading forces, without causing damage to the elevated portion of the building or supporting foundation system.
+
+             G.    “Coastal high hazard area” means an area of special flood hazard extending from offshore to the inland limit of a primary frontal dune along an open coast and any other area subject to high velocity wave action from storms or seismic sources. The area is designated on the FIRM as zone V1-30, VE or V.
+
+             H.    “Critical facility” means a facility for which even a slight chance of flooding might be too great. Critical facilities include, but are not limited to schools, nursing homes, hospitals, police, fire and emergency response installations, installations which produce, use or store hazardous materials or hazardous waste.
+
+             I.    “Development” means any man-made change to improved or unimproved real estate, including but not limited to buildings or other structures, mining, dredging, filling, grading, paving, excavation or drilling operations or storage of equipment or materials located within the area of special flood hazard.
+
+             J.    “Elevated building” means for insurance purposes, a nonbasement building which has its lowest elevated floor raised above ground level by foundation walls, shear walls, post, piers, pilings, or columns.
+
+             K.    “Existing manufactured home park or subdivision” means a manufactured home park or subdivision for which the construction of facilities for servicing the lots on which the manufactured homes are to be affixed (including, at a minimum, the installation of utilities, the construction of streets, and either final site grading or the pouring of concrete pads) is completed before the effective date of the adopted floodplain management regulations.
+
+             L.    “Expansion to an existing manufactured home park or subdivision” means the preparation of additional sites by the construction of facilities for servicing the lots on which the manufactured homes are to be affixed (including the installation of utilities, the construction of streets, and either final site grading or the pouring of concrete pads).
+
+             M.    “Flood” or “flooding” means a general and temporary condition of partial or complete inundation of normally dry land areas from:
+
+             1.    The overflow of inland or tidal waters; and/or
+
+             2.    The unusual and rapid accumulation of runoff of surface waters from any source.
+
+             N.    “Flood insurance rate map (FIRM)” means the official map on which the Federal Insurance Administration has delineated both the areas of special flood hazards and the risk premium zones applicable to the community.
+
+             O.    “Flood insurance study” means the official report provided by the Federal Insurance Administration that includes flood profiles, the flood boundary-floodway map, and the water surface elevation of the base flood.
+
+             P.    “Floodway” means the channel of a river or other watercourse and the adjacent land areas that must be reserved in order to discharge the base flood without cumulatively increasing the water surface elevation more than one foot.
+
+             Q.    “Lowest floor” means the lowest floor of the lowest enclosed area (including basement). An unfinished or flood resistant enclosure, usable solely for parking of vehicles, building access or storage, in an area other than a basement area, is not considered a building’s lowest floor, provided that such enclosure is not built so as to render the structure in violation of the applicable non-elevation design requirements of this ordinance found at Section  17.66.150 (A)(2).
+
+             R.    “Manufactured home” means a structure, transportable in one or more sections, which is built on a permanent chassis and is designed for use with or without a permanent foundation when attached to the required utilities. The term “manufactured home” does not include a “recreational vehicle.”
+
+             S.    “Manufactured home park or subdivision” means a parcel (or contiguous parcels) of land divided into two or more manufactured home lots for rent or sale.
+
+             T.    “New construction” means structures for which the “start of construction” commenced on or after the effective date of this ordinance.
+
+             U.    “New manufactured home park or subdivision” means a manufactured home park or subdivision for which the construction of facilities for servicing the lots on which the manufactured homes are to be affixed (including at a minimum, the installation of utilities, the construction of streets, and either final site grading or the pouring of concrete pads) is completed on or after the effective date of adopted floodplain management regulations.
+
+             V.    “Recreational vehicle” means a vehicle which is:
+
+             1.    Built on a single chassis;
+
+             2.    Four hundred square feet or less when measured at the largest horizontal projection;
+
+             3.    Designed to be self-propelled or permanently towable by a light duty truck; and
+
+             4.    Designed primarily not for use as a permanent dwelling but as temporary living quarters for recreational, camping, travel, or seasonal use.
+
+             W.    “Start of construction” includes substantial improvement, and means the date the building permit was issued, provided the actual start of construction, repair, reconstruction, placement or other improvement was within one hundred eighty days of the permit date. The actual start means either the first placement of permanent construction of a structure on a site, such as the pouring of slab or footings, the installation of piles, the construction of columns, or any work beyond the stage of excavation; or the placement of a manufactured home on a foundation. Permanent construction does not include land preparation, such as clearing, grading and filling; nor does it include the installation of streets and/or walkways; nor does it include excavation for a basement, footings, piers, or foundations or the erection of temporary forms; nor does it include the installation on the property of accessory buildings, such as garages or sheds not occupied as dwelling units or not part of the main structure. For a substantial improvement, the actual start of construction means the first alteration of any wall, ceiling, floor, or other structural part of a building, whether or not that alteration affects the external dimensions of the building.
+
+             X.    “Structure” means a walled and roofed building including a gas or liquid storage tank that is principally above ground.
+
+             Y.    “Substantial damage” means damage of any origin sustained by a structure whereby the cost of restoring the structure to its before damaged condition would equal or exceed fifty percent of the market value of the structure before the damage occurred.
+
+             Z.    “Substantial improvement” means any repair, reconstruction, or improvement of a structure, the cost of which equals or exceeds fifty percent of the market value of the structure either:
+
+             1.    Before the improvement or repair is started; or
+
+             2.    If the structure has been damaged and is being restored, before the damage occurred. For the purposes of this definition “substantial improvement” is considered to occur when the first alteration of any wall, ceiling, floor, or other structural part of the building commences, whether or not that alteration affects the external dimensions of the structure;
+
+             3.    The term does not, however, include either:
+
+             a.    Any project for improvement of a structure to correct existing violations of state or local health, sanitary, or safety code specifications which have been identified by the local code enforcement official and which are the minimum necessary to assure safe living conditions, or
+
+             b.    Any alteration of a structure listed on the National Register of Historic Places or a State Inventory of Historic Places.
+
+             AA.    “Variance” means a grant of relief from the requirements of this ordinance which permits construction in a manner that would otherwise be prohibited by this ordinance.
+
+             BB.    “Water dependent” means a structure for commerce or industry which cannot exist in any other location and is dependent on the water by reason of the intrinsic nature of its operations. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.040  Lands to which this ordinance applies.
+
+             This ordinance shall apply to all areas of special flood hazards within the jurisdiction of the city of Sedro-Woolley. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.050  Basis for establishing the area of special flood hazard.
+
+             The areas of special flood hazard identified by the Federal Insurance Administration in a scientific and engineering report entitled “The Flood Insurance Study for Sedro-Woolley” dated December 1989, and any revisions thereto, with an accompanying flood insurance rate map (FIRM), and any revisions thereto, are hereby adopted by reference and declared to be a part of this ordinance. The Flood Insurance Study and the FIRM are on file at 720 Murdock Street, Sedro-Woolley. The best available information for flood hazard area identification as outlined in Section  17.66.120 (B) shall be the basis for regulation until a new FIRM is issued which incorporates the data utilized under Section 17.66. 120(B). (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.060  Penalties for noncompliance.
+
+             No structure or land shall hereafter be constructed, located, extended, converted, or altered without full compliance with the terms of this ordinance and other applicable regulations. Violations of the provisions of this ordinance by failure to comply with any of its requirements (including violations of conditions and safeguards established in connection with conditions), shall constitute a misdemeanor. Any person who violates this ordinance or fails to comply with any of its requirements shall upon conviction thereof be fined not more than one thousand dollars or imprisoned for not more than ninety days, or both, for each violation, and in addition shall pay all costs and expenses involved in the case. Nothing herein contained shall prevent the city of Sedro-Woolley from taking such other lawful action as is necessary to prevent or remedy any violation. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.070  Abrogation and greater restrictions.
+
+             This ordinance is not intended to repeal, abrogate, or impair any existing easements, covenants, or deed restrictions. However, where this ordinance and another ordinance, easement, covenant, or deed restriction conflict or overlap, whichever imposes the more stringent restrictions shall prevail. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.080  Interpretation.
+
+             In the interpretation and application of this ordinance, all provisions shall be:
+
+             A.    Considered as minimum requirements;
+
+             B.    Liberally construed in favor of the governing body; and
+
+             C.    Deemed neither to limit nor repeal any other powers granted under state statutes. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.090  Warning and disclaimer of liability.
+
+             The degree of flood protection required by this ordinance is considered reasonable for regulatory purposes and is based on scientific and engineering considerations. Larger floods can and will occur on rare occasions. Flood heights may be increased by man-made or natural causes. This ordinance does not imply that land outside the areas of special flood hazards or uses permitted within such areas will be free from flooding or flood damages. This ordinance shall not create liability on the part of the city of Sedro-Woolley, any officer or employee thereof, or the Federal Insurance Administration, for any flood damages that result from reliance on this ordinance or any administrative decision lawfully made hereunder. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.100  Establishment of development permit.
+
+             A.    Development Permit Required. A development permit shall be obtained before construction or development begins within any area of special flood hazard established in Section  17.66.050 . The permit shall be for all structures including manufactured homes, as set forth in Section  17.66.030 , and for all development including fill and other activities, also as set forth in Section  17.66.030 .
+
+             B.    Application for Development Permit. Application for a development permit shall be made on forms furnished by the city of Sedro-Woolley and may include, but not be limited to, plans in duplicate drawn to scale showing the nature, location, dimensions, and elevations of the area in question; existing or proposed structures, fill, storage of materials, drainage facilities, and the location of the foregoing. Specifically, the following information is required:
+
+             1.    Elevation in relation to mean sea level, of the lowest floor (including basement) of all structures;
+
+             2.    Elevation in relation to mean sea level to which any structure has been floodproofed;
+
+             3.    Certification by a registered professional engineer or architect that the floodproofing methods for any nonresidential structure meet the floodproofing criteria in Section  17.66.150 (B); and
+
+             4.    Description of the extent to which a watercourse will be altered or relocated as a result of proposed development. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.110  Designation of the local administrator.
+
+             The building official is hereby appointed to administer and implement this ordinance by granting or denying development permit applications in accordance with its provisions. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.120  Duties and responsibilities of the local administrator.
+
+             Duties of the building official shall include, but not be limited to:
+
+             A.    Permit Review.
+
+             1.    Review all development permits to determine that the permit requirements of the ordinance codified in this chapter have been satisfied.
+
+             2.    Review all development permits to determine that all necessary permits have been obtained from those federal, state, or local governmental agencies from which prior approval is required.
+
+             3.    Review all development permits to determine if the proposed development is located in the floodway. If located in the floodway, assure that the encroachment provisions of Section  17.66.170 (1) are met.
+
+             B.    Use of Other Base Flood Data (In A and V Zones). When base flood elevation data has not been provided (A and V Zones) in accordance with Section  17.66.050 , “Basis for Establishing the Areas of Special Flood Hazard”, the building official shall obtain, review, and reasonably utilize any base flood elevation and floodway data available from a federal, state or other source, in order to administer Sections  17.66.150 , “Specific Standards,” and 17.66.170, “Floodways.”
+
+             C.    Information to be Obtained and Maintained.
+
+             1.    Where base flood elevation data is provided through the Flood Insurance Study, FIRM, or required as in Section  17.66.120 (B), obtain and record the actual elevation (in relation to mean sea level) of the lowest floor (including basement) of all new or substantially improved structures, and whether or not the structure contains a basement.
+
+             2.    For all new or substantially improved floodproofed structures where base flood elevation data is provided through the Flood Insurance Study, FIRM, or as required in Section  17.66.120 (B):
+
+             a.    Obtain and record the elevation (in relation to mean sea level) to which the structure was floodproofed; and
+
+             b.    Maintain the floodproofing certifications required in Section  17.66.100 (B)(3).
+
+             3.    Maintain for public inspection all records pertaining to the provisions of this ordinance.
+
+             D.    Alteration of Watercourses.
+
+             1.    Notify adjacent communities and the Department of Ecology prior to any alteration or relocation of a watercourse, and submit evidence of such notification to the Federal Insurance Administration.
+
+             2.    Require that maintenance is provided within the altered or relocated portion of said watercourse so that the flood carrying capacity is not diminished.
+
+             E.    Interpretation of FIRM Boundaries. Make interpretations where needed, as to exact location of the boundaries of the areas of special flood hazards (for example, where there appears to be a conflict between a mapped boundary and actual field conditions). The person contesting the location of the boundary shall be given a reasonable opportunity to appeal the interpretation as provided in Section  17.66.130 . (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.130  Variance procedure.
+
+             The hearing examiner shall hear and decide appeals de novo when it is alleged there is an error in any requirement, decision, or determination made by the building official in the enforcement or administration of the ordinance codified in this chapter. Procedure for such appeals is per SWMC Chapter  2.90 . (Ord.  1607-08  § 7(J), 2008: Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.140  General standards.
+
+             In all areas of special flood hazards, the following standards are required:
+
+             A.    Anchoring.
+
+             1.    All new construction and substantial improvements shall be anchored to prevent flotation, collapse, or lateral movement of the structure.
+
+             2.    All manufactured homes must likewise be anchored to prevent flotation, collapse, or lateral movement, and shall be installed using methods and practices that minimize flood damage. Anchoring methods may include, but are not limited to, use of over-the-top or frame ties to ground anchors (reference FEMA’s “Manufactured Home Installation in Flood Hazard Areas” guidebook for additional techniques).
+
+             B.    AH Zone Drainage. Adequate drainage paths are required around structures on slopes to guide floodwaters around and away from proposed structures.
+
+             C.    Construction Materials and Methods.
+
+             1.    All new construction and substantial improvements shall be constructed with materials and utility equipment resistant to flood damage.
+
+             2.    All new construction and substantial improvements shall be constructed using methods and practices that minimize flood damage.
+
+             3.    Electrical, heating, ventilation, plumbing, and air-conditioning equipment and other service facilities shall be designed and/or otherwise elevated or located so as to prevent water from entering or accumulating within the components during conditions of flooding.
+
+             D.    Utilities.
+
+             1.    All new and replacement water supply systems shall be designed to minimize or eliminate infiltration of flood waters into the systems.
+
+             2.    The proposed water well shall be located on high ground that is not in the floodway (WAC  173 -
+
+             160-171).
+
+             3.    New and replacement sanitary sewage systems shall be designed to minimize or eliminate infiltration of flood waters into the systems and discharges from the systems into flood waters.
+
+             4.    Onsite waste disposal systems shall be located to avoid impairment to them or contamination from them during flooding.
+
+             E.    Subdivision Proposals.
+
+             1.    All subdivision proposals shall be consistent with the need to minimize flood damage.
+
+             2.    All subdivision proposals shall have public utilities and facilities, such as sewer, gas, electrical, and water systems located and constructed to minimize or eliminate flood damage.
+
+             3.    All subdivision proposals shall have adequate drainage provided to reduce exposure to flood damage.
+
+             4.    Where base flood elevation data has not been provided or is not available from another authoritative source, it shall be generated for subdivision proposals and other proposed developments which contain at least fifty lots or five acres (whichever is less).
+
+             F.    Review of Building Permits. Where elevation data is not available either through the Flood Insurance Study, FIRM, or from another authoritative source (Section  17.66.120 (B)), applications for building permits shall be reviewed to assure that proposed construction will be reasonably safe from flooding. The test of reasonableness is a local judgment and includes use of historical data, high water marks, photographs of past flooding, etc., where available. Failure to elevate at least two feet above the highest adjacent grade in these zones may result in higher insurance rates. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.150  Specific standards.
+
+             In all areas of special flood hazards where base flood elevation data has been provided as set forth in Section  17.66.050 , “Basis for Establishing the Areas of Special Flood Hazard,” or Section  17.66.120 (B), “Use of Other Base Flood Data,” the following provisions are required:
+
+             A.    Residential Construction.
+
+             1.    New construction and substantial improvement of any residential structure shall have the lowest floor, including basement, elevated two feet or more above the base flood elevation.
+
+             2.    Fully enclosed areas below the lowest floor that are subject to flooding are prohibited, or shall be designed to automatically equalize hydrostatic flood forces on exterior walls by allowing for the entry and exit of floodwaters. Designs for meeting this requirement must either be certified by a registered professional engineer or architect or must meet or exceed the following minimum criteria:
+
+             a.    A minimum of two openings having a total net area of not less than one square inch for every square foot of enclosed area subject to flooding shall be provided.
+
+             b.    The bottom of all openings shall be no higher than one foot above grade.
+
+             c.    Openings may be equipped with screens, louvers, or other coverings or devices provided that they permit the automatic entry and exit of floodwaters.
+
+             B.    Nonresidential Construction. New construction and substantial improvement of any commercial, industrial or other nonresidential structure shall either have the lowest floor, including basement, elevated two feet or more above the base flood elevation; or, together with attendant utility and sanitary facilities, shall:
+
+             1.    Be floodproofed so that below two feet or more above the base flood level the structure is watertight with walls substantially impermeable to the passage of water;
+
+             2.    Have structural components capable of resisting hydrostatic and hydrodynamic loads and effects of buoyancy;
+
+             3.    Be certified by a registered professional engineer or architect that the design and methods of construction are in accordance with accepted standards of practice for meeting provisions of this subsection based on their development and/or review of the structural design, specifications and plans. Such certifications shall be provided to the official as set forth in Section  17.66.120 (C)(2);
+
+             4.    Nonresidential structures that are elevated, not floodproofed, must meet the same standards for space below the lowest floor as described in 17.66.150(A)(2);
+
+             5.    Applicants floodproofing nonresidential buildings shall be notified that flood insurance premiums will be based on rates that are one foot below the floodproofed level (e.g. a building floodproofed to the base flood level will be rated as one foot below).
+
+             C.    Manufactured Homes.
+
+             1.    All manufactured homes to be placed or substantially improved on sites:
+
+             a.    Outside of a manufactured home park or subdivision,
+
+             b.    In a new manufactured home park or subdivision,
+
+             c.    In an expansion to an existing manufactured home park or subdivision, or
+
+             d.    In an existing manufactured home park or subdivision on which a manufactured home has incurred “substantial damage” as the result of a flood;
+
+             shall be elevated on a permanent foundation such that the lowest floor of the manufactured home is elevated two feet or more above the base flood elevation and be securely anchored to an adequately designed foundation system to resist flotation, collapse and lateral movement.
+
+             2.    Manufactured homes to be placed or substantially improved on sites in an existing manufactured home park or subdivision that are not subject to the above manufactured home provisions be elevated so that either:
+
+             a.    The lowest floor of the manufactured home is elevated two feet or more above the base flood elevation, or
+
+             b.    The manufactured home chassis is supported by reinforced piers or other foundation elements of at least equivalent strength that are no less than thirty-six inches in height above grade and be securely anchored to an adequately designed foundation system to resist flotation, collapse, and lateral movement.
+
+             D.    Recreational Vehicles. Recreational vehicles placed on sites are required to either:
+
+             1.    Be on the site for fewer than one hundred eighty consecutive days;
+
+             2.    Be fully licensed and ready for highway use, on its wheels or jacking system, is attached to the site only by quick disconnect type utilities and security devices, and has no permanently attached additions; or
+
+             3.    Meet the requirements of Section  17.66.150 (C) above and the elevation and anchoring requirements for manufactured homes. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.160  Before regulatory floodway.
+
+             In areas where a regulatory floodway has not been designated, no new construction, substantial improvements, or other development (including fill) shall be permitted within zones A1 - 30 and AE on the community’s FIRM, unless it is demonstrated that the cumulative effect of the proposed development, when combined with all other existing and anticipated development, will not increase the water surface elevation of the base flood more than one foot at any point within the community. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.170  Floodways.
+
+             Located within areas of special flood hazard established in Section  17.66.050  are areas designated as floodways. Since the floodway is an extremely hazardous area due to the velocity of floodwaters which carry debris, potential projectiles, and erosion potential, the following provisions apply:
+
+             A.    Prohibit encroachments, including fill, new construction, substantial improvements, and other development unless certification by a registered professional engineer is provided demonstrating through hydrologic and hydraulic analyses performed in accordance with standard engineering practice that the proposed encroachment would not result in any increase in flood levels during the occurrence of the base flood discharge.
+
+             B.    Construction or reconstruction of residential structures is prohibited within designated floodways, except for (1) repairs, reconstruction, or improvements to a structure which do not increase the ground floor area; and (2) repairs, reconstruction or improvements to a structure, the cost of which does not exceed fifty percent of the market value of the structure either, (a) before the repair, or reconstruction is started, or (b) if the structure has been damaged, and is being restored, before the damage occurred. Any project for improvement of a structure to correct existing violations of state or local health, sanitary, or safety code specifications which have been identified by the local code enforcement official and which are the minimum necessary to assure safe living conditions or to structures identified as historic places shall not be included in the fifty percent.
+
+             C.    If subsection (A) is satisfied, all new construction and substantial improvements shall comply with all applicable flood hazard reduction provisions of Section 17.66.140-.190. (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.180  Standards for shallow flooding areas (AO zones).
+
+             Shallow flooding areas appear on FIRMs as AO zones with depth designations. The base flood depths in these zones range from one to three feet above ground where a clearly defined channel does not exist, or where the path of flooding is unpredictable and where velocity flow may be evident. Such flooding is usually characterized as sheet flow. In these areas, the following provisions apply:
+
+             A.    New construction and substantial improvements of residential structures and manufactured homes within AO zones shall have the lowest floor (including basement) elevated above the highest adjacent grade to the structure, one foot or more above the depth number specified in feet on the community’s FIRM (at least two feet above the highest adjacent grade to the structure if no depth number is specified).
+
+             B.    New construction and substantial improvements of nonresidential structures within AO zones shall either:
+
+             1.    Have the lowest floor (including basement) elevated above the highest adjacent grade of the building site, one foot or more above the depth number specified on the FIRM (at least two feet if no depth number is specified); or
+
+             2.    Together with attendant utility and sanitary facilities, be completely flood proofed to or above that level so that any space below that level is watertight with walls substantially impermeable to the passage of water and with structural components having the capability of resisting hydrostatic and hydrodynamic loads and effects of buoyancy. If this method is used, compliance shall be certified by a registered professional engineer or architect as in Section  17.66.150 (B)(3).
+
+             C.    Require adequate drainage paths around structures on slopes to guide floodwaters around and away from proposed structures.
+
+             D.    Recreational vehicles placed on sites within AO Zones on the community’s FIRM either:
+
+             1.    Be on the site for fewer than one hundred eighty consecutive days;
+
+             2.    Be fully licensed and ready for highway use, on its wheels or jacking system, is attached to the site only by quick disconnect type utilities and security devices, and has no permanently attached additions; or
+
+             3.    Meet the requirements of Sections  17.66.180 (A) and  17.66.180 (C) above and the anchoring requirements for manufactured homes (Section 17.66. 140(A)(2)). (Ord.  1484-04  § 14 (part), 2004)
+
+        17.66.190  Critical facility.
+
+             Construction of new critical facilities shall be, to the extent possible, located outside the limits of the Special Flood Hazard Area (SFHA) (one hundred year floodplain). Construction of new critical facilities shall be permissible within the SFHA if no feasible alternative site is available. Critical facilities constructed within the SFHA shall have the lowest floor elevated three feet or to the height of the five hundred year flood, whichever is higher. Access to and from the critical facility should also be protected to the height utilized above. Floodproofing and sealing measures must be taken to ensure that toxic substances will not be displaced by or released into floodwaters. Access routes elevated to or above the level of the base flood elevation shall be provided to all critical facilities to the extent possible. (Ord.  1484-04  § 14 (part), 2004)

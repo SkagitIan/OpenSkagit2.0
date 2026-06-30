@@ -1,0 +1,691 @@
+Ch. 19.62 Site Planning | Anacortes Municipal Code
+
+ Skip to main content
+
+		Loading…
+
+	 Anacortes, WA
+
+		Municipal Code
+
+				   Home
+
+					   Ch. 19.61
+
+					   Title 19 Div. 6
+
+					   Ch. 19.63
+
+			 Toggle site navigation
+
+			 Menu
+
+		  City of Anacortes
+
+						Municipal Code
+
+  Title 19, Unified Development Code
+  Title 19 Div. 6, Project Design
+  Ch. 19.62, Site Planning
+
+						   Home
+
+							   Contents
+
+						   Track
+
+							Legislative History
+
+								Historic Versions
+
+								Pending Updates
+
+								Recent Updates
+
+						   Share
+
+							This Page
+
+							Your Selections
+
+						   Settings
+
+						   Help
+
+		  City of Anacortes
+
+						Municipal Code
+
+  Title 19, Unified Development Code
+  Title 19 Div. 6, Project Design
+  Ch. 19.62, Site Planning
+
+	    Chapter 19.62   SITE PLANNING   Revised
+
+			 Search Within This
+
+	   This chapter is included in your selections.
+
+ Sections:
+
+   19.62.010   Purpose.
+
+   19.62.020   Applicability.  Revised
+
+   19.62.030   Relationship to adjacent properties.  Revised
+
+   19.62.040   Internal open space.  Revised
+
+   19.62.050   Internal pedestrian access and design.
+
+   19.62.060   Vehicular circulation and parking.
+
+   19.62.070   Service areas and mechanical equipment.  Revised
+
+    19.62.010   Purpose.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+    A.   To promote thoughtful layout of  buildings , parking areas, and circulation, service,  landscaping , and amenity elements.
+
+    B.   Enhance Anacortes’s visual character.
+
+    C.   Promote compatibility between  developments  and uses.
+
+    D.   Enhance the function of  developments .
+
+    E.   Meet  stormwater  infiltration requirements when feasible.  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.62.020   Applicability.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+    A.   The provisions of this chapter apply to all nonresidential and multifamily  development . The following are exempt:
+
+      1.   Add  development  in the I, LM, AZ, CM2, and MS zones.
+
+      2.    Developments  in the HM and LM1 zones when not abutting State Route 20  right-of-way .
+
+      3.   Townhouse  development , except that for large  developments  with multiple  buildings , internal drive aisles, and/or featuring common service elements, the provisions of AMC  19.62.070  may be applied.
+
+    B.   For clarification on the relationship between the provisions in this division and other documents and codes, see AMC  19.60.020(B) .
+
+    C.   For the application of  building  additions and remodels and site improvements, see AMC  19.60.020(C) .
+
+    D.   For clarification on how the provisions of this division are applied, see AMC  19.60.030 .  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.62.030   Relationship to adjacent properties.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+   A.   Purpose.
+
+      1.   To promote the functional and visual compatibility between  developments .
+
+      2.   To protect the privacy of residents on adjacent properties.
+
+    B.   Balconies near Side and Rear Property Lines Adjacent to Property in Any Residential Zone.   Balconies and rooftop decks above the  ground floor  within 15 horizontal feet of a side property line abutting a residentially zoned property must feature a railing system that is at least 50 percent opaque. Specifically, 50 percent of the area below the top edge of the railing must be a sight-obscuring  structure .
+
+  DEPARTURES  to this standard will be allowed if the balcony will not cause visual or privacy impacts due to its location, orientation, design or other consideration.
+
+    Figure 19.62.030(B)
+ Privacy standards for balconies within 15 feet of side or rear property lines.
+
+    C.   Light and Air Access and Privacy near Interior Side and Rear Property Lines.    Buildings  or portions thereof containing  multifamily dwelling   units  whose only solar access (windows) is from the applicable side of the  building  (facing towards the interior side property line) must be set back from the applicable interior side or rear property lines at least 15 feet. See Figure 19.62.030(C).
+
+      1.   Balconies may be allowed to project up to six feet into the required 15 feet where such  setbacks  are required herein, provided they comply with the balcony standards in subsection  (B)  above.
+
+  DEPARTURES  will be allowed where it is determined that the proposed design will not create a compatibility problem in the near and long term based on the unique site context.
+
+    Figure 19.62.030(C)
+ Light/air access and privacy standards for multifamily residential buildings along interior side and rear property lines.
+
+  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.62.040   Internal open space.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+   A.   Purpose.
+
+      1.   To create usable space that is suitable for leisure or recreational activities for residents.
+
+      2.   To create  open space  that contributes to the residential setting.
+
+      3.   To provide plazas that attract shoppers to commercial areas.
+
+      4.   To provide plazas and other  pedestrian-oriented spaces  in commercial areas that enhance the employees’ and public’s opportunity for active and passive activities, such as dining, resting,  people  watching, and recreational activities.
+
+      5.   To enhance the  development  character and attractiveness of commercial  development .
+
+   B.   Usable Residential Open Space.
+
+      1.   Usable residential  open space  must be provided as follows:
+
+ Housing Type
+
+ Quantity
+
+ Multifamily (including multifamily portions of  mixed-use   development )
+
+ 100 sq. ft. per  dwelling unit  for studio and 1-bedroom  dwellings
+
+ 150 sq. ft. per  dwelling unit  for  dwellings  with 2 or more bedrooms
+
+  Co-living housing
+
+ 25 sq. ft. per  sleeping unit
+
+  Permanent supportive housing  and  transitional housing  (new  development )
+
+ 100 sq. ft. per  dwelling unit
+
+  Emergency shelter
+
+ None
+
+      2.   The required  open space  may be provided in a combination of ways:
+
+        a.   Shared Open Space.   All of the required  open space  may be in the form of shared  open space  available to all residents and meeting the requirements of subsection  (B)(2)  of this section.
+
+        b.   Ground Level Individual Outdoor Space.   All of the required  open space  for a  unit  may be provided by ground level outdoor space that is adjacent and directly accessible to the subject  unit . Such  open spaces  must be:
+
+          i.   Outdoor spaces may be located in the front, side, or rear yard, provided they are generally level, feature no dimension less than 10 feet, and are enclosed by a  fence  and/or  hedge  at least 32 inches in height to qualify.
+
+   DEPARTURES  will be considered for this provision.
+
+          ii.   Private porches may qualify as outdoor space, provided they are at least 36 square feet in area, with no dimension less than six feet.
+
+          iii.     LID BMPs  may be included in ground level individual outdoor space, provided the  LID BMP  design and maintenance requirements are consistent with the purpose of the space and do not affect usability.
+
+ Individual ground level  open space  that is in excess of  minimum requirements  must not be used in the calculations for determining the minimum usable  open space  requirements for other  units  in the  development .
+
+        c.   Balconies.   Up to 50 percent of the required  open space  may be provided by private balconies, provided such spaces are at least 32 square feet in area, with no dimension less than four feet (not including railings), to provide a space usable for human activity.
+
+        d.   Common Indoor Recreation Areas.   For  mixed-use   buildings , up to 50 percent of the required  open space  may be provided by common indoor recreation areas meeting the following conditions:
+
+          i.   The minimum area is 250 square feet. The space must feature dimensions necessary to provide functional leisure or recreational activities (unless otherwise noted herein).
+
+          ii.   The space must meet ADA standards and must be located in a visible area, such as near an entrance, lobby, or high-traffic corridor.
+
+          iii.   The space must be designed specifically to serve interior recreational functions and not merely be leftover unrentable space used to meet the  open space  requirement. Such space must include amenities and design elements that will encourage use by residents.
+
+        e.   Shared Roof Decks.   Such spaces are a type of private internal common area located on the top of  buildings  or intermediate levels (e.g., upper floor  building   facade  step-back areas) and are available to all residents. Up to 50 percent of the required  open space  may be provided by shared roof decks. Examples of amenities include, but are not limited to, cooking and dining areas, seating areas, gardening areas, water features, children’s play areas and pet play areas. Shared rooftop decks must meet the following design standards:
+
+          i.   Space must feature hard surfacing, and provide amenities such as seating areas and other features that encourage use.
+
+          ii.   Space must integrate  landscaping  elements that enhance the character of the space and encourage its use.
+
+          iii.   Space must incorporate features that provide for the safety of residents, such as enclosures, railings, and appropriate lighting levels.
+
+      3.   Shared Open Space Design Requirements.   Shared  open space  can include  landscaped  courtyards or decks, entrance plazas, gardens with pathways, children’s play areas, pools, and water features, provided they are accessible to all residents of the  development . Accessible areas with  native vegetation  and areas used for  stormwater  retention, infiltration, or other multipurpose recreational and/or green spaces that meet the design criteria herein may qualify as shared  open space .
+
+ Special requirements for shared  open spaces  include the following:
+
+        a.   Shared  open space  must be located in centralized areas that are visible from  units  within the  development .
+
+        b.   Required  setback  areas must not count as shared  open space  unless the design of the space meets the standards herein.
+
+        c.   Shared  open space  must feature no dimension less than 15 feet in order to provide functional leisure or recreational activity (unless otherwise noted herein).
+
+        d.   Shared  open space  must feature paths or walkable lawns,  landscaping , seating, lighting, and play  structures , sports courts, or other pedestrian amenities to make the area more functional and enjoyable for a range of users.
+
+        e.   Shared  open space  must be separated from ground level windows, streets, service areas and parking  lots  with  landscaping ,  fencing , and/or other acceptable treatments that enhance safety and privacy for both the shared  open space  and  dwelling units .
+
+        f.   When possible, the space should be oriented to receive sunlight, facing east, west or preferably south.
+
+        g.   Stairways and service elements located within or on the edge of shared  open space  must not be included in the  open space  calculations.
+
+        h.   Shared porches may qualify as shared  open space , provided they are at least eight feet in depth and 96 square feet in total area.
+
+        i.   The space must be accessible to all residents of the  development .
+
+        j.   Shared  open spaces  may include  LID BMPs , like  rain gardens , in up to 25 percent of the required  open space .
+
+    Figure 19.62.040(B)(3)(a)
+ Shared open space examples.
+
+ The upper left example includes a combination of open lawn area for informal recreation plus pathways and decorative  landscape  areas to enhance the setting for residents. The upper right courtyard includes pathways, seating areas,  landscaped  beds, and decorative lighting to provide a visual and physical amenity for residents.
+
+ The left image above includes a covered gathering space with outdoor grills adjacent to a  landscaped  commons with a central pathway. The right image includes a  pond  area with boardwalk and seating areas.
+
+    Figure 19.62.040(B)(3)(b)
+ Rooftop deck examples.
+
+      4.   Open Space Credit.   Multifamily  development  and multifamily portions of  mixed-use   development  and  co-living housing  may reduce the minimum amount of usable  open space  required per  unit  under subsection  (B)(1)  of this section by 33 percent (one-third) when the primary entrance of the  development  is located within 250 feet walking distance of a park at least one-quarter acre in size. The park may be public or private, and it must be accessible to all residents and be suitable for a variety of leisure and recreational activities.
+
+      5.   Modification.   The  Director  may reduce or modify the required  open space  standards of this section in the following circumstances:
+
+        a.   The project provides 100 percent of the  units  as permanently affordable  units  for  households  earning zero to 60 percent AMI.
+
+        b.   The project preserves significant architectural features or contributes to community historic preservation goals in a manner that limits  open space  placement or involves constrained parcels where rigid  open space  ratios would limit viable  development .
+
+        c.   The primary entrance of the  development  is located within one-quarter-mile walking distance of a  public park  or publicly accessible  open space .
+
+    C.   Usable Commercial Open Space.   New  developments  with nonresidential uses with more than 10,000 square feet of  gross floor area  in the C, CBD, and MMU zones must provide  open space  equal to at least two percent of the  development site . The  open space  may be in the form of pedestrian-oriented  open space  per subsection  (D)  below, garden, play area and/or other  open space  feature that serves both as a visual amenity and a place for human activity. Portions of sidewalks that are wider than 12 feet and which meet the standards of pedestrian-oriented  open space  may be counted toward this requirement.
+
+  DEPARTURE :  Open space  area may be reduced to one percent of the  development site  if the  Director  finds the project includes exceptional design features and elements that meet the purpose of the standards. This includes  open spaces  that feature a combination of design (site materials, amenities, and configurations) and location/context that clearly exceed typical plaza designs found in the region.
+
+    Figure 19.62.040(C)
+ Example of site development integrating usable commercial open space.
+
+    D.   Pedestrian-Oriented Open Space Design Criteria.   This subsection describes the requirements and desired characteristics of pedestrian-oriented  open space  (which may be used to meet the requirements of subsection  C  of this section).
+
+     1.   Required Pedestrian-Oriented Open Space Features.
+
+        a.   Visual and pedestrian access into the site from a street, private access road, or nonvehicular courtyard.
+
+        b.   Paved walking surfaces of either concrete or approved  unit  paving. Form-in-place pervious concrete paving is allowed.
+
+        c.   Lighting must conform to AMC  19.69.040 .
+
+        d.   The spaces must be located in or adjacent to areas with significant pedestrian traffic to provide interest and security, such as adjacent to or visible from a  building  entry.
+
+        e.   At least two feet of seating area (a bench or ledge at least 16 inches deep and appropriate seating height) or one individual seat per 60 square feet of plaza area or  open space .
+
+        f.    Landscaping  components that add visual interest and do not act as a visual barrier. This could include planting beds, raised planters, and/or potted plants, or both.
+
+     2.   Desirable Pedestrian-Oriented Open Space Features.
+
+        a.   Pedestrian amenities, such as site furniture, artwork, drinking fountains, shade  structures , kiosks, or other similar features.
+
+        b.   Adjacent  buildings  with transparent windows and doors covering at least 50 percent of the  facade  between 30 inches and 10 feet above the ground level.
+
+        c.   Pedestrian  weather protection , alcoves, seating, or other features along  building  edges to allow for outdoor gathering.
+
+        d.   Pedestrian-oriented  open spaces  may include  LID BMPs , like  rain gardens , in up to 25 percent of the required  open space .
+
+     3.   Features Prohibited within a Pedestrian-Oriented Open Space.
+
+        a.   Asphalt pavement.
+
+        b.   Adjacent service areas (e.g., trash areas, loading docks) that are not separated with  landscaping , as required by AMC  19.62.070 .
+
+        c.   Adjacent chain-link  fences .
+
+        d.   Adjacent  blank walls  without  blank wall  treatment (see AMC  19.63.070 ).
+
+        e.   Outdoor storage.
+
+    Figure 19.62.040(D)(1)
+ Example of a small pedestrian-oriented open space.
+
+    Figure 19.62.040(D)(2)
+ Desirable examples of pedestrian-oriented open space.
+
+ The left example above is a colorful plaza with outdoor seating,  landscaping  elements and direct access to adjacent  retail  uses. The upper right image is a commons area with adjacent covered areas.
+
+ A covered outdoor gathering space (left) may be used to meet pedestrian-oriented  open space  requirements. In the right image, the widened sidewalk area may be counted as pedestrian-oriented  open space .
+
+  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.62.050   Internal pedestrian access and design.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+   A.   Purpose.
+
+      1.   To improve the pedestrian and bicycling environment by making it easier, safer, and more comfortable to walk or ride among residences, to businesses, to the street sidewalk, to transit stops, through parking  lots , to adjacent properties, and connections throughout the  city .
+
+      2.   To enhance access to on- and off-site  open space  areas and pedestrian/bicycle paths.
+
+    B.   Access to Sidewalk.   All  buildings  must feature pedestrian connections to a sidewalk per applicable  block frontage  standards in Chapter  19.61 . See subsection  (D)  below for access design requirements.
+
+    Figure 19.62.050(B)
+ Examples of direct pedestrian access to buildings from the street.
+
+   C.   Internal Circulation.
+
+      1.   For sites with multiple  buildings  in the C, CBD, and MMU zones, pedestrian paths connecting businesses and residential entries on the same  development site  must be provided. Routes that minimize walking distances must be utilized to the extent practical.
+
+  DEPARTURES  will be allowed where an indirect route would enhance the design and/or use of a common usable  open space . See subsection  (D)  below for pathway design standards.
+
+    Figure 19.62.050(C)(1)
+ Internal and external pedestrian connections are important.
+
+      2.   Sites with Residential Units.   Provide direct pedestrian access between all ground related  unit  entries and a  public street  or to a clearly marked pathway network or  open space  that has direct access to a  public street . Residential  developments  must provide a pedestrian circulation network that connects all main entrances on the site to other areas of the site, such as:
+
+        a.   Parking areas.
+
+        b.   Recreational areas.
+
+        c.   Common outdoor areas.
+
+        d.   Any pedestrian amenities.
+
+ For townhouses or other residential  units  fronting the street, the sidewalk may be used to meet this standard.
+
+    Figure 19.62.050(C)(2)(a)
+ Direct pathways between the street and dwelling units are required.
+
+ The entries of the example on the left connect directly to a public sidewalk while the entries in the right example connect to a common path that extends to the sidewalk.
+
+    Figure 19.62.050(C)(2)(b)
+ Examples of attractive pedestrian connection through a residential development.
+
+      3.   Crosswalks are required when a pathway crosses an on-site paved area accessible to vehicles. Crosswalks must contain contrasting material (such as concrete) and/or patterns (such as stamped asphalt), excluding painted surfaces.
+
+      4.   Pedestrian Paths through Parking Lots.   Large parking areas must include specially marked or paved sidewalks. At least one pathway must be provided every four rows of parking, or at a maximum spacing of 200 feet. The pathways must provide a safe connection to the  building  entrance and meet the pathway design standards in subsection  D  of this section. See examples below.
+
+    Figure 19.62.050(C)(4)
+ Parking area pathway standards and examples.
+
+ Note the location of the parking  lot  pathway in the upper right example (connecting shops in one  building  to the main entry of a grocery store).
+
+ Note in both examples that the concrete pathway extends into the vehicular area to provide a highly visible and safe crosswalk.
+
+      5.   Barriers that limit future pedestrian access are prohibited. Gates that limit access to employees and residents are permitted. See subsection  (D)  below for pathway design standards.
+
+   D.   Pathway Design.
+
+      1.   All internal pedestrian pathways must have at least a minimum five-foot-wide unobstructed walking surface, except where otherwise required by the Anacortes engineering design standards.
+
+      2.   All internal pedestrian pathways must be curbed and raised six inches above adjacent parking  lot  surface. Curbs may be cut to allow  surface water  runoff to enter  low-impact development best management practices  ( LID BMPs ). Ramps and other accessibility features must be provided in accordance with the Americans with Disabilities Act of 1990 and the current ADA Standards for Accessible Design.
+
+  DEPARTURE : Alternative curbless designs may be approved where design features are included to make the pathways safe and welcoming while enhancing the visual character of the site. See the lower right example in Figure 19.62.060(C) as a good example of a curbless design.
+
+      3.   Where a pedestrian pathway is adjacent to perpendicular or angled parking, an extra two feet of pathway width must be provided to accommodate parked vehicles overhanging the pathway unless wheel stops are installed to prevent parked vehicles from overhanging the curb.
+
+      4.   Pedestrian walks must be separated from  structures  with at least three feet of  landscaping  except where the adjacent  building   facade  meets the  storefront block frontage  standards per AMC  19.61.060 .
+
+  DEPARTURE : Other  landscaping  and/or  facade  design treatments to provide attractive pathways will be considered. Examples include sculptural, mosaic, bas-relief artwork, or other decorative treatments that meet the purpose. Figure 19.62.050(D)(4) below provides one example.
+
+    Figure 19.62.050(D)(4)
+ Standards for internal pathways adjacent to buildings.
+
+ Internal pathways adjacent to  building   walls  that do not meet  storefront   facade  standards must provide at least three feet of  landscaping  to enhance the character of the pathway. The  Director  will consider alternative treatments, such as decorative  walls  (right example).
+
+      5.   Pathways along  facades  containing primary tenant entries of multi-tenant commercial or  mixed-use   buildings , and which are 100 feet long or more and abut parking  lots , must include the following:
+
+        a.   Twelve-foot-wide sidewalk and eight feet minimum unobstructed width.
+
+        b.    Trees , as approved by the reviewing authority, placed at an average of 50 feet on center and placed in grates or in planting strips as established in subsection  (D)(5)(c)  of this section.
+
+  DEPARTURE : Breaks in the  tree  coverage will be allowed near major  building  entries to enhance visibility.
+
+        c.   Planting strips with  trees  may be used between any vehicle access or parking area and the pathway; provided, that the  trees  required in subsection  (D)(5)(b)  of this section are included, the pathway meets the applicable width standards herein, and the combined pathway and planting strip is at least 12 feet wide.  Stormwater   best management practices  elements may be included in the planting strip.
+
+    Figure 19.62.050(D)(5)
+ Example of a successful pedestrian sidewalk between parking lot and storefront.
+
+        d.   Pedestrian lighting in accordance with AMC  19.69.040 .
+
+        e.   See also AMC  19.62.060(C) , Internal Roadway Design.  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.62.060   Vehicular circulation and parking.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+ The standards herein supplement the provisions of AMC Chapters  19.64 , Parking, and  19.53 , Private Driveways and Access. Where there is a conflict, these provisions herein apply.
+
+   A.   Purpose.
+
+      1.   To create a safe, convenient, and efficient network for vehicle circulation and parking.
+
+      2.   To enhance the visual character of interior access roads.
+
+      3.   To minimize conflicts with pedestrian circulation and activity.
+
+    B.   Driveway Provisions.   Driveways must meet the standards in AMC  19.53.030 .
+
+   C.   Internal Roadway Design.
+
+      1.   To increase the function and appearance of internal roadways on large sites (greater than two acres) in the MMU zone, street  trees  and sidewalks must be provided on all internal access roadways, excepting access roads designed solely for the purpose of service (e.g., waste pick-up) and loading.
+
+  DEPARTURES  will be allowed, provided the overall pedestrian circulation system and site  landscaping  meet the intent of the standards.
+
+      2.   In some instances where traffic speed and volume are low, the reviewing authority may approve a street where vehicle, bicycle and pedestrian movement are mixed such as in a “woonerf” or “shared street.” Woonerf streets must feature traffic-calming and safety measures as well as  landscape  and amenity features as determined by the reviewing authority.
+
+    Figure 19.62.060(C)
+ Good internal roadway examples.
+
+ The examples above include angled parking and planter strips with street  trees . Pedestrian-scaled lighting also contributes to the character in the upper right image.
+
+ The above left image illustrates a thoroughfare lane with a row of street  trees . A sidewalk is included on one side of the street to provide a strategic connection between businesses. The right image illustrates the curbless “woonerf” design where travel speeds are low and lanes are shared between pedestrians and vehicles.
+
+    D.   Drive-Through Facilities.   Where allowed, drive through facilities (e.g., drive-up windows) must comply with the following:
+
+      1.   Block Frontage Provisions.   For the purpose of complying with the  block frontage  standards in AMC Chapter  19.61 , drive-through lanes are considered a parking area.
+
+      2.   Screening.   Drive-through lanes must be screened from  public streets , internal pathways, and adjacent residential uses with  landscaping  or architectural screens.
+
+        a.   For drive-through lanes adjacent to the street, at least 10 feet of Type C  landscaping  (see AMC  19.65.060 ) must be provided between the sidewalk and the drive-through lane.
+
+        b.   For drive-through lanes adjacent to internal pathways, at least five feet of Type C  landscaping  (see AMC  19.65.060 ) must be provided between the pathway and the drive-through lane.
+
+        c.   For drive-through lanes adjacent to residential uses, at least five feet of Type A, B, or C  landscaping  (see AMC  19.65.060 ) must be provided.
+
+  DEPARTURE : Alternative screening schemes may be approved, provided they reduce the negative visual impacts of views from sidewalks, pathways, and adjacent residential uses and add visual interest.
+
+     3.   Additional Drive-Through Lane Standards.
+
+        a.   Drive-through lanes must not restrict pedestrian access between a public sidewalk and on-site  buildings . Designated pathways must not be located within required stacking space.
+
+        b.   Stacking spaces and the entrance and exit for the drive-through facility must be located to prevent any vehicles from extending onto the public  right-of-way , or interfering with any pedestrian circulation, traffic maneuvering, or other  parking space  areas.
+
+        c.   Sufficient stacking space must be provided for handling of motor vehicles using the drive-through facility during peak business hours of the facility.
+
+        d.   A stacking space must be an area measuring eight feet by 20 feet with direct forward access to a service window of a drive-through facility.
+
+        e.   Stacking spaces may not be counted as required  parking spaces .
+
+        f.   Noise from drive-through speakers must not be audible from adjacent residential properties.  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.62.070   Service areas and mechanical equipment.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+   A.   Purpose.
+
+      1.   To minimize adverse visual, odor, and noise impacts of mechanical equipment, utility cabinets and service areas at ground and roof levels.
+
+      2.   To provide adequate, durable, well-maintained, and accessible service and equipment areas.
+
+      3.   To protect residential uses and adjacent properties from impacts due to location and utilization of service areas.
+
+    B.   Location of Ground-Related Service Areas and Mechanical Equipment.   Ground-level  building  service areas and mechanical equipment include loading docks, trash collection and compactors, dumpster areas, storage tanks, electrical panels, HVAC equipment, and other utility equipment. If any such elements are outside the  building  envelope at ground level, the following location standards apply.
+
+      1.   Service areas must be located for convenient service access while avoiding negative visual, auditory, olfactory, or physical impacts on the  streetscape  environment and adjacent residentially zoned properties. Service areas must be sited for alley access if available.
+
+ The  Director  may require evidence that such elements will not significantly impact neighboring properties or public areas. (For example, the  Director  may require noise-damping specifications for fans near residential zones.)
+
+      2.   Exterior Loading Areas.   Exterior loading areas for commercial uses must not be located within 20 feet of a residentially zoned property.
+
+  DEPARTURES  may be allowed where such a restriction does not allow feasible  development , and alternative design measures can successfully mitigate potential negative impacts. For example, areas and drives may be required by the reviewing authority to be separated from the residential  lot  by a masonry  wall  at least eight feet high.
+
+      3.   Service areas must not be visible from the sidewalk and adjacent properties. Where the  Director  finds that the only option for locating a service area is an area visible from a street, internal pathway or pedestrian area, or from an adjacent property, the area must be screened with structural and or  landscaping  screening measures provided in subsection  (C)  below and AMC Chapter  19.65 ,  Landscaping . Service elements accessible from an alley are exempt from screening requirements.
+
+      4.   Design for Safety.   Other provisions of this section notwithstanding, service areas used by residents must be located to avoid entrapment areas and other conditions where personal security is potentially a problem. The  Director  may require pedestrian-scaled lighting or other measures to enhance security.
+
+      5.   Locate and/or shield noise-producing mechanical equipment, such as fans, heat pumps, etc., to minimize sounds and reduce impacts at property lines adjacent to residentially zoned properties.
+
+     6.   Dumpster Storage Areas.
+
+        a.   Dumpster storage areas must be provided for all nonresidential and multifamily  development .
+
+        b.   Dumpster storage areas must be on site and must not be located in the public  right-of-way .
+
+        c.   Dumpster storage areas must be sized to accommodate the minimum dumpster sizes (as provided by the Anacortes engineering design standards) for garbage, recycling, and composting.
+
+        d.   Trash collection areas must include roofs or overhead  weather protection  and must meet required  stormwater  standards. Drainage must be designed to meet applicable  NPDES  standards.
+
+    Figure 19.62.070(B)
+ Service element location.
+
+ Locate service elements to reduce impacts on the residential and pedestrian environment, and provide appropriate enclosure.
+
+   C.   Screening of Ground-Related Service Areas and Mechanical Equipment.
+
+      1.   Where screening of ground level service areas is required (see subsection  (B)(3)  of this section), the following applies:
+
+        a.   A structural enclosure must be constructed of masonry, heavy-gauge metal, or decay-resistant material that is also used with the architecture of the main  building . The reviewing authority may allow materials other than those used for the main  building  if the finishes are similar in color and texture or if the proposed enclosure materials are more durable than those for the main  structure . The  walls  must be sufficient to provide full screening from the affected roadway, pedestrian areas or adjacent use. The enclosure may use overlapping  walls  to screen dumpsters and other materials (see Figure 19.62.070(C) below).
+
+        b.   Gates must be made of heavy-gauge, site-obscuring material. Chain-link or chain-link with slats is not an acceptable material for enclosures or gates.
+
+        c.   Where the interior of a service enclosure is visible from surrounding streets, pathways, and  buildings , an opaque or semi-opaque horizontal cover or screen must be used to mitigate unsightly views. The horizontal screen/cover should be integrated into the enclosure design (in terms of materials and/or design).
+
+        d.   Collection points must be located and configured to the extent practical so that the enclosure gate swing does not obstruct pedestrian or vehicular traffic, or does not require that a hauling truck project into any public  right-of-way . Ensure that screening elements allow for efficient service delivery and removal operations.
+
+        e.   The service area must be paved.
+
+      2.   The sides and rear of service enclosures must be screened with  landscaping  at least five feet wide in locations visible from the street, parking  lots , and pathways to soften views of the screening element and add visual interest.
+
+  DEPARTURES  to the provisions of subsections  (C)(1)  and  (2)  of this section will be considered per AMC  19.20.220 , provided the enclosure and  landscaping  treatment meet the purpose of the standards and add visual interest to site users.
+
+    Figure 19.62.070(C)
+ Acceptable screening enclosures.
+
+ All three examples use durable and attractive enclosures with  trees  and shrubs to soften views of the enclosures from the side. The lower left example uses a trellis  structure  on top—a desirable example particularly where the top of the enclosures are visible from surrounding  buildings , streets, and pathways (due to topography or  building heights ).
+
+    D.   Utility Meters, Electrical Conduit, and Other Service Utility Apparatus.   These elements must be located and/or designed to minimize their visibility to the public. Project designers are strongly encouraged to coordinate with applicable service providers early in the design process to determine the best approach in meeting these standards. If such elements are mounted in a location visible from the street, pedestrian pathway, shared  open space , or shared auto courtyards, they must be screened with vegetation and/or integrated into the  building ’s architecture.
+
+    Figure 19.62.070(D)
+ Utility meter location and screening—Good and bad examples.
+
+ Place utility meters in less visible locations. The upper and lower left examples are successfully tucked away in a less visible location and/or screened by vegetation. The right images are poorly executed and would not be permitted in such visible locations. Such meters must be coordinated and better integrated with the architecture of the  building .
+
+   E.   Location and Screening of Roof-Mounted Mechanical Equipment.
+
+      1.   All rooftop mechanical equipment, including air conditioners, heaters, vents, and similar equipment, must be fully screened from public view at the street level. Screening must be located so as not to interfere with operation of the equipment.
+
+ Exception: Roof-mounted wind turbines, solar energy systems, and rainwater reuse systems do not require screening.
+
+      2.   For rooftop equipment, all screening devices must be well integrated into the architectural design through such elements as parapet  walls , false roofs, roof wells, clerestories, or equipment rooms. Screening  walls  or  unit -mounted screening is allowed but less desirable. Wood must not be used for screens or enclosures. Louvered designs are acceptable if consistent with  building  design style.
+
+      3.   The screening materials must be of material requiring minimal maintenance and must be as high as the equipment being screened.
+
+      4.   Locate and/or shield noise-producing mechanical equipment such as fans, heat pumps, etc., to minimize sounds and reduce impacts to adjacent properties.
+
+    Figure 19.62.070(E)
+ Examples of how to screen roof-mounted mechanical equipment.
+
+ The left illustration shows how rooftop mechanical equipment can be located and screened effectively. The right image shows effective location and screening, including side  walls  and a trellis to screen views from taller surrounding  buildings .
+
+  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+	Your Selections
+
+	 What’s Nearby
+
+			 Title
+
+					   18
+
+					 19
+
+					 20
+
+			 Division
+
+					   5
+
+					 6
+
+					 7
+
+			 Chapter
+
+					   19.61
+
+					 19.62
+
+					 19.63
+
+		On This Page
+
+				19.62.010 Purpose
+
+				19.62.020 Applicability
+
+				19.62.030 Relationship to adjacent properties
+
+				19.62.040 Internal open space
+
+				19.62.050 Internal pedestrian access and design
+
+				19.62.060 Vehicular circulation and parking
+
+				19.62.070 Service areas and mechanical equipment
+
+  The Anacortes Municipal Code is current through Ordinance 5028, passed May 4, 2026.
+
+ Disclaimer: The city attorney’s office has the official version of the Anacortes Municipal Code. Users should contact the city attorney’s office for ordinances passed subsequent to the ordinance cited here.
+
+				 City Website: www.anacorteswa.gov
+				 City Telephone: (360) 293-1900
+
+	  Hosted by General Code.
+
+			 Privacy Policy
+			|
+			 Terms of Use
+			|
+			 Cookie Preferences
+
+				 Contents
+
+					 ×
+
+					 All Publications
+
+					Municipal Code
+
+					Municipal Policies
+
+			   Your Selections
+
+					Anacortes Municipal Code
+
+					Anacortes Municipal Policies
+
+		   Expand All
+
+		   Collapse All
+
+		   Share
+
+		   Clear
+
+					   Close
+
+		 View Full Table
+
+		 View Full Image
+
+		 View Full File
+
+		  ×
+
+			    Go to Top
+
+			    Go to Bottom
+
+			    Share/Save
+
+			 Close
+
+				Save, Share, Bookmark or Print
+
+				History of This Subsection

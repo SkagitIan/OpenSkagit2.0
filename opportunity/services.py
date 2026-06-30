@@ -14,6 +14,7 @@ from django.db import connection
 ASSESSOR_DETAIL_URL = "https://www.skagitcounty.net/search/property/default.aspx?id={parcel_number}"
 AUDITOR_RECORDING_SEARCH_URL = "https://www.skagitcounty.net/Search/Recording/default.aspx"
 AUDITOR_DOCUMENT_URL = "https://www.skagitcounty.net/AuditorRecording/Documents/RecordedDocuments/{year}/{month}/{day}/{recording_number}.pdf"
+LATEST_AERIAL_IMAGE_URL = "https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer/exportImage"
 RECENT_RECORDING_DAYS = 90
 SFR_OR_MOBILE_CODES = {"110", "111", "112", "113", "180", "185"}
 SFR_TEARDOWN_CODES = {"110", "111", "112", "113"}
@@ -656,6 +657,8 @@ def _base_row(row: dict[str, Any], opportunity_type: str) -> dict[str, Any]:
         "lng": lng,
         "map_url": map_url,
         "map_embed_url": map_embed_url,
+        "aerial_image_url": aerial_image_url(row),
+        "aerial_image_source": "Skagit County 2021 3-inch aerial imagery",
         "auditor_url": "",
         "auditor_label": "",
         "auditor_note": "",
@@ -1007,7 +1010,7 @@ def latest_assessor_sync_summary(user=None) -> dict[str, Any]:
                 {"label": "Parcel signals updated", "value": f"{sync_counts['parcel_signals']:,}", "accent": "teal", "note": since_text},
                 {"label": "New sales", "value": f"{sync_counts['new_sales']:,}", "accent": "gold", "note": since_text},
                 {"label": "New filings", "value": f"{sync_counts['new_filings']:,}", "accent": "red", "note": since_text},
-                {"label": "Watchlist changes", "value": f"{sync_counts['watchlist_changes']:,}", "accent": "purple", "note": since_text},
+                {"label": "Watchlist changes", "value": f"{sync_counts['watchlist_changes']:,}", "accent": "blue", "note": since_text},
             ],
             "totals": {"applied": applied, "inserted": inserted, "updated": updated, "warnings": warnings},
             "narrative": sync_narrative_dict(report, report.run.summary or {}) if report else fallback_sync_narrative(run.summary or {}),
@@ -1354,7 +1357,9 @@ def parcel_detail(parcel_number: str) -> dict[str, Any] | None:
                p.taxable_value, p.total_market_value, p.total_taxes, p.sale_date, p.sale_price, p.sale_deed_type,
                p.year_built, p.living_area, p.levy_code,
                z.zone_id, z.zone_name, z.waza_general, z.waza_specific, z.reference_url,
-               ST_Y(ST_Centroid(g.geometry)) AS lat, ST_X(ST_Centroid(g.geometry)) AS lng
+               ST_Y(ST_Centroid(g.geometry)) AS lat, ST_X(ST_Centroid(g.geometry)) AS lng,
+               ST_XMin(g.geometry::box3d) AS min_lng, ST_YMin(g.geometry::box3d) AS min_lat,
+               ST_XMax(g.geometry::box3d) AS max_lng, ST_YMax(g.geometry::box3d) AS max_lat
         FROM skagit_parcels p
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
@@ -1464,7 +1469,45 @@ def parcel_value_history_chart(parcel_number: str) -> dict[str, Any]:
         "value_max_fmt": money(value_max),
         "tax_min_fmt": money(tax_min),
         "tax_max_fmt": money(tax_max),
+        "labels_json": json.dumps([str(point["tax_year"]) for point in points]),
+        "value_values_json": json.dumps([point["total_value"] for point in points]),
+        "tax_values_json": json.dumps([point["tax_amount"] for point in points]),
     }
+
+
+def aerial_image_url(row: dict[str, Any]) -> str:
+    bounds = [
+        _decimal(row.get("min_lng")),
+        _decimal(row.get("min_lat")),
+        _decimal(row.get("max_lng")),
+        _decimal(row.get("max_lat")),
+    ]
+    if any(value is None for value in bounds):
+        lat = _decimal(row.get("lat"))
+        lng = _decimal(row.get("lng"))
+        if lat is None or lng is None:
+            return ""
+        bounds = [lng - Decimal("0.0015"), lat - Decimal("0.0012"), lng + Decimal("0.0015"), lat + Decimal("0.0012")]
+
+    min_lng, min_lat, max_lng, max_lat = bounds
+    width = max(max_lng - min_lng, Decimal("0.0012"))
+    height = max(max_lat - min_lat, Decimal("0.0010"))
+    pad = max(width, height) * Decimal("0.85")
+    bbox = [
+        min_lng - pad,
+        min_lat - pad,
+        max_lng + pad,
+        max_lat + pad,
+    ]
+    params = {
+        "bbox": ",".join(f"{value:.7f}" for value in bbox),
+        "bboxSR": "4326",
+        "imageSR": "4326",
+        "size": "900,620",
+        "format": "jpgpng",
+        "f": "image",
+    }
+    return f"{LATEST_AERIAL_IMAGE_URL}?{urlencode(params)}"
 
 
 def parcel_recent_sales(parcel_number: str) -> list[dict[str, Any]]:

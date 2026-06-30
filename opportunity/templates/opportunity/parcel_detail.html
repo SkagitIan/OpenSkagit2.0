@@ -5,43 +5,20 @@
 {% block content %}
 {% include "opportunity/_chrome_open.html" %}
 
-<div class="pb-page-head">
-  <div>
-    <p class="pb-kicker">Parcel detail</p>
-    <h1>{{ parcel.parcel_number }}</h1>
-    <p class="pb-muted">{{ parcel.location }}</p>
-  </div>
-  <div class="pb-card-actions">
-    {% with row=parcel %}
-      {% include "opportunity/_save_form.html" %}
-    {% endwith %}
-    <a class="pb-button secondary" href="{{ parcel.parcel_url }}" target="_blank" rel="noopener">Assessor</a>
-    {% if parcel.map_url %}<a class="pb-button secondary" href="{{ parcel.map_url }}" target="_blank" rel="noopener">Map</a>{% endif %}
-  </div>
-</div>
-
 <div class="pb-detail-page">
   <section class="pb-panel pb-detail-main">
-    <div class="pb-detail-grid">
+    <div class="pb-parcel-identity">
       <div>
-        <h3>Opportunity Signals</h3>
-        {% for signal in parcel.signal_labels %}
-          <span class="pb-pill">{{ signal }}</span>
-        {% endfor %}
-        {% for feature in parcel.feature_labels %}
-          <span class="pb-pill">{{ feature }}</span>
-        {% endfor %}
-        {% if parcel.tax_pressure %}
-          <span class="pb-pill">{{ parcel.tax_pressure.total_fmt }} tax pressure</span>
-        {% endif %}
+        <p class="pb-kicker">Parcel detail</p>
+        <h1>{{ parcel.parcel_number }}</h1>
+        <p class="pb-muted">{{ parcel.location }}</p>
       </div>
-      <div>
-        <h3>Risk Flags</h3>
-        {% for flag in parcel.risk_flags %}
-          <span class="pb-flag pb-flag-{{ forloop.counter }}">{{ flag }}</span>
-        {% empty %}
-          <span class="pb-muted">No obvious flags</span>
-        {% endfor %}
+      <div class="pb-card-actions pb-parcel-actions">
+        {% with row=parcel %}
+          {% include "opportunity/_save_form.html" %}
+        {% endwith %}
+        <a class="pb-button secondary" href="{{ parcel.parcel_url }}" target="_blank" rel="noopener">Source</a>
+        {% if parcel.map_url %}<a class="pb-button secondary" href="{{ parcel.map_url }}" target="_blank" rel="noopener">Map</a>{% endif %}
       </div>
     </div>
 
@@ -73,62 +50,54 @@
     <hr class="pb-rule">
 
     <div class="pb-chart-head">
-      <h3>Value History</h3>
-      <div class="pb-chart-legend" aria-label="Chart legend">
-        <span><i class="pb-chart-legend-value"></i>Total value</span>
-        <span><i class="pb-chart-legend-tax"></i>Tax amount</span>
+      <div>
+        <h3>Value History</h3>
+        <p class="pb-muted">Click or tap a year point to see the value and tax amount.</p>
       </div>
     </div>
     {% if parcel.history_chart.has_data %}
-      <div class="pb-history-chart" data-history-chart>
-        <svg viewBox="0 0 720 280" role="img" aria-labelledby="history-chart-title">
-          <title id="history-chart-title">Total value and tax amount history for {{ parcel.parcel_number }}</title>
-          <line class="pb-chart-grid" x1="70" y1="24" x2="644" y2="24"></line>
-          <line class="pb-chart-grid" x1="70" y1="131" x2="644" y2="131"></line>
-          <line class="pb-chart-grid" x1="70" y1="238" x2="644" y2="238"></line>
-          <line class="pb-chart-axis-line" x1="70" y1="24" x2="70" y2="238"></line>
-          <line class="pb-chart-axis-line" x1="644" y1="24" x2="644" y2="238"></line>
-          <line class="pb-chart-axis-line" x1="70" y1="238" x2="644" y2="238"></line>
-          <text class="pb-chart-axis pb-chart-axis-left" x="62" y="31">{{ parcel.history_chart.value_max_fmt }}</text>
-          <text class="pb-chart-axis pb-chart-axis-left" x="62" y="241">{{ parcel.history_chart.value_min_fmt }}</text>
-          <text class="pb-chart-axis pb-chart-axis-right" x="652" y="31">{{ parcel.history_chart.tax_max_fmt }}</text>
-          <text class="pb-chart-axis pb-chart-axis-right" x="652" y="241">{{ parcel.history_chart.tax_min_fmt }}</text>
-          <polyline class="pb-history-line-value" points="{{ parcel.history_chart.value_polyline }}"></polyline>
-          <polyline class="pb-history-line-tax" points="{{ parcel.history_chart.tax_polyline }}"></polyline>
-          {% for point in parcel.history_chart.points %}
-            <line class="pb-chart-year-line" x1="{{ point.x }}" y1="238" x2="{{ point.x }}" y2="244"></line>
-            <text class="pb-chart-year" x="{{ point.x }}" y="262">{{ point.tax_year }}</text>
-            <circle class="pb-history-dot pb-history-dot-value pb-history-hit" cx="{{ point.x }}" cy="{{ point.value_y }}" r="6" tabindex="0" role="button" data-year="{{ point.tax_year }}" data-series="Total value" data-value="{{ point.total_value_fmt }}" data-pair-label="Tax amount" data-pair-value="{{ point.tax_amount_fmt }}" aria-label="{{ point.tax_year }} total value {{ point.total_value_fmt }}">
-              <title>{{ point.tax_year }} total value {{ point.total_value_fmt }}</title>
-            </circle>
-            <circle class="pb-history-dot pb-history-dot-tax pb-history-hit" cx="{{ point.x }}" cy="{{ point.tax_y }}" r="6" tabindex="0" role="button" data-year="{{ point.tax_year }}" data-series="Tax amount" data-value="{{ point.tax_amount_fmt }}" data-pair-label="Total value" data-pair-value="{{ point.total_value_fmt }}" aria-label="{{ point.tax_year }} tax amount {{ point.tax_amount_fmt }}">
-              <title>{{ point.tax_year }} tax amount {{ point.tax_amount_fmt }}</title>
-            </circle>
-          {% endfor %}
-        </svg>
-        <div class="pb-history-tooltip" data-history-tooltip aria-live="polite">Click a point to inspect a year.</div>
+      <div class="pb-history-chart">
+        <canvas id="parcel-value-history" role="img" aria-label="Total value and tax amount history for {{ parcel.parcel_number }}"></canvas>
       </div>
     {% else %}
       <p class="pb-muted">No value history found.</p>
     {% endif %}
   </section>
 
-  <section class="pb-panel pb-parcel-map-card">
-    <div class="pb-card-head">
-      <div>
-        <h3>Map</h3>
-        <p class="pb-muted">{{ parcel.location }}</p>
+  <div class="pb-map-media-grid">
+    <section class="pb-panel pb-parcel-map-card">
+      <div class="pb-card-head">
+        <div>
+          <h3>Map</h3>
+          <p class="pb-muted">{{ parcel.location }}</p>
+        </div>
+        {% if parcel.map_url %}<a class="pb-button secondary" href="{{ parcel.map_url }}" target="_blank" rel="noopener">Open map</a>{% endif %}
       </div>
-      {% if parcel.map_url %}<a class="pb-button secondary" href="{{ parcel.map_url }}" target="_blank" rel="noopener">Open map</a>{% endif %}
-    </div>
-    {% if parcel.map_embed_url %}
-      <iframe class="pb-parcel-map" src="{{ parcel.map_embed_url }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map for {{ parcel.parcel_number }}"></iframe>
-    {% else %}
-      <div class="pb-map-canvas pb-parcel-map-empty">
-        <span class="pb-muted">No parcel geometry available.</span>
+      {% if parcel.map_embed_url %}
+        <iframe class="pb-parcel-map" src="{{ parcel.map_embed_url }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map for {{ parcel.parcel_number }}"></iframe>
+      {% else %}
+        <div class="pb-map-canvas pb-parcel-map-empty">
+          <span class="pb-muted">No parcel geometry available.</span>
+        </div>
+      {% endif %}
+    </section>
+
+    <section class="pb-panel pb-aerial-card">
+      <div class="pb-card-head">
+        <div>
+          <h3>Aerial Imagery</h3>
+          <p class="pb-muted">{{ parcel.aerial_image_source }}</p>
+        </div>
       </div>
-    {% endif %}
-  </section>
+      {% if parcel.aerial_image_url %}
+        <img class="pb-aerial-image" src="{{ parcel.aerial_image_url }}" alt="Aerial imagery around parcel {{ parcel.parcel_number }}" loading="lazy">
+      {% else %}
+        <div class="pb-map-canvas pb-parcel-map-empty">
+          <span class="pb-muted">No aerial imagery extent available.</span>
+        </div>
+      {% endif %}
+    </section>
+  </div>
 
   <section class="pb-detail-sidecars">
     <div class="pb-panel">
@@ -161,28 +130,78 @@
   </section>
 </div>
 
-<script>
-  (() => {
-    const charts = document.querySelectorAll("[data-history-chart]");
-    charts.forEach((chart) => {
-      const tooltip = chart.querySelector("[data-history-tooltip]");
-      chart.querySelectorAll(".pb-history-hit").forEach((button) => {
-        const showPoint = () => {
-          chart.querySelectorAll(".pb-history-hit").forEach((item) => item.classList.remove("active"));
-          button.classList.add("active");
-          tooltip.innerHTML = `<strong>${button.dataset.year} ${button.dataset.series}: ${button.dataset.value}</strong><span>${button.dataset.pairLabel}: ${button.dataset.pairValue}</span>`;
-        };
-        button.addEventListener("click", showPoint);
-        button.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            showPoint();
+{% if parcel.history_chart.has_data %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <script>
+    (() => {
+      const canvas = document.getElementById("parcel-value-history");
+      if (!canvas || !window.Chart) return;
+      const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+      new Chart(canvas, {
+        type: "line",
+        data: {
+          labels: {{ parcel.history_chart.labels_json|safe }},
+          datasets: [
+            {
+              label: "Total value",
+              data: {{ parcel.history_chart.value_values_json|safe }},
+              borderColor: "#00828A",
+              backgroundColor: "rgba(0, 130, 138, 0.12)",
+              pointBackgroundColor: "#ffffff",
+              pointBorderColor: "#00828A",
+              pointBorderWidth: 3,
+              pointRadius: 5,
+              pointHoverRadius: 7,
+              tension: 0.28,
+              yAxisID: "value"
+            },
+            {
+              label: "Tax amount",
+              data: {{ parcel.history_chart.tax_values_json|safe }},
+              borderColor: "#FDB913",
+              backgroundColor: "rgba(253, 185, 19, 0.14)",
+              pointBackgroundColor: "#ffffff",
+              pointBorderColor: "#FDB913",
+              pointBorderWidth: 3,
+              pointRadius: 5,
+              pointHoverRadius: 7,
+              tension: 0.28,
+              yAxisID: "tax"
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: {
+            legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
+            tooltip: {
+              callbacks: {
+                label: (context) => `${context.dataset.label}: ${currency.format(context.parsed.y || 0)}`
+              }
+            }
+          },
+          scales: {
+            x: { grid: { display: false } },
+            value: {
+              type: "linear",
+              position: "left",
+              ticks: { callback: (value) => currency.format(value) },
+              grid: { color: "#dfe7ee" }
+            },
+            tax: {
+              type: "linear",
+              position: "right",
+              ticks: { callback: (value) => currency.format(value) },
+              grid: { drawOnChartArea: false }
+            }
           }
-        });
+        }
       });
-    });
-  })();
-</script>
+    })();
+  </script>
+{% endif %}
 
 {% include "opportunity/_chrome_close.html" %}
 {% endblock %}

@@ -1,0 +1,443 @@
+{
+  "jurisdiction": "burlington",
+  "jurisdiction_key": "burlington",
+  "title": "Burlington Municipal Code zoning and land-use PDF",
+  "source": "https://ecode360.com/BU4372",
+  "platform": "ecode360-pdf",
+  "source_pdf": "data\\Environmental Regulations - Land Use Decisions - Buildings and Construction - Land Divisions and Adjustments - Comprehensive Zoning Ordinance - Shoreline Master Program (1).pdf",
+  "page_count": 54,
+  "pages": [
+    {
+      "ref": "14.01.txt",
+      "url": "https://ecode360.com/BU4372/14.01",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 14.01 General Provisions",
+      "text_length": 45325
+    },
+    {
+      "ref": "14.05.txt",
+      "url": "https://ecode360.com/BU4372/14.05",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 14.05 Surface Water Management",
+      "text_length": 46517
+    },
+    {
+      "ref": "14.10.txt",
+      "url": "https://ecode360.com/BU4372/14.10",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 14.10 Environmental Policy",
+      "text_length": 39233
+    },
+    {
+      "ref": "14.15.txt",
+      "url": "https://ecode360.com/BU4372/14.15",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 14.15 Critical Area Regulations",
+      "text_length": 205434
+    },
+    {
+      "ref": "14A.01.txt",
+      "url": "https://ecode360.com/BU4372/14A.01",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 14A.01 General Provisions",
+      "text_length": 10400
+    },
+    {
+      "ref": "14A.05.txt",
+      "url": "https://ecode360.com/BU4372/14A.05",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 14A.05 Processing Land Use Actions \u2013 Decision Making Framework",
+      "text_length": 48900
+    },
+    {
+      "ref": "15.01.txt",
+      "url": "https://ecode360.com/BU4372/15.01",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 15.01 General Provisions",
+      "text_length": 22049
+    },
+    {
+      "ref": "15.04.txt",
+      "url": "https://ecode360.com/BU4372/15.04",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 15.04 Uniform Codes",
+      "text_length": 9120
+    },
+    {
+      "ref": "15.06.txt",
+      "url": "https://ecode360.com/BU4372/15.06",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 15.06 Requirements For Construction Permit Applications",
+      "text_length": 7678
+    },
+    {
+      "ref": "15.08.txt",
+      "url": "https://ecode360.com/BU4372/15.08",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 15.08 Fire Code",
+      "text_length": 7186
+    },
+    {
+      "ref": "15.10.txt",
+      "url": "https://ecode360.com/BU4372/15.10",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 15.10 Addresses",
+      "text_length": 8816
+    },
+    {
+      "ref": "15.12.txt",
+      "url": "https://ecode360.com/BU4372/15.12",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 15.12 Transportation, Parks, And Fire Impact Fees",
+      "text_length": 31958
+    },
+    {
+      "ref": "15.14.txt",
+      "url": "https://ecode360.com/BU4372/15.14",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 15.14 Overnight Lodging Establishments",
+      "text_length": 20869
+    },
+    {
+      "ref": "16.01.txt",
+      "url": "https://ecode360.com/BU4372/16.01",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 16.01 General Provisions",
+      "text_length": 14823
+    },
+    {
+      "ref": "16.10.txt",
+      "url": "https://ecode360.com/BU4372/16.10",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 16.10 Preliminary Plat Review",
+      "text_length": 14459
+    },
+    {
+      "ref": "16.20.txt",
+      "url": "https://ecode360.com/BU4372/16.20",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 16.20 Final Plat Review",
+      "text_length": 8793
+    },
+    {
+      "ref": "16.30.txt",
+      "url": "https://ecode360.com/BU4372/16.30",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 16.30 Binding Site Plans",
+      "text_length": 16767
+    },
+    {
+      "ref": "16.40.txt",
+      "url": "https://ecode360.com/BU4372/16.40",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 16.40 Survey And Design Standards",
+      "text_length": 25796
+    },
+    {
+      "ref": "16.50.txt",
+      "url": "https://ecode360.com/BU4372/16.50",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 16.50 Alterations And Vacations",
+      "text_length": 5374
+    },
+    {
+      "ref": "16.60.txt",
+      "url": "https://ecode360.com/BU4372/16.60",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 16.60 Boundary Line Adjustments",
+      "text_length": 7324
+    },
+    {
+      "ref": "16.70.txt",
+      "url": "https://ecode360.com/BU4372/16.70",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 16.70 Innocent Purchaser And Testamentary Divisions",
+      "text_length": 5922
+    },
+    {
+      "ref": "17.01.txt",
+      "url": "https://ecode360.com/BU4372/17.01",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.01 General Provisions",
+      "text_length": 16090
+    },
+    {
+      "ref": "17.05.txt",
+      "url": "https://ecode360.com/BU4372/17.05",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.05 Land Use Zones, Maps And Boundaries",
+      "text_length": 8581
+    },
+    {
+      "ref": "17.15.txt",
+      "url": "https://ecode360.com/BU4372/17.15",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.15 Rd Land Use Zones",
+      "text_length": 22191
+    },
+    {
+      "ref": "17.20.txt",
+      "url": "https://ecode360.com/BU4372/17.20",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.20 Ra-1 Residential Attached Zone",
+      "text_length": 19467
+    },
+    {
+      "ref": "17.25.txt",
+      "url": "https://ecode360.com/BU4372/17.25",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.25 Ra-2 Residential Attached Zone",
+      "text_length": 15114
+    },
+    {
+      "ref": "17.30.txt",
+      "url": "https://ecode360.com/BU4372/17.30",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.30 Mur-1 Mixed Use Residential Zone",
+      "text_length": 15655
+    },
+    {
+      "ref": "17.40.txt",
+      "url": "https://ecode360.com/BU4372/17.40",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.40 Mur-2 Mixed Use Residential Zone",
+      "text_length": 16323
+    },
+    {
+      "ref": "17.45.txt",
+      "url": "https://ecode360.com/BU4372/17.45",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.45 Muc-1 Mixed Use Commercial Zone",
+      "text_length": 10329
+    },
+    {
+      "ref": "17.50.txt",
+      "url": "https://ecode360.com/BU4372/17.50",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.50 Muc-2 Mixed Use Commercial Zone",
+      "text_length": 15994
+    },
+    {
+      "ref": "17.55.txt",
+      "url": "https://ecode360.com/BU4372/17.55",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.55 Ci-1 Commercial And Industrial Zone",
+      "text_length": 14629
+    },
+    {
+      "ref": "17.60.txt",
+      "url": "https://ecode360.com/BU4372/17.60",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.60 Ci-2 Commercial And Industrial Zone",
+      "text_length": 14241
+    },
+    {
+      "ref": "17.66.txt",
+      "url": "https://ecode360.com/BU4372/17.66",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.66 Pc-1 Parks And Conservation Zone",
+      "text_length": 4974
+    },
+    {
+      "ref": "17.67.txt",
+      "url": "https://ecode360.com/BU4372/17.67",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.67 Pc-2 Parks And Conservation Zone",
+      "text_length": 4801
+    },
+    {
+      "ref": "17.68.txt",
+      "url": "https://ecode360.com/BU4372/17.68",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.68 Pft-1 Public Facilities And Transportation Zone",
+      "text_length": 7203
+    },
+    {
+      "ref": "17.69.txt",
+      "url": "https://ecode360.com/BU4372/17.69",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.69 Pft-2 Public Facilities And Transportation Zone",
+      "text_length": 6259
+    },
+    {
+      "ref": "17.70.txt",
+      "url": "https://ecode360.com/BU4372/17.70",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.70 General Development Standards",
+      "text_length": 29713
+    },
+    {
+      "ref": "17.81.txt",
+      "url": "https://ecode360.com/BU4372/17.81",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.81 Landscaping",
+      "text_length": 33382
+    },
+    {
+      "ref": "17.85.txt",
+      "url": "https://ecode360.com/BU4372/17.85",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.85 Access And Parking",
+      "text_length": 37421
+    },
+    {
+      "ref": "17.90.txt",
+      "url": "https://ecode360.com/BU4372/17.90",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.90 Public Utilities",
+      "text_length": 3184
+    },
+    {
+      "ref": "17.95.txt",
+      "url": "https://ecode360.com/BU4372/17.95",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.95 Signs",
+      "text_length": 122438
+    },
+    {
+      "ref": "17.100.txt",
+      "url": "https://ecode360.com/BU4372/17.100",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.100 Nonconforming Structures, Lots And Uses",
+      "text_length": 7461
+    },
+    {
+      "ref": "17.105.txt",
+      "url": "https://ecode360.com/BU4372/17.105",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.105 Essential Public Facilities",
+      "text_length": 26388
+    },
+    {
+      "ref": "17.110.txt",
+      "url": "https://ecode360.com/BU4372/17.110",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.110 Agricultural Heritage Credit Program",
+      "text_length": 10692
+    },
+    {
+      "ref": "17.115.txt",
+      "url": "https://ecode360.com/BU4372/17.115",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.115 Planning Commission",
+      "text_length": 4531
+    },
+    {
+      "ref": "17.120.txt",
+      "url": "https://ecode360.com/BU4372/17.120",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.120 Hearing Examiner",
+      "text_length": 6455
+    },
+    {
+      "ref": "17.125.txt",
+      "url": "https://ecode360.com/BU4372/17.125",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 17.125 Amendments To Comprehensive Plan And Development",
+      "text_length": 14013
+    },
+    {
+      "ref": "18.03.txt",
+      "url": "https://ecode360.com/BU4372/18.03",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 18.03 Definitions",
+      "text_length": 40494
+    },
+    {
+      "ref": "18.06.txt",
+      "url": "https://ecode360.com/BU4372/18.06",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 18.06 Purpose",
+      "text_length": 7790
+    },
+    {
+      "ref": "18.07.txt",
+      "url": "https://ecode360.com/BU4372/18.07",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 18.07 Shorelines Environment Designations",
+      "text_length": 7402
+    },
+    {
+      "ref": "18.09.txt",
+      "url": "https://ecode360.com/BU4372/18.09",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 18.09 Administrative Provisions",
+      "text_length": 37695
+    },
+    {
+      "ref": "18.12.txt",
+      "url": "https://ecode360.com/BU4372/18.12",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 18.12 Master Program Policy Goals",
+      "text_length": 7732
+    },
+    {
+      "ref": "18.14.txt",
+      "url": "https://ecode360.com/BU4372/18.14",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 18.14 General Provisions",
+      "text_length": 41651
+    },
+    {
+      "ref": "18.16.txt",
+      "url": "https://ecode360.com/BU4372/18.16",
+      "status": 200,
+      "mode": "pdf",
+      "chapter": "Chapter 18.16 Regulations",
+      "text_length": 26722
+    }
+  ]
+}

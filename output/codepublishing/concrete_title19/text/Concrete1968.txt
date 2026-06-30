@@ -1,0 +1,628 @@
+Chapter 19.68 THE LAND USE PERMIT PROCESS – FRAMEWORK FOR DECISION-MAKING
+
+         Chapter 19.68
+THE LAND USE PERMIT PROCESS – FRAMEWORK FOR DECISION-MAKING
+
+             Sections:
+
+              19.68.010    Intent and scope.
+
+              19.68.020    Definition of terms used in this title.
+
+              19.68.030    Land use decision framework.
+
+              19.68.040    Variances – Administrative procedures and regulations.
+
+              19.68.050    Applications – General.
+
+              19.68.060    Review criteria for decisions.
+
+              19.68.070    Notice Requirements – Type and Content of Notice – General.
+
+              19.68.080    Notice of application requirements and comment period.
+
+              19.68.090    Public hearing requirements.
+
+              19.68.100    Notice of decision requirements and content of notice.
+
+              19.68.110    Standards to ensure performance and compliance with conditions.
+
+              19.68.120    Expiration of land use approvals.
+
+              19.68.130    Conditional use applications – When required – Submittal requirements review criteria and conditions of approval.
+
+              19.68.140    Variance applications – When required – Submittal requirements review criteria and conditions of approval.
+
+              19.68.150    Plan review – When required – Application submittal requirements review criteria and conditions of approval.
+
+              19.68.160    Reclassification of property including rezone and contract rezone and zoning ordinance text amendments, initiation of amendments, review criteria and conditions of approval.
+
+        19.68.010  Intent and scope.
+
+             (1) The purpose of the land use permit process is to promote informed public participation in discretionary land use decisions, eliminate redundancy in the application submittal process, and minimize delays and expense in appeals of land use decisions.
+
+             (2) Increasing opportunities for public comment and getting the concerned public involved early in the process are the primary goals. This makes it feasible for the project developer to be responsive to the issues raised and will result in better projects, among other benefits.
+
+             (3) Each proposed development project shall obtain a land use permit as required by CMC  19.68.040 , which shall contain all the components required for the project. The broadest applicable public notice shall apply.
+
+             (4) This chapter consolidates all land use decisions and constitutes the permit process for this title; CMC Title  17 , Subdivisions; Chapter  15.08  CMC, Floodplain Management; Chapter  16.04  CMC, State Environmental Policy Act Guidelines; and, Chapter  15.16  CMC, Critical Areas. [Ord. 426 § 10.68.010, 1998]
+
+        19.68.020  Definition of terms used in this title.
+
+             (1) Use, Establish or Change. This is the decision that a use is permitted in the zone and that it meets the development standards, such as setbacks and parking. It is not a discretionary decision, but is often combined with one.
+
+             (2) Plan Review. Plan review by the town council, building official, and town planner is required for most new construction projects to assure that all land use permits and approvals comply with the use, development and all other standards of this title and related land use standards, rules, policies and procedures.
+
+             (3) Environmental Review. This includes the determination of significance (DS), which requires preparation of a detailed environmental impact statement (draft and final EIS) for large projects and other projects with significant adverse environmental impacts. Environmental review also includes the determination of nonsignificance (DNS). This determination often includes conditions to mitigate the adverse impacts of a project, in which case it is a mitigated determination of nonsignificance (MDNS). The threshold for requiring environmental review is the construction of more than four dwelling units, grading more than 500 cubic yards, the construction of more than 4000 square feet of commercial space, construction of a parking lot for more than 20 cars, or as further defined by WAC  197-11-800  (Washington Administrative Code regulations).
+
+             (4) Subdivision Decisions. The procedure for subdivision decisions, preliminary plat approval and final plat approval are set forth in CMC Title 17.
+
+             (5) Lot Boundary Adjustment. Moves existing property lines; no new lots created.
+
+             (6) Binding Site Plan. Used for commercial and industrial properties that are leased or sold, often frequently moving property lines as tenants demand.
+
+             (7) Short Subdivision. Process to create or re-divide land into four or fewer lots. Review elements include location, access, configuration, and availability of utilities. Review by the town council is required.
+
+             (8) Long Subdivision. Process to create any number of lots. Substantial public improvements are typically required, such as construction of streets, sewers, and sidewalks to provide safe walking areas for children attending school. A public hearing before the town council is required.
+
+             (9) Zoning Exceptions and Changes.
+
+             (a) Conditional Use. Allows a use to be located in a zone where it is not normally permitted, if certain conditions can be met. One public hearing before the town council is required and property owners shall be notified in accordance with CMC  19.68.070 .
+
+             (b) Variance. Allows relief from the dimensional standards of this title, such as front, side or rear setbacks. It requires a public hearing before the town council. Variances may also be sought from floodplain requirements.
+
+             (c) Rezone Including Contract Rezone. This is a zoning map amendment. It changes the list of permitted uses on the site as well as the height, setback and other limitations, such as changing from residential to commercial or industrial. One public hearing before the town council is required and property owners shall be notified in accordance with CMC  19.68.070 . If there are conditions required by the town council, a contract shall be executed as further provided in this title.
+
+             (d) Zoning Text Amendment. This is a change to the text of the title, such as adding a use to the list of uses permitted in a zone. One public hearing before the town council is required and property owners shall be notified in accordance with CMC  19.68.070 .
+
+             (10) Comprehensive Plan. A generalized coordinated land use policy statement of the town that guides the future physical development of the community and assists in land use decisions, capital improvement planning and enactment of development regulations. One public hearing is required before the town council who may adopt by resolution the plan or any part of the plan. [Ord. 426 § 10.68.020, 1998]
+
+        19.68.030  Land use decision framework.
+
+             (1) Land use decisions are classified into three categories based on the amount of discretion and level of impact associated with each decision. Procedures for the three different categories are distinguished according to who makes the decision, the type and amount of public notice required, and whether appeal opportunities are provided. Land use decisions are consolidated as components of the land use permit.
+
+             (2) Type I decisions are nonappeal decisions made by the planning director which require the exercise of little or no discretion. Type I decisions include the following components:
+
+             Lot boundary adjustment
+
+             Binding site plan
+
+             Single-family zoning plan review
+
+             Determination of significance (environmental impact statement required)
+
+             Uses permitted outright
+
+             Sign permits meeting standards
+
+             Temporary uses for up to two weeks
+
+             (3) Type II decisions are discretionary decisions that involve two review steps. The first step is a report and recommendation or decision by the planning director with a final decision made by the town council. The town council Type II decisions are listed as follows:
+
+             Plan review
+
+             Temporary uses for more than two weeks
+
+             Shoreline substantial development permits
+
+             Short subdivision
+
+             Zoning variances
+
+             Floodplain variance and appeals
+
+             Noise standards variance
+
+             Sign variance
+
+             Administrative rules
+
+             Environmental (SEPA) appeal of the decision to grant a permit based on environmental review with or without conditions
+
+             (4) Type III decisions are quasi-judicial decisions made by the town council in its capacity to establish policy and manage public lands pursuant to existing legislative standards and based on the record, public hearing and recommendations.
+
+             Type III decisions include the following components:
+
+             Full subdivisions (preliminary plat)
+
+             Conditional use permits
+
+             Zoning text amendments
+
+             Town-wide rezoning to implement comprehensive plan
+
+             (5) For projects requiring more than one type of decision, all decisions must be made prior to issuance of a land use permit. All conditions established by the town council in its decisions shall be incorporated in any subsequently issued land use permit or construction permit for the project.
+
+             (6) Land use permits requiring only Type I decisions are categorically exempt from the State Environmental Policy Act (SEPA) and do not require environmental review. All land use permits requiring environmental review include a Type II decision and may include a Type I decision. For these projects, SEPA review procedures established in Chapter  16.04  CMC are supplemental to the procedures set forth in this chapter. [Ord. 439 § 1, 1999; Ord. 426 § 10.68.030, 1998]
+
+        19.68.040  Variances – Administrative procedures and regulations.
+
+             (1) General. A variance allows private property owners opportunity for relief from the town’s zoning code requirements when special circumstances are present. A variance from the strict application of this title, the official town zoning map, or other land use regulatory ordinances of the town may be permitted pursuant to the terms and conditions as set forth in this chapter.
+
+             (2) Application. A written application for a variance from this title and any other land use regulatory ordinance or plan shall be submitted to the town clerk/treasurer on forms prescribed by the town clerk/treasurer and shall include such information as requested thereon. No application shall be accepted unless it complies with such requirements.
+
+             (3) Fee. The variance application shall be accompanied by a nonrefundable fee established by resolution of the town council. No action shall be taken upon the application until the fee has been paid.
+
+             (4) Public Hearing Notification. Before a request for a variance is acted upon, the town council shall consider the application at a public hearing. Notice of the town council public hearing on the application for a variance shall identify the property that is the subject of the variance application, and the date, time and place of the public hearing and contain a general description of the variance requested. The notice described above shall be:
+
+             (a) Mailed to all property owners within 300 feet of the boundaries of the property in which the variance application applies and within 300 feet of the boundaries of any property owned by the applicant located adjacent to the property to which the variance application applies; and
+
+             (b) Additional announcements of the public hearing shall be given by posting copies of the notice in three conspicuous places, as determined annually by the planning commission, and printed in the town’s official paper at least twice, allowing for a 15-day public comment period prior to the planner issuing a recommendation to the town council.
+
+             The 15-day comment period shall begin on the date notice is first published in the town’s official paper; and
+
+             (c) Post a large sign (minimum size three by four feet) on the site to be considered for a variance, which is easily read from the roadway adjacent to said property. The sign should include the date, time, place and purpose of the public hearing. The sign shall be located so as to be clearly readable from the adjacent street or sidewalk, and shall remain posted from the date of first public notice until final town action on the application has been completed.
+
+             (d) For purposes of mailing notices, the planner shall compile a list of the names and addresses of the owners of record owning property within 300 feet of the boundaries of the property that is the subject of the variance from the records of the county assessor. Mailing notices to the property owners on the list shall constitute compliance with all notice-mailing requirements.
+
+             (5) Approval or Denial of Application – Standards. Applications for variances from the terms of this title, from the official zoning map, and from other town land use regulatory ordinances may be granted only if the town council finds:
+
+             (a) The variance does not constitute a grant of special privilege inconsistent with the limitation upon uses of other properties in the vicinity and zone in which the property on behalf of which the application was filed is located;
+
+             (b) The variance is necessary, because of special circumstances relating to the size, shape, topography, location or surroundings of the subject property, to provide it with use rights and privileges permitted to other properties in the vicinity and in the zone in which the subject property is located; and
+
+             (c) That the granting of such variance will not be materially detrimental to the public welfare or injurious to the property or improvements in the vicinity and zone in which the property is situated.
+
+             (6) Conditions of Approval. In approving any variance, the town council may impose reasonable conditions to ensure that the variance shall not be materially detrimental to the public welfare or injurious to property or improvements in the area.
+
+             (7) Appeal. The action of the town council on an application for a variance shall be final. Any town council decision shall be subject to review by the Skagit County superior court pursuant to Chapter  36.70C  RCW, the Land Use Petition Act, as it now exists or as may be hereafter amended; provided, that the petition shall be made to the court within 21 days from any decision so to be reviewed. The cost of transportation of all records ordered certified by the court for such review shall be borne by the appellant at the rate prescribed by the administrator of this title. Such costs shall not exceed the amount necessary to reimburse the town for its expenses actually incurred. [Ord. 472 § 1, 2002; Ord. 426 § 10.68.040, 1998]
+
+        19.68.050  Applications – General.
+
+             (1) Applications for land use permits shall be made by the property owner, lessee, contract purchaser, or a town agency, or by an authorized agent thereof.
+
+             (2) All applications for land use permits shall be made to the planning director on a form provided by the building/planning department.
+
+             (3) Applications shall be accompanied by payment of the applicable filing fees, if any, as established in the current fee schedule* of the town.
+
+             (4) All land use permit decisions necessary for a project shall be included in the same application; provided that, at the applicant’s discretion, a separate land use permit application may be filed for a variance, lot boundary adjustment and/or short subdivision approval if no environmental review pursuant to State Environmental Policy Act Guidelines, Chapter  16.04  CMC is required for the proposed project, or if SEPA review is required only because the project is located in an environmentally sensitive area or over water.
+
+             (5) All applications shall contain the submittal information required by the applicable sections of this title and related sections of this title; Subdivisions, CMC Title  17 ; State Environmental Policy Act Guidelines, Chapter  16.04  CMC; and Critical Areas, Chapter  15.16  CMC. The planning director may require additional material from the applicant such as maps, text, or models when the planning director determines that such material is needed to accurately assess the proposed project.
+
+             (6) The applicant or authorized agent shall attend all public meetings and/or public hearings or the matter shall be continued until the applicant or authorized agent is available to attend. [Ord. 426 § 10.68.050, 1998]
+
+             *Code reviser’s note: The fee schedule is set by annual resolution and on file at Town Hall.
+
+        19.68.060  Review criteria for decisions.
+
+             (1) General. Compliance with all applicable ordinances, standards and procedures is required prior to authorization of compliance with this title. This includes but is not limited to CMC Title  17 , Subdivisions; Chapter  15.16  CMC, Critical areas; interim controls; and voluntary mitigation agreements pursuant to SEPA, in addition to this title.
+
+             (2) Plan Review. See CMC  19.68.150
+
+             (3) Conditional Use Permit. See CMC  19.68.130
+
+             (4) Variances. See CMC  19.68.140  for zoning variance; Chapter  15.08  CMC, Floodplain Management.
+
+             (5) Subdivisions. See CMC Title  17 .
+
+             (6) Environmental (SEPA – State Environmental Policy Act). See Chapter  16.04  CMC. [Ord. 426 § 10.68.060, 1998]
+
+        19.68.070  Notice requirements – Type and content of notice – General.
+
+             (1) Process for Notification. If public notice is required, notice shall be in accordance with subsection (4) of this section. The general intent is to give the broadest notice on application (notice of application). Next step is notice of public meeting and/or notice of public hearing, whichever applies to the project. This is followed by notice of decision/opportunity for appeal or opportunity to request further consideration.
+
+             (2) Types of Public Notice. The following is a description of the types of notice utilized as further provided in this title:
+
+             (a) Post a large sign on the site. Specific standards shall be set by administrative rule. The sign shall be a four-by-four-foot half sheet of plywood. There shall be precise specifications about what goes on the sign, and they shall all be of a standard design except for the specifics about the project. These shall be furnished by the applicant. The processing of the application will not begin until the large sign is in place. The large sign shall be located so as to be clearly visible from the adjacent street or sidewalk, and shall remain posted until final town action on the application has been completed. For sites that are not highly visible, location of the large sign shall be approved by the planning director or alternative means of notification provided to include mailed notice. Projects limited to interior remodeling are exempt from the large sign requirement. Large sign standards shall be adopted by administrative rule.
+
+             (b) Publication of a notice in the official newspaper or newspaper of general circulation. The legal publication of notice shall be easily identifiable, language should be simple and descriptive, not bureaucratic.
+
+             (c) Individual, mailed notice to owners and occupants in a 600-foot radius of the site. The notice shall provide a brief description of the proposed project and its location and identify any opportunities for comment, appeal, public hearings, and the means for obtaining additional information.
+
+             (d) Public access channel if available on cable TV; public service broadcasts on local radio station. This is used for major projects and town-wide issues.
+
+             (e) Notice to applicant and to persons who have expressed an interest in the project. These are the parties of record who are apprised of each action taken on a proposed project.
+
+             (f) Open Meeting Notice. This shall include posting in Town Hall, public bulletin board and mailing to the news media and interested persons.
+
+             (3) Types of notice required for each land use action.
+
+             (a) Use, establish or change – None required.
+
+             (b) Plan review by town council –
+
+             Notice of application –
+
+             Open meeting notice.
+
+             (c) Environmental (SEPA) review.
+
+             (i) Determination of nonsignificance (DNS) and mitigated determination of nonsignificance (MDNS).
+
+             Notice of application –
+
+             Post a large sign on site
+
+             Notice of decision – Appeal opportunity –
+
+             Publish in the town official newspaper
+
+             Notice to parties of record
+
+             (ii) Determination of significance, scoping notice, draft and final environmental impact statement.
+
+             Notice of application –
+
+             Post a large sign on site
+
+             Publish in the town official newspaper
+
+             Determination of significance (DS)
+
+             none required
+
+             Scoping notice –
+
+             Publication in official newspaper and newspaper of general circulation
+
+             Mailed notice
+
+             Notice of draft environmental impact statement
+
+             Availability and public hearing –
+
+             Publication in official newspaper
+
+             Mailed notice
+
+             Open meeting notice
+
+             Public access channel
+
+             Final environmental impact statement –
+
+             Publication in official newspaper
+
+             Notice to parties of record
+
+             (d) Lot boundary adjustment – None required.
+
+             (e) Binding site plan – None required.
+
+             (f) Short subdivision – None required.
+
+             (g) Full subdivision –
+
+             Notice of application –
+
+             Post large sign
+
+             Publication in official newspaper
+
+             Mailed notice
+
+             Notice of public hearings –
+
+             Publication in official newspaper
+
+             Mailed notice
+
+             Open meeting notice
+
+             Notice of decision –
+
+             Notice to parties of record
+
+             (h) Conditional use
+
+             Notice of application –
+
+             Publication in official newspaper
+
+             Mailed notice
+
+             Notice of public hearings –
+
+             Publication in official newspaper
+
+             Mailed notice
+
+             Open meeting notice
+
+             Notice of decision –
+
+             Notice to parties of record
+
+             (i) Variance, including zoning, flood and noise – Notice of application and public hearing may be combined for a variance.
+
+             Notice of application –
+
+             Publication in official newspaper
+
+             Mailed notice
+
+             Notice of public hearing –
+
+             Publication in official newspaper
+
+             Mailed notice
+
+             Notice of decision –
+
+             Notice to parties of record
+
+             (j) Rezone and contract rezone
+
+             Notice of application –
+
+             Publication in official newspaper
+
+             Mailed notice
+
+             Notice of public hearing(s) –
+
+             Publication in official newspaper
+
+             Mailed notice
+
+             Open meeting notice
+
+             Notice to parties of record
+
+             Notice of decision –
+
+             Notice to parties of record
+
+             (k) Zoning text amendment
+
+             Notice of public hearing(s) –
+
+             Publication in official newspaper
+
+             Open meeting notice
+
+             Notice to parties of record
+
+             (l) Comprehensive plan adoption and amendment
+
+             Notice of public hearing(s) –
+
+             Publication in official newspaper
+
+             Open meeting notice
+
+             Notice to parties of record
+
+             Public access channel
+
+             (4) Contents of Notice. The notice shall identify the nature and location of the project, and shall include a statement that persons who desire to submit comments on the application or who request notification of the decision may so inform the planning director in writing within the comment period specified in CMC  19.68.080 (2). Except for the large sign requirement, each notice shall also include a list of the land use decisions sought. The planning director shall specify detailed requirements for large signs.
+
+             (5) When a land use permit includes more than one decision component, notice requirements shall be consolidated and the broadest applicable notice requirements imposed. [Ord. 426 § 10.68.070, 1998]
+
+        19.68.080  Notice of application requirements and comment period.
+
+             (1) Notice of Application. When a land use permit application requiring a Type II or III decision is submitted, the planning director shall provide notice of application and an opportunity for public comment as described in this title. No notice or public comment period shall be required for Type I decisions.
+
+             (2) Comment Period. The planning director shall provide a 15-day public comment period prior to making a threshold determination of nonsignificance (DNS) or issuing a decision or recommendation on a proposed Type II or III land use action; provided, that the comment period shall be extended to 30 days if a written request for extension is submitted within the initial 15-day comment period. The comment period shall begin on the date notice is published in the official newspaper. Comments shall be filed with the planning director by 5:00 p.m. of the last day of the comment period. When the last day of the comment period is a Saturday, Sunday or federal or town holiday, the comment period shall run until 5:00 p.m. of the next business day. [Ord. 426 § 10.68.080, 1998]
+
+        19.68.090  Public hearing requirements.
+
+             Public hearings are required as listed below for the following land use permit components, prior to a recommendation, final environmental impact statement or land use decision being made. Procedures for the town council shall be adopted by administrative rule.
+
+             (1) Draft Environmental Impact Statement. A public hearing is required before the planning director to take comments for inclusion in the final environmental impact statement.
+
+             (2) Conditional Use Permit. One public hearing is required before the town council; it shall adopt recommendations and approve, modify or disapprove the conditional use permit.
+
+             (3) Zoning, Flood and Noise Variance. A public hearing is required before the town council.
+
+             (4) Full Subdivision. See CMC Title  17 . A public hearing is required before the town council. The town council makes recommendation if it determines changes are necessary and modifies or disapproves the preliminary plat.
+
+             (5) Rezone and Contract Rezone, and Zoning Text Amendment. A public hearing is required before the town council. The town council shall adopt recommendations and approve, modify or disapprove the rezone, contract rezone or zoning text amendment.
+
+             (6) Comprehensive Plan Adoption and Amendment. A public hearing is required before the town council. The council may adopt by resolution the plan or any part of the plan. [Ord. 426 § 10.68.090, 1998]
+
+        19.68.100  Notice of decision requirements and content of notice.
+
+             (1) The town council shall adopt written findings and conclusions in support of its decision on subdivisions, rezones, and conditional use permits. The decision shall be final and conclusive unless, within 15 calendar days of the date the decision is filed with the city clerk, a party of record makes application to Skagit County superior court for a writ of review; provided, that application for a writ of review of a decision approving or disapproving a subdivision preliminary plan shall be made within 30 days of the filing of the decision with the city clerk. A copy of the town council’s findings, conclusions and decision shall be sent to all parties of record. The transmittal shall include official notice of the time and place for seeking judicial review. The planning director shall be bound by and incorporate the terms and conditions of the town council’s decision in permits issued to the applicant or on approved plans.
+
+             (2) The town council minutes shall constitute the written findings and conclusions in support of its recommendations and decisions on Type II and III land use permits and recommendations. [Ord. 426 § 10.68.100, 1998]
+
+        19.68.110  Standards to ensure performance and compliance with conditions.
+
+             Whenever a new development project is approved and substantial public and private improvements are required, the town shall use the following methods to ensure performance and compliance with the requirements of the land use permit:
+
+             (1) Binding agreement to perform at a later date.
+
+             (2) Performance bond or other security for defined time period.
+
+             (3) Cash deposit or interest-bearing savings account, or other acceptable instrument of credit.
+
+             (4) Covenants and/or easements that are filed with the Skagit County Auditor’s real property records.
+
+             (5) Conditional building permits with specified compliance requirements linked to called inspections.
+
+             (6) Pre-annexation agreements.
+
+             (7) Agreement to participate in a local improvement district or other public improvement project at a later date.
+
+             (8) Other means as appropriate. [Ord. 426 § 10.68.110, 1998]
+
+        19.68.120  Expiration of land use approvals.
+
+             (1) Type I and II land use permits, contract rezones, and conditional use permits shall expire two years from the date of issuance. An extension of one year may be granted by the planning director upon a showing of substantial progress towards completion.
+
+             (2) Subdivisions shall be regulated by CMC Title  17 . [Ord. 426 § 10.68.120, 1998]
+
+        19.68.130  Conditional use applications – When required – Submittal requirements review criteria and conditions of approval.
+
+             (1) A conditional use permit is required when the use proposed is listed as requiring a conditional use in the regulations for the zone in which it is located. Any project requiring a plan review for determination of the proper classification of a land use not listed requires a conditional use when the town council determines the need for a public hearing and conditional use review of the application.
+
+             (2) An application shall be required for approval of a conditional use permit which shall include a site plan that illustrates the following:
+
+             (a) Vicinity map;
+
+             (b) Name, address, phone number of property owner;
+
+             (c) Name, address, phone number of engineer or agent;
+
+             (d) Boundaries and dimensions of property;
+
+             (e) Adjacent public streets;
+
+             (f) Easements, existing and proposed;
+
+             (g) Location and size of all existing and proposed utilities;
+
+             (h) Location of buildings, including setbacks;
+
+             (i) Location and layout of off-street parking;
+
+             (j) Location and height of fences;
+
+             (k) Location and size of signs;
+
+             (l) Landscape detail;
+
+             (m) Indication of height of buildings.
+
+             (3) The site plan shall be properly dimensioned and drawn to scale.
+
+             (4) The site plan shall be adopted and made part of the permit. Subsequent building permits and construction activity shall be in accord with the approved site plan. Adjustments to the site plan may be approved as follows:
+
+             (a) Minor Adjustments. Minor adjustments may be made and approved by the planning director. Minor adjustments are those which may affect the precise dimensions or siting of buildings, but which do not affect the basic character or arrangement of buildings approved, nor the development coverage of the development or the open space requirements. Such dimensional adjustments shall not vary more than 10 percent from the original.
+
+             (b) Major Adjustments. Major adjustments are those, when determined by the planning director, substantially change the basic design, coverage, open space or other requirements of the permit. When the planning director determines that a change constitutes a major adjustment, no building or other permit shall be issued without prior review and approval by the town council of such adjustment.
+
+             (5) Review Criteria. Conditional use permits may only be approved if findings of fact are drawn to support the following:
+
+             (a) The use will have no more adverse effect on the health, safety or comfort of persons living or working in the area, and will be no more injurious, economically or otherwise, to property or improvements in the surrounding area, than would any use generally permitted in the district. Among matters to be considered are traffic flow and control, access to and circulation within the property, off-street parking and loading, refuse and service areas, utilities, screening and buffering, signs, yards and other open spaces, height, bulk and location of structures, location of proposed open space uses, hours and manner of operation, and noise, lights, dust, odor, fumes and vibration.
+
+             (b) The proposal is in accordance with the goals, policies and objectives of the comprehensive plan.
+
+             (c) The proposal complies with all the requirements of this title.
+
+             (d) The proposal can be constructed and maintained so as to be harmonious and appropriate in design, character, and appearance with the existing or intended character of the general vicinity and provides a high quality of development.
+
+             (e) The proposal will not adversely affect the public infrastructure.
+
+             (6) Conditions of Approval. In order to mitigate any adverse impact or support a finding of fact associated with the proposal, conditions may be imposed which could increase requirements in the standards, criteria, or regulations of this title or other town legislation or adopted policies. [Ord. 426 § 10.68.130, 1998]
+
+        19.68.140  Variance applications – When required – Submittal requirements review criteria and conditions of approval.
+
+             (1) A variance is required when, because of special circumstances applicable to subject property because of size, shape, topography location or surroundings, the strict application of this title is found to deprive subject property of rights and privileges enjoyed by other properties in the same zone and vicinity. The town council shall have the authority to grant a variance from the requirements of this title, after considering the matter at a public hearing.
+
+             (2) Application. A site plan shall be required with each application for a variance. The site plan shall be accurately drawn using an appropriate scale and shall illustrate the following:
+
+             (a) Adjacent streets and alleys;
+
+             (b) Boundaries and dimensions of site and setbacks;
+
+             (c) Location and dimensions of buildings;
+
+             (d) Location and dimensions of parking areas;
+
+             (e) Location and dimensions of feature needing variance.
+
+             (3) Review Criteria. Subject to conditions, safeguards and procedures provided by this title, the town council may be empowered to hear and decide applications for variances from the terms of this title, provided the town council may approve a variance only if the request conforms to all of the following criteria. The council must enter findings of fact and conclusions which support the following criteria and any conditions:
+
+             (a) That there are unique physical conditions, including narrowness or shallowness of lot size or shape, or exceptional topographical or other physical conditions peculiar to and inherent in the particular lot; and that, as a result of such unique physical conditions, practical difficulties or unnecessary hardships arise in complying with the provisions of this title.
+
+             (b) That, because of such physical conditions, the development of the lot in strict conformity with the provisions of this title will not allow a reasonable and harmonious use of such lot.
+
+             (c) That the variance, if granted, will not alter the character of the neighborhood, or be detrimental to surrounding properties in which the property is located.
+
+             (d) That the special circumstances and conditions associated with the variance are not a result of the actions of the applicant or previous owners.
+
+             (e) Literal interpretation of the provisions of this title would deprive the applicant of rights commonly enjoyed by other properties in the same zoning district.
+
+             (f) The approval of the variance will be consistent with the purpose of this title and the zoning district in which the property is located.
+
+             (g) The variance will not allow an increase in the number of dwelling units permitted by the zoning district.
+
+             (h) The authorization of such variance will not adversely affect the comprehensive plan.
+
+             (i) The variance shall not allow a land use which is not permitted under the zoning district in which the property is located.
+
+             (j) The variance shall not change any regulations or conditions established by conditional use permits or contract rezones.
+
+             (4) Conditions of Approval. In authorization of a variance, the town council may attach thereto such conditions regarding the location, character and other features of the proposed structure or use as may be deemed necessary to carry out the spirit and purpose of this title and in the public interest.
+
+             (5) Floodplain variance and appeals pursuant to Chapter  15.08  CMC shall be heard by the town council. [Ord. 426 § 10.68.140, 1998]
+
+        19.68.150  Plan review – When required – Application submittal requirements review criteria and conditions of approval.
+
+             (1) Plan review is required for the following:
+
+             (a) Parking and loading area plans for all developments except single-family and duplex residential units and the addition of up to five parking spaces in an existing development.
+
+             (b) Landscaping plans.
+
+             (c) Determination of proper classifications of land uses not included in the lists of permitted or conditional uses for the zone.
+
+             (d) Temporary conforming and nonconforming land uses and buildings for more than two weeks and not exceeding one year.
+
+             (e) Review of new development proposals for consistency with the town of Concrete design guidelines as may be amended and updated over time to reflect the town’s comprehensive plan and vision for the future. The review shall not include single-family and duplex dwellings on existing lots of record or short subdivisions.
+
+             (2) Application submittal requirements include the following:
+
+             (a) Site plan drawn to an appropriate scale.
+
+             (b) Boundary lines and dimensions for the property and all proposed lot lines. Future building locations in phased developments shall be indicated.
+
+             (c) Natural features of the site, including existing significant trees, wetland areas and special flood risk areas.
+
+             (d) Location, dimensions and names of all existing or platted streets or alleys, easements, and railroad rights-of-way, on or adjacent to the property.
+
+             (e) Location and dimensions of all existing structures, improvements or utilities to remain, and structures to be removed.
+
+             (f) Approximate location and size of stormwater retention or detention facilities and storm drains.
+
+             (g) Location and dimensions of all proposed structures and parking lots, to include parking and loading areas, pedestrian circulation and related access ways. Individual parking spaces shall be shown.
+
+             (h) Service areas for waste disposal, recycling, loading and delivery and location of mail boxes.
+
+             (i) Architectural drawings including building elevations and sections, building materials, color and type and floor plans.
+
+             (j) Landscaping plans.
+
+             (k) Signs, including freestanding and signs located on the building.
+
+             (3) Review Criteria. Plan review by the town council includes compliance with the use and development standards, assuring that appropriate conditions are on the plans and in the recommendations of the planning director, determining project consistency with current design review guidelines, comprehensive plans, capital facilities and improvement plans, environmental mitigation and concurrency requirements and reasonableness of standards. Review of the site plan includes landscaping, parking and relationship of the proposed project to the public right-of-way from the pedestrian and transportation perspectives.
+
+             (4) Conditions of Approval. In authorization of a plan review, the town council may attach such conditions as may be deemed necessary to carry out the spirit and purpose of this title and in the public interest. [Ord. 426 § 10.68.150, 1998]
+
+        19.68.160  Reclassification of property including rezone and contract rezone and zoning ordinance text amendments, initiation of amendments, review criteria and conditions of approval.
+
+             (1) Initiation of Amendments.
+
+             (a) Zoning Map.
+
+             (i) One or more property owners of the property may submit an application requesting a reclassification of the property;
+
+             (ii) The town council, as part of a town-wide project to implement the comprehensive plan, may upon its own motion call for a public hearing on the reclassification of property.
+
+             (b) Text.
+
+             (i) The town council may upon its own motion call for a public hearing to amend any portion or all of this title;
+
+             (ii) Any resident or property owner of the town may petition the town to request an amendment to the text of this title.
+
+             (2) Review Criteria. When the town council is considering recommendations or approval for reclassifications, the town council shall investigate the request for reclassification and shall consider, among other questions, the following:
+
+             (a) Is the request compatible with the town’s comprehensive plan and development goals?
+
+             (b) Are public utilities, public facilities and other services currently adequate to serve the proposed district?
+
+             (c) Would the proposal adversely affect the health, safety, or welfare of the adjacent area of the area being considered?
+
+             (d) Is the reclassification or land development needed at this time?
+
+             (e) What are the economic impacts of the proposed action?
+
+             (f) Are the arguments of support or opposition by local citizens valid?
+
+             (g) Have conditions of the area substantially changed since the original zoning to justify a rezone?
+
+             (3) Amendments to Rezone Requests. A requested rezone may be changed, conditioned or modified by the town council without requiring additional hearings subject to the following:
+
+             (a) The modification or change shall not result in a more intense zone than the one requested.
+
+             (b) The area of the request shall not be enlarged; however, the area may be lessened.
+
+             (4) Contract Rezones.
+
+             (a) In order to mitigate any impacts that may result from a rezone, the town may enter into a property use and development agreement with the property owner. The agreement shall outline the conditions of approval and the obligations of the property owner. The contract shall be binding upon the owner and his/her heirs, assigns and successors. The agreement shall run with the land, be signed by the property owner(s) and be recorded with the Skagit County Auditor real property records within 120 days of adoption of the ordinance accepting the agreement.
+
+             (b) The ordinance rezoning the property shall provide for acceptance of the agreement and shall not be passed by the council until the agreement has been executed by the owner.
+
+             (c) Amendment of Contract Rezones. Agreements required as a condition to map amendments may be amended by agreement between the owner and the town; provided, that the amended agreement shall be approved by the council. Amendments which are within the spirit and general purpose of the prior decision of the council may be approved by the council by ordinance after receiving any advice which it deems necessary. Written notice and an opportunity to comment shall be provided by the council at least 15 days prior to council consideration of the amendment request to persons who submit written or oral comments on the original rezone decision. Amendments which, in the judgment of the council, represent a major departure from the terms of the agreement shall not be approved until after a public hearing held in the same manner and pursuant to the same notice provided for map amendments. [Ord. 426 § 10.68.160, 1998]

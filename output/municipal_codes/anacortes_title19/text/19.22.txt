@@ -1,0 +1,336 @@
+Ch. 19.22 Concurrency | Anacortes Municipal Code
+
+ Skip to main content
+
+		Loading…
+
+	 Anacortes, WA
+
+		Municipal Code
+
+				   Home
+
+					   Title 19 Div. 2
+
+					   Title 19 Div. 2
+
+					   Ch. 19.24
+
+			 Toggle site navigation
+
+			 Menu
+
+		  City of Anacortes
+
+						Municipal Code
+
+  Title 19, Unified Development Code
+  Title 19 Div. 2, Procedures
+  Ch. 19.22, Concurrency
+
+						   Home
+
+							   Contents
+
+						   Track
+
+							Legislative History
+
+								Historic Versions
+
+								Pending Updates
+
+								Recent Updates
+
+						   Share
+
+							This Page
+
+							Your Selections
+
+						   Settings
+
+						   Help
+
+		  City of Anacortes
+
+						Municipal Code
+
+  Title 19, Unified Development Code
+  Title 19 Div. 2, Procedures
+  Ch. 19.22, Concurrency
+
+	    Chapter 19.22   CONCURRENCY   Revised
+
+			 Search Within This
+
+	   This chapter is included in your selections.
+
+ Sections:
+
+   19.22.010   Purpose.
+
+   19.22.020   Definitions.
+
+   19.22.030   Applicability.
+
+   19.22.035   Application requirements.  Revised
+
+   19.22.040   Project concurrency review.  Revised
+
+   19.22.050   Concurrency test.  Revised
+
+   19.22.060   Phased development.
+
+    19.22.010   Purpose.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+    A.   To ensure that transportation improvements or strategies to accommodate the impacts of  development  are provided  concurrent  with the  development .
+
+    B.   To ensure that public facilities and services necessary to support  development  will be  adequate  to serve the  development  without decreasing service levels below adopted minimum standards.
+
+    C.   Concurrency for most urban public facilities and services is assured by the manner in which the  city   comprehensive plan  and its functional plans are integrated, implemented and monitored. The following public facilities and services, termed “ concurrency facilities and services ,” however, need to be analyzed on a site-specific basis: water, wastewater,  stormwater , transportation, police protection, and fire protection. This chapter describes concurrency management systems for the  city .
+
+    D.   To provide a framework for determining facilities and services needs and to provide a basis for meeting those needs through capital facilities planning.
+
+    E.   To provide for the evaluation of requests for  development  to ensure that  adequate  facilities can be provided within a reasonable time of the  development  impact.  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.22.020   Definitions.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+ For the purposes of this chapter, the following words have the following meanings:
+
+ “ Adequate ” means at or above the adopted  level of service standards .
+
+ “ Available facility capacity ” means capacity in a concurrency facility that is currently available for use without requiring facility construction, expansion or modification.
+
+ “ Concurrency facilities and services    ” means facilities and services for which concurrency is required in accordance with the provisions of this chapter. They are water, wastewater,  stormwater , transportation, police protection, and fire protection. The  city  of Anacortes is the service provider for all of these facilities and services for the entire area within its limits.
+
+ “ Concurrency test ” means the comparison of an  applicant ’s impact on concurrency facilities to the capacity of the concurrency facilities.
+
+ “ Concurrent with development  ( concurrent )” means that improvements or strategies are in place at the time of  development  or that financial commitment is in place to complete the improvements or strategies within six years.
+
+ “ Level of service (LOS) standard     ” means an established minimum capacity of public facilities or services that must be provided per  unit  of demand or other appropriate measure of need. For transportation, an A through F scale is frequently used to reflect level of service and to designate an  LOS standard .  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.22.030   Applicability.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+    A.   This chapter applies to all  development  except the following:
+
+      1.    Development  types which create no additional impacts on concurrency facilities or services, including, but not limited to:
+
+        a.   Any addition or  accessory structure  to a residence with no change in use or increase in the number of  dwelling units .
+
+        b.   Interior renovations with no change in use or increase in number of  dwelling units .
+
+        c.   Interior completion of a  structure  for use(s) with the same or less intensity as the existing use or a previously approved use.
+
+        d.   Replacement  structure  with no change in use or increase in number of  dwelling units .
+
+        e.   Temporary construction trailers.
+
+        f.   Driveway, resurfacing or parking  lot  paving.
+
+        g.   Reroofing of  structures .
+
+        h.   Demolitions.
+
+        i.   Any other permit or approval that the  Director  determines has no impact on a  concurrency facility or service .
+
+    B.   The following  development permits  are exempt from the requirements of this chapter:
+
+      1.    Accessory dwelling units .
+
+      2.    Boundary line adjustment .
+
+      3.    Final plats  (if a  concurrency test  was conducted for the corresponding  preliminary plat  permit).
+
+      4.    Rezone .
+
+      5.   Street vacation.
+
+      6.   Temporary use permit.
+
+      7.    Variance .  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.22.035   Application requirements.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently added by Ordinance 5014, codified in February 2026.
+
+    A.   An  applicant  must provide the information deemed necessary by the  Director  to evaluate the  development ’s impact on concurrency facilities.
+
+    B.   The cost of conducting the  concurrency test  must be borne by the  applicant , including reimbursement for the cost of review by the  city ’s contracted consultant, if required.  (Ord. 5014 § 2 (Att. A), 2025)
+
+    19.22.040   Project concurrency review.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+    A.    Development  is prohibited, and all applications therefor must be denied, if the  development  would cause the level of service on a  concurrency facility or service  to decline below the adopted levels of service standards, unless the improvements or strategies to accommodate the new  development  are made  concurrent  with the  development , subject to the provisions of AMC  19.22.050(C) .
+
+      1.   For potable water, wastewater, and  stormwater  management, only available capacity or capacity that can be provided prior to the actual use of the facility will be used.
+
+    B.   If proposed  development  would cause the level of service to decline below adopted  level of service standards  for an affected facility, the proposed  development  may nonetheless be approved if the  Director  finds that an improvement will be completed that will result in meeting adopted  level of service standards  of all affected concurrency facilities at the time of  development , or that a financial commitment is in place to complete the improvement or implement the strategy within six years.
+
+      1.   A  development  proposal may not be denied for causing the level of service on a locally owned or locally or regionally operated transportation facility to decline below the standards adopted in the transportation element of the  comprehensive plan  where such impacts could be adequately mitigated through active transportation facility improvements, increased or enhanced public transportation service, ride-sharing programs, demand management, or other transportation systems management strategies funded by the  development .
+
+    C.   All  development  approvals must include a finding as to the application of this chapter, and those approvals for which concurrency improvements are required under this chapter must be expressly conditioned thereon.  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.22.050   Concurrency test.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+    A.   In conducting the  concurrency test , the  city  must use the  level of service standards  adopted in the capital facilities element of the  comprehensive plan .
+
+    B.   Procedures.   The  concurrency test  for concurrency facilities must be conducted in accordance with the  city ’s concurrency review program during the  development permit  review process by each  department  responsible for providing those facilities and services.
+
+    C.   Test.    Development  applications must comply with either subsection  (C)(1)  or  (C)(2)  of this section:
+
+      1.   If the capacity of concurrency facilities is equal to or greater than the capacity required to maintain the  level of service standard  for the impact from the  development  application, the  concurrency test  is passed and is to be documented by the  Director .
+
+      2.   If the  available facility capacity  of concurrency facilities is less than the capacity required to maintain the  level of service standard  for the impact from the  development  application, the  concurrency test  is not passed. The  applicant  may:
+
+        a.   Accept a 90- day  reservation of  available facility capacity  on concurrency facilities and modify the application to reduce the need for planned facility capacity on concurrency facilities;
+
+        b.   Accept a 90- day  reservation of  available facility capacity  on concurrency facilities and demonstrate to the service provider’s satisfaction that the  development  will have a lower need for capacity than usual and, therefore, the  available facility capacity  is  adequate ;
+
+        c.   Accept a 90- day  reservation of  available facility capacity  on concurrency facilities and arrange with the service provider for the provision of the additional capacity of concurrency facilities required; or
+
+        d.   Appeal the results of the  concurrency test  in accordance with the procedures for the applicable underlying permit, per AMC  19.20.030 .  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.22.060   Phased development.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+    A.   When a  development  is proposed in phases, or construction is proposed to occur over a period greater than three years,  concurrency facilities and services  impacts must be reviewed as part of environmental review.
+
+    B.   The  city  and the proponent of the  development  must enter into an agreement identifying the improvements or strategies that will be required with each phase or time period of  development  to meet the concurrency facility and service requirements.
+
+    C.   All implementing permits, including but not limited to  subdivision  and  building  permits, must be conditioned that the improvements identified in the agreement are made  concurrent  with construction during such phase or time period or that a financial commitment is in place to complete the improvements or strategies within six years of construction.  (Ord. 3040 § 2 (Att. A), 2019)
+
+	Your Selections
+
+	 What’s Nearby
+
+			 Title
+
+					   18
+
+					 19
+
+					 20
+
+			 Division
+
+					   1
+
+					 2
+
+					 3
+
+			 Chapter
+
+					   19.20
+
+					 19.22
+
+					 19.24
+
+		On This Page
+
+				19.22.010 Purpose
+
+				19.22.020 Definitions
+
+				19.22.030 Applicability
+
+				19.22.035 Application requirements
+
+				19.22.040 Project concurrency review
+
+				19.22.050 Concurrency test
+
+				19.22.060 Phased development
+
+  The Anacortes Municipal Code is current through Ordinance 5028, passed May 4, 2026.
+
+ Disclaimer: The city attorney’s office has the official version of the Anacortes Municipal Code. Users should contact the city attorney’s office for ordinances passed subsequent to the ordinance cited here.
+
+				 City Website: www.anacorteswa.gov
+				 City Telephone: (360) 293-1900
+
+	  Hosted by General Code.
+
+			 Privacy Policy
+			|
+			 Terms of Use
+			|
+			 Cookie Preferences
+
+				 Contents
+
+					 ×
+
+					 All Publications
+
+					Municipal Code
+
+					Municipal Policies
+
+			   Your Selections
+
+					Anacortes Municipal Code
+
+					Anacortes Municipal Policies
+
+		   Expand All
+
+		   Collapse All
+
+		   Share
+
+		   Clear
+
+					   Close
+
+		 View Full Table
+
+		 View Full Image
+
+		 View Full File
+
+		  ×
+
+			    Go to Top
+
+			    Go to Bottom
+
+			    Share/Save
+
+			 Close
+
+				Save, Share, Bookmark or Print
+
+				History of This Subsection

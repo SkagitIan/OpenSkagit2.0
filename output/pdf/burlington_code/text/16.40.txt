@@ -1,0 +1,386 @@
+16.40.010 Title.
+This chapter shall be called "Survey and Design Standards."
+(Ord. 1856 § 2 (Exh. B), 2018)
+
+16.40.020 Application.
+This chapter shall apply as follows:
+A. Plats and binding site plans shall be subject to this chapter;
+B. The design specifications identified in this chapter shall apply to the design and
+construction of streets, roads, drainage facilities, sidewalks and other improvements
+serving plats and binding site plans;
+C. No plat or binding site plan shall be granted final approval unless the streets, roads,
+drainage facilities, sidewalks, and other improvements required by this chapter have been
+constructed, installed, or provided.
+(Ord. 1856 § 2 (Exh. B), 2018)
+
+16.40.030 Purpose.
+A. Ensure that plats and binding site plans include appropriate provisions for the public health,
+safety, and general welfare, for open spaces, drainage ways, streets or roads, alleys, other
+public ways, transit stops, potable water supplies, sanitary wastes, parks and recreation,
+playgrounds, schools and school grounds, sidewalks, and planning features that assure safe
+walking conditions for students traveling to and from school;
+B. Establish uniform standards for the preparation of plats and binding site plans;
+C. Ensure that plats and binding site plans are accurate and consistent with applicable laws
+and regulations;
+D. Establish uniform design standards for the design and construction of streets, roads,
+drainage facilities, sidewalks, and other infrastructure or improvements within plats and
+binding site plans.
+E. Ensure that streets, roads, drainage facilities, sidewalks, and other improvements serving
+plats and binding site plans are compatible with, and can be easily connected to, adjoining
+properties and developments, thereby creating a uniform and interconnected system of
+public improvements.
+(Ord. 1856 § 2 (Exh. B), 2018)
+
+16.40.040 Authority.
+This chapter is adopted pursuant to chapters 36.70, 36.70A,36.70B, 58.17 RCW and other
+applicable laws and regulations.
+(Ord. 1856 § 2 (Exh. B), 2018)
+§ 16.40.050 LAND DIVISIONS AND ADJUSTMENTS § 16.40.050
+
+16.40.050 Access standards.
+The design standards in this section shall apply to the design and construction of all plats and
+binding site plans. Vehicle and pedestrian access shall be provided as follows:
+A. General.
+1. Plats and binding site plans shall be served by one or more streets providing adequate
+ingress and egress.
+2. The alignment of streets within plats and binding site plans shall conform to the city's
+street plan and allow streets adjoining the plat or binding site plan to be extended
+through the site.
+3. Street intersections shall be as nearly at right angles as practicable and in no event
+shall the angle formed be less than 30 degrees.
+4. Street networks shall conform to any applicable fire code requirements to ensure
+adequate access for emergency vehicles and equipment.
+5. Unless warranted by special physical circumstances, the right-of-way for public
+streets shall be at least 60 feet wide.
+6. Alleys shall be at least 16 feet wide plus such additional width as shall be necessary
+for an adequate turning radius.
+7. Public streets, roads, alleys, and sidewalks shall conform to applicable standards
+identified in chapter 12.28 BMC.
+8. Low impact development features such as bioretention areas, rain gardens, and
+permeable paving shall be incorporated into the design and construction of all streets
+unless demonstrated to be infeasible through an engineering analysis. In determining
+the feasibility of such low impact development features, an engineering analysis shall
+be submitted and reviewed by the city engineer. This analysis should consider site
+characteristics such as soil and ground water conditions, and anticipated traffic
+volumes. The analysis should be consistent with the Washington State Department of
+Ecology's "Stormwater Manual for Western Washington" and the design and site
+evaluation guidance in the Puget Sound Partnership's "Low Impact Development
+Technical Guidance Manual for Puget Sound."
+9. All streets, bridges, sidewalks, and pedestrian access facilities shall be designed and
+constructed in accordance with plans and specifications prepared or approved by the
+city engineer.
+10. All dedicated streets shall be graded to their full width with adequate drainage
+provided prior to acceptance for public use. Grades shall be established by the city
+engineer and all streets shall be surfaced according to plans and specifications
+prepared or approved by the city engineer.
+11. Land divisions shall create, and contribute to, a fully connected network of streets.
+Unless explicitly waived by these requirements streets shall be extended to connect
+with adjacent streets and stubbed out to abutting properties to facilitate future access.
+B. Private Streets. Vehicle and pedestrian access should be provided by public streets
+dedicated to the city. However, private streets and shared driveways may, at the city's
+discretion, be authorized if all of the following criteria are met:
+1. The goals of the zoning code to provide for adequate light, air and usable open space
+between structures would not be compromised; and
+2. The dedication and improvement of a public street is not necessary to facilitate the
+provision of public utilities such as water, sanitary sewer, storm drainage; and
+3. The dedication and improvement of a street is not necessary or desirable in order to
+provide on-street parking for overflow conditions; and
+4. No potential safety hazards would result from multiple access points between existing
+and future developments onto a roadway without curbs and with limited sight lines;
+and
+5. There is no potential for extending the street system to connect with existing streets,
+or to serve potential development sites adjacent to the plat or binding site plan; and
+6. Private streets shall be designed and constructed in accordance with the applicable
+standards identified in chapter 17.85 BMC.
+C. Sidewalks and Pedestrian Access.
+1. Sidewalks and pedestrian access shall be designed and constructed in accordance with
+the applicable standards identified in chapter 17.85 BMC.
+2. Sidewalks should be provided along both sides of streets unless this requirement is
+explicitly waived by the city's adopted standards for public or private streets.
+(Ord. 1856 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+16.40.060 Design of lots and blocks.
+A. Blocks. To implement the comprehensive plan, minimize travel distances, and create a
+fully interconnected street network, developments must produce complete blocks bounded
+by a connecting network of streets in accordance with the following standards:
+1. Blocks shall be designed and arranged to provide for the safe and efficient movement
+of vehicles and pedestrians.
+2. Blocks shall be identified on the face of the plat or binding site plan by letters or
+numbers.
+3. Design standards for blocks in areas zoned RD, RA, MUR, or MUC-1:
+a. Maximum block length: 600 feet.
+b. Maximum block perimeter: 1,600 feet.
+4. Design standard for blocks in areas zoned MUC-2, CI-1, or PFT-1:
+a. Maximum block length: 600 feet.
+b. Maximum block perimeter: 2,000 feet.
+§ 16.40.060 LAND DIVISIONS AND ADJUSTMENTS § 16.40.070
+5. Design standards for blocks in areas zoned CI-2 or PFT-2: None.
+6. Design standards for blocks in areas zoned PC: None.
+7. General Exceptions. An exception may be granted to standards for maximum block
+length or perimeter as minimally necessary due to severe topography, the presence of
+wetlands, or other significant critical area constraints, or for small sites. Exceptions
+may also be granted when street connections or stubs cannot feasibly be provided
+based on one or more of the factors listed in subsection (C)(2) of this section. In such
+cases mid-block pedestrian paths may be required in order to provide adequate
+pedestrian circulation.
+8. Partial Blocks. Exceptions may be granted to the maximum permitted block perimeter
+in order to allow for the establishment of partial blocks bounded on one or more sides
+by a street(s) stubbed out to the site boundaries. When authorized, partial blocks shall
+comply with the applicable standard for block length and streets stubbed out to the
+site boundaries shall not be more than 150 feet in length, as measured from the nearest
+intersection.
+B. Lots.
+1. Lots shall either adjoin a street, or be served by a private access easement if permitted
+by this chapter and chapter 17.85 BMC.
+2. Lots shall be numbered with reference to blocks.
+3. The creation of through lots is prohibited in areas zoned RD.
+C. Street Connections.
+1. Street connections shall be provided to all streets and street stub-ends that abut the
+boundary of the land division.
+2. Streets shall be extended to the boundaries of the land division and stub-ends shall be
+provided to allow for future connections. Exceptions may be granted to this
+requirement as follows:
+a. Where the abutting property is fully developed and there is little or no possibility
+of redevelopment occurring.
+b. Where the abutting property is zoned PFT or PC.
+c. Where the abutting property is located in unincorporated Skagit County and is
+zoned Ag-NRL.
+d. Where the presence of significant critical area constraints make future street
+extensions infeasible.
+e. Where the property abuts a railroad or limited access highway right-of-way that
+makes future street extensions infeasible.
+(Ord. 1856 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+16.40.070 Utilities.
+A. Easements shall be provided for all utilities including storm water facilities.
+B. All utility easements shall be designed and configured to allow access for inspection,
+maintenance, and repair purposes.
+C. The design and configuration of easements for storm water and sanitary sewer facilities
+shall be reviewed and approved by the city engineer.
+D. Low impact development techniques shall be incorporated into the design and construction
+of all plats and binding site plans in accordance with the provisions of chapter 17.70 BMC.
+E. All storm water facilities shall be approved by the city engineer and shall be designed and
+constructed in accordance with the applicable standards identified in BMC Title 14.
+F. Above ground utility installations, such as power and telephone lines, shall not be permitted
+unless the city engineer determines that topographic or geologic conditions make below
+ground installation infeasible.
+G. Each lot in a plat or binding site plan shall be provided with a connection to a public water
+supply system. Lots used for nonbuilding purposes shall be exempt from this requirement
+provided a note is included on the face of the plat restricting the use of the lot to
+nonbuilding purposes.
+H. Public water supply systems and connections shall be designed and constructed in
+accordance with any standards adopted by the Skagit Public Utility District.
+I. Each lot in a plat or binding site plan shall be provided with a connection to the city's
+sanitary sewer system. Lots used for nonbuilding purposes shall be exempt from this
+requirement provided a note is included on the face of the plat restricting the use of the lot
+to nonbuilding purposes.
+J. Sewer system components and connections shall be designed and constructed in
+accordance with any applicable standards adopted by the city of Burlington and shall be
+approved by the city engineer.
+K. Service Mains and Fire Hydrants. Service mains and fire hydrants shall be installed and
+inspected by the city engineer and fire marshal prior to final approval of plats and binding
+site plans. The design and construction of service mains and fire hydrants shall be
+consistent with all applicable standards and regulations, and all plans shall be approved by
+the city engineer and fire marshal.
+(Ord. 1856 § 2 (Exh. B), 2018)
+
+16.40.080 Survey requirements.
+Plats and binding site plans shall be based on a thorough survey and shall be prepared by a land
+surveyor licensed in the state of Washington. Plats and binding site plans shall be consistent with
+the following requirements:
+A. The surveyor shall furnish the city engineer with a full set of survey notes which include:
+1. The ties to each permanent monument;
+2. At least three durable, distinctive reference points or monuments;
+§ 16.40.080 LAND DIVISIONS AND ADJUSTMENTS § 16.40.090
+3. Sufficient data to determine readily the bearing and length of each line;
+4. The base meridian referred to.
+B. A traverse of the boundaries of the subdivision, short subdivision, or binding site plan and
+all lots and blocks shall close within one foot in 5,000 feet, as required by chapter 332-130
+WAC.
+C. Primary survey control points shall be referenced to section corners and monuments, and
+the corners of adjoining plats or binding site plans, or portions of plats or binding site plans,
+shall be identified and ties shown.
+D. Prior to final plat or binding site plan approval, permanent control monuments shall be
+established at:
+1. All controlling comers on the boundaries of the plat or binding site plan;
+2. The intersections of centerlines of roads within the plat or binding site plan;
+3. The beginning and ends of curves on centerlines;
+4. All block corners.
+E. Permanent control monuments may be placed on the offset lines. The position and type of
+every permanent monument shall be noted on all plats and binding site plans. Permanent
+control monuments shall be of a type approved by the city engineer.
+F. Permanent control monuments within the streets shall be set after the streets are graded.
+G. Each lot corner shall be marked by a three-quarter-inch galvanized iron pipe, 24 inches in
+length, or approved equivalent, driven into the ground, set with C cap per the requirements
+of RCW 58.19.120.
+H. Prior to final plat or binding site plan approval the city engineer shall verify the required
+permanent control monuments and lot corner markers have been installed in accordance
+with the requirements of this chapter.
+I. Property contiguous to water. If any land in a plat or binding site plan is contiguous to a
+body of water, a meander line shall be established along the shore at a safe distance back
+from the ordinary high water mark. Property lying below and beyond the meander line shall
+be defined by distance along the side property lines extended from the meander line. If the
+thread of a stream lies within a plat or binding site plan or forms the boundary of a plat or
+binding site plan, such thread shall be defined by bearings and distances as it exists at the
+time of the survey.
+(Ord. 1856 § 2 (Exh. B), 2018)
+
+16.40.090 Preliminary plat and binding site plan requirements.
+Preliminary plats and binding site plans shall be prepared by a land surveyor licensed in the state
+of Washington and shall include all of the following:
+A. A complete survey of the parcel being divided;
+B. The name of the proposed plat or binding site plan;
+C. North point and scale;
+D. The location of existing property lines, streets, buildings, watercourses, natural hazards,
+critical areas and critical area buffers, significant topographic features, and existing
+utilities;
+E. A legal description of the land contained within the plat or binding site plan;
+F. The names and addresses of all persons, firms and corporations holding interest in the
+lands, including easement rights and interest;
+G. The proposed locations, dimensions, and names of streets, alleys, and roadways;
+H. The location and dimensions of all proposed lots, lot lines, easements, common areas,
+storm water facilities, and dedications;
+I. The locations, dimensions, and centerlines of all public and private streets, roadways, and
+access easements adjoining the proposed plat or binding site plan;
+J. The approximate location of utilities adjoining the proposed plat or binding site plan;
+K. The proposed location and routing of utilities necessary to serve lots within the proposed
+plat or binding site plan;
+L. The names of adjoining plats or binding site plans;
+M. The surveyor's signature, license stamp, name, and contact information;
+N. The date of the survey;
+O. All existing monuments and markers located by the survey;
+P. The zoning classification applicable to the land within the plat or binding site plan;
+Q. The conditions of or the limitations on dedications, if any, including slope rights;
+R. Contour intervals as required, based upon city datum;
+S. Any other information required by Burlington Municipal Code or deemed necessary by the
+director for purposes of demonstrating compliance with regulatory requirements.
+(Ord. 1856 § 2 (Exh. B), 2018)
+
+16.40.100 Final plat and binding site plan requirements.
+Final plats and binding site plans shall be prepared by a land surveyor licensed in the state of
+Washington and shall include all of the following:
+A. A complete survey of the section or sections in which the plat, or replat, is located, or as
+many sections as may be necessary to properly orient the plat within the section or sections;
+B. Complete field and computation notes as provided in BMC § 16.40.080;
+C. The final plat or binding site plan shall be printed on paper or other material acceptable to
+the Skagit County auditor and shall be 18 inches by 24 inches in size;
+D. The accuracy and completeness of the final plat or binding site plan shall be the sole
+§ 16.40.100 LAND DIVISIONS AND ADJUSTMENTS § 16.40.100
+responsibility of the surveyor preparing the plat or binding site plan. The surveyor shall
+make field surveys and investigations as necessary to ensure the map is complete and
+accurate in every detail;
+E. The final plat or binding site plan shall be presented at a scale not smaller than 100 feet to
+one inch;
+F. The final plat or binding site plan shall include the following:
+1. The name of the plat or binding site plan;
+2. The lines, widths and names of all streets, avenues, places, parks or other public
+property, and the location of monuments marking the same;
+3. The length and direction of all lot lines, also the angles made by the lot lines with the
+street lines;
+4. The location of control points and monuments together with all ties;
+5. The names of all adjoining plats and binding site plans;
+6. The scale and north point;
+7. The boundary of the tract as covered by the plat or binding site plan showing courses
+and distance on the plat;
+8. The initial point;
+9. All protective improvements and restrictions on uses;
+10. All dedications and all conveyances to a homeowner's nonprofit maintenance
+corporation in lieu of dedication;
+11. Any notes, restrictions, or information required by Burlington Municipal Code or as
+a condition of preliminary plat or binding site plan approval;
+12. Inscriptions or notes on the face of the plat or binding site plan setting forth all
+limitations and conditions for the use of land;
+13. Inscription or notes on the face of the plat or binding site plan requiring that any
+development of the subject property be in conformance with the plat or binding site
+plan;
+14. Tracts shall be individually identified by letters or numbers and notes shall be
+provided indicating the purpose, intended ownership, and permitted or prohibited uses
+for each tract.
+G. Any additional information necessary to meet the standards for mapping set forth in chapter
+332-130 WAC;
+H. In the case of a plat alteration or binding site plan alteration, the lots, blocks, streets, alleys,
+easements and parks appearing on the original plat or binding site plan shall be shown by
+dotted lines in their proper position in relation to the new arrangement of the plat or binding
+site plan, and the new plat or binding site plan shall be shown clearly in solid lines to avoid
+ambiguity;
+I. The following certificates and signature blocks shall be included on the face of the plat or
+binding site plan. The director may specify the specific content, or format, of the required
+signature blocks and certificates unless a specific format is prescribed by state law.
+1. A dated surveyor's certificate including the surveyor's signature and license stamp;
+2. A certificate giving a full and correct description of the lands divided as they appear
+on the plat or binding site plan, including a statement that the subdivision, short
+subdivision, or binding site plan has bean made with the free consent and in
+accordance with the desires of the owners. If the plat is subject to a dedication, the
+certificate or a separate written instrument shall also contain the dedication of all
+streets and other areas to the public, an individual or individuals, religious society or
+societies or to any corporation, public or private as shown on the plat and a waiver of
+all claims for damages against any governmental authority which may be occasioned
+to the adjacent land by the established construction, drainage and maintenance of the
+road. The certificate or instrument of dedication shall be signed and acknowledged
+before a notary public by all parties having any ownership interest in the land
+subdivided and recorded as part of the final plat;
+3. A statement of approval from the city engineer as to the survey data, the layout of
+streets, alleys, and other rights-of-way, design of bridges, sewage and water systems,
+and other structures, and indicating the plat complies with BMC Titles 12, 13, and 14;
+4. A statement of approval from the director indicating the plat or binding site plan
+complies with BMC Titles 15, 16, 17, and 18;
+5. For subdivisions, a signature block indicating the city council's approval;
+6. Be acknowledged by the person filing the plat before the auditor of the county in
+which the land is located, or any other officer who is authorized by law to take
+acknowledgment of deeds, and a certificate of said acknowledgment shall be enclosed
+or annexed to such plat or binding site plan and recorded therewith;
+7. A certification from the Skagit County treasurer that all taxes and delinquent
+assessments for which the property may be liable as of the date of certification have
+been duly paid, satisfied or discharged;
+8. A certification from the city treasurer that all taxes and delinquent assessments for
+which the property may be liable as of the date of certification have been duly paid,
+satisfied or discharged;
+9. Be acknowledged by the person filing the plat before the Skagit County auditor or
+any other officer who is authorized by law to take acknowledgment of deeds, and a
+certificate of the acknowledgment shall be enclosed or annexed to the plat or binding
+site plan and recorded with it;
+10. For binding site plans where a condominium or condominium conversion is proposed,
+the final plan drawing shall include a statement indicating that the plan is either for a
+"condominium development" or a "condominium conversion."
+(Ord. 1856 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+16.40.110 Dedications.
+§ 16.40.110 LAND DIVISIONS AND ADJUSTMENTS § 16.40.110
+A. All subdivisions and short subdivisions shall include adequate provisions for the dedication
+of drainage ways, streets, alleys, easements, critical areas, parks, and other public open
+space areas as may be required by Burlington Municipal Code, Washington State law, or
+other applicable regulatory requirements.
+B. All dedications shall be clearly and precisely indicated on the face of plat or binding site
+plan along with the intended purpose of the dedication and any associated restrictions on
+its use.
+C. Protective improvements and easements allowing access, inspection, and maintenance of
+such improvements shall be dedicated to the city in accordance with applicable municipal
+code requirements.
+D. City-owned and operated storm water facilities, infiltration areas, and conveyance or
+collection systems, as well as easements allowing access, inspection, and maintenance of
+such features shall be dedicated to the city in accordance with applicable municipal code
+requirements.
+E. Easements being dedicated, and their intended purpose, shall be shown on the face of the
+plat or binding site plan and included in the certificate of dedication.
+F. Convenient pedestrian and vehicular access to every lot shall be provided by a dedicated
+street unless a private street is authorized pursuant to BMC § 16.40.050(B).
+G. If the city concludes that the public interest will be served the city may, in lieu of requiring
+the dedication to the public of land in a subdivision for protective improvements, drainage
+ways, streets, alleys, sidewalks, parks and other open space, allow the land to be conveyed
+to a homeowner's nonprofit maintenance corporation. In such cases, prior to the time of
+filing a final plat or binding site plan for approval, articles of incorporation and bylaws of
+the grantee organization and evidence of the conveyance or of a binding commitment to
+convey shall be provided to the city. The articles of incorporation shall provide that
+membership in the corporation shall be conditioned upon ownership of land in the plat or
+binding site plan, that the corporation is empowered to assess the land for costs of
+construction and maintenance of the improvements and property owned by the corporation,
+and that the assessment shall be a lien upon the land. The city attorney shall review and
+approve the articles of incorporation and bylaws as to compliance with this provision. The
+city council may impose other conditions as it deems appropriate to assure that property
+and improvements owned by the corporation will be adequately constructed and
+maintained.
+H. Any dedication, donation or grant as shown on the face of the plat or binding site plan shall
+be considered, to all intents and purposes, as a quitclaim deed to the grantee or grantees,
+for his, her or their use for the purpose intended by the donors or grantors.
+(Ord. 1856 § 2 (Exh. B), 2018)
+§ 16.50.010 LAND DIVISIONS AND ADJUSTMENTS § 16.50.060

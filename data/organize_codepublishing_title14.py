@@ -14,6 +14,9 @@ DEFAULT_INPUT = Path("output/codepublishing/skagit_county_title14")
 
 def clean_text(value: str) -> str:
     value = repair_mojibake(value)
+    value = value.replace("Search Within This This section is included in your selections.", "")
+    value = value.replace("Search Within This This chapter is included in your selections.", "")
+    value = value.replace("Search Within This", "")
     value = re.sub(r"\s+", " ", value.replace("\xa0", " ")).strip()
     return re.sub(r"\s+([,.;:])", r"\1", value)
 
@@ -46,14 +49,32 @@ def element_text(element) -> str:
     return clean_text(element.get_text(" ", strip=True))
 
 
+def clean_heading(value: str) -> str:
+    return clean_text(value.replace("Search Within This", "")).strip()
+
+
 def chapter_title(soup: BeautifulSoup, fallback: str) -> str:
     heading = soup.select_one("h2.CH")
-    return element_text(heading) if heading else fallback
+    if heading:
+        return element_text(heading)
+    chapter = soup.select_one("h1, .chunk-title, .breadcrumbs .active")
+    if chapter:
+        text = element_text(chapter)
+        if text:
+            return text
+    page_title = soup.find("title")
+    if page_title:
+        text = element_text(page_title)
+        if text:
+            return text
+    return fallback
 
 
 def iter_section_records(ref: str, url: str, soup: BeautifulSoup, jurisdiction: str, title: str) -> list[dict[str, Any]]:
     main = soup.select_one("#mainContent") or soup.body or soup
     headings = main.select("h3.Cite[id]")
+    if not headings:
+        return iter_municipal_code_section_records(ref, url, soup, jurisdiction, title)
     records = []
     for index, heading in enumerate(headings):
         section_id = heading.get("id", "")
@@ -85,6 +106,39 @@ def iter_section_records(ref: str, url: str, soup: BeautifulSoup, jurisdiction: 
     return records
 
 
+def iter_municipal_code_section_records(ref: str, url: str, soup: BeautifulSoup, jurisdiction: str, title: str) -> list[dict[str, Any]]:
+    section_nodes = soup.select("article.type-Section[id][data-cite], section[id][data-cite]")
+    records = []
+    for index, node in enumerate(section_nodes):
+        section_id = node.get("id", "")
+        if not re.match(r"^\d{1,2}\.\d{2}\.\d{3}$", section_id):
+            continue
+        header = node.select_one(".inner-header, .header")
+        heading = clean_heading(element_text(header)) if header else section_id
+        section_text = element_text(node)
+        if heading and section_text.startswith(heading):
+            section_text = section_text[len(heading) :].strip()
+        records.append(
+            {
+                "jurisdiction": jurisdiction,
+                "title": title,
+                "chapter_ref": ref,
+                "chapter_title": chapter_title(soup, ref),
+                "section": section_id,
+                "heading": f"{section_id} {heading}".strip() if section_id not in heading else heading,
+                "text": section_text,
+                "source_url": municipal_section_url(url, section_id),
+                "order": index,
+            }
+        )
+    return records
+
+
+def municipal_section_url(chapter_url: str, section_id: str) -> str:
+    base = chapter_url.rsplit("/", 1)[0]
+    return f"{base}/{section_id}"
+
+
 def iter_table_records(ref: str, url: str, soup: BeautifulSoup, jurisdiction: str, title: str) -> list[dict[str, Any]]:
     records = []
     for index, table in enumerate(soup.find_all("table")):
@@ -96,10 +150,14 @@ def iter_table_records(ref: str, url: str, soup: BeautifulSoup, jurisdiction: st
                 rows.append(cells)
         if not rows:
             continue
-        nearest_heading = None
+        nearest_heading = municipal_table_heading(table)
         previous = table.find_previous(["h2", "h3", "h4"])
         if previous:
-            nearest_heading = element_text(previous)
+            nearest_heading = nearest_heading or element_text(previous)
+        source_url = url
+        section = table.find_parent(["article", "section"], id=re.compile(r"^\d{1,2}\.\d{2}\.\d{3}$"))
+        if section:
+            source_url = municipal_section_url(url, section.get("id", ""))
         records.append(
             {
                 "jurisdiction": jurisdiction,
@@ -110,10 +168,18 @@ def iter_table_records(ref: str, url: str, soup: BeautifulSoup, jurisdiction: st
                 "caption": element_text(caption) if caption else "",
                 "nearest_heading": nearest_heading or "",
                 "rows": rows,
-                "source_url": url,
+                "source_url": source_url,
             }
         )
     return records
+
+
+def municipal_table_heading(table) -> str:
+    section = table.find_parent(["article", "section"], id=re.compile(r"^\d{1,2}\.\d{2}\.\d{3}$"))
+    if not section:
+        return ""
+    header = section.select_one(".inner-header, .header")
+    return clean_heading(element_text(header)) if header else section.get("id", "")
 
 
 def organize(input_dir: Path) -> dict[str, Any]:

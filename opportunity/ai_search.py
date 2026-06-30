@@ -8,6 +8,8 @@ import threading
 from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
+from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 from django.db import DatabaseError, close_old_connections, connection, transaction
@@ -35,6 +37,8 @@ RESIDENTIAL_DWELLING_CODES = {"110", "111", "112", "113", "120", "130", "180", "
 NONRESIDENTIAL_LAND_USE_PREFIXES = ("2", "3", "4", "5", "6", "7", "8")
 BARE_RECREATION_TERMS = {"bare", "raw", "unimproved", "undeveloped", "recreation", "recreational", "camp", "camping"}
 LAND_ASSET_TERMS = {"land", "lot", "lots", "parcel", "parcels", "acreage", "acres"}
+MULTIUNIT_TERMS = {"duplex", "triplex", "fourplex", "fiveplex", "sixplex", "multiunit", "multifamily", "multi", "unit", "units"}
+AVERAGE_QUALITY_TERMS = {"average", "avg"}
 BAD_BARE_LAND_TEXT = (
     "MH LEASED",
     "LEASED PROPERTY",
@@ -110,6 +114,20 @@ Exact core columns:
 - tax_delinquency_taxstatement t: parcel_number, tax_year, total_due, amount_paid, status, lead_level, delinquent_installment_count, unpaid_installment_count, oldest_due_date
 
 Never use columns not listed here. In particular, parcel_primary_zoning does not have primary_zone; use z.zone_id, z.zone_name, z.waza_general, or z.waza_specific.
+sales.sale_date_iso is a text ISO-date field. For date comparisons, guard and cast it: NULLIF(s.sale_date_iso, '')::date, preferably with s.sale_date_iso ~ '^\\d{4}-\\d{2}-\\d{2}$'.
+""".strip()
+
+FALLBACK_SKILL_REFERENCE_CONTEXT = """
+OpenSkagit data dictionary essentials:
+- Use raw assessor codes and readable labels together when possible.
+- `skagit_parcels.land_use` commonly includes code and label, for example `(111) HOUSEHOLD, SFR, INSIDE CITY`, `(181) MH LEASED PROPERTY`, `(911) UNDEVELOPED LAND INCORPORATED`.
+- Parse land-use code with split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1).
+- Key land-use meanings: 110/111/112/113 SFR/household; 120/130 multi-unit; 140 condo residential; 150 mobile home parks; 180 manufactured homes; 181 MH leased property; 182 multiple mobile homes; 185 MH with detached SFR; 190 vacation/cabin; 670 governmental; 680 schools; 740 recreational activities; 760 parks; 910 unimproved land; 911 undeveloped incorporated land; 912 undeveloped 2-4 family; 930 water areas; 940 open space; 970 condo moorage.
+- MH LEASED PROPERTY is not bare land; leased manufactured homes may exist without normal main-area dwelling improvements.
+- Utilities tokens: PWR power, PWR-U underground power, SEP septic, SEW sewer, WTR-P public water, WTR-W well water, NONE no listed utilities.
+- Improvements: MA is common main-area dwelling; MA2/MA1.5F/UF2/UF1.5F/BMF/BMU/BMG also indicate dwelling/living-area evidence. Prefer `imprv_det_type_description`, `imprv_det_class_description`, and `condition_description` when available.
+- Land table clues: `land.land_type` includes CLEARED, WOODED/BRUSH, TIMBER, TIDELAND, WET; `land.appr_meth` includes ACREAGE, LOT, SQUARE FOOT, Front Foot.
+- `assessor_rollup` has land_use_description, neighborhood_description, and utilities_description for human-readable labels.
 """.strip()
 
 
@@ -233,7 +251,16 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
         }
         last_error = ""
         for attempt in range(3):
-            generated = _generate_search_from_plan(prompt, plan, model, error_feedback=last_error)
+            try:
+                generated = _generate_search_from_plan(prompt, plan, model, error_feedback=last_error)
+            except OpportunitySearchError as exc:
+                last_error = (
+                    f"{exc} Return only the required JSON object with title, criteria_summary, assumptions, sql, and params. "
+                    "Do not include markdown, prose, or comments outside JSON."
+                )
+                if attempt == 2:
+                    raise
+                continue
             try:
                 result_rows = _run_generated_search(prompt, generated)
                 if not result_rows and attempt < 2:
@@ -398,6 +425,8 @@ def validate_search_sql(sql: str, params: list[Any] | tuple[Any, ...] | None = N
         raise OpportunitySearchError("The generated SQL used a forbidden operation.")
     if not re.search(r"(?i)\bparcel_number\b", stripped):
         raise OpportunitySearchError("The query must return a parcel_number column.")
+    if re.search(r"(?is)\bs(?:ales)?\.sale_date_iso\s*(?:[<>]=?|=)\s*(?:current_date|now\(\)|date\b|timestamp\b|%s|\()", stripped):
+        raise OpportunitySearchError("sales.sale_date_iso is text; date filters must guard and cast it with NULLIF(s.sale_date_iso, '')::date.")
 
     params = list(params or [])
     if re.search(r"(?<!%)%s[A-Za-z0-9_]", stripped) or re.search(r"(?<!%)%[A-Za-rt-zA-RT-Z]", stripped):
@@ -623,6 +652,8 @@ def _parse_json_object(text: str) -> dict[str, Any]:
 
 
 def _fallback_generated_search(prompt: str) -> GeneratedSearch | None:
+    if _requires_multiunit_asset(prompt):
+        return _fallback_multiunit_search(prompt)
     if not _requires_dwelling_asset(prompt):
         return None
     place = _extract_place_hint(prompt)
@@ -698,6 +729,81 @@ def _fallback_generated_search(prompt: str) -> GeneratedSearch | None:
     )
 
 
+def _fallback_multiunit_search(prompt: str) -> GeneratedSearch:
+    years = _extract_years_hint(prompt) or 15
+    wants_average = bool(_tokens(prompt) & AVERAGE_QUALITY_TERMS)
+    quality_filter = ""
+    if wants_average:
+        quality_filter = """
+          AND multi.average_quality_count > 0
+        """
+    sql = f"""
+        SELECT
+            p.parcel_number,
+            (
+                COALESCE(multi.unit_signal_count, 0) * 80
+                + COALESCE(multi.average_quality_count, 0) * 25
+                + COALESCE(p.acres, 0) * 5
+            ) AS score,
+            array_remove(ARRAY[
+                'multi-unit building evidence',
+                CASE WHEN multi.average_quality_count > 0 THEN 'average quality improvement signal' END,
+                CASE WHEN NOT recent_sale.has_recent_sale THEN 'no sale in requested period' END
+            ], NULL) AS match_reasons
+        FROM skagit_parcels p
+        LEFT JOIN assessor_rollup ar ON ar.parcel_number = p.parcel_number
+        LEFT JOIN LATERAL (
+            SELECT
+                COUNT(*) FILTER (
+                    WHERE upper(COALESCE(i.imprv_det_type_description, '')) ~ '(DUPLEX|TRIPLEX|FOURPLEX|APARTMENT|MULTI)'
+                       OR upper(COALESCE(i.imprv_det_class_description, '')) ~ '(DUPLEX|TRIPLEX|FOURPLEX|MULTI)'
+                       OR upper(COALESCE(i.imprv_det_type_cd, '')) IN ('APT', 'DUP', 'TRI')
+                ) AS unit_signal_count,
+                COUNT(*) FILTER (
+                    WHERE upper(COALESCE(i.imprv_det_class_cd, '')) IN ('MSA', '4', 'AVG')
+                       OR upper(COALESCE(i.imprv_det_class_description, '')) ~ 'AVERAGE'
+                       OR upper(COALESCE(i.condition_description, '')) = 'AVERAGE'
+                ) AS average_quality_count
+            FROM improvements i
+            WHERE i.parcelnumber = p.parcel_number
+        ) multi ON true
+        LEFT JOIN LATERAL (
+            SELECT EXISTS (
+                SELECT 1
+                FROM sales s
+                WHERE s.parcel_number = p.parcel_number
+                  AND s.sale_date_iso ~ '^\\d{{4}}-\\d{{2}}-\\d{{2}}$'
+                  AND NULLIF(s.sale_date_iso, '')::date >= CURRENT_DATE - (%s || ' years')::interval
+            ) AS has_recent_sale
+        ) recent_sale ON true
+        WHERE p.inactive_date IS NULL
+          AND (
+            split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) IN ('113', '120', '130')
+            OR upper(COALESCE(p.land_use, '')) ~ '(2-4 UNIT|5\\+ UNIT)'
+            OR upper(COALESCE(ar.land_use_description, '')) ~ '(2-4 UNIT|5\\+ UNIT)'
+          )
+          AND split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) NOT IN (
+            '0', '140', '150', '160', '450', '480', '670', '680', '710', '720', '730', '740', '750', '760', '770', '790',
+            '810', '820', '830', '840', '850', '860', '880', '890', '920', '930', '940', '941', '970'
+          )
+          AND NOT recent_sale.has_recent_sale
+          {quality_filter}
+        ORDER BY score DESC NULLS LAST, p.assessed_value ASC NULLS LAST
+        LIMIT 100
+    """
+    return GeneratedSearch(
+        title="Multi-unit building candidates with no recent sales",
+        criteria_summary=f"Parcels with duplex-to-sixplex or other multi-unit signals, no recorded sale in about {years} years, and average-quality signals when requested.",
+        assumptions=[
+            "Multi-unit evidence uses assessor land-use descriptions and improvement descriptions/classes.",
+            "No recent sale uses sales.sale_date_iso after validating and casting the stored text date.",
+            "Average quality uses assessor class/condition descriptions as a screening signal.",
+        ],
+        sql=sql,
+        params=[years],
+    )
+
+
 def _fallback_search_plan(prompt: str) -> SearchPlan:
     place = _extract_place_hint(prompt)
     residential = _requires_dwelling_asset(prompt)
@@ -767,6 +873,9 @@ Planning rules:
 Schema and domain context:
 {SCHEMA_CONTEXT}
 
+Skill-backed data dictionary context:
+{_skill_reference_context()}
+
 Prompt-specific deterministic hints:
 {_intent_context(prompt)}
 
@@ -823,6 +932,7 @@ Rules:
 - Use assessor_rollup for readable land_use_description, utilities_description, and neighborhood_description when helpful.
 - Utilities tokens include PWR, PWR-U, SEP, SEW, WTR-P, WTR-W, NONE.
 - skagit_parcels.land_use often looks like '(911) UNDEVELOPED LAND INCORPORATED'; parse the code with split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1).
+- sales.sale_date_iso is text, not a date column. Never compare s.sale_date_iso directly to CURRENT_DATE, DATE, timestamp, or interval expressions. Use a guarded cast such as s.sale_date_iso ~ '^\\d{{4}}-\\d{{2}}-\\d{{2}}$' AND NULLIF(s.sale_date_iso, '')::date >= CURRENT_DATE - INTERVAL '5 years'.
 - For no-home or vacant-like intent, use conservative screening signals such as low/zero p.building_value and/or NOT EXISTS main dwelling improvements.
 - For bare land, raw land, undeveloped land, recreation land, camp/camping land, or small recreational parcel intent, exclude MH LEASED PROPERTY, leased manufactured-home land, condos, condominium/common-area parcels, public/civic/government/school/church/cemetery parcels, public open-space zoning, zero-acre/no-geometry records, and parcels with residential dwelling evidence.
 - MH LEASED PROPERTY means leased manufactured homes are present on land that may not show normal MA dwelling improvements; do not treat it as bare land.
@@ -849,6 +959,9 @@ SQL generation rules from the approved plan:
 
 {SCHEMA_CONTEXT}
 
+Skill-backed data dictionary context:
+{_skill_reference_context()}
+
 Allowed tables/views:
 {", ".join(sorted(ALLOWED_TABLES))}
 
@@ -865,6 +978,93 @@ User prompt:
 {prompt}
 {retry_note}
 """.strip()
+
+
+@lru_cache(maxsize=1)
+def _skill_reference_context() -> str:
+    base = _skill_reference_dir()
+    if not base:
+        return FALLBACK_SKILL_REFERENCE_CONTEXT
+
+    sections = [
+        "OpenSkagit PostGIS skill reference excerpts. Use these to interpret user language, codes, and parcel facts; still obey the exact SQL schema above.",
+    ]
+    descriptions = _read_text(base / "descriptions.md")
+    if descriptions:
+        sections.append(_clip_text("Human-readable description guidance", descriptions, 5000))
+
+    codes = _read_text(base / "codes.md")
+    if codes:
+        selected = "\n\n".join(
+            part
+            for part in [
+                _extract_markdown_section(codes, "How To Use Codes"),
+                _extract_markdown_section(codes, "Improvement Fields"),
+                _extract_markdown_section(codes, "`land.land_type`"),
+                _extract_markdown_section(codes, "`skagit_parcels.land_use`"),
+                _extract_markdown_section(codes, "`utilities` Mappings"),
+                _extract_markdown_section(codes, "`land_use` Mappings"),
+            ]
+            if part
+        )
+        if selected:
+            sections.append(_clip_text("Assessor code and value guidance", selected, 9000))
+
+    schema = _read_text(base / "schema.md")
+    if schema:
+        selected = "\n\n".join(
+            part
+            for part in [
+                _extract_markdown_section(schema, "Core Relationships"),
+                _extract_markdown_section(schema, "Core Tables"),
+                _extract_markdown_section(schema, "Query Recipes"),
+            ]
+            if part
+        )
+        if selected:
+            sections.append(_clip_text("Schema usage guidance", selected, 5000))
+
+    context = "\n\n".join(sections).strip()
+    max_chars = int(os.environ.get("OPPORTUNITY_SEARCH_SKILL_CONTEXT_CHARS", "18000"))
+    return _clip_text("Skill reference context", context or FALLBACK_SKILL_REFERENCE_CONTEXT, max_chars)
+
+
+def _skill_reference_dir() -> Path | None:
+    configured = os.environ.get("OPENSKAGIT_POSTGIS_SKILL_DIR")
+    candidates = []
+    if configured:
+        candidates.append(Path(configured))
+    candidates.append(Path.home() / ".codex" / "skills" / "openskagit-postgis")
+    for candidate in candidates:
+        references = candidate / "references"
+        if references.exists():
+            return references
+    return None
+
+
+def _read_text(path: Path) -> str:
+    try:
+        return path.read_text(encoding="utf-8")
+    except OSError:
+        return ""
+
+
+def _extract_markdown_section(markdown: str, heading: str) -> str:
+    pattern = re.compile(rf"(?im)^(#+)\s+{re.escape(heading)}\s*$")
+    match = pattern.search(markdown or "")
+    if not match:
+        return ""
+    level = len(match.group(1))
+    next_heading = re.search(rf"(?m)^#{{1,{level}}}\s+", markdown[match.end() :])
+    end = match.end() + next_heading.start() if next_heading else len(markdown)
+    return markdown[match.start() : end].strip()
+
+
+def _clip_text(label: str, text: str, max_chars: int) -> str:
+    text = (text or "").strip()
+    if len(text) <= max_chars:
+        return f"{label}:\n{text}" if label else text
+    return f"{label}:\n{text[:max_chars].rstrip()}\n[truncated]"
 
 
 def _mark_error(search: OpportunitySearch, error: str, model: str = "") -> OpportunitySearch:
@@ -1017,6 +1217,28 @@ def _requires_bare_recreation_land(prompt: str) -> bool:
     has_land_intent = bool(tokens & LAND_ASSET_TERMS)
     has_bare_or_recreation_intent = bool(tokens & BARE_RECREATION_TERMS)
     return has_land_intent and has_bare_or_recreation_intent and not _requires_dwelling_asset(prompt)
+
+
+def _requires_multiunit_asset(prompt: str) -> bool:
+    normalized = (prompt or "").lower().replace("-", "")
+    tokens = _tokens(normalized)
+    return (
+        bool(tokens & MULTIUNIT_TERMS)
+        or "sixplex" in normalized
+        or "fiveplex" in normalized
+        or "fourplex" in normalized
+        or "triplex" in normalized
+        or "duplex" in normalized
+        or "multi unit" in (prompt or "").lower()
+    )
+
+
+def _extract_years_hint(prompt: str) -> int | None:
+    match = re.search(r"\b(\d{1,2})\s+years?\b", (prompt or "").lower())
+    if not match:
+        return None
+    years = int(match.group(1))
+    return years if 1 <= years <= 50 else None
 
 
 def _has_bare_recreation_land_evidence(row: dict[str, Any]) -> bool:

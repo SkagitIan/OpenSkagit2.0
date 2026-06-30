@@ -1,0 +1,441 @@
+18.16.010 Shoreline use and development tables.
+The following tables indicate the allowable uses and shoreline development and some of the
+standards applicable to those uses and development. Where there is a conflict between the chart
+and the written provisions in this master program, the written provisions shall apply. Please note
+that the severely limited list of uses is a result of the shoreline fronted by levees and the fact that
+the land has been and continues to be acquired in public ownership for flood hazard mitigation.
+The charts are coded according to the following legend:
+KEY:
+P = May be permitted although a shoreline permit may not be required
+C = May be permitted as a conditional use only
+X = Prohibited; the use is not permitted nor is it eligible for a variance or conditional
+use permit
+N/A = Not applicable
+See also notes to tables following Table 3.
+Table 1: Shoreline Use
+Shoreline Environment
+Urban
+Shoreline Use Aquatic Natural Conservancy
+Agriculture X X P – 1
+Boating facilities P – 2,3 X C – 2,3
+Commercial:
+Water-dependent X – 9 X X – 9
+Water-related, water- X X X
+enjoyment
+Non-water-oriented X X X
+Flood hazard reduction P X – 11 P – 2
+Industrial:
+Water-dependent X X X
+Water-related, water- X X X
+enjoyment
+Non-water-oriented X X X
+Mining C – 3 X X
+Parking (primary) X X X
+Table 1: Shoreline Use
+Shoreline Environment
+Urban
+Shoreline Use Aquatic Natural Conservancy
+Parking (accessory) X X P
+Recreation P – 9 P – 9 P – 9
+Residential development X X X
+Transportation – existing P – 2 P – 2 P – 2
+corridors
+Transportation – new corridors C – 4 C – 4 C – 4
+Utilities (accessory) P P P
+Utilities including wastewater P – 10 P – 10 P – 10
+treatment plant
+Wetland restoration and P – 2 P – 2 P – 2
+maintenance
+Table 2: Shoreline Modifications
+Shoreline Environment
+Urban
+Shoreline Modification Aquatic Natural Conservancy
+Shoreline Stabilization:
+Beach or buffer restoration/ P – 5 P P
+enhancement
+Bioengineering P – 5,6 X P – 5,6
+Revetments P – 5,6 X P – 1,5,6
+Bulkheads P – 5,6 X P – 1,5,6
+Breakwaters/jetties/rock P – 5,6 X P – 1,5,6
+weirs/groins
+Levees P X P – 1
+Dredging C – 5 X X
+Hazardous waste cleanup P P P
+Fill C – 5,6 X P – 1,6
+Piers, docks, buoys, floats P – 7 X P
+§ 18.16.010 SHORELINE MASTER PROGRAM § 18.16.010
+Table 3: Development Standards
+Shoreline Environment
+Urban
+Development Standard Aquatic Natural Conservancy
+Boating facilities
+Water-dependent setback N/A N/A 0
+Water-related building N/A N/A 50 – 8
+setback
+Recreational development
+Water-dependent setback N/A N/A 0
+Water-related, water- N/A N/A 70 – 8
+enjoyment setback
+Non-water-oriented setback N/A N/A 70 – 8
+Building height limit N/A N/A 45 – 8
+Parking (accessory)
+Setback N/A N/A 70 – 8
+Notes to Tables 1, 2 and 3:
+1. The use or development is prohibited in Gages Slough urban conservancy, except as part
+of a transportation improvement, utility installation or water quality enhancement project with
+mitigation as prescribed in Appendices A and B.
+2. Public access, as approved by the city, is a condition of development and substantial
+development.
+3. The use may be allowed provided it does not cause significant ecological impacts that cannot
+be mitigated on site.
+4. The use may be allowed providing there is no other feasible route or location.
+5. The shoreline modification may be allowed only for environmental restoration/mitigation or
+if the city determines that there will be a net increase in desired shoreline ecological functions.
+6. Development for which a floodplain approval is required is prohibited in the floodway, other
+than utility outfall structures authorized by the Corps of Engineers and levee construction to
+maintain the structural integrity of critical infrastructure.
+7. Piers or docks may be allowed only for public access or hand-carried vessels and only if
+significant adverse ecological impacts are avoided.
+8. The setback is measured from the ordinary high water mark and shall include a 50-foot
+minimum strip of shoreline restoration measures and/or native vegetation plantings as approved
+by the city plus a 20-foot-wide public access easement running parallel with the shoreline.
+9. Commercial recreation facilities may be allowed as a water-dependent use or in support of
+recreational facilities such as concession stands.
+Notes to Tables 1, 2 and 3:
+10. New utility production and processing facilities are prohibited unless it can be demonstrated
+that no other practical option is available. The existing wastewater treatment plant and future
+expansion is a permitted facility.
+11. Only flood control physical elements such as levees or fill are prohibited. Other forms of
+flood hazard reduction such as planning, monitoring and warning systems are allowed.
+(Ord. 1786 § 1, 2013)
+
+18.16.015 Shoreline modifications.
+A. Implementation Policy. Shoreline modifications are generally related to construction of a
+physical element such as a dike, breakwater, dredged basin, or fill, but they can include
+other actions such as clearing, grading, application of chemicals, or significant vegetation
+removal. Shoreline modifications usually are undertaken in support of or in preparation for
+a shoreline use; for example, fill (shoreline modification) required for a cargo terminal
+(industrial use) or dredging (shoreline modification) to allow for a marina (boating facility
+use). Shoreline modifications in Burlington are limited.
+B. Regulations.
+1. All new shoreline modifications must be in support or protection of an allowable
+shoreline use or development that is in danger of loss or substantial damage or is
+necessary for mitigation or enhancement and conforms to the provisions of this
+master program. Except as otherwise noted, all shoreline modifications not associated
+with a legally existing or an approved shoreline use are prohibited.
+(Ord. 1786 § 1, 2013)
+
+18.16.020 Agriculture.
+A. Implementation Policy. Agricultural activities on agricultural land are not regulated by this
+shoreline master program. Only new agricultural activities on land not meeting the
+definition of agricultural land, conversion of agricultural lands to other uses, and other
+development on agricultural land that does not meet the definition of agricultural activities
+is regulated by this shoreline master program.
+Existing and ongoing agriculture shall be required to implement applicable standards and
+practices through an individual farm plan based on the Field Office Technical Guides
+(FOTG) administered by the Natural Resources Conservation Service of USDA. An
+accountability and monitoring program shall be included in each plan. The farm
+management plan shall be consistent with the Washington State Agricultural Strategy to
+ensure agricultural practices are not negatively affecting water quality, quantity or salmon
+habitat.
+New development in support of agricultural activities shall be designed to minimize
+impacts to shoreline environments, specifically, to prevent livestock intrusion into the
+water; bank erosion; degradation of water quality from fertilizers, pesticides, and manure
+into the water; and loss of shoreline vegetation. Standards or best management practices,
+setbacks and vegetation management areas shall be addressed through individual farm
+plans as above.
+§ 18.16.020 SHORELINE MASTER PROGRAM § 18.16.030
+B. Regulations by Environment for New Agricultural Activities on Land Currently Not
+Meeting the Definition of Agricultural Land.
+1. Urban Conservancy Environment. Agriculture is prohibited in the Gages Slough
+urban conservancy. Agriculture is permitted in the Skagit River urban conservancy
+subject to the following requirements:
+a. Fencing livestock out of Skagit River, associated wetlands and all buffers;
+b. Prohibit the practice of spraying liquid manure, the use of pesticides, herbicides
+and organic fertilizers, and the cultivation of land within the buffers of the
+Skagit River, associated wetlands and their buffers.
+2. Natural Environment. Agriculture is prohibited.
+3. Aquatic Environment. Agriculture is prohibited.
+(Ord. 1786 § 1, 2013)
+
+18.16.030 Boating facilities.
+A. Implementation Policy. Provisions shall be included to address potential impacts while
+providing the public boating opportunities. Facilities shall be restricted to existing locations
+with suitable environmental conditions, shoreline configuration, access, and neighboring
+uses. Sewage pumpouts and wash-off stations shall be required where appropriate to meet
+health requirements. Mitigation of visual and ecological impacts shall be required. Parking
+impacts shall be mitigated. Live-aboards and covered moorage are prohibited.
+At the time of adoption of the SMP, boating facilities in Burlington consist of one floating
+dock moored by pilings that abuts the shoreline and is used as a landing or moorage place
+for small water craft utilized for recreational purposes (e.g. private angling club facility),
+and one public boat launch ramp.
+Pier and dock construction should be restricted to the minimum size necessary to meet
+the needs of the proposed use. Multiple-use and expansion of legally existing piers and
+docks should be encouraged over the addition of new facilities. Joint-use facilities are
+preferred over new single-use piers, docks, and floats. Piers and docks should be sited and
+designed to avoid or minimize potentially significant ecological impacts, including impacts
+on sediment movement, water circulation and quality, and fish and wildlife habitat. The
+proposed size of the structure and intensity of use or uses of any pier or dock should be
+compatible with the surrounding environment and land and water uses.
+B. Regulations.
+1. Marinas are prohibited.
+2. Live-aboards and covered moorage is prohibited.
+3. Sewage pumpouts, restrooms and wash-off stations shall be required where
+appropriate to meet health requirements.
+4. Pier and dock construction shall be restricted to the minimum size necessary to meet
+the needs of the proposed use. Piers and docks shall be sited and designed to avoid or
+minimize potentially significant ecological impacts, including impacts on sediment
+movement, water circulation and quality, and fish and wildlife habitat.
+C. Regulations by Environment.
+1. Urban Conservancy Environment. Boating facilities are a shoreline conditional use
+permit along the Skagit River. Boating facilities are prohibited in Gages Slough.
+2. Natural Environment. Boating facilities are prohibited.
+3. Aquatic Environment. Boating facilities are permitted subject to compliance with
+applicable state and federal regulations and standards and the implementation policies
+and regulations of this section.
+(Ord. 1786 § 1, 2013)
+
+18.16.040 Commercial and industrial development.
+A. Implementation Policy. No significant development other than critical infrastructure is
+allowed along the Skagit River, and no development is allowed in the Gages Slough
+wetland. Levee maintenance and improvement and transportation upgrades such as
+replacing bridges are the only potential development activity and mitigation would be
+required.
+As stated in the regulations by environment, there is existing guide service that may utilize
+the boat launch ramp, but there is no location available for commercial and industrial
+development along the riverfront.
+B. Regulations by Environment.
+1. Urban Conservancy Environment. Commercial and industrial development is
+prohibited except for commercial services related to recreational facilities.
+2. Natural Environment. Commercial and industrial development is prohibited.
+3. Aquatic Environment. Water-dependent commercial and industrial development is
+prohibited except for water-taxi or guide service.
+(Ord. 1786 § 1, 2013)
+
+18.16.050 In-stream structures.
+A. Implementation Policies. The guidelines define an in-stream structure as a structure placed
+by humans within a stream or river waterward of the ordinary high water mark that either
+causes or has the potential to cause water impoundment or the diversion, obstruction, or
+modification of water flow. In-stream structures may include those for hydroelectric
+generation, irrigation, water supply, flood control, transportation, utility service
+transmission, fish habitat enhancement, or other purpose.
+In-stream structures are defined to include structures in wetlands and shall provide for the
+protection and preservation of natural and cultural resources, including but not limited to
+fish, wildlife, and water resources; critical areas; geohydrological processes; and natural
+scenic vistas. The location and planning of in-stream structures shall give due consideration
+to the full range of public interests, watershed functions and processes, and environmental
+concerns, with special emphasis on protecting and restoring priority habitats and species.
+§ 18.16.050 SHORELINE MASTER PROGRAM § 18.16.070
+The only likely installations in the Skagit River shoreline area would be associated with a
+transportation facility, data collection, flood control, or fish enhancement.
+B. Regulations.
+1. In-stream structures shall provide for the protection and preservation of safe surface
+navigation, ecosystem-wide processes, ecological functions and cultural resources,
+including but not limited to fish and fish passage, wildlife and water resources,
+shoreline critical areas, hydrogeologic processes, and natural scenic vistas.
+2. The location and planning of in-stream structures shall give due consideration to the
+full range of public interests, watershed functions and processes, and environmental
+concerns, with special emphasis on protecting and restoring priority habitats and
+species.
+C. Regulations by Environment.
+1. Urban Conservancy Environment. In-stream structures including culverts and similar
+structures are permitted to be located in Gages Slough.
+2. Natural Environment. In-stream structures are permitted as a shoreline conditional
+use.
+3. Aquatic Environment. In-stream structures are permitted.
+(Ord. 1786 § 1, 2013)
+
+18.16.060 Mining.
+A. Implementation Policies. Mining shall not be allowed in unique and fragile areas and
+excavation of sand, gravel and other minerals shall be done as required by the Washington
+State Surface Mining Reclamation Act, chapter78.44 RCW.
+B. Regulations.
+1. Mining is prohibited in unique and fragile areas. When allowed it shall be in
+compliance with the Washington State Surface Mining Reclamation Act, chapter
+78.44 RCW.
+C. Regulations by Environment.
+1. Urban Conservancy Environment. Mining is prohibited.
+2. Natural Environment. Mining is prohibited.
+3. Aquatic Environment. Mining is prohibited except for gravel extraction as a shoreline
+conditional use for specific quantities and specified locations. The removal of gravel
+from the Skagit River shall be done only after a biological and geohydrological study
+shows that sustainable extraction can take place without altering the natural processes
+of gravel transport and there is no net loss of ecological functions. Fish and wildlife
+resources shall be protected consistent with the Endangered Species Act and all
+disturbed areas shall be reclaimed. Removal of gravel for flood management purposes
+shall be consistent with the flood hazard mitigation plan.
+(Ord. 1786 § 1, 2013)
+
+18.16.070 Recreational development.
+A. Implementation Policies. The public shall be allowed to enjoy the waters of the state
+through water-oriented recreation. Shoreline recreational facilities should be linked to other
+recreational attractions by pedestrian and bicycle trails. In order to provide for a spectrum
+of recreational needs and opportunities, recreational development must be consistent with
+the parks and recreation comprehensive plan.
+Location and design shall minimize environmental damage, and shall be designed to
+improve natural habitat, whether on the shoreline or upland, to maximize the diversity of
+habitat opportunities.
+B. Regulations by Environment.
+1. Urban Conservancy Environment. Recreational development is permitted. All non-
+water-oriented recreational developments shall make provision for public access to
+the shoreline.
+2. Natural Environment. Only low-intensity, water-oriented recreational development
+such as public access trails is permitted.
+3. Aquatic Environment. Recreational development is permitted.
+(Ord. 1786 § 1, 2013)
+
+18.16.080 Residential.
+A. Implementation Policies. Existing residential development shall be allowed, subject to
+BMC § 18.09.040, Nonconforming uses and structures.
+Floating homes, houseboats and live-aboard vessels are not permitted.
+B. Regulations by Environment.
+1. Urban Conservancy Environment. Residences, floating homes, houseboats and live-
+aboard vessels are prohibited.
+2. Natural Environment. Residences, floating homes, houseboats and live-aboard
+vessels are prohibited.
+3. Aquatic Environment. Residences, floating homes, houseboats and live-aboard
+vessels are prohibited.
+(Ord. 1786 § 1, 2013)
+
+18.16.090 Transportation and parking – Existing corridors.
+A. Implementation Policies. Existing transportation corridors shall be upgraded as feasible, to
+comply with the latest edition of the Department of Ecology's Surface Water Manual, for
+both quantity and quality, and shall further be required to improve public nonmotorized
+access opportunities when improvements are constructed.
+Transportation and parking plans and projects should support circulation system planning
+for pedestrians, bicycles, and public transportation that in turn supports existing and
+proposed shoreline uses.
+§ 18.16.090 SHORELINE MASTER PROGRAM § 18.16.100
+B. Regulations.
+1. Existing transportation corridors shall be upgraded as feasible to comply with the
+latest edition of the Department of Ecology's Surface Water Manual, for both quantity
+and quality, and shall further be required to improve public nonmotorized access
+opportunities when improvements are constructed.
+C. Regulations by Environment.
+1. Urban Conservancy Environment. Existing transportation corridors and related
+improvements are permitted.
+2. Natural Environment. Existing transportation corridors and related improvements are
+permitted.
+3. Aquatic Environment. Existing transportation corridors and related improvements are
+permitted.
+(Ord. 1786 § 1, 2013)
+
+18.16.100 Transportation and parking – New corridors.
+A. Implementation Policies. New transportation corridors shall only be established when a
+clear regional need is demonstrated.
+Proposed transportation and parking plans and projects need to be planned, located and
+designed where they will have the least possible adverse effect on unique or fragile
+shoreline features, and will not result in a net loss of shoreline ecological functions.
+They shall comply with the latest edition of the Department of Ecology's Surface Water
+Manual, for both quantity and quality, and shall further be required to provide public
+nonmotorized access opportunities when improvements are constructed.
+Parking is the temporary storage of automobiles or other motorized vehicles. Except as
+noted the following provisions apply only to parking that is "accessory" to a permitted
+shoreline use. Parking as a "primary" use and parking which serves a use not permitted
+in the shoreline jurisdiction is prohibited. Parking should be planned to achieve optimum
+use. Where possible, parking should serve more than one use (e.g., serving recreational use
+on weekends, commercial uses on weekdays). Where feasible, parking for shoreline uses
+should be provided in areas outside shoreline jurisdiction. Low-impact parking facilities,
+such as permeable pavements, are encouraged.
+Parking as a primary use or that serves a use not permitted in the applicable shoreline
+environment designation shall be prohibited over water and within shoreline jurisdiction.
+Parking in shoreline jurisdiction must directly serve a permitted shoreline use.
+Parking facilities shall be designed and landscaped to minimize adverse impacts upon the
+adjacent shoreline and abutting properties. Landscaping shall consist of native vegetation
+and/or plant materials approved by the city and planted before completion of the parking
+area in such a manner that plantings provide effective screening within three years of
+project completion.
+Parking facilities serving individual buildings on the shoreline shall be located landward
+from the principal building being served, except when the parking facility is within or
+beneath the structure and adequately screened, or in cases when an alternate location would
+have less environmental impact on the shoreline.
+Parking facilities for shoreline activities shall provide safe and convenient pedestrian
+circulation within the parking area and to the shorelines.
+Parking facilities shall provide adequate facilities to prevent surface water runoff from
+contaminating water bodies, using best available technologies, and include a maintenance
+program that will assure proper functioning of such facilities over time.
+B. Regulations, General.
+1. New transportation corridors and related improvements are permitted when there is
+no feasible route or location outside shoreline jurisdiction, when a clear regional need
+is demonstrated and as a shoreline conditional use permit.
+2. Proposed transportation and parking plans and projects shall be planned, located and
+designed where they will have the least possible adverse effect on unique or fragile
+shoreline features, and will not result in a net loss of shoreline ecological functions.
+3. Transportation and parking shall comply with the latest edition of the Department of
+Ecology's Surface Water Manual, for both quantity and quality, and shall further be
+required to provide public nonmotorized access opportunities when improvements are
+constructed.
+4. Transportation and parking shall comply with the latest edition of the Department of
+Ecology's Surface Water Manual, for both quantity and quality, and shall further be
+required to provide public nonmotorized access opportunities when improvements are
+constructed.
+5. Parking as a primary use or that serves a use not permitted in the applicable shoreline
+environment designation shall be prohibited within shoreline jurisdiction.
+6. Parking facilities shall be designed and landscaped to minimize adverse impacts upon
+the adjacent shoreline and abutting properties. Landscaping shall consist of native
+vegetation and/or plant materials approved by the city and be planted before
+completion of the parking area in such a manner that plantings provide effective
+screening within three years of project completion.
+7. Parking facilities serving individual buildings on the shoreline shall be located
+landward from the principal building being served, except when the parking facility
+is within or beneath the structure and adequately screened, or in cases when an
+alternate location would have less environmental impact on the shoreline.
+8. Parking facilities for shoreline activities shall provide safe and convenient pedestrian
+circulation within the parking area and to the shorelines.
+9. Parking facilities shall provide adequate facilities to prevent surface water runoff
+from contaminating water bodies, using best available technologies and include a
+maintenance program that will assure proper functioning of such facilities over time.
+C. Regulations by Environment.
+1. Urban Conservancy Environment. Parking areas shall be designed to minimize the
+§ 18.16.100 SHORELINE MASTER PROGRAM § 18.16.120
+environmental and visual impacts.
+2. Natural Environment. Parking areas are prohibited in the natural environment.
+3. Aquatic Environment. Parking areas are prohibited in the aquatic environment.
+(Ord. 1786 § 1, 2013)
+
+18.16.110 Utilities including wastewater treatment plant and accessory utilities.
+A. Implementation Policies. These facilities include utility production and processing as well
+as large transmission facilities. It does not include accessory utilities found in BMC
+§ 18.14.020(H). Design and location of utilities shall minimize harm to the shoreline,
+preserve the natural landscape, and minimize conflicts with present and planned land and
+shoreline uses.
+B. Regulations.
+1. The existing wastewater treatment plant and future expansion is a permitted facility;
+new utility production and processing facilities are prohibited unless it can be
+demonstrated that no other practical option is available.
+2. Transmission facilities for the conveyance of services, such as pipelines and power
+wires, shall be located to assure no net loss of shoreline ecological functions, cause
+minimum harm to the shoreline and be located outside the shoreline area where
+feasible, and shall be consistent with the master program environment designation.
+Locate utilities in existing rights-of-way and corridors wherever possible.
+C. Regulations by Environment.
+1. Urban Conservancy Environment. Utilities are permitted. Transmission facilities for
+the conveyance of services, such as pipelines and power wires, shall be located to
+assure no net loss of shoreline ecological functions, cause minimum harm to the
+shoreline and be located outside the shoreline area where feasible.
+2. Natural Environment. Utilities are permitted. Transmission facilities for the
+conveyance of services, such as pipelines and power wires, shall be located to assure
+no net loss of shoreline ecological functions, cause minimum harm to the shoreline
+and be located outside the shoreline area where feasible.
+3. Aquatic Environment. Utilities are permitted. Transmission facilities for the
+conveyance of services, such as pipelines and power wires, shall be located to assure
+no net loss of shoreline ecological functions, cause minimum harm to the shoreline
+and be located outside the shoreline area where feasible.
+(Ord. 1786 § 1, 2013)
+
+18.16.120 Wetlands and Skagit River shoreline buffer areas – Restoration and.
+maintenance.
+A. Implementation Policies. The plans and implementation of restoration and maintenance of
+wetlands and shoreline buffers shall be designed, installed, monitored and maintained in
+accordance with best available science practices.
+B. Regulations by Environment.
+1. Urban Conservancy Environment. Wetland and Skagit River shoreline buffer
+restoration and maintenance is permitted and shall be designed, installed, monitored
+and maintained in accordance with best available science practices.
+2. Natural Environment. Wetland and Skagit River shoreline buffer restoration and
+maintenance is permitted and shall be designed, installed, monitored and maintained
+in accordance with best available science practices.
+3. Aquatic Environment. Wetland and Skagit River shoreline buffer restoration and
+maintenance is permitted and shall be designed, installed, monitored and maintained
+in accordance with best available science practices.
+(Ord. 1786 § 1, 2013)

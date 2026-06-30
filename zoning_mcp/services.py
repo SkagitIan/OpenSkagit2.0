@@ -246,7 +246,7 @@ def _best_db_rule_match(jurisdiction: str, zone_code: str, proposed_use: str):
         return None
     scored = [(rule, _rule_match_score(rule.normalized_use_key, rule.use_name, proposed_use)) for rule in rules]
     scored = [item for item in scored if item[1] >= 0.35]
-    return max(scored, key=lambda item: item[1]) if scored else None
+    return max(scored, key=lambda item: (item[1], _status_rank(item[0].normalized_status))) if scored else None
 
 
 def _db_allowed_uses(jurisdiction: str, zone_code: str, wanted: set[str]) -> list[dict[str, Any]]:
@@ -384,3 +384,7 @@ def _rule_match_score(key: str, name: str, proposed_use: str) -> float:
     if any(alias in key_text or alias in name_text for alias in USE_ALIASES.get(proposed_key, [])):
         return 0.86
     return max(SequenceMatcher(None, proposed, candidate).ratio() for candidate in candidates)
+
+
+def _status_rank(status: str) -> int:
+    return {"P": 6, "AC": 5, "AD": 4, "HE": 4, "C": 3, "CUP": 3, "UNKNOWN": 1, "X": 0}.get(status, 0)

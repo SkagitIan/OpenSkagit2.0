@@ -1,0 +1,239 @@
+
+<a title="Skip Navigation" class="skip" href="#!/Concrete19/Concrete19.html#mainContent">Skip Navigation</a> 
+	
+<div id="topBanner">
+	
+	<!-- 	custom banner stuff can go in here. 
+		<a href="http://www.townofconcrete.com/" target="_top" id="cityBanner">
+			<img src="images/banner.jpg"  alt="Concrete" border="0" />
+		</a>
+
+		<div id="cityDiv">
+			<div id="cityLinks"> </div>
+		</div>
+	-->
+	
+	
+</div>
+	
+<div id="navBar">
+<h1 class="cityCodeName"><a class="cityCodeName" href="/WA/Concrete">Concrete Municipal Code</a></h1>
+	<div id="codetabs">
+		<span><a target="_blank" href="/help.html" class="codetab">Help</a></span>
+		<span class="codetab">Text Size:  <span onclick="decreaseFont()" class="click" style="font-size:0.75em">-A</span> <span class="click" onclick="increaseFont()">+A</span></span>
+		
+		<span id="addthis_button" class="addspan"></span>
+	</div>
+		<form name="SearchForm" id="SearchForm" action="/search/" method="POST" class="SearchControl">
+	   <input type="hidden" name="cmd" value="search">
+        <input type="hidden" id="SearchFormValue" name="SearchForm" value="D:\inetpub\wwwroot\public_html\WA\Concrete\Concrete_formSML.html">
+        <input type="hidden" id="OrigSearchFormValue" name="OrigSearchForm" value="D:\inetpub\wwwroot\public_html\WA\Concrete\Concrete_formSML.html">
+        <input type="hidden" name="index" value="D:\Program Files\dtSearch\UserData\WA\Concrete_index">
+        
+        <input type="hidden" name="autoStopLimit" value="5000">
+        <input type="hidden" name="autoTermWeight" value="yes">
+        <input type="hidden" name="pageSize" value="10">
+        <input type="hidden" name="booleanConditions" value="" id="booleanConditions">
+        <input type="hidden" name="maxFiles" value="200">
+
+		<input type="hidden" name="fileConditions" value="ext &quot;*.html&quot;">
+		<input type="hidden" name="fileConditions" value="excl &quot;disclaimer*&quot;">
+		<input type="hidden" name="fileConditions" value="excl &quot;*nt.html&quot;">
+		<input type="hidden" name="fileConditions" value="excl &quot;index*&quot;">
+		<input type="hidden" name="fileConditions" value="excl &quot;*_*&quot;">
+
+		<div id="formInputs">
+			<input type="search" name="request" id="request" size="20" placeholder="Search Code">
+			<input type="submit" value="Search" alt="Search" class="color">
+			<p class="littleLink"><a id="toggleAdvancedSearch" class="toggleSearch" href="Concrete_form.html">+</a></p>
+		</div>
+
+		<div id="AdvancedSearch" style="display:none;"><fieldset class="options search"><legend>Search Type</legend><input type="radio" name="searchType" value="allwords" checked="">all of the words<br><input type="radio" name="searchType" value="anywords">any of the words<br><input type="radio" name="searchType" value="phrase">the exact phrase<br><input type="radio" name="searchType" value="bool">boolean <span onclick="openWindow('/Search_forms/help/booleanhelp.html', 'boolean', '300', '350');" class="click">[ Help ]</span></fieldset><fieldset class="options search"><span class="popLabel" rel="#stem"><input class="SearchControl" name="stemming" id="stemmingcheck" type="checkbox">&nbsp;<label for="stemmingcheck">Stemming</label></span><br><br><span class="popLabel" rel="#fuzz"><input class="SearchControl" name="fuzzy" id="fuzzycheck" type="checkbox">&nbsp;<label for="fuzzycheck">Fuzzy searching</label><br><label for="fuzzylevel">Fuzziness</label>&nbsp;<select name="fuzziness" size="1" class="SearchControl" title="Fuzziness Level" id="fuzzylevel"><option value="0"> 0&nbsp;</option><option value="1" selected="selected"> 1&nbsp;</option><option value="2"> 2&nbsp;</option><option value="3"> 3&nbsp;</option><option value="4"> 4&nbsp;</option><option value="5"> 5&nbsp;</option><option value="6"> 6&nbsp;</option><option value="7"> 7&nbsp;</option><option value="8"> 8&nbsp;</option><option value="9"> 9&nbsp;</option></select></span></fieldset><div id="stem" style="display:none;"><p><b>Stemming</b> extends a search to cover grammatical variations on a word. For example, a search for <i>fish</i> would also find <i>fishing</i>. A search for <i>applied</i> would also find <i>applying</i>, <i>applies</i>, and <i>apply</i>.</p></div><div id="fuzz" style="display:none;"><p><b>Fuzzy searching</b> will find a word even if it is misspelled. For example, a fuzzy search for <i>apple</i> will find <i>appple</i>. </p><p>Select a fuzziness level from the drop-down menu to set how many characters off a word can be from your search term and still count as a hit.</p></div><fieldset class="options" id="savedSearchFieldset"><legend>Saved Searches</legend><div id="SavedList"><p id="noSearch">You have no saved Searches</p></div><hr style="color:white;"><input value="Save Current Search" class="color" onclick="saveSearch()" type="button"></fieldset></div>
+	</form>
+
+	<div id="SearchDiv"> <!-- form#SearchForm will be inserted in here. move/style as needed --> </div>
+
+</div>
+
+
+<div id="wrapper">
+   <div id="leftSidebar" style="z-index: 2;">
+		<div id="printSaveToggle" style="margin: 0px; display: none;">&nbsp;&nbsp;<span onclick="showMobileSave()" class="toggleSearch">+ Print/Save Selections</span></div><div id="SearchResults">
+			<!--Search results will be thrown in here -->
+		</div>	
+		
+		<div id="browseCode">
+			<!--Table of Contents in here -->
+		
+			<h2 id="tocHeader"><span id="tocToggle" onclick="tocToggle();">+ Contents</span></h2> 
+			<div class="" id="browseCodeInner" style="display: none;">
+<form name="saveForm" id="saveForm" action="/WA/Concrete/cgi/menuCompile.pl" method="post" target="formtarget"><div id="formControls" style="display: none;"><p class="instruct">Click the <b>plus (+)</b> or <b>minus (-)</b> symbols to expand or collapse the entries. Click the <b>checkboxes</b> to select sections for saving or printing.</p><div><input type="submit" value="Print/Save Selections" name="Print/Save Selections" alt="Print/Save Selections" id="printSubmit" class="color"><a href="#" class="clearSaveAsForm" onclick="clearAll('saveForm'); return false;">Clear all</a></div></div><p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete01/Concrete01.html" id="Concrete01">Title 1 General Provisions</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete01"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete02/Concrete02.html" id="Concrete02">Title 2 Administration and Personnel</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete02"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete03/Concrete03.html" id="Concrete03">Title 3 Revenue and Finance</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete03"></div>
+
+<p><span class="hide" style="display: none;">–</span>  <a href="/WA/Concrete/#!/Concrete04/Concrete04.html" id="Concrete04">Title 4 (Reserved)</a> </p>
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete05/Concrete05.html" id="Concrete05">Title 5 Business Licenses and Regulations</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete05"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete06/Concrete06.html" id="Concrete06">Title 6 Animals</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete06"></div>
+
+<p><span class="hide" style="display: none;">–</span>  <a href="/WA/Concrete/#!/Concrete07/Concrete07.html" id="Concrete07">Title 7 (Reserved)</a> </p>
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete08/Concrete08.html" id="Concrete08">Title 8 Health and Safety</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete08"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete09/Concrete09.html" id="Concrete09">Title 9 Public Peace, Morals and Welfare</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete09"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete10/Concrete10.html" id="Concrete10">Title 10 Vehicles and Traffic</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete10"></div>
+
+<p><span class="hide" style="display: none;">–</span>  <a href="/WA/Concrete/#!/Concrete11/Concrete11.html" id="Concrete11">Title 11 (Reserved)</a> </p>
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete12/Concrete12.html" id="Concrete12">Title 12 Streets, Sidewalks and Public Places</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete12"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete13/Concrete13.html" id="Concrete13">Title 13 Public Utilities</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete13"></div>
+
+<p><span class="hide" style="display: none;">–</span>  <a href="/WA/Concrete/#!/Concrete14/Concrete14.html" id="Concrete14">Title 14 (Reserved)</a> </p>
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete15/Concrete15.html" id="Concrete15">Title 15 Buildings and Construction</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete15"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete16/Concrete16.html" id="Concrete16">Title 16 Environment</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete16"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete17/Concrete17.html" id="Concrete17">Title 17 Subdivisions</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete17"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete18/Concrete18.html" id="Concrete18">Title 18 Land Development</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete18"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/Concrete19/Concrete19.html" id="Concrete19">Title 19 Zoning</a> </p>
+<div class="ptoc1" style="display: none" id="divConcrete19"></div>
+
+<p><span class="hide ajx" style="display: none;">+</span>  <a href="/WA/Concrete/#!/ConcreteSR.html" id="ConcreteSR">Statutory References for Washington Cities and Towns</a> </p>
+<div class="ptoc1" style="display: none" id="divConcreteSR"></div>
+
+<p><span class="hide" style="display: none;">–</span>  <a href="/WA/Concrete/#!/ConcreteOT.html" id="ConcreteOT">Ordinance Table and Disposition List</a> </p>
+</form>		</div> <!-- end of #browseCode div -->
+		</div> <!-- end of #browseCode -->
+	</div>	<!-- end of #leftSidebar -->
+
+
+	<div id="mainBody"> 
+		<div id="mainBodyInner"><div id="navTop">
+      <a href="/WA/Concrete">
+        <img src="/WA/Concrete/html/images/toc.gif" alt="Home" border="0">
+      </a>
+      <a rel="cgi/extract.pl?page=Concrete18/Concrete1808.html" href="/WA/Concrete/#!/Concrete18/Concrete1808.html" class="basic">
+        <img src="/WA/Concrete/html/images/prev.gif" alt="Previous" border="0">
+      </a>
+      <a rel="cgi/extract.pl?page=Concrete19/Concrete1903.html" href="/WA/Concrete/#!/Concrete19/Concrete1903.html" class="basic">
+        <img src="/WA/Concrete/html/images/next.gif" alt="Next" border="0">
+      </a>
+    </div><div id="mainContent">
+      <h1 class="Title"><a name="19"></a>Title 19<br>Zoning</h1>
+            <p class="CHTOC">Chapters:</p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1903.html&amp;anchor=19.03" href="/WA/Concrete/#!/Concrete19/Concrete1903.html#19.03" class="basic">19.03&nbsp;&nbsp;&nbsp;&nbsp;General Provisions</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1906.html&amp;anchor=19.06" href="/WA/Concrete/#!/Concrete19/Concrete1906.html#19.06" class="basic">19.06&nbsp;&nbsp;&nbsp;&nbsp;Definitions</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1909.html&amp;anchor=19.09" href="/WA/Concrete/#!/Concrete19/Concrete1909.html#19.09" class="basic">19.09&nbsp;&nbsp;&nbsp;&nbsp;District Establishment, Maps and Boundaries</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1915.html&amp;anchor=19.15" href="/WA/Concrete/#!/Concrete19/Concrete1915.html#19.15" class="basic">19.15&nbsp;&nbsp;&nbsp;&nbsp;Permitted and Conditional Uses</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1918.html&amp;anchor=19.18" href="/WA/Concrete/#!/Concrete19/Concrete1918.html#19.18" class="basic">19.18&nbsp;&nbsp;&nbsp;&nbsp;<span class="italic">Repealed</span></a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1920.html&amp;anchor=19.20" href="/WA/Concrete/#!/Concrete19/Concrete1920.html#19.20" class="basic">19.20&nbsp;&nbsp;&nbsp;&nbsp;Development Standards</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1925.html&amp;anchor=19.25" href="/WA/Concrete/#!/Concrete19/Concrete1925.html#19.25" class="basic">19.25&nbsp;&nbsp;&nbsp;&nbsp;Supplemental Development Standards</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1933.html&amp;anchor=19.33" href="/WA/Concrete/#!/Concrete19/Concrete1933.html#19.33" class="basic">19.33&nbsp;&nbsp;&nbsp;&nbsp;<span class="italic">Repealed</span></a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1936.html&amp;anchor=19.36" href="/WA/Concrete/#!/Concrete19/Concrete1936.html#19.36" class="basic">19.36&nbsp;&nbsp;&nbsp;&nbsp;<span class="italic">Repealed</span></a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1939.html&amp;anchor=19.39" href="/WA/Concrete/#!/Concrete19/Concrete1939.html#19.39" class="basic">19.39&nbsp;&nbsp;&nbsp;&nbsp;<span class="italic">Repealed</span></a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1940.html&amp;anchor=19.40" href="/WA/Concrete/#!/Concrete19/Concrete1940.html#19.40" class="basic">19.40&nbsp;&nbsp;&nbsp;&nbsp;<span class="italic">Repealed</span></a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1943.html&amp;anchor=19.43" href="/WA/Concrete/#!/Concrete19/Concrete1943.html#19.43" class="basic">19.43&nbsp;&nbsp;&nbsp;&nbsp;<span class="italic">Repealed</span></a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1945.html&amp;anchor=19.45" href="/WA/Concrete/#!/Concrete19/Concrete1945.html#19.45" class="basic">19.45&nbsp;&nbsp;&nbsp;&nbsp;Supplemental Development Standards</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1948.html&amp;anchor=19.48" href="/WA/Concrete/#!/Concrete19/Concrete1948.html#19.48" class="basic">19.48&nbsp;&nbsp;&nbsp;&nbsp;Performance Standards</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1950.html&amp;anchor=19.50" href="/WA/Concrete/#!/Concrete19/Concrete1950.html#19.50" class="basic">19.50&nbsp;&nbsp;&nbsp;&nbsp;Landscaping</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1954.html&amp;anchor=19.54" href="/WA/Concrete/#!/Concrete19/Concrete1954.html#19.54" class="basic">19.54&nbsp;&nbsp;&nbsp;&nbsp;Off-Street Parking and Loading</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1958.html&amp;anchor=19.58" href="/WA/Concrete/#!/Concrete19/Concrete1958.html#19.58" class="basic">19.58&nbsp;&nbsp;&nbsp;&nbsp;Planned Unit Developments</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1963.html&amp;anchor=19.63" href="/WA/Concrete/#!/Concrete19/Concrete1963.html#19.63" class="basic">19.63&nbsp;&nbsp;&nbsp;&nbsp;Signs</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1966.html&amp;anchor=19.66" href="/WA/Concrete/#!/Concrete19/Concrete1966.html#19.66" class="basic">19.66&nbsp;&nbsp;&nbsp;&nbsp;Nonconforming Structures, Land and Uses</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1968.html&amp;anchor=19.68" href="/WA/Concrete/#!/Concrete19/Concrete1968.html#19.68" class="basic">19.68&nbsp;&nbsp;&nbsp;&nbsp;The Land Use Permit Process – Framework for Decision-Making</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1970.html&amp;anchor=19.70" href="/WA/Concrete/#!/Concrete19/Concrete1970.html#19.70" class="basic">19.70&nbsp;&nbsp;&nbsp;&nbsp;State Environmental Policy Act</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1972.html&amp;anchor=19.72" href="/WA/Concrete/#!/Concrete19/Concrete1972.html#19.72" class="basic">19.72&nbsp;&nbsp;&nbsp;&nbsp;Shoreline Master Program</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1974.html&amp;anchor=19.74" href="/WA/Concrete/#!/Concrete19/Concrete1974.html#19.74" class="basic">19.74&nbsp;&nbsp;&nbsp;&nbsp;Development in Flood Areas</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1976.html&amp;anchor=19.76" href="/WA/Concrete/#!/Concrete19/Concrete1976.html#19.76" class="basic">19.76&nbsp;&nbsp;&nbsp;&nbsp;Annexation</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1978.html&amp;anchor=19.78" href="/WA/Concrete/#!/Concrete19/Concrete1978.html#19.78" class="basic">19.78&nbsp;&nbsp;&nbsp;&nbsp;Boundary Line Adjustment</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1980.html&amp;anchor=19.80" href="/WA/Concrete/#!/Concrete19/Concrete1980.html#19.80" class="basic">19.80&nbsp;&nbsp;&nbsp;&nbsp;Vacation of Public Rights-of-Way</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1982.html&amp;anchor=19.82" href="/WA/Concrete/#!/Concrete19/Concrete1982.html#19.82" class="basic">19.82&nbsp;&nbsp;&nbsp;&nbsp;Wireless Communication Facilities (WCF)</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1984.html&amp;anchor=19.84" href="/WA/Concrete/#!/Concrete19/Concrete1984.html#19.84" class="basic">19.84&nbsp;&nbsp;&nbsp;&nbsp;Enforcement</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1986.html&amp;anchor=19.86" href="/WA/Concrete/#!/Concrete19/Concrete1986.html#19.86" class="basic">19.86&nbsp;&nbsp;&nbsp;&nbsp;Recreational Marijuana/Cannabis Producers, Processors and Retailers</a></p>
+
+            <p class="CHTOC"><a rel="cgi/extract.pl?page=Concrete19/Concrete1988.html&amp;anchor=19.88" href="/WA/Concrete/#!/Concrete19/Concrete1988.html#19.88" class="basic">19.88&nbsp;&nbsp;&nbsp;&nbsp;District Maps</a></p>
+
+    </div><div id="navBottom">
+      <a href="/WA/Concrete">
+        <img src="/WA/Concrete/html/images/toc.gif" alt="Home" border="0">
+      </a>
+      <a rel="cgi/extract.pl?page=Concrete18/Concrete1808.html" href="/WA/Concrete/#!/Concrete18/Concrete1808.html" class="basic">
+        <img src="/WA/Concrete/html/images/prev.gif" alt="Previous" border="0">
+      </a>
+      <a rel="cgi/extract.pl?page=Concrete19/Concrete1903.html" href="/WA/Concrete/#!/Concrete19/Concrete1903.html" class="basic">
+        <img src="/WA/Concrete/html/images/next.gif" alt="Next" border="0">
+      </a>
+    </div></div>
+	<div id="pgFooter"> 
+
+    
+<p id="current">The Concrete Municipal Code is current through Ordinance 916, passed May 11, 2026.</p>
+<p id="disclaimer">Disclaimer: The Town Clerk's Office has the official version of the Concrete Municipal Code. Users should contact the Town Clerk's Office for ordinances passed subsequent to the ordinance cited above.</p>
+
+<p>Town Website: <a href="https://www.townofconcrete.com/" target="_top">https://www.townofconcrete.com/</a><br>
+Town Telephone: (360) 853-8401</p>
+<p>Codification services provided by <a href="https://www.generalcode.com/" target="top">General Code</a></p>
+    
+
+ </div>
+	<a id="swapFormat" href="https://www.codepublishing.com/WA/Concrete/#!/Concrete19/Concrete19.html" onclick="swapFormat()">Web Version</a></div>
+
+
+</div> <!-- end of #wrapper -->
+
+
+		
+		<!--for the saved search alerts -->
+	<div id="shadow" style="display:none;"></div>
+	<div id="savealert" style="display:none;" class="fadewrap"><div id="savealert2" class="fade">&nbsp;</div></div>
+
+	<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;c60ba34ac0fe48c1acf405bbc7e1a7c6&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+    

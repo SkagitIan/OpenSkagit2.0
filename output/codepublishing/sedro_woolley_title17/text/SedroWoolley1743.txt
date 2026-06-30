@@ -1,0 +1,372 @@
+Chapter 17.43 PLANNED RESIDENTIAL DEVELOPMENT (PRD)
+
+         Chapter 17.43
+PLANNED RESIDENTIAL DEVELOPMENT (PRD)
+
+             Sections:
+
+              17.43.010    Purpose.
+
+              17.43.020    Zoning districts where permitted.
+
+              17.43.030    Permitted uses.
+
+              17.43.035    Density.
+
+              17.43.040    Commercial uses.
+
+              17.43.050    Relationship of design to adjacent areas.
+
+              17.43.060    Property development standards.
+
+              17.43.070    Approval—Procedure.
+
+              17.43.080    Approval criteria.
+
+              17.43.090    Requirement for homeowner’s association and restrictive covenants.
+
+              17.43.100    Phasing.
+
+        17.43.010  Purpose.
+
+             It is the purpose of this chapter to create open space in residential developments and to encourage imaginative site and building design that exceeds the minimum standards found in the subdivision regulations—Title 16—by permitting greater flexibility in zoning requirements than is permitted by other sections of this title. Furthermore, it is the purpose of this section to:
+
+             A.    Promote the retention of significant features of the natural environment, including waterways and views;
+
+             B.    Encourage a variety of housing types and densities;
+
+             C.    Encourage maximum efficiency in the layout of streets, stormwater facilities, utility networks and other public improvements through innovative site layout and the use of clustering;
+
+             D.    Create and/or preserve usable open space for the enjoyment of the occupants and the general public;
+
+             E.    Allow development of land with physical constraints while preserving the natural characteristics of the site, including topography, native vegetation, critical areas and other natural amenities of value to the community; and
+
+             F.    Encourage infill within areas of the city which are characterized by existing development. (Ord.  1913-18  § 1 (App. A) (part), 2018: Ord.  1484-04  § 11 (part), 2004)
+
+        17.43.020  Zoning districts where permitted.
+
+             Planned residential development (PRD) may be permitted in the following zoning districts:
+
+             A.    R-1, residential 1;
+
+             B.    R-5, residential 5;
+
+             C.    R-7, residential 7;
+
+             D.    R-15, residential 15. (Ord.  1913-18  § 1 (App. A) (part), 2018: Ord.  1484-04  § 11 (part), 2004)
+
+        17.43.030  Permitted uses.
+
+             The following uses are allowed in planned residential developments:
+
+             A.    Within the R-1, R-5 and R-7 zones, allowable residential uses shall include only single-family residences, duplexes (either built to zero-lot line or with both units on one lot), detached condominiums or townhouses on individual lots. Within the R-15 zone, residential development of all types, regardless of the type of building in which such residence is located, such as single-family residences, duplexes, triplexes, four-plexes, townhouses or apartments; provided, that hotels, motels and mobile home parks are prohibited.
+
+             B.    Accessory uses specifically limited to meet the needs of the residents of the PRD such as garages and recreation facilities of a noncommercial nature.
+
+             C.    In planned residential developments of twenty acres or more, commercial uses may be permitted as set forth herein.
+
+             D.    A variety of housing types are offered; advantage is taken of unusual or significant site features such as views, waterways or other natural characteristics; separation of auto and pedestrian movement; development aspects of the PRD complement the land use policies of the comprehensive plan; and some extraordinary public benefit is derived in exchange for the increased density in the planned residential development.
+
+             E.    Except as set forth herein, the use restrictions of the underlying zone shall apply. (Ord.  1913-18  § 1 (App. A) (part), 2018: Ord.  1484-04  § 11 (part), 2004)
+
+        17.43.035  Density.
+
+             A.    Permitted Density. Density shall be allowed as determined in the underlying zone as shown in the table below. Allowed number of units shall be calculated by dividing the total site area (less area encumbered by wetlands, fish and wildlife habitat conservation areas and their respective buffers per Chapter  17.65 ) by the maximum units allowed per acre and rounding down to the nearest whole number. Land area encumbered by wetlands, fish and wildlife habitat conservation areas and their respective buffers per Chapter  17.65  do not count towards the density allowed, but may count as open space per Sections  17.43.060 (H) and (I).
+
+                         Underlying Zone
+
+                         Minimum units per net acre (see Section  16.04.060 )
+
+                         Maximum units per acre (less area encumbered by wetlands, fish and wildlife habitat conservation areas and their respective buffers)
+
+                         Residential 1
+
+                         1
+
+                         1
+
+                         Residential 5
+
+                         4
+
+                         5
+
+                         Residential 7
+
+                         4
+
+                         7
+
+                         Residential 15
+
+                         4
+
+                         15
+
+             B.    Clubhouse Density Bonus. PRDs that provide a private clubhouse may receive a density bonus. An additional two units may be granted for PRDs of up to ten acres if a clubhouse is provided and an additional two units per ten acres over the first ten acres. The clubhouse must be owned and maintained by the homeowners’ association. The clubhouse must be constructed prior to final plat approval and must meet the Sedro-Woolley Design Standards and Guidelines. (Ord.  1913-18  § 1 (App. A) (part), 2018)
+
+        17.43.040  Commercial uses.
+
+             Commercial uses are permitted in the PRD which satisfy the criteria of this section. Such uses are intended to serve the surrounding neighborhood, be comprised of small-scale buildings that maintain the visual character and architectural style of the residential area, and minimize visual and functional conflicts between residential and nonresidential uses within and abutting the PRD. Commercial uses within the PRD shall meet the following criteria:
+
+             A.    Shall be limited to:
+
+             1.    Retail businesses serving the local neighborhood; provided, that drive-through businesses and twenty-four-hour establishments are prohibited;
+
+             2.    Personal or professional services;
+
+             3.    Public and quasi-public uses;
+
+             4.    Recreational uses;
+
+             5.    Residential dwellings located either behind or above an allowed commercial use are permitted;
+
+             6.    Beauty salons;
+
+             7.    Day care centers.
+
+             B.    Bulk restrictions.
+
+             1.    Maximum building size: five thousand square feet.
+
+             2.    Minimum setbacks:
+
+             a.    Front: ten feet;
+
+             b.    Side: ten feet;
+
+             c.    Rear: ten feet.
+
+             3.    Maximum building height:
+
+             a.    Commercial: twenty-five feet;
+
+             b.    Commercial with residential above: thirty-five feet.
+
+             C.    Design Standards.
+
+             1.    Lot Size. Commercial lots shall not exceed twenty thousand square feet in area per twenty acres of land within the PRD. Any increase in commercial area shall be based upon twenty-acre increments of additional land, and proportionate increases shall not be permitted.
+
+             2.    Landscaping requirement: Shall comply with the landscaping requirements for commercial uses in Chapter  17.50 .
+
+             3.    Signage. Total sign area is limited to one percent of gross floor area utilized by the activity. Monument signs are restricted to no more than six feet high. Internally illuminated signs, flashing signs, mechanically mobile signs, or neon signs are not allowed. All signs must be ground oriented or a facade sign.
+
+             4.    Parking. Two parking spaces required per one thousand square feet of commercial area. On-street parking which fronts the parcel shall be counted in the overall parking requirement. Off-street parking shall be located at the side or at the rear of the building.
+
+             5.    The site plan for the commercial area shall comply with the design standards and guidelines of Chapter  15.44 . The site plan and commercial designation must be submitted and processed as part of the PRD application. (Ord.  1913-18  § 1 (App. A) (part), 2018: Ord.  1484-04  § 11 (part), 2004)
+
+        17.43.050  Relationship of design to adjacent areas.
+
+             A.    The design and layout of a planned residential development shall take into account the relationship of the site to the surrounding areas. The PRD shall be so designed as to minimize any undesirable impact of the PRD on adjacent properties.
+
+             B.    Setbacks, building heights and lot sizes of the PRD shall be comparable to, or compatible with, those of the existing development of adjacent properties or, if adjacent properties are undeveloped, the type of development which may be permitted. (Ord.  1913-18  § 1 (App. A) (part), 2018: Ord.  1484-04  § 11 (part), 2004)
+
+        17.43.060  Property development standards.
+
+             A.    Acreage Minimum. The minimum site for a planned residential development shall be three acres.
+
+             B.    Minimum Lot Requirements in the R-1, R-5 and R-7 Zones.
+
+             1.    Single-family residential lots created through the PRD process in the R-5 zone may be a variety of sizes; provided, no lot shall be less than six thousand square feet in size—except fifty percent of the single-family lots in a PRD may be as small as four thousand eight hundred square feet in size.
+
+             2.    Single-family residential lots created through the PRD process in the R-7 zone may be a variety of sizes; provided, that no lot shall be less than four thousand eight hundred square feet in size—except fifty percent of the single-family lots in a PRD may be as small as four thousand square feet in size.
+
+             3.    In the R-5 and R-7 zones, the minimum lot size for all lots created through a PRD process with duplex homes shall be eight thousand square feet if both units comprising a single duplex are located on the same lot.
+
+             4.    In the R-5 and R-7 zones, the minimum lot size for townhouse units on their own platted lot (including duplexes with each unit on a separate platted lot) is two thousand five hundred square feet for lots that have a unit on either side (center units) and three thousand five hundred square feet for lots at the end of a townhouse row.
+
+             5.    The averaged lot size in the R-5 and R-7 zones shall be reduced by not less than twenty percent of the minimum lot size for that zone as specified in Chapters  17.08  and  17.12  respectively—this requirement means the minimum averaged lot size is six thousand seven hundred twenty square feet in the R-5 zone and four thousand eight hundred square feet in the R-7 zone. The averaged lot size requirements for the R-5 zone shall not incorporate individual townhome-unit lots or commercial lots into the calculations. The averaged lot size requirements for the R-7 zone shall not incorporate individual commercial lots into the calculations.
+
+             6.    Single-family residential lots in the R-1 zone may be a variety of sizes; provided, that no lot shall be less than eight thousand four hundred square feet in size.
+
+             7.    In the R-1 zone, the minimum lot size for all lots created through a PRD process with duplex homes shall be ten thousand five hundred square feet if both units comprising a single duplex are located on the same lot.
+
+             8.    In the R-1 zone, the minimum lot size for townhouse units on their own platted lot is four thousand square feet for lots that have a unit on either side and five thousand five hundred square feet for lots at the end of a townhouse row.
+
+             C.    Unit Distribution. In the R-1, R-5 and R-7 zoning designations, at least sixty percent of the units in the PRD shall be single-family lots.
+
+             D.    Landscaping. Each lot created through the PRD regulations shall have a minimum of twenty-five percent landscaping that shall be approved as a condition of the building permit.
+
+             E.    Setbacks. Setbacks to lots within the PRD shall be the same as the underlying zone unless alternate setbacks to lots within the PRD are specified in the PRD approval. Covered front porches in the R-1, R-5 and R-7 zones may be constructed up to ten feet from the front setback. Setbacks to properties surrounding the PRD may not be reduced.
+
+             F.    Off-Street Parking. Off-street parking shall be provided in a PRD to the same extent as required in the underlying zone for the same use.
+
+             G.    On-Street Parking. One on-street parking space shall be provided per every four units. Each single-family lot shall count as one unit. Each lot intended for a duplex shall count as two units. On-street parking for residential units above and behind (on the same lot with) commercial uses shall be anticipated as part of the street layout before the PRD is approved.
+
+             H.    Open Space. Each planned residential development shall provide not less than twenty percent of the gross site area of the PRD for common open space—or if one hundred percent of the open space provided is “usable open space” as defined in subsection I of this section then not less than ten percent of the gross site area of the PRD shall be provided as open space—which shall be:
+
+             1.    Concentrated in large usable areas of at least six thousand square feet in area and designed to provide either passive or active recreation;
+
+             2.    Ownership and Maintenance.
+
+             a.    If the open space is under one ownership, the open space shall be owned and maintained by the ownership;
+
+             b.    If the open space is held in common ownership by all the owners of the development by means of a homeowners’ or similar association, then such association shall be responsible for maintenance of the common open space; or
+
+             c.    If the open space is dedicated for public use, the dedication shall be acceptable to the city and/or other appropriate public agency;
+
+             3.    Stormwater facilities and utility corridors/easements shall not be counted towards open space calculations, unless they meet the definition of usable open space in subsection I of this section; and
+
+             4.    Any amenities in a public right-of-way, such as roads, parking strip landscape areas and sidewalks, shall not be counted towards open space calculations;
+
+             5.    Usable open space amenities that are required as part of the PRD approval shall be installed/constructed and complete before final plat approval. A maintenance bond for those amenities that meets the requirements of the public works director shall be required.
+
+             I.    Of the open space required to be provided, fifty percent shall be “usable open space.” “Usable open space” includes only open space which is accessible for active or passive recreation purposes, is visually integrated into the design so that is an intentional aspect of the PRD, or is of direct benefit to the PRD residents. “Usable open space” may not include lots, dwellings, private yards, outdoor storage, streets and any associated rights-of-way, driveways, parking areas, fenced stormwater detention ponds, critical areas and their associated buffers, slopes in excess of fifteen percent, areas with any dimension less than ten feet, and required perimeter buffers that do not include screened trails and pathways (where applicable). At least fifty percent of the “usable open space” shall be for active purposes. Open space for active purposes includes areas which have appropriate topography (generally less than a ten percent slope), soils, drainage, and size to be considered for development as active areas for all residents, owners, or users of the PRD. The remaining open space that is not “usable open space” may include critical areas and utility easements.
+
+             1.    That portion of multiuse stormwater facilities which provides significant recreational or aesthetic benefit per subsection J of this section may count as usable open space.
+
+             2.    Only that portion of utility corridors/easements which contain improved walking trails in compliance with federal, state, or city regulations may be counted as usable open space. The applicant shall provide documentation that the walking trail meets this criteria.
+
+             3.    Only open space which satisfies the requirements of the design standards and guidelines of Chapter  15.44  and the current version of the Sedro-Woolley Design Standards and Guidelines manual may be counted as usable open space.
+
+             4.    That portion of sensitive areas, such as fish and wildlife habitat areas, which are accessible to the residents or public and integrated into the design of the PRD in a manner which results in restoration or enhancement of the functional values of the sensitive area, may be included in the usable open space calculation.
+
+             J.    Stormwater Detention Facilities. All stormwater detention facilities are subject to Sedro-Woolley stormwater management regulations (Chapter  13.36 ) and for the purposes of this chapter are differentiated as dry ponds and wet ponds. A dry pond may be included as part of the required usable open space area of a PRD only if the pond meets the criteria in subsection (J)(1) of this section. A wet pond may be included as part of the required open space (not usable open space) area of a PRD only if the pond meets the criteria in subsection (J)(2) of this section.
+
+             1.    Dry ponds for the purposes of this chapter are stormwater facilities that incorporate usable recreation area per the following criteria:
+
+             a.    The detention facility does not provide drainage for public facilities including public streets unless all easements and drainage releases are approved;
+
+             b.    The detention facility shall be constructed so as to drain fully when precipitation is not occurring (i.e., no standing water shall be left) unless the facility is a pond designed as an aesthetic amenity;
+
+             c.    The side slope of the detention facility shall not exceed thirty-three percent, unless such slopes already exist naturally and are covered with vegetation. Where the facility has a hard surface wall or slope, the vertical drop shall not exceed twenty-four inches without fencing appropriate to the site conditions to protect public safety;
+
+             d.    If detention facilities are located adjacent to or near a natural, year-round stream or wetland, these systems shall be left in a natural or near-natural condition;
+
+             e.    The detention area shall be landscaped both in a manner consistent with maintaining high aesthetic standards and is able to withstand the inundation expected;
+
+             f.    Use of property set aside as open space area for both detention and recreation purposes shall not be acceptable if the detention area is rendered unsuitable or unavailable for recreation use during dry weather; and
+
+             g.    In the case of joint use of open space set aside (not dedicated to city) for detention and recreation, the homeowner’s association shall be responsible for the maintenance in perpetuity of the facilities in the condition approved under the development contract.
+
+             2.    Wet ponds for the purposes of this chapter contain water year round and may count towards open space if the wet pond is an amenity to the PRD and meets all of the criteria below. Wet ponds that do not meet the below criteria shall be screened per the screening requirements in Section  17.50.120 :
+
+             a.    Contain circulated water that is not brackish;
+
+             b.    Be surrounded by a trail or be located adjacent to another active open space;
+
+             c.    Children’s play structures may not be located closer than one hundred fifty feet to a stormwater pond;
+
+             d.    The pond must be curvilinear in shape, not rectangular;
+
+             e.    Only thirty percent of the circumference of the pond may contain berming;
+
+             f.    The inside slope of the pond shall be three to one or flatter;
+
+             g.    Gravel and asphalt shall not be used for pond access;
+
+             h.    No fencing shall be provided around the pond; and
+
+             i.    The applicant shall place appropriate signage near the pond which says, “This pond is for stormwater detention and/or treatment purposes. Swimming or fishing or other recreational activities are prohibited” or similar signage approved by the planning director. (Ord.  1913-18  § 1 (App. A) (part), 2018: Ord.  1484-04  § 11 (part), 2004)
+
+        17.43.070  Approval—Procedure.
+
+             Planned residential development applications shall be processed as subdivisions under Chapter  16.08 .
+
+             In addition, the following procedure is required for approval of the planned residential development:
+
+             A.    Documents.
+
+             1.    Vicinity map showing the location of the site and its relationship to surrounding areas, including the land use and zoning of both the site and the surrounding areas;
+
+             2.    A map of the site drawn to a scale of not less than one inch representing one hundred feet showing the following:
+
+             a.    Existing site conditions including watercourses, floodplains and unique natural features;
+
+             b.    The location and floor area size of all existing and proposed buildings, structures and other improvements including maximum heights, types of dwelling units, density per type, and nonresidential structures, including commercial facilities, if any;
+
+             c.    The location and size in acres or square feet of all areas to be conveyed, dedicated, or reserved as common open spaces, public parks, recreational areas, and similar public or semipublic uses;
+
+             d.    The existing and proposed circulation system of streets, including off-street parking areas, service areas, loading areas and major points of access to public rights-of-way;
+
+             e.    The existing and proposed pedestrian circulation system;
+
+             f.    The existing and proposed utility systems, including sanitary sewers, storm sewers, water, electric, gas and telephone; and
+
+             g.    The proposed treatment of the perimeter of the PRD, including materials and techniques used such as screens, fences and walls.
+
+             3.    In addition to the graphic illustrations listed in subsections (A)(1) and (2) of this section, the applicant shall submit a written statement providing the following information:
+
+             a.    Program for development including staging or timing of development;
+
+             b.    Proposed ownership pattern upon completion of the project;
+
+             c.    Basic content of any restrictive covenants; and
+
+             d.    Provisions to assure permanence and maintenance of common open space through a homeowners’ association or similar association, condominium development or other means acceptable to the city.
+
+             4.    An application for preliminary plat must be submitted with the PRD application. Fees for the subdivision shall be in addition to those of the PRD application.
+
+             B.    A PRD application must contain sufficient detail to show compliance with the design standards and guidelines of Chapter  15.44  for the layout, infrastructure, and buildings within the PRD, to allow the reviewing body to incorporate compliance with design standards into its recommendation and final decision. The applicant is expected to submit this information in a format that meets the standards of an architect or design professional. The integration of a comprehensive, well-planned design into all aspects of the PRD is a required element of the application. The application and approval shall require subsequent construction within the PRD to conform with the approved design elements, at a sufficiently detailed level to ensure subsequent compliance with the approval documents.
+
+             C.    Filing of Application. Application for approval of the PRD shall be made on forms prescribed by the planning department and which shall be accompanied by a filing fee as required.
+
+             D.    Public Hearing. A PRD is a Type III land use application under Chapter  2.90 . The hearing examiner shall hold a public hearing on the proposed PRD.
+
+             E.    Hearing Examiner Decision. Following the public hearing, the hearing examiner shall make a report of findings and decision with respect to the proposed PRD, and shall give approval, approval with modifications, or disapproval to the proposed PRD. The decision may be appealed as allowed in Chapter  2.90 . The hearing examiner report of findings and decision shall include, but need not be limited to, the following items:
+
+             1.    Suitability of the site area for the proposed development;
+
+             2.    Requirements of the subdivision code for the proposed development;
+
+             3.    Time limitations for the entire development and specified stages;
+
+             4.    Development in accordance with the Sedro-Woolley comprehensive plan;
+
+             5.    Public purposes have been served by the proposed development;
+
+             6.    Compliance with the design standards and guidelines.
+
+             F.    City Council Decision. After receipt of the hearing examiner’s findings and recommendations, the city council shall give approval, approval with modifications or disapproval to the proposed PRD. The city council’s decision may be appealed to Skagit County superior court as allowed in Chapter  2.90 . (Ord.  2032-22  § 13, 2023; Ord.  1913-18  § 1 (App. A) (part), 2018: Ord.  1607-08  § 7(B—D), 2008; Ord.  1484-04  § 11 (part), 2004)
+
+        17.43.080  Approval criteria.
+
+             In addition to the findings of fact required for approval, the following criteria shall be met for approval of a PRD:
+
+             A.    Design Criteria. The design of the PRD shall achieve two or more of the following results:
+
+             1.    High quality architectural design, placement, relationship or orientation of the structures;
+
+             2.    Achieving the allowable density for the subject property;
+
+             3.    Improving circulation patterns;
+
+             4.    Minimizing the use of impervious surfacing materials;
+
+             5.    Increasing open space or recreational facilities on site; and
+
+             6.    Preserving, enhancing or rehabilitating the natural features of the property such as significant woodlands or critical areas.
+
+             B.    Perimeter Design. The perimeter of a PRD shall be appropriate in design, character and appearance with the existing or intended character of the development adjacent to the subject property and with the physical characteristics of the property.
+
+             C.    Streets and Sidewalks. Existing and proposed streets and sidewalks within a PRD shall be suitable to carry the anticipated traffic within the proposed development and the vicinity. The design of the circulation system shall be consistent with the requirements of Chapter  16.08 .
+
+             D.    Site Infrastructure. Small-scale utility infrastructure, such as utility boxes, shall be located and/or screened so as not to be visible from the rights-of-way. Larger utility infrastructure, such as a pump station, shall be placed inside a building that meets design standards and functional needs of the utility. (Ord.  1913-18  § 1 (App. A) (part), 2018)
+
+        17.43.090  Requirement for homeowner’s association and restrictive covenants.
+
+             To preserve and maintain community facilities and open space, every PRD shall have a homeowner’s association and agreements and enforceable covenants to fund and effectively collect funds for such an organization. Such agreements and enforceable covenants shall apply to all property within the PRD, shall be recorded and shall run with the land.
+
+             A.    The restrictive covenants and/or homeowner’s association intended to be used by the applicant in a PRD, which purports to restrict the use of land, the location or character of buildings or other structures thereon, set aside open space, and establish provisions for the perpetual maintenance of common grounds, must be reviewed by the technical review committee. The city attorney will make a written report to the planning commission which shall be subject to approval by the city council, before final approval of the PRD application and recording with the county auditor.
+
+             B.    The homeowner’s association authority shall be established in restrictive covenants applicable to all property within the PRD. Such restrictive covenants shall provide, inter alia, for the assessment, collection and enforcement of collection of such homeowner’s dues as are necessary for adequate maintenance of open space, common grounds and facilities, any private roads or utilities, and for performance of any other association obligations.
+
+             C.    The exterior of any non-single-family structure and property on which non-single-family structures are located shall be maintained uniformly by the homeowner’s association.
+
+             D.    The homeowner’s association documents shall address storage and parking of RVs, trailers, boats, ATVs, etc. Such vehicles shall not be stored on city streets, rights-of-way, driveways or side yards. Screened, community-owned storage areas for such vehicles may be provided.
+
+             E.    The homeowner’s association documents shall include restrictions on parking of vehicles in grassed, landscaped or gravel areas. Parking on private and HOA-owned land shall be constructed of concrete, asphalt or concrete pavers.
+
+             F.    The homeowner’s association documents shall require the maintenance of private fences visible from the public right-of-way. (Ord.  1913-18  § 1 (App. A) (part), 2018)
+
+        17.43.100  Phasing.
+
+             If an applicant wishes to phase their PRD project the following minimum criteria shall be used in approving a phasing plan:
+
+             A.    A phasing plan shall be reviewed and approved as part of the preliminary PRD process. The city council shall specifically approve the phasing plan as part of the preliminary PRD process. If a project has already received preliminary PRD approval and the applicant wishes to phase their project, the applicant shall have a major modification approved through the hearing examiner and city council.
+
+             B.    To approve a phasing plan, each phase (at a minimum) shall include:
+
+             1.    Infrastructure such as roads and utility systems to ensure enhanced circulation and public safety as determined by the public works director.
+
+             2.    Usable open space areas shall be included within each phase proportionate with the size of each phase. For example, if twenty-five percent of the overall acreage of the PRD is in a particular phase, twenty-five percent of both the usable open space areas shall be created/installed as part of that phase. (Ord.  1913-18  § 1 (App. A) (part), 2018)

@@ -1,0 +1,624 @@
+Chapter 17.36 OFF-STREET PARKING AND LOADING
+
+         Chapter 17.36
+OFF-STREET PARKING AND LOADING
+
+             Sections:
+
+              17.36.010    When required—Maintenance.
+
+              17.36.020    Location—Restrictions.
+
+              17.36.030    Number of spaces required.
+
+              17.36.035    Reductions to required parking minimums.
+
+              17.36.040    Development standards.
+
+              17.36.050     Repealed.
+
+              17.36.060    Cooperative provisions.
+
+              17.36.070    Third party consents.
+
+              17.36.080     Repealed.
+
+              17.36.090     Repealed.
+
+              17.36.092    Parking—Urban village mixed-use (UVMU) overlay zone.
+
+              17.36.094    Parking—Central business district (CBD) zone.
+
+        17.36.010  When required—Maintenance.
+
+             Whenever a building is built or moved onto a lot, and whenever and to the extent that a building is enlarged and whenever and to the extent that the use of a building changes and the new use is required to provide more off-street parking or loading than the most recent use, then off-street parking or loading shall be provided in accordance with the following requirements. Furthermore, parking and loading so required shall be maintained in a usable, safe condition so long as the land use they serve continues. (Ord.  1013  § 3.01.01, 1985)
+
+        17.36.020  Location—Restrictions.
+
+             A.    Off-street parking spaces required shall be located off the public right-of-way in an area with appropriate zoning, and within five hundred feet walking distance of a public entrance to the building served. Parking spaces may be located within the required setback areas except that they shall not be located within any required vision clearance triangle.
+
+             B.    New retail businesses, restaurants and the first four thousand square feet of all other commercial uses located in an existing building within the central business district core as defined in Section  17.04.030  may use the city-owned parking lots to accommodate the parking requirements in this chapter. This area is substantially developed on zero setbacks from the right-of-way, making it impractical to provide on-site parking to satisfy the purpose and intent of this chapter. (Ord.  2096-25  § 1, 2025; Ord.  1979-21  § 1 (Exh. B), 2021; Ord.  1785-13  § 1, 2013: Ord.  1013 , § 3.01.02, 1985)
+
+        17.36.030  Number of spaces required.
+
+             The number of required off-street parking spaces shall be as follows, rounded up to the next integer:
+
+             A.    Housing reserved for persons fifty-five years of age and older: one per dwelling unit;
+
+             B.    Group homes: one per resident between the ages of sixteen and fifty-nine, inclusive, excluding persons unable to drive due to disability, plus one-half per such younger, older or disabled person; except that bed and breakfasts and similar transient guest facilities shall provide one space per transient unit plus two for the residing family;
+
+             C.    All housing other than the above, subject to any cooperative parking agreements as approved by the community development director or their designee:
+
+                          Dwelling Unit Type
+
+                          Studio single-family home
+
+                          1-bed-room single-family home
+
+                          2-bed-room single-family home
+
+                          3-bedroom single-family home
+
+                          4-bed-room single-family home
+
+                          Studio apart-ment
+
+                          1-bed-room apart-ment
+
+                          2-bed-room apart-ment
+
+                          3-bed-room apart-ment
+
+                          4-bed-room apart-ment
+
+                          Accessory dwelling unit
+
+                          Studio or 1-bed-room duplex or triplex unit
+
+                          2-bedroom (or more) duplex or triplex unit
+
+                          Studio or 1-bed-room town-house unit
+
+                          2-bedroom (or more) town-house unit
+
+                          Work/live unit (residential parking only)
+
+                         Zone Designation
+
+                         R-1
+
+                         Minimum Residential Parking
+
+                         1.5
+
+                         1.75
+
+                         2
+
+                         2.5
+
+                         3
+
+                          Not Permitted
+
+                         1
+
+                          Not Permitted
+
+                         Required Visitor Parking
+
+                          Not Required in R-1 Zone
+
+                          Not Required in R-1 Zone
+
+                         R-5
+
+                         Minimum Residential Parking
+
+                         1.5
+
+                         1.75
+
+                         2
+
+                         2.5
+
+                         3
+
+                          Not Permitted
+
+                         1
+
+                          Not Permitted
+
+                         Required Visitor Parking
+
+                          Not Required in R-5 Zone
+
+                          Not Required in R-5 Zone
+
+                         R-7
+
+                         Minimum Residential Parking
+
+                         1.5
+
+                         1.75
+
+                         2
+
+                         2.5
+
+                         3
+
+                          Not Permitted
+
+                         1
+
+                         2
+
+                         3
+
+                          Not Permitted
+
+                         Required Visitor Parking
+
+                          Not Required in R-7 Zone
+
+                          Not Required in R-7 Zone
+
+                         R-15
+
+                         Minimum Residential Parking
+
+                         1.5
+
+                         1.75
+
+                         2
+
+                         2.5
+
+                         3
+
+                         1.2
+
+                         1.5
+
+                         2
+
+                         2.5
+
+                         3
+
+                          Not Permitted
+
+                         2
+
+                         3
+
+                         1.75
+
+                         2.5
+
+                          Not Permitted
+
+                         Required Visitor Parking
+
+                          Not Required in R-15 Zone
+
+                         1 stall for every 6 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                          Not Required in R-15 Zone
+
+                         1 stall for every 6 units
+
+                         1 stall for every 3 units
+
+                         MC
+
+                         Minimum Residential Parking
+
+                          Not Permitted
+
+                         1.2
+
+                         1.5
+
+                         2.5
+
+                         3
+
+                         4
+
+                          Not Permitted
+
+                         Required Visitor Parking
+
+                         1 stall for every 6 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         UVMU
+
+                         Minimum Residential Parking
+
+                          Not Permitted
+
+                         1.2
+
+                         1.5
+
+                         1.7
+
+                         2.5
+
+                         3
+
+                          Not Permitted
+
+                         1
+
+                         2 (plus 0.5 for each add’l bedroom)
+
+                          Not Permitted
+
+                         Required Visitor Parking
+
+                         1 stall for every 6 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 6 units
+
+                         1 stall for every 3 units
+
+                         Maximum Residential Parking
+
+                         2
+
+                         2.5
+
+                         3
+
+                         3.5
+
+                         4
+
+                         3
+
+                         4
+
+                         TMCO
+
+                         Minimum Residential Parking
+
+                          Not Permitted
+
+                         1.2
+
+                         1.5
+
+                         2.5
+
+                         3
+
+                         4
+
+                          Not Permitted
+
+                         2
+
+                         Required Visitor Parking
+
+                         1 stall for every 6 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                         1 stall for every 3 units
+
+                          Not Required in TMCO Zone
+
+                         CBD Reduced Parking for Mixed-Use
+
+                         Minimum Residential Parking
+
+                          Not Permitted
+
+                         1
+
+                         1
+
+                         1.5
+
+                         2.5
+
+                         3
+
+                          Not Permitted
+
+                         Required Visitor Parking
+
+                          Not Required in CBD-core Zone
+
+                         Maximum Residential Parking
+
+                         1.5
+
+                         2
+
+                         2.5
+
+                         3
+
+                         3.5
+
+                         CBD Parking for Standalone Residential
+
+                         Minimum Residential Parking
+
+                          Not Permitted
+
+                         1
+
+                         1.5
+
+                         2
+
+                         3
+
+                         4
+
+                          Not Permitted
+
+                         2
+
+                         3
+
+                         2
+
+                         3
+
+                          Not Permitted
+
+                         Required Visitor Parking
+
+                         1 stall per 10 units
+
+                         1 stall for every 6 units
+
+                         1 stall for every 6 units
+
+                         1 stall for every 6 units
+
+                         1 stall for every 6 units
+
+                          Not Required in CBD-fringe Zone
+
+                         Maximum Residential Parking
+
+                         2
+
+                         2.5
+
+                         3
+
+                         3.5
+
+                         4.5
+
+                         3
+
+                         3.5
+
+                         2.5
+
+                         3.5
+
+                         I
+
+                         Minimum Residential Parking
+
+                          Not Permitted
+
+                         2
+
+                         Required Visitor Parking
+
+                          Not Required in I Zone
+
+             1.    When residential developments contain multiple dwelling unit types listed above, the required amount of parking shall be individually determined for each residential unit and summed in total. When the required amount of parking stalls for residential units or residential visitors is a fraction of a whole number, the required amount shall be rounded up to the next integer in all cases.
+
+             2.    Parking spaces counted for residential use shall not also be counted towards non-residential parking requirements for other uses, unless approved by the community development director or their designee through a shared parking agreement or similar binding mechanism. Parking spaces counted for use of a particular dwelling unit shall not also be counted towards parking requirements for other dwelling units.
+
+             3.    Work/live units shall provide parking per the table above for the residential use in the unit. Work/live units shall also provide parking spaces for the business use per the standards of this chapter. Parking spaces counted for the residential portion of the work/live unit shall not also be counted towards the parking requirements of the business portion.
+
+             4.    In the central business district core, as defined in Section  17.04.030 , off-street parking is not required for new residential developments, with the following exceptions:
+
+             a.    New construction is accompanied with more than four thousand square feet of commercial space as a mixed-use development, in which case the reduced parking requirements outlined in the table above shall be required; or
+
+             b.    Eleven or more new residential units are constructed, in which case the parking requirements in the table above shall apply.
+
+             5.    For the purpose of this chapter, “bedroom” shall be defined by the most recent edition of the International Building Code.
+
+             6.    Parking for Accessory Dwelling Units (ADUs). Unless the ADU is located within one-half mile walking distance to a major transit stop, as defined in RCW  36.70A.030 (25), one off-street parking stall per unit is required in addition to the off-street parking stalls required for the principal residence, regardless of lot size. Parking must be provided on the subject property, either off of an alley or on a driveway. When the property abuts an alley, the off-street parking stall for the ADU shall gain access from the alley. Parking shall be developed in accordance with the standards of this chapter.
+
+             D.    Offices (excluding health care offices) and banks: one per three hundred square feet gross floor area plus five vehicle storage spaces per drive-through window;
+
+             E.    Eating and drinking establishments: one per seventy-five square feet of area open to the public, including outdoor service areas, plus additional as specified by the community development director or their designee for drive-through capability;
+
+             F.    Low-intensity sales and service (lumber, building supplies, feed and grain, large appliances, furniture, motor vehicles, boats, machinery, dry-cleaning, sign making, shoe and clothing repair, locksmiths, photography, saw-sharpening, etc.): one per four hundred square feet of gross floor area plus additional as specified by the community development director or their designee for outdoor sales and activity areas;
+
+             G.    High intensity sales and service (food, clothing, hardware, household goods, drugs, arts and crafts, auto parts, sporting goods, office equipment, books, plants, jewelry, liquor, musical instruments, barber and beauty shops, laundromats, etc.): one per two hundred fifty square feet of gross floor area open to the public;
+
+             H.    Churches and funeral homes: one per four occupants at maximum design capacity;
+
+             I.    Places of public assembly other than the above (auditoriums, stadiums, halls, clubs, theaters, indoor recreation, bus stations, etc.): one per three occupants at maximum design capacity;
+
+             J.    Hospitals and residential health care facilities: one per three beds;
+
+             K.    Health care offices and clinics including veterinarians: six per doctor, dentist or other principal personnel;
+
+             L.    Day care and preschool facilities: one per worker at maximum shift plus adequate loading space.
+
+             M.    Industry, wholesaling, warehousing, nonpassenger transportation facilities except ministorage: one per one and one-half workers on maximum shift;
+
+             N.    Open air activities, schools, plant nurseries, public utilities, outdoor recreation, ministorage, drive-through facilities (food, carwash, service stations, etc.) and all other uses not otherwise specified: to be determined by the community development director or their designee.
+
+             O.    Nonresidential uses in the urban village mixed-use overlay zone: refer to Section  17.36.092 .
+
+             P.    Nonresidential uses in the central business district zone: refer to Section  17.36.094 . (Ord.  2096-25  § 1, 2025; Ord.  1013  § 3.01.03, 1985)
+
+        17.36.035  Reductions to required parking minimums.
+
+             Reductions to the required minimum parking standards outlined in Section  17.36.030 (C) may be permitted by the community development director or their designee if the following provisions are applicable. Reductions are only permitted for multifamily residential use. Applicants shall be limited to no more than two of the following reduction options:
+
+             A.    Public Transit Reduction. The required parking minimum may be reduced by up to ten percent if the proposed development is within one-quarter mile of a public transit service that provides transportation at a frequency rate of twice per hour for twelve or more consecutive hours on a standard weekday.
+
+             B.    Reduction for Underground or Structured Parking Within Multifamily Residential Development. The required parking minimum may be reduced by up to ten percent if the proposed development incorporates underground or structured parking, in accordance with the following provisions:
+
+             1.    A parking requirement reduction for underground or structured parking shall not be granted for single-family residences, ADUs, duplex units, or triplex units;
+
+             2.    Underground or structured parking satisfies at least forty percent of the multifamily residential development’s required minimum parking after reduction; and
+
+             3.    A minimum of ten parking stalls shall be underground or structured.
+
+             C.    Permanent Affordable Housing Reduction. The required parking minimum may be reduced by up to twenty percent if a proposed residential development designates at least fifty percent of all residential units as permanent affordable housing as defined in Section  17.04.030 . If sale price limitation is selected, residential developments which limit the sale of at least fifty percent of the units to no more than forty percent fair market value are eligible for this reduction. If occupancy restriction is selected, residential developments which reserve a minimum of fifty percent of the units for households with incomes at eighty percent area median income or below, according to most recent U.S. census data, are eligible for this reduction. At the time of residential building permit application, the applicant shall submit documentation of a legally binding document indicating the selected method to be recorded with the Skagit County auditor upon city approval. (Ord.  2096-25  § 1, 2025)
+
+        17.36.040  Development standards.
+
+             Parking facilities provided in accordance herewith shall:
+
+             A.    Have access to a public thoroughfare, with ingress and egress designed with respect to intersections, crosswalks and traffic in general so as not to create safety hazards or impedances. Driveways connecting parking spaces to the public thoroughfare shall be at least twelve feet in width if one-way or serving less than ten parking spaces. Otherwise driveway width shall be at least twenty feet;
+
+             B.    Incorporate maneuvering room so as not to require backing out onto a public street, except that parking spaces serving single-family residences, accessory dwelling units, duplexes, and triplexes may utilize a street for backing out, provided the street is not an arterial and location is at least fifty feet from all street intersections;
+
+             C.    Be permitted to use a tandem parking configuration, compliant with RCW  36.70A.622 (C);
+
+             D.    Be surfaced with a dust-free, durable material; provided, that the portion of the driveway lying within the public right-of-way shall be paved with a material matching or superior to that of the public thoroughfare. Existing legal nonconforming gravel parking stalls may be permitted, up to a maximum of six parking stalls, compliant with RCW  36.70A.622 (D);
+
+             E.    Incorporate provision for drainage so as not to create on-site or off-site drainage problems;
+
+             F.    Incorporate adequate traffic control devices to inform users of the designed use of spaces, ingress, egress and maneuvering space. Parking spaces, if more than four, shall be separately identified by striping, wheel-stops or other such means. General use of wheel stops to prevent damage to structures and landscaping is recommended, as is lighting of larger parking lots;
+
+             G.    Provide for convenient pedestrian movement from parking spaces to building entrance, sufficiently separated from or compatible with vehicular traffic to ensure safety;
+
+             H.    Incorporate effective and attractive sight-obscuring screening if serving a nonresidential use and located in or abutting a residential zone;
+
+             I.    Provide a minimum off-street parking apron of twenty-five feet in length directly in front of all garage door entrances when accessing a street whether to the front or side of a residence. Where garage doors access an alley, the off-street parking apron shall be at least ten feet in length for all dwelling unit types.
+
+             J.    Be in accordance with the following dimensional requirements, provided the parking stall area excludes striping, wheel stops, curbs, and other similar devices from the required minimum dimensions:
+
+             1.    Standard parking stalls accessed at a ninety-degree angle shall be no less than eight feet in width and nineteen feet in length.
+
+             2.    The dimensions of standard parking stalls accessed at an angle not explicitly referenced in this chapter shall be determined according to the city engineer using the most recent edition of the Washington State Department of Transportation Standard Plan Manual.
+
+             3.    A maximum of thirty percent of the total required spaces may be designated for compact cars, provided they are accessed at a ninety-degree angle and are no less than seven and one-half feet in width and fifteen feet in length;
+
+             a.    Parking stalls for compact cars accessed at an angle not explicitly referenced in the chapter are permitted, provided their dimensions are determined according to the city engineer using the most recent edition of the Washington State Department of Transportation Standard Plan Manual.
+
+             K.    Equally distribute parking stalls among dwelling units within residential development. It shall be the responsibility of the underlying property owner to ensure off-street parking stalls are equally distributed among the dwelling units of a residential development;
+
+             L.    Provide adequate accessible parking in conformance with both the most recent edition of the Americans with Disabilities Act (ADA) Standards for Accessible Design released by the U.S. Department of Justice as well as the most recent edition of the Washington State International Building Code, whichever is stricter;
+
+             M.    Parking stalls for residential use may utilize grass block pavers, as permitted in RCW  36.70A.622 (G); and
+
+             N.    Preserve significant trees as defined in Section  17.50.110  in accordance with RCW  36.70A.622 (F). For residential and mixed-use developments only, significant trees shall not be removed to accommodate minimum parking requirements. If a proposed development cannot provide adequate parking solely due to significant tree retention, the minimum parking requirement shall be reduced to preserve all significant trees. (Ord.  2096-25  § 1, 2025; Ord.  1013  § 3.01.04, 1985)
+
+        17.36.050  Loading facilities requirement.
+
+              Repealed by Ord.  2096-25 .  (Ord.  1013  § 3.01.05, 1985)
+
+        17.36.060  Cooperative provisions.
+
+             Parking and loading facilities may be provided cooperatively, either through private arrangements or by means of a fee-in-lieu public parking program administered by the city.
+
+             A.    If the uses party to such a cooperative parking arrangement generate their peak parking demand at different times, the community development director or their designee may permit parking stalls to be counted towards the minimum requirement for more than one use.
+
+             B.    The amount of required parking stalls within a cooperative provision shall not be less than the minimum required amount for the use with the largest parking requirement. (Ord.  2096-25  § 1, 2025; Ord.  1013  § 3.01.06, 1985)
+
+        17.36.070  Third party consents.
+
+             If the required parking or loading is to be provided on land not owned or leased by the applicant, proof shall be supplied of the owner’s consent provided that such consent shall not be construed to constitute an obligation of any greater permanence than is explicit therein. At such time as such consent is withdrawn, the use by virtue of which such parking or loading has been required shall cease unless alternative arrangements have been made for compliance with these requirements. (Ord.  1013  § 3.01.07, 1985)
+
+        17.36.080  Verification.
+
+              Repealed by Ord.  2042-23 .  (Ord.  1013  § 3.01.08, 1985)
+
+        17.36.090  Handicapped parking.
+
+              Repealed by Ord.  2096-25 .  (Ord.  1312-98  § 1 (part), 1998)
+
+        17.36.092  Parking—Urban village mixed-use (UVMU) overlay zone.
+
+             A.    Intent. The intent of the UVMU overlay is to encourage commerce by creating a pedestrian-friendly environment that accommodates both shoppers and its residents. Providing adequate parking without creating large expanses of parking lots in front of commercial businesses is key to the success of the UVMU overlay.
+
+             The creation of a mixed-use parking district shall be encouraged. Parking may be constructed and maintained for motor vehicles, bicycles or other non-motorized transportation, lease parking and/or other parking that promotes alternatives to driving single-occupant motor vehicles. New development may utilize a shared parking arrangement subject to review and approval by the community development director.
+
+             Partially underground parking structures are encouraged with either landscape or constructed buffers to minimize visual impacts of parking. The Sedro-Woolley design standards and guidelines apply to location and design of parking lots.
+
+             Private driveways, garages, and garage entrances shall be at rear and side of buildings; unless deemed unfeasible by the city engineer, community development director, or their designees.
+
+             The city may enter into a developer agreement (or similar binding agreement) and collect in-lieu fees to develop and manage a mixed-use parking district.
+
+             B.    Off-street parking shall be provided for residential dwellings, commercial and retail uses in the UVMU overlay. Off-street parking for residential use shall be limited with parking stall maximums to reduce automobile dependency and overexpansion of asphalt.
+
+             C.    Subject to any shared parking agreement as approved by the community development director or their designee, nonresidential parking in the urban village mixed-use (UVMU) overlay zone shall be provided as follows:
+
+             1.    A minimum of one parking space per three hundred square feet of gross commercial floor area shall be provided. If more than fifty percent of the gross floor area of the first floor is used as commercial area, then only one parking space per six hundred square feet shall be required for the commercial space in excess of fifty percent of the gross first floor commercial space.
+
+             2.    Parking for commercial uses shall be provided in addition to residential parking requirements outlined in Section  17.36.030 (C).
+
+             D.    Parking requirements for residential use in the UVMU shall be in accordance with the requirements in Section  17.36.030 (C). (Ord.  2096-25  § 1, 2025)
+
+        17.36.094  Parking—Central business district (CBD) zone.
+
+             A.    Intent. To encourage the creation of a downtown parking district administered by the city. It would be authorized to collect in-lieu parking fees from new residential uses downtown and use that revenue, with any other revenue it generates, to manage a downtown parking district. The district may construct and maintain downtown parking for motor vehicles and bikes, lease parking, or otherwise monitor the provision of adequate parking and/or promotion of alternatives to driving.
+
+             B.    The goal of the central business district is to create a pedestrian-friendly environment and to encourage commerce. Parking requirements for non-residential uses in the central business district shall be as follows:
+
+                         Location
+
+                         Required Minimum Parking for Nonresidential Uses
+
+                         Within the central business district core
+
+                         Retail and restaurants: no off-street parking required.
+
+                         Public Use: no off-street parking required.
+
+                         Nonresidential uses not described: refer to Section  17.36.030 .
+
+                         Outside of the central business district core
+
+                         Commercial use: refer to Section  17.36.030 .
+
+                         Public use: no off-street parking required.
+
+             C.    New commercial or retail development may propose a shared parking arrangement to the community development director or their designee for review and approval, subject to the requirements in Section  17.36.060 .
+
+             D.    Parking requirements for residential use in the CBD shall be in accordance with the requirements in Section  17.36.030 (C). (Ord.  2096-25  § 1, 2025)

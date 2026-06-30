@@ -1,0 +1,285 @@
+{
+  "jurisdiction": "concrete",
+  "title": "Title 19 Development Regulations",
+  "source": "https://www.codepublishing.com/WA/Concrete/#!/Concrete19/Concrete19.html",
+  "discovered_from_har": null,
+  "preset": "concrete_title19",
+  "jurisdiction_key": "concrete",
+  "title_id": "Concrete19",
+  "collected_at": "2026-06-29T22:38:44.746Z",
+  "page_count": 30,
+  "toc_page_count": 30,
+  "toc_section_count": 35,
+  "pages": [
+    {
+      "ref": "Concrete1903.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1903.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.03 GENERAL PROVISIONS",
+      "text_length": 7287,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1906.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1906.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.06 DEFINITIONS",
+      "text_length": 44852,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1909.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1909.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.09 DISTRICT ESTABLISHMENT,",
+      "text_length": 9995,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1915.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1915.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.15 PERMITTED AND CONDITIONAL USES",
+      "text_length": 32012,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1918.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1918.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.18 ACCESSORY DWELLING UNITS",
+      "text_length": 124,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1920.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1920.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.20 DEVELOPMENT STANDARDS",
+      "text_length": 12417,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1925.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1925.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.25 SUPPLEMENTAL DEVELOPMENT STANDARDS",
+      "text_length": 60672,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1933.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1933.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.33 CL – COMMERCIAL/LIGHT",
+      "text_length": 136,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1936.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1936.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.36 TC – TOWN CENTER DISTRICT",
+      "text_length": 126,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1939.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1939.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.39 I – INDUSTRIAL DISTRICT",
+      "text_length": 122,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1940.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1940.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.40 P – PUBLIC LANDS DISTRICT",
+      "text_length": 126,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1943.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1943.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.43 O-S – OPEN SPACE",
+      "text_length": 108,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1945.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1945.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.45 SUPPLEMENTAL DEVELOPMENT STANDARDS",
+      "text_length": 28442,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1948.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1948.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.48 PERFORMANCE STANDARDS",
+      "text_length": 3854,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1950.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1950.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.50 LANDSCAPING",
+      "text_length": 20040,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1954.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1954.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.54 OFF-STREET PARKING AND LOADING",
+      "text_length": 25482,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1958.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1958.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.58 PLANNED UNIT DEVELOPMENTS",
+      "text_length": 13115,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1963.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1963.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.63 SIGNS",
+      "text_length": 21656,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1966.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1966.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.66 NONCONFORMING STRUCTURES,",
+      "text_length": 5852,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1968.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1968.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.68 THE LAND USE PERMIT PROCESS – FRAMEWORK FOR DECISION-MAKING",
+      "text_length": 46070,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1970.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1970.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.70 STATE ENVIRONMENTAL POLICY ACT",
+      "text_length": 569,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1972.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1972.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.72 SHORELINE MASTER PROGRAM",
+      "text_length": 2209,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1974.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1974.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.74 DEVELOPMENT IN FLOOD AREAS",
+      "text_length": 2103,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1976.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1976.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.76 ANNEXATION",
+      "text_length": 686,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1978.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1978.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.78 BOUNDARY LINE ADJUSTMENT",
+      "text_length": 4271,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1980.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1980.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.80 VACATION OF PUBLIC RIGHTS-OF-WAY",
+      "text_length": 7047,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1982.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1982.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.82 WIRELESS COMMUNICATION FACILITIES (WCF)",
+      "text_length": 97808,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1984.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1984.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.84 ENFORCEMENT",
+      "text_length": 14776,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1986.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1986.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.86 RECREATIONAL MARIJUANA/CANNABIS PRODUCERS, PROCESSORS AND RETAILERS",
+      "text_length": 16553,
+      "section_anchors": []
+    },
+    {
+      "ref": "Concrete1988.html",
+      "url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1988.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 19.88 DISTRICT MAPS",
+      "text_length": 574,
+      "section_anchors": []
+    }
+  ]
+}

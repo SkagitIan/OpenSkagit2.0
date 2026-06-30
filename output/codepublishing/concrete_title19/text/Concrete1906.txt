@@ -1,0 +1,742 @@
+Chapter 19.06 DEFINITIONS
+
+         Chapter 19.06
+DEFINITIONS
+
+             Sections:
+
+              19.06.010    Generally.
+
+              19.06.020    Accessory building.
+
+              19.06.022    Accessory dwelling unit (ADU).
+
+              19.06.030    Accessory use.
+
+              19.06.031    Administrative design review.
+
+              19.06.035    Adult or family day-care facilities.
+
+              19.06.036    Affordable housing.
+
+              19.06.040    Alley.
+
+              19.06.050    Alterations.
+
+              19.06.060    Area, building.
+
+              19.06.070    Area, site.
+
+              19.06.080    Boarding house.
+
+              19.06.090    Building.
+
+              19.06.100    Building height.
+
+              19.06.110    Building line.
+
+              19.06.120    Building site.
+
+              19.06.125    Child day-care centers.
+
+              19.06.126    Co-living.
+
+              19.06.130    Conditional use.
+
+              19.06.131    Cottage housing.
+
+              19.06.140    Council.
+
+              19.06.141    Courtyard apartments.
+
+              19.06.150    Reserved.
+
+              19.06.160    Coverage.
+
+              19.06.170    Density.
+
+              19.06.180    Detached building.
+
+              19.06.190    Developed land area.
+
+              19.06.192    Development.
+
+              19.06.193    Development regulations.
+
+              19.06.200    Discontinue.
+
+              19.06.205    Duplex.
+
+              19.06.210    Dwelling, single-family.
+
+              19.06.220     Repealed.
+
+              19.06.230    Dwelling, multifamily.
+
+              19.06.240    Dwelling unit.
+
+              19.06.241    Emergency housing.
+
+              19.06.242    Emergency shelters.
+
+              19.06.243    Encampments on religious property.
+
+              19.06.250    Family.
+
+              19.06.251    Fiveplex.
+
+              19.06.260    Floor area.
+
+              19.06.261    Fourplex.
+
+              19.06.270    Garage.
+
+              19.06.280    Reserved.
+
+              19.06.290    Gas station.
+
+              19.06.291    Government facilities.
+
+              19.06.295    Group home.
+
+              19.06.296    Hangar.
+
+              19.06.300    Home occupation.
+
+              19.06.310    Hospital.
+
+              19.06.320    Hotel.
+
+              19.06.330    Inoperable vehicle.
+
+              19.06.340    Junk storage.
+
+              19.06.350    Junk yard.
+
+              19.06.360    Kennel.
+
+              19.06.370    Land use.
+
+              19.06.380    Land use permit.
+
+              19.06.390    Lot.
+
+              19.06.400    Lot, corner.
+
+              19.06.410    Lot depth.
+
+              19.06.420    Lot, interior.
+
+              19.06.430    Lot width.
+
+              19.06.440    Mailed notice.
+
+              19.06.450    Major auto repair.
+
+              19.06.460    Manufactured home.
+
+              19.06.470    Mean depth.
+
+              19.06.471    Middle housing.
+
+              19.06.472    Mixed-use building.
+
+              19.06.475    Mobile food van and espresso stand.
+
+              19.06.480    Mobile home.
+
+              19.06.490    Mobile home park.
+
+              19.06.491    Noncommercial fixture.
+
+              19.06.500    Nonconforming structure.
+
+              19.06.510    Nonconforming use.
+
+              19.06.511    Organic materials management facilities.
+
+              19.06.520    Parking space.
+
+              19.06.521    Permanent supportive housing (PSH).
+
+              19.06.530    Permitted use.
+
+              19.06.531    Pilot’s lounge.
+
+              19.06.540    Primary use (or principal use).
+
+              19.06.550    Public hearing.
+
+              19.06.560    Recreational vehicle.
+
+              19.06.561    Recreational vehicle park.
+
+              19.06.562    Recreational vehicle site.
+
+              19.06.563    Religious organization.
+
+              19.06.570    Rezone.
+
+              19.06.580    Service or storage yard.
+
+              19.06.590    Setback.
+
+              19.06.591    Sidewalk.
+
+              19.06.592    Sidewalk cafe.
+
+              19.06.600    Sign.
+
+              19.06.610    Sign area or surface area.
+
+              19.06.620    Sign, electronic message center.
+
+              19.06.630    Sign, free-standing.
+
+              19.06.640    Sign, ground-mounted.
+
+              19.06.650    Sign, logo.
+
+              19.06.660    Sign, message.
+
+              19.06.670    Sign, off-premises.
+
+              19.06.680    Sign, public service information.
+
+              19.06.690    Sign, segmented message.
+
+              19.06.691    Sixplex.
+
+              19.06.700    Solid planting.
+
+              19.06.701    Stacked flat.
+
+              19.06.710    Story.
+
+              19.06.720    Street.
+
+              19.06.730    Structure.
+
+              19.06.738    Temporary use.
+
+              19.06.739    Townhouse.
+
+              19.06.740    Tract.
+
+              19.06.741    Transitional housing.
+
+              19.06.742    Triplex.
+
+              19.06.743    Unit density.
+
+              19.06.750    Variance.
+
+              19.06.760    Yard.
+
+              19.06.770    Yard, front.
+
+              19.06.780    Yard, rear.
+
+              19.06.790    Yard, side.
+
+        19.06.010  Generally.
+
+             Except where specifically defined herein, all words used in this title shall carry their customary meanings. Words used in the present tense include the future, and the plural includes the singular; the word “shall” is always mandatory, the word “may” denotes a use of discretion in making a decision: the words “used” or “occupied” shall be considered as though followed by the words “or intended, arranged or designed to be used or occupied.” [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.010, 1998]
+
+        19.06.020  Accessory building.
+
+             “Accessory building” means a subordinate building, the use of which is incidental to the use of the main building on the same lot. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.020, 1998]
+
+        19.06.022  Accessory dwelling unit (ADU).
+
+             “Accessory dwelling unit (ADU)” means a small, self-contained residential unit located on the same lot as an existing single-family home. An ADU has all the basic facilities needed for day-to-day living independent of the main home, such as a kitchen, sleeping area, and a bathroom. As the term “accessory” implies, ADUs are generally defined to be smaller in size and prominence than the main residence on the lot. An ADU may be attached or contained within the existing single-family residence, or the ADU may be a separate structure from the existing or proposed single-family residence.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 887 § 2 (Exh. 1), 2025; Ord. 639 § 1, 2009]
+
+        19.06.030  Accessory use.
+
+             “Accessory use” means a use incidental and subordinate to the principal use and located on the same lot or in the same building as the principal use. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.030, 1998]
+
+        19.06.031  Administrative design review.
+
+             “Administrative design review” means a development permit process whereby an application is reviewed, approved, or denied by the town planner or designee based solely on objective design and development standards without a public predecision hearing, unless such review is otherwise required by state or federal law, or the structure is a designated landmark or historic district established under a local preservation ordinance. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.035  Adult or family day-care facilities.
+
+             “Adult or family day-care facilities” includes permanent or temporary lodging and care facilities for the elderly and physically and mentally disabled, as defined by the state Department of Social and Health Services (DSHS). [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 597 § 1, 2006]
+
+        19.06.036  Affordable housing.
+
+             “Affordable housing” means residential housing that is rented by a person or household whose monthly housing costs, including utilities other than telephone, do not exceed 30 percent of the household’s monthly income. For the purposes of housing intended for owner occupancy, “affordable housing” means residential housing that is within the means of low- or moderate-income households. (RCW  36.70A.540 ) [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.040  Alley.
+
+             “Alley” means an open and accessible public thoroughfare which affords only a secondary means of access to abutting property and not intended for general traffic circulation. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.040, 1998]
+
+        19.06.050  Alterations.
+
+             “Alterations” means a change or rearrangement of the structural parts or exit facilities, or an enlargement by extending the sides or increasing the height or depth, or the moving from one location to another. In buildings for business, commercial, industrial or similar uses the installation or rearrangement of partitions affecting more than one-third of a single floor area shall be considered an alteration. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.050, 1998]
+
+        19.06.060  Area, building.
+
+             “Building area” means the total ground coverage of a building or structure which provides shelter measured from the outside of its external walls or supporting members or from a point four feet in from the outside edge of a cantilevered roof. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.060, 1998]
+
+        19.06.070  Area, site.
+
+             “Site area” means the total horizontal area within the property lines excluding external streets. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.070, 1998]
+
+        19.06.080  Boarding house.
+
+             “Boarding house” means a dwelling in which not more than four roomers and/or boarders are housed or fed. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.080, 1998]
+
+        19.06.090  Building.
+
+             A “building” is a structure as herein defined. When separated by division walls without openings each portion so separated shall be considered a separate building. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.090, 1998]
+
+        19.06.100  Building height.
+
+             “Height of building” means the vertical distance measured from the finished grade to the highest point of the roof for flat roofs, to the deck line of mansard roofs, and to the mean height between eaves and ridge for gable, hip and gambrel roofs. If a structure has none of the above features then the height shall be measured from the finished grade to the highest portion of the structure. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.100, 1998]
+
+        19.06.110  Building line.
+
+             “Building line” means a corner of part of a building nearest the property line. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.110, 1998]
+
+        19.06.120  Building site.
+
+             See “Area, site,” CMC  19.06.070 . [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.120, 1998]
+
+        19.06.125  Child day-care centers.
+
+             “Child day-care centers” provide temporary care of children as defined by the state Department of Social and Health Services, preschool or nursery school. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 597 § 2, 2006]
+
+        19.06.126  Co-living.
+
+             “Co-living” means housing units with residents living in private, lockable sleeping units with shared kitchen facilities. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.130  Conditional use.
+
+             “Conditional use” means uses which may be permitted as principal or accessory uses when authorized by the council pursuant to specified standards. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.130, 1998]
+
+        19.06.131  Cottage housing.
+
+             “Cottage housing” means residential units on a lot with a common open space that either: (1) is owned in common; or (2) has units owned as condominium units with property owned in common and a minimum of 20 percent of the lot size as open space.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.140  Council.
+
+             The term “council” or “town council” shall mean the town council of the town of Concrete. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.140, 1998]
+
+        19.06.141  Courtyard apartments.
+
+             “Courtyard apartments” means up to four attached dwelling units arranged on two or three sides of a yard or court.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.150  Reserved.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.150, 1998]
+
+        19.06.160  Coverage.
+
+             “Coverage” means the area of a lot which is covered by a roofed structure. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.160, 1998]
+
+        19.06.170  Density.
+
+             “Density” means the permitted ratio of residential units to land area and/or the permitted ratio of building size to land area. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.170, 1998]
+
+        19.06.180  Detached building.
+
+             “Detached building” means a building surrounded on all sides by open space. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.180, 1998]
+
+        19.06.190  Developed land area.
+
+             “Developed land area” means those parts of a land parcel that have been extensively improved for an existing land use including building coverage, parking and loading areas, service yards and landscaped areas. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.190, 1998]
+
+        19.06.192  Development.
+
+             “Development” means that which is to be done pursuant to a land use permit, building permit, special use permit, conditional use permit, temporary use permit, shoreline substantial development permit, or sign permit. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 661 § 1, 2010]
+
+        19.06.193  Development regulations.
+
+             “Development regulations” means any controls placed on development or land use activities by the town, including, but not limited to, zoning ordinances, official controls, subdivision ordinances, and binding site plan ordinances. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.200  Discontinue.
+
+             “Discontinue” means to cease to operate, use, or take; to end. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.200, 1998]
+
+        19.06.205  Duplex.
+
+             “Duplex” means a residential building with two attached dwelling units.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.210  Dwelling, single-family.
+
+             “Single-family dwelling” means a detached building containing but one kitchen, designed for and occupied exclusively by one family. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.210, 1998]
+
+        19.06.220  Dwelling, two-family.
+
+              Repealed by Ord. 900.  [Ord. 426 § 10.06.220, 1998]
+
+        19.06.230  Dwelling, multifamily.
+
+             “Multifamily dwelling” means a building designed to house three or more families living independently of each other. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.230, 1998]
+
+        19.06.240  Dwelling unit.
+
+             “Dwelling unit” means a building or portion thereof providing complete housekeeping facilities for one family. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.240, 1998]
+
+        19.06.241  Emergency housing.
+
+             “Emergency housing” means temporary indoor accommodations for individuals or families who are homeless or at imminent risk of becoming homeless that is intended to address the basic health, food, clothing, and personal hygiene needs of individuals or families. Emergency housing may or may not require occupants to enter into a lease or an occupancy agreement. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.242  Emergency shelters.
+
+             “Emergency shelter” means a facility that provides a temporary shelter for individuals or families who are currently homeless. Emergency shelter may not require occupants to enter into a lease or an occupancy agreement. Emergency shelter facilities may include day and warming centers that do not provide overnight accommodations. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.243  Encampments on religious property.
+
+             “Encampment on religious property” means outdoor encampments, safe parking efforts, indoor overnight shelters, and temporary small (tiny) houses on property owned or controlled by a religious organization to house homeless or temporarily unhoused individuals and families for a period less than four months (RCW  35.21.915 ). [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.250  Family.
+
+             “Family” means one person or two or more related or unrelated persons living together as a single, nonprofit housekeeping unit. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.250, 1998]
+
+        19.06.251  Fiveplex.
+
+             “Fiveplex” means a residential building with five attached dwelling units.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.260  Floor area.
+
+             “Floor area” means the sum of the gross horizontal areas of the floors of a building or buildings, measured from the exterior faces of exterior walls and from the center line of division walls. Floor area shall include: basement space, elevator shafts and stairwells at each floor, mechanical equipment rooms or attic spaces with headroom of seven feet, six inches or more, penthouse floors, interior balconies and mezzanines, enclosed porches. Floor area shall not include: accessory water tanks and cooling towers, mechanical equipment or attic spaces with headroom of less than seven feet, six inches, exterior steps or stairs, terraces, breezeways and open spaces. See also CMC  19.54.010 (6). [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.260, 1998]
+
+        19.06.261  Fourplex.
+
+             “Fourplex” means a residential building with four attached dwelling units.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.270  Garage.
+
+             “Garage” means a sheltered or enclosed space designed and used for the storage of the motor vehicles or boats. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.270, 1998]
+
+        19.06.280  Garage, public.
+
+              Repealed by Ord. 900.  [Ord. 426 § 10.06.280, 1998]
+
+        19.06.290  Gas station.
+
+             “Gas station” means any area of land, including the structures thereon, that is used for the sale of gasoline or other motor fuels, oils, lubricants and auto accessories and which may or may not include washing, lubricating, motor tuning and other minor servicing but not painting operation, body work or major auto repair. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.290, 1998]
+
+        19.06.291  Government facilities.
+
+             “Government facilities” means buildings and properties owned, operated, or leased by governmental entities for public purposes. These facilities can encompass a wide range of structures and land uses, from offices and service centers to infrastructure projects and specialized installations. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.295  Group home.
+
+             “Group home” means a building providing lodging to three or more persons including children and with or without handicaps, unrelated to the principal residing family including, among other things, boarding houses and bed and breakfast establishments. This definition excludes multifamily residences, hotels, hospitals, and institutions of involuntary detention. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 597 § 3, 2006]
+
+        19.06.296  Hangar.
+
+             “Hangar” means a covered and usually enclosed building designed and primarily used for the purpose of parking and/or repairing aircraft. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.300  Home occupation.
+
+             “Home occupation” means an occupation or profession which is customarily incident to or carried in a dwelling place and not one in which the use of the premises as a dwelling place is largely incidental to the occupation carried on, and which occupation is carried on by a member of the family residing within the dwelling place. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.300, 1998]
+
+        19.06.310  Hospital.
+
+             “Hospital” means a building designed and used for the medical and surgical diagnosis, treatment and housing of persons under the care of doctors and nurses. Rest homes, nursing homes, convalescent homes and clinics are not included. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.310, 1998]
+
+        19.06.320  Hotel.
+
+             “Hotel” means a building or portion thereof designed or used for the transient rental of five or more units for sleeping purposes. A central kitchen and dining room and accessory shops and services catering to the general public can be provided. Not included are institutions housing persons under legal restraint or requiring medical attention or care. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.320, 1998]
+
+        19.06.330  Inoperable vehicle.
+
+             “Inoperable vehicle” means a car, truck, bus or van that cannot be started and moved under its own power. A vehicle that is not currently licensed, including a recreational vehicle or trailer, that is designed for travel on the public roads, is also considered an inoperable vehicle. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.330, 1998]
+
+        19.06.340  Junk storage.
+
+             “Junk storage” means the temporary or permanent storage outdoors of junk, waste, discarded, salvaged or used materials or inoperable vehicles or vehicle parts. This definition shall include but not be limited to the storage of used lumber, scrap, metal, tires, household garbage, furniture, and inoperable machinery, and as further defined in the current edition of the Uniform Fire Code. This definition shall not include outdoor storage of normal residential equipment and related activities such as garden tools lawn mowers, wood piles, grass clippings, and similar items. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.340, 1998]
+
+        19.06.350  Junk yard.
+
+             “Junk yard” means a lot, land or structure, or part thereof, used for the collection, storage and sale of waste paper, rags, scrap metal or discarded material; or for the collecting, dismantling, storage, salvaging or sale of parts or machinery or vehicles not in running condition. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.350, 1998]
+
+        19.06.360  Kennel.
+
+             “Kennel” means more than five dogs and/or two litters of unweaned pups constitutes a kennel. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.360, 1998]
+
+        19.06.370  Land use.
+
+             “Land use” means the type of use activity occurring on a land parcel or within a building situated upon a land parcel. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.370, 1998]
+
+        19.06.380  Land use permit.
+
+             “Land use permit” means the document issued to an applicant which records all land use decisions which are made by the town on a land use application. Construction permits are excluded. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.380, 1998]
+
+        19.06.390  Lot.
+
+             A “lot” in the meaning of this title is a single tract of land, no matter how legally described, whether by metes and bounds and/or by lot or lots and block designation as in a recorded plat, that at the time of applying for a building permit is designated by its owner or developer as the tract to be used, developed or built upon as a unit of land under single ownership or control and assigned to the particular use for which the building permit is being secured. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.390, 1998]
+
+        19.06.400  Lot, corner.
+
+             “Corner lot” means a lot at the junction of and fronting on two or more intersecting streets. A corner lot has two front and two side yards. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.400, 1998]
+
+        19.06.410  Lot depth.
+
+             “Lot depth” means the mean dimension of the lot from the front street line to the rear line. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.410, 1998]
+
+        19.06.420  Lot, interior.
+
+             “Interior lot” means a lot fronting on one street. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.420, 1998]
+
+        19.06.430  Lot width.
+
+             “Lot width” means the dimension of the lot line at the street, or in an irregular shaped lot the dimension across the lot at the building line, or in a corner lot the narrow dimension of the lot at a street or building line. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.430, 1998]
+
+        19.06.440  Mailed notice.
+
+             “Mailed notice” means notice mailed to all property owners, commercial lessees and all residents of the area within a specified distance of the boundaries of the site of a proposed action. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.440, 1998]
+
+        19.06.450  Major auto repair.
+
+             “Major auto repair” means vehicular repair involving welding or the removal, replacement or opening of the radiator, motor block, transmission or differential for other than fluid check or fill. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.450, 1998]
+
+        19.06.460  Manufactured home.
+
+             “Manufactured home” means a structure, transportable in one or more sections from its manufacturer, retailer or wholesaler to its destination. A manufactured home is designated primarily for residential occupancy by human beings and the term includes mobile home or modular home. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.460, 1998]
+
+        19.06.470  Mean depth.
+
+             The “mean depth” of a lot is the depth of such lot measured on a line approximately perpendicular to the fronting street and midway between the side lines of such lot. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.470, 1998]
+
+        19.06.471  Middle housing.
+
+             “Middle housing” means buildings that are compatible in scale, form, and character with single-family houses and contain two or more attached, stacked, or clustered homes including duplexes, triplexes, fourplexes, fiveplexes, sixplexes, townhouses, stacked flats, courtyard apartments, and cottage housing. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.472  Mixed-use building.
+
+             “Mixed-use building” means a building whose ground floor is at least 75 percent occupied by retail or pedestrian-interest activity and the remaining 25 percent of the ground and all of the upper floors are residential.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.475  Mobile food van and espresso stand.
+
+             “Mobile food van and espresso stand” means a vehicular type unit designed for the preparation and dispensing of food and drink products, which either has its own motive power or is mounted on or drawn by another vehicle. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 652 § 1, 2009]
+
+        19.06.480  Mobile home.
+
+             “Mobile home” shall mean a factory constructed residential unit with its own independent sanitary facilities, that is intended for year-round occupancy and is composed of one or more major components which are mobile in that they can be supported by wheels attached to their own integral frame or structure over the public highway under license or by special permit. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.480, 1998]
+
+        19.06.490  Mobile home park.
+
+             “Mobile home park” means an area of land occupied or designed for the occupancy of two or more mobile homes. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.490, 1998]
+
+        19.06.491  Noncommercial fixture.
+
+             “Noncommercial fixture” means a temporary feature, amenity, or improvement not owned or provided by the town that is provided for the general public’s use and enjoyment while not identifying, advertising, or promoting a particular business. Examples include flower baskets, flowerpots, seating available to general public, civic announcements, public art, street clocks, pop-up canopies, tables, etc. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.500  Nonconforming structure.
+
+             “Nonconforming structure” means a structure which was lawful when established which does not now conform to the development standards of the zone in which it is located. A structure shall be considered established if it conformed to applicable zoning regulations at any time, or when it is built under permit, a permit for the structure has been granted and has not expired, or the structure is substantially underway as evidenced by timely called inspections complying with the Uniform Building Code. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.500, 1998]
+
+        19.06.510  Nonconforming use.
+
+             “Nonconforming use” means a use of land or a structure which was lawful when established and which does not now conform to the use regulations of the zone in which it is located. A use shall be considered established if it conformed to applicable zoning regulations at any time, or when it has commenced under permit, a permit for the use has been granted and has not expired, or a structure to be occupied by the use is substantially underway as evidenced by timely called inspections complying with the Uniform Building Code. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.510, 1998]
+
+        19.06.511  Organic materials management facilities.
+
+             “Organic materials management facility” means composting and anaerobic digestion facilities that process food scraps and yard waste to reduce landfill waste. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.520  Parking space.
+
+             “Parking space” means an off-street space used to temporarily park a motor vehicle and having access to a public street or alley. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.520, 1998]
+
+        19.06.521  Permanent supportive housing (PSH).
+
+             “Permanent supporting housing (PSH)” means subsidized, leased housing with no limit on length of stay that prioritizes people who need comprehensive support services to retain tenancy and utilizes admissions practices designed to use lower barriers to entry than would be typical for other subsidized or unsubsidized rental housing, especially related to rental history, criminal history, and personal behaviors. Permanent supportive housing is paired with on-site or off-site voluntary services designed to support a person living with a complex and disabling behavioral health or physical health condition who was experiencing homelessness or was at imminent risk of homelessness prior to moving into housing to retain their housing and be a successful tenant in a housing arrangement, improve the resident’s health status, and connect the resident of the housing with community-based health care, treatment, or employment services. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.530  Permitted use.
+
+             “Permitted use” means any use authorized or permitted alone or in conjunction with another use in specific district and subject to the limitations of the regulations of such use district. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.530, 1998]
+
+        19.06.531  Pilot’s lounge.
+
+             “Pilot’s lounge” means a designated area for flight crews, pilots, aircraft owners/operators, guests, customers, mechanics, or families and relatives of the same that may include a kitchen. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.540  Primary use (or principal use).
+
+             “Primary use” (or “principal use”) means the use for which a lot, structure or building, or the major portion thereof, is designed or actually employed. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.540, 1998]
+
+        19.06.550  Public hearing.
+
+             “Public hearing” means a duly advertised public meeting called by the town council, board, or commission of the town for the purpose of taking formal public comment, both in favor and opposition to a proposed action. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.550, 1998]
+
+        19.06.560  Recreational vehicle.
+
+             “Recreational vehicle” means a vehicular type unit primarily designed as temporary living quarters for recreational, camping or travel use, which either has its own motive power or is mounted or drawn by another vehicle. The following shall be considered a recreational vehicle (RV):
+
+             (1) Camping Trailer. A canvas (or other type of material) folding vehicle of rigid construction, mounted on wheels and designed for travel and recreation.
+
+             (2) Motorized Home, Motor Home and/or Recreational Bus or Van. A recreational vehicle consisting of a portable, temporary dwelling to be used for travel, recreation and vacation uses, and constructed as an integral part of a self-propelled vehicle.
+
+             (3) Pickup Coach. A vehicle designed to be mounted on or loaded into a truck chassis for use as a temporary dwelling for travel and recreation.
+
+             (4) Tent. Protective fabric erected to provide protection from the elements.
+
+             (5) Travel Trailer. A towable vehicle designed as a temporary dwelling for travel and recreation.
+
+             (6) Travel Trailer, Self-Contained. A trailer which can operate independently of connections to sewer, water and electric systems. It contains a water-flushed toilet, lavatory, shower or bath and kitchen sink, all of which are connected to water storage and sewage holding tanks located within the trailer. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 629 § 1, 2008]
+
+        19.06.561  Recreational vehicle park.
+
+             “Recreational vehicle park” means a parcel of land specifically developed for locating only recreational vehicles on sites on a short-term basis. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 629 § 1, 2008]
+
+        19.06.562  Recreational vehicle site.
+
+             “Recreational vehicle site” means a plot of ground within a recreational vehicle park intended for the accommodation of a recreational vehicle, tent or other individual camping unit on a temporary basis. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 629 § 1, 2008]
+
+        19.06.563  Religious organization.
+
+             “Religious organization” means the federally protected practice of a recognized religious assembly, school, or institution that owns or controls real property. (RCW  36.01.290 (6)(c)) [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.570  Rezone.
+
+             “Rezone” means an amendment to the official zoning map to change the zone classification of an area. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.570, 1998]
+
+        19.06.580  Service or storage yard.
+
+             “Service” or “storage yard” means an accessory yard used for the storage of equipment, vehicles or materials and/or outdoor fabrication or processing of materials or devices. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.580, 1998]
+
+        19.06.590  Setback.
+
+             “Setback” means yard requirements. The distances that buildings or uses must be removed from their lot lines. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.590, 1998]
+
+        19.06.591  Sidewalk.
+
+             “Sidewalk” means that portion of the right-of-way adjacent and parallel to the street, designated for pedestrian use. For the purpose of this chapter, “sidewalk” may include the area between a street curb and the outer extent of the right-of-way. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.592  Sidewalk cafe.
+
+             “Sidewalk cafe” means a portion of public sidewalk on which tables and chairs are placed for the use of patrons while consuming food and/or beverages served by a cafe, restaurant, or tavern located on the abutting property. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.600  Sign.
+
+             “Sign” means any visual presentation or representation whatsoever which is displayed outside in view of the general public so as to bring attention to the subject thereof. This definition specifically includes billboards, ground-mounted signs, free-standing signs, wall signs, roof signs, logo signs, and signs on marquees, awnings, canopies and furniture. Specifically excluded are house numbers; the flag, badge or insignia of any government or government agency and any authorized traffic control sign. Each display surface of the sign shall be considered to be a sign. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.600, 1998]
+
+        19.06.610  Sign area or surface area.
+
+             “Sign area” or “surface area” means the area, on the largest single face of a sign, within a perimeter which forms the outside shape of a sign. If the sign consists of more than one module, the total area of all modules will constitute the sign area. The area of a sign having no such perimeter or border shall be computed by enclosing the entire copy area within the outline of either a parallelogram, triangle, circle or any other easily recognized geometric shape and then computing the area. Where a sign is of a three-dimensional, round or irregular shape, the largest cross section shall be used in flat projection for the purpose of computing sign area. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.610, 1998]
+
+        19.06.620  Sign, electronic message center.
+
+             “Electronic message center sign” means a sign, display or device, or portion thereof, whose message may be changed by electronic process or remote control and includes electronic time and temperature displays and the device known in the advertising industry as a commercial electronic variable message sign. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.620, 1998]
+
+        19.06.630  Sign, free-standing.
+
+             “Free-standing sign” means a sign erected and maintained on a free-standing frame, mast or pole and not attached to any building but does not include ground-mounted signs. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.630, 1998]
+
+        19.06.640  Sign, ground-mounted.
+
+             “Ground-mounted sign” means a sign which extends from the ground or which has a support which places the bottom thereof less than three feet from the ground and which does not exceed an overall height of six feet. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.640, 1998]
+
+        19.06.650  Sign, logo.
+
+             “Logo sign” means a sign consisting of a trademark or symbol. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.650, 1998]
+
+        19.06.660  Sign, message.
+
+             “Message sign” means anything displayed on an electronic message center sign, including copy and graphics. A “traveling message” is any message which appears to move across an electronic message center sign. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.660, 1998]
+
+        19.06.670  Sign, off-premises.
+
+             “Off-premises sign” means a sign which advertises goods, products or services which are not sold, manufactured, or distributed on or from the premises or facilities on which the sign is located. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.670, 1998]
+
+        19.06.680  Sign, public service information.
+
+             “Public service information sign” means any sign or message on an electronic message center sign which provides the time, date, temperature, weather or information concerning civic, charitable or other noncommercial activities. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.680, 1998]
+
+        19.06.690  Sign, segmented message.
+
+             “Segmented message sign” means any message or distinct sub-unit of a message presented by means of at least one display change on an electronic message center sign. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.690, 1998]
+
+        19.06.691  Sixplex.
+
+             “Sixplex” means a residential building with six attached dwelling units.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.700  Solid planting.
+
+             “Solid planting” means a planting of evergreen trees and shrubs which will prevent a through and unobscured penetration of sight or light. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.700, 1998]
+
+        19.06.701  Stacked flat.
+
+             “Stacked flat” means dwelling units in a residential building of no more than three stories on a residential zoned lot in which each floor may be separately rented or owned.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.710  Story.
+
+             “Story” means the part of a building lying between two floors or between the floor and ceiling of the highest usable level in the building. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.710, 1998]
+
+        19.06.720  Street.
+
+             “Street” means a public thoroughfare which affords the principal means of access to abutting properties. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.720, 1998]
+
+        19.06.730  Structure.
+
+             “Structure” means a combination of materials constructed and erected permanently on the ground or attached to something having a permanent location on the ground. Not included are residential fences six feet or less in height, retaining walls less than three feet in height, rock walls and similar improvements of a minor character. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.730, 1998]
+
+        19.06.738  Temporary use.
+
+             “Temporary use” means uses which may be permitted as a principal or accessory use when authorized by the council, fire chief, building official, planning director, or town engineer pursuant to specific standards. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 652 § 2, 2009]
+
+        19.06.739  Townhouse.
+
+             “Townhouses” means buildings that contain three or more attached single-family dwelling units that extend from foundation to roof and that have a yard or public way on not less than two sides.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.740  Tract.
+
+             “Tract” means a lot. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.740, 1998]
+
+        19.06.741  Transitional housing.
+
+             “Transitional housing” means a project that provides housing and supportive services to homeless persons or families for up to two years and that has as its purpose facilitating the movement of homeless persons and families into independent living. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.742 Triplex.
+
+             “Triplex” means a residential building with three attached dwelling units.
+
+             [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.743  Unit density.
+
+             “Unit density” means the number of dwelling units allowed on a lot, regardless of lot size. [Ord. 900 § 2 (Att. A (§ 2)), 2025]
+
+        19.06.750  Variance.
+
+             “Variance” means relief from certain provisions of this title as authorized by the town council after determining that the criteria established for the granting of variances have been satisfied. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.750, 1998]
+
+        19.06.760  Yard.
+
+             “Yard” means an unoccupied space open to the sky, on the same lot with a building or structure. Eaves and masonry chimneys may protrude a maximum of 36 inches into a required yard. [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.760, 1998]
+
+        19.06.770  Yard, front.
+
+             “Front yard” means an open unoccupied space extending from the principal street line to the nearest wall of a building on the lot and including the full width of the lot to its side lot lines. See “Yard,” CMC  19.06.760 . [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.770, 1998]
+
+        19.06.780  Yard, rear.
+
+             “Rear yard” means an open unoccupied space extending from the rear lot line to the nearest wall of the main building on the lot and including the full width of the lot to its side lines. See “Yard,” CMC  19.06.760 . [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.780, 1998]
+
+        19.06.790  Yard, side.
+
+             “Side yard” means an open unoccupied space extending from the front yard to the rear yard and from the nearest wall of the main building to the side lot line. See “Yard,” CMC  19.06.760 . [Ord. 900 § 2 (Att. A (§ 2)), 2025; Ord. 426 § 10.06.790, 1998]

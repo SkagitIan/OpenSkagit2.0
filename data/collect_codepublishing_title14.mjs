@@ -150,10 +150,21 @@ async function discoverWithBrowser(config, outDir) {
       "accept-language": "en-US,en;q=0.9",
     },
   });
-  await page.goto(`${BASE}${config.jurisdictionPath}`, { waitUntil: "domcontentloaded", timeout: 45000 });
-  const readerUrl = `${BASE}${config.jurisdictionPath}cgi/reader.pl?cite=${config.titleId}&check=false&boxen=true&archive=html&_=${Date.now()}`;
-  await page.goto(readerUrl, { waitUntil: "domcontentloaded", timeout: 45000 });
-  const tocHtml = await page.locator("body").innerHTML();
+  const hashUrl = `${BASE}${config.jurisdictionPath}#!/${config.titleId}/${config.titleId}.html`;
+  let tocHtml = "";
+  try {
+    await page.goto(hashUrl, { waitUntil: "domcontentloaded", timeout: 90000 });
+    await page.waitForTimeout(5000);
+    tocHtml = await page.locator("body").innerHTML();
+  } catch {
+    tocHtml = "";
+  }
+  if (!tocHtml || !tocHtml.includes(config.titleId)) {
+    await page.goto(`${BASE}${config.jurisdictionPath}`, { waitUntil: "domcontentloaded", timeout: 90000 });
+    const readerUrl = `${BASE}${config.jurisdictionPath}cgi/reader.pl?cite=${config.titleId}&check=false&boxen=true&archive=html&_=${Date.now()}`;
+    await page.goto(readerUrl, { waitUntil: "domcontentloaded", timeout: 90000 });
+    tocHtml = await page.locator("body").innerHTML();
+  }
   await browser.close();
   if (/Just a moment|cf-browser-verification|challenge-platform/i.test(tocHtml)) {
     throw new Error(`Browser discovery was challenged for ${config.titleId}`);
@@ -162,7 +173,10 @@ async function discoverWithBrowser(config, outDir) {
   await fs.mkdir(outDir, { recursive: true });
   await fs.writeFile(tmpHar, tocHtml, "utf8");
   const escapedTitle = config.titleId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const pageRefs = unique([...tocHtml.matchAll(new RegExp(`\\.\\./html/${escapedTitle}/(${escapedTitle}\\d+\\.html)`, "g"))].map((match) => match[1])).sort();
+  const pageRefs = unique([
+    ...[...tocHtml.matchAll(new RegExp(`\\.\\./html/${escapedTitle}/(${escapedTitle}\\d+\\.html)`, "g"))].map((match) => match[1]),
+    ...[...tocHtml.matchAll(new RegExp(`${escapedTitle}/(${escapedTitle}\\d+\\.html)`, "g"))].map((match) => match[1]),
+  ]).sort();
   const sections = [...tocHtml.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)]
     .map((match) => ({ href: match[1], label: stripHtml(match[2]).replace(/\s+/g, " ").trim() }))
     .filter((item) => item.href.includes(`/${config.titleId}/`));

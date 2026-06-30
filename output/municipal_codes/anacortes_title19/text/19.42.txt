@@ -1,0 +1,1535 @@
+Ch. 19.42 Form and Intensity Standards | Anacortes Municipal Code
+
+ Skip to main content
+
+		Loading…
+
+	 Anacortes, WA
+
+		Municipal Code
+
+				   Home
+
+					   Ch. 19.41
+
+					   Title 19 Div. 4
+
+					   Ch. 19.43
+
+			 Toggle site navigation
+
+			 Menu
+
+		  City of Anacortes
+
+						Municipal Code
+
+  Title 19, Unified Development Code
+  Title 19 Div. 4, Zoning and Land Uses
+  Ch. 19.42, Form and Intensity Standards
+
+						   Home
+
+							   Contents
+
+						   Track
+
+							Legislative History
+
+								Historic Versions
+
+								Pending Updates
+
+								Recent Updates
+
+						   Share
+
+							This Page
+
+							Your Selections
+
+						   Settings
+
+						   Help
+
+		  City of Anacortes
+
+						Municipal Code
+
+  Title 19, Unified Development Code
+  Title 19 Div. 4, Zoning and Land Uses
+  Ch. 19.42, Form and Intensity Standards
+
+	    Chapter 19.42   FORM AND INTENSITY STANDARDS   Revised
+
+			 Search Within This
+
+	   This chapter is included in your selections.
+
+ Sections:
+
+   19.42.010   Generally.
+
+   19.42.020   Form and intensity standards for residential zones.  Revised
+
+   19.42.030   Form and intensity standards for mixed-use and industrial zones.  Revised
+
+   19.42.040   Bonus incentives, generally.  Revised
+
+   19.42.045   Density bonus for religious organizations.  Revised
+
+   19.42.050   Bonus incentives in the R4, C, and CBD zones.  Revised
+
+   19.42.060   Bonus incentives in the CM zone.
+
+   19.42.070   Bonus incentives in the MMU zone.  Revised
+
+   19.42.080   Minimum lot size calculations.  Revised
+
+   19.42.090   Minimum lot width circle calculation and exceptions.
+
+   19.42.100   Density calculations.
+
+   19.42.110   Lot coverage calculations, exceptions, and modifications.
+
+   19.42.120   Building height calculations, exceptions, and modifications.  Revised
+
+   19.42.130   Setback types and measurements.
+
+   19.42.140   Permitted projections into required setbacks.
+
+   19.42.150   Setback modifications.  Revised
+
+   19.42.160   Old Town supplemental form and intensity standards.
+
+   19.42.170   Aeronautical zone form and intensity standards.
+
+   19.42.180   Public use zone form and intensity standards.  Revised
+
+    Prior legislation:   Ord. 2992 § 1 (Att. A).
+
+    19.42.010   Generally.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+   A.   Purpose.
+
+      1.   To promote forms of  development  that reinforce and/or enhance the desired character of Anacortes residential neighborhoods, business districts, and industrial zones.
+
+      2.   To promote compatibility between  developments .
+
+      3.   To minimize environmental impacts of  development .
+
+   B.   Key to the Form and Intensity Standards Tables.
+
+      1.   The form and intensity standards tables address the form and intensity of  development  specific to individual zones. The zone is located on the vertical columns and the form/intensity topic being addressed is located on the horizontal rows.
+
+      2.   Where an AMC reference appears after the form and intensity measure, then the use or  development  is subject to standards in that section or chapter.
+
+      3.   For standards containing a superscript  (X) , refer to the code reference in the right column next to the superscript  (X) .
+
+      4.   If a cell is blank ( ), then there are no standards for the particular measure or it is not applicable to the zone.
+
+      5.   AMC   19.42.040  through  19.42.160   provide clarification and exceptions to the form and intensity standards tables below.  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.020   Form and intensity standards for residential zones.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+ The following table describes the form and intensity standards in residential zones. Supplemental form and intensity standards apply to the Old Town zone per AMC  19.42.160 .
+
+   Table 19.42.020
+ Form and intensity standards for residential use.
+
+  Measure
+
+  R1
+
+  R2
+
+  R2A
+
+  R3
+
+  R3A
+
+  R4
+
+  R4A
+
+  OT
+
+  Conditions/Reference
+
+  Measure
+
+  R1
+
+  R2
+
+  R2A
+
+  R3
+
+  R3A
+
+  R4
+
+  R4A
+
+  OT
+
+  Conditions/Reference
+
+  LOT SIZE AND DEVELOPMENT INTENSITY
+
+  Lot  size for  single-family dwelling , minimum (square feet)
+
+ (AMC  19.42.080 )
+
+ 15,000
+
+ 7,500
+
+ 6,000
+
+ 4,500
+
+ 3,000
+
+ 3,000
+
+ 3,000
+
+ 6,000
+
+ See AMC  19.43.030  for standards for  lots  &lt;5,000 sq. ft.
+
+   Lot  size for “small duplex,” minimum (square feet)
+
+ (AMC  19.42.080 )
+
+ 7,500 (X)
+
+ 6,000 (X)
+
+ 4,500 (X)
+
+ 3,000 (X)
+
+ 6,000 (X)
+
+ See AMC  19.43.050  for duplex standards.
+
+  (X) AMC  19.43.050(B)(2)
+
+  Lot  size for duplex, minimum (square feet)
+
+ (AMC  19.42.080 )
+
+ 9,000
+
+ 7,500
+
+ 6,000
+
+ 4,500
+
+ 3,000
+
+ 3,000
+
+ 7,500
+
+ See AMC  19.43.050  for duplex standards.
+
+ Additional  lot  size needed for additional attached  dwelling unit  beyond duplex, minimum (square feet)
+
+ (AMC  19.42.080 )
+
+ 1,500
+
+ 1,500
+
+ 1,000
+
+ 1,500
+
+ See AMC  19.43.060  and  19.43.070  for applicable housing type standards.
+
+ Minimum  lot  width circle
+
+ Applies to each newly created  lot  in residential zones. See AMC  19.42.090  for minimum  lot  width circle calculation and exceptions.
+
+  Lot  with alley access (feet)
+
+ 100
+
+ 60
+
+ 50
+
+ 35
+
+ 25
+
+ 25
+
+ 25
+
+ 45
+
+  Lot  without alley access (feet)
+
+ 100
+
+ 60
+
+ 50
+
+ 40
+
+ 30
+
+ 30
+
+ 30
+
+ 50
+
+ Density minimum ( dwelling units /acre)
+
+ 15 (X)
+
+ See AMC  19.42.100  for calculating density.
+
+  (X)  Applies to  lots  6,000 sq. ft. or more in size.
+
+ Density maximum ( dwelling units / gross acre )
+
+ 2
+
+ See AMC  19.42.100  for calculating density.
+
+  Lot coverage , maximum percentage
+
+ 35%
+
+ 35%
+
+ 40%
+
+ 50%
+
+ 50%
+
+ 60%
+
+ 60%
+
+ 35%
+
+  (X)
+
+ See AMC  19.42.110  for clarification of  lot coverage  standards.
+
+  (X)  See AMC  19.42.160(A)  for additional  lot coverage  standards in the OT zone.
+
+  Landscaped area , minimum percentage
+
+ 20%
+
+ 20%
+
+ 20%
+
+ 20%
+
+ 20%
+
+ 20%
+
+ 20%
+
+ 20%
+
+ See AMC Chapter  19.65  for  landscaping  standards.
+
+  HEIGHT—PRINCIPAL STRUCTURES
+
+ Height, maximum (feet)
+
+ 35
+
+ 35
+
+ 35
+
+ 35
+
+ 35
+
+ 40
+
+ 35
+
+ 25
+
+  (X)
+
+ See AMC  19.42.120  for  building height  exceptions and modifications.
+
+  (X)  See AMC  19.42.160(B)  for height exceptions in the OT zone.
+
+ Height, maximum with bonus
+
+ 50
+
+ See AMC  19.42.050  for  building height  bonuses in the R4 zone.
+
+  SETBACKS (feet)
+
+  NOTE: The setbacks below apply to principal and accessory structures, except where accessory structure setbacks are modified by AMC   19.47.020(B)  .
+
+  NOTE: For multifamily projects, also see AMC   19.62.030  , Relationship to adjacent properties.
+
+ Street  setback , minimum
+
+ 20
+
+ 20
+
+ 15
+
+ 15
+
+ 15
+
+ 10
+
+ 10
+
+ 20
+
+ AMC  19.42.130(B)
+
+ Street  setback — garage , minimum
+
+ 25
+
+ 20
+
+ 20
+
+ 20
+
+ 20
+
+ 20
+
+ 20
+
+ 25
+
+  (X)
+
+ AMC  19.42.130(B)
+
+ AMC  19.42.150(B)
+
+  (X)  See AMC  19.42.160(D)  for additional  garage   setback  standards in the OT zone.
+
+ Side street  setback , minimum
+
+ 20
+
+ 10
+
+ 10
+
+ 10
+
+ 10
+
+ 10
+
+ 10
+
+ 10
+
+  (X)
+
+ AMC  19.42.130(B)
+
+  (X)  See AMC 19.42.160(C) for additional  setback  standards in the OT zone.
+
+ Interior side  setback , minimum
+
+ 10
+
+ 5
+
+ 5
+
+ 5
+
+ 5
+
+ 5
+
+ 5
+
+ 5
+
+  (X)
+
+ AMC  19.42.130(C)
+
+  (X)  See AMC  19.42.160(C)  for additional  setback  standards in the OT zone.
+
+ Interior side  setback —upper  floors , minimum
+
+ 10
+
+ 7.5
+
+ 7.5
+
+ 5
+
+ 5
+
+ 5
+
+ 5
+
+ 7.5
+
+ AMC  19.42.130(D)
+
+ Rear  setback , minimum
+
+ 20
+
+ 20
+
+ 20
+
+ 20
+
+ 20
+
+ 10
+
+ 10
+
+ 20
+
+ AMC  19.42.130(E)
+
+  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.030   Form and intensity standards for mixed-use and industrial zones.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+ The following table describes the form and intensity standards in  mixed-use  and industrial zones. Form and intensity standards for the aeronautical zone are located in AMC  19.42.170  and for the public use zone in AMC  19.42.180 .
+
+   Table 19.42.030
+ Form and intensity standards for mixed-use and industrial zones.
+
+   Measure
+
+  CBD
+
+  C
+
+  MMU
+
+  CM
+
+  CM2
+
+  LM
+
+  LM1
+
+  MS
+
+  I
+
+  HM
+
+   Conditions/Reference
+
+   Measure
+
+  CBD
+
+  C
+
+  MMU
+
+  CM
+
+  CM2
+
+  LM
+
+  LM1
+
+  MS
+
+  I
+
+  HM
+
+   Conditions/Reference
+
+  LOT SIZE AND DEVELOPMENT INTENSITY
+
+ Density minimum ( dwelling units / gross acre )
+
+ 15
+
+ 15
+
+ 15 (X)
+
+ See AMC  19.42.100
+
+  (X)  East of Q Avenue only
+
+ Maximum  building  size without a  conditional use  permit ( gross floor area )
+
+ 200,000
+
+ 300,000
+
+ 200,000
+
+  Landscaped area , minimum percentage
+
+ 10%
+
+ 10%
+
+ 10%
+
+ 15%
+
+ 15%
+
+ 10%
+
+ 10%
+
+ 10%
+
+ 10%
+
+ See AMC  19.65.030  for  landscaped area  provisions
+
+  HEIGHT (feet)—PRINCIPAL STRUCTURES
+
+ Height, base maximum
+
+ 50
+
+ 40
+
+ 35—45
+
+ 35
+
+ 50
+
+ 35—50
+
+ 50
+
+ 50
+
+ 50
+
+ 50
+
+ See AMC  19.42.120  for  building height  exceptions and modifications
+
+ Height, maximum with bonus
+
+ 65 (X)
+
+ 50
+
+ 50—65 (X)
+
+ 50
+
+ 50 (Y)
+
+ See AMC    19.42.050  through  19.42.070
+
+  (X)  AMC  19.42.120(C)(7)
+
+  (Y)  AMC  19.42.120(C)(1)
+
+  SETBACKS (feet)
+
+  NOTE: The setbacks below apply to principal structures, unless otherwise noted, except where accessory structure setbacks are modified by AMC   19.47.020(B)  .
+
+ Street  setback , minimum
+
+ 0
+
+ 0
+
+ 0
+
+ 10
+
+ 10
+
+ 10
+
+ 10
+
+ 10 (X)
+
+ 15
+
+ 15
+
+ See AMC  19.42.130(B)  for street  setback  measurements
+
+ See AMC  19.42.150  for possible  setback  modifications
+
+  (X)  See AMC  19.42.150(F)  for street  setbacks  on  storefront block frontages  in MS zone
+
+ Also see AMC Chapter  19.61 ,  Block Frontage  Standards
+
+  NOTE: Most nonresidential and multifamily development must conform to block frontage standards of AMC Chapter   19.61  , which affect the street setbacks.
+
+ Interior side  setback , minimum
+
+ 0 (X) (Y) (Z)
+
+ 0 (X) (Y)
+
+ 0 (X) (Y)
+
+ 0 (X) (Y)
+
+ 0 (Y)
+
+ 10 (X) (Y)
+
+ 10 (Y)
+
+ 10 (Y)
+
+ 10 (Y)
+
+ 10 (Y)
+
+ AMC  19.42.130(C)
+
+  (X)  AMC  19.62.030(C)  regarding multifamily uses along internal property lines
+
+  (Y)  AMC  19.42.150(C)  regarding  setbacks  to adjoining residential zones
+
+  (Z)  AMC  19.42.150(D)  when site abuts OT-zoned property
+
+ Rear  setback , minimum
+
+ 0
+
+ 0
+
+ 0
+
+ 0
+
+ 0
+
+ 10
+
+ 10
+
+ 10
+
+ 10
+
+ 10
+
+ AMC  19.42.130(E)
+
+ Also see AMC  19.62.030 , Relationship to adjacent properties
+
+ Accessory  building   setbacks
+
+  (where they differ from setbacks above)
+
+ Interior side  setback , minimum
+
+ 0
+
+ 0
+
+ 0
+
+ 0
+
+ 0
+
+ 3—5 (see AMC  19.47.020(B)  for details and exceptions)
+
+ Rear  setback , minimum
+
+ 0
+
+ 0
+
+ 0
+
+ 0
+
+ 0
+
+ 0—10 (see AMC  19.47.020(B)  for details and exceptions)
+
+  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.040   Bonus incentives, generally.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+    A.   Purpose.   The purpose of the bonus incentives provisions is to encourage the production of  affordable housing  and community benefits by allowing increased  development  potential in exchange for qualifying public benefits.
+
+   B.   Applicability.
+
+      1.   The bonus incentive provisions of this chapter apply to the following situations:
+
+        a.   Density bonuses for  affordable housing  on property owned by a religious organization (see AMC  19.42.045 ).
+
+        b.   Height bonuses in the R4, C, and CBD zones as established in Tables 19.42.020 and 19.42.030 (see AMC  19.42.050 ).
+
+        c.   Height bonuses in several  mixed-use  and industrial zones (see AMC  19.42.060  and  19.42.070 ).
+
+      2.   The provisions of this section are optional.  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.045   Density bonus for religious organizations.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently added by Ordinance 5014, codified in February 2026.
+
+    A.   Purpose.   To implement RCW  36.70A.545  and encourage the  development  of long-term  affordable housing  on property owned or controlled by religious organizations.
+
+    B.   Applicability.    Developments  meeting the requirements of RCW  36.70A.545  may request modifications to any of the  development  standards listed in subsection  (C) , below.
+
+    C.   Modifications to Development Standards.   An  applicant  may request modification of the following  development  standards:
+
+      1.   Allowed housing types (AMC  19.41.040  and  19.41.050 ). In residential zones, the next increment of higher-intensity residential  building  type is allowed in addition to the base residential type(s). Depending on the zone, the next increment of housing may include duplexes, triplexes, fourplexes, townhouses, or small multiplexes. Zone-specific limitations to location on alley-loaded  lots  and on maximum  unit  size do not apply to  development  proposed under this section.
+
+      2.   Reduced  setbacks , increased  lot coverage , increased density and/or reduced minimize  lot  size or dimensions (AMC  19.42.020  and  19.42.030 ).
+
+      3.   Reduced internal  open space  standards (AMC  19.62.040 ).
+
+    D.   Criteria for Granting Request.   The  Director  may approve the requested modification(s) to  development  standards when an  applicant  demonstrates that:
+
+      1.   The modification is necessary to make the project financially or physically feasible while maintaining the required affordability level.
+
+      2.   The project is designed to minimize neighborhood impacts through sensitive site and  building  design.  (Ord. 5014 § 2 (Att. A), 2025)
+
+    19.42.050   Bonus incentives in the R4, C, and CBD zones.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+    A.   Purpose.   To allow flexibility in  building height  in exchange for the integration of less expensive  dwelling units  into the  development .
+
+    B.   Applicability.   Height bonuses are available to  development  in the R4, C, and CBD zones as established in this chapter, provided it complies with one of the  affordable housing  options in this section.
+
+    C.   Option 1: Small Units.    Developments  where at least 50 percent of the total  dwelling units  contain no more than 650 square feet of  gross floor area  qualify for the height bonus.
+
+    D.   Option 2: Affordable Units.    Developments  that integrate affordable  dwelling units  per the standards below qualify for the height bonus.
+
+      1.   For every three  dwelling units  occupying floor area above the base height limit, at least one affordable  dwelling unit  must be integrated into the  development .  Dwelling units  larger than 1,400 square feet (leasable/living area, excluding common hallways) qualify as two standard  dwelling units . Note: Applicable floor area over base height limit refers to any floor-to-ceiling space of applicable  dwelling units  or shared recreational or amenity space that exceeds the base height limit established in Tables 19.42.020 and 19.42.030. See Figure 19.42.050 for an example.
+
+      2.   For every 2,000 square feet of shared recreational or amenity space that is integrated into floor area that occupies space above the base height limit, at least one affordable  dwelling  must be integrated into the  development .
+
+   Figure 19.42.050
+ Height bonus example—How affordable housing requirements are measured.
+
+ The example  building  in the R4 zone contains one  floor  that exceeds the base height limit. The table below illustrates what is included on each  floor  and the number of required affordable  units  that are required to be integrated.
+
+   Floor
+
+   Floor statistics
+
+   Number of required affordable units  (to be integrated on any  floor  in the  building )
+
+ 5
+
+ 2  dwelling units  (average 2,250 sq. ft.) + 3,000 sq. ft. shared recreation/amenity space
+
+ = 2 affordable  units  min.
+
+ 4
+
+ 8  dwelling units  (average 938 sq. ft.)
+
+ None required
+
+ 3
+
+ 10  dwelling units  (average 750 sq. ft.)
+
+ 2
+
+ 10  dwelling units  (average 750 sq. ft.)
+
+ 1
+
+ 10  dwelling units  (average 750 sq. ft.)
+
+ Total
+
+ = 2 affordable  units  min.
+
+     3.   Income Limit and Affordability.
+
+        a.    Dwelling units  that qualify as  affordable housing  must be affordable to  households  whose annual income does not exceed 50 percent of median income (see subsection  (D)(3)(c)  of this section) for rental  units  or 80 percent of median income for owner-occupied housing, adjusted for  household  size, and no more than 30 percent of monthly  household  income is paid for monthly housing expenses (see subsection  (D)(3)(b)  of this section).
+
+        b.   Housing expenses for ownership include mortgage and mortgage insurance, property taxes, property insurance, and homeowner dues. Housing expenses for rental housing include rent and appropriate utility allowances.
+
+        c.   The median income for the Mount Vernon-Anacortes Metropolitan Statistical Area (MSA) is determined by the Secretary of Housing and Urban  Development  under Section 8(f)(3) of the  United  States Housing Act of 1937, as amended. If programs under said Section 8(f)(3) are terminated, median income is determined under the method used by the Secretary prior to such termination. In the event that HUD no longer publishes median income figures for the Mount Vernon-Anacortes MSA, the  city  may use any other method for determining the Skagit County median income, adjusted for  household  size.
+
+      4.   Duration.   Rental and ownership  units  must serve only income-eligible  households  for a minimum period of 50 years from the date of the  certificate of occupancy .
+
+      5.   Tenure.   The tenure of the  affordable housing   units  (ownership or rental) must be the same as the tenure for the rest of the housing  units  in the  development .
+
+     6.   Affordability Agreement.
+
+        a.   Prior to  building  permit issuance, an  affordable housing  agreement in a form approved by the  Director  and  City  Attorney must be recorded with the Skagit County Auditor’s office as a covenant running with the land and binding on the  applicant , property owner, assigns, heirs and successors.
+
+        b.   The agreement must address the level and duration of affordability, tenant qualifications, reporting, monitoring, and any other topics related to the provision of the  affordable housing   units .
+
+        c.   The  city  may, at its sole discretion, establish a monitoring fee for the affordable  units  to cover the costs to the  city  to review and process documents to maintain compliance with income and affordability restrictions of the agreement.
+
+      7.   Location.   The affordable  unit (s) must be located within the  development  and above  grade  (no  basement   units ).
+
+      8.   Size (Bedroom).   The  affordable housing   units  must consist of a range of number of bedrooms that is comparable to  units  in the overall  development .
+
+      9.   Size (Net Floor Area).   The size of the  affordable housing   units , if smaller than the other  units  with the same number of bedrooms in the  development , must be approved by the  Director . If there is a proposal that the affordable  units  be smaller than the market rate  units , in no case may the  affordable housing   units  be less than 500 square feet for a studio  unit , 600 square feet for a one-bedroom  unit , 800 square feet for a two-bedroom  unit , or 1,000 square feet for a three-bedroom  unit .
+
+      10.   Design.   The exterior design of the  affordable housing   units  must be compatible and comparable with the rest of the  dwelling units  in the  building / development  and must comply with design standards specified in AMC Chapter  19.63 . The interior finish and quality of construction of the  affordable housing   units  must at a minimum be comparable to entry-level rental or ownership housing in the  city .
+
+      11.   Timing/Phasing.   The  affordable housing   units  must be available for occupancy in a time frame comparable to the availability of the rest of the  dwelling units  in the  development .  (Ord. 5014 § 2 (Att. A), 2025; Ord. 4042 § 2 (Att. A), 2023; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.060   Bonus incentives in the CM zone.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+    A.   Purpose.   To allow flexibility in  building height  via:
+
+      1.   Integration of affordable  dwelling units  into the  development .
+
+      2.   Providing a review process to ensure that the additional  building height  would not have  adverse impacts  on the general vicinity.
+
+    B.    Developments  seeking additional  building height  that integrate residential  units  must comply with height bonus provisions of AMC  19.42.050 .
+
+    C.    Developments  seeking additional  building height  that do not integrate residential  units  are subject to a  conditional use  permit per AMC Chapter  19.36 ,  Conditional Uses . Special application requirements, criteria, and conditions:
+
+      1.    Applicants  must conduct a three-dimensional visual analysis to examine views of the  development  from surrounding streets, adjacent properties, and up to three other sites selected by the  Director  to help ensure that the proposed  building (s) do not adversely impact the general vicinity.
+
+      2.   The  applicant  must demonstrate how the  building  has been sited and designed to minimize visual impacts on sites specified in subsection  (C)(1)  of this section.
+
+      3.   Conditions may be imposed to ensure compatibility with the  conditional use  criteria and compliance with subsection  (C)(1)  of this section, including those in AMC  19.36.050  and the following:
+
+        a.   Changes in  building  depth, width.
+
+        b.   Additional  building  massing techniques (beyond  minimum requirements  in AMC  19.63.040 ), such as upper-level  building   setbacks  and/or additional  building   modulation  or  articulation  treatments.  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.070   Bonus incentives in the MMU zone.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+    A.   Bonus Incentives in the Portion of the MMU Zone West of Q Avenue.   Such bonus height increases are subject to a  conditional use  permit per AMC Chapter  19.36 ,  Conditional Uses . Special application requirements, criteria, and conditions:
+
+      1.    Applicants  must conduct a three-dimensional visual analysis to examine views of the  development  from at least three vantage points (including surrounding streets and other public vantage points as selected by the  Director ) to help ensure that the proposed  building (s) do not adversely impact the general vicinity.
+
+      2.   The  applicant  must demonstrate how the  building  has been sited and designed to minimize visual impacts on sites specified in subsection  (A)(1)  of this section.
+
+      3.   Conditions may be imposed to ensure compatibility with the  conditional use  criteria, including those in AMC  19.36.050  and the following:
+
+        a.   Changes in  building  depth, width.
+
+        b.   Additional  building  massing techniques (beyond  minimum requirements  in AMC  19.63.040 ), such as upper-level  building   setbacks  and/or additional  building   modulation  or  articulation  treatments.
+
+    B.   Bonus Incentives in the Portion of the MMU Zone East of Q Avenue.    Buildings  integrating one feature from the list below have a bonus height limit addition of 10 feet above the base height limit.  Buildings  integrating two features from the list below have a bonus height limit addition of 20 feet above the base height limit.
+
+   Figure 19.42.070
+ Height bonus incentive features for the portion of the MMU zone east of Q Avenue.
+
+  1. Integrate small units.   Developments  where at least 25 percent of the total  dwelling units  contain no more than 600 square feet of  gross floor area  and qualify for the height bonus.
+
+  2. Vertical mixed-use building design.  Ground level spaces designed to accommodate nonresidential uses must occupy at least 50 percent of the  building ’s primary  facade . Such spaces must be at least 50 feet deep and contain 13 feet minimum floor-to-ceiling heights. Residential lobbies and  structured  parking areas do not qualify as nonresidential space for the purposes of this incentive option.
+
+  3. Provide additional ground level pedestrian-oriented space  (meeting design requirements in AMC  19.62.040(D) ) equal to at least 2 percent of the  development site . Such space must be above and beyond minimum sidewalk, esplanade, and applicable  pedestrian-oriented space  requirements. This could include a small entry plaza (left image), or it could include a widened sidewalk (middle image).
+
+  4. Provide space for a public park  equal to at least five percent of the  gross floor area  of the applicable  building , but not less than 10,000 square feet in area, on a site agreed upon by, and dedicated to, the  city . The  city  may permit the owner to retain title if a  city  attorney-approved instrument guaranteeing permanent  public access  and ongoing maintenance is executed. The space should be configured and located so it is able to incorporate common municipal park features such as playgrounds, fitness areas, picnic areas, pavilions, etc. This feature qualifies for two bonus incentive elements, allowing up to 20 feet of additional  building height  above the base height limit.
+
+  5. Integrate ornamental stormwater management features.  Include creative and expressive techniques to celebrate  stormwater  management. The feature must be a significant visible design feature of the site and must include educational signage or a plaque explaining the incorporated  stormwater  techniques as determined and approved by the  city . The design and management plan for the features must demonstrate long-term success of the ornamental  stormwater  management element. See examples below.
+
+  6. Integrate visible landscaping elements on buildings.  This could include a combination of green  walls  and green roof elements integrated as a prominent visual feature of the  building . To qualify, at least 50 percent of applicable roof areas or 5 percent of street-facing  facades  must be vegetated. Reduced and/or a combination of green roof/ walls  may be acceptable, provided the visible placement and high quality of the installations achieves the intent of the amenity feature. The design and management plan for the  landscaping  features must demonstrate long-term success of the  landscaping  element. See examples below.
+
+  7. Integration of permanent public art in visible location.  This could include murals, mosaics, sculptural elements, or gateway features that are clearly recognizable as public art as determined by the  Director  in consultation with the  City  of Anacortes Arts  Commission . Features may be located in a plaza, within the  streetscape  adjacent to the  building , and/or on the  building . Off-site features may be considered by the  city  provided they are placed within the central waterfront MMU zone. To qualify as an amenity, the estimated cost of the feature must be at least 1 percent of the construction cost of the  development .
+
+  8. Exceptional landscaping display in visible location.  The display must cover an area equal to at least 2 percent of the  development site  and function as a prominent visual feature of the  development . The design and management plan for the  landscaping  display must demonstrate long-term success of the  landscaping  elements. See examples below.
+
+  9. Integrating brick as the primary cladding material on the building.  In order to qualify, brick must occupy at least 50 percent of the cladding on the street-facing  facades  of the applicable  building .
+
+  10. Provide freely accessible public restrooms.  Must be available to the general public (not only commercial customers) and available daily.
+
+  11. Provide indoor meeting space  available for free to the general public (3,000 square feet minimum). See example below.
+
+  12. Other similar features that function as a permanent public amenity.  Such features must be comparable in cost and public benefit to the features above.
+
+  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.080   Minimum lot size calculations.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+ Minimum  lot  size calculations are based on net  lot  area, rather than gross  lot  area. The following areas are excluded from the minimum  lot  area calculations:
+
+    A.   Street  right-of-way , or other areas reserved or dedicated for public use (such as parks,  open space , and  stormwater facilities ).
+
+    B.   Submerged lands, landslide hazard areas and buffers, regulated wetlands and buffers, streams, and riparian management zones.  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.090   Minimum lot width circle calculation and exceptions.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+    A.   Purpose.   The purpose of the minimum  lot  width circle requirement is to:
+
+      1.   Ensure that each  lot  is wide enough to maintain a consistent and compatible land use pattern in residential neighborhoods; and
+
+      2.   Ensure that a minimum buildable area is included in each  lot  created.
+
+    B.   Requirement.   Table 19.42.020 identifies the minimum  lot  width circle diameter that must fit within each newly created  lot  in residential zones. This circle establishes that at least some portion of a  lot  must be at least as wide as the minimum  lot  width. The  lot  width circle must not include submerged lands, landslide hazard areas and buffers, regulated wetlands and buffers, and Types 1, 2, 3 and 4 streams and buffers.
+
+    C.   The following  lots  are exempt from minimum  lot  width circle standards: duplexes, triplexes, cottage and townhouse  developments , where individual  units  are subdivided into separate  lots  via  unit lot subdivision .
+
+   Figure 19.42.090
+ Minimum lot width circle.
+
+  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.100   Density calculations.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+    A.   Calculations for Determining Minimum Density.   The density minimum standard applies to single-purpose residential  developments  ( mixed-use   developments  are exempt). All  site areas  applicable to the residential  development  must be used in the calculation of minimum allowed residential density except the following:
+
+      1.   Street  right-of-way , or other areas reserved or dedicated for public use (such as parks,  open space , and  stormwater facilities ).
+
+      2.   Submerged lands, landslide hazard areas and buffers, regulated wetlands and buffers, and Types 1, 2, 3, and 4 streams and buffers.
+
+   B.   Calculations for Determining Maximum Density.
+
+      1.   Maximum density for residential zones applies to all  development  with new residential  dwelling units , unless otherwise noted herein.
+
+      2.   Gross acreage of the site may be used in the calculation of the maximum allowed residential density (including half of existing street  right-of-way  around the perimeter of the site and any new street  right-of-way  internal to the site).
+
+      3.   For the purpose of meeting maximum density requirements for  subdivisions  in applicable zones,  final plats  must specify the maximum number of  dwelling units  per  lot .
+
+    C.   How to Calculate Density.   Minimum and maximum density for an individual site must be calculated by multiplying the total site acreage based on subsections  A  and/or  B  of this section by the minimum and maximum  dwelling units  per acre for the applicable zone. When calculation results in a fraction, the fraction must be rounded to the nearest whole number as follows:
+
+      1.   Fractions of one-half and above must be rounded up.
+
+      2.   Fractions below one-half must be rounded down.
+
+    D.   Prohibited Reduction.   Any portion of a  lot  that was used to calculate minimum compliance with the standards and regulations of this title must not be subsequently subdivided or segregated from such  lot  unless all portions of the resulting  lots  continue to meet the code requirements after the  subdivision .  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.110   Lot coverage calculations, exceptions, and modifications.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+  Lot coverage  refers to the area of a  lot  which is covered by  buildings  and  structures .  Lot coverage  calculation details and clarification:
+
+    A.   The area covered must be measured from the outside of external  walls  of enclosed spaces, from the outer edge of the floor of open decks and porches and from the supporting members of  structures  such as a  carport  which are not enclosed by  walls .
+
+    B.   The roof overhang must not be included in the  lot coverage  unless it exceeds three feet, in which case the portion of the roof overhang extending beyond three feet must count as part of the  lot coverage .
+
+    C.   Open beams and lattice work without a roof are not considered part of the  lot coverage .
+
+    D.   Minor appurtenances such as bay windows, chimneys and trim not extending more than two feet from the primary  wall , and not extending the enclosed floor area, must not count in  lot coverage .
+
+    E.   Decks or patios on  grade  within an average height of 18 inches above  grade  must not count in  lot coverage .
+
+    F.   For unusual  structures , for example, communication towers, the  Director  must determine the extent of  lot coverage .
+
+    G.   Modification for All Residential Zones, Except for R1.   One detached  accessory structure  not exceeding 144 square feet is permitted without counting as part of the  lot coverage . The  lot coverage  of any additional  accessory structures  or of any  accessory structure  exceeding 144 square feet shall count as part of the percentage of  lot coverage  permitted in these zones.
+
+   H.   Modifications for Townhouse and Multifamily Development in the R4 Zone .
+
+      1.   Townhouses: Maximum  lot coverage  is 60 percent.
+
+      2.   Multifamily: Maximum  lot coverage  is 75 percent when at least 50 percent of the required parking is accommodated within and/or below the  structure .  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.120   Building height calculations, exceptions, and modifications.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+    A.   Height Measurement.    Building height  is measured to the highest point of the  structure  from the average of the natural topography at the foundation at the front of the  building . Exceptions and clarifications:
+
+      1.   In cases where the  lot  slopes downhill from the property line at the front of the  building , the height is measured from the highest point of the house to the average of the natural  grade  directly under the  building .
+
+      2.   If the  building site  has frontage on two or more streets, the height is measured from the highest point of the  building  to the average of the natural  grade  directly under the  building  if the  lot  slopes downhill from the property line on either street frontage.
+
+      3.   The allowable height is measured from the average of the natural or existing topography of the portion of the  lot , parcel or  tract  of real property which will be directly under the proposed  building .
+
+      4.   Height requirements for  buildings  in shoreline jurisdictions are provided for in the Shoreline Master Program.
+
+      5.   Calculation of the average  grade  level is made by averaging the elevations of the center of all exterior  walls  of the proposed  building . Additionally, “natural or existing topography” is the topography of the  lot , parcel or  tract  of real property immediately prior to any site preparation,  grading , excavation, or filling. Where a  tract  of land is regraded for the purpose of a land division, the “natural or existing topography” is the  grades  as they exist at the time of recording of the  final plat .
+
+    B.   Exceptions.   The following  structures  may be erected above the height limits established in Tables 19.42.020 and 19.42.030:
+
+      1.   Roof  structure  housing or screening elevators, stairways, tanks, rooftop wind generators, ventilating fans or similar equipment required for  building  operation and maintenance may exceed the height limit by:
+
+        a.   Up to 10 feet in the R3, R3A, R4, R4A,  mixed-use , and industrial zones, provided the area with the added height is limited to what is necessary to screen or enclose the use.
+
+        b.   Up to 17 feet on  buildings  over four  stories  in height where they allow access to shared roof decks that meet the requirements of AMC  19.62.040(B)(2)(e) , provided the area with the added height is limited to what is necessary to screen or enclose the use.
+
+ Such  structures  constructed for nonresidential or multifamily uses are subject to screening standards in AMC  19.62.070(E) .
+
+      2.   Fire or parapet  walls  may exceed the height limit by up to five feet in the R3, R3A, R4, and R4A zone and 10 feet in  mixed-use  and industrial zones.
+
+      3.   Except as may otherwise be prohibited by the FAA regulations, the height limitations of Tables 19.42.020 and 19.42.030 do not apply to church spires, belfries, cupolas and domes not intended for residential purposes, or to monuments, water towers, observation towers, power transmission towers, silos, grain elevators, chimneys, smokestacks, derricks, conveyors, flag poles, radio masts, aerials and similar  structures .
+
+      4.   In the HM zone, unoccupied  structures  may exceed 50 feet in height, provided the minimum  setbacks  for the zone are increased by one foot for each foot of  building height  in excess of 50 feet.
+
+   C.   Modifications.
+
+      1.   The LM Zone Abutting the Guemes Channel.   Nonresidential  structures  over 35 feet in height may only be approved through the  conditional use  process. A  conditional use  permit for heights between 35 and 50 feet must only be granted for uses which are  permitted uses  in the zone, and where the specialized nature of the use is such that the operations, processes, and equipment cannot be accommodated in a  building  35 feet or less in height. The  applicant  must show specifically why the additional height is needed. The  conditional use  permit must limit the height and area consistent with RCW  90.58.320  and to that which is reasonably necessary to accommodate the specific operations, processes, and equipment. All portions of the facility which do not have a specialized function requiring additional height must comply with the 35-foot height limit.
+
+      2.   LM1 Zone.   The maximum height for residential  structures  is 35 feet.
+
+      3.   MS Zone.   Temporary equipment used in the primary  permitted use  and not constituting a  building  or permanent enclosure, such as cranes or scaffolding, may exceed the maximum height. The  Director  may authorize construction of fabric enclosures or temporary  structures  to contain particulates or shelter a vessel under construction which exceed 50 feet in height; provided, that the permit is for a specified length of time for a specific project, and they are taken down at the conclusion of the specific work for which they were erected.
+
+      4.   MMU Zone West of Q Avenue.   Base maximum height is 35 feet. The maximum height with bonus is 50 feet (see AMC  19.42.070(A)  for applicable bonus provisions).
+
+      5.   MMU Zone East of Q Avenue.   Base maximum height is 45 feet. The maximum height with bonus is 65 feet (see AMC  19.42.070(B)  for applicable bonus provisions).  Buildings  are also subject to special height, width, and orientation standards:
+
+        a.   All  buildings  are subject to  building  massing and  articulation  standards in AMC  19.63.040 .
+
+        b.    Buildings  up to four  stories  tall or no more than 50 feet tall are limited to 200 feet in width in the north-south direction.
+
+        c.    Buildings  taller than four  stories  or more than 50 feet tall are limited to 150 feet in width in the north-south direction.
+
+  Departures  to subsections  (C)(5)(b)  and  (c)  of this section will be considered per AMC  19.20.220 , provided site and  building  design features are included to reduce the perceived scale of such  buildings , add visual interest, and enhance east-west pedestrian access and marine views.
+
+      6.   MED-O Overlay.   The maximum height limit is 60 feet in the area bounded by the following lines (illustrated in Figure 19.42.120(C)(6)):
+
+        a.   A line parallel to and 350 feet west of the Commercial Avenue west  right-of-way  edge.
+
+        b.   A line parallel to and 50 feet north of the 26th Street north  right-of-way  edge.
+
+        c.   A line parallel to and 200 feet east of the M Avenue east  right-of-way  edge.
+
+        d.   A line parallel to and 50 feet south of the 24th Street south  right-of-way  edge.
+
+   Figure 19.42.120(C)(6)
+ MED-O boundary and 60-foot height limit area.
+
+      7.   CBD and MMU Zone Stepback Requirements.   For  buildings  which exceed the maximum base height in the CBD and MMU zones,  buildings  must incorporate a minimum horizontal stepback of eight feet along at least 75 percent of the  facade . The required stepback must be placed somewhere between the  ground floor  and the top floor. See Figure 19.42.120(C)(7) for an example.
+
+   Figure 19.42.120(C)(7)
+
+ This figure illustrates two examples of tall  buildings  that comply with the horizontal stepback requirements. The left  building  features a stepback after the first floor, whereas the right  building  only steps back the top floor. In both  buildings , 25 percent of the  facade  (length) does not include a stepback.
+
+      8.   CM2 Zone.   The  city  may consider and approve  building heights  in excess of 50 feet through a  conditional use  permit process.  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.130   Setback types and measurements.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+ The form and intensity standards tables in this chapter provide minimum standards for street, interior side, and rear  setbacks . Clarification on how these  setbacks  are measured are provided below.
+
+    A.   Measurement.   All  setbacks  must be measured at right angles, or as near to right angles as possible, to the nearest property line in a plane horizontal to the ground.  Setback  directions must be determined as provided in subsections    (B)  through  (E)    below.
+
+   B.   Street Setbacks.
+
+      1.   The street  setback  is measured from the street  right-of-way  to a line parallel to and measured perpendicularly from the street  right-of-way  at the depth prescribed for each zone.
+
+      2.   For  corner lots  in residential zones, the street  setback  is measured from the street  right-of-way  that is the property’s street address and primary access. The other  lot frontage  is referred to as the side street  setback .
+
+      3.   Street  setbacks  for  garages  apply to the front doors of individual private  garages  and do not apply to underground or aboveground parking  structures  shared by multiple residents or tenants.
+
+    C.   Interior Side Setback.   The interior side  setback  is measured from the side  lot  line adjacent to another property or alley  right-of-way  to a line parallel to and measured perpendicularly from the side  lot  lines at the depth prescribed for each zone.
+
+ Exception: No interior side  setback  is required between individual  units  within a townhouse  building , where allowed.
+
+    D.   Interior Side Setback—Upper Floors.   The interior side  setback  for the portion of the  building  above the floor level of the  second floor  is measured as provided in subsection  C  of this section, except the measurement is to the portion of the  structure  above the floor level of the  second floor . The additional  second-floor   setback  must not apply where the interior side  lot  line is along an alley.
+
+    E.   Rear Setback.   The rear  setback  is measured from the rear  lot  line to a line parallel to and measured perpendicularly from the rear  lot  line at the depth prescribed for each zone.
+
+    F.   Setbacks for Flag Lots.    Flag lots  are exempt from street  setback  requirements.  Flag lots  must have a rear  lot  line designated, typically opposite from the  access corridor  (the pole of the flag), and all other  lot  lines are considered side  lot  lines (see Figure 19.42.130(F)).
+
+   Figure 19.42.130(F)
+ Setbacks on flag lots.
+
+    G.   Setbacks for Lots Served by Shared Driveways.   See AMC  19.54.040(E)  for applicable standards.
+
+    H.   Through Lots.   For  lots  featuring streets on opposite ends, the street  setback  is measured from the street  right-of-way  that is the property’s street address and primary access. The opposite  lot frontage  is considered the rear  setback .
+
+    I.   Setback Measurements for Irregular Lots.    Setback  distances established for residential zones are based on rectangular  lots . Nonrectangular  lots ,  lots  with three sides or more than four sides, curved property lines, and other nonstandard  lots  require special measurement techniques in order to achieve the purpose of  setback  requirements:
+
+      1.   Rear Setbacks.   In the case of an irregularly shaped  lot , a 10-foot line which is within the  lot  and parallel to and most distant from the front  lot  line must be considered the rear  lot  line for purposes of determining required  setbacks  and for interpretation of other provisions of this code (see illustration).
+
+      2.   Interior Side Setbacks.   All  lot  lines which are not front or rear  lot  lines must be considered interior side  lot  lines for the purpose of measuring  setbacks .
+
+      3.   Determination by Director.   Where a  building site  is situated such that it is unclear which should be considered the front, rear, and sides, required  setbacks  must be as determined by the  Director  in compliance with the following criterion: required  setbacks  must not permit the placement of  buildings  on the site in a manner that will constitute a grant of special privileges inconsistent with the limitations placed on other properties in the vicinity and incompatible with surrounding uses.
+
+   Figure 19.42.130(I)
+ Examples of determining setback lines on irregular lots.
+
+  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.140   Permitted projections into required setbacks.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+ The following  structures  may extend into or be located in required  setbacks :
+
+    A.   Fireplace  structures , bay or garden windows, or similar  structures  may project 30 inches into a street or rear  setback , provided such projections are:
+
+      1.   Limited to two per  building  elevation.
+
+      2.   Not wider than 10 feet.
+
+      3.   Do not extend the floor area or foundation into the  setback .
+
+    B.   Eaves,  cornices , awnings, and window shades may not project more than:
+
+      1.   Three feet into a street or rear  setback .
+
+      2.   Two feet into the interior side  setback .
+
+    C.   Covered porches and entries may project up to six feet into the street  setback .
+
+    D.   Uncovered porches and decks may project up to six feet into the street or rear  setbacks .
+
+    E.   The following features are permitted within the required street  setback :
+
+      1.   Mailboxes, newspaper boxes, and free neighborhood book exchange boxes.
+
+      2.   Fire hydrants and associated appendages.
+
+      3.   Bus shelters.
+
+      4.    Freestanding signs  complying with AMC Chapter  19.67 ,  Signs .
+
+    F.   The following features are permitted within any required  setback :
+
+      1.   Utility poles and lines.
+
+      2.   Underground utilities and sprinkler systems.
+
+      3.   Light and flagpoles.
+
+      4.   Trellises and open, unroofed gazebos not exceeding eight feet in height.
+
+      5.   Electrical equipment cabinets and similar utility boxes and vaults.
+
+      6.    Stormwater facilities  and elements of  stormwater   best management practices , unless a minimum  setback  is otherwise specified in this title or in the adopted  stormwater management manual .
+
+      7.    Fences  complying with AMC Chapter  19.66 ,  Fences ,  Walls , and  Hedges .
+
+      8.   Uncovered porches and decks not exceeding 18 inches average height above the finished  grade .
+
+      9.    Rockeries  and  retaining walls  in conformance with the standards in AMC  19.66.080 .
+
+      10.   Enclosures for solid waste collection and storage when in compliance with the standards of AMC  19.62.070(B)  and  (C) .
+
+      11.   Ramps added to an existing  building  for the specific purpose of accessibility for  persons  with disabilities when no other reasonable location is available.
+
+    G.   No projections are allowed into a regional utility corridor, access easement, or utility easement.  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.150   Setback modifications.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+    A.   A  lot  adjoining a planned street identified in the  comprehensive plan , transportation plan, and/or capital improvement program must provide a street  setback  along the planned street meeting the same standards as though the street were already constructed.
+
+    B.   Several housing types feature special  garage  placement/ setback  requirements. See applicable provisions in AMC Chapter  19.43 , Residential Uses, for details.
+
+    C.   Along any  mixed-use  or industrial-zoned property line adjoining a residential zone with no intervening street or alley, the minimum  setback  must be the same as the applicable minimum  setback  for the adjacent zone.
+
+    D.   For CBD-zoned properties that abut the OT zone, the minimum interior side  setback  along such zone edge must be:
+
+      1.   10 feet.
+
+      2.   For  buildings  over 25 feet in height, the minimum  setback  must increase at a 45-degree angle inward up to the maximum height in the CBD zone (see Figure19.42.150(D) for clarification).
+
+   Figure 19.42.150(D)
+ Illustrating minimum interior side setbacks where CBD-zoned properties abut the OT zone.
+
+    E.   The  setbacks  for Skyline No. 6 PUD must be one-half of the minimum  setback  of the underlying zone for street and interior side  setbacks  with a minimum of five feet. The rear  setback  must be one-half of the minimum  setback  of the underlying zone except that for measurement purposes the width of community-owned property directly to the rear of each  lot  may be used for distance to property line measurement. This use of community-owned property must not reduce the rear yard  setback  from property line to less than five feet.
+
+    F.   In the MS zone,  development  of new  buildings  on sites with a  storefront block frontage  designation must follow the  storefront block frontage  requirements for  building  placement instead of the 10-foot street  setback  stated in Table 19.42.030.  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.160   Old Town supplemental form and intensity standards.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+ The provisions herein apply in addition to the form and intensity standards in Table 19.42.020. These standards seek to encourage sensitively designed infill in keeping with the existing character of Old Town. To maintain the scale of  buildings  currently existing in Old Town, it is important that the scale of surrounding  buildings  be taken into consideration when designing additions and new  buildings .
+
+    A.   The principal  building  may cover up to 35 percent of the  lot . Where there are multiple  buildings  on one  lot , they are limited to 50 percent  lot coverage .
+
+    B.   Exceptions to the Height Limit in Table 19.42.020.   Maximum  building height  may be increased to a maximum of 30 feet if two conditions are met:
+
+      1.   The upper  floor  may not contain a floor area greater than 80 percent of the  floor  below.
+
+      2.   No exterior  wall  higher than 25 feet may be closer to an adjacent property line than 15 feet.
+
+    C.   If a  structure  covers more than 3,000 square feet of land, or if two or more  structures  on a  lot  cover more than 4,000 square feet of land, the following additional requirements apply:
+
+      1.   The minimum side yard  setback  is 10 feet.
+
+      2.   For each 200 square feet of land coverage beyond the above limits, the minimum side yard  setback  must be increased by one foot.
+
+    D.   Detached  garages  must be set back a minimum of 50 feet from the street property line on a numbered street.
+
+    E.   No new driveway is permitted on a numbered street serviced by an alley. See AMC  19.53.030(B)(3)  for driveway alley access standards.
+
+    F.   Any roof above 14 feet must have a minimum roof pitch of 4:12, except for roofs on porches, dormers, bay windows, and similar appurtenances.
+
+    G.   The maximum continuous  wall  length must be 40 feet.  Buildings  may be longer but must incorporate  setbacks , recesses, porches, balconies, bay windows or offsets of at least 18 inches in depth and at least eight feet in length and height so that no increment of  wall  exceeds 40 feet.  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.170   Aeronautical zone form and intensity standards.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+    A.   Minimum Lot Size.   No minimum.
+
+    B.   Minimum Setback Requirements.   Within the AZ zone, all  structures  must be set back as follows:
+
+      1.   Aeronautical Area, as Defined in the Development Agreement.   No  setback  from the buffer areas. Due to the proximity of the aircraft operations areas to the existing property line of the Anacortes Airport, a 10-foot  setback  on all other parts of the aeronautical area. If additional property is added to the aeronautical area, then the  setback  will be subject to change.
+
+      2.   Anacopper Future Process Area and North Aviation Area, as Defined in the Development Agreement.   The  setback  will be determined as part of the  conditional use  process.
+
+ Notwithstanding the foregoing, within the Rockwell Reserve and Panhandle Reserve Areas, airport and aeronautical/aviation safety features, walking trails, and  landscaping  are permitted; within the 10-foot  setback  area, airport and aeronautical/aviation safety features,  fencing   structures  up to eight feet, and  landscaping  uses are permitted. Provided further, within the Anacopper Future Process Area and the North Aeronautical Area airport and aeronautical/aviation safety features,  fencing   structures  up to eight feet and  landscaping  uses are permitted subject to the mitigation contained in the  development  agreement.
+
+ The exception set forth above for  fences  should be interpreted to mean that  fences  (along with  landscaping ) are permitted within the  setback . Even if a  fence  is considered a “ structure ” under the  building  code due to a height over six feet, it is still a “ fence ” under the exception and could be placed within the  setback  without a  variance ,  conditional use  permit, or any other discretionary permit required; provided, however, that compliance with an approved mitigation plan, required under AMC  19.41.080(D)(5) , is required. For example, airport property and/or facility security  fencing  over six feet in height may be located along the perimeter of the property, or where deemed necessary by the entity operating an airport, to ensure adequate security of airport premises, but is subject to mitigation as provided herein.
+
+ This  setback  or buffer area is mitigation for  development  outside of the  setback /buffer area, in addition to wetland and  land-clearing  mitigation requirements.
+
+    C.   Maximum Density.   No maximum.
+
+    D.   Maximum Land Coverage.   The maximum land coverage by  buildings  is 60 percent of the parcel size, as identified by the port, with such parcel size including any buffer or  setback  area not already allocated to another parcel. For the purposes of calculating the buildable area as required ( open space  requirement), the port may allocate any portion of the 75-foot buffer area within the Rockwell Reserve and Panhandle Reserve Areas that has not already been allocated to any portion of the aeronautical area being developed.
+
+    E.   Maximum Building Height.   The maximum  building height  is 35 feet; provided, however, that  buildings  over 35 feet, but less than 50 feet, are subject to approval through the  conditional use  process and related criteria.  Buildings  above 50 feet are prohibited.  (Ord. 3040 § 2 (Att. A), 2019)
+
+    19.42.180   Public use zone form and intensity standards.
+
+			 Search Within This
+
+	   This section is included in your selections.
+
+			This section was recently amended by Ordinance 5014, codified in February 2026.
+
+  Single-family dwellings  in the public use zone must comply with the form and intensity standards of the R2A zone. All other  development  in the public use zone is subject to the form and intensity standards of subsections    (A)  through  (E)    below.
+
+    A.   Minimum Lot Size.   No minimum.
+
+    B.   Minimum Setback Requirements.   No minimum, except  development  is subject to the  block frontage  standards (AMC Chapter  19.61 ,  Block Frontage  Standards) and the  setback  standard of AMC  19.42.150(C) .
+
+    C.   Maximum Density.   No maximum.
+
+    D.   Maximum Land Coverage.   No maximum.
+
+    E.   Maximum Building Height.   Thirty-five feet.  (Ord. 5014 § 2 (Att. A), 2025; Ord. 3040 § 2 (Att. A), 2019)
+
+	Your Selections
+
+	 What’s Nearby
+
+			 Title
+
+					   18
+
+					 19
+
+					 20
+
+			 Division
+
+					   3
+
+					 4
+
+					 5
+
+			 Chapter
+
+					   19.41
+
+					 19.42
+
+					 19.43
+
+		On This Page
+
+				19.42.010 Generally
+
+				19.42.020 Form and intensity standards for residential zones
+
+				19.42.030 Form and intensity standards for mixed-use and industrial zones
+
+				19.42.040 Bonus incentives, generally
+
+				19.42.045 Density bonus for religious organizations
+
+				19.42.050 Bonus incentives in the R4, C, and CBD zones
+
+				19.42.060 Bonus incentives in the CM zone
+
+				19.42.070 Bonus incentives in the MMU zone
+
+				19.42.080 Minimum lot size calculations
+
+				19.42.090 Minimum lot width circle calculation and exceptions
+
+				19.42.100 Density calculations
+
+				19.42.110 Lot coverage calculations, exceptions, and modifications
+
+				19.42.120 Building height calculations, exceptions, and modifications
+
+				19.42.130 Setback types and measurements
+
+				19.42.140 Permitted projections into required setbacks
+
+				19.42.150 Setback modifications
+
+				19.42.160 Old Town supplemental form and intensity standards
+
+				19.42.170 Aeronautical zone form and intensity standards
+
+				19.42.180 Public use zone form and intensity standards
+
+  The Anacortes Municipal Code is current through Ordinance 5028, passed May 4, 2026.
+
+ Disclaimer: The city attorney’s office has the official version of the Anacortes Municipal Code. Users should contact the city attorney’s office for ordinances passed subsequent to the ordinance cited here.
+
+				 City Website: www.anacorteswa.gov
+				 City Telephone: (360) 293-1900
+
+	  Hosted by General Code.
+
+			 Privacy Policy
+			|
+			 Terms of Use
+			|
+			 Cookie Preferences
+
+				 Contents
+
+					 ×
+
+					 All Publications
+
+					Municipal Code
+
+					Municipal Policies
+
+			   Your Selections
+
+					Anacortes Municipal Code
+
+					Anacortes Municipal Policies
+
+		   Expand All
+
+		   Collapse All
+
+		   Share
+
+		   Clear
+
+					   Close
+
+		 View Full Table
+
+		 View Full Image
+
+		 View Full File
+
+		  ×
+
+			    Go to Top
+
+			    Go to Bottom
+
+			    Share/Save
+
+			 Close
+
+				Save, Share, Bookmark or Print
+
+				History of This Subsection

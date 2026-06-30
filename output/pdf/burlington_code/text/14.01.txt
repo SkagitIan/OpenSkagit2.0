@@ -1,0 +1,617 @@
+14.01.010 Title.
+This title shall be called "Environmental Regulations." This chapter shall be called "General
+Provisions."
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.01.020 Application.
+This title shall be applicable as is set forth in the following chapters.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.01.030 Purpose.
+The purpose of this title is to include all regulations concerning the protection of the environment
+and critical areas. The specific chapters included are General Provisions, Surface Water
+Management, Environmental Policy, and Critical Area Regulations. The shoreline master
+program is adopted separately as BMC Title 18, Shoreline Master Program.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.01.040 Authority.
+This title is authorized by the general provisions of chapters35A.63 and 36.70A RCW, the
+specific authority set forth in each chapter and other applicable laws and regulations.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.01.050 Adoption by reference.
+Statutes, codes or regulations identified or adopted herein shall be the existing version of that
+statute, code or regulation and any subsequent amendment to the same, unless expressly stated
+otherwise.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.01.060 Definitions.
+For the purpose of this title, the words listed in this chapter shall have the following meanings
+unless the context clearly indicates otherwise. Terms relating to pollutants and to hazardous
+wastes, materials, and substances, where not defined in this title, shall be as defined in chapters
+173-303 and 173-340 WAC, the International Building Code or the International Fire Code.
+Words used in the singular include the plural, and words used in the plural include the singular.
+Additional defined terms applicable to chapter 14.10 BMC, Environmental Policy, can be found
+in that chapter or adopted WAC provisions found at WAC 197-11-700 through 197-11-799.
+"A"
+"Agency" means any governmental entity or its subdivision.
+"AKART" means all known, available, and reasonable methods of prevention, control, and
+treatment. See also the State Water Pollution Control Act, RCW 90.48.010 and 90.48.520.
+"Alteration of watercourse" means any action that will change the location of the channel
+occupied by water within the banks of any portion of a riverine water body.
+"Area of shallow flooding" means a designated zone AO, AH, AR/AO or AR/AH (or VO) on
+a flood insurance rate map (FIRM) with a one percent or greater annual chance of flooding to
+an average depth of one to three feet where a clearly defined channel does not exist, where the
+path of flooding is unpredictable, and where velocity flow may be evident. Such flooding is
+characterized by ponding or sheet flow. Also referred to as the sheet flow area.
+"Area of special flood hazard" means the land in a floodplain subject to a one percent or greater
+chance of flooding in any given year. It is shown on the flood insurance rate map (FIRM) as
+zone A, AO, AH, A1-30, AE, A99, or AR (V, VO, V1-30, VE). "Special flood hazard area" is
+synonymous in meaning with the phrase "area of special flood hazard."
+"Aquifer recharge areas, critical" refers to areas where an aquifer that is a source of drinking
+water is vulnerable to contamination that would affect the potability of water.
+"B"
+"Base flood" means a flood event with a one percent chance of being equaled or exceeded in any
+given year. This term may be used interchangeably with the term "100-year flood."
+"Base flood elevation" means the elevation to which floodwater is projected to rise during a base
+flood event.
+"Basement" means any area of the building having its floor subgrade (below ground level on all
+sides).
+"Basin plan" means a plan to manage the quality and quantity of stormwater in a drainage basin
+as described in the city of Burlington comprehensive surface water management plan, as now or
+hereafter amended.
+"Best management practice (BMP)" means schedules of activities, prohibitions of practices,
+general good housekeeping practices, pollution prevention and educational practices,
+maintenance procedures, structural or managerial practices to prevent or reduce the discharge
+of pollutants directly or indirectly to stormwater, receiving waters, or stormwater conveyance
+systems. BMPs also include treatment practices, operating procedures, practices to control site
+runoff, spillage or leaks, sludge or water disposal, or drainage from raw materials storage.
+"Nonstructural best management practices" are those which require modified or additional
+operational or behavioral practices, such as sweeping a parking lot or having spill response
+equipment on site.
+"Structural best management practices" are those which require the construction of a structure or
+other physical modification on the site.
+"Buffer, critical area" is an area which provides a reasonable margin of safety through protection
+of slope stability, attenuation of surface water flows and landslide hazards reasonably necessary
+to minimize risk to the public from loss of life or well-being or property damage resulting from
+natural disasters; or an area which is an integral part of a stream or wetland ecosystem and which
+provides shading, input of organic debris and coarse sediments, room for variation in stream
+or wetland boundaries, habitat for wildlife, and protection from harmful intrusion necessary to
+protect the public from losses suffered when the functions and values of aquatic resources are
+degraded.
+"Burlington Hill Special Management Area" means those portions of Burlington Hill with a
+§ 14.01.060 ENVIRONMENTAL REGULATIONS § 14.01.060
+ground elevation 40 feet or more above sea level as shown on the most current USGS 7.5 minute
+topographic quadrangle map.
+"C"
+"Cause or contribute" to a violation includes acts or omissions that create a violation, that
+increase the duration, extent, or severity of a violation, and that aid or abet a violation.
+"Certificate of occupancy" means a written document issued by the governing authority in
+accordance with the provisions of the building permit. The certificate of occupancy indicates
+that, in the opinion of the building official, the project has been completed in accordance with
+the building and zoning codes. This document gives the owner permission from the authorities
+to occupy and use the premises for the intended purpose.
+"City engineer" means the official appointed and acting as the public works director for the city
+of Burlington.
+"Civil engineer, licensed" means a person who is licensed by the state of Washington to practice
+civil engineering.
+"Clean Water Act" means the Federal Water Pollution Control Act (33 U.S.C.1251 et seq.), and
+any subsequent amendments thereto.
+"Combined sewer" means a system that collects sanitary sewage and stormwater in a single
+sewer system.
+"Community development director" or "planning director" means the official appointed and
+acting as the community development director for the city of Burlington.
+"Compensatory mitigation" is replacing project-induced critical area losses or impacts, and
+includes, but is not limited to, restoration, creation, or enhancement.
+"Complete application" or "completed application" means an application that contains all of
+the materials and information required by Burlington Municipal Code in accordance with the
+requirements of this title and BMC Title 14A.
+"Critical areas" include the following areas and ecosystems:
+1. Wetlands;
+2. Areas with a critical recharging effect on aquifers used for potable water;
+3. Fish and wildlife habitat conservation areas;
+4. Frequently flooded areas;
+5. Geologically hazardous areas;
+6. Special management areas including:
+a. Burlington Hill;
+b. Gages Slough corridor;
+c. Skagit River corridor.
+"Critical facility" means a facility for which even a slight chance of flooding might be too
+great. Critical facilities include, but are not limited to, schools, nursing homes, hospitals, police,
+fire and emergency response installations, installations which produce, use or store hazardous
+materials or hazardous waste.
+"D"
+"Damages" means monetary compensation for harm, loss, costs, or expenses incurred by the city
+including, but not limited to, costs of abating violations of this title or public nuisances; fines or
+penalties by the city incurred as a result of a violation of this title; and costs to repair or clean the
+public drainage control system as a result of a violation. For the purposes of this title, it does not
+include compensation to any person other than the city.
+"Delineation" is the precise determination of wetland boundaries in the field according to the
+application of specific methodology as described in the most recently adopted Washington
+State Wetlands Identification and Delineation Manual, Washington State Department of Ecology
+Publication.
+"Design storm" means a rainfall event used in the analysis and design of drainage facilities.
+"Designated receiving waters" means the Skagit River, Padilla Bay and other receiving waters
+designated by the public works director as having the capacity to receive drainage discharges.
+"Detention" refers to temporary storage of drainage water.
+"Developed parcel" means a parcel of real property which has been altered by developmental
+coverage.
+"Development" means any manmade change to the land or improvements occurring after the
+effective date of the ordinance codified in this chapter including structures, mining, dredging,
+drilling, filling, grading, paving or excavation, storage of equipment and materials, clearing,
+and the removal of vegetation. Where a project is dividable into parts, the entire scope of such
+changes or improvements constituting an integral, functional project should be considered the
+development for purposes of determining whether such development is allowed or requires a
+permit.
+"Developmental coverage" means all areas within a site planned to be developed or redeveloped
+including, but not limited to, rooftops; driveways; carports; accessory buildings; parking areas;
+areas in which soils, slopes and vegetation have been altered; and roadways and other pervious
+and impervious surfaces.
+"Director" means the community development director.
+"Discharge point" means the location to which drainage water from a specific site is released.
+"Discharge rate" means the rate at which drainage water is released from a specific site. The
+discharge rate is expressed as volume per unit of time, such as cubic feet per second.
+"Drainage basin" means the tributary area through which drainage water is collected, regulated,
+transported, and discharged to receiving waters.
+"Drainage control" means the management of drainage water. Drainage control is accomplished
+through the collection, conveyance, and discharge of drainage water, controlling the rate of
+discharge from a site, or separating, treating or preventing the introduction of pollutants.
+"Drainage control facility" means any facility, including best management practices, installed
+or constructed for the purpose of controlling the flow, quantity, and/or quality of drainage
+water. Drainage control facilities include, but are not limited to, all types of catch basins, pipes,
+detention/retention ponds, bioswales, and other structural and nonstructural components that
+handle surface water.
+§ 14.01.060 ENVIRONMENTAL REGULATIONS § 14.01.060
+"Drainage control plan" means a plan for collecting, controlling, transporting and disposing of
+drainage water falling upon, entering, flowing within, and exiting the site, including designs for
+drainage control facilities. The plan shall contain information as set forth in Appendix 1 of the
+Western Washington Phase II Municipal Stormwater Permit.
+"Drainage control system" means a system to collect, convey and control release of only
+drainage water. The system may serve public or private property. It includes constructed and/or
+natural components such as ditches, culverts, streams and drainage control facilities.
+"Drainage water" means stormwater, snow melt, surface water, surface and irrigation runoff,
+water from footing drains and other drains approved by the public works director or installed in
+compliance with this title and rules which may be adopted hereunder. Other water which is not
+an illicit discharge as defined in BMC § 14.05.070 shall be considered drainage water if it drains
+from the exterior of a building or structure, a pervious or impervious surface, or undeveloped
+land, or by surface or shallow subsurface flow.
+"Dredging" means the excavating of earth materials from land covered by water. The term shall
+include dredging which maintains an established water depth.
+"E"
+"Elevation certificate" means an administrative tool of the National Flood Insurance Program
+(NFIP) that can be used to provide elevation information, to determine the proper insurance
+premium rate, and to support a request for a letter of map amendment (LOMA) or letter of map
+revision based on fill (LOMR-F)
+"Equivalent service unit" means a configuration of impervious surface estimated to contribute an
+amount of runoff to the city's surface water management system which is approximately equal
+to that created by the average single-family residential developed parcel in Burlington. One
+equivalent service unit (ESU) is equivalent to 2,400 square feet of impervious surface area. For
+purposes of computation of rates, the number of equivalent service units shall be rounded to the
+nearest tenth.
+"Erosion" means the wearing away of the ground surface as a result of mass wasting or the
+movement of wind, water and/or ice.
+"F"
+"FEMA" means the Federal Emergency Management Agency and its predecessor and successor
+agencies.
+"Fish and wildlife habitat conservation areas" is as defined in the critical areas code, chapter
+14.15 BMC.
+"Flood" or "flooding" means:
+1. A general and temporary condition of partial or complete inundation of normally dry land
+areas from:
+a. The overflow of inland or tidal waters.
+b. The unusual and rapid accumulation or runoff of surface waters from any source.
+c. Mudslides, or mudflows, caused, or precipitated by, flooding as defined in subsection
+(1)(b) of this definition resulting in a river of liquid and flowing mud across normally
+dry land areas, as when earth is carried by a current of water and deposited along the
+path of the current.
+2. The collapse or subsidence of land along the shore of a lake or other body of water
+as a result of erosion or undermining caused by waves or currents of water exceeding
+anticipated cyclical levels or suddenly caused by an unusually high water level in a natural
+body of water, accompanied by a severe storm, or by an unanticipated force of nature, such
+as flash flood or an abnormal tidal surge, or by some similarly unusual and unforeseeable
+event which results in flooding as defined in subsection (1)(a) of this definition.
+"Flood elevation study" or "flood insurance study" means an examination, evaluation, and
+determination of flood hazards and, if appropriate, corresponding water surface elevations, or an
+examination, evaluation, and determination of mudslide or erosion hazards.
+"Flood fringe" means those portions of the floodplain other than floodways and special flood
+risk zones.
+"Flood insurance rate map" means an official map on which the Federal Insurance Administrator
+has delineated both the special hazard areas and the risk premium zones. A flood insurance rate
+map available digitally is called a "digital flood insurance rate map."
+"Flood protection elevation" means the elevation to which development must be protected
+against flooding and flood damage. Methods for determining the required flood protection
+elevation are identified in chapter 14.15 BMC.
+"Floodplain management area" means floodplains and other related areas as defined in BMC
+§ 14.15.400.
+"Floodplain" or "frequently flooded areas" are lands subject to a one percent or greater chance of
+flooding in any given year, which means all lands that would be covered by the 100-year flood
+(A zones), together with all B zones, as established by FEMA in the "Flood Insurance Study,
+City of Burlington," dated July 3, 1984, and any revisions thereto, with accompanying flood
+insurance rate map (FIRM), dated January 3, 1985. That document is on file at Burlington City
+Hall, 833 South Spruce Street.
+"Floodplain administrator" means the official designated to administer and enforce the city's
+floodplain regulations. The floodplain administrator shall be the community development
+director or designee.
+"Floodprone area" is as defined in the critical areas code, BMC § 14.15.390.
+"Floodway" means the channel of a river or other watercourse and the adjacent land areas
+that must be reserved in order to discharge the 100-year flood without cumulatively increasing
+the water surface elevation more than one foot. Floodways in Burlington consist of all areas
+riverward of the riverward toe of dikes and levees along the Skagit River.
+"G"
+"Gages Slough Special Management Area" means the open water areas of Gages Slough together
+with all associated wetlands, deep-water habitat, wetland buffers, and special flood risk areas.
+"Geologically hazardous areas" are areas that, because of their susceptibility to erosion, sliding,
+earthquake, or other geological events, are not suited to siting commercial, residential, or
+industrial development consistent with public health or safety concerns.
+"Geotechnical professional" means either (1) a geologist licensed in the state of Washington
+or (2) a professional engineer licensed in the state of Washington with training and experience
+analyzing geologic, hydrologic, and ground water flow systems.
+"Ground water" means water in a saturated zone or stratum beneath the surface of the land or
+§ 14.01.060 ENVIRONMENTAL REGULATIONS § 14.01.060
+below a surface water body.
+"H"
+"Habitats of local importance" include a seasonal range or habitat element with which a given
+species has a primary association, and which, if altered, may reduce the likelihood that the
+species will maintain and reproduce over the long term. These might include areas of high
+relative density or species richness, breeding habitat, winter range, and movement corridors.
+These might also include habitats that are of limited availability or high vulnerability to
+alteration, such as cliffs, talus, and wetlands.
+"Hazardous materials" means any material, including any substance, waste, or combination
+thereof, which because of its quantity, concentration, or physical, chemical, or infectious
+characteristics may cause, or significantly contribute to, a substantial present or potential hazard
+to human health, safety, property or the environment when improperly treated, stored,
+transported, disposed of, or otherwise managed.
+"Hearing examiner" means a person who reviews and interprets land use regulations, conducts
+hearings, makes decisions and recommendations on land use applications, hears administrative
+appeals on permits, decisions or determinations made by city officials, and reviews and hears
+other matters.
+The hearing examiner serves in a role similar to that of a judge. The hearing examiner ensures
+that parties receive proper due process; and issues final decisions on some land use applications
+and makes recommendations to the city council on others. The hearing examiner for the city of
+Burlington shall be the person designated under chapter 17.120 BMC.
+"Highest adjacent grade" means the highest natural surface elevation adjacent to the walls
+of a proposed structure. The highest adjacent grade shall be measured using preconstruction
+conditions.
+"Historic structure" means any structure that is:
+1. Listed individually in the National Register of Historic Places (a listing maintained by the
+Department of the Interior) or preliminarily determined by the Secretary of the Interior as
+meeting the requirements for individual listing on the National Register;
+2. Certified or preliminarily determined by the Secretary of the Interior as contributing to the
+historical significance of a registered historic district or a district preliminarily determined
+by the Secretary to qualify as a registered historic district;
+3. Individually listed on a state inventory of historic places in states with historic preservation
+programs which have been approved by the Secretary of the Interior.
+"Hyperchlorinated" means water that contains more than 10 milligrams per liter of chlorine.
+"I"
+"Illicit connection" means any manmade conveyance that is connected to a municipal separate
+storm sewer without a permit, excluding roof drains, footing drains, and other similar type
+connections that convey any material not composed entirely of stormwater. Examples of illicit
+connections include sanitary sewer connections, floor drains, channels, pipelines, conduits,
+inlets, or outlets that are connected directly to the municipal separate storm sewer system.
+"Illicit discharge" means any direct or indirect non-stormwater discharge to the city's storm drain
+system as expressly defined by BMC § 14.05.070.
+"Impervious surface" means any surface from which most water runs off including, but not
+limited to, paved streets, graveled or paved areas such as driveways, parking areas, packed earth
+material, oiled macadam or other treated surfaces, walkways, roof surfaces, patios and formal
+planters.
+"Inspector" means the city inspector, inspection agency, or licensed civil engineer performing
+the inspection work required by this title.
+"L"
+"Land disturbing activity" means any activity that results in a change in the existing soil
+cover (both vegetative and nonvegetative) or the existing topography. Land disturbing activities
+include but are not limited to demolition, clearing, grading, filling and excavation.
+"Land use action" means an action taken by the appropriate city of Burlington review authority
+concerning the development or use of land or street right-of-way including project permits as
+defined in BMC § 14A.01.060.
+"Low impact development" or "LID" means a stormwater and land use management strategy
+that strives to mimic predisturbance hydrologic processes of infiltration, filtration, storage,
+evaporation, and transpiration by emphasizing conservation, use of on-site natural features, site
+planning, and distributed stormwater management practices that are integrated into a project
+design. Low impact development features, practices, and techniques include bioretention, rain
+gardens, permeable pavements, roof downspout controls, dispersion, soil quality and depth,
+vegetated or green roofs, minimum excavation foundations, and water reuse.
+"Lowest floor" means the lowest floor of the lowest enclosed area (including basement). An
+unfinished or flood resistant enclosure, usable solely for parking of vehicles, building access,
+or storage, in an area other than a basement area, is not considered a building's lowest floor;
+provided, that such enclosure is designed to allow the entry and exit of flood waters and equalize
+hydrostatic forces on exterior wall consistent with the requirements of BMC § 14.15.430(B)(5).
+"M"
+"Manufactured home" means a single-family dwelling unit built in accordance with regulations
+adopted under the National Manufactured Housing Construction and Safety Standards Act of
+1974 (42 U.S.C. 5401 et seq.) and RCW43.22.335. This term includes modular homes as defined
+in this chapter but does not include mobile homes. This term also does not include recreational
+vehicles, park models, trailers, and other similar vehicles which are licensed for use on public
+roads, capable of being licensed for use on public roads, or designed and constructed to be
+licensed for use on public roads. Only structures which are certified by the state of Washington
+or federal government for use as a permanent habitable dwelling are included in this definition.
+"Manufactured home park" means an area of land occupied or designed for the occupancy of two
+or more manufactured homes.
+"Mean sea level" means the average height of the sea for all stages of tide; also equals National
+Geodetic Vertical Datum.
+"Mobile home" means a factory built dwelling unit that does not meet current state or federal
+standards for factory built dwellings, modular homes, or manufactured homes. This definition
+does not include manufactured or modular homes as defined in this chapter or site built homes
+constructed in accordance with city building code requirements. Mobile homes may not be
+placed within the city of Burlington; however, existing legally established mobile homes shall
+be considered a nonconforming use and shall be subject to the nonconforming standards set forth
+§ 14.01.060 ENVIRONMENTAL REGULATIONS § 14.01.060
+in chapter 17.100 BMC.
+"Municipal separate storm sewer system (MS4)" means a conveyance or system of conveyances
+(including roads with drainage systems, municipal streets, catch basins, curbs, gutters, ditches,
+manmade channels, or storm drains): (1) owned or operated by the city of Burlington; (2)
+designed or used for collecting or conveying stormwater; (3) which is not part of a publicly
+owned treatment works (POTW).
+"N"
+"National Pollutant Discharge Elimination System (NPDES) stormwater discharge permit"
+means a permit issued by the Environmental Protection Agency (EPA) (or by the Washington
+Department of Ecology under authority delegated pursuant to 33 U.S.C. 1342(b)) that authorizes
+the discharge of pollutants to waters of the United States, whether the permit is applicable on an
+individual, group, or general areawide basis.
+"New construction" means, for the purposes of determining insurance rates, structures for
+which the start of construction commenced on or after the effective date of an initial flood
+insurance rate map or after December 31, 1974, whichever is later, and includes any subsequent
+improvements to such structures. For floodplain management purposes, "new construction"
+means structures for which the start of construction commenced on or after the effective date
+of applicable floodplain management regulations and includes any subsequent improvements to
+such structures.
+"New development" means any of the following activities:
+1. Structural development, including construction of a new building or other structure;
+2. Expansion or alteration of an existing structure that results in an increase in the footprint of
+the building or structure;
+3. Land disturbing activities;
+4. Creation or expansion of impervious surface;
+5. Demolition;
+6. Subdivision and short subdivision of land as defined in BMC Title 16, Land Divisions and
+Adjustment; or
+7. Class IV general forest practices, as defined in WAC 222-16-050, that are conversions from
+timber land to other uses.
+No other forest practices or commercial agriculture are considered new development.
+"Non-stormwater discharge" means any discharge to the storm drain system that is not composed
+entirely of stormwater.
+"NPDES" means National Pollutant Discharge Elimination System, the national program for
+controlling discharges under the Federal Clean Water Act.
+"O"
+"One-hundred-year flood" means that flood having a one percent chance of being equaled or
+exceeded in any given year, as established by FEMA.
+"Owner" means any person having title to and/or responsibility for a building or property,
+including a lessee, guardian, receiver or trustee and the owner's duly authorized agent.
+"P"
+"Parcel" means the smallest separately segregated unit or plot of land having an identified owner,
+boundaries, and surface area which constitutes a separate lot or tract capable of being conveyed
+without further subdivision.
+"Party of record" means all persons, agencies or organizations who have submitted written
+comments in response to a notice of application, made oral comments in a formal public hearing
+conducted on the application, or requested in writing to be a "party of record." In all cases the
+permit applicant and property owner shall be considered parties of record. Notwithstanding any
+of the foregoing, no person shall be a party of record who has not furnished an accurate post
+office mailing address.
+"Person" means an individual, firm, partnership, corporation, municipal corporation, and
+government, and the individual's or entity's heirs, successors and assigns.
+"Plan" means, for the purposes of this title, and unless a different meaning is set forth or
+clearly required, a graphic or schematic representation with accompanying notes, schedules,
+specifications and other related documents.
+"Plot plan" is a scaled map of a site and adjacent public rights-of-way showing locations and
+dimensions of various existing and proposed features, such as buildings, curbs, driveways,
+sidewalks, trees, grades and drainage patterns.
+"Pollutant" means anything which causes or contributes to pollution. Pollutants may include, but
+are not limited to: paints, varnishes, and solvents; oil and other automotive fluids; nonhazardous
+liquid and solid wastes and yard wastes; refuse, rubbish, garbage, litter, or other discarded
+or abandoned objects and accumulations, so that same may cause or contribute to pollution;
+flotables; pesticides, herbicides and fertilizers; hazardous substances and wastes; sewage, fecal
+coliform and pathogens; dissolved and particulate metals; animal wastes; wastes and residues
+that result from constructing a building or structure; and noxious or offensive matter of any kind.
+"POTW" or "publicly owned treatment works" means any device or system used in treatment of
+municipal sewage or industrial wastes of a liquid nature which is publicly owned.
+"Premises" means any building, lot, parcel of land, or portion of land, whether improved or
+unimproved, including adjacent sidewalks and parking strips.
+"Primary drainage system" means a drainage system serving a watershed of 20 acres or greater.
+"Private storm drain" means the part of a private drainage control system which is wholly or
+partially piped, is owned or operated by a private entity, and is designed to carry only drainage
+water.
+"Project permit" means a land use action subject to the provisions of chapter36.70B RCW and
+applicable provisions of BMC Title 14A, and as defined in BMC § 14A.01.060.
+"Public drainage control system" means a drainage control system owned or used by the city of
+Burlington serving city streets and adjacent property.
+"Public facilities" includes streets, roads, highways, sidewalks, street and road lighting systems,
+traffic signals, domestic water systems, storm and sanitary sewer systems, parks and recreation
+facilities, and schools.
+"Public services" include fire protection and suppression, law enforcement, public health,
+§ 14.01.060 ENVIRONMENTAL REGULATIONS § 14.01.060
+education, recreation, environmental protection, and other governmental services.
+"Public storm drain" means the part of a public drainage control system which is wholly or
+partially piped, is owned or operated by a public entity, and is designed to carry only drainage
+water.
+"Public works director" means the director of public works or designee.
+"Q"
+"Qualified expert" means a person having substantial demonstrated experience as a practicing
+specialist and who has a degree in a related field from an accredited college or university or who
+has equivalent training.
+"R"
+"Reasonably safe from flooding" means development that is designed and built to be safe from
+flooding based on consideration of current flood elevation studies, historical data, high water
+marks and other reliable data known to the community. In unnumbered A zones where flood
+elevation information is not available and cannot be obtained by practicable means, "reasonably
+safe from flooding" means that the lowest floor is at least two feet above the highest adjacent
+grade.
+"Recreational vehicle" or "RV" means a structure or vehicle containing living space intended
+to provide short-term accommodations for recreational purposes and licensed for use on public
+roads, designed to be licensed for use on public roads, or capable of being licensed for use on
+public roads. This term includes trailers, campers, motor homes, park models, and other similar
+vehicles but does not include manufactured homes as defined in this chapter. A recreational
+vehicle shall not be considered a dwelling unit and shall not be used as a permanent place of
+habitation.
+"Redevelopment" means, on a site that is already substantially developed (i.e., has 35 percent or
+more of existing impervious surface coverage), the creation or addition of impervious surfaces;
+the expansion of a building footprint or addition or replacement of a structure; structural
+development including construction, installation or expansion of a building or other structure;
+replacement of impervious surface that is not part of a routine maintenance activity; and land
+disturbing activities.
+"Residential health care facilities" means facilities caring for elderly or infirm persons wherein
+clients are partly or entirely residents or detainees thereof. They include hospitals, convalescent
+homes and homes for the elderly where some supervision or health care is provided.
+"Responsible party" means all of the following persons: (1) owners and occupants of property
+within the city of Burlington; and (2) any person causing or contributing to a violation of the
+provisions of this title.
+"Riparian corridor" is as defined in the critical areas code, chapter 14.15 BMC.
+"Rules" means administrative rules promulgated by the public works director in accordance with
+the State Administrative Procedures Act.
+"S"
+"Secondary drainage system" means a drainage system serving a watershed less than 20 acres in
+size or a watershed with a runoff of three cubic feet per second or less for a storm with a five-
+year frequency.
+"Seismic hazard areas" are areas subject to severe risk of damage as a result of earthquake
+induced ground shaking, slope failure, settlement, or soil liquefaction. The city of Burlington is
+located in Seismic Zone 3 and construction is required to comply with the International Building
+Code seismic standards.
+"Serve" or "service," when used regarding a document, means the procedures set forth in BMC
+§ 1.34.040 and 1.44.060.
+"Service drain" means a privately owned and maintained drainage control facility or system
+which carries only drainage water. Service drains include, but are not limited to, conveyance
+pipes, catch basin connections, downspout connections, pipes, and subsurface drain connections.
+"Shoreline district" means all land regulated by the Shorelines Management Act of 1971 (chapter
+90.58 RCW). See BMC Title 18, Shoreline Master Program.
+"Single-family residential parcel" means a parcel which has been actually developed with a
+detached dwelling (single-family residence).
+"Site" means any lot, parcel of land, street or highway right-of-way, or contiguous combination
+thereof, where a permit for new development, redevelopment, land disturbing activity, or grading
+has been issued or where any such work is proposed or performed.
+"Skagit River Corridor Special Management Area" means the Skagit River and associated
+shorelines, floodways, dikes, levees, or other flood control structures, and a strip of land
+extending inland 300 feet from the landward toe of the dikes and levees along the Skagit River.
+"Special flood risk zone" means the following areas:
+1. Gages Slough, including wetlands and deep water habitat areas; or
+2. Areas with a ground elevation three feet or more below the base flood elevation that
+are hydraulically connected to Gages Slough through a channel, watercourse, or other
+topographical feature that provides a continuous path capable of conveying floodwaters
+with an elevation three feet or more below the base flood elevation; or
+3. Areas within 300 feet of the landward toe of dikes and levees along the Skagit River,
+excluding floodways.
+"Special management areas" means the Burlington Hill, Gages Slough, and Skagit River special
+management areas as defined in this title.
+"Species of local importance" are those species that are of local concern due to their population
+status or their sensitivity to habitat manipulation or that are game species.
+"Standard design" is a design approved by the Burlington public works department for drainage
+and erosion control for a typical site.
+"Start of construction" includes substantial improvement and means the date the building permit
+was issued, provided the actual start of construction, repair, reconstruction, rehabilitation,
+addition, placement, or other improvement was within 180 days from the date of the permit. The
+"actual start" means either the first placement of permanent construction of a structure on a site,
+such as the pouring of slab or footings, the installation of piles, the construction of columns,
+or any work beyond the stage of excavation, or the placement of a manufactured home on a
+foundation. Permanent construction does not include land preparation, such as clearing, grading,
+and filling; nor does it include the installation of streets and/or walkways; nor does it include
+excavation for a basement, footings, piers, or foundations or the erection of temporary forms; nor
+§ 14.01.060 ENVIRONMENTAL REGULATIONS § 14.01.060
+does it include the installation on the property of accessory buildings, such as garages or sheds
+not occupied as dwelling units or not part of the main structure. For a substantial improvement,
+the "actual start of construction" means the first alteration of any wall, ceiling, floor, or other
+structural part of a building, whether or not that alteration affects the external dimensions of the
+building.
+"Steep slope areas" are areas with slopes greater than 15 percent.
+Storm Drain. See "private storm drain," "public storm drain" and "service drain."
+"Storm drainage system" means publicly owned facilities, including the city's municipal separate
+storm sewer system, by which stormwater is collected and/or conveyed, including but not limited
+to any roads with drainage systems, municipal streets, gutters, curbs, inlets, piped storm drains,
+pumping facilities, retention and detention basins, natural and human-made or altered drainage
+channels, reservoirs, and other drainage structures.
+"Stormwater" means runoff during and following precipitation and snowmelt events, including
+surface runoff and drainage.
+"Stormwater pollution prevention plan" means a document which describes the best management
+practices and activities to be implemented by a person to identify sources of pollution or
+contamination at a premises and the actions to eliminate or reduce pollutant discharges to
+stormwater, stormwater conveyance systems, and/or receiving waters to the maximum extent
+practicable. The plan shall contain elements as set forth in Appendix 1 of the Western
+Washington Phase II Municipal Stormwater Permit.
+"Structure" means a walled and roofed building or mobile home, or gas or liquid storage tank
+that is principally above ground.
+"Substantial damage" means damage of any origin sustained by a structure whereby the cost of
+restoring the structure to its before-damaged condition would equal or exceed 50 percent of the
+market value of the structure before the damage occurred.
+"Substantial improvement" means any reconstruction, rehabilitation, addition, or other
+improvement of a structure, the cost of which equals or exceeds 50 percent of the market value
+of the structure before the start of construction of the improvement. This term includes structures
+which have incurred substantial damage, regardless of the actual repair work performed. The
+term does not, however, include either:
+1. Any project for improvement of a structure to correct previously identified existing
+violations of state or local health, sanitary, or safety code specifications that have been
+identified by the local code enforcement official and that are the minimum necessary to
+assure safe living conditions; or
+2. Any alteration of a historic structure; provided, that the alteration will not preclude the
+structure's continued designation as a historic structure.
+"U"
+"Uncontaminated" means, for the purposes of this title, not containing sediment or other
+pollutants or contaminates above natural background levels when referring to surface or ground
+water, and not containing pollutants or contaminants in levels greater than city-supplied drinking
+water when referring to potable water.
+"Undeveloped parcel" means any parcel of real property which has not been altered by grading or
+filling of the ground surface, or by construction of any improvement or other impervious surface
+area which affects the hydraulic properties of the parcel.
+"Urban growth" refers to growth that makes intensive use of land for the location of buildings,
+structures, and impermeable surfaces to such a degree as to be incompatible with the primary
+use of such land for the production of food, other agricultural produce, or fiber, or the extraction
+of mineral resources. When allowed to spread over wide areas, urban growth typically requires
+urban governmental services. "Characterized by urban growth" refers to land having urban
+growth located on it, or to land located in relationship to an area with urban growth on it as to be
+appropriate for urban growth.
+"W"
+"Watercourse" means the route, constructed or formed by humans or by natural processes,
+generally consisting of a channel with bed, banks, or sides, in which surface waters flow,
+including lakes, bogs, streams, sloughs, and intermittent artificial components (including ditches
+and culverts) but not including receiving waters.
+"Wetland" or "wetlands" means areas that are inundated or saturated by surface water or ground
+water at a frequency and duration sufficient to support, and that under normal circumstances
+do support, a prevalence of vegetation typically adapted for life in saturated soil conditions.
+Wetlands generally include swamps, marshes, bogs, and similar areas. Wetlands do not include
+those artificial wetlands intentionally created from non-wetland sites, including, but not limited
+to, irrigation and drainage ditches, grass-lined swales, canals, detention facilities, wastewater
+treatment facilities, farm ponds, and landscape amenities. However, wetlands may include these
+artificial wetlands intentionally created from non-wetland areas created to mitigate conversion
+of wetlands, if permitted by the city.
+(Ord. 1853 § 2 (Exh. B), 2018; Ord. 1903 § 2 (Exh. A), 2021; Ord. 1933 § 1 (Exh. A), 2023)
+
+14.01.070 Liability.
+It is the specific intent of this title to place the obligation of compliance upon the property owner
+or party subject to the provisions of the chapters contained within this title. Nothing contained
+in this title is intended to be or shall be construed to create or form the basis for liability on the
+part of the city of Burlington officers, employees or agents for any injury or damage resulting
+from the failure of the property owner or party subject to the provisions of the chapters contained
+within this title, to comply with the provisions of this title, or by reason or in consequence of
+any act or omission in connection with the implementation or enforcement of this code by the
+city of Burlington officers, employees or agents. This title is not intended to create or otherwise
+establish or designate any particular class or group of persons who will or should be especially
+protected or benefited by its terms.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.01.080 Minimum requirements.
+The requirements of this title are minimum requirements. They do not replace, repeal, abrogate,
+supersede or affect any other more stringent requirements, rules, regulations, covenants,
+standards, or restrictions. Where this title imposes requirements which are more protective of
+human health or the environment than those set forth elsewhere, the provisions of this title shall
+prevail.
+Approvals and permits granted under this title are not waivers of the requirements of any other
+laws. Compliance is still required with all applicable federal, state and local laws and regulations,
+§ 14.01.080 ENVIRONMENTAL REGULATIONS § 14.01.110
+including rules promulgated under authority of this title.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.01.090 Violations and penalties.
+All acts or omissions in violation of any provision contained within this title, or acts or omissions
+that cause or contribute to a violation of any provision contained within this title, are hereby
+determined to be detrimental to the public health, safety and general welfare and shall constitute
+a public nuisance. Further, as specified in chapter 1.24 BMC, such acts or omissions shall be
+subject to fines and abatement under chapter 8.12 BMC, criminal penalties as set forth in chapter
+1.24 BMC, penalties for civil infractions as set forth in chapter 1.34 BMC, or civil violations as
+set forth in chapter 1.44 BMC.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.01.100 Appeal.
+Decisions made pursuant to this title are appealed in the manner set forth in BMC Title 14A.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.01.110 Severability.
+If any portion of this title is found to be invalid or unenforceable for any reason, such finding
+shall not affect the validity or enforceability of any other section of this title.
+(Ord. 1853 § 2 (Exh. B), 2018)
+§ 14.05.010 ENVIRONMENTAL REGULATIONS § 14.05.040
+Part I
+Application and Purpose

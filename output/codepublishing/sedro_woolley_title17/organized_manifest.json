@@ -1,0 +1,10 @@
+{
+  "input_dir": "output\\codepublishing\\sedro_woolley_title17",
+  "jurisdiction": "sedro_woolley",
+  "title": "Title 17 Zoning",
+  "pages": 38,
+  "sections": 266,
+  "tables": 12,
+  "sections_path": "output\\codepublishing\\sedro_woolley_title17\\sections.jsonl",
+  "tables_path": "output\\codepublishing\\sedro_woolley_title17\\tables.json"
+}

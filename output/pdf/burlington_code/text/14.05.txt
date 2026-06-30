@@ -1,0 +1,680 @@
+14.05.010 Title.
+This chapter shall be called "Surface Water Management."
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.020 Application.
+This chapter applies to:
+A. All grading, drainage, and erosion control, whether or not a permit is required; and
+B. All new development, redevelopment, land disturbing activities, and construction sites,
+whether or not a permit is required; and
+C. All new and existing discharges directly or indirectly to a public drainage control system;
+and
+D. All new and existing land uses.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.030 Purpose.
+The provisions of this chapter shall be liberally construed to accomplish its remedial purposes,
+which are:
+A. To protect, to the greatest extent practical, life, property and the environment from loss,
+injury and damage by pollution, erosion, flooding, landslides, strong ground motion, soil
+liquefaction, accelerated soil creep, settlement and subsidence, and other potential hazards
+whether from natural causes or from human activity;
+B. To protect the public interest in drainage and related functions of drainage basins,
+watercourses and shoreline areas;
+C. To protect surface waters, ground waters and other receiving waters from pollution,
+mechanical damage, excessive flows and other conditions in their drainage basins which
+will increase the rate of downcutting, streambank erosion, and/or the degree of turbidity,
+siltation and other forms of pollution, or which will reduce their low flows or low levels to
+levels which degrade the environment, reduce recharging and ground water, or endanger
+aquatic and benthic life within these surface waters and receiving waters of the state;
+D. To meet the requirements of state and federal law and comply with regulatory standards for
+the city's municipal storm water; and
+E. To fulfill the responsibilities of the city as trustee of the environment for future generations.
+(Ord. 1853 § 2 (Exh. B), 2018)
+§ 14.05.040 ENVIRONMENTAL REGULATIONS § 14.05.050
+
+14.05.040 Authority.
+This chapter is authorized by the provisions of chapters 35A.63 and 36.70A RCW, the Western
+Washington Phase II Municipal Stormwater Permit and other applicable laws and regulations.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.050 Authority of the public works director/city engineer.
+A. The public works director is authorized to issue, monitor, stop work or require
+modifications of storm water permits and inspections for the construction, capping,
+alterations, or repairs of privately owned and operated drainage control systems as more
+specifically set forth in BMC § 14.05.120; require modification of drainage control
+facilities and associated project designs during construction and approve and file approved
+drainage control plans as more specifically set forth in BMC § 14.05.130; and accept and
+approve when appropriate storm sewer permits for the construction or alteration of all
+storm water systems as more specifically set forth in BMC § 14.05.240. Any powers
+granted or duties imposed upon the public works director may be delegated to persons or
+entities acting in the beneficial interest of or in the employ of the agency.
+B. The public works director is authorized to take actions necessary to implement the
+provisions and purposes of this title in their respective spheres of authority, including, but
+not limited to: promulgating and amending rules and regulations, which may include
+prescribing best management practices ("BMPs"); establishing and conducting inspection
+programs; establishing and conducting or, as set forth in BMC § 14.05.070, requiring
+responsible parties to conduct monitoring programs, which may include sampling of
+discharges to or from drainage control facilities, the public drainage control system, or
+surface water; taking enforcement action; abating nuisances; promulgating guidance and
+policy documents under this title. The public works director shall also have the authority to
+review and approve or disapprove required submittals and applications for approvals and
+permits as set forth in this title. Any powers granted or duties imposed upon the public
+works director may be delegated to persons or entities acting in the beneficial interest of or
+in the employ of the agency as designated by the public works director.
+The public works director is further authorized to develop drainage basin plans for
+managing surface water, drainage water, and erosion within individual subbasins.
+Compliance with an adopted drainage basin plan may, when approved by the public works
+director, modify requirements of this title, provided the level of protection for human
+health, safety, and welfare, the environment, and public or private property will equal or
+exceed that which would otherwise be achieved.
+(Ord. 1853 § 2 (Exh. B), 2018)
+§ 14.05.060 ENVIRONMENTAL REGULATIONS § 14.05.070
+Part II
+Storm Water, Drainage And Erosion Control
+
+14.05.060 Scope.
+BMC § 14.05.060 through 14.05.130 are applicable to:
+A. General. All new and existing discharges subject to this title as set forth in BMC
+§ 14.05.030, all land uses and all new development, redevelopment, and grading shall
+comply with all requirements of this title unless explicitly exempted by this title or
+exempted by the public works director pursuant to the authority granted in BMC
+§ 14.05.050 and as specifically set forth in this chapter.
+B. Exemptions. The following land uses are exempt from the provisions of this title.
+1. Commercial agriculture, including only those activities conducted on lands defined in
+RCW 84.34.020(2), and production of crops or livestock for wholesale trade;
+2. Forest practices regulated under WAC Title 222, except for Class IV general forest
+practices, as defined in WAC 222-16-050, that are conversions from timber land to
+other uses;
+3. Development undertaken by the Washington State Department of Transportation in
+state highway right-of-way that complies with the standards found in chapter 173-270
+WAC, the Puget Sound Highway Runoff Program; and
+4. Any additional exemptions as set forth in Appendix 1, Minimum Technical
+Requirements for New Development and Redevelopment, of the Western Washington
+Phase II Municipal Stormwater Permit.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.070 Prohibited discharges.
+A. Storm Water Discharges to Sanitary and Combined Sewers. In consultation with the local
+sewage treatment agency, the public works director may approve discharges of storm water
+to a public combined sewer or sanitary sewer if other methods of controlling pollutants in
+the discharge are not adequate or reasonable, and the discharging party certifies that the
+discharge will not harm the environment and will not overburden or otherwise harm the
+public combined sewer or sanitary sewer systems. The public works director shall
+condition approval of such a discharge on compliance with local pretreatment regulations.
+B. Discharges Prohibited to Public Drainage Control Systems. No person shall throw, drain,
+or otherwise discharge, cause, or allow others under its control to throw, drain, or otherwise
+discharge into the MS4 any pollutants or waters containing any pollutants other than storm
+water. It is unlawful to make illicit discharges, as defined in subsection (C) of this section,
+either directly or indirectly to a public drainage control system.
+C. Illicit Discharges Defined. Except as provided in subsection (D) of this section, all
+discharges which are not composed entirely of storm water are illicit discharges, as defined
+in BMC § 14.01.060.
+The following is a partial list, provided for informational purposes only, of common
+substances which are illicit discharges when allowed to enter a public drainage control
+§ 14.05.070 ENVIRONMENTAL REGULATIONS § 14.05.070
+system:
+1. Trash or debris.
+2. Construction materials.
+3. Petroleum products including but not limited to oil, gasoline, grease, fuel oil, and
+heating oil.
+4. Antifreeze and other automotive products.
+5. Metals in either particulate or dissolved form.
+6. Flammable or explosive materials.
+7. Radioactive material.
+8. Batteries.
+9. Acids, alkalis or bases.
+10. Paints, stains, resins, lacquers or varnishes.
+11. Degreasers and solvents.
+12. Drain cleaners.
+13. Pesticides, herbicides or fertilizers.
+14. Steam cleaning wastes.
+15. Soaps, detergents or ammonia.
+16. Swimming pool backwash.
+17. Chlorine, bromine and other disinfectants.
+18. Heated water.
+19. Domestic animal wastes.
+20. Sewage.
+21. Recreational vehicle waste.
+22. Animal carcasses.
+23. Food wastes.
+24. Bark and other fibrous materials.
+25. Collected lawn clippings, leaves, or branches.
+26. Silt, sediment or gravel.
+27. Dyes.
+28. Chemicals not normally found in uncontaminated water.
+29. Washing of fresh concrete for cleaning and/or finishing purposes or to expose
+aggregates.
+30. Any other process-associated discharge except as otherwise allowed in this section.
+31. Any hazardous material or waste not listed above.
+D. Allowable Discharges. The following types of discharges shall not be considered illegal
+discharges for the purposes of this chapter unless the public works director determines that
+the type of discharge, whether singly or in combination with others, is causing or is likely
+to cause pollution of surface water or ground water:
+1. Diverted stream flows.
+2. Rising ground water.
+3. Uncontaminated ground water infiltration.
+4. Uncontaminated pumped ground water.
+5. Foundation drains.
+6. Air conditioning condensation.
+7. Irrigation water from agricultural sources that is commingled with urban storm water.
+8. Springs.
+9. Water from crawlspace pumps.
+10. Footing drains.
+11. Flows from riparian habitats and wetlands.
+12. Non-storm water discharges authorized by another NPDES or state waste discharge
+permit.
+13. Discharges from emergency firefighting activities.
+E. Conditional Discharges. The following types of discharges shall not be considered illegal
+discharges for the purposes of this chapter if they meet the stated conditions, or unless the
+public works director determines that the type of discharge, whether singly or in
+combination with others, is causing or is likely to cause pollution of surface water or
+ground water:
+1. Potable water, including water from water line flushing, hyperchlorinated water line
+flushing, fire hydrant system flushing, and pipeline hydrostatic test water. Planned
+discharges shall be dechlorinated to a concentration of 0.1 ppm or less, pH-adjusted
+if necessary, and in volumes and velocities controlled to prevent resuspension of
+sediments in the storm water system;
+2. Lawn watering and other irrigation runoff is permitted but shall be minimized;
+3. Dechlorinated swimming pool discharges. These discharges shall be dechlorinated to
+a concentration of 0.1 ppm or less, pH-adjusted if necessary, and in volumes and
+velocities controlled to prevent resuspension of sediments in the storm water system.
+§ 14.05.070 ENVIRONMENTAL REGULATIONS § 14.05.080
+Discharges shall be thermally controlled to prevent an increase in temperature of the
+receiving water;
+4. Street and sidewalk wash water, water used to control dust, and routine external
+building wash down that does not use detergents are permitted if the amount of street
+wash and dust control water used is minimized. At active construction sites, street
+sweeping must be performed prior to washing the street;
+5. Other non-storm water discharges. The discharges shall be in compliance with the
+requirements of a storm water pollution prevention plan (SWPPP) reviewed and
+approved by the city, which addresses control of such discharges by applying
+AKART to prevent contaminants from entering surface or ground water.
+F. Testing for Illicit Discharges. When the public works director has reason to believe that
+any discharge is an illicit discharge, the public works director or designee may sample and
+analyze the discharge and recover the costs from a responsible party in an enforcement
+proceeding. When the discharge is likely to contain illicit discharges on a recurring basis,
+the public works director may conduct, or may require the responsible party to conduct,
+ongoing monitoring at the responsible party's expense.
+G. Illicit Connections Prohibited. Any connection identified by the public works director that
+could convey anything not composed entirely of surface and storm water directly to surface
+and storm water or ground water is considered an illicit connection. The construction, use,
+maintenance or continued existence of illicit connections to the storm drain system is
+prohibited. This prohibition expressly includes, without limitation, illicit connections made
+in the past, regardless of whether the connection was permissible under law or practices
+applicable or prevailing at the time of connection. A person is considered to be in violation
+of this section if the person connects a line conveying sewage to the MS4 or allows such a
+connection to continue.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.080 Requirements for existing discharges and land uses.
+A. General. For all existing discharges directly or indirectly to a public drainage control
+system, responsible parties shall implement and maintain nonstructural best management
+practices as specified in rules promulgated by the public works director. Nonstructural best
+management practices shall include, but not be limited to, maintenance and source control
+housekeeping practices such as cleaning of catch basins and detention facilities, sweeping
+of parking lots, storing oil barrels and other contaminant sources out of the rain, covering
+material stockpiles, and proper use and storage of hazardous materials.
+If the public works director or designee determines that discharges from a drainage facility
+are causing or contributing to a water quality problem, such as discharges that cannot
+be adequately addressed by nonstructural best management practices, including, but not
+limited to, areas with recurrent spills such as discharges from vehicle maintenance shops
+or gas stations, then the director may require the responsible party to undertake more
+stringent or additional best management practices. These best management practices may
+include structural best management practices or other action necessary to cease causing or
+contributing to the water quality problem. Structural best management practices include but
+shall not be limited to constructed facilities such as detention tanks, wet ponds, oil/water
+separators, grassed swales, roofing and berming of container storage areas, and revised
+piping systems.
+B. Spill Prevention Required. All responsible parties shall take measures to prevent spills or
+other accidental introduction of illicit discharges into a public drainage control system.
+Such measures shall include:
+1. Establishment and implementation of plans and procedures to prevent spills and other
+accidental releases of materials that may contaminate storm water;
+2. Implementation of procedures for immediate containment and other appropriate
+action regarding spills and other accidental releases to prevent contamination of storm
+water; and
+3. Provision of necessary containment and response equipment on site, and training of
+personnel regarding the procedures and equipment to be used.
+The provisions of this subsection may be satisfied by a storm water pollution
+prevention plan prepared in compliance with the NPDES industrial storm water
+permit for the site.
+The responsible parties shall make the plans and procedures required by this
+subsection available to the public works director or designee when requested.
+C. Release Notification Requirements. A responsible party must, at the earliest possible time,
+but in any case within 24 hours of discovery, report to the public works department a spill,
+release, dumping, or other situation that has contributed or is likely to contribute pollutants
+to a public drainage control system. This reporting requirement is in addition to, and not
+instead of, any other reporting requirements under federal, state or local laws.
+D. Natural Drainage Patterns. Natural drainage patterns shall be maintained.
+E. Obstruction of Watercourses. Every person owning property through which a watercourse
+passes, or such person's lessee, shall keep and maintain that part of the watercourse within
+the property free of trash, debris, excessive vegetation, sediment, and other obstacles that
+would pollute, contaminate, or significantly retard the flow of water through the
+watercourse. In addition, the owner or lessee shall maintain existing privately owned
+structures within or adjacent to a watercourse so that such structures will not become a
+hazard to the use, function, or physical integrity of the watercourse. Watercourses shall not
+be obstructed.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.090 Storm water, drainage, and erosion control requirements.
+A. Stormwater Management Manual Adopted. The city of Burlington hereby adopts as a
+technical reference manual, hereafter referred to as the "storm water manual," the 2019
+State Department of Ecology Stormwater Management Manual for Western Washington,
+as amended by Sections 1 through 7 of Appendix 1 of the Western Washington Phase II
+Municipal Stormwater Permit. The city hereby further adopts the thresholds, definitions,
+minimum requirements, and exceptions, adjustments and variance criteria found in
+Appendix 1 and Appendix 10 of the Western Washington Phase II Municipal Stormwater
+Permit as the city of Burlington's minimum storm water regulations.
+B. Thresholds for Minimum Technical Requirements for Storm Water Control.
+§ 14.05.090 ENVIRONMENTAL REGULATIONS § 14.05.100
+1. All new development, redevelopment, and construction sites, regardless of type and
+regardless of whether or not a permit is required, that meet or exceed the threshold
+conditions set forth in Appendix 1 of the Western Washington Phase II Municipal
+Stormwater Permit must comply with the minimum technical requirements of said
+Appendix 1, including the mandatory incorporated provisions of the 2019 Ecology
+Stormwater Management Manual for Western Washington.
+2. The city of Burlington requires that all projects, even those that result in land
+disturbance of less than one acre, adhere to the minimum requirements for erosion
+and storm water control set forth in Appendix 1 and Appendix 7 of the Western
+Washington Phase II Municipal Stormwater Permit.
+3. For those projects meeting the review thresholds set forth in this section, the applicant
+shall submit a site assessment and analysis along with a drainage control plan or storm
+water site plan pursuant to requirements in Appendix 1 of the Western Washington
+Phase II Municipal Stormwater Permit.
+4. The city of Burlington allows applications for an erosivity waiver as specified in
+Appendix 1 of the Western Washington Phase II Municipal Stormwater Permit.
+C. Standards and Definitions. Unless otherwise specified in this chapter, all standards,
+definitions, and requirements shall be in accordance with the storm water manual.
+D. Flood Prone Areas. Sites within flood prone areas must employ measures to minimize the
+potential for flooding on the site and for the project to increase the risk of floods on adjacent
+or nearby properties. Flood control measures shall include those set forth in other titles of
+the Burlington Municipal Code and rules promulgated thereunder, including but not limited
+to the critical areas code, chapter 14.15 BMC, and in rules promulgated by the public works
+director to meet the purposes of this subsection.
+E. Natural Drainage Patterns. Natural drainage patterns shall be maintained.
+F. Obstruction of Watercourses. Watercourses shall not be obstructed.
+G. Low Impact Development. The city requires a site analysis and technical evaluation to
+ensure that all sites meeting the minimum qualifications shall utilize low impact
+development (LID) best management practices (BMPs), as an alternative to conventional
+storm water management systems that rely on detention ponds and closed conveyances,
+when such measures are feasible. Low impact development is intended to manage runoff
+close to the source of generation and to mimic predeveloped hydrologic condition of a site.
+Low impact development is accomplished through minimizing the impervious surface
+coverage and loss of vegetation and by managing runoff through dispersion, infiltration,
+evapotranspiration, or a combination of these approaches. Use of LID BMPs may reduce
+or eliminate the need for conventional detention facilities but does not remove the
+obligation to comply with the minimum requirements of the storm water manual. A variety
+of BMPs to minimize impervious surfaces and to manage storm water have been developed
+and tested for use in Western Washington.
+(Ord. 1853 § 2 (Exh. B), 2018; Ord. 1921 § 1 (Exh. A), 2022)
+
+14.05.100 Scope of drainage control review and application requirements.
+A. Scope of Review. Where drainage and approval are required by BMC § 14.05.090, the
+scope of this review shall at least include the following:
+1. Applications for Building and Other Permits. The public works director shall review
+any application for a building permit or other permit, other than land use permit
+applications, for compliance with BMC § 14.05.090 and to determine whether
+improvements to the public drainage control system shall be required.
+2. The public works director shall review all storm water plans for proposed
+development activities in accordance with the site planning process and best
+management practice selection and design criteria as set forth in the storm water
+manual.
+B. Application and Approval Requirements. Drainage control plans for projects subject to
+review under BMC § 14.05.090 shall be reviewed by the public works director or designee.
+The public works director or designee may approve those plans which comply with the
+provisions of this title and rules promulgated hereunder, and may place conditions upon the
+approval in order to assure compliance with the provisions of this title. Submission of the
+required drainage control application information shall be a condition precedent to the
+processing of any of the above-listed permits. Approval of drainage control shall be a
+condition precedent to issuance of any of the above-listed permits. A storm sewer permit
+shall be issued to construct on-site and off-site drainage control facilities based on the
+approved plans. See BMC § 14.05.240, Storm sewer permits required.
+The public works director may disapprove plans which do not comply with the provisions
+of this title and rules promulgated hereunder. Disapproved plans shall be returned to the
+applicant, who may correct and resubmit the plans.
+C. Submittal Requirements.
+1. Applications shall be prepared and submitted in accordance with provisions of this
+section, with this chapter (public storm sewers) and with associated rules and
+regulations adopted by the public works director.
+2. The public works director or designee may require additional information necessary
+to adequately evaluate applications for compliance with the requirements and
+purposes of this title and other laws and regulations, including the critical areas code,
+chapter 14.15 BMC. The public works director or designee may also require
+appropriate information about adjoining properties which may be related to, or
+affected by, the drainage control proposal in order to evaluate effects on the adjacent
+property. This additional information may be required as a precondition for permit
+application review and approval.
+3. Where an applicant simultaneously applies for more than one of the permits listed in
+subsection (A) of this section for the same property, the application shall comply with
+the requirements for the permit which are the most detailed and complete.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.110 Drainage control plan registry.
+The public works director shall maintain a permanent file of all approved drainage control plans.
+Each plan shall be cataloged according to the property address, legal description of the property
+and the storm sewer permit number for which the plan is required. See BMC § 14.05.240,
+§ 14.05.110 ENVIRONMENTAL REGULATIONS § 14.05.130
+Storm sewer permits required. Where a drainage control plan covers more than one property, the
+approved plan shall be cataloged for each property covered by the plan.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.120 Installation of drainage control facilities.
+All privately owned and operated drainage control facilities or systems, whether or not they
+discharge to a public drainage control system, shall be considered storm sewers and shall be
+subject to this title, the public works department director's rules promulgated under this title, and
+the public works department's design and installation specifications and permit requirements for
+storm sewer and drainage control systems.
+Storm sewer permits and inspections shall be required for construction, capping, alterations, or
+repairs of privately owned and operated drainage control systems as provided in this title. When
+the work is ready for inspection, the permittee shall notify the public works director. If the work
+is not in accordance with plans approved under this title and in accordance with the department
+of community development design and installation specifications adopted by administrative rule,
+the public works director may order the work stopped by written notice to the persons engaged in
+performing the work or causing the work to be done, and may require modifications as provided
+in this title.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.130 Modifications of drainage control facilities during construction.
+During construction the public works director may require, or the applicant may request, that the
+construction of drainage control facilities and associated project designs be modified if physical
+conditions are discovered on the site which are inconsistent with the assumptions upon which
+the approval was based, including but not limited to unexpected soil and/or water conditions,
+weather-generated problems, or changes in the design of the improved areas. Modifications shall
+be submitted to the public works director for approval prior to implementation.
+Any such modifications made during the construction of drainage control facilities shall be
+recorded on the final approved drainage control plan, a revised copy of which shall be filed by
+the community development director.
+(Ord. 1853 § 2 (Exh. B), 2018)
+§ 14.05.140 ENVIRONMENTAL REGULATIONS § 14.05.170
+Part III
+Storm Water And Surface Water Inspection And Maintenance
+
+14.05.140 Scope.
+BMC § 14.05.140 through 14.05.200 are intended to:
+A. Provide for the inspection and regulation of public or private storm and surface water
+system control or detention facilities in order to provide for a properly functioning city
+storm and surface water drainage system and to protect the public health, safety and
+welfare;
+B. Authorize the storm and surface water utility to inspect storm and surface water system
+control and drainage control facilities and to require owners of such systems to maintain,
+operate and repair such systems in conformity with the code and the utility standards and
+regulations; and
+C. Authorize the storm and surface water utility to investigate the source of suspected illicit
+discharges, dumping, and/or illicit connections.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.150 Compliance.
+Each owner or person responsible for the maintenance, operation or repair of detention facilities
+within the city shall maintain, operate and repair said detention facilities in compliance with the
+requirements of this code and in compliance with the utility standards and regulations.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.160 Responsibility for inspection and maintenance.
+Drainage control facilities required by this title and by the rules adopted hereunder shall be
+maintained by the owner or other responsible party. The owner or responsible party shall inspect
+permanent drainage control facilities at least annually, and shall inspect temporary drainage
+control facilities and other temporary best management practices or facilities on a schedule
+sufficient for the facilities to function at design capacity. When an inspection identifies a need
+for maintenance as defined by standards found in chapter 4 of Volume V of the storm water
+manual, maintenance shall be performed in accordance with the following schedule:
+A. Within one year for typical maintenance of facilities, except catch basins.
+B. Within six months for catch basins.
+C. Within two years for maintenance that requires capital construction of less than $25,000.
+The public works director may require the responsible party to conduct more frequent
+inspections and/or maintenance when necessary to ensure functioning at design capacity.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.170 Inspection program.
+The public works director shall establish inspection programs to ensure compliance with the
+requirements of this title and accomplishment of its purposes. Inspection programs may be
+established on any reasonable basis, including but not limited to routine inspections; random
+§ 14.05.170 ENVIRONMENTAL REGULATIONS § 14.05.180
+inspections; inspections based upon complaints or other notice of possible violations; inspections
+of drainage basins or areas identified as higher than typical sources of sediment or other
+contaminants or pollutants; inspections of businesses or industries of a type associated with
+higher than usual discharges of contaminants or pollutants or with discharges of a type which are
+more likely than the typical discharge to cause violations of state or federal water or sediment
+quality standards; and joint inspections with other agencies inspecting under environmental
+or safety laws. Inspections may include, but are not limited to, reviewing maintenance and
+repair records; visual inspection of catch basins and detention/retention ponds; video inspection
+of pipe system; sampling discharges, surface water, ground water, and material or water in
+drainage control facilities; and evaluating the condition of drainage control facilities and other
+best management practices.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.180 Entry for inspection and abatement purposes.
+A. New Installations and Connections. When any new drainage control facility is installed on
+private property, and when any new connection is made between private property and a
+public drainage control system, or sanitary sewer, the property owner shall obtain approval
+from the public works director. The property owner shall grant the city the right to enter
+the property at reasonable times and in a reasonable manner pursuant to an inspection
+program established pursuant to BMC § 14.05.170, and to enter the property when the city
+has a reasonable basis to believe that a violation of this title is occurring or has occurred,
+and to enter when necessary for abatement of a public nuisance or correction of a violation
+of this title.
+B. The public works director or designee, whenever implementing the provisions of the
+utility's inspection program or whenever he/she has cause to believe that a violation of this
+code or the utility standards and regulations has been or is being committed, is authorized
+to inspect during regular working hours and at other reasonable times all drainage control
+facilities within the city to determine compliance with the provisions of this code and the
+utility standards and regulations. If a property owner has not granted right of entry under
+subsection (A) of this section, prior to making any inspection the director shall present
+identification credentials, state the reason for the inspection, and request entry.
+1. If said property or any building or structure on said property is unoccupied, he/she
+shall first make a reasonable effort to locate the owner or other person(s) having
+charge or control of the property or portion thereof and request entry.
+2. If, after reasonable effort, the public works director or designee is unable to locate the
+owner or such other person(s) having charge or control of the property, and he/she
+has reason to believe the condition of the detention facility creates an imminent
+hazard to persons or property, he/she may make entry.
+3. Unless entry is consented to by the owner or person(s) in control of said property or
+portion thereof or unless conditions are reasonably believed to exist which create an
+imminent hazard, the public works director, prior to entry, shall obtain a search
+warrant as authorized by the laws of the state.
+4. The public works director or designee may inspect the drainage control facility
+without obtaining a search warrant pursuant to subsection (B)(3) of this section if said
+inspection can be conducted while he/she remains on public property or on other
+property on which he/she has permission to be.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.190 Disposal of waste from maintenance activities.
+Disposal of waste from maintenance of drainage and storm water control facilities shall be
+conducted in accordance with federal, state and local regulations, including the minimum
+functional standards for solid waste handling, chapter 173-304 WAC, guidelines for disposal of
+waste materials, and, where appropriate, dangerous waste regulations, chapter 173-303 WAC,
+including any subsequent amendments to these provisions.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.200 Records of installation and maintenance activities.
+When a new drainage control facility is installed, the party having the facility installed shall
+obtain a copy of the as-built plans from the public works director. Responsible parties shall
+make records of the installation and of all maintenance and repair and shall retain the records
+for at least 10 years. These records shall be made available to the public works director during
+inspection of the facility and at other reasonable times upon request of the public works director.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.210 Exceptions to requirements.
+A. General. The purpose of this chapter is to administer and enforce all requirements set forth
+in this title. Requests for exceptions to the requirements of this title shall be made according
+to this section and Appendix 1 of the Western Washington Phase II Municipal Stormwater
+Permit, Section 6. Exceptions shall include alternative requirements, waivers, reductions,
+or modifications of the requirements. An exception shall only be granted to the extent
+necessary to meet the criteria set forth in this section. An applicant is not entitled to an
+exception, whether or not the criteria allowing approval of an exception are met. The
+director may require an applicant to submit an engineer's report or analysis with a request
+for an exception. When an exception is granted, the director may impose new or additional
+requirements to offset or mitigate harm that may be caused by granting the exception, or
+that would have been prevented if the exception had not been granted.
+B. Public Notice. Public notice of an application for an exception under the criteria set forth
+in this section shall comply with Appendix 1 of the Western Washington Phase II
+Municipal Stormwater Permit, Section 6.
+(Ord. 1853 § 2 (Exh. B), 2018)
+§ 14.05.220 ENVIRONMENTAL REGULATIONS § 14.05.230
+Part IV
+Public Storm Sewers
+
+14.05.220 Plans required.
+Storm sewers and drainage improvements shall require a storm sewer permit with approved
+engineering plans with the following information:
+A. Plan map properly dimensioned and drawn to scale showing the location of the proposed
+storm sewer, drainage ditches and sewer appurtenances within the street right-of-way.
+Sewers and drainage ditches shall be stationed and all manholes, catch basins, and
+appurtenances shall be numbered;
+B. Location of existing above and below ground utilities in road right-of-way or adjacent
+easements;
+C. Location and dimensions of utility and drainage easements and location of all existing
+watercourses, ditches, trunk storm sewers, ponds and retention facilities connected with or
+adjacent to the proposed drainage facilities;
+D. Profiles of storm drains and drainage ditches with the following information:
+1. Location and number of all manholes, catch basins and appurtenances,
+2. Profile of existing and proposed ground surface and storm drain,
+3. Size, slope and length of storm sewers between consecutive manholes, and
+4. Sewer, manhole, and catch basin invert elevations;
+E. Suitable title plate on each drawing with street or sewer name, name and address of the
+developer, scale, date and the name, address and telephone number and stamp of the
+registered engineer responsible for the plan preparation;
+F. Structural details of any special manholes, catch basins, and appurtenances including drop
+manholes, retention control manholes, outlet structures, pumping stations, diversion
+structures, etc.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.230 Design criteria.
+A. Storm sewers and drainage facilities shall be designed for a projected life span of 30 years
+without excessive maintenance. All trunk sewers and collector sewers shall be designed
+and stamped by a civil engineer registered in the state of Washington unless otherwise
+approved by the public works director. Accepted engineering practices shall be employed
+in the design of all drainage facilities.
+B. Storm drainage facilities shall be designed per specifications in the storm water manual.
+All drainage facilities in public rights-of-way or easements shall have an outfall into an
+approved drainage system.
+C. The minimum requirements for storm drainage facilities shall be as follows:
+1. Catch basins or inlets shall be spaced a maximum of 200 feet apart along any street,
+alley or avenue;
+2. The minimum catch basin lateral pipe size shall be 12 inches in diameter and the
+minimum storm main size shall be 12 inches in diameter;
+3. Manholes on trunk sewers shall have a maximum spacing of 400 feet; and
+4. Construction materials and methods shall be in accordance with Standards and
+Specifications for Municipal Public Works Construction prepared by the American
+Public Works Association, latest edition.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.240 Storm sewer permits required.
+A. A storm sewer permit shall be obtained for the construction or alteration of all storm sewer
+systems, including on-site and off-site installations. Applications for storm sewer permits
+shall be processed as Type I decisions in accordance with the provisions of BMC Title 14A.
+B. To obtain a storm sewer permit, an application shall be filed with the community
+development department. Applications for storm sewer permit approval shall be made on
+forms provided by the community development director and shall include all of the
+information required by the form in addition to all of the items listed below. Only
+applications including all of the information required by this section shall be deemed
+complete for purposes of complying with BMC Title 14A. A complete application shall
+include:
+1. A detailed description of the work to be covered by the permit;
+2. A description of the land on which the proposed work is to be done by legal
+description, street address or similar description that will readily identify and
+definitely locate the proposed project or work;
+3. Any plans, diagrams, computations and specifications, or other data as required in this
+title;
+4. Any applicable fees in accordance with the fee schedule established by the city
+council; and
+5. Applications must be signed by the applicant, or the applicant's authorized agent.
+C. The application, plans, specifications, computations and other data filed by an applicant for
+a permit shall be reviewed by the public works director. Such plans may be reviewed by
+other departments of this jurisdiction to verify compliance with any applicable laws under
+their jurisdiction. If the public works director finds that the work described in an application
+for a permit and the plans, specifications, and other data filed therewith conform to the
+requirements of this title and other pertinent laws and ordinances, and that the fees specified
+in the current fee resolution have been paid, the public works director shall issue a permit
+therefor to the applicant.
+When the public works director issues the permit where plans are required, the public
+works director shall endorse in writing or stamp the plans and specifications
+"APPROVED." Such approved plans and specifications shall not be changed, modified or
+altered without authorization from the public works director, and all work regulated by this
+§ 14.05.240 ENVIRONMENTAL REGULATIONS § 14.05.260
+title shall be in accordance with the approved plans.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.250 Fees.
+Fees for drainage control plan review, recordkeeping or other activities pursuant to this title
+shall, unless otherwise provided for in this title, be prescribed by resolution.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.260 Financial assurance and covenants.
+As a condition precedent to issuance of any permit or approval provided for in this title, the
+director may require an applicant for a permit or approval to submit financial assurances as
+provided in this section.
+A. Insurance.
+1. The director may require the owner(s), or contractor to carry liability and property
+damage insurance against damage, naming the city as an additional insured. The
+amount shall be commensurate with the risks as determined by the director.
+2. The director may also require the owner(s) to maintain a policy of general public
+liability insurance against personal injury, death, property damage and/or loss from
+activities conducted pursuant to the permit or approval, or conditions caused by such
+activities, and naming the city as an additional insured. The policy shall be in an
+amount which the director determines to be commensurate with the risks. It shall
+cover a period of not more than 10 years from the date of issuance of a certificate of
+occupancy or finalization of the permit or approval. A certificate evidencing such
+insurance shall be filed with the director before issuance of a certificate of occupancy
+or finalization of a permit for any single-family dwelling or duplex.
+3. The insurance policy shall provide that the city will be notified of cancellation of the
+policy at least 30 days prior to cancellation. The notice shall be sent to the director
+who required the insurance and shall state the insured's name and the property
+address. If a property owner's insurance is canceled and not replaced, the permit or
+approval and any interrelated permit or approval may be revoked, including a
+certificate of occupancy or approval for occupancy.
+B. Bonds, Cash Deposits or Instruments of Credit.
+1. Surety Bond. The director may require that the owner or contractor deliver to the
+director for filing in the office of the city clerk a surety bond, cash deposit or an
+instrument of credit in such form and amounts deemed by the director to be necessary
+to ensure that requirements of the permit or approval are met. A surety bond may be
+furnished only by a surety company licensed to do business in the state of
+Washington. The bond shall be conditioned that the work will be completed in
+accordance with the conditions of the permit or approval, or, if the work is not
+completed, that the site will be restored if damaged or made unsafe by activities
+conducted pursuant to the permit or approval.
+The bond will be exonerated one year after a determination by the director that the
+requirements of the permit or approval have been met.
+For work under a building permit, issuance of a certificate of occupancy or approval
+for occupancy following a final inspection shall be considered to be such a
+determination. For grading, completion of the final grading inspection and submittal
+of required final reports in accordance with BMC § 14.05.240 shall be such a
+determination.
+2. Assurance in Lieu of Surety Bond. In lieu of a surety bond, the owner may elect to
+file a cash deposit or instrument of credit with the director in an amount equal to that
+which would be required in the surety bond and in a form approved by the director.
+The cash deposit or instrument of credit shall comply with the same conditions as
+required for surety bonds.
+C. Covenants.
+1. The director may require a covenant between the owner(s) of the property and the
+city. The covenant shall be signed by the owner(s) of the site and notarized prior to
+issuance of any permit or approval in a potential landslide area, potentially hazardous
+location, flood prone zone, or other area of potentially hazardous soils or drainage or
+erosion conditions. The covenant shall not be required where the permit or approval
+is for work done by the city. The covenant shall include:
+a. A legal description of the property; and
+b. A description of the property condition making this subsection applicable; and
+c. A statement that the owner(s) of the property understands and accepts the
+responsibility for the risks associated with development on the property given
+the described condition, and agrees to inform future purchasers and other
+successors and assignees of the risks; and
+d. The application date, type, and number of the permit or approval for which the
+covenant is required; and
+e. A statement waiving the right of the owner(s), the owner's heirs, successors and
+assigns to assert any claim against the city by reason of or arising out of issuance
+of this permit or approval by the city for the development on the property, except
+only for such losses that may directly result from the negligence of the city.
+2. The covenant shall be filed by the director with the Skagit County auditor's office, at
+the expense of the owner, so as to become part of the Skagit County real property
+records.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.05.270 Date of initial enforcement.
+The public works director shall not enforce provisions of this code which require existing
+discharges and land uses to adopt operational and nonstructural best management practices until
+six months after adoption of rules identifying the best management practices to be required.
+The director shall not enforce the provisions of this code which require existing discharges and
+land uses to install structural best management practices until one year after adoption of rules
+identifying the best management practices to be required.
+(Ord. 1853 § 2 (Exh. B), 2018)
+§ 14.10.010 ENVIRONMENTAL REGULATIONS § 14.10.050

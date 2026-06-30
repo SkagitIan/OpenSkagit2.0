@@ -12,3 +12,4 @@ openai-agents>=0.3
 requests
 pyshp
 pyproj
+pypdf

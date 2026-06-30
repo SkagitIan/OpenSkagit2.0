@@ -1,0 +1,9 @@
+{
+  "input_pdf": "data\\Environmental Regulations - Land Use Decisions - Buildings and Construction - Land Divisions and Adjustments - Comprehensive Zoning Ordinance - Shoreline Master Program (1).pdf",
+  "output_dir": "output\\pdf\\burlington_code",
+  "sections": 663,
+  "documents": 54,
+  "tables": 0,
+  "sections_path": "output\\pdf\\burlington_code\\sections.jsonl",
+  "tables_path": "output\\pdf\\burlington_code\\tables.json"
+}

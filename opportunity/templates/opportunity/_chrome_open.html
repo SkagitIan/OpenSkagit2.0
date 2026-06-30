@@ -4,13 +4,13 @@
     <input class="pb-nav-toggle" type="checkbox" id="pb-nav-toggle" aria-hidden="true">
     <aside class="pb-sidebar">
       <div class="pb-brand">
-        <img src="https://res.cloudinary.com/dq0l2n3zr/image/upload/v1753214772/openskagit_logo_mark_koy5zh.png" alt="">
-        <span>PARCEL BOOK</span>
+        <img src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png" alt="">
+        <span>OpenSkagit Parcel Book</span>
       </div>
       <nav class="pb-nav" aria-label="Parcel Book">
         <a href="{% url 'opportunity_home' %}" class="{% if active_nav == 'overview' %}active{% endif %}">Overview</a>
         <a href="{% url 'opportunity_ai_search' %}" class="{% if active_nav == 'ai_search' %}active{% endif %}">AI Search</a>
-        <span class="pb-nav-label">Opportunity Types</span>
+        <span class="pb-nav-label">Parcels</span>
         <a href="{% url 'opportunity_explore' %}?tab=delinquent-tax-pressure" class="{% if active_tab == 'delinquent-tax-pressure' %}active{% endif %}">Delinquent Tax Pressure</a>
         <a href="{% url 'opportunity_explore' %}?tab=vacant-buildable-lots" class="{% if active_tab == 'vacant-buildable-lots' %}active{% endif %}">Vacant Buildable Lots</a>
         <a href="{% url 'opportunity_explore' %}?tab=possible-lot-splits" class="{% if active_tab == 'possible-lot-splits' %}active{% endif %}">Possible Lot Splits</a>

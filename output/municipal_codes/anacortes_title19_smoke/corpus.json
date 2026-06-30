@@ -1,0 +1,37 @@
+{
+  "jurisdiction": "anacortes",
+  "jurisdiction_key": "anacortes",
+  "title": "Title 19 Unified Development Code",
+  "source": "https://anacortes.municipal.codes/AMC/19",
+  "preset": "anacortes_title19",
+  "platform": "municipal.codes",
+  "collected_at": "2026-06-29T22:56:41.624Z",
+  "page_count": 3,
+  "toc_page_count": 46,
+  "pages": [
+    {
+      "ref": "19.10.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.10",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.10 General Provisions",
+      "text_length": 6382
+    },
+    {
+      "ref": "19.12.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.12",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.12 Definitions and Interpretation Revised",
+      "text_length": 53012
+    },
+    {
+      "ref": "19.14.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.14",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.14 International Codes",
+      "text_length": 3215
+    }
+  ]
+}

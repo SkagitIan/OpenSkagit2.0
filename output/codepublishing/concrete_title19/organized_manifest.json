@@ -1,0 +1,10 @@
+{
+  "input_dir": "output\\codepublishing\\concrete_title19",
+  "jurisdiction": "concrete",
+  "title": "Title 19 Development Regulations",
+  "pages": 30,
+  "sections": 297,
+  "tables": 7,
+  "sections_path": "output\\codepublishing\\concrete_title19\\sections.jsonl",
+  "tables_path": "output\\codepublishing\\concrete_title19\\tables.json"
+}

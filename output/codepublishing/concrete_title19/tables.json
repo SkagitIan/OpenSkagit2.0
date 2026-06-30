@@ -1,0 +1,2614 @@
+[
+  {
+    "jurisdiction": "concrete",
+    "title": "Title 19 Development Regulations",
+    "chapter_ref": "Concrete1915.html",
+    "chapter_title": "Chapter 19.15 PERMITTED AND CONDITIONAL USES",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "19.15.020 Land use table.",
+    "rows": [
+      [
+        "Zones",
+        "R",
+        "A",
+        "CL",
+        "TC",
+        "I",
+        "P",
+        "OS"
+      ],
+      [
+        "Residential Uses"
+      ],
+      [
+        "Single-family dwellings",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Caretakers apartments/quarters, not more than one per establishment",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Aviation-related single-unit apartment (5)",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Accessory dwelling unit (ADU) (41)",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Duplex",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Triplex",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Fourplex",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Fiveplex",
+        "C",
+        "",
+        "C",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Sixplex",
+        "C",
+        "",
+        "C",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Townhouse",
+        "C",
+        "",
+        "C",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Stacked flats",
+        "C",
+        "",
+        "C",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Courtyard buildings",
+        "C",
+        "",
+        "C",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Cottage houses",
+        "C",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Co-living housing units",
+        "C",
+        "",
+        "C",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Mixed-use",
+        "C",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Planned unit developments",
+        "C",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Affordable housing",
+        "P",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Permanent supportive housing (PSH)",
+        "P",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Transitional housing",
+        "C",
+        "",
+        "C",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Emergency housing and emergency shelters",
+        "C",
+        "",
+        "C",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Encampments on a religious property",
+        "C",
+        "",
+        "C",
+        "C",
+        "",
+        "C",
+        ""
+      ],
+      [
+        "Group homes",
+        "C",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Nursing homes",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Motels",
+        "",
+        "",
+        "P",
+        "P",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Hotels",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Mobile and manufactured home parks",
+        "",
+        "",
+        "C",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Recreation vehicle park",
+        "",
+        "",
+        "C",
+        "",
+        "",
+        "C",
+        ""
+      ],
+      [
+        "Accessory uses (1)",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Residential Related Uses"
+      ],
+      [
+        "Home occupations and sole proprietor businesses (3)",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Household pets (2)",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Aviation Uses"
+      ],
+      [
+        "Aviation hangar per lot – one each",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Aviation-related pilot’s lounge (5)",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Aviation-related commercial or industrial uses (6)",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Aviation-related public uses and government facilities (6)",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Aviation-related commercial uses (6)",
+        "",
+        "C",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Aviation-related manufacturing uses",
+        "",
+        "C",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Aviation-related service business such as restaurants",
+        "",
+        "C",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Airports and related uses",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        ""
+      ],
+      [
+        "Commercial and Related Uses"
+      ],
+      [
+        "Accessory buildings or multi-building development (16)",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Administrative, educational, and related (7)",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Arcades",
+        "",
+        "",
+        "C",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Automobile sales and leasing (14)",
+        "",
+        "",
+        "P",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Automobile service stations",
+        "",
+        "",
+        "P",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Art, music, and photography studios",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Baking bread and pastry shop products sold on premises",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Banking and related financial institutions",
+        "",
+        "",
+        "P",
+        "P",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Bingo halls",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Club, topless",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Convenience stores",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Convenience grocery stores",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Day-care including family and child centers (8)",
+        "C",
+        "",
+        "P",
+        "C",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Day-care adult facilities",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Day-care on-site of a specified permitted use",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Delicatessens",
+        "",
+        "",
+        "P",
+        "P",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Drive-in facilities including banks, restaurants",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Dry cleaning and laundry services",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Eating establishments limited to on-site employers (21)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Factory outlets",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Food banks",
+        "",
+        "",
+        "C",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Funeral homes",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Grocery stores",
+        "",
+        "",
+        "P",
+        "P",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Health and physical fitness clubs",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Hobby shops",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Household goods storage (19)",
+        "",
+        "",
+        "P",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Hospitals to include small animals (9)",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Kennels",
+        "C",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Laundry, self-service",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Laundries, commercial",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Liquor store",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Manufactured/mobile home sales lots",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "News syndicate services",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Newsstands",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Personal service shops",
+        "",
+        "",
+        "P",
+        "P",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Pharmacies",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Printing and publishing",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Professional offices including corporate headquarters",
+        "",
+        "",
+        "P",
+        "P",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Radio and television broadcasting studios",
+        "",
+        "",
+        "P",
+        "P",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Recreation commercial",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Recreational vehicle sales lots",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Retail sales (34)",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Retail stores including department and variety (11)",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Research laboratories",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Restaurants including outdoor eating (12)",
+        "",
+        "",
+        "P",
+        "P",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Secretarial services",
+        "",
+        "",
+        "P",
+        "P",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Taverns, dance halls, music auditoriums",
+        "",
+        "",
+        "C",
+        "C",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Theaters except drive-in",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Theater’s drive-in",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Vehicle repair shops within enclosed building",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Water bottling facilities",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Other uses by the town council or planner (15 and 18)",
+        "",
+        "",
+        "P",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Industrial and Related Uses"
+      ],
+      [
+        "Sale or repair of firearms",
+        "",
+        "",
+        "C",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Mini-storage warehouses",
+        "",
+        "",
+        "C",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Animal and food processing (32)",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Auction houses, including animals",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Automobile and truck rental",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Automobile and truck sales, new and used",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Automobile vehicle repair shops (within enclosed buildings)",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Automobile repair services",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Automobile service station",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Automobile washes",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Basic wood processing (20)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Boat building and accessory fabrication",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Building movers",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Bulk storage or processing (33)",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Cold storage plants",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Concrete mixing and batching plants, including ready-mix facilities",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Contractor trade services including storage yards",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Enameling, galvanizing, and electroplating",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Equipment repair and storage, rental, leasing, sales",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Existing logging company",
+        "",
+        "",
+        "P",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Food locker services",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Heavy equipment and truck repair",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Household movers and storage",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Janitorial services",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Lumber yards",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Manufacturing light (10)",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Manufacturing natural materials (22)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Manufacturing electronics (23)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Manufacturing appliances (24)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Manufacturing metals (25)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Manufacturing soaps and clay (26)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Manufacturing drugs and food (27)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Manufacturing computers (28)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Mini-storage warehouses",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Motorcycle sales and services",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Motor freight terminals and transportation",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Offices related to on-site permitted use (29)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Outside storage yards",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Printing, publishing, and allied (30)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Radio and television transmitting towers",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Research, development, and testing of permitted use",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Retail and wholesale trade of products manufactured, processed, or assembled on site",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Rock crushing plants",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Small appliance repair",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Theaters, adult",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Upholstery and furniture repair",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Warehouse sales, open to the public",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Warehousing and distribution facilities, to include wholesale trade not open to general public",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Other similar uses and accessory uses (31)",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Other uses (38)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "C"
+      ],
+      [
+        "Public, Open Space, and Related Uses"
+      ],
+      [
+        "Agriculture croplands (39)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P"
+      ],
+      [
+        "Civic, social, and fraternal clubs",
+        "",
+        "",
+        "P",
+        "P",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Conservation areas including forest, wetlands, wildlife",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "P"
+      ],
+      [
+        "Community centers, recreational buildings, band shells, and similar",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "P"
+      ],
+      [
+        "Clubhouses and youth centers",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        ""
+      ],
+      [
+        "Golf courses and country clubs privately owned (4)",
+        "C",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Golf courses and clubhouses publicly owned",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "C"
+      ],
+      [
+        "Government facilities (17)",
+        "C",
+        "",
+        "C",
+        "C",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Government facilities, fire stations",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Government buildings, structures, facilities (35)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Meeting rooms and/or reception facilities",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Museums, libraries, and public schools",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        ""
+      ],
+      [
+        "Parks, trails, playgrounds, playfields, recreation facilities, storage buildings, refreshment stands, related",
+        "P",
+        "",
+        "P",
+        "",
+        "",
+        "P",
+        "P"
+      ],
+      [
+        "Public parks, natural scenic areas, trails, walking and bicycle paths (36)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "P"
+      ],
+      [
+        "Reclamation areas (37)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "P"
+      ],
+      [
+        "Schools (13)",
+        "",
+        "",
+        "P",
+        "P",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Schools, existing",
+        "P",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Schools, preschools or nursery",
+        "",
+        "",
+        "P",
+        "C",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Schools, job training and vocational education",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Recreation buildings, neighborhood facilities",
+        "C",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Recreation on-site facilities serving specified use",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Religious institutions",
+        "C",
+        "",
+        "P",
+        "C",
+        "",
+        "C",
+        ""
+      ],
+      [
+        "Infrastructure Uses"
+      ],
+      [
+        "Bus passenger terminals",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "",
+        ""
+      ],
+      [
+        "Hydroelectric power generation facilities and related and ancillary structures and facilities",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "C"
+      ],
+      [
+        "Organic materials management facility",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "P",
+        ""
+      ],
+      [
+        "Parking facilities",
+        "",
+        "",
+        "P",
+        "C",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Parking facilities for permitted uses on site",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "P",
+        "P"
+      ],
+      [
+        "Utilities substations and public utilities facilities (40)",
+        "C",
+        "",
+        "",
+        "C",
+        "",
+        "C",
+        "C"
+      ],
+      [
+        "Utility facilities, major",
+        "",
+        "",
+        "C",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Utilities facilities, minor",
+        "",
+        "",
+        "P",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Utility substations, unless incidental permitted use",
+        "",
+        "",
+        "",
+        "",
+        "C",
+        "",
+        ""
+      ],
+      [
+        "Wireless communications facilities",
+        "",
+        "",
+        "C",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1915.html"
+  },
+  {
+    "jurisdiction": "concrete",
+    "title": "Title 19 Development Regulations",
+    "chapter_ref": "Concrete1920.html",
+    "chapter_title": "Chapter 19.20 DEVELOPMENT STANDARDS",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "19.20.020 Table.",
+    "rows": [
+      [
+        "Zones",
+        "R",
+        "A",
+        "CL",
+        "TC",
+        "I",
+        "P",
+        "OS"
+      ],
+      [
+        "Minimum Lot Size (Square Feet)"
+      ],
+      [
+        "Where sewer not available (1)",
+        "12,500",
+        "",
+        "12,500",
+        "2,000",
+        "12,500",
+        "",
+        ""
+      ],
+      [
+        "Where sewer available (2)",
+        "10,000",
+        "",
+        "2,000",
+        "",
+        "4,000",
+        "",
+        "10 ac"
+      ],
+      [
+        "Single-family detached",
+        "6,000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Accessory dwelling unit ADU (11)",
+        "6,000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Duplex",
+        "4,000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Triplex",
+        "4,500",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Fourplex",
+        "4,500",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Fiveplex",
+        "",
+        "",
+        "9,500",
+        "9,500",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Sixplex",
+        "",
+        "",
+        "6,000",
+        "6,000",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Townhouse – three units",
+        "",
+        "",
+        "6,500",
+        "6,500",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Townhouse – five units",
+        "",
+        "",
+        "10,200",
+        "10,200",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Courtyard building",
+        "",
+        "",
+        "7,500",
+        "7,500",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Stacked flats/multiplex",
+        "",
+        "",
+        "10,200",
+        "10,200",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Cottage housing – six units",
+        "",
+        "",
+        "12,600",
+        "12,600",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Minimum Lot Width (Feet)"
+      ],
+      [
+        "At building line",
+        "",
+        "",
+        "25 ft",
+        "25 ft",
+        "0 ft",
+        "",
+        ""
+      ],
+      [
+        "Single-family detached",
+        "50 ft",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Accessory dwelling unit (ADU) (7)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Duplex, triplex, fourplex",
+        "45 ft",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Fiveplex",
+        "",
+        "",
+        "90 ft",
+        "90 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Sixplex",
+        "",
+        "",
+        "55 ft",
+        "55 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Townhouse – three units",
+        "",
+        "",
+        "80 ft",
+        "80 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Townhouse – five units",
+        "",
+        "",
+        "120 ft",
+        "120 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Courtyard building",
+        "",
+        "",
+        "80 ft",
+        "80 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Stacked flats/multiplex",
+        "",
+        "",
+        "120 ft",
+        "120 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Cottage housing",
+        "105 ft",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Minimum Lot Depth (Feet)"
+      ],
+      [
+        "Minimum mean depth of lot",
+        "",
+        "",
+        "0 ft",
+        "0 ft",
+        "0 ft",
+        "",
+        ""
+      ],
+      [
+        "Single-family detached",
+        "80 ft",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Accessory dwelling unit (ADU) (7)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Duplex, triplex, fourplex",
+        "85 ft",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Fiveplex",
+        "",
+        "",
+        "105 ft",
+        "105 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Sixplex",
+        "",
+        "",
+        "100 ft",
+        "100 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Townhouse – three units",
+        "",
+        "",
+        "85 ft",
+        "85 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Townhouse – five units",
+        "",
+        "",
+        "60 ft",
+        "60 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Courtyard building",
+        "",
+        "",
+        "100 ft",
+        "100 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Stacked flats/multiplex",
+        "",
+        "",
+        "85 ft",
+        "85 ft",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Cottage housing",
+        "120 ft",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Setbacks (Feet)"
+      ],
+      [
+        "Front yard (3)",
+        "20 ft",
+        "0 ft",
+        "0 ft",
+        "0 ft",
+        "0 ft",
+        "",
+        ""
+      ],
+      [
+        "Side yard minimum mean depth (4)",
+        "5 ft",
+        "0 ft",
+        "0 ft",
+        "0 ft",
+        "0 ft",
+        "",
+        ""
+      ],
+      [
+        "Rear yard minimum depth without an alley (5)",
+        "20 ft",
+        "0 ft",
+        "0 ft",
+        "0 ft",
+        "0 ft",
+        "",
+        ""
+      ],
+      [
+        "Accessory structures",
+        "(7)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Exceptions in TC zone",
+        "",
+        "",
+        "",
+        "(8)",
+        "",
+        "",
+        "(9)"
+      ],
+      [
+        "Lot Coverage by Buildings"
+      ],
+      [
+        "Total lot coverage (%)",
+        "40%",
+        "",
+        "100%",
+        "100%",
+        "100%",
+        "",
+        ""
+      ],
+      [
+        "Accessory buildings of rear yard",
+        "50%",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Maximum Height"
+      ],
+      [
+        "Main buildings (10)",
+        "35 ft",
+        "",
+        "35 ft",
+        "35 ft",
+        "45 ft",
+        "",
+        "35 ft"
+      ],
+      [
+        "Accessory buildings",
+        "28 ft",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1920.html"
+  },
+  {
+    "jurisdiction": "concrete",
+    "title": "Title 19 Development Regulations",
+    "chapter_ref": "Concrete1950.html",
+    "chapter_title": "Chapter 19.50 LANDSCAPING",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "19.50.050 Minimum area standards.",
+    "rows": [
+      [
+        "Zoning Classification Site Area",
+        "Percent of Gross"
+      ],
+      [
+        "Industrial District (I)",
+        "10%"
+      ],
+      [
+        "Public Land District (P)",
+        "15%"
+      ],
+      [
+        "Commercial District (C)",
+        "10%"
+      ],
+      [
+        "Commercial Uses in Industrial Districts",
+        "10%"
+      ],
+      [
+        "P.R.D.’s and C.U.P.’s in Residential Districts",
+        "15%"
+      ],
+      [
+        "Other P.R.D.’s and C.U.P.’s",
+        "Same as underlying district or as specified by the town council."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1950.html"
+  },
+  {
+    "jurisdiction": "concrete",
+    "title": "Title 19 Development Regulations",
+    "chapter_ref": "Concrete1950.html",
+    "chapter_title": "Chapter 19.50 LANDSCAPING",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "19.50.090 Buffering requirements.",
+    "rows": [
+      [
+        "District to Be Developed",
+        "District to Be Buffered"
+      ],
+      [
+        "Semi-Public (i.e., churches, community centers)",
+        "All Residential"
+      ],
+      [
+        "Business/Commercial",
+        "All Residential"
+      ],
+      [
+        "Heavy Commercial/Industrial",
+        "All Residential and Commercial"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1950.html"
+  },
+  {
+    "jurisdiction": "concrete",
+    "title": "Title 19 Development Regulations",
+    "chapter_ref": "Concrete1954.html",
+    "chapter_title": "Chapter 19.54 OFF-STREET PARKING AND LOADING",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "19.54.020 Required off-street parking – Minimum standards.",
+    "rows": [
+      [
+        "Residential",
+        "Parking Requirements"
+      ],
+      [
+        "Single-family lot 6,000 square feet",
+        "1 stall per studio – 1-2 bedrooms, 2 stalls per 3 or more bedrooms not to exceed more than 2 stalls per lot"
+      ],
+      [
+        "Single-family lot less than 6,000 square feet (1)",
+        "1 stall per studio – 1-2 bedrooms, 2 stalls per 3 or more bedrooms not to exceed more than 2 stalls per lot"
+      ],
+      [
+        "Accessory dwelling unit (ADU)",
+        "1 stall per studio – 1-2 bedrooms, 2 stalls per 3 or more bedrooms not to exceed more than 2 stalls per unit"
+      ],
+      [
+        "Duplex, triplex, fourplex on lots less than 6,000 square feet (1)",
+        "1 stall per studio – 1-2 bedrooms, 2 stalls per 3 or more bedrooms not to exceed more than 2 stalls per unit"
+      ],
+      [
+        "Fiveplex, sixplex, townhouse, stacked flat/multiples, courtyard building on lots less than 6,000 sf (1)",
+        "1 stall per studio – 1-2 bedrooms, 2 stalls per 3 or more bedrooms not to exceed more than 2 stalls per unit"
+      ],
+      [
+        "Cottage housing",
+        "1 stall per studio – 1-2 bedrooms, 2 stalls per 3 or more bedrooms not to exceed more than 2 stalls per unit"
+      ],
+      [
+        "Caretakers apartments/quarters",
+        "1 stall per apartment"
+      ],
+      [
+        "Aviation-related single unit apartment",
+        "1 stall per apartment"
+      ],
+      [
+        "Co-living housing units/boarding house",
+        "1 stall for the manager plus 1 stall per sleeping room for boarders and/or lodging use plus 1 additional stall for each 4 persons employed on the premises"
+      ],
+      [
+        "Mixed-use",
+        "Total requirements shall be the sum of the requirements for the principal uses computed separately (4)"
+      ],
+      [
+        "Affordable housing",
+        "1 stall per studio – 1-2 bedrooms, 2 stalls per 3 or more bedrooms not to exceed more than 2 stalls per unit (5)"
+      ],
+      [
+        "Permanent supportive housing (PSH)",
+        "1 stall per studio – 1-2 bedrooms, 2 stalls per 3 or more bedrooms not to exceed more than 2 stalls per unit (5)"
+      ],
+      [
+        "Transitional housing",
+        "1 stall per sleeping quarter plus 1 additional stall for each 4 persons employed on the premises"
+      ],
+      [
+        "Emergency housing and shelters",
+        "1 stall per sleeping quarter plus 1 additional stall for each 4 persons employed on the premises"
+      ],
+      [
+        "Encampments on a religious property",
+        "0.25 stall per tent, vehicle, tiny home, or other sleeping quarter plus 1 additional stall for each 4 persons employed on the premises"
+      ],
+      [
+        "Group homes",
+        "0.5 stalls per bed"
+      ],
+      [
+        "Nursing homes",
+        "0.25 stalls per bed"
+      ],
+      [
+        "Motels and hotels",
+        "1 stall for manager and 1 stall per room"
+      ],
+      [
+        "Mobile and manufactured home parks",
+        "1 stall for manager and 2 stalls per dwelling unit"
+      ],
+      [
+        "Recreation vehicle park",
+        "1 stall per recreational vehicle camping space and 1 stall for every tent or other designated camping space"
+      ],
+      [
+        "Commercial",
+        "Parking Requirements"
+      ],
+      [
+        "Auto, boat, or recreational vehicle sales or leasing, new or used",
+        "1 stall per 5,000 square feet of outdoor sales area, 1 stall per 1,000 square feet of showroom and services facilities, but in no case shall there be less than 6 stalls provided"
+      ],
+      [
+        "Drive-in business, eat in and out",
+        "1 stall for each 100 square feet of gross floor area; eat out only, 1 stall for each 15 square feet of gross floor area"
+      ],
+      [
+        "Food retail stores and markets",
+        "1 stall per 200 square feet of gross floor area, a minimum of 6 parking stalls"
+      ],
+      [
+        "Laundry, self-service",
+        "1 stall per 4 washing machines, a minum of 5 stalls"
+      ],
+      [
+        "Mortuaries or funeral homes",
+        "1 stall per 4 seats in the assembly area, computed as 7 square feet of floor area per seat"
+      ],
+      [
+        "Motels, motor motels, hotels",
+        "1.25 stalls per sleeping unit"
+      ],
+      [
+        "Motorcycle and other small engine vehicle sales and service",
+        "1 stall for each 400 square feet of gross floor area of the building and 1 stall for each 1,000 square feet of outdoor sales area"
+      ],
+      [
+        "Motor vehicle repair and services",
+        "1 stall per 400 square feet of gross floor area, a minimum of 3 stalls"
+      ],
+      [
+        "Offices including professional and business, banks, and related",
+        "1 stall per 250 square feet of gross floor area, up to 400 square feet of unfinished basement floor area use exclusively for storage may be excluded (2)"
+      ],
+      [
+        "Personal services shops",
+        "1 stall per 400 square feet of gross floor area, a minimum of 2 stalls"
+      ],
+      [
+        "Restaurants, nightclubs, taverns, and lounges",
+        "1 stall per 100 square feet of gross floor area"
+      ],
+      [
+        "Theaters",
+        "1 stall per 4 fixed theater seats"
+      ],
+      [
+        "Other retail establishments, including but not limited to appliances, bakeries, dry cleaning, furniture stores, hardware stores, household equipment service shops, clothing or shoe repair shops",
+        "1 stall per 500 square feet of gross floor area"
+      ],
+      [
+        "Private lodges, with no overnight boarding facilities",
+        "1 stall per 500 square feet of gross floor area"
+      ],
+      [
+        "Industrial",
+        "Parking Requirements"
+      ],
+      [
+        "Manufacturing, research, and testing laboratories, creameries, bottling establishments, bakeries, canneries, printing, and engraving shops",
+        "1 stall per 1,000 square feet of gross floor area"
+      ],
+      [
+        "Warehouse and storage up to 20,000 square feet",
+        "1 stall per 2,000 square feet a minimum of 3"
+      ],
+      [
+        "Warehouse and storage 20,000 – 100,000 square feet",
+        "1 stall per 2,500 square feet a minimum of 10"
+      ],
+      [
+        "Warehouse and storage 10,000+ square feet",
+        "1 stall per 3,000 square feet a minimum of 40"
+      ],
+      [
+        "Uncovered outdoor storage areas, which are incidental and subordinate to a principal use that ortherwise meets parking requirements",
+        "0 additional parking required"
+      ],
+      [
+        "Uncovered outdoor storage arewas which are not incidental or subordinate to a principal use",
+        "1 stall per 5,000 square feet of storage area"
+      ],
+      [
+        "Office space",
+        "1 stall per 250 square feet of gross floor area (2)"
+      ],
+      [
+        "Public Assembly and Recreation",
+        "Parking Requirements"
+      ],
+      [
+        "Assembly halls, auditoriums, stadiums, sports arenas, and community clubs",
+        "1 stall per 3 fixed seats consisting of pews or benches (3)"
+      ],
+      [
+        "Churches",
+        "1 stall per 5 seats (3)"
+      ],
+      [
+        "Dance halls and skating rinks",
+        "1 stall per 100 square feet of gross floor area"
+      ],
+      [
+        "Libraries and museums",
+        "1 stall per 250 square feet of gross floor area"
+      ],
+      [
+        "Parks",
+        "Determine by planning director on an individual basis"
+      ],
+      [
+        "Other uses not specified herein; parking shall be provided as specified",
+        "Parking shall be provided as specified for the use which, in the opinion of the planning director, is most similar to the use under consideration"
+      ],
+      [
+        "Town Center (TC) district",
+        "Existing on-street parking may be counted towards off-street parking requirement in an arrangement approved by the town planner"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1954.html"
+  },
+  {
+    "jurisdiction": "concrete",
+    "title": "Title 19 Development Regulations",
+    "chapter_ref": "Concrete1954.html",
+    "chapter_title": "Chapter 19.54 OFF-STREET PARKING AND LOADING",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "19.54.090 Parking angle dimension requirements.",
+    "rows": [
+      [
+        "Angle Degrees",
+        "0 – 29",
+        "30 – 53",
+        "54 – 75",
+        "76 – 90"
+      ],
+      [
+        "One-way maneuvering lane width",
+        "12 ft",
+        "12 ft",
+        "15 ft",
+        "18 ft"
+      ],
+      [
+        "Two-way maneuvering lane width",
+        "20 ft",
+        "20 ft",
+        "20 ft",
+        "24 ft"
+      ],
+      [
+        "Parking stall width",
+        "9 ft",
+        "9 ft",
+        "9 ft",
+        "10 ft"
+      ],
+      [
+        "Parking stall length",
+        "23 ft",
+        "16 ft",
+        "18 ft",
+        "20 ft"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1954.html"
+  },
+  {
+    "jurisdiction": "concrete",
+    "title": "Title 19 Development Regulations",
+    "chapter_ref": "Concrete1982.html",
+    "chapter_title": "Chapter 19.82 WIRELESS COMMUNICATION FACILITIES (WCF)",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "19.82.090 Macro facility design and concealment standards.",
+    "rows": [
+      [
+        "Zone",
+        "Permitted Height"
+      ],
+      [
+        "Residential",
+        "Macro facilities shall not exceed 75 feet in total (whether collocating on an existing structure or locating on a new tower or structure)."
+      ],
+      [
+        "All other zones",
+        "Towers shall not exceed 85 feet, unless collocation is provided for, in which case the facility shall not exceed 100 feet."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/Concrete/html/Concrete19/Concrete1982.html"
+  }
+]

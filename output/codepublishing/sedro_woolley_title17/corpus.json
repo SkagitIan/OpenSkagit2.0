@@ -1,0 +1,357 @@
+{
+  "jurisdiction": "sedro_woolley",
+  "title": "Title 17 Zoning",
+  "source": "https://www.codepublishing.com/WA/SedroWoolley/#!/SedroWoolley17/SedroWoolley17.html",
+  "discovered_from_har": null,
+  "preset": "sedro_woolley_title17",
+  "jurisdiction_key": "sedro_woolley",
+  "title_id": "SedroWoolley17",
+  "collected_at": "2026-06-29T21:09:42.111Z",
+  "page_count": 38,
+  "toc_page_count": 38,
+  "toc_section_count": 315,
+  "pages": [
+    {
+      "ref": "SedroWoolley1704.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1704.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.04 ADMINISTRATIVE PROVISIONS",
+      "text_length": 40846,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1706.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1706.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.06 RESIDENTIAL 1 ENVIRONMENTALLY CONSTRAINED (R-1) ZONE",
+      "text_length": 4312,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1708.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1708.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.08 RESIDENTIAL 5 (R-5) ZONE",
+      "text_length": 4573,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley17100.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley17100.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.100 ACCESSORY DWELLING UNITS (ADUS)",
+      "text_length": 7083,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley17110.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley17110.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.110 HOMELESS ENCAMPMENTS AT RELIGIOUS ORGANIZATIONS",
+      "text_length": 26264,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1712.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1712.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.12 RESIDENTIAL 7 (R-7) ZONE",
+      "text_length": 5969,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1716.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1716.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.16 RESIDENTIAL 15 (R-15) ZONE",
+      "text_length": 6340,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1720.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1720.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.20 MIXED COMMERCIAL (MC) ZONE",
+      "text_length": 5670,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1721.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1721.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.21 URBAN VILLAGE MIXED-USE (UVMU) OVERLAY",
+      "text_length": 14632,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1722.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1722.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.22 TRANSITIONAL MIXED COMMERCIAL OVERLAY",
+      "text_length": 3939,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1724.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1724.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.24 CENTRAL BUSINESS DISTRICT (CBD) ZONE",
+      "text_length": 6353,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1728.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1728.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.28 INDUSTRIAL (I) ZONE",
+      "text_length": 9314,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1732.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1732.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.32 PUBLIC (P) ZONE",
+      "text_length": 2394,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1734.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1734.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.34 OPEN SPACE (OS) ZONE",
+      "text_length": 2101,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1736.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1736.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.36 OFF-STREET PARKING AND LOADING",
+      "text_length": 30292,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1738.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1738.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.38 RESIDENTIAL RECREATION AREAS",
+      "text_length": 3045,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1740.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1740.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.40 SIGNS*",
+      "text_length": 15636,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1743.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1743.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.43 PLANNED RESIDENTIAL DEVELOPMENT (PRD)",
+      "text_length": 31920,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1744.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1744.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.44 GENERAL REGULATIONS FOR ALL ZONES",
+      "text_length": 9393,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1748.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1748.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.48 MOBILE HOME PARKS",
+      "text_length": 5436,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1750.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1750.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.50 LANDSCAPING",
+      "text_length": 22767,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1751.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1751.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.51 MURALS",
+      "text_length": 9862,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1752.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1752.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.52 REZONES",
+      "text_length": 96,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1756.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1756.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.56 CONDITIONAL USE PERMITS",
+      "text_length": 3493,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1760.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1760.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.60 VARIANCES AND ZONING WAIVERS",
+      "text_length": 3737,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1764.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1764.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.64 TEMPORARY PERMITS",
+      "text_length": 1821,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1765.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1765.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.65 REGULATIONS FOR CRITICAL AREAS",
+      "text_length": 199796,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1766.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1766.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.66 FLOOD DAMAGE PREVENTION*",
+      "text_length": 38429,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1768.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1768.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.68 HOME OCCUPATION PERMITS",
+      "text_length": 1419,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1772.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1772.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.72 SIGN PERMITS",
+      "text_length": 106,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1776.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1776.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.76 COMPLIANCE CHECKLIST",
+      "text_length": 122,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1780.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1780.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.80 ENFORCEMENT",
+      "text_length": 559,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1784.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1784.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.84 ADULT ENTERTAINMENT ESTABLISHMENTS",
+      "text_length": 6194,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1788.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1788.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.88 ESSENTIAL PUBLIC FACILITIES",
+      "text_length": 30614,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1790.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1790.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.90 COLLECTIVE GARDENS",
+      "text_length": 882,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1792.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1792.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.92 RECREATIONAL MARIJUANA PRODUCERS, PROCESSORS AND RETAILERS",
+      "text_length": 12955,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1796.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1796.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.96 CITY OF SEDRO-WOOLLEY SHORELINE MASTER PROGRAM",
+      "text_length": 1322,
+      "section_anchors": []
+    },
+    {
+      "ref": "SedroWoolley1798.html",
+      "url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1798.html",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "Chapter 17.98 MODEL HOMES",
+      "text_length": 9173,
+      "section_anchors": []
+    }
+  ]
+}

@@ -1,0 +1,669 @@
+14.10.010 Title.
+This chapter shall be called "Environmental Policy."
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.020 Application.
+The provisions of this chapter shall apply to all proposals as defined in chapter 197-11 WAC
+where the city is presented with an application or has a goal and is actively preparing to make a
+decision on the means of accomplishing that goal and environmental impacts can be reasonably
+identified.
+Application of this chapter shall be implemented in a manner consistent with WAC 197-11-055.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.030 Purpose.
+The purpose of this chapter is to establish uniform requirements for compliance with chapter
+43.21C RCW and chapter 197-11 WAC, in a manner that is consistent with the provisions of
+WAC 197-11-020 and 197-11-030.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.040 Authority.
+A. The city adopts the ordinance codified in this chapter under the State Environmental Policy
+Act (SEPA), RCW 43.21C.120, and the SEPA rules, chapter 197-11 WAC, chapter 36.70A
+RCW, and other applicable laws and regulations.
+B. This chapter contains the city's SEPA procedures and policies.
+C. The SEPA rules, chapter 197-11 WAC, must be used in conjunction with this chapter.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.050 Basic requirements and adoption by reference.
+This part contains the basic requirements that apply to the SEPA process. This city adopts the
+following sections of chapter 197-11 WAC by reference:
+WAC 197-11-040 Definitions.
+WAC 197-11-050 Lead agency.
+WAC 197-11-060 Content of environmental review.
+WAC 197-11-070 Limitations on actions during SEPA process.
+WAC 197-11-080 Incomplete or unavailable information.
+WAC 197-11-090 Supporting documents.
+WAC 197-11-100 Information required of applicants.
+WAC 197-11-158 SEPA/GMA project review – Reliance on existing plans, laws, and
+regulations.
+WAC 197-11-210 SEPA/GMA integration.
+WAC 197-11-220 SEPA/GMA definitions.
+WAC 197-11-228 Overall SEPA/GMA integration procedures.
+WAC 197-11-230 Timing of an integrated SEPA/GMA process.
+WAC 197-11-232 SEPA/GMA integration procedures for preliminary planning,
+environmental analysis, and expanded scoping.
+WAC 197-11-235 SEPA/GMA integration documents.
+WAC 197-11-238 SEPA/GMA monitoring.
+WAC 197-11-250 SEPA/Model Toxics Control Act integration.
+WAC 197-11-253 SEPA lead agency for MTCA actions.
+WAC 197-11-256 Preliminary evaluation.
+WAC 197-11-259 Determination of nonsignificance for MTCA remedial actions.
+WAC 197-11-262 Determination of significance and EIS for MTCA remedial actions.
+WAC 197-11-265 Early scoping for MTCA actions.
+WAC 197-11-268 MTCA interim actions.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.060 Additional definitions.
+In addition to those definitions contained within WAC 197-11-220 and 197-11-700 through
+197-11-799, when used in this chapter, the following terms shall have the following meanings,
+unless the context indicates otherwise:
+A. "Department" means any division, subdivision or organizational unit of the city established
+by ordinance, rule or order.
+B. "SEPA rules" means chapter 197-11 WAC adopted by the Department of Ecology.
+C. "Ordinance" means the ordinance, resolution, or other procedure used by the city to adopt
+regulatory requirements.
+D. "Early notice" means the city's response to an applicant stating whether it considers
+issuance of a determination of significance likely for the applicant's proposal (mitigated
+determination of nonsignificance (DNS) procedures).
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.070 Designation of responsible official.
+A. For those proposals for which the city is the lead agency, the responsible official shall be
+the community development director.
+B. For all proposals for which the city is the lead agency, the responsible official shall make
+the threshold determination, supervise scoping and preparation of any required
+§ 14.10.070 ENVIRONMENTAL REGULATIONS § 14.10.090
+environmental impact statement (EIS), and perform any other functions assigned to the
+"lead agency" or "responsible official" by those sections of the SEPA rules that were
+adopted by reference in BMC § 14.10.050.
+C. The city shall retain all documents required by the SEPA rules (chapter197-11 WAC) and
+make them available in accordance with chapter 42.56 RCW.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.080 Lead agency determination and responsibilities.
+A. If the city receives an application for or initiates a proposal that involves a nonexempt
+action, the city shall determine the lead agency for that proposal under WAC 197-11-050,
+197-11-253, and 197-11-922 through 197-11-940, unless the lead agency has been
+previously determined or the city is aware that another agency is in the process of
+determining the lead agency.
+B. When the city is not the lead agency for a proposal, the city shall use and consider, as
+appropriate, either the DNS or the final EIS of the lead agency in making decisions on the
+proposal. The city shall not prepare or require preparation of a DNS or EIS in addition to
+that prepared by the lead agency, unless required under WAC 197-11-600. In some cases,
+the city may conduct supplemental environmental review under WAC 197-11-600.
+C. If the city receives a lead agency determination made by another agency that appears
+inconsistent with the criteria of WAC 197-11-253 or 197-11-922 through 197-11-940, it
+may object to the determination. Any objection must be made to the agency originally
+making the determination and resolved within 15 days of receipt of the determination, or
+the city must petition the Department of Ecology for a lead agency determination under
+WAC 197-11-946 within the 15-day time period. Any such petition on behalf of the city
+may be initiated by the responsible official.
+D. The city is authorized to make agreements as to lead agency status or shared lead agency
+duties for a proposal under WAC 197-11-942 and197-11-944; provided, that the
+responsible official and any city department that will incur responsibilities as the result of
+such agreement approve the agreement.
+E. The city, in making a lead agency determination for a private project, shall require
+sufficient information from the applicant to identify which other agencies have jurisdiction
+over the proposal (that is: which agencies require nonexempt licenses?).
+F. When the city/county is lead agency for a MTCA remedial action, the Department of
+Ecology shall be provided with an opportunity under WAC 197-11-253(5) to review the
+environmental documents prior to public notice being provided. If the SEPA and MTCA
+documents are issued together with one public comment period under WAC
+197-11-253(6). The city/county shall decide jointly with Ecology who receives the
+comment letters and how copies of the comment letters will be distributed to the other
+agency.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.090 Transfer of lead agency status to a state agency.
+For any proposal for a private project where the city would be the lead agency and for which
+one or more state agencies have jurisdiction, the city's responsible official may elect to transfer
+the lead agency duties to a state agency. The state agency with jurisdiction appearing first on the
+priority listing in WAC 197-11-936 shall be the lead agency and the city shall be an agency with
+jurisdiction. To transfer lead agency duties, the city's responsible official must transmit a notice
+of the transfer together with any relevant information available on the proposal to the appropriate
+state agency with jurisdiction. The responsible official of the city shall also give notice of the
+transfer to the private applicant and any other agencies with jurisdiction over the proposal.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.100 Additional consideration in time limits applicable to the SEPA process.
+Time estimates contained in this section (expressed in calendar days) shall apply when the city
+processes licenses for all private projects and those governmental proposals submitted to the city
+by other agencies. The actual time may vary with the complexity of the project, availability of
+staff, cooperation of agencies with jurisdiction or expertise, etc. The time estimates contained
+herein shall not be construed to be mandatory. Time periods for making threshold determinations
+shall commence upon payment of fees.
+A. Categorical Exemptions. The city will normally identify whether an action is categorically
+exempt within seven days of receiving a completed application.
+B. Threshold Determinations.
+1. For project actions involving the issuance of a city license or permit the city shall
+make a threshold determination on a completed application using the optional DNS
+process provided for in WAC 197-11-355 unless the responsible official determines
+the proposed action is unusually complex or significant uncertainties exist with
+respect to potential environmental impacts.
+2. For projects where the optional DNS process is used the city shall issue a threshold
+determination together with the notice of application required by BMC Title 14A.
+3. If the optional DNS process provided for in WAC 197-11-355 is not used, the city
+will normally complete threshold determinations that can be based solely upon review
+of the environmental checklist for the proposal within 15 days of the date an
+applicant's completed application and completed checklist are submitted.
+4. When the responsible official requires further information from the applicant or
+consultation with other agencies with jurisdictions:
+a. The city will normally request such further information within 15 days of
+receiving a completed application and completed environmental checklist;
+b. The city will normally wait no longer than 30 days for a consulted agency to
+respond;
+c. The responsible official will normally complete the threshold determination
+within 15 days of receiving the requested information from the applicant or the
+consulted agency.
+5. When the city must initiate further studies, including field investigations, to obtain
+the information to make the threshold determination, the city will normally complete
+the studies within 30 days of receiving a completed application and a completed
+checklist.
+§ 14.10.100 ENVIRONMENTAL REGULATIONS § 14.10.120
+6. The city will normally complete threshold determinations on actions where the
+applicant recommends in writing that an EIS be prepared, because of the probable
+significant adverse environmental impact(s) described in the application, within 15
+days of receiving a completed application and completed checklist.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.110 Categorical exemptions and threshold determinations, purpose and adoption.
+by reference.
+This part contains the rules for deciding whether a proposal has a "probable significant, adverse
+environmental impact" requiring an environmental impact statement (EIS) to be prepared. This
+part also contains rules for evaluating the impacts of proposals not requiring an EIS. The city
+adopts the following sections by reference, as supplemented in this part:
+WAC 197-11-300 Purpose of this part.
+WAC 197-11-305 Categorical exemptions.
+WAC 197-11-310 Threshold determination required.
+WAC 197-11-315 Environmental checklist.
+WAC 197-11-330 Threshold determination process.
+WAC 197-11-335 Additional information.
+WAC 197-11-340 Determination of nonsignificance (DNS).
+WAC 197-11-350 Mitigated DNS (MDNS).
+WAC 197-11-355 Optional DNS process.
+WAC 197-11-360 Determination of significance (DS)/initiating of scoping.
+WAC 197-11-390 Effect of threshold determination.
+WAC 197-11-800 Categorical exemptions.
+WAC 197-11-880 Emergencies.
+WAC 197-11-890 Petitioning DOE to change exemptions.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.120 Flexible threshold for categorical exemptions.
+Categorical exemptions are adopted by reference under BMC § 14.10.110. The city establishes
+the following exempt levels for minor new construction under WAC 197-11-800(1)(b) based on
+local conditions:
+A. For residential dwelling units in WAC 197-11-800(1)(b)(i): nine units;
+B. For agriculture structures in WAC 197-11-800(1)(b)(ii): 10,000 square feet;
+C. For office, school, commercial, recreational, service or storage buildings in WAC
+197-11-800(1)(b)(iii): 4,000 square feet and 20 parking spaces;
+D. For parking lots in WAC 197-11-800(1)(b)(iv): 20 parking spaces;
+E. For landfills and excavations in WAC 197-11-800(1)(b)(v): 100 cubic yards;
+F. Demolition of any structure or facility up to the maximum exempt level provided in WAC
+197-11-800;
+G. Replacement, addition of up to 20 percent of gross floor area, alteration or modification of
+an existing commercial structure, up to
+12,000 square feet.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.130 Use of exemptions.
+A. Upon receiving an application for a license or, in the case of governmental proposals, the
+department initiating the proposal, the city shall determine whether the license and/or the
+proposal is exempt. The city's determination that a proposal is exempt shall be final and not
+subject to administrative review. If a proposal is exempt, none of the procedural
+requirements of this chapter shall apply to the proposal.
+B. In determining whether or not a proposal is exempt, the city shall make certain the proposal
+is properly defined and shall identify the governmental licenses required (WAC
+197-11-060). If a proposal includes exempt and nonexempt actions, the city shall determine
+the lead agency, even if the license application that triggers the city's consideration is
+exempt.
+C. If a proposal includes both exempt and nonexempt actions, the city may authorize exempt
+actions prior to compliance with the procedural requirements of this chapter, except that:
+1. The city shall not give authorization for:
+a. Any nonexempt action; or
+b. Any action that would have an adverse environmental impact; or
+c. Any action that would limit the choice of alternatives; or
+d. Any combination of exempt activities which when considered together would
+not be exempt.
+2. The city may withhold approval of an exempt action that would lead to modification
+of the physical environment, when such modification would serve no purpose if
+nonexempt action(s) were not approved.
+3. The city may withhold approval of exempt actions that would lead to substantial
+financial expenditures by a private applicant when the expenditures would serve no
+purpose if nonexempt action(s) were not approved.
+D. Proposed short subdivision of land that is adjacent to previous short subdivisions or
+adjacent to land on which a subdivision is pending shall not be exempt if adjacent
+subdivisions share any improvements or access easements. In such cases, the proposed
+short plat will be considered physically or functionally related regardless of ownership.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.140 Environmental checklist.
+§ 14.10.140 ENVIRONMENTAL REGULATIONS § 14.10.150
+A. Except as provided in subsection (C) of this section, a completed environmental checklist
+(or a copy), in the form provided in WAC 197-11-960, shall be filed at the same time as an
+application for a permit, license, certificate, or other approval not specifically exempted in
+this chapter; provided, that a checklist is not needed if the city and applicant agree an EIS
+is required, SEPA compliance has been completed, or SEPA compliance has been initiated
+by another agency. The city shall use the environmental checklist to determine the lead
+agency and if the city is the lead agency, for determining the responsible official and for
+making the threshold determination.
+B. For private proposals, the city will require the applicant to complete the environmental
+checklist, providing assistance as necessary. For city proposals, the department initiating
+the proposal shall complete the environmental checklist for that proposal.
+C. For projects submitted as planned actions under WAC 197-11-164, the city shall use its
+existing environmental checklist form or may modify the environmental checklist form as
+provided in WAC 197-11-315. The modified environmental checklist form may be
+prepared and adopted along with or as part of a planned action ordinance; or developed
+after the ordinance is adopted. In either case, a proposed modified environmental checklist
+form must be sent to the Department of Ecology to allow at least a 30-day review prior to
+use.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.150 Mitigated DNS.
+A. As provided in this section and in WAC 197-11-350, the responsible official may issue a
+DNS based on conditions attached to the proposal by the responsible official or on changes
+to, or clarifications of, the proposal made by the applicant.
+B. An applicant may request in writing early notice of whether a DS is likely under WAC
+197-11-350. The request must:
+1. Follow submission of a permit application and environmental checklist for a
+nonexempt proposal for which the city is lead agency; and
+2. Precede the city's actual threshold determination for the proposal.
+C. The responsible official should respond to the request for early notice within 15 working
+days. The response shall:
+1. Be written;
+2. State whether the city currently considers issuance of a DS likely and, if so, indicate
+the general or specific areas of concern that are leading the city to consider a DS; and
+3. State that the applicant may change or clarify the proposal to mitigate the indicated
+impacts, revising the environmental checklist and/or permit application as necessary
+to reflect the changes or clarifications.
+D. As much as possible, the city should assist the applicant with identification of impacts to
+the extent necessary to formulate mitigation measures.
+E. When the applicant submits a changed or clarified proposal along with a revised or
+amended environmental checklist, the city shall base its threshold determination on the
+changed or clarified proposal and should make the determination within 15 days of
+receiving the changed or clarified proposal.
+1. If the city indicated specific mitigation measures in its response to the request for
+early notice, and the applicant changed or clarified the proposal to include those
+specific mitigation measures, the city shall issue and circulate a DNS under WAC
+197-11-340(2).
+2. If the city indicated areas of concern, but did not indicate specific mitigation measures
+that would allow it to issue a DNS, the city shall make the threshold determination,
+issuing a DNS or DS as appropriate.
+3. The applicant's proposed mitigation measures (clarifications, changes or conditions)
+must be in writing and must be specific. For example, proposals to "control noise" or
+"prevent storm water runoff" are inadequate whereas proposals to "muffle machinery
+to X decibel" or "construct 200-foot storm water retention pond at Y location" are
+adequate.
+4. Mitigation measures which justify issuance of a mitigated DNS may be incorporated
+in the DNS by reference to agency staff reports, studies or other documents.
+F. A mitigated DNS is issued either under WAC 197-11-340(2), requiring a 14-day comment
+period and public notice, or under WAC 197-11-335, which may require no additional
+comment period beyond the comment period on the notice of application.
+G. Mitigation measures incorporated in the mitigated DNS shall be deemed conditions of
+approval of the permit decision and may be enforced in the same manner as any term or
+condition of the permit, or enforced in any manner specifically prescribed by the city.
+Failure to comply with the designated mitigation measures shall be grounds for suspension
+and/or revocation of any issued license or permit.
+H. If the city's tentative decision on a permit or approval does not include mitigation measures
+that were incorporated in a mitigated DNS for the proposal, the city should evaluate the
+threshold determination to assure consistency with WAC 197-11-340(3)(a) (Withdrawal of
+DNS).
+I. The city's written response under subsection (B) of this section shall not be construed as a
+determination of significance. In addition, preliminary discussions of clarifications or
+changes to a proposal, as opposed to a written request for early notice, shall not bind the
+city to consider the clarifications or changes in its threshold determination.
+(Ord. 1853 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+14.10.160 Environmental impact statements (EIS) – Purpose and adoption by reference.
+This part contains the rules for preparing environmental impact statements. The city adopts the
+following sections by reference, as supplemented by this part:
+WAC 197-11-400 Purpose of EIS.
+WAC 197-11-402 General requirements.
+WAC 197-11-405 EIS types.
+WAC 197-11-406 EIS timing.
+§ 14.10.160 ENVIRONMENTAL REGULATIONS § 14.10.170
+WAC 197-11-408 Scoping.
+WAC 197-11-410 Expanded scoping (optional).
+WAC 197-11-420 EIS preparation.
+WAC 197-11-425 Style and size.
+WAC 197-11-430 Format.
+WAC 197-11-435 Cover letter or memo.
+WAC 197-11-440 EIS contents.
+WAC 197-11-442 Contents of EIS on nonproject proposals.
+WAC 197-11-443 EIS contents when prior nonproject EIS.
+WAC 197-11-444 Elements of the environment.
+WAC 197-11-448 Relationship of EIS to other considerations.
+WAC 197-11-450 Cost-benefit analysis.
+WAC 197-11-455 Issuance of DEIS.
+WAC 197-11-460 Issuance of FEIS.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.170 Preparation of EIS – Additional considerations.
+A. Preparation of draft and final EISs (DEIS and FEIS) and draft and final supplemental EISs
+(SEIS) is the responsibility of the city under the direction of the responsible official. Before
+the city issues an EIS, the responsible official shall be satisfied that it complies with this
+chapter and chapter 197-11 WAC.
+B. The DEIS and FEIS or draft and final SEIS shall be prepared by city staff, the applicant, or
+by a consultant selected by the city or the applicant. A consultant selected by the applicant
+requires written approval by the city to ensure compliance with the provisions of chapter
+43.21C RCW and chapter 197-11 WAC. (See WAC 197-11-420(1) through (4).) If the
+responsible official requires an EIS for a proposal and determines that someone other than
+the city will prepare the EIS, the responsible official shall notify the applicant immediately
+after completion of the threshold determination. The responsible official shall also notify
+the applicant of the city's procedure for EIS preparation, including approval of the DEIS
+and FEIS prior to distribution.
+C. The city may require an applicant to provide information the city does not possess,
+including specific investigations. However, the applicant is not required to supply
+information that is not required under this chapter or that is being requested from another
+agency. (This does not apply to information the city may request under another ordinance
+or statute.)
+D. The environmental impact statement may be combined with the recommendation or report
+on the proposal or issued as a separate document. The substantive decisions or
+recommendations shall be clearly identifiable in the combined document.
+E. The applicant shall be responsible for reimbursing or compensating the city for all costs
+associated with the preparation of draft and final EISs (DEIS and FEIS) and draft and final
+supplemental EISs (SEIS). Work shall not proceed on such documents until arrangements
+for all associated costs have been made and approved in writing by the city. (See WAC
+197-11-420 and 197-11-914.)
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.180 Additional elements to be covered in an EIS.
+The following additional elements are part of the environment for the purpose of EIS content, but
+do not add to the criteria for threshold determinations or perform any other function or purpose
+under this chapter:
+A. Economy of the area;
+B. Social policy analysis;
+C. Cost-benefit analysis;
+D. Such other elements as may be required by the responsible official.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.190 Commenting, adoption by reference.
+This part contains rules for consulting, commenting, and responding on all environmental
+documents under SEPA, including rules for public notice and hearings. The city adopts the
+following sections by reference, as supplemented in this part:
+WAC 197-11-500 Purpose of this part.
+WAC 197-11-502 Inviting comment.
+WAC 197-11-504 Availability and cost of environmental documents.
+WAC 197-11-508 SEPA register.
+WAC 197-11-510 Public notice.
+WAC 197-11-535 Public hearings and meetings.
+WAC 197-11-545 Effect of no comment.
+WAC 197-11-550 Specificity of comments.
+WAC 197-11-560 FEIS response to comments.
+WAC 197-11-570 Consulted agency costs to assist lead agency.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.200 Public notice.
+A. Whenever the city issues a DNS under WAC 197-11-340(2) or a DS under WAC
+197-11-360(3) the city shall give public notice as required by chapter 14A.05 BMC.
+B. Whenever the city issues a DNS or MDNS under WAC 197-11-355 the city shall combine
+the SEPA threshold determination notice and the notice of application required by BMC
+Title 14A and issue a single notice using the timelines and procedures prescribed by BMC
+Title 14A.
+§ 14.10.200 ENVIRONMENTAL REGULATIONS § 14.10.230
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.210 Designation of official to perform consulted agency responsibilities for the.
+city.
+A. The responsible official shall be responsible for preparation of written comments for the
+city in response to a consultation request prior to a threshold determination, participation
+in scoping, and reviewing a DEIS.
+B. The responsible official shall be responsible for the city's compliance with WAC
+197-11-550 whenever the city is a consulted agency and is authorized to develop operating
+procedures that will ensure that responses to consultation requests are prepared in a timely
+fashion and include data from all appropriate city departments.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.220 Using existing environmental documents, purpose of this part and adoption.
+by reference.
+This part contains rules for using and supplementing existing environmental documents prepared
+under SEPA or National Environmental Policy Act (NEPA) for the city's own environmental
+compliance. The city adopts the following sections by reference:
+WAC 197-11-164 Planned actions – Definition and criteria.
+WAC 197-11-168 Ordinances or resolutions designating planned actions – Procedures
+for adoption.
+WAC 197-11-172 Planned actions – Project review.
+WAC 197-11-600 When to use existing environmental documents.
+WAC 197-11-610 Use of NEPA documents.
+WAC 197-11-620 Supplemental environmental impact statement – Procedures.
+WAC 197-11-625 Addenda – Procedures.
+WAC 197-11-630 Adoption – Procedures.
+WAC 197-11-635 Incorporation by reference – Procedures.
+WAC 197-11-640 Combining documents.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.230 SEPA and agency decisions, purpose and adoption by reference.
+This part contains rules (and policies) for SEPA's substantive authority, such as decisions to
+mitigate or reject proposals as a result of SEPA. This part also contains procedures for appealing
+SEPA determinations to agencies or the courts. The city adopts the following sections by
+reference:
+WAC 197-11-650 Purpose of this part.
+WAC 197-11-655 Implementation.
+WAC 197-11-660 Substantive authority and mitigation.
+WAC 197-11-680 Appeals.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.240 Substantive authority.
+A. The policies and goals set forth in this chapter are supplementary to those set forth in
+chapter 43.21C RCW and chapter 197-11 WAC and those identified in subsection (D) of
+this section.
+B. The city may attach conditions to a permit or approval for a proposal so long as:
+1. Such conditions are necessary to mitigate specific probable adverse environmental
+impacts identified in environmental documents prepared pursuant to this chapter; and
+2. Such conditions are in writing; and
+3. The conditions or mitigation measures included in such conditions are reasonable and
+capable of being accomplished; and
+4. The city has considered whether other local, state, or federal mitigation measures
+applied to the proposal are sufficient to mitigate the identified impacts; and
+5. Such conditions are based on one or more policies in subsection (D) of this section
+and cited in the license or other decision document.
+C. The city may deny a permit or approval for a proposal on the basis of SEPA so long as:
+1. A finding is made that approving the proposal would result in probable significant
+adverse environmental impacts that are identified in a FEIS or final SEIS prepared
+pursuant to this chapter; and
+2. A finding is made that no reasonable mitigation measures are capable of being
+accomplished that are sufficient to mitigate the identified impact; and
+3. The denial is based on one or more policies identified in subsection (D) of this section
+and identified in writing in the decision document. (Chapter 43.21C RCW and chapter
+197-11 WAC.)
+D. The city designates and adopts by reference the following policies as the basis for the city's
+exercise of authority pursuant to this section:
+1. The city shall use all practicable means, consistent with other essential considerations
+of state policy, to improve and coordinate plans, functions, programs, and resources
+to the end that the state and its citizens may:
+a. Fulfill the responsibilities of each generation as trustee of the environment for
+succeeding generations;
+b. Assure for all people of Washington safe, healthful, productive, and
+aesthetically and culturally pleasing surroundings;
+c. Attain the widest range of beneficial uses of the environment without
+degradation, risk to health or safety, or other undesirable and unintended
+§ 14.10.240 ENVIRONMENTAL REGULATIONS § 14.10.250
+consequences;
+d. Preserve important historic, cultural, and natural aspects of our national
+heritage;
+e. Maintain, whenever possible, an environment which supports diversity and
+variety of individual choice;
+f. Achieve a balance between population and resource use which will permit high
+standards of living and a wide sharing of life's amenities; and
+g. Enhance the quality of renewable resources and approach the maximum
+attainable recycling of depletable resources.
+2. The city recognizes that each person has a fundamental and inalienable right to a
+healthful environment and that each person has a responsibility to contribute to the
+preservation and enhancement of the environment.
+3. The city adopts by reference the policies in the following as they may be further
+amended:
+a. Burlington Municipal Code;
+b. Burlington comprehensive plan;
+c. Shoreline Management Act;
+d. Growth Management Act;
+e. Forest Practice Act and regulations;
+f. Washington State Environmental Policy Act (SEPA) (Chapter 43.21C RCW);
+g. Skagit County Countywide Planning Policies (CPPs).
+(Ord. 1853 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+14.10.250 SEPA appeals.
+A. Any person may appeal the issuance of:
+1. A determination of nonsignificance;
+2. A determination of significance when issued in conjunction with a project permit; or
+3. A final environmental impact statement.
+The appeal of a SEPA decision not requiring a legislative decision, conditioning or
+denying a proposal, to the city council as set forth in RCW 43.21C.060, shall only be
+available where expressly provided for in this section.
+B. An appeal must be filed in writing with the responsible official (WAC197-11-680) within
+14 calendar days of the date the decision becomes final. The appeal shall identify the
+decision, contain a summary of the grounds for the appeal and be accompanied by an
+appeal fee in an amount established by the adopted fee ordinance or applicable resolution.
+Following receipt of the appeal and the fee, the responsible official shall transmit a copy of
+the appeal to the hearing examiner, unless the decision is made by the hearing examiner,
+in which case an appeal shall go directly to city council or to whatever authority that has
+jurisdiction over the underlying action.
+C. Because a major purpose of this chapter is to combine environmental considerations with
+public decisions, any appeal brought under this chapter shall be linked to the appeal of a
+specific governmental action. The State Environmental Policy Act provides a basis for
+challenging whether governmental action is in compliance with the substantive and
+procedural provisions of this chapter. The State Environmental Policy Act is not intended
+to create a cause of action unrelated to a specific governmental action.
+D. Unless otherwise provided by this section:
+1. Appeals under this chapter shall be of the governmental action together with its
+accompanying environmental determinations.
+2. Appeals of environmental determinations made or the lack thereof under this chapter
+shall be combined with and commenced within the time and in the manner required
+to appeal the governmental action which is subject to environmental review, pursuant
+to chapter 14A.05 BMC.
+3. An appeal of a determination of significance may be filed as set forth above, prior to
+and separate from a final hearing and determination of a project action and a
+determination of nonsignificance of a nonproject action initiated by the city may also
+be made independent of the underlying action, in the manner set forth in subsection
+(B) of this section.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.260 Planned action.
+A. A planned action, as provided for in subsection (B) of this section, does not require a
+threshold determination or the preparation of an environmental impact statement under this
+chapter, but is subject to environmental review and mitigation as provided in this chapter.
+B. 1. For purposes of this section, a "planned action" means one or more types of project
+action that:
+a. Are designated planned actions by an ordinance or resolution adopted by a
+county, city or town planning under RCW 36.70A.040;
+b. Have had the significant impacts adequately addressed in an environmental
+impact statement prepared in conjunction with (i) a comprehensive plan or
+subarea plan adopted under chapter 36.70A RCW, or (ii) a phased project;
+c. Are subsequent or implementing projects for the proposals listed in subsection
+(B)(1)(b) of this subsection;
+d. Are located within an urban growth area, as defined in RCW 36.70A.030;
+e. Are not essential public facilities, as defined in RCW 36.70A.200; and
+f. Are consistent with the comprehensive plan adopted under chapter36.70A
+RCW.
+§ 14.10.260 ENVIRONMENTAL REGULATIONS § 14.10.280
+2. The city shall limit planned actions to development or specific geographical areas that
+are less extensive than the jurisdictional boundaries of the city and may limit a
+planned action to a time period identified in the environmental impact statement or
+the ordinance or resolution adopted under this subsection.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.270 Notice/statute of limitations.
+A. The city, applicant for, or proponent of an action may publish a notice of action pursuant
+to RCW 43.21C.080 for any action.
+B. The form of the notice shall be substantially in the form provided in WAC 197-11-990. The
+notice shall be published by the city clerk, applicant or proponent pursuant to RCW
+43.21C.080.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.280 Definitions – Purpose of this part and adoption by reference.
+This part contains uniform usage and definitions of terms under SEPA. The city adopts the
+following sections by reference, as supplemented by BMC § 14.10.060:
+WAC 197-11-700 Definitions.
+WAC 197-11-702 Act.
+WAC 197-11-704 Action.
+WAC 197-11-706 Addendum.
+WAC 197-11-708 Adoption.
+WAC 197-11-710 Affected tribe.
+WAC 197-11-712 Affecting.
+WAC 197-11-714 Agency.
+WAC 197-11-716 Applicant.
+WAC 197-11-718 Built environment.
+WAC 197-11-720 Categorical exemption.
+WAC 197-11-721 Closed record appeal.
+WAC 197-11-722 Consolidated appeal.
+WAC 197-11-724 Consulted agency.
+WAC 197-11-726 Cost-benefit analysis.
+WAC 197-11-728 County/city.
+WAC 197-11-730 Decision maker.
+WAC 197-11-732 Department.
+WAC 197-11-734 Determination of nonsignificance (DNS).
+WAC 197-11-736 Determination of significance (DS).
+WAC 197-11-738 EIS.
+WAC 197-11-740 Environment.
+WAC 197-11-742 Environmental checklist.
+WAC 197-11-744 Environmental document.
+WAC 197-11-746 Environmental review.
+WAC 197-11-750 Expanded scoping.
+WAC 197-11-752 Impacts.
+WAC 197-11-754 Incorporation by reference.
+WAC 197-11-756 Lands covered by water.
+WAC 197-11-758 Lead agency.
+WAC 197-11-760 License.
+WAC 197-11-762 Local agency.
+WAC 197-11-764 Major action.
+WAC 197-11-766 Mitigated DNS.
+WAC 197-11-768 Mitigation.
+WAC 197-11-770 Natural environment.
+WAC 197-11-772 NEPA.
+WAC 197-11-774 Nonproject.
+WAC 197-11-775 Open record hearing.
+WAC 197-11-776 Phased review.
+WAC 197-11-778 Preparation.
+WAC 197-11-780 Private project.
+WAC 197-11-782 Probable.
+WAC 197-11-784 Proposal.
+WAC 197-11-786 Reasonable alternative.
+WAC 197-11-788 Responsible official.
+WAC 197-11-790 SEPA.
+WAC 197-11-792 Scope.
+WAC 197-11-793 Scoping.
+WAC 197-11-794 Significant.
+WAC 197-11-796 State agency.
+WAC 197-11-797 Threshold determination.
+WAC 197-11-799 Underlying governmental action.
+(Ord. 1853 § 2 (Exh. B), 2018)
+§ 14.10.290 ENVIRONMENTAL REGULATIONS § 14.10.300
+
+14.10.290 Agency compliance, purpose and adoption by reference.
+This part contains rules for agency compliance with SEPA, including rules for charging fees
+under the SEPA process, designating categorical exemptions which do not apply within critical
+areas, listing agencies with environmental expertise, selecting the lead agency, and applying
+these rules to current agency activities. The city adopts the following sections by reference:
+WAC 197-11-900 Purpose of this part.
+WAC 197-11-902 Agency SEPA policies.
+WAC 197-11-916 Application to ongoing actions.
+WAC 197-11-920 Agencies with environmental expertise.
+WAC 197-11-922 Lead agency rules.
+WAC 197-11-924 Determining the lead agency.
+WAC 197-11-926 Lead agency for governmental proposals.
+WAC 197-11-928 Lead agency for public and private proposals.
+WAC 197-11-930 Lead agency for private projects with one agency with jurisdiction.
+WAC 197-11-932 Lead agency for private projects requiring licensing from more
+than one agency, when one of the agencies is county/city.
+WAC 197-11-934 Lead agency for private projects requiring licenses from a local
+agency, not a county/city, and one or more state agencies.
+WAC 197-11-936 Lead agency for private projects requiring licenses from more than
+one state agency.
+WAC 197-11-938 Lead agencies for specific proposals.
+WAC 197-11-940 Transfer of lead agency status to a state agency.
+WAC 197-11-942 Agreements on lead agency status.
+WAC 197-11-944 Agreements on division of lead agency duties.
+WAC 197-11-946 DOE resolution of lead agency disputes.
+WAC 197-11-948 Assumption of lead agency status.
+(Ord. 1853 § 2 (Exh. B), 2018)
+
+14.10.300 Form – Adoption by reference.
+The city adopts the following forms and sections by reference:
+WAC 197-11-960 Environmental checklist.
+WAC 197-11-965 Adoption notice.
+WAC 197-11-970 Determination of nonsignificance (DNS).
+WAC 197-11-980 Determination of significance and scoping notice (DS).
+WAC 197-11-985 Notice of assumption of lead agency status.
+WAC 197-11-990 Notice of action.
+(Ord. 1853 § 2 (Exh. B), 2018)
+§ 14.15.010 ENVIRONMENTAL REGULATIONS § 14.15.020
+Article I
+General Provisions

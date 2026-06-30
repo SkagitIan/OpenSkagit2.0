@@ -1,0 +1,381 @@
+{
+  "jurisdiction": "anacortes",
+  "jurisdiction_key": "anacortes",
+  "title": "Title 19 Unified Development Code",
+  "source": "https://anacortes.municipal.codes/AMC/19",
+  "preset": "anacortes_title19",
+  "platform": "municipal.codes",
+  "collected_at": "2026-06-29T23:18:00.863Z",
+  "page_count": 46,
+  "toc_page_count": 46,
+  "pages": [
+    {
+      "ref": "19.10.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.10",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.10 General Provisions",
+      "text_length": 6382
+    },
+    {
+      "ref": "19.12.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.12",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.12 Definitions and Interpretation Revised",
+      "text_length": 53012
+    },
+    {
+      "ref": "19.14.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.14",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.14 International Codes",
+      "text_length": 3215
+    },
+    {
+      "ref": "19.16.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.16",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.16 Legislative Actions",
+      "text_length": 21934
+    },
+    {
+      "ref": "19.20.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.20",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.20 Application Procedures Revised",
+      "text_length": 51116
+    },
+    {
+      "ref": "19.22.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.22",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.22 Concurrency Revised",
+      "text_length": 12890
+    },
+    {
+      "ref": "19.24.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.24",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.24 Essential Public Facilities",
+      "text_length": 2648
+    },
+    {
+      "ref": "19.28.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.28",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.28 Permit Revision and Expiration",
+      "text_length": 2137
+    },
+    {
+      "ref": "19.30.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.30",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.30 Site Plan Review",
+      "text_length": 6569
+    },
+    {
+      "ref": "19.32.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.32",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.32 Land Divisions",
+      "text_length": 39362
+    },
+    {
+      "ref": "19.34.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.34",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.34 Boundary Line Adjustments",
+      "text_length": 6543
+    },
+    {
+      "ref": "19.36.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.36",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.36 Conditional Uses",
+      "text_length": 5861
+    },
+    {
+      "ref": "19.38.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.38",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.38 Variances",
+      "text_length": 2094
+    },
+    {
+      "ref": "19.40.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.40",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.40 Zones",
+      "text_length": 2320
+    },
+    {
+      "ref": "19.41.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.41",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.41 Allowed Uses Revised",
+      "text_length": 31432
+    },
+    {
+      "ref": "19.42.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.42",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.42 Form and Intensity Standards Revised",
+      "text_length": 60719
+    },
+    {
+      "ref": "19.43.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.43",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.43 Residential Use Standards Revised",
+      "text_length": 2756
+    },
+    {
+      "ref": "19.44.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.44",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.44 Commercial Uses Revised",
+      "text_length": 39674
+    },
+    {
+      "ref": "19.45.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.45",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.45 Industrial Uses",
+      "text_length": 13926
+    },
+    {
+      "ref": "19.46.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.46",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.46 Public, Institutional and Open Space Uses",
+      "text_length": 15941
+    },
+    {
+      "ref": "19.47.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.47",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.47 Accessory Uses and Structures Revised",
+      "text_length": 14166
+    },
+    {
+      "ref": "19.48.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.48",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.48 Temporary Uses",
+      "text_length": 2110
+    },
+    {
+      "ref": "19.49.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.49",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.49 Nonconforming Uses and Structures Revised",
+      "text_length": 2387
+    },
+    {
+      "ref": "19.50.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.50",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.50 Introduction Revised",
+      "text_length": 2164
+    },
+    {
+      "ref": "19.51.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.51",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.51 Public Street Improvements Required Revised",
+      "text_length": 2505
+    },
+    {
+      "ref": "19.52.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.52",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.52 Public Street Design Revised",
+      "text_length": 2483
+    },
+    {
+      "ref": "19.53.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.53",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.53 Private Driveways and Access Revised",
+      "text_length": 2356
+    },
+    {
+      "ref": "19.54.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.54",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.54 Subdivision Design and Block Structure",
+      "text_length": 20762
+    },
+    {
+      "ref": "19.59.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.59",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.59 Underground Utilities",
+      "text_length": 11778
+    },
+    {
+      "ref": "19.60.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.60",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.60 Introduction",
+      "text_length": 8792
+    },
+    {
+      "ref": "19.61.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.61",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.61 Block Frontage Standards Revised",
+      "text_length": 43094
+    },
+    {
+      "ref": "19.62.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.62",
+      "status": 200,
+      "mode": "browser-resume",
+      "chapter": "19.62 Site Planning Revised",
+      "text_length": 39891
+    },
+    {
+      "ref": "19.63.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.63",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.63 Building Design Revised",
+      "text_length": 2363
+    },
+    {
+      "ref": "19.64.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.64",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.64 Parking Revised",
+      "text_length": 2685
+    },
+    {
+      "ref": "19.65.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.65",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.65 Landscaping Revised",
+      "text_length": 2438
+    },
+    {
+      "ref": "19.66.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.66",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.66 Fences, Walls and Hedges",
+      "text_length": 2471
+    },
+    {
+      "ref": "19.67.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.67",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.67 Signs",
+      "text_length": 2613
+    },
+    {
+      "ref": "19.68.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.68",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.68 Wireless Service Facilities",
+      "text_length": 3367
+    },
+    {
+      "ref": "19.69.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.69",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.69 Standards, Generally",
+      "text_length": 2301
+    },
+    {
+      "ref": "19.70.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.70",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.70 Critical Areas",
+      "text_length": 4859
+    },
+    {
+      "ref": "19.72.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.72",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.72 Shorelines",
+      "text_length": 1978
+    },
+    {
+      "ref": "19.74.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.74",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.74 Floodplain Management",
+      "text_length": 2322
+    },
+    {
+      "ref": "19.76.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.76",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.76 Stormwater",
+      "text_length": 2361
+    },
+    {
+      "ref": "19.78.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.78",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.78 Clearing and Grading",
+      "text_length": 2222
+    },
+    {
+      "ref": "19.80.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.80",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.80 Development Agreements",
+      "text_length": 2045
+    },
+    {
+      "ref": "19.82.html",
+      "url": "https://anacortes.municipal.codes/AMC/19.82",
+      "status": 200,
+      "mode": "browser",
+      "chapter": "19.82 Development Agreement for Port-Owned Property",
+      "text_length": 3117
+    }
+  ]
+}

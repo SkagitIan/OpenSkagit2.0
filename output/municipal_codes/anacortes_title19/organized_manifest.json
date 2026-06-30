@@ -1,0 +1,10 @@
+{
+  "input_dir": "output\\municipal_codes\\anacortes_title19",
+  "jurisdiction": "anacortes",
+  "title": "Title 19 Unified Development Code",
+  "pages": 46,
+  "sections": 180,
+  "tables": 40,
+  "sections_path": "output\\municipal_codes\\anacortes_title19\\sections.jsonl",
+  "tables_path": "output\\municipal_codes\\anacortes_title19\\tables.json"
+}

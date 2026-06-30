@@ -1,0 +1,392 @@
+Chapter 19.20 DEVELOPMENT STANDARDS
+
+         Chapter 19.20
+DEVELOPMENT STANDARDS
+
+             Sections:
+
+              19.20.010    General development standards.
+
+              19.20.020    Table.
+
+              19.20.030    Affordable housing incentives.
+
+        19.20.010  General development standards.
+
+             The regulations established in this chapter within each zoning district shall be minimum regulations and shall apply uniformly to each class or kind of structure or land, except as hereinafter provided:
+
+             (1) No building, structure or part thereof shall hereafter be erected, constructed, reconstructed, moved, or structurally altered unless in conformity with all of the regulations specified in this chapter for the zoning district in which it is located.
+
+             (2) No buildings or structures shall encroach on any easement or right-of-way.
+
+             (3) No part of a yard, or other open space, or off-street parking or loading space required about or in connection with any building for the purpose of complying with this chapter shall be included as part of a yard, open space or off-street parking or loading space similarly required for any other building.
+
+             (4) No yard or lot existing at the time of passage of the ordinance codified in this chapter shall be reduced in dimension or area below the minimum requirements set forth in this chapter. Yards or lots created after the effective date of this chapter shall meet at least the minimum requirements established by this chapter.
+
+             (5) All structures and uses require connection to public water and sewer systems where available. If public sewer and/or water service is not available to serve a proposed project the proponent shall extend such service unless the reviewing official and all other appropriate agencies authorize the use of interim systems. When interim systems are authorized, the following may be required:
+
+             (a) “Double plumbing” dry line sewers to connect the structure or use’s on-site system to a public sewer when it becomes available;
+
+             (b) Dry line sewer installation when the town provides construction elevations in sufficient detail to ensure that the dry lines will be able to function;
+
+             (c) Installation of an interim community sewer system which shall be managed and/or owned by an approved satellite management agency;
+
+             (d) Permanent or interim community water supply system shall be managed and/or owned by an approved satellite management agency.
+
+             (6) Uses allowed within a zoning district are specifically those listed as permitted (P) or conditional (C) in the table in CMC  19.15.020 . [Ord. 900 § 2 (Att. A (§ 6)), 2025]
+
+        19.20.020  Table.
+
+                          Zones
+
+                          R
+
+                          A
+
+                          CL
+
+                          TC
+
+                          I
+
+                          P
+
+                          OS
+
+                          Minimum Lot Size (Square Feet)
+
+                         Where sewer not available (1)
+
+                         12,500
+
+                         12,500
+
+                         2,000
+
+                         12,500
+
+                         Where sewer available (2)
+
+                         10,000
+
+                         2,000
+
+                         4,000
+
+                         10 ac
+
+                         Single-family detached
+
+                         6,000
+
+                         Accessory dwelling unit ADU (11)
+
+                         6,000
+
+                         Duplex
+
+                         4,000
+
+                         Triplex
+
+                         4,500
+
+                         Fourplex
+
+                         4,500
+
+                         Fiveplex
+
+                         9,500
+
+                         9,500
+
+                         Sixplex
+
+                         6,000
+
+                         6,000
+
+                         Townhouse – three units
+
+                         6,500
+
+                         6,500
+
+                         Townhouse – five units
+
+                         10,200
+
+                         10,200
+
+                         Courtyard building
+
+                         7,500
+
+                         7,500
+
+                         Stacked flats/multiplex
+
+                         10,200
+
+                         10,200
+
+                         Cottage housing – six units
+
+                         12,600
+
+                         12,600
+
+                          Minimum Lot Width (Feet)
+
+                         At building line
+
+                         25 ft
+
+                         25 ft
+
+                         0 ft
+
+                         Single-family detached
+
+                         50 ft
+
+                         Accessory dwelling unit (ADU) (7)
+
+                         Duplex, triplex, fourplex
+
+                         45 ft
+
+                         Fiveplex
+
+                         90 ft
+
+                         90 ft
+
+                         Sixplex
+
+                         55 ft
+
+                         55 ft
+
+                         Townhouse – three units
+
+                         80 ft
+
+                         80 ft
+
+                         Townhouse – five units
+
+                         120 ft
+
+                         120 ft
+
+                         Courtyard building
+
+                         80 ft
+
+                         80 ft
+
+                         Stacked flats/multiplex
+
+                         120 ft
+
+                         120 ft
+
+                         Cottage housing
+
+                         105 ft
+
+                          Minimum Lot Depth (Feet)
+
+                         Minimum mean depth of lot
+
+                         0 ft
+
+                         0 ft
+
+                         0 ft
+
+                         Single-family detached
+
+                         80 ft
+
+                         Accessory dwelling unit (ADU) (7)
+
+                         Duplex, triplex, fourplex
+
+                         85 ft
+
+                         Fiveplex
+
+                         105 ft
+
+                         105 ft
+
+                         Sixplex
+
+                         100 ft
+
+                         100 ft
+
+                         Townhouse – three units
+
+                         85 ft
+
+                         85 ft
+
+                         Townhouse – five units
+
+                         60 ft
+
+                         60 ft
+
+                         Courtyard building
+
+                         100 ft
+
+                         100 ft
+
+                         Stacked flats/multiplex
+
+                         85 ft
+
+                         85 ft
+
+                         Cottage housing
+
+                         120 ft
+
+                          Setbacks (Feet)
+
+                         Front yard (3)
+
+                         20 ft
+
+                         0 ft
+
+                         0 ft
+
+                         0 ft
+
+                         0 ft
+
+                         Side yard minimum mean depth (4)
+
+                         5 ft
+
+                         0 ft
+
+                         0 ft
+
+                         0 ft
+
+                         0 ft
+
+                         Rear yard minimum depth without an alley (5)
+
+                         20 ft
+
+                         0 ft
+
+                         0 ft
+
+                         0 ft
+
+                         0 ft
+
+                         Accessory structures
+
+                         (7)
+
+                         Exceptions in TC zone
+
+                         (8)
+
+                         (9)
+
+                          Lot Coverage by Buildings
+
+                         Total lot coverage (%)
+
+                         40%
+
+                         100%
+
+                         100%
+
+                         100%
+
+                         Accessory buildings of rear yard
+
+                         50%
+
+                          Maximum Height
+
+                         Main buildings (10)
+
+                         35 ft
+
+                         35 ft
+
+                         35 ft
+
+                         45 ft
+
+                         35 ft
+
+                         Accessory buildings
+
+                         28 ft
+
+             (1) Or as necessary to meet applicable state or county on-site septic system requirements, whichever is greater.
+
+             (2) Exclusive of roadways.
+
+             (3) To garage door if residential accessed from a street or 15 feet except 10 feet for lots with a density of three or more. Maximum setback for TC in all other locations, 10 feet from the property line on the street side for new construction. If new construction occurs on a corner lot, the maximum setback shall apply to each boundary line adjacent to a street.
+
+             (4) The total of the two side yards shall be 10 feet. “Side of the building” means the out face of any part of the building roof eaves. Zero feet for attached units internal to the development.
+
+             (5) For R zone, rear yard setback zero feet with access to an accessible and open alley. For I zone, a 20-foot setback shall be required for any and each yard that abuts, adjoins, or is separated by a street less than 50 feet in width, any residentially zone property. This additional setback requirement also applies to residentially zoned property that is unincorporated county land.
+
+             (6) In TC zone, parking shall not be located in front of the building.
+
+             (7) Accessory structures shall conform to the requirements of this section, shall meet all the required setbacks of the zone with the exception that the rear yard setback may be reduced to five feet if the height of the accessory structure does not exceed 16 feet.
+
+             (8) In TC zone, exceptions may be authorized through the town council plan review established as part of the conditional use permit for the drive-in use:
+
+             (a) Drive-in businesses shall have the building setback established as part of the conditional use permit for the drive-in use.
+
+             (b) Utility easements.
+
+             (c) When a wider sidewalk or additional landscaping is approved at the building entrance.
+
+             (d) Architectural design features such as a unique building entrance, outside seating area, pocket park, or similar element.
+
+             (e) Irregular shaped lot or lots that do not directly abut the right-of-way.
+
+             (f) Site development that incorporates existing buildings, when needed to preserve existing visual and physical access.
+
+             (g) Other exceptions consistent with the intent of providing a well-defined street edge and pedestrian-oriented streetscape.
+
+             (9) In OS zone, minimum setback requirements for:
+
+             (a) Buildings and other structures shall be located a minimum of 50 feet from any lot in a residential zone.
+
+             (b) Sports play areas and parking lots shall be located to minimize disruption of nearby residential uses.
+
+             (10) Churches may exceed maximum height if approved by plan review (see CMC  19.68.030  and  19.68.040 ). In I zone, structures that exceed 45 feet shall provide one additional foot of setback for each foot the structure exceeds 45 feet.
+
+             (11) In A zone, development shall comply with:
+
+             (a) This chapter;
+
+             (b) The Mears Field Airport Layout Plan; and
+
+             (c) Applicable FAA standards. Development and landscaping shall not exceed the height limitation of the requirements of the Federal Aviation Regulations Part 77 or any applicable state or federal agency. [Ord. 900 § 2 (Att. A (§ 6)), 2025]
+
+        19.20.030  Affordable housing incentives.
+
+             (1) Increased density may be allowed consistent with local needs for any affordable housing development of any single-family or middle housing residence located on real property owned or controlled by a religious organization pursuant to RCW  36.70A.545 .
+
+             (2) Additional housing units may be created within existing commercial, mixed-use, and middle housing buildings that are exempt from density limits, parking, and other regulations pursuant to RCW  35.21.990  and  35A.21.440 . [Ord. 900 § 2 (Att. A (§ 6)), 2025]

@@ -1,0 +1,753 @@
+14A.05.010 Title.
+This chapter shall be called "Processing Land Use Actions – Decision Making Framework."
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.020 Application.
+This chapter shall apply to all land use actions including project permits as defined in BMC
+§ 14A.01.060.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.030 Purpose.
+The purpose of this chapter is to identify the process for accepting and reviewing land use
+applications to determine consistency with applicable state regulations, the zoning map and
+Burlington Municipal Code requirements, the comprehensive plan and other applicable
+regulations.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.040 Authority.
+This chapter is authorized pursuant to chapters 36.70A, 36.70B and 43.21C RCW and other
+applicable laws and regulations.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.050 Project permit applications – Consideration – Requirements.
+A. Each proposed project permit, as defined in BMC § 14A.01.060, shall file an application
+for a project permit. No project shall proceed without a valid project permit issued by the
+city. Applications shall contain all documents and information required by the applicable
+provisions of the BMC.
+B. Within 28 days after receiving a project permit application, the planning department shall
+mail or provide in person a written determination to the applicant, stating either:
+1. That the application is complete; or
+2. That the application is incomplete and what is necessary to make the application
+complete.
+The notice of complete application described above shall be combined with and
+issued simultaneously with the notice of application. The notice should also identify
+other local, state, or federal government agencies that may have jurisdiction over
+some aspect of the application.
+C. A project permit application is complete for purposes of this section when it meets the
+procedural submission requirements of the land use regulations in effect on the date of
+application, and is sufficient for continued processing even though additional information
+may be required or project modifications may be undertaken subsequently. The
+§ 14A.05.050 LAND USE DECISIONS § 14A.05.060
+determination of completeness shall not preclude the city from requesting additional
+information or studies either at the time of the notice of completeness or subsequently if
+new information is required or substantial changes in the proposed action occur.
+D. The determination of completeness may include the following as optional information:
+1. A preliminary determination of those development regulations that will be used for
+project mitigation;
+2. A preliminary determination of consistency with the comprehensive plan and
+development regulations; or
+3. Other information the planning department chooses to include.
+E. Applications shall automatically be deemed complete unless the applicant is notified within
+28 days that the application is incomplete as required by subsection (B) of this section.
+F. Within 14 days after an applicant has submitted to the city additional information identified
+by the city as being necessary for a complete application, the planning department shall
+notify the applicant whether the application is complete or what additional information is
+necessary.
+G. Consistency of a proposed project with the applicable development regulations or plans is
+determined by considering four factors as follows:
+1. Type of land use allowed;
+2. Level of development allowed, such as units per acre or other measures of density;
+3. Infrastructure, such as the adequacy of public facilities and services to serve the
+proposed project; and
+4. Compliance with specific development standards.
+H. Project review shall be used to identify specific project design and conditions relating to
+compliance with applicable regulations.
+I. Any public meeting or required open record hearing may be combined with any public
+meeting or open record hearing that may be held on the project by another local, state,
+regional, federal, or other agency, subject to the public notification requirements of this
+chapter.
+J. SEPA appeal hearings shall be combined with the hearing on the underlying project or any
+appeal of the underlying project or permit except where independent review is provided for
+by BMC § 14.10.250.
+K. Completeness determinations shall be classified as Type I decisions regardless of the type
+of application they are associated with and may be appealed in accordance with the
+applicable appeal procedures identified in this title.
+(Ord. 1854 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+14A.05.060 Classification of land use actions.
+Land use actions governed by this title are classified into four categories as set forth below.
+Projects requiring more than one type of decision should, whenever possible, be consolidated
+under the higher classification.
+A. Type I decisions are administrative decisions which require no notice or hearing. These
+decisions are made by the appropriate administrative official based upon the application
+materials received and the specific criteria identified in this chapter. Type I decisions which
+are not categorically exempt from SEPA shall be processed as Type II decisions.
+Type I decisions include the following:
+1. Building and grading permits including plan review (see BMC Title 15).
+2. Boundary line adjustments (chapter 16.60 BMC).
+3. Binding site plans (chapter 16.30 BMC).
+4. Site plan review (BMC § 14A.05.160).
+5. Code interpretations and other administrative decisions (chapter 17.01 BMC).
+6. Temporary uses for less than one year where SEPA is not required.
+7. Permits to establish or change uses that are permitted outright (chapter 17.01 BMC).
+8. Final short subdivision approvals (chapter 16.20 BMC).
+9. Final long subdivision approval, except that city council approval shall be required
+pursuant to BMC § 16.20.060.
+10. Minor adjustments to approved land use and conditional use permits.
+11. Shoreline exemptions (chapter 18.09 BMC).
+12. Construction permits for site infrastructure, street improvements, utilities, and
+stormwater infrastructure.
+13. Completeness determinations (BMC § 14A.05.050(F)) and decisions to close an
+application due to lack of information or failure to respond (BMC § 14A.05.070(F)).
+14. Any other land use action or project permit approval identified by Burlington
+Municipal Code as a Type I review.
+B. Type II decisions are administrative decisions that require notification but do not require a
+hearing. These decisions are made by the appropriate administrative official based upon the
+application materials received and the specific criteria identified in this chapter.
+Type II decisions include the following:
+1. Accessory dwelling units (BMC § 17.15.070).
+2. Shoreline substantial development permits (chapter 18.09 BMC).
+3. Preliminary short subdivision approval (chapter 16.10 BMC).
+4. Permits and land use actions normally classified as Type I decisions which are not
+categorically exempt from SEPA.
+§ 14A.05.060 LAND USE DECISIONS § 14A.05.060
+5. SEPA threshold determinations not associated with a land use action.
+6. Shoreline variances (chapter 18.09 BMC).
+7. Any other land use action or project permit approval identified by Burlington
+Municipal Code as a Type II review.
+C. Type III decisions are quasi-judicial decisions made by the hearing examiner pursuant to
+the criteria identified in this chapter, the staff report provided by the planning department
+and evidence presented at time of hearing before the hearing examiner.
+Type III decisions include the following:
+1. Reasonable use exemptions (chapter 14.15 BMC).
+2. Variances (BMC § 14A.05.150 and 17.95.140).
+3. Appeals of Type I decisions.
+4. Appeals of Type II decisions.
+5. Preliminary long subdivision approval (chapter 16.10 BMC).
+6. Site specific zoning map amendments consistent with and not requiring an
+amendment to the comprehensive plan (BMC § 14A.05.170 and 17.125.080).
+7. Conditional use permits (BMC § 14A.05.140).
+8. Shoreline conditional use permits (chapter 18.09 BMC).
+9. Any other land use action or project permit approval identified by Burlington
+Municipal Code as a Type III review.
+D. Type IV decisions are legislative decisions made by the city council and limited quasi-
+judicial final decisions pursuant to the criteria identified in this chapter, in its capacity to
+establish policy and manage public lands, pursuant to existing legislative standards and
+based on the hearing examiner's or planning commission's record, public meeting and
+recommendation, and an open and/or closed record public hearing by the city council, the
+staff report provided by the planning department and evidence presented at time of hearing
+before the city council.
+Type IV decisions include the following:
+1. Final approval of site specific zoning map amendments (BMC § 14A.05.170 and
+17.125.080).
+2. Essential public facility conditional use permits (chapter 17.105 BMC).
+3. Zoning text amendments (BMC § 14A.05.170 and chapter 17.125 BMC).
+4. Area wide zoning map amendments (BMC § 14A.05.170 and 17.125.070).
+5. Comprehensive plan adoption and amendment (BMC § 14A.05.180 and chapter
+17.125 BMC).
+6. Final decision as to appeals or adjustments of impact fees pursuant to chapter 15.12
+BMC.
+7. Zoning map and text amendments which are not consistent with, and require, a
+corresponding change to the comprehensive plan.
+8. Appeals of decisions on Type III project permit applications.
+9. Any other land use action or project permit approval identified by Burlington
+Municipal Code as a Type IV review.
+(Ord. 1854 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+14A.05.070 Applications – Generally.
+A. Applications for project permits and other land use actions shall be made by the property
+owner, lessee, contract purchaser, or a city agency, or by an authorized agent thereof.
+B. All applications for project permits or other land use actions shall be made to the director
+on a form provided by the community development department.
+C. Applications shall be accompanied by payment of the applicable filing fees, if any, as
+adopted by city council resolution in the current city fee schedule.
+D. All project permit or land use actions necessary for a project shall, whenever possible, be
+included in the same application.
+E. All applications shall contain the submittal information required by the applicable sections
+of this title and any other applicable development regulations such as BMC Title 18,
+Shoreline Master Program; Title 17, Comprehensive Zoning Ordinance; Title 16,
+Subdivisions; Title 15, Buildings and Construction; Title 12, Streets, Sidewalks, and Public
+Places; and Title 14, Environmental Regulations. The director may require additional
+material from the applicant such as maps, text, or models when the director determines that
+such material is needed to accurately assess the proposed project.
+F. An application shall be closed and shall be deemed abandoned and void if the applicant has
+failed without reasonable justification to supply all required information or data within 60
+days of a written request for it; provided, that the director may extend, in writing, the period
+for such submission if it is determined that the delay was not the fault of the applicant. A
+decision to close an application under this provision shall be classified as a Type I decision
+regardless of the type of application it is associated with and may be appealed in
+accordance with the applicable appeal procedures identified in this title.
+G. Final Decision.
+1. The city shall issue its notice of final decision on an application within 120 days after
+the city notifies the applicant that the application is complete (determination of
+completeness) unless the project permit is requested under BMC Title 16, in which
+case a final decision shall be issued within 90 days. The following time periods shall
+be excluded:
+a. Any period during which the applicant has been requested by the city to correct
+plans, perform studies, or provide additional required information. The period
+shall be calculated from the date the city notifies the applicant of the need for
+additional information until the earlier of the date the city determines whether
+§ 14A.05.070 LAND USE DECISIONS § 14A.05.080
+the additional information satisfies the request for information or 14 days after
+the date the information has been provided to the local government;
+b. If the city determines that the information submitted by the applicant under
+BMC § 14A.05.050(B) is insufficient, it shall notify the applicant of the
+deficiencies and the procedures shall apply as if a new request for studies had
+been made;
+c. Any period during which an environmental impact statement is being prepared
+following a determination of significance pursuant to chapter43.21C RCW and
+chapter 14.10 BMC, subject to an agreement between the city and the applicant
+in writing to a time period for completion of an environmental impact statement;
+d. Any period for administrative appeals of project permits, if an open record
+appeal hearing or a closed record appeal is allowed. The time period for an open
+record appeal hearing shall not exceed 90 days and 60 days for a closed record
+appeal. The parties to an appeal may agree to extend these time periods;
+e. Any extension of time mutually agreed upon by the applicant and the local
+government.
+2. If the city is unable to issue its final decision within the time limits provided for in
+this section, it shall provide written notice of this fact to the project applicant. The
+notice shall include a statement of the reasons why the time limits have not been met
+and an estimated date for issuance of the notice of final decision.
+3. The time limits established by subsection (G)(1) of this section do not apply if the
+application:
+a. Is initiated by the city or a department of the city;
+b. Requires an amendment to the comprehensive plan, an area wide zone change
+or a text change to the development code;
+c. Requires approval of the siting of an essential public facility;
+d. Is substantially revised by the applicant, in which case the time period shall start
+from the date at which the revised project application is determined to be
+complete under BMC § 14A.05.050 and 15.06.050; or
+e. Another time period is prescribed by state law and the city is enjoined from
+using the time periods identified in this section. In such cases the time period
+prescribed by state law shall be used.
+H. The applicant or authorized agent shall attend all public meetings and/or public hearings or
+the matter shall be continued until the applicant or authorized agent is available to attend.
+A single person or entity shall be designated by the applicant to receive determinations and
+notices required by this chapter.
+(Ord. 1854 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+14A.05.080 Review criteria for decisions.
+A. General Compliance. Compliance with all applicable statutes, codes, ordinances, standards
+and procedures, including the provisions of this title, is required prior to approval of a land
+use action. This includes, but is not limited to, voluntary mitigation agreements entered into
+pursuant to SEPA and BMC Title 14, and development agreements entered into pursuant
+to chapter 36.70B RCW and chapter 17.125 BMC.
+B. Site Plan Review. See BMC § 14A.05.160.
+C. Conditional Use Permits. See BMC § 14A.05.140.
+D. Variances. See BMC § 14A.05.150.
+E. Subdivisions and Short Subdivisions. See BMC Title 16.
+F. Environmental Compliance. See BMC Title 14.
+G. Site Specific Zoning Map Amendment. See BMC § 14A.05.170 and 17.125.080.
+H. Area Wide Zoning Map Amendment. See BMC § 14A.05.170 and 17.125.070.
+I. Zoning Code Text Amendment. See BMC § 14A.05.170 and chapter 17.125 BMC.
+J. Comprehensive Plan Amendment. See BMC § 14A.05.180 and chapter 17.125 BMC.
+K. Building and Grading Permits. See BMC Title 15.
+L. Construction Permits for Site Improvements and Infrastructure. See BMC Titles 12 and 13.
+(Ord. 1854 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+14A.05.090 Notice requirements, type and content of notice – General.
+A. Process for Notification. If public notice is required, notice shall be in accordance with
+subsection (D) of this section. The general intent is to give the broadest notice on
+application (notice of application). When notice of application is required, it shall be given
+to the public and city departments and agencies with jurisdiction as provided in this section.
+If the city is using the optional DNS process or has made a determination of significance
+under SEPA and chapter 14.10 BMC, Environmental Policy, concurrently with the notice
+of application, the notice of application shall be combined with the optional DNS notice
+required by WAC 197-11-355(2) or the determination of significance and scoping. Nothing
+in this section prevents a determination of significance and scoping notice from being
+issued prior to the notice of application. The next step is notice of public meeting and/or
+notice of public hearing, whichever applies to the project. This is followed by notice of
+decision/opportunity for appeal or opportunity to request further consideration.
+B. Types of Public Notice. The types of notice required are as set forth in subsection (C) of
+this section. The characteristics of required notice are set forth as follows:
+1. Post a public notice sign on the site. The director shall establish standards for public
+notice signs specifying the size, location, and content of the public notice sign. The
+processing of the application will not begin until the public notice sign is in place.
+The sign shall be located so as to be clearly visible from the adjacent street or
+sidewalk, and shall remain posted until final city action on the application has been
+completed. For sites that are not highly visible, alternative locations for the public
+notice sign may be approved by the director or alternative means of notification
+provided to include mailed notice. Nonproject actions, projects that are not site
+§ 14A.05.090 LAND USE DECISIONS § 14A.05.090
+specific, and projects limited to interior remodeling or a change of use are exempt
+from the public notice sign requirement.
+2. Publication of a notice in the official newspaper or newspaper of general circulation.
+The legal publication of notice shall be easily identifiable; language should be simple
+and descriptive, not bureaucratic.
+3. Individually mailed notices to owners and occupants in a 600-foot radius of the site.
+The notices shall provide a brief description of the proposed project and its location
+and identify any opportunities for comment, appeal, public hearings, and the means
+for obtaining additional information.
+4. A periodic land use bulletin maintained on the department's website. This should
+include application notices, meeting and hearing dates, and permit decisions. The land
+use bulletin need not include information concerning Type I permits.
+5. Notice to parties of record. Parties of record shall receive direct notification of all
+related notices, meeting and hearing dates, and decisions.
+6. Open meeting notice. This shall include posting in city hall and the library and
+mailing to the news media and interested persons.
+7. Mailed notice to adjacent property owners. Property owners within 600 feet of a site
+where a Type III use is proposed shall be sent a notice of application.
+8. Unless otherwise required by law or requested by a party of record "mailing" a notice
+may be accomplished by email.
+C. Types of Notice Required.
+Table 14A.05.090
+Mail Notice
+of Application
+to Property
+Website Mailed Notice Mailed Public Owners Notice of
+Permit Land Use of Notice of Publish in Notice within 600 Public Meeting
+Type Bulletin Application1 Decision Newspaper Sign Feet or Hearing
+I X X
+II X X X X X2
+III X X X X X2 X3 X
+IV X X4 X4 X4 X2,4 X4 X
+Notes:
+1. Notice to applicant and property owner(s) only.
+2. Sign not required for projects which are limited to interior remodels and changes or for SEPA non-
+project actions.
+3. Not required for conditional use permits involving four dwelling units or less.
+Notes:
+4. Only required for site-specific permit decisions without a corresponding preliminary decision
+processed as a Type I, II or III permit. Notice for amendments to the comprehensive plan, area wide
+changes to the zoning map or text changes to the development code are subject to notice requirements
+set forth in chapter 36.70A RCW, chapter 17.125 BMC, SEPA requirements set forth in chapter 14.10
+BMC and other applicable provisions of the BMC.
+D. Contents of Notice.
+1. Notice of application shall include:
+a. The notice shall provide a description of the proposed land use action and its
+nature and location.
+b. The date of application, the date of the notice of completeness (BMC
+§ 14A.05.050 and 15.06.050) for the application, the date of the notice of
+application;
+c. If applicable, a list of any studies requested, identify any permits not included in
+the application to the extent known by the city, identify existing environmental
+documents that evaluate the proposed project, and the location where the
+application and any studies can be reviewed;
+d. Except for the public notice sign requirement, each notice shall also include a
+list of the land use decisions sought. The planning director shall specify detailed
+requirements for public notice signs;
+e. If applicable, a statement indicating that a hearing or meeting will take place,
+and if scheduled at the time of the notice, the date, time, place and type of
+hearing; if no hearing is scheduled at the time of the notice, instructions on how
+to obtain information concerning the date, time, and place of any applicable
+hearing;
+f. A statement of the preliminary determination, if one has been made at the time
+of notice of those development regulations that will be used for project
+mitigation and of consistency as provided in BMC § 14A.05.050;
+g. If the optional DNS process is being used, the notice required by WAC
+197-11-355(2); and
+h. Any other information deemed appropriate by the community development
+director.
+2. Notice of open public hearing shall include subsections (D)(1)(a), (e), (g) and (h) of
+this section.
+E. When a land use permit includes more than one decision component, notice requirements
+shall be consolidated and the broadest applicable notice requirements imposed.
+(Ord. 1854 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+14A.05.100 Notice of application requirements and comment period.
+§ 14A.05.100 LAND USE DECISIONS § 14A.05.120
+A. Notice of Application. When a land use permit application requiring a Type II, III or IV
+decision is submitted, the director shall provide notice of application and an opportunity
+for public comment as described in this chapter, within 14 days after the determination of
+completeness as provided in BMC § 14A.05.050 and 15.06.050. No notice or public
+comment period shall be required for Type I decisions.
+B. Comment Period. The director shall provide a 14-day public comment period prior to
+making a threshold determination of nonsignificance (DNS) or issuing a decision or
+recommendation on a proposed Type II, III or IV land use action; provided, that the
+comment period shall be extended to 30 days if a written request for extension is submitted
+within the initial 14-day comment period or if otherwise required by state law. The
+comment period shall begin on the date notice of application is issued by the city.
+Comments shall be filed with the director by 5:00 p.m. of the last day of the comment
+period. When the last day of the comment period is a Saturday, Sunday or federal or city
+holiday, the comment period shall run until 5:00 p.m. of the next business day.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.110 Public hearing requirements.
+Public hearings are required as listed below for the following land use permit components prior
+to a recommendation, final environmental impact statement or land use decision being made.
+Notice of hearing shall be provided no later than 14 days prior to the hearing. Procedures for
+matters before the hearing examiner shall be pursuant to chapter 17.120 BMC. Procedures for
+matters before the city council shall be adopted by administrative rule.
+A. Draft Environmental Impact Statement. An open public hearing is required before the
+planning director to take comments for inclusion in the final environmental impact
+statement.
+B. Conditional Use Permit. One open public hearing is required, before the hearing examiner.
+C. Zoning and Sign Variance and Reasonable Use Exceptions. An open public hearing is
+required before the hearing examiner.
+D. Preliminary Long Subdivision. See BMC Title 16 for detailed requirements. One open
+public hearing is required, before the hearing examiner.
+E. Site Specific Rezone. For site specific rezones that are consistent with and implement the
+comprehensive plan, an open public hearing is required before the hearing examiner. The
+recommendation of the hearing examiner shall be submitted to the city council for a closed
+record hearing.
+F. Zoning Text and Map Amendments Which Are Not Site Specific, Involve More Than One
+Project or Site or Which Are Not Consistent with the Comprehensive Plan. An open public
+hearing is required before the planning commission and recommendations are submitted to
+the city council. The council may hold additional public hearings or meetings. The council
+may reject, adopt or amend by ordinance the recommendations of the planning
+commission.
+G. Comprehensive Plan Adoption and Amendment. A public hearing is required before the
+planning commission. The council may adopt by ordinance the plan or any part of the plan.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.120 Notice of decision requirements and contents of notice.
+Decisions on project permits and land use decisions shall be in writing and include written
+findings and conclusions in support of the decision. A copy of the decision shall be sent to all
+parties of record.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.130 Standards to ensure performance and compliance with conditions.
+Whenever a new development project is approved and substantial public and private
+improvements are required, the city shall use the following methods to ensure performance and
+compliance with the requirements of the land use permit:
+A. Development agreement pursuant to RCW 36.70B.170 through 36.70B.220 to perform at a
+later date.
+B. Performance bond or other security for defined time period with a 15 percent contingency
+fund.
+C. Cash deposit or interest-bearing savings account, or other acceptable instrument of credit
+with a 15 percent contingency fund.
+D. Covenants and/or easements that are filed with the Skagit County auditor's real property
+records.
+E. Conditional building permits with specified compliance requirements linked to called
+inspections.
+F. Preannexation development agreements pursuant to RCW 36.70B.170 through
+36.70B.220.
+G. Agreement to participate in a local improvement district or other public improvement
+project at a later date.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.140 Conditional use applications, when required, submittal requirements,.
+review criteria and conditions of approval.
+A. A conditional use permit is required when the use proposed is listed as requiring a
+conditional use in the regulations for the zone in which it is located. A conditional use
+permit is also required for uses which are not listed as conditional or permitted in any zone.
+The community development director is authorized to waive the conditional use permit
+requirement for unlisted uses if the director determines the use is substantially the same as
+another use permitted in the zone in which the proposed use will be located.
+B. An application shall be required for approval of a conditional use permit. Applications for
+conditional use permit approval shall be made on forms provided by the director and shall
+include all of the information required by the form in addition to all of the items listed
+below. Only applications including all of the information required by this section shall be
+deemed complete for purposes of complying with this title. A complete application shall
+include:
+1. Vicinity map;
+§ 14A.05.140 LAND USE DECISIONS § 14A.05.140
+2. Name, address, phone number of property owner;
+3. Name, address, phone number of engineer or agent;
+4. A site plan drawn to scale showing all of the following:
+a. Boundaries and dimensions of property;
+b. Adjacent public streets;
+c. Easements, existing and proposed;
+d. Location and size of all existing and proposed utilities;
+e. Location of buildings, including setbacks;
+f. Location and layout of off-street parking;
+g. Location and height of fences;
+h. Location and size of signs;
+i. Landscape detail;
+5. Elevation drawings showing the height of all proposed buildings.
+C. The site plan shall be adopted and made part of the permit. All subsequent permits
+authorizing development, building, site improvements or construction activity shall be in
+accordance with the approved site plan. Adjustments to the site plan may be approved as
+follows:
+1. Minor Adjustments. Minor adjustments to previously approved conditional use
+permits may be approved by the community development director. Minor adjustments
+shall be limited to those adjustments which may affect the precise dimensions or
+siting of buildings and improvements, but which do not affect the basic character,
+arrangement or function of the buildings and improvements, or the site coverage of
+the development, open space requirements, or impacts associated with the
+development. Dimensional adjustments shall not vary more than 10 percent from the
+original approval. Requests for minor adjustments shall be processed as a Type I
+permit in accordance with the procedures set forth in this section.
+2. Major Adjustments. Major adjustments to previously approved conditional use
+permits may be approved by the hearing examiner. Any adjustment or modification
+which would deviate from the originally approved dimensions by more than 10
+percent, or which the director determines is not consistent with the definition of a
+minor adjustment, shall be considered a major adjustment. Requests for major
+adjustments shall be processed as a Type III permit in accordance with the procedures
+set forth in this section.
+3. The cumulative effect of multiple minor adjustments shall be considered and the
+director shall not approve a request for a minor adjustment if, when considered
+together with the effect of previously approved adjustments, the adjustment would be
+classified as a major adjustment.
+4. The application requirements and approval criteria for adjustments to conditional use
+permits shall be the same as those applicable to new conditional use permit
+applications; provided, that the director may waive those application requirements
+that relate solely to aspects of the project that are not affected by and do not affect the
+proposed adjustments.
+D. Approval Criteria. Conditional use permits shall only be approved if consistent with all of
+the following criteria:
+1. The use will have no more adverse effect on the health, safety or comfort of persons
+living or working in the area, and will be no more injurious, economically or
+otherwise, to property or improvements in the surrounding area, than would any use
+generally permitted in the district. Among matters to be considered are traffic flow
+and control, access to and circulation within the property, off-street parking and
+loading, refuse and service areas, utilities, screening and buffering, signs, yards and
+other open spaces, height, bulk and location of structures, location of proposed open
+space uses, hours and manner of operation, and noise, lights, dust, odor, fumes and
+vibration; and
+2. The proposal is in accordance with the goals, policies and objectives of the
+comprehensive plan; and
+3. The proposal complies with all the requirements of this title; and
+4. The proposal can be constructed and maintained so as to be harmonious and
+appropriate in design, character, and appearance with the existing or intended
+character of the general vicinity and provides a high quality of development; and
+5. The proposal will not adversely affect the public infrastructure.
+E. Conditional use permit decisions shall include written findings of fact demonstrating
+compliance with each of the approval criteria enumerated above.
+F. Conditions of Approval. In order to mitigate any adverse impact or address a finding of fact
+associated with the proposal, conditions may be imposed which increase requirements in
+the standards, criteria, or regulations of this title or other city legislation or adopted policies.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.150 Variance applications, when required, submittal requirements, review.
+criteria and conditions of approval.
+A. The purpose of a variance is to permit a deviation from the specific height, bulk, setback,
+dimensional, or performance standards of this title where the strict application of such
+standards would deprive a property of the rights and privileges enjoyed by other properties
+in the same zone and vicinity. Variances shall only be authorized in those instances where
+the hardship imposed on the property is the result of special circumstances inherent in the
+subject property related to size, shape, topography, location, or surroundings. Variance
+requests shall be processed as a Type III application in accordance with the procedures set
+forth in this section.
+B. Application Requirements. Applications for variances shall be made on forms provided by
+the director and shall include all of the information required by the form in addition to all
+of the items listed below. Only applications including all of the information required by
+§ 14A.05.150 LAND USE DECISIONS § 14A.05.150
+this section shall be deemed complete for purposes of complying with this title. A complete
+application shall include:
+1. A written statement identifying the specific dimensional or performance standard of
+the zoning code from which the applicant is requesting to deviate and addressing,
+individually, each of the approval criteria enumerated in this section.
+2. A site plan drawn to scale and illustrating the following:
+a. Adjacent streets and alleys;
+b. Boundaries and dimensions of site and setbacks;
+c. Location and dimensions of buildings;
+d. Location and dimensions of parking areas; and
+e. Location and dimensions of feature needing variance.
+C. Approval Criteria. The hearing examiner may approve a variance only if the request
+conforms to all of the following approval criteria. The hearing examiner must enter
+findings of fact and conclusions which support the following criteria and any conditions:
+1. There are unique physical conditions including narrowness or shallowness of lot size
+or shape, or exceptional topographical or other physical conditions peculiar to and
+inherent in the particular lot; and that, as a result of such unique physical conditions,
+practical difficulties or unnecessary hardships arise in complying with the provisions
+of this title; and
+2. Because of such physical conditions, the development of the lot in strict conformity
+with the provisions of this title will not allow a reasonable and harmonious use of
+such lot; and
+3. The variance, if granted, will not alter the character of the neighborhood, or be
+detrimental to surrounding properties in which the property is located; and
+4. The special circumstances and conditions associated with the variance are not a result
+of the actions of the applicant or previous owners; and
+5. Literal interpretation of the provisions of this title would deprive the applicant of
+rights commonly enjoyed by other properties in the same zoning district; and
+6. The approval of the variance will be consistent with the purpose of this title and the
+zoning district in which the property is located; and
+7. The variance will not allow an increase in the number of dwelling units permitted by
+the zoning district; and
+8. The authorization of such variance will not adversely affect the comprehensive plan;
+and
+9. The variance shall not allow a land use which is not permitted under the zoning
+district in which the property is located; and
+10. The variance is the minimum necessary to afford relief; and
+11. The variance will not constitute a grant of special privilege not enjoyed by other
+properties in the area; and
+12. The variance shall not change any regulations or permit deviations from any
+conditions established by permits, contract rezones, or shown on the face of a binding
+site plan or plat.
+D. Conditions of Approval. In authorization of a variance, the hearing examiner may attach
+thereto such conditions regarding the location, character and other features of the proposed
+structure or use as may be deemed necessary to carry out the spirit and purpose of this title
+and in the public interest.
+E. Critical areas reasonable use exceptions shall be processed in accordance with the
+provisions of BMC § 14.15.140.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.160 Site plan review, when required, application submittal requirements, review.
+criteria and conditions of approval.
+A. Site plan review under this section shall be required for each of the actions listed below.
+1. Construction of a building containing three or more dwelling units;
+2. Construction of three or more dwelling units on a single lot; provided, that no site
+plan review shall be required for the construction of an accessory dwelling unit(s);
+3. Construction of a nonresidential building with a footprint greater than 2,000 square
+feet or a floor area in excess of 4,000 square feet;
+4. Additions or expansions to buildings requiring site plan review under this section;
+5. Other construction or development that is not categorically exempt from SEPA;
+6. Other construction or development that modifies previously approved landscaping or
+site improvements, or that conflicts with conditions imposed through a previous site
+plan review;
+7. Temporary uses for not more than one year.
+8. Site plan review requirements may be waived for simple small scale additions or site
+modifications when potential impacts or code requirements can be easily identified
+and addressed through the application of clear and unambiguous permit conditions.
+B. Applications for site plan approval shall be made on forms provided by the director and
+shall include all of the information required by the form in addition to all of the items listed
+below. Only applications including all of the information required by this section shall be
+deemed complete for purposes of complying with this title. A complete application shall
+include:
+1. Vicinity map;
+2. Name, address, phone number of property owner;
+3. Name, address, phone number of engineer or agent;
+§ 14A.05.160 LAND USE DECISIONS § 14A.05.170
+4. A site plan drawn to scale showing all of the following:
+a. Boundary lines and dimensions for the property and all proposed lot lines.
+Future building locations in phased developments shall be indicated.
+b. Natural features of the site, including existing significant trees, wetlands areas
+and special flood risk areas.
+c. Location, dimensions and names of all existing or platted streets or alleys,
+easements, railroad rights-of-way, on or adjacent to the property.
+d. Location and dimensions of all existing structures, improvements or utilities to
+remain, and structures to be removed.
+e. Approximate location and size of storm water retention or detention facilities
+and storm drains.
+f. Location and dimensions of all proposed structures and parking lots, to include
+parking and loading areas, pedestrian circulation and related access ways.
+Individual parking spaces shall be shown.
+g. Service areas for waste disposal, recycling, loading and delivery and location of
+mail boxes.
+h. Location and dimensions of any proposed signs;
+5. Landscaping plans consistent with the requirements of chapter 17.81 BMC.
+6. Elevation drawing showing the height of all proposed buildings.
+C. Approval Criteria. No land use permit application shall be approved unless the proposal
+complies with all applicable Burlington Municipal Code requirements.
+D. Conditions of Approval. Conditions may be attached to a land use permit if deemed
+necessary to enforce the requirements of the Burlington Municipal Code or to ensure
+consistency with the comprehensive plan.
+(Ord. 1854 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+14A.05.170 Reclassification of property including rezone and zoning ordinance text.
+amendments, initiation of amendments, review criteria and conditions of approval.
+A. Initiation of Amendments.
+1. Site Specific Zoning Map Amendments.
+a. Owner(s) of a property may submit an application requesting a reclassification
+of the property;
+b. The hearing examiner shall conduct a public hearing on the reclassification of
+property, and make a recommendation to the city council.
+2. Zoning Code Text Amendments Consistent with the Comprehensive Plan.
+a. The city council, upon its own motion, may request the planning commission to
+conduct a public hearing to amend any portion or all of this title;
+b. The planning commission may upon its own motion call for a public hearing to
+amend any portion or all of this title;
+c. Any resident or property owner of the city may petition the city to request an
+amendment to the text of this title.
+3. Area wide rezones, changes to the text of the zoning code which are not consistent
+with the comprehensive plan, and all other code and map amendments requiring
+corresponding changes to the comprehensive plan shall be processed in accordance
+with the applicable procedures identified in chapter 17.125 BMC.
+B. Review Criteria. When the hearing examiner is considering recommendations for
+reclassifications, or when the city council is considering approval of reclassifications, the
+hearing examiner or the city council shall investigate the request for reclassification and
+shall consider, among other questions, the following:
+1. Is the request compatible with the city's comprehensive plan and development goals?
+2. Are public utilities, public facilities and other services currently adequate to serve the
+proposed district?
+3. Would the proposal adversely affect the health, safety, or welfare of the adjacent area
+of the area being considered?
+4. Is the reclassification or land development needed at this time?
+5. What are the economic impacts of the proposed action?
+6. Are the arguments of support or opposition by local citizens valid?
+7. Have conditions of the area substantially changed since the original zoning to justify
+a rezone?
+C. Amendments to Rezone Requests. A requested rezone may be changed, conditioned or
+modified by the city council without requiring additional hearings subject to the following:
+1. The modification or change shall not result in a more intense zone than the one
+requested.
+2. The area of the request shall not be enlarged, however, the area may be lessened.
+(Ord. 1854 § 2 (Exh. B), 2018)
+
+14A.05.180 Amendments to the comprehensive plan, review criteria and conditions of.
+approval.
+Amendments to the comprehensive plan, comprehensive plan map, and all other zoning text and
+map amendments which require corresponding changes to the comprehensive plan shall be made
+pursuant to the applicable provisions of BMC Title 17.
+(Ord. 1854 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+
+14A.05.190 Appeal procedures.
+Procedures shall apply to appeals of land use actions by the city.
+§ 14A.05.190 LAND USE DECISIONS § 14A.05.190
+A. Type I Decisions.
+1. A final decision regarding a Type I land use action may be appealed by any interested
+party. Final decisions may be appealed only if, within 14 calendar days after written
+notice of the decision is mailed, a written appeal is filed with the director.
+2. Submittal Requirements. Appeals shall be submitted on forms provided by the
+director and shall include all of the following:
+a. The specific permit number or decision being appealed;
+b. The name of the applicant and property owner;
+c. If multiple parties file an appeal, the appeal shall designate a single
+representative or contact person;
+d. The specific aspects of the decision being appealed, the reasons why each aspect
+is in error as a matter of fact or law, and the evidence relied on to prove the
+error; and
+e. Any applicable appeal fee identified in the fee schedule adopted by the city
+council.
+3. Appeal Decision. The hearing examiner shall hear appeals of Type I land use actions
+in an open record hearing. Appeals of Type I land use actions shall be processed as a
+Type III decision except that notice of the appeal hearing and appeal decision need
+only be provide to the property owner and applicant.
+B. Type II Decisions.
+1. A final decision regarding a Type II land use action may be appealed by any party of
+record. Final decisions may be appealed only if, within 14 calendar days after written
+notice of the decision is mailed, a written appeal is filed with the director.
+2. Submittal Requirements. The appeal shall contain the following information:
+a. The specific permit number or decision being appealed;
+b. The name of the applicant and property owner;
+c. If multiple parties file an appeal, the appeal shall designate a single
+representative or contact person;
+d. The specific aspects of the decision being appealed, the reasons why each aspect
+is in error as a matter of fact or law, and the evidence relied on to prove the
+error; and
+e. Any applicable appeal fee identified in the fee schedule adopted by the city
+council.
+3. SEPA. An appeal of a SEPA threshold determination associated with a Type II land
+use action shall be considered together with the appeal of the associated land use
+action.
+4. Appeal Decision. The hearing examiner shall hear appeals of Type II land use actions
+in an open record hearing. Appeals of Type II land use actions shall be processed as a
+Type III decision. Notice of the appeal hearing and appeal decision shall be provided
+to all parties of record.
+C. Type III Decisions.
+1. Appeal Decisions. Hearing examiner decisions on appeals of Type I and II decisions
+shall be appealed to superior court in accordance with the provisions of chapter
+36.70C RCW.
+2. Permit Decisions. Hearing examiner decisions on Type III project permit applications
+may be appealed to the city council by any party of record. Hearing examiner
+decisions may be appealed only if, within 14 calendar days after written notice of the
+decision is mailed, a written appeal is filed with the director.
+3. SEPA Decisions. An appeal of a SEPA threshold determination associated with a
+Type III land use action shall be considered together with the appeal of the associated
+land use action by whichever authority is charged with considering the appeal of the
+associated land use action.
+4. Submittal Requirements. Appeals filed with the city council shall contain all of the
+following information:
+a. The specific permit number or decision being appealed;
+b. The name of the applicant and property owner;
+c. If multiple parties file an appeal, the appeal shall designate a single
+representative or contact person;
+d. The specific aspects of the decision being appealed, the reasons why each aspect
+is in error as a matter of fact or law, and the evidence relied on to prove the
+error; and
+e. Any applicable appeal fee identified in the fee schedule adopted by the city
+council.
+5. City Council Action. Within 30 days of receiving an appeal the city council shall hold
+a closed record hearing. At the conclusion of the hearing the city council shall either:
+a. Decline to consider the appeal; or
+b. Consider the appeal and uphold the hearing examiner's decision; or
+c. If, based solely on the record created by the hearing examiner, the city council
+finds that the examiner's decision is in error as a matter of fact or law, the city
+council may reverse the examiner's decision. If the city council reverses the
+hearing examiner's decision, it shall make specific findings identifying the
+aspects of the hearing examiner's decision which are in error.
+D. Type IV Decisions. Type IV decisions shall be appealed to superior court pursuant to
+chapter 36.70C RCW, the Growth Management Hearings Board pursuant to RCW
+36.70A.280, the Shoreline Hearings Board pursuant to chapter 90.58 RCW, or other
+applicable statutory authority in accordance with Washington State law. An appeal of a
+§ 14A.05.190 LAND USE DECISIONS § 14A.05.190
+SEPA threshold determination associated with a Type IV land use action shall be
+considered together with the appeal of the associated land use action.
+(Ord. 1854 § 2 (Exh. B), 2018; Ord. 1933 § 1 (Exh. A), 2023)
+BUILDINGS AND CONSTRUCTION
+Title 15
+BUILDINGS AND CONSTRUCTION
+Chapter 15.01 Chapter 15.06
+GENERAL PROVISIONS REQUIREMENTS FOR
+CONSTRUCTION PERMIT

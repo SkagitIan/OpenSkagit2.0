@@ -1,0 +1,611 @@
+[
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1721.html",
+    "chapter_title": "Chapter 17.21 URBAN VILLAGE MIXED-USE (UVMU) OVERLAY",
+    "table_index": 0,
+    "caption": "Table 17.21.050(1)",
+    "nearest_heading": "17.21.050 Open space.",
+    "rows": [
+      [
+        "Density (units per acre)",
+        "Open Space (% of total site)",
+        "Usable Public Open Space (% of total site)"
+      ],
+      [
+        "35 Units",
+        "30%",
+        "25%"
+      ],
+      [
+        "30 Units",
+        "25%",
+        "20%"
+      ],
+      [
+        "≤25 Units",
+        "20%",
+        "15%"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1721.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1736.html",
+    "chapter_title": "Chapter 17.36 OFF-STREET PARKING AND LOADING",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.36.030 Number of spaces required.",
+    "rows": [
+      [
+        "",
+        "Dwelling Unit Type"
+      ],
+      [
+        "Studio single-family home",
+        "1-bed-room single-family home",
+        "2-bed-room single-family home",
+        "3-bedroom single-family home",
+        "4-bed-room single-family home",
+        "Studio apart-ment",
+        "1-bed-room apart-ment",
+        "2-bed-room apart-ment",
+        "3-bed-room apart-ment",
+        "4-bed-room apart-ment",
+        "Accessory dwelling unit",
+        "Studio or 1-bed-room duplex or triplex unit",
+        "2-bedroom (or more) duplex or triplex unit",
+        "Studio or 1-bed-room town-house unit",
+        "2-bedroom (or more) town-house unit",
+        "Work/live unit (residential parking only)"
+      ],
+      [
+        "Zone Designation",
+        "R-1",
+        "Minimum Residential Parking",
+        "1.5",
+        "1.75",
+        "2",
+        "2.5",
+        "3",
+        "Not Permitted",
+        "1",
+        "Not Permitted"
+      ],
+      [
+        "Required Visitor Parking",
+        "Not Required in R-1 Zone",
+        "Not Required in R-1 Zone"
+      ],
+      [
+        "R-5",
+        "Minimum Residential Parking",
+        "1.5",
+        "1.75",
+        "2",
+        "2.5",
+        "3",
+        "Not Permitted",
+        "1",
+        "Not Permitted"
+      ],
+      [
+        "Required Visitor Parking",
+        "Not Required in R-5 Zone",
+        "Not Required in R-5 Zone"
+      ],
+      [
+        "R-7",
+        "Minimum Residential Parking",
+        "1.5",
+        "1.75",
+        "2",
+        "2.5",
+        "3",
+        "Not Permitted",
+        "1",
+        "2",
+        "3",
+        "Not Permitted"
+      ],
+      [
+        "Required Visitor Parking",
+        "Not Required in R-7 Zone",
+        "Not Required in R-7 Zone"
+      ],
+      [
+        "R-15",
+        "Minimum Residential Parking",
+        "1.5",
+        "1.75",
+        "2",
+        "2.5",
+        "3",
+        "1.2",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "Not Permitted",
+        "2",
+        "3",
+        "1.75",
+        "2.5",
+        "Not Permitted"
+      ],
+      [
+        "Required Visitor Parking",
+        "Not Required in R-15 Zone",
+        "1 stall for every 6 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "Not Required in R-15 Zone",
+        "1 stall for every 6 units",
+        "1 stall for every 3 units"
+      ],
+      [
+        "MC",
+        "Minimum Residential Parking",
+        "Not Permitted",
+        "1.2",
+        "1.5",
+        "2.5",
+        "3",
+        "4",
+        "Not Permitted"
+      ],
+      [
+        "Required Visitor Parking",
+        "1 stall for every 6 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units"
+      ],
+      [
+        "UVMU",
+        "Minimum Residential Parking",
+        "Not Permitted",
+        "1.2",
+        "1.5",
+        "1.7",
+        "2.5",
+        "3",
+        "Not Permitted",
+        "1",
+        "2 (plus 0.5 for each add’l bedroom)",
+        "Not Permitted"
+      ],
+      [
+        "Required Visitor Parking",
+        "1 stall for every 6 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "1 stall for every 6 units",
+        "1 stall for every 3 units"
+      ],
+      [
+        "Maximum Residential Parking",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "3",
+        "4"
+      ],
+      [
+        "TMCO",
+        "Minimum Residential Parking",
+        "Not Permitted",
+        "1.2",
+        "1.5",
+        "2.5",
+        "3",
+        "4",
+        "Not Permitted",
+        "2"
+      ],
+      [
+        "Required Visitor Parking",
+        "1 stall for every 6 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "1 stall for every 3 units",
+        "Not Required in TMCO Zone"
+      ],
+      [
+        "CBD Reduced Parking for Mixed-Use",
+        "Minimum Residential Parking",
+        "Not Permitted",
+        "1",
+        "1",
+        "1.5",
+        "2.5",
+        "3",
+        "Not Permitted"
+      ],
+      [
+        "Required Visitor Parking",
+        "Not Required in CBD-core Zone"
+      ],
+      [
+        "Maximum Residential Parking",
+        "1.5",
+        "2",
+        "2.5",
+        "3",
+        "3.5"
+      ],
+      [
+        "CBD Parking for Standalone Residential",
+        "Minimum Residential Parking",
+        "Not Permitted",
+        "1",
+        "1.5",
+        "2",
+        "3",
+        "4",
+        "Not Permitted",
+        "2",
+        "3",
+        "2",
+        "3",
+        "Not Permitted"
+      ],
+      [
+        "Required Visitor Parking",
+        "1 stall per 10 units",
+        "1 stall for every 6 units",
+        "1 stall for every 6 units",
+        "1 stall for every 6 units",
+        "1 stall for every 6 units",
+        "Not Required in CBD-fringe Zone"
+      ],
+      [
+        "Maximum Residential Parking",
+        "2",
+        "2.5",
+        "3",
+        "3.5",
+        "4.5",
+        "3",
+        "3.5",
+        "2.5",
+        "3.5"
+      ],
+      [
+        "I",
+        "Minimum Residential Parking",
+        "Not Permitted",
+        "2"
+      ],
+      [
+        "Required Visitor Parking",
+        "Not Required in I Zone"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1736.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1736.html",
+    "chapter_title": "Chapter 17.36 OFF-STREET PARKING AND LOADING",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "17.36.094 Parking—Central business district (CBD) zone.",
+    "rows": [
+      [
+        "Location",
+        "Required Minimum Parking for Nonresidential Uses"
+      ],
+      [
+        "Within the central business district core",
+        "Retail and restaurants: no off-street parking required. Public Use: no off-street parking required. Nonresidential uses not described: refer to Section 17.36.030."
+      ],
+      [
+        "Outside of the central business district core",
+        "Commercial use: refer to Section 17.36.030. Public use: no off-street parking required."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1736.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1740.html",
+    "chapter_title": "Chapter 17.40 SIGNS*",
+    "table_index": 0,
+    "caption": "Maximum Sign Area",
+    "nearest_heading": "17.40.020 Permanent on-premises signs.",
+    "rows": [
+      [
+        "Facade Area",
+        "Maximum Sign Area"
+      ],
+      [
+        "0—499",
+        "50 sq. ft. maximum"
+      ],
+      [
+        "500—999",
+        "10% or 75 sq. ft. maximum, whichever is less"
+      ],
+      [
+        "1,000—1,499",
+        "9% or 100 sq. ft. maximum, whichever is less"
+      ],
+      [
+        "1,500—2,999",
+        "8% or 150 sq. ft. maximum, whichever is less"
+      ],
+      [
+        "3,000 or greater",
+        "6% or 200 sq. ft. maximum, whichever is less"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1740.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1740.html",
+    "chapter_title": "Chapter 17.40 SIGNS*",
+    "table_index": 1,
+    "caption": "Maximum Letter Size for Primary Signs",
+    "nearest_heading": "17.40.020 Permanent on-premises signs.",
+    "rows": [
+      [
+        "Distance from Primary Street",
+        "Maximum Letter Size"
+      ],
+      [
+        "Up to 10 ft.",
+        "12 inches"
+      ],
+      [
+        "10—25",
+        "18 inches"
+      ],
+      [
+        "25—50",
+        "24 inches"
+      ],
+      [
+        "50—100",
+        "36 inches"
+      ],
+      [
+        "Over 100",
+        "48 inches"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1740.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1743.html",
+    "chapter_title": "Chapter 17.43 PLANNED RESIDENTIAL DEVELOPMENT (PRD)",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.43.035 Density.",
+    "rows": [
+      [
+        "Underlying Zone",
+        "Minimum units per net acre (see Section 16.04.060 )",
+        "Maximum units per acre (less area encumbered by wetlands, fish and wildlife habitat conservation areas and their respective buffers)"
+      ],
+      [
+        "Residential 1",
+        "1",
+        "1"
+      ],
+      [
+        "Residential 5",
+        "4",
+        "5"
+      ],
+      [
+        "Residential 7",
+        "4",
+        "7"
+      ],
+      [
+        "Residential 15",
+        "4",
+        "15"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1743.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1750.html",
+    "chapter_title": "Chapter 17.50 LANDSCAPING",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.50.040 Minimum site requirements.",
+    "rows": [
+      [
+        "Residential 15",
+        "20%"
+      ],
+      [
+        "Residential in Mixed Commercial",
+        "20%"
+      ],
+      [
+        "Mixed Commercial (excluding the CBD)",
+        "15%"
+      ],
+      [
+        "Industrial",
+        "10%"
+      ],
+      [
+        "Commercial uses in industrial district",
+        "15%"
+      ],
+      [
+        "Public",
+        "10%"
+      ],
+      [
+        "PRD’s and CUP’s",
+        "As required by planning commission"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1750.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1750.html",
+    "chapter_title": "Chapter 17.50 LANDSCAPING",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "17.50.120 Screening requirements.",
+    "rows": [
+      [
+        "Zone to Be Developed",
+        "Zone to Be Screened"
+      ],
+      [
+        "Residential-15 (R-15)",
+        "Any other residential zone"
+      ],
+      [
+        "Public",
+        "Any residential zone"
+      ],
+      [
+        "Mixed commercial",
+        "Any residential zone"
+      ],
+      [
+        "Industrial",
+        "Any residential zone, mixed commercial zone, public zone"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1750.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1765.html",
+    "chapter_title": "Chapter 17.65 REGULATIONS FOR CRITICAL AREAS",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "17.65.240 Wetland mitigation standards.",
+    "rows": [
+      [
+        "Category I",
+        "150"
+      ],
+      [
+        "Category II",
+        "110"
+      ],
+      [
+        "Category III",
+        "50"
+      ],
+      [
+        "Category IV",
+        "25"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1765.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1765.html",
+    "chapter_title": "Chapter 17.65 REGULATIONS FOR CRITICAL AREAS",
+    "table_index": 1,
+    "caption": "Wetland On-Site Restoration/Creation Ratios: Wetland Created: Wetland Area Lost",
+    "nearest_heading": "17.65.240 Wetland mitigation standards.",
+    "rows": [
+      [
+        "Category I",
+        "6:1"
+      ],
+      [
+        "Category II",
+        "3:1"
+      ],
+      [
+        "Category III",
+        "2:1"
+      ],
+      [
+        "Category IV",
+        "1.5:1"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1765.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1765.html",
+    "chapter_title": "Chapter 17.65 REGULATIONS FOR CRITICAL AREAS",
+    "table_index": 2,
+    "caption": "Wetland On-Site Enhancement Ratios: Wetland Enhanced: Wetland Area Lost",
+    "nearest_heading": "17.65.240 Wetland mitigation standards.",
+    "rows": [
+      [
+        "Category I",
+        "24:1"
+      ],
+      [
+        "Category II",
+        "12:1"
+      ],
+      [
+        "Category III",
+        "8:1"
+      ],
+      [
+        "Category IV",
+        "6:1"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1765.html"
+  },
+  {
+    "jurisdiction": "sedro_woolley",
+    "title": "Title 17 Zoning",
+    "chapter_ref": "SedroWoolley1765.html",
+    "chapter_title": "Chapter 17.65 REGULATIONS FOR CRITICAL AREAS",
+    "table_index": 3,
+    "caption": "Water Type Riparian Buffer",
+    "nearest_heading": "17.65.530 Fish and wildlife habitat conservation area mitigation standards.",
+    "rows": [
+      [
+        "Type 1 and 2",
+        "200 feet"
+      ],
+      [
+        "Type 3",
+        "110 feet"
+      ],
+      [
+        "Type 4 and 5",
+        "50 feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/SedroWoolley/html/SedroWoolley17/SedroWoolley1765.html"
+  }
+]

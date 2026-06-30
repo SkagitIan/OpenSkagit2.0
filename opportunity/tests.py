@@ -9,7 +9,14 @@ from django.test import SimpleTestCase, TestCase, override_settings, tag
 from django.urls import reverse
 
 from . import services
-from .ai_search import OpportunitySearchError, apply_prompt_result_filters, parse_generated_search_response, validate_search_sql
+from .ai_search import (
+    OpportunitySearchError,
+    _extract_markdown_section,
+    _fallback_generated_search,
+    apply_prompt_result_filters,
+    parse_generated_search_response,
+    validate_search_sql,
+)
 from .models import OpportunitySearch, OpportunitySearchFeedback
 
 
@@ -127,6 +134,13 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertEqual(parsed["title"], "Large parcels")
         self.assertEqual(parsed["params"], [40])
 
+    def test_multiunit_prompt_has_safe_deterministic_fallback(self):
+        generated = _fallback_generated_search("parcels with multi unit buildings like duplex to sixplex. no sales activity for 15 years. average quality.")
+        self.assertIsNotNone(generated)
+        self.assertIn("NULLIF(s.sale_date_iso, '')::date", generated.sql)
+        self.assertIn("(%s || ' years')::interval", generated.sql)
+        self.assertEqual(generated.params, [15])
+
     def test_ai_search_sql_validator_allows_safe_select(self):
         sql = "SELECT p.parcel_number FROM skagit_parcels p WHERE p.inactive_date IS NULL AND p.acres > %s"
         self.assertEqual(validate_search_sql(sql, [10]), sql)
@@ -162,6 +176,13 @@ class OpportunityHelperTests(SimpleTestCase):
         ]
         filtered = apply_prompt_result_filters("Recreation or Small Bare Land Parcels with Utilities Under $200K Assessed Value", rows)
         self.assertEqual([row["parcel_number"] for row in filtered], ["P1"])
+
+    def test_skill_reference_section_extractor_stops_at_next_heading(self):
+        markdown = "# Root\n\n## `land_use` Mappings\nkeep this\n\n### Child\nand this\n\n## Other\nskip this"
+        section = _extract_markdown_section(markdown, "`land_use` Mappings")
+        self.assertIn("keep this", section)
+        self.assertIn("and this", section)
+        self.assertNotIn("skip this", section)
 
 
 @override_settings(ROOT_URLCONF="config.urls")
