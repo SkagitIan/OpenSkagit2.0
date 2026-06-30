@@ -274,6 +274,35 @@ def save_parcel(request):
     return redirect(next_url)
 
 
+@login_required(login_url=reverse_lazy("opportunity_login"))
+def notification_settings(request):
+    from .models import UserNotificationPreference
+
+    pref, _ = UserNotificationPreference.objects.get_or_create(user=request.user)
+    saved = False
+
+    if request.method == "POST":
+        cadence = request.POST.get("digest_cadence", UserNotificationPreference.CADENCE_DAILY)
+        if cadence not in {UserNotificationPreference.CADENCE_DAILY, UserNotificationPreference.CADENCE_WEEKLY}:
+            cadence = UserNotificationPreference.CADENCE_DAILY
+        pref.notify_watchlist = request.POST.get("notify_watchlist") == "on"
+        pref.digest_cadence = cadence
+        pref.notify_brief = request.POST.get("notify_brief") == "on"
+        pref.save()
+        saved = True
+
+    return render(
+        request,
+        "opportunity/settings.html",
+        {
+            "active_nav": "settings",
+            "pref": pref,
+            "saved": saved,
+            "disclaimer": DISCLAIMER,
+        },
+    )
+
+
 def staff_redirect(request):
     return redirect("opportunity_explore")
 

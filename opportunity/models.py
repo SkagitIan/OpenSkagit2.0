@@ -118,6 +118,81 @@ class OpportunitySearchFeedback(models.Model):
         return f"{self.user_id}: {self.search_id} {scope} {self.rating}"
 
 
+class UserNotificationPreference(models.Model):
+    CADENCE_DAILY = "daily"
+    CADENCE_WEEKLY = "weekly"
+    CADENCE_CHOICES = [
+        (CADENCE_DAILY, "Daily digest"),
+        (CADENCE_WEEKLY, "Weekly digest"),
+    ]
+
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="notification_pref"
+    )
+    notify_watchlist = models.BooleanField(default=False)
+    digest_cadence = models.CharField(max_length=8, choices=CADENCE_CHOICES, default=CADENCE_DAILY)
+    notify_brief = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Notification prefs for {self.user_id}"
+
+
+class ParcelWatchNotification(models.Model):
+    TRIGGER_ASSESSOR = "assessor_change"
+    TRIGGER_AUDITOR = "auditor_recording"
+    TRIGGER_BRIEF = "brief"
+    TRIGGER_CHOICES = [
+        (TRIGGER_ASSESSOR, "Assessor data change"),
+        (TRIGGER_AUDITOR, "Auditor recording"),
+        (TRIGGER_BRIEF, "Daily brief"),
+    ]
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="parcel_watch_notifications"
+    )
+    parcel_number = models.TextField(blank=True)
+    trigger_type = models.CharField(max_length=24, choices=TRIGGER_CHOICES)
+    payload = models.JSONField(default=dict)
+    run_id = models.BigIntegerField()
+    sent_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "parcel_number", "trigger_type", "run_id"],
+                name="uniq_parcel_watch_notification",
+            ),
+        ]
+        indexes = [
+            models.Index(fields=["user", "sent_at", "-created_at"]),
+            models.Index(fields=["trigger_type", "sent_at"]),
+        ]
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.user_id}: {self.parcel_number} {self.trigger_type}"
+
+
+class EmailTemplate(models.Model):
+    WATCHLIST_DIGEST = "watchlist_digest"
+    DAILY_BRIEF = "daily_brief"
+    NAME_CHOICES = [
+        (WATCHLIST_DIGEST, "Watchlist change digest"),
+        (DAILY_BRIEF, "Daily brief / newsletter"),
+    ]
+
+    name = models.CharField(max_length=32, unique=True, choices=NAME_CHOICES)
+    subject = models.TextField()
+    body_html = models.TextField(help_text="Django template syntax. Variables: {{ user }}, {{ changes }}, {{ site_url }} for digest; {{ user }}, {{ narrative }}, {{ site_url }} for brief.")
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.get_name_display()
+
+
 class ParcelBookSyncNarrative(models.Model):
     assessor_sync_report = models.OneToOneField(
         "assessor_sync.AssessorSyncReport",

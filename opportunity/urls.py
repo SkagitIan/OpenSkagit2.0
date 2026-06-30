@@ -17,4 +17,5 @@ urlpatterns = [
     path("parcels/<str:parcel_number>/", views.parcel, name="opportunity_parcel_detail"),
     path("watchlist/", views.watchlist, name="opportunity_watchlist"),
     path("save/", views.save_parcel, name="opportunity_save"),
+    path("settings/", views.notification_settings, name="opportunity_settings"),
 ]

@@ -120,6 +120,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 OPPORTUNITY_DASHBOARD_PASSWORD = env("OPPORTUNITY_DASHBOARD_PASSWORD", default="opportunity" if DEBUG else "")
+SITE_URL = env("SITE_URL", default="https://openskagit.org/opportunity")
+RESEND_API_KEY = env("RESEND_API_KEY", default="")
+RESEND_FROM_EMAIL = env("RESEND_FROM_EMAIL", default="Parcel Book <parcelbook@openskagit.org>")
 CSRF_TRUSTED_ORIGINS = [
     o for o in env("CSRF_TRUSTED_ORIGINS", default="").split(",") if o
 ]

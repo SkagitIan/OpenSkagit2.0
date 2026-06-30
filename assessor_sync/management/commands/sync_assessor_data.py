@@ -307,6 +307,13 @@ class Command(BaseCommand):
                 self.stdout.write(report)
                 if narrative_status:
                     self.stdout.write(narrative_status)
+
+                try:
+                    from opportunity.notifications import queue_watchlist_notifications
+                    queue_watchlist_notifications(run_id, stdout=self.stdout)
+                except Exception as exc:
+                    self.stdout.write(self.style.WARNING(f"Watchlist notification queuing failed: {exc}"))
+
                 with connection.cursor() as cursor:
                     pruned_changes = self._prune_sync_changes(cursor, int(options["audit_retain_runs"]), run_id)
                 if pruned_changes:

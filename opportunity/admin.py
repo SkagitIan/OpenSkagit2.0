@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from .models import OpportunitySavedParcel, OpportunitySearch, OpportunitySearchFeedback, ParcelBookSyncNarrative
+from .models import (
+    EmailTemplate,
+    OpportunitySavedParcel,
+    OpportunitySearch,
+    OpportunitySearchFeedback,
+    ParcelBookSyncNarrative,
+    ParcelWatchNotification,
+    UserNotificationPreference,
+)
 
 
 @admin.register(OpportunitySavedParcel)
@@ -43,6 +51,27 @@ class OpportunitySearchFeedbackAdmin(admin.ModelAdmin):
     search_fields = ("search__title", "search__prompt", "parcel_number", "comment", "user__username", "user__email")
     list_filter = ("rating", "reason_code", "created_at", "updated_at")
     readonly_fields = ("search", "user", "parcel_number", "rating", "reason_code", "comment", "created_at", "updated_at")
+
+
+@admin.register(UserNotificationPreference)
+class UserNotificationPreferenceAdmin(admin.ModelAdmin):
+    list_display = ("user", "notify_watchlist", "digest_cadence", "notify_brief", "updated_at")
+    search_fields = ("user__username", "user__email")
+    list_filter = ("notify_watchlist", "digest_cadence", "notify_brief")
+
+
+@admin.register(ParcelWatchNotification)
+class ParcelWatchNotificationAdmin(admin.ModelAdmin):
+    list_display = ("user", "parcel_number", "trigger_type", "run_id", "sent_at", "created_at")
+    search_fields = ("user__username", "user__email", "parcel_number")
+    list_filter = ("trigger_type", "sent_at", "created_at")
+    readonly_fields = ("user", "parcel_number", "trigger_type", "payload", "run_id", "sent_at", "created_at")
+
+
+@admin.register(EmailTemplate)
+class EmailTemplateAdmin(admin.ModelAdmin):
+    list_display = ("name", "subject", "updated_at")
+    fields = ("name", "subject", "body_html")
 
 
 @admin.register(ParcelBookSyncNarrative)
