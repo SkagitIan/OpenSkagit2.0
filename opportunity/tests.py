@@ -91,10 +91,15 @@ class OpportunityHelperTests(SimpleTestCase):
 
     def test_sync_narrative_response_parser(self):
         parsed = services.parse_sync_narrative_response(
-            '{"headline":"Fresh assessor changes","narrative":"Several records changed overnight.","bullets":["Sales changed","Land changed","Review before use"]}'
+            '{"headline":"Fresh assessor changes","dek":"A local field note","narrative":"Several records changed overnight.",'
+            '"bullets":["Sales changed","Land changed","Review before use"],'
+            '"notable_signals":["Lot certification: P1 in Bow"],"trend_line":"Land division led the day",'
+            '"disclaimer":"Screening only","newsletter_subject":"Skagit field note","preview_text":"Fresh signals"}'
         )
         self.assertEqual(parsed["headline"], "Fresh assessor changes")
+        self.assertEqual(parsed["dek"], "A local field note")
         self.assertEqual(len(parsed["bullets"]), 3)
+        self.assertEqual(parsed["notable_signals"], ["Lot certification: P1 in Bow"])
 
     def test_sync_narrative_fallback_is_plain_english(self):
         narrative = services.fallback_sync_narrative(
@@ -102,6 +107,30 @@ class OpportunityHelperTests(SimpleTestCase):
         )
         self.assertIn("2 changed source file", narrative["narrative"])
         self.assertEqual(len(narrative["bullets"]), 3)
+
+    def test_fresh_sale_requires_event_date_inside_window(self):
+        start = date(2026, 6, 23)
+        end = date(2026, 6, 30)
+        self.assertTrue(services._is_fresh_sale_row({"sale_date": "2026-06-25"}, start, end))
+        self.assertFalse(services._is_fresh_sale_row({"sale_date": "2024-01-03"}, start, end))
+        self.assertFalse(services._is_fresh_sale_row({"sale_date": ""}, start, end))
+
+    def test_sync_brief_fallback_ignores_stale_sales_updates(self):
+        context = {
+            "window": {"label": "Jun 23, 2026 to Jun 30, 2026"},
+            "counts": {"fresh_recordings": 0, "fresh_sales": 0, "stale_sales_updates_ignored": 119},
+            "signal_counts": {},
+            "notable_signals": [],
+        }
+        narrative = services.fallback_sync_narrative({}, context)
+        self.assertIn("No fresh investor-facing", narrative["headline"])
+        self.assertIn("119 historical assessor sales update", narrative["narrative"])
+        self.assertEqual(len(narrative["bullets"]), 3)
+
+    def test_notability_ranks_land_division_over_generic_financing(self):
+        land_score = services._brief_notability_score({"signal_group": "land_division", "document_type": "Lot Certification", "parcel_number": "P1"})
+        financing_score = services._brief_notability_score({"signal_group": "financing", "document_type": "Deed Of Trust", "parcel_number": "P2"})
+        self.assertGreater(land_score, financing_score)
 
     def test_latest_nonempty_sync_report_skips_empty_latest_report(self):
         empty_latest = SimpleNamespace(run=SimpleNamespace(summary={"files_changed": 0, "tables": {"sales": {"applied_rows": 0}}}))

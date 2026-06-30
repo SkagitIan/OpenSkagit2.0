@@ -71,6 +71,13 @@ def home(request):
 
 
 @login_required(login_url=reverse_lazy("opportunity_login"))
+def newsletter_preview(request):
+    context = dashboard_context(request.user)
+    context.update({"active_nav": "overview", "disclaimer": DISCLAIMER})
+    return render(request, "opportunity/newsletter_preview.html", context)
+
+
+@login_required(login_url=reverse_lazy("opportunity_login"))
 def explore(request):
     selected_tab = request.GET.get("tab", DEFAULT_TAB)
     if selected_tab not in TAB_LOOKUP:

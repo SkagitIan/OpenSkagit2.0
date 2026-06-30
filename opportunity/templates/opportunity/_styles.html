@@ -48,7 +48,7 @@
   .pb-menu-button span { width: 18px; height: 2px; border-radius: 999px; background: var(--os-navy); }
   .pb-user { color: var(--os-slate); font-size: 13px; display: flex; gap: 12px; align-items: center; }
   .pb-user a { color: var(--pb-teal); text-decoration: none; font-weight: 800; }
-  .pb-content { width: min(100% - 32px, 1120px); margin: 0 auto; padding: 28px 0; }
+  .pb-content { width: min(100% - 32px, 1360px); margin: 0 auto; padding: 28px 0; }
   .pb-page-head, .pb-section-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
   .pb-section-head h2 { margin: 0; font-size: 20px; }
   .pb-section-eyebrow { margin: 0 0 4px; color: var(--os-teal); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
@@ -78,8 +78,14 @@
   .pb-hot-label { color: var(--os-gold); font-weight: 900; font-size: 12px; text-transform: uppercase; }
   .pb-hot h2 { margin: 8px 0; font-size: 26px; }
   .pb-sync-brief h2 { margin: 7px 0 8px; font-size: 24px; line-height: 1.12; }
+  .pb-sync-dek { display: block; color: #ffffff; margin-bottom: 8px; font-size: 14px; }
   .pb-sync-brief p { color: #dce8f4; max-width: 760px; line-height: 1.55; margin-bottom: 0; }
   .pb-sync-brief ul { margin: 0; padding-left: 20px; color: #eef7ff; line-height: 1.65; min-width: 0; }
+  .pb-sync-bullets { margin-top: 12px !important; }
+  .pb-notable-signals { display: grid; gap: 6px; margin-top: 14px; color: #eef7ff; font-size: 13px; }
+  .pb-notable-signals span { color: var(--os-gold); font-weight: 900; font-size: 12px; text-transform: uppercase; }
+  .pb-notable-signals div { padding-left: 10px; border-left: 2px solid rgba(253,185,19,.6); line-height: 1.35; }
+  .pb-sync-preview-link { justify-self: start; color: #fff !important; border-color: rgba(255,255,255,.4) !important; margin-top: 12px; }
   .pb-activity-panel, .pb-alert-panel { padding: 18px; }
   .pb-count-pill { display: inline-flex; align-items: center; min-height: 28px; padding: 3px 9px; border-radius: 8px; background: rgba(0,130,138,.1); color: var(--os-teal); font-size: 12px; font-weight: 900; }
   .pb-activity-list { display: grid; gap: 10px; max-height: 330px; overflow: auto; padding-right: 4px; }
@@ -100,6 +106,13 @@
   .pb-notice-item, .pb-record-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px; border: 1px solid #e1ebf2; border-radius: 8px; background: #fbfdfd; }
   .pb-record-row-link { color: inherit; text-decoration: none; }
   .pb-record-row-link:hover { border-color: rgba(0,130,138,.3); box-shadow: 0 10px 22px rgba(15,23,42,.06); }
+  .pb-newsletter-preview { max-width: 760px; margin: 0 auto; line-height: 1.6; }
+  .pb-newsletter-preview h2 { margin: 8px 0; font-size: 30px; line-height: 1.12; }
+  .pb-newsletter-preview h3 { margin: 18px 0 8px; color: #132238; }
+  .pb-newsletter-preview ul { padding-left: 20px; }
+  .pb-email-meta { display: grid; gap: 5px; padding: 14px; border: 1px solid #e1ebf2; border-radius: 8px; background: #fbfdfd; }
+  .pb-email-meta span { color: #63748a; font-size: 12px; font-weight: 900; text-transform: uppercase; }
+  .pb-email-meta p { margin: 0; color: #32445c; }
   .pb-notice-item > div, .pb-record-row > div { display: grid; gap: 3px; min-width: 0; }
   .pb-notice-item strong, .pb-notice-item span, .pb-record-row strong, .pb-record-row span, .pb-record-row small { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .pb-notice-item strong, .pb-record-row strong { color: #132238; font-size: 13px; }
@@ -375,7 +388,7 @@
     .pb-ai-inline, .pb-ai-summary, .pb-saved-search-row, .pb-plan-grid { grid-template-columns: 1fr; }
     .pb-map-canvas { min-height: 340px; }
     .pb-topbar { align-items: center; justify-content: space-between; height: 58px; gap: 12px; padding: 10px 14px; flex-direction: row; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
-    .pb-content { width: min(100% - 24px, 1120px); padding: 16px 0; }
+    .pb-content { width: min(100% - 24px, 1360px); padding: 16px 0; }
     .pb-parcel-identity { flex-direction: column; }
     .pb-detail-hero-top { flex-direction: column; }
     .pb-detail-rail { position: static; }

@@ -38,8 +38,27 @@
       <div>
         <div class="pb-hot-label">Sync brief</div>
         <h2>{{ sync.narrative.headline }}</h2>
+        {% if sync.narrative.dek %}<strong class="pb-sync-dek">{{ sync.narrative.dek }}</strong>{% endif %}
         <p>{{ sync.narrative.narrative }}</p>
+        {% if sync.narrative.bullets %}
+          <ul class="pb-sync-bullets">
+            {% for bullet in sync.narrative.bullets %}
+              <li>{{ bullet }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if sync.narrative.notable_signals %}
+          <div class="pb-notable-signals">
+            <span>Notable signals</span>
+            {% for signal in sync.narrative.notable_signals|slice:":5" %}
+              <div>{{ signal }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
+      {% if sync.narrative.newsletter_subject %}
+        <a class="pb-mini-link pb-sync-preview-link" href="{% url 'opportunity_newsletter_preview' %}">Newsletter preview</a>
+      {% endif %}
     </article>
   {% endif %}
 
@@ -113,7 +132,7 @@
     <div class="pb-section-head">
       <div>
         <p class="pb-section-eyebrow">From last sync</p>
-        <h2>Recent Sales</h2>
+        <h2>Fresh Sales</h2>
       </div>
       <div class="pb-section-tools">
         <span class="pb-count-pill">{{ sync.recent_sales|length }} {{ sync.since_text }}</span>
@@ -135,7 +154,7 @@
           </div>
         </a>
       {% empty %}
-        <p class="pb-muted">No new sales in the latest sync.</p>
+        <p class="pb-muted">No current-window sales in the latest sync.</p>
       {% endfor %}
     </div>
   </article>
@@ -152,11 +171,7 @@
       {% for doc in sync.recorded_docs %}
         <article class="pb-record-row">
           <div>
-            {% if doc.parcel_number %}
-              <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' doc.parcel_number %}">{{ doc.parcel_number }}</a>
-            {% else %}
-              <span class="pb-card-title">No parcel matched</span>
-            {% endif %}
+            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' doc.parcel_number %}">{{ doc.parcel_number }}</a>
             <strong>{{ doc.document_type }}</strong>
             <span>{{ doc.location|default:doc.signal_group }}</span>
           </div>

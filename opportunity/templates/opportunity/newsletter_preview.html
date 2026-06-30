@@ -1,0 +1,47 @@
+{% block title %}Parcel Book Newsletter Preview{% endblock %}
+
+{% block content %}
+{% include "opportunity/_chrome_open.html" %}
+
+<section class="pb-page-head">
+  <div>
+    <p class="pb-kicker">Newsletter preview</p>
+    <h1>Skagit Parcel Field Note</h1>
+    <p class="pb-muted">Email-shaped preview generated from fresh public-record signals in the latest sync.</p>
+  </div>
+  <a class="pb-button secondary" href="{% url 'opportunity_home' %}">Back to dashboard</a>
+</section>
+
+<article class="pb-panel pb-newsletter-preview">
+  {% if sync.narrative %}
+    <div class="pb-email-meta">
+      <span>Subject</span>
+      <strong>{{ sync.narrative.newsletter_subject|default:sync.narrative.headline }}</strong>
+      <span>Preview text</span>
+      <p>{{ sync.narrative.preview_text|default:sync.narrative.dek }}</p>
+    </div>
+    <hr>
+    <p class="pb-section-eyebrow">OpenSkagit Parcel Book</p>
+    <h2>{{ sync.narrative.headline }}</h2>
+    {% if sync.narrative.dek %}<strong>{{ sync.narrative.dek }}</strong>{% endif %}
+    <p>{{ sync.narrative.narrative }}</p>
+    {% if sync.narrative.bullets %}
+      <ul>
+        {% for bullet in sync.narrative.bullets %}<li>{{ bullet }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    {% if sync.narrative.notable_signals %}
+      <h3>Notable signals</h3>
+      <ul>
+        {% for signal in sync.narrative.notable_signals %}<li>{{ signal }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    {% if sync.narrative.trend_line %}<p><strong>Read:</strong> {{ sync.narrative.trend_line }}</p>{% endif %}
+    <p class="pb-muted">{{ sync.narrative.disclaimer|default:disclaimer }}</p>
+  {% else %}
+    <p class="pb-muted">No sync brief is available yet.</p>
+  {% endif %}
+</article>
+
+{% include "opportunity/_chrome_close.html" %}
+{% endblock %}

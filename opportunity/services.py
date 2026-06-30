@@ -16,6 +16,34 @@ AUDITOR_RECORDING_SEARCH_URL = "https://www.skagitcounty.net/Search/Recording/de
 AUDITOR_DOCUMENT_URL = "https://www.skagitcounty.net/AuditorRecording/Documents/RecordedDocuments/{year}/{month}/{day}/{recording_number}.pdf"
 LATEST_AERIAL_IMAGE_URL = "https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer/exportImage"
 RECENT_RECORDING_DAYS = 90
+SYNC_BRIEF_DISCLAIMER = (
+    "Public-record screening signals only. Confirm documents, title, zoning, access, taxes, and site conditions "
+    "before treating any parcel as an investment lead."
+)
+BRIEF_SIGNAL_LABELS = {
+    "transfer": "Transfers",
+    "financing": "Financing",
+    "distress": "Distress",
+    "lien_judgment": "Liens and judgments",
+    "lease_option": "Leases and options",
+    "land_division": "Land division",
+    "land_status": "Land status",
+    "rights_access": "Rights and access",
+    "fresh_sale": "Fresh sales",
+    "other": "Other recordings",
+}
+BRIEF_SIGNAL_WEIGHTS = {
+    "land_division": 95,
+    "land_status": 90,
+    "distress": 88,
+    "rights_access": 82,
+    "lease_option": 78,
+    "lien_judgment": 72,
+    "transfer": 66,
+    "fresh_sale": 62,
+    "financing": 52,
+    "other": 25,
+}
 SFR_OR_MOBILE_CODES = {"110", "111", "112", "113", "180", "185"}
 SFR_TEARDOWN_CODES = {"110", "111", "112", "113"}
 VACANT_BUILDABLE_CODES = {"910", "911", "912"}
@@ -856,6 +884,60 @@ def _date_value(value: Any) -> date | None:
         return None
 
 
+def _sync_window(run=None, summary: dict[str, Any] | None = None) -> tuple[date | None, date | None]:
+    auditor = (summary or getattr(run, "summary", {}) or {}).get("auditor") or {}
+    start = _date_value(auditor.get("start_date"))
+    end = _date_value(auditor.get("end_date"))
+    if start and end:
+        return start, end
+    stamp = getattr(run, "finished_at", None) or getattr(run, "started_at", None)
+    fallback = _date_value(stamp)
+    return fallback, fallback
+
+
+def _date_in_window(value: Any, start: date | None, end: date | None) -> bool:
+    parsed = _date_value(value)
+    if not parsed or not start or not end:
+        return False
+    return start <= parsed <= end
+
+
+def _sale_event_date(row: dict[str, Any]) -> date | None:
+    return _date_value(
+        row.get("sale_date")
+        or row.get("sale_date_iso")
+        or row.get("deed_date_iso")
+        or row.get("deed_date")
+    )
+
+
+def _is_fresh_sale_row(row: dict[str, Any], start: date | None, end: date | None) -> bool:
+    event_date = _sale_event_date(row)
+    return bool(event_date and start and end and start <= event_date <= end)
+
+
+def _brief_signal_label(signal_group: str | None) -> str:
+    return BRIEF_SIGNAL_LABELS.get(signal_group or "other", "Other recordings")
+
+
+def _brief_notability_score(row: dict[str, Any]) -> int:
+    group = row.get("signal_group") or ("fresh_sale" if row.get("event_kind") == "sale" else "other")
+    score = BRIEF_SIGNAL_WEIGHTS.get(group, BRIEF_SIGNAL_WEIGHTS["other"])
+    document_type = (row.get("document_type") or row.get("deed_type") or "").lower()
+    if "notice" in document_type or "trustee" in document_type or "foreclosure" in document_type:
+        score += 12
+    if "lot certification" in document_type or "survey" in document_type or "plat" in document_type:
+        score += 10
+    if row.get("parcel_number"):
+        score += 4
+    if row.get("document_url") or row.get("pdf_url"):
+        score += 2
+    amount = _decimal(row.get("sale_price_num"))
+    if amount and amount >= Decimal("1000000"):
+        score += 8
+    return score
+
+
 def _compact_date(value: Any) -> str:
     parsed = _date_value(value)
     if not parsed:
@@ -1016,6 +1098,7 @@ def latest_assessor_sync_summary(user=None, sales_sort: str = "") -> dict[str, A
         inserted = sum(int((table or {}).get("inserted") or 0) for table in tables.values())
         updated = sum(int((table or {}).get("updated") or 0) for table in tables.values())
         warnings = sum(int((table or {}).get("warnings") or 0) for table in tables.values())
+        window_start, window_end = _sync_window(run, run.summary or {})
         sync_counts = latest_sync_metric_counts(run, user)
         since_text = sync_since_text(run)
         changes = list(
@@ -1023,7 +1106,7 @@ def latest_assessor_sync_summary(user=None, sales_sort: str = "") -> dict[str, A
             .values("table_name", "record_key", "change_type", "changed_fields", "created_at")
             .order_by("-created_at")[:6]
         )
-        recent_sales = latest_sync_sales(run.pk, sort=sales_sort)
+        recent_sales = latest_sync_sales(run.pk, sort=sales_sort, window=(window_start, window_end))
         recorded_docs = latest_sync_recorded_docs(run.pk)
         watchlist_alerts = latest_watchlist_alerts(run.pk, user)
         return {
@@ -1034,7 +1117,7 @@ def latest_assessor_sync_summary(user=None, sales_sort: str = "") -> dict[str, A
             "sales_sort": sales_sort if sales_sort in {"city", "price"} else "",
             "metrics": [
                 {"label": "Parcel signals updated", "value": f"{sync_counts['parcel_signals']:,}", "accent": "teal", "note": since_text},
-                {"label": "New sales", "value": f"{sync_counts['new_sales']:,}", "accent": "gold", "note": since_text},
+                {"label": "Fresh sales", "value": f"{sync_counts['new_sales']:,}", "accent": "gold", "note": since_text},
                 {"label": "New filings", "value": f"{sync_counts['new_filings']:,}", "accent": "red", "note": since_text},
                 {"label": "Watchlist changes", "value": f"{sync_counts['watchlist_changes']:,}", "accent": "blue", "note": since_text},
             ],
@@ -1050,7 +1133,12 @@ def latest_assessor_sync_summary(user=None, sales_sort: str = "") -> dict[str, A
         return {"has_run": False, "metrics": [], "changes": [], "activity": [], "recent_sales": [], "recorded_docs": [], "watchlist_alerts": []}
 
 
-def latest_sync_sales(run_id: int, sort: str = "", limit: int | None = None) -> list[dict[str, Any]]:
+def latest_sync_sales(
+    run_id: int,
+    sort: str = "",
+    limit: int | None = None,
+    window: tuple[date | None, date | None] | None = None,
+) -> list[dict[str, Any]]:
     limit_sql = "LIMIT %s" if limit else ""
     params = [run_id]
     if limit:
@@ -1104,6 +1192,9 @@ def latest_sync_sales(run_id: int, sort: str = "", limit: int | None = None) -> 
         row["sale_price_fmt"] = money(row.get("sale_price_num"))
         row["date_label"] = _compact_date(row.get("sale_date"))
         row["document_url"] = _auditor_url(row.get("recording_number")) if row.get("recording_number") else ""
+    if window:
+        start, end = window
+        rows = [row for row in rows if _is_fresh_sale_row(row, start, end)]
     if sort == "city":
         rows.sort(key=lambda row: ((row.get("city_label") or "zzzz").lower(), row.get("parcel_number") or ""))
     elif sort == "price":
@@ -1118,22 +1209,34 @@ def latest_sync_recorded_docs(run_id: int, limit: int | None = None) -> list[dic
         params.append(limit)
     rows = _fetch(
         f"""
+        WITH recording_changes AS (
+          SELECT
+            COALESCE(NULLIF(c.new_row->>'parcel_number', ''), NULLIF(c.old_row->>'parcel_number', '')) AS parcel_number,
+            COALESCE(NULLIF(c.new_row->>'recording_number', ''), NULLIF(c.old_row->>'recording_number', ''), c.record_key) AS recording_number,
+            COALESCE(NULLIF(c.new_row->>'recorded_date', ''), NULLIF(c.old_row->>'recorded_date', '')) AS recorded_date,
+            COALESCE(NULLIF(c.new_row->>'document_type', ''), NULLIF(c.old_row->>'document_type', ''), 'Auditor filing') AS document_type,
+            COALESCE(NULLIF(c.new_row->>'signal_group', ''), NULLIF(c.old_row->>'signal_group', '')) AS signal_group,
+            COALESCE(NULLIF(c.new_row->>'pdf_url', ''), NULLIF(c.old_row->>'pdf_url', '')) AS pdf_url,
+            c.created_at
+          FROM assessor_sync_changes c
+          WHERE c.run_id = %s
+            AND c.table_name = 'auditor_recordings'
+            AND c.change_type IN ('insert', 'update')
+        )
         SELECT
-          COALESCE(NULLIF(c.new_row->>'parcel_number', ''), NULLIF(c.old_row->>'parcel_number', '')) AS parcel_number,
-          COALESCE(NULLIF(c.new_row->>'recording_number', ''), NULLIF(c.old_row->>'recording_number', ''), c.record_key) AS recording_number,
-          COALESCE(NULLIF(c.new_row->>'recorded_date', ''), NULLIF(c.old_row->>'recorded_date', '')) AS recorded_date,
-          COALESCE(NULLIF(c.new_row->>'document_type', ''), NULLIF(c.old_row->>'document_type', ''), 'Auditor filing') AS document_type,
-          COALESCE(NULLIF(c.new_row->>'signal_group', ''), NULLIF(c.old_row->>'signal_group', '')) AS signal_group,
-          COALESCE(NULLIF(c.new_row->>'pdf_url', ''), NULLIF(c.old_row->>'pdf_url', '')) AS pdf_url,
+          rc.parcel_number,
+          rc.recording_number,
+          rc.recorded_date,
+          rc.document_type,
+          rc.signal_group,
+          rc.pdf_url,
           concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
           COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city
-        FROM assessor_sync_changes c
-        LEFT JOIN skagit_parcels p ON p.parcel_number = COALESCE(NULLIF(c.new_row->>'parcel_number', ''), NULLIF(c.old_row->>'parcel_number', ''))
+        FROM recording_changes rc
+        JOIN skagit_parcels p ON p.parcel_number = rc.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
-        WHERE c.run_id = %s
-          AND c.table_name = 'auditor_recordings'
-          AND c.change_type IN ('insert', 'update')
-        ORDER BY c.created_at DESC
+        WHERE COALESCE(rc.parcel_number, '') <> ''
+        ORDER BY rc.created_at DESC
         {limit_sql}
         """,
         params,
@@ -1240,7 +1343,7 @@ def latest_sync_activity(run_id: int, limit: int = 40) -> list[dict[str, Any]]:
           p.land_use,
           p.assessed_value
         FROM raw_events e
-        LEFT JOIN skagit_parcels p ON p.parcel_number = e.parcel_number
+        JOIN skagit_parcels p ON p.parcel_number = e.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = e.parcel_number
         WHERE COALESCE(e.parcel_number, '') <> ''
         ORDER BY e.created_at DESC
@@ -1318,6 +1421,7 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
     summary = run.summary or {}
     tables = summary.get("tables", {})
     auditor = summary.get("auditor", {}) or {}
+    window_start, window_end = _sync_window(run, summary)
     sales_summary = tables.get("sales", {}) or {}
     new_sales = int(sales_summary.get("inserted") or 0) + int(sales_summary.get("updated") or 0)
     signal_tables = ("sales", "land", "improvements")
@@ -1350,13 +1454,40 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
             if not auditor.get("enabled"):
                 new_filings = int(sales_rows[0].get("new_filings") or 0)
 
+        if window_start and window_end:
+            fresh_sales_rows = _fetch(
+                """
+                SELECT COUNT(*) AS fresh_sales
+                FROM assessor_sync_changes
+                WHERE run_id = %s
+                  AND table_name = 'sales'
+                  AND change_type IN ('insert', 'update')
+                  AND COALESCE(
+                    NULLIF(new_row->>'sale_date_iso', ''),
+                    NULLIF(new_row->>'sale_date', ''),
+                    NULLIF(new_row->>'deed_date_iso', ''),
+                    NULLIF(new_row->>'deed_date', '')
+                  ) ~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}'
+                  AND LEFT(COALESCE(
+                    NULLIF(new_row->>'sale_date_iso', ''),
+                    NULLIF(new_row->>'sale_date', ''),
+                    NULLIF(new_row->>'deed_date_iso', ''),
+                    NULLIF(new_row->>'deed_date', '')
+                  ), 10)::date BETWEEN %s AND %s
+                """,
+                [run.pk, window_start, window_end],
+            )
+            new_sales = int((fresh_sales_rows[0] or {}).get("fresh_sales") or 0) if fresh_sales_rows else 0
+
         auditor_rows = _fetch(
             """
             SELECT COUNT(*) AS new_filings
-            FROM assessor_sync_changes
-            WHERE run_id = %s
-              AND table_name = 'auditor_recordings'
-              AND change_type IN ('insert', 'update')
+            FROM assessor_sync_changes c
+            JOIN skagit_parcels p
+              ON p.parcel_number = COALESCE(NULLIF(c.new_row->>'parcel_number', ''), NULLIF(c.old_row->>'parcel_number', ''))
+            WHERE c.run_id = %s
+              AND c.table_name = 'auditor_recordings'
+              AND c.change_type IN ('insert', 'update')
             """,
             [run.pk],
         )
@@ -1378,8 +1509,9 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
                 AND table_name IN ('land', 'improvements', 'sales', 'auditor_recordings')
             )
             SELECT COUNT(*) AS parcel_signals
-            FROM normalized
-            WHERE parcel_number <> ''
+            FROM normalized n
+            JOIN skagit_parcels p ON p.parcel_number = n.parcel_number
+            WHERE n.parcel_number <> ''
             """,
             [run.pk],
         )
@@ -1437,12 +1569,99 @@ def sync_narrative_dict(report, summary: dict[str, Any] | None = None) -> dict[s
     if narrative:
         return {
             "headline": narrative.headline,
+            "dek": narrative.dek,
             "narrative": narrative.narrative,
             "bullets": narrative.bullets or [],
+            "notable_signals": narrative.notable_signals or [],
+            "trend_line": narrative.trend_line,
+            "disclaimer": narrative.disclaimer or SYNC_BRIEF_DISCLAIMER,
+            "newsletter_subject": narrative.newsletter_subject,
+            "preview_text": narrative.preview_text,
             "generated": narrative.generated_by_ai,
             "model": narrative.model,
         }
     return fallback_sync_narrative(summary or getattr(report.run, "summary", {}) or {})
+
+
+def build_sync_brief_context(run) -> dict[str, Any]:
+    summary = run.summary or {}
+    window_start, window_end = _sync_window(run, summary)
+    sales = latest_sync_sales(run.pk, window=(window_start, window_end))
+    docs = [
+        row for row in latest_sync_recorded_docs(run.pk)
+        if _date_in_window(row.get("recorded_date"), window_start, window_end)
+    ]
+    signal_counts: dict[str, int] = {}
+    document_counts: dict[str, int] = {}
+    city_counts: dict[str, int] = {}
+    notable_rows: list[dict[str, Any]] = []
+
+    for row in docs:
+        group = row.get("signal_group") or "other"
+        signal_counts[group] = signal_counts.get(group, 0) + 1
+        doc_type = row.get("document_type") or "Auditor filing"
+        document_counts[doc_type] = document_counts.get(doc_type, 0) + 1
+        location = row.get("location") or ""
+        city = location.rsplit(",", 1)[-1].strip() if "," in location else location
+        if city and city != "n/a":
+            city_counts[city] = city_counts.get(city, 0) + 1
+        notable_rows.append({
+            "event_kind": "recording",
+            "parcel_number": row.get("parcel_number") or "",
+            "location": row.get("location") or row.get("signal_group") or "n/a",
+            "document_type": doc_type,
+            "signal_group": group,
+            "signal_label": _brief_signal_label(group),
+            "recorded_date": str(row.get("recorded_date") or ""),
+            "date_label": row.get("date_label") or _compact_date(row.get("recorded_date")),
+            "recording_number": row.get("recording_number") or "",
+            "document_url": row.get("document_url") or "",
+        })
+
+    for row in sales:
+        notable_rows.append({
+            "event_kind": "sale",
+            "parcel_number": row.get("parcel_number") or "",
+            "location": row.get("location") or "n/a",
+            "document_type": row.get("deed_type") or "Sale",
+            "signal_group": "fresh_sale",
+            "signal_label": _brief_signal_label("fresh_sale"),
+            "recorded_date": str(row.get("sale_date") or ""),
+            "date_label": row.get("date_label") or _compact_date(row.get("sale_date")),
+            "recording_number": row.get("recording_number") or "",
+            "sale_price": row.get("sale_price_fmt") or "",
+            "sale_price_num": str(row.get("sale_price_num") or ""),
+            "document_url": row.get("document_url") or "",
+        })
+
+    notable_rows.sort(key=lambda row: (_brief_notability_score(row), row.get("recorded_date") or ""), reverse=True)
+    stale_sales = int(((summary.get("tables") or {}).get("sales") or {}).get("updated") or 0) - len(sales)
+    return {
+        "run_id": run.pk,
+        "window": {
+            "start": window_start.isoformat() if window_start else "",
+            "end": window_end.isoformat() if window_end else "",
+            "label": (
+                f"{_compact_date(window_start)} to {_compact_date(window_end)}"
+                if window_start and window_end and window_start != window_end
+                else _compact_date(window_end or window_start)
+            ),
+        },
+        "counts": {
+            "fresh_sales": len(sales),
+            "fresh_recordings": len(docs),
+            "notable_signals": len(notable_rows),
+            "stale_sales_updates_ignored": max(0, stale_sales),
+        },
+        "signal_counts": dict(sorted(signal_counts.items(), key=lambda item: item[1], reverse=True)),
+        "document_counts": dict(sorted(document_counts.items(), key=lambda item: item[1], reverse=True)[:12]),
+        "city_counts": dict(sorted(city_counts.items(), key=lambda item: item[1], reverse=True)[:12]),
+        "notable_signals": notable_rows[:12],
+        "source_note": (
+            "Fresh means the sale/deed date or auditor recorded date falls inside the reporting window. "
+            "Historical sales rows updated by the assessor export are ignored."
+        ),
+    }
 
 
 def generate_sync_narrative_for_report(report_id: int, force: bool = False):
@@ -1455,8 +1674,9 @@ def generate_sync_narrative_for_report(report_id: int, force: bool = False):
         return existing
 
     summary = report.run.summary or {}
+    brief_context = build_sync_brief_context(report.run)
     model = os.environ.get("OPENAI_SYNC_NARRATIVE_MODEL", os.environ.get("OPENAI_MODEL", "gpt-4.1-mini"))
-    fallback = fallback_sync_narrative(summary)
+    fallback = fallback_sync_narrative(summary, brief_context)
     payload = fallback | {"model": "", "generated_by_ai": False, "error": ""}
 
     if not os.environ.get("OPENAI_API_KEY"):
@@ -1467,15 +1687,21 @@ def generate_sync_narrative_for_report(report_id: int, force: bool = False):
 
             response = OpenAI().responses.create(
                 model=model,
-                input=build_sync_narrative_prompt(report.report_text or "", summary),
+                input=build_sync_narrative_prompt(report.report_text or "", summary, brief_context),
                 temperature=0.2,
-                max_output_tokens=450,
+                max_output_tokens=900,
             )
             parsed = parse_sync_narrative_response(response.output_text)
             payload = {
                 "headline": parsed["headline"],
+                "dek": parsed["dek"],
                 "narrative": parsed["narrative"],
                 "bullets": parsed["bullets"],
+                "notable_signals": parsed["notable_signals"],
+                "trend_line": parsed["trend_line"],
+                "disclaimer": parsed["disclaimer"],
+                "newsletter_subject": parsed["newsletter_subject"],
+                "preview_text": parsed["preview_text"],
                 "model": model,
                 "generated_by_ai": True,
                 "error": "",
@@ -1488,9 +1714,16 @@ def generate_sync_narrative_for_report(report_id: int, force: bool = False):
         defaults={
             "model": payload.get("model", ""),
             "headline": payload["headline"],
+            "dek": payload.get("dek", ""),
             "narrative": payload["narrative"],
             "bullets": payload["bullets"],
+            "notable_signals": payload.get("notable_signals", []),
+            "trend_line": payload.get("trend_line", ""),
+            "disclaimer": payload.get("disclaimer", SYNC_BRIEF_DISCLAIMER),
+            "newsletter_subject": payload.get("newsletter_subject", ""),
+            "preview_text": payload.get("preview_text", ""),
             "summary_snapshot": summary,
+            "brief_context": brief_context,
             "generated_by_ai": payload.get("generated_by_ai", False),
             "error": payload.get("error", ""),
         },
@@ -1498,15 +1731,28 @@ def generate_sync_narrative_for_report(report_id: int, force: bool = False):
     return narrative
 
 
-def build_sync_narrative_prompt(report_text: str, summary: dict[str, Any]) -> str:
+def build_sync_narrative_prompt(
+    report_text: str,
+    summary: dict[str, Any],
+    brief_context: dict[str, Any] | None = None,
+) -> str:
     auditor = (summary or {}).get("auditor") or {}
+    brief_context = brief_context or {}
     return (
-        "You are writing the morning Parcel Book data brief for a real estate opportunity dashboard. "
-        "Use simple, plain English. Be specific, but do not overclaim. Mention that these are public-record "
-        "changes and screening signals, not approvals. If auditor recordings are present, explain them as filing "
-        "metadata and links, not legal conclusions. Return compact JSON with keys: headline, narrative, bullets. "
-        "bullets must be an array of exactly 3 short strings. Return only the JSON object, with no markdown fences, "
-        "no prose before it, and no prose after it.\n\n"
+        "You are writing the morning OpenSkagit Parcel Book field note for Skagit County real estate investors, "
+        "brokers, builders, and land watchers. Sound local, precise, and useful: more field-note analyst than "
+        "generic software summary. Focus only on fresh public-record signals inside the reporting window. "
+        "The curated fresh-signal context is authoritative for every count that appears in the dashboard or newsletter. "
+        "Raw sync and auditor summary totals are diagnostics only; do not quote them when they differ from curated context counts, "
+        "because unmatched recordings and stale assessor sales updates are intentionally filtered out. "
+        "Do not treat assessor sales rows that were merely updated as market activity. Mention them only if the "
+        "curated context says there are current-window sale/deed dates. Auditor recordings are filing metadata "
+        "and document links, not legal conclusions, approvals, title opinions, or investment advice.\n\n"
+        "Return compact JSON with keys: headline, dek, narrative, bullets, notable_signals, trend_line, "
+        "disclaimer, newsletter_subject, preview_text. bullets must be exactly 3 short strings. notable_signals "
+        "must be 3 to 6 short strings based only on the notable_signals in the curated context. Return only the "
+        "JSON object, with no markdown fences, no prose before it, and no prose after it.\n\n"
+        f"Curated fresh-signal context JSON:\n{json.dumps(brief_context, default=str)[:14000]}\n\n"
         f"Assessor sync summary JSON:\n{json.dumps(summary, default=str)[:6000]}\n\n"
         f"Auditor sync summary JSON:\n{json.dumps(auditor, default=str)[:4000]}\n\n"
         f"Latest admin assessor sync report:\n{report_text[:12000]}"
@@ -1528,14 +1774,77 @@ def parse_sync_narrative_response(text: str) -> dict[str, Any]:
     bullets = [str(item)[:180] for item in (parsed.get("bullets") or [])[:3]]
     if len(bullets) != 3:
         bullets = fallback["bullets"]
+    notable = [str(item)[:220] for item in (parsed.get("notable_signals") or [])[:6]]
+    if not notable:
+        notable = fallback.get("notable_signals", [])
     return {
         "headline": str(parsed.get("headline") or fallback["headline"])[:140],
+        "dek": str(parsed.get("dek") or fallback.get("dek") or "")[:220],
         "narrative": str(parsed.get("narrative") or fallback["narrative"])[:900],
         "bullets": bullets,
+        "notable_signals": notable,
+        "trend_line": str(parsed.get("trend_line") or fallback.get("trend_line") or "")[:300],
+        "disclaimer": str(parsed.get("disclaimer") or fallback.get("disclaimer") or SYNC_BRIEF_DISCLAIMER)[:400],
+        "newsletter_subject": str(parsed.get("newsletter_subject") or fallback.get("newsletter_subject") or "")[:140],
+        "preview_text": str(parsed.get("preview_text") or fallback.get("preview_text") or "")[:220],
     }
 
 
-def fallback_sync_narrative(summary: dict[str, Any]) -> dict[str, Any]:
+def fallback_sync_narrative(summary: dict[str, Any], brief_context: dict[str, Any] | None = None) -> dict[str, Any]:
+    if brief_context:
+        counts = brief_context.get("counts") or {}
+        signal_counts = brief_context.get("signal_counts") or {}
+        window = (brief_context.get("window") or {}).get("label") or "the latest sync window"
+        fresh_recordings = int(counts.get("fresh_recordings") or 0)
+        fresh_sales = int(counts.get("fresh_sales") or 0)
+        ignored_sales = int(counts.get("stale_sales_updates_ignored") or 0)
+        top_groups = [
+            f"{_brief_signal_label(group)}: {count:,}"
+            for group, count in list(signal_counts.items())[:3]
+        ]
+        notable = []
+        for item in (brief_context.get("notable_signals") or [])[:5]:
+            label = item.get("signal_label") or item.get("document_type") or "Recording"
+            parcel = item.get("parcel_number") or "unmatched parcel"
+            place = item.get("location") or "Skagit County"
+            notable.append(f"{label}: {parcel} at {place}")
+        if not notable and not fresh_recordings and not fresh_sales:
+            notable = ["No fresh investor-facing parcel signals were detected in this window."]
+        if fresh_recordings or fresh_sales:
+            headline = f"{fresh_recordings + fresh_sales:,} fresh Skagit record signal(s)"
+            dek = f"{window}: auditor filings lead the read; stale assessor sales updates are filtered out."
+            narrative = (
+                f"Parcel Book found {fresh_recordings:,} current-window auditor recording(s)"
+                f" and {fresh_sales:,} current-window sale record(s). "
+                "The brief is using recorded dates and sale/deed dates, so historical assessor sales rows touched by the nightly file are not treated as market activity."
+            )
+        else:
+            headline = "No fresh investor-facing parcel signals"
+            dek = f"{window}: the sync did not surface current-window sales or notable recordings."
+            narrative = (
+                "The latest sync did not surface fresh sale/deed dates or auditor recordings that should be treated as investor-facing signals. "
+                f"{ignored_sales:,} historical assessor sales update(s) were ignored as data maintenance."
+            )
+        bullets = (top_groups + [
+            f"{fresh_sales:,} current-window sale/deed record(s)",
+            f"{ignored_sales:,} historical assessor sales update(s) ignored",
+            "Confirm source documents before acting",
+        ])[:3]
+        while len(bullets) < 3:
+            bullets.append("Screening signal only, not a due-diligence conclusion")
+        return {
+            "headline": headline,
+            "dek": dek,
+            "narrative": narrative,
+            "bullets": bullets,
+            "notable_signals": notable,
+            "trend_line": "; ".join(top_groups) if top_groups else "No fresh signal cluster stood out in this window.",
+            "disclaimer": SYNC_BRIEF_DISCLAIMER,
+            "newsletter_subject": f"Skagit parcel field note: {headline}",
+            "preview_text": dek,
+            "generated": False,
+        }
+
     tables = (summary or {}).get("tables", {})
     auditor = (summary or {}).get("auditor") or {}
     files_changed = int((summary or {}).get("files_changed") or 0)
@@ -1552,6 +1861,7 @@ def fallback_sync_narrative(summary: dict[str, Any]) -> dict[str, Any]:
     )
     return {
         "headline": "Latest assessor sync is ready",
+        "dek": "Public-record data refreshed; review source documents before acting.",
         "narrative": (
             f"The latest assessor sync found {files_changed:,} changed source file(s) and applied "
             f"{applied:,} public-record updates.{auditor_phrase} Parcel Book is using those changes as screening signals only."
@@ -1561,6 +1871,11 @@ def fallback_sync_narrative(summary: dict[str, Any]) -> dict[str, Any]:
             f"{inserted + auditor_inserted:,} new records inserted",
             f"{auditor_errors:,} auditor query warning(s)" if auditor_errors else "Review high-signal parcels before relying on them for due diligence",
         ],
+        "notable_signals": [],
+        "trend_line": "",
+        "disclaimer": SYNC_BRIEF_DISCLAIMER,
+        "newsletter_subject": "Skagit parcel field note",
+        "preview_text": "Fresh public-record data is ready for review.",
         "generated": False,
     }
 
