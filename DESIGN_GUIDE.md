@@ -49,8 +49,8 @@ Use these colors as the default palette. Define them as CSS custom properties on
 Use color this way:
 
 - Navy: primary app shell, dark tool pages, sticky nav.
-- Teal: primary action, focus state, live/data signal.
-- Green: OpenSkagit brand emphasis, success, active signal.
+- Teal: primary action, focus state, live/data signal. Primary action text on teal must be white.
+- Green: OpenSkagit brand emphasis, success, active signal. Primary action text on green must be white.
 - Blue: map/GIS/tax secondary accent.
 - Gold: finance, caution, tax highlights.
 - City accent: use `--city-accent` for place-specific pages and city cards.
@@ -204,6 +204,11 @@ Visual treatment:
 - Use a small set of semantic accents: teal for primary/data, green for success, gold for finance/caution, blue for maps/GIS, red only for real risk or destructive attention.
 - Give metric cards a strong number, short label, and tiny source/freshness note.
 - Dense side panels can use `max-height` with internal scrolling when the data is secondary.
+- For mobile, prefer app-list patterns over report cards: thumbnail or icon, primary label, one timely status, and compact action/status symbols.
+- Watchlists should show current state and recent changes only. Avoid explaining why an item was saved on the list page; send deeper reasoning to the detail screen.
+- Use real imagery or map/aerial thumbnails for parcel lists when available. It makes repeated parcel review feel inspectable and app-like.
+- Use clean icon assets, inline SVG, or an existing icon library for product icons. Avoid hand-drawn CSS icons for inspectable app surfaces.
+- Primary buttons must have sufficient contrast: white text on green/teal/dark fills, dark text only on pale or white secondary surfaces.
 
 Avoid:
 
@@ -211,6 +216,7 @@ Avoid:
 - Long unbounded lists inside the main page flow.
 - Charts that dominate the page without adjacent interpretation or controls.
 - Repeating raw database labels as headings when a plain-language label exists.
+- Dark text on saturated green or teal primary buttons.
 
 Suggested layout:
 

@@ -5,185 +5,141 @@
 {% block content %}
 {% include "opportunity/_chrome_open.html" %}
 
-<section class="pb-dashboard-hero">
-  <div class="pb-dashboard-hero__copy">
-    <div class="pb-kicker">Good morning, {{ request.user.get_username }}</div>
-    <h1 class="pb-title">Opportunity Command Center</h1>
-    <p class="pb-subtitle">Fresh assessor, sale, auditor, tax, and zoning signals organized into a compact parcel workflow.</p>
-    <div class="pb-hero-actions">
-      <a class="pb-button" href="{% url 'opportunity_ai_search' %}">Search</a>
-    </div>
+<section class="pb-home-stats" aria-label="Latest parcel book stats">
+  {% for metric in sync.metrics %}
+    <article class="pb-home-stat pb-home-stat-{{ metric.accent }}">
+      <span>{{ metric.label }}</span>
+      <strong>{{ metric.value }}</strong>
+      <small>{{ metric.note }}</small>
+    </article>
+  {% empty %}
+    <article class="pb-home-stat">
+      <span>No sync runs yet</span>
+      <strong>0</strong>
+      <small>waiting for first import</small>
+    </article>
+  {% endfor %}
+</section>
+
+<header class="pb-app-header">
+  <div>
+    <p class="pb-kicker">Parcel Book</p>
+    <h1>My Watchlist</h1>
+    <p class="pb-muted">Timely parcel changes and saved properties.</p>
   </div>
-  <div class="pb-metrics pb-metrics-premium" id="data-sources">
-    {% for metric in sync.metrics %}
-      <article class="pb-metric pb-metric-{{ metric.accent }}">
-        <span>{{ metric.label }}</span>
-        <strong>{{ metric.value }}</strong>
-        <small>{{ metric.note }}</small>
+  <div class="pb-app-header-actions">
+    <span class="pb-alert-count {% if sync.watchlist_alerts %}has-alerts{% endif %}">{{ sync.watchlist_alerts|length }} alert{{ sync.watchlist_alerts|length|pluralize }}</span>
+    <a class="pb-button" href="{% url 'opportunity_ai_search' %}">Create new opportunity</a>
+  </div>
+</header>
+
+<section class="pb-panel pb-watchlist-panel pb-home-watchlist">
+  <div class="pb-watch-table-head" aria-hidden="true">
+    <span>Parcel / Address</span>
+    <span>Location</span>
+    <span>Type</span>
+    <span>Last Change</span>
+    <span>Alerts</span>
+  </div>
+  <div class="pb-watch-table">
+    {% for row in watchlist %}
+      <article class="pb-watch-row {% if row.has_alert %}has-alert{% endif %}">
+        <a class="pb-watch-main" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">
+          <span class="pb-watch-thumb">
+            {% if row.aerial_image_url %}
+              <img src="{{ row.aerial_image_url }}" alt="" loading="lazy">
+            {% endif %}
+          </span>
+          <span>
+            <strong>{{ row.location }}</strong>
+            <small>{{ row.parcel_number }}</small>
+          </span>
+        </a>
+        <div class="pb-watch-location">{{ row.city|default:"Skagit County" }}</div>
+        <div>
+          <span class="pb-type-pill">{{ row.current_use }}</span>
+        </div>
+        <div class="pb-watch-change">
+          <strong>{% if row.has_alert %}{{ row.alert_label }}{% else %}Saved{% endif %}</strong>
+          <small>{% if row.has_alert and row.alert_date_label %}{{ row.alert_date_label }}{% else %}{{ row.saved_at|timesince }} ago{% endif %}</small>
+        </div>
+        <div class="pb-watch-alerts">
+          <span class="pb-alert-symbol {% if row.has_alert %}active{% endif %}" title="{% if row.has_alert %}Has alert{% else %}No current alerts{% endif %}" aria-label="{% if row.has_alert %}Has alert{% else %}No current alerts{% endif %}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+          </span>
+          <span class="pb-alert-symbol saved active" title="Saved" aria-label="Saved">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2 7.5 14 3 9.6l6.2-.9L12 3z"/></svg>
+          </span>
+        </div>
       </article>
     {% empty %}
-      <article class="pb-metric">
-        <span>No assessor sync runs yet</span>
-        <strong>0</strong>
-        <small>waiting for first import</small>
+      <p class="pb-muted">Saved parcels will appear here.</p>
+    {% endfor %}
+
+    {% if sample_alert_row %}
+      <article class="pb-watch-row has-alert is-sample">
+        <div class="pb-watch-main">
+          <span class="pb-watch-thumb">
+            {% if sample_alert_row.aerial_image_url %}
+              <img src="{{ sample_alert_row.aerial_image_url }}" alt="" loading="lazy">
+            {% endif %}
+          </span>
+          <span>
+            <strong>{{ sample_alert_row.location }}</strong>
+            <small>{{ sample_alert_row.parcel_number }}</small>
+          </span>
+        </div>
+        <div class="pb-watch-location">Sedro-Woolley</div>
+        <div>
+          <span class="pb-type-pill">{{ sample_alert_row.current_use }}</span>
+        </div>
+        <div class="pb-watch-change">
+          <strong>{{ sample_alert_row.alert_label }}</strong>
+          <small>{{ sample_alert_row.alert_date_label }}</small>
+        </div>
+        <div class="pb-watch-alerts">
+          <span class="pb-alert-symbol active" title="Has alert" aria-label="Has alert"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span>
+          <span class="pb-alert-symbol saved active" title="Saved" aria-label="Saved"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2 7.5 14 3 9.6l6.2-.9L12 3z"/></svg></span>
+        </div>
+      </article>
+    {% endif %}
+  </div>
+</section>
+
+<section class="pb-panel pb-opportunity-strip">
+  <div class="pb-opportunity-strip-head">
+    <h2>Your Opportunities</h2>
+    <a class="pb-mini-link" href="{% url 'opportunity_explore' %}">View all opportunities</a>
+  </div>
+  <div class="pb-opportunity-card-grid">
+    {% for opportunity in opportunity_cards %}
+      <a class="pb-opportunity-card pb-opportunity-card-{{ opportunity.accent }}" href="{{ opportunity.url }}">
+        <span class="pb-opportunity-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+        </span>
+        <div>
+          <strong>{{ opportunity.title }}</strong>
+          <p>
+            <span>Location</span>
+            {{ opportunity.location }}
+          </p>
+          <p>
+            <span>Criteria</span>
+            {{ opportunity.criteria }}
+          </p>
+        </div>
+        <footer>
+          <b>{{ opportunity.match_label }}</b>
+          {% if not opportunity.updated_label %}<small>Last match: {{ opportunity.updated_at|timesince }} ago</small>{% endif %}
+        </footer>
+      </a>
+    {% empty %}
+      <article class="pb-opportunity-empty">
+        <strong>No saved opportunities yet</strong>
+        <span>Create a search, save it, and it will appear here as an opportunity.</span>
       </article>
     {% endfor %}
   </div>
-</section>
-
-<section class="pb-ops-grid">
-  {% if sync.narrative %}
-    <article class="pb-sync-brief pb-sync-brief-premium">
-      <div>
-        <div class="pb-hot-label">Sync brief</div>
-        <h2>{{ sync.narrative.headline }}</h2>
-        {% if sync.narrative.dek %}<strong class="pb-sync-dek">{{ sync.narrative.dek }}</strong>{% endif %}
-        <p>{{ sync.narrative.narrative }}</p>
-        {% if sync.narrative.bullets %}
-          <ul class="pb-sync-bullets">
-            {% for bullet in sync.narrative.bullets %}
-              <li>{{ bullet }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-        {% if sync.narrative.notable_signals %}
-          <div class="pb-notable-signals">
-            <span>Notable signals</span>
-            {% for signal in sync.narrative.notable_signals|slice:":5" %}
-              <div>{{ signal }}</div>
-            {% endfor %}
-          </div>
-        {% endif %}
-      </div>
-      {% if sync.narrative.newsletter_subject and request.user.is_staff %}
-        <a class="pb-mini-link pb-sync-preview-link" href="{% url 'opportunity_newsletter_preview' %}">Newsletter preview</a>
-      {% endif %}
-    </article>
-  {% endif %}
-
-  <article class="pb-panel pb-alert-panel">
-    <div class="pb-section-head">
-      <div>
-        <p class="pb-section-eyebrow">Watchlist alerts</p>
-        <h2>Saved Parcel Notifications</h2>
-      </div>
-      <span class="pb-count-pill">{{ sync.watchlist_alerts|length }} alerts</span>
-    </div>
-    <div class="pb-notice-list">
-      {% for alert in sync.watchlist_alerts %}
-        <article class="pb-notice-item">
-          <div>
-            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' alert.parcel_number %}">{{ alert.parcel_number }}</a>
-            <strong>{{ alert.alert_label }}</strong>
-            <span>{{ alert.location }}</span>
-          </div>
-          <small>{{ alert.date_label }}</small>
-          {% if alert.document_url %}<a class="pb-doc-icon-button" href="{{ alert.document_url }}" target="_blank" rel="noopener" title="{{ alert.alert_label }} document" aria-label="Open {{ alert.alert_label }} document for {{ alert.parcel_number }}">Doc</a>{% endif %}
-        </article>
-      {% empty %}
-        <p class="pb-muted">No saved-parcel alerts in the latest sync.</p>
-      {% endfor %}
-    </div>
-  </article>
-</section>
-
-<div class="pb-dashboard-grid">
-  <section class="pb-panel pb-watchlist-panel">
-    <div class="pb-section-head">
-      <div>
-        <p class="pb-section-eyebrow">Saved workbench</p>
-        <h2>My Watchlist</h2>
-      </div>
-      <a class="pb-button secondary" href="{% url 'opportunity_watchlist' %}">View all</a>
-    </div>
-    <div class="pb-result-list">
-      {% for row in watchlist %}
-        <article class="pb-list-row pb-home-list-row">
-          <div>
-            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
-            <strong>{{ row.location }}</strong>
-            <span>{{ row.current_use }}</span>
-          </div>
-          <div>
-            <span class="pb-chip">{{ row.source_tab_label }}</span>
-            <span class="pb-chip">{{ row.zoning }}</span>
-          </div>
-          <div class="pb-list-values">
-            <strong>{{ row.assessed_value_fmt }}</strong>
-            <span>{{ row.acres_fmt }}</span>
-          </div>
-          <div>
-            {% for flag in row.risk_flags|slice:":2" %}<span class="pb-flag pb-flag-{{ forloop.counter }}">{{ flag }}</span>{% empty %}<span class="pb-muted">No flags</span>{% endfor %}
-          </div>
-          <div class="pb-icon-actions">
-            {% if row.map_url %}<a class="pb-icon-button" href="{{ row.map_url }}" target="_blank" rel="noopener" title="Open map" aria-label="Open map for {{ row.parcel_number }}"><span class="pb-map-glyph"></span></a>{% endif %}
-          </div>
-        </article>
-      {% empty %}
-        <p class="pb-muted">Saved parcels will appear here.</p>
-      {% endfor %}
-    </div>
-  </section>
-</div>
-
-<section class="pb-sync-lists">
-  <article class="pb-panel">
-    <div class="pb-section-head">
-      <div>
-        <p class="pb-section-eyebrow">From last sync</p>
-        <h2>Fresh Sales</h2>
-      </div>
-      <div class="pb-section-tools">
-        <span class="pb-count-pill">{{ sync.recent_sales|length }} {{ sync.since_text }}</span>
-        <a class="{% if sync.sales_sort == 'city' %}active{% endif %}" href="{% url 'opportunity_home' %}?sales_sort=city">City</a>
-        <a class="{% if sync.sales_sort == 'price' %}active{% endif %}" href="{% url 'opportunity_home' %}?sales_sort=price">Price</a>
-      </div>
-    </div>
-    <div class="pb-record-list">
-      {% for sale in sync.recent_sales %}
-        <a class="pb-record-row pb-record-row-link" href="{% url 'opportunity_parcel_detail' sale.parcel_number %}">
-          <div>
-            <span class="pb-card-title">{{ sale.parcel_number }}</span>
-            <strong>{{ sale.sale_price_fmt }}</strong>
-            <span>{{ sale.location }}</span>
-          </div>
-          <div>
-            <span>{{ sale.deed_type }}</span>
-            <small>{{ sale.date_label }}</small>
-          </div>
-        </a>
-      {% empty %}
-        <p class="pb-muted">No current-window sales in the latest sync.</p>
-      {% endfor %}
-    </div>
-  </article>
-
-  <article class="pb-panel">
-    <div class="pb-section-head">
-      <div>
-        <p class="pb-section-eyebrow">From last sync</p>
-        <h2>Recorded Documents</h2>
-      </div>
-      <span class="pb-count-pill">{{ sync.recorded_docs|length }} {{ sync.since_text }}</span>
-    </div>
-    <div class="pb-record-list">
-      {% for doc in sync.recorded_docs %}
-        <article class="pb-record-row">
-          <div>
-            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' doc.parcel_number %}">{{ doc.parcel_number }}</a>
-            <strong>{{ doc.document_type }}</strong>
-            <span>{{ doc.location|default:doc.signal_group }}</span>
-          </div>
-          <div>
-            <span>{{ doc.date_label }}</span>
-          </div>
-          {% if doc.document_url %}<a class="pb-doc-icon-button" href="{{ doc.document_url }}" target="_blank" rel="noopener" title="{{ doc.document_type }} {{ doc.recording_number }}" aria-label="Open {{ doc.document_type }} document {{ doc.recording_number }} for parcel {{ doc.parcel_number }}">Doc</a>{% endif %}
-        </article>
-      {% empty %}
-        <p class="pb-muted">No new recorded documents in the latest sync.</p>
-      {% endfor %}
-    </div>
-  </article>
 </section>
 
 {% include "opportunity/_chrome_close.html" %}

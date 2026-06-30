@@ -24,6 +24,7 @@ from .services import (
     DATA_SOURCES,
     TAB_LOOKUP,
     TABS,
+    dashboard_watchlist_rows,
     dashboard_context,
     fetch_tab_rows,
     filter_specs_for_tab,
@@ -269,14 +270,15 @@ def parcel(request, parcel_number):
 
 @login_required(login_url=reverse_lazy("opportunity_login"))
 def watchlist(request):
+    sync = latest_assessor_sync_summary(request.user)
     return render(
         request,
         "opportunity/watchlist.html",
         _chrome_context(request, {
             "active_nav": "watchlist",
-            "rows": watchlist_rows(request.user),
+            "rows": dashboard_watchlist_rows(request.user, sync, limit=100),
             "saved_searches": saved_searches_for_user(request.user),
-            "sync": latest_assessor_sync_summary(request.user),
+            "sync": sync,
             "disclaimer": DISCLAIMER,
         }),
     )

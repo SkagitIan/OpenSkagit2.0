@@ -91,31 +91,42 @@
     </div>
     <span class="pb-count-pill">{{ rows|length }} saved</span>
   </div>
-  <div class="pb-watch-grid">
+  <div class="pb-watch-table-head" aria-hidden="true">
+    <span>Parcel / Address</span>
+    <span>Location</span>
+    <span>Type</span>
+    <span>Last Change</span>
+    <span>Alerts</span>
+  </div>
+  <div class="pb-watch-table">
     {% for row in rows %}
-      <article class="pb-watch-card">
-        <div class="pb-card-head">
-          <div>
-            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
-            <div class="pb-card-location">{{ row.location }}</div>
-          </div>
-          <strong>{{ row.assessed_value_fmt }}</strong>
-        </div>
+      <article class="pb-watch-row {% if row.has_alert %}has-alert{% endif %}">
+        <a class="pb-watch-main" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">
+          <span class="pb-watch-thumb">
+            {% if row.aerial_image_url %}
+              <img src="{{ row.aerial_image_url }}" alt="" loading="lazy">
+            {% endif %}
+          </span>
+          <span>
+            <strong>{{ row.location }}</strong>
+            <small>{{ row.parcel_number }}</small>
+          </span>
+        </a>
+        <div class="pb-watch-location">{{ row.city|default:"Skagit County" }}</div>
         <div>
-          <span class="pb-chip">{{ row.source_tab_label }}</span>
-          <span class="pb-chip" title="{{ row.zone_definition }}">{{ row.zoning }}</span>
-          <span class="pb-chip">{{ row.current_use }}</span>
+          <span class="pb-type-pill">{{ row.current_use }}</span>
         </div>
-        <p class="pb-watch-reason">{{ row.watch_reason }}</p>
-        <div>
-          {% for signal in row.signal_labels %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
-          {% for flag in row.risk_flags %}<span class="pb-flag pb-flag-{{ forloop.counter }}">{{ flag }}</span>{% empty %}<span class="pb-muted">No obvious flags</span>{% endfor %}
+        <div class="pb-watch-change">
+          <strong>{% if row.has_alert %}{{ row.alert_label }}{% else %}Saved{% endif %}</strong>
+          <small>{% if row.has_alert and row.alert_date_label %}{{ row.alert_date_label }}{% else %}{{ row.saved_at|timesince }} ago{% endif %}</small>
         </div>
-        <p class="pb-muted">Land {{ row.land_value_fmt }} / Building {{ row.building_value_fmt }} / {{ row.acres_fmt }}</p>
-        <div class="pb-card-actions">
-          <a class="pb-button secondary" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">Details</a>
-          {% if row.map_url %}<a href="{{ row.map_url }}" target="_blank" rel="noopener">Map</a>{% endif %}
-          {% include "opportunity/_save_form.html" %}
+        <div class="pb-watch-alerts">
+          <span class="pb-alert-symbol {% if row.has_alert %}active{% endif %}" title="{% if row.has_alert %}Has alert{% else %}No current alerts{% endif %}" aria-label="{% if row.has_alert %}Has alert{% else %}No current alerts{% endif %}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+          </span>
+          <span class="pb-alert-symbol saved active" title="Saved" aria-label="Saved">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2 7.5 14 3 9.6l6.2-.9L12 3z"/></svg>
+          </span>
         </div>
       </article>
     {% empty %}

@@ -9,6 +9,7 @@ from typing import Any
 from urllib.parse import urlencode
 
 from django.db import connection
+from django.urls import reverse
 
 
 ASSESSOR_DETAIL_URL = "https://www.skagitcounty.net/search/property/default.aspx?id={parcel_number}"
@@ -2001,11 +2002,122 @@ def fallback_sync_narrative(summary: dict[str, Any], brief_context: dict[str, An
 
 
 def dashboard_context(user, sales_sort: str = "") -> dict[str, Any]:
-    watchlist = watchlist_rows(user, limit=5)
+    sync = latest_assessor_sync_summary(user, sales_sort=sales_sort)
+    watchlist = dashboard_watchlist_rows(user, sync, limit=8)
     return {
         "watchlist": watchlist,
-        "sync": latest_assessor_sync_summary(user, sales_sort=sales_sort),
+        "opportunity_cards": dashboard_opportunity_cards(user, limit=8),
+        "sample_alert_row": sample_dashboard_alert_row(watchlist),
+        "sync": sync,
         "tabs": TABS,
+    }
+
+
+def dashboard_opportunity_cards(user, limit: int = 8) -> list[dict[str, Any]]:
+    from .models import OpportunitySearch
+
+    counts = tab_counts({})
+    cards = []
+    accents = ["green", "blue", "purple", "orange"]
+    for index, tab in enumerate(TABS):
+        cards.append(
+            {
+                "title": tab.label,
+                "location": "Skagit County, WA",
+                "criteria": tab.note or tab.description,
+                "count": counts.get(tab.key, ""),
+                "match_label": f"{counts.get(tab.key, '')} Matches".strip(),
+                "updated_at": None,
+                "updated_label": "live county data",
+                "url": f"{reverse('opportunity_explore')}?tab={tab.key}",
+                "accent": accents[index % len(accents)],
+            }
+        )
+    searches = OpportunitySearch.objects.filter(user=user, saved_at__isnull=False).order_by("-saved_at", "-updated_at")[: max(limit - len(cards), 0)]
+    for search in searches:
+        plan = search.search_plan or {}
+        index = len(cards)
+        cards.append(
+            {
+                "title": search.short_name or search.title or "Opportunity",
+                "location": _opportunity_location(plan),
+                "criteria": _opportunity_criteria(search, plan),
+                "count": f"{search.result_count:,}",
+                "match_label": f"{search.result_count:,} Match" if search.result_count == 1 else f"{search.result_count:,} Matches",
+                "updated_at": search.saved_at or search.updated_at,
+                "updated_label": "",
+                "url": reverse("opportunity_detail", args=[search.pk]),
+                "accent": accents[index % len(accents)],
+            }
+        )
+    return cards[: max(limit, len(TABS))]
+
+
+def _opportunity_location(plan: dict[str, Any]) -> str:
+    value = plan.get("location") or plan.get("place") or ""
+    if isinstance(value, dict):
+        value = value.get("label") or value.get("name") or value.get("value") or ""
+    if isinstance(value, list):
+        value = ", ".join(str(item) for item in value[:2] if item)
+    text = str(value or "").strip()
+    return text or "Skagit County, WA"
+
+
+def _opportunity_criteria(search, plan: dict[str, Any]) -> str:
+    for key in ("hard_filters", "soft_rankers", "asset_intent"):
+        value = plan.get(key)
+        if isinstance(value, list):
+            text = ", ".join(str(item) for item in value[:2] if item)
+            if text:
+                return text[:84]
+        if isinstance(value, str) and value.strip():
+            return value.strip()[:84]
+    summary = (search.criteria_summary or search.prompt or "").strip()
+    first_sentence = summary.split(".")[0].strip()
+    return (first_sentence or "Saved parcel opportunity")[:84]
+
+
+def dashboard_watchlist_rows(user, sync: dict[str, Any], limit: int = 8) -> list[dict[str, Any]]:
+    rows = watchlist_rows(user)
+    alerts = {
+        (alert.get("parcel_number") or "").upper(): alert
+        for alert in (sync.get("watchlist_alerts") or [])
+        if alert.get("parcel_number")
+    }
+    for row in rows:
+        alert = alerts.get((row.get("parcel_number") or "").upper())
+        row["has_alert"] = bool(alert)
+        row["alert_label"] = alert.get("alert_label", "") if alert else ""
+        row["alert_date_label"] = alert.get("date_label", "") if alert else ""
+        row["alert_document_url"] = alert.get("document_url", "") if alert else ""
+    rows.sort(key=lambda row: _timestamp(row.get("saved_at")), reverse=True)
+    rows.sort(key=lambda row: not row.get("has_alert"))
+    return rows[:limit]
+
+
+def _timestamp(value: Any) -> float:
+    if hasattr(value, "timestamp"):
+        return float(value.timestamp())
+    return 0.0
+
+
+def sample_dashboard_alert_row(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    if any(row.get("has_alert") for row in rows):
+        return {}
+    source = rows[0] if rows else {}
+    return {
+        "parcel_number": source.get("parcel_number") or "P77001",
+        "location": source.get("location") or "906 MAPLE ST, SEDRO WOOLLEY",
+        "current_use": source.get("current_use") or "HOUSEHOLD, SFR, INSIDE CITY",
+        "zoning": source.get("zoning") or "I",
+        "source_tab_label": source.get("source_tab_label") or "Saved Parcel",
+        "assessed_value_fmt": source.get("assessed_value_fmt") or "$462,200",
+        "acres_fmt": source.get("acres_fmt") or "1.47 acres",
+        "aerial_image_url": source.get("aerial_image_url") or "",
+        "alert_label": "Sample alert",
+        "alert_date_label": "latest sync",
+        "has_alert": True,
+        "is_sample": True,
     }
 
 
@@ -2053,6 +2165,7 @@ def parcel_summary(parcel_number: str) -> dict[str, Any] | None:
         "parcel_url": detail["parcel_url"],
         "detail_url_name": "opportunity_parcel_detail",
         "location": detail["location"],
+        "city": detail["city"],
         "zoning": detail["zoning"],
         "zone_definition": detail["zone_definition"],
         "current_use": detail["current_use"],
@@ -2062,6 +2175,7 @@ def parcel_summary(parcel_number: str) -> dict[str, Any] | None:
         "building_value_fmt": detail["building_value_fmt"],
         "acres_fmt": detail["acres_fmt"],
         "map_url": detail["map_url"],
+        "aerial_image_url": detail["aerial_image_url"],
         "signal_labels": detail["feature_labels"],
         "risk_flags": detail["risk_flags"],
     }
