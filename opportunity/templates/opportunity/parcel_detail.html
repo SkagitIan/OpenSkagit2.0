@@ -5,13 +5,13 @@
 {% block content %}
 {% include "opportunity/_chrome_open.html" %}
 
-<div class="pb-detail-page">
-  <section class="pb-panel pb-detail-main">
-    <div class="pb-parcel-identity">
+<div class="pb-detail-page pb-detail-page-premium">
+  <section class="pb-detail-hero-card">
+    <div class="pb-detail-hero-top">
       <div>
         <p class="pb-kicker">Parcel detail</p>
         <h1>{{ parcel.parcel_number }}</h1>
-        <p class="pb-muted">{{ parcel.location }}</p>
+        <p class="pb-detail-address">{{ parcel.location }}</p>
       </div>
       <div class="pb-card-actions pb-parcel-actions">
         {% with row=parcel %}
@@ -22,115 +22,299 @@
       </div>
     </div>
 
-    <hr class="pb-rule">
-
-    <div class="pb-detail-grid">
-      <div>
-        <h3>Parcel</h3>
-        <dl class="pb-facts">
-          <dt>Owner</dt><dd>{{ parcel.owner|default:"n/a" }}</dd>
-          <dt>Current use</dt><dd>{{ parcel.current_use }}</dd>
-          <dt>Zone</dt><dd><a href="{{ parcel.zone_url|default:'#' }}" title="{{ parcel.zone_definition }}">{{ parcel.zoning }}</a></dd>
-          <dt>Utilities</dt><dd>{{ parcel.utilities|default:"n/a" }}</dd>
-          <dt>Acres</dt><dd>{{ parcel.acres_fmt }}</dd>
-        </dl>
-      </div>
-      <div>
-        <h3>Values</h3>
-        <dl class="pb-facts">
-          <dt>Assessed</dt><dd>{{ parcel.assessed_value_fmt }}</dd>
-          <dt>Land</dt><dd>{{ parcel.land_value_fmt }}</dd>
-          <dt>Building</dt><dd>{{ parcel.building_value_fmt }}</dd>
-          <dt>Taxable</dt><dd>{{ parcel.taxable_value_fmt }}</dd>
-          <dt>Total taxes</dt><dd>{{ parcel.total_taxes_fmt }}</dd>
-        </dl>
-      </div>
-    </div>
-
-    <hr class="pb-rule">
-
-    <div class="pb-chart-head">
-      <div>
-        <h3>Value History</h3>
-        <p class="pb-muted">Click or tap a year point to see the value and tax amount.</p>
-      </div>
-    </div>
-    {% if parcel.history_chart.has_data %}
-      <div class="pb-history-chart">
-        <canvas id="parcel-value-history" role="img" aria-label="Total value and tax amount history for {{ parcel.parcel_number }}"></canvas>
+    {% if parcel.is_locked %}
+      <div class="pb-unlock-card">
+        <h2>Heart this parcel to unlock the detail page.</h2>
+        <p class="pb-muted">Saved parcels get the deeper property dossier, zoning feasibility screen, sales, land segments, improvements, and map imagery tools.</p>
       </div>
     {% else %}
-      <p class="pb-muted">No value history found.</p>
+      <div class="pb-parcel-kpis">
+        <article class="pb-kpi-card pb-kpi-card-teal">
+          <span>Assessed value</span>
+          <strong>{{ parcel.assessed_value_fmt }}</strong>
+          <small>Current assessor value</small>
+        </article>
+        <article class="pb-kpi-card pb-kpi-card-gold">
+          <span>Land value</span>
+          <strong>{{ parcel.land_value_fmt }}</strong>
+          <small>{{ parcel.acres_fmt }}</small>
+        </article>
+        <article class="pb-kpi-card pb-kpi-card-blue">
+          <span>Building value</span>
+          <strong>{{ parcel.building_value_fmt }}</strong>
+          <small>{{ parcel.current_use }}</small>
+        </article>
+        <article class="pb-kpi-card pb-kpi-card-green">
+          <span>Annual taxes</span>
+          <strong>{{ parcel.total_taxes_fmt }}</strong>
+          <small>{{ parcel.zoning }}</small>
+        </article>
+      </div>
     {% endif %}
   </section>
 
-  <div class="pb-map-media-grid">
-    <section class="pb-panel pb-parcel-map-card">
-      <div class="pb-card-head">
-        <div>
-          <h3>Map</h3>
-          <p class="pb-muted">{{ parcel.location }}</p>
-        </div>
-        {% if parcel.map_url %}<a class="pb-button secondary" href="{{ parcel.map_url }}" target="_blank" rel="noopener">Open map</a>{% endif %}
-      </div>
-      {% if parcel.map_embed_url %}
-        <iframe class="pb-parcel-map" src="{{ parcel.map_embed_url }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map for {{ parcel.parcel_number }}"></iframe>
-      {% else %}
-        <div class="pb-map-canvas pb-parcel-map-empty">
-          <span class="pb-muted">No parcel geometry available.</span>
-        </div>
-      {% endif %}
-    </section>
-
-    <section class="pb-panel pb-aerial-card">
-      <div class="pb-card-head">
-        <div>
-          <h3>Aerial Imagery</h3>
-          <p class="pb-muted">{{ parcel.aerial_image_source }}</p>
-        </div>
-      </div>
-      {% if parcel.aerial_image_url %}
-        <img class="pb-aerial-image" src="{{ parcel.aerial_image_url }}" alt="Aerial imagery around parcel {{ parcel.parcel_number }}" loading="lazy">
-      {% else %}
-        <div class="pb-map-canvas pb-parcel-map-empty">
-          <span class="pb-muted">No aerial imagery extent available.</span>
-        </div>
-      {% endif %}
-    </section>
-  </div>
-
-  <section class="pb-detail-sidecars">
-    <div class="pb-panel">
-      <h3>Recent Sales</h3>
-      <div class="pb-list">
-        {% for sale in parcel.sales %}
-          <div class="pb-watch-item">
-            <div>{{ sale.sale_date_iso|default:"Unknown date" }}<br><span class="pb-muted">{{ sale.deed_type }}</span></div>
-            <strong>{{ sale.sale_price_fmt }}</strong>
+  {% if not parcel.is_locked %}
+    <div class="pb-detail-dashboard">
+      <main class="pb-detail-workspace">
+        <section class="pb-panel pb-chart-panel">
+          <div class="pb-card-head">
+            <div>
+              <p class="pb-section-eyebrow">Trend</p>
+              <h3>Value History</h3>
+            </div>
+            <span class="pb-count-pill">2020-2025</span>
           </div>
-        {% empty %}
-          <p class="pb-muted">No sales snippets found.</p>
-        {% endfor %}
-      </div>
-    </div>
+          {% if parcel.history_chart.has_data %}
+            <div class="pb-history-chart">
+              <canvas id="parcel-value-history" role="img" aria-label="Total value and tax amount history for {{ parcel.parcel_number }}"></canvas>
+            </div>
+          {% else %}
+            <p class="pb-muted">No value history found.</p>
+          {% endif %}
+        </section>
 
-    <div class="pb-panel">
-      <h3>Latest Sync Changes</h3>
-      <div class="pb-list">
-        {% for change in parcel.sync_changes %}
-          <div class="pb-watch-item">
-            <div>{{ change.table_name }}<br><span class="pb-muted">{{ change.change_type }}</span></div>
-            <span class="pb-muted">{{ change.created_at|date:"M j" }}</span>
+        <section class="pb-panel pb-feasibility-panel">
+          <div class="pb-card-head">
+            <div>
+              <p class="pb-section-eyebrow">Build screen</p>
+              <h3>Feasibility</h3>
+            </div>
           </div>
-        {% empty %}
-          <p class="pb-muted">No recent sync changes found.</p>
-        {% endfor %}
-      </div>
+          <div class="pb-feasibility">
+            <div class="pb-feasibility-summary">
+              <h4>{{ parcel.feasibility.headline }}</h4>
+              <p>{{ parcel.feasibility.summary }}</p>
+              {% if parcel.feasibility.note %}<p class="pb-muted">{{ parcel.feasibility.note }}</p>{% endif %}
+              {% if parcel.feasibility.sources %}
+                <div class="pb-source-links">
+                  {% for source in parcel.feasibility.sources %}
+                    <a href="{{ source }}" target="_blank" rel="noopener">Source {{ forloop.counter }}</a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+            <div class="pb-feasibility-grid">
+              <div>
+                <h4>Likely Uses</h4>
+                <ul class="pb-plain-list">
+                  {% for item in parcel.feasibility.likely_uses %}
+                    <li>{{ item }}</li>
+                  {% empty %}
+                    <li>No allowed uses found in the zoning data.</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div>
+                <h4>Constraints</h4>
+                <ul class="pb-plain-list">
+                  {% for item in parcel.feasibility.constraints %}
+                    <li>{{ item }}</li>
+                  {% empty %}
+                    <li>Review zoning, critical areas, utilities, and site standards.</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div>
+                <h4>Next Steps</h4>
+                <ul class="pb-plain-list">
+                  {% for item in parcel.feasibility.next_steps %}
+                    <li>{{ item }}</li>
+                  {% empty %}
+                    <li>Confirm with source code and planning staff.</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="pb-panel pb-dossier-panel">
+          <div class="pb-card-head">
+            <div>
+              <p class="pb-section-eyebrow">Dossier</p>
+              <h3>Parcel Records</h3>
+            </div>
+          </div>
+          <div class="pb-dossier-metrics">
+            {% for card in parcel.dossier.summary_cards %}
+              <div class="pb-dossier-metric">
+                <strong>{{ card.value }}</strong>
+                <span>{{ card.label }}</span>
+                {% if card.note %}<small>{{ card.note }}</small>{% endif %}
+              </div>
+            {% endfor %}
+          </div>
+          <div class="pb-dossier-disclosures">
+            <details open>
+              <summary>Improvements</summary>
+              <div class="pb-mini-table pb-mini-table-scroll">
+                {% for row in parcel.dossier.improvements %}
+                  <div>
+                    <strong>{{ row.type_description|default:row.description|default:"Improvement" }}</strong>
+                    {% if row.living_area_num %}<span>{{ row.living_area_fmt }}</span>{% endif %}
+                    <small>{{ row.detail_line|default:"quality/condition/year n/a" }}</small>
+                  </div>
+                {% empty %}
+                  <p class="pb-muted">No improvement records found.</p>
+                {% endfor %}
+              </div>
+            </details>
+            <details>
+              <summary>Land Details</summary>
+              <div class="pb-mini-table">
+                {% for row in parcel.dossier.land_segments %}
+                  <div>
+                    <strong>{{ row.land_type|default:"Land segment" }}</strong>
+                    <span>{{ row.size_fmt }} / {{ row.market_value_fmt }}</span>
+                    <small>{{ row.appr_meth|default:"method n/a" }}{% if row.effective_front %} / {{ row.effective_front }} effective frontage{% endif %}</small>
+                  </div>
+                {% empty %}
+                  <p class="pb-muted">No land segment records found.</p>
+                {% endfor %}
+              </div>
+            </details>
+            <details open>
+              <summary>Zoning</summary>
+              <div class="pb-mini-table">
+                {% for row in parcel.dossier.zoning_overlaps %}
+                  <div>
+                    <strong>{{ row.zone_id|default:"Unknown zone" }}{% if row.is_primary %} primary{% endif %}</strong>
+                    <span>{{ row.definition|default:row.zone_name|default:"No zoning definition available." }}</span>
+                    <small>
+                      {{ row.jurisdiction|default:"jurisdiction n/a" }}{% if row.percent_of_parcel_fmt %} / {{ row.percent_of_parcel_fmt }} of parcel{% endif %}
+                      {% if row.definition_source_url %} / <a href="{{ row.definition_source_url }}" target="_blank" rel="noopener">Source</a>{% endif %}
+                    </small>
+                  </div>
+                {% empty %}
+                  <p class="pb-muted">No zoning overlaps found.</p>
+                {% endfor %}
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <div class="pb-map-media-grid">
+          <section class="pb-panel pb-parcel-map-card">
+            <div class="pb-card-head">
+              <div>
+                <p class="pb-section-eyebrow">Map</p>
+                <h3>Parcel Map</h3>
+              </div>
+              {% if parcel.map_url %}<a class="pb-button secondary" href="{{ parcel.map_url }}" target="_blank" rel="noopener">Open map</a>{% endif %}
+            </div>
+            {% if parcel.map_embed_url %}
+              <iframe class="pb-parcel-map" src="{{ parcel.map_embed_url }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map for {{ parcel.parcel_number }}"></iframe>
+            {% else %}
+              <div class="pb-map-canvas pb-parcel-map-empty">
+                <span class="pb-muted">No parcel geometry available.</span>
+              </div>
+            {% endif %}
+          </section>
+
+          <section class="pb-panel pb-aerial-card">
+            <div class="pb-card-head">
+              <div>
+                <p class="pb-section-eyebrow">Imagery</p>
+                <h3>Aerial</h3>
+              </div>
+            </div>
+            {% if parcel.aerial_image_url %}
+              <div class="pb-aerial-frame" data-aerial-frame>
+                <div class="pb-zoom-controls" aria-label="Aerial imagery zoom controls">
+                  <button type="button" data-zoom-out aria-label="Zoom aerial imagery out">-</button>
+                  <button type="button" data-zoom-in aria-label="Zoom aerial imagery in">+</button>
+                  <button type="button" data-zoom-reset aria-label="Reset aerial imagery zoom">Reset</button>
+                </div>
+                <img class="pb-aerial-image" src="{{ parcel.aerial_image_url }}" alt="Aerial imagery around parcel {{ parcel.parcel_number }}" loading="lazy" data-aerial-image>
+              </div>
+            {% else %}
+              <div class="pb-map-canvas pb-parcel-map-empty">
+                <span class="pb-muted">No aerial imagery extent available.</span>
+              </div>
+            {% endif %}
+          </section>
+        </div>
+      </main>
+
+      <aside class="pb-detail-rail">
+        <section class="pb-panel pb-rail-panel">
+          <p class="pb-section-eyebrow">Snapshot</p>
+          <h3>Property Facts</h3>
+          <dl class="pb-facts pb-facts-compact">
+            <dt>Owner</dt><dd>{{ parcel.owner|default:"n/a" }}</dd>
+            <dt>Mailing</dt>
+            <dd>
+              {% for line in parcel.owner_lines %}
+                {{ line }}{% if not forloop.last %}<br>{% endif %}
+              {% empty %}
+                n/a
+              {% endfor %}
+            </dd>
+            <dt>Use</dt><dd>{{ parcel.current_use }}</dd>
+            <dt>Zone</dt><dd><a href="{{ parcel.zone_url|default:'#' }}" title="{{ parcel.zone_definition }}">{{ parcel.zoning }}</a></dd>
+            <dt>Utilities</dt><dd>{{ parcel.utilities|default:"n/a" }}</dd>
+            <dt>Neighborhood</dt><dd>{{ parcel.dossier.rollup.neighborhood_description|default:parcel.neighborhood_code|default:"n/a" }}</dd>
+          </dl>
+        </section>
+
+        <section class="pb-panel pb-rail-panel pb-gis-panel">
+          <p class="pb-section-eyebrow">GIS</p>
+          <h3>GIS Layers</h3>
+          {% if parcel.gis_context.layers %}
+            <div class="pb-gis-layer-list">
+              {% for layer in parcel.gis_context.layers %}
+                <details {% if forloop.first %}open{% endif %}>
+                  <summary>
+                    <span>{{ layer.label }}</span>
+                    <small>{{ layer.count }}</small>
+                  </summary>
+                  <div class="pb-gis-feature-list">
+                    {% for feature in layer.rows %}
+                      <div>
+                        <strong>{{ feature.primary }}</strong>
+                        {% for detail in feature.details %}
+                          <span>{{ detail }}</span>
+                        {% endfor %}
+                      </div>
+                    {% endfor %}
+                    {% if layer.exceeded %}<p class="pb-muted">More records exist in this layer.</p>{% endif %}
+                  </div>
+                </details>
+              {% endfor %}
+            </div>
+          {% elif parcel.gis_context.error %}
+            <p class="pb-muted">{{ parcel.gis_context.error }}</p>
+          {% else %}
+            <p class="pb-muted">No relevant GIS layer hits found for this parcel.</p>
+          {% endif %}
+        </section>
+
+        <section class="pb-panel pb-rail-panel">
+          <p class="pb-section-eyebrow">Activity</p>
+          <h3>Recent Records</h3>
+          <div class="pb-record-stack">
+            {% for sale in parcel.sales %}
+              <div>
+                <strong>{{ sale.sale_price_fmt }}</strong>
+                <span>{{ sale.sale_date_iso|default:"Unknown date" }} / {{ sale.deed_type|default:"Sale" }}</span>
+              </div>
+            {% empty %}
+              <p class="pb-muted">No sales snippets found.</p>
+            {% endfor %}
+            {% for change in parcel.sync_changes|slice:":4" %}
+              <div>
+                <strong>{{ change.table_name }}</strong>
+                <span>{{ change.change_type }} / {{ change.created_at|date:"M j" }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+      </aside>
     </div>
-  </section>
+  {% endif %}
 </div>
 
-{% if parcel.history_chart.has_data %}
+{% if parcel.history_chart.has_data and not parcel.is_locked %}
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
   <script>
     (() => {
@@ -198,6 +382,43 @@
             }
           }
         }
+      });
+    })();
+  </script>
+{% endif %}
+<script>
+  document.querySelectorAll("form[action$='{% url 'opportunity_save' %}']").forEach((form) => {
+    form.addEventListener("submit", () => {
+      const button = form.querySelector("button[type='submit']");
+      if (!button) return;
+      button.disabled = true;
+      button.classList.add("is-loading");
+      button.setAttribute("aria-label", "Loading parcel detail");
+    });
+  });
+</script>
+{% if not parcel.is_locked %}
+  <script>
+    (() => {
+      const frame = document.querySelector("[data-aerial-frame]");
+      const image = document.querySelector("[data-aerial-image]");
+      if (!frame || !image) return;
+      let zoom = 1;
+      const applyZoom = () => {
+        image.style.transform = `scale(${zoom})`;
+        frame.dataset.zoomed = zoom > 1 ? "true" : "false";
+      };
+      frame.querySelector("[data-zoom-in]")?.addEventListener("click", () => {
+        zoom = Math.min(zoom + 0.25, 3);
+        applyZoom();
+      });
+      frame.querySelector("[data-zoom-out]")?.addEventListener("click", () => {
+        zoom = Math.max(zoom - 0.25, 1);
+        applyZoom();
+      });
+      frame.querySelector("[data-zoom-reset]")?.addEventListener("click", () => {
+        zoom = 1;
+        applyZoom();
       });
     })();
   </script>

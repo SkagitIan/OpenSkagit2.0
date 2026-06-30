@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "ask_agent",
     "discovery_agent",
     "zoning_mcp",
+    "gis_mcp",
 ]
 
 MIDDLEWARE = [

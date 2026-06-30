@@ -392,6 +392,8 @@ class Command(BaseCommand):
         return parsed
 
     def _parse_section_use_rules(self, jurisdiction: Jurisdiction, sections_path: Path) -> list[ParsedUseRule]:
+        if jurisdiction.key == "la_conner":
+            return self._parse_la_conner_use_sections(sections_path)
         if jurisdiction.key == "burlington":
             return self._parse_burlington_use_sections(sections_path)
         if jurisdiction.key == "sedro_woolley":
@@ -424,6 +426,45 @@ class Command(BaseCommand):
                             zone_code=zone_code,
                             status=status,
                             notes="Generated from imported Mount Vernon use section.",
+                        )
+                    )
+        return parsed
+
+    def _parse_la_conner_use_sections(self, sections_path: Path) -> list[ParsedUseRule]:
+        parsed = []
+        with sections_path.open(encoding="utf-8") as handle:
+            for line in handle:
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                heading = row.get("heading", "")
+                lower_heading = heading.lower()
+                if "permitted uses" in lower_heading:
+                    status = "P"
+                    category = "Permitted uses"
+                elif "administrative conditional use" in lower_heading:
+                    status = "AD"
+                    category = "Administrative conditional uses"
+                elif "conditional use" in lower_heading:
+                    status = "CUP"
+                    category = "Conditional uses"
+                else:
+                    continue
+                zone_code = self._la_conner_zone_from_chapter_title(row.get("chapter_title", ""))
+                if not zone_code:
+                    continue
+                for use_name in self._numbered_uses_from_section(row.get("text", "")):
+                    parsed.append(
+                        ParsedUseRule(
+                            source_table=heading,
+                            source_url=row.get("source_url", ""),
+                            chapter_ref=row.get("chapter_ref", ""),
+                            use_category=category,
+                            use_name=self._truncate(use_name, 240),
+                            normalized_use_key=self._normalized_key(use_name),
+                            zone_code=zone_code,
+                            status=status,
+                            notes="Generated from imported La Conner local Code Publishing export.",
                         )
                     )
         return parsed
@@ -573,6 +614,50 @@ class Command(BaseCommand):
         if zone_code in {"GENERAL", "LAND", "ACCESS", "PUBLIC", "NONCONFORMING", "ESSENTIAL", "AGRICULTURAL", "PLANNING", "HEARING", "AMENDMENTS"}:
             return ""
         return normalize_zone_code(zone_code)
+
+    def _la_conner_zone_from_chapter_title(self, title: str) -> str:
+        lowered = title.lower()
+        if "residential zone" in lowered:
+            return "RD"
+        if "transitional commercial zone" in lowered:
+            return "TC"
+        if "commercial zone" in lowered:
+            return "C"
+        if "port industrial zone" in lowered:
+            return "PIND"
+        if "industrial zone" in lowered:
+            return "IND"
+        if "public use zone" in lowered:
+            return "P"
+        return ""
+
+    def _numbered_uses_from_section(self, text: str) -> list[str]:
+        uses = []
+        current = ""
+        for line in [line.strip() for line in text.splitlines() if line.strip()]:
+            if line.startswith("[Ord."):
+                continue
+            match = re.match(r"^\((\d+)\)\s+(.+)$", line)
+            if match:
+                if current:
+                    cleaned = self._clean_numbered_use_name(current)
+                    if self._looks_like_use(cleaned):
+                        uses.append(cleaned)
+                current = match.group(2)
+                continue
+            if current and not re.match(r"^\([a-zivx]+\)", line, flags=re.IGNORECASE):
+                current = f"{current} {line}"
+        if current:
+            cleaned = self._clean_numbered_use_name(current)
+            if self._looks_like_use(cleaned):
+                uses.append(cleaned)
+        return uses
+
+    def _clean_numbered_use_name(self, value: str) -> str:
+        value = self._clean_use_name(value)
+        value = re.split(r";\s*provided|,\s*provided|,\s*subject to| – see | - see | such as ", value, maxsplit=1, flags=re.IGNORECASE)[0]
+        value = re.sub(r"\s+", " ", value).strip(" .,;")
+        return value
 
     def _burlington_uses_from_section(self, text: str) -> list[str]:
         uses = []

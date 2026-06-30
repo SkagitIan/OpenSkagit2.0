@@ -55,6 +55,11 @@ def get_overlays_and_constraints(parcel_id: str) -> dict:
 
 
 @mcp.tool()
+def build_parcel_feasibility_report(parcel_id: str, proposed_use: str) -> dict:
+    return services.build_parcel_feasibility_report(parcel_id, proposed_use)
+
+
+@mcp.tool()
 def compare_zones_for_use(proposed_use: str, jurisdictions: list[str] | None = None) -> dict:
     return services.compare_zones_for_use(proposed_use, jurisdictions)
 

@@ -1,0 +1,369 @@
+15.135.005 Conflict of provisions.
+It is the intent of the town council, in adoption of this chapter, that in the event of inconsistencies between different sections of LCMC Title 15, the procedures found in this chapter shall prevail. [Ord. 743 § 7, 1999.]
+
+15.135.010 General.
+(1) Purpose. This section establishes a uniform framework for considering the consistency of a proposed project with the comprehensive plan and development regulations set forth in this code and outlines application and integrated project review procedures required for obtaining development permits. It includes procedures for appealing decisions and seeking legislative action.
+(2) Withdrawal of Applications. An application for development review may be withdrawn at any time; however, the fees paid for such review may not be refunded. [Ord. 743 § 6, 1999.]
+
+15.135.020 Designation of administrator.
+(1) The planning director shall review all permit applications to determine that the requirements of this code are met.
+(2) The proposal shall be reviewed under the applicable standards of this code and all documents received and prepared related to the proposal shall be filed in a permanent record maintained at Town Hall.
+(3) The planning director shall issue a certificate of authorization for a use or development activity when all project permits required for the use or development activity have been issued or when other applicable development requirements for issuance are completed. [Ord. 1191 § 2 (Exh. A), 2020; Ord. 743 § 6, 1999.]
+
+15.135.030 Concurrency management systems and LOS standards.
+(1) Concurrency Management System. The town shall prepare an annual capacity statement report that includes:
+(a) A summary of building permits issued, including quantity and type of development;
+(b) A summary of certificates of occupancy issued, including quantity and type of development;
+(c) A summary of proposed development, including quantity and type of development;
+(d) An evaluation of public facilities providing service to existing and planned development indicating:
+(i) Capacity available at the beginning and end of each reporting period;
+(ii) Capacity available for planned development;
+(iii) A comparison of actual capacity and levels of service to adopted levels of service in the comprehensive plan;
+(iv) A forecast of the capacity based upon the updated capital facilities plan element of the comprehensive plan.
+(2) Adopted Levels of Service Standards (LOS). The town shall use the following LOS standards in reviewing the impacts of new development and redevelopment upon public facility provision:
+(a) Community parks – Six acres per 1,000 residents (now have minimum of 12 acres for Pioneer Park).
+(b) Open space – 25 percent of total town area.
+(c) Drainage – Storm water management system to retain the runoff from a 25-year, 24-hour storm event at peak discharge rates. Development will be regulated to ensure that the post-development runoff to the town system does not exceed the predeveloped discharge volume and/or rate to ensure the level of service of the existing storm water system is not compromised.
+(d) Traffic circulation – Roadway link specific for all streets in the town. The LOS of C (occasional backups may develop, but delay to vehicles is short-term and still tolerable) is desirable for major access streets during peak traffic times. LOS designations are listed in the transportation element of the comprehensive plan.
+(e) Sanitary sewer – 85 gallons per capita per day; 300 milligrams per liter strength (BOD).
+(f) Potable water – 170 gallons per capita per day at 55 psi; with a minimum of three days reserve.
+(g) Fireflow – Minimum of 500 gallons per minute. [Ord. 1132 § 4, 2015; Ord. 743 § 6, 1999.]
+
+15.135.040 Certificate of authorization required.
+(1) No use or development activity which requires approval of a project permit pursuant to any section of the LCMC shall be undertaken unless the activity is authorized by a certificate of authorization. Under the integrated project process, environmental review in accordance with the State Environmental Protection Act (SEPA) must be combined with review under this code, the Shoreline Management Act, the requirements of the Federal Emergency Management Agency regulating floodplains, the International Building Code, fire code, and all other applicable local, state, and federal laws and regulations.
+(2) After a permit has been issued, it shall be unlawful to change, modify, alter, or otherwise deviate from the terms or conditions of the permit without first obtaining a modification permit from the planning department or authorizing body. [Ord. 963 § 6, 2005; Ord. 743 § 6, 1999.]
+Article II. Procedure for Project Permit Review
+
+15.135.050 Process classification and procedures.
+(1) Classification. Project permits shall be classified by the planning director as Types I through V according to Table A, below.
+Table A – Permit Classifications
+I Administrative II Planning Director III Planning Commission IV Hearing Examiner V Town Council Building and construction permits; LCMC 15.135.020 Land use review of permitted and accessory uses exempt from SEPA; LCMC 15.135.120 Demolition permits for Type I and II structures; Chapter 15.112 LCMC Non-areawide rezone; LCMC 15.125.080 Lot line adjustments; LCMC 15.125.050 Temporary structures; LCMC 15.110.030 Historic design review of major new construction; LCMC 15.50.060 Conditional use permits; LCMC 15.135.190 Final plat; Chapter 15.30 LCMC Sign permits; Chapter 15.115 LCMC Bed and breakfast; CMC 15.20.055 Tree removal permits (excluding residential outside the HPD); Chapter 15.60 LCMC Shoreline permit revision Demolition permits for Type III structures; Chapter 15.112 LCMC Critical areas; Chapter 15.65 LCMC Temporary use permits; LCMC 15.110.050 Preliminary plat approval; Chapter 15.30 LCMC Home occupation permits; LCMC 15.110.070 Short plat; Chapter 15.30 LCMC Floodplain permits; Chapter 15.70 LCMC Shoreline conditional use permits Change of use; LCMC 15.125.020 Administrative variance; LCMC 15.125.040 Historic design review of minor new construction; LCMC 15.50.060 Administrative conditional use permits; LCMC 15.20.055 Shoreline variances Shoreline exemptions Variances; LCMC 15.125.040 Binding site plan; Chapter 15.55 LCMC Shoreline substantial development permits Appeals of planning commission and administrative decisions; LCMC 15.12.110 Accessory uses; LCMC 15.40.030 SEPA appeals; LCMC 13.10.090 PURD; Chapter 15.25 LCMC
+(2) Procedures. Type I through Type V shall be processed pursuant to the procedures outlined in Table B, below.
+Table B – Review Procedures
+Process Type I II III IV V Recommendation made by N/A N/A Planning commission, if consolidated with Type IV or V permit applications Planning director or planning commission Planning commission Final decision made by Planning director, public works director or designees Planning director or designee Planning commission unless consolidated with Type IV or V permit applications Hearing examiner Town council Notice of application No Yes 1 Yes Yes Yes Open record public hearing No Only if appealed, open record hearing before hearing examiner Yes, before planning commission unless consolidated with Type IV or V permit applications Yes, before hearing examiner for final decision Yes, before hearing examiner for recommendation Closed record appeal/final decision Only if appealed, a closed record hearing before the hearing examiner, except that appeals of a building official order shall be remanded to the Skagit County building appeals board No Only if appealed, closed record hearing before hearing examiner No Yes, before town council Judicial appeal Yes Yes Yes Yes Yes 1. Type II – Open Record Public Hearing. For administrative variance and administrative conditional use applications, a public hearing before the hearing examiner may be requested by the applicant, interested parties, or the planning director.
+[Ord. 1222 § 2, 2023; Ord. 1211 § 2(A), 2022; Ord. 1191 § 2 (Exh. A), 2020; Ord. 1040 § 1, 2010; Ord. 986 § 6, 2007; Ord. 901 §§ 7, 8, 2003; Ord. 842 §§ 10, 14, 2002; Ord. 743 § 6, 1999.]
+
+15.135.060 Preapplication conference.
+An applicant may request a preapplication conference for development plan review prior to filing an application to discuss the review process and permit requirements. Any comments concerning the proposed development during the preapplication conference shall not be construed as approval or denial of the proposal. [Ord. 743 § 6, 1999.]
+
+15.135.070 Application for permit.
+Applications for all permits, including, but not limited to, certificate of authorization, change of use, conditional use, lot line adjustments, floodplain permit, fill/grade/excavation permit, shoreline permit, and environmental checklist, shall be made on forms provided by the town of La Conner. The following information shall be submitted as required by the planning director or applicable code section:
+(1) Name, address and telephone of property owner of record or certified designated agent, or the developer. Where a corporation or company is the owner of the property, the name and address of the president and secretary of the entity shall be submitted;
+(2) Complete legal description of the property, including section, township and range;
+(3) Vicinity map drawn to scale showing the position of the proposed development, together with principal roads, town limits, and/or other pertinent orientation information;
+(4) A minimum of six sets of project plans on reproducible material at least 17 by 25 inches in size showing:
+(a) Name, address, and telephone number of property owner of record or certified designated agent, the developer and the land surveyor and/or registered engineer preparing the plat map;
+(b) Legal description of the property;
+(c) Existing zoning classification;
+(d) Scale of not less than 100 feet to the inch, and north arrow;
+(e) Benchmarks and ground elevation at mean sea level when all or a portion of the plat is located in the floodplain and contours with intervals of 95 feet;
+(f) Boundary lines of entire tract and individual lots in square feet and/or acres;
+(g) Easements, existing public and private, with location, name and width of any existing street and right-of-way within the area and 200 feet thereof. Grades, profiles and cross-sections of proposed streets;
+(h) Location of fire hydrants within 1,000 feet of the project site;
+(i) Location of any existing structures;
+(j) Availability and location of utilities including water, sewer, and storm water drainage;
+(k) Parcels of land intended to be dedicated or temporarily reserved for public use or to be reserved in the deeds for the common use of property owners of the property or dedication;
+(l) Relationship to nearest body of water or critical area;
+(m) Existing or proposed parking areas;
+(n) Pedestrian and vehicular ingress and egress/circulation patterns;
+(o) Existing and proposed landscaping, vegetation, and trees;
+(p) Building site, dimensions, gross floor area, architectural elevations, setbacks, cross-sections and specifications;
+(q) Building floor plans with proposed use and occupancy of each room noted;
+(r) Proposed open space and percentage of impervious surface;
+(s) Lighting and signs as applicable;
+(t) Buffer areas;
+(u) Aerial photograph, soils map, and topographic map as applicable;
+(v) Benchmark elevations provided on a FEMA Elevation Certificate and certified by a registered engineer or architect;
+(w) Elevation in relation to mean sea level of the lowest floor (including basement) of all structures and the extent to which any structure has been floodproofed;
+(x) Registered architect/engineer/surveyor stamp and date;
+(y) Acknowledged signatures of property owners and notary public stamp as applicable;
+(z) Signature block for approval of planning commission and/or town council as applicable.
+(5) Section elevations taken near the centerline of any adjacent public rights-of-way showing proposed development and adjacent structures on the same block;
+(6) Samples of proposed colors and materials;
+(7) Architectural inventory;
+(8) Economic analysis;
+(9) A survey map of reproducible material, at least 18 by 24 inches in size with two-inch margins, signed by a registered land surveyor and eight copies shall be required for subdivision, short subdivision or PURD applications containing all of the information in subsection (2) of this section;
+(10) Evidence of title;
+(11) If lots are to be served by a private street, copies of applicable covenants or documents with provisions covering, but not limited to, ingress, egress, utility easements, and maintenance shall be furnished to the town and recorded with the county;
+(12) Certification by a registered engineer or architect on a FEMA certificate that the floodproofing methods for any nonresidential structure meet floodproofing criteria must be submitted upon completion of the building and before a certificate of occupancy is issued;
+(13) The town clerk shall affix a file number and date received to the application and plans upon submittal and payment of fees. A fee set by the town council shall be payable to the town clerk at the time of application. There is no fee for maintenance and repair of existing structures. [Ord. 743 § 6, 1999.]
+
+15.135.080 Consolidated permit process.
+An application that involves two or more classification types may be processed collectively under the highest numbered type required for any part of the application or processed individually under each of the procedures identified by code. The applicant may determine whether the application shall be processed collectively or individually, subject to the following requirements:
+(1) If the applications are processed individually, the highest numbered type shall be processed prior to the subsequent lower numbered type. Type V is the highest, followed by Type IV, then Type III, then Type II and Type I.
+(2) A consolidated permit application shall not be considered complete until all information required for individual permit applications has been submitted.
+(3) Applications processed through the consolidated permit process which involve different hearing bodies shall be heard collectively by the highest ranking body. The town council is the highest rank, followed by the hearing examiner, then the planning commission and then the planning director.
+(4) In the case of Type III permits consolidated with Type IV or V permits, the planning commission shall consider the application and any written comments in a public meeting and make a recommendation to the hearing examiner.
+(5) Projects involving comprehensive plan amendments may be consolidated with non-area-wide rezone proposals and reviewed pursuant to Chapter 15.125 LCMC (Procedure for Rezone Reviews by Planning Commission and Town Council). The hearing examiner shall hear and make recommendations to the town council regarding rezones only when no comprehensive plan amendment is required to be approved for the rezone proposal. [Ord. 1222 § 2, 2023; Ord. 842 § 12, 2002; Ord. 743 § 6, 1999.]
+
+15.135.090 Determination of complete application.
+(1) A project permit application is complete when it meets the procedural requirements of this code as determined by the planning director and is sufficient for continued processing, even though additional information may be required or project modifications may be undertaken subsequently. The determination of completeness shall not preclude requests for additional information or studies either at the time of the notice of completeness or subsequently if new information is required or substantial changes in the proposed action occur. A determination of completeness may include the following:
+(a) A preliminary determination of those development regulations that will be used for project mitigation.
+(b) A preliminary determination of consistency.
+(c) Other information as required to process the application.
+(2) An application shall be deemed complete if the town does not provide a written determination to the applicant that the application is incomplete within 28 days of receipt of the application and required fees. Applications submitted after the close of business shall be deemed received on the next working day. [Ord. 743 § 6, 1999.]
+
+15.135.100 Notice of application received.
+(1) Within 28 days after receiving a project permit application, the planning director shall mail or provide in person a written determination to the applicant, stating either:
+(a) That the application is complete; or
+(b) That the application is incomplete and what is necessary to make the application complete;
+(c) To the extent known, other agencies of local, state, or federal governments that may have jurisdiction over some aspect of the application; and
+(d) The number of days shall be calculated by counting each calendar day.
+(2) Within 14 days after an applicant has submitted additional information identified by the planning director as being necessary for a complete application, the applicant, the public, and agencies determined by the planning director to have jurisdiction over the proposal shall be notified that the application is complete. Notice of application shall include:
+(a) The date of application, the date of the notice of completion for the application, and the date of the notice of application.
+(b) A description of the proposed project and a list of permits applied for by the applicant, and if applicable, a list of any requested studies.
+(c) To the extent known, the identification of other permits required but not included in the application.
+(d) The identification of existing environmental documents that evaluate the proposed project, and the location where the application and any studies can be reviewed.
+(e) A statement of the required public comment period, which shall be not less than 14 nor more than 30 days following the date of the notice of application.
+(f) A statement of the public’s procedural rights, including the right of any person to comment on the application, receive notice of and participate in any hearings, request a copy of the decision once made, and any appeal rights. Public comments may be accepted at any time prior to the closing of the record of an open record predecision hearing, if any, or, if no open record predecision hearing is provided, prior to the decision on the project permit.
+(g) The date, time, place and type of hearing.
+(h) A statement of any preliminary determination of the development regulations that will be used for project mitigation.
+(i) Any other appropriate information.
+(3) If an open record predecision hearing is required for the requested project permits, the notice of application shall be provided at least 15 days prior to the open record hearing.
+(4) A determination of significance (DS) may be issued before expiration of the public comment period, but not a determination of nonsignificance (DNS) or mitigated determination of nonsignificance (MDNS).
+(5) A notice of application shall not be required for project permits that are categorically exempt under Chapter 43.21C RCW, such as construction permits that do not require environmental review or public notice, unless a public comment period or an open record predecision hearing is required. [Ord. 1255 § 16, 2025; Ord. 743 § 6, 1999.]
+
+15.135.110 Public notice requirements.
+(1) The following shall be the minimum public notice requirements. Public notice greater than the minimum requirements may be required at the discretion of the planning director.
+(a) Type I Permits. No notice required.
+(b) Type II Permits. Notice of application, in the manner and form designated by the planning director, shall be posted on the site and mailed to all property owners within 300 feet of proposal site.
+(c) Public meetings during which the planning commission will make a recommendation on Type III, Type IV, or Type V permit applications. The application number, project location, description and type of permit shall be listed in the planning commission agenda which is published in the newspaper of record at least five days prior to the meeting.
+(d) Type III, Type IV and Type V. All of the following are required:
+(i) Posting the notice of application on the project site in the manner and form designated by the planning director.
+(ii) Publishing notice, including at least the project location; description; type of permit(s) required; comment period dates; hearing date, location and time; and the location where the complete application may be reviewed, in the newspaper of record at least 15 days before the open record hearing. A published SEPA threshold determination, notice of hearing or notice of application containing this information shall satisfy this requirement.
+(iii) Mailing the notice of the hearing to neighboring property owners within 300 feet of the proposed site, and to any person or entity who has submitted written comments. The failure of any person to receive notice shall not invalidate an action if a good faith attempt was made to comply with the notice requirements of this code. Addresses for mail notices shall be obtained by the applicant based on the current rolls of the Skagit County assessor’s office or obtained from a title company doing business in Skagit County and submitted with the application on one-inch by two-and-five-eighths-inch mailing labels.
+(2) Additional public notice methods which may be used at the discretion of the planning director:
+(a) Notifying the news media.
+(b) Notifying public or private groups with known interest in a certain proposal or in the type of proposal being considered.
+(c) Placing notices in appropriate regional or neighborhood newspapers or trade journals.
+(d) Publishing notice in agency newsletters or sending notice to agency mailing lists. [Ord. 901 § 9, 2003; Ord. 898 § 5, 2003; Ord. 842 § 7, 2002; Ord. 743 § 6, 1999.]
+
+15.135.120 Determination of consistency.
+(1) When the town receives a project permit application, consistency between the proposed project and the applicable regulations and comprehensive plan shall be determined through the process in this chapter and in the town’s adopted SEPA procedures and policies. Applicable development regulations may include, but are not limited to, floodplain management regulations; shoreline master program goals, policies and regulations; state and federal statutes and regulations; and sewer, water and storm water management plans.
+(2) Consistency. During the review of the project permit, the town shall determine whether subsections (2)(a) through (d) of this section are defined in the development regulations applicable to the proposed project. In the absence of applicable development regulations, the town shall determine whether the items listed in this subsection are defined in the town’s adopted comprehensive plan. This determination of consistency shall include the following:
+(a) The type of land use permitted on the site, including uses that may be allowed under certain circumstances, if the criteria for their approval have been satisfied;
+(b) The level of development, such as units per acre, density of residential development in urban growth areas, or other measures of density;
+(c) Availability and adequacy of infrastructure and public facilities identified in the comprehensive plan, if the plan or development regulations provide for the funding of these facilities as required by Chapter 36.70A RCW; and
+(d) Character of the development, relative to adopted policies, regulations and guidelines. [Ord. 743 § 6, 1999.]
+
+15.135.130 Public hearing.
+Any public meeting or required open record hearing may be combined with any public meeting or hearing that may be held on the project by another local, state, regional, federal, or other agency. [Ord. 743 § 6, 1999.]
+
+15.135.140 Decision report.
+A single report stating all the decisions made as of the date of the report on all project permits included in the consolidated permit process that do not require an open record predecision hearing and any recommendations on project permits that do not require an open record predecision hearing. The report shall state any mitigation required or proposed under the development regulations or the agency’s authority under RCW 43.21C.060. The report may be the local permit. If a threshold determination other than a determination of significance has not been issued previously by the local government, the report shall include or append this determination. [Ord. 743 § 6, 1999.]
+
+15.135.150 Appeal.
+Except for the appeal of a determination of significance as provided in RCW 43.21C.075, no more than one consolidated open record hearing on an appeal shall be held by the hearing examiner. If an appeal is provided after the open record hearing, it shall be a closed record appeal before the hearing examiner. [Ord. 743 § 6, 1999.]
+
+15.135.155 Notice of final decision and final decision timelines.
+A notice of final decision on a project permit application shall be issued by the planning director, designee, or deciding authorities as stated in LCMC 15.135.050 (2). The time periods for final decisions on project permits shall not exceed the following time periods:
+(1) For class 1 permits and any other project permit that does not require public notice, the planning director or designee must issue a final decision within 65 days of the determination of completeness.
+(2) For class II permits and any other project permit that requires public notice, the planning director or designee must issue a final decision within 100 days of the determination of completeness.
+(3) For class III permits, class IV permits, class V permits, and any other project permit that requires public notice and a public hearing, the decision authorities as stated in LCMC 15.135.050 (2) must issue a final decision within 170 days of the determination of completeness.
+(4) For permits that are submitted under the consolidated permit process in LCMC 15.135.080, the time period for a final decision shall be the longest of the permit time periods that would apply had the permits been submitted individually.
+(5) The number of days an application is in review shall be calculated from the day completeness is determined to the date a final decision is issued on the project permit application. The number of days shall be calculated by counting every calendar day and excluding the following time periods:
+(a) Any period between the day that the planning director or designee has notified the applicant, in writing, that additional information is required to further process the application and the day when responsive information is resubmitted by the applicant.
+(b) Any period after an applicant informs the planning director or designee, in writing, that they would like to temporarily suspend review of the project permit application until the time that the applicant notifies the planning director or designee, in writing, that they would like to resume the application.
+(c) Any period after an administrative appeal is filed until the administrative appeal is resolved and any additional time period provided by the administrative appeal has expired.
+(d) The time periods to process a permit shall start over if an applicant proposes a change in use that adds or removes commercial or residential elements from the original application that would make the application fail to meet the determination of procedural completeness for the new use.
+(e) If, at any time, an applicant informs the local government, in writing, that the applicant would like to temporarily suspend the review of the project for more than 60 days, or if an applicant is not responsive for more than 60 consecutive days after the planning director or designee has notified the applicant, in writing, that additional information is required to further process the application, an additional 30 days may be added to the time periods for local government action to issue a final decision for each type of project permit that is subject to this chapter. Any written notice from the planning director or designee to the applicant that additional information is required to further process the application must include a notice that nonresponsiveness for 60 consecutive days may result in 30 days being added to the time for review. For the purposes of this subsection, “nonresponsiveness” means that an applicant is not making demonstrable progress on providing additional requested information to the local government, or that there is no ongoing communication from the applicant to the local government on the applicant’s ability or willingness to provide the additional information.
+(f) Annual amendments to the comprehensive plan are not subject to the requirements of this section.
+(6) The time limits established above do not apply to the following project permits:
+(a) Landmark designations, street vacations, or other approvals relating to the use of public areas or facilities.
+(b) Building and other construction permits, categorically exempt from environmental review under Chapter 43.21C RCW, or for which environmental review has been completed in connection with other project permits. [Ord. 1255 § 17, 2025.]
+
+15.135.160 Notice of decision.
+Repealed by Ord. 1255. [Ord. 743 § 6, 1999.]
+
+15.135.170 Permit issued.
+(1) A project permit may not be issued unless the proposed development activity is consistent with all applicable plans, regulations and policies as determined pursuant to LCMC 15.135.030 (1) and (2). An issued permit shall include, but not be limited to, the following:
+(a) A specific time period for which the permit is valid.
+(b) A statement of availability for water, sewer, and drainage services.
+(c) A schedule of construction phasing if applicable.
+(d) Conditions of the permit.
+(e) Statement of bond required if applicable.
+(2) The development activity or use shall not commence until a certificate of authorization has been issued for the development activity or use.
+(3) A certificate of authorization for a development activity or use shall not be issued until all project permits required for the use or activity have been issued. [Ord. 743 § 6, 1999.]
+
+15.135.180 Limitations.
+(1) A project permit approval shall become void if:
+(a) Property/structure stands vacant for 12 months or more, or use changes substantially as determined by the planning director.
+(b) Construction of new development is not completed and certificate of occupancy is not granted within five years from the date of application; provided the period of time during which any judicial appeal of the project approval is pending shall not be counted.
+(c) Construction of a project in a manner other than substantially in conformance with the plans authorized in the certificate of authorization.
+(2) Within constraints established by this code, a project permit constitutes a permanent permit, regardless of transfers of ownership. However, if after a permit has been issued, and before the improvements are complete, the applicant or the successor makes any alterations in the use, size, appearance or the ability of the structure to meet the dimensional standards of this chapter, a new application shall be required to be approved by the individual or department of the town, or its designee, which gave final approval of the project. The review of such a change is appealable to the same extent and in the same manner as the original approval would have been, if appealed. [Ord. 1040 § 3, 2010; Ord. 743 § 6, 1999.]
+Article III. Conditional Use Criteria
+
+15.135.190 Criteria for conditional use permits.
+(1) Conditional uses may or may not be permitted, depending on conformance with specific criteria. They are called conditional because they are allowed only when proper conditions exist, or when the proposal can be brought into conformance with the criteria by placing conditions on the permit. The applicant must provide evidence substantiating that all the requirements of this code relative to the proposed use are satisfied, and demonstrate that the proposed use also satisfies all of the following criteria:
+(a) The use is listed as a conditional use in the underlying district.
+(b) The characteristics of the site are suitable for the proposed use considering size, shape, location, topography, existence of improvements and natural features.
+(c) The site and proposed development is timely, considering the adequacy of transportation systems, public facilities and services existing or planned for the area affected by the use.
+(d) The proposed use will not alter the character of the surrounding area in a manner which substantially limits, impairs, or precludes the use of surrounding properties for the primary uses listed in the underlying district.
+(e) The proposal, through findings, satisfies the goals and policies of the comprehensive plan, Shoreline Management Act, and floodplain ordinance, which apply to the proposed use, if applicable.
+(f) Setbacks or buffers proposed by applicant are shown to mitigate potential adverse impacts that might emerge from the proposed conditional use.
+(g) The use must cause no adverse effect on the surrounding area due to traffic, parking, noise, odor, air or water pollution.
+(h) Consideration shall be given to the cumulative impact of like uses within the neighborhood.
+(2) No conditional use permit shall be approved unless the hearing examiner has made findings and/or conclusions that each of the foregoing criteria is met or is inapplicable. [Ord. 1222 § 2, 2023; Ord. 884 § 4, 2003; Ord. 743 § 6, 1999.]
+Article IV. Development Agreements
+
+15.135.210 Development agreements.
+(1) The town may enter into a development agreement with a person having ownership or control of real property within its jurisdiction. The town may enter into a development agreement for real property outside its boundaries as part of a proposed annexation or a service agreement.
+(2) A development agreement must set forth the development standards and other provisions that shall apply to and govern and vest the development, use, and mitigation of the development of real property for the duration specified in the agreement. A development agreement shall be consistent with applicable development regulations.
+(3) A development agreement does not affect the validity of a contract rezone, concomitant agreement, annexation agreement, or other agreement in existence on the effective date of the development agreement.
+(4) Development standards include, but are not limited to:
+(a) Project elements such as permitted uses, residential and nonresidential densities, intensities or building sizes.
+(b) Any reimbursement provisions, other financial contributions by the property owner, inspection fees, or dedications.
+(c) Mitigation measures, development conditions, and other requirements under Chapter 43.21C RCW.
+(d) Design standards such as maximum heights, setbacks, drainage and water quality requirements, landscaping, and other development features.
+(e) Affordable housing.
+(f) Parks and open space preservation.
+(g) Phasing.
+(h) Review procedures and standards for implementing decisions.
+(i) A build-out or vesting period for applicable standards.
+(j) Any other appropriate development requirement or procedure.
+(5) The execution of a development agreement is a proper exercise of the town’s police power and contract authority. A development agreement may obligate a party to fund or provide services, infrastructure, or other facilities. A development agreement shall reserve authority to impose new or different regulations to the extent required by a serious threat to public health and safety.
+(6) Unless amended or terminated, a development agreement is enforceable during its term by a party to the agreement. A development agreement and the development standards in the agreement govern during the term of the agreement, or for all or that part of the build-out period specified in the agreement, and may not be subject to an amendment to a zoning ordinance or development standard or regulation or a new zoning ordinance or development or regulation adopted after the effective date of the agreement. A permit or approval issued by the town or the county after the execution of the development agreement must be consistent with the development agreement.
+(7) A development agreement shall be recorded with the real property records in the Skagit County office of records. During the term of the development agreement, the agreement is binding on the parties and their successors, including the town if it assumes jurisdiction through incorporation or annexation of the area covering the property under the development agreement.
+(8) The town council shall approve a development agreement by ordinance or resolution after a public hearing. If the development agreement relates to a project permit application, the provisions on appeal of the decision shall apply. [Ord. 743 § 6, 1999.]
+Article V. Procedure for Appeals
+
+15.135.220 Procedure for appeals.
+(1) This chapter does not apply to judicial review of:
+(a) Land use decisions made by bodies that are not part of a local jurisdiction;
+(b) Land use decisions of a local jurisdiction that are subject to review by a quasi-judicial body created by state law, such as the Shorelines Hearings Board or the Growth Management Hearings Board;
+(c) Claims provided by any law for monetary damages or compensation.
+(2) Land use decisions by the planning director or planning commission may be appealed to the hearing examiner; provided the appeal is submitted, in writing, and a fee paid to the town clerk within 10 days of the decision. The decision of the hearing examiner is final.
+(3) A land use decision by the hearing examiner or town council shall be appealed by filing a petition in superior court within 21 calendar days of the issuance of the land use decision. For the purposes of this section, the date on which a land use decision is issued is:
+(a) Three days after a written decision is mailed by the town or, if not mailed, the date on which the town provides notice that a written decision is publicly available.
+(b) If the land use decision is made by order, ordinance or resolution by the hearing examiner or town council, the date the order, ordinance or resolution is passed.
+(c) If neither of the above applies, the date the decision is entered into the public record.
+(4) A land use petitioner may be:
+(a) The applicant and the owner of property to which the land use decision is directed.
+(b) Another person aggrieved or adversely affected by the land use decision, or who would be aggrieved or adversely affected by a reversal or modification of the land use decision. A person is aggrieved or adversely affected within the meaning of this section only when all of the following conditions are present:
+(i) The land use decision has prejudiced or is likely to prejudice that person.
+(ii) That person’s asserted interests are among those that the town was required to consider when it made the land use decision.
+(iii) A judgment in favor of that person would substantially eliminate or redress the prejudice to that person caused or likely to be caused by the land use decision.
+(iv) The petitioner has exhausted his or her administrative remedies to the extent required by law. [Ord. 743 § 6, 1999.]
+Article VI. Special Provisions Relating to Administrative and Legislative Decision-Making Bodies
+
+15.135.230 Challenges to impartiality.
+A party to an administrative hearing may challenge the impartiality of any member of the hearing body. The challenge shall state by facts relating to a bias, prejudgment, personal interest, or other facts from which the challenger has concluded that the decision-maker cannot participate in an impartial manner. Any challenge shall be submitted in accordance with RCW 42.36.080 now or as hereafter amended. The challenge shall be incorporated into the record of the hearing. [Ord. 986 § 2, 2007; Ord. 743 § 6, 1999.]
+
+15.135.240 Participation by interested officers or employees.
+No nonelected officer or employee of the town who has a financial or other private interest in a proposal shall participate in discussions with or give an official opinion to the hearing body on a proposal without first declaring for the record the nature and extent of the interest. [Ord. 986 § 2, 2007; Ord. 743 § 6, 1999. Formerly 15.135.250.]
+
+15.135.250 Ex parte contacts.
+Administrative decision-makers shall reveal any prehearing or ex parte, i.e., outside the hearing, contacts with regard to any matter at the commencement of their hearing on the matter. Typical preapplication discussions that do not dwell upon the particulars of the proposal are presumed and need not be stated. If the decision-maker’s impartiality or ability to vote on the matter has been impaired, the decision-maker shall so state. [Ord. 986 § 2, 2007; Ord. 743 § 6, 1999. Formerly 15.135.260.]
+
+15.135.260 Rights of disqualified member of the hearing body.
+(1) An abstaining or disqualified member of a hearing body shall not be counted for purposes of forming a quorum.
+(2) If the hearing body is reduced to less than a quorum by abstentions or disqualifications, all members present after stating their reasons for abstention or disqualification shall be requalified and proceed to resolve the issues.
+(3) A member absent during the presentation of evidence in a hearing may not participate in the deliberations or final decision regarding the matter of the hearing unless the member has reviewed the evidence received. [Ord. 986 § 2, 2007; Ord. 743 § 6, 1999. Formerly 15.135.280.]
+
+15.135.270 Involuntary disqualification.
+Repealed by Ord. 986. [Ord. 743 § 6, 1999.]
+Article VII. Enforcement of Development Permits
+
+15.135.290 Ongoing inspections.
+(1) The Skagit County Permit Center, by interlocal agreement, is the inspecting authority on all development permits issued as a result of a town of La Conner certificate of authorization.
+(2) Fire code compliance inspections shall be performed by the town fire department, or designee as required for new and existing development.
+(3) If the work is found to have major deviations from authorized plans:
+(a) The applicant shall submit revised plans to the planning department for review before proceeding with the development.
+(b) A stop work order may be issued by the mayor or designee upon recommendation by the planning director and/or the certificate of occupancy may be withheld until the development complies with all codes and authorizations.
+(c) A permit may be revoked based on a determination that the development cannot be brought into substantial compliance. Development activity shall not proceed on the site until a new permit is granted in accordance with procedures for original approval. [Ord. 743 § 6, 1999.]
+
+15.135.300 Application for certificate of occupancy.
+Upon completion of work authorized by permit and before the development is occupied, the developer shall apply to the Skagit County permit center for a certificate of occupancy. After final inspection by the permit center and the planning director to ensure that all code and permit requirements are met, the town of La Conner will deliver a certificate of occupancy. [Ord. 743 § 6, 1999.]
+Article VIII. Enforcement of Code Provisions
+
+15.135.310 General.
+(1) Declaration of Intent. All violations of land use ordinances, codes, statutes and regulations are determined to be detrimental to the public health, safety, and welfare and are hereby declared to be public nuisances. All conditions which are determined by the town council, or designee, to be in violation of any land use ordinance, code, statute or regulation shall be subject to the provisions of this code and shall be corrected by any reasonable and lawful means as provided herein.
+(2) Right of Entry.
+(a) Whenever necessary to make an inspection to enforce the provisions of any land use ordinance, code, statute, or regulation, or whenever the town council or designee has reasonable cause to believe that any building, structure, property or portion thereof is being used in violation of any land use ordinance, code, statute or regulation, the director or designee may enter such building, structure, property or portion thereof at all reasonable times to inspect the same.
+(b) If such building, structure, property or portion thereof is occupied, town council or designee shall present proper credentials and demand entry.
+(c) If such building, structure, property or portion thereof is unoccupied, a reasonable effort shall be made to locate the owner or other persons having charge or control of the building, structure, property or portion thereof and demand entry. If the owner or such other persons are unable to be located and the town council or designee has reason to believe that conditions therein create an immediate and irreparable land use or health hazard, then entry shall be made.
+(d) It shall be unlawful for any owner or occupant or any other person having charge, care or control of any building, structure, property or portion thereof to fail or neglect after proper demand to permit prompt entry thereon by the town council or designee for the inspection and examination pursuant to this code. [Ord. 743 § 6, 1999.]
+
+15.135.320 Penalties – Misdemeanor.
+Repealed by Ord. 812. [Ord. 743 § 6, 1999.]
+
+15.135.330 Penalties – Civil penalty.
+In addition to or as an alternative to any other judicial or administrative remedy provided herein or by law, any person who violates any land use ordinance, code, statute, regulation, or by any act of commission or omission procures, aids or abets such violation shall be subject to a civil penalty in an amount of $100.00 per day for each continuous violation to be directly assessed by the mayor or designee until such violation is corrected. The penalty shall be $200.00 per day for the second separate violation and $300.00 per day for the third separate violation of the same regulation within any five-year period. All civil penalties assessed will be enforced and collected in the procedures specified in this code. [Ord. 839 § 30, 2001; Ord. 743 § 6, 1999.]
+
+15.135.340 Penalties – Abatement.
+In addition to or as an alternative to any other judicial or administrative remedy provided herein or by law, the mayor or designee may order a land use violation to be abated. The mayor or designee may order any person who creates or maintains a violation of any land use ordinance, code, statute or regulation, to commence corrective work and to complete the work within such time as the mayor or designee determines reasonable under the circumstances. If the required corrective work is not commenced or completed within the time specified, the mayor or designee will proceed to abate the violation and cause the work to be done. Costs thereof may be charged as a lien against the property and as both a joint and separate personal obligation of any person who is in violation. [Ord. 839 § 31, 2001; Ord. 743 § 6, 1999.]
+
+15.135.350 Penalties – Additional enforcement.
+Notwithstanding the existence or use of any other remedy, the mayor or designee may seek legal or equitable relief to enjoin any acts or practices or abate any conditions which constitute or will constitute a violation of any land use ordinance, code, or rules and regulations adopted thereunder. [Ord. 839 § 32, 2001; Ord. 743 § 6, 1999.]
+
+15.135.355 Penalties – Work without permits.
+If any work is commenced without proper permits or prior to permits being issued, the cost of the permit will be doubled. [Ord. 1211 § 2(A), 2022.]
+Article IX. Enforcement Procedures*
+*See also Chapter 15.13 LCMC.
+
+15.135.360 Commencement of proceedings.
+(1) Whenever the mayor or designee has reason to believe that a use or condition exists in violation of any land use code, ordinance, statute, or regulation, enforcement action shall be initiated as herein provided and/or, at the mayor or designee’s option, administrative notice and order shall be commenced to cause the enforcement and correction of each violation.
+(2) Pending commencement and completion of the notice and order procedure provided for in this section, the mayor or designee may cause a “stop work order” to be posted on the subject property or served on persons engaged in any work or activity in violation of a land use ordinance, code, statute or regulation. The effect of such a “stop work order” shall be to require the immediate cessation of such work or activity until authorized by the mayor or designee posting the order to proceed. [Ord. 839 § 33, 2001; Ord. 743 § 6, 1999.]
+
+15.135.370 Notice and order.
+Whenever the mayor or designee has reason to believe that violation of a land use ordinance, code, statute, or regulation will be most promptly and equitably terminated by an administrative notice and order proceeding, a written notice and order shall be issued directed either to the owner or operator of the source of the violation, the person in possession of the property where the violation originates, or the person otherwise causing or responsible for the violation. The notice and order may be posted on the property and shall contain:
+(1) The street address when available and a legal description of the real property and/or description of personal property sufficient for identification of the location where the violation occurred or is located.
+(2) A statement that the mayor or designee has found the person to be in violation of a land use ordinance, code, statute or regulation with a brief and concise description of the conditions found to be in violation.
+(3) A statement of the corrective action required to be taken. If the council or designee has determined that corrective work is required, the order shall require that all required permits be secured and the work physically commenced within such time and be completed within such time as the council or designee shall determine is reasonable under the circumstances.
+(4) A statement specifying the amount of any civil penalty assessed on account of the violation and, if applicable, the conditions on which assessment of such civil penalty is contingent.
+(5) Statements advising that:
+(a) If any required work is not commenced or completed within the time specified, the town clerk will proceed to abate the violation and cause the work to be done and charge the costs thereof as a lien against the property and as a joint and separate personal obligation of any person in violation; and
+(b) If any assessed civil penalty is not paid, the town clerk will charge the amount of the penalty as a lien against the property and as a joint and separate personal obligation of any person in violation.
+(6) A statement advising that the order shall become final unless, no later than 10 days after the notice and order are served, any person aggrieved by the order submits to the clerk-treasurer a request in writing for a reconsideration conference with the town employee issuing the order. [Ord. 839 § 34, 2001; Ord. 743 § 6, 1999.]
+
+15.135.380 Method of service.
+Service of the notice and order shall be made upon all persons identified in the notice and order either personally or by mail, postage prepaid, return receipt requested. If the address of any such person cannot reasonably be ascertained, then a copy of the notice and order shall be mailed by certified mail to such person at the location of the violation and a copy shall be posted in a conspicuous location on the premises. The failure of any such person to receive such notice shall not affect the validity of any proceedings taken under this section. Service by certified mail in the manner herein provided shall be effective two working days after mailing. [Ord. 839 § 35, 2001; Ord. 743 § 6, 1999.]
+
+15.135.390 Reconsideration conference.
+Upon receipt of a timely written request from aggrieved person for a reconsideration conference, the mayor or designee shall schedule such conference with the person or persons making the request. Such conference shall be by agreement of the mayor or designee and the requesting parties. The request for a reconsideration conference shall state on its face the telephone number and address at which the requesting party may be promptly contacted. The reconsideration conference shall be informal in nature at such time and place as the town shall specify and upon such reasonable oral or written notice as the town shall give at the telephone number or address indicated upon the face of the request. Within five days after the reconsideration conference or scheduled time thereof, the mayor or designee shall issue a final order which shall be served either personally or by certified mail at the address indicated upon the reconsideration request. The final order shall be effective and final three days after personal service or five days after mailing unless within that time the aggrieved party files an appeal directed to the hearing examiner as set forth in LCMC 15.12.130. Any such appeal shall be subject to Chapter 15.12 LCMC, now or as hereafter amended. Exhaustion of an appeal to the hearing examiner shall be a prerequisite to any district court action. [Ord. 839 § 36, 2001; Ord. 743 § 6, 1999.]
+
+15.135.400 Supplemental notice and order.
+The mayor or his designee may at any time add to, rescind in part, or otherwise modify a notice and order by issuing a supplemental notice and order. The supplemental notice and order shall be governed by the same procedure applicable to all notices and orders and contained in this code. [Ord. 839 § 37, 2001; Ord. 743 § 6, 1999.]
+
+15.135.410 Enforcement of final order.
+(1) If, after any order duly issued by the mayor or designee has become final, the person to whom such order is directed fails, neglects, or refuses to obey such order, including refusal to pay a civil penalty assessed under such order, the mayor or designee may:
+(a) Institute any appropriate action to collect a civil penalty assessed under this code; and/or
+(b) Abate the land use violation using the procedures of this code; and/or
+(c) File in the office of the Skagit County auditor a certificate describing the property and the violation and stating that the owner has been so notified; and/or
+(d) Pursue any other appropriate remedy at law or equity.
+(2) Enforcement of a civil penalty imposed with any notice and order of the mayor or designee issued pursuant to this code shall be stayed during the pendency of the request for reconsideration conference or appeal under this code, except when council or designee determines that the violation will cause immediate and irreparable harm and so states in the notice and order issued; provided, that if the hearing examiner rules that an appeal is frivolous, any civil penalty shall not be stayed during the pendency of the appeal. [Ord. 839 § 38, 2001; Ord. 743 § 6, 1999.]
+
+15.135.420 Suspension of permits.
+(1) The mayor or designee may temporarily suspend any permit issued under a land use or health ordinance for failure of the holder to comply with any notice and order issued pursuant to this code.
+(2) Such permit suspension shall be carried out through the notice and order provisions of this code, and the suspension shall be effective upon service of the notice and order upon the holder or operator. The holder or operator may appeal suspension as provided by this code.
+(3) Notwithstanding any other provision of this code, whenever the mayor or designee finds that a violation of any land use or public health ordinance, code, statute, or regulation has created, or is creating, an unsanitary, dangerous, or other condition which, in the opinion of the mayor or designee, constitutes an immediate and irreparable hazard, the operations under the permit may be, without service of a written notice and order, suspended or terminated immediately. [Ord. 839 § 39, 2001; Ord. 743 § 6, 1999.]
+
+15.135.430 Revocation of permits.
+(1) The mayor or designee may permanently revoke any permit issued by the town for:
+(a) Failure of the holder to comply with the requirements or any land use ordinance, code, statute, or regulation; or
+(b) Failure of the holder to comply with any notice and order issued pursuant to this code; or
+(c) Interference with the council or designee in the performance of duties; or
+(d) Discovery by the mayor or designee that a permit was issued in error or on the basis of incorrect information supplied to the town.
+(2) Such permit revocation shall be carried out through the notice and order provisions of this code and other revocation shall be effective upon service of the notice and order upon the holder or operator. The holder or operator may appeal such revocation, as provided by this code.
+(3) A permit may be suspended pending its revocation or a hearing relative thereto. [Ord. 839 § 40, 2001; Ord. 743 § 6, 1999.]
+
+15.135.440 Lien authorized.
+The town of La Conner shall have a lien for the cost of any work of abatement done by it pursuant to this code, or both, against the real property on which the civil penalty was imposed or any of the above work was performed, to the extent and in the manner provided by law. [Ord. 839 § 41, 2001; Ord. 743 § 6, 1999.]
+
+15.135.450 Personal obligation authorized.
+The civil penalty and the cost of abatement are also joint and separate personal obligations of any person in violation. The town attorney on behalf of La Conner or the town’s assignee may collect the civil penalty and the abatement work costs by use of all appropriate legal remedies. The town or its assignee shall be entitled to its attorney fees and costs, including appeals, incurred to collect. [Ord. 839 § 42, 2001; Ord. 743 § 6, 1999.]
+
+15.135.460 Notice lien may be claimed.
+Repealed by Ord. 839. [Ord. 743 § 6, 1999.]
+
+15.135.470 Priority.
+Repealed by Ord. 839. [Ord. 743 § 6, 1999.]
+
+15.135.480 Claim of lien – General.
+Repealed by Ord. 839. [Ord. 743 § 6, 1999.]
+
+15.135.490 Duration of lien – Limitation of action.
+Repealed by Ord. 839. [Ord. 743 § 6, 1999.]
+
+15.135.500 Foreclosure – Parties.
+Repealed by Ord. 839. [Ord. 743 § 6, 1999.]

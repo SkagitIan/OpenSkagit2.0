@@ -1,0 +1,1287 @@
+[
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.15",
+    "chapter_title": "Chapter 15.15 ZONE CLASSIFICATION",
+    "table_index": 0,
+    "caption": "",
+    "nearest_heading": "15.15.010 Purpose.",
+    "rows": [
+      [
+        "Abbreviated Designation",
+        "Zone Classification"
+      ],
+      [
+        "RD",
+        "Residential"
+      ],
+      [
+        "C",
+        "Commercial"
+      ],
+      [
+        "IND",
+        "Light and Medium Industry"
+      ],
+      [
+        "P",
+        "Public Use"
+      ],
+      [
+        "HPD",
+        "Historic Preservation District"
+      ],
+      [
+        "TC",
+        "Transitional/Commercial"
+      ],
+      [
+        "PIND",
+        "Port Industrial"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.15.010"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.20",
+    "chapter_title": "Chapter 15.20 RESIDENTIAL ZONE",
+    "table_index": 1,
+    "caption": "",
+    "nearest_heading": "15.20.090 Multihousehold dwelling unit standards.",
+    "rows": [
+      [
+        "",
+        "Front",
+        "Side",
+        "Rear"
+      ],
+      [
+        "Interior Lot",
+        "20 ft.",
+        "10 ft. (total 20)",
+        "25 ft."
+      ],
+      [
+        "Corner Lot",
+        "20 ft. (street side)",
+        "10 ft.",
+        "25 ft."
+      ],
+      [
+        "Agricultural Setback – 25 ft."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.20.090"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.40",
+    "chapter_title": "Chapter 15.40 INDUSTRIAL ZONE",
+    "table_index": 2,
+    "caption": "",
+    "nearest_heading": "15.40.050 Dimensional standards.",
+    "rows": [
+      [
+        "",
+        "Front",
+        "Side",
+        "Rear"
+      ],
+      [
+        "All buildings, interior lot",
+        "50 ft.",
+        "15 ft. (total 30)",
+        "50 ft."
+      ],
+      [
+        "All buildings, corner lot",
+        "50 ft.",
+        "50 ft.",
+        "25 ft."
+      ],
+      [
+        "Outdoor storage",
+        "25 ft.",
+        "25 ft.",
+        "25 ft."
+      ],
+      [
+        "Agricultural Lands",
+        "",
+        "25 ft.",
+        "25 ft."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.40.050"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.42",
+    "chapter_title": "Chapter 15.42 PORT INDUSTRIAL ZONE",
+    "table_index": 3,
+    "caption": "",
+    "nearest_heading": "15.42.050 Dimensional standards.",
+    "rows": [
+      [
+        "",
+        "Front",
+        "Side",
+        "Rear"
+      ],
+      [
+        "All buildings, interior lot",
+        "50 ft.",
+        "15 ft. (total 30)",
+        "50 ft."
+      ],
+      [
+        "All buildings, corner lot",
+        "50 ft.",
+        "50 ft.",
+        "25 ft."
+      ],
+      [
+        "Outdoor storage",
+        "25 ft.",
+        "25 ft.",
+        "25 ft."
+      ],
+      [
+        "Agricultural lands",
+        "",
+        "25 ft.",
+        "25 ft."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.42.050"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.50",
+    "chapter_title": "Chapter 15.50 HISTORIC PRESERVATION DISTRICT",
+    "table_index": 4,
+    "caption": "Standards for the Treatment of Historic Properties",
+    "nearest_heading": "15.50.070 Standards for treatment of historic properties.",
+    "rows": [
+      [
+        "Table 1"
+      ],
+      [
+        "P = Preservation"
+      ],
+      [
+        "R = Rehabilitation"
+      ],
+      [
+        "RS = Restoration"
+      ],
+      [
+        "RC = Reconstruction"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.50.070"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.50",
+    "chapter_title": "Chapter 15.50 HISTORIC PRESERVATION DISTRICT",
+    "table_index": 5,
+    "caption": "",
+    "nearest_heading": "15.50.070 Standards for treatment of historic properties.",
+    "rows": [
+      [
+        "Standards",
+        "P",
+        "R",
+        "RS",
+        "RS"
+      ],
+      [
+        "(1) A property shall be used as it was historically, or be given a new use that maximizes the retention of distinctive materials, features, spaces, and spatial relationships. Where a treatment and use have not been identified, a property shall be protected and, if necessary, stabilized until additional work may be undertaken.",
+        "P",
+        "R",
+        "",
+        ""
+      ],
+      [
+        "(2) The historic character of a property shall be retained and preserved. The replacement of intact or repairable historic materials or alteration of features, spaces, and spational relationships that characterize a property shall be avoided.",
+        "P",
+        "R",
+        "",
+        ""
+      ],
+      [
+        "(3) Each property shall be recognized as a physical record of its time, place, and use. Work needed to stabilize, consolidate, and conserve existing historic materials and features shall be physically and visually compatible, identifiable upon close inspection, and properly documented for future research.",
+        "P",
+        "",
+        "RS",
+        ""
+      ],
+      [
+        "(4) Changes to a property that have acquired historic significance in their own right shall be retained and preserved.",
+        "P",
+        "R",
+        "",
+        ""
+      ],
+      [
+        "(5) Distinctive materials, features, finishes, and construction techniques or examples of craftsmanship that characterize a property shall be preserved.",
+        "P",
+        "R",
+        "",
+        ""
+      ],
+      [
+        "(6) The existing condition of historic features shall be evaluated to determine the appropriate level of intervention needed. Where the severity of deterioration requires repair or limited replacement of a distinctive feature, the new material shall match the old in composition, design, color, and texture.",
+        "p",
+        "",
+        "",
+        ""
+      ],
+      [
+        "(7) Chemical or physical treatments, if appropriate, shall be undertaken using the gentlest means possible. Treatments that cause damage to historic materials shall not be used.",
+        "P",
+        "R",
+        "RS",
+        ""
+      ],
+      [
+        "(8) Archeological resources affected by a project shall be protected and preserved in place. If such resources must be disturbed, mitigation measures shall be undertaken.",
+        "P",
+        "R",
+        "RS",
+        ""
+      ],
+      [
+        "(9) Each property shall be recognized as a physical record of its time, place, and use. Changes that create a false sense of historical development, such as adding conjectural features or elements from other historic properties, shall not be undertaken.",
+        "",
+        "R",
+        "",
+        ""
+      ],
+      [
+        "(10) Deteriorated historic features shall be repaired rather than replaced. Where the severity of deterioration requires replacement of a distinctive feature, the new feature shall match the old in design, color, texture, and, where possible, materials. Replacement features shall be substantiated by documentary and physical evidence.",
+        "",
+        "R",
+        "",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.50.070"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.50",
+    "chapter_title": "Chapter 15.50 HISTORIC PRESERVATION DISTRICT",
+    "table_index": 6,
+    "caption": "",
+    "nearest_heading": "15.50.070 Standards for treatment of historic properties.",
+    "rows": [
+      [
+        "(11) New additions, exterior alterations, or related new construction shall not destroy historic materials, features, and spatial relationships that characterize the property. The new work shall be differentiated from the old and shall be compatible with the historic materials, features, size, scale and proportion, and massing to protect the integrity of the property and its environment.",
+        "",
+        "R",
+        "",
+        ""
+      ],
+      [
+        "(12) New additions and adjacent or related new construction shall be undertaken in such a manner that, if removed in the future, the essential form and integrity of the historic property and its environment would be unimpaired.",
+        "",
+        "R",
+        "",
+        ""
+      ],
+      [
+        "(13) A property shall be used as it was historically or be given a new use which reflects the property’s restoration period.",
+        "",
+        "",
+        "RS",
+        ""
+      ],
+      [
+        "(14) Materials and features from the restoration period shall be retained and preserved. The removal of materials or alteration of features, spaces, and spatial relationships that characterize the period shall not be undertaken.",
+        "",
+        "",
+        "RS",
+        ""
+      ],
+      [
+        "(15) Materials, features, spaces, and finishes that characterize other historical periods shall be documented prior to their alteration or removal.",
+        "",
+        "",
+        "RS",
+        ""
+      ],
+      [
+        "(16) Distinctive materials, features, finishes, and construction techniques or examples of craftsmanship that characterize the restoration period shall be preserved.",
+        "",
+        "",
+        "RS",
+        ""
+      ],
+      [
+        "(17) Deteriorated features from the restoration period shall be repaired rather than replaced. Where the severity of deterioration requires replacement of a distinctive feature, the new feature shall match the old in design, color, texture, and where possible, materials.",
+        "",
+        "",
+        "RS",
+        ""
+      ],
+      [
+        "(18) Replacement of missing features from the restoration period shall be substantiated by documentary and physical evidence. A false sense of history shall not be created by adding conjectural features, features from other properties, or by combining features that never existed together historically.",
+        "",
+        "",
+        "RS",
+        ""
+      ],
+      [
+        "(19) Designs that were never executed historically shall not be constructed.",
+        "",
+        "",
+        "RS",
+        "RC"
+      ],
+      [
+        "(20) Reconstruction shall be used to depict vanished or nonsurviving portions of a property when documentary and physical evidence is available to permit accurate reconstruction with minimal conjecture, and such reconstruction is essential to the public understanding of the property.",
+        "",
+        "",
+        "",
+        "RC"
+      ],
+      [
+        "(21) Reconstruction of a landscape, building, structure, or object in its historic location shall be preceded by a thorough archeological investigation to identify and evaluate those features and artifacts which are essential to an accurate reconstruction. If such resources must be disturbed, mitigation measures shall be undertaken.",
+        "",
+        "",
+        "",
+        "RC"
+      ],
+      [
+        "(22) Reconstruction shall include measures to preserve any remaining historic materials, features, and spatial relationships.",
+        "",
+        "",
+        "",
+        "RC"
+      ],
+      [
+        "(23) Reconstruction shall be based on the accurate duplication of historic features and elements substantiated by documentary or physical evidence rather than on conjectural designs or the availability of different features from other historic properties. A reconstructed property shall re-create the appearance of the nonsurviving historic property in materials, design, color, and texture.",
+        "",
+        "",
+        "",
+        "RC"
+      ],
+      [
+        "(24) A reconstruction shall be clearly identified as a contemporary re-creation.",
+        "",
+        "",
+        "",
+        "RC"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.50.070"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.50",
+    "chapter_title": "Chapter 15.50 HISTORIC PRESERVATION DISTRICT",
+    "table_index": 7,
+    "caption": "",
+    "nearest_heading": "15.50.170 Design evaluation checklist.",
+    "rows": [
+      [
+        "",
+        "Design Criteria",
+        "Project Includes",
+        "Meets Code",
+        "Approved",
+        "Not Approved"
+      ],
+      [
+        "1.",
+        "General",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Exception",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "2.",
+        "Building exterior",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Masonry",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Wood",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Architectural metals",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Drainage",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Design – Missing features",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Windows and trim",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Roofs, canopies, awnings",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Entrances and porches",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Storefront",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Ornamentation",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Materials",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Paint and color",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.",
+        "Building interior",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Structural system",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Spaces, features, finishes",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "4.",
+        "Building site",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Site features",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Landscape",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Critical area",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "5.",
+        "District/neighborhood",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Setbacks",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "Size and scale",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "6.",
+        "Health/safety code",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "7.",
+        "Energy retrofitting",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "8.",
+        "New addition – HPD building",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "9.",
+        "Accessory structure",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.50.170"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.65",
+    "chapter_title": "Chapter 15.65 ENVIRONMENTALLY SENSITIVE AND CRITICAL AREA LANDS",
+    "table_index": 8,
+    "caption": "Table 1. Wetland Buffer Requirements if Table 2 Is Implemented and Corridor Provided",
+    "nearest_heading": "15.65.070 Specific requirements – Nontidal wetlands.",
+    "rows": [
+      [
+        "",
+        "Buffer width (in feet) based on habitat score"
+      ],
+      [
+        "Wetland Category",
+        "3 – 5",
+        "6 – 7",
+        "8 – 9"
+      ],
+      [
+        "Category I: Based on Total Score",
+        "75",
+        "110",
+        "225"
+      ],
+      [
+        "Category I: Bogs and Wetlands of High Conservation Value",
+        "190",
+        "225"
+      ],
+      [
+        "Category I: Interdunal",
+        "225 (buffer width not based on habitat scores)"
+      ],
+      [
+        "Category I: Forested",
+        "75",
+        "110",
+        "225"
+      ],
+      [
+        "Category I: Estuarine and Coastal Lagoons",
+        "150 (buffer width not based on habitat scores)"
+      ],
+      [
+        "Category II: Based on Score",
+        "75",
+        "110",
+        "225"
+      ],
+      [
+        "Category II: Interdunal Wetlands",
+        "110 (buffer width not based on habitat scores)"
+      ],
+      [
+        "Category II: Estuarine and Coastal Lagoons",
+        "110 (buffer width not based on habitat scores)"
+      ],
+      [
+        "Category III (all)",
+        "60",
+        "110",
+        "225"
+      ],
+      [
+        "Category IV (all)",
+        "40"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.65.070"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.65",
+    "chapter_title": "Chapter 15.65 ENVIRONMENTALLY SENSITIVE AND CRITICAL AREA LANDS",
+    "table_index": 9,
+    "caption": "Table 2. Required Measures to Minimize Impacts to Wetlands",
+    "nearest_heading": "15.65.070 Specific requirements – Nontidal wetlands.",
+    "rows": [
+      [
+        "Disturbance",
+        "Required Measures to Minimize Impacts"
+      ],
+      [
+        "Lights",
+        "• Direct lights away from wetland"
+      ],
+      [
+        "Noise",
+        "• Locate activity that generates noise away from wetland • If warranted, enhance existing buffer with native vegetation plantings adjacent to noise source • For activities that generate relatively continuous, potentially disruptive noise, such as certain heavy industry or mining, establish an additional 10-foot heavily vegetated buffer strip immediately adjacent to the outer wetland buffer"
+      ],
+      [
+        "Toxic runoff",
+        "• Route all new, untreated runoff away from wetland while ensuring wetland is not dewatered • Establish covenants limiting use of pesticides within 150 feet of wetland • Apply integrated pest management"
+      ],
+      [
+        "Stormwater runoff",
+        "• Retrofit stormwater detention and treatment for roads and existing adjacent development • Prevent channelized flow from lawns that directly enters the buffer • Use low intensity development techniques (for more information refer to the drainage ordinance and manual)"
+      ],
+      [
+        "Change in water regime",
+        "• Infiltrate or treat, detain, and disperse into buffer new runoff from impervious surfaces and new lawns"
+      ],
+      [
+        "Pets and human disturbance",
+        "• Use privacy fencing or plant dense vegetation to delineate buffer edge and to discourage disturbance using vegetation appropriate for the ecoregion • Place wetland and its buffer in a separate tract or protect with a conservation easement"
+      ],
+      [
+        "Dust",
+        "• Use best management practices to control dust"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.65.070"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.65",
+    "chapter_title": "Chapter 15.65 ENVIRONMENTALLY SENSITIVE AND CRITICAL AREA LANDS",
+    "table_index": 10,
+    "caption": "Table 3. Wetland Buffer Requirements if Table 2 Is Not Implemented or Corridor Not Provided",
+    "nearest_heading": "15.65.070 Specific requirements – Nontidal wetlands.",
+    "rows": [
+      [
+        "",
+        "Buffer width (in feet) based on habitat score"
+      ],
+      [
+        "Wetland Category",
+        "3 – 5",
+        "6 – 7",
+        "8 –9"
+      ],
+      [
+        "Category I: Based on Total Score",
+        "100",
+        "150",
+        "300"
+      ],
+      [
+        "Category I: Bogs and Wetlands of High Conservation Value",
+        "250",
+        "300"
+      ],
+      [
+        "Category I: Interdunal",
+        "300 (buffer width not based on habitat scores)"
+      ],
+      [
+        "Category I: Forested",
+        "100",
+        "150",
+        "300"
+      ],
+      [
+        "Category I: Estuarine and Coastal Lagoons",
+        "200 (buffer width not based on habitat scores)"
+      ],
+      [
+        "Category II: Based on Score",
+        "100",
+        "150",
+        "300"
+      ],
+      [
+        "Category II: Interdunal Wetlands",
+        "150 (buffer width not based on habitat scores)"
+      ],
+      [
+        "Category II: Estuarine and Coastal Lagoons",
+        "150 (buffer width not based on habitat scores)"
+      ],
+      [
+        "Category III (all)",
+        "80",
+        "150",
+        "300"
+      ],
+      [
+        "Category IV (all)",
+        "50"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.65.070"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.75",
+    "chapter_title": "Chapter 15.75 TRANSPORTATION SYSTEMS",
+    "table_index": 11,
+    "caption": "",
+    "nearest_heading": "15.75.130 Clear visibility triangle.",
+    "rows": [
+      [
+        "Right-of-Way Width",
+        "Distance from Street Center Line Intersection"
+      ],
+      [
+        "40 feet",
+        "45 feet"
+      ],
+      [
+        "50 feet",
+        "55 feet"
+      ],
+      [
+        "60 feet",
+        "65 feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.75.130"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.86",
+    "chapter_title": "Chapter 15.86 STREET DEVELOPMENT STANDARDS",
+    "table_index": 12,
+    "caption": "",
+    "nearest_heading": "15.86.080 Public street and sidewalk design standards.",
+    "rows": [
+      [
+        "Table 1 – Public Street Improvement Requirements for Private Development"
+      ],
+      [
+        "Project Size",
+        "Right-of-Way Width",
+        "Pavement Width",
+        "Sidewalks and Street Lighting",
+        "Distance to Arterial"
+      ],
+      [
+        "2 – 4 units residential 0 – 5,000 sq. ft. commercial 0 – 10,000 sq. ft. industrial",
+        "As determined by Tables 2 through 5 of this section.",
+        "Provide half pavement width per standard plus minimum 10 feet – curb required on project side.",
+        "Provide sidewalk on project side. No street lighting required.",
+        "Minimum 20 feet pavement to arterial (500 feet maximum)."
+      ],
+      [
+        "5 – 20 residential lots 5,000 – 10,000 sq. ft. commercial 10,000 – 20,000 sq. ft. industrial",
+        "As determined by Tables 2 through 5 of this section.",
+        "Provide full pavement width per standard – curb required on project side.",
+        "Provide sidewalk on project side. Street lighting required on project side.",
+        "Minimum 20 feet pavement to arterial (500 feet maximum)."
+      ],
+      [
+        "More than 20 units residential 10,000 sq. ft. commercial 20,000 sq. ft. industrial",
+        "As determined by Tables 2 through 5 of this section.",
+        "Provide full pavement width per standard – curb required on project side.",
+        "Provide sidewalk on project side. Street lighting required on project side.",
+        "Minimum 20 feet pavement and pedestrian walkway to arterial."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.86.080"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.86",
+    "chapter_title": "Chapter 15.86 STREET DEVELOPMENT STANDARDS",
+    "table_index": 13,
+    "caption": "",
+    "nearest_heading": "15.86.080 Public street and sidewalk design standards.",
+    "rows": [
+      [
+        "Table 2 – Minimum Design Standards for Residential Access Streets"
+      ],
+      [
+        "Right-of- Way Width",
+        "Pavement",
+        "Sidewalks",
+        "Other"
+      ],
+      [
+        "50 feet",
+        "32 feet paved Parking both sides",
+        "5-foot sidewalk adjacent to curbs both sides",
+        "Combined public storm drainage detention Street lighting"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.86.080"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.86",
+    "chapter_title": "Chapter 15.86 STREET DEVELOPMENT STANDARDS",
+    "table_index": 14,
+    "caption": "",
+    "nearest_heading": "15.86.080 Public street and sidewalk design standards.",
+    "rows": [
+      [
+        "Table 3 – Minimum Design Standards for Collector Streets"
+      ],
+      [
+        "Right-of- Way Width",
+        "Pavement",
+        "Sidewalks",
+        "Other"
+      ],
+      [
+        "60 feet",
+        "38 feet paved Parking both sides",
+        "5-foot sidewalks and 5-foot planting strip on both sides",
+        "Combined public storm drainage detention Street lighting"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.86.080"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.86",
+    "chapter_title": "Chapter 15.86 STREET DEVELOPMENT STANDARDS",
+    "table_index": 15,
+    "caption": "",
+    "nearest_heading": "15.86.080 Public street and sidewalk design standards.",
+    "rows": [
+      [
+        "Table 4 – Minimum Design Standards for Commercial Access Streets"
+      ],
+      [
+        "Right-of- Way Width",
+        "Pavement",
+        "Sidewalks",
+        "Other"
+      ],
+      [
+        "60 feet",
+        "40 feet paved Parking both sides",
+        "5-foot sidewalks on the property line and 5-foot planting strip",
+        "Combined public storm drainage detention Street lighting"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.86.080"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.86",
+    "chapter_title": "Chapter 15.86 STREET DEVELOPMENT STANDARDS",
+    "table_index": 16,
+    "caption": "",
+    "nearest_heading": "15.86.080 Public street and sidewalk design standards.",
+    "rows": [
+      [
+        "Table 5 – Minimum Design Standards for Industrial Access Streets"
+      ],
+      [
+        "Right-of- Way Width",
+        "Pavement",
+        "Sidewalks",
+        "Other"
+      ],
+      [
+        "60 feet",
+        "40 feet paved Parking both sides",
+        "5-foot sidewalks and 5-foot planting strip on both sides",
+        "Combined public storm drainage detention Street lighting"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.86.080"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.86",
+    "chapter_title": "Chapter 15.86 STREET DEVELOPMENT STANDARDS",
+    "table_index": 17,
+    "caption": "",
+    "nearest_heading": "15.86.100 Dead end streets.",
+    "rows": [
+      [
+        "Table 6 – Cul-de-Sacs and Turnarounds"
+      ],
+      [
+        "Length of Street",
+        "Type of Turnaround"
+      ],
+      [
+        "For up to 150 feet in length",
+        "No turnaround required."
+      ],
+      [
+        "From 150 feet to 300 feet in length",
+        "Dedicated hammerhead turnaround or cul-de-sac required."
+      ],
+      [
+        "From 300 feet to 700 feet in length",
+        "Cul-de-sac required. Fire sprinkler system required for houses."
+      ],
+      [
+        "Longer than 700 feet in length",
+        "Two means of access and fire sprinklers required for all houses beyond 300 feet."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.86.100"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.86",
+    "chapter_title": "Chapter 15.86 STREET DEVELOPMENT STANDARDS",
+    "table_index": 18,
+    "caption": "",
+    "nearest_heading": "15.86.110 Alley standards.",
+    "rows": [
+      [
+        "Table 7 – Minimum Alley Design Standards"
+      ],
+      [
+        "Zoning Type",
+        "ROW Width"
+      ],
+      [
+        "All residential",
+        "20 feet"
+      ],
+      [
+        "Commercial",
+        "20 feet"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.86.110"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.86",
+    "chapter_title": "Chapter 15.86 STREET DEVELOPMENT STANDARDS",
+    "table_index": 19,
+    "caption": "",
+    "nearest_heading": "15.86.120 Street lighting standards.",
+    "rows": [
+      [
+        "Table 8 – Street Illumination Levels"
+      ],
+      [
+        "Arterial",
+        "Commercial",
+        "Industrial",
+        "Residential"
+      ],
+      [
+        "Principal",
+        "1.4",
+        "1.4",
+        "1.0"
+      ],
+      [
+        "Minor",
+        "1.4",
+        "1.2",
+        "0.6"
+      ],
+      [
+        "Collector Street",
+        "1.2",
+        "0.9",
+        "0.6"
+      ],
+      [
+        "Local Street",
+        "0.9",
+        "0.6",
+        "0.2"
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.86.120"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.135",
+    "chapter_title": "Chapter 15.135 ADMINISTRATION AND ENFORCEMENT*",
+    "table_index": 20,
+    "caption": "",
+    "nearest_heading": "15.135.050 Process classification and procedures.",
+    "rows": [
+      [
+        "I Administrative",
+        "II Planning Director",
+        "III Planning Commission",
+        "IV Hearing Examiner",
+        "V Town Council"
+      ],
+      [
+        "Building and construction permits; LCMC 15.135.020",
+        "Land use review of permitted and accessory uses exempt from SEPA; LCMC 15.135.120",
+        "Demolition permits for Type I and II structures; Chapter 15.112 LCMC",
+        "",
+        "Non-areawide rezone; LCMC 15.125.080"
+      ],
+      [
+        "Lot line adjustments; LCMC 15.125.050",
+        "Temporary structures; LCMC 15.110.030",
+        "Historic design review of major new construction; LCMC 15.50.060",
+        "Conditional use permits; LCMC 15.135.190",
+        "Final plat; Chapter 15.30 LCMC"
+      ],
+      [
+        "Sign permits; Chapter 15.115 LCMC",
+        "Bed and breakfast; CMC 15.20.055",
+        "Tree removal permits (excluding residential outside the HPD); Chapter 15.60 LCMC",
+        "",
+        "Shoreline permit revision"
+      ],
+      [
+        "Demolition permits for Type III structures; Chapter 15.112 LCMC",
+        "Critical areas; Chapter 15.65 LCMC",
+        "Temporary use permits; LCMC 15.110.050",
+        "Preliminary plat approval; Chapter 15.30 LCMC",
+        ""
+      ],
+      [
+        "Home occupation permits; LCMC 15.110.070",
+        "Short plat; Chapter 15.30 LCMC",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Floodplain permits; Chapter 15.70 LCMC",
+        "",
+        "",
+        "Shoreline conditional use permits",
+        ""
+      ],
+      [
+        "Change of use; LCMC 15.125.020",
+        "Administrative variance; LCMC 15.125.040",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Historic design review of minor new construction; LCMC 15.50.060",
+        "Administrative conditional use permits; LCMC 15.20.055",
+        "",
+        "Shoreline variances",
+        ""
+      ],
+      [
+        "Shoreline exemptions",
+        "",
+        "",
+        "Variances; LCMC 15.125.040",
+        ""
+      ],
+      [
+        "Binding site plan; Chapter 15.55 LCMC",
+        "Shoreline substantial development permits",
+        "",
+        "Appeals of planning commission and administrative decisions; LCMC 15.12.110",
+        ""
+      ],
+      [
+        "Accessory uses; LCMC 15.40.030",
+        "",
+        "",
+        "SEPA appeals; LCMC 13.10.090",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "PURD; Chapter 15.25 LCMC",
+        ""
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.135.050"
+  },
+  {
+    "jurisdiction": "la_conner",
+    "title": "Title 15 UNIFORM DEVELOPMENT CODE*",
+    "chapter_ref": "15.135",
+    "chapter_title": "Chapter 15.135 ADMINISTRATION AND ENFORCEMENT*",
+    "table_index": 21,
+    "caption": "",
+    "nearest_heading": "15.135.050 Process classification and procedures.",
+    "rows": [
+      [
+        "Process Type",
+        "I",
+        "II",
+        "III",
+        "IV",
+        "V"
+      ],
+      [
+        "Recommendation made by",
+        "N/A",
+        "N/A",
+        "Planning commission, if consolidated with Type IV or V permit applications",
+        "Planning director or planning commission",
+        "Planning commission"
+      ],
+      [
+        "Final decision made by",
+        "Planning director, public works director or designees",
+        "Planning director or designee",
+        "Planning commission unless consolidated with Type IV or V permit applications",
+        "Hearing examiner",
+        "Town council"
+      ],
+      [
+        "Notice of application",
+        "No",
+        "Yes 1",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "Open record public hearing",
+        "No",
+        "Only if appealed, open record hearing before hearing examiner",
+        "Yes, before planning commission unless consolidated with Type IV or V permit applications",
+        "Yes, before hearing examiner for final decision",
+        "Yes, before hearing examiner for recommendation"
+      ],
+      [
+        "Closed record appeal/final decision",
+        "Only if appealed, a closed record hearing before the hearing examiner, except that appeals of a building official order shall be remanded to the Skagit County building appeals board",
+        "No",
+        "Only if appealed, closed record hearing before hearing examiner",
+        "No",
+        "Yes, before town council"
+      ],
+      [
+        "Judicial appeal",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "1. Type II – Open Record Public Hearing. For administrative variance and administrative conditional use applications, a public hearing before the hearing examiner may be requested by the applicant, interested parties, or the planning director."
+      ]
+    ],
+    "source_url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.135.050"
+  }
+]

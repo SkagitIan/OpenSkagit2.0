@@ -856,6 +856,27 @@ def _date_value(value: Any) -> date | None:
         return None
 
 
+def _compact_date(value: Any) -> str:
+    parsed = _date_value(value)
+    if not parsed:
+        return ""
+    return f"{parsed:%b %-d, %Y}" if os.name != "nt" else f"{parsed:%b %#d, %Y}"
+
+
+def _watchlist_alert_label(row: dict[str, Any]) -> str:
+    table = row.get("table_name")
+    change = row.get("change_type") or "changed"
+    if table == "sales":
+        return "New sale" if change == "insert" else "Sale changed"
+    if table == "auditor_recordings":
+        return "New recording" if change == "insert" else "Recording changed"
+    if table == "improvements":
+        return "Improvement changed"
+    if table == "land":
+        return "Land detail changed"
+    return "Watchlist change"
+
+
 def _delinquent_years_phrase(years_delinquent: Any, current_year_count: Any) -> str:
     prior_years = int(years_delinquent or 0)
     has_current = bool(current_year_count or 0)
@@ -982,14 +1003,14 @@ def mark_saved(rows: list[dict[str, Any]], user) -> list[dict[str, Any]]:
     return rows
 
 
-def latest_assessor_sync_summary(user=None) -> dict[str, Any]:
+def latest_assessor_sync_summary(user=None, sales_sort: str = "") -> dict[str, Any]:
     try:
         from assessor_sync.models import AssessorSyncChange, AssessorSyncReport, AssessorSyncRun
 
-        run = AssessorSyncRun.objects.order_by("-started_at").first()
+        report = latest_nonempty_sync_report(AssessorSyncReport)
+        run = report.run if report else AssessorSyncRun.objects.order_by("-started_at").first()
         if not run:
             return {"has_run": False, "metrics": [], "changes": []}
-        report = latest_nonempty_sync_report(AssessorSyncReport)
         tables = (run.summary or {}).get("tables", {})
         applied = sum(int((table or {}).get("applied_rows") or 0) for table in tables.values())
         inserted = sum(int((table or {}).get("inserted") or 0) for table in tables.values())
@@ -1002,10 +1023,15 @@ def latest_assessor_sync_summary(user=None) -> dict[str, Any]:
             .values("table_name", "record_key", "change_type", "changed_fields", "created_at")
             .order_by("-created_at")[:6]
         )
+        recent_sales = latest_sync_sales(run.pk, sort=sales_sort)
+        recorded_docs = latest_sync_recorded_docs(run.pk)
+        watchlist_alerts = latest_watchlist_alerts(run.pk, user)
         return {
             "has_run": True,
             "run": run,
             "tables": tables,
+            "since_text": since_text,
+            "sales_sort": sales_sort if sales_sort in {"city", "price"} else "",
             "metrics": [
                 {"label": "Parcel signals updated", "value": f"{sync_counts['parcel_signals']:,}", "accent": "teal", "note": since_text},
                 {"label": "New sales", "value": f"{sync_counts['new_sales']:,}", "accent": "gold", "note": since_text},
@@ -1015,9 +1041,247 @@ def latest_assessor_sync_summary(user=None) -> dict[str, Any]:
             "totals": {"applied": applied, "inserted": inserted, "updated": updated, "warnings": warnings},
             "narrative": sync_narrative_dict(report, report.run.summary or {}) if report else fallback_sync_narrative(run.summary or {}),
             "changes": changes,
+            "activity": latest_sync_activity(run.pk),
+            "recent_sales": recent_sales,
+            "recorded_docs": recorded_docs,
+            "watchlist_alerts": watchlist_alerts,
         }
     except Exception:
-        return {"has_run": False, "metrics": [], "changes": []}
+        return {"has_run": False, "metrics": [], "changes": [], "activity": [], "recent_sales": [], "recorded_docs": [], "watchlist_alerts": []}
+
+
+def latest_sync_sales(run_id: int, sort: str = "", limit: int | None = None) -> list[dict[str, Any]]:
+    limit_sql = "LIMIT %s" if limit else ""
+    params = [run_id]
+    if limit:
+        params.append(limit)
+    rows = _fetch(
+        f"""
+        WITH sales_changes AS (
+          SELECT DISTINCT ON (c.record_key)
+            c.record_key,
+            c.created_at,
+            COALESCE(NULLIF(c.new_row->>'parcel_number', ''), split_part(c.record_key, '|', 2)) AS parcel_number,
+            COALESCE(NULLIF(c.new_row->>'recording_number', ''), split_part(c.record_key, '|', 3)) AS recording_number,
+            NULLIF(c.new_row->>'deed_type', '') AS deed_type,
+            COALESCE(NULLIF(c.new_row->>'sale_date_iso', ''), NULLIF(c.new_row->>'deed_date_iso', '')) AS sale_date,
+            NULLIF(c.new_row->>'sale_price_num', '')::numeric AS sale_price_num
+          FROM assessor_sync_changes c
+          WHERE c.run_id = %s
+            AND c.table_name = 'sales'
+            AND c.change_type IN ('insert', 'update')
+            AND COALESCE(NULLIF(c.new_row->>'parcel_number', ''), split_part(c.record_key, '|', 2), '') <> ''
+          ORDER BY c.record_key, c.created_at DESC
+        )
+        SELECT
+          c.parcel_number,
+          c.recording_number,
+          COALESCE(c.deed_type, s.deed_type, 'Sale') AS deed_type,
+          COALESCE(c.sale_date, s.sale_date_iso, s.deed_date_iso) AS sale_date,
+          COALESCE(c.sale_price_num, s.sale_price_num) AS sale_price_num,
+          concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
+          COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city
+        FROM sales_changes c
+        LEFT JOIN LATERAL (
+          SELECT s.deed_type, s.sale_date_iso, s.deed_date_iso, s.sale_price_num
+          FROM sales s
+          WHERE s.saleid = split_part(c.record_key, '|', 1)
+            AND s.parcel_number = c.parcel_number
+            AND COALESCE(s.recording_number, '') = COALESCE(c.recording_number, '')
+          ORDER BY s.sale_date_iso DESC NULLS LAST
+          LIMIT 1
+        ) s ON true
+        LEFT JOIN skagit_parcels p ON p.parcel_number = c.parcel_number
+        LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
+        ORDER BY c.created_at DESC
+        {limit_sql}
+        """,
+        params,
+    )
+    for row in rows:
+        row["city_label"] = _city_label(row.get("city"))
+        row["location"] = _location_label((row.get("address") or "").strip(), row["city_label"])
+        row["sale_price_fmt"] = money(row.get("sale_price_num"))
+        row["date_label"] = _compact_date(row.get("sale_date"))
+        row["document_url"] = _auditor_url(row.get("recording_number")) if row.get("recording_number") else ""
+    if sort == "city":
+        rows.sort(key=lambda row: ((row.get("city_label") or "zzzz").lower(), row.get("parcel_number") or ""))
+    elif sort == "price":
+        rows.sort(key=lambda row: (_decimal(row.get("sale_price_num")) or Decimal("0"), row.get("parcel_number") or ""), reverse=True)
+    return rows
+
+
+def latest_sync_recorded_docs(run_id: int, limit: int | None = None) -> list[dict[str, Any]]:
+    limit_sql = "LIMIT %s" if limit else ""
+    params = [run_id]
+    if limit:
+        params.append(limit)
+    rows = _fetch(
+        f"""
+        SELECT
+          COALESCE(NULLIF(c.new_row->>'parcel_number', ''), NULLIF(c.old_row->>'parcel_number', '')) AS parcel_number,
+          COALESCE(NULLIF(c.new_row->>'recording_number', ''), NULLIF(c.old_row->>'recording_number', ''), c.record_key) AS recording_number,
+          COALESCE(NULLIF(c.new_row->>'recorded_date', ''), NULLIF(c.old_row->>'recorded_date', '')) AS recorded_date,
+          COALESCE(NULLIF(c.new_row->>'document_type', ''), NULLIF(c.old_row->>'document_type', ''), 'Auditor filing') AS document_type,
+          COALESCE(NULLIF(c.new_row->>'signal_group', ''), NULLIF(c.old_row->>'signal_group', '')) AS signal_group,
+          COALESCE(NULLIF(c.new_row->>'pdf_url', ''), NULLIF(c.old_row->>'pdf_url', '')) AS pdf_url,
+          concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
+          COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city
+        FROM assessor_sync_changes c
+        LEFT JOIN skagit_parcels p ON p.parcel_number = COALESCE(NULLIF(c.new_row->>'parcel_number', ''), NULLIF(c.old_row->>'parcel_number', ''))
+        LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
+        WHERE c.run_id = %s
+          AND c.table_name = 'auditor_recordings'
+          AND c.change_type IN ('insert', 'update')
+        ORDER BY c.created_at DESC
+        {limit_sql}
+        """,
+        params,
+    )
+    for row in rows:
+        row["location"] = _location_label((row.get("address") or "").strip(), _city_label(row.get("city")))
+        row["date_label"] = _compact_date(row.get("recorded_date"))
+        row["document_url"] = row.get("pdf_url") or _auditor_url(row.get("recording_number"))
+    return rows
+
+
+def latest_watchlist_alerts(run_id: int, user=None, limit: int = 8) -> list[dict[str, Any]]:
+    saved = saved_parcel_numbers(user)
+    if not saved:
+        return []
+    rows = _fetch(
+        """
+        WITH events AS (
+          SELECT
+            CASE
+              WHEN c.table_name IN ('land', 'improvements') THEN split_part(c.record_key, '|', 1)
+              WHEN c.table_name = 'sales' THEN COALESCE(NULLIF(c.new_row->>'parcel_number', ''), split_part(c.record_key, '|', 2))
+              WHEN c.table_name = 'auditor_recordings' THEN COALESCE(NULLIF(c.new_row->>'parcel_number', ''), NULLIF(c.old_row->>'parcel_number', ''))
+              ELSE ''
+            END AS parcel_number,
+            c.table_name,
+            c.change_type,
+            c.changed_fields,
+            c.created_at,
+            COALESCE(NULLIF(c.new_row->>'recording_number', ''), NULLIF(c.old_row->>'recording_number', ''), '') AS recording_number
+          FROM assessor_sync_changes c
+          WHERE c.run_id = %s
+            AND c.table_name IN ('land', 'improvements', 'sales', 'auditor_recordings')
+        )
+        SELECT
+          e.*,
+          concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
+          COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
+          p.land_use
+        FROM events e
+        LEFT JOIN skagit_parcels p ON p.parcel_number = e.parcel_number
+        LEFT JOIN parcel_primary_zoning z ON z.parcel_id = e.parcel_number
+        WHERE e.parcel_number = ANY(%s)
+        ORDER BY e.created_at DESC
+        LIMIT %s
+        """,
+        [run_id, list(saved), limit],
+    )
+    for row in rows:
+        row["location"] = _location_label((row.get("address") or "").strip(), _city_label(row.get("city")))
+        row["current_use"] = _land_use_label(row.get("land_use"))
+        row["alert_label"] = _watchlist_alert_label(row)
+        row["date_label"] = _compact_date(row.get("created_at"))
+        row["document_url"] = _auditor_url(row.get("recording_number")) if row.get("recording_number") else ""
+    return rows
+
+
+def latest_sync_activity(run_id: int, limit: int = 40) -> list[dict[str, Any]]:
+    rows = _fetch(
+        """
+        WITH raw_events AS (
+          SELECT
+            'sale' AS event_kind,
+            split_part(c.record_key, '|', 2) AS parcel_number,
+            c.change_type,
+            c.record_key,
+            c.created_at,
+            split_part(c.record_key, '|', 3) AS recording_number,
+            s.sale_date_iso AS event_date,
+            s.sale_price_num,
+            s.deed_type,
+            '' AS document_type,
+            '' AS signal_group,
+            '' AS pdf_url
+          FROM assessor_sync_changes c
+          LEFT JOIN sales s
+            ON s.saleid = split_part(c.record_key, '|', 1)
+           AND s.parcel_number = split_part(c.record_key, '|', 2)
+           AND COALESCE(s.recording_number, '') = split_part(c.record_key, '|', 3)
+          WHERE c.run_id = %s
+            AND c.table_name = 'sales'
+          UNION ALL
+          SELECT
+            'auditor' AS event_kind,
+            COALESCE(NULLIF(c.new_row->>'parcel_number', ''), NULLIF(c.old_row->>'parcel_number', '')) AS parcel_number,
+            c.change_type,
+            c.record_key,
+            c.created_at,
+            COALESCE(NULLIF(c.new_row->>'recording_number', ''), NULLIF(c.old_row->>'recording_number', ''), c.record_key) AS recording_number,
+            COALESCE(NULLIF(c.new_row->>'recorded_date', ''), NULLIF(c.old_row->>'recorded_date', '')) AS event_date,
+            NULL::numeric AS sale_price_num,
+            '' AS deed_type,
+            COALESCE(NULLIF(c.new_row->>'document_type', ''), NULLIF(c.old_row->>'document_type', '')) AS document_type,
+            COALESCE(NULLIF(c.new_row->>'signal_group', ''), NULLIF(c.old_row->>'signal_group', '')) AS signal_group,
+            COALESCE(NULLIF(c.new_row->>'pdf_url', ''), NULLIF(c.old_row->>'pdf_url', '')) AS pdf_url
+          FROM assessor_sync_changes c
+          WHERE c.run_id = %s
+            AND c.table_name = 'auditor_recordings'
+        )
+        SELECT
+          e.*,
+          concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
+          COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
+          p.land_use,
+          p.assessed_value
+        FROM raw_events e
+        LEFT JOIN skagit_parcels p ON p.parcel_number = e.parcel_number
+        LEFT JOIN parcel_primary_zoning z ON z.parcel_id = e.parcel_number
+        WHERE COALESCE(e.parcel_number, '') <> ''
+        ORDER BY e.created_at DESC
+        LIMIT %s
+        """,
+        [run_id, run_id, limit],
+    )
+    grouped: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        parcel_number = row.get("parcel_number") or "Unknown"
+        group = grouped.setdefault(
+            parcel_number,
+            {
+                "parcel_number": parcel_number,
+                "location": _location_label((row.get("address") or "").strip(), _city_label(row.get("city"))),
+                "current_use": _land_use_label(row.get("land_use")),
+                "assessed_value_fmt": money(row.get("assessed_value")),
+                "sale_count": 0,
+                "auditor_count": 0,
+                "events": [],
+            },
+        )
+        if row.get("event_kind") == "sale":
+            group["sale_count"] += 1
+            label = row.get("deed_type") or "Sale record"
+            detail = money(row.get("sale_price_num")) if row.get("sale_price_num") else (row.get("recording_number") or "updated")
+        else:
+            group["auditor_count"] += 1
+            label = row.get("document_type") or "Auditor filing"
+            detail = row.get("recording_number") or row.get("signal_group") or "new filing"
+        if len(group["events"]) < 3:
+            group["events"].append(
+                {
+                    "kind": row.get("event_kind"),
+                    "label": label,
+                    "detail": detail,
+                    "date": row.get("event_date") or row.get("created_at"),
+                    "url": row.get("pdf_url") or "",
+                }
+            )
+    return list(grouped.values())[:12]
 
 
 def latest_nonempty_sync_report(AssessorSyncReport):
@@ -1055,19 +1319,23 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
     tables = summary.get("tables", {})
     auditor = summary.get("auditor", {}) or {}
     sales_summary = tables.get("sales", {}) or {}
-    new_sales = int(sales_summary.get("inserted") or 0)
+    new_sales = int(sales_summary.get("inserted") or 0) + int(sales_summary.get("updated") or 0)
     signal_tables = ("sales", "land", "improvements")
     parcel_signals = sum(int((tables.get(table) or {}).get("applied_rows") or 0) for table in signal_tables)
-    new_filings = int(auditor.get("inserted") or 0) if auditor.get("enabled") else new_sales
+    new_filings = (
+        int(auditor.get("inserted") or 0) + int(auditor.get("updated") or 0)
+        if auditor.get("enabled")
+        else new_sales
+    )
     watchlist_changes = 0
 
     try:
         sales_rows = _fetch(
             """
             SELECT
-              COUNT(*) FILTER (WHERE change_type = 'insert') AS new_sales,
+              COUNT(*) FILTER (WHERE change_type IN ('insert', 'update')) AS new_sales,
               COUNT(*) FILTER (
-                WHERE change_type = 'insert'
+                WHERE change_type IN ('insert', 'update')
                   AND COALESCE(NULLIF(new_row->>'recording_number', ''), NULLIF(new_row->>'excise_number', '')) IS NOT NULL
               ) AS new_filings
             FROM assessor_sync_changes
@@ -1077,7 +1345,8 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
             [run.pk],
         )
         if sales_rows:
-            new_sales = int(sales_rows[0].get("new_sales") or new_sales)
+            if new_sales <= 0:
+                new_sales = int(sales_rows[0].get("new_sales") or new_sales)
             if not auditor.get("enabled"):
                 new_filings = int(sales_rows[0].get("new_filings") or 0)
 
@@ -1087,7 +1356,7 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
             FROM assessor_sync_changes
             WHERE run_id = %s
               AND table_name = 'auditor_recordings'
-              AND change_type = 'insert'
+              AND change_type IN ('insert', 'update')
             """,
             [run.pk],
         )
@@ -1296,11 +1565,11 @@ def fallback_sync_narrative(summary: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def dashboard_context(user) -> dict[str, Any]:
+def dashboard_context(user, sales_sort: str = "") -> dict[str, Any]:
     watchlist = watchlist_rows(user, limit=5)
     return {
         "watchlist": watchlist,
-        "sync": latest_assessor_sync_summary(user),
+        "sync": latest_assessor_sync_summary(user, sales_sort=sales_sort),
         "tabs": TABS,
     }
 
@@ -1325,7 +1594,7 @@ def watchlist_rows(user, limit: int | None = None) -> list[dict[str, Any]]:
 
 
 def parcel_summary(parcel_number: str) -> dict[str, Any] | None:
-    detail = parcel_detail(parcel_number)
+    detail = parcel_detail(parcel_number, include_dossier=False)
     if not detail:
         return None
     return {
@@ -1347,12 +1616,13 @@ def parcel_summary(parcel_number: str) -> dict[str, Any] | None:
     }
 
 
-def parcel_detail(parcel_number: str) -> dict[str, Any] | None:
+def parcel_detail(parcel_number: str, include_dossier: bool = True, use_ai_feasibility: bool = False) -> dict[str, Any] | None:
     sql = """
         SELECT p.parcel_number,
                concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
                COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
-               p.owner_name, p.acres, p.land_use, p.utilities,
+               p.owner_name, p.owner_add_1, p.owner_add_2, p.owner_add_3, p.owner_city, p.owner_state, p.owner_zip,
+               p.legal_description, p.neighborhood_code, p.exemptions, p.acres, p.land_use, p.utilities,
                p.assessed_value, p.impr_land_value, p.unimpr_land_value, p.building_value,
                p.taxable_value, p.total_market_value, p.total_taxes, p.sale_date, p.sale_price, p.sale_deed_type,
                p.year_built, p.living_area, p.levy_code,
@@ -1383,6 +1653,9 @@ def parcel_detail(parcel_number: str) -> dict[str, Any] | None:
             "year_built": row.get("year_built") or "",
             "living_area": row.get("living_area") or "",
             "levy_code": row.get("levy_code") or "",
+            "legal_description": row.get("legal_description") or "",
+            "neighborhood_code": row.get("neighborhood_code") or "",
+            "owner_lines": _owner_lines(row),
             "feature_labels": feature_labels(row),
             "risk_flags": risk_flags(
                 "No parcel geometry" if not item["map_url"] else None,
@@ -1395,9 +1668,437 @@ def parcel_detail(parcel_number: str) -> dict[str, Any] | None:
             "sales": parcel_recent_sales(parcel_number),
             "tax_pressure": parcel_tax_pressure(parcel_number),
             "sync_changes": parcel_sync_changes(parcel_number),
+            "dossier": parcel_dossier(parcel_number) if include_dossier else {},
+            "gis_context": parcel_gis_context(parcel_number) if include_dossier else {},
         }
     )
+    item["feasibility"] = parcel_feasibility(item, use_ai=use_ai_feasibility) if include_dossier else {}
     return item
+
+
+def _owner_lines(row: dict[str, Any]) -> list[str]:
+    lines = []
+    for key in ("owner_add_1", "owner_add_2", "owner_add_3"):
+        value = (row.get(key) or "").strip()
+        if value:
+            lines.append(value)
+    city_line = " ".join(str(row.get(key) or "").strip() for key in ("owner_city", "owner_state", "owner_zip") if row.get(key))
+    if city_line:
+        lines.append(city_line)
+    return lines
+
+
+def parcel_dossier(parcel_number: str) -> dict[str, Any]:
+    parcel_number = parcel_number.upper()
+    improvements = parcel_improvements(parcel_number)
+    land_segments = parcel_land_segments(parcel_number)
+    zoning_overlaps = parcel_zoning_overlaps(parcel_number)
+    rollup = parcel_rollup_context(parcel_number)
+    return {
+        "summary_cards": [
+            {"label": "Improvement records", "value": len(improvements), "note": _dossier_improvement_note(improvements)},
+            {"label": "Land segments", "value": len(land_segments), "note": _dossier_land_note(land_segments)},
+            {"label": "Zoning", "value": len(zoning_overlaps), "note": _dossier_zoning_note(zoning_overlaps)},
+        ],
+        "improvements": improvements,
+        "land_segments": land_segments,
+        "zoning_overlaps": zoning_overlaps,
+        "rollup": rollup,
+    }
+
+
+def parcel_improvements(parcel_number: str) -> list[dict[str, Any]]:
+    rows = _fetch(
+        """
+        SELECT
+            i.imprv_id,
+            i.segment_id,
+            NULLIF(i.description, '') AS description,
+            NULLIF(i.building_style, '') AS building_style,
+            i.imprv_det_type_cd,
+            COALESCE(i.imprv_det_type_description, type_map.description, NULLIF(i.imprv_det_type_cd, '')) AS type_description,
+            i.imprv_det_class_cd,
+            COALESCE(i.imprv_det_class_description, class_map.description, NULLIF(i.imprv_det_class_cd, '')) AS class_description,
+            i.condition_cd,
+            COALESCE(i.condition_description, condition_map.description, NULLIF(i.condition_cd, '')) AS condition_description,
+            i.imprv_val_num,
+            i.living_area_num,
+            NULLIF(i.actual_year_built, '') AS actual_year_built,
+            NULLIF(i.effective_yr_blt, '') AS effective_yr_blt,
+            NULLIF(i.constructionstyle, '') AS constructionstyle,
+            NULLIF(i.foundation, '') AS foundation,
+            NULLIF(i.exteriorwall, '') AS exteriorwall,
+            NULLIF(i.roofcovering, '') AS roofcovering,
+            NULLIF(i.heatingcooling, '') AS heatingcooling,
+            NULLIF(i.bedrooms, '') AS bedrooms
+        FROM improvements i
+        LEFT JOIN code_mappings type_map
+          ON type_map.category = 'improvement_type'
+         AND type_map.code = upper(trim(i.imprv_det_type_cd))
+        LEFT JOIN code_mappings class_map
+          ON class_map.category = 'improvement_class'
+         AND class_map.code = upper(trim(i.imprv_det_class_cd))
+        LEFT JOIN code_mappings condition_map
+          ON condition_map.category = 'condition'
+         AND condition_map.code = upper(trim(i.condition_cd))
+        WHERE upper(i.parcelnumber) = upper(%s)
+        ORDER BY i.imprv_id, i.segment_id
+        LIMIT 12
+        """,
+        [parcel_number],
+    )
+    for row in rows:
+        row["living_area_fmt"] = _area(row.get("living_area_num"))
+        row["detail_line"] = _improvement_detail_line(row)
+    return rows
+
+
+def parcel_land_segments(parcel_number: str) -> list[dict[str, Any]]:
+    rows = _fetch(
+        """
+        SELECT land_seg_id, land_type, appr_meth, size_acres_num, size_square_feet,
+               effective_front, actual_front, market_value_num, open_space_val,
+               open_space_use_code_desc, land_seg_comment
+        FROM land
+        WHERE upper(parcelnumber) = upper(%s)
+        ORDER BY market_value_num DESC NULLS LAST, land_seg_id
+        LIMIT 10
+        """,
+        [parcel_number],
+    )
+    for row in rows:
+        row["size_fmt"] = acres(row.get("size_acres_num")) if row.get("size_acres_num") else _area(row.get("size_square_feet"), "sq ft")
+        row["market_value_fmt"] = money(row.get("market_value_num"))
+    return rows
+
+
+def parcel_zoning_overlaps(parcel_number: str) -> list[dict[str, Any]]:
+    rows = _fetch(
+        """
+        SELECT zone_id, zone_name, jurisdiction, waza_general, waza_specific,
+               percent_of_parcel, overlap_area_sqft, reference_url, is_primary
+        FROM parcel_zoning
+        WHERE upper(parcel_id) = upper(%s)
+        ORDER BY is_primary DESC, percent_of_parcel DESC NULLS LAST
+        LIMIT 10
+        """,
+        [parcel_number],
+    )
+    material = []
+    seen = set()
+    for row in rows:
+        percent = _decimal(row.get("percent_of_parcel")) or Decimal("0")
+        is_primary = bool(row.get("is_primary"))
+        key = (row.get("zone_id"), row.get("zone_name"), row.get("jurisdiction"))
+        if key in seen:
+            continue
+        if not is_primary and percent < Decimal("5"):
+            continue
+        row["percent_of_parcel_fmt"] = f"{percent:.0f}%" if percent >= Decimal("5") else ""
+        row["is_tiny_overlap"] = percent < Decimal("5") and not is_primary
+        row.update(zoning_definition_context(row))
+        material.append(row)
+        seen.add(key)
+    return material
+
+
+def zoning_definition_context(row: dict[str, Any]) -> dict[str, str]:
+    zone_code = row.get("zone_id") or ""
+    jurisdiction = row.get("jurisdiction") or ""
+    source_url = row.get("reference_url") or ""
+    description = row.get("zone_name") or ""
+    try:
+        from zoning_mcp import services as zoning_services
+
+        normalized_jurisdiction = zoning_services.normalize_jurisdiction(jurisdiction)
+        normalized_zone = zoning_services.normalize_zone_code(zone_code)
+        profile = zoning_services.get_zone_profile(normalized_jurisdiction, normalized_zone) if normalized_jurisdiction and normalized_zone else {}
+        profile_name = profile.get("zone_name") or description
+        purpose = profile.get("purpose") or ""
+        if profile_name and purpose and purpose != profile_name:
+            description = f"{profile_name}. {purpose}."
+        elif profile_name:
+            description = profile_name
+        source_url = profile.get("source_url") or source_url
+    except Exception:
+        pass
+    if not description:
+        description = "No zoning definition is available from zoning_mcp."
+    return {
+        "definition": description[:500],
+        "definition_source_url": source_url,
+    }
+
+
+def parcel_gis_context(parcel_number: str) -> dict[str, Any]:
+    try:
+        from gis_mcp import services as gis_services
+
+        raw = gis_services.get_parcel_overlays(parcel_number, include_parcel_geometry=False)
+    except Exception as exc:
+        return {"status": "error", "error": str(exc)[:220], "layers": [], "count": 0}
+
+    layers = []
+    for overlay in raw.get("overlays") or []:
+        features = overlay.get("features") or []
+        if not features:
+            continue
+        rows = [_gis_feature_summary(feature.get("attributes") or {}) for feature in features[:4]]
+        rows = [row for row in rows if row.get("primary") or row.get("details")]
+        if not rows:
+            continue
+        layers.append(
+            {
+                "key": overlay.get("layer") or "",
+                "label": overlay.get("label") or overlay.get("layer") or "GIS layer",
+                "count": overlay.get("count") or len(features),
+                "exceeded": bool(overlay.get("exceededTransferLimit")),
+                "rows": rows,
+            }
+        )
+    return {"status": "ok", "layers": layers, "count": len(layers)}
+
+
+def parcel_rollup_context(parcel_number: str) -> dict[str, Any]:
+    rows = _fetch(
+        """
+        SELECT land_use_code, land_use_description, neighborhood_code_id,
+               neighborhood_description, utilities_codes, utilities_description
+        FROM assessor_rollup
+        WHERE upper(parcel_number) = upper(%s)
+        LIMIT 1
+        """,
+        [parcel_number],
+    )
+    return rows[0] if rows else {}
+
+
+def parcel_feasibility(parcel: dict[str, Any], use_ai: bool = False) -> dict[str, Any]:
+    zoning = _structured_zoning_context(parcel)
+    fallback = fallback_feasibility(parcel, zoning)
+    if not use_ai:
+        fallback["status"] = "structured"
+        fallback["note"] = "Showing zoning context from local source data."
+        return fallback
+    if not os.environ.get("OPENAI_API_KEY"):
+        fallback["status"] = "structured"
+        fallback["note"] = "OpenAI API key is not configured; showing zoning context from local source data."
+        return fallback
+    try:
+        from openai import OpenAI
+
+        model = os.environ.get("OPENAI_FEASIBILITY_MODEL", os.environ.get("OPENAI_MODEL", "gpt-4.1-mini"))
+        response = OpenAI().responses.create(
+            model=model,
+            input=build_feasibility_prompt(parcel, zoning),
+            temperature=0.1,
+            max_output_tokens=650,
+        )
+        parsed = parse_feasibility_response(response.output_text)
+        parsed["status"] = "ai"
+        parsed["model"] = model
+        parsed["zoning_source"] = zoning.get("source", "")
+        return parsed
+    except Exception as exc:
+        fallback["status"] = "error"
+        fallback["note"] = f"AI feasibility summary unavailable: {str(exc)[:180]}"
+        return fallback
+
+
+def _structured_zoning_context(parcel: dict[str, Any]) -> dict[str, Any]:
+    try:
+        from zoning_mcp import services as zoning_services
+
+        resolved = zoning_services.resolve_parcel(parcel_id=parcel.get("parcel_number"))
+        jurisdiction = resolved.get("jurisdiction") or ""
+        zone_code = resolved.get("zoning_code") or parcel.get("zoning") or ""
+        profile = zoning_services.get_zone_profile(jurisdiction, zone_code) if jurisdiction and zone_code else {}
+        allowed = zoning_services.list_allowed_uses(jurisdiction, zone_code) if jurisdiction and zone_code else {}
+        constraints = zoning_services.get_overlays_and_constraints(parcel.get("parcel_number") or "")
+        standards = zoning_services.get_development_standards(jurisdiction, zone_code) if jurisdiction and zone_code else {}
+        return {
+            "resolved": resolved,
+            "profile": profile,
+            "allowed_uses": (allowed.get("allowed_uses") or [])[:24],
+            "constraints": constraints,
+            "standards": standards,
+            "source": "zoning_mcp",
+        }
+    except Exception as exc:
+        return {"source": "zoning_mcp", "error": str(exc)[:300], "allowed_uses": []}
+
+
+def fallback_feasibility(parcel: dict[str, Any], zoning: dict[str, Any]) -> dict[str, Any]:
+    allowed = zoning.get("allowed_uses") or []
+    top_uses = [row.get("use") for row in allowed[:8] if row.get("use")]
+    zone = zoning.get("resolved", {}).get("zoning_code") or parcel.get("zoning")
+    jurisdiction = zoning.get("resolved", {}).get("jurisdiction_label") or "local jurisdiction"
+    summary = f"{zone} in {jurisdiction}. Review listed uses and source code before relying on this screen."
+    if top_uses:
+        summary = f"{zone} in {jurisdiction}. Zoning data lists {', '.join(top_uses[:4])} among allowed or reviewable uses."
+    return {
+        "headline": "Zoning screen ready for review",
+        "summary": summary,
+        "likely_uses": top_uses[:8],
+        "constraints": [note for note in (zoning.get("constraints") or {}).get("notes", [])[:4]],
+        "next_steps": ["Confirm setbacks, density, parking, critical areas, and utility capacity with the source code or planner."],
+        "sources": _feasibility_sources(zoning),
+        "note": "",
+    }
+
+
+def build_feasibility_prompt(parcel: dict[str, Any], zoning: dict[str, Any]) -> str:
+    payload = {
+        "parcel": {
+            "parcel_number": parcel.get("parcel_number"),
+            "location": parcel.get("location"),
+            "owner": parcel.get("owner"),
+            "acres": parcel.get("acres"),
+            "current_use": parcel.get("current_use"),
+            "utilities": parcel.get("utilities"),
+            "assessed_value": parcel.get("assessed_value_fmt"),
+            "land_value": parcel.get("land_value_fmt"),
+            "building_value": parcel.get("building_value_fmt"),
+            "legal_description": parcel.get("legal_description"),
+        },
+        "dossier": parcel.get("dossier"),
+        "zoning_mcp": zoning,
+    }
+    return (
+        "You are preparing a compact feasibility screen for an OpenSkagit parcel detail page. "
+        "Use the supplied parcel dossier and zoning_mcp context. Determine what can plausibly be built or pursued, "
+        "but do not state legal entitlements as certain. Be conservative and plain-English. "
+        "Return only compact JSON with keys: headline, summary, likely_uses, constraints, next_steps, sources. "
+        "likely_uses, constraints, next_steps, and sources must be arrays of short strings. "
+        "Mention source-code or planner confirmation in next_steps.\n\n"
+        f"{json.dumps(payload, default=str)[:14000]}"
+    )
+
+
+def parse_feasibility_response(text: str) -> dict[str, Any]:
+    fallback = {
+        "headline": "Feasibility needs review",
+        "summary": "The AI response could not be parsed. Use the structured zoning context and source links.",
+        "likely_uses": [],
+        "constraints": [],
+        "next_steps": ["Review source zoning code and planner guidance."],
+        "sources": [],
+    }
+    try:
+        body = (text or "").strip()
+        if body.startswith("```"):
+            body = body.strip("`").strip()
+            if body.lower().startswith("json"):
+                body = body[4:].strip()
+        start = body.find("{")
+        end = body.rfind("}")
+        if start >= 0 and end > start:
+            body = body[start : end + 1]
+        parsed = json.loads(body)
+    except Exception:
+        return fallback
+    return {
+        "headline": str(parsed.get("headline") or fallback["headline"])[:140],
+        "summary": str(parsed.get("summary") or fallback["summary"])[:900],
+        "likely_uses": _short_list(parsed.get("likely_uses"), 8),
+        "constraints": _short_list(parsed.get("constraints"), 8),
+        "next_steps": _short_list(parsed.get("next_steps"), 5) or fallback["next_steps"],
+        "sources": _short_list(parsed.get("sources"), 5),
+    }
+
+
+def _feasibility_sources(zoning: dict[str, Any]) -> list[str]:
+    sources = []
+    for obj in (zoning.get("profile"), zoning.get("resolved")):
+        url = (obj or {}).get("source_url")
+        if url and url not in sources:
+            sources.append(url)
+    for use in zoning.get("allowed_uses") or []:
+        url = use.get("source_url")
+        if url and url not in sources:
+            sources.append(url)
+        if len(sources) >= 4:
+            break
+    return sources
+
+
+def _short_list(value: Any, limit: int) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    return [str(item)[:220] for item in value if str(item).strip()][:limit]
+
+
+def _improvement_detail_line(row: dict[str, Any]) -> str:
+    parts = []
+    for key in ("class_description", "condition_description"):
+        value = (row.get(key) or "").strip()
+        if value:
+            parts.append(value)
+    if row.get("actual_year_built"):
+        parts.append(f"built {row['actual_year_built']}")
+    if row.get("effective_yr_blt"):
+        parts.append(f"effective {row['effective_yr_blt']}")
+    return " / ".join(parts)
+
+
+def _gis_feature_summary(attributes: dict[str, Any]) -> dict[str, Any]:
+    cleaned = {
+        _humanize_field_name(key): value
+        for key, value in attributes.items()
+        if _meaningful_gis_value(key, value)
+    }
+    if not cleaned:
+        return {}
+    priority_terms = ("name", "district", "zone", "type", "code", "water", "flood", "school", "parcel", "basin", "system")
+    primary_key = next((key for key in cleaned if any(term in key.lower() for term in priority_terms)), next(iter(cleaned)))
+    primary = cleaned.pop(primary_key)
+    details = [f"{key}: {value}" for key, value in list(cleaned.items())[:5]]
+    return {"primary": str(primary)[:160], "details": details}
+
+
+def _meaningful_gis_value(key: str, value: Any) -> bool:
+    if value in (None, "", " ", "Null", "NULL"):
+        return False
+    key_upper = str(key).upper()
+    if key_upper in {"OBJECTID", "GLOBALID", "SHAPE", "SHAPE_AREA", "SHAPE_LENGTH"}:
+        return False
+    text = str(value).strip()
+    return bool(text and text not in {"0", "0.0"})
+
+
+def _humanize_field_name(value: str) -> str:
+    text = str(value or "").replace("_", " ").strip()
+    return " ".join(part.capitalize() for part in text.split())
+
+
+def _area(value: Any, unit: str = "sq ft") -> str:
+    amount = _decimal(value)
+    if amount is None:
+        return "n/a"
+    return f"{amount:,.0f} {unit}"
+
+
+def _dossier_improvement_note(rows: list[dict[str, Any]]) -> str:
+    main = next((row for row in rows if (row.get("imprv_det_type_cd") or "").upper().startswith("MA")), None)
+    if main:
+        return f"{main.get('type_description') or 'Main area'} / {main.get('condition_description') or 'condition n/a'}"
+    return "No main-area improvement found" if not rows else "Accessory or other segments found"
+
+
+def _dossier_land_note(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "No land detail segments found"
+    first = rows[0]
+    return " / ".join(str(value) for value in [first.get("land_type"), first.get("size_fmt")] if value)
+
+
+def _dossier_zoning_note(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "No zoning overlay rows found"
+    first = rows[0]
+    pct_text = first.get("percent_of_parcel_fmt") or ""
+    primary_text = "primary" if first.get("is_primary") else ""
+    return " / ".join(str(value) for value in [first.get("zone_id"), primary_text or pct_text] if value)
 
 
 def parcel_value_history(parcel_number: str) -> list[dict[str, Any]]:

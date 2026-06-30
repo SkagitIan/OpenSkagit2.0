@@ -1,0 +1,15 @@
+- generic [ref=e4]:
+  - generic [ref=e6]: PARCEL BOOK
+  - paragraph [ref=e7]: OpenSkagit opportunity intelligence
+  - heading "Sign in" [level=1] [ref=e8]
+  - paragraph [ref=e9]: Use your OpenSkagit account to review parcel signals, save opportunities, and track public-record changes.
+  - paragraph [ref=e10]: That username and password did not match.
+  - generic [ref=e11]:
+    - generic [ref=e12]:
+      - text: Username
+      - textbox "Username" [active] [ref=e13]: ian
+    - generic [ref=e14]:
+      - text: Password
+      - textbox "Password" [ref=e15]
+    - button "Log in" [ref=e16] [cursor=pointer]
+  - paragraph [ref=e17]: Parcel Book is private screening software. No public signup is available in V1.

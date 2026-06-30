@@ -14,6 +14,7 @@ Favor:
 - Data-first tools that feel grounded and inspectable
 - Moderate use of brand color as accents
 - Responsive grids that collapse predictably
+- Premium SaaS-style tool pages for logged-in workflows: crisp widgets, strong metric hierarchy, compact activity feeds, and obvious next actions
 
 Avoid:
 
@@ -23,6 +24,7 @@ Avoid:
 - Marketing hero layouts that delay the actual product
 - Rounded pill buttons everywhere
 - Hard-coded links when a Django route exists
+- Report-like walls of facts where a dashboard summary, tabs, disclosures, or compact scroll areas would scan better
 
 ## Brand Tokens
 
@@ -179,6 +181,66 @@ Use this for search, parcel, tax, map, and analysis interfaces.
 - Keep tool panels dense and scannable.
 - Use sticky side panels only when they materially improve comparison or inspection.
 - Keep data sources visible near the relevant report or footer.
+
+### Premium SaaS Dashboard
+
+Use this for logged-in operational tools such as Parcel Book, parcel detail pages, watchlists, sync activity, AI workflows, and admin-style review screens.
+
+The page should feel like a polished product dashboard: colorful but restrained, fast to scan, and clearly action-oriented.
+
+Structure:
+
+- Start with a dashboard hero or command header that identifies the current object or workflow.
+- Put the most important metrics in a compact KPI strip directly under or inside the hero.
+- Use a primary work column for charts, maps, AI summaries, and decision modules.
+- Use a secondary rail for owner/source facts, activity, recent records, and dense dossier details.
+- Prefer compact scroll areas, disclosure blocks, tabs, or grouped rows for long lists.
+- Keep the first viewport useful: identity, key values, status, and the next likely action should all be visible.
+
+Visual treatment:
+
+- Use white surfaces on `--os-soft` with 8px radius, light borders, and subtle product-style shadows.
+- Add color through thin accent bars, status badges, KPI icons, and category chips rather than large tinted panels.
+- Use a small set of semantic accents: teal for primary/data, green for success, gold for finance/caution, blue for maps/GIS, red only for real risk or destructive attention.
+- Give metric cards a strong number, short label, and tiny source/freshness note.
+- Dense side panels can use `max-height` with internal scrolling when the data is secondary.
+
+Avoid:
+
+- Three equal fact columns that force long labels to wrap awkwardly.
+- Long unbounded lists inside the main page flow.
+- Charts that dominate the page without adjacent interpretation or controls.
+- Repeating raw database labels as headings when a plain-language label exists.
+
+Suggested layout:
+
+```css
+.os-dashboard {
+  display: grid;
+  gap: 18px;
+}
+
+.os-dashboard__hero {
+  padding: 24px;
+  border: 1px solid var(--os-border);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+}
+
+.os-dashboard__metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.os-dashboard__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 18px;
+  align-items: start;
+}
+```
 
 ### City Page
 

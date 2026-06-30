@@ -1,0 +1,152 @@
+13.05.010 International Codes.
+(1) Except as amended by this chapter, the following codes, published by the International Code Council, as now and hereafter amended by the state of Washington, are hereby adopted by reference:
+(a) 2018 International Building Code – Chapter 51-50 WAC;
+(b) 2018 International Residential Code – Chapter 51-51WAC;
+(c) 2018 International Mechanical Code – Chapter 51-52 WAC;
+(d) 2018 International Fuel Gas Code – Chapter 51-52 WAC;
+(e) 2018 International Existing Building Code – Chapter 51-50 WAC;
+(f) 2018 Washington State Energy Code – Chapters 51-11C and 51-11R WAC;
+(g) 2009 ICC/ANSI A117.1 Accessibility Code; and
+(h) 2018 International Swimming Pool and Spa Code – Chapter 51-51 WAC.
+(2) Except as amended by this chapter, the following codes, published by the National Fire Protection Association, as now and hereafter amended by the state of Washington, are hereby adopted by reference:
+(a) 2017 National Fuel Gas Code (NFPA 54) – Chapter 51-52 WAC; and
+(b) 2018 Liquefied Petroleum Gas Code (NFPA 58) – Chapter 51-52 WAC.
+(3) Except as amended by this chapter, the 2018 Uniform Plumbing Code published by the International Association of Plumbing and Mechanical Officials, Chapter 51-56 WAC, as now and hereafter amended by the state of Washington, is hereby adopted by reference.
+(4) The 2020 National Electric Code (NFPA 70), as amended by Chapter 296-46B WAC, is hereby adopted by reference.
+(5) In case of conflict among the codes numerated in subsections (1)(a) through (h) of this section, the first named code shall govern over those following.
+(6) For all codes adopted by this title, the town does not adopt any section regarding, or reference to, a board of appeals. The hearing examiner, pursuant to the procedures in Chapter 15.12 LCMC, will hear all appeals of orders, decisions, or determinations made by the building official and/or the fire code official regarding the application and interpretation of this chapter. [Ord. 1209 § 1, 2022; Ord. 1140 (Exh. A), 2016; Ord. 1102 1 (Exh. A), 2013; Ord. 1052 Exh. A, 2010; Ord. 930 § 1, 2004.]
+
+13.05.015 Specific amendments to codes.
+Pursuant to authority granted by the Revised Code of Washington under the State Building Code Act, the following amendments to the International Codes are hereby adopted and apply within this jurisdiction:
+(1) Amendments to the International Building Code (IBC) and the International Residential Code (IRC):
+(a) Section 105.2, Work Exempt from Permit. IBC Section 105.2 exception 1 and IRC Section R105.2 exception 1 are amended as follows:
+1. One story detached buildings 200 square feet or smaller, provided that this exemption does not apply to signs, and provided further that:
+a. The building is not used for sleeping purposes; and
+b. The building is not placed within a defined critical area or its buffer, unless critical areas review has been completed and the location has been approved; and
+c. Only one such exempt building is allowed for each 5 acres of any property up to a maximum of 4 exempt buildings; and
+d. The building is not located in a designated floodway; and
+e. The building meets the setback requirements of Skagit County Code (SCC) 14.16 and the specific requirements of SCC 14.16.810; and
+f. The building contains no plumbing.
+(b) Section 105.2, Work Exempt from Permit. IBC Section 105.2 and IRC Section R105.2 are amended to include:
+14./11. Membrane structures as defined in the International Building Code; provided:
+(a) The structure is used exclusively for the protection or propagation of plants, other than marijuana, not on display for public viewing or sales.
+(b) The structure is located a minimum of twenty feet (20') from any property line or other structure and meets the setback requirements of SCC 14.16 and the specific requirements of SCC 14.16.810.
+(c) Multiple membrane structures located on the same lot and having an aggregate floor area exceeding twelve thousand (12,000') square feet shall maintain a minimum of sixty (60') foot clear yards on all sides of the structure.
+(d) The membrane material is less than 20 mil (0.5 mm) thickness.
+(e) A site plan is submitted to Skagit County Planning & Development Services, which shows compliance with this section.
+15./12. Work located primarily in a public way including but not limited to grading, trenching, vaults and walls, installation and maintenance of public utility towers and poles, installation and maintenance of mechanical equipment not specifically regulated in this code, underground utilities, and hydraulic flood control structures.
+16/13. Any project, other than signs, mechanical equipment or plumbing equipment, that has a valuation of less than $2,500 as calculated using the method currently adopted by Skagit County.
+17./14. Uncovered decks with walking surface(s) no more than 30" above grade.
+(c) Section 105.5, Expiration.
+Every building permit issued by the Building Official under the provisions of this code shall expire by limitation and become null and void if the building or work authorized by such permit is not completed in accordance with the permitted requirements within three (3) years of the date of issuance. Any permittee holding an unexpired permit may apply for a six month extension in order to complete the authorized work for no additional cost. The Building
+Official may grant the extension on written request from the permittee showing that circumstances beyond the control of the permittee have prevented the authorized work from being completed. No permit may be thus extended more than once.
+To renew a permit for an additional 3-year period, prior to expiration or within 6 months of expiration, of the current permit, the permittee shall pay the renewal fee as determined on the currently adopted fee schedule. No permit may be thus renewed more than once. A new permit will be required where expiration is more than six months.
+(d) Section 109.2 of the International Building Code and Section 108.2 of the International Residential Code shall read as follows for La Conner:
+General Fees shall be as set forth in the fee schedule for the La Conner Planning Department, adopted under separate resolution by the La Conner Town Council.
+(e) Section 903.2.7 item 4 is amended to exempt display and sales areas of upholstered furniture where the aggregate floor area used for display and sales is 350 square feet or less.
+(f) Sections 1608.1 and 1608.2 of the International Building Code and Map 301.2(5) of the International Residential Code for snow loads are amended as follows:
+Buildings and structures that are located in the designated “CS” zone, as shown in the International Building Code, must have their snow loads determined by engineered analysis in accordance with the requirements of the International Building Code, or must comply with the roof snow loads as shown on the adopted snow load map for Skagit County.
+Under authority granted to local jurisdictions through WAC 296-150M-0600, the Skagit County Building Official has determined and mapped the anticipated snow loads for Skagit County. The snow loads and the snow load map of Skagit County have been reviewed by local structural and civil engineers for methodology and conformance with the 1995 Snow Load Analysis published by the Structural Engineers Association of Washington and have been found to be conforming.
+(g) IBC Section 3002.4 is amended as follows:
+Stretcher Requirements. In all structures two or more stories in height in Group A, E, B, I, R1 and LC occupancies where elevator cars are installed, at least one elevator shall be provided with a minimum clear distance between walls or between walls and door including return panels, of not less than 86 inches by 54 inches (2184 mm x 1372 mm) and a minimum distance from wall to return panel of not less than 51 inches (1295 mm) with a 42 inch (1067 mm) side slide door, unless otherwise designed to accommodate an ambulance-type stretcher 86 inches by 26 inches (2184 mm x 660 mm).
+In buildings where one elevator does not serve all floors, two or more elevators may be used. The elevators shall be identified by the international symbol for emergency medical services (Star of Life). The symbol shall not be less than 3 inches (76 mm) and placed inside on both sides of the hoistway door frame. The symbol shall be placed no lower than 78 inches (1981 mm) from the floor level or higher than 84 inches (2134 mm) from the floor level.
+(h) Appendix J, Section J103.2, Exemptions, is amended as follows:
+1. Exemption #1 regarding isolated areas is not adopted.
+2. through 7: No change.
+8. An excavation not within a defined critical area or its buffers, unless there has been critical areas review of the project and the location has been approved, and:
+a. Does not obstruct natural drainage and is less than 2 feet in depth, and
+b. Does not create a cut slope greater than 5 feet in height and steeper than 1.5:1, and
+c. Does not exceed 100 cubic yards of excavated material.
+9. A fill that:
+a. Is not within a defined critical area or its buffers, unless there has been critical areas review of the project and the location has been approved, and:
+b. Does not obstruct natural drainage and is less than 1 foot in depth and placed on natural terrain with a slope less than 12%, or
+c. Is not within a defined critical area or its buffers unless there has been critical areas review of the project and the location has been approved, and is less than 3 feet in depth and is not intended to support structures and that does not exceed 100 cubic yard on any one lot.
+10. Agricultural projects such as tilling, planting, and fertilizing.
+11. Work located primarily in a public way per Section 105.2.
+(i) Chapter 34, Existing Structures.
+3401 GENERAL.
+Buildings, whether previously legally permitted or not, in existence at the time of the adoption of this code may have their existing use or occupancy continued if such use or occupancy existed prior to July 1, 1989 and provided such use or occupancy is not dangerous to life. Buildings legally permitted and approved for occupancy before or after such date are considered legal at the time of the adoption of this edition of this code.
+(2) Amendments to International Fire Code (IFC).
+(a) IFC Section 102.2 is amended as follows:
+3. To help assure that this section is properly administered and to help provide for a reasonable degree of safety to persons occupying existing buildings, there shall be a fire code inspection, at times determined by the Skagit County Fire Marshal, for all Group A, B, E, F, H, I, M and S occupancies.
+(b) IFC Section 202 is amended as follows:
+Definitions.
+Fire Chief. Shall mean for Skagit County, the director of Planning and Development Services or designee; for La Conner, the La Conner Fire Chief, as it relates to the implementation of this code.
+Fire Code Official. Shall mean for Skagit County, the director of Planning and Development Services or designee; for La Conner, the La Conner Fire Marshal, as it relates to the implementation of this code.
+(c) IFC Appendix A, Section A101 is amended as follows:
+In order to determine the suitability of materials and type of construction and to provide for reasonable interpretations of the provisions of this code, there shall be hereby created a Board of Appeals. This Board shall consist of the same membership as the Building Code Board of Appeals. The Fire Marshal and the Building Official shall be Ex-Officio members. The Board shall adopt rules and regulations for conducting its investigations and shall render all decisions in writing to the Fire Marshal and Building Official with a duplicate copy to the applicant.
+(d) IFC Appendix B, Section 103, Modifications, is amended as follows:
+Section 103.1 Decreases.
+Fire flow requirements may be modified downward by the Skagit County Fire Marshal for isolated buildings or a group of buildings in rural areas or small communities where development of full fire flow requirements is impractical. The Fire Marshal may be guided by written procedures entitled “Skagit County Fire Marshal Procedures Concerning Fire Flow and Placement of Fire Hydrants” in making this determination.
+Section 103.2 Increases.
+Fire Flow requirements may be increased by the Skagit County Fire Marshal where conditions indicate an unusual susceptibility to group fires or conflagrations. An increase shall not be more than twice the required for the building under consideration.
+Section 103.3 Buildings That May Not Require Fire Flow.
+When, in the opinion of the Fire Marshal, a proposed building meets the criteria stated in “Skagit County Fire Marshal Procedures Concerning Fire Flow and Placement of Fire Hydrants,” a permit may be issued without meeting the requirements for fire flow for the following:
+(i) Single family residences and accessory buildings, such as garages and carports.
+(ii) Agricultural buildings as defined in SCC 14.04.020 in agricultural resource lands as identified on currently adopted zoning maps.
+(iii) Other buildings that comply with the following:
+(1) Are less than 4000 sq. ft. in area.
+(2) Are not an ‘H’ or R occupancy.
+(3) Have 40-foot clear yards on all sides.
+(4) Are in a rural area where fire flow is not practical.
+(e) IFC Appendix C, Fire Hydrant Locations and Distribution, is amended as follows:
+Footnote b:
+3. Where new water mains are upgraded or extended along streets or roads where hydrants are not otherwise required, hydrants shall be installed for filling tanker trucks at major roadway intersections wherever practical, and the distance between hydrants shall not exceed one mile.
+(f) IFC Appendix D is amended as follows:
+Section D101.1 Scope: Fire apparatus access roads shall be in accordance with this chapter and all other applicable requirements of the International Fire Code as required by the Fire Marshal.
+Section D102.1 Access and Loading: Fire apparatus access roads shall be provided for every facility, building or portion of a building hereafter constructed or moved into or within the jurisdiction when the facility is in excess of one hundred fifty (150) feet from fire apparatus access.
+Section D103.1 Driveways: Roads serving one (1) or two (2) residential lots is amended as follows:
+a. Driveways where a building is less than one hundred fifty (150) feet from an approved access road meeting Section D103.2 of this code have no specific requirements.
+b. Driveways that are one hundred fifty (150) feet or more in length and serve one or two residential lots shall meet the following standards:
+(i) Width: 12 feet of driving surface with turnouts located every 300 feet, when required by the Fire Marshal. To create a turnout, the road shall be widened to 20 feet in the direction of travel for a distance of not less than 30 feet to allow vehicles to pull over and emergency vehicles to proceed.
+(ii) Vertical clearance: A minimum of 13 feet, 6 inches of unobstructed head clearance is required.
+(iii) Surface: Skagit County Road Standard for Private Roads as required by the Skagit County Public Works Department or as approved by the Skagit County Fire Marshal.
+(iv) Turning radius for turns along the length of driveway: A minimum of 20 feet of inside radius and 50 feet of outside radius is required. (Note: This is not a cul-de-sac standard).
+(v) An acceptable means of turning around a fire apparatus must be provided. This does not necessarily require a cul-de-sac for a driveway serving 1 or 2 residential lots. Means of turning apparatus must be acceptable to the Fire Marshal.
+(vi) Bridges must meet Skagit County Road Standards as required by the Skagit County Public Works Department.
+(vii) Where grades are 12% or under, the driving surface must be gravel or equivalent or may be concrete, asphalt, or equivalent.
+(viii) Where grades are over 12% and equal to or less than 14%, the driving surface must be concrete, asphalt, or equivalent.
+(ix) Where grades are over 14% and equal to or less than 16%, any residence must have a NFPA 13D fire suppression system is required for each residence and the driveway must be gravel or equivalent or may be concrete, asphalt, or equivalent.
+(x) Where grades exceed 16%, an NFPA 13D fire suppression system and a 10,000-gallon water storage tank with a dry hydrant is required for each residence. The driveway must be gravel or equivalent and may be concrete, asphalt, or equivalent.
+Section D103.2 Fire Department Vehicle Access Roads—Roads serving other than 1 or 2 residential lots is amended as follows:
+a. Width: 20 feet of driving surface.
+b. Vertical clearance: 13 feet, 6 inches of unobstructed overhead clearance.
+c. Surface: 6 inches of gravel.
+d. Turning radius: 50 feet of outside radius.
+e. Turnarounds: 70-foot cul-de-sac standards or as approved by the Fire Marshal.
+f. Bridges must meet Skagit County Road Standards as required by the Skagit County Public Works Department.
+g. Grade:
+1. Where grades are 12% or under, the driving surface must be gravel or equivalent or may be concrete, asphalt, or equivalent.
+2. Where grades are over 12% to 14%, the driving surface must be concrete, asphalt, or equivalent.
+3. Where grades are over 14% to 16%, any residence must have a NFPA 13D fire suppression system is required and the driveway must be gravel or equivalent or may be concrete, asphalt, or equivalent.
+4. Where grades exceed 16%, fire vehicle access is impaired thus an NFPA 13D fire suppression system and a 10,000 gallon water storage tank with a dry hydrant is required. The driveway must be gravel or equivalent and may be concrete, asphalt, or equivalent.
+h. Public roads that are part of a land division must comply with Skagit County Road Standards and be approved by the Skagit County Public Works Department.
+NOTE:
+1. These standards apply to all building permits and are the minimum for building permit purposes. County platting standards may exceed these standards, and these standards are in no way intended to eliminate the need for full compliance with land division requirements.
+2. The Fire Marshal may make modifications to these standards if the road is not buildable because of topography, waterways, non-negotiable grades, or similar conditions. These modifications are based on:
+a. The building being protected by NFPA 13D Automatic Sprinkler Systems.
+b. Additional fire protection as required by the Fire Marshal.
+c. Exceptions may be made for minor additions or small accessory buildings to existing dwellings when in the opinion of the Fire Marshal the addition or accessory building will not create significantly more dangerous situations.
+3. For roads accepted or platted by Skagit County prior to June 11, 1990, these standards may be modified by the Fire Marshal provided that, in the Fire Marshal’s opinion, firefighting or rescue operations would still be possible.
+4. On lots not in a fire district and accessible only by water, the access road requirement may be waived if the project meets all of the other requirements of Skagit County Unified Development Code to qualify for a building permit.
+5. Emergency vehicle access roads or driveways shall not be obstructed in any manner, including the parking of vehicles. Width and clearance requirements consistent with these standards shall be maintained at all times.
+(g) Section 308, Open Flames.
+308.1.5.1 Sky Lanterns: The use of, transfer, discharge or sale of sky lanterns shall be prohibited in unincorporated areas of Skagit County.
+1. “Sky Lantern” means any sky candles, fire balloons and other lanterns airborne lantern made of paper or other combustible material with a wood frame containing a candle, fuel cell composed of waxy flammable material or other open flame which serves as a heat source to heat the air inside the device to cause it to lift into the air.
+(h) 503.6, Security Gates.
+The installation of security gates across fire apparatus access roads shall be approved by the Skagit County Fire Marshal. Where security gates are installed, they shall have an approved means of emergency operation. The security gate and emergency operation shall be maintained operational at all times. Electric gate operators, where provided, shall be listed in accordance with UL 325. Gates intended for automatic operation shall be designed, constructed and installed to comply with requirements of ASTM F2200.
+(i) IFC Appendix K, International Wildland-Urban Interface Code, is amended as follows:
+Section K402.2.1, Access, is deleted. [Ord. 1140 (Exh. A), 2016; Ord. 1102 2 (Exh. A), 2013; Ord. 1054 Exh. A, 2010.]
+
+13.05.018 Regulating accessibility for individuals with disabilities.
+Any construction proposed with the intention of complying with the provisions of WAC 51-50-005 and Chapter 11 and other applicable requirements of the International Building Code for barrier-free access, including ICC A117.1-2017 and Appendix “E” shall require administrative review and approval only. No section of the La Conner Municipal Code, including any requirements set forth in Chapter 15.50 LCMC, Historic Preservation District, shall require any such proposal to be subject to a public hearing. [Ord. 1256 § 1, 2025.]
+
+13.05.020 Administration.
+The La Conner town council has provided by interlocal agreement that the Skagit County Planning and Permit Center shall administer and enforce the State Building Code within the town of La Conner’s jurisdictional boundaries. Such administration and enforcement of the State Building Code by the Skagit County Planning and Permit Center shall include all codes comprising the State Building Code as enumerated in the previous section. The town of La Conner hereby delegates authority to Skagit County to carry out all administrative and enforcement duties assigned the county in the interlocal agreement. [Ord. 1140 (Exh. A), 2016; Ord. 930 § 1, 2004.]
+
+13.05.030 Severability.
+Should any section or sections of this chapter be found invalid for any reason, the remainder of this chapter shall remain in full force and effect. [Ord. 1140 (Exh. A), 2016; Ord. 930 § 1, 2004.]
+1
+Ord. 1102 provides “that Chapter 13.05 of the La Conner Municipal Code is amended to read as shown in Exhibit “A”.” Exhibit A lays out Skagit County Code Chapter 15.04. The intent of the city is to adopt the most current edition of the building codes and the amendments made by Skagit County. Therefore, Sections 15.04.020 and 15.04.030 of the Skagit County Code, as shown in Exhibit A, are incorporated into LCMC 13.05.010 and 13.05.015 to reflect the intent of the city.
+2
+Ord. 1102 provides “that Chapter 13.05 of the La Conner Municipal Code is amended to read as shown in Exhibit “A”.” Exhibit A lays out Skagit County Code Chapter 15.04. The intent of the city is to adopt the most current edition of the building codes and the amendments made by Skagit County. Therefore, Sections 15.04.020 and 15.04.030 of the Skagit County Code, as shown in Exhibit A, are incorporated into LCMC 13.05.010 and 13.05.015 to reflect the intent of the city.

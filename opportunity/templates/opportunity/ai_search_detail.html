@@ -10,11 +10,13 @@
     <p class="pb-kicker">AI Search</p>
     <h1>{{ search.title|default:"Finding target parcels" }}</h1>
   </div>
-  <div class="pb-view-toggle" aria-label="View">
-    <a class="{% if view_mode == 'list' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=list">List</a>
-    <a class="{% if view_mode == 'card' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=card">Card</a>
-    <a class="{% if view_mode == 'map' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=map">Map</a>
-  </div>
+  {% if not is_pending and search.status != "error" %}
+    <div class="pb-view-toggle" aria-label="View">
+      <a class="{% if view_mode == 'list' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=list">List</a>
+      <a class="{% if view_mode == 'card' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=card">Card</a>
+      <a class="{% if view_mode == 'map' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=map">Map</a>
+    </div>
+  {% endif %}
 </div>
 
 <section class="pb-panel pb-ai-summary">

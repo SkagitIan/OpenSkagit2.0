@@ -1,0 +1,347 @@
+{
+  "jurisdiction": "la_conner",
+  "jurisdiction_key": "la_conner",
+  "title": "Title 15 Uniform Development Code",
+  "source": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html",
+  "platform": "codepublishing-local-export",
+  "source_html": "data\\LaConner (1).html",
+  "page_count": 42,
+  "pages": [
+    {
+      "ref": "13.05.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#13.05",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 13.05 BUILDING CODES*",
+      "text_length": 22990
+    },
+    {
+      "ref": "13.10.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#13.10",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 13.10 STATE ENVIRONMENTAL POLICY ACT",
+      "text_length": 3730
+    },
+    {
+      "ref": "13.15.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#13.15",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 13.15 PUBLIC WORKS CONSTRUCTION",
+      "text_length": 1556
+    },
+    {
+      "ref": "13.25.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#13.25",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 13.25 COMMERCIAL ZONE FIRE PROTECTION",
+      "text_length": 1738
+    },
+    {
+      "ref": "13.30.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#13.30",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 13.30 UNFIT, IMPROPERLY MAINTAINED OR SUBSTANDARD STRUCTURES OR PREMISES",
+      "text_length": 21884
+    },
+    {
+      "ref": "13.40.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#13.40",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 13.40 IMPACT FEES",
+      "text_length": 27975
+    },
+    {
+      "ref": "15.05.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.05",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.05 GENERAL PROVISIONS",
+      "text_length": 8906
+    },
+    {
+      "ref": "15.10.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.10",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.10 DEFINITIONS",
+      "text_length": 80587
+    },
+    {
+      "ref": "15.100.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.100",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.100 STORM WATER MANAGEMENT",
+      "text_length": 29064
+    },
+    {
+      "ref": "15.105.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.105",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.105 LANDSCAPING",
+      "text_length": 8070
+    },
+    {
+      "ref": "15.109.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.109",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.109 WIRELESS COMMUNICATION FACILITIES*",
+      "text_length": 13179
+    },
+    {
+      "ref": "15.110.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.110",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.110 ACCESSORY AND TEMPORARY STRUCTURES AND USES",
+      "text_length": 11029
+    },
+    {
+      "ref": "15.112.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.112",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.112 DEMOLITION STANDARDS",
+      "text_length": 14611
+    },
+    {
+      "ref": "15.115.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.115",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.115 SIGNS",
+      "text_length": 20026
+    },
+    {
+      "ref": "15.12.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.12",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.12 HEARING EXAMINER",
+      "text_length": 13911
+    },
+    {
+      "ref": "15.120.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.120",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.120 OPERATIONAL PERFORMANCE STANDARDS",
+      "text_length": 4606
+    },
+    {
+      "ref": "15.125.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.125",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.125 HARDSHIP RELIEF \u2013 DISCRETIONARY PERMITS",
+      "text_length": 19709
+    },
+    {
+      "ref": "15.13.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.13",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.13 ENFORCEMENT",
+      "text_length": 231
+    },
+    {
+      "ref": "15.130.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.130",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.130 BOARDS AND AGENCIES (POWERS AND DUTIES)*",
+      "text_length": 5994
+    },
+    {
+      "ref": "15.135.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.135",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.135 ADMINISTRATION AND ENFORCEMENT*",
+      "text_length": 58160
+    },
+    {
+      "ref": "15.140.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.140",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.140 ADULT BUSINESS LOCATION REQUIREMENTS",
+      "text_length": 1372
+    },
+    {
+      "ref": "15.15.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.15",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.15 ZONE CLASSIFICATION",
+      "text_length": 867
+    },
+    {
+      "ref": "15.150.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.150",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.150 FIREARM SALE LOCATION REQUIREMENTS",
+      "text_length": 1382
+    },
+    {
+      "ref": "15.20.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.20",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.20 RESIDENTIAL ZONE",
+      "text_length": 10605
+    },
+    {
+      "ref": "15.25.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.25",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.25 PLANNED UNIT RESIDENTIAL DEVELOPMENT (PURD)",
+      "text_length": 19528
+    },
+    {
+      "ref": "15.30.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.30",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.30 SUBDIVISIONS \u2013 SHORT SUBDIVISIONS",
+      "text_length": 25452
+    },
+    {
+      "ref": "15.35.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.35",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.35 COMMERCIAL ZONE",
+      "text_length": 12763
+    },
+    {
+      "ref": "15.36.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.36",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.36 TRANSITIONAL COMMERCIAL ZONE",
+      "text_length": 19555
+    },
+    {
+      "ref": "15.40.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.40",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.40 INDUSTRIAL ZONE",
+      "text_length": 13495
+    },
+    {
+      "ref": "15.42.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.42",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.42 PORT INDUSTRIAL ZONE",
+      "text_length": 6029
+    },
+    {
+      "ref": "15.45.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.45",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.45 PUBLIC USE ZONE",
+      "text_length": 5128
+    },
+    {
+      "ref": "15.50.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.50",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.50 HISTORIC PRESERVATION DISTRICT",
+      "text_length": 43391
+    },
+    {
+      "ref": "15.55.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.55",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.55 BINDING SITE PLAN REGULATIONS",
+      "text_length": 13395
+    },
+    {
+      "ref": "15.60.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.60",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.60 TREES",
+      "text_length": 7447
+    },
+    {
+      "ref": "15.65.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.65",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.65 ENVIRONMENTALLY SENSITIVE AND CRITICAL AREA LANDS",
+      "text_length": 37380
+    },
+    {
+      "ref": "15.70.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.70",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.70 FLOODPLAIN MANAGEMENT",
+      "text_length": 23873
+    },
+    {
+      "ref": "15.75.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.75",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.75 TRANSPORTATION SYSTEMS",
+      "text_length": 12369
+    },
+    {
+      "ref": "15.80.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.80",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.80 USE OF STREET RIGHTS-OF-WAY",
+      "text_length": 15065
+    },
+    {
+      "ref": "15.85.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.85",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.85 STREET DEVELOPMENT",
+      "text_length": 18293
+    },
+    {
+      "ref": "15.86.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.86",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.86 STREET DEVELOPMENT STANDARDS",
+      "text_length": 30805
+    },
+    {
+      "ref": "15.90.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.90",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.90 OFF-STREET PARKING AND LOADING",
+      "text_length": 14525
+    },
+    {
+      "ref": "15.95.txt",
+      "url": "https://www.codepublishing.com/WA/LaConner/#!/LaConner15/LaConner15.html#15.95",
+      "status": 200,
+      "mode": "local-html-export",
+      "chapter": "Chapter 15.95 UTILITIES",
+      "text_length": 1861
+    }
+  ]
+}

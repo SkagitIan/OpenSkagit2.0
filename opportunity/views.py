@@ -65,7 +65,7 @@ class ParcelBookLogoutView(LogoutView):
 
 @login_required(login_url=reverse_lazy("opportunity_login"))
 def home(request):
-    context = dashboard_context(request.user)
+    context = dashboard_context(request.user, sales_sort=request.GET.get("sales_sort", ""))
     context.update({"active_nav": "overview", "disclaimer": DISCLAIMER})
     return render(request, "opportunity/home.html", context)
 
@@ -216,10 +216,14 @@ def ai_search_feedback(request, search_id):
 
 @login_required(login_url=reverse_lazy("opportunity_login"))
 def parcel(request, parcel_number):
-    detail = parcel_detail(parcel_number)
+    is_saved = OpportunitySavedParcel.objects.filter(user=request.user, parcel_number=parcel_number.upper()).exists()
+    use_ai_feasibility = is_saved
+    detail = parcel_detail(parcel_number, include_dossier=is_saved, use_ai_feasibility=use_ai_feasibility)
     if not detail:
         raise Http404("Parcel not found")
-    detail["is_saved"] = OpportunitySavedParcel.objects.filter(user=request.user, parcel_number=parcel_number.upper()).exists()
+    detail["is_saved"] = is_saved
+    detail["is_locked"] = not is_saved
+    detail["ai_feasibility_requested"] = use_ai_feasibility
     detail["source_tab"] = ""
     return render(
         request,

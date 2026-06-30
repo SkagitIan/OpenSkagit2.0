@@ -13,6 +13,8 @@ from .ai_search import (
     OpportunitySearchError,
     _extract_markdown_section,
     _fallback_generated_search,
+    _needs_zoning_mcp_context,
+    _proposed_uses_for_zoning,
     apply_prompt_result_filters,
     parse_generated_search_response,
     validate_search_sql,
@@ -183,6 +185,16 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertIn("keep this", section)
         self.assertIn("and this", section)
         self.assertNotIn("skip this", section)
+
+    def test_zoning_mcp_context_triggers_for_use_suitability_prompts(self):
+        self.assertTrue(_needs_zoning_mcp_context("large homes suitable for senior community conversion"))
+        self.assertFalse(_needs_zoning_mcp_context("vacant parcels under 200k with power"))
+
+    def test_zoning_mcp_use_hints_preserve_senior_conversion_intent(self):
+        uses = _proposed_uses_for_zoning("large homes in Conway suitable for senior community conversion")
+        self.assertIn("senior housing", uses)
+        self.assertIn("assisted living", uses)
+        self.assertIn("single family residence", uses)
 
 
 @override_settings(ROOT_URLCONF="config.urls")

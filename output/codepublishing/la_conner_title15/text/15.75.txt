@@ -1,0 +1,95 @@
+15.75.010 Purpose.
+This chapter establishes minimum requirements applicable to a development transportation system, including public and private streets, pedestrian ways and access control to and from public streets. The standards in this chapter are intended to minimize the traffic impacts of development, to assure that all development adequately and safely provide for the storage and movement of vehicles consistent with good engineering and development design practices. [Ord. 671 § 5.1.A, 1995.]
+
+15.75.020 Streets – Classification system established.
+(1) Town streets are classified and mapped according to function served in order to allow for regulation of access, road and right-of-way widths, circulation patterns, design speed and construction standards.
+(2) Public rights-of-way and private streets should be classified according to function and average daily traffic (ADT), calculated by trip generation rates prepared by the Institute of Transportation Engineers or other comparable source.
+(3) When a street continues an existing street that previously terminated outside a subdivision or development, or is a street that will be continued beyond the subdivision, the classification of the street will be based upon the street in its entirety, both within and outside the development.
+(4) The following street hierarchy is established for La Conner: residential access, minor collector, and major collector. All development proposals containing new streets or taking access from existing streets shall conform to the specifications set forth in Chapter 15.86 LCMC. [Ord. 867, 2002; Ord. 671 § 5.1.B, 1995.]
+
+15.75.030 Special purpose streets.
+(1) Alleys. An alley provides a secondary means of access to lots and is subject to design specifications set in LCMC 15.86.110.
+(2) Fire Lanes. A fire lane shall be installed as determined by the fire department in accordance with the Uniform Fire Code for access to new development. [Ord. 867, 2002; Ord. 671 § 5.1.C, 1995.]
+
+15.75.040 Official street map.
+The official street map and any amendments thereto adopted by the town is hereby made a part of this code. The map shall be the basis for all decisions regarding required road improvements, reservation or dedication or rights-of-way for required road improvements, or access of proposed uses to existing or proposed roadways. [Ord. 671 § 5.1.D, 1995.]
+
+15.75.050 Rights-of-way.
+(1) Rights-of-way widths – as platted or amended by the town. The right-of-way should be measured from lot line to lot line.
+(2) Future rights-of-way – where roadway construction, improvement, or reconstruction is not required to serve the needs of a proposed development project, future right-of-way shall be reserved for future use.
+(3) Protection and Use of Rights-of-Way.
+(a) No encroachment shall be permitted into existing rights-of-way, except as authorized by the town.
+(b) Use of the right-of-way for public or private utilities, including, but not limited to, sanitary sewer, potable water, telephone wires, cable television wires, gas or electric lines, shall be allowed subject to the placement specifications of public works.
+(c) Sidewalks and bicycle ways shall be placed within the right-of-way. [Ord. 671 § 5.1.E.1, 1995.]
+
+15.75.060 Vacations of rights-of-way.
+Applications to vacate a right-of-way may be approved upon a finding that all of the following requirements are met:
+(1) The requested vacation is consistent with the transportation element of the comprehensive plan.
+(2) The right-of-way does not provide the sole access to any property. Remaining access shall not be by easement.
+(3) The vacation would not jeopardize the current or future location of any utility.
+(4) The proposed vacation is not detrimental to the public interest, and provides a positive benefit to the town.
+(5) All procedures and requirements of Chapter 35.79 RCW, Streets – Vacation, are met.
+(6) Claims for recognition of vacation claims under the Laws of 1889-1890, Chapter XIX, Section 32, p. 603 must be processed pursuant to the following procedures:
+(a) A property owner (“owner”) adjacent to a purportedly vacated portion of right-of-way shall submit a processing fee established by resolution of the town council, proof of ownership and parcel identification number of his/her adjacent property and a letter to the planning director requesting recognition of the vacated nature of an adjacent unopened right-of-way, including a surveyor-prepared or title company-prepared legal description of the portion of purportedly unopened right-of-way.
+(b) The planning director will research plat history to determine:
+(i) The validity of the claimed vacation;
+(ii) Whether the portion of right-of-way for which the owner seeks recognition is contiguous with open access to a town street right-of-way for ingress and egress. If the portion of right-of-way to be recognized does not have open access to a city street, then the owner, as a condition of recognition, shall execute a waiver as prescribed by the town attorney;
+(iii) Whether the town or other persons have in place utilities in the portion of right-of-way for which recognition is sought. In such an instance, any recognition deed shall reserve such easement(s) and access thereto in perpetuity in a form approved by the town attorney; and
+(iv) Whether, by virtue of vacation or recognition thereof other parcels will be cut off from access to town streets (“stranded parcels”). If so, the town shall not recognize the vacation unless the owner grants unrestricted perpetual rights of ingress, egress and utilities to the owners of such stranded parcels in a form approved by the town attorney.
+(c) Upon approval of the claim by the planning director, the applicant will prepare a draft “quit claim deed” using the format prescribed in Attachment A to the ordinance codified in this section for town approval, along with a real estate excise tax affidavit (“REETA”).
+(d) Upon completion of subsections (6)(a) through (c) of this section, the mayor is hereby authorized to sign the quit claim deed and the REETA for vacated property terminating any claim by the town to the right-of-way.
+(e) Recording of the quit claim deed is the responsibility of, and fees for recording and processing the REETA shall be paid by, the applicant who shall provide a copy of the recorded deed to the town planner immediately after recordation. [Ord. 1211 § 2(A), 2022; Ord. 1129 § 1, 2015; Ord. 671 § 5.1.E.2, 1995.]
+
+15.75.070 Street design standards.
+(1) All public streets in new development must be designed and constructed pursuant to the standards in LCMC 15.86.080, the AASHTO Standards, the American Public Works Standard Specifications for Roads, Bridges, and Municipal Construction manual or as approved by the town council. Streets may be dedicated to the town upon completion, inspection, and acceptance by the town.
+(2) The street system of a proposed development shall, to the extent practicable, conform to the natural topography of the site, preserving existing hydrological and vegetative patterns, and minimizing erosion potential, runoff, and the need for site alteration. Particular effort should be directed toward securing the flattest possible grade near intersections.
+(3) Streets shall be laid out to avoid environmentally sensitive areas.
+(4) Private streets may be allowed within developments that will remain under common ownership, provided they are designed and constructed pursuant to LCMC 15.86.130.
+(5) The street layout in all new development shall be coordinated with and interconnected to the street system of the surrounding area.
+(6) Streets in proposed subdivisions shall be connected to rights-of-way in adjacent areas to allow for proper inter-neighborhood traffic flow. If adjacent lands are unplatted, stub outs in the new development shall be provided for future connection to the adjacent unplatted land.
+(7) Residential streets shall be arranged to discourage through traffic.
+(8) Streets shall intersect as nearly as possible at right angles. [Ord. 867, 2002; Ord. 671 § 5.1.E.3, 1995.]
+
+15.75.080 Paving widths.
+Paving widths for each classification shall be as per specifications in LCMC 15.86.080, Tables 1 through 5. [Ord. 867, 2002; Ord. 671 § 5.1.E.4, 1995.]
+
+15.75.090 Curbing requirements.
+(1) Curbing shall be required for the purposes of drainage, safety, and delineation and protection of pavement edge along streets in the following cases:
+(a) Along designed parking lanes;
+(b) Where the surface drainage plan requires curbing to channel storm water.
+(2) All curbing shall conform to the construction specifications set by public works. [Ord. 671 § 5.1.E.5, 1995.]
+
+15.75.100 Shoulders.
+Shoulders, where required, shall measure at least seven feet in width and shall be required on each side of streets and located within the right-of-way. Shoulders shall consist of materials specified by public works and may include grassy swales. Bicycle lanes may be included in the shoulder dimensions. [Ord. 671 § 5.1.E.6, 1995.]
+
+15.75.110 Turn lanes.
+Turn lanes shall be designed to the following standards:
+(1) The lane width shall be the same as the required width of the roadway moving lanes for the entire length.
+(2) Acceleration lanes are only required when determined to be needed by a traffic impact study. [Ord. 671 § 5.1.E.7, 1995.]
+
+15.75.120 Cul-de-sacs – Turnarounds.
+Cul-de-sacs must comply with the specifications of LCMC 15.86.100 (2), Table 6. [Ord. 867, 2002; Ord. 671 § 5.1.E.8, 1995.]
+
+15.75.130 Clear visibility triangle.
+There shall be a triangular area of clear visibility formed by two intersecting streets or the intersection of a driveway and a street. The following standards shall be met for all corner lots:
+(1) Nothing shall be erected, placed, parked, planted, or allowed to grow in such a manner as to materially impede vision between a height of two feet and 10 feet above the grade, measured at the center line of the intersection.
+(2) The clear visibility triangle shall be formed by connecting a point on each street center line, to be located at the distance from the intersection of the street center lines, and a third line connecting the two points.
+(3) The distance from the intersection of the street center lines for the various road widths shall be as follows:
+Right-of-Way Width Distance from Street Center Line Intersection 40 feet 45 feet 50 feet 55 feet 60 feet 65 feet
+(4) Any property owner or occupant who has been determined to be the cause of an obstruction blocking visibility at street intersections shall be notified by certified letter to remove such obstruction. If the obstruction is not removed within 14 days of notification, it shall be removed by public works at the expense of the property owner. [Ord. 1211 § 2(A), 2022; Ord. 671 § 5.1.E.9, 1995.]
+
+15.75.140 Signage and signalization.
+At least two street name signs shall be placed at each four-way street intersection, and one at each “T” intersection. Signs shall be installed under light standards and free of visual obstruction. The design of street name signs shall be consistent and of a uniform size and color in accordance with the Uniform Traffic Control Device Manual. Developers shall deposit sufficient funds with the town to provide all necessary roadway signs and traffic signalization as may be required based upon town traffic standards. [Ord. 671 § 5.1.E.10, 1995.]
+
+15.75.150 Transit stops.
+Transit stops shall be located at sites approved by the town council. [Ord. 671 § 5.1.E.11, 1995.]
+
+15.75.160 Sidewalks and bikeways.
+(1) Sidewalks shall be provided on all residential streets.
+(2) Where a proposed development includes improvements or new construction affecting traffic patterns, the facility design shall include provision for sidewalks.
+(3) Where improvements or new construction occur on collector streets, bikeways shall be provided within the right-of-way.
+(4) Crosswalks not less than six feet wide may be installed as determined by public works.
+(5) Design and construction of sidewalks and bikeways shall conform to public works specifications and Chapter 15.86 LCMC. [Ord. 867, 2002; Ord. 671 § 5.1.E.12, 1995.]
+
+15.75.170 Access.
+Access to all lots in a proposed residential subdivision shall be by way of a residential street or private road as specified in Chapter 15.86 LCMC. [Ord. 867, 2002; Ord. 671 § 5.1.E.13, 1995.]

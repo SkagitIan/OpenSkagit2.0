@@ -1,0 +1,71 @@
+15.109.010 Purpose.
+The purpose of this chapter is to:
+(1) Provide for a range of locations and options for wireless communication providers; and
+(2) Minimize the inherent tendency of wireless facilities to appear inconsistent with the attributes of a historic community, and
+(3) Encourage creative approaches in locating communication facilities which will blend in with the surroundings of such facilities. [Ord. 786 § 1, 2000.]
+
+15.109.020 Applicability.
+This chapter applies to the construction, installation and operation of all personal wireless communication facilities (“WCF”) within the town limits except for the following:
+(1) Towers, or antennas that are under 50 feet in height, owned and operated by a federally licensed amateur radio station operator, or used exclusively for receive only signals. [Ord. 786 § 1, 2000.]
+
+15.109.030 Certificate of authorization.
+A certificate of authorization shall be obtained from the planning director prior to the construction, installation or operation of a wireless communication facility with the town limits. [Ord. 786 § 1, 2000.]
+
+15.109.040 Administering and enforcing authority.
+The planning director and/or his/her designated representative are responsible for the general administration, coordination and enforcement of this chapter. [Ord. 786 § 1, 2000.]
+
+15.109.050 Application requirements.
+An application for a certificate of authorization to construct, install or operate a personal wireless communication facility shall, at a minimum, include the following:
+(1) Detailed construction drawings, including plan and elevation views, showing the proposed wireless communication facility, support structures, equipment shelters or cabinets and utility lines servicing the proposal;
+(2) Estimated time of construction;
+(3) A description of materials, including exterior surface materials and colors;
+(4) A site plan showing the location of the proposal, topographic features, and existing vegetation;
+(5) A statement demonstrating that an effort to co-locate has been made, or would not be applicable to the specific proposed site. [Ord. 786 § 1, 2000.]
+
+15.109.060 Standards and requirements for wireless communication facilities.
+The following standards shall apply to all types of wireless communication facilities:
+(1) Equipment Shelters. Equipment shelters shall be contained wholly within a building or structure, or otherwise appropriately concealed, camouflaged or located underground. When they cannot be located in buildings or underground, equipment shelters or cabinets shall be fenced, screened and landscaped in conformance with Chapter 15.105 LCMC.
+(2) Landscaping. Landscaping shall include a minimum 15-foot sight-obscuring landscape buffer around the accessory equipment facility. Accessory equipment facilities located on the roof of any building shall be enclosed so as to be shielded from view.
+(3) Visual Impact. Site location and development shall preserve the preexisting character of the surrounding buildings and land uses and the zone district. Wireless communication towers shall be integrated through location and design to blend in with the existing visual and structural characteristics of the site. Camouflage and concealment shall be required for towers to blend with the surrounding site features. Existing on-site vegetation shall be preserved or improved, and disturbance of the existing topography shall be minimized, unless such disturbance would result in less visual impact of the site to the surrounding area.
+(4) Screening of Accessory Equipment Shelters and Cabinets. Accessory equipment facilities used to house wireless communication equipment should be located within buildings or placed underground when possible. When they cannot be located in buildings, equipment shelters or cabinets shall be fenced, screened and landscaped to screen views from adjacent residential or commercial zoned properties. Any landscaping shall be in conformance with Chapter 15.105 LCMC. Accessory equipment facilities located on the roof of any building shall be enclosed so as to be shielded from view. Accessory equipment facilities may not be enclosed with exposed metal surfaces.
+(5) Maximum Noise Levels. No equipment shall be operated so as to produce noise in levels above 45 dB as measured from the nearest property line on which the attached wireless communication facility is located. Operation of a back-up power generator in the event of power failure or the testing of a back-up generator between 8:00 a.m. and 9:00 p.m. are exempt from this standard. No testing of back-up generators shall occur between the hours of 9:00 p.m. and 8:00 a.m.
+(6) Fencing. Security fencing, if used, shall be painted or coated with nonreflective color.
+(7) Lighting. Towers shall not be artificially lighted, unless required by the United States Federal Aviation Administration (“FAA”) or other applicable authority. If lighting is required, the governing authority may review the available lighting alternatives and approve the design that would cause the least disturbance to the surrounding views. Security lighting for the equipment shelters or cabinets and other on-the-ground ancillary equipment is also permitted, as long as it is appropriately down shielded to keep light within the boundaries of the site.
+(8) Advertising Prohibited. No lettering, symbols, images, or trademarks large enough to be legible to occupants of vehicular traffic on any adjacent roadway shall be placed on or affixed to any part of a telecommunications tower, antenna array or antenna, other than as required by the Federal Communications Commission (“FCC”) regulations regarding tower registration or other applicable law. Antenna arrays may be located on previously approved signs or billboards without alteration of the existing advertising or sign.
+(9) Building Standards. Wireless communication support structures shall be constructed so as to meet or exceed the most recent Electronic Industries Association/Telecommunications Industries Association (EIA/TIA) 222 Revision F Standard entitled: “Structural Standards for Steel Antenna Towers and Antenna Supporting Structures” (or equivalent), as it may be updated or amended. Prior to issuance of a building permit the building official shall be provided with an engineer’s certification that the support structure’s design meets or exceeds those standards. A wireless communication support structure shall be located in such a manner that the structure must be within property boundaries and avoid conflicts with habitable structures, public streets, utility lines and other telecommunications towers.
+(10) Radio Frequency Standards. The applicant shall ensure that the WCF will not cause localized interference with the reception of area television or radio broadcasts. If on review the town finds that the WCF interferes with such reception, and if such interference is not remedied within 30 days, the town may revoke or modify this permit.
+(11) Height. Wireless communication facilities shall be limited in height to the minimum practical for the equipment to provide properly functioning service. Wireless communication facilities are allowed to extend above tree height or any other skyline only if the extension is required for the equipment to function properly, and the extension complies with the requirements of this chapter. [Ord. 931 § 6, 2004; Ord. 786 § 1, 2000.]
+
+15.109.070 Airport restrictions – Notice to FAA.
+A notice of proposed construction shall be submitted to the FAA a minimum of 30 days prior to the issuance of any building permit for any wireless communication support structure or attached wireless communication facilities. [Ord. 786 § 1, 2000.]
+
+15.109.080 Obsolescence.
+If the use of any wireless communication facility or attached wireless communication equipment is discontinued, the owner of the facility shall:
+(1) Report the discontinuance to the planning director within 15 days of the date the facility or equipment ceases to be operational; and
+(2) Decommission and remove the facility within six months of the date it ceases to be operational; and
+(3) Restore the site to its pre-existing condition; and
+(4) Be allowed to apply to the planning director for an extension of an additional six months if good cause is demonstrated. [Ord. 786 § 1, 2000.]
+
+15.109.090 Co-location required.
+(1) Demonstration of Efforts to Co-locate. No new wireless communication support structure shall be permitted unless the applicant demonstrates that no existing tower or structure can accommodate the applicant’s proposed antenna, or that co-location would result in expansion of a legal nonconforming use. Evidence submitted to demonstrate that an existing tower or structure can not accommodate the applicant’s proposed antenna may consist of any of the following:
+(a) No existing towers or structures are located within the geographic area required to meet applicant’s engineering requirements.
+(b) Existing towers or structures are not of sufficient height to meet applicant’s engineering requirements.
+(c) Existing towers or structures do not have sufficient structural strength to support applicant’s proposed antenna and related equipment.
+(d) Existing towers are legally nonconforming with local code.
+(e) The applicant’s proposed antenna would cause electromagnetic interference with the antenna on the existing towers or structures, or the antenna on the existing towers or structures would cause interference with the applicant’s proposed antenna.
+(f) The fees, costs, or contractual provisions required by the owner in order to share an existing tower or structure or to adapt an existing tower or structure for sharing are unreasonable, for instance if costs to co-locate exceed new tower development.
+(g) The applicant demonstrates that there are other limiting factors that render existing towers and structures unsuitable.
+(2) Cooperation in Co-location Efforts. The certificate of authorization may be conditioned to require that a permittee shall cooperate with other wireless communication facility providers in co-locating additional antennas on support structures and/or on existing buildings provided said proposed co-locators have received a certificate of authorization permit for such use at said site from the town. Such a condition may require that a permittee shall exercise good faith in co-locating with other providers and sharing the permitted site, provided such shared use does not give rise to a substantial technical level of impairment of the ability to provide the permitted use (i.e., a significant interference in broadcast or reception capabilities as opposed to a competitive conflict or financial burden). Such good faith shall include sharing technical information to evaluate the feasibility of co-location. In the event a dispute arises as to whether a permittee has exercised good faith in accommodating other users, the town may require a third party technical study at the expense of either or both the applicant and permittee.
+(3) If co-location requires an extension in height or expansion of the tower profile, co-locators may be required by the planning director to camouflage or conceal the tower. [Ord. 931 § 6, 2004; Ord. 786 § 1, 2000.]
+
+15.109.100 Permit limitations.
+(1) Maintenance Required. The applicant shall maintain the WCF to standards that may be imposed by the town at the time of the granting of a permit. Such maintenance shall include, but shall not be limited to, maintenance of the paint, structural integrity and landscaping. If the applicant fails to maintain the facility, the town may undertake the maintenance at the expense of the applicant or terminate the permit, at its sole option.
+(2) Compliance with Federal Standards for Radio Frequency Emissions. The applicant shall comply with FCC standards for radio frequency emissions. Within 60 days after the issuance of its building permit, the applicant shall submit a project implementation report which provides cumulative field measurements of radio frequency emissions of all antennas installed at the subject site and compares the results with established federal standards. Said report shall be subject to review and approval of the administrator for consistency with federal standards. If on review the town finds that the wireless communication facility does not meet federal standards, the town may revoke or modify this permit.
+(3) Notice to Town of Change of Ownership. The applicant shall notify the town of all changes in ownership or operation of the facility, within 60 days of the change. [Ord. 786 § 1, 2000.]
+
+15.109.110 Alternatives, modifications, variances.
+(1) Alternatives and Modifications. The applicant may propose alternatives and modifications to the provisions of this chapter. The applicant must demonstrate to the satisfaction of the planning director that such alternatives and modifications would achieve the desired outcome of the provisions of this chapter, and/ or the provisions of this chapter are not applicable to the proposal.
+(2) Variances. See LCMC 15.125.040. [Ord. 786 § 1, 2000.]
+
+15.109.120 Enforcement.
+See Chapter 15.135 LCMC. [Ord. 786 § 1, 2000.]

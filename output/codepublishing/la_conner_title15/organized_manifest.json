@@ -1,0 +1,9 @@
+{
+  "input_html": "data\\LaConner (1).html",
+  "output_dir": "output\\codepublishing\\la_conner_title15",
+  "sections": 724,
+  "documents": 42,
+  "tables": 22,
+  "sections_path": "output\\codepublishing\\la_conner_title15\\sections.jsonl",
+  "tables_path": "output\\codepublishing\\la_conner_title15\\tables.json"
+}

@@ -39,6 +39,38 @@ BARE_RECREATION_TERMS = {"bare", "raw", "unimproved", "undeveloped", "recreation
 LAND_ASSET_TERMS = {"land", "lot", "lots", "parcel", "parcels", "acreage", "acres"}
 MULTIUNIT_TERMS = {"duplex", "triplex", "fourplex", "fiveplex", "sixplex", "multiunit", "multifamily", "multi", "unit", "units"}
 AVERAGE_QUALITY_TERMS = {"average", "avg"}
+ZONING_INTENT_TERMS = {
+    "adu",
+    "adult",
+    "allowed",
+    "assisted",
+    "camp",
+    "campground",
+    "community",
+    "conditional",
+    "conversion",
+    "convert",
+    "development",
+    "duplex",
+    "feasible",
+    "feasibility",
+    "fourplex",
+    "industrial",
+    "multifamily",
+    "permitted",
+    "possible",
+    "recreation",
+    "recreational",
+    "redevelopment",
+    "senior",
+    "sixplex",
+    "suitable",
+    "triplex",
+    "use",
+    "uses",
+    "zoned",
+    "zoning",
+}
 BAD_BARE_LAND_TEXT = (
     "MH LEASED",
     "LEASED PROPERTY",
@@ -876,6 +908,9 @@ Schema and domain context:
 Skill-backed data dictionary context:
 {_skill_reference_context()}
 
+Zoning MCP advisory context:
+{_zoning_mcp_context(prompt)}
+
 Prompt-specific deterministic hints:
 {_intent_context(prompt)}
 
@@ -902,6 +937,9 @@ User prompt:
 
 Draft plan JSON:
 {json.dumps(plan.as_dict(), default=str)}
+
+Zoning MCP advisory context:
+{_zoning_mcp_context(prompt, plan)}
 """.strip()
 
 
@@ -961,6 +999,9 @@ SQL generation rules from the approved plan:
 
 Skill-backed data dictionary context:
 {_skill_reference_context()}
+
+Zoning MCP advisory context:
+{_zoning_mcp_context(prompt, plan)}
 
 Allowed tables/views:
 {", ".join(sorted(ALLOWED_TABLES))}
@@ -1027,6 +1068,205 @@ def _skill_reference_context() -> str:
     context = "\n\n".join(sections).strip()
     max_chars = int(os.environ.get("OPPORTUNITY_SEARCH_SKILL_CONTEXT_CHARS", "18000"))
     return _clip_text("Skill reference context", context or FALLBACK_SKILL_REFERENCE_CONTEXT, max_chars)
+
+
+def _zoning_mcp_context(prompt: str, plan: SearchPlan | None = None) -> str:
+    if not _needs_zoning_mcp_context(prompt, plan):
+        return "No zoning-specific advisory context requested for this prompt."
+    plan_json = json.dumps(plan.as_dict(), sort_keys=True, default=str) if plan else ""
+    return _cached_zoning_mcp_context((prompt or "").strip(), plan_json)
+
+
+@lru_cache(maxsize=128)
+def _cached_zoning_mcp_context(prompt: str, plan_json: str = "") -> str:
+    try:
+        from zoning_mcp import services as zoning_services
+        from zoning_mcp.seed_data import JURISDICTIONS
+    except Exception as exc:
+        return f"Zoning MCP unavailable: {type(exc).__name__}. Continue with assessor/GIS zoning fields only."
+
+    plan = _plan_from_json(plan_json)
+    proposed_uses = _proposed_uses_for_zoning(prompt, plan)[:4]
+    jurisdictions = _jurisdictions_for_zoning_context(prompt, plan, JURISDICTIONS)[:5]
+    if not proposed_uses:
+        return "No clear proposed land use was detected for zoning MCP lookup; use parcel zoning fields only as soft context."
+
+    lines = [
+        "Use this zoning_mcp context as advisory ranking/screening context, not as a legal determination.",
+        "Do not replace requested asset type with zoning compatibility; filter for the requested parcel/building first.",
+        f"Proposed use lookups: {', '.join(proposed_uses)}.",
+        f"Jurisdiction focus: {', '.join(_jurisdiction_label(item, JURISDICTIONS) for item in jurisdictions)}.",
+    ]
+
+    for proposed_use in proposed_uses:
+        try:
+            comparison = zoning_services.compare_zones_for_use(proposed_use, jurisdictions=jurisdictions)
+        except Exception as exc:
+            lines.append(f"- {proposed_use}: zoning comparison unavailable ({type(exc).__name__}).")
+            continue
+        matches = [match for match in (comparison.get("matches") or []) if _zoning_match_relevant(proposed_use, match)]
+        if not matches:
+            lines.append(f"- {proposed_use}: no structured allowed-use matches found; treat zoning suitability as unknown.")
+            continue
+        compact_matches = []
+        for match in matches[:10]:
+            jurisdiction = _jurisdiction_label(match.get("jurisdiction"), JURISDICTIONS)
+            zone = " ".join(str(part) for part in [match.get("zone_code"), match.get("zone_name")] if part).strip()
+            status = match.get("status_label") or match.get("status") or "unknown"
+            matched_use = match.get("matched_use") or proposed_use
+            compact_matches.append(f"{jurisdiction} {zone}: {status} for {matched_use}")
+        lines.append(f"- {proposed_use}: " + "; ".join(compact_matches))
+
+    code_query = " ".join(proposed_uses[:3])
+    for jurisdiction in jurisdictions[:3]:
+        try:
+            code_result = zoning_services.search_zoning_code(jurisdiction, code_query, limit=3)
+        except Exception as exc:
+            lines.append(f"- Source text for {_jurisdiction_label(jurisdiction, JURISDICTIONS)} unavailable ({type(exc).__name__}).")
+            continue
+        matches = code_result.get("matches") or []
+        coverage = _zoning_coverage_label(code_result.get("coverage_status"))
+        snippets = []
+        for match in matches[:3]:
+            title = str(match.get("title") or match.get("heading") or match.get("section") or "source").strip()
+            snippet = str(match.get("snippet") or match.get("text") or "").strip()
+            if snippet:
+                snippet = re.sub(r"\s+", " ", snippet)[:260]
+            snippets.append(f"{title}: {snippet}" if snippet else title)
+        if snippets:
+            lines.append(f"- Source text {_jurisdiction_label(jurisdiction, JURISDICTIONS)} ({coverage}): " + " | ".join(snippets))
+
+    max_chars = int(os.environ.get("OPPORTUNITY_SEARCH_ZONING_CONTEXT_CHARS", "7000"))
+    return _clip_text("Zoning MCP advisory context", "\n".join(lines), max_chars)
+
+
+def _plan_from_json(plan_json: str) -> SearchPlan | None:
+    if not plan_json:
+        return None
+    try:
+        payload = json.loads(plan_json)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(payload, dict):
+        return None
+    return _search_plan_from_payload(payload)
+
+
+def _needs_zoning_mcp_context(prompt: str, plan: SearchPlan | None = None) -> bool:
+    if plan and plan.needs_zoning_definitions:
+        return True
+    text = " ".join(
+        [
+            prompt or "",
+            plan.asset_intent if plan else "",
+            " ".join(plan.hard_filters if plan else []),
+            " ".join(plan.soft_rankers if plan else []),
+        ]
+    )
+    tokens = _tokens(text)
+    return bool(tokens & ZONING_INTENT_TERMS)
+
+
+def _proposed_uses_for_zoning(prompt: str, plan: SearchPlan | None = None) -> list[str]:
+    text = " ".join(
+        [
+            prompt or "",
+            plan.asset_intent if plan else "",
+            plan.criteria_summary if plan else "",
+        ]
+    ).lower()
+    tokens = _tokens(text.replace("-", " "))
+    uses: list[str] = []
+
+    def add(use: str) -> None:
+        if use not in uses:
+            uses.append(use)
+
+    if tokens & {"senior", "seniors", "elder", "elderly", "assisted"}:
+        add("senior housing")
+        add("assisted living")
+        add("residential care facility")
+        add("adult family home")
+    if _requires_multiunit_asset(text) or tokens & {"apartment", "apartments", "multifamily"}:
+        add("multi-family dwelling")
+        add("duplex")
+        add("middle housing")
+    if tokens & {"adu", "accessory"}:
+        add("accessory dwelling unit")
+    if tokens & {"camp", "camping", "campground"}:
+        add("campground")
+    if tokens & {"recreation", "recreational"}:
+        add("recreational use")
+    if tokens & {"restaurant", "restaurants", "cafe"}:
+        add("restaurant")
+    if tokens & {"retail", "shop", "commercial"}:
+        add("small retail service business")
+    if tokens & {"office", "professional"}:
+        add("business professional office")
+    if tokens & {"industrial", "warehouse"}:
+        add("light industrial")
+    if _requires_dwelling_asset(text):
+        add("single family residence")
+
+    if plan and plan.asset_intent and len(plan.asset_intent) <= 80:
+        normalized_asset = plan.asset_intent.strip().lower()
+        if normalized_asset and normalized_asset not in {"parcel", "parcels", "land"}:
+            add(normalized_asset)
+    return uses[:6]
+
+
+def _jurisdictions_for_zoning_context(prompt: str, plan: SearchPlan | None, jurisdictions: dict[str, Any]) -> list[str]:
+    text = " ".join(
+        str(part)
+        for part in [
+            prompt or "",
+            (plan.location or {}).get("place") if plan else "",
+            (plan.location or {}).get("jurisdiction") if plan else "",
+        ]
+        if part
+    ).lower()
+    aliases = {
+        "skagit_county": ["skagit county", "county", "conway", "alger", "bow", "clear lake", "big lake"],
+        "mount_vernon": ["mount vernon", "mt vernon"],
+        "sedro_woolley": ["sedro woolley", "sedro-woolley", "sedro"],
+        "burlington": ["burlington"],
+        "anacortes": ["anacortes"],
+        "concrete": ["concrete"],
+        "la_conner": ["la conner", "laconner"],
+    }
+    found = [key for key, names in aliases.items() if key in jurisdictions and any(name in text for name in names)]
+    if found:
+        if "skagit_county" not in found:
+            found.append("skagit_county")
+        return found
+    preferred = ["skagit_county", "sedro_woolley", "mount_vernon", "burlington", "anacortes", "concrete", "la_conner"]
+    return [key for key in preferred if key in jurisdictions]
+
+
+def _jurisdiction_label(jurisdiction: Any, jurisdictions: dict[str, Any]) -> str:
+    key = str(jurisdiction or "").strip()
+    configured = jurisdictions.get(key, {})
+    return configured.get("display_name") or key.replace("_", " ").title() or "Unknown jurisdiction"
+
+
+def _zoning_match_relevant(proposed_use: str, match: dict[str, Any]) -> bool:
+    score = _coerce_number(match.get("match_score")) or 0
+    if score >= 0.9:
+        return True
+    proposed_tokens = _meaningful_zoning_tokens(proposed_use)
+    matched_tokens = _meaningful_zoning_tokens(match.get("matched_use") or match.get("normalized_use") or "")
+    return bool(proposed_tokens and matched_tokens and proposed_tokens <= matched_tokens)
+
+
+def _meaningful_zoning_tokens(value: Any) -> set[str]:
+    stopwords = {"and", "or", "the", "a", "an", "use", "uses", "housing", "dwelling", "residence", "residential", "family", "home"}
+    return {token for token in _tokens(str(value or "")) if token not in stopwords}
+
+
+def _zoning_coverage_label(value: Any) -> str:
+    if isinstance(value, dict):
+        return str(value.get("extraction_status") or value.get("status") or value.get("display_name") or "").strip()
+    return str(value or "").strip()
 
 
 def _skill_reference_dir() -> Path | None:

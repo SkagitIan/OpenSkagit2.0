@@ -11,7 +11,7 @@ JURISDICTIONS = {
     "sedro_woolley": {"display_name": "Sedro-Woolley", "code_source": "Code Publishing", "zoning_title": "Title 17 Zoning", "source_url": f"{CODEPUBLISHING_BASE}/WA/SedroWoolley/", "extraction_status": "Major residential, commercial, central business, and industrial zones extracted."},
     "anacortes": {"display_name": "Anacortes", "code_source": "Code Publishing", "zoning_title": "Title 19 Unified Development Code", "source_url": f"{CODEPUBLISHING_BASE}/WA/Anacortes/", "extraction_status": "Residential table extracted."},
     "concrete": {"display_name": "Concrete", "code_source": "Code Publishing", "zoning_title": "Title 19 Development Regulations", "source_url": f"{CODEPUBLISHING_BASE}/WA/Concrete/", "extraction_status": "Major land-use table rows extracted."},
-    "la_conner": {"display_name": "La Conner", "code_source": "Code Publishing", "zoning_title": "Title 15 Uniform Development Code", "source_url": f"{CODEPUBLISHING_BASE}/WA/LaConner/", "extraction_status": "Source located; extraction pending."},
+    "la_conner": {"display_name": "La Conner", "code_source": "Code Publishing local HTML export", "zoning_title": "Title 15 Uniform Development Code", "source_url": f"{CODEPUBLISHING_BASE}/WA/LaConner/", "extraction_status": "Title 15 use sections extracted from local Code Publishing HTML export."},
 }
 
 SOURCE_URLS = {
@@ -59,17 +59,25 @@ ZONE_NAMES = {
         "PFT_1": "Public Facilities and Transportation 1",
         "PFT_2": "Public Facilities and Transportation 2",
     },
+    "la_conner": {
+        "RD": "Residential",
+        "C": "Commercial",
+        "TC": "Transitional Commercial",
+        "IND": "Light and Medium Industry",
+        "PIND": "Port Industrial",
+        "P": "Public Use",
+    },
 }
 
 USE_ALIASES = {
-    "restaurant": ["cafe", "coffee shop", "coffee stand", "diner", "eating and drinking", "food service"],
+    "restaurant": ["cafe", "coffee shop", "coffee stand", "diner", "eating and drinking", "food service", "food service establishment"],
     "small_retail_service_business": ["small retail", "shop", "boutique", "service business", "neighborhood retail"],
     "business_professional_office": ["office", "professional office", "business office", "real estate office"],
     "mini_storage": ["self storage", "storage units", "mini storage"],
     "accessory_dwelling_unit": ["adu", "accessory apartment", "mother in law unit", "detached accessory dwelling"],
-    "single_family_residence": ["single family", "house", "home", "detached dwelling"],
+    "single_family_residence": ["single family", "single household", "single-household", "house", "home", "detached dwelling"],
     "middle_housing_2_to_4_units": ["duplex", "triplex", "fourplex", "middle housing"],
-    "multifamily": ["multiunit", "multi-unit", "multiunit building", "multiunit buildings", "apartment", "apartments"],
+    "multifamily": ["multiunit", "multi-unit", "multiunit building", "multiunit buildings", "multihousehold", "multi household", "apartment", "apartments"],
     "contractor_yards": ["contractor yard", "contractor storage yard", "construction yard"],
     "contractor_yard": ["outdoor storage yard", "outdoor storage yards", "sales lot", "storage yard"],
     "outdoor_storage_yards_and_sales_lots": ["contractor yard", "contractor storage yard", "construction yard", "outdoor storage"],

@@ -15,6 +15,14 @@
       "env": {
         "DJANGO_SETTINGS_MODULE": "config.settings"
       }
+    },
+    "gis-mcp": {
+      "type": "stdio",
+      "command": "C:\\Users\\ian\\Desktop\\Factory\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "gis_mcp.mcp_server"],
+      "env": {
+        "DJANGO_SETTINGS_MODULE": "config.settings"
+      }
     }
   }
 }
