@@ -36,6 +36,7 @@ class OpportunitySearch(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="opportunity_searches")
     prompt = models.TextField()
+    short_name = models.TextField(blank=True)
     title = models.TextField(blank=True)
     criteria_summary = models.TextField(blank=True)
     assumptions = models.JSONField(default=list)
@@ -71,7 +72,7 @@ class OpportunitySearch(models.Model):
             self.save(update_fields=["saved_at", "updated_at"])
 
     def __str__(self):
-        return self.title or self.prompt[:80]
+        return self.short_name or self.title or self.prompt[:80]
 
 
 class OpportunitySearchFeedback(models.Model):

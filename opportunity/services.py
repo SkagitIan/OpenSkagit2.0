@@ -54,6 +54,7 @@ EXEMPT_OR_COMMON_AREA_CODES = {"0", "140", "500", "970"}
 NON_BUILDER_CODES = PUBLIC_OR_CIVIC_CODES | RESOURCE_CODES
 URBAN_RESIDENTIAL_ZONE_GROUPS = {"LIR", "MR"}
 MIXED_OR_COMMERCIAL_REDEVELOPMENT_ZONE_GROUPS = {"MXU", "COM"}
+INDUSTRIAL_ZONE_GROUPS = {"IND"}
 BUILDER_ZONE_EXCLUSION_SQL = """
   COALESCE(z.zone_id, '') <> 'R-A'
   AND COALESCE(z.zone_id, '') NOT ILIKE 'RR%%'
@@ -88,6 +89,75 @@ TABS = [
 TAB_LOOKUP = {tab.key: tab for tab in TABS}
 DEFAULT_TAB = TABS[0].key
 ROW_LIMIT = 100
+FILTER_LABELS = {
+    "min_years": ("Minimum delinquent years", "2"),
+    "min_due": ("Minimum tax due", "5000"),
+    "improved": ("Vacant/improved", ""),
+    "place": ("Place", "Mount Vernon"),
+    "min_land_ratio": ("Minimum land/building ratio", "3"),
+    "min_acres": ("Minimum acres", "0.25"),
+    "max_building": ("Maximum building value", "10000"),
+    "min_land_value": ("Minimum land value", "150000"),
+    "min_cluster": ("Minimum cluster size", "3"),
+}
+TAB_FILTER_KEYS = {
+    "delinquent-tax-pressure": ["min_years", "min_due", "min_land_ratio", "improved", "place"],
+    "vacant-buildable-lots": ["min_acres", "max_building", "place"],
+    "possible-lot-splits": ["min_acres", "max_building", "place"],
+    "teardown-candidates": ["min_land_value", "max_building", "place"],
+    "generated-opportunity": ["min_acres", "min_land_value", "max_building", "improved", "place"],
+}
+DATA_SOURCES = [
+    {
+        "name": "Skagit County Assessor parcels",
+        "category": "Parcel facts",
+        "description": "Active parcel identity, situs location, ownership mailing fields, value fields, land use, utility tokens, acres, and assessor sale fields.",
+        "cadence": "Nightly sync when source files change",
+        "used_for": "Parcel summaries, watchlist cards, opportunity rows, valuation context, and basic parcel filtering.",
+    },
+    {
+        "name": "Assessor improvements",
+        "category": "Buildings",
+        "description": "Improvement segments, class descriptions, condition descriptions, living area, value, and build-year fields.",
+        "cadence": "Nightly sync when source files change",
+        "used_for": "Teardown screens, dwelling evidence, AI search hydration, and saved parcel dossiers.",
+    },
+    {
+        "name": "Assessor land segments",
+        "category": "Land",
+        "description": "Land type, appraisal method, market value, segment size, and frontage signals.",
+        "cadence": "Nightly sync when source files change",
+        "used_for": "Vacant lots, lot split screens, feature labels, and parcel dossiers.",
+    },
+    {
+        "name": "Skagit GIS parcels and zoning",
+        "category": "Map and zoning",
+        "description": "Parcel geometry, map coordinates, primary zoning, jurisdiction, WAZA group labels, zoning overlaps, and source URLs.",
+        "cadence": "Synced from local GIS-backed tables",
+        "used_for": "Map buttons, zoning labels, opportunity filters, parcel detail maps, and feasibility screens.",
+    },
+    {
+        "name": "Treasurer tax delinquency",
+        "category": "Tax pressure",
+        "description": "Current tax statement status, delinquent rows, unpaid installment signals, oldest due date, and total due.",
+        "cadence": "Separate delinquency refresh",
+        "used_for": "Delinquent Tax Pressure tab, tax flags, and watchlist alert context.",
+    },
+    {
+        "name": "Auditor recorded documents",
+        "category": "Recorded documents",
+        "description": "Recording number, document type, signal group, recorded date, parcel number, and document link when a filing is attached to an active parcel.",
+        "cadence": "Auditor lookup during assessor sync",
+        "used_for": "Dashboard recorded documents, sync brief, watchlist notifications, and source-document links.",
+    },
+    {
+        "name": "Assessor sales",
+        "category": "Sales",
+        "description": "Sale date, deed date, sale price, recording number, deed type, buyer, and seller fields attached to active parcels.",
+        "cadence": "Nightly sync when source files change",
+        "used_for": "Fresh sales, parcel detail sales, AI no-recent-sale filters, and sync brief counts.",
+    },
+]
 
 
 def money(value: Any) -> str:
@@ -156,6 +226,28 @@ def is_rural_residential_zone(waza_general: str | None = "") -> bool:
     return (waza_general or "").upper() == "RUR"
 
 
+def current_use_zoning_audit(row: dict[str, Any]) -> dict[str, str]:
+    land_use = row.get("land_use") or row.get("current_use") or ""
+    waza_general = (row.get("waza_general") or "").upper()
+    zone_id = row.get("zone_id") or row.get("zoning") or ""
+    zone_name = row.get("zone_name") or ""
+    if is_residential_dwelling_land_use(land_use) and waza_general in INDUSTRIAL_ZONE_GROUPS:
+        return {
+            "status": "review",
+            "label": "Residential use in industrial zoning",
+            "description": (
+                f"Current assessor land use is residential ({_land_use_label(land_use)}), "
+                f"while primary zoning is {zone_id or zone_name}."
+            ),
+        }
+    return {"status": "", "label": "", "description": ""}
+
+
+def current_use_zoning_flags(row: dict[str, Any]) -> list[str]:
+    audit = current_use_zoning_audit(row)
+    return [audit["label"]] if audit.get("label") else []
+
+
 def utility_labels(value: str | None) -> list[str]:
     text = (value or "").upper()
     if not text.strip() or "NONE" in text:
@@ -210,8 +302,22 @@ def fetch_tab_rows(
     return rows[:limit]
 
 
+def filter_specs_for_tab(tab_key: str) -> list[dict[str, str]]:
+    specs = []
+    for key in TAB_FILTER_KEYS.get(tab_key, TAB_FILTER_KEYS["generated-opportunity"]):
+        label, placeholder = FILTER_LABELS[key]
+        specs.append({"key": key, "label": label, "placeholder": placeholder})
+    return specs
+
+
 def tab_counts(filters: dict[str, str]) -> dict[str, str]:
-    return {tab.key: "" for tab in TABS}
+    counts = {}
+    for tab in TABS:
+        try:
+            counts[tab.key] = f"{len(fetch_tab_rows(tab.key, filters, limit=500)):,}+"
+        except Exception:
+            counts[tab.key] = ""
+    return counts
 
 
 def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[str, Any]]:
@@ -501,7 +607,7 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
                ST_Y(ST_Centroid(g.geometry)) AS lat, ST_X(ST_Centroid(g.geometry)) AS lng,
                (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0))
                  + LEAST(((COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0)) * 25000, 250000)
-                 + CASE WHEN lower(COALESCE(i.primary_condition, '')) IN ('poor', 'low') THEN 90000
+                 + CASE WHEN lower(COALESCE(i.primary_condition, '')) = 'low' THEN 90000
                         WHEN lower(COALESCE(i.primary_condition, '')) = 'fair' THEN 65000
                         ELSE 20000 END
                  + CASE WHEN COALESCE(i.primary_effective_year, p.eff_year_built, p.year_built, 9999) < 1960 THEN 80000
@@ -548,7 +654,7 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
           AND COALESCE(i.improvement_count, 0) > 0
           AND (COALESCE(p.impr_land_value, 0) + COALESCE(p.unimpr_land_value, 0)) / NULLIF(p.building_value, 0) >= 3
           AND (
-              (lower(COALESCE(i.primary_condition, '')) IN ('poor', 'fair', 'low')
+              (lower(COALESCE(i.primary_condition, '')) IN ('fair', 'low')
                AND COALESCE(i.primary_effective_year, p.eff_year_built, p.year_built, 9999) <= 1989)
               OR
               (lower(COALESCE(i.primary_condition, '')) IN ('average', 'unknown', '')
@@ -676,11 +782,14 @@ def _base_row(row: dict[str, Any], opportunity_type: str) -> dict[str, Any]:
         "zone_definition": _zone_definition(row),
         "zone_url": row.get("reference_url") or "",
         "assessed_value": row.get("assessed_value"),
+        "building_value": row.get("building_value"),
+        "land_value": land_value,
         "assessed_value_fmt": money(row.get("assessed_value")),
         "land_value_fmt": money(land_value),
         "building_value_fmt": money(row.get("building_value")),
         "score": int(row.get("score") or 0),
         "risk_flags": [],
+        "current_use_zoning_audit": current_use_zoning_audit(row),
         "lat": lat,
         "lng": lng,
         "map_url": map_url,
@@ -718,7 +827,7 @@ def _format_delinquency(row: dict[str, Any]) -> dict[str, Any]:
         "Improved parcel" if (row.get("building_value") or 0) > 10000 else None,
         "Septic/well only" if "sewer" not in utility_labels(row.get("utilities")) and any(label in utility_labels(row.get("utilities")) for label in {"septic", "well water"}) else None,
         "No utility signal" if not utility_labels(row.get("utilities")) else None,
-    )
+    ) + current_use_zoning_flags(row)
     return item
 
 
@@ -741,7 +850,7 @@ def _format_vacant(row: dict[str, Any]) -> dict[str, Any]:
         "No frontage signal" if not frontage else None,
         "Resource land" if is_resource_land_use(row.get("land_use")) else None,
         "Public/civic use" if is_public_or_civic_land_use(row.get("land_use")) else None,
-    )
+    ) + current_use_zoning_flags(row)
     return item
 
 
@@ -767,7 +876,7 @@ def _format_lot_split(row: dict[str, Any]) -> dict[str, Any]:
         "Rural split risk" if is_rural_residential_zone(row.get("waza_general")) else None,
         "Natural resource zoning" if is_natural_resource_zone(row.get("zone_id"), row.get("zone_name"), row.get("waza_general")) else None,
         "Resource land" if is_resource_land_use(row.get("land_use")) else None,
-    )
+    ) + current_use_zoning_flags(row)
     return item
 
 
@@ -798,7 +907,7 @@ def _format_teardown(row: dict[str, Any]) -> dict[str, Any]:
         "No improvement detail" if not row.get("improvement_count") else None,
         "Natural resource zoning" if is_natural_resource_zone(row.get("zone_id"), row.get("zone_name"), row.get("waza_general")) else None,
         "No parcel geometry" if not item["map_url"] else None,
-    )
+    ) + current_use_zoning_flags(row)
     return item
 
 
@@ -817,7 +926,7 @@ def _format_assemblage(row: dict[str, Any]) -> dict[str, Any]:
         "Mixed zoning" if (row.get("neighbor_zone_count") or 1) > 1 else None,
         "Natural resource zoning" if is_natural_resource_zone(row.get("zone_id"), row.get("zone_name"), row.get("waza_general")) else None,
         "Resource land" if is_resource_land_use(row.get("land_use")) else None,
-    )
+    ) + current_use_zoning_flags(row)
     return item
 
 
@@ -1501,7 +1610,7 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
                 CASE
                   WHEN table_name IN ('land', 'improvements') THEN split_part(record_key, '|', 1)
                   WHEN table_name = 'sales' THEN split_part(record_key, '|', 2)
-                  WHEN table_name = 'auditor_recordings' THEN new_row->>'parcel_number'
+                  WHEN table_name = 'auditor_recordings' THEN COALESCE(NULLIF(new_row->>'parcel_number', ''), NULLIF(old_row->>'parcel_number', ''))
                   ELSE ''
                 END AS parcel_number
               FROM assessor_sync_changes
@@ -1527,7 +1636,7 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
                     CASE
                       WHEN table_name IN ('land', 'improvements') THEN split_part(record_key, '|', 1)
                       WHEN table_name = 'sales' THEN split_part(record_key, '|', 2)
-                      WHEN table_name = 'auditor_recordings' THEN new_row->>'parcel_number'
+                      WHEN table_name = 'auditor_recordings' THEN COALESCE(NULLIF(new_row->>'parcel_number', ''), NULLIF(old_row->>'parcel_number', ''))
                       ELSE ''
                     END AS parcel_number
                   FROM assessor_sync_changes
@@ -1535,8 +1644,9 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
                     AND table_name IN ('land', 'improvements', 'sales', 'auditor_recordings')
                 )
                 SELECT COUNT(*) AS watchlist_changes
-                FROM normalized
-                WHERE parcel_number = ANY(%s)
+                FROM normalized n
+                JOIN skagit_parcels p ON p.parcel_number = n.parcel_number
+                WHERE n.parcel_number = ANY(%s)
                 """,
                 [run.pk, list(saved)],
             )
@@ -1564,6 +1674,11 @@ def sync_narrative_dict(report, summary: dict[str, Any] | None = None) -> dict[s
     from .models import ParcelBookSyncNarrative
 
     narrative = ParcelBookSyncNarrative.objects.filter(assessor_sync_report=report).first()
+    current_context = build_sync_brief_context(report.run)
+    stale_recording_scope = narrative and (narrative.brief_context or {}).get("recording_scope") != "active_parcel_attached_only"
+    stale_incomplete_text = narrative and (narrative.narrative or "").strip() and (narrative.narrative or "").strip()[-1:] not in ".!?"
+    if stale_recording_scope or stale_incomplete_text:
+        narrative = generate_sync_narrative_for_report(report.pk, force=True)
     if not narrative:
         narrative = generate_sync_narrative_for_report(report.pk)
     if narrative:
@@ -1580,7 +1695,7 @@ def sync_narrative_dict(report, summary: dict[str, Any] | None = None) -> dict[s
             "generated": narrative.generated_by_ai,
             "model": narrative.model,
         }
-    return fallback_sync_narrative(summary or getattr(report.run, "summary", {}) or {})
+    return fallback_sync_narrative(summary or getattr(report.run, "summary", {}) or {}, current_context)
 
 
 def build_sync_brief_context(run) -> dict[str, Any]:
@@ -1659,8 +1774,9 @@ def build_sync_brief_context(run) -> dict[str, Any]:
         "notable_signals": notable_rows[:12],
         "source_note": (
             "Fresh means the sale/deed date or auditor recorded date falls inside the reporting window. "
-            "Historical sales rows updated by the assessor export are ignored."
+            "Historical sales rows updated by the assessor export are ignored. Auditor recordings without an active attached parcel are excluded."
         ),
+        "recording_scope": "active_parcel_attached_only",
     }
 
 
@@ -1689,7 +1805,7 @@ def generate_sync_narrative_for_report(report_id: int, force: bool = False):
                 model=model,
                 input=build_sync_narrative_prompt(report.report_text or "", summary, brief_context),
                 temperature=0.2,
-                max_output_tokens=900,
+                max_output_tokens=1800,
             )
             parsed = parse_sync_narrative_response(response.output_text)
             payload = {
@@ -1780,7 +1896,7 @@ def parse_sync_narrative_response(text: str) -> dict[str, Any]:
     return {
         "headline": str(parsed.get("headline") or fallback["headline"])[:140],
         "dek": str(parsed.get("dek") or fallback.get("dek") or "")[:220],
-        "narrative": str(parsed.get("narrative") or fallback["narrative"])[:900],
+        "narrative": _clean_text(str(parsed.get("narrative") or fallback["narrative"])),
         "bullets": bullets,
         "notable_signals": notable,
         "trend_line": str(parsed.get("trend_line") or fallback.get("trend_line") or "")[:300],
@@ -1788,6 +1904,10 @@ def parse_sync_narrative_response(text: str) -> dict[str, Any]:
         "newsletter_subject": str(parsed.get("newsletter_subject") or fallback.get("newsletter_subject") or "")[:140],
         "preview_text": str(parsed.get("preview_text") or fallback.get("preview_text") or "")[:220],
     }
+
+
+def _clean_text(text: str) -> str:
+    return " ".join((text or "").split())
 
 
 def fallback_sync_narrative(summary: dict[str, Any], brief_context: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -1890,7 +2010,7 @@ def dashboard_context(user, sales_sort: str = "") -> dict[str, Any]:
 
 
 def watchlist_rows(user, limit: int | None = None) -> list[dict[str, Any]]:
-    from .models import OpportunitySavedParcel
+    from .models import OpportunitySavedParcel, OpportunitySearch
 
     qs = OpportunitySavedParcel.objects.filter(user=user).order_by("-updated_at")
     if limit:
@@ -1901,11 +2021,27 @@ def watchlist_rows(user, limit: int | None = None) -> list[dict[str, Any]]:
         detail = parcel_summary(saved.parcel_number)
         if detail:
             detail["source_tab"] = saved.source_tab
-            detail["source_tab_label"] = TAB_LOOKUP.get(saved.source_tab, TABS[0]).label if saved.source_tab else "Saved Parcel"
+            opportunity_title = ""
+            if saved.source_tab.startswith("opportunity:"):
+                search_id = saved.source_tab.split(":", 1)[1]
+                opportunity = OpportunitySearch.objects.filter(user=user, pk=search_id).first()
+                opportunity_title = (opportunity.short_name or opportunity.title) if opportunity else ""
+            detail["source_tab_label"] = opportunity_title or (TAB_LOOKUP.get(saved.source_tab, TABS[0]).label if saved.source_tab else "Saved Parcel")
+            detail["watch_reason"] = watch_reason(detail)
             detail["saved_at"] = saved.updated_at
             detail["is_saved"] = True
             rows.append(detail)
     return rows
+
+
+def watch_reason(row: dict[str, Any]) -> str:
+    source = row.get("source_tab_label") or "Saved Parcel"
+    signals = [signal for signal in (row.get("signal_labels") or [])[:2] if signal]
+    flags = [flag for flag in (row.get("risk_flags") or [])[:1] if flag]
+    details = signals + flags
+    if details:
+        return f"Saved from {source}: {', '.join(details)}."
+    return f"Saved from {source} for repeat review."
 
 
 def parcel_summary(parcel_number: str) -> dict[str, Any] | None:
@@ -1977,7 +2113,7 @@ def parcel_detail(parcel_number: str, include_dossier: bool = True, use_ai_feasi
                 "Unknown zoning" if not row.get("zone_id") else None,
                 "No utility signal" if not utility_labels(row.get("utilities")) else None,
                 "Natural resource zoning" if is_natural_resource_zone(row.get("zone_id"), row.get("zone_name"), row.get("waza_general")) else None,
-            ),
+            ) + current_use_zoning_flags(row),
             "history": parcel_value_history(parcel_number),
             "history_chart": parcel_value_history_chart(parcel_number),
             "sales": parcel_recent_sales(parcel_number),

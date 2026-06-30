@@ -18,6 +18,7 @@ from .models import OpportunitySearch, OpportunitySearchFeedback
 from .services import (
     _base_row,
     _fetch,
+    current_use_zoning_flags,
     feature_labels,
     is_natural_resource_zone,
     is_public_or_civic_land_use,
@@ -165,6 +166,7 @@ OpenSkagit data dictionary essentials:
 
 @dataclass(frozen=True)
 class GeneratedSearch:
+    short_name: str
     title: str
     criteria_summary: str
     assumptions: list[str]
@@ -287,7 +289,7 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
                 generated = _generate_search_from_plan(prompt, plan, model, error_feedback=last_error)
             except OpportunitySearchError as exc:
                 last_error = (
-                    f"{exc} Return only the required JSON object with title, criteria_summary, assumptions, sql, and params. "
+                    f"{exc} Return only the required JSON object with short_name, title, criteria_summary, assumptions, sql, and params. "
                     "Do not include markdown, prose, or comments outside JSON."
                 )
                 if attempt == 2:
@@ -320,7 +322,8 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
             if generated:
                 search.generated_sql = _strip_sql(generated.sql)
                 search.generated_params = _json_safe(generated.params)
-                search.title = generated.title[:220] or "AI opportunity search"
+                search.short_name = _opportunity_short_name(generated.short_name or generated.title or search.prompt)
+                search.title = generated.title[:220] or search.short_name or "AI opportunity search"
                 search.criteria_summary = generated.criteria_summary[:1600]
                 search.assumptions = _merged_assumptions(prompt, generated.assumptions)[:8]
                 search.search_plan = _json_safe(plan.as_dict())
@@ -330,6 +333,7 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
                     update_fields=[
                         "generated_sql",
                         "generated_params",
+                        "short_name",
                         "title",
                         "criteria_summary",
                         "assumptions",
@@ -341,7 +345,8 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
                 )
             return _mark_error(search, _friendly_error(exc), model)
 
-    search.title = generated.title[:220] or "AI opportunity search"
+    search.short_name = _opportunity_short_name(generated.short_name or generated.title or search.prompt)
+    search.title = generated.title[:220] or search.short_name or "AI opportunity search"
     search.criteria_summary = generated.criteria_summary[:1600]
     search.assumptions = _merged_assumptions(prompt, generated.assumptions)[:8]
     search.search_plan = _json_safe(plan.as_dict())
@@ -364,6 +369,7 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
             "result_diagnostics",
             "generated_sql",
             "generated_params",
+            "short_name",
             "model",
             "result_rows",
             "result_count",
@@ -391,15 +397,47 @@ def saved_searches_for_user(user, limit: int | None = None):
     return qs[:limit] if limit else qs
 
 
+def navigation_saved_searches_for_user(user, limit: int = 6):
+    return saved_searches_for_user(user, limit=limit)
+
+
 def recent_searches_for_user(user, limit: int | None = None):
     qs = OpportunitySearch.objects.filter(user=user).order_by("-updated_at", "-created_at")
     return qs[:limit] if limit else qs
 
 
-def display_rows_for_search(search: OpportunitySearch, user) -> list[dict[str, Any]]:
+def display_rows_for_search(search: OpportunitySearch, user, filters: dict[str, str] | None = None) -> list[dict[str, Any]]:
     rows = copy.deepcopy(search.result_rows or [])
     rows = apply_prompt_result_filters(search.prompt, rows)
+    rows = filter_generated_opportunity_rows(rows, filters or {})
     return mark_saved(rows, user)
+
+
+def filter_generated_opportunity_rows(rows: list[dict[str, Any]], filters: dict[str, str]) -> list[dict[str, Any]]:
+    min_acres = _coerce_number(filters.get("min_acres"))
+    min_land_value = _coerce_number(filters.get("min_land_value"))
+    max_building = _coerce_number(filters.get("max_building"))
+    improved = (filters.get("improved") or "").strip()
+    place = (filters.get("place") or "").strip().lower()
+    filtered = []
+    for row in rows:
+        if min_acres is not None and (_coerce_number(row.get("acres")) or 0) < min_acres:
+            continue
+        if min_land_value is not None and (_coerce_number(row.get("land_value")) or 0) < min_land_value:
+            continue
+        if max_building is not None and (_coerce_number(row.get("building_value")) or 0) > max_building:
+            continue
+        building_value = _coerce_number(row.get("building_value")) or 0
+        if improved == "vacant" and building_value > 10000:
+            continue
+        if improved == "improved" and building_value <= 10000:
+            continue
+        if place:
+            haystack = f"{row.get('location') or ''} {row.get('city') or ''}".lower()
+            if place not in haystack:
+                continue
+        filtered.append(row)
+    return filtered
 
 
 def apply_prompt_result_filters(prompt: str, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -545,13 +583,13 @@ def hydrate_result_rows(raw_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def _format_ai_result_row(base: dict[str, Any], raw: dict[str, Any]) -> dict[str, Any]:
-    item = _base_row(base, "AI Search")
+    item = _base_row(base, "Opportunity")
     reasons = _reason_labels(raw.get("match_reasons"))
     item["score"] = int(_coerce_number(raw.get("score")) or 0)
     item["signal_labels"] = reasons[:4] or feature_labels(base)
     item["ai_match_reasons"] = reasons
     item["source_tab"] = "ai-search"
-    item["source_tab_label"] = "AI Search"
+    item["source_tab_label"] = "Opportunity"
     item["why_it_ranks"] = "; ".join(reasons[:3]) if reasons else "Matched the natural-language search."
     item["risk_flags"] = risk_flags(
         "No parcel geometry" if not item["map_url"] else None,
@@ -561,7 +599,7 @@ def _format_ai_result_row(base: dict[str, Any], raw: dict[str, Any]) -> dict[str
         "Public/civic or moorage use" if is_public_or_civic_land_use(base.get("land_use")) else None,
         "Resource land" if is_resource_land_use(base.get("land_use")) else None,
         "No utility signal" if not utility_labels(base.get("utilities")) else None,
-    )
+    ) + current_use_zoning_flags(base)
     return item
 
 
@@ -593,9 +631,12 @@ def _fallback_result_row(parcel_number: str, raw: dict[str, Any]) -> dict[str, A
         "score": int(_coerce_number(raw.get("score")) or 0),
         "risk_flags": ["Parcel not found in active assessor table"],
         "map_url": "",
+        "map_embed_url": "",
+        "building_value": None,
+        "land_value": None,
         "parcel_url": "",
         "source_tab": "ai-search",
-        "source_tab_label": "AI Search",
+        "source_tab_label": "Opportunity",
         "ai_match_reasons": reasons,
         "why_it_ranks": "; ".join(reasons[:3]) if reasons else "Matched the natural-language search.",
     }
@@ -630,6 +671,7 @@ def _generate_search_from_plan(prompt: str, plan: SearchPlan, model: str, error_
     )
     payload = parse_generated_search_response(_response_text(response))
     return GeneratedSearch(
+        short_name=str(payload.get("short_name") or payload.get("opportunity_name") or payload.get("title") or "Opportunity"),
         title=str(payload.get("title") or "AI opportunity search"),
         criteria_summary=str(payload.get("criteria_summary") or ""),
         assumptions=[str(item)[:240] for item in _as_list(payload.get("assumptions"))],
@@ -662,6 +704,15 @@ def parse_generated_search_response(text: str) -> dict[str, Any]:
     if not isinstance(parsed.get("assumptions"), list) or not isinstance(parsed.get("params"), list):
         raise OpportunitySearchError("AI assumptions and params must be arrays.")
     return parsed
+
+
+def _opportunity_short_name(value: str) -> str:
+    text = re.sub(r"[^A-Za-z0-9\s-]", "", value or "").strip()
+    text = re.sub(r"\s+", " ", text)
+    words = text.split()
+    if not words:
+        return "Opportunity"
+    return " ".join(words[:3])[:60]
 
 
 def _parse_json_object(text: str) -> dict[str, Any]:
@@ -746,6 +797,7 @@ def _fallback_generated_search(prompt: str) -> GeneratedSearch | None:
     place_phrase = f" in {place.title()}" if place else ""
     threshold_phrase = " over about 2,000 sq ft" if large_threshold else ""
     return GeneratedSearch(
+        short_name=f"Dwelling Leads{place_phrase}" if place else "Dwelling Leads",
         title=f"Residential dwelling candidates{place_phrase}",
         criteria_summary=(
             f"Residential parcels{place_phrase}{threshold_phrase}, ranked by living area, acreage, and zoning presence. "
@@ -824,6 +876,7 @@ def _fallback_multiunit_search(prompt: str) -> GeneratedSearch:
         LIMIT 100
     """
     return GeneratedSearch(
+        short_name="Multiunit Leads",
         title="Multi-unit building candidates with no recent sales",
         criteria_summary=f"Parcels with duplex-to-sixplex or other multi-unit signals, no recorded sale in about {years} years, and average-quality signals when requested.",
         assumptions=[
@@ -953,10 +1006,11 @@ def _build_generation_prompt(prompt: str, plan: SearchPlan, error_feedback: str 
     return f"""
 You are writing a safe PostgreSQL/PostGIS SELECT query for the OpenSkagit Parcel Book opportunity search.
 Return only one compact JSON object with keys:
-title, criteria_summary, assumptions, sql, params.
+short_name, title, criteria_summary, assumptions, sql, params.
 
 Rules:
 - The user's prompt is arbitrary; do not hard-code examples or assume a fixed opportunity type.
+- short_name must be a simple 2-3 word opportunity name suitable for navigation, like Tax Pressure, Teardown Leads, or Small Lot Splits.
 - SQL must be one SELECT or WITH statement, no semicolons, no mutations, no temp objects.
 - Use %s placeholders for user-provided values and put those values in params.
 - For LIKE/ILIKE patterns, never write SQL string literals such as '%senior%' because %s inside words breaks DB params. Use ILIKE %s with params like ['%senior%'].
@@ -1008,6 +1062,7 @@ Allowed tables/views:
 
 Core output shape example:
 {{
+  "short_name": "Vacant Parcels",
   "title": "Large vacant parcels near a named place",
   "criteria_summary": "Parcels matching acreage, improvement, utility, and location signals from the prompt.",
   "assumptions": ["Vacant means low assessor building value unless the prompt says otherwise."],

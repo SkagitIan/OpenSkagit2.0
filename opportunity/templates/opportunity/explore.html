@@ -1,5 +1,7 @@
 ﻿{% extends "base.html" %}
 
+{% load core_extras %}
+
 {% block title %}Parcel Book Opportunities{% endblock %}
 
 {% block content %}
@@ -9,56 +11,76 @@
   <div>
     <p class="pb-kicker">Opportunities</p>
     <h1>Explore parcel signals</h1>
-    <p class="pb-muted">{{ selected_tab_obj.note }}</p>
-  </div>
-  <div class="pb-view-toggle" aria-label="View">
-    <a class="{% if view_mode == 'list' %}active{% endif %}" href="{% url 'opportunity_explore' %}?tab={{ selected_tab }}&view=list">List</a>
-    <a class="{% if view_mode == 'card' %}active{% endif %}" href="{% url 'opportunity_explore' %}?tab={{ selected_tab }}&view=card">Card</a>
-    <a class="{% if view_mode == 'map' %}active{% endif %}" href="{% url 'opportunity_explore' %}?tab={{ selected_tab }}&view=map">Map</a>
+    <p class="pb-muted">{{ selected_tab_obj.description }}</p>
   </div>
 </div>
 
 <section class="pb-panel">
-  <form class="pb-ai-inline pb-loading-form" method="post" action="{% url 'opportunity_ai_search' %}" data-loading-label="Starting...">
-    {% csrf_token %}
-    <label for="ai-prompt">AI opportunity search</label>
-    <input id="ai-prompt" name="prompt" placeholder="Describe any parcel pattern in plain English">
-    <button class="pb-button pb-loading-button" type="submit">
-      <span class="pb-button-label">Search</span>
-      <span class="pb-button-spinner" aria-hidden="true"></span>
-    </button>
-  </form>
+  <div class="pb-results-toolbar">
+    <div>
+      <p class="pb-section-eyebrow">{{ selected_tab_obj.label }}</p>
+      <h2>{{ selected_count }} matching parcel{{ rows|length|pluralize }}</h2>
+      <p class="pb-muted">{{ selected_tab_obj.note }}</p>
+    </div>
+    <div class="pb-view-toggle pb-view-toggle-light" aria-label="View">
+      <a class="{% if view_mode == 'list' %}active{% endif %}" href="{% url 'opportunity_explore' %}?tab={{ selected_tab }}&view=list">List</a>
+      <a class="{% if view_mode == 'card' %}active{% endif %}" href="{% url 'opportunity_explore' %}?tab={{ selected_tab }}&view=card">Card</a>
+      <a class="{% if view_mode == 'map' %}active{% endif %}" href="{% url 'opportunity_explore' %}?tab={{ selected_tab }}&view=map">Map</a>
+    </div>
+  </div>
 
-  <form class="pb-filter" method="get">
-    <input type="hidden" name="tab" value="{{ selected_tab }}">
-    <input type="hidden" name="view" value="{{ view_mode }}">
-    <label>Minimum acres<br><input name="min_acres" value="{{ filters.min_acres }}"></label>
-    <label>Minimum due<br><input name="min_due" value="{{ filters.min_due }}"></label>
-    <label>Minimum land value<br><input name="min_land_value" value="{{ filters.min_land_value }}"></label>
-    <label>Vacant/improved<br>
-      <select name="improved">
-        <option value="">Any</option>
-        <option value="vacant" {% if filters.improved == "vacant" %}selected{% endif %}>Vacant</option>
-        <option value="improved" {% if filters.improved == "improved" %}selected{% endif %}>Improved</option>
-      </select>
-    </label>
-    <button class="pb-button" type="submit">Apply</button>
-  </form>
+  <div class="pb-tab-strip">
+    {% for tab in tabs %}
+      <a class="{% if selected_tab == tab.key %}active{% endif %}" href="{% url 'opportunity_explore' %}?tab={{ tab.key }}&view={{ view_mode }}">
+        <strong>{{ tab.label }}</strong>
+        <span>{{ counts|dict_value:tab.key }} parcels</span>
+      </a>
+    {% endfor %}
+    {% for opportunity in saved_opportunities %}
+      <a href="{% url 'opportunity_detail' opportunity.pk %}">
+        <strong>{{ opportunity.short_name|default:opportunity.title|default:"Opportunity" }}</strong>
+        <span>{{ opportunity.result_count }} parcels</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  <details class="pb-filter-drawer">
+    <summary>
+      <span>Refine filters</span>
+      <small>{{ selected_tab_obj.label }} filters</small>
+    </summary>
+    <form class="pb-filter pb-filter-grid" method="get">
+      <input type="hidden" name="tab" value="{{ selected_tab }}">
+      <input type="hidden" name="view" value="{{ view_mode }}">
+      {% for spec in filter_specs %}
+        <label><span>{{ spec.label }}</span>
+          {% if spec.key == "improved" %}
+            <select name="improved">
+              <option value="">Any</option>
+              <option value="vacant" {% if filters.improved == "vacant" %}selected{% endif %}>Vacant</option>
+              <option value="improved" {% if filters.improved == "improved" %}selected{% endif %}>Improved</option>
+            </select>
+          {% else %}
+            <input name="{{ spec.key }}" value="{{ filters|dict_value:spec.key }}" placeholder="{{ spec.placeholder }}">
+          {% endif %}
+        </label>
+      {% endfor %}
+      <div class="pb-filter-actions">
+        <button class="pb-button" type="submit">Apply filters</button>
+        <a class="pb-button secondary" href="{% url 'opportunity_explore' %}?tab={{ selected_tab }}&view={{ view_mode }}">Clear</a>
+      </div>
+    </form>
+  </details>
 
   {% if view_mode == "map" %}
-    <div class="pb-map-view">
-      <div class="pb-map-canvas">
-        {% for row in rows|slice:":18" %}
-          {% if row.map_url %}
-            <a class="pb-map-pin pb-map-pin-{{ forloop.counter }}" href="{{ row.map_url }}" target="_blank" rel="noopener" title="{{ row.location }}">
-              <span>{{ forloop.counter }}</span>
-            </a>
-          {% endif %}
-        {% endfor %}
-      </div>
-      <div class="pb-map-list">
+    <div class="pb-map-card-grid">
         {% for row in rows %}
-          <article class="pb-map-item">
+          <article class="pb-map-result-card">
+            {% if row.map_embed_url %}
+              <iframe src="{{ row.map_embed_url }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map for {{ row.parcel_number }}"></iframe>
+            {% else %}
+              <div class="pb-map-empty">No parcel geometry</div>
+            {% endif %}
             <div>
               <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
               <div>{{ row.location }}</div>
@@ -72,7 +94,6 @@
         {% empty %}
           <p class="pb-muted">No parcels matched these filters.</p>
         {% endfor %}
-      </div>
     </div>
   {% elif view_mode == "card" %}
     <div class="pb-grid">

@@ -58,6 +58,36 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertFalse(services.is_urban_residential_zone("RUR"))
         self.assertTrue(services.is_rural_residential_zone("RUR"))
 
+    def test_current_use_zoning_audit_flags_residential_use_in_industrial_zoning(self):
+        audit = services.current_use_zoning_audit(
+            {
+                "land_use": "(111) HOUSEHOLD, SFR, INSIDE CITY",
+                "waza_general": "IND",
+                "zone_id": "I",
+                "zone_name": "Industrial Zone",
+            }
+        )
+        self.assertEqual(audit["status"], "review")
+        self.assertEqual(audit["label"], "Residential use in industrial zoning")
+        self.assertIn("HOUSEHOLD, SFR, INSIDE CITY", audit["description"])
+        self.assertIn("I", audit["description"])
+        self.assertEqual(
+            services.current_use_zoning_flags(
+                {"land_use": "(111) HOUSEHOLD, SFR, INSIDE CITY", "waza_general": "IND", "zone_id": "I"}
+            ),
+            ["Residential use in industrial zoning"],
+        )
+
+    def test_current_use_zoning_audit_ignores_expected_combinations(self):
+        residential_zone = services.current_use_zoning_audit(
+            {"land_use": "(111) HOUSEHOLD, SFR, INSIDE CITY", "waza_general": "LIR", "zone_id": "R-5"}
+        )
+        industrial_vacant_use = services.current_use_zoning_audit(
+            {"land_use": "(911) UNDEVELOPED LAND INCORPORATED", "waza_general": "IND", "zone_id": "I"}
+        )
+        self.assertEqual(residential_zone["status"], "")
+        self.assertEqual(industrial_vacant_use["status"], "")
+
     def test_auditor_document_url_from_recording_number(self):
         self.assertEqual(
             services._auditor_url("202506270191"),
@@ -336,7 +366,7 @@ class OpportunityAISearchTests(TestCase):
         start_ai_opportunity_search.return_value = search
         self.client.login(username="user", password="pass")
         response = self.client.post(reverse("opportunity_ai_search"), {"prompt": "large parcels"})
-        self.assertRedirects(response, reverse("opportunity_ai_search_detail", args=[search.pk]))
+        self.assertRedirects(response, reverse("opportunity_detail", args=[search.pk]))
         start_ai_opportunity_search.assert_called_once_with(self.user, "large parcels")
 
     def test_ai_search_detail_shows_pending_state(self):
@@ -347,7 +377,7 @@ class OpportunityAISearchTests(TestCase):
             status=OpportunitySearch.STATUS_DRAFT,
         )
         self.client.login(username="user", password="pass")
-        response = self.client.get(reverse("opportunity_ai_search_detail", args=[search.pk]))
+        response = self.client.get(reverse("opportunity_detail", args=[search.pk]))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Finding target parcels")
         self.assertNotContains(response, "No parcels matched this AI search.")
@@ -361,14 +391,14 @@ class OpportunityAISearchTests(TestCase):
             result_rows=[],
         )
         self.client.login(username="other", password="pass")
-        response = self.client.get(reverse("opportunity_ai_search_detail", args=[search.pk]))
+        response = self.client.get(reverse("opportunity_detail", args=[search.pk]))
         self.assertEqual(response.status_code, 404)
 
     def test_user_can_save_ai_search(self):
         search = OpportunitySearch.objects.create(user=self.user, prompt="large parcels")
         self.client.login(username="user", password="pass")
         response = self.client.post(reverse("opportunity_ai_search_save", args=[search.pk]))
-        self.assertRedirects(response, reverse("opportunity_ai_search_detail", args=[search.pk]))
+        self.assertRedirects(response, reverse("opportunity_detail", args=[search.pk]))
         search.refresh_from_db()
         self.assertIsNotNone(search.saved_at)
 
@@ -379,7 +409,7 @@ class OpportunityAISearchTests(TestCase):
             reverse("opportunity_ai_search_feedback", args=[search.pk]),
             {"rating": "bad", "reason_code": "too_broad", "comment": "Lots of noise"},
         )
-        self.assertRedirects(response, reverse("opportunity_ai_search_detail", args=[search.pk]))
+        self.assertRedirects(response, reverse("opportunity_detail", args=[search.pk]))
         feedback = OpportunitySearchFeedback.objects.get(search=search, user=self.user)
         self.assertEqual(feedback.rating, "bad")
         self.assertEqual(feedback.reason_code, "too_broad")

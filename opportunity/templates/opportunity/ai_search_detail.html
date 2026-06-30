@@ -1,22 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Parcel Book AI Search Results{% endblock %}
+{% load core_extras %}
+
+{% block title %}Parcel Book Opportunity{% endblock %}
 
 {% block content %}
 {% include "opportunity/_chrome_open.html" %}
 
 <div class="pb-page-head">
   <div>
-    <p class="pb-kicker">AI Search</p>
-    <h1>{{ search.title|default:"Finding target parcels" }}</h1>
+    <p class="pb-kicker">Opportunity</p>
+    <h1>{{ search.short_name|default:search.title|default:"Finding target parcels" }}</h1>
   </div>
-  {% if not is_pending and search.status != "error" %}
-    <div class="pb-view-toggle" aria-label="View">
-      <a class="{% if view_mode == 'list' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=list">List</a>
-      <a class="{% if view_mode == 'card' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=card">Card</a>
-      <a class="{% if view_mode == 'map' %}active{% endif %}" href="{% url 'opportunity_ai_search_detail' search.pk %}?view=map">Map</a>
-    </div>
-  {% endif %}
 </div>
 
 <section class="pb-panel pb-ai-summary">
@@ -25,7 +20,7 @@
       <span class="pb-page-spinner" aria-hidden="true"></span>
       <div>
         <strong>Finding target parcels...</strong>
-        <p class="pb-muted">Your search is saved. You can leave this page and come back from Recent AI searches while Parcel Book looks for likely matches.</p>
+        <p class="pb-muted">Your opportunity is saved. You can leave this page and come back while Parcel Book looks for likely matches.</p>
       </div>
     </div>
     <div class="pb-card-actions">
@@ -47,7 +42,7 @@
   {% else %}
     <div>
       <strong>{{ display_result_count }} result{{ display_result_count|pluralize }}</strong>
-      <p class="pb-muted"><span class="pb-query-label">Search:</span> {{ search.prompt }}</p>
+      <p class="pb-muted"><span class="pb-query-label">Original prompt:</span> {{ search.prompt }}</p>
       {% if search.criteria_summary %}
         <p class="pb-muted">{{ search.criteria_summary }}</p>
       {% endif %}
@@ -77,41 +72,73 @@
       {% endfor %}
     </div>
   {% endif %}
-  {% if not is_pending and search.status != "error" %}
-  <div class="pb-feedback pb-feedback-compact">
-    <strong>Was this a good match?</strong>
-    <form method="post" action="{% url 'opportunity_ai_search_feedback' search.pk %}">
-      {% csrf_token %}
-      <input type="hidden" name="next" value="{{ request.get_full_path }}">
-      <button class="pb-button secondary" type="submit" name="rating" value="good">Thumbs up</button>
-      <button class="pb-button secondary" type="submit" name="rating" value="bad">Thumbs down</button>
-      <select name="reason_code" aria-label="Feedback reason">
-        <option value="">Reason optional</option>
-        {% for value, label in feedback_reasons %}
-          <option value="{{ value }}">{{ label }}</option>
-        {% endfor %}
-      </select>
-      <input name="comment" placeholder="Optional note">
-    </form>
-  </div>
 </section>
 
+{% if not is_pending and search.status != "error" %}
 <section class="pb-panel">
+  <div class="pb-results-toolbar">
+    <div>
+      <p class="pb-section-eyebrow">{{ search.short_name|default:"Opportunity" }}</p>
+      <h2>{{ display_result_count }} parcel{{ display_result_count|pluralize }}</h2>
+      {% if common_signal_labels %}
+        <p class="pb-muted">Common signal: {% for label in common_signal_labels %}<span class="pb-pill">{{ label }}</span>{% endfor %}</p>
+      {% endif %}
+      {% if zoning_outliers %}
+        <p class="pb-muted">Zoning sanity check: {% for zoning in zoning_outliers %}<span class="pb-flag">{{ zoning }} appears once</span>{% endfor %}</p>
+      {% endif %}
+    </div>
+    <div class="pb-view-toggle pb-view-toggle-light" aria-label="View">
+      <a class="{% if view_mode == 'list' %}active{% endif %}" href="{% url 'opportunity_detail' search.pk %}?view=list">List</a>
+      <a class="{% if view_mode == 'card' %}active{% endif %}" href="{% url 'opportunity_detail' search.pk %}?view=card">Card</a>
+      <a class="{% if view_mode == 'map' %}active{% endif %}" href="{% url 'opportunity_detail' search.pk %}?view=map">Map</a>
+    </div>
+  </div>
+
+  <div class="pb-tab-strip">
+    {% for opportunity in saved_opportunities %}
+      <a class="{% if search.pk == opportunity.pk %}active{% endif %}" href="{% url 'opportunity_detail' opportunity.pk %}">
+        <strong>{{ opportunity.short_name|default:opportunity.title|default:"Opportunity" }}</strong>
+        <span>{{ opportunity.result_count }} parcels</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  <details class="pb-filter-drawer">
+    <summary>
+      <span>Refine filters</span>
+      <small>{{ search.short_name|default:"Opportunity" }} filters</small>
+    </summary>
+    <form class="pb-filter pb-filter-grid" method="get">
+      <input type="hidden" name="view" value="{{ view_mode }}">
+      {% for spec in filter_specs %}
+        <label><span>{{ spec.label }}</span>
+          {% if spec.key == "improved" %}
+            <select name="improved">
+              <option value="">Any</option>
+              <option value="vacant" {% if filters.improved == "vacant" %}selected{% endif %}>Vacant</option>
+              <option value="improved" {% if filters.improved == "improved" %}selected{% endif %}>Improved</option>
+            </select>
+          {% else %}
+            <input name="{{ spec.key }}" value="{{ filters|dict_value:spec.key }}" placeholder="{{ spec.placeholder }}">
+          {% endif %}
+        </label>
+      {% endfor %}
+      <div class="pb-filter-actions">
+        <button class="pb-button" type="submit">Apply filters</button>
+        <a class="pb-button secondary" href="{% url 'opportunity_detail' search.pk %}?view={{ view_mode }}">Clear</a>
+      </div>
+    </form>
+  </details>
 
   {% if view_mode == "map" %}
-    <div class="pb-map-view">
-      <div class="pb-map-canvas">
-        {% for row in rows|slice:":18" %}
-          {% if row.map_url %}
-            <a class="pb-map-pin pb-map-pin-{{ forloop.counter }}" href="{{ row.map_url }}" target="_blank" rel="noopener" title="{{ row.location }}">
-              <span>{{ forloop.counter }}</span>
-            </a>
-          {% endif %}
-        {% endfor %}
-      </div>
-      <div class="pb-map-list">
+    <div class="pb-map-card-grid">
         {% for row in rows %}
-          <article class="pb-map-item">
+          <article class="pb-map-result-card">
+            {% if row.map_embed_url %}
+              <iframe src="{{ row.map_embed_url }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map for {{ row.parcel_number }}"></iframe>
+            {% else %}
+              <div class="pb-map-empty">No parcel geometry</div>
+            {% endif %}
             <div>
               <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
               <div>{{ row.location }}</div>
@@ -125,7 +152,6 @@
         {% empty %}
           <p class="pb-muted">No parcels matched this AI search.</p>
         {% endfor %}
-      </div>
     </div>
   {% elif view_mode == "card" %}
     <div class="pb-grid">
@@ -146,19 +172,12 @@
             <span class="pb-chip">{{ row.current_use }}</span>
           </div>
           <div>
-            {% for signal in row.signal_labels %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
+            {% for signal in row.display_signal_labels %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
           </div>
           <div>
             {% for flag in row.risk_flags %}<span class="pb-flag pb-flag-{{ forloop.counter }}">{{ flag }}</span>{% empty %}<span class="pb-muted">No obvious flags</span>{% endfor %}
           </div>
           <p class="pb-muted">Assessed {{ row.assessed_value_fmt }} / Land {{ row.land_value_fmt }} / Building {{ row.building_value_fmt }} / {{ row.acres_fmt }}</p>
-          <form class="pb-inline-feedback" method="post" action="{% url 'opportunity_ai_search_feedback' search.pk %}">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ request.get_full_path }}">
-            <input type="hidden" name="parcel_number" value="{{ row.parcel_number }}">
-            <button type="submit" name="rating" value="good">Good match</button>
-            <button type="submit" name="rating" value="bad">Not right</button>
-          </form>
         </article>
       {% empty %}
         <p class="pb-muted">No parcels matched this AI search.</p>
@@ -175,7 +194,7 @@
           </div>
           <div>
             <span class="pb-chip" title="{{ row.zone_definition }}">{{ row.zoning }}</span>
-            {% for signal in row.signal_labels|slice:":3" %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
+            {% for signal in row.display_signal_labels|slice:":3" %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
           </div>
           <div class="pb-list-values">
             <strong>{{ row.assessed_value_fmt }}</strong>

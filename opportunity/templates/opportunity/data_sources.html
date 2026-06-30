@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Parcel Book Data Sources{% endblock %}
+
+{% block content %}
+{% include "opportunity/_chrome_open.html" %}
+
+<div class="pb-page-head">
+  <div>
+    <p class="pb-kicker">Data Sources</p>
+    <h1>What powers Parcel Book</h1>
+    <p class="pb-muted">The opportunity app only turns public-record and local GIS signals into screening workflows. It does not replace source documents, title review, zoning confirmation, or due diligence.</p>
+  </div>
+</div>
+
+<section class="pb-data-source-hero">
+  <article>
+    <span>Primary source</span>
+    <strong>County records</strong>
+    <small>Assessor, auditor, treasurer, GIS, and zoning tables</small>
+  </article>
+  <article>
+    <span>Parcel rule</span>
+    <strong>Active parcels</strong>
+    <small>Recorded documents without attached parcels are excluded from opportunity surfaces</small>
+  </article>
+  <article>
+    <span>Use</span>
+    <strong>Screening only</strong>
+    <small>Confirm every lead against source systems</small>
+  </article>
+</section>
+
+<section class="pb-panel">
+  <div class="pb-section-head">
+    <div>
+      <p class="pb-section-eyebrow">Source map</p>
+      <h2>Opportunity App Inputs</h2>
+    </div>
+    <span class="pb-count-pill">{{ data_sources|length }} sources</span>
+  </div>
+  <div class="pb-data-source-grid">
+    {% for source in data_sources %}
+      <article class="pb-data-source-card">
+        <div>
+          <span>{{ source.category }}</span>
+          <h3>{{ source.name }}</h3>
+          <p>{{ source.description }}</p>
+        </div>
+        <dl>
+          <dt>Refresh</dt>
+          <dd>{{ source.cadence }}</dd>
+          <dt>Used for</dt>
+          <dd>{{ source.used_for }}</dd>
+        </dl>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="pb-panel">
+  <div class="pb-section-head">
+    <div>
+      <p class="pb-section-eyebrow">Guardrails</p>
+      <h2>How the App Treats Records</h2>
+    </div>
+  </div>
+  <div class="pb-source-rules">
+    <div>
+      <strong>Recorded documents</strong>
+      <span>Only filings attached to an active assessor parcel are counted, shown, or used in the sync brief.</span>
+    </div>
+    <div>
+      <strong>Generated opportunities</strong>
+      <span>Generated opportunity queries are read-only parcel screens over allowed tables and must return parcel numbers.</span>
+    </div>
+    <div>
+      <strong>Opportunity tabs</strong>
+      <span>Tabs are ranked screens, not legal findings. They combine land use, value, tax, zoning, improvement, utility, and map signals.</span>
+    </div>
+  </div>
+</section>
+
+{% include "opportunity/_chrome_close.html" %}
+{% endblock %}

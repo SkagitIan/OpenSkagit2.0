@@ -8,22 +8,42 @@
 <div class="pb-page-head">
   <div>
     <p class="pb-kicker">Watchlist</p>
-    <h1>Saved lists and parcels</h1>
-    <p class="pb-muted">Your private saved searches and parcels worth revisiting.</p>
+    <h1>Saved parcel workspace</h1>
+    <p class="pb-muted">Your repeat-use command center for saved opportunities, parcel alerts, and parcels that deserve another look.</p>
   </div>
-  <a class="pb-button secondary" href="{% url 'opportunity_explore' %}">Explore opportunities</a>
 </div>
 
-<section class="pb-panel">
-  <div class="pb-section-head">
-    <h2>Saved AI searches</h2>
-    <a class="pb-button secondary" href="{% url 'opportunity_ai_search' %}">New AI search</a>
-  </div>
+<section class="pb-watch-hero">
+  <article>
+    <span>Saved parcels</span>
+    <strong>{{ rows|length }}</strong>
+    <small>Private watchlist items</small>
+  </article>
+  <article>
+    <span>Saved opportunities</span>
+    <strong>{{ saved_searches|length }}</strong>
+    <small>Saved as explore tabs</small>
+  </article>
+  <article>
+    <span>Latest alerts</span>
+    <strong>{{ sync.watchlist_alerts|length }}</strong>
+    <small>{{ sync.since_text|default:"latest sync" }}</small>
+  </article>
+</section>
+
+<section class="pb-watch-layout">
+  <article class="pb-panel">
+    <div class="pb-section-head">
+      <div>
+        <p class="pb-section-eyebrow">Saved opportunities</p>
+        <h2>Opportunity Library</h2>
+      </div>
+    </div>
   <div class="pb-result-list">
     {% for search in saved_searches %}
       <article class="pb-saved-search-row">
         <div>
-          <a class="pb-card-title" href="{% url 'opportunity_ai_search_detail' search.pk %}">{{ search.title|default:"AI opportunity search" }}</a>
+          <a class="pb-card-title" href="{% url 'opportunity_detail' search.pk %}">{{ search.short_name|default:search.title|default:"Opportunity" }}</a>
           <div class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</div>
         </div>
         <div class="pb-list-values">
@@ -32,17 +52,48 @@
         </div>
       </article>
     {% empty %}
-      <p class="pb-muted">Saved AI searches will appear here.</p>
+      <p class="pb-muted">Saved opportunities will appear here.</p>
     {% endfor %}
   </div>
+  </article>
 
-  <hr class="pb-rule">
+  <article class="pb-panel">
+    <div class="pb-section-head">
+      <div>
+        <p class="pb-section-eyebrow">Alerts</p>
+        <h2>Latest Watchlist Changes</h2>
+      </div>
+      <span class="pb-count-pill">{{ sync.watchlist_alerts|length }} alerts</span>
+    </div>
+    <div class="pb-notice-list">
+      {% for alert in sync.watchlist_alerts %}
+        <article class="pb-notice-item">
+          <div>
+            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' alert.parcel_number %}">{{ alert.parcel_number }}</a>
+            <strong>{{ alert.alert_label }}</strong>
+            <span>{{ alert.location }}</span>
+          </div>
+          <small>{{ alert.date_label }}</small>
+          {% if alert.document_url %}<a class="pb-doc-icon-button" href="{{ alert.document_url }}" target="_blank" rel="noopener" title="{{ alert.alert_label }} document" aria-label="Open {{ alert.alert_label }} document for {{ alert.parcel_number }}">Doc</a>{% endif %}
+        </article>
+      {% empty %}
+        <p class="pb-muted">No saved-parcel alerts in the latest sync.</p>
+      {% endfor %}
+    </div>
+  </article>
+</section>
+
+<section class="pb-panel">
   <div class="pb-section-head">
-    <h2>Saved parcels</h2>
+    <div>
+      <p class="pb-section-eyebrow">Parcels</p>
+      <h2>Saved Parcels</h2>
+    </div>
+    <span class="pb-count-pill">{{ rows|length }} saved</span>
   </div>
-  <div class="pb-grid">
+  <div class="pb-watch-grid">
     {% for row in rows %}
-      <article class="pb-card">
+      <article class="pb-watch-card">
         <div class="pb-card-head">
           <div>
             <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
@@ -55,6 +106,7 @@
           <span class="pb-chip" title="{{ row.zone_definition }}">{{ row.zoning }}</span>
           <span class="pb-chip">{{ row.current_use }}</span>
         </div>
+        <p class="pb-watch-reason">{{ row.watch_reason }}</p>
         <div>
           {% for signal in row.signal_labels %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
           {% for flag in row.risk_flags %}<span class="pb-flag pb-flag-{{ forloop.counter }}">{{ flag }}</span>{% empty %}<span class="pb-muted">No obvious flags</span>{% endfor %}
