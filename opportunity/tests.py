@@ -1,6 +1,7 @@
 import os
 from datetime import date
 from decimal import Decimal
+from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -11,10 +12,14 @@ from django.urls import reverse
 from . import services
 from .ai_search import (
     OpportunitySearchError,
+    _build_plan_prompt,
     _extract_markdown_section,
     _fallback_generated_search,
+    _fallback_search_plan,
     _needs_zoning_mcp_context,
     _proposed_uses_for_zoning,
+    _skill_reference_context,
+    _skill_reference_metadata,
     apply_prompt_result_filters,
     parse_generated_search_response,
     validate_search_sql,
@@ -244,6 +249,37 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertIn("keep this", section)
         self.assertIn("and this", section)
         self.assertNotIn("skip this", section)
+
+    def test_skill_reference_context_loads_from_configured_repo_style_path(self):
+        with TemporaryDirectory() as tmp:
+            references = os.path.join(tmp, "references")
+            os.makedirs(references)
+            with open(os.path.join(references, "descriptions.md"), "w", encoding="utf-8") as handle:
+                handle.write("# Descriptions\n\nInvestor meaning for tired buildings.")
+            with open(os.path.join(references, "codes.md"), "w", encoding="utf-8") as handle:
+                handle.write("# Codes\n\n## `land_use` Mappings\n(111) means SFR.")
+            with patch.dict(os.environ, {"OPENSKAGIT_POSTGIS_SKILL_DIR": tmp}):
+                _skill_reference_context.cache_clear()
+                context = _skill_reference_context()
+                metadata = _skill_reference_metadata()
+        _skill_reference_context.cache_clear()
+        self.assertIn("Investor meaning for tired buildings", context)
+        self.assertIn("(111) means SFR", context)
+        self.assertTrue(metadata["skill_context_loaded"])
+        self.assertIn("descriptions.md", metadata["skill_context_files"])
+
+    def test_plan_prompt_frames_real_estate_investor_intent_taxonomy(self):
+        prompt = _build_plan_prompt("large homes near Mount Vernon for adult family home reuse")
+        self.assertIn("real estate investors", prompt)
+        self.assertIn("Allowed intent_type values", prompt)
+        self.assertIn("existing_residential", prompt)
+        self.assertIn("adult family home", prompt)
+
+    def test_fallback_plan_has_structured_investor_intent(self):
+        plan = _fallback_search_plan("large homes near Mount Vernon for adult family home reuse")
+        self.assertEqual(plan.intent_type, "existing_residential")
+        self.assertEqual(plan.asset_type, "existing dwelling")
+        self.assertEqual(plan.investor_strategy, "senior_housing_or_adult_family_home_reuse")
 
     def test_zoning_mcp_context_triggers_for_use_suitability_prompts(self):
         self.assertTrue(_needs_zoning_mcp_context("large homes suitable for senior community conversion"))
