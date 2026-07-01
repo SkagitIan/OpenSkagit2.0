@@ -12,6 +12,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
+from django.conf import settings
 from django.db import DatabaseError, close_old_connections, connection, transaction
 
 from .models import OpportunitySearch, OpportunitySearchFeedback
@@ -110,6 +111,20 @@ EXPLICIT_NONRESIDENTIAL_TERMS = {
     "warehouse",
     "institutional",
 }
+INTENT_TYPES = {
+    "vacant_land",
+    "recreation_land",
+    "existing_residential",
+    "multi_family",
+    "commercial_reuse",
+    "industrial_reuse",
+    "tax_distress",
+    "longtime_owner",
+    "ag_or_resource_land",
+    "zoning_feasibility",
+    "general_opportunity",
+}
+DEFAULT_INTENT_TYPE = "general_opportunity"
 
 ALLOWED_TABLES = {
     "assessor_rollup",
@@ -176,6 +191,9 @@ class GeneratedSearch:
 
 @dataclass(frozen=True)
 class SearchPlan:
+    intent_type: str
+    investor_strategy: str
+    asset_type: str
     title: str
     criteria_summary: str
     asset_intent: str
@@ -189,6 +207,9 @@ class SearchPlan:
 
     def as_dict(self) -> dict[str, Any]:
         return {
+            "intent_type": self.intent_type,
+            "investor_strategy": self.investor_strategy,
+            "asset_type": self.asset_type,
             "title": self.title,
             "criteria_summary": self.criteria_summary,
             "asset_intent": self.asset_intent,
@@ -277,7 +298,7 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
     result_rows: list[dict[str, Any]] = []
     result_diagnostics: dict[str, Any] = {}
     try:
-        plan = _review_search_plan(prompt, _generate_search_plan(prompt, model), model)
+        plan = _review_search_plan(prompt, _generate_search_plan(prompt, model, user=user), model)
         plan_review = {
             "source": "openai",
             "warnings": plan.as_dict().get("warnings", []),
@@ -309,6 +330,7 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
                 if attempt == 2:
                     raise
         result_diagnostics = _diagnose_results(prompt, plan, result_rows)
+        result_diagnostics["context"] = _skill_reference_metadata()
     except Exception as exc:
         fallback = _fallback_generated_search(prompt)
         if fallback:
@@ -316,6 +338,7 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
                 generated = fallback
                 result_rows = _run_generated_search(prompt, generated)
                 result_diagnostics = _diagnose_results(prompt, plan, result_rows)
+                result_diagnostics["context"] = _skill_reference_metadata()
             except Exception:
                 pass
         if not generated or not result_rows:
@@ -642,10 +665,10 @@ def _fallback_result_row(parcel_number: str, raw: dict[str, Any]) -> dict[str, A
     }
 
 
-def _generate_search_plan(prompt: str, model: str) -> SearchPlan:
+def _generate_search_plan(prompt: str, model: str, user=None) -> SearchPlan:
     response = _openai_client().responses.create(
         model=model,
-        input=_build_plan_prompt(prompt),
+        input=_build_plan_prompt(prompt, feedback_context=_feedback_examples_context(user, prompt)),
         temperature=0.1,
         max_output_tokens=1400,
     )
@@ -681,7 +704,11 @@ def _generate_search_from_plan(prompt: str, plan: SearchPlan, model: str, error_
 
 
 def _search_plan_from_payload(payload: dict[str, Any]) -> SearchPlan:
+    intent_type = _normalized_intent_type(payload.get("intent_type"))
     return SearchPlan(
+        intent_type=intent_type,
+        investor_strategy=str(payload.get("investor_strategy") or "")[:240],
+        asset_type=str(payload.get("asset_type") or payload.get("asset_intent") or "")[:240],
         title=str(payload.get("title") or "AI opportunity search")[:220],
         criteria_summary=str(payload.get("criteria_summary") or "")[:1600],
         asset_intent=str(payload.get("asset_intent") or "unspecified parcel opportunity")[:240],
@@ -693,6 +720,11 @@ def _search_plan_from_payload(payload: dict[str, Any]) -> SearchPlan:
         relaxation_order=_string_list(payload.get("relaxation_order")),
         needs_zoning_definitions=bool(payload.get("needs_zoning_definitions")),
     )
+
+
+def _normalized_intent_type(value: Any) -> str:
+    text = re.sub(r"[^a-z0-9_]+", "_", str(value or "").strip().lower()).strip("_")
+    return text if text in INTENT_TYPES else DEFAULT_INTENT_TYPE
 
 
 def parse_generated_search_response(text: str) -> dict[str, Any]:
@@ -892,17 +924,39 @@ def _fallback_multiunit_search(prompt: str) -> GeneratedSearch:
 def _fallback_search_plan(prompt: str) -> SearchPlan:
     place = _extract_place_hint(prompt)
     residential = _requires_dwelling_asset(prompt)
+    multiunit = _requires_multiunit_asset(prompt)
+    bare_recreation = _requires_bare_recreation_land(prompt)
     hard_filters = ["active parcel"]
     exclusions = []
     if residential:
         hard_filters.append("residential dwelling evidence")
         exclusions.extend(["retail/service/government/industrial/resource-only parcels without dwelling evidence"])
+    if multiunit:
+        hard_filters.append("multi-unit assessor or improvement evidence")
+    if bare_recreation:
+        hard_filters.append("private vacant/undeveloped/recreation land evidence")
+        exclusions.extend(["leased manufactured-home, condo/common-area, public/civic/open-space, existing dwelling parcels"])
     if place:
         hard_filters.append(f"place match: {place}")
+    if residential:
+        intent_type = "existing_residential"
+        asset_type = "existing dwelling"
+    elif multiunit:
+        intent_type = "multi_family"
+        asset_type = "multi-unit residential"
+    elif bare_recreation:
+        intent_type = "recreation_land"
+        asset_type = "private vacant or recreation land"
+    else:
+        intent_type = DEFAULT_INTENT_TYPE
+        asset_type = "parcel opportunity"
     return SearchPlan(
+        intent_type=intent_type,
+        investor_strategy=_investor_strategy_hint(prompt),
+        asset_type=asset_type,
         title="AI opportunity search",
         criteria_summary="Interprets the prompt into parcel asset, location, hard filters, ranking signals, exclusions, and relaxation order before SQL generation.",
-        asset_intent="existing residential dwelling" if residential else "parcel opportunity",
+        asset_intent=asset_type,
         location={"place": place, "match_strategy": "situs/GIS/zoning place fields"} if place else {},
         hard_filters=hard_filters,
         soft_rankers=["larger building/lot signals", "zoning compatibility", "higher assessed or building value"],
@@ -911,6 +965,63 @@ def _fallback_search_plan(prompt: str) -> SearchPlan:
         relaxation_order=["specific zoning language", "size threshold", "exact place match"],
         needs_zoning_definitions=True,
     )
+
+
+def _investor_strategy_hint(prompt: str) -> str:
+    tokens = _tokens(prompt)
+    if tokens & {"senior", "seniors", "adult", "assisted", "elder", "elderly"}:
+        return "senior_housing_or_adult_family_home_reuse"
+    if tokens & {"duplex", "triplex", "fourplex", "fiveplex", "sixplex", "multifamily", "multiunit"}:
+        return "small_multifamily_acquisition_or_development"
+    if tokens & {"delinquent", "tax", "distressed", "distress"}:
+        return "tax_distress"
+    if tokens & {"recreation", "recreational", "camp", "camping"}:
+        return "recreation_land"
+    if tokens & {"redevelopment", "reuse", "conversion", "convert", "underbuilt"}:
+        return "adaptive_reuse_or_redevelopment"
+    return "general_real_estate_investor_opportunity"
+
+
+def _feedback_examples_context(user, prompt: str, limit: int = 6) -> str:
+    if not user or not getattr(user, "is_authenticated", False):
+        return ""
+    prompt_tokens = _tokens(prompt)
+    try:
+        feedback_rows = list(
+            OpportunitySearchFeedback.objects.select_related("search")
+            .filter(user=user)
+            .order_by("-updated_at")[:40]
+        )
+    except Exception:
+        return ""
+
+    examples = []
+    for feedback in feedback_rows:
+        prior_prompt = feedback.search.prompt if feedback.search_id and feedback.search else ""
+        overlap = len(prompt_tokens & _tokens(prior_prompt))
+        if overlap == 0 and examples:
+            continue
+        examples.append((overlap, feedback))
+    examples.sort(key=lambda item: (item[0], item[1].updated_at), reverse=True)
+
+    lines = []
+    for _overlap, feedback in examples[:limit]:
+        prior_search = feedback.search
+        label = "good match" if feedback.rating == OpportunitySearchFeedback.RATING_GOOD else "bad match"
+        reason = feedback.get_reason_code_display() if feedback.reason_code else "No reason code"
+        plan = prior_search.search_plan if isinstance(prior_search.search_plan, dict) else {}
+        intent_bits = [
+            plan.get("intent_type"),
+            plan.get("investor_strategy"),
+            plan.get("asset_type") or plan.get("asset_intent"),
+        ]
+        intent_text = ", ".join(str(bit) for bit in intent_bits if bit)
+        parcel = f" parcel {feedback.parcel_number}" if feedback.parcel_number else ""
+        comment = f"; note: {feedback.comment[:160]}" if feedback.comment else ""
+        lines.append(
+            f"- Prior prompt: {prior_search.prompt[:220]} | interpreted as: {intent_text or 'unknown'} | user marked{parcel}: {label} ({reason}){comment}"
+        )
+    return "\n".join(lines)
 
 
 def _diagnose_results(prompt: str, plan: SearchPlan, rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -940,20 +1051,28 @@ def _diagnose_results(prompt: str, plan: SearchPlan, rows: list[dict[str, Any]])
     return diagnostics
 
 
-def _build_plan_prompt(prompt: str) -> str:
+def _build_plan_prompt(prompt: str, feedback_context: str = "") -> str:
+    feedback_section = feedback_context or "No prior feedback examples are available for this prompt."
     return f"""
-You are the planning stage for OpenSkagit Parcel Book natural-language opportunity search.
-Do not write SQL. Convert the user request into a structured search plan.
+You are the planning stage for OpenSkagit Parcel Book. Users are real estate investors searching Skagit County parcel opportunities.
+Do not write SQL. Infer the investor thesis from plain English and convert it into a structured search plan.
 
 Return only JSON with keys:
-title, criteria_summary, asset_intent, location, hard_filters, soft_rankers, exclusions, assumptions, relaxation_order, needs_zoning_definitions.
+intent_type, investor_strategy, asset_type, title, criteria_summary, asset_intent, location, hard_filters, soft_rankers, exclusions, assumptions, relaxation_order, needs_zoning_definitions.
+
+Allowed intent_type values:
+{", ".join(sorted(INTENT_TYPES))}
 
 Planning rules:
+- Infer meaning, not just keywords. The app is for investor screening, so translate phrases like tired building, infill, land bank, no recent sale, tax pressure, senior housing, adult family home, underbuilt, duplex potential, recreation land, and commercial reuse into the closest structured investor intent.
 - Preserve the user's noun. If they ask for homes, houses, dwellings, residences, or residential buildings, asset_intent must be an existing residential dwelling, not merely a commercial parcel in compatible zoning.
+- asset_type is the physical thing to find first, for example existing dwelling, vacant land, multi-unit building, commercial building, industrial land, farmland, or tax-distressed parcel.
+- investor_strategy is the thesis, for example senior_housing_or_adult_family_home_reuse, small_multifamily_acquisition, tax_distress, land_banking, infill_development, recreation_land, commercial_redevelopment, or general_real_estate_investor_opportunity.
 - Split hard filters from soft rankers. Suitability words like suitable, potential, conversion, redevelopment, senior community, or adult community are usually rankers unless the user says must/only/required.
 - Exclusions should name obvious wrong-result classes.
 - Include a relaxation_order for zero-result handling.
 - Location should identify place text and a match_strategy using situs/GIS/zoning place fields.
+- Prefer a known intent_type over general_opportunity when the investor thesis is clear.
 
 Schema and domain context:
 {SCHEMA_CONTEXT}
@@ -967,6 +1086,9 @@ Zoning MCP advisory context:
 Prompt-specific deterministic hints:
 {_intent_context(prompt)}
 
+Real user feedback examples:
+{feedback_section}
+
 User prompt:
 {prompt}
 """.strip()
@@ -978,6 +1100,9 @@ You are the critique stage for OpenSkagit Parcel Book AI search.
 Review and repair this search plan before SQL generation. Return a complete corrected plan as JSON with the same keys.
 
 Critique checklist:
+- Is intent_type one of these allowed values: {", ".join(sorted(INTENT_TYPES))}?
+- Does investor_strategy describe the real estate thesis?
+- Does asset_type name the physical parcel/building asset to find first?
 - Does asset_intent preserve the user's noun?
 - Are hard_filters truly mandatory?
 - Are zoning/use-code suitability signals rankers unless the prompt explicitly requires them?
@@ -1005,6 +1130,7 @@ def _build_generation_prompt(prompt: str, plan: SearchPlan, error_feedback: str 
         )
     return f"""
 You are writing a safe PostgreSQL/PostGIS SELECT query for the OpenSkagit Parcel Book opportunity search.
+The user is a real estate investor; the approved plan contains the investor thesis and required asset type.
 Return only one compact JSON object with keys:
 short_name, title, criteria_summary, assumptions, sql, params.
 
@@ -1080,10 +1206,11 @@ User prompt:
 def _skill_reference_context() -> str:
     base = _skill_reference_dir()
     if not base:
-        return FALLBACK_SKILL_REFERENCE_CONTEXT
+        return _clip_text("Skill reference context", FALLBACK_SKILL_REFERENCE_CONTEXT, int(os.environ.get("OPPORTUNITY_SEARCH_SKILL_CONTEXT_CHARS", "18000")))
 
     sections = [
         "OpenSkagit PostGIS skill reference excerpts. Use these to interpret user language, codes, and parcel facts; still obey the exact SQL schema above.",
+        f"Skill reference source: {base}",
     ]
     descriptions = _read_text(base / "descriptions.md")
     if descriptions:
@@ -1329,12 +1456,46 @@ def _skill_reference_dir() -> Path | None:
     candidates = []
     if configured:
         candidates.append(Path(configured))
-    candidates.append(Path.home() / ".codex" / "skills" / "openskagit-postgis")
+    repo_root = Path(settings.BASE_DIR)
+    candidates.extend(
+        [
+            repo_root / "skills" / "openskagit-postgis",
+            repo_root / ".codex" / "skills" / "openskagit-postgis",
+            repo_root / "openskagit-postgis",
+            repo_root / "references",
+            Path.home() / ".codex" / "skills" / "openskagit-postgis",
+        ]
+    )
     for candidate in candidates:
         references = candidate / "references"
-        if references.exists():
+        if _has_skill_reference_files(references):
             return references
+        if _has_skill_reference_files(candidate):
+            return candidate
     return None
+
+
+def _has_skill_reference_files(path: Path) -> bool:
+    return path.exists() and any((path / name).exists() for name in ("descriptions.md", "codes.md", "schema.md"))
+
+
+def _skill_reference_metadata() -> dict[str, Any]:
+    base = _skill_reference_dir()
+    if not base:
+        return {
+            "skill_context_loaded": False,
+            "skill_context_source": "",
+            "skill_context_files": [],
+            "skill_context_chars": len(FALLBACK_SKILL_REFERENCE_CONTEXT),
+        }
+    files = [name for name in ("descriptions.md", "codes.md", "schema.md") if (base / name).exists()]
+    chars = sum(len(_read_text(base / name)) for name in files)
+    return {
+        "skill_context_loaded": True,
+        "skill_context_source": str(base),
+        "skill_context_files": files,
+        "skill_context_chars": chars,
+    }
 
 
 def _read_text(path: Path) -> str:
