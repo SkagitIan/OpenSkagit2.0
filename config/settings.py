@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "opportunity",
     "ask_agent",
     "discovery_agent",
+    "parcelbook",
     "zoning_mcp",
     "gis_mcp",
 ]
