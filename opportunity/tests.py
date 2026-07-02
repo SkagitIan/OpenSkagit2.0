@@ -254,6 +254,8 @@ class OpportunityHelperTests(SimpleTestCase):
         with TemporaryDirectory() as tmp:
             references = os.path.join(tmp, "references")
             os.makedirs(references)
+            with open(os.path.join(tmp, "SKILL.md"), "w", encoding="utf-8") as handle:
+                handle.write("# Skill\n\nPrefer readable labels.")
             with open(os.path.join(references, "descriptions.md"), "w", encoding="utf-8") as handle:
                 handle.write("# Descriptions\n\nInvestor meaning for tired buildings.")
             with open(os.path.join(references, "codes.md"), "w", encoding="utf-8") as handle:
@@ -263,10 +265,34 @@ class OpportunityHelperTests(SimpleTestCase):
                 context = _skill_reference_context()
                 metadata = _skill_reference_metadata()
         _skill_reference_context.cache_clear()
+        self.assertIn("Prefer readable labels", context)
         self.assertIn("Investor meaning for tired buildings", context)
         self.assertIn("(111) means SFR", context)
         self.assertTrue(metadata["skill_context_loaded"])
+        self.assertIn("SKILL.md", metadata["skill_context_files"])
         self.assertIn("descriptions.md", metadata["skill_context_files"])
+
+    def test_skill_reference_context_prefers_project_data_path(self):
+        with TemporaryDirectory() as tmp:
+            skill_dir = os.path.join(tmp, "data", "openskagit-postgis")
+            references = os.path.join(skill_dir, "references")
+            os.makedirs(references)
+            with open(os.path.join(skill_dir, "SKILL.md"), "w", encoding="utf-8") as handle:
+                handle.write("# OpenSkagit PostGIS\n\nProject-local skill instructions.")
+            with open(os.path.join(references, "descriptions.md"), "w", encoding="utf-8") as handle:
+                handle.write("# Descriptions\n\nProject-local readable descriptions.")
+            with open(os.path.join(references, "codes.md"), "w", encoding="utf-8") as handle:
+                handle.write("# Codes\n\n## `land_use` Mappings\nProject-local land-use mappings.")
+            with patch.dict(os.environ, {"OPENSKAGIT_POSTGIS_SKILL_DIR": ""}), override_settings(BASE_DIR=tmp):
+                _skill_reference_context.cache_clear()
+                context = _skill_reference_context()
+                metadata = _skill_reference_metadata()
+        _skill_reference_context.cache_clear()
+        self.assertIn("Project-local skill instructions", context)
+        self.assertIn("Project-local readable descriptions", context)
+        self.assertIn("Project-local land-use mappings", context)
+        self.assertTrue(metadata["skill_context_loaded"])
+        self.assertEqual(metadata["skill_context_source"], references)
 
     def test_plan_prompt_frames_real_estate_investor_intent_taxonomy(self):
         prompt = _build_plan_prompt("large homes near Mount Vernon for adult family home reuse")

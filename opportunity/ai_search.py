@@ -1212,6 +1212,10 @@ def _skill_reference_context() -> str:
         "OpenSkagit PostGIS skill reference excerpts. Use these to interpret user language, codes, and parcel facts; still obey the exact SQL schema above.",
         f"Skill reference source: {base}",
     ]
+    skill = _read_text(_skill_instruction_file(base))
+    if skill:
+        sections.append(_clip_text("Skill instructions", skill, 3500))
+
     descriptions = _read_text(base / "descriptions.md")
     if descriptions:
         sections.append(_clip_text("Human-readable description guidance", descriptions, 5000))
@@ -1459,6 +1463,7 @@ def _skill_reference_dir() -> Path | None:
     repo_root = Path(settings.BASE_DIR)
     candidates.extend(
         [
+            repo_root / "data" / "openskagit-postgis",
             repo_root / "skills" / "openskagit-postgis",
             repo_root / ".codex" / "skills" / "openskagit-postgis",
             repo_root / "openskagit-postgis",
@@ -1479,6 +1484,12 @@ def _has_skill_reference_files(path: Path) -> bool:
     return path.exists() and any((path / name).exists() for name in ("descriptions.md", "codes.md", "schema.md"))
 
 
+def _skill_instruction_file(reference_dir: Path) -> Path:
+    if reference_dir.name == "references":
+        return reference_dir.parent / "SKILL.md"
+    return reference_dir / "SKILL.md"
+
+
 def _skill_reference_metadata() -> dict[str, Any]:
     base = _skill_reference_dir()
     if not base:
@@ -1488,8 +1499,14 @@ def _skill_reference_metadata() -> dict[str, Any]:
             "skill_context_files": [],
             "skill_context_chars": len(FALLBACK_SKILL_REFERENCE_CONTEXT),
         }
-    files = [name for name in ("descriptions.md", "codes.md", "schema.md") if (base / name).exists()]
-    chars = sum(len(_read_text(base / name)) for name in files)
+    paths = [
+        ("SKILL.md", _skill_instruction_file(base)),
+        ("descriptions.md", base / "descriptions.md"),
+        ("codes.md", base / "codes.md"),
+        ("schema.md", base / "schema.md"),
+    ]
+    files = [name for name, path in paths if path.exists()]
+    chars = sum(len(_read_text(path)) for _, path in paths if path.exists())
     return {
         "skill_context_loaded": True,
         "skill_context_source": str(base),
