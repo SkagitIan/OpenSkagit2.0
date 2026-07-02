@@ -2,24 +2,25 @@
 
 {% block content %}
 <section style="max-width: 1100px; margin: 2rem auto; padding: 0 1rem;">
-  <h1>ParcelBook Query Lab</h1>
-  <p>Staff-only test UI for natural-language parcel searches against <code>parcel_search.parquet</code>.</p>
+  <h1>ParcelBook AI Test Lab</h1>
+  <p>Staff-only UI for testing the OpenAI Agents SDK parcel search system.</p>
 
   <form method="post" style="display: grid; gap: 1rem; margin: 1.5rem 0;">
     {% csrf_token %}
     <label for="query"><strong>Question</strong></label>
     <textarea id="query" name="query" rows="4" style="width: 100%;">{{ query }}</textarea>
+    <label for="limit"><strong>Result limit</strong></label>
+    <input id="limit" name="limit" type="number" min="1" max="100" value="{{ limit }}" style="max-width: 8rem;">
     <div>
-      <button type="submit" name="mode" value="plan">Generate SQL only</button>
-      <button type="submit" name="mode" value="run">Run query</button>
+      <button type="submit">Ask ParcelBook AI</button>
     </div>
   </form>
 
-  <details>
+  <details {% if not query %}open{% endif %}>
     <summary>Example prompts</summary>
     <ul>
       {% for example in examples %}
-        <li><a href="?query={{ example|urlencode }}">{{ example }}</a></li>
+        <li><a href="?query={{ example|urlencode }}&amp;limit={{ limit }}">{{ example }}</a></li>
       {% endfor %}
     </ul>
   </details>
@@ -30,51 +31,64 @@
     </div>
   {% endif %}
 
-  {% if plan %}
-    <h2>Generated plan</h2>
-    <p><strong>Intent:</strong> {{ plan.intent }}</p>
-    <p><strong>Plan:</strong> {{ plan.plan }}</p>
-    <h3>Safe SQL</h3>
-    <pre style="white-space: pre-wrap; background: #f6f8fa; padding: 1rem;">{{ safe_sql }}</pre>
-    {% if plan.caveats %}
-      <h3>Caveats</h3>
-      <ul>{% for caveat in plan.caveats %}<li>{{ caveat }}</li>{% endfor %}</ul>
-    {% endif %}
+  {% if zoning_route %}
+    <h2>Detected routing</h2>
+    <dl>
+      <dt>Mode</dt><dd>{{ zoning_route.mode }}</dd>
+      <dt>Needs zoning?</dt><dd>{{ zoning_route.needs_zoning }}</dd>
+      <dt>Proposed use</dt><dd>{{ zoning_route.proposed_use|default:"—" }}</dd>
+      <dt>Reason</dt><dd>{{ zoning_route.reason }}</dd>
+    </dl>
   {% endif %}
 
-  {% if result %}
-    <h2>Results</h2>
-    <p><strong>Intent:</strong> {{ result.intent }}</p>
-    <p><strong>Rows returned:</strong> {{ result.row_count }}</p>
-    <h3>SQL</h3>
-    <pre style="white-space: pre-wrap; background: #f6f8fa; padding: 1rem;">{{ result.sql }}</pre>
-    <h3>Parcels</h3>
+  {% if answer %}
+    <h2>Agent answer</h2>
+    <dl>
+      <dt>Interpreted intent</dt><dd>{{ answer.interpreted_intent }}</dd>
+      <dt>Mode</dt><dd>{{ answer.mode }}</dd>
+      <dt>Zoning used?</dt><dd>{{ answer.zoning_was_used }}</dd>
+      <dt>Rows returned</dt><dd>{{ answer.row_count }}</dd>
+    </dl>
+
+    {% if answer.sql_used %}
+      <h3>SQL used</h3>
+      <pre style="white-space: pre-wrap; background: #f6f8fa; padding: 1rem;">{{ answer.sql_used }}</pre>
+    {% endif %}
+
+    <h3>Ranked parcels</h3>
     <div style="overflow-x: auto;">
       <table>
         <thead>
           <tr>
-            <th>Parcel</th><th>Address</th><th>City</th><th>Acres</th><th>Assessed</th><th>Score</th><th>Why matched</th>
+            <th>Parcel</th><th>Address</th><th>Owner</th><th>Why matched</th><th>Zoning</th><th>Caveats</th>
           </tr>
         </thead>
         <tbody>
-          {% for row in result.results %}
+          {% for row in answer.results %}
             <tr>
               <td>{{ row.parcel_number }}</td>
-              <td>{{ row.situs_address }}</td>
-              <td>{{ row.city_name }}</td>
-              <td>{{ row.acres }}</td>
-              <td>{{ row.assessed_value }}</td>
-              <td>{{ row.match_score }}</td>
-              <td>{{ row.match_explanation }}</td>
+              <td>{{ row.address|default:"—" }}</td>
+              <td>{{ row.owner_name|default:"—" }}</td>
+              <td>{{ row.parcel_match_reason }}</td>
+              <td>{{ row.zoning_status|default:"—" }}{% if row.zoning_summary %}: {{ row.zoning_summary }}{% endif %}</td>
+              <td>
+                <ul>{% for caveat in row.caveats %}<li>{{ caveat }}</li>{% endfor %}</ul>
+              </td>
             </tr>
           {% empty %}
-            <tr><td colspan="7">No rows returned.</td></tr>
+            <tr><td colspan="6">No parcel rows returned.</td></tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
-    <h3>Caveats</h3>
-    <ul>{% for caveat in result.caveats %}<li>{{ caveat }}</li>{% endfor %}</ul>
+
+    <h3>General caveats</h3>
+    <ul>{% for caveat in answer.general_caveats %}<li>{{ caveat }}</li>{% empty %}<li>No caveats returned.</li>{% endfor %}</ul>
   {% endif %}
+
+  <details>
+    <summary>Schema guide sent to the agent</summary>
+    <pre style="white-space: pre-wrap; background: #f6f8fa; padding: 1rem;">{{ schema_guide }}</pre>
+  </details>
 </section>
 {% endblock %}
