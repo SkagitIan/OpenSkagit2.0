@@ -31,6 +31,19 @@ logger = logging.getLogger(__name__)
 def resolve_parcel(parcel_id: str | None = None, address: str | None = None) -> dict[str, Any]:
     if not parcel_id and not address:
         raise ValueError("Provide parcel_id or address.")
+    if _duckdb_parcel_search_enabled():
+        try:
+            from .duckdb_parcel_search import resolve_parcel_from_parquet
+
+            parquet_result = resolve_parcel_from_parquet(parcel_id=parcel_id, address=address)
+            if parquet_result.get("found"):
+                return parquet_result
+        except Exception:
+            logger.warning("DuckDB/R2 parcel_search lookup failed; falling back to relational parcel resolver", exc_info=True)
+    return _resolve_parcel_from_database(parcel_id=parcel_id, address=address)
+
+
+def _resolve_parcel_from_database(parcel_id: str | None = None, address: str | None = None) -> dict[str, Any]:
     params: list[Any] = []
     where = "p.inactive_date IS NULL"
     if parcel_id:
@@ -248,6 +261,7 @@ def build_parcel_feasibility_report(parcel_id: str, proposed_use: str) -> dict[s
             "summary": "Parcel was not found in the OpenSkagit parcel table.",
             "parcel": parcel,
             "citations": [],
+            "caveats": _feasibility_caveats(parcel),
         }
     if parcel.get("ambiguous"):
         return {
@@ -258,6 +272,7 @@ def build_parcel_feasibility_report(parcel_id: str, proposed_use: str) -> dict[s
             "summary": "Multiple parcel candidates matched. Select a parcel_id before generating a feasibility report.",
             "parcel": parcel,
             "citations": [],
+            "caveats": _feasibility_caveats(parcel),
         }
     jurisdiction = parcel.get("jurisdiction", "")
     zone_code = parcel.get("zoning_code", "")
@@ -278,6 +293,7 @@ def build_parcel_feasibility_report(parcel_id: str, proposed_use: str) -> dict[s
         "development_standards": standards,
         "overlays": overlays,
         "citations": citations,
+        "caveats": _feasibility_caveats(parcel),
     }
 
 
@@ -298,6 +314,24 @@ def compare_zones_for_use(proposed_use: str, jurisdictions: list[str] | None = N
                 results.append({"jurisdiction": rule.jurisdiction, "zone_code": zone_code, "status": status, "status_label": STATUS_LABELS.get(status, status), "matched_use": rule.use_name, "match_score": round(score, 3), "source_table": rule.source_table, "source_url": rule.source_url})
     results.sort(key=lambda row: (row["status"] != "P", -row["match_score"], row["jurisdiction"], row["zone_code"]))
     return {"proposed_use": proposed_use, "matches": results}
+
+
+def _duckdb_parcel_search_enabled() -> bool:
+    return os.environ.get("ZONING_MCP_USE_DUCKDB_PARCEL_SEARCH", "true").lower() in {"1", "true", "yes"}
+
+
+def _feasibility_caveats(parcel: dict[str, Any] | None = None) -> list[str]:
+    caveats = [
+        "Zoning code from parcel_search is a data signal and should be verified against source zoning code.",
+        "Development standards may be incomplete if extracted tables are incomplete.",
+        "Environmental overlays may be unknown unless overlay GIS layers are loaded.",
+        "Missing sale/address/geometry facts are data gaps, not proof of absence.",
+        "Assessed value is not market value.",
+    ]
+    notes = (parcel or {}).get("notes")
+    if notes:
+        caveats.append(str(notes))
+    return caveats
 
 
 def _feasibility_summary(parcel: dict[str, Any], proposed_use: str, use_status: dict[str, Any]) -> str:
@@ -337,7 +371,19 @@ def _report_citations(zone_profile: dict[str, Any], use_status: dict[str, Any], 
 
 def normalize_jurisdiction(value: str | None) -> str:
     text = normalize_use_key(value or "")
-    return {"skagit": "skagit_county", "county": "skagit_county", "mt_vernon": "mount_vernon", "sedro_woolley_city": "sedro_woolley"}.get(text, text or "unknown")
+    return {
+        "skagit": "skagit_county",
+        "county": "skagit_county",
+        "skagit_county": "skagit_county",
+        "mt_vernon": "mount_vernon",
+        "mount_vernon": "mount_vernon",
+        "burlington": "burlington",
+        "sedro_woolley": "sedro_woolley",
+        "sedro_woolley_city": "sedro_woolley",
+        "anacortes": "anacortes",
+        "concrete": "concrete",
+        "la_conner": "la_conner",
+    }.get(text, text or "unknown")
 
 
 def normalize_zone_code(value: str | None) -> str:
