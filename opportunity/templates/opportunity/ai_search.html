@@ -5,24 +5,15 @@
 {% block content %}
 {% include "opportunity/_chrome_open.html" %}
 
-<div class="pb-page-head">
-  <div>
-    <p class="pb-kicker">Search</p>
-    <h1>Search opportunities in plain English</h1>
-    <p class="pb-muted">Describe the parcel pattern you want. Parcel Book will look for likely matches and keep the results here for review.</p>
-  </div>
-  <a class="pb-button secondary" href="{% url 'opportunity_explore' %}">Browse standard tabs</a>
-</div>
-
-<section class="pb-panel">
+<section class="pb-panel pb-search-composer">
   {% if error %}<div class="pb-error">{{ error }}</div>{% endif %}
   <form class="pb-ai-form pb-loading-form" method="post" data-loading-label="Starting opportunity...">
     {% csrf_token %}
-    <label for="prompt">Natural-language search</label>
+    <label for="prompt">Search opportunities</label>
     <textarea id="prompt" name="prompt" rows="4" placeholder="Describe acreage, location, zoning, tax, utility, value, improvement, sale, or other parcel signals.">{{ prompt }}</textarea>
     <div class="pb-card-actions">
       <button class="pb-button pb-loading-button" type="submit">
-        <span class="pb-button-label">Find opportunity</span>
+        <span class="pb-button-label">Search</span>
         <span class="pb-button-spinner" aria-hidden="true"></span>
       </button>
     </div>
@@ -58,7 +49,9 @@
         </div>
         <form method="post" action="{% url 'opportunity_ai_search_delete' search.pk %}">
           {% csrf_token %}
-          <button class="pb-icon-button" type="submit" title="Delete opportunity search" aria-label="Delete {{ search.short_name|default:search.title|default:'opportunity search' }}">x</button>
+          <button class="pb-trash-button" type="submit" title="Delete opportunity search" aria-label="Delete {{ search.short_name|default:search.title|default:'opportunity search' }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 15h10l1-15"/><path d="M10 10v7"/><path d="M14 10v7"/></svg>
+          </button>
         </form>
       </article>
     {% empty %}
@@ -84,7 +77,9 @@
         </div>
         <form method="post" action="{% url 'opportunity_ai_search_delete' search.pk %}">
           {% csrf_token %}
-          <button class="pb-icon-button" type="submit" title="Delete opportunity" aria-label="Delete {{ search.short_name|default:search.title|default:'opportunity' }}">x</button>
+          <button class="pb-trash-button" type="submit" title="Delete opportunity" aria-label="Delete {{ search.short_name|default:search.title|default:'opportunity' }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 15h10l1-15"/><path d="M10 10v7"/><path d="M14 10v7"/></svg>
+          </button>
         </form>
       </article>
     {% empty %}

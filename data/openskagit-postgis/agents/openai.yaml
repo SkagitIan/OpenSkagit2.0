@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenSkagit PostGIS"
+  short_description: "OpenSkagit SQL, schema, and readable data descriptions"
+  default_prompt: "Use $openskagit-postgis to write or explain an OpenSkagit parcel, tax, zoning, opportunity, or land-ledger query with human-readable field descriptions."

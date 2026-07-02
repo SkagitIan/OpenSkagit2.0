@@ -2077,7 +2077,7 @@ def _opportunity_criteria(search, plan: dict[str, Any]) -> str:
     return (first_sentence or "Saved parcel opportunity")[:84]
 
 
-def dashboard_watchlist_rows(user, sync: dict[str, Any], limit: int = 8) -> list[dict[str, Any]]:
+def dashboard_watchlist_rows(user, sync: dict[str, Any], limit: int | None = 8) -> list[dict[str, Any]]:
     rows = watchlist_rows(user)
     alerts = {
         (alert.get("parcel_number") or "").upper(): alert
@@ -2090,9 +2090,10 @@ def dashboard_watchlist_rows(user, sync: dict[str, Any], limit: int = 8) -> list
         row["alert_label"] = alert.get("alert_label", "") if alert else ""
         row["alert_date_label"] = alert.get("date_label", "") if alert else ""
         row["alert_document_url"] = alert.get("document_url", "") if alert else ""
+        row["alert_created_at"] = alert.get("created_at") if alert else None
     rows.sort(key=lambda row: _timestamp(row.get("saved_at")), reverse=True)
     rows.sort(key=lambda row: not row.get("has_alert"))
-    return rows[:limit]
+    return rows[:limit] if limit else rows
 
 
 def _timestamp(value: Any) -> float:

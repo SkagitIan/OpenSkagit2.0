@@ -23,12 +23,9 @@
 
 <header class="pb-app-header">
   <div>
-    <p class="pb-kicker">Parcel Book</p>
     <h1>My Watchlist</h1>
-    <p class="pb-muted">Timely parcel changes and saved properties.</p>
   </div>
   <div class="pb-app-header-actions">
-    <span class="pb-alert-count {% if sync.watchlist_alerts %}has-alerts{% endif %}">{{ sync.watchlist_alerts|length }} alert{{ sync.watchlist_alerts|length|pluralize }}</span>
     <a class="pb-button" href="{% url 'opportunity_ai_search' %}">Create new opportunity</a>
   </div>
 </header>

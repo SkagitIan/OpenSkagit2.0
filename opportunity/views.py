@@ -2,6 +2,7 @@ from urllib.parse import urlencode
 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
+from django.core.paginator import Paginator
 from django.http import Http404, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
@@ -271,17 +272,48 @@ def parcel(request, parcel_number):
 @login_required(login_url=reverse_lazy("opportunity_login"))
 def watchlist(request):
     sync = latest_assessor_sync_summary(request.user)
+    sort = request.GET.get("sort", "last_change")
+    if sort not in {"last_change", "added", "parcel", "alerts"}:
+        sort = "last_change"
+    per_page = _positive_int(request.GET.get("per_page"), 10)
+    if per_page not in {10, 25, 50}:
+        per_page = 10
+    page = _positive_int(request.GET.get("page"), 1)
+    all_rows = dashboard_watchlist_rows(request.user, sync, limit=None)
+    all_rows = _sort_watchlist_rows(all_rows, sort)
+    paginator = Paginator(all_rows, per_page)
+    page_obj = paginator.get_page(page)
     return render(
         request,
         "opportunity/watchlist.html",
         _chrome_context(request, {
             "active_nav": "watchlist",
-            "rows": dashboard_watchlist_rows(request.user, sync, limit=100),
-            "saved_searches": saved_searches_for_user(request.user),
+            "rows": list(page_obj.object_list),
+            "page_obj": page_obj,
+            "paginator": paginator,
+            "sort": sort,
+            "per_page": per_page,
+            "total_rows": paginator.count,
             "sync": sync,
             "disclaimer": DISCLAIMER,
         }),
     )
+
+
+def _sort_watchlist_rows(rows, sort: str):
+    if sort == "added":
+        return sorted(rows, key=lambda row: _row_timestamp(row.get("saved_at")), reverse=True)
+    if sort == "parcel":
+        return sorted(rows, key=lambda row: (row.get("parcel_number") or ""))
+    if sort == "alerts":
+        return sorted(rows, key=lambda row: (not row.get("has_alert"), -_row_timestamp(row.get("alert_created_at") or row.get("saved_at"))))
+    return sorted(rows, key=lambda row: _row_timestamp(row.get("alert_created_at") or row.get("saved_at")), reverse=True)
+
+
+def _row_timestamp(value) -> float:
+    if hasattr(value, "timestamp"):
+        return float(value.timestamp())
+    return 0.0
 
 
 @login_required(login_url=reverse_lazy("opportunity_login"))

@@ -5,92 +5,38 @@
 {% block content %}
 {% include "opportunity/_chrome_open.html" %}
 
-<div class="pb-page-head">
+<header class="pb-app-header">
   <div>
-    <p class="pb-kicker">Watchlist</p>
-    <h1>Saved parcel workspace</h1>
-    <p class="pb-muted">Your repeat-use command center for saved opportunities, parcel alerts, and parcels that deserve another look.</p>
+    <h1>Watchlist</h1>
   </div>
-</div>
+</header>
 
-<section class="pb-watch-hero">
-  <article>
-    <span>Saved parcels</span>
-    <strong>{{ rows|length }}</strong>
-    <small>Private watchlist items</small>
-  </article>
-  <article>
-    <span>Saved opportunities</span>
-    <strong>{{ saved_searches|length }}</strong>
-    <small>Saved as explore tabs</small>
-  </article>
-  <article>
-    <span>Latest alerts</span>
-    <strong>{{ sync.watchlist_alerts|length }}</strong>
-    <small>{{ sync.since_text|default:"latest sync" }}</small>
-  </article>
-</section>
+<section class="pb-panel pb-watchlist-page">
+  <form class="pb-watch-toolbar" method="get">
+    <div class="pb-watch-toolbar-left">
+      <label>
+        <span>Sort by</span>
+        <select name="sort">
+          <option value="last_change" {% if sort == "last_change" %}selected{% endif %}>Last Change (Newest)</option>
+          <option value="alerts" {% if sort == "alerts" %}selected{% endif %}>Alerts First</option>
+          <option value="added" {% if sort == "added" %}selected{% endif %}>Added (Newest)</option>
+          <option value="parcel" {% if sort == "parcel" %}selected{% endif %}>Parcel Number</option>
+        </select>
+      </label>
+      <button class="pb-button secondary" type="submit">Apply</button>
+    </div>
+    <div class="pb-watch-toolbar-right">
+      <label>
+        <span>Per page</span>
+        <select name="per_page" onchange="this.form.submit()">
+          <option value="10" {% if per_page == 10 %}selected{% endif %}>10 per page</option>
+          <option value="25" {% if per_page == 25 %}selected{% endif %}>25 per page</option>
+          <option value="50" {% if per_page == 50 %}selected{% endif %}>50 per page</option>
+        </select>
+      </label>
+    </div>
+  </form>
 
-<section class="pb-watch-layout">
-  <article class="pb-panel">
-    <div class="pb-section-head">
-      <div>
-        <p class="pb-section-eyebrow">Saved opportunities</p>
-        <h2>Opportunity Library</h2>
-      </div>
-    </div>
-  <div class="pb-result-list">
-    {% for search in saved_searches %}
-      <article class="pb-saved-search-row">
-        <div>
-          <a class="pb-card-title" href="{% url 'opportunity_detail' search.pk %}">{{ search.short_name|default:search.title|default:"Opportunity" }}</a>
-          <div class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</div>
-        </div>
-        <div class="pb-list-values">
-          <strong>{{ search.result_count }}</strong>
-          <span>cached results</span>
-        </div>
-      </article>
-    {% empty %}
-      <p class="pb-muted">Saved opportunities will appear here.</p>
-    {% endfor %}
-  </div>
-  </article>
-
-  <article class="pb-panel">
-    <div class="pb-section-head">
-      <div>
-        <p class="pb-section-eyebrow">Alerts</p>
-        <h2>Latest Watchlist Changes</h2>
-      </div>
-      <span class="pb-count-pill">{{ sync.watchlist_alerts|length }} alerts</span>
-    </div>
-    <div class="pb-notice-list">
-      {% for alert in sync.watchlist_alerts %}
-        <article class="pb-notice-item">
-          <div>
-            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' alert.parcel_number %}">{{ alert.parcel_number }}</a>
-            <strong>{{ alert.alert_label }}</strong>
-            <span>{{ alert.location }}</span>
-          </div>
-          <small>{{ alert.date_label }}</small>
-          {% if alert.document_url %}<a class="pb-doc-icon-button" href="{{ alert.document_url }}" target="_blank" rel="noopener" title="{{ alert.alert_label }} document" aria-label="Open {{ alert.alert_label }} document for {{ alert.parcel_number }}">Doc</a>{% endif %}
-        </article>
-      {% empty %}
-        <p class="pb-muted">No saved-parcel alerts in the latest sync.</p>
-      {% endfor %}
-    </div>
-  </article>
-</section>
-
-<section class="pb-panel">
-  <div class="pb-section-head">
-    <div>
-      <p class="pb-section-eyebrow">Parcels</p>
-      <h2>Saved Parcels</h2>
-    </div>
-    <span class="pb-count-pill">{{ rows|length }} saved</span>
-  </div>
   <div class="pb-watch-table-head" aria-hidden="true">
     <span>Parcel / Address</span>
     <span>Location</span>
@@ -132,6 +78,25 @@
     {% empty %}
       <p class="pb-muted">No saved parcels yet.</p>
     {% endfor %}
+  </div>
+
+  <div class="pb-watch-pagination">
+    <span class="pb-muted">Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ total_rows }} parcel{{ total_rows|pluralize }}</span>
+    <div class="pb-watch-page-buttons">
+      {% if page_obj.has_previous %}
+        <a class="pb-page-button" href="?sort={{ sort }}&per_page={{ per_page }}&page={{ page_obj.previous_page_number }}">‹</a>
+      {% endif %}
+      {% for page_number in paginator.page_range %}
+        {% if page_number == page_obj.number %}
+          <span class="pb-page-button active">{{ page_number }}</span>
+        {% elif page_number >= page_obj.number|add:"-2" and page_number <= page_obj.number|add:"2" %}
+          <a class="pb-page-button" href="?sort={{ sort }}&per_page={{ per_page }}&page={{ page_number }}">{{ page_number }}</a>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <a class="pb-page-button" href="?sort={{ sort }}&per_page={{ per_page }}&page={{ page_obj.next_page_number }}">›</a>
+      {% endif %}
+    </div>
   </div>
 </section>
 
