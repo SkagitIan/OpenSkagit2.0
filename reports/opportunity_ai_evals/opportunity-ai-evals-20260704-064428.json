@@ -1,0 +1,128 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "advanced_average_quality_sfr_not_low_quality",
+      "prompt": "MSA average-quality single family homes in Skagit County, excluding low quality homes.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT DISTINCT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, i_quality.quality_codes, 'MSA average improvement class' AS match_reasons\nFROM read_parquet('r2://openskagit/derived/parcel_search_with_sales_improvements.parquet') AS ps\nJOIN (\n  SELECT TRIM(ParcelNumber) AS parcel_number, string_agg(DISTINCT TRIM(imprv_det_class_cd), ' | ') AS quality_codes\n  FROM read_parquet('r2://openskagit/improvements.parquet')\n  WHERE TRIM(imprv_det_class_cd) = 'MSA'\n  GROUP BY parcel_number\n) AS i_quality ON ps.parcel_number = i_quality.parcel_number\nWHERE TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) IN (110, 111, 112, 113)\nAND ps.improvement_building_count > 0",
+      "generated_params": [],
+      "title": "MSA Average-Quality Single Family Homes in Skagit County",
+      "criteria_summary": "Select parcels classified as single family residential (DOR land use codes 110, 111, 112, 113) with improvements of MSA (average) quality class, excluding low quality (MSL) homes. Countywide Skagit search with no city limit filter.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P70201",
+        "P70450",
+        "P71517",
+        "P72212",
+        "P72267",
+        "P72633",
+        "P72907",
+        "P73167",
+        "P73229",
+        "P73308"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P70201",
+          "location": "12027 HILYNN DRIVE, BURLINGTON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.30000001,
+          "zoning": "BR-R",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P70450",
+          "location": "17559 BENNETT ROAD, MOUNT VERNON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.54000002,
+          "zoning": "RI",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P71517",
+          "location": "1115 FAIRHAVEN AVENUE, BURLINGTON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.12,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P72212",
+          "location": "514 S SKAGIT ST, BURLINGTON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.47,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P72267",
+          "location": "236 N SKAGIT ST, BURLINGTON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.2121,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search_with_sales_improvements.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "anacortes_condominium_residential",
+      "prompt": "Residential condominium parcels in Anacortes.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, ps.city_name, ps.situs_city_state_zip\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE ps.land_use LIKE '(140)%'\n  AND (lower(ps.city_name) = 'anacortes' OR lower(ps.situs_city_state_zip) LIKE '%anacortes%')",
+      "generated_params": [],
+      "title": "Residential Condominium Parcels in Anacortes",
+      "criteria_summary": "Parcels with land use indicating residential condominiums located in Anacortes city by matching city_name or situs_city_state_zip",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100699",
+        "P100703",
+        "P100704",
+        "P101626",
+        "P101628",
+        "P103485",
+        "P103486",
+        "P103487",
+        "P103488",
+        "P103490"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100699",
+          "location": "1510 SKYLINE WAY, ANACORTES",
+          "current_use": "CONDO RESIDENTIAL",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,424 sf primary building",
+            "built 1992",
+            "25 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P100703",
+          "location": "1510 SKYLINE WAY, ANACORTES",
+          "current_use": "CONDO RESIDENTIAL",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,424 sf primary building",
+            "built 1992",
+            "6 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P100704",
+          "location": "1510 SKYLINE WAY, ANACORTES",
+          "current_use": "CONDO RESIDENTIAL",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,105 sf primary building",
+            "built 1992",
+            "7 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P101626",
+          "location": "3120 R AVE, ANACORTES",
+          "current_use": "CONDO RESIDENTIAL",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,354 sf primary building",
+            "built 1992",
+            "14 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P101628",
+          "location": "3120 R AVE, ANACORTES",
+          "current_use": "CONDO RESIDENTIAL",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,216 sf primary building",
+            "built 1992",
+            "7 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

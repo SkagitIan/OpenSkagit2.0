@@ -1,0 +1,178 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "sedro_marblemount_lots_over_1_acre_utilities_no_improvements",
+      "prompt": "lots in sedro-woolley or marblemount that are over 1 acre with utilities and no improvements.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.acres, TRIM(a.\"Utilities\") AS utilities\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nJOIN read_parquet('r2://openskagit/assessor.parquet') AS a ON ps.parcel_number = TRIM(a.\"Parcel Number\")\nWHERE ps.acres > 1\n  AND (LOWER(ps.city_name) = 'sedro-woolley' OR LOWER(ps.city_name) = 'marblemount' OR LOWER(ps.situs_city_state_zip) LIKE '%sedro-woolley%' OR LOWER(ps.situs_city_state_zip) LIKE '%marblemount%')\n  AND TRIM(COALESCE(a.\"Utilities\", '')) <> ''\n  AND ps.improvement_building_count = 0",
+      "generated_params": [],
+      "title": "Lots in Sedro-Woolley or Marblemount Over 1 Acre with Utilities and No Improvements",
+      "criteria_summary": "Parcels located in Sedro-Woolley or Marblemount with acreage over 1, having utilities, and no improvements recorded.",
+      "raw_row_count": 66,
+      "hydrated_row_count": 66,
+      "filtered_row_count": 66,
+      "top_result_parcels": [
+        "P100299",
+        "P101334",
+        "P120078",
+        "P126554",
+        "P128061",
+        "P128062",
+        "P134434",
+        "P134435",
+        "P134441",
+        "P134443"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100299",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 1.24,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P101334",
+          "location": "61440 SOUTH CASCADE ROAD, MARBLEMOUNT",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 4.0900002,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "32 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P120078",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, 5+ UNITS",
+          "acres": 3.74,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "18 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P126554",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 1.73,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P128061",
+          "location": "LIBERTY BELL LANE, MARBLEMOUNT",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 9.8199997,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "18 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 66,
+        "hydrated_row_count": 66,
+        "parquet_paths": [
+          "r2://openskagit/assessor.parquet",
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 66,
+        "eval_hydrated_row_count": 66,
+        "eval_filtered_row_count": 66,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "required_sql_pattern",
+                "message": "SQL did not match required pattern: \\bAS\\s+utilities\\b"
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 1 parcel P100299 did not include utility evidence."
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 2 parcel P101334 did not include utility evidence."
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 3 parcel P120078 did not include utility evidence."
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 4 parcel P126554 did not include utility evidence."
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 5 parcel P128061 did not include utility evidence."
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 6 parcel P128062 did not include utility evidence."
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 7 parcel P134434 did not include utility evidence."
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 8 parcel P134435 did not include utility evidence."
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 9 parcel P134441 did not include utility evidence."
+              },
+              {
+                "code": "row_utilities",
+                "message": "row 10 parcel P134443 did not include utility evidence."
+              },
+              {
+                "code": "row_failure_limit",
+                "message": "Stopped after 10 row-level failures."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

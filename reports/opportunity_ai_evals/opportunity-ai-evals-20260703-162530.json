@@ -1,0 +1,134 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "county_commercial_over_1m_assessed",
+      "prompt": "Commercial retail or service properties in Skagit County assessed over one million dollars.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.assessed_value\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') ps\nWHERE ps.assessed_value > 1000000\n  AND (LOWER(ps.land_use) LIKE '%retail%' OR LOWER(ps.land_use) LIKE '%service%')",
+      "generated_params": [],
+      "title": "Commercial Retail or Service Properties in Skagit County Assessed Over $1 Million",
+      "criteria_summary": "Parcels in Skagit County with land use indicating commercial retail or service properties and assessed value greater than 1,000,000 dollars.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100111",
+        "P100316",
+        "P100467",
+        "P100968",
+        "P101168",
+        "P102210",
+        "P102726",
+        "P104516",
+        "P104517",
+        "P104625"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100111",
+          "location": "1415 PACIFIC DRIVE, BURLINGTON",
+          "current_use": "MISCELLANEOUS SERVICES",
+          "acres": 1.3017,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "15,616 sf primary building",
+            "built 1992",
+            "9 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P100316",
+          "location": "506 CROSSROADS SQ, SEDRO-WOOLLEY",
+          "current_use": "RETAIL TRADE, GENERAL MERCHANDISE",
+          "acres": 0.88999999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "31,715 sf primary building",
+            "built 1989"
+          ]
+        },
+        {
+          "parcel_number": "P100467",
+          "location": "600 CROSSROADS SQUARE, SEDRO-WOOLLEY",
+          "current_use": "RETAIL TRADE, EATING & DRINKING",
+          "acres": 0.88999999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "2,756 sf primary building",
+            "built 1989"
+          ]
+        },
+        {
+          "parcel_number": "P100968",
+          "location": "MOUNT VERNON",
+          "current_use": "PROFESSIONAL SERVICES",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "14,580 sf primary building",
+            "built 1995"
+          ]
+        },
+        {
+          "parcel_number": "P101168",
+          "location": "1370 ANACORTES ST, BURLINGTON",
+          "current_use": "MISCELLANEOUS SERVICES",
+          "acres": 2.22,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,848 sf primary building",
+            "built 1997",
+            "3 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 1
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "mount_vernon_mobile_home_parcels",
+      "prompt": "Mobile home parcels in Mount Vernon, including mobile home parks and mobile homes on owned or leased land.",
+      "status": "error",
+      "failures": [
+        {
+          "code": "eval_exception",
+          "message": "R2SearchError: Column building_value is not listed for alias ps on r2://openskagit/derived/parcel_search.parquet.",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval."
+      ],
+      "next_action": "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval.",
+      "generated_sql": "",
+      "generated_params": [],
+      "title": "",
+      "criteria_summary": "",
+      "raw_row_count": 0,
+      "hydrated_row_count": 0,
+      "filtered_row_count": 0,
+      "top_result_parcels": [],
+      "sample_rows": [],
+      "diagnostics": {
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "Column building_value is not listed for alias ps on r2://openskagit/derived/parcel_search.parquet."
+          },
+          {
+            "attempt": 2,
+            "status": "error",
+            "error": "The query must read from allowed R2 parquet files with read_parquet()."
+          },
+          {
+            "attempt": 3,
+            "status": "error",
+            "error": "Column building_value is not listed for alias ps on r2://openskagit/derived/parcel_search.parquet."
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

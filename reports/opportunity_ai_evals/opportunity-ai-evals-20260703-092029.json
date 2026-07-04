@@ -1,0 +1,56 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 1
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "mount_vernon_mobile_home_parcels",
+      "prompt": "Mobile home parcels in Mount Vernon, including mobile home parks and mobile homes on owned or leased land.",
+      "status": "error",
+      "failures": [
+        {
+          "code": "eval_exception",
+          "message": "R2SearchError: DuckDB execution failed: Binder Error: Values list \"ps\" does not have a column named \"year_built\"",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval."
+      ],
+      "next_action": "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval.",
+      "generated_sql": "WITH mh_land_use_codes AS (\n  SELECT '150' AS code UNION ALL\n  SELECT '180' UNION ALL\n  SELECT '181' UNION ALL\n  SELECT '182' UNION ALL\n  SELECT '185'\n),\nps AS (\n  SELECT *\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet')\n  WHERE (\n    lower(city_name) = 'mount vernon'\n    OR lower(situs_city_state_zip) LIKE '%mount vernon%'\n  )\n  AND (\n    regexp_extract(COALESCE(land_use, ''), '^\\((\\d+)\\)', 1) IN (SELECT code FROM mh_land_use_codes)\n  )\n)\nSELECT\n  ps.parcel_number,\n  ps.owner_name,\n  ps.situs_address,\n  ps.situs_city_state_zip,\n  ps.land_use,\n  ps.acres,\n  ps.assessed_value,\n  ps.year_built,\n  ps.improvement_building_count,\n  ps.total_improvement_value,\n  ps.total_living_area,\n  ps.largest_building_living_area,\n  ps.primary_building_style,\n  ps.primary_actual_year_built,\n  ps.primary_effective_year_built,\n  ps.primary_building_improvement_value,\n  'Mobile home land use code match' AS match_reasons\nFROM ps\nORDER BY ps.parcel_number",
+      "generated_params": [],
+      "title": "Mobile Home Parcels in Mount Vernon Including Parks and Owned/Leased Land",
+      "criteria_summary": "Parcels in Mount Vernon city or with situs city state zip containing 'mount vernon' having land use codes for mobile homes (180, 181, 182, 185) or mobile home parks (150). Includes parcels with mobile home improvements. Returns parcel details with match reasons.",
+      "raw_row_count": 0,
+      "hydrated_row_count": 0,
+      "filtered_row_count": 0,
+      "top_result_parcels": [],
+      "sample_rows": [],
+      "diagnostics": {
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "Column year_built is not listed for alias ps on r2://openskagit/derived/parcel_search.parquet."
+          },
+          {
+            "attempt": 2,
+            "status": "error",
+            "error": "Column building_value is not listed for alias ps on r2://openskagit/derived/parcel_search.parquet."
+          },
+          {
+            "attempt": 3,
+            "status": "error",
+            "error": "DuckDB execution failed: Binder Error: Values list \"ps\" does not have a column named \"year_built\""
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

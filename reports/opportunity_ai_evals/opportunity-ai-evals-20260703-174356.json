@@ -1,0 +1,56 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 1
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "county_cultural_recreation_properties",
+      "prompt": "Cultural or recreation properties in Skagit County, such as parks, camps, resorts, or public assembly uses.",
+      "status": "error",
+      "failures": [
+        {
+          "code": "eval_exception",
+          "message": "R2SearchError: DuckDB execution failed: Conversion Error: Could not convert string '' to INT32",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval."
+      ],
+      "next_action": "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval.",
+      "generated_sql": "SELECT\n  ps.parcel_number,\n  ps.land_use,\n  ps.acres,\n  ps.assessed_value,\n  'Cultural or recreation land use code' AS match_reasons\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE\n  CAST(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1) AS INTEGER) BETWEEN 710 AND 790",
+      "generated_params": [],
+      "title": "Cultural or Recreation Properties in Skagit County",
+      "criteria_summary": "Parcels with land use codes indicating cultural or recreation uses such as parks, camps, resorts, or public assembly.",
+      "raw_row_count": 0,
+      "hydrated_row_count": 0,
+      "filtered_row_count": 0,
+      "top_result_parcels": [],
+      "sample_rows": [],
+      "diagnostics": {
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "DuckDB execution failed: Conversion Error: Could not convert string '' to INT32"
+          },
+          {
+            "attempt": 2,
+            "status": "error",
+            "error": "DuckDB execution failed: Parser Error: syntax error at end of input"
+          },
+          {
+            "attempt": 3,
+            "status": "error",
+            "error": "DuckDB execution failed: Conversion Error: Could not convert string '' to INT32"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

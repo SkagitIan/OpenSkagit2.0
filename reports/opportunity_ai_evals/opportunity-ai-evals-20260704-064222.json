@@ -1,0 +1,675 @@
+{
+  "summary": {
+    "total": 4,
+    "passed": 3,
+    "failed": 1,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "county_under_2_acres_no_utilities_no_exemptions_not_flood_plain",
+      "prompt": "less than 2 acre parcels with no utilities, no exemptions not in flood plain",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.acres, COALESCE(ps.improvement_building_count, 0) AS improvement_building_count, TRIM(a.\"Utilities\") AS utilities, TRIM(a.\"Exemptions\") AS exemptions\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nJOIN read_parquet('r2://openskagit/assessor.parquet') AS a ON ps.parcel_number = TRIM(a.\"Parcel Number\")\nWHERE ps.acres < 2\n  AND (TRIM(COALESCE(a.\"Utilities\", '')) = '')\n  AND (TRIM(COALESCE(a.\"Exemptions\", '')) = '')\n  AND COALESCE(ps.improvement_building_count, 0) = 0",
+      "generated_params": [],
+      "title": "Parcels Less Than 2 Acres with No Utilities and No Exemptions",
+      "criteria_summary": "Parcels with less than 2 acres, no utilities, no exemptions, and no flood plain filter (flood plain data not available).",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100003",
+        "P100009",
+        "P100010",
+        "P100026",
+        "P100027",
+        "P100029",
+        "P100032",
+        "P100086",
+        "P1001",
+        "P100103"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100003",
+          "location": "702 R AVENUE, ANACORTES",
+          "current_use": "Personal Property",
+          "acres": 0.0,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Public/civic or moorage use"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100009",
+          "location": "910 26TH ST, ANACORTES",
+          "current_use": "Personal Property",
+          "acres": 0.0,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Public/civic or moorage use"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100010",
+          "location": "915 23RD ST, ANACORTES",
+          "current_use": "Personal Property",
+          "acres": 0.0,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Public/civic or moorage use"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100026",
+          "location": "9374 THUNDERBIRD LANE, CONCRETE",
+          "current_use": "VACATION AND CABIN",
+          "acres": 0.34999999,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100027",
+          "location": "9380 THUNDERBIRD LANE, CONCRETE",
+          "current_use": "VACATION AND CABIN",
+          "acres": 0.34999999,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "5 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/assessor.parquet",
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "required_sql_pattern",
+                "message": "SQL did not match required pattern: \\bAS\\s+utilities\\b"
+              },
+              {
+                "code": "required_sql_pattern",
+                "message": "SQL did not match required pattern: \\bAS\\s+exemptions\\b"
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_old_sfr_with_garage_remodel_candidates",
+      "prompt": "Older single family homes in Skagit County built before 1980 with garage area that could be remodel candidates.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.primary_actual_year_built, ps.total_garage_area, ps.assessed_value\nFROM read_parquet('r2://openskagit/derived/parcel_search_with_sales_improvements.parquet') ps\nWHERE TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) IN (110, 111, 112, 113)\n  AND ps.primary_actual_year_built < 1980\n  AND COALESCE(ps.total_garage_area, 0) > 0\n  AND ps.primary_actual_year_built IS NOT NULL\n  AND ps.land_use IS NOT NULL",
+      "generated_params": [],
+      "title": "Older Single Family Homes in Skagit County Built Before 1980 with Garage Area for Remodel Candidates",
+      "criteria_summary": "Parcels with single family residential land use, primary actual year built before 1980, with at least some garage area, suitable for remodel candidate screening.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P107400",
+        "P100685",
+        "P103862",
+        "P109616",
+        "P112520",
+        "P113022",
+        "P119747",
+        "P115815",
+        "P122320",
+        "P124139"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P107400",
+          "location": "3924 E DIVISION, MOUNT VERNON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.31,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "built 1961",
+            "3 years since valid sale",
+            "720 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P100685",
+          "location": "4850 G LOOP ROAD, BOW",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 1.0025001,
+          "zoning": "RI",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "2,160 sf primary building",
+            "built 1970",
+            "7 years since valid sale",
+            "600 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P103862",
+          "location": "16713 MCLEAN ROAD, MOUNT VERNON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.66000003,
+          "zoning": "Ag-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning"
+          ],
+          "signal_labels": [
+            "2,787 sf primary building",
+            "built 1949",
+            "8 years since valid sale",
+            "506 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P109616",
+          "location": "105 NORTH FIFTH STREET, MOUNT VERNON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.11,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,395 sf primary building",
+            "built 1918",
+            "4 years since valid sale",
+            "200 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P112520",
+          "location": "19548 DRY SLOUGH ROAD, MOUNT VERNON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 1.24,
+          "zoning": "Ag-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning"
+          ],
+          "signal_labels": [
+            "1,919 sf primary building",
+            "built 1957",
+            "1 years since valid sale",
+            "576 sf garage area"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search_with_sales_improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_sedro_old_sfr_garage_no_recent_sale",
+      "prompt": "Sedro-Woolley single family homes built before 1985 with garage area and no valid sale in at least 20 years.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.primary_actual_year_built, ps.total_garage_area, ps.years_since_last_valid_sale\nFROM read_parquet('r2://openskagit/derived/parcel_search_with_sales_improvements.parquet') AS ps\nWHERE (lower(ps.city_name) = 'sedro-woolley' OR lower(ps.situs_city_state_zip) LIKE '%sedro-woolley%')\n  AND (TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) BETWEEN 110 AND 119)\n  AND ps.primary_actual_year_built < 1985\n  AND COALESCE(ps.total_garage_area, 0) > 0\n  AND (ps.years_since_last_valid_sale IS NULL OR ps.years_since_last_valid_sale >= 20)",
+      "generated_params": [],
+      "title": "Sedro-Woolley Single Family Homes Built Before 1985 with Garage and No Valid Sale in 20+ Years",
+      "criteria_summary": "Parcels in Sedro-Woolley city with single family residential land use, built before 1985, having garage area, and no valid sale recorded in the last 20 years.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P36653",
+        "P37222",
+        "P37358",
+        "P37367",
+        "P37465",
+        "P37477",
+        "P39313",
+        "P39340",
+        "P39341",
+        "P39351"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P36653",
+          "location": "703 GARDEN OF EDEN RD, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 4.8899999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "2,146 sf primary building",
+            "built 1920",
+            "620 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P37222",
+          "location": "703 W JONES RD, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.43000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,432 sf primary building",
+            "built 1973",
+            "22 years since valid sale",
+            "300 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P37358",
+          "location": "1106 ROBINSON RD, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.20999999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,616 sf primary building",
+            "built 1976",
+            "336 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P37367",
+          "location": "1100 ROBINSON STREET, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.2154,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,056 sf primary building",
+            "built 1979",
+            "23 years since valid sale",
+            "336 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P37465",
+          "location": "125 N BALL ST, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.43000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "2,098 sf primary building",
+            "built 1958",
+            "302 sf garage area"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search_with_sales_improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_average_quality_sfr_not_low_quality",
+      "prompt": "Average quality single family homes in Skagit County, excluding low quality homes.",
+      "status": "failed",
+      "failures": [
+        {
+          "code": "row_land_use_code",
+          "message": "row 46 parcel P77956 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_land_use_code",
+          "message": "row 60 parcel P80959 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_land_use_code",
+          "message": "row 61 parcel P81008 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_land_use_code",
+          "message": "row 102 parcel P36238 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_land_use_code",
+          "message": "row 104 parcel P36387 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_land_use_code",
+          "message": "row 116 parcel P39754 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_land_use_code",
+          "message": "row 119 parcel P40987 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_land_use_code",
+          "message": "row 121 parcel P41444 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_land_use_code",
+          "message": "row 125 parcel P42092 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_land_use_code",
+          "message": "row 135 parcel P49011 had land_use_code=180, expected one of: 110, 111, 112, 113.",
+          "severity": "error"
+        },
+        {
+          "code": "row_failure_limit",
+          "message": "Stopped after 10 row-level failures.",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Use regexp_extract(COALESCE(land_use, ''), '^\\\\((\\\\d+)\\\\)', 1) for DOR land-use code filters and select land_use/land_use_code evidence."
+      ],
+      "next_action": "Use regexp_extract(COALESCE(land_use, ''), '^\\\\((\\\\d+)\\\\)', 1) for DOR land-use code filters and select land_use/land_use_code evidence.",
+      "generated_sql": "SELECT DISTINCT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, i_quality.quality_codes, 'MSA average improvement class' AS match_reasons\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nJOIN (\n  SELECT TRIM(ParcelNumber) AS parcel_number, string_agg(DISTINCT TRIM(imprv_det_class_cd), ' | ') AS quality_codes\n  FROM read_parquet('r2://openskagit/improvements.parquet')\n  WHERE TRIM(imprv_det_class_cd) = 'MSA'\n  GROUP BY parcel_number\n) AS i_quality ON ps.parcel_number = i_quality.parcel_number\nWHERE\n  -- Filter for single family residential land use codes (DOR codes 110-113, 180, 185)\n  TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) IN (110, 111, 112, 113, 180, 185)\n  AND COALESCE(ps.improvement_building_count, 0) > 0\n",
+      "generated_params": [],
+      "title": "Average Quality Single Family Homes in Skagit County",
+      "criteria_summary": "Parcels with average quality (MSA) single family residential improvements in Skagit County, excluding low (MSL) and fair (MSF) quality homes.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P70233",
+        "P70281",
+        "P70304",
+        "P70375",
+        "P70405",
+        "P71099",
+        "P71150",
+        "P71269",
+        "P71804",
+        "P71820"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P70233",
+          "location": "17430 GOLDEN VIEW AVENUE, LA CONNER",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.40000001,
+          "zoning": "R",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P70281",
+          "location": "12131 CHINOOK DRIVE, BURLINGTON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.30000001,
+          "zoning": "URR",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P70304",
+          "location": "16077 WEST DIVISION STREET, MOUNT VERNON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.44,
+          "zoning": "Ag-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P70375",
+          "location": "1751 LAKE SAMISH ROAD, BELLINGHAM",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.44999999,
+          "zoning": "RVR",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P70405",
+          "location": "n/a",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.46000001,
+          "zoning": "RI",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average improvement class"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "The query must read from allowed R2 parquet files with read_parquet()."
+          },
+          {
+            "attempt": 2,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_quality_code",
+                "message": "row 6 parcel P71140 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 15 parcel P73262 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 19 parcel P73630 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 22 parcel P74409 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 59 parcel P79338 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 89 parcel P83461 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 98 parcel P99088 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 99 parcel P99138 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 103 parcel P29453 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 107 parcel P29911 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_failure_limit",
+                "message": "Stopped after 10 row-level failures."
+              }
+            ]
+          },
+          {
+            "attempt": 3,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_land_use_code",
+                "message": "row 46 parcel P77956 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 60 parcel P80959 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 61 parcel P81008 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 102 parcel P36238 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 104 parcel P36387 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 116 parcel P39754 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 119 parcel P40987 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 121 parcel P41444 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 125 parcel P42092 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 135 parcel P49011 had land_use_code=180, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_failure_limit",
+                "message": "Stopped after 10 row-level failures."
+              }
+            ]
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

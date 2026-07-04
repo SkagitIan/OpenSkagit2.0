@@ -1,0 +1,128 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "county_cultural_recreation_properties",
+      "prompt": "Cultural or recreation properties in Skagit County, such as parks, camps, resorts, or public assembly uses.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) BETWEEN 710 AND 790",
+      "generated_params": [],
+      "title": "Cultural or Recreation Properties in Skagit County",
+      "criteria_summary": "Parcels with land use codes between 710 and 790 indicating cultural, recreation, parks, camps, resorts, or public assembly uses in Skagit County.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P105306",
+        "P106655",
+        "P107266",
+        "P107269",
+        "P100635",
+        "P106788",
+        "P103405",
+        "P103619",
+        "P106266",
+        "P108876"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P105306",
+          "location": "632 SUNSET PARK DR, SEDRO-WOOLLEY",
+          "current_use": "RECREATIONAL ACTIVITIES",
+          "acres": 0.75,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "11,272 sf primary building",
+            "built 2001",
+            "15 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P106655",
+          "location": "200 VALLEY MALL WAY, MOUNT VERNON",
+          "current_use": "RECREATIONAL ACTIVITIES",
+          "acres": 2.05,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "15,300 sf primary building",
+            "built 2021"
+          ]
+        },
+        {
+          "parcel_number": "P107266",
+          "location": "909 PETERSON ROAD, BURLINGTON",
+          "current_use": "OTHER CULTURAL/ENTERTAIN./RECREATIONAL & CHURCHES",
+          "acres": 0.22,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "built 2010"
+          ]
+        },
+        {
+          "parcel_number": "P107269",
+          "location": "BURLINGTON",
+          "current_use": "OTHER CULTURAL/ENTERTAIN./RECREATIONAL & CHURCHES",
+          "acres": 4.5300002,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "built 1965"
+          ]
+        },
+        {
+          "parcel_number": "P100635",
+          "location": "25751 HELMICK ROAD, SEDRO WOOLLEY",
+          "current_use": "RECREATIONAL ACTIVITIES",
+          "acres": 1.79,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

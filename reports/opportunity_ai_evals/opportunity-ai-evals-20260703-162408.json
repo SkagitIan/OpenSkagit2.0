@@ -1,0 +1,191 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "mount_vernon_unimproved_inside_city_lots",
+      "prompt": "Unimproved land inside Mount Vernon city limits.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, ps.improvement_building_count\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE (lower(ps.city_name) = 'mount vernon' OR lower(ps.situs_city_state_zip) LIKE '%mount vernon%')\n  AND COALESCE(ps.improvement_building_count, 0) = 0\n  AND regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1) = '911'\n  AND ps.acres > 0\n  AND ps.has_geometry = TRUE",
+      "generated_params": [],
+      "title": "Unimproved Land Inside Mount Vernon City Limits",
+      "criteria_summary": "Parcels inside Mount Vernon city limits with no improvements (improvement_building_count = 0) and land use indicating unimproved land.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100289",
+        "P100310",
+        "P100476",
+        "P100764",
+        "P103393",
+        "P103402",
+        "P104268",
+        "P106651",
+        "P107270",
+        "P108337"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100289",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 1.64,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100310",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 0.31,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100476",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 4.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100764",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 0.34,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P103393",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 3.75,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "27 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_land_use_code",
+                "message": "row 15 parcel P109375 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 16 parcel P109382 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 17 parcel P109412 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 18 parcel P110851 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 23 parcel P113735 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 25 parcel P116371 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 30 parcel P117440 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 32 parcel P118383 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 37 parcel P119266 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 38 parcel P119270 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_failure_limit",
+                "message": "Stopped after 10 row-level failures."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "required_sql_pattern",
+                "message": "SQL did not match required pattern: improvement_building_count"
+              },
+              {
+                "code": "row_max_improvements",
+                "message": "row 1 parcel P104774 had improvement_building_count=1.0, expected <= 0."
+              },
+              {
+                "code": "row_max_improvements",
+                "message": "row 163 parcel P136905 had improvement_building_count=1.0, expected <= 0."
+              },
+              {
+                "code": "row_max_improvements",
+                "message": "row 194 parcel P25679 had improvement_building_count=1.0, expected <= 0."
+              }
+            ]
+          },
+          {
+            "attempt": 3,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

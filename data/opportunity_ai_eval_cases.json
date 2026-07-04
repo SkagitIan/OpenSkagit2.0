@@ -1,0 +1,1293 @@
+[
+  {
+    "id": "county_under_2_acres_no_utilities_no_exemptions_not_flood_plain",
+    "prompt": "less than 2 acre parcels with no utilities, no exemptions not in flood plain",
+    "notes": "Regression for treating 'not in flood plain' as a place filter and for no-utilities/no-exemptions evidence selection.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\"Exemptions\"", "\\bAS\\s+utilities\\b", "\\bAS\\s+exemptions\\b"],
+    "forbidden_sql_patterns": [
+      "(city_name|situs_city_state_zip)[\\s\\S]{0,80}flood",
+      "\\bplace\\s+match\\s*:\\s*flood"
+    ],
+    "row_expectations": {
+      "max_acres": 2,
+      "require_no_utilities": true,
+      "require_no_exemptions": true
+    }
+  },
+  {
+    "id": "sedro_woolley_low_quality_dwellings_1_to_3_acres",
+    "prompt": "Parcels located in Sedro-Woolley city or its immediate unincorporated vicinity with existing residential dwellings classified as low quality, and parcel size between 1 and 3 acres.",
+    "notes": "Regression for broad inside_city_limits OR city_name logic and for confusing quality codes with condition codes.",
+    "expected_min_result_count": 1,
+  "expected_max_result_count": 100,
+    "required_sql_patterns": ["improvements\\.parquet", "imprv_det_class_cd", "(quality_codes|match_reasons)"],
+    "forbidden_sql_patterns": [
+      "inside_city_limits\\s*=\\s*TRUE\\s+OR\\s+.*city_name",
+      "inside_city_limits\\s*=\\s*true\\s+OR\\s+.*city_name",
+      "condition_codes[\\s\\S]{0,80}(LIKE|=|IN)[\\s\\S]{0,80}MSL",
+      "condition_codes[\\s\\S]{0,80}(LIKE|=|IN)[\\s\\S]{0,80}MSF",
+      "condition_codes[\\s\\S]{0,80}(LIKE|=|IN)[\\s\\S]{0,80}MSA"
+    ],
+    "row_expectations": {
+      "place_terms": ["sedro-woolley"],
+      "min_acres": 1,
+      "max_acres": 3,
+      "require_dwelling": true,
+      "require_low_quality_signal": true,
+      "forbidden_place_terms": ["anacortes", "burlington", "mount vernon", "la conner"]
+    }
+  },
+  {
+    "id": "sedro_marblemount_lots_over_1_acre_utilities_no_improvements",
+    "prompt": "lots in sedro-woolley or marblemount that are over 1 acre with utilities and no improvements.",
+    "notes": "Regression for ps.utilities hallucination and unqualified acres in joined parquet queries.",
+  "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\\bAS\\s+utilities\\b"],
+    "forbidden_sql_patterns": ["ps\\.utilities", "(?<!\\.)\\bacres\\b\\s*>\\s*1", "utilities\\s*=\\s*'Yes'"],
+    "row_expectations": {
+      "place_terms": ["sedro-woolley", "marblemount"],
+      "min_acres": 1,
+      "max_improvement_building_count": 0,
+      "require_utilities": true
+    }
+  },
+  {
+    "id": "sedro_woolley_recreation_lots",
+    "prompt": "Recreation lots in sedro-woolley",
+    "notes": "Regression for treating derived parcel_search.land_use as a bare numeric code.",
+    "expected_max_result_count": 300,
+    "forbidden_sql_patterns": [
+      "\\bland_use\\s+IN\\s*\\(",
+      "TRIM\\s*\\(\\s*land_use\\s*\\)\\s*(=|!=|<>)\\s*'\\d+",
+      "TRIM\\s*\\(\\s*ps\\.land_use\\s*\\)\\s*(=|!=|<>)\\s*'\\d+"
+    ],
+    "row_expectations": {
+      "place_terms": ["sedro-woolley"],
+      "require_bare_recreation_land": true
+    }
+  },
+  {
+    "id": "anacortes_high_value_sfr",
+    "prompt": "High value single family residential parcels in Anacortes assessed over $750,000.",
+    "notes": "SFR value threshold and named-city place filtering.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessed_value"],
+    "forbidden_sql_patterns": ["\\bland_use\\s+IN\\s*\\("],
+    "row_expectations": {
+      "place_terms": ["anacortes"],
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "min_assessed_value": 750000,
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "mount_vernon_mobile_home_parcels",
+    "prompt": "Mobile home parcels in Mount Vernon, including mobile home parks and mobile homes on owned or leased land.",
+    "notes": "Mobile home DOR codes are property-use codes, not improvement detail codes.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["\\b[a-z_][a-z0-9_]*\\.year_built\\b", "\\b[a-z_][a-z0-9_]*\\.building_value\\b"],
+    "row_expectations": {
+      "place_terms": ["mount vernon"],
+      "expected_land_use_codes": ["150", "180", "181", "182", "185"]
+    }
+  },
+  {
+    "id": "burlington_retail_service_commercial",
+    "prompt": "Commercial retail or service parcels in Burlington.",
+    "notes": "Commercial DOR use families should use land_use code prefixes 5 and 6.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["burlington"],
+      "expected_land_use_code_prefixes": ["5", "6"],
+      "forbidden_land_use_code_prefixes": ["1", "8", "9"]
+    }
+  },
+  {
+    "id": "la_conner_retail_service_commercial",
+    "prompt": "Commercial service or retail properties in La Conner.",
+    "notes": "Named-place regression for La Conner plus commercial code families.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["la conner"],
+      "expected_land_use_code_prefixes": ["5", "6"],
+      "forbidden_land_use_code_prefixes": ["1", "8", "9"]
+    }
+  },
+  {
+    "id": "concrete_manufacturing_industrial",
+    "prompt": "Manufacturing or industrial parcels in Concrete.",
+    "notes": "Industrial/manufacturing code families are 210-390.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 100,
+    "row_expectations": {
+      "place_terms": ["concrete"],
+      "expected_land_use_code_prefixes": ["2", "3"],
+      "forbidden_land_use_code_prefixes": ["1", "5", "6", "8", "9"]
+    }
+  },
+  {
+    "id": "bow_ag_resource_over_5_acres",
+    "prompt": "Agriculture or resource parcels around Bow over 5 acres.",
+    "notes": "Resource/agriculture DOR code family plus postal-city vicinity matching.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["bow"],
+      "expected_land_use_code_prefixes": ["8"],
+      "min_acres": 5
+    }
+  },
+  {
+    "id": "burlington_ag_resource_over_10_acres",
+    "prompt": "Agricultural or resource land near Burlington over 10 acres.",
+    "notes": "Checks that rural vicinity prompts do not only search incorporated city limits.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["burlington"],
+      "expected_land_use_code_prefixes": ["8"],
+      "min_acres": 10
+    }
+  },
+  {
+    "id": "sedro_woolley_sfr_no_sale_20_years",
+    "prompt": "Single family residential parcels in Sedro-Woolley with no valid sale in at least 20 years.",
+    "notes": "Sales-summary regression: use derived sales fields, not raw sale strings.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["years_since_last_valid_sale"],
+    "row_expectations": {
+      "place_terms": ["sedro-woolley"],
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "min_years_since_last_valid_sale": 20,
+      "allow_missing_sale_as_old": true
+    }
+  },
+  {
+    "id": "anacortes_sfr_no_sale_25_years",
+    "prompt": "Anacortes single family residential parcels with no valid sale in 25 years or more.",
+    "notes": "Long hold-period SFR search in a different jurisdiction.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["years_since_last_valid_sale|has_valid_sale"],
+    "row_expectations": {
+      "place_terms": ["anacortes"],
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "min_years_since_last_valid_sale": 25,
+      "allow_missing_sale_as_old": true
+    }
+  },
+  {
+    "id": "mount_vernon_unimproved_inside_city_lots",
+    "prompt": "Unimproved land inside Mount Vernon city limits.",
+    "notes": "Unimproved inside-city DOR code 911 and named city matching.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvement_building_count"],
+    "row_expectations": {
+      "place_terms": ["mount vernon"],
+      "expected_land_use_codes": ["911"],
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "marblemount_unimproved_land_over_5_acres",
+    "prompt": "Unimproved land in or near Marblemount over 5 acres.",
+    "notes": "Rural place/vicinity search for unimproved land.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 100,
+    "row_expectations": {
+      "place_terms": ["marblemount"],
+      "expected_land_use_codes": ["910", "911"],
+      "min_acres": 5,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "conway_sfr_outside_city",
+    "prompt": "Single family residential parcels around Conway outside city areas.",
+    "notes": "Small postal-place SFR regression with outside-city code 110.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 50,
+    "row_expectations": {
+      "place_terms": ["conway"],
+      "expected_land_use_codes": ["110"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "mount_vernon_two_to_four_unit_residential",
+    "prompt": "Two to four unit residential properties in Mount Vernon.",
+    "notes": "Multifamily 2-4 attached unit DOR code 120.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["mount vernon"],
+      "expected_land_use_codes": ["120"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "anacortes_condominium_residential",
+    "prompt": "Residential condominium parcels in Anacortes.",
+    "notes": "Residential condo DOR code 140 should not be confused with SFR.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["anacortes"],
+      "expected_land_use_codes": ["140"]
+    }
+  },
+  {
+    "id": "county_transportation_communication_utility_properties",
+    "prompt": "Transportation, communication, or utility properties in Skagit County.",
+    "notes": "DOR code family 410-490, broad countywide non-residential search.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["4"],
+      "forbidden_land_use_code_prefixes": ["1", "8", "9"]
+    }
+  },
+  {
+    "id": "county_cultural_recreation_properties",
+    "prompt": "Cultural or recreation properties in Skagit County, such as parks, camps, resorts, or public assembly uses.",
+    "notes": "DOR code family 710-790 should be distinct from bare recreation lots.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["7"],
+      "forbidden_land_use_code_prefixes": ["1", "8", "9"]
+    }
+  },
+  {
+    "id": "county_large_resource_land_over_100_acres",
+    "prompt": "Large agriculture, resource, or timber parcels in Skagit County over 100 acres.",
+    "notes": "Large acreage resource-land search.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["8"],
+      "min_acres": 100
+    }
+  },
+  {
+    "id": "county_commercial_over_1m_assessed",
+    "prompt": "Commercial retail or service properties in Skagit County assessed over one million dollars.",
+    "notes": "Commercial value threshold without a named city.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessed_value"],
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["5", "6"],
+      "min_assessed_value": 1000000
+    }
+  },
+  {
+    "id": "advanced_old_sfr_with_garage_remodel_candidates",
+    "prompt": "Older single family homes in Skagit County built before 1980 with garage area that could be remodel candidates.",
+    "notes": "Cross-checks improvement summary fields, older-building evidence, garage signal, match reasons, and countywide behavior.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["total_garage_area", "primary_actual_year_built|oldest_actual_year_built"],
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit", "\\b[a-z_][a-z0-9_]*\\.year_built\\b", "\\b[a-z_][a-z0-9_]*\\.building_value\\b"],
+    "row_expectations": {
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "require_match_reasons": true,
+      "min_numeric_fields": {"total_garage_area": 1},
+      "max_numeric_fields": {"primary_actual_year_built": 1980}
+    }
+  },
+  {
+    "id": "advanced_sedro_old_sfr_garage_no_recent_sale",
+    "prompt": "Sedro-Woolley single family homes built before 1985 with garage area and no valid sale in at least 20 years.",
+    "notes": "Combines place, SFR, garage, building age, and sales-age evidence.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 250,
+    "required_sql_patterns": ["total_garage_area", "primary_actual_year_built|oldest_actual_year_built", "years_since_last_valid_sale"],
+    "row_expectations": {
+      "place_terms": ["sedro-woolley"],
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "min_years_since_last_valid_sale": 20,
+      "allow_missing_sale_as_old": true,
+      "min_numeric_fields": {"total_garage_area": 1},
+      "max_numeric_fields": {"primary_actual_year_built": 1985}
+    }
+  },
+  {
+    "id": "advanced_anacortes_large_sfr_with_geometry",
+    "prompt": "Anacortes single family residential parcels over half an acre with valid map geometry.",
+    "notes": "Checks place, SFR, acreage, and map/geometry quality.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["has_geometry|gis_x|gis_y"],
+    "row_expectations": {
+      "place_terms": ["anacortes"],
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "min_acres": 0.5,
+      "require_dwelling": true,
+      "require_geometry": true
+    }
+  },
+  {
+    "id": "advanced_mount_vernon_commercial_value_with_reasons",
+    "prompt": "Mount Vernon commercial retail or service properties assessed over $750,000 with clear match reasons.",
+    "notes": "Commercial value threshold plus explainability.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessed_value", "(match_reasons|score)"],
+    "row_expectations": {
+      "place_terms": ["mount vernon"],
+      "expected_land_use_code_prefixes": ["5", "6"],
+      "min_assessed_value": 750000,
+      "require_match_reasons": true
+    }
+  },
+  {
+    "id": "advanced_burlington_industrial_over_1_acre_not_residential",
+    "prompt": "Burlington industrial or manufacturing parcels over 1 acre, excluding residential uses.",
+    "notes": "Industrial code-family positive/negative control.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 100,
+    "row_expectations": {
+      "place_terms": ["burlington"],
+      "expected_land_use_code_prefixes": ["2", "3"],
+      "forbidden_land_use_code_prefixes": ["1", "5", "6", "7", "8", "9"],
+      "min_acres": 1
+    }
+  },
+  {
+    "id": "advanced_no_utilities_no_exemptions_under_half_acre",
+    "prompt": "Countywide parcels under half an acre with no utilities and no exemptions.",
+    "notes": "No-utilities/no-exemptions evidence and countywide non-place behavior.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\"Exemptions\"", "\\bAS\\s+utilities\\b", "\\bAS\\s+exemptions\\b"],
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}county"],
+    "row_expectations": {
+      "max_acres": 0.5,
+      "require_no_utilities": true,
+      "require_no_exemptions": true
+    }
+  },
+  {
+    "id": "advanced_utilities_but_no_improvements_small_lots",
+    "prompt": "Small parcels under one acre with utilities but no improvements anywhere in Skagit County.",
+    "notes": "Contrasts utilities-present with no-improvements and countywide handling.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\\bAS\\s+utilities\\b", "improvement_building_count"],
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "max_acres": 1,
+      "require_utilities": true,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "advanced_marblemount_large_no_utilities_no_improvements",
+    "prompt": "Large parcels near Marblemount over 5 acres with no utilities and no improvements.",
+    "notes": "Rural place, no-utilities, and no-improvement combined screen.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 100,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\\bAS\\s+utilities\\b", "improvement_building_count"],
+    "row_expectations": {
+      "place_terms": ["marblemount"],
+      "min_acres": 5,
+      "require_no_utilities": true,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "advanced_mobile_home_parks_only_not_individual_mobile_homes",
+    "prompt": "Mobile home parks in Skagit County, not individual mobile homes or leased manufactured homes.",
+    "notes": "Negative control inside the mobile-home family: code 150 only, excluding 180/181/182/185.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 250,
+    "forbidden_sql_patterns": ["\\b[a-z_][a-z0-9_]*\\.year_built\\b", "\\b[a-z_][a-z0-9_]*\\.building_value\\b", "(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_codes": ["150"],
+      "forbidden_land_use_codes": ["180", "181", "182", "185"]
+    }
+  },
+  {
+    "id": "advanced_individual_mobile_homes_not_parks",
+    "prompt": "Individual mobile home parcels in Mount Vernon, excluding mobile home parks.",
+    "notes": "Mobile-home negative control: individual/mobile leased codes but not park code 150.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["\\b[a-z_][a-z0-9_]*\\.year_built\\b", "\\b[a-z_][a-z0-9_]*\\.building_value\\b"],
+    "row_expectations": {
+      "place_terms": ["mount vernon"],
+      "expected_land_use_codes": ["180", "181", "182", "185"],
+      "forbidden_land_use_codes": ["150"]
+    }
+  },
+  {
+    "id": "advanced_county_open_space_conservation_not_unimproved_lots",
+    "prompt": "Countywide open space or farm conservation parcels, not ordinary unimproved lots.",
+    "notes": "Separates open-space/conservation codes from unimproved-land codes.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}county"],
+    "row_expectations": {
+      "expected_land_use_codes": ["940", "941"],
+      "forbidden_land_use_codes": ["910", "911"]
+    }
+  },
+  {
+    "id": "advanced_recreation_business_uses_not_bare_recreation_lots",
+    "prompt": "Countywide cultural or recreation business/use properties, not bare recreation lots.",
+    "notes": "Prevents app from confusing DOR 7xx cultural/recreation uses with bare vacant recreation land.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["7"],
+      "forbidden_land_use_codes": ["910", "911", "940", "941"],
+      "forbidden_text_terms": ["unimproved land"]
+    }
+  },
+  {
+    "id": "advanced_recreation_lots_with_geometry_not_public_or_moorage",
+    "prompt": "Private bare recreation lots with valid map geometry, excluding public parks, schools, cemeteries, churches, moorage, and condos.",
+    "notes": "Bare/recreation land with geometry and public/condo exclusions.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["has_geometry|gis_x|gis_y"],
+    "row_expectations": {
+      "require_bare_recreation_land": true,
+      "require_geometry": true,
+      "forbidden_land_use_codes": ["140", "500", "670", "680", "760", "970"],
+      "forbidden_text_terms": ["moorage", "condo", "cemetery", "church", "public"]
+    }
+  },
+  {
+    "id": "advanced_low_quality_sfr_with_condition_evidence",
+    "prompt": "Low quality single family residential parcels countywide with condition evidence included.",
+    "notes": "Requires quality-code evidence and allows condition evidence, while preserving quality-vs-condition distinction.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvements\\.parquet", "imprv_det_class_cd", "(quality_codes|match_reasons)"],
+    "forbidden_sql_patterns": ["condition_codes[\\s\\S]{0,80}(LIKE|=|IN)[\\s\\S]{0,80}MSL", "condition_codes[\\s\\S]{0,80}(LIKE|=|IN)[\\s\\S]{0,80}MSF", "condition_codes[\\s\\S]{0,80}(LIKE|=|IN)[\\s\\S]{0,80}MSA"],
+    "row_expectations": {
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "require_low_quality_signal": true,
+      "require_match_reasons": true
+    }
+  },
+  {
+    "id": "advanced_average_quality_sfr_not_low_quality",
+    "prompt": "MSA average-quality single family homes in Skagit County, excluding low quality homes.",
+    "notes": "Quality-code negative control for exact MSA average quality vs MSL low quality.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvements\\.parquet", "imprv_det_class_cd", "(quality_codes|match_reasons)"],
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "expected_quality_codes": ["MSA"],
+      "forbidden_quality_codes": ["MSL"]
+    }
+  },
+  {
+    "id": "advanced_fair_quality_sfr_not_average_or_low",
+    "prompt": "Fair quality single family homes in Skagit County, excluding average and low quality.",
+    "notes": "Quality-code negative control for MSF vs MSA/MSL.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvements\\.parquet", "imprv_det_class_cd", "(quality_codes|match_reasons)"],
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "expected_quality_codes": ["MSF"],
+      "forbidden_quality_codes": ["MSL", "MSA"]
+    }
+  },
+  {
+    "id": "advanced_recent_sale_commercial_last_5_years",
+    "prompt": "Commercial retail or service parcels with a valid sale in the last 5 years.",
+    "notes": "Recent-sale temporal logic for nonresidential assets.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["years_since_last_valid_sale|sold_last_5_years|has_valid_sale"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["5", "6"],
+      "max_years_since_last_valid_sale": 5
+    }
+  },
+  {
+    "id": "advanced_no_recent_sale_commercial_15_years",
+    "prompt": "Commercial retail or service parcels with no valid sale in at least 15 years.",
+    "notes": "Long-hold temporal logic for nonresidential assets.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["years_since_last_valid_sale|has_valid_sale"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["5", "6"],
+      "min_years_since_last_valid_sale": 15,
+      "allow_missing_sale_as_old": true
+    }
+  },
+  {
+    "id": "advanced_high_value_resource_land_no_city_filter",
+    "prompt": "High value agriculture or resource land countywide assessed over $500,000.",
+    "notes": "Countywide resource land with value threshold and no fake place filter.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessed_value"],
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}(skagit|county)"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["8"],
+      "min_assessed_value": 500000
+    }
+  },
+  {
+    "id": "advanced_small_infill_city_lots_no_improvements",
+    "prompt": "Small inside-city infill lots under 0.25 acres with no improvements.",
+    "notes": "Inside-city/infill intent without a named city, plus no-improvement evidence.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["inside_city_limits", "improvement_building_count"],
+    "row_expectations": {
+      "max_acres": 0.25,
+      "expected_land_use_codes": ["911", "912"],
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "advanced_large_unincorporated_unimproved_land_no_city_limits",
+    "prompt": "Large unincorporated unimproved land over 20 acres, outside city limits.",
+    "notes": "Unincorporated large land should not use inside_city_limits as a broad OR branch.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["inside_city_limits", "improvement_building_count"],
+    "forbidden_sql_patterns": ["inside_city_limits\\s*=\\s*TRUE\\s+OR"],
+    "row_expectations": {
+      "expected_land_use_codes": ["910"],
+      "min_acres": 20,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "advanced_water_area_negative_control",
+    "prompt": "Water area parcels in Skagit County, not buildable land opportunities.",
+    "notes": "Negative-control asset class: DOR 930 water areas should not be converted into land opportunity rows.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_codes": ["930"],
+      "forbidden_land_use_code_prefixes": ["1", "5", "8"]
+    }
+  },
+  {
+    "id": "advanced_public_civic_negative_control",
+    "prompt": "Government, school, or public/civic parcels countywide, not private investment parcels.",
+    "notes": "Negative control for public/civic uses.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}county"],
+    "row_expectations": {
+      "expected_land_use_codes": ["670", "680"]
+    }
+  },
+  {
+    "id": "advanced_sedro_commercial_redevelopment_not_sfr",
+    "prompt": "Sedro-Woolley commercial redevelopment parcels, not single family homes.",
+    "notes": "Commercial redevelopment should not be filtered to dwelling assets.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["sedro-woolley"],
+      "expected_land_use_code_prefixes": ["5", "6"],
+      "forbidden_land_use_codes": ["110", "111", "112", "113"],
+      "forbidden_text_terms": ["SFR"]
+    }
+  },
+  {
+    "id": "advanced_mount_vernon_multifamily_not_sfr",
+    "prompt": "Mount Vernon multifamily residential properties, excluding single family residences.",
+    "notes": "Multifamily intent should target 120/130 and exclude SFR codes.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["mount vernon"],
+      "expected_land_use_codes": ["120", "130"],
+      "forbidden_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "advanced_anacortes_condos_not_sfr",
+    "prompt": "Anacortes residential condos, excluding single family homes.",
+    "notes": "Condo intent should not trigger SFR/dwelling-only filtering.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["anacortes"],
+      "expected_land_use_codes": ["140"],
+      "forbidden_land_use_codes": ["110", "111", "112", "113"]
+    }
+  },
+  {
+    "id": "suite_res_sedro_sfr_inside_city_small_lots",
+    "prompt": "Sedro-Woolley single family homes inside city on lots under a quarter acre.",
+    "notes": "Residential suite: strict SFR code and named-city small-lot screen.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["sedro-woolley"],
+      "expected_land_use_codes": ["111", "112", "113"],
+      "forbidden_land_use_codes": ["180", "181", "182", "185"],
+      "require_dwelling": true,
+      "max_acres": 0.25
+    }
+  },
+  {
+    "id": "suite_res_county_sfr_outside_city_over_2_acres",
+    "prompt": "Single family homes outside city limits in Skagit County on more than 2 acres.",
+    "notes": "Residential suite: countywide outside-city SFR code.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_codes": ["110"],
+      "require_dwelling": true,
+      "min_acres": 2
+    }
+  },
+  {
+    "id": "suite_res_anacortes_sfr_secondary_units",
+    "prompt": "Anacortes SFR parcels with a detached secondary unit.",
+    "notes": "Residential suite: distinguishes SFR secondary-unit codes from generic SFR.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["anacortes"],
+      "expected_land_use_codes": ["112", "113"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "suite_res_county_vacation_cabins",
+    "prompt": "Vacation or cabin residential parcels countywide.",
+    "notes": "Residential suite: vacation/cabin DOR code should remain distinct from SFR.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["190"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "suite_res_county_five_plus_multifamily",
+    "prompt": "Five or more unit multifamily residential properties in Skagit County.",
+    "notes": "Residential suite: large multifamily code 130.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["130"],
+      "forbidden_land_use_codes": ["110", "111", "112", "113", "120"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "suite_res_burlington_two_to_four_unit_residential",
+    "prompt": "Burlington two to four unit residential properties.",
+    "notes": "Residential suite: small multifamily code 120 with place filter.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["burlington"],
+      "expected_land_use_codes": ["120"],
+      "forbidden_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "suite_res_county_mh_leased_property",
+    "prompt": "Manufactured home leased property parcels countywide.",
+    "notes": "Residential suite: MH leased property is occupied/mobile-home use, not bare land.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["181"],
+      "forbidden_land_use_codes": ["150", "910", "911"]
+    }
+  },
+  {
+    "id": "suite_res_county_multiple_mobile_home_land",
+    "prompt": "Mobile home land with two or more units under same ownership.",
+    "notes": "Residential suite: code 182 should not be collapsed into mobile home park code 150.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["182"],
+      "forbidden_land_use_codes": ["150"]
+    }
+  },
+  {
+    "id": "suite_res_county_mh_with_detached_sfr_second_unit",
+    "prompt": "Manufactured home parcels with a detached SFR second unit.",
+    "notes": "Residential suite: code 185 is mobile/manufactured family, not strict SFR.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["185"],
+      "forbidden_land_use_codes": ["110", "111", "112", "113", "150"]
+    }
+  },
+  {
+    "id": "suite_res_county_manufactured_homes_owned_land",
+    "prompt": "Manufactured home parcels on owned land, not mobile home parks.",
+    "notes": "Residential suite: individual manufactured homes code 180, excluding park code 150.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["180"],
+      "forbidden_land_use_codes": ["150"]
+    }
+  },
+  {
+    "id": "suite_land_unimproved_under_1_acre_no_improvements",
+    "prompt": "Unimproved land parcels under 1 acre with no buildings.",
+    "notes": "Land suite: small unimproved land must include no-improvement evidence.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvement_building_count"],
+    "row_expectations": {
+      "expected_land_use_codes": ["910", "911", "912"],
+      "max_acres": 1,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_land_inside_city_undeveloped_over_quarter_acre",
+    "prompt": "Undeveloped inside-city land over 0.25 acres.",
+    "notes": "Land suite: inside-city unimproved code 911.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvement_building_count"],
+    "row_expectations": {
+      "expected_land_use_codes": ["911"],
+      "min_acres": 0.25,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_land_unimproved_outside_city_over_5_acres",
+    "prompt": "County unimproved land outside city limits over 5 acres.",
+    "notes": "Land suite: outside-city unimproved code 910.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvement_building_count"],
+    "row_expectations": {
+      "expected_land_use_codes": ["910"],
+      "min_acres": 5,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_land_open_space_over_10_acres",
+    "prompt": "Open space parcels over 10 acres in Skagit County.",
+    "notes": "Land suite: open-space DOR code 940.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["940"],
+      "min_acres": 10
+    }
+  },
+  {
+    "id": "suite_land_farm_ag_conservation",
+    "prompt": "Farm and agricultural conservation parcels countywide.",
+    "notes": "Land suite: farm/ag conservation code 941.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["941"]
+    }
+  },
+  {
+    "id": "suite_land_trees_timber_920",
+    "prompt": "Tree or timber land parcels classified as trees.",
+    "notes": "Land suite: DOR 920 tree land should not become SFR/resource generic rows.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["920"],
+      "forbidden_land_use_code_prefixes": ["1", "5", "6"]
+    }
+  },
+  {
+    "id": "suite_land_resource_production_over_20_acres",
+    "prompt": "Resource production parcels over 20 acres, such as agriculture, timber, mining, or fishing.",
+    "notes": "Land suite: broad resource family 810-890 with acreage.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["8"],
+      "min_acres": 20
+    }
+  },
+  {
+    "id": "suite_land_marblemount_unimproved_recreation_lots",
+    "prompt": "Marblemount private unimproved recreation lots with no buildings.",
+    "notes": "Land suite: rural place, recreation wording, and no-improvement evidence.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvement_building_count"],
+    "row_expectations": {
+      "place_terms": ["marblemount"],
+      "require_bare_recreation_land": true,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_land_mappable_private_unimproved_lots",
+    "prompt": "Mappable private unimproved lots with valid geometry, excluding condos and moorage.",
+    "notes": "Land suite: geometry and private-land exclusions.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["has_geometry|gis_x|gis_y", "improvement_building_count"],
+    "row_expectations": {
+      "expected_land_use_codes": ["910", "911", "912", "940", "941"],
+      "forbidden_land_use_codes": ["140", "500", "970"],
+      "require_geometry": true,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_land_low_value_unimproved_under_100k",
+    "prompt": "Low assessed value unimproved land under $100,000 with no improvements.",
+    "notes": "Land suite: value and no-improvement screen.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvement_building_count"],
+    "row_expectations": {
+      "expected_land_use_codes": ["910", "911", "912"],
+      "max_assessed_value": 100000,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_com_anacortes_retail_trade",
+    "prompt": "Anacortes wholesale or retail trade commercial properties.",
+    "notes": "Commercial suite: DOR 510-590 plus named city.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["anacortes"],
+      "expected_land_use_code_prefixes": ["5"],
+      "forbidden_land_use_code_prefixes": ["1", "8", "9"]
+    }
+  },
+  {
+    "id": "suite_com_mount_vernon_services",
+    "prompt": "Mount Vernon service commercial properties.",
+    "notes": "Commercial suite: DOR 610-691 plus named city.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["mount vernon"],
+      "expected_land_use_code_prefixes": ["6"],
+      "forbidden_land_use_codes": ["110", "111", "112", "113"]
+    }
+  },
+  {
+    "id": "suite_com_burlington_retail_food_auto",
+    "prompt": "Burlington retail trade properties such as food, auto, furniture, or eating and drinking.",
+    "notes": "Commercial suite: retail/trade family should not become generic commercial exclusion.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["burlington"],
+      "expected_land_use_code_prefixes": ["5"],
+      "forbidden_land_use_code_prefixes": ["1"]
+    }
+  },
+  {
+    "id": "suite_com_county_professional_services",
+    "prompt": "Professional, finance, repair, or business service parcels countywide.",
+    "notes": "Commercial suite: broad service family 610-691.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["6"],
+      "forbidden_land_use_code_prefixes": ["1"]
+    }
+  },
+  {
+    "id": "suite_com_nonresidential_condos",
+    "prompt": "Non-residential condominium parcels countywide.",
+    "notes": "Commercial suite: non-residential condo code 500, not residential condo code 140.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["500"],
+      "forbidden_land_use_codes": ["140"]
+    }
+  },
+  {
+    "id": "suite_ind_county_manufacturing_industrial",
+    "prompt": "Manufacturing or industrial properties in Skagit County.",
+    "notes": "Industrial suite: DOR 210-360.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}skagit"],
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["2", "3"],
+      "forbidden_land_use_code_prefixes": ["1", "5", "6"]
+    }
+  },
+  {
+    "id": "suite_ind_concrete_industrial_over_250k",
+    "prompt": "Concrete industrial or manufacturing properties over $250,000 assessed value.",
+    "notes": "Industrial suite: named place with industrial family and value threshold.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["concrete"],
+      "expected_land_use_code_prefixes": ["2", "3"],
+      "min_assessed_value": 250000
+    }
+  },
+  {
+    "id": "suite_ind_industrial_zoned_with_residence",
+    "prompt": "Land zoned industrial with a residence, countywide.",
+    "notes": "Industrial suite: code 390 is a special mixed industrial/residential case.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["390"]
+    }
+  },
+  {
+    "id": "suite_transport_parking_transport_properties",
+    "prompt": "Transportation, parking, communication, or utility properties countywide.",
+    "notes": "Commercial/industrial suite: DOR 410-490.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["4"],
+      "forbidden_land_use_code_prefixes": ["1", "5", "6"]
+    }
+  },
+  {
+    "id": "suite_com_high_value_commercial_over_500k",
+    "prompt": "Commercial retail or service properties countywide assessed over $500,000.",
+    "notes": "Commercial suite: value threshold with commercial/service families.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["5", "6"],
+      "min_assessed_value": 500000
+    }
+  },
+  {
+    "id": "suite_signals_no_utilities_over_2_acres",
+    "prompt": "Parcels over 2 acres with no listed utilities.",
+    "notes": "Signals suite: no-utilities evidence must come from assessor.parquet.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\\bAS\\s+utilities\\b"],
+    "row_expectations": {
+      "min_acres": 2,
+      "require_no_utilities": true
+    }
+  },
+  {
+    "id": "suite_signals_utilities_present_under_half_acre",
+    "prompt": "Parcels under half an acre with utilities present.",
+    "notes": "Signals suite: utilities-present evidence must be selected.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\\bAS\\s+utilities\\b"],
+    "row_expectations": {
+      "max_acres": 0.5,
+      "require_utilities": true
+    }
+  },
+  {
+    "id": "suite_sales_recent_sfr_last_2_years",
+    "prompt": "Single family homes with a valid sale in the last 2 years.",
+    "notes": "Signals suite: recent sale screen with strict SFR codes.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "max_years_since_last_valid_sale": 2
+    }
+  },
+  {
+    "id": "suite_sales_sfr_no_valid_sale_30_years",
+    "prompt": "Single family homes with no valid sale in at least 30 years.",
+    "notes": "Signals suite: long hold period SFR screen.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "min_years_since_last_valid_sale": 30,
+      "allow_missing_sale_as_old": true
+    }
+  },
+  {
+    "id": "suite_value_high_value_sfr_over_1m",
+    "prompt": "High value single family homes assessed over $1,000,000.",
+    "notes": "Signals suite: strict SFR plus assessed value threshold.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "min_assessed_value": 1000000
+    }
+  },
+  {
+    "id": "suite_geom_mappable_sfr",
+    "prompt": "Single family homes with valid map geometry.",
+    "notes": "Signals suite: geometry evidence for residential results.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["has_geometry|gis_x|gis_y"],
+    "row_expectations": {
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true,
+      "require_geometry": true
+    }
+  },
+  {
+    "id": "suite_signals_no_exemptions_high_value",
+    "prompt": "Parcels assessed over $500,000 with no exemptions listed.",
+    "notes": "Signals suite: exemptions evidence from assessor.parquet.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Exemptions\"", "\\bAS\\s+exemptions\\b"],
+    "row_expectations": {
+      "min_assessed_value": 500000,
+      "require_no_exemptions": true
+    }
+  },
+  {
+    "id": "suite_signals_no_utilities_no_improvements_under_1_acre",
+    "prompt": "Small parcels under 1 acre with no utilities and no improvements.",
+    "notes": "Signals suite: combines no utilities with no-improvement evidence.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\\bAS\\s+utilities\\b", "improvement_building_count"],
+    "row_expectations": {
+      "max_acres": 1,
+      "require_no_utilities": true,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_place_la_conner_sfr",
+    "prompt": "La Conner single family residential parcels.",
+    "notes": "Place suite: La Conner SFR place matching.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["la conner"],
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "suite_place_hamilton_unimproved_land",
+    "prompt": "Hamilton unimproved land with no buildings.",
+    "notes": "Place suite: small city/place plus no-improvement screen.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvement_building_count"],
+    "row_expectations": {
+      "place_terms": ["hamilton"],
+      "expected_land_use_codes": ["910", "911", "912"],
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_place_lyman_sfr",
+    "prompt": "Lyman single family homes.",
+    "notes": "Place suite: Lyman SFR place matching.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["lyman"],
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "suite_place_rockport_resource_land",
+    "prompt": "Resource or unimproved land near Rockport over 5 acres.",
+    "notes": "Place suite: rural place and resource/unimproved land.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["rockport"],
+      "expected_land_use_code_prefixes": ["8", "9"],
+      "min_acres": 5
+    }
+  },
+  {
+    "id": "suite_place_conway_resource_over_5_acres",
+    "prompt": "Agricultural or resource parcels around Conway over 5 acres.",
+    "notes": "Place suite: Conway vicinity and resource family.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["conway"],
+      "expected_land_use_code_prefixes": ["8", "9"],
+      "min_acres": 5
+    }
+  },
+  {
+    "id": "suite_place_bow_sfr_vicinity",
+    "prompt": "Single family homes around Bow.",
+    "notes": "Place suite: postal/vicinity place matching for Bow.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "place_terms": ["bow"],
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "suite_place_marblemount_no_city_limits_unimproved",
+    "prompt": "Marblemount unimproved land outside city limits.",
+    "notes": "Place suite: Marblemount spelling and no broad city-limits OR logic.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "forbidden_sql_patterns": ["inside_city_limits\\s*=\\s*TRUE\\s+OR"],
+    "row_expectations": {
+      "place_terms": ["marblemount"],
+      "expected_land_use_codes": ["910"],
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_neg_public_parks_not_private_recreation_lots",
+    "prompt": "Public park parcels countywide, not private bare recreation lots.",
+    "notes": "Negative-control suite: public/recreation-use 7xx codes should not become private bare land.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["7"],
+      "forbidden_land_use_codes": ["910", "911", "940"]
+    }
+  },
+  {
+    "id": "suite_neg_cemetery_church_recreation_uses",
+    "prompt": "Cemetery or church recreation/cultural use parcels, not private investment land.",
+    "notes": "Negative-control suite: 7xx cultural/recreation civic uses.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["7"],
+      "forbidden_land_use_codes": ["910", "911"]
+    }
+  },
+  {
+    "id": "suite_neg_condo_moorage_only",
+    "prompt": "Condo moorage parcels only, not waterfront buildable land.",
+    "notes": "Negative-control suite: moorage code 970.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["970"],
+      "forbidden_land_use_code_prefixes": ["1", "5", "8"]
+    }
+  },
+  {
+    "id": "suite_neg_strict_sfr_excludes_commercial",
+    "prompt": "Strict single family residential parcels, excluding commercial and industrial uses.",
+    "notes": "Negative-control suite: SFR prompt should not return commercial/service/industrial rows.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "forbidden_land_use_code_prefixes": ["2", "3", "4", "5", "6", "7", "8", "9"],
+      "require_dwelling": true
+    }
+  },
+  {
+    "id": "suite_neg_commercial_excludes_sfr",
+    "prompt": "Commercial parcels only, excluding single family residences and manufactured homes.",
+    "notes": "Negative-control suite: commercial prompt should positively target 5xx/6xx.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "row_expectations": {
+      "expected_land_use_code_prefixes": ["5", "6"],
+      "forbidden_land_use_codes": ["110", "111", "112", "113", "180", "181", "182", "185"]
+    }
+  },
+  {
+    "id": "suite_ui_sedro_marblemount_lots_utilities_no_improvements",
+    "prompt": "lots in sedro-woolley or marbelmount that are over 1 acre with utilities and no improvements.",
+    "notes": "UI-style suite: misspelled Marblemount, utilities evidence, no improvements.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 300,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\\bAS\\s+utilities\\b", "improvement_building_count"],
+    "row_expectations": {
+      "place_terms": ["sedro-woolley", "marblemount"],
+      "min_acres": 1,
+      "require_utilities": true,
+      "max_improvement_building_count": 0
+    }
+  },
+  {
+    "id": "suite_ui_under_2_acres_no_utilities_no_exemptions",
+    "prompt": "less than 2 acre parcels with no utilities and no exemptions, not in flood plain.",
+    "notes": "UI-style suite: no utilities/no exemptions and flood-plain wording as exclusion, not place.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 300,
+    "required_sql_patterns": ["assessor\\.parquet", "\"Utilities\"", "\"Exemptions\"", "\\bAS\\s+utilities\\b", "\\bAS\\s+exemptions\\b"],
+    "forbidden_sql_patterns": ["(city_name|situs_city_state_zip)[\\s\\S]{0,80}flood"],
+    "row_expectations": {
+      "max_acres": 2,
+      "require_no_utilities": true,
+      "require_no_exemptions": true
+    }
+  },
+  {
+    "id": "suite_ui_sedro_low_quality_sfr_1_to_3_acres_residential_zones",
+    "prompt": "low quality homes in sedro-woolly on lots between 1-3 acres. residential zones only",
+    "notes": "UI regression: misspelled Sedro-Woolley and residential zoning should not collapse to ps.zoning_code_short LIKE 'R%' only.",
+    "expected_min_result_count": 1,
+    "expected_max_result_count": 200,
+    "required_sql_patterns": ["improvements\\.parquet", "imprv_det_class_cd", "zoning_(code_short|label)|comp_plan_lud|city_name|situs_city_state_zip"],
+    "forbidden_sql_patterns": ["zoning_code_short\\s+LIKE\\s+'R%'"],
+    "row_expectations": {
+      "place_terms": ["sedro-woolley"],
+      "min_acres": 1,
+      "max_acres": 3,
+      "expected_land_use_codes": ["110", "111", "112", "113"],
+      "expected_quality_codes": ["MSL"],
+      "require_dwelling": true,
+      "zoning_terms": ["residential", "rural reserve", "rural intermediate", "rural village residential", "incorporated area", "rrv", "ri", "rvr", "city"]
+    }
+  }
+]

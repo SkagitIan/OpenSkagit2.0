@@ -1,0 +1,127 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "county_large_resource_land_over_100_acres",
+      "prompt": "Large agriculture, resource, or timber parcels in Skagit County over 100 acres.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres FROM read_parquet('r2://openskagit/derived/parcel_search.parquet') ps WHERE ps.acres > 100 AND (regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1) BETWEEN '810' AND '890')",
+      "generated_params": [],
+      "title": "Large Agriculture, Resource, or Timber Parcels Over 100 Acres in Skagit County",
+      "criteria_summary": "Parcels in Skagit County with land use codes indicating agriculture, resource, or timber, having more than 100 acres",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P104582",
+        "P135506",
+        "P15044",
+        "P15118",
+        "P15143",
+        "P15147",
+        "P15169",
+        "P15170",
+        "P17978",
+        "P18089"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P104582",
+          "location": "n/a",
+          "current_use": "CURRENT USE FARM AND AG",
+          "acres": 123.68,
+          "zoning": "Ag-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P135506",
+          "location": "n/a",
+          "current_use": "FORESTLAND UNDER RCW 84.33",
+          "acres": 168.0,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P15044",
+          "location": "n/a",
+          "current_use": "MINING ACTIVITIES & RELATED SERVICES",
+          "acres": 126.76,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P15118",
+          "location": "n/a",
+          "current_use": "MINING ACTIVITIES & RELATED SERVICES",
+          "acres": 120.0,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P15143",
+          "location": "n/a",
+          "current_use": "MINING ACTIVITIES & RELATED SERVICES",
+          "acres": 104.6,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

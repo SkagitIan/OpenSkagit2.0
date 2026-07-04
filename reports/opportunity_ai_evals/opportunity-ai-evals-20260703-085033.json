@@ -1,0 +1,345 @@
+{
+  "summary": {
+    "total": 3,
+    "passed": 2,
+    "failed": 1,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "sedro_woolley_low_quality_dwellings_1_to_3_acres",
+      "prompt": "Parcels located in Sedro-Woolley city or its immediate unincorporated vicinity with existing residential dwellings classified as low quality, and parcel size between 1 and 3 acres.",
+      "status": "failed",
+      "failures": [
+        {
+          "code": "row_low_quality",
+          "message": "row 1 parcel P37434 did not include low-quality improvement evidence.",
+          "severity": "error"
+        },
+        {
+          "code": "row_low_quality",
+          "message": "row 2 parcel P37479 did not include low-quality improvement evidence.",
+          "severity": "error"
+        },
+        {
+          "code": "row_low_quality",
+          "message": "row 3 parcel P76885 did not include low-quality improvement evidence.",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Return explicit low-quality evidence in selected columns or match_reasons so the row-level evaluator can verify it."
+      ],
+      "next_action": "Return explicit low-quality evidence in selected columns or match_reasons so the row-level evaluator can verify it.",
+      "generated_sql": "WITH sedro_woolley_area AS (\n  SELECT ps.parcel_number\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet') ps\n  WHERE (lower(ps.city_name) = 'sedro-woolley' OR lower(ps.situs_city_state_zip) LIKE '%sedro-woolley%')\n), low_quality_residential AS (\n  SELECT DISTINCT TRIM(i.ParcelNumber) AS parcel_number\n  FROM read_parquet('r2://openskagit/improvements.parquet') i\n  WHERE TRIM(i.imprv_det_class_cd) = 'MSL'\n), parcels_filtered AS (\n  SELECT ps.parcel_number, ps.acres\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet') ps\n  WHERE ps.acres BETWEEN 1 AND 3\n    AND (lower(ps.city_name) = 'sedro-woolley' OR lower(ps.situs_city_state_zip) LIKE '%sedro-woolley%')\n)\nSELECT pf.parcel_number\nFROM parcels_filtered pf\nJOIN low_quality_residential lq ON pf.parcel_number = lq.parcel_number\nORDER BY pf.parcel_number",
+      "generated_params": [],
+      "title": "Sedro-Woolley Area Low Quality Residential Parcels 1-3 Acres",
+      "criteria_summary": "Parcels in Sedro-Woolley city or immediate unincorporated vicinity with existing residential dwellings classified as low quality (MSL) and parcel size between 1 and 3 acres",
+      "raw_row_count": 3,
+      "hydrated_row_count": 3,
+      "filtered_row_count": 3,
+      "top_result_parcels": [
+        "P37434",
+        "P37479",
+        "P76885"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P37434",
+          "location": "201 GARDEN OF EDEN RD, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 1.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,728 sf primary building",
+            "built 1910",
+            "7 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P37479",
+          "location": "214 N BALL ST, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 1.0034,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,020 sf primary building",
+            "built 1900"
+          ]
+        },
+        {
+          "parcel_number": "P76885",
+          "location": "113 N REED, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 1.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,760 sf primary building",
+            "built 1915"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 3,
+        "hydrated_row_count": 3,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "The query must read from allowed R2 parquet files with read_parquet()."
+          },
+          {
+            "attempt": 2,
+            "status": "generated"
+          }
+        ],
+        "eval_raw_row_count": 3,
+        "eval_hydrated_row_count": 3,
+        "eval_filtered_row_count": 3
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "sedro_marblemount_lots_over_1_acre_utilities_no_improvements",
+      "prompt": "lots in sedro-woolley or marblemount that are over 1 acre with utilities and no improvements.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number AS parcel_number, ps.acres, ps.situs_city_state_zip, a.\"Utilities\" AS utilities\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') ps\nJOIN read_parquet('r2://openskagit/assessor.parquet') a ON ps.parcel_number = TRIM(a.\"Parcel Number\")\nWHERE (LOWER(ps.city_name) = 'sedro-woolley' OR LOWER(ps.city_name) = 'marblemount' OR LOWER(ps.situs_city_state_zip) LIKE '%sedro-woolley%' OR LOWER(ps.situs_city_state_zip) LIKE '%marblemount%')\n  AND ps.acres > 1\n  AND TRIM(COALESCE(a.\"Utilities\", '')) <> ''\n  AND ps.improvement_building_count = 0",
+      "generated_params": [],
+      "title": "Lots in Sedro-Woolley or Marblemount Over 1 Acre with Utilities and No Improvements",
+      "criteria_summary": "Parcels located in Sedro-Woolley or Marblemount, larger than 1 acre, having utilities, and with zero improvements",
+      "raw_row_count": 66,
+      "hydrated_row_count": 66,
+      "filtered_row_count": 66,
+      "top_result_parcels": [
+        "P100299",
+        "P101334",
+        "P120078",
+        "P126554",
+        "P128061",
+        "P128062",
+        "P134434",
+        "P134435",
+        "P134441",
+        "P134443"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100299",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 1.24,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P101334",
+          "location": "61440 SOUTH CASCADE ROAD, MARBLEMOUNT",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 4.0900002,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "32 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P120078",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, 5+ UNITS",
+          "acres": 3.74,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "18 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P126554",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 1.73,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P128061",
+          "location": "LIBERTY BELL LANE, MARBLEMOUNT",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 9.8199997,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "18 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 66,
+        "hydrated_row_count": 66,
+        "parquet_paths": [
+          "r2://openskagit/assessor.parquet",
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "generated"
+          }
+        ],
+        "eval_raw_row_count": 66,
+        "eval_hydrated_row_count": 66,
+        "eval_filtered_row_count": 66
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "sedro_woolley_recreation_lots",
+      "prompt": "Recreation lots in sedro-woolley",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "WITH base AS (\n  SELECT ps.parcel_number, ps.situs_address, ps.situs_city_state_zip, ps.owner_name, ps.land_use, ps.acres, ps.city_name, ps.has_geometry, ps.improvement_building_count\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\n  WHERE (lower(ps.city_name) = 'sedro-woolley' OR lower(ps.situs_city_state_zip) LIKE '%sedro-woolley%')\n    AND ps.has_geometry = TRUE\n    AND ps.acres > 0\n    AND ps.improvement_building_count = 0\n    AND ps.land_use IS NOT NULL\n    AND NOT (ps.land_use LIKE '%MH LEASED PROPERTY%')\n    AND (ps.land_use LIKE '%RECREATION%' OR ps.land_use LIKE '%VACANT%' OR ps.land_use LIKE '%UNDEVELOPED%')\n    AND ps.land_use NOT LIKE '%CONDOMINIUM%'\n    AND ps.land_use NOT LIKE '%PUBLIC%'\n    AND ps.land_use NOT LIKE '%CIVIC%'\n    AND ps.land_use NOT LIKE '%OPEN SPACE%'\n)\nSELECT parcel_number, situs_address, situs_city_state_zip, owner_name, land_use, acres, city_name\nFROM base\nORDER BY acres DESC",
+      "generated_params": [],
+      "title": "Recreation Lots in Sedro-Woolley",
+      "criteria_summary": "Select parcels in Sedro-Woolley that are recreation or private vacant land, excluding mobile home leased property, condominiums, public/civic/open-space parcels, zero-acre or no-geometry parcels, and parcels with residential dwelling evidence.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 193,
+      "top_result_parcels": [
+        "P39369",
+        "P90024",
+        "P39391",
+        "P36417",
+        "P37594",
+        "P121363",
+        "P40409",
+        "P136897",
+        "P37331",
+        "P135488"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P39369",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 24.42,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "5 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P90024",
+          "location": "201 E JONES RD, SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 21.4,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P39391",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "RECREATIONAL ACTIVITIES",
+          "acres": 12.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "21 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P36417",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 11.65,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "35 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P37594",
+          "location": "105 JAMESON STREET, SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 7.2800002,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "generated"
+          }
+        ],
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 193
+      },
+      "repair_report": {}
+    }
+  ]
+}

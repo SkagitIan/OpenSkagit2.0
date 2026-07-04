@@ -1,0 +1,184 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "burlington_retail_service_commercial",
+      "prompt": "Commercial retail or service parcels in Burlington.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, ps.city_name, ps.situs_city_state_zip\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE (lower(ps.city_name) = 'burlington' OR lower(ps.situs_city_state_zip) LIKE '%burlington%')\n  AND (lower(ps.land_use) LIKE '%retail%' OR lower(ps.land_use) LIKE '%service%')\n  AND ps.acres > 0\n  AND ps.assessed_value > 0\nLIMIT 100",
+      "generated_params": [],
+      "title": "Commercial Retail or Service Parcels in Burlington",
+      "criteria_summary": "Parcels located in Burlington city with land use indicating commercial retail or service business.",
+      "raw_row_count": 100,
+      "hydrated_row_count": 100,
+      "filtered_row_count": 100,
+      "top_result_parcels": [
+        "P100111",
+        "P101168",
+        "P104516",
+        "P104517",
+        "P105936",
+        "P105938",
+        "P105940",
+        "P105942",
+        "P105944",
+        "P105946"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100111",
+          "location": "1415 PACIFIC DRIVE, BURLINGTON",
+          "current_use": "MISCELLANEOUS SERVICES",
+          "acres": 1.3017,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "15,616 sf primary building",
+            "built 1992",
+            "9 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P101168",
+          "location": "1370 ANACORTES ST, BURLINGTON",
+          "current_use": "MISCELLANEOUS SERVICES",
+          "acres": 2.22,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,848 sf primary building",
+            "built 1997",
+            "3 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P104516",
+          "location": "1022-1040 S BURLINGTON BLVD, BURLINGTON",
+          "current_use": "OTHER RETAIL TRADES",
+          "acres": 0.91829997,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "10,981 sf primary building",
+            "built 1997",
+            "8 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P104517",
+          "location": "1060 S BURLINGTON BOULEVARD, BURLINGTON",
+          "current_use": "RETAIL TRADE, EATING & DRINKING",
+          "acres": 0.82309997,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "5,600 sf primary building",
+            "built 1998",
+            "23 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P105936",
+          "location": "1457 WALTON DR, BURLINGTON",
+          "current_use": "RETAIL/AUTO/TIRES/MARINECRAFT/AIRCRAFT & ACCESS.",
+          "acres": 1.24,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "built 2002",
+            "26 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 100,
+        "hydrated_row_count": 100,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 100,
+        "eval_hydrated_row_count": 100,
+        "eval_filtered_row_count": 100,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_land_use_code",
+                "message": "row 154 parcel P35851 had land_use_code=840, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_forbidden_land_use_code",
+                "message": "row 154 parcel P35851 had forbidden land_use_code=840."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 155 parcel P36773 had land_use_code=850, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_forbidden_land_use_code",
+                "message": "row 155 parcel P36773 had forbidden land_use_code=850."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 161 parcel P36835 had land_use_code=850, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_forbidden_land_use_code",
+                "message": "row 161 parcel P36835 had forbidden land_use_code=850."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 162 parcel P36852 had land_use_code=850, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_forbidden_land_use_code",
+                "message": "row 162 parcel P36852 had forbidden land_use_code=850."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "min_result_count",
+                "message": "Expected at least 1 rows, got 0."
+              }
+            ]
+          },
+          {
+            "attempt": 3,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

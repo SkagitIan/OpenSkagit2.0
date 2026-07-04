@@ -16,6 +16,13 @@ from django.conf import settings
 from django.db import DatabaseError, close_old_connections, connection, transaction
 
 from .models import OpportunitySearch, OpportunitySearchFeedback
+from .r2_search import (
+    DuckDBR2OpportunityClient,
+    R2SearchError,
+    generate_r2_search,
+    run_generated_r2_search,
+    validate_r2_search_sql,
+)
 from .services import (
     _base_row,
     _fetch,
@@ -73,6 +80,23 @@ ZONING_INTENT_TERMS = {
     "zoned",
     "zoning",
 }
+KNOWN_PLACE_TERMS = {
+    "anacortes": "anacortes",
+    "bay view": "bay view",
+    "bow": "bow",
+    "burlington": "burlington",
+    "concrete": "concrete",
+    "conway": "conway",
+    "hamilton": "hamilton",
+    "la conner": "la conner",
+    "lyman": "lyman",
+    "marbelmount": "marblemount",
+    "marblemount": "marblemount",
+    "mount vernon": "mount vernon",
+    "rockport": "rockport",
+    "sedro woolley": "sedro-woolley",
+    "sedro-woolley": "sedro-woolley",
+}
 BAD_BARE_LAND_TEXT = (
     "MH LEASED",
     "LEASED PROPERTY",
@@ -110,6 +134,12 @@ EXPLICIT_NONRESIDENTIAL_TERMS = {
     "office",
     "warehouse",
     "institutional",
+}
+NON_DWELLING_RESIDENTIAL_ASSET_TERMS = {
+    "condo",
+    "condos",
+    "condominium",
+    "condominiums",
 }
 INTENT_TYPES = {
     "vacant_land",
@@ -293,55 +323,95 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
         return _mark_error(search, "OPENAI_API_KEY is not set. Add it to .env to enable AI opportunity search.", model)
 
     plan = _fallback_search_plan(prompt)
-    plan_review: dict[str, Any] = {"source": "deterministic", "changes": [], "warnings": []}
-    generated: GeneratedSearch | None = None
+    plan_review: dict[str, Any] = {
+        "source": "duckdb_r2",
+        "approved_plan": plan.as_dict(),
+        "warnings": [],
+    }
+    generated = None
     result_rows: list[dict[str, Any]] = []
     result_diagnostics: dict[str, Any] = {}
+    attempt_diagnostics: list[dict[str, Any]] = []
+    last_error = ""
     try:
-        plan = _review_search_plan(prompt, _generate_search_plan(prompt, model, user=user), model)
-        plan_review = {
-            "source": "openai",
-            "warnings": plan.as_dict().get("warnings", []),
-            "approved_plan": plan.as_dict(),
-        }
-        last_error = ""
+        r2_client = DuckDBR2OpportunityClient()
+        extra_context = "\n\n".join(
+            [
+                "Prompt-specific intent guidance:",
+                _intent_context(prompt),
+                "",
+                "Zoning MCP advisory context:",
+                _zoning_mcp_context(prompt, plan),
+            ]
+        )
         for attempt in range(3):
             try:
-                generated = _generate_search_from_plan(prompt, plan, model, error_feedback=last_error)
-            except OpportunitySearchError as exc:
-                last_error = (
-                    f"{exc} Return only the required JSON object with short_name, title, criteria_summary, assumptions, sql, and params. "
-                    "Do not include markdown, prose, or comments outside JSON."
+                generated = generate_r2_search(
+                    prompt,
+                    model=model,
+                    error_feedback=last_error,
+                    extra_context=extra_context,
+                    r2_client=r2_client,
                 )
+            except R2SearchError as exc:
+                last_error = (
+                    f"{exc} Return only the required JSON object with short_name, title, criteria_summary, "
+                    "assumptions, sql, and params. Use DuckDB SQL over allowed R2 parquet paths only."
+                )
+                attempt_diagnostics.append({"attempt": attempt + 1, "stage": "generation", "error": str(exc)})
                 if attempt == 2:
                     raise
                 continue
             try:
-                result_rows = _run_generated_search(prompt, generated)
+                raw_rows, hydrated_rows, result_diagnostics = run_generated_r2_search(
+                    generated,
+                    r2_client=r2_client,
+                    limit=DEFAULT_RESULT_LIMIT,
+                )
+                result_rows = apply_prompt_result_filters(prompt, hydrated_rows)
+                result_diagnostics["attempt"] = attempt + 1
+                result_diagnostics["raw_row_count"] = len(raw_rows)
+                result_diagnostics["app_filtered_row_count"] = len(result_rows)
                 if not result_rows and attempt < 2:
                     last_error = (
                         "The query returned zero parcel rows after app filters. Broaden conservatively while preserving the user's core asset intent. "
-                        "Do not require zoning text to contain senior/adult/community unless the user explicitly says only such zones; use zoning suitability as score or match_reasons instead."
+                        "Use derived/parcel_search.parquet for parcel facts and make suitability signals score or match_reasons instead of hard filters unless required."
                     )
+                    attempt_diagnostics.append({"attempt": attempt + 1, "stage": "results", "error": last_error})
                     continue
                 break
-            except OpportunitySearchError as exc:
+            except R2SearchError as exc:
                 last_error = str(exc)
+                attempt_diagnostics.append({"attempt": attempt + 1, "stage": "execution", "error": last_error})
                 if attempt == 2:
                     raise
+        engine_diagnostics = result_diagnostics
+        if attempt_diagnostics:
+            engine_diagnostics["attempts"] = attempt_diagnostics
         result_diagnostics = _diagnose_results(prompt, plan, result_rows)
-        result_diagnostics["context"] = _skill_reference_metadata()
+        result_diagnostics.update(engine_diagnostics)
+        result_diagnostics.update(
+            {
+                "engine": "duckdb_r2",
+                "context": {
+                    **_skill_reference_metadata(),
+                    "schema_reference": "data/schema_dump.md",
+                    "code_reference": "data/appraisal_code_reference.md",
+                    "ontology_reference": "data/opportunity_search_ontology.md",
+                    "zoning_reference": "data/opportunity_zoning_reference.md + live zoning_mcp corpus",
+                },
+            }
+        )
     except Exception as exc:
-        fallback = _fallback_generated_search(prompt)
-        if fallback:
-            try:
-                generated = fallback
-                result_rows = _run_generated_search(prompt, generated)
-                result_diagnostics = _diagnose_results(prompt, plan, result_rows)
-                result_diagnostics["context"] = _skill_reference_metadata()
-            except Exception:
-                pass
         if not generated or not result_rows:
+            if attempt_diagnostics:
+                result_diagnostics.update(
+                    {
+                        "engine": "duckdb_r2",
+                        "attempts": attempt_diagnostics,
+                        "last_error": last_error or _friendly_error(exc),
+                    }
+                )
             if generated:
                 search.generated_sql = _strip_sql(generated.sql)
                 search.generated_params = _json_safe(generated.params)
@@ -464,6 +534,9 @@ def filter_generated_opportunity_rows(rows: list[dict[str, Any]], filters: dict[
 
 
 def apply_prompt_result_filters(prompt: str, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    place_terms = _prompt_place_terms(prompt)
+    if place_terms:
+        rows = [row for row in rows if _row_matches_prompt_place(row, place_terms)]
     if _requires_bare_recreation_land(prompt):
         rows = [row for row in rows if _has_bare_recreation_land_evidence(row)]
     if _requires_dwelling_asset(prompt):
@@ -507,102 +580,28 @@ def record_search_feedback(
 
 
 def validate_search_sql(sql: str, params: list[Any] | tuple[Any, ...] | None = None) -> str:
-    stripped = _strip_sql(sql)
-    if not stripped:
-        raise OpportunitySearchError("The generated SQL was empty.")
-    if ";" in stripped:
-        raise OpportunitySearchError("Only one SQL statement is allowed.")
-    if not re.match(r"(?is)^(select|with)\b", stripped):
-        raise OpportunitySearchError("Only read-only SELECT/WITH queries are allowed.")
-    if FORBIDDEN_SQL.search(stripped):
-        raise OpportunitySearchError("The generated SQL used a forbidden operation.")
-    if not re.search(r"(?i)\bparcel_number\b", stripped):
-        raise OpportunitySearchError("The query must return a parcel_number column.")
-    if re.search(r"(?is)\bs(?:ales)?\.sale_date_iso\s*(?:[<>]=?|=)\s*(?:current_date|now\(\)|date\b|timestamp\b|%s|\()", stripped):
-        raise OpportunitySearchError("sales.sale_date_iso is text; date filters must guard and cast it with NULLIF(s.sale_date_iso, '')::date.")
-
-    params = list(params or [])
-    if re.search(r"(?<!%)%s[A-Za-z0-9_]", stripped) or re.search(r"(?<!%)%[A-Za-rt-zA-RT-Z]", stripped):
-        raise OpportunitySearchError("SQL wildcard patterns must be passed as params, for example ILIKE %s with params ['%term%'].")
-    placeholders = len(re.findall(r"(?<!%)%s(?![A-Za-z0-9_])", stripped))
-    if placeholders != len(params):
-        raise OpportunitySearchError("SQL placeholders and params did not match.")
-    for value in params:
-        if not _safe_param(value):
-            raise OpportunitySearchError("SQL params must be simple JSON-compatible values.")
-
-    ctes = _cte_names(stripped)
-    for table in _referenced_tables(stripped):
-        if table not in ALLOWED_TABLES and table not in ctes:
-            raise OpportunitySearchError(f"Table {table} is not allowed for opportunity search.")
-    return stripped
+    try:
+        return validate_r2_search_sql(sql, params)
+    except R2SearchError as exc:
+        raise OpportunitySearchError(str(exc)) from exc
 
 
 def execute_search_sql(sql: str, params: list[Any] | tuple[Any, ...] | None = None, limit: int = DEFAULT_RESULT_LIMIT) -> list[dict[str, Any]]:
-    stripped = validate_search_sql(sql, list(params or []))
-    wrapped = f"SELECT * FROM ({stripped}) opportunity_ai_search LIMIT %s"
     try:
-        with connection.cursor() as cursor:
-            cursor.execute(wrapped, [*(params or []), limit])
-            columns = [column[0] for column in cursor.description]
-            rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
-    except DatabaseError as exc:
-        raise OpportunitySearchError(_database_error_message(exc)) from exc
-    if "parcel_number" not in columns:
-        raise OpportunitySearchError("The query result did not include parcel_number.")
-    return rows
+        return DuckDBR2OpportunityClient().execute(validate_search_sql(sql, params), limit=limit)
+    except R2SearchError as exc:
+        raise OpportunitySearchError(str(exc)) from exc
 
 
 def explain_search_sql(sql: str, params: list[Any] | tuple[Any, ...] | None = None) -> None:
-    stripped = validate_search_sql(sql, list(params or []))
-    try:
-        with connection.cursor() as cursor:
-            cursor.execute(f"EXPLAIN SELECT * FROM ({stripped}) opportunity_ai_search LIMIT 1", list(params or []))
-    except DatabaseError as exc:
-        raise OpportunitySearchError(_database_error_message(exc)) from exc
+    validate_search_sql(sql, list(params or []))
 
 
 def hydrate_result_rows(raw_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    parcel_numbers = []
-    raw_by_parcel: dict[str, dict[str, Any]] = {}
-    for row in raw_rows:
-        parcel_number = str(row.get("parcel_number") or "").strip().upper()
-        if not parcel_number or parcel_number in raw_by_parcel:
-            continue
-        parcel_numbers.append(parcel_number)
-        raw_by_parcel[parcel_number] = row
-    if not parcel_numbers:
-        return []
-
-    base_rows = _fetch(
-        """
-        SELECT p.parcel_number,
-               concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
-               COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
-               p.owner_name, p.acres, z.zone_id, z.zone_name,
-               z.waza_general, z.waza_specific, z.reference_url,
-               p.assessed_value, p.impr_land_value, p.unimpr_land_value, p.building_value,
-               p.land_use, p.utilities,
-               split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code,
-               ST_Y(ST_Centroid(g.geometry)) AS lat, ST_X(ST_Centroid(g.geometry)) AS lng
-        FROM skagit_parcels p
-        LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
-        LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
-        WHERE p.parcel_number = ANY(%s)
-          AND p.inactive_date IS NULL
-        """,
-        [parcel_numbers],
-    )
-    base_by_parcel = {str(row.get("parcel_number")).upper(): row for row in base_rows}
-    hydrated = []
-    for parcel_number in parcel_numbers:
-        base = base_by_parcel.get(parcel_number)
-        if base:
-            item = _format_ai_result_row(base, raw_by_parcel[parcel_number])
-        else:
-            item = _fallback_result_row(parcel_number, raw_by_parcel[parcel_number])
-        hydrated.append(item)
-    return hydrated
+    try:
+        return DuckDBR2OpportunityClient().hydrate_rows(raw_rows)
+    except R2SearchError as exc:
+        raise OpportunitySearchError(str(exc)) from exc
 
 
 def _format_ai_result_row(base: dict[str, Any], raw: dict[str, Any]) -> dict[str, Any]:
@@ -1681,11 +1680,21 @@ def _intent_context(prompt: str) -> str:
 
 
 def _requires_dwelling_asset(prompt: str) -> bool:
+    normalized = (prompt or "").lower()
+    if re.search(r"\b(?:mobile|manufactured|trailer)\s+home\s+parks?\b", normalized):
+        return False
     tokens = _tokens(prompt)
+    if tokens & NON_DWELLING_RESIDENTIAL_ASSET_TERMS:
+        return False
     return bool(tokens & DWELLING_ASSET_TERMS) and not bool(tokens & EXPLICIT_NONRESIDENTIAL_TERMS)
 
 
 def _requires_bare_recreation_land(prompt: str) -> bool:
+    normalized = (prompt or "").lower()
+    if re.search(r"\b(cemetery|cemeteries|church|churches)\b", normalized):
+        return False
+    if "not private investment" in normalized or "not private investment land" in normalized:
+        return False
     tokens = _tokens(prompt)
     has_land_intent = bool(tokens & LAND_ASSET_TERMS)
     has_bare_or_recreation_intent = bool(tokens & BARE_RECREATION_TERMS)
@@ -1752,16 +1761,82 @@ def _tokens(value: str) -> set[str]:
     return set(re.findall(r"[a-z0-9]+", (value or "").lower()))
 
 
+def _prompt_place_terms(prompt: str) -> list[str]:
+    normalized = re.sub(r"[^a-z0-9\s-]", " ", (prompt or "").lower())
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    if re.search(r"\bskagit\s+county\b", normalized):
+        normalized = re.sub(r"\bskagit\s+county\b", " ", normalized)
+    terms: list[str] = []
+    for phrase, canonical in sorted(KNOWN_PLACE_TERMS.items(), key=lambda item: len(item[0]), reverse=True):
+        if re.search(rf"\b{re.escape(phrase)}\b", normalized):
+            terms.append(canonical)
+    extracted = _extract_place_hint(prompt)
+    if extracted and extracted not in terms and extracted not in {"city", "limits", "vicinity"}:
+        terms.append(extracted)
+    deduped = []
+    for term in terms:
+        if term and term not in deduped:
+            deduped.append(term)
+    return deduped
+
+
+def _row_matches_prompt_place(row: dict[str, Any], place_terms: list[str]) -> bool:
+    parcel_data = row.get("parcel_data") if isinstance(row.get("parcel_data"), dict) else {}
+    haystack = " ".join(
+        str(value or "")
+        for value in (
+            row.get("location"),
+            row.get("city"),
+            row.get("zoning"),
+            row.get("zone_name"),
+            parcel_data.get("situs_city_state_zip"),
+            parcel_data.get("city_name"),
+            parcel_data.get("fire_district"),
+            parcel_data.get("school_district_name"),
+            parcel_data.get("library_service_area"),
+        )
+    ).lower()
+    haystack = haystack.replace("-", " ")
+    return any(term.replace("-", " ") in haystack for term in place_terms)
+
+
 def _extract_place_hint(prompt: str) -> str:
+    normalized_prompt = re.sub(r"[^a-z0-9\s-]", " ", (prompt or "").lower())
+    if re.search(r"\bskagit\s+county\b", normalized_prompt):
+        return ""
+    if re.search(r"\b(?:not\s+in|outside|excluding|exclude|without|no)\s+(?:a\s+|the\s+)?flood\s*plain\b", normalized_prompt):
+        normalized_prompt = re.sub(
+            r"\b(?:not\s+in|outside|excluding|exclude|without|no)\s+(?:a\s+|the\s+)?flood\s*plain\b",
+            " ",
+            normalized_prompt,
+        )
+    if re.search(r"\bflood\s*plain\b", normalized_prompt) and not re.search(
+        r"\b(?:located\s+in|in|near|around|close\s+to)\s+flood\s*plain\b",
+        normalized_prompt,
+    ):
+        normalized_prompt = re.sub(r"\bflood\s*plain\b", " ", normalized_prompt)
+    known_terms = _prompt_known_place_terms(prompt)
+    if known_terms:
+        return " or ".join(known_terms)
     match = re.search(
-        r"\b(?:in|near|around|close\s+to)\s+([a-z][a-z\s-]{1,40}?)(?:\s+(?:suitable|that|with|for|over|under|above|below|could|can|to|and)\b|$)",
-        (prompt or "").lower(),
+        r"\b(?:located\s+in|in|near|around|close\s+to)\s+([a-z][a-z\s-]{1,40}?)(?:\s+(?:city|limits|vicinity|suitable|that|with|for|over|under|above|below|could|can|to|and)\b|$)",
+        normalized_prompt,
     )
     if not match:
         return ""
     place = re.sub(r"[^a-z\s-]", "", match.group(1)).strip(" -")
     words = [word for word in place.split() if word not in {"the", "a", "an"}]
     return " ".join(words[:4])
+
+
+def _prompt_known_place_terms(prompt: str) -> list[str]:
+    normalized = re.sub(r"[^a-z0-9\s-]", " ", (prompt or "").lower())
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    terms = []
+    for phrase, canonical in sorted(KNOWN_PLACE_TERMS.items(), key=lambda item: len(item[0]), reverse=True):
+        if re.search(rf"\b{re.escape(phrase)}\b", normalized) and canonical not in terms:
+            terms.append(canonical)
+    return terms
 
 
 def _database_error_message(exc: DatabaseError) -> str:

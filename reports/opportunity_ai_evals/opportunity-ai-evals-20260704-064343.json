@@ -1,0 +1,114 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 1
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "advanced_average_quality_sfr_not_low_quality",
+      "prompt": "Average quality single family homes in Skagit County, excluding low quality homes.",
+      "status": "error",
+      "failures": [
+        {
+          "code": "eval_exception",
+          "message": "R2SearchError: The query must read from allowed R2 parquet files with read_parquet().",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "The model generated SQL without an approved read_parquet('r2://openskagit/...') source. Regenerate with explicit allowed parquet paths; low-quality dwelling searches should join parcel_search.parquet to improvements.parquet.",
+        "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval."
+      ],
+      "next_action": "The model generated SQL without an approved read_parquet('r2://openskagit/...') source. Regenerate with explicit allowed parquet paths; low-quality dwelling searches should join parcel_search.parquet to improvements.parquet.",
+      "generated_sql": "SELECT DISTINCT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, string_agg(DISTINCT TRIM(i.imprv_det_class_cd), ' | ') AS quality_codes, 'Average or better quality SFR excluding low quality' AS match_reasons\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') ps\nJOIN read_parquet('r2://openskagit/improvements.parquet') i ON ps.parcel_number = TRIM(i.ParcelNumber)\nWHERE TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) IN (110, 111, 112, 113)\n  AND TRIM(i.imprv_det_class_cd) IN ('MSF', 'MSA', 'MSG', 'MSVG', 'MSE')\n  AND TRIM(i.imprv_det_class_cd) <> 'MSL'\nGROUP BY ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value",
+      "generated_params": [],
+      "title": "Average Quality Single Family Homes in Skagit County Excluding Low Quality",
+      "criteria_summary": "Select parcels classified as single family residential (land use codes 110, 111, 112, 113) with improvement quality class MSA (average) or better, excluding low quality (MSL). Countywide Skagit County search with no city or floodplain filters.",
+      "raw_row_count": 0,
+      "hydrated_row_count": 0,
+      "filtered_row_count": 0,
+      "top_result_parcels": [],
+      "sample_rows": [],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "The query must read from allowed R2 parquet files with read_parquet()."
+          },
+          {
+            "attempt": 2,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_quality_code",
+                "message": "row 3 parcel P70467 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 6 parcel P70764 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 7 parcel P70822 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 8 parcel P70835 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 11 parcel P70994 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 12 parcel P70995 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 14 parcel P71440 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 16 parcel P71691 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 17 parcel P71876 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 18 parcel P71885 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_failure_limit",
+                "message": "Stopped after 10 row-level failures."
+              }
+            ]
+          },
+          {
+            "attempt": 3,
+            "status": "error",
+            "error": "The query must read from allowed R2 parquet files with read_parquet()."
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "bow_ag_resource_over_5_acres",
+      "prompt": "Agriculture or resource parcels around Bow over 5 acres.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE (CAST(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1) AS INTEGER) BETWEEN 810 AND 890)\n  AND ps.acres > 5\n  AND (lower(ps.city_name) LIKE '%bow%' OR lower(ps.situs_city_state_zip) LIKE '%bow%')",
+      "generated_params": [],
+      "title": "Agriculture or Resource Parcels Around Bow Over 5 Acres",
+      "criteria_summary": "Parcels with land use codes indicating agriculture or resource use, located in or near Bow area, with parcel size over 5 acres.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P101569",
+        "P102120",
+        "P110373",
+        "P113105",
+        "P118574",
+        "P119253",
+        "P123954",
+        "P123955",
+        "P131232",
+        "P135164"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P101569",
+          "location": "15783 SUNSET ROAD, BOW",
+          "current_use": "CURRENT USE FARM AND AG",
+          "acres": 39.0,
+          "zoning": "Ag-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning",
+            "Resource land"
+          ],
+          "signal_labels": [
+            "2,016 sf primary building",
+            "built 1912",
+            "920 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P102120",
+          "location": "1482 COLONY RD, BOW",
+          "current_use": "FORESTLAND UNDER RCW 84.33",
+          "acres": 7.3299999,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P110373",
+          "location": "WORLINE RD, BOW",
+          "current_use": "CURRENT USE FARM AND AG",
+          "acres": 10.25,
+          "zoning": "Ag-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P113105",
+          "location": "7181 WORLINE ROAD, BOW",
+          "current_use": "CURRENT USE FARM AND AG",
+          "acres": 39.040001,
+          "zoning": "Ag-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P118574",
+          "location": "13026 PERSONS ROAD, BOW",
+          "current_use": "CURRENT USE FARM AND AG",
+          "acres": 10.0,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry",
+            "Resource land"
+          ],
+          "signal_labels": [
+            "2,566 sf primary building",
+            "built 2002",
+            "480 sf garage area"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

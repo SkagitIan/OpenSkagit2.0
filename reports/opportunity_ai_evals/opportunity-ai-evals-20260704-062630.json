@@ -1,0 +1,713 @@
+{
+  "summary": {
+    "total": 5,
+    "passed": 4,
+    "failed": 1,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "mount_vernon_unimproved_inside_city_lots",
+      "prompt": "Unimproved land inside Mount Vernon city limits.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, ps.improvement_building_count\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE LOWER(ps.city_name) = 'mount vernon'\n  AND TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) = 911\n  AND COALESCE(ps.improvement_building_count, 0) = 0\n  AND ps.has_geometry = TRUE\n  AND ps.acres > 0\nORDER BY ps.acres DESC",
+      "generated_params": [],
+      "title": "Unimproved Land Inside Mount Vernon City Limits",
+      "criteria_summary": "Select parcels inside Mount Vernon city limits with land use code 911 (Unimproved land inside city) and no improvements (improvement_building_count = 0).",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P23499",
+        "P24133",
+        "P24132",
+        "P24123",
+        "P119008",
+        "P24340",
+        "P123128",
+        "P109370",
+        "P133609",
+        "P124084"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P23499",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 37.439999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "33 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P24133",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 36.290001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "33 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P24132",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 32.950001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "33 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P24123",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 26.07,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "33 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P119008",
+          "location": "MOUNT VERNON",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 22.51,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_land_use_code",
+                "message": "row 29 parcel P126105 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 35 parcel P126623 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 41 parcel P128694 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 47 parcel P25541 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 61 parcel P26275 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 62 parcel P26376 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 68 parcel P26943 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 72 parcel P27915 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 79 parcel P28041 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 81 parcel P28201 had land_use_code=910, expected one of: 911."
+              },
+              {
+                "code": "row_failure_limit",
+                "message": "Stopped after 10 row-level failures."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_mobile_home_parks_only_not_individual_mobile_homes",
+      "prompt": "Mobile home parks in Skagit County, not individual mobile homes or leased manufactured homes.",
+      "status": "failed",
+      "failures": [
+        {
+          "code": "max_result_count",
+          "message": "Expected at most 100 rows, got 200.",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "The query returned more rows than the eval allows. Either add a deterministic LIMIT/order for this case or raise expected_max_result_count if the broader result set is acceptable."
+      ],
+      "next_action": "The query returned more rows than the eval allows. Either add a deterministic LIMIT/order for this case or raise expected_max_result_count if the broader result set is acceptable.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) = 150",
+      "generated_params": [],
+      "title": "Mobile Home Parks in Skagit County",
+      "criteria_summary": "Parcels classified as mobile home parks (DOR land use code 150), excluding individual mobile homes (code 180) and leased manufactured homes (code 181). Countywide search without city limits restriction.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P108246",
+        "P108453",
+        "P105621",
+        "P112009",
+        "P113424",
+        "P131538",
+        "P131550",
+        "P131566",
+        "P131631",
+        "P131646"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P108246",
+          "location": "600 NORTHN REED ST, SEDRO-WOOLLEY",
+          "current_use": "MOBILE HOME PARKS",
+          "acres": 17.24,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P108453",
+          "location": "891 CARRIAGE CT, SEDRO-WOOLLEY",
+          "current_use": "MOBILE HOME PARKS",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "built 1995",
+            "27 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P105621",
+          "location": "BURLINGTON",
+          "current_use": "MOBILE HOME PARKS",
+          "acres": 0.0020999999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "4 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P112009",
+          "location": "700 N REED ST, SEDRO-WOOLLEY",
+          "current_use": "MOBILE HOME PARKS",
+          "acres": 9.3000002,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "built 1997",
+            "15 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P113424",
+          "location": "6060 SANDS WAY, ANACORTES",
+          "current_use": "MOBILE HOME PARKS",
+          "acres": 0.31999999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "max_result_count",
+                "message": "Expected at most 100 rows, got 200."
+              }
+            ]
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_recreation_lots_with_geometry_not_public_or_moorage",
+      "prompt": "Private bare recreation lots with valid map geometry, excluding public parks, schools, cemeteries, churches, moorage, and condos.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "WITH base AS (\n  SELECT\n    ps.parcel_number,\n    ps.land_use,\n    ps.acres,\n    ps.assessed_value,\n    ps.has_geometry,\n    COALESCE(ps.improvement_building_count, 0) AS improvement_building_count\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\n  WHERE ps.has_geometry = TRUE\n    AND COALESCE(ps.acres, 0) > 0\n    AND COALESCE(ps.improvement_building_count, 0) = 0\n),\nexcluded_land_use_codes AS (\n  SELECT DISTINCT TRIM(regexp_extract(COALESCE(land_use, ''), '^\\((\\d+)\\)', 1)) AS code\n  FROM base\n  WHERE land_use IS NOT NULL\n),\nfiltered AS (\n  SELECT\n    b.parcel_number,\n    b.land_use,\n    b.acres,\n    b.assessed_value,\n    b.improvement_building_count\n  FROM base b\n  WHERE\n    -- Exclude public parks, schools, cemeteries, churches, moorage, condos by land use code or keywords\n    -- Exclude land use codes: 940 (Open space), 941 (Farm & ag conservation), 970 (Condo moorage), 190 (Vacation and cabin), 710-790 (Cultural/recreation), 912 (Unimproved land, multi-family)\n    -- Also exclude land use labels containing keywords for public/institutional\n    TRY_CAST(NULLIF(regexp_extract(COALESCE(b.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) NOT IN (940, 941, 970, 912)\n    AND NOT (TRY_CAST(NULLIF(regexp_extract(COALESCE(b.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) BETWEEN 710 AND 790)\n    AND NOT LOWER(b.land_use) LIKE '%park%'\n    AND NOT LOWER(b.land_use) LIKE '%school%'\n    AND NOT LOWER(b.land_use) LIKE '%cemetery%'\n    AND NOT LOWER(b.land_use) LIKE '%church%'\n    AND NOT LOWER(b.land_use) LIKE '%moorage%'\n    AND NOT LOWER(b.land_use) LIKE '%condo%'\n)\nSELECT\n  parcel_number,\n  land_use,\n  acres,\n  assessed_value,\n  improvement_building_count\nFROM filtered\nORDER BY acres DESC",
+      "generated_params": [],
+      "title": "Private Bare Recreation Lots with Valid Geometry Excluding Public and Institutional Uses",
+      "criteria_summary": "Select parcels that are private bare or recreational land with valid map geometry, excluding parcels used as public parks, schools, cemeteries, churches, moorage, and condominiums. Parcels must have no buildings or improvements and must not be public or institutional land use types.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 23,
+      "top_result_parcels": [
+        "P30634",
+        "P51316",
+        "P51317",
+        "P51281",
+        "P47967",
+        "P30000",
+        "P51238",
+        "P51540",
+        "P51652",
+        "P51366"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P30634",
+          "location": "n/a",
+          "current_use": "FORESTLAND UNDER RCW 84.33",
+          "acres": 1036.16,
+          "zoning": "IF-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P51316",
+          "location": "n/a",
+          "current_use": "FORESTLAND UNDER RCW 84.33",
+          "acres": 709.78003,
+          "zoning": "IF-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P51317",
+          "location": "n/a",
+          "current_use": "FORESTLAND UNDER RCW 84.33",
+          "acres": 709.40002,
+          "zoning": "IF-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P51281",
+          "location": "n/a",
+          "current_use": "FORESTLAND UNDER RCW 84.33",
+          "acres": 707.62,
+          "zoning": "IF-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P47967",
+          "location": "n/a",
+          "current_use": "FISHING ACTIVITIES & RELATED SERVICES",
+          "acres": 700.0,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Resource land"
+          ],
+          "signal_labels": []
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 23,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_large_unincorporated_unimproved_land_no_city_limits",
+      "prompt": "Large unincorporated unimproved land over 20 acres, outside city limits.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres, ps.improvement_building_count, ps.inside_city_limits\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE ps.inside_city_limits = FALSE\n  AND TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) = 910\n  AND ps.acres > 20\n  AND COALESCE(ps.improvement_building_count, 0) = 0",
+      "generated_params": [],
+      "title": "Large Unincorporated Unimproved Land Over 20 Acres Outside City Limits",
+      "criteria_summary": "Parcels with unimproved land use code 910 (unimproved land county), over 20 acres, located outside city limits",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 195,
+      "top_result_parcels": [
+        "P108139",
+        "P115497",
+        "P115536",
+        "P115672",
+        "P118881",
+        "P118883",
+        "P127949",
+        "P128015",
+        "P128070",
+        "P128218"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P108139",
+          "location": "n/a",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 26.639999,
+          "zoning": "RRc-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P115497",
+          "location": "n/a",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 23.98,
+          "zoning": "Ag-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P115536",
+          "location": "ISLANDER WAY",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 30.83,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "27 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P115672",
+          "location": "n/a",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 36.790001,
+          "zoning": "BR-LI",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P118881",
+          "location": "14899 OVENELL ROAD, BURLINGTON",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 130.88,
+          "zoning": "BR-HI",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 195,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_land_use_code",
+                "message": "row 40 parcel P24348 had land_use_code=911, expected one of: 910."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 165 parcel P24349 had land_use_code=911, expected one of: 910."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_sedro_commercial_redevelopment_not_sfr",
+      "prompt": "Sedro-Woolley commercial redevelopment parcels, not single family homes.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, ps.city_name, ps.situs_city_state_zip\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE (lower(ps.city_name) = 'sedro-woolley' OR lower(ps.situs_city_state_zip) LIKE '%sedro-woolley%')\n  AND TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)', 1), '') AS INTEGER) BETWEEN 500 AND 699\n  AND NOT TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)', 1), '') AS INTEGER) BETWEEN 110 AND 119",
+      "generated_params": [],
+      "title": "Sedro-Woolley Commercial Redevelopment Parcels (Not Single Family Homes)",
+      "criteria_summary": "Parcels located in Sedro-Woolley city area with land use codes starting with 5 or 6 (commercial/industrial related), excluding single family residential land uses.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100311",
+        "P100316",
+        "P100330",
+        "P100467",
+        "P105297",
+        "P105304",
+        "P105305",
+        "P105288",
+        "P105290",
+        "P105296"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100311",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "RETAIL TRADE, GENERAL MERCHANDISE",
+          "acres": 0.38,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "6,600 sf primary building",
+            "built 1999"
+          ]
+        },
+        {
+          "parcel_number": "P100316",
+          "location": "506 CROSSROADS SQ, SEDRO-WOOLLEY",
+          "current_use": "RETAIL TRADE, GENERAL MERCHANDISE",
+          "acres": 0.88999999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "31,715 sf primary building",
+            "built 1989"
+          ]
+        },
+        {
+          "parcel_number": "P100330",
+          "location": "510 CROSSROADS SQ, SEDRO-WOOLLEY",
+          "current_use": "RETAIL TRADE, GENERAL MERCHANDISE",
+          "acres": 0.19,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "7,100 sf primary building",
+            "built 1989"
+          ]
+        },
+        {
+          "parcel_number": "P100467",
+          "location": "600 CROSSROADS SQUARE, SEDRO-WOOLLEY",
+          "current_use": "RETAIL TRADE, EATING & DRINKING",
+          "acres": 0.88999999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "2,756 sf primary building",
+            "built 1989"
+          ]
+        },
+        {
+          "parcel_number": "P105297",
+          "location": "639 SUNSET PARK DR, SEDRO-WOOLLEY",
+          "current_use": "CONTRACT CONSTRUCTION SERVICES",
+          "acres": 0.55000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "7,632 sf primary building",
+            "built 2000",
+            "22 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_land_use_code",
+                "message": "row 2 parcel P37350 had land_use_code=340, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 3 parcel P39372 had land_use_code=830, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 4 parcel P39369 had land_use_code=911, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 5 parcel P39361 had land_use_code=740, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 6 parcel P90024 had land_use_code=911, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 7 parcel P39366 had land_use_code=911, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 10 parcel P108246 had land_use_code=150, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 11 parcel P39295 had land_use_code=830, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 16 parcel P39391 had land_use_code=740, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 17 parcel P36417 had land_use_code=911, expected prefix one of: 5, 6."
+              },
+              {
+                "code": "row_failure_limit",
+                "message": "Stopped after 10 row-level failures."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

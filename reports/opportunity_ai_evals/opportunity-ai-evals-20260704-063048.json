@@ -1,0 +1,161 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "advanced_old_sfr_with_garage_remodel_candidates",
+      "prompt": "Older single family homes in Skagit County built before 1980 with garage area that could be remodel candidates.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "WITH filtered_parcels AS (\n  SELECT\n    ps.parcel_number,\n    ps.land_use,\n    TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) AS land_use_code,\n    ps.primary_actual_year_built,\n    ps.total_garage_area,\n    ps.primary_building_improvement_value,\n    'Built before or in 1980 with garage area > 0' AS match_reasons\n  FROM read_parquet('r2://openskagit/derived/parcel_search_with_sales_improvements.parquet') ps\n  WHERE\n    ps.primary_actual_year_built IS NOT NULL\n    AND ps.primary_actual_year_built <= 1980\n    AND TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) IN (110, 111, 112, 113)\n    AND COALESCE(ps.total_garage_area, 0) > 0\n)\nSELECT\n  parcel_number,\n  land_use,\n  land_use_code,\n  primary_actual_year_built,\n  total_garage_area,\n  primary_building_improvement_value,\n  match_reasons\nFROM filtered_parcels\nORDER BY primary_actual_year_built ASC",
+      "generated_params": [],
+      "title": "Older Single Family Homes in Skagit County Built Before 1980 with Garage Area for Remodel Candidates",
+      "criteria_summary": "Parcels with primary_actual_year_built before or equal to 1980, land use codes for single family residences (110, 111, 112, 113), with garage area greater than zero, indicating potential remodel candidates.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P70483",
+        "P59592",
+        "P20579",
+        "P20618",
+        "P21560",
+        "P74166",
+        "P31838",
+        "P77095",
+        "P22541",
+        "P73981"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P70483",
+          "location": "13913 AVON ALLEN ROAD, MOUNT VERNON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.69999999,
+          "zoning": "RI",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Built before or in 1980 with garage area > 0"
+          ]
+        },
+        {
+          "parcel_number": "P59592",
+          "location": "2006 CAY WAY, ANACORTES",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.46000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Built before or in 1980 with garage area > 0"
+          ]
+        },
+        {
+          "parcel_number": "P20579",
+          "location": "15372 SNEE OOSH ROAD, LA CONNER",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 2.48,
+          "zoning": "R",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Built before or in 1980 with garage area > 0"
+          ]
+        },
+        {
+          "parcel_number": "P20618",
+          "location": "15770 SNEE OOSH ROAD, LA CONNER",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.87,
+          "zoning": "R",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Built before or in 1980 with garage area > 0"
+          ]
+        },
+        {
+          "parcel_number": "P21560",
+          "location": "17322 BENNETT ROAD, MOUNT VERNON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 2.9200001,
+          "zoning": "RI",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Built before or in 1980 with garage area > 0"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search_with_sales_improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "required_sql_pattern",
+                "message": "SQL did not match required pattern: primary_actual_year_built|oldest_actual_year_built"
+              },
+              {
+                "code": "required_sql_pattern",
+                "message": "SQL did not match required pattern: (match_reasons|score)"
+              },
+              {
+                "code": "row_max_numeric_field",
+                "message": "row 24 parcel P19249 had primary_actual_year_built=2022.0, expected <= 1980."
+              },
+              {
+                "code": "row_max_numeric_field",
+                "message": "row 60 parcel P20917 had primary_actual_year_built=2013.0, expected <= 1980."
+              },
+              {
+                "code": "row_max_numeric_field",
+                "message": "row 89 parcel P21415 had primary_actual_year_built=2019.0, expected <= 1980."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 93 parcel P21500 had land_use_code=120, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_max_numeric_field",
+                "message": "row 115 parcel P21909 had primary_actual_year_built=2006.0, expected <= 1980."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

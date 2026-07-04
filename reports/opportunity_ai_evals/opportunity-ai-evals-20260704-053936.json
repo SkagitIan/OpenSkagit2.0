@@ -1,0 +1,140 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "county_under_2_acres_no_utilities_no_exemptions_not_flood_plain",
+      "prompt": "less than 2 acre parcels with no utilities, no exemptions not in flood plain",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number, ps.acres, TRIM(a.\"Utilities\") AS utilities, TRIM(a.\"Exemptions\") AS exemptions\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nJOIN read_parquet('r2://openskagit/assessor.parquet') AS a ON ps.parcel_number = TRIM(a.\"Parcel Number\")\nWHERE ps.acres < 2\n  AND (TRIM(COALESCE(a.\"Utilities\", '')) = '' OR a.\"Utilities\" IS NULL)\n  AND (TRIM(COALESCE(a.\"Exemptions\", '')) = '' OR a.\"Exemptions\" IS NULL)",
+      "generated_params": [],
+      "title": "Parcels under 2 Acres with No Utilities, No Exemptions, Not in Flood Plain",
+      "criteria_summary": "Select parcels less than 2 acres, with no utilities, no exemptions, and excluding flood plain (flood plain exclusion noted as limitation).",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100003",
+        "P100009",
+        "P100010",
+        "P100026",
+        "P100027",
+        "P100029",
+        "P100032",
+        "P100062",
+        "P100086",
+        "P1001"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100003",
+          "location": "702 R AVENUE, ANACORTES",
+          "current_use": "Personal Property",
+          "acres": 0.0,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Public/civic or moorage use"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100009",
+          "location": "910 26TH ST, ANACORTES",
+          "current_use": "Personal Property",
+          "acres": 0.0,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Public/civic or moorage use"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100010",
+          "location": "915 23RD ST, ANACORTES",
+          "current_use": "Personal Property",
+          "acres": 0.0,
+          "zoning": "Unknown zoning",
+          "risk_flags": [
+            "No parcel geometry",
+            "Unknown zoning",
+            "Public/civic or moorage use"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100026",
+          "location": "9374 THUNDERBIRD LANE, CONCRETE",
+          "current_use": "VACATION AND CABIN",
+          "acres": 0.34999999,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P100027",
+          "location": "9380 THUNDERBIRD LANE, CONCRETE",
+          "current_use": "VACATION AND CABIN",
+          "acres": 0.34999999,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "5 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/assessor.parquet",
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "required_sql_pattern",
+                "message": "SQL did not match required pattern: \\bAS\\s+utilities\\b"
+              },
+              {
+                "code": "required_sql_pattern",
+                "message": "SQL did not match required pattern: \\bAS\\s+exemptions\\b"
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

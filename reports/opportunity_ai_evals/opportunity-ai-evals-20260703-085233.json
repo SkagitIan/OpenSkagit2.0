@@ -1,0 +1,126 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "failed": 1,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "sedro_woolley_low_quality_dwellings_1_to_3_acres",
+      "prompt": "Parcels located in Sedro-Woolley city or its immediate unincorporated vicinity with existing residential dwellings classified as low quality, and parcel size between 1 and 3 acres.",
+      "status": "failed",
+      "failures": [
+        {
+          "code": "required_sql_pattern",
+          "message": "SQL did not match required pattern: (quality_codes|match_reasons)",
+          "severity": "error"
+        },
+        {
+          "code": "row_low_quality",
+          "message": "row 1 parcel P76885 did not include low-quality improvement evidence.",
+          "severity": "error"
+        },
+        {
+          "code": "row_low_quality",
+          "message": "row 2 parcel P37479 did not include low-quality improvement evidence.",
+          "severity": "error"
+        },
+        {
+          "code": "row_low_quality",
+          "message": "row 3 parcel P37434 did not include low-quality improvement evidence.",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Add the required SQL construct from the eval case, or remove that expectation if it is not truly required.",
+        "Return explicit low-quality evidence in selected columns or match_reasons so the row-level evaluator can verify it."
+      ],
+      "next_action": "Add the required SQL construct from the eval case, or remove that expectation if it is not truly required.",
+      "generated_sql": "WITH low_quality_improvements AS (\n  SELECT DISTINCT TRIM(i.ParcelNumber) AS parcel_number\n  FROM read_parquet('r2://openskagit/improvements.parquet') AS i\n  WHERE TRIM(i.imprv_det_class_cd) = 'MSL'\n),\nsedro_woolley_parcels AS (\n  SELECT ps.parcel_number, ps.acres\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\n  WHERE (LOWER(ps.city_name) = 'sedro-woolley' OR LOWER(ps.situs_city_state_zip) LIKE '%sedro-woolley%')\n    AND ps.acres BETWEEN 1 AND 3\n)\nSELECT swp.parcel_number\nFROM sedro_woolley_parcels AS swp\nJOIN low_quality_improvements AS lqi ON swp.parcel_number = lqi.parcel_number",
+      "generated_params": [],
+      "title": "Sedro-Woolley Area Parcels with Low Quality Residential Dwellings and 1-3 Acres",
+      "criteria_summary": "Parcels located in Sedro-Woolley city or immediate unincorporated vicinity, with existing low quality residential dwellings, and parcel size between 1 and 3 acres.",
+      "raw_row_count": 3,
+      "hydrated_row_count": 3,
+      "filtered_row_count": 3,
+      "top_result_parcels": [
+        "P76885",
+        "P37479",
+        "P37434"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P76885",
+          "location": "113 N REED, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 1.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,760 sf primary building",
+            "built 1915"
+          ]
+        },
+        {
+          "parcel_number": "P37479",
+          "location": "214 N BALL ST, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 1.0034,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,020 sf primary building",
+            "built 1900"
+          ]
+        },
+        {
+          "parcel_number": "P37434",
+          "location": "201 GARDEN OF EDEN RD, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 1.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,728 sf primary building",
+            "built 1910",
+            "7 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 3,
+        "hydrated_row_count": 3,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "The query must read from allowed R2 parquet files with read_parquet()."
+          },
+          {
+            "attempt": 2,
+            "status": "generated"
+          }
+        ],
+        "eval_raw_row_count": 3,
+        "eval_hydrated_row_count": 3,
+        "eval_filtered_row_count": 3
+      },
+      "repair_report": {}
+    }
+  ]
+}

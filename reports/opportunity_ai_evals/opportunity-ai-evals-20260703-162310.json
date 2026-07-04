@@ -1,0 +1,141 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "anacortes_sfr_no_sale_25_years",
+      "prompt": "Anacortes single family residential parcels with no valid sale in 25 years or more.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number\nFROM read_parquet('r2://openskagit/derived/parcel_search_with_sales.parquet') AS ps\nWHERE (lower(ps.city_name) = 'anacortes' OR lower(ps.situs_city_state_zip) LIKE '%anacortes%')\n  AND (regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1) IN ('110', '111'))\n  AND (ps.years_since_last_valid_sale IS NULL OR ps.years_since_last_valid_sale >= 25)",
+      "generated_params": [],
+      "title": "Anacortes Single Family Residential Parcels with No Valid Sale in 25+ Years",
+      "criteria_summary": "Parcels located in Anacortes city with single family residential land use and no valid sale recorded in the last 25 years or more.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100043",
+        "P100047",
+        "P100056",
+        "P100315",
+        "P100322",
+        "P100323",
+        "P101342",
+        "P101677",
+        "P102283",
+        "P102626"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100043",
+          "location": "3614 W 4TH, ANACORTES",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,629 sf primary building",
+            "built 1993",
+            "26 years since valid sale",
+            "380 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P100047",
+          "location": "3710 W 4TH ST, ANACORTES",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,613 sf primary building",
+            "built 1991",
+            "28 years since valid sale",
+            "437 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P100056",
+          "location": "3619 W 4TH, ANACORTES",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,992 sf primary building",
+            "built 1993",
+            "33 years since valid sale",
+            "400 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P100315",
+          "location": "4016 PETERS LN, ANACORTES",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,773 sf primary building",
+            "built 1992",
+            "34 years since valid sale",
+            "460 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P100322",
+          "location": "4001 PETERS LN, ANACORTES",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.2,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "2,915 sf primary building",
+            "built 1993",
+            "34 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search_with_sales.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

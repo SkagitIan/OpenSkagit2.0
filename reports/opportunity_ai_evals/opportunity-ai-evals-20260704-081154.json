@@ -1,0 +1,139 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "suite_ui_sedro_low_quality_sfr_1_to_3_acres_residential_zones",
+      "prompt": "low quality homes in sedro-woolly on lots between 1-3 acres. residential zones only",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "WITH ps AS (\n  SELECT *\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet')\n  WHERE (\n    lower(city_name) = 'sedro-woolley'\n    OR lower(situs_city_state_zip) LIKE '%sedro woolley%'\n    OR lower(situs_city_state_zip) LIKE '%sedro-woolley%'\n  )\n  AND acres BETWEEN 1 AND 3\n  AND TRY_CAST(NULLIF(regexp_extract(COALESCE(land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) BETWEEN 110 AND 113\n  AND (\n    zoning_code_short IN ('RI', 'RRv', 'RVR', 'URR', 'BR-R', 'R')\n    OR lower(COALESCE(zoning_label, '')) LIKE '%residential%'\n    OR (\n      zoning_code_short = 'CITY'\n      AND lower(city_name) = 'sedro-woolley'\n      AND TRY_CAST(NULLIF(regexp_extract(COALESCE(land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) BETWEEN 110 AND 113\n    )\n  )\n  AND COALESCE(improvement_building_count, 0) > 0\n),\nimp AS (\n  SELECT DISTINCT TRIM(ParcelNumber) AS parcel_number, STRING_AGG(DISTINCT TRIM(imprv_det_class_cd), ' | ') AS quality_codes\n  FROM read_parquet('r2://openskagit/improvements.parquet')\n  WHERE TRIM(imprv_det_class_cd) = 'MSL'\n  GROUP BY TRIM(ParcelNumber)\n)\nSELECT ps.parcel_number, ps.land_use, ps.acres, ps.zoning_code_short, ps.zoning_label, imp.quality_codes\nFROM ps\nJOIN imp ON ps.parcel_number = imp.parcel_number",
+      "generated_params": [],
+      "title": "Low Quality Homes in Sedro-Woolley on Lots 1-3 Acres, Residential Zones Only",
+      "criteria_summary": "Parcels in Sedro-Woolley city or immediate vicinity with residential land use codes (110-113), lot size between 1 and 3 acres, located in residential zones, and having low quality improvements (MSL).",
+      "raw_row_count": 13,
+      "hydrated_row_count": 13,
+      "filtered_row_count": 13,
+      "top_result_parcels": [
+        "P36107",
+        "P49290",
+        "P49720",
+        "P82959",
+        "P76885",
+        "P40532",
+        "P81589",
+        "P30054",
+        "P105576",
+        "P50752"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P36107",
+          "location": "7891 F AND S GRADE ROAD, SEDRO WOOLLEY",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 2.95,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,904 sf primary building",
+            "built 1968",
+            "34 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P49290",
+          "location": "2262 BUTLER CREEK ROAD, SEDRO WOOLLEY",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 1.04,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,261 sf primary building",
+            "built 1910"
+          ]
+        },
+        {
+          "parcel_number": "P49720",
+          "location": "20153 ECHO HILL ROAD, SEDRO WOOLLEY",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 1.79,
+          "zoning": "RI",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,368 sf primary building",
+            "built 1952"
+          ]
+        },
+        {
+          "parcel_number": "P82959",
+          "location": "4675 LOIS LANE, SEDRO WOOLLEY",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 1.08,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,194 sf primary building",
+            "built 1981"
+          ]
+        },
+        {
+          "parcel_number": "P76885",
+          "location": "113 N REED, SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 1.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,760 sf primary building",
+            "built 1915"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 13,
+        "hydrated_row_count": 13,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 13,
+        "eval_hydrated_row_count": 13,
+        "eval_filtered_row_count": 13,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "DuckDB execution failed: Binder Error: Referenced column \"land_use_code\" not found in FROM clause!"
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

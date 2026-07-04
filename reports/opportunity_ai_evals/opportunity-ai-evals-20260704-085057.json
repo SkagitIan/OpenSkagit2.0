@@ -1,0 +1,56 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 1
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "sedro_woolley_low_quality_dwellings_1_to_3_acres",
+      "prompt": "Parcels located in Sedro-Woolley city or its immediate unincorporated vicinity with existing residential dwellings classified as low quality, and parcel size between 1 and 3 acres.",
+      "status": "error",
+      "failures": [
+        {
+          "code": "eval_exception",
+          "message": "RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval."
+      ],
+      "next_action": "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval.",
+      "generated_sql": "",
+      "generated_params": [],
+      "title": "",
+      "criteria_summary": "",
+      "raw_row_count": 0,
+      "hydrated_row_count": 0,
+      "filtered_row_count": 0,
+      "top_result_parcels": [],
+      "sample_rows": [],
+      "diagnostics": {
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+          },
+          {
+            "attempt": 2,
+            "status": "error",
+            "error": "Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+          },
+          {
+            "attempt": 3,
+            "status": "error",
+            "error": "Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

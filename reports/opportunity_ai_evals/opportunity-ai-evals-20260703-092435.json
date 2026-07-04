@@ -1,0 +1,56 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 1
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "burlington_retail_service_commercial",
+      "prompt": "Commercial retail or service parcels in Burlington.",
+      "status": "error",
+      "failures": [
+        {
+          "code": "eval_exception",
+          "message": "R2SearchError: Column building_value is not listed for alias ps on derived/parcel_search.parquet. Do not select generic building_value or year_built from parcel_search. Use assessor_building_value, primary_building_improvement_value, total_improvement_value, primary_actual_year_built, oldest_actual_year_built, or primary_effective_year_built when those fields are needed.",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval."
+      ],
+      "next_action": "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval.",
+      "generated_sql": "",
+      "generated_params": [],
+      "title": "",
+      "criteria_summary": "",
+      "raw_row_count": 0,
+      "hydrated_row_count": 0,
+      "filtered_row_count": 0,
+      "top_result_parcels": [],
+      "sample_rows": [],
+      "diagnostics": {
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "Column building_value is not listed for alias ps on derived/parcel_search.parquet. Do not select generic building_value or year_built from parcel_search. Use assessor_building_value, primary_building_improvement_value, total_improvement_value, primary_actual_year_built, oldest_actual_year_built, or primary_effective_year_built when those fields are needed."
+          },
+          {
+            "attempt": 2,
+            "status": "error",
+            "error": "The query must read from allowed R2 parquet files with read_parquet()."
+          },
+          {
+            "attempt": 3,
+            "status": "error",
+            "error": "Column building_value is not listed for alias ps on derived/parcel_search.parquet. Do not select generic building_value or year_built from parcel_search. Use assessor_building_value, primary_building_improvement_value, total_improvement_value, primary_actual_year_built, oldest_actual_year_built, or primary_effective_year_built when those fields are needed."
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "summary": {
+    "total": 3,
+    "passed": 1,
+    "failed": 1,
+    "errors": 1
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "sedro_woolley_low_quality_dwellings_1_to_3_acres",
+      "prompt": "Parcels located in Sedro-Woolley city or its immediate unincorporated vicinity with existing residential dwellings classified as low quality, and parcel size between 1 and 3 acres.",
+      "status": "error",
+      "failures": [
+        {
+          "code": "eval_exception",
+          "message": "R2SearchError: The query must read from allowed R2 parquet files with read_parquet().",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval."
+      ],
+      "next_action": "Fix the SQL-generation guardrail or schema contract named in the failure before rerunning the eval.",
+      "generated_sql": "",
+      "generated_params": [],
+      "title": "",
+      "criteria_summary": "",
+      "raw_row_count": 0,
+      "hydrated_row_count": 0,
+      "filtered_row_count": 0,
+      "top_result_parcels": [],
+      "sample_rows": [],
+      "diagnostics": {},
+      "repair_report": {}
+    },
+    {
+      "id": "sedro_marblemount_lots_over_1_acre_utilities_no_improvements",
+      "prompt": "lots in sedro-woolley or marblemount that are over 1 acre with utilities and no improvements.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT ps.parcel_number AS parcel_number, ps.acres, ps.city_name, ps.situs_city_state_zip, TRIM(a.\"Utilities\") AS utilities, ps.improvement_building_count\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') ps\nJOIN read_parquet('r2://openskagit/assessor.parquet') a ON ps.parcel_number = TRIM(a.\"Parcel Number\")\nWHERE ps.acres > 1\n  AND (LOWER(ps.city_name) = 'sedro-woolley' OR LOWER(ps.city_name) = 'marblemount' OR LOWER(ps.situs_city_state_zip) LIKE '%sedro-woolley%' OR LOWER(ps.situs_city_state_zip) LIKE '%marblemount%')\n  AND TRIM(COALESCE(a.\"Utilities\", '')) <> ''\n  AND ps.improvement_building_count = 0",
+      "generated_params": [],
+      "title": "Lots in Sedro-Woolley or Marblemount Over 1 Acre with Utilities and No Improvements",
+      "criteria_summary": "Parcels located in Sedro-Woolley or Marblemount, with acreage greater than 1, having utilities present, and no improvements on the parcel.",
+      "raw_row_count": 66,
+      "hydrated_row_count": 66,
+      "filtered_row_count": 66,
+      "top_result_parcels": [
+        "P100299",
+        "P101334",
+        "P120078",
+        "P126554",
+        "P128061",
+        "P128062",
+        "P134434",
+        "P134435",
+        "P134441",
+        "P134443"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100299",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 1.24,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P101334",
+          "location": "61440 SOUTH CASCADE ROAD, MARBLEMOUNT",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 4.0900002,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "32 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P120078",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "HOUSEHOLD, 5+ UNITS",
+          "acres": 3.74,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "18 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P126554",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 1.73,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P128061",
+          "location": "LIBERTY BELL LANE, MARBLEMOUNT",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 9.8199997,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "18 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 66,
+        "hydrated_row_count": 66,
+        "parquet_paths": [
+          "r2://openskagit/assessor.parquet",
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 66,
+        "eval_hydrated_row_count": 66,
+        "eval_filtered_row_count": 66
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "sedro_woolley_recreation_lots",
+      "prompt": "Recreation lots in sedro-woolley",
+      "status": "failed",
+      "failures": [
+        {
+          "code": "max_result_count",
+          "message": "Expected at most 100 rows, got 200.",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "The query returned more rows than the eval allows. Either add a deterministic LIMIT/order for this case or raise expected_max_result_count if the broader result set is acceptable."
+      ],
+      "next_action": "The query returned more rows than the eval allows. Either add a deterministic LIMIT/order for this case or raise expected_max_result_count if the broader result set is acceptable.",
+      "generated_sql": "SELECT ps.parcel_number\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE (lower(ps.city_name) = 'sedro-woolley' OR lower(ps.situs_city_state_zip) LIKE '%sedro-woolley%')\n  AND ps.acres > 0\n  AND ps.has_geometry = TRUE\n  AND ps.land_use IS NOT NULL\n  AND (regexp_extract(ps.land_use, '^\\((\\d+)\\)', 1) IN ('190', '910', '911', '940', '941'))\n  AND ps.land_use NOT LIKE '%MH LEASED%'\n  AND ps.land_use NOT LIKE '%CONDOMINIUM%'\n  AND ps.land_use NOT LIKE '%PUBLIC%'\n  AND ps.improvement_building_count = 0",
+      "generated_params": [],
+      "title": "Recreation Lots in Sedro-Woolley",
+      "criteria_summary": "Select parcels in Sedro-Woolley city or situs city state zip containing 'sedro-woolley' that are recreational or undeveloped land, excluding mobile home leased properties, condominiums, public/civic/open-space parcels, zero-acre or no-geometry parcels, and parcels with residential dwelling evidence.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100299",
+        "P101377",
+        "P101553",
+        "P101778",
+        "P103017",
+        "P104717",
+        "P105683",
+        "P107722",
+        "P109239",
+        "P111929"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100299",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 1.24,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P101377",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 0.079999998,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P101553",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 0.73000002,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "30 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P101778",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNDEVELOPED LAND INCORPORATED",
+          "acres": 0.059999999,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "32 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P103017",
+          "location": "SEDRO-WOOLLEY",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 0.017000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200
+      },
+      "repair_report": {}
+    }
+  ]
+}

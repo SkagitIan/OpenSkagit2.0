@@ -1,0 +1,726 @@
+{
+  "summary": {
+    "total": 5,
+    "passed": 3,
+    "failed": 2,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "advanced_mobile_home_parks_only_not_individual_mobile_homes",
+      "prompt": "Mobile home parks in Skagit County, not individual mobile homes or leased manufactured homes.",
+      "status": "failed",
+      "failures": [
+        {
+          "code": "min_result_count",
+          "message": "Expected at least 1 rows, got 0.",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "The generated SQL returned no accepted rows. Inspect hard WHERE filters and move uncertain criteria into score/match_reasons."
+      ],
+      "next_action": "The generated SQL returned no accepted rows. Inspect hard WHERE filters and move uncertain criteria into score/match_reasons.",
+      "generated_sql": "SELECT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value\nFROM read_parquet('r2://openskagit/derived/parcel_search.parquet') ps\nWHERE TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) = 150\nAND COALESCE(ps.improvement_building_count, 0) >= 0",
+      "generated_params": [],
+      "title": "Mobile Home Parks in Skagit County",
+      "criteria_summary": "Parcels classified as mobile home parks (DOR land use code 150), excluding individual mobile homes (code 180) and leased manufactured homes (code 181). Countywide Skagit search with no city or flood filters.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 0,
+      "top_result_parcels": [],
+      "sample_rows": [],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 0,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "min_result_count",
+                "message": "Expected at least 1 rows, got 0."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "min_result_count",
+                "message": "Expected at least 1 rows, got 0."
+              }
+            ]
+          },
+          {
+            "attempt": 3,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "min_result_count",
+                "message": "Expected at least 1 rows, got 0."
+              }
+            ]
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_recreation_lots_with_geometry_not_public_or_moorage",
+      "prompt": "Private bare recreation lots with valid map geometry, excluding public parks, schools, cemeteries, churches, moorage, and condos.",
+      "status": "failed",
+      "failures": [
+        {
+          "code": "row_forbidden_text",
+          "message": "row 143 parcel P23499 included forbidden text term: church.",
+          "severity": "error"
+        },
+        {
+          "code": "row_forbidden_text",
+          "message": "row 159 parcel P24133 included forbidden text term: church.",
+          "severity": "error"
+        },
+        {
+          "code": "row_forbidden_text",
+          "message": "row 183 parcel P24132 included forbidden text term: church.",
+          "severity": "error"
+        }
+      ],
+      "action_plan": [
+        "Tighten text/code evidence in SQL and select match_reasons or source fields that explain why each row belongs."
+      ],
+      "next_action": "Tighten text/code evidence in SQL and select match_reasons or source fields that explain why each row belongs.",
+      "generated_sql": "WITH base AS (\n  SELECT ps.parcel_number, ps.land_use, ps.acres, ps.owner_name, ps.situs_address, ps.has_geometry, COALESCE(ps.improvement_building_count, 0) AS improvement_building_count\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\n  WHERE ps.has_geometry = TRUE\n    AND ps.acres > 0\n    AND TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) IN (910, 911, 940, 941, 710, 711, 712, 713, 714, 715, 716, 717, 718, 719) -- unimproved, open space, recreation codes\n    AND COALESCE(ps.improvement_building_count, 0) = 0\n    AND lower(COALESCE(ps.owner_name, '')) NOT LIKE '%church%'\n    AND lower(COALESCE(ps.owner_name, '')) NOT LIKE '%cemetery%'\n    AND lower(COALESCE(ps.owner_name, '')) NOT LIKE '%school%'\n    AND lower(COALESCE(ps.owner_name, '')) NOT LIKE '%park%'\n    AND lower(COALESCE(ps.owner_name, '')) NOT LIKE '%moorage%'\n    AND lower(COALESCE(ps.owner_name, '')) NOT LIKE '%condo%'\n    AND lower(COALESCE(ps.situs_address, '')) NOT LIKE '%church%'\n    AND lower(COALESCE(ps.situs_address, '')) NOT LIKE '%cemetery%'\n    AND lower(COALESCE(ps.situs_address, '')) NOT LIKE '%school%'\n    AND lower(COALESCE(ps.situs_address, '')) NOT LIKE '%park%'\n    AND lower(COALESCE(ps.situs_address, '')) NOT LIKE '%moorage%'\n    AND lower(COALESCE(ps.situs_address, '')) NOT LIKE '%condo%'\n)\nSELECT parcel_number, land_use, acres, improvement_building_count\nFROM base\nORDER BY acres DESC",
+      "generated_params": [],
+      "title": "Private Bare Recreation Lots with Valid Geometry Excluding Public Parks, Schools, Cemeteries, Churches, Moorage, and Condos",
+      "criteria_summary": "Select parcels that are private bare or recreation land with valid map geometry, excluding parcels with land use indicating public parks, schools, cemeteries, churches, moorage, or condos, and excluding parcels with forbidden text terms in owner or situs address fields.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 194,
+      "top_result_parcels": [
+        "P48764",
+        "P49773",
+        "P45607",
+        "P20259",
+        "P29678",
+        "P20277",
+        "P118881",
+        "P19985",
+        "P18782",
+        "P24649"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P48764",
+          "location": "n/a",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 514.83002,
+          "zoning": "RRc-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P49773",
+          "location": "n/a",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 320.0,
+          "zoning": "SF-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P45607",
+          "location": "n/a",
+          "current_use": "CULTURAL ACTIVITIES & NATURE EXHIBITS",
+          "acres": 262.01999,
+          "zoning": "IF-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P20259",
+          "location": "n/a",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 233.07001,
+          "zoning": "SF-NRL",
+          "risk_flags": [
+            "No parcel geometry",
+            "Natural resource zoning"
+          ],
+          "signal_labels": []
+        },
+        {
+          "parcel_number": "P29678",
+          "location": "20483 JAMES ST, MOUNT VERNON",
+          "current_use": "UNIMPROVED LAND UNINCORPORATED",
+          "acres": 160.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": []
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 194,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_forbidden_text",
+                "message": "row 77 parcel P106788 included forbidden text term: cemetery."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 83 parcel P107553 included forbidden text term: public."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 143 parcel P108346 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 172 parcel P112614 included forbidden text term: condo."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_forbidden_text",
+                "message": "row 5 parcel P23499 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 6 parcel P24133 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 8 parcel P24132 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 9 parcel P24123 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 23 parcel P23501 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 44 parcel P24135 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 74 parcel P24366 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 143 parcel P108346 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 144 parcel P24368 included forbidden text term: church."
+              }
+            ]
+          },
+          {
+            "attempt": 3,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_forbidden_text",
+                "message": "row 143 parcel P23499 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 159 parcel P24133 included forbidden text term: church."
+              },
+              {
+                "code": "row_forbidden_text",
+                "message": "row 183 parcel P24132 included forbidden text term: church."
+              }
+            ]
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_low_quality_sfr_with_condition_evidence",
+      "prompt": "Low quality single family residential parcels countywide with condition evidence included.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "WITH low_quality_improvements AS (\n  SELECT\n    TRIM(i.ParcelNumber) AS parcel_number,\n    STRING_AGG(DISTINCT TRIM(i.imprv_det_class_cd), ' | ') AS quality_codes,\n    STRING_AGG(DISTINCT TRIM(i.condition_cd), ' | ') AS condition_codes\n  FROM\n    read_parquet('r2://openskagit/improvements.parquet') AS i\n  WHERE\n    TRIM(i.imprv_det_class_cd) = 'MSL'\n  GROUP BY\n    parcel_number\n),\nsingle_family_parcels AS (\n  SELECT\n    ps.parcel_number,\n    ps.land_use,\n    ps.acres,\n    ps.assessed_value\n  FROM\n    read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\n  WHERE\n    TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) BETWEEN 110 AND 113\n)\nSELECT\n  sf.parcel_number,\n  sf.land_use,\n  sf.acres,\n  sf.assessed_value,\n  lq.quality_codes,\n  lq.condition_codes\nFROM\n  single_family_parcels AS sf\n  JOIN low_quality_improvements AS lq ON sf.parcel_number = lq.parcel_number\nORDER BY\n  sf.parcel_number",
+      "generated_params": [],
+      "title": "Low Quality Single Family Residential Parcels Countywide with Condition Evidence",
+      "criteria_summary": "Parcels classified as single family residential with low quality improvements (imprv_det_class_cd = 'MSL') joined with condition codes from improvements for condition evidence, countywide.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100374",
+        "P104491",
+        "P104867",
+        "P105576",
+        "P107199",
+        "P108002",
+        "P108025",
+        "P109616",
+        "P113563",
+        "P114351"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100374",
+          "location": "428 S 27TH ST, MOUNT VERNON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,176 sf primary building",
+            "built 1993",
+            "3 years since valid sale",
+            "336 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P104491",
+          "location": "1305 CRYSTAL LN, BURLINGTON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,214 sf primary building",
+            "built 1994",
+            "6 years since valid sale",
+            "483 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P104867",
+          "location": "45317 MAIN STREET, CONCRETE",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.14,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,272 sf primary building",
+            "built 1940"
+          ]
+        },
+        {
+          "parcel_number": "P105576",
+          "location": "24461 OLD DAY CREEK ROAD, SEDRO WOOLLEY",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 2.5,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,276 sf primary building",
+            "built 1900",
+            "23 years since valid sale"
+          ]
+        },
+        {
+          "parcel_number": "P107199",
+          "location": "8712 ARNOLD LANE, CONCRETE",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.31,
+          "zoning": "RRv",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "567 sf primary building",
+            "built 1930",
+            "2 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "forbidden_sql_pattern",
+                "message": "SQL matched forbidden pattern: condition_codes[\\s\\S]{0,80}(LIKE|=|IN)[\\s\\S]{0,80}MSL"
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "required_sql_pattern",
+                "message": "SQL did not match required pattern: imprv_det_class_cd"
+              },
+              {
+                "code": "forbidden_sql_pattern",
+                "message": "SQL matched forbidden pattern: condition_codes[\\s\\S]{0,80}(LIKE|=|IN)[\\s\\S]{0,80}MSL"
+              },
+              {
+                "code": "min_result_count",
+                "message": "Expected at least 1 rows, got 0."
+              }
+            ]
+          },
+          {
+            "attempt": 3,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_average_quality_sfr_not_low_quality",
+      "prompt": "Average quality single family homes in Skagit County, excluding low quality homes.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "WITH filtered_parcels AS (\n  SELECT\n    ps.parcel_number,\n    ps.land_use,\n    TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) AS land_use_code,\n    ps.acres,\n    ps.assessed_value\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet') ps\n  WHERE TRY_CAST(NULLIF(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1), '') AS INTEGER) IN (110, 111, 112, 113)\n    AND COALESCE(ps.improvement_building_count, 0) > 0\n),\nquality_filtered AS (\n  SELECT\n    fp.parcel_number,\n    fp.land_use,\n    fp.land_use_code,\n    fp.acres,\n    fp.assessed_value,\n    STRING_AGG(DISTINCT TRIM(i.imprv_det_class_cd), ' | ') AS quality_codes\n  FROM filtered_parcels fp\n  JOIN read_parquet('r2://openskagit/improvements.parquet') i\n    ON fp.parcel_number = TRIM(i.ParcelNumber)\n  WHERE TRIM(i.imprv_det_class_cd) = 'MSA'\n  GROUP BY fp.parcel_number, fp.land_use, fp.land_use_code, fp.acres, fp.assessed_value\n)\nSELECT\n  parcel_number,\n  land_use,\n  land_use_code,\n  acres,\n  assessed_value,\n  quality_codes,\n  'MSA average quality improvement class' AS match_reasons\nFROM quality_filtered",
+      "generated_params": [],
+      "title": "Average Quality Single Family Homes in Skagit County Excluding Low Quality",
+      "criteria_summary": "Select parcels with land use codes for single family residences (110, 111, 112, 113) and with average quality improvements (imprv_det_class_cd = 'MSA'). Exclude low quality (MSL) and other quality classes. Require at least one improvement building. Use derived parcel_search and join improvements for quality filtering.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P70193",
+        "P70194",
+        "P70207",
+        "P70233",
+        "P70251",
+        "P70270",
+        "P70271",
+        "P70278",
+        "P70279",
+        "P70281"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P70193",
+          "location": "12113 HILYNN DRIVE, BURLINGTON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.30000001,
+          "zoning": "BR-R",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average quality improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P70194",
+          "location": "12103 HILYNN DRIVE, BURLINGTON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.30000001,
+          "zoning": "BR-R",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average quality improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P70207",
+          "location": "17462 MAPLE LANE, LA CONNER",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.36000001,
+          "zoning": "R",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average quality improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P70233",
+          "location": "17430 GOLDEN VIEW AVENUE, LA CONNER",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.40000001,
+          "zoning": "R",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average quality improvement class"
+          ]
+        },
+        {
+          "parcel_number": "P70251",
+          "location": "12042 CHINOOK DRIVE, BURLINGTON",
+          "current_use": "HOUSEHOLD SFR OUTSIDE CITY",
+          "acres": 0.23,
+          "zoning": "URR",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSA average quality improvement class"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "failures": [
+              {
+                "code": "row_land_use_code",
+                "message": "row 1 parcel P100005 had land_use_code=120, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 3 parcel P100026 had land_use_code=190, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 3 parcel P100026 had quality_codes=[], expected one of: MSA."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 4 parcel P100027 had land_use_code=190, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 4 parcel P100027 had quality_codes=[], expected one of: MSA."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 16 parcel P100050 had quality_codes=['MSG'], expected one of: MSA."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 25 parcel P100071 had land_use_code=190, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 25 parcel P100071 had quality_codes=[], expected one of: MSA."
+              },
+              {
+                "code": "row_land_use_code",
+                "message": "row 26 parcel P100072 had land_use_code=190, expected one of: 110, 111, 112, 113."
+              },
+              {
+                "code": "row_quality_code",
+                "message": "row 26 parcel P100072 had quality_codes=['MSF'], expected one of: MSA."
+              },
+              {
+                "code": "row_failure_limit",
+                "message": "Stopped after 10 row-level failures."
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    },
+    {
+      "id": "advanced_fair_quality_sfr_not_average_or_low",
+      "prompt": "Fair quality single family homes in Skagit County, excluding average and low quality.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "WITH fair_quality_parcels AS (\n  SELECT DISTINCT ps.parcel_number\n  FROM read_parquet('r2://openskagit/derived/parcel_search_with_sales_improvements.parquet') ps\n  JOIN read_parquet('r2://openskagit/improvements.parquet') i ON ps.parcel_number = TRIM(i.ParcelNumber)\n  WHERE TRIM(i.imprv_det_class_cd) = 'MSF'\n    AND TRY_CAST(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1) AS INTEGER) IN (110, 111, 112, 113, 120, 140)\n    AND ps.improvement_building_count > 0\n),\nexcluded_parcels AS (\n  SELECT DISTINCT ps.parcel_number\n  FROM read_parquet('r2://openskagit/derived/parcel_search_with_sales_improvements.parquet') ps\n  JOIN read_parquet('r2://openskagit/improvements.parquet') i ON ps.parcel_number = TRIM(i.ParcelNumber)\n  WHERE TRIM(i.imprv_det_class_cd) IN ('MSL', 'MSA')\n)\nSELECT ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, ps.improvement_building_count, \n       string_agg(DISTINCT TRIM(i.imprv_det_class_cd), ' | ') AS quality_codes, 'Fair quality single family home, excluding average and low quality' AS match_reasons\nFROM read_parquet('r2://openskagit/derived/parcel_search_with_sales_improvements.parquet') ps\nJOIN read_parquet('r2://openskagit/improvements.parquet') i ON ps.parcel_number = TRIM(i.ParcelNumber)\nWHERE ps.parcel_number IN (SELECT parcel_number FROM fair_quality_parcels)\n  AND ps.parcel_number NOT IN (SELECT parcel_number FROM excluded_parcels)\n  AND TRY_CAST(regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1) AS INTEGER) IN (110, 111, 112, 113, 120, 140)\nGROUP BY ps.parcel_number, ps.land_use, ps.acres, ps.assessed_value, ps.improvement_building_count\nORDER BY ps.parcel_number",
+      "generated_params": [],
+      "title": "Fair Quality Single Family Homes in Skagit County Excluding Average and Low Quality",
+      "criteria_summary": "Select parcels with single family residential land use codes, having improvements classified as fair quality (MSF) but excluding average (MSA) and low (MSL) quality classes. Countywide search without city limits restriction.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100343",
+        "P100350",
+        "P100362",
+        "P100363",
+        "P100364",
+        "P100367",
+        "P100369",
+        "P100370",
+        "P100373",
+        "P100375"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100343",
+          "location": "301 S 27TH ST, MOUNT VERNON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Fair quality single family home, excluding average and low quality"
+          ]
+        },
+        {
+          "parcel_number": "P100350",
+          "location": "302 S 27TH ST, MOUNT VERNON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Fair quality single family home, excluding average and low quality"
+          ]
+        },
+        {
+          "parcel_number": "P100362",
+          "location": "413 S 27TH ST, MOUNT VERNON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Fair quality single family home, excluding average and low quality"
+          ]
+        },
+        {
+          "parcel_number": "P100363",
+          "location": "419 S 27TH ST, MOUNT VERNON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Fair quality single family home, excluding average and low quality"
+          ]
+        },
+        {
+          "parcel_number": "P100364",
+          "location": "425 S 27TH ST, MOUNT VERNON",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.18000001,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "Fair quality single family home, excluding average and low quality"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search_with_sales_improvements.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

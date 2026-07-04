@@ -1,0 +1,144 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "mount_vernon_mobile_home_parcels",
+      "prompt": "Mobile home parcels in Mount Vernon, including mobile home parks and mobile homes on owned or leased land.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "SELECT\n  ps.parcel_number,\n  ps.owner_name,\n  ps.situs_address,\n  ps.situs_city_state_zip,\n  ps.land_use,\n  ps.acres,\n  ps.assessed_value,\n  ps.assessor_building_value,\n  ps.primary_actual_year_built,\n  ps.primary_building_improvement_value\nFROM\n  read_parquet('r2://openskagit/derived/parcel_search.parquet') AS ps\nWHERE\n  (lower(ps.city_name) = 'mount vernon' OR lower(ps.situs_city_state_zip) LIKE '%mount vernon%')\n  AND (\n    regexp_extract(COALESCE(ps.land_use, ''), '^\\((\\d+)\\)', 1) IN ('150', '180', '181')\n  )",
+      "generated_params": [],
+      "title": "Mobile Home Parcels in Mount Vernon Including Parks and Owned/Leased Land",
+      "criteria_summary": "Parcels in Mount Vernon city with land use codes for mobile homes, mobile home parks, or leased mobile home land. Includes parcels with land_use codes 180 (Mobile homes), 181 (MH leased property), and 150 (Mobile home parks). Filters by city_name or situs_city_state_zip containing 'mount vernon'.",
+      "raw_row_count": 200,
+      "hydrated_row_count": 200,
+      "filtered_row_count": 200,
+      "top_result_parcels": [
+        "P100550",
+        "P100948",
+        "P100950",
+        "P100951",
+        "P101223",
+        "P101225",
+        "P101379",
+        "P101497",
+        "P101712",
+        "P101809"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P100550",
+          "location": "2610 E SECTION ST, MOUNT VERNON",
+          "current_use": "MH LEASED PROPERTY",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,455 sf primary building",
+            "built 1992",
+            "21 years since valid sale",
+            "680 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P100948",
+          "location": "2610 E SECTION ST, MOUNT VERNON",
+          "current_use": "MH LEASED PROPERTY",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,572 sf primary building",
+            "built 1991",
+            "21 years since valid sale",
+            "440 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P100950",
+          "location": "2610 E SECTION ST, MOUNT VERNON",
+          "current_use": "MH LEASED PROPERTY",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,136 sf primary building",
+            "built 1991"
+          ]
+        },
+        {
+          "parcel_number": "P100951",
+          "location": "2610 E SECTION ST, MOUNT VERNON",
+          "current_use": "MH LEASED PROPERTY",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,243 sf primary building",
+            "built 1992",
+            "19 years since valid sale",
+            "324 sf garage area"
+          ]
+        },
+        {
+          "parcel_number": "P101223",
+          "location": "2610 E SECTION ST, MOUNT VERNON",
+          "current_use": "MH LEASED PROPERTY",
+          "acres": 0.0,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "1,160 sf primary building",
+            "built 1992",
+            "20 years since valid sale"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 200,
+        "hydrated_row_count": 200,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 200,
+        "eval_hydrated_row_count": 200,
+        "eval_filtered_row_count": 200,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "Column building_value is not listed for alias ps on derived/parcel_search.parquet. Do not select generic building_value or year_built from parcel_search. Use assessor_building_value, primary_building_improvement_value, total_improvement_value, primary_actual_year_built, oldest_actual_year_built, or primary_effective_year_built when those fields are needed."
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}

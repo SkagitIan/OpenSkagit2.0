@@ -1,0 +1,72 @@
+{
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "report_path": "",
+  "cases": [
+    {
+      "id": "anacortes_high_value_sfr",
+      "prompt": "High value single family residential parcels in Anacortes assessed over $750,000.",
+      "status": "passed",
+      "failures": [],
+      "action_plan": [
+        "No action needed. Keep this case in the regression suite."
+      ],
+      "next_action": "No action needed. Keep this case in the regression suite.",
+      "generated_sql": "WITH ps AS (\n  SELECT *\n  FROM read_parquet('r2://openskagit/derived/parcel_search.parquet')\n  WHERE lower(city_name) = 'anacortes'\n    AND CAST(assessed_value AS DOUBLE) > 750000\n    AND regexp_extract(COALESCE(land_use, ''), '^\\((\\d+)\\)', 1) IN ('110', '111', '112', '113')\n), imp AS (\n  SELECT TRIM(ParcelNumber) AS parcel_number, string_agg(DISTINCT TRIM(imprv_det_class_cd), ' | ') AS quality_codes\n  FROM read_parquet('r2://openskagit/improvements.parquet')\n  WHERE TRIM(imprv_det_class_cd) = 'MSL'\n  GROUP BY parcel_number\n)\nSELECT ps.parcel_number, ps.situs_address, ps.city_name, ps.assessed_value, ps.land_use, imp.quality_codes, 'MSL low-quality improvement class' AS match_reasons\nFROM ps\nJOIN imp ON ps.parcel_number = imp.parcel_number\nORDER BY ps.assessed_value DESC",
+      "generated_params": [],
+      "title": "High Value Single Family Residential Parcels in Anacortes Assessed Over $750,000",
+      "criteria_summary": "Parcels located in Anacortes city with land use indicating single family residential, assessed value over $750,000, and having at least one improvement classified as low quality (MSL).",
+      "raw_row_count": 1,
+      "hydrated_row_count": 1,
+      "filtered_row_count": 1,
+      "top_result_parcels": [
+        "P32308"
+      ],
+      "sample_rows": [
+        {
+          "parcel_number": "P32308",
+          "location": "1601 QUAIL DR, ANACORTES",
+          "current_use": "HOUSEHOLD, SFR, INSIDE CITY",
+          "acres": 0.87,
+          "zoning": "CITY",
+          "risk_flags": [
+            "No parcel geometry"
+          ],
+          "signal_labels": [
+            "MSL low-quality improvement class"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "source": "duckdb_r2",
+        "raw_row_count": 1,
+        "hydrated_row_count": 1,
+        "parquet_paths": [
+          "r2://openskagit/derived/parcel_search.parquet",
+          "r2://openskagit/improvements.parquet"
+        ],
+        "tool_trace": [],
+        "registry_table_count": 25,
+        "eval_raw_row_count": 1,
+        "eval_hydrated_row_count": 1,
+        "eval_filtered_row_count": 1,
+        "generation_attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "Column year_built is not listed for alias ps on r2://openskagit/derived/parcel_search.parquet."
+          },
+          {
+            "attempt": 2,
+            "status": "passed"
+          }
+        ]
+      },
+      "repair_report": {}
+    }
+  ]
+}
