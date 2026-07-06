@@ -2038,6 +2038,10 @@ pre {
 }
 
 .os-footer-v2__links a {
+  /* Negative margins offset the padding so visual spacing is unchanged,
+     while the tap target grows from ~11px tall to a touch-friendly size. */
+  padding: 13px 6px;
+  margin: -13px -6px;
   text-decoration: none;
   font-size: 11px;
   color: rgba(255, 255, 255, 0.16);
@@ -2825,11 +2829,14 @@ pre {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 28px;
+  /* Negative margins cancel the padding below so the link's visual position
+     and spacing are unchanged, while the actual tap target grows to a
+     touch-friendly size (was ~17px tall). */
+  margin: -10px -8px 18px -8px;
   border: 0;
   background: transparent;
   cursor: pointer;
-  padding: 0;
+  padding: 10px 8px;
   font-size: 13px;
   font-weight: 600;
   color: var(--os-teal-dk);
@@ -5491,6 +5498,11 @@ pre {
   width: min(100% - 36px, 1040px);
   margin: 14px auto 0;
   padding: clamp(18px, 3vw, 30px) 0 56px;
+  /* ::before is a rotateX() "grid floor" decoration — its rendered bounding
+     box extends well past this section's edges even though nothing is
+     visible there, which was blowing out the page's horizontal scroll
+     range on mobile. Clip it to the section it's already meant to sit in. */
+  overflow: hidden;
 }
 
 .taxshift-hero::before,
@@ -6113,6 +6125,11 @@ pre {
 /* TaxShift parcel report refinements */
 .os-tax-report__shell {
   gap: 16px;
+  /* Without an explicit column track, this grid's implicit column defaults to
+     "auto" sizing, which never shrinks below the max-content width of the
+     widest card inside it — that's what was forcing every card to ~700px
+     wide and overflowing on mobile regardless of the shell's own width. */
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .os-tax-report__shell > .os-tax-parcel-banner {
@@ -6376,8 +6393,8 @@ pre {
 }
 
 .os-tax-share-report {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   display: inline-grid;
   place-items: center;
   border: 1px solid rgba(0, 130, 138, 0.24);
@@ -6866,6 +6883,192 @@ pre {
 
   .os-tax-reason-history__driver strong,
   .os-tax-reason-history__driver em {
+    text-align: left;
+  }
+}
+
+/* Mobile report readability pass */
+.os-tax-reason-history__driver-empty {
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid rgba(8, 26, 53, 0.08);
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .os-tax-story-card {
+    padding: 18px;
+  }
+
+  .os-tax-reason-card,
+  .os-tax-step,
+  .os-tax-step--rate {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+    align-items: start;
+    padding: 16px;
+  }
+
+  .os-tax-reason-card {
+    box-shadow: inset 0 4px 0 var(--os-green);
+  }
+
+  .os-tax-reason-card .os-tax-step__num {
+    width: auto;
+    height: auto;
+    justify-self: start;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(47, 122, 23, 0.12);
+    color: #2f7a17;
+    font-size: 12px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .os-tax-reason-card h3 {
+    font-size: 23px;
+    line-height: 1.15;
+  }
+
+  .os-tax-reason-card p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .os-tax-step__num,
+  .os-tax-step--rate .os-tax-step__num,
+  .os-tax-step__icon,
+  .os-tax-step__effect,
+  .os-tax-step--rate .os-tax-step__effect {
+    grid-column: auto !important;
+  }
+
+  .os-tax-step__num,
+  .os-tax-step--rate .os-tax-step__num {
+    justify-self: start;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+
+  .os-tax-step__icon {
+    justify-self: start;
+    width: 50px;
+    height: 50px;
+  }
+
+  .os-tax-step h2,
+  .os-tax-step--rate h2 {
+    font-size: 25px;
+    line-height: 1.08;
+  }
+
+  .os-tax-step p {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .os-tax-step__effect,
+  .os-tax-step--rate .os-tax-step__effect {
+    width: 100%;
+    padding: 12px 14px;
+  }
+
+  .os-tax-step__effect strong,
+  .os-tax-step--rate .os-tax-step__effect strong {
+    font-size: 22px;
+    line-height: 1.15;
+  }
+
+  .os-tax-line-chart {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .os-tax-line-chart svg {
+    width: 700px;
+    max-width: none;
+  }
+
+  .os-tax-chart-year,
+  .os-tax-chart-axis {
+    font-size: 13px;
+  }
+
+  .os-tax-chart-legend {
+    gap: 12px;
+  }
+
+  .os-tax-chart-legend span {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  .os-tax-footnote {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .os-tax-reason-history {
+    padding: 16px;
+  }
+
+  .os-tax-reason-history__head {
+    display: grid;
+    gap: 8px;
+    align-items: start;
+  }
+
+  .os-tax-reason-history__head h3 {
+    font-size: 27px;
+    line-height: 1.1;
+  }
+
+  .os-tax-reason-history__head p {
+    max-width: none;
+    font-size: 15px;
+  }
+
+  .os-tax-reason-history__item {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .os-tax-reason-history__item dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px;
+  }
+
+  .os-tax-reason-history__item span,
+  .os-tax-reason-history__item dt {
+    font-size: 10px;
+    letter-spacing: 0.09em;
+  }
+
+  .os-tax-reason-history__item strong {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .os-tax-reason-history__item dd {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .os-tax-reason-history__driver {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 10px;
+  }
+
+  .os-tax-reason-history__driver em {
+    grid-column: 1 / -1;
     text-align: left;
   }
 }

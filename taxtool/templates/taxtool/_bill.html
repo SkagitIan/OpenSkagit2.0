@@ -309,6 +309,8 @@
                   </div>
                   <p>{{ reason.driver_note }}</p>
                 </details>
+                {% else %}
+                <p class="os-tax-reason-history__driver-empty">Rate-driver detail is not available for this year pair.</p>
                 {% endif %}
               </div>
             </article>
