@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 import time
 
 from django.core.management.base import BaseCommand
@@ -102,6 +103,15 @@ class Command(BaseCommand):
 
     def _resolve_parcel_number(self, query: str, get_parcel, search_parcels) -> str | None:
         """Return a parcel_number, '' for ambiguous, or None for no match."""
+        # The parcel-detail signup form (taxtool/_bill.html) pre-fills a hidden
+        # "<address> / Parcel <parcel_number>" value — that suffix is authoritative,
+        # so prefer it over fuzzy-matching the whole string.
+        tagged = re.search(r"/\s*Parcel\s+(\S+)\s*$", query, re.I)
+        if tagged:
+            exact = get_parcel(tagged.group(1).upper())
+            if exact:
+                return exact["parcel_number"]
+
         exact = get_parcel(query.upper())
         if exact:
             return exact["parcel_number"]
