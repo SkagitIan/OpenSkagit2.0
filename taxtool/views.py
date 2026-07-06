@@ -1,10 +1,13 @@
+from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
+from django.db.models import F
 from django.core.validators import validate_email
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 
 from core.views import CITY_PAGES
-from .models import TaxShiftSignup
+from .models import ParcelSearchCache, TaxShiftSignup
 
 from .queries import (
     search_parcels,
@@ -19,6 +22,8 @@ from .queries import (
     get_county_total_for_mcag,
     get_parcel_history,
     get_tax_shock,
+    get_tax_shock_history,
+    get_data_methodology_stats,
 )
 from .utils import (
     group_levy_rows,
@@ -40,13 +45,132 @@ from .utils import (
 )
 
 
+
+
+
+
+def attach_reason_history_drivers(history_story, shock_history):
+    if not history_story or not history_story.get("reason_history"):
+        return history_story
+    for reason in history_story["reason_history"]:
+        shock = shock_history.get((reason["year_old"], reason["year_new"]))
+        if not shock:
+            continue
+        driver_lines = []
+        for line in shock.get("top_lines", [])[:3]:
+            rate_delta = line.get("rate_delta") or 0
+            driver_lines.append({
+                "name": (line.get("district_name") or line.get("agency_name") or line.get("levy_name") or "Taxing district").title(),
+                "rate_delta_fmt": f"{'+' if rate_delta >= 0 else '-'}{abs(float(rate_delta)):.2f} per $1,000",
+                "effect_fmt": format_delta_currency(line.get("rate_effect")),
+            })
+        reason["drivers"] = driver_lines
+        reason["driver_note"] = "Estimated using the parcel's current levy code and historical levy-rate files."
+    return history_story
+
+def cache_searched_parcels(parcels, query="", source="search_result"):
+    """Persist a lightweight cache of parcels users searched or opened."""
+    for parcel in parcels:
+        parcel_number = (parcel.get("parcel_number") or "").strip()
+        if not parcel_number:
+            continue
+        defaults = {
+            "situs_street_number": str(parcel.get("situs_street_number") or "")[:32],
+            "situs_street_name": str(parcel.get("situs_street_name") or "")[:160],
+            "situs_city_state_zip": str(parcel.get("situs_city_state_zip") or "")[:160],
+            "last_query": query[:255],
+            "last_source": source[:40],
+        }
+        cache, created = ParcelSearchCache.objects.update_or_create(
+            parcel_number=parcel_number,
+            defaults=defaults,
+        )
+        if created:
+            ParcelSearchCache.objects.filter(pk=cache.pk).update(hit_count=1)
+        else:
+            ParcelSearchCache.objects.filter(pk=cache.pk).update(hit_count=F("hit_count") + 1)
+
 def tax_home(request):
     return render(request, "taxtool/base.html", {"city_pages": CITY_PAGES})
 
 
+def tax_data_sources(request):
+    stats = get_data_methodology_stats()
+    for key in (
+        "active_parcels",
+        "parcels_with_tax",
+        "history_rows",
+        "history_parcels",
+        "summary_rows",
+        "summary_parcels",
+        "levy_rows",
+        "levy_codes",
+        "dor_rows",
+        "agency_total_rows",
+    ):
+        if key in stats and stats[key] is not None:
+            stats[f"{key}_fmt"] = f"{int(stats[key]):,}"
+    return render(request, "taxtool/data_sources.html", {
+        "city_pages": CITY_PAGES,
+        "stats": stats,
+    })
+
+
+
+
+def tax_contact(request):
+    context = {"city_pages": CITY_PAGES}
+
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip().lower()
+        subject = request.POST.get("subject", "").strip()
+        message = request.POST.get("message", "").strip()
+        errors = []
+
+        if not name:
+            errors.append("Enter your name.")
+        try:
+            validate_email(email)
+        except ValidationError:
+            errors.append("Enter a valid email address.")
+        if not message:
+            errors.append("Enter a message.")
+
+        context.update({
+            "form_data": {
+                "name": name,
+                "email": email,
+                "subject": subject,
+                "message": message,
+            },
+            "errors": errors,
+        })
+
+        if not errors:
+            email_subject = subject or "TaxShift contact form message"
+            body = (
+                f"Name: {name}\n"
+                f"Email: {email}\n"
+                f"Subject: {email_subject}\n\n"
+                f"{message}"
+            )
+            send_mail(
+                subject=f"[TaxShift] {email_subject}",
+                message=body,
+                from_email=getattr(settings, "DEFAULT_FROM_EMAIL", None),
+                recipient_list=["ian@openskagit.com"],
+                fail_silently=False,
+            )
+            context = {"city_pages": CITY_PAGES, "success": True}
+
+    return render(request, "taxtool/contact.html", context)
+
 def tax_search(request):
     q = request.GET.get("q", "").strip()
     parcels = search_parcels(q) if len(q) >= 2 else []
+    if parcels:
+        cache_searched_parcels(parcels, query=q, source="search_result")
     return render(request, "taxtool/_suggestions.html", {"parcels": parcels, "q": q})
 
 
@@ -79,6 +203,9 @@ def tax_signup(request):
 def tax_parcel(request, parcel_number):
     template_name = "taxtool/_bill.html" if request.headers.get("HX-Request") else "taxtool/parcel_page.html"
     parcel = get_parcel(parcel_number)
+    if parcel:
+        cache_searched_parcels([parcel], query=parcel_number, source="parcel_detail")
+
     if not parcel:
         return render(request, template_name, {
             "error": "Parcel not found.",
@@ -114,6 +241,7 @@ def tax_parcel(request, parcel_number):
     money_story = build_money_buckets(grouped)
     agency_donut = build_agency_donut(grouped)
     history_story = build_history_story(history)
+    history_story = attach_reason_history_drivers(history_story, get_tax_shock_history(parcel_number, limit=7))
     current_assessed_value = history[0]["total_value"] if history else parcel.get("assessed_value")
     exemption_context = build_exemption_context(parcel, current_tax_amount)
     current_taxable_value = parcel.get("tax_statement_taxable_value") or parcel.get("taxable_value")
@@ -126,7 +254,6 @@ def tax_parcel(request, parcel_number):
         levy_rate_median,
         county_taxable_rate_median,
     )
-    payable_year = int(parcel["tax_year"]) + 1 if parcel.get("tax_year") else None
     tax_shock = get_tax_shock(parcel_number)
     tax_shock_ctx = None
     if tax_shock:
@@ -200,7 +327,6 @@ def tax_parcel(request, parcel_number):
         "parcel": parcel,
         "grouped": grouped,
         "total_fmt": format_currency(current_tax_amount),
-        "payable_year": payable_year,
         "levy_code_median_fmt": format_currency(levy_code_median) if levy_code_median else None,
         "county_median_fmt": format_currency(county_median) if county_median else None,
         "tax_shock": tax_shock_ctx,
@@ -212,9 +338,9 @@ def tax_parcel(request, parcel_number):
         "exemption_context": exemption_context,
         "data_sources": {
             "bill_year": parcel.get("tax_year"),
-            "payable_year": payable_year,
             "current_bill_fmt": format_currency(current_tax_amount),
             "history_source": "Current assessor roll merged with parcel tax statement history",
+            "agency_allocation_note": "Agency amounts are reconstructed from levy rates and assessed value, then reconciled to the displayed parcel bill when the sources do not match exactly.",
             "agency_source_total_fmt": format_currency(reconciliation["source_total"]),
             "agency_adjusted": reconciliation["adjusted"],
             "agency_difference_fmt": format_delta_currency(reconciliation["difference"]),

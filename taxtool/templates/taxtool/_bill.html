@@ -14,17 +14,19 @@
 
     {% if parcel %}
     <article class="os-tax-report__shell">
-      <header class="os-tax-parcel-banner">
-        <div class="os-tax-parcel-banner__body">
-          <p class="os-tax-parcel-banner__eyebrow">Property tax report</p>
-          <h1>{{ parcel.situs_street_number }} {{ parcel.situs_street_name }}{% if parcel.situs_city_state_zip %},<br>{{ parcel.situs_city_state_zip }}{% endif %}</h1>
-          <div class="os-tax-parcel-meta">
+<section class="os-tax-story-card os-tax-story-card--hero">
+        <div class="os-tax-report-identity">
+          <div>
+            <p class="os-tax-parcel-banner__eyebrow">Property tax report</p>
+            <h1>{{ parcel.situs_street_number }} {{ parcel.situs_street_name }}{% if parcel.situs_city_state_zip %}, {{ parcel.situs_city_state_zip }}{% endif %}</h1>
+          </div>
+          <div class="os-tax-report-actions">
             <span class="os-tax-parcel-pill">Parcel {{ parcel.parcel_number }}</span>
+            <button type="button" class="os-tax-share-report" data-share-report aria-label="Share this parcel report">
+              <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+            </button>
           </div>
         </div>
-      </header>
-
-      <section class="os-tax-story-card os-tax-story-card--hero">
         <div class="os-tax-hero-copy">
           {% if latest_change %}
           {% if latest_change.delta_zero %}
@@ -50,7 +52,7 @@
             </svg>
           </div>
           <div class="os-tax-step__body">
-            <h3>Main reason: assessed value changed</h3>
+            <h3>{{ latest_change.main_reason_heading }}</h3>
             {% if exemption_context.has_exemption %}
             <p>Your property value moved from {{ latest_change.value_old_fmt }} to {{ latest_change.value_new_fmt }}. Because this parcel has an exemption, the current bill is also affected by taxable value. The rate change shown below is an estimate based on available assessed-value history.</p>
             {% else %}
@@ -145,13 +147,30 @@
       <section class="os-tax-story-card os-tax-money">
         <div>
           <h2>Where your money went</h2>
-          <p>Your tax dollar supports the services you use every day.</p>
+          <p>This reconstructs how the displayed bill is allocated across public agencies using levy rates, assessor values, and the agency crosswalk.</p>
           {% if exemption_context.has_exemption %}
           <p class="os-tax-section-note">{{ exemption_context.money_note }}</p>
           {% endif %}
         </div>
-        <div class="os-tax-money__content">
-          <div class="os-tax-donut" style="background: conic-gradient({{ agency_donut.gradient }});">
+        <div class="os-tax-money__content" data-money-chart>
+          <div class="os-tax-donut" aria-label="Tax allocation chart">
+            <svg class="os-tax-donut__svg" viewBox="0 0 120 120" role="img" aria-hidden="true">
+              <circle class="os-tax-donut__track" cx="60" cy="60" r="45"></circle>
+              {% for group in agency_donut.groups %}
+              <circle
+                class="os-tax-donut__slice"
+                tabindex="0"
+                data-agency-index="{{ forloop.counter0 }}"
+                cx="60"
+                cy="60"
+                r="45"
+                pathLength="100"
+                stroke="{{ group.color }}"
+                stroke-dasharray="{{ group.donut_pct }} 100"
+                stroke-dashoffset="{{ group.donut_offset }}"
+              ></circle>
+              {% endfor %}
+            </svg>
             <span>{{ total_fmt }}</span>
           </div>
           <div class="os-tax-agency-details os-tax-agency-details--inline">
@@ -159,6 +178,7 @@
             <button
               type="button"
               class="os-tax-agency-row"
+              data-agency-index="{{ forloop.counter0 }}"
               {% if group.mcag %}
               hx-get="{% url 'tax_agency' group.mcag %}?your_amount={{ group.total|floatformat:2 }}"
               hx-target="#agency-panel"
@@ -175,7 +195,7 @@
             {% endfor %}
           </div>
         </div>
-        <div id="agency-panel" class="os-tax-agency-detail-slot">
+        <div id="agency-panel" class="os-tax-agency-detail-slot" aria-live="polite">
           <p class="os-tax-agency-card__empty">Choose a taxing district to see spending categories and financial context.</p>
         </div>
       </section>
@@ -218,7 +238,7 @@
         {% if exemption_context.has_exemption %}
         <p class="os-tax-section-note">{{ exemption_context.history_note }}</p>
         {% endif %}
-        <div class="os-tax-line-chart">
+        <div class="os-tax-line-chart" data-tax-chart>
           <div class="os-tax-chart-legend">
             <span><i class="os-tax-chart-legend__value"></i>Assessed value, left axis</span>
             <span><i class="os-tax-chart-legend__tax"></i>Tax bill, right axis</span>
@@ -235,7 +255,7 @@
             <polyline class="os-tax-line-chart__value" points="{{ history_story.value_polyline }}"></polyline>
             <polyline class="os-tax-line-chart__tax" points="{{ history_story.tax_polyline }}"></polyline>
             {% for point in history_story.tax_points %}
-            <circle class="os-tax-line-chart__tax-hit" cx="{{ point.x }}" cy="{{ point.y }}" r="11">
+            <circle class="os-tax-line-chart__tax-hit" tabindex="0" cx="{{ point.x }}" cy="{{ point.y }}" r="13" data-year="{{ point.year }}" data-value="{{ point.value_fmt }}" data-tax="{{ point.tax_fmt }}">
               <title>{{ point.year }} details&#10;Assessed value: {{ point.value_fmt }}&#10;Tax bill: {{ point.tax_fmt }}</title>
             </circle>
             <circle class="os-tax-line-chart__tax-dot" cx="{{ point.x }}" cy="{{ point.y }}" r="4"></circle>
@@ -244,41 +264,165 @@
             <text class="os-tax-chart-year" x="{{ point.x }}" y="{{ history_story.plot_bottom|add:'26' }}">{{ point.year }}</text>
             {% endfor %}
           </svg>
+          <div class="os-tax-chart-tooltip" data-tax-tooltip role="status" aria-live="polite"></div>
         </div>
         <p class="os-tax-footnote">Amounts are rounded. Assessed value uses the left axis; tax bill uses the right axis. Hover a blue tax-bill point for exact figures.</p>
+        {% if history_story.reason_history %}
+        <div class="os-tax-reason-history" aria-labelledby="reason-history-heading">
+          <div class="os-tax-reason-history__head">
+            <h3 id="reason-history-heading">Main Reason History</h3>
+            <p>Each row uses the same value-vs-rate split as the main reason above.</p>
+          </div>
+          <div class="os-tax-reason-history__list">
+            {% for reason in history_story.reason_history %}
+            <article class="os-tax-reason-history__item os-tax-reason-history__item--{{ reason.tone }}">
+              <div>
+                <span>{{ reason.year_old }} to {{ reason.year_new }}</span>
+                <strong>{{ reason.label|capfirst }}</strong>
+              </div>
+              <div>
+                <dl>
+                  <div>
+                    <dt>Bill change</dt>
+                    <dd class="{% if reason.delta_positive %}os-tax-yoy--up{% else %}os-tax-yoy--down{% endif %}">{{ reason.delta_fmt }}</dd>
+                  </div>
+                  <div>
+                    <dt>Value effect</dt>
+                    <dd>{{ reason.value_effect_fmt }}</dd>
+                  </div>
+                  <div>
+                    <dt>Rate effect</dt>
+                    <dd>{{ reason.rate_effect_fmt }}</dd>
+                  </div>
+                </dl>
+                {% if reason.drivers %}
+                <details class="os-tax-reason-history__drivers">
+                  <summary>Show rate drivers</summary>
+                  <div class="os-tax-reason-history__driver-list">
+                    {% for driver in reason.drivers %}
+                    <div class="os-tax-reason-history__driver">
+                      <span>{{ driver.name }}</span>
+                      <strong>{{ driver.effect_fmt }}</strong>
+                      <em>{{ driver.rate_delta_fmt }}</em>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  <p>{{ reason.driver_note }}</p>
+                </details>
+                {% endif %}
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
       </section>
       {% endif %}
 
-      <section class="os-tax-story-card os-tax-data-sources">
-        <h2>Data sources</h2>
-        <div class="os-tax-data-sources__grid">
-          <div>
-            <strong><a href="{{ data_sources.skagit_property_search_url }}" target="_blank" rel="noopener">Skagit County Property Search</a></strong>
-            <p>Current parcel roll, exemption code, assessed value, taxable value, tax bill, and parcel tax history. This page shows {{ data_sources.current_bill_fmt }} for tax year {{ data_sources.bill_year }}{% if data_sources.payable_year %}, payable in {{ data_sources.payable_year }}{% endif %}.</p>
-          </div>
-          <div>
-            <strong><a href="{{ data_sources.sao_fit_url }}" target="_blank" rel="noopener">Washington State Auditor FIT</a></strong>
-            <p>Financial Intelligence Tool data for local government revenue, spending, and top expenditure categories. Agency-specific reports open from the taxing-district rows above when available.</p>
-          </div>
-          <div>
-            <strong><a href="{{ data_sources.dor_skagit_url }}" target="_blank" rel="noopener">Washington DOR Skagit County reports</a></strong>
-            <p>Department of Revenue county property-tax administration reports and review materials for Skagit County.</p>
-          </div>
-          <div>
-            <strong><a href="{{ data_sources.dor_levy_limit_url }}" target="_blank" rel="noopener">Washington DOR levy guidance</a></strong>
-            <p>Background on how property-tax levy limits and rates work. Agency rows use the parcel levy summary for tax year {{ data_sources.bill_year }}. {% if data_sources.agency_adjusted %}Raw agency detail summed to {{ data_sources.agency_source_total_fmt }}, so rows were proportionally reconciled to the displayed bill; difference {{ data_sources.agency_difference_fmt }}.{% else %}Agency detail reconciled to the displayed bill before rounding.{% endif %}</p>
-          </div>
-          <div>
-            <strong><a href="{{ data_sources.dor_senior_exemption_url }}" target="_blank" rel="noopener">Washington DOR senior/disabled exemption</a></strong>
-            <p>State guidance for property-tax exemptions available to seniors, people retired due to disability, and veterans with disabilities.</p>
-          </div>
-          <div>
-            <strong><a href="{{ data_sources.dor_exemptions_url }}" target="_blank" rel="noopener">Washington DOR exemptions and deferrals</a></strong>
-            <p>General state guidance for property-tax exemption and deferral programs that can affect taxable value.</p>
-          </div>
+      <section class="os-tax-story-card os-tax-signup-card taxshift-signup" aria-labelledby="parcel-track-heading">
+        <div>
+          <p class="taxshift-eyebrow">Track the next shift</p>
+          <h2 id="parcel-track-heading">Get notified when this snapshot changes.</h2>
+          <p>We already know the parcel. Add your email and we will use it to roll out tax shift tracking and alerts for this property.</p>
         </div>
+        <form class="taxshift-signup__form" hx-post="{% url 'tax_signup' %}" hx-target="#parcel-signup-result" hx-swap="innerHTML">
+          {% csrf_token %}
+          <input type="hidden" name="address_or_parcel" value="{{ parcel.situs_street_number }} {{ parcel.situs_street_name }}{% if parcel.situs_city_state_zip %}, {{ parcel.situs_city_state_zip }}{% endif %} / Parcel {{ parcel.parcel_number }}">
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="you@example.com" required>
+          </label>
+          <button type="submit">Sign up to track this parcel</button>
+          <div id="parcel-signup-result" class="taxshift-signup__result" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section class="os-tax-story-card os-tax-data-callout">
+        <div>
+          <p class="taxshift-eyebrow">Data sources</p>
+          <h2>How this report is built</h2>
+          <p>Parcel values, tax history, levy detail, state levy workbooks, and auditor financial data are combined into this plain-English report.</p>
+        </div>
+        <a href="{% url 'tax_data_sources' %}">Read the data methodology</a>
       </section>
     </article>
     {% endif %}
   </section>
+<script>
+(function () {
+  const root = document.currentScript.closest('#main-content') || document;
+
+  root.querySelectorAll('[data-share-report]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const shareData = { title: document.title || 'TaxShift parcel report', text: 'TaxShift parcel report', url: window.location.href };
+      if (navigator.share) {
+        try { await navigator.share(shareData); return; }
+        catch (error) { if (error && error.name === 'AbortError') return; }
+      }
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(window.location.href);
+        button.classList.add('os-tax-share-report--copied');
+        button.setAttribute('aria-label', 'Report link copied');
+        window.setTimeout(() => {
+          button.classList.remove('os-tax-share-report--copied');
+          button.setAttribute('aria-label', 'Share this parcel report');
+        }, 1600);
+      }
+    });
+  });
+
+
+  root.querySelectorAll('[data-money-chart]').forEach((chart) => {
+    const rows = chart.querySelectorAll('.os-tax-agency-row[data-agency-index]');
+    const slices = chart.querySelectorAll('.os-tax-donut__slice[data-agency-index]');
+
+    function setActive(index) {
+      rows.forEach((row) => row.classList.toggle('is-linked-hover', row.dataset.agencyIndex === index));
+      slices.forEach((slice) => slice.classList.toggle('is-linked-hover', slice.dataset.agencyIndex === index));
+    }
+
+    function clearActive() {
+      rows.forEach((row) => row.classList.remove('is-linked-hover'));
+      slices.forEach((slice) => slice.classList.remove('is-linked-hover'));
+    }
+
+    rows.forEach((row) => {
+      row.addEventListener('mouseenter', () => setActive(row.dataset.agencyIndex));
+      row.addEventListener('focus', () => setActive(row.dataset.agencyIndex));
+      row.addEventListener('mouseleave', clearActive);
+      row.addEventListener('blur', clearActive);
+    });
+
+    slices.forEach((slice) => {
+      slice.addEventListener('mouseenter', () => setActive(slice.dataset.agencyIndex));
+      slice.addEventListener('focus', () => setActive(slice.dataset.agencyIndex));
+      slice.addEventListener('mouseleave', clearActive);
+      slice.addEventListener('blur', clearActive);
+    });
+  });
+  root.querySelectorAll('[data-tax-chart]').forEach((chart) => {
+    const tooltip = chart.querySelector('[data-tax-tooltip]');
+    if (!tooltip) return;
+
+    function show(point) {
+      tooltip.innerHTML = '<strong>' + (point.dataset.year || '') + '</strong><span>Assessed value: ' + (point.dataset.value || '') + '</span><span>Tax bill: ' + (point.dataset.tax || '') + '</span>';
+      tooltip.classList.add('is-visible');
+      const chartBox = chart.getBoundingClientRect();
+      const pointBox = point.getBoundingClientRect();
+      const left = Math.min(Math.max(pointBox.left - chartBox.left + 10, 12), chartBox.width - tooltip.offsetWidth - 12);
+      tooltip.style.left = left + 'px';
+      tooltip.style.top = Math.max(pointBox.top - chartBox.top - tooltip.offsetHeight - 10, 12) + 'px';
+    }
+
+    function hide() { tooltip.classList.remove('is-visible'); }
+
+    chart.querySelectorAll('.os-tax-line-chart__tax-hit').forEach((point) => {
+      point.addEventListener('mouseenter', () => show(point));
+      point.addEventListener('focus', () => show(point));
+      point.addEventListener('mouseleave', hide);
+      point.addEventListener('blur', hide);
+    });
+  });
+})();
+</script>
 </div>

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}How TaxShift Builds Property Tax Snapshots{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #f7fbfc; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="taxshift-page taxshift-methodology-page">
+  <header class="taxshift-nav">
+    <a href="/" class="taxshift-brand" aria-label="taxshift.co home">
+      <span class="taxshift-brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" width="36" height="36" role="img">
+          <path d="M4 17 18 5l14 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 16v15h8V21h5v10h5V16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M27 5v7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>taxshift.co</span>
+    </a>
+    <nav class="taxshift-nav__links" aria-label="Site navigation">
+      <a href="{% url 'tax_home' %}">Search</a>
+      <a href="{% url 'tax_contact' %}">Contact</a>
+      <a class="taxshift-nav__cta" href="{% url 'tax_home' %}#snapshot">Free search</a>
+    </nav>
+  </header>
+
+  <main class="taxshift-methodology">
+    <section class="taxshift-methodology__hero">
+      <p class="taxshift-eyebrow">Data methodology</p>
+      <h1>Where the TaxShift data comes from.</h1>
+      <p>TaxShift is a public-data walkthrough. It gathers parcel records, tax history, levy rates, and agency financial context, then turns those records into a plain-English property tax snapshot.</p>
+    </section>
+
+    {% if stats.error %}
+    <section class="taxshift-methodology__note">
+      <p>Live data statistics are temporarily unavailable, but the source and calculation notes below still describe how the tax snapshots are built.</p>
+    </section>
+    {% else %}
+    <section class="taxshift-methodology__stats" aria-label="Current data coverage">
+      <div>
+        <strong>{{ stats.active_parcels_fmt }}</strong>
+        <span>active parcels in the current assessor roll</span>
+      </div>
+      <div>
+        <strong>{{ stats.parcel_tax_year_max }}</strong>
+        <span>current roll tax year shown for most parcels</span>
+      </div>
+      <div>
+        <strong>{{ stats.history_year_min }}-{{ stats.history_year_max }}</strong>
+        <span>parcel tax-history years loaded</span>
+      </div>
+      <div>
+        <strong>{{ stats.levy_year_min }}-{{ stats.levy_year_max }}</strong>
+        <span>levy-rate composition years loaded</span>
+      </div>
+    </section>
+    {% endif %}
+
+    <section class="taxshift-methodology__section">
+      <h2>The short version</h2>
+      <p>For each parcel, TaxShift starts with the Skagit County Assessor parcel roll. That gives us the parcel number, address, owner name, levy code, assessed value, taxable value, exemption codes, and current tax amount. We then join that parcel to levy-rate tables so we can estimate which agencies receive pieces of the bill. Finally, we add public financial context from the Washington State Auditor where an agency can be matched to a reporting ID.</p>
+    </section>
+
+    <section class="taxshift-methodology__section">
+      <h2>Source 1: Current parcel roll</h2>
+      <p>The current parcel facts come from the Skagit County Assessor data export and property search records. In the database this is the `skagit_parcels` table. TaxShift filters out inactive parcels, then uses the current parcel roll for the displayed bill amount, assessed value, taxable value, exemption fields, levy code, and property address.</p>
+      <p>Important wording: when a report says "tax year," it means the tax year value in the parcel roll. It should not be displayed as "payable in the next year" unless a separate source explicitly says that. The parcel detail page now avoids that unsupported year-plus-one wording.</p>
+    </section>
+
+    <section class="taxshift-methodology__section">
+      <h2>Source 2: Parcel tax history</h2>
+      <p>Historical parcel values and tax bills come from Skagit County's public property-search webservice. The loader requests the public history page for each parcel, parses the "Assessed Values" table, and stores tax year, value year, building value, land value, total value, and tax amount in `skagit_parcel_history`.</p>
+      {% if not stats.error %}
+      <p>Current loaded history covers tax years {{ stats.history_year_min }} through {{ stats.history_year_max }} for {{ stats.history_parcels_fmt }} parcels. The history scrape in this database ran from {{ stats.history_fetched_min|date:"F j, Y" }} to {{ stats.history_fetched_max|date:"F j, Y" }}.</p>
+      {% endif %}
+      <p>Because the latest assessor roll can be newer than the scraped history table, the report merges the current roll into the history chart when needed. That keeps the headline bill and chart aligned with the current parcel record.</p>
+    </section>
+
+    <section class="taxshift-methodology__section">
+      <h2>Source 3: Levy rates and agencies</h2>
+      <p>Skagit County parcels contain a levy code. TaxShift joins that code to `skagit_levy_composition`, a table built from levy-code mapping data. Each levy line has a short code, public-facing name, category, tax year, and rate.</p>
+      <p>The agency name comes from a maintained crosswalk, `skagit_levy_crosswalk`, that maps levy short codes to agencies and Washington State Auditor MCAG IDs where possible. Some rows are marked "needs review" when the agency mapping is not certain enough to present as an independent public agency.</p>
+      {% if not stats.error %}
+      <p>The current database has levy composition for {{ stats.levy_codes_fmt }} levy codes across {{ stats.levy_year_min }} through {{ stats.levy_year_max }}.</p>
+      {% endif %}
+    </section>
+
+    <section class="taxshift-methodology__section">
+      <h2>How the agency dollar amounts are calculated</h2>
+      <p>The agency breakdown is reconstructed. The app multiplies each levy rate by the parcel's assessed value, divides by 1,000, groups those levy lines by agency, and then compares the reconstructed total to the actual bill amount in the parcel roll.</p>
+      <p>If the reconstructed agency total and the displayed bill do not match exactly, TaxShift proportionally reconciles the agency rows to the displayed bill. That makes the pie chart add up to the bill the user sees, while still preserving the relative agency split from the levy-rate data.</p>
+      <p>This is why the report now says "reconstructed allocation" instead of implying that every agency row is a direct statement line copied from the county tax bill.</p>
+    </section>
+
+    <section class="taxshift-methodology__section">
+      <h2>Source 4: Agency financial context</h2>
+      <p>When an agency has a Washington State Auditor MCAG ID, TaxShift links to the Auditor's Financial Intelligence Tool and uses the local `2025schedule01.csv` data extract to summarize revenue, spending, and broad spending categories. Those categories are grouped for readability; they are not a formal audit classification.</p>
+      {% if not stats.error %}
+      <p>The agency totals table currently contains {{ stats.agency_total_rows_fmt }} matched agency records.</p>
+      {% endif %}
+    </section>
+
+    <section class="taxshift-methodology__section">
+      <h2>How "why did it change?" is estimated</h2>
+      <p>The year-over-year explanation compares the newest tax amount and assessed value with the prior year. It separates the change into two broad pieces: value effect and effective-rate effect. Value effect estimates how much changed because assessed value moved. Rate effect estimates how much changed because the effective tax rate moved.</p>
+      <p>This is an explanatory model, not an official tax calculation. It is especially approximate for parcels with exemptions, taxable-value adjustments, omitted taxes, special assessments, or unusual public-property treatment.</p>
+    </section>
+
+    <section class="taxshift-methodology__section">
+      <h2>Accuracy checks and known limits</h2>
+      <ul>
+        <li>Displayed bill totals come from the parcel roll and are treated as the authority for the report total.</li>
+        <li>Agency rows are reconstructed from levy rates and then reconciled to the bill total when needed.</li>
+        <li>Exemptions can make assessed value, taxable value, and agency-rate math diverge. The report calls this out when an exemption or taxable-value gap is detected.</li>
+        <li>Some agency crosswalk rows are marked for review; those are grouped as "Other Local Districts" instead of being over-explained.</li>
+        <li>SAO spending categories are broad public-context labels, not a substitute for reading the full agency financial report.</li>
+        <li>Tax year, value year, and fetch/load dates are different fields. The report now avoids inventing a payable year from the tax year alone.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="taxshift-footer">
+    <span>taxshift.co</span>
+    <a href="{% url 'tax_home' %}">Search</a>
+    <a href="{% url 'tax_contact' %}">Contact</a>
+  </footer>
+</div>
+{% endblock %}

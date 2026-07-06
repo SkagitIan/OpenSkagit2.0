@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Contact taxshift.co{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #eef6f7; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="taxshift-page">
+  <header class="taxshift-nav">
+    <a href="https://taxshift.co/" class="taxshift-brand" aria-label="taxshift home">
+      <span class="taxshift-brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" width="36" height="36" role="img">
+          <path d="M4 17 18 5l14 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 16v15h8V21h5v10h5V16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M27 5v7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>taxshift</span>
+    </a>
+    <nav class="taxshift-nav__links" aria-label="Site navigation">
+      <a href="{% url 'tax_home' %}#how-it-works">How it works</a>
+      <a href="{% url 'tax_home' %}#data-sources">Data sources</a>
+      <a href="{% url 'tax_contact' %}" aria-current="page">Contact</a>
+      <a class="taxshift-nav__cta" href="{% url 'tax_home' %}#snapshot">Free search</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="taxshift-contact" aria-labelledby="contact-heading">
+      <div class="taxshift-contact__copy">
+        <p class="taxshift-eyebrow">Contact</p>
+        <h1 id="contact-heading">Send a note about TaxShift.</h1>
+        <p>Questions, data issues, property tax edge cases, or partnership ideas all land here.</p>
+      </div>
+
+      <form class="taxshift-contact__form" method="post">
+        {% csrf_token %}
+        {% if success %}
+          <p class="taxshift-contact__success">Thanks. Your message has been sent.</p>
+        {% endif %}
+        {% if errors %}
+          <div class="taxshift-contact__errors" role="alert">
+            {% for error in errors %}<p>{{ error }}</p>{% endfor %}
+          </div>
+        {% endif %}
+
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" value="{{ form_data.name|default:'' }}" required>
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" value="{{ form_data.email|default:'' }}" required>
+        </label>
+        <label>
+          <span>Subject</span>
+          <input type="text" name="subject" value="{{ form_data.subject|default:'' }}" placeholder="Optional">
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="7" required>{{ form_data.message|default:'' }}</textarea>
+        </label>
+        <button type="submit">Send message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="taxshift-footer">
+    <span>taxshift</span>
+    <a href="{% url 'tax_home' %}">Tax tool</a>
+    <a href="https://openskagit.org/" target="_blank" rel="noopener">OpenSkagit</a>
+    <a href="{% url 'tax_contact' %}">Contact</a>
+  </footer>
+</div>
+{% endblock %}

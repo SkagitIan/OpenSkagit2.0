@@ -440,6 +440,7 @@ def build_agency_donut(grouped):
         gradient_parts.append(f"{color} {cursor:.1f}% {next_cursor:.1f}%")
         group["donut_pct"] = pct
         group["donut_pct_fmt"] = f"{pct:.1f}%"
+        group["donut_offset"] = round(-cursor, 1)
         cursor = next_cursor
 
     return {
@@ -447,6 +448,24 @@ def build_agency_donut(grouped):
         "gradient": ", ".join(gradient_parts) if gradient_parts else "#d8e1e8 0% 100%",
     }
 
+
+
+
+def describe_yoy_reason(breakdown):
+    """Classify the main reason for a year-over-year tax change."""
+    value_abs = abs(breakdown["value_effect"])
+    rate_abs = abs(breakdown["rate_effect"])
+    if value_abs >= rate_abs:
+        label = "assessed value changed"
+        tone = "value"
+    else:
+        label = "effective tax rate changed"
+        tone = "rate"
+    return {
+        "label": label,
+        "heading": f"Main reason: {label}",
+        "tone": tone,
+    }
 
 def build_latest_change(history_rows):
     """Return current/prior year narrative values from parcel history."""
@@ -456,6 +475,9 @@ def build_latest_change(history_rows):
 
     b = breakdowns[0]
     rate_delta = b["rate_b"] - b["rate_a"]
+    reason = describe_yoy_reason(b)
+    main_reason_label = reason["label"]
+    main_reason_heading = reason["heading"]
     return {
         "year_new": b["year_b"],
         "year_old": b["year_a"],
@@ -480,6 +502,8 @@ def build_latest_change(history_rows):
         "value_effect_positive": b["value_effect"] >= 0,
         "rate_effect_fmt": format_delta_currency(b["rate_effect"]),
         "rate_effect_positive": b["rate_effect"] >= 0,
+        "main_reason_label": main_reason_label,
+        "main_reason_heading": main_reason_heading,
     }
 
 
@@ -546,6 +570,24 @@ def build_history_story(history_rows):
             "tax_label": format_currency(tax_tick),
         })
 
+    reason_history = []
+    for breakdown in compute_yoy_breakdown(sorted(rows, key=lambda row: int(row["tax_year"]), reverse=True))[:7]:
+        reason = describe_yoy_reason(breakdown)
+        rate_delta = breakdown["rate_b"] - breakdown["rate_a"]
+        reason_history.append({
+            "year_new": breakdown["year_b"],
+            "year_old": breakdown["year_a"],
+            "label": reason["label"],
+            "heading": reason["heading"],
+            "tone": reason["tone"],
+            "delta_fmt": format_delta_currency(breakdown["delta_tax"]),
+            "delta_positive": breakdown["delta_tax"] >= 0,
+            "value_effect_fmt": format_delta_currency(breakdown["value_effect"]),
+            "rate_effect_fmt": format_delta_currency(breakdown["rate_effect"]),
+            "value_delta_fmt": format_delta_currency(breakdown["delta_val"]),
+            "value_delta_pct_fmt": format_delta_pct(breakdown["delta_val_pct"]),
+            "rate_delta_fmt": f"{'+' if rate_delta >= 0 else '-'}{abs(rate_delta):.2f} per $1,000",
+        })
     first = rows[0]
     latest = rows[-1]
     growth = None
@@ -572,6 +614,7 @@ def build_history_story(history_rows):
         "first_tax_fmt": format_currency(first["tax_amount"]),
         "latest_year": latest["tax_year"],
         "latest_tax_fmt": format_currency(latest["tax_amount"]),
+        "reason_history": reason_history,
         "growth_text": (
             f"up {growth:.0f}% since {first['tax_year']}"
             if growth is not None and growth >= 0

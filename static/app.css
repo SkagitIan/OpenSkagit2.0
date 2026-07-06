@@ -5521,54 +5521,19 @@ pre {
   filter: blur(18px);
 }
 
-.taxshift-hero__screen {
+.taxshift-hero__panel {
   position: relative;
   z-index: 1;
   margin: 0 auto;
-  padding: clamp(8px, 1.4vw, 14px);
-  border: 12px solid #111111;
-  border-radius: 18px;
-  background: #111111;
-  box-shadow: 0 30px 60px rgba(8, 26, 53, 0.22);
-}
-
-.taxshift-browser {
-  overflow: hidden;
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.taxshift-browser__bar {
-  height: 38px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 15px;
-  background: #eef3f6;
-  color: #58677a;
-  font-size: 12px;
-}
-
-.taxshift-browser__bar span {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: #ff645d;
-}
-
-.taxshift-browser__bar span:nth-child(2) { background: #ffc54d; }
-.taxshift-browser__bar span:nth-child(3) { background: #34c759; }
-.taxshift-browser__bar strong { margin-left: 8px; font-weight: 700; }
-
-.taxshift-browser__content {
-  position: relative;
   padding: clamp(42px, 7vw, 74px) clamp(22px, 7vw, 90px) clamp(30px, 5vw, 54px);
+  border: 1px solid rgba(8, 26, 53, 0.08);
+  border-radius: 16px;
   text-align: center;
   background:
     linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.94)),
     linear-gradient(120deg, transparent 0 49%, rgba(26, 172, 176, 0.08) 49% 51%, transparent 51% 100%);
+  box-shadow: 0 30px 60px rgba(8, 26, 53, 0.14);
 }
-
 .taxshift-eyebrow {
   margin: 0 0 12px;
   color: #0e9aa4;
@@ -5673,7 +5638,7 @@ pre {
   min-width: 0;
 }
 
-.taxshift-feature-row span {
+.taxshift-feature-row span.taxshift-feature-icon {
   width: 42px;
   height: 42px;
   margin: 0 auto 13px;
@@ -5711,13 +5676,18 @@ pre {
   grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
   gap: 36px;
   align-items: center;
-  padding: clamp(34px, 5vw, 54px) 0;
-  border-top: 1px solid rgba(8, 26, 53, 0.1);
+  padding: clamp(34px, 5vw, 54px);
+  border: 1px solid rgba(24, 183, 202, 0.24);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(8, 26, 53, 0.96), rgba(10, 67, 82, 0.94)),
+    radial-gradient(circle at 18% 15%, rgba(24, 183, 202, 0.35), transparent 32%);
+  box-shadow: 0 24px 55px rgba(8, 26, 53, 0.18);
 }
 
 .taxshift-signup h2 {
   margin: 0 0 10px;
-  color: #081a35;
+  color: #ffffff;
   font-family: "DM Sans", system-ui, sans-serif;
   font-size: clamp(28px, 4vw, 42px);
   line-height: 1.08;
@@ -5725,7 +5695,7 @@ pre {
 
 .taxshift-signup p {
   margin: 0;
-  color: #526173;
+  color: rgba(255, 255, 255, 0.76);
   line-height: 1.6;
 }
 
@@ -5743,13 +5713,15 @@ pre {
 }
 
 .taxshift-signup__form label span {
-  color: #42536a;
+  color: rgba(255, 255, 255, 0.78);
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
 }
 
-.taxshift-signup__form input {
+.taxshift-signup__form input,
+.taxshift-contact__form input,
+.taxshift-contact__form textarea {
   width: 100%;
   min-height: 46px;
   padding: 0 13px;
@@ -5777,6 +5749,105 @@ pre {
 
 .taxshift-signup__ok { color: #0b7b5c; }
 .taxshift-signup__error { color: #b3261e; }
+
+
+.taxshift-signup .taxshift-eyebrow {
+  color: #77e5ef;
+}
+
+.taxshift-contact {
+  width: min(100% - 40px, 1040px);
+  margin: 24px auto 64px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(320px, 1fr);
+  gap: clamp(28px, 5vw, 56px);
+  align-items: start;
+}
+
+.taxshift-contact__copy {
+  padding-top: clamp(24px, 5vw, 54px);
+}
+
+.taxshift-contact h1 {
+  margin: 0 0 14px;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(38px, 6vw, 62px);
+  line-height: 1.02;
+}
+
+.taxshift-contact__copy p:not(.taxshift-eyebrow) {
+  max-width: 520px;
+  margin: 0;
+  color: #42536a;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.taxshift-contact__form {
+  display: grid;
+  gap: 14px;
+  padding: clamp(24px, 4vw, 34px);
+  border: 1px solid rgba(8, 26, 53, 0.08);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 24px 55px rgba(8, 26, 53, 0.14);
+}
+
+.taxshift-contact__form label {
+  display: grid;
+  gap: 7px;
+}
+
+.taxshift-contact__form label span {
+  color: #42536a;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.taxshift-contact__form textarea {
+  min-height: 170px;
+  padding-top: 12px;
+  resize: vertical;
+}
+
+.taxshift-contact__form button {
+  min-height: 48px;
+  border: 0;
+  border-radius: 7px;
+  background: #18b7ca;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.taxshift-contact__success,
+.taxshift-contact__errors {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.taxshift-contact__success {
+  background: rgba(11, 123, 92, 0.1);
+  color: #0b7b5c;
+}
+
+.taxshift-contact__errors {
+  background: rgba(179, 38, 30, 0.09);
+  color: #b3261e;
+}
+
+.taxshift-contact__errors p {
+  margin: 0;
+}
+
+.taxshift-contact__errors p + p {
+  margin-top: 4px;
+}
 
 .taxshift-data {
   padding: 22px 0 42px;
@@ -5835,8 +5906,8 @@ pre {
     padding-top: 4px;
   }
 
-  .taxshift-hero__screen {
-    border-width: 8px;
+  .taxshift-hero__panel {
+    border-radius: 13px;
   }
 
   .taxshift-search__wrap,
@@ -5870,8 +5941,13 @@ pre {
     grid-template-columns: 1fr;
   }
 
-  .taxshift-signup {
+  .taxshift-signup,
+  .taxshift-contact {
     width: min(100% - 28px, 1040px);
+  }
+
+  .taxshift-contact {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -5888,7 +5964,7 @@ pre {
     display: none;
   }
 
-  .taxshift-browser__content {
+  .taxshift-hero__panel {
     padding: 34px 14px 28px;
   }
 
@@ -5898,5 +5974,898 @@ pre {
 
   .taxshift-footer {
     flex-wrap: wrap;
+  }
+}
+
+/* TAXSHIFT METHODOLOGY */
+
+.taxshift-methodology {
+  width: min(100% - 40px, 980px);
+  margin: 0 auto;
+  padding: 38px 0 70px;
+}
+
+.taxshift-methodology__hero {
+  padding: clamp(34px, 6vw, 64px) 0 28px;
+}
+
+.taxshift-methodology__hero h1 {
+  max-width: 780px;
+  margin: 0;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(38px, 6vw, 64px);
+  line-height: 1.02;
+}
+
+.taxshift-methodology__hero p:not(.taxshift-eyebrow) {
+  max-width: 760px;
+  margin: 18px 0 0;
+  color: #42536a;
+  font-size: 18px;
+  line-height: 1.62;
+}
+
+.taxshift-methodology__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 20px 0 34px;
+}
+
+.taxshift-methodology__stats div,
+.taxshift-methodology__section,
+.taxshift-methodology__note {
+  border: 1px solid rgba(8, 26, 53, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 14px 34px rgba(8, 26, 53, 0.05);
+}
+
+.taxshift-methodology__stats div {
+  padding: 18px;
+}
+
+.taxshift-methodology__stats strong {
+  display: block;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.taxshift-methodology__stats span {
+  display: block;
+  margin-top: 8px;
+  color: #526173;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.taxshift-methodology__section,
+.taxshift-methodology__note {
+  margin-top: 14px;
+  padding: clamp(20px, 3vw, 30px);
+}
+
+.taxshift-methodology__section h2 {
+  margin: 0 0 12px;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 24px;
+}
+
+.taxshift-methodology__section p,
+.taxshift-methodology__section li,
+.taxshift-methodology__note p {
+  color: #42536a;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.taxshift-methodology__section p,
+.taxshift-methodology__note p {
+  margin: 0;
+}
+
+.taxshift-methodology__section p + p {
+  margin-top: 12px;
+}
+
+.taxshift-methodology__section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.taxshift-methodology__section li + li {
+  margin-top: 8px;
+}
+
+.taxshift-data a,
+.os-tax-footnote a {
+  color: var(--os-teal);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.taxshift-data a:hover,
+.os-tax-footnote a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 820px) {
+  .taxshift-methodology {
+    width: min(100% - 28px, 980px);
+    padding-top: 12px;
+  }
+
+  .taxshift-methodology__stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .taxshift-methodology__stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* TaxShift parcel report refinements */
+.os-tax-report__shell {
+  gap: 16px;
+}
+
+.os-tax-report__shell > .os-tax-parcel-banner {
+  display: none;
+}
+
+.os-tax-story-card--hero {
+  gap: 24px;
+}
+
+.os-tax-report-identity {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--os-border);
+}
+
+.os-tax-report-identity h1 {
+  max-width: 820px;
+  margin: 0;
+  color: #111827;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(20px, 3vw, 30px);
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.os-tax-report-identity .os-tax-parcel-pill {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.os-tax-hero-copy h2 {
+  margin-top: 0;
+}
+
+.os-tax-step {
+  grid-template-columns: 42px 54px minmax(0, 1fr) minmax(170px, 240px);
+}
+
+.os-tax-step__num,
+.os-tax-step--rate .os-tax-step__num {
+  display: grid;
+  visibility: visible;
+  opacity: 1;
+  color: #ffffff;
+  place-items: center;
+  align-self: center;
+  justify-self: center;
+  z-index: 1;
+}
+
+.os-tax-money__content {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 24px;
+}
+
+.os-tax-donut {
+  width: clamp(220px, 30vw, 300px);
+  height: clamp(220px, 30vw, 300px);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+.os-tax-donut::after {
+  inset: 28%;
+}
+
+.os-tax-donut span {
+  font-size: clamp(28px, 4vw, 38px);
+}
+
+.os-tax-agency-details--inline {
+  width: min(100%, 760px);
+  overflow: hidden;
+  border-color: #d8e4ee;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row {
+  grid-template-columns: 14px minmax(0, 1fr) minmax(82px, auto) minmax(58px, auto);
+  gap: 14px;
+  min-height: 58px;
+  padding: 13px 16px;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row__dot {
+  width: 10px;
+  height: 10px;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row__name {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row__amount {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row__pct {
+  color: #64748b;
+  font-size: 12px;
+  text-align: right;
+}
+
+.os-tax-agency-detail-slot {
+  width: min(100%, 860px);
+  margin: 22px auto 0;
+  padding: 22px;
+}
+
+.os-tax-agency-detail-slot .os-tax-agency-panel {
+  max-width: none;
+}
+
+.os-tax-stats {
+  gap: 12px;
+  margin: 16px 0 18px;
+}
+
+.os-tax-stat {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.os-tax-stat__label {
+  margin: 0 0 4px !important;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.os-tax-stat__value {
+  margin: 0 !important;
+  font-size: 20px;
+}
+
+.os-tax-expenditures {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.os-tax-expenditure {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.os-tax-expenditure__cat {
+  color: #334155;
+}
+
+.os-tax-expenditure__amt {
+  color: #111827;
+  font-weight: 800;
+}
+
+.os-tax-pct-note {
+  margin-top: 12px !important;
+}
+
+.os-tax-share {
+  margin-top: 14px;
+}
+
+.os-tax-source-link {
+  display: inline-flex;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.os-tax-chart-legend i {
+  display: inline-block;
+}
+
+.os-tax-chart-legend__tax {
+  background: #0071BC !important;
+}
+
+.os-tax-chart-legend__value {
+  background: #7DB61C !important;
+}
+
+.os-tax-line-chart__tax {
+  stroke: #0071BC !important;
+  stroke-width: 4.5 !important;
+}
+
+.os-tax-line-chart__value {
+  stroke: #7DB61C !important;
+  stroke-width: 4.5 !important;
+}
+
+.os-tax-line-chart__tax-dot {
+  fill: #ffffff !important;
+  stroke: #0071BC !important;
+  stroke-width: 3.5 !important;
+}
+
+.os-tax-line-chart__tax-hit {
+  fill: rgba(255, 255, 255, 0.01);
+  pointer-events: all;
+  cursor: help;
+}
+
+.os-tax-line-chart__tax-hit:focus {
+  outline: none;
+  stroke: #0071BC;
+  stroke-width: 2;
+}
+
+@media (max-width: 900px) {
+  .os-tax-report-identity {
+    display: grid;
+  }
+
+  .os-tax-step {
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .os-tax-step__icon,
+  .os-tax-step__effect {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .os-tax-report-identity h1 {
+    font-size: 22px;
+  }
+
+  .os-tax-agency-details--inline .os-tax-agency-row {
+    grid-template-columns: 12px minmax(0, 1fr) auto;
+  }
+}
+
+/* TaxShift parcel report interaction refinements */
+.taxshift-nav--report {
+  padding-top: 8px;
+}
+
+.os-tax-report-identity {
+  position: relative;
+}
+
+.os-tax-report-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.os-tax-share-report {
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(0, 130, 138, 0.24);
+  border-radius: 8px;
+  background: rgba(0, 130, 138, 0.08);
+  color: var(--os-teal);
+  cursor: pointer;
+}
+
+.os-tax-share-report:hover,
+.os-tax-share-report:focus-visible {
+  background: var(--os-teal);
+  color: #ffffff;
+  outline: none;
+}
+
+.os-tax-share-report--copied {
+  background: var(--os-green);
+  color: #ffffff;
+}
+
+.os-tax-money {
+  background: linear-gradient(180deg, #ffffff 0%, #f3fafa 100%);
+}
+
+.os-tax-money__content {
+  width: 100%;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid rgba(0, 130, 138, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.os-tax-donut {
+  margin: 0 auto;
+}
+
+.os-tax-donut::after {
+  inset: 34%;
+  background: #ffffff;
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.72), inset 0 0 0 1px #e2eaf4;
+}
+
+.os-tax-agency-details--inline {
+  background: #ffffff;
+}
+
+.os-tax-agency-detail-slot {
+  border-color: rgba(0, 130, 138, 0.18);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
+}
+
+.os-tax-chart-tooltip {
+  position: absolute;
+  z-index: 3;
+  min-width: 190px;
+  display: none;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid rgba(8, 26, 53, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.16);
+  color: #111827;
+  font-size: 12px;
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+.os-tax-chart-tooltip.is-visible {
+  display: grid;
+}
+
+.os-tax-chart-tooltip strong {
+  color: var(--os-teal);
+  font-size: 13px;
+}
+
+.os-tax-chart-tooltip span {
+  display: block;
+}
+
+.os-tax-signup-card.taxshift-signup {
+  width: auto;
+  margin: 0;
+}
+
+.os-tax-signup-card .taxshift-signup__form {
+  grid-template-columns: minmax(220px, 1fr) auto;
+}
+
+.os-tax-data-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: linear-gradient(120deg, #ffffff 0%, #f1fbfd 100%);
+}
+
+.os-tax-data-callout h2 {
+  margin-bottom: 6px;
+}
+
+.os-tax-data-callout a {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: var(--os-teal);
+  color: #ffffff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.os-tax-data-callout a:hover {
+  background: var(--os-teal-bright);
+}
+
+@media (max-width: 820px) {
+  .os-tax-data-callout,
+  .os-tax-report-identity {
+    display: grid;
+  }
+
+  .os-tax-signup-card .taxshift-signup__form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* TaxShift reason history */
+.os-tax-reason-history {
+  margin-top: 18px;
+  padding: clamp(16px, 3vw, 22px);
+  border: 1px solid rgba(0, 130, 138, 0.16);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f6fbfb 100%);
+}
+
+.os-tax-reason-history__head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.os-tax-reason-history__head h3 {
+  margin: 0;
+  color: #111827;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 21px;
+}
+
+.os-tax-reason-history__head p {
+  max-width: 420px;
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.os-tax-reason-history__list {
+  display: grid;
+  gap: 10px;
+}
+
+.os-tax-reason-history__item {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(0, 1.4fr);
+  gap: 18px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid #dbe7f4;
+  border-left-width: 5px;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.os-tax-reason-history__item--value {
+  border-left-color: var(--os-green);
+}
+
+.os-tax-reason-history__item--rate {
+  border-left-color: var(--os-teal);
+}
+
+.os-tax-reason-history__item span,
+.os-tax-reason-history__item dt {
+  display: block;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.os-tax-reason-history__item strong {
+  display: block;
+  margin-top: 4px;
+  color: #111827;
+  font-size: 15px;
+}
+
+.os-tax-reason-history__item dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.os-tax-reason-history__item dd {
+  margin: 3px 0 0;
+  color: #111827;
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .os-tax-reason-history__head,
+  .os-tax-reason-history__item {
+    display: grid;
+  }
+
+  .os-tax-reason-history__item {
+    grid-template-columns: 1fr;
+  }
+
+  .os-tax-reason-history__item dl {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Money section integrated chart/legend polish */
+.os-tax-money {
+  background: #ffffff;
+}
+
+.os-tax-money > div:first-child {
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(8, 26, 53, 0.1);
+}
+
+.os-tax-money__content {
+  max-width: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 56px);
+  align-items: center;
+  justify-items: stretch;
+  margin: 24px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.os-tax-donut {
+  width: min(100%, 330px);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.os-tax-donut::after {
+  display: none;
+}
+
+.os-tax-donut__svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 18px 28px rgba(15, 23, 42, 0.08));
+}
+
+.os-tax-donut__track,
+.os-tax-donut__slice {
+  fill: none;
+  transform: rotate(-90deg);
+  transform-origin: 60px 60px;
+}
+
+.os-tax-donut__track {
+  stroke: #e7eef5;
+  stroke-width: 20;
+}
+
+.os-tax-donut__slice {
+  stroke-width: 24;
+  transition: stroke-width 160ms ease, filter 160ms ease, opacity 160ms ease;
+  cursor: pointer;
+}
+
+.os-tax-donut__slice.is-linked-hover {
+  stroke-width: 30;
+  filter: brightness(1.08) saturate(1.12);
+}
+
+.os-tax-donut:has(.os-tax-donut__slice.is-linked-hover) .os-tax-donut__slice:not(.is-linked-hover) {
+  opacity: 0.42;
+}
+
+.os-tax-donut span {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 37%;
+  height: 37%;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.9), inset 0 0 0 1px #e2eaf4;
+  color: var(--os-navy);
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(26px, 3.2vw, 38px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.os-tax-agency-details--inline {
+  width: 100%;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row {
+  grid-template-columns: 12px minmax(0, 1fr) minmax(90px, auto) minmax(54px, auto);
+  gap: 14px;
+  min-height: 50px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(8, 26, 53, 0.09);
+  background: transparent;
+  transition: background-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row:last-child {
+  border-bottom: 0;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row:hover,
+.os-tax-agency-details--inline .os-tax-agency-row.is-linked-hover {
+  background: rgba(0, 130, 138, 0.06);
+  box-shadow: -12px 0 0 rgba(0, 130, 138, 0.06), 12px 0 0 rgba(0, 130, 138, 0.06);
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row__dot {
+  width: 9px;
+  height: 9px;
+  align-self: center;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row__name {
+  color: #26364e;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row__amount {
+  color: #111827;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 900;
+  text-align: right;
+}
+
+.os-tax-agency-details--inline .os-tax-agency-row__pct {
+  color: #718096;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+@media (max-width: 820px) {
+  .os-tax-money__content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    justify-items: center;
+  }
+
+  .os-tax-donut {
+    width: min(100%, 420px);
+  }
+
+  .os-tax-agency-details--inline {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .os-tax-agency-details--inline .os-tax-agency-row {
+    grid-template-columns: 10px minmax(0, 1fr) auto;
+  }
+
+  .os-tax-agency-details--inline .os-tax-agency-row__pct {
+    grid-column: 2 / -1;
+    text-align: left;
+  }
+}
+
+/* Main reason history driver drilldown */
+.os-tax-reason-history__item > div:last-child {
+  min-width: 0;
+}
+
+.os-tax-reason-history__drivers {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(8, 26, 53, 0.08);
+}
+
+.os-tax-reason-history__drivers summary {
+  width: fit-content;
+  color: var(--os-teal);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.os-tax-reason-history__driver-list {
+  display: grid;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.os-tax-reason-history__driver {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(84px, auto) minmax(112px, auto);
+  gap: 10px;
+  align-items: baseline;
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: rgba(0, 130, 138, 0.06);
+}
+
+.os-tax-reason-history__driver span {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.os-tax-reason-history__driver strong {
+  margin: 0;
+  color: #111827;
+  font-size: 13px;
+  text-align: right;
+}
+
+.os-tax-reason-history__driver em {
+  color: #64748b;
+  font-size: 12px;
+  font-style: normal;
+  text-align: right;
+}
+
+.os-tax-reason-history__drivers p {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 760px) {
+  .os-tax-reason-history__driver {
+    grid-template-columns: 1fr;
+  }
+
+  .os-tax-reason-history__driver strong,
+  .os-tax-reason-history__driver em {
+    text-align: left;
   }
 }

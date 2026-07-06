@@ -222,38 +222,13 @@ def _is_voter_approved(row):
     return any(token in levy_name for token in ("BOND", "ENRICHMENT", "TECH", "CAPITAL", "EMS"))
 
 
-def get_tax_shock(parcel_number):
+def _build_tax_shock_from_pair(levy_code, newer, older):
     """
-    Return a compact explanation of the latest year-over-year parcel tax change.
+    Build a rate/value explanation for one year-over-year pair.
 
-    The parcel-history tax year is the bill year. The 10-year levy composition
-    file is one label behind that bill year in this dataset, so a 2025 history
-    row uses 2024 levy-composition rates.
+    Parcel-history tax_year is the bill year. The levy-composition file is one
+    label behind that bill year, so a 2025 history row uses 2024 composition.
     """
-    with connection.cursor() as cursor:
-        cursor.execute(
-            """
-            SELECT p.levy_code, h.tax_year, h.total_value, h.tax_amount
-            FROM skagit_parcels p
-            JOIN skagit_parcel_history h
-              ON h.parcel_number = p.parcel_number
-            WHERE p.parcel_number = %s
-              AND p.inactive_date IS NULL
-              AND p.levy_code IS NOT NULL
-              AND h.tax_amount IS NOT NULL AND h.tax_amount > 0
-              AND h.total_value IS NOT NULL AND h.total_value > 0
-            ORDER BY h.tax_year DESC
-            LIMIT 2
-            """,
-            [parcel_number],
-        )
-        history = _dictfetchall(cursor)
-
-    if len(history) < 2:
-        return None
-
-    newer, older = history[0], history[1]
-    levy_code = newer["levy_code"]
     newer_year = int(newer["tax_year"])
     older_year = int(older["tax_year"])
     composition_years = [newer_year - 1, older_year - 1]
@@ -337,13 +312,12 @@ def get_tax_shock(parcel_number):
             other_rate_effect += line_rate_effect
         line_drivers.append({
             **item,
+            "rate_delta": new_rate - old_rate,
             "rate_effect": line_rate_effect,
             "value_effect": line_value_effect,
         })
 
-    if delta_tax == 0:
-        return None
-    if abs(delta_tax) < Decimal("25"):
+    if delta_tax == 0 or abs(delta_tax) < Decimal("25"):
         return None
 
     if delta_tax > 0:
@@ -370,6 +344,8 @@ def get_tax_shock(parcel_number):
     return {
         "year_new": newer_year,
         "year_old": older_year,
+        "composition_year_new": composition_years[0],
+        "composition_year_old": composition_years[1],
         "tax_new": tax_new,
         "tax_old": tax_old,
         "delta_tax": delta_tax,
@@ -381,9 +357,68 @@ def get_tax_shock(parcel_number):
         "voter_rate_effect": voter_rate_effect,
         "other_rate_effect": other_rate_effect,
         "top_lines": top_lines,
+        "estimated_from_current_levy_code": True,
     }
 
 
+def get_tax_shock(parcel_number):
+    """Return a compact explanation of the latest year-over-year parcel tax change."""
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            SELECT p.levy_code, h.tax_year, h.total_value, h.tax_amount
+            FROM skagit_parcels p
+            JOIN skagit_parcel_history h
+              ON h.parcel_number = p.parcel_number
+            WHERE p.parcel_number = %s
+              AND p.inactive_date IS NULL
+              AND p.levy_code IS NOT NULL
+              AND h.tax_amount IS NOT NULL AND h.tax_amount > 0
+              AND h.total_value IS NOT NULL AND h.total_value > 0
+            ORDER BY h.tax_year DESC
+            LIMIT 2
+            """,
+            [parcel_number],
+        )
+        history = _dictfetchall(cursor)
+
+    if len(history) < 2:
+        return None
+
+    return _build_tax_shock_from_pair(history[0]["levy_code"], history[0], history[1])
+
+
+def get_tax_shock_history(parcel_number, limit=7):
+    """Return estimated levy/rate drivers for recent year-over-year history rows."""
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            SELECT p.levy_code, h.tax_year, h.total_value, h.tax_amount
+            FROM skagit_parcels p
+            JOIN skagit_parcel_history h
+              ON h.parcel_number = p.parcel_number
+            WHERE p.parcel_number = %s
+              AND p.inactive_date IS NULL
+              AND p.levy_code IS NOT NULL
+              AND h.tax_amount IS NOT NULL AND h.tax_amount > 0
+              AND h.total_value IS NOT NULL AND h.total_value > 0
+            ORDER BY h.tax_year DESC
+            LIMIT %s
+            """,
+            [parcel_number, limit + 1],
+        )
+        history = _dictfetchall(cursor)
+
+    if len(history) < 2:
+        return {}
+
+    levy_code = history[0]["levy_code"]
+    shocks = {}
+    for index in range(min(limit, len(history) - 1)):
+        shock = _build_tax_shock_from_pair(levy_code, history[index], history[index + 1])
+        if shock:
+            shocks[(shock["year_old"], shock["year_new"])] = shock
+    return shocks
 def get_agency_crosswalk(mcag):
     """Return the crosswalk row for a given MCAG (sao_legal_name, sao_fit_url)."""
     with connection.cursor() as cursor:
@@ -412,3 +447,93 @@ def get_county_total_for_mcag(mcag):
         )
         row = cursor.fetchone()
         return row[0] if row else 0
+
+
+def get_data_methodology_stats():
+    """Return live, read-only provenance stats for the TaxShift methodology page."""
+    stats = {}
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT count(*), min(tax_year), max(tax_year),
+                       count(*) FILTER (WHERE total_taxes IS NOT NULL AND total_taxes > 0)
+                FROM skagit_parcels
+                WHERE inactive_date IS NULL
+                """
+            )
+            row = cursor.fetchone()
+            stats["active_parcels"] = row[0]
+            stats["parcel_tax_year_min"] = row[1]
+            stats["parcel_tax_year_max"] = row[2]
+            stats["parcels_with_tax"] = row[3]
+
+            cursor.execute(
+                """
+                SELECT min(tax_year), max(tax_year), count(*), count(DISTINCT parcel_number),
+                       min(fetched_at), max(fetched_at)
+                FROM skagit_parcel_history
+                """
+            )
+            row = cursor.fetchone()
+            stats["history_year_min"] = row[0]
+            stats["history_year_max"] = row[1]
+            stats["history_rows"] = row[2]
+            stats["history_parcels"] = row[3]
+            stats["history_fetched_min"] = row[4]
+            stats["history_fetched_max"] = row[5]
+
+            cursor.execute(
+                """
+                SELECT min(parcel_tax_year), max(parcel_tax_year), count(*), count(DISTINCT parcel_number)
+                FROM v_parcel_tax_summary
+                """
+            )
+            row = cursor.fetchone()
+            stats["summary_year_min"] = row[0]
+            stats["summary_year_max"] = row[1]
+            stats["summary_rows"] = row[2]
+            stats["summary_parcels"] = row[3]
+
+            cursor.execute(
+                """
+                SELECT min(tax_year), max(tax_year), count(*), count(DISTINCT levy_code)
+                FROM skagit_levy_composition
+                """
+            )
+            row = cursor.fetchone()
+            stats["levy_year_min"] = row[0]
+            stats["levy_year_max"] = row[1]
+            stats["levy_rows"] = row[2]
+            stats["levy_codes"] = row[3]
+
+            cursor.execute(
+                """
+                SELECT min(tax_year), max(tax_year), count(*), max(loaded_at)
+                FROM skagit_levy_history
+                """
+            )
+            row = cursor.fetchone()
+            stats["dor_year_min"] = row[0]
+            stats["dor_year_max"] = row[1]
+            stats["dor_rows"] = row[2]
+            stats["dor_loaded_at"] = row[3]
+
+            cursor.execute("SELECT count(*) FROM skagit_agency_totals")
+            stats["agency_total_rows"] = cursor.fetchone()[0]
+
+            cursor.execute(
+                """
+                SELECT reporting_status, count(*)
+                FROM v_parcel_tax_summary
+                GROUP BY reporting_status
+                ORDER BY reporting_status
+                """
+            )
+            stats["reporting_statuses"] = [
+                {"status": row[0], "count": row[1]}
+                for row in cursor.fetchall()
+            ]
+    except DatabaseError:
+        stats["error"] = True
+    return stats
