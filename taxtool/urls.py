@@ -6,6 +6,7 @@ urlpatterns = [
     path("search/", views.tax_search, name="tax_search"),
     path("signup/", views.tax_signup, name="tax_signup"),
     path("unsubscribe/<str:token>/", views.tax_unsubscribe, name="tax_unsubscribe"),
+    path("verify/<str:token>/", views.tax_verify, name="tax_verify"),
     path("contact/", views.tax_contact, name="tax_contact"),
     path("data-sources/", views.tax_data_sources, name="tax_data_sources"),
     path("parcel/<str:parcel_number>/", views.tax_parcel, name="tax_parcel"),

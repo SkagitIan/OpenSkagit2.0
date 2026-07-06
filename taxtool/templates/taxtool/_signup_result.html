@@ -1,1 +1,18 @@
+{% if show_modal %}
+<dialog id="taxshift-verify-modal" class="taxshift-modal">
+  <form method="dialog">
+    <button type="submit" class="taxshift-modal__close" aria-label="Close">&times;</button>
+  </form>
+  <p class="taxshift-modal__eyebrow">Verification email on its way</p>
+  <h3>Check your inbox</h3>
+  <p>We're pulling a snapshot for your property now and sending a verification email to <strong>{{ email }}</strong>. Click the link inside to verify and start tracking — no password needed.</p>
+  <form method="dialog">
+    <button type="submit" class="taxshift-modal__ok">Got it</button>
+  </form>
+</dialog>
+<script>
+  document.getElementById('taxshift-verify-modal')?.showModal();
+</script>
+{% else %}
 <p class="{% if success %}taxshift-signup__ok{% else %}taxshift-signup__error{% endif %}">{{ message }}</p>
+{% endif %}

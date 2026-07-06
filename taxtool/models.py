@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -22,6 +23,16 @@ class TaxShiftSignup(models.Model):
     recorded_docs_snapshot = models.JSONField(default=list)
     is_active = models.BooleanField(default=True)
     unsubscribed_at = models.DateTimeField(blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
+    verified_at = models.DateTimeField(blank=True, null=True)
+    verification_email_sent_at = models.DateTimeField(blank=True, null=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="taxshift_signups",
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -71,14 +82,20 @@ class TaxShiftNotification(models.Model):
 
 class TaxShiftEmailTemplate(models.Model):
     WATCHLIST_DIGEST = "taxshift_watchlist_digest"
+    VERIFICATION = "taxshift_verification"
     NAME_CHOICES = [
         (WATCHLIST_DIGEST, "TaxShift watchlist digest"),
+        (VERIFICATION, "TaxShift verification + snapshot summary"),
     ]
 
     name = models.CharField(max_length=32, unique=True, choices=NAME_CHOICES)
     subject = models.TextField()
     body_html = models.TextField(
-        help_text="Django template syntax. Variables: {{ signup }}, {{ changes }}, {{ unsubscribe_url }}, {{ site_url }}."
+        help_text=(
+            "Django template syntax. Watchlist digest variables: {{ signup }}, {{ changes }}, "
+            "{{ unsubscribe_url }}, {{ site_url }}. Verification variables: {{ signup }}, "
+            "{{ snapshot }}, {{ verify_url }}, {{ unsubscribe_url }}, {{ parcel_url }}, {{ site_url }}."
+        )
     )
     updated_at = models.DateTimeField(auto_now=True)
 

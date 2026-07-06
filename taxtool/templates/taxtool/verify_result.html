@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Verify your email - taxshift.co{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #eef6f7; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="taxshift-page">
+  <header class="taxshift-nav">
+    <a href="https://taxshift.co/" class="taxshift-brand" aria-label="taxshift home">
+      <span class="taxshift-brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" width="36" height="36" role="img">
+          <path d="M4 17 18 5l14 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 16v15h8V21h5v10h5V16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M27 5v7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>taxshift</span>
+    </a>
+    <nav class="taxshift-nav__links" aria-label="Site navigation">
+      <a href="{% url 'tax_home' %}#snapshot">Free search</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="taxshift-verify" aria-labelledby="verify-heading">
+      {% if success %}
+      <p class="taxshift-eyebrow">Email verified</p>
+      <h1 id="verify-heading">You're all set.</h1>
+      <p>You're signed in and we'll keep tracking{% if signup.parcel_number %} <strong>{{ signup.parcel_number }}</strong>{% else %} your parcel{% endif %} for changes.</p>
+      {% if signup.parcel_number %}
+      <a href="{% url 'tax_parcel' signup.parcel_number %}" class="taxshift-verify__cta">View your parcel report</a>
+      {% else %}
+      <a href="{% url 'tax_home' %}" class="taxshift-verify__cta">Back to taxshift.co</a>
+      {% endif %}
+      {% else %}
+      <p class="taxshift-eyebrow">Verification failed</p>
+      <h1 id="verify-heading">That link didn't work.</h1>
+      <p>{{ message }}</p>
+      <a href="{% url 'tax_home' %}" class="taxshift-verify__cta">Back to taxshift.co</a>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer class="taxshift-footer">
+    <span>taxshift</span>
+    <a href="{% url 'tax_home' %}">Tax tool</a>
+    <a href="https://openskagit.org/" target="_blank" rel="noopener">OpenSkagit</a>
+    <a href="{% url 'tax_contact' %}">Contact</a>
+  </footer>
+</div>
+{% endblock %}

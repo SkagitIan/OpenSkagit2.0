@@ -7100,3 +7100,111 @@ pre {
 .os-tax-step--rate .os-tax-step__num {
   background: #00828A;
 }
+
+/* Signup verification modal */
+.taxshift-modal {
+  width: min(90vw, 420px);
+  padding: 28px;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(8, 26, 53, 0.22);
+}
+
+.taxshift-modal::backdrop {
+  background: rgba(8, 26, 53, 0.55);
+}
+
+/* Qualified with .taxshift-modal (rather than a bare class) so these beat
+   .taxshift-signup__form button — the modal gets swapped inside that form's
+   result slot, and a bare class selector loses to that descendant rule. */
+.taxshift-modal .taxshift-modal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.taxshift-modal__eyebrow {
+  margin: 0 0 8px;
+  color: #0e9aa4;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.taxshift-modal h3 {
+  margin: 0 0 12px;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 24px;
+}
+
+.taxshift-modal p {
+  margin: 0 0 20px;
+  color: #42536a;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.taxshift-modal .taxshift-modal__ok {
+  width: auto;
+  height: auto;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 8px;
+  background: #0e9aa4;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.taxshift-modal .taxshift-modal__ok:hover {
+  background: #0c8790;
+}
+
+/* Verification landing page */
+.taxshift-verify {
+  width: min(100% - 40px, 640px);
+  margin: 64px auto 96px;
+  text-align: center;
+}
+
+.taxshift-verify h1 {
+  margin: 0 0 14px;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(30px, 5vw, 44px);
+  line-height: 1.1;
+}
+
+.taxshift-verify p {
+  margin: 0 auto 24px;
+  max-width: 480px;
+  color: #42536a;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.taxshift-verify__cta {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 8px;
+  background: #0e9aa4;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.taxshift-verify__cta:hover {
+  background: #0c8790;
+}

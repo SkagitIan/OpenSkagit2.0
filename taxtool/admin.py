@@ -15,14 +15,23 @@ class TaxShiftSignupAdmin(admin.ModelAdmin):
         "address_or_parcel",
         "parcel_number",
         "resolution_status",
+        "is_verified",
         "is_active",
         "snapshot_captured_at",
         "source",
         "created_at",
     )
     search_fields = ("email", "address_or_parcel", "parcel_number")
-    list_filter = ("resolution_status", "is_active", "source", "created_at")
-    readonly_fields = ("created_at", "updated_at", "snapshot_captured_at", "recorded_docs_snapshot")
+    list_filter = ("resolution_status", "is_verified", "is_active", "source", "created_at")
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+        "snapshot_captured_at",
+        "recorded_docs_snapshot",
+        "verified_at",
+        "verification_email_sent_at",
+        "user",
+    )
 
 
 @admin.register(TaxShiftNotification)
