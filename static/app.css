@@ -3301,6 +3301,7 @@ pre {
 }
 
 .os-tax-scroll-note {
+  display: none;
   margin: 8px 0 4px;
   text-align: center;
   color: #748399;
@@ -6451,6 +6452,17 @@ pre {
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 }
 
+/* Each row now has its own slot right beneath it (inline expand instead of
+   one shared panel far below the list) — collapse it to nothing when empty
+   so unclicked rows don't show a blank padded card. */
+.os-tax-agency-detail-slot:empty {
+  display: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+
 .os-tax-chart-tooltip {
   position: absolute;
   z-index: 3;
@@ -6991,6 +7003,10 @@ pre {
     padding-bottom: 8px;
   }
 
+  .os-tax-scroll-note {
+    display: block;
+  }
+
   .os-tax-line-chart svg {
     width: 700px;
     max-width: none;
@@ -7071,4 +7087,16 @@ pre {
     grid-column: 1 / -1;
     text-align: left;
   }
+}
+
+/* Consolidated, non-!important rule for the "1" / "2" step badges — several
+   earlier passes above styled .os-tax-step__num with CSS variables and
+   !important overrides across duplicate blocks; pinning the colors here as
+   plain hex removes any doubt about variable scope or cascade order. */
+.os-tax-step__num {
+  background: #7DB61C;
+}
+
+.os-tax-step--rate .os-tax-step__num {
+  background: #00828A;
 }

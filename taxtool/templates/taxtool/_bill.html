@@ -175,28 +175,28 @@
           </div>
           <div class="os-tax-agency-details os-tax-agency-details--inline">
             {% for group in agency_donut.groups %}
-            <button
-              type="button"
-              class="os-tax-agency-row"
-              data-agency-index="{{ forloop.counter0 }}"
-              {% if group.mcag %}
-              hx-get="{% url 'tax_agency' group.mcag %}?your_amount={{ group.total|floatformat:2 }}"
-              hx-target="#agency-panel"
-              hx-swap="innerHTML"
-              {% else %}
-              disabled
-              {% endif %}
-            >
-              <span class="os-tax-agency-row__dot" style="background-color: {{ group.color }};"></span>
-              <span class="os-tax-agency-row__name">{{ group.label }}</span>
-              <span class="os-tax-agency-row__amount">{{ group.total_fmt }}</span>
-              <span class="os-tax-agency-row__pct">{{ group.donut_pct_fmt }}</span>
-            </button>
+            <div class="os-tax-agency-item">
+              <button
+                type="button"
+                class="os-tax-agency-row"
+                data-agency-index="{{ forloop.counter0 }}"
+                {% if group.mcag %}
+                hx-get="{% url 'tax_agency' group.mcag %}?your_amount={{ group.total|floatformat:2 }}"
+                hx-target="#agency-detail-{{ forloop.counter0 }}"
+                hx-swap="innerHTML"
+                {% else %}
+                disabled
+                {% endif %}
+              >
+                <span class="os-tax-agency-row__dot" style="background-color: {{ group.color }};"></span>
+                <span class="os-tax-agency-row__name">{{ group.label }}</span>
+                <span class="os-tax-agency-row__amount">{{ group.total_fmt }}</span>
+                <span class="os-tax-agency-row__pct">{{ group.donut_pct_fmt }}</span>
+              </button>
+              <div id="agency-detail-{{ forloop.counter0 }}" class="os-tax-agency-detail-slot" aria-live="polite"></div>
+            </div>
             {% endfor %}
           </div>
-        </div>
-        <div id="agency-panel" class="os-tax-agency-detail-slot" aria-live="polite">
-          <p class="os-tax-agency-card__empty">Choose a taxing district to see spending categories and financial context.</p>
         </div>
       </section>
 
@@ -261,10 +261,13 @@
             <circle class="os-tax-line-chart__tax-dot" cx="{{ point.x }}" cy="{{ point.y }}" r="4"></circle>
             {% endfor %}
             {% for point in history_story.value_points %}
+            {% if forloop.first or forloop.last or forloop.counter0|divisibleby:2 %}
             <text class="os-tax-chart-year" x="{{ point.x }}" y="{{ history_story.plot_bottom|add:'26' }}">{{ point.year }}</text>
+            {% endif %}
             {% endfor %}
           </svg>
           <div class="os-tax-chart-tooltip" data-tax-tooltip role="status" aria-live="polite"></div>
+          <p class="os-tax-scroll-note">Swipe to see the full history<span aria-hidden="true">&rarr;</span></p>
         </div>
         <p class="os-tax-footnote">Amounts are rounded. Assessed value uses the left axis; tax bill uses the right axis. Hover a blue tax-bill point for exact figures.</p>
         {% if history_story.reason_history %}
