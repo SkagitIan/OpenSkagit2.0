@@ -1,14 +1,43 @@
 from django.contrib import admin
 
-from .models import ParcelSearchCache, TaxShiftSignup
+from .models import (
+    ParcelSearchCache,
+    TaxShiftEmailTemplate,
+    TaxShiftNotification,
+    TaxShiftSignup,
+)
 
 
 @admin.register(TaxShiftSignup)
 class TaxShiftSignupAdmin(admin.ModelAdmin):
-    list_display = ("email", "address_or_parcel", "source", "created_at")
-    search_fields = ("email", "address_or_parcel")
-    list_filter = ("source", "created_at")
-    readonly_fields = ("created_at", "updated_at")
+    list_display = (
+        "email",
+        "address_or_parcel",
+        "parcel_number",
+        "resolution_status",
+        "is_active",
+        "snapshot_captured_at",
+        "source",
+        "created_at",
+    )
+    search_fields = ("email", "address_or_parcel", "parcel_number")
+    list_filter = ("resolution_status", "is_active", "source", "created_at")
+    readonly_fields = ("created_at", "updated_at", "snapshot_captured_at", "recorded_docs_snapshot")
+
+
+@admin.register(TaxShiftNotification)
+class TaxShiftNotificationAdmin(admin.ModelAdmin):
+    list_display = ("signup", "parcel_number", "trigger_type", "run_id", "sent_at", "created_at")
+    search_fields = ("signup__email", "parcel_number")
+    list_filter = ("trigger_type", "sent_at", "created_at")
+    readonly_fields = ("signup", "parcel_number", "trigger_type", "payload", "run_id", "sent_at", "created_at")
+
+
+@admin.register(TaxShiftEmailTemplate)
+class TaxShiftEmailTemplateAdmin(admin.ModelAdmin):
+    list_display = ("name", "subject", "updated_at")
+    fields = ("name", "subject", "body_html")
+
 
 @admin.register(ParcelSearchCache)
 class ParcelSearchCacheAdmin(admin.ModelAdmin):

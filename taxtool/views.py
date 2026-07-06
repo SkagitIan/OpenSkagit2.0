@@ -192,12 +192,40 @@ def tax_signup(request):
         defaults={
             "address_or_parcel": address_or_parcel[:255],
             "source": "taxshift_home",
+            "resolution_status": TaxShiftSignup.RESOLUTION_PENDING,
+            "is_active": True,
+            "unsubscribed_at": None,
         },
     )
     return render(request, "taxtool/_signup_result.html", {
         "success": True,
         "message": "You're on the list. We'll send tax shift updates as this rolls out.",
     })
+
+
+def tax_unsubscribe(request, token):
+    from django.core.signing import BadSignature, SignatureExpired
+    from django.utils import timezone
+
+    from .notifications import email_from_token
+
+    try:
+        email = email_from_token(token)
+    except (BadSignature, SignatureExpired):
+        return render(request, "taxtool/_signup_result.html", {
+            "success": False,
+            "message": "This unsubscribe link is invalid or has expired.",
+        }, status=400)
+
+    updated = TaxShiftSignup.objects.filter(email=email).update(
+        is_active=False, unsubscribed_at=timezone.now()
+    )
+    message = (
+        "You're unsubscribed and won't receive further TaxShift updates."
+        if updated
+        else "That email address wasn't found on the TaxShift list."
+    )
+    return render(request, "taxtool/_signup_result.html", {"success": True, "message": message})
 
 
 def tax_parcel(request, parcel_number):

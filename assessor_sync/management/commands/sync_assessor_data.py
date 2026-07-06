@@ -314,6 +314,12 @@ class Command(BaseCommand):
                 except Exception as exc:
                     self.stdout.write(self.style.WARNING(f"Watchlist notification queuing failed: {exc}"))
 
+                try:
+                    from taxtool.notifications import queue_taxshift_notifications
+                    queue_taxshift_notifications(run_id, stdout=self.stdout)
+                except Exception as exc:
+                    self.stdout.write(self.style.WARNING(f"TaxShift notification queuing failed: {exc}"))
+
                 with connection.cursor() as cursor:
                     pruned_changes = self._prune_sync_changes(cursor, int(options["audit_retain_runs"]), run_id)
                 if pruned_changes:
