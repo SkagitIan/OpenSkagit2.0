@@ -1,79 +1,124 @@
 {% extends "base.html" %}
-{% block title %}Property Tax Transparency - OpenSkagit{% endblock %}
+{% block title %}taxshift.co - Track your tax shift{% endblock %}
 
 {% block extra_head %}
-<style>body { background: #f6f8f8; }</style>
+<style>body { background: #eef6f7; }</style>
 {% endblock %}
 
 {% block content %}
-<div class="os-tax-v2 os-tax-v2--home">
-
-  <header class="os-nav-v2">
-    <a href="/" class="os-nav-v2__logo">
-      <img src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png" alt="" width="26" height="26" class="os-nav-v2__logo-img">
-      OpenSkagit
+<div class="taxshift-page">
+  <header class="taxshift-nav">
+    <a href="/" class="taxshift-brand" aria-label="taxshift.co home">
+      <span class="taxshift-brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" width="36" height="36" role="img">
+          <path d="M4 17 18 5l14 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 16v15h8V21h5v10h5V16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M27 5v7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>taxshift.co</span>
     </a>
-    <nav class="os-nav-v2__links" aria-label="Site navigation">
-      <details class="os-nav-v2__menu">
-        <summary>Cities</summary>
-        <div class="os-nav-v2__dropdown">
-          {% for item in city_pages %}
-            <a href="{% url 'city' item.slug %}">{{ item.name }}</a>
-          {% endfor %}
-        </div>
-      </details>
-      <a href="{% url 'tax_home' %}" aria-current="page">Taxes</a>
-      <a href="/#places">Places</a>
+    <nav class="taxshift-nav__links" aria-label="Site navigation">
+      <a href="#how-it-works">How it works</a>
+      <a href="#data-sources">Data sources</a>
       <a href="mailto:ian@openskagit.com">Contact</a>
+      <a class="taxshift-nav__cta" href="#snapshot">Free search</a>
     </nav>
   </header>
 
-  <div id="main-content">
-    <section class="os-tax-hero">
-      <div class="os-tax-hero__inner">
-        <p class="os-tax-hero__eyebrow">Skagit County</p>
-        <h1 class="os-tax-hero__h1">Where did my property taxes go?</h1>
-        <p class="os-tax-hero__sub">Enter an address or parcel number to see the current tax bill broken down by agency.</p>
-
-        <div class="os-tax-hero__search">
-          <div class="os-tax-hero__search-wrap">
-            <svg class="os-tax-hero__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M10.5 10.5 L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <input
-              id="tax-search"
-              type="text"
-              name="q"
-              autocomplete="off"
-              placeholder="123 Main St or parcel number"
-              hx-get="{% url 'tax_search' %}"
-              hx-trigger="keyup changed delay:300ms"
-              hx-target="#suggestions"
-              hx-swap="innerHTML"
-              hx-include="#tax-search"
-              class="os-tax-hero__input"
-            >
+  <main id="main-content">
+    <section class="taxshift-hero" id="snapshot">
+      <div class="taxshift-hero__screen" aria-label="taxshift.co property tax search">
+        <div class="taxshift-browser">
+          <div class="taxshift-browser__bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <strong>taxshift.co</strong>
           </div>
-          <div id="suggestions" class="os-tax-suggestions"></div>
-        </div>
 
-        <p class="os-tax-hero__hint">
-          83,000+ parcels. Data from Skagit County Assessor and SAO Financial Intelligence Tool.
-        </p>
+          <div class="taxshift-browser__content">
+            <p class="taxshift-eyebrow">Skagit County property tax snapshots</p>
+            <h1>Track your tax shift.</h1>
+            <p class="taxshift-hero__sub">See why your property taxes shifted, what changed underneath the bill, and where your dollars go. Free, instant, and built from public data.</p>
+
+            <div class="taxshift-search">
+              <div class="taxshift-search__wrap">
+                <svg class="taxshift-search__icon" width="21" height="21" viewBox="0 0 21 21" fill="none" aria-hidden="true">
+                  <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>
+                  <path d="M13.5 13.5 18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <input
+                  id="tax-search"
+                  type="text"
+                  name="q"
+                  autocomplete="off"
+                  placeholder="Enter your property address or parcel number"
+                  hx-get="{% url 'tax_search' %}"
+                  hx-trigger="keyup changed delay:300ms"
+                  hx-target="#suggestions"
+                  hx-swap="innerHTML"
+                  hx-include="#tax-search"
+                  class="taxshift-search__input"
+                >
+                <button type="button" class="taxshift-search__button" onclick="document.getElementById('tax-search').focus()">Get snapshot</button>
+              </div>
+              <div id="suggestions" class="os-tax-suggestions taxshift-suggestions"></div>
+            </div>
+
+            <p class="taxshift-hero__note">Powered by official public county, assessor, tax statement, and financial data.</p>
+
+            <div class="taxshift-feature-row" id="how-it-works">
+              <article>
+                <span aria-hidden="true">1</span>
+                <h2>Find your property</h2>
+                <p>Search an address or parcel number and get a plain-English snapshot.</p>
+              </article>
+              <article>
+                <span aria-hidden="true">2</span>
+                <h2>Decode the shift</h2>
+                <p>Separate value changes, levy rates, voter-approved levies, and agencies.</p>
+              </article>
+              <article>
+                <span aria-hidden="true">3</span>
+                <h2>Track what changes</h2>
+                <p>Sign up for alerts as tax bills, assessments, and district context update.</p>
+              </article>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-  </div>
 
-  <footer class="os-footer-v2">
-    <span class="os-footer-v2__built">Built in Skagit Valley</span>
-    <nav class="os-footer-v2__links" aria-label="Footer navigation">
-      <a href="/">OpenSkagit</a>
-      <a href="{% url 'tax_home' %}">Tax tool</a>
-      <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
-      <a href="mailto:ian@openskagit.com">Contact</a>
-    </nav>
+    <section class="taxshift-signup" aria-labelledby="track-heading">
+      <div>
+        <p class="taxshift-eyebrow">Track the next shift</p>
+        <h2 id="track-heading">Get notified when your snapshot changes.</h2>
+        <p>Leave an email and, optionally, the property you care about. We will use it to roll out tax shift tracking and alerts.</p>
+      </div>
+      <form class="taxshift-signup__form" hx-post="{% url 'tax_signup' %}" hx-target="#signup-result" hx-swap="innerHTML">
+        {% csrf_token %}
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          <span>Address or parcel</span>
+          <input type="text" name="address_or_parcel" placeholder="123 Maple Ave or P12345">
+        </label>
+        <button type="submit">Sign up to track tax shift</button>
+        <div id="signup-result" class="taxshift-signup__result" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section class="taxshift-data" id="data-sources">
+      <p>Data sources include Skagit County Assessor property records, tax statement history, levy detail, and Washington State Auditor financial data where available.</p>
+    </section>
+  </main>
+
+  <footer class="taxshift-footer">
+    <span>taxshift.co</span>
+    <a href="/tax/">Tax tool</a>
+    <a href="https://openskagit.org/" target="_blank" rel="noopener">OpenSkagit</a>
+    <a href="mailto:ian@openskagit.com">Contact</a>
   </footer>
-
 </div>
 {% endblock %}

@@ -20,6 +20,11 @@ SECRET_KEY = env(
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "*").split(",") if host.strip()]
+TAXSHIFT_HOSTS = {"taxshift.co", "www.taxshift.co"}
+if "*" not in ALLOWED_HOSTS:
+    for host in TAXSHIFT_HOSTS:
+        if host not in ALLOWED_HOSTS:
+            ALLOWED_HOSTS.append(host)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -127,5 +132,8 @@ RESEND_FROM_EMAIL = env("RESEND_FROM_EMAIL", default="Parcel Book <parcelbook@op
 CSRF_TRUSTED_ORIGINS = [
     o for o in env("CSRF_TRUSTED_ORIGINS", default="").split(",") if o
 ]
+for origin in ("https://taxshift.co", "https://www.taxshift.co"):
+    if origin not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(origin)
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

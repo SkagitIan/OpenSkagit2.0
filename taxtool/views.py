@@ -1,6 +1,10 @@
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.shortcuts import render
+from django.views.decorators.http import require_POST
 
 from core.views import CITY_PAGES
+from .models import TaxShiftSignup
 
 from .queries import (
     search_parcels,
@@ -44,6 +48,32 @@ def tax_search(request):
     q = request.GET.get("q", "").strip()
     parcels = search_parcels(q) if len(q) >= 2 else []
     return render(request, "taxtool/_suggestions.html", {"parcels": parcels, "q": q})
+
+
+@require_POST
+def tax_signup(request):
+    email = request.POST.get("email", "").strip().lower()
+    address_or_parcel = request.POST.get("address_or_parcel", "").strip()
+
+    try:
+        validate_email(email)
+    except ValidationError:
+        return render(request, "taxtool/_signup_result.html", {
+            "success": False,
+            "message": "Enter a valid email address.",
+        }, status=400)
+
+    TaxShiftSignup.objects.update_or_create(
+        email=email,
+        defaults={
+            "address_or_parcel": address_or_parcel[:255],
+            "source": "taxshift_home",
+        },
+    )
+    return render(request, "taxtool/_signup_result.html", {
+        "success": True,
+        "message": "You're on the list. We'll send tax shift updates as this rolls out.",
+    })
 
 
 def tax_parcel(request, parcel_number):
