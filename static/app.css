@@ -5486,6 +5486,18 @@ pre {
   color: #0e9aa4;
 }
 
+.taxshift-nav__resume {
+  max-width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.taxshift-nav__resume[hidden] {
+  display: none;
+}
+
 .taxshift-nav__cta {
   padding: 11px 15px;
   border-radius: 7px;

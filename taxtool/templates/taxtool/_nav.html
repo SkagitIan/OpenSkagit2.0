@@ -16,6 +16,7 @@
     {% if request.user.is_staff %}
       <a class="taxshift-nav__secondary" href="{% url 'tax_staff_dashboard' %}">Dashboard</a>
     {% endif %}
+    <a class="taxshift-nav__resume" href="#" data-taxshift-last-parcel hidden>Return to parcel</a>
     {% if request.user.is_authenticated %}
       <a href="{% url 'tax_account' %}">Account</a>
     {% else %}
@@ -24,3 +25,59 @@
     <a class="taxshift-nav__cta" href="{% url 'tax_home' %}#snapshot">Free search</a>
   </nav>
 </header>
+<script>
+(function () {
+  const storageKey = 'taxshift:lastParcel';
+
+  function readLastParcel() {
+    try {
+      return JSON.parse(window.localStorage.getItem(storageKey) || 'null');
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function writeLastParcel(source) {
+    if (!source || !source.dataset.parcelNumber || !source.dataset.parcelUrl) return;
+    const parcel = {
+      parcelNumber: source.dataset.parcelNumber,
+      address: source.dataset.parcelAddress || '',
+      url: source.dataset.parcelUrl
+    };
+    try {
+      window.localStorage.setItem(storageKey, JSON.stringify(parcel));
+    } catch (error) {
+      return;
+    }
+    renderLastParcel(parcel);
+  }
+
+  function renderLastParcel(parcel) {
+    const link = document.querySelector('[data-taxshift-last-parcel]');
+    if (!link) return;
+    if (!parcel || !parcel.parcelNumber || !parcel.url) {
+      link.hidden = true;
+      return;
+    }
+    link.href = parcel.url;
+    link.textContent = 'Return to parcel ' + parcel.parcelNumber;
+    link.title = parcel.address ? 'Return to ' + parcel.address : 'Return to parcel ' + parcel.parcelNumber;
+    link.hidden = false;
+  }
+
+  function rememberCurrentParcel() {
+    writeLastParcel(document.querySelector('[data-taxshift-current-parcel]'));
+  }
+
+  document.addEventListener('click', function (event) {
+    writeLastParcel(event.target.closest('[data-taxshift-parcel-option]'));
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+    rememberCurrentParcel();
+    renderLastParcel(readLastParcel());
+  });
+  document.body.addEventListener('htmx:afterSwap', function () {
+    rememberCurrentParcel();
+  });
+})();
+</script>

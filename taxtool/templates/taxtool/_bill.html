@@ -13,7 +13,13 @@
     </div>
 
     {% if parcel %}
-    <article class="os-tax-report__shell">
+    <article
+      class="os-tax-report__shell"
+      data-taxshift-current-parcel
+      data-parcel-number="{{ parcel.parcel_number }}"
+      data-parcel-address="{{ parcel.situs_street_number }} {{ parcel.situs_street_name }}{% if parcel.situs_city_state_zip %}, {{ parcel.situs_city_state_zip }}{% endif %}"
+      data-parcel-url="{% url 'tax_parcel' parcel.parcel_number %}"
+    >
 <section class="os-tax-story-card os-tax-story-card--hero">
         <div class="os-tax-report-identity">
           <div>

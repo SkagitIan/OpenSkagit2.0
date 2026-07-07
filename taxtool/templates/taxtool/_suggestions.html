@@ -3,9 +3,14 @@
   <button
     type="button"
     hx-get="{% url 'tax_parcel' p.parcel_number %}"
+    hx-push-url="true"
     hx-target="#main-content"
     hx-swap="outerHTML"
     class="os-tax-suggestion"
+    data-taxshift-parcel-option
+    data-parcel-number="{{ p.parcel_number }}"
+    data-parcel-address="{{ p.situs_street_number }} {{ p.situs_street_name }}{% if p.situs_city_state_zip %}, {{ p.situs_city_state_zip }}{% endif %}"
+    data-parcel-url="{% url 'tax_parcel' p.parcel_number %}"
   >
     <div class="os-tax-suggestion__addr">
       {{ p.situs_street_number }} {{ p.situs_street_name }}{% if p.situs_city_state_zip %}, {{ p.situs_city_state_zip }}{% endif %}
