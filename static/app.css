@@ -6502,6 +6502,32 @@ pre {
   grid-template-columns: minmax(220px, 1fr) auto;
 }
 
+.os-tax-signup-card--tracked {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.os-tax-signup-card__action {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 8px;
+  background: #18b7ca;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.os-tax-signup-card__action:hover {
+  background: #0e9aa4;
+}
+
 .os-tax-data-callout {
   display: flex;
   align-items: center;

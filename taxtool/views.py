@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
-from django.db.models import F
+from django.db.models import F, Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods, require_POST
 
@@ -49,6 +49,9 @@ def _taxshift_context(**extra):
 
 
 def _verify_turnstile(request):
+    if request.user.is_authenticated:
+        return True, ""
+
     site_key = getattr(settings, "TAXSHIFT_TURNSTILE_SITE_KEY", "")
     secret_key = getattr(settings, "TAXSHIFT_TURNSTILE_SECRET_KEY", "")
     if not site_key and not secret_key:
@@ -80,6 +83,14 @@ def _verify_turnstile(request):
         logger.warning("TaxShift Turnstile rejected signup: %s", payload.get("error-codes"))
         return False, "CAPTCHA verification failed. Try again."
     return True, ""
+
+
+def _signup_error_response(request, message):
+    status = 200 if request.headers.get("HX-Request") else 400
+    return render(request, "taxtool/_signup_result.html", {
+        "success": False,
+        "message": message,
+    }, status=status)
 
 
 def _ensure_user_for_signup(signup):
@@ -218,32 +229,47 @@ def _process_signup_async(signup_pk: int) -> None:
 def tax_signup(request):
     email = request.POST.get("email", "").strip().lower()
     address_or_parcel = request.POST.get("address_or_parcel", "").strip()
+    parcel_number = request.POST.get("parcel_number", "").strip().upper()
+    source = "parcel_detail" if parcel_number else "taxshift_home"
 
-    captcha_ok, captcha_message = _verify_turnstile(request)
-    if not captcha_ok:
-        return render(request, "taxtool/_signup_result.html", {
-            "success": False,
-            "message": captcha_message,
-        }, status=400)
+    if request.user.is_authenticated and not email:
+        email = (request.user.email or request.user.username or "").strip().lower()
 
     try:
         validate_email(email)
     except ValidationError:
-        return render(request, "taxtool/_signup_result.html", {
-            "success": False,
-            "message": "Enter a valid email address.",
-        }, status=400)
+        return _signup_error_response(request, "Enter a valid email address.")
+
+    if parcel_number:
+        parcel = get_parcel(parcel_number)
+        if not parcel:
+            return _signup_error_response(request, "We could not find that parcel anymore. Search again and retry.")
+        parcel_number = parcel["parcel_number"]
+        if not address_or_parcel:
+            address_parts = [parcel.get("situs_street_number"), parcel.get("situs_street_name")]
+            address = " ".join(part for part in address_parts if part).strip()
+            if parcel.get("situs_city_state_zip"):
+                address = f"{address}, {parcel['situs_city_state_zip']}".strip(", ")
+            address_or_parcel = f"{address} / Parcel {parcel_number}".strip()
+    else:
+        captcha_ok, captcha_message = _verify_turnstile(request)
+        if not captcha_ok:
+            return _signup_error_response(request, captcha_message)
+
+    signup_defaults = {
+        "address_or_parcel": address_or_parcel[:255],
+        "source": source,
+        "resolution_status": TaxShiftSignup.RESOLUTION_PENDING,
+        "is_active": True,
+        "unsubscribed_at": None,
+        "verification_email_sent_at": None,
+    }
+    if parcel_number:
+        signup_defaults["parcel_number"] = parcel_number
 
     signup, _created = TaxShiftSignup.objects.update_or_create(
         email=email,
-        defaults={
-            "address_or_parcel": address_or_parcel[:255],
-            "source": "taxshift_home",
-            "resolution_status": TaxShiftSignup.RESOLUTION_PENDING,
-            "is_active": True,
-            "unsubscribed_at": None,
-            "verification_email_sent_at": None,
-        },
+        defaults=signup_defaults,
     )
     threading.Thread(target=_process_signup_async, args=(signup.pk,), daemon=True).start()
 
@@ -420,8 +446,23 @@ def tax_parcel(request, parcel_number):
     parcel = context.get("parcel")
     if parcel:
         cache_searched_parcels([parcel], query=parcel_number, source="parcel_detail")
+        context["parcel_is_tracked"] = _user_tracks_parcel(request.user, parcel["parcel_number"])
 
     return render(request, template_name, context)
+
+
+def _user_tracks_parcel(user, parcel_number):
+    if not user.is_authenticated:
+        return False
+
+    filters = Q(user=user)
+    if user.email:
+        filters |= Q(email__iexact=user.email)
+    return TaxShiftSignup.objects.filter(
+        filters,
+        parcel_number=parcel_number,
+        is_verified=True,
+    ).exists()
 
 
 def tax_yoy(request, parcel_number):

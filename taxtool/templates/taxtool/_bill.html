@@ -336,7 +336,15 @@
       </section>
       {% endif %}
 
-      <section class="os-tax-story-card os-tax-signup-card taxshift-signup" aria-labelledby="parcel-track-heading">
+      <section class="os-tax-story-card os-tax-signup-card taxshift-signup{% if parcel_is_tracked %} os-tax-signup-card--tracked{% endif %}" aria-labelledby="parcel-track-heading">
+        {% if parcel_is_tracked %}
+        <div>
+          <p class="taxshift-eyebrow">Tracking active</p>
+          <h2 id="parcel-track-heading">This parcel is on your watchlist.</h2>
+          <p>Open your account to see tracking status, notification settings, and the parcels you are watching.</p>
+        </div>
+        <a class="os-tax-signup-card__action" href="{% url 'tax_account' %}">View tracking status</a>
+        {% else %}
         <div>
           <p class="taxshift-eyebrow">Track the next shift</p>
           <h2 id="parcel-track-heading">Get notified when this snapshot changes.</h2>
@@ -344,18 +352,17 @@
         </div>
         <form class="taxshift-signup__form" hx-post="{% url 'tax_signup' %}" hx-target="#parcel-signup-result" hx-swap="innerHTML">
           {% csrf_token %}
+          <input type="hidden" name="parcel_number" value="{{ parcel.parcel_number }}">
           <input type="hidden" name="address_or_parcel" value="{{ parcel.situs_street_number }} {{ parcel.situs_street_name }}{% if parcel.situs_city_state_zip %}, {{ parcel.situs_city_state_zip }}{% endif %} / Parcel {{ parcel.parcel_number }}">
           <label>
             <span>Email</span>
-            <input type="email" name="email" placeholder="you@example.com" required>
+            <input type="email" name="email" placeholder="you@example.com" value="{% if request.user.is_authenticated %}{{ request.user.email|default:request.user.username }}{% endif %}" required>
           </label>
-          {% if taxshift_turnstile_site_key %}
-          <div class="taxshift-captcha cf-turnstile" data-sitekey="{{ taxshift_turnstile_site_key }}"></div>
-          {% endif %}
           <button type="submit">Sign up to track this parcel</button>
           <p class="taxshift-signup__fineprint">By signing up, you agree to the <a href="{% url 'tax_terms' %}">terms</a> and <a href="{% url 'tax_privacy' %}">privacy policy</a>.</p>
           <div id="parcel-signup-result" class="taxshift-signup__result" aria-live="polite"></div>
         </form>
+        {% endif %}
       </section>
 
       <section class="os-tax-story-card os-tax-data-callout">
