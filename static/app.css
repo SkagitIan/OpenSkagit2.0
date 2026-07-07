@@ -3768,47 +3768,150 @@ pre {
   background: #f2fbff;
 }
 
-.os-tax-rate-cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+.os-tax-rate-verdict--why {
+  border-color: #d8e2ea;
+  background: #f8fafc;
 }
 
-.os-tax-rate-card {
-  min-width: 0;
-  padding: 14px;
-  border: 1px solid #dbe7f4;
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.os-tax-rate-card--you {
-  border-color: #1769e8;
-  box-shadow: inset 0 3px 0 #1769e8;
-}
-
-.os-tax-rate-card span,
-.os-tax-rate-card em {
-  display: block;
-  color: #64748b;
-  font-size: 12px;
-  font-style: normal;
-  line-height: 1.3;
-}
-
-.os-tax-rate-card strong {
-  display: block;
-  margin: 6px 0 2px;
-  color: #0b2146;
-  font-family: "DM Sans", sans-serif;
-  font-size: 26px;
-  line-height: 1;
+.os-tax-rate-verdict__yours {
+  margin-top: 8px;
+  color: #52647a;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .os-tax-rate-guide__note {
   margin: 0 !important;
   color: #64748b !important;
   font-size: 13px;
+}
+
+.os-tax-compare-map-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.os-tax-compare-map-wrap {
+  position: relative;
+  height: 360px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #dbe7f4;
+}
+
+.os-tax-compare-map {
+  width: 100%;
+  height: 100%;
+  background: #eef2f4;
+}
+
+.os-tax-compare-map__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background: #eef2f4;
+  color: #64748b;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.os-tax-compare-map__loading[hidden] {
+  display: none;
+}
+
+.os-tax-compare-map__legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.os-tax-compare-map__legend-bar {
+  position: relative;
+  flex: 1;
+  height: 8px;
+  margin-top: 14px;
+}
+
+.os-tax-compare-map__legend-gradient {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.os-tax-compare-map__legend-tick {
+  position: absolute;
+  bottom: 100%;
+  transform: translateX(-50%);
+  margin-bottom: 4px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #0b2146;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.os-tax-compare-map__legend-tick::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 1px;
+  height: 8px;
+  background: #0b2146;
+  transform: translateX(-50%);
+}
+
+.os-tcm-popup strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #0b2146;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+}
+
+.os-tcm-popup__code {
+  display: block;
+  color: #64748b;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.os-tcm-popup__rate {
+  margin: 8px 0 2px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #0b2146;
+}
+
+.os-tcm-popup__rate span {
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.os-tcm-popup__tone {
+  display: inline-block;
+  margin: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.os-tcm-popup__note {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 12px;
 }
 
 .os-tax-line-chart {
@@ -3959,6 +4062,10 @@ pre {
     grid-template-columns: 1fr;
   }
 
+  .os-tax-compare-map-wrap {
+    height: 280px;
+  }
+
   .os-tax-money__content {
     grid-template-columns: 1fr;
     justify-items: center;
@@ -4031,8 +4138,6 @@ pre {
     grid-column: 2 / -1;
     text-align: left;
   }
-
-  .os-tax-rate-cards { grid-template-columns: 1fr; }
 }
 
 /* SIMPLE HOMEPAGE */
@@ -4535,7 +4640,6 @@ pre {
 .os-tax-parcel-banner h1,
 .os-tax-story-card h2,
 .os-tax-rate-verdict strong,
-.os-tax-rate-card strong,
 .os-tax-agency-panel__name,
 .os-tax-exemption-card h3 {
   color: #111827;
@@ -4601,7 +4705,6 @@ pre {
 .os-tax-step--rate,
 .os-tax-exemption-card,
 .os-tax-rate-verdict,
-.os-tax-rate-card,
 .os-tax-agency-detail-slot,
 .os-tax-data-sources__grid div {
   border: 1px solid var(--os-border);
@@ -4752,11 +4855,6 @@ pre {
   color: #0f5a5c;
 }
 
-.os-tax-rate-card--you {
-  border-color: rgba(0, 130, 138, 0.38);
-  box-shadow: inset 0 3px 0 var(--os-teal);
-}
-
 .os-tax-rate-verdict--typical {
   border-color: rgba(125, 182, 28, 0.32);
   background: #f7fbf2;
@@ -4893,8 +4991,7 @@ pre {
   }
 
   .os-tax-yoy-drivers,
-  .os-tax-stats,
-  .os-tax-rate-cards {
+  .os-tax-stats {
     grid-template-columns: 1fr;
   }
 

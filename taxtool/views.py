@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.db.models import F, Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods, require_POST
@@ -25,6 +25,8 @@ from .queries import (
     get_county_total_for_mcag,
     get_parcel_history,
     get_data_methodology_stats,
+    get_levy_area_map_features,
+    get_county_effective_rate_median,
 )
 from .og_images import render_parcel_og_image
 from .report import build_tax_report_context
@@ -36,6 +38,8 @@ from .utils import (
     compute_yoy_breakdown,
     get_agency_info,
     build_display_history,
+    format_rate,
+    format_delta_rate,
 )
 
 logger = logging.getLogger(__name__)
@@ -592,3 +596,45 @@ def tax_staff_dashboard(request):
     from .dashboard import build_dashboard_context
 
     return render(request, "taxtool/staff_dashboard.html", build_dashboard_context())
+
+
+def tax_levy_area_map(request):
+    features = get_levy_area_map_features()
+    county_median = get_county_effective_rate_median()
+
+    geo_features = []
+    for row in features:
+        geometry = row.pop("geometry")
+        rebuilt_at = row.pop("rebuilt_at")
+        median_rate = row.get("median_rate")
+        delta = None
+        verdict_tone = None
+        if median_rate is not None and county_median is not None:
+            delta = float(median_rate) - float(county_median)
+            if abs(delta) < 0.10:
+                verdict_tone = "typical"
+            elif delta > 0:
+                verdict_tone = "high"
+            else:
+                verdict_tone = "low"
+        geo_features.append({
+            "type": "Feature",
+            "geometry": geometry,
+            "properties": {
+                "levy_code": row["levy_code"],
+                "area_label": row["area_label"],
+                "parcel_count": row["parcel_count"],
+                "median_rate": float(median_rate) if median_rate is not None else None,
+                "median_rate_fmt": format_rate(median_rate),
+                "delta_fmt": format_delta_rate(delta),
+                "verdict_tone": verdict_tone,
+                "rebuilt_at": rebuilt_at.isoformat() if rebuilt_at else None,
+            },
+        })
+
+    return JsonResponse({
+        "type": "FeatureCollection",
+        "county_median_rate": float(county_median) if county_median is not None else None,
+        "county_median_rate_fmt": format_rate(county_median),
+        "features": geo_features,
+    })

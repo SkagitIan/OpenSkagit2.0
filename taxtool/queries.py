@@ -193,6 +193,21 @@ def get_county_taxable_effective_rate_median():
         return row[0] if row and row[0] is not None else None
 
 
+def get_levy_area_map_features():
+    """Return precomputed levy-code area rows with simplified GeoJSON geometry."""
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            SELECT levy_code, area_label, parcel_count, median_rate, rebuilt_at,
+                   ST_AsGeoJSON(geometry, 5)::json AS geometry
+            FROM levy_area_map
+            WHERE geometry IS NOT NULL
+            ORDER BY levy_code
+            """
+        )
+        return _dictfetchall(cursor)
+
+
 def get_parcel_history(parcel_number):
     """Return assessed-value/tax history rows, most recent first, excluding zero/null values."""
     with connection.cursor() as cursor:

@@ -103,6 +103,22 @@ class TaxShiftEmailTemplate(models.Model):
         return self.get_name_display()
 
 
+class LevyAreaMap(models.Model):
+    levy_code = models.TextField(primary_key=True)
+    area_label = models.TextField()
+    parcel_count = models.IntegerField()
+    median_rate = models.DecimalField(max_digits=10, decimal_places=4, blank=True, null=True)
+    geometry = models.TextField(blank=True, null=True)
+    rebuilt_at = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = "levy_area_map"
+
+    def __str__(self):
+        return f"{self.levy_code} ({self.area_label})"
+
+
 class ParcelSearchCache(models.Model):
     parcel_number = models.CharField(max_length=32, unique=True)
     situs_street_number = models.CharField(max_length=32, blank=True)

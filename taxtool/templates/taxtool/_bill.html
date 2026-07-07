@@ -1,4 +1,5 @@
 {% load taxtool_extras %}
+{% load static %}
 <div id="main-content">
   <section class="os-tax-results os-tax-report">
     <div class="os-tax-report__top">
@@ -211,30 +212,44 @@
           <h2>How you compare</h2>
           <p>{{ exemption_context.comparison_intro }}</p>
         </div>
+
+        <div id="tax-compare-map-section" class="os-tax-compare-map-section" data-levy-areas-url="{% url 'tax_levy_area_map' %}" data-current-levy-code="{{ parcel.levy_code|default:'' }}">
+          <div class="os-tax-compare-map-wrap">
+            <div id="os-tcm-map" class="os-tax-compare-map"></div>
+            <p id="os-tcm-loading" class="os-tax-compare-map__loading">Loading the county comparison map&hellip;</p>
+          </div>
+          <div class="os-tax-compare-map__legend">
+            <span id="os-tcm-legend-min">&nbsp;</span>
+            <div class="os-tax-compare-map__legend-bar">
+              <span id="os-tcm-legend-gradient" class="os-tax-compare-map__legend-gradient"></span>
+              <span id="os-tcm-legend-median" class="os-tax-compare-map__legend-tick"></span>
+            </div>
+            <span id="os-tcm-legend-max">&nbsp;</span>
+          </div>
+        </div>
+
         <div class="os-tax-rate-report" aria-label="Effective tax rate comparison">
           <div class="os-tax-rate-verdict os-tax-rate-verdict--{{ comparison.verdict_tone }}">
-            <span>Rate check</span>
+            <span>About typical</span>
             <strong>{{ comparison.verdict }}</strong>
             <p>{{ comparison.verdict_detail }}</p>
-          </div>
-          <div class="os-tax-rate-cards">
             {% if comparison.your %}
-            <div class="os-tax-rate-card os-tax-rate-card--you">
-              <span>Your property</span>
-              <strong>{{ comparison.your.short_rate_fmt }}</strong>
-              <em>per $1,000</em>
-            </div>
-            {% endif %}
-            {% if comparison.county %}
-            <div class="os-tax-rate-card">
-              <span>County median</span>
-              <strong>{{ comparison.county.short_rate_fmt }}</strong>
-              <em>{{ comparison.county.delta_fmt }} vs you</em>
-            </div>
+            <p class="os-tax-rate-verdict__yours">Your rate: {{ comparison.your.short_rate_fmt }} per $1,000</p>
             {% endif %}
           </div>
-          <p class="os-tax-rate-guide__note">{{ exemption_context.comparison_note }}</p>
+          {% if history_story.growth_text %}
+          <div class="os-tax-rate-verdict os-tax-rate-verdict--why">
+            <span>Why it changed</span>
+            <strong>This bill is {{ history_story.growth_text }}.</strong>
+            {% if history_story.reason_history %}
+            {% with reason=history_story.reason_history.0 %}
+            <p>{{ reason.year_old }} to {{ reason.year_new }}: {{ reason.label|capfirst }} ({{ reason.delta_fmt }}). <a href="#reason-history-heading">See the full year-by-year breakdown &rarr;</a></p>
+            {% endwith %}
+            {% endif %}
+          </div>
+          {% endif %}
         </div>
+        <p class="os-tax-rate-guide__note">{{ exemption_context.comparison_note }}</p>
       </section>
 
       {% if history_story %}
@@ -464,6 +479,31 @@
       point.addEventListener('blur', hide);
     });
   });
+
+  if (root.querySelector('#tax-compare-map-section')) {
+    if (!document.getElementById('os-tcm-leaflet-css')) {
+      const link = document.createElement('link');
+      link.id = 'os-tcm-leaflet-css';
+      link.rel = 'stylesheet';
+      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      document.head.appendChild(link);
+    }
+
+    const runMapScript = () => {
+      const script = document.createElement('script');
+      script.src = '{% static "js/tax_compare_map.js" %}';
+      document.body.appendChild(script);
+    };
+
+    if (window.L) {
+      runMapScript();
+    } else {
+      const leaflet = document.createElement('script');
+      leaflet.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      leaflet.onload = runMapScript;
+      document.body.appendChild(leaflet);
+    }
+  }
 })();
 </script>
 </div>
