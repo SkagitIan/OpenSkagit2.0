@@ -345,13 +345,6 @@
           <p>Open your account to see tracking status, notification settings, and the parcels you are watching.</p>
         </div>
         <a class="os-tax-signup-card__action" href="{% url 'tax_account' %}">Account</a>
-        {% elif request.user.is_authenticated %}
-        <div>
-          <p class="taxshift-eyebrow">Signed in</p>
-          <h2 id="parcel-track-heading">Manage parcel tracking from your account.</h2>
-          <p>Open your account to review watched parcels, tracking status, and notification settings.</p>
-        </div>
-        <a class="os-tax-signup-card__action" href="{% url 'tax_account' %}">Account</a>
         {% else %}
         <div>
           <p class="taxshift-eyebrow">Track the next shift</p>
