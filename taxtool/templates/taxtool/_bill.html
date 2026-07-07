@@ -48,7 +48,7 @@
         </div>
 
         {% if latest_change %}
-        <div class="os-tax-reason-card os-tax-reason-card--primary">
+        <!-- <div class="os-tax-reason-card os-tax-reason-card--primary">
           <span class="os-tax-step__num">Why</span>
           <div class="os-tax-step__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
@@ -65,7 +65,7 @@
             <p>Your property value moved from {{ latest_change.value_old_fmt }} to {{ latest_change.value_new_fmt }}, changing your bill by <strong class="{% if latest_change.value_effect_positive %}os-tax-up{% else %}os-tax-down{% endif %}">{{ latest_change.value_effect_fmt }}</strong>. The effective tax rate changed your bill by <strong class="{% if latest_change.rate_effect_positive %}os-tax-up{% else %}os-tax-down{% endif %}">{{ latest_change.rate_effect_fmt }}</strong>.</p>
             {% endif %}
           </div>
-        </div>
+        </div> -->
 
         <div class="os-tax-why os-tax-why--inside">
           {% if exemption_context.has_exemption %}
@@ -209,8 +209,8 @@
       <section class="os-tax-story-card os-tax-compare">
         <div>
           <h2>How you compare</h2>
-          <p>{{ exemption_context.comparison_intro }}</p>
-          <p class="os-tax-compare__verdict"><strong class="os-tax-compare__verdict-lead os-tax-compare__verdict-lead--{{ comparison.verdict_tone }}">{{ comparison.verdict }}</strong> {{ comparison.verdict_detail }}</p>
+          <p>{{ exemption_context.comparison_intro }}
+          <span class="os-tax-compare__verdict">  <strong class="os-tax-compare__verdict-lead os-tax-compare__verdict-lead--{{ comparison.verdict_tone }}">{{ comparison.verdict }}</strong> {{ comparison.verdict_detail }}</span>
         </div>
 
         <div class="os-tax-rate-ruler-card os-tax-rate-ruler-card--{{ comparison.verdict_tone }}">
