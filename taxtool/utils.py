@@ -686,16 +686,16 @@ def build_comparison_context(
     if not available_rates:
         return {"your": None, "county": None, "levy": None, "items": [], "basis_label": basis_label}
 
-    min_rate = min(available_rates)
-    max_rate = max(available_rates)
-    midpoint = (min_rate + max_rate) / 2
-    half_span = max((max_rate - min_rate) / 2, 0.25)
-    min_rate = midpoint - half_span
-    max_rate = midpoint + half_span
-    span = max_rate - min_rate
+    # County median anchors the ruler's center (50%). Other points are placed by
+    # their dollar distance from it against a fixed, realistic county-wide spread
+    # (not the min/max of just the 2-3 points being plotted), so the gap on the
+    # ruler always means the same thing rather than auto-stretching to fill it.
+    RULER_HALF_RANGE = 3.0
+    ruler_center = float(county_median) if county_median is not None else available_rates[0]
 
     def position(rate):
-        return round(8 + (float(rate) - min_rate) / span * 84, 1)
+        offset = (float(rate) - ruler_center) / RULER_HALF_RANGE * 42
+        return round(max(4, min(96, 50 + offset)), 1)
 
     items = []
     for key, label, rate in raw_items:
@@ -742,8 +742,6 @@ def build_comparison_context(
         "verdict_tone": verdict_tone,
         "basis_label": basis_label,
         "uses_taxable_value": use_taxable,
-        "axis_min_fmt": format_rate(min_rate),
-        "axis_max_fmt": format_rate(max_rate),
     }
 
 

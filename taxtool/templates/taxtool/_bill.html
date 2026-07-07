@@ -213,8 +213,7 @@
         </div>
 
         <div class="os-tax-rate-ruler-card os-tax-rate-ruler-card--{{ comparison.verdict_tone }}">
-          <strong>{{ comparison.verdict }}</strong>
-          <p>{{ comparison.verdict_detail }}</p>
+          <p class="os-tax-rate-ruler-card__verdict"><strong>{{ comparison.verdict }}</strong> {{ comparison.verdict_detail }}</p>
 
           {% if comparison.your and comparison.county %}
           <div class="os-tax-rate-ruler" aria-label="Effective tax rate ruler">
@@ -224,28 +223,10 @@
                 <span class="os-tax-rate-ruler__tag os-tax-rate-ruler__tag--above">County median<br>{{ comparison.county.short_rate_fmt }}</span>
               </span>
               <span class="os-tax-rate-ruler__marker os-tax-rate-ruler__marker--you" style="left: {{ comparison.your.position }}%">
-                <span class="os-tax-rate-ruler__pin os-tax-rate-ruler__pin--you"></span>
-                <span class="os-tax-rate-ruler__tag os-tax-rate-ruler__tag--below">You<br>{{ comparison.your.short_rate_fmt }}</span>
+                <span class="os-tax-rate-ruler__pin os-tax-rate-ruler__pin--you os-tax-rate-ruler__pin--{{ comparison.verdict_tone }}"></span>
+                <span class="os-tax-rate-ruler__tag os-tax-rate-ruler__tag--below os-tax-rate-ruler__tag--{{ comparison.verdict_tone }}">You<br>{{ comparison.your.short_rate_fmt }}</span>
               </span>
             </div>
-            <div class="os-tax-rate-ruler__axis">
-              <span>{{ comparison.axis_min_fmt }}</span>
-              <span>{{ comparison.axis_max_fmt }}</span>
-            </div>
-          </div>
-          {% endif %}
-        </div>
-
-        <div class="os-tax-rate-report" aria-label="Why this bill changed">
-          {% if history_story.growth_text %}
-          <div class="os-tax-rate-verdict os-tax-rate-verdict--why">
-            <span>Why it changed</span>
-            <strong>This bill is {{ history_story.growth_text }}.</strong>
-            {% if history_story.reason_history %}
-            {% with reason=history_story.reason_history.0 %}
-            <p>{{ reason.year_old }} to {{ reason.year_new }}: {{ reason.label|capfirst }} ({{ reason.delta_fmt }}). <a href="#reason-history-heading">See the full year-by-year breakdown &rarr;</a></p>
-            {% endwith %}
-            {% endif %}
           </div>
           {% endif %}
         </div>
