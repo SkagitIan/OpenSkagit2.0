@@ -6577,71 +6577,243 @@ pre {
 
 .os-tax-reason-history__list {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
-.os-tax-reason-history__item {
-  display: grid;
-  grid-template-columns: minmax(180px, 0.9fr) minmax(0, 1.4fr);
-  gap: 18px;
-  align-items: center;
-  padding: 14px;
+.os-tax-reason-history__row {
   border: 1px solid #dbe7f4;
-  border-left-width: 5px;
-  border-radius: 9px;
+  border-radius: 10px;
   background: #ffffff;
+  overflow: hidden;
 }
 
-.os-tax-reason-history__item--value {
-  border-left-color: var(--os-green);
+.os-tax-reason-history__row summary {
+  list-style: none;
+  cursor: pointer;
 }
 
-.os-tax-reason-history__item--rate {
-  border-left-color: var(--os-teal);
+.os-tax-reason-history__row summary::-webkit-details-marker {
+  display: none;
 }
 
-.os-tax-reason-history__item span,
-.os-tax-reason-history__item dt {
-  display: block;
+.os-tax-reason-history__row-summary {
+  display: grid;
+  grid-template-columns: 150px 1fr 1.5fr auto;
+  align-items: stretch;
+  gap: 18px;
+}
+
+.os-tax-reason-history__tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 14px 16px;
+  color: #ffffff;
+}
+
+.os-tax-reason-history__tile--up {
+  background: var(--red);
+}
+
+.os-tax-reason-history__tile--down {
+  background: var(--os-teal-dk);
+}
+
+.os-tax-reason-history__tile-years {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+.os-tax-reason-history__tile-label {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.os-tax-reason-history__tile-amount {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.os-tax-reason-history__reason {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 14px 0;
+  min-width: 0;
+}
+
+.os-tax-reason-history__reason-label {
   color: #64748b;
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
-.os-tax-reason-history__item strong {
-  display: block;
-  margin-top: 4px;
+.os-tax-reason-history__reason-text {
   color: #111827;
   font-size: 15px;
 }
 
-.os-tax-reason-history__item dl {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin: 0;
+.os-tax-reason-history__driver-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 0;
+  min-width: 0;
 }
 
-.os-tax-reason-history__item dd {
-  margin: 3px 0 0;
-  color: #111827;
+.os-tax-reason-history__driver-label {
+  color: #64748b;
+  font-size: 11px;
   font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.os-tax-reason-history__bar {
+  --os-tax-value: #5bbb2f;
+  display: flex;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #eef2f4;
+}
+
+.os-tax-reason-history__bar-seg--value {
+  background: var(--os-tax-value);
+}
+
+.os-tax-reason-history__bar-seg--rate {
+  background: var(--os-teal);
+}
+
+.os-tax-reason-history__driver-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.os-tax-reason-history__driver-labels-value {
+  color: #3f8f1f;
+}
+
+.os-tax-reason-history__driver-labels-rate {
+  color: var(--os-teal-dk);
+}
+
+.os-tax-reason-history__toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  color: var(--os-teal);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.os-tax-reason-history__chevron {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.15s;
+}
+
+.os-tax-reason-history__row[open] .os-tax-reason-history__chevron {
+  transform: rotate(-135deg);
+}
+
+.os-tax-reason-history__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px;
+  border-top: 1px solid rgba(8, 26, 53, 0.08);
+  background: #f8fafb;
+}
+
+.os-tax-reason-history__details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 220px;
+}
+
+.os-tax-reason-history__details-col span {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.os-tax-reason-history__details-col strong {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.os-tax-reason-history__details-col strong i {
+  margin: 0 2px;
+  color: #94a3b8;
+  font-style: normal;
+}
+
+.os-tax-reason-history__details-col strong small {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.os-tax-reason-history__details-col em {
+  margin-top: 2px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.os-tax-reason-history__footnote {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 @media (max-width: 760px) {
-  .os-tax-reason-history__head,
-  .os-tax-reason-history__item {
-    display: grid;
-  }
-
-  .os-tax-reason-history__item {
+  .os-tax-reason-history__row-summary {
     grid-template-columns: 1fr;
   }
 
-  .os-tax-reason-history__item dl {
-    grid-template-columns: 1fr;
+  .os-tax-reason-history__tile {
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+
+  .os-tax-reason-history__reason,
+  .os-tax-reason-history__driver-col {
+    padding: 10px 16px;
+  }
+
+  .os-tax-reason-history__toggle {
+    justify-content: center;
+    padding: 10px 16px;
+    border-top: 1px solid #eef2f4;
   }
 }
 
@@ -6825,44 +6997,24 @@ pre {
 }
 
 /* Main reason history driver drilldown */
-.os-tax-reason-history__item > div:last-child {
-  min-width: 0;
-}
-
-.os-tax-reason-history__drivers {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(8, 26, 53, 0.08);
-}
-
-.os-tax-reason-history__drivers summary {
-  width: fit-content;
-  color: var(--os-teal);
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
 .os-tax-reason-history__driver-list {
   display: grid;
-  gap: 7px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .os-tax-reason-history__driver {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(84px, auto) minmax(112px, auto);
+  grid-template-columns: minmax(0, 1fr) minmax(70px, auto) minmax(100px, auto);
   gap: 10px;
   align-items: baseline;
-  padding: 8px 10px;
-  border-radius: 7px;
-  background: rgba(0, 130, 138, 0.06);
+  padding: 6px 0;
+  border-top: 1px solid rgba(8, 26, 53, 0.06);
 }
 
 .os-tax-reason-history__driver span {
-  color: #334155;
-  font-size: 13px;
-  font-weight: 800;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
 }
@@ -6870,27 +7022,22 @@ pre {
 .os-tax-reason-history__driver strong {
   margin: 0;
   color: #111827;
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 700;
   text-align: right;
 }
 
 .os-tax-reason-history__driver em {
-  color: #64748b;
-  font-size: 12px;
+  color: #94a3b8;
+  font-size: 11px;
   font-style: normal;
   text-align: right;
-}
-
-.os-tax-reason-history__drivers p {
-  margin-top: 8px;
-  color: #64748b;
-  font-size: 12px;
-  line-height: 1.45;
 }
 
 @media (max-width: 760px) {
   .os-tax-reason-history__driver {
     grid-template-columns: 1fr;
+    gap: 2px;
   }
 
   .os-tax-reason-history__driver strong,
@@ -6901,9 +7048,7 @@ pre {
 
 /* Mobile report readability pass */
 .os-tax-reason-history__driver-empty {
-  margin: 10px 0 0;
-  padding-top: 10px;
-  border-top: 1px solid rgba(8, 26, 53, 0.08);
+  margin: 6px 0 0;
   color: #64748b;
   font-size: 12px;
   line-height: 1.45;
@@ -7051,31 +7196,8 @@ pre {
     font-size: 15px;
   }
 
-  .os-tax-reason-history__item {
-    grid-template-columns: 1fr !important;
-    gap: 14px;
-    padding: 14px;
-  }
-
-  .os-tax-reason-history__item dl {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 8px;
-  }
-
-  .os-tax-reason-history__item span,
-  .os-tax-reason-history__item dt {
-    font-size: 10px;
-    letter-spacing: 0.09em;
-  }
-
-  .os-tax-reason-history__item strong {
-    font-size: 18px;
-    line-height: 1.2;
-  }
-
-  .os-tax-reason-history__item dd {
-    font-size: 18px;
-    line-height: 1.2;
+  .os-tax-reason-history__tile-amount {
+    font-size: 22px;
   }
 
   .os-tax-reason-history__driver {

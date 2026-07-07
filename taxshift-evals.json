@@ -1,0 +1,227 @@
+{
+  "generated_at": "2026-07-07T13:43:42Z",
+  "summary": {
+    "parcel_count": 10,
+    "passed_count": 10,
+    "error_count": 0,
+    "warning_count": 2
+  },
+  "results": [
+    {
+      "parcel_number": "P53931",
+      "address": "429 N 15TH ST, MOUNT VERNON, WA 98273",
+      "findings": [],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 6501.25,
+        "parcel_total_taxes": 6501.25,
+        "agency_group_count": 7,
+        "summary_row_count": 11,
+        "history_count": 21,
+        "agency_group_total": 6501.25,
+        "agency_pct_total": 100.0,
+        "agency_source_drift_pct": 0.07690828686791001,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 11.164777606044995,
+        "comparison_actual_rate": 11.164777606044995
+      }
+    },
+    {
+      "parcel_number": "P23134",
+      "address": "17831 BRADSHAW ROAD, MOUNT VERNON, WA 98273",
+      "findings": [
+        {
+          "severity": "warning",
+          "check": "agency.source_drift",
+          "message": "Levy-summary source total needed a large reconciliation adjustment.",
+          "expected": "within $25 or 2%",
+          "actual": {
+            "source_total": 7771.54,
+            "target_total": 9447.32,
+            "difference": 1675.78,
+            "drift_pct": 17.738152195543286
+          }
+        }
+      ],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 9447.32,
+        "parcel_total_taxes": 9447.32,
+        "agency_group_count": 9,
+        "summary_row_count": 12,
+        "history_count": 21,
+        "agency_group_total": 9447.32,
+        "agency_pct_total": 99.9,
+        "agency_source_drift_pct": 17.738152195543286,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 11.102738277118345,
+        "comparison_actual_rate": 11.102738277118345
+      }
+    },
+    {
+      "parcel_number": "P60542",
+      "address": "1307 27TH STREET, ANACORTES, WA 98221",
+      "findings": [],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 3862.17,
+        "parcel_total_taxes": 3862.17,
+        "agency_group_count": 8,
+        "summary_row_count": 12,
+        "history_count": 21,
+        "agency_group_total": 3862.17,
+        "agency_pct_total": 100.1,
+        "agency_source_drift_pct": 0.12946089892469778,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 7.8356055995130856,
+        "comparison_actual_rate": 7.8356055995130856
+      }
+    },
+    {
+      "parcel_number": "P48223",
+      "address": "17846 COLONY ROAD, BOW, WA 98232",
+      "findings": [
+        {
+          "severity": "warning",
+          "check": "agency.source_drift",
+          "message": "Levy-summary source total needed a large reconciliation adjustment.",
+          "expected": "within $25 or 2%",
+          "actual": {
+            "source_total": 3611.37,
+            "target_total": 3816.47,
+            "difference": 205.1,
+            "drift_pct": 5.374076044093102
+          }
+        }
+      ],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 3816.47,
+        "parcel_total_taxes": 3816.47,
+        "agency_group_count": 8,
+        "summary_row_count": 11,
+        "history_count": 21,
+        "agency_group_total": 3816.47,
+        "agency_pct_total": 100.0,
+        "agency_source_drift_pct": 5.374076044093102,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 8.965163260512098,
+        "comparison_actual_rate": 8.965163260512098
+      }
+    },
+    {
+      "parcel_number": "P48854",
+      "address": "",
+      "findings": [],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 59.94,
+        "parcel_total_taxes": 59.94,
+        "agency_group_count": 6,
+        "summary_row_count": 9,
+        "history_count": 21,
+        "agency_group_total": 59.94,
+        "agency_pct_total": 100.1,
+        "agency_source_drift_pct": 10.01001001001001,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 8.210958904109589,
+        "comparison_actual_rate": 8.210958904109589
+      }
+    },
+    {
+      "parcel_number": "P33151",
+      "address": "3910 V AVENUE, ANACORTES, WA 98221",
+      "findings": [],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 5788.78,
+        "parcel_total_taxes": 5788.78,
+        "agency_group_count": 8,
+        "summary_row_count": 12,
+        "history_count": 21,
+        "agency_group_total": 5788.78,
+        "agency_pct_total": 100.1,
+        "agency_source_drift_pct": 0.08637398553753986,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 7.832201325936951,
+        "comparison_actual_rate": 7.83220132593695
+      }
+    },
+    {
+      "parcel_number": "P123471",
+      "address": "1918 TUNDRA LOOP, MOUNT VERNON, WA 98273",
+      "findings": [],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 6600.55,
+        "parcel_total_taxes": 6600.55,
+        "agency_group_count": 7,
+        "summary_row_count": 11,
+        "history_count": 20,
+        "agency_group_total": 6600.55,
+        "agency_pct_total": 100.0,
+        "agency_source_drift_pct": 0.07575126315231306,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 11.164665087956699,
+        "comparison_actual_rate": 11.164665087956697
+      }
+    },
+    {
+      "parcel_number": "P41908",
+      "address": "",
+      "findings": [],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 59.49,
+        "parcel_total_taxes": 59.49,
+        "agency_group_count": 7,
+        "summary_row_count": 10,
+        "history_count": 21,
+        "agency_group_total": 59.49,
+        "agency_pct_total": 100.0,
+        "agency_source_drift_pct": 17.650025214321733,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 9.752459016393443,
+        "comparison_actual_rate": 9.752459016393443
+      }
+    },
+    {
+      "parcel_number": "P57581",
+      "address": "1912 23RD ST, ANACORTES, WA 98221",
+      "findings": [],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 3887.21,
+        "parcel_total_taxes": 3887.21,
+        "agency_group_count": 8,
+        "summary_row_count": 12,
+        "history_count": 21,
+        "agency_group_total": 3887.21,
+        "agency_pct_total": 100.1,
+        "agency_source_drift_pct": 0.1286269586670131,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 7.835537190082644,
+        "comparison_actual_rate": 7.835537190082644
+      }
+    },
+    {
+      "parcel_number": "P36088",
+      "address": "",
+      "findings": [],
+      "metrics": {
+        "tax_year": "2026",
+        "current_tax_amount": 115.47,
+        "parcel_total_taxes": 115.47,
+        "agency_group_count": 7,
+        "summary_row_count": 10,
+        "history_count": 21,
+        "agency_group_total": 115.47,
+        "agency_pct_total": 100.1,
+        "agency_source_drift_pct": 18.706157443491815,
+        "comparison_basis": "assessed_value",
+        "comparison_expected_rate": 10.309821428571428,
+        "comparison_actual_rate": 10.309821428571428
+      }
+    }
+  ]
+}

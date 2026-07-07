@@ -44,7 +44,6 @@ def attach_reason_history_drivers(history_story, shock_history):
                 "effect_fmt": format_delta_currency(line.get("rate_effect")),
             })
         reason["drivers"] = driver_lines
-        reason["driver_note"] = "Estimated using the parcel's current levy code and historical levy-rate files."
     return history_story
 
 

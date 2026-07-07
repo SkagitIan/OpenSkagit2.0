@@ -274,33 +274,45 @@
         <div class="os-tax-reason-history" aria-labelledby="reason-history-heading">
           <div class="os-tax-reason-history__head">
             <h3 id="reason-history-heading">Main Reason History</h3>
-            <p>Each row uses the same value-vs-rate split as the main reason above.</p>
+            <p>How each year's bill changed, and why.</p>
           </div>
           <div class="os-tax-reason-history__list">
             {% for reason in history_story.reason_history %}
-            <article class="os-tax-reason-history__item os-tax-reason-history__item--{{ reason.tone }}">
-              <div>
-                <span>{{ reason.year_old }} to {{ reason.year_new }}</span>
-                <strong>{{ reason.label|capfirst }}</strong>
-              </div>
-              <div>
-                <dl>
-                  <div>
-                    <dt>Bill change</dt>
-                    <dd class="{% if reason.delta_positive %}os-tax-yoy--up{% else %}os-tax-yoy--down{% endif %}">{{ reason.delta_fmt }}</dd>
+            <details class="os-tax-reason-history__row">
+              <summary class="os-tax-reason-history__row-summary">
+                <div class="os-tax-reason-history__tile {% if reason.delta_positive %}os-tax-reason-history__tile--up{% else %}os-tax-reason-history__tile--down{% endif %}">
+                  <span class="os-tax-reason-history__tile-years">{{ reason.year_old }} to {{ reason.year_new }}</span>
+                  <span class="os-tax-reason-history__tile-label">Bill change</span>
+                  <span class="os-tax-reason-history__tile-amount">{{ reason.delta_fmt }}</span>
+                </div>
+                <div class="os-tax-reason-history__reason">
+                  <span class="os-tax-reason-history__reason-label">Main reason</span>
+                  <strong class="os-tax-reason-history__reason-text">{{ reason.label|capfirst }}</strong>
+                </div>
+                <div class="os-tax-reason-history__driver-col">
+                  <span class="os-tax-reason-history__driver-label">Change driver</span>
+                  <div class="os-tax-reason-history__bar">
+                    <span class="os-tax-reason-history__bar-seg os-tax-reason-history__bar-seg--value" style="width:{{ reason.value_bar_pct }}%"></span>
+                    <span class="os-tax-reason-history__bar-seg os-tax-reason-history__bar-seg--rate" style="width:{{ reason.rate_bar_pct }}%"></span>
                   </div>
-                  <div>
-                    <dt>Value effect</dt>
-                    <dd>{{ reason.value_effect_fmt }}</dd>
+                  <div class="os-tax-reason-history__driver-labels">
+                    <span class="os-tax-reason-history__driver-labels-value">Value: {{ reason.value_effect_fmt }}</span>
+                    <span class="os-tax-reason-history__driver-labels-rate">Rate: {{ reason.rate_effect_fmt }}</span>
                   </div>
-                  <div>
-                    <dt>Rate effect</dt>
-                    <dd>{{ reason.rate_effect_fmt }}</dd>
-                  </div>
-                </dl>
-                {% if reason.drivers %}
-                <details class="os-tax-reason-history__drivers">
-                  <summary>Show rate drivers</summary>
+                </div>
+                <span class="os-tax-reason-history__toggle">Show details<i class="os-tax-reason-history__chevron" aria-hidden="true"></i></span>
+              </summary>
+              <div class="os-tax-reason-history__details">
+                <div class="os-tax-reason-history__details-col">
+                  <span>Assessed value</span>
+                  <strong>{{ reason.value_old_fmt }} <i aria-hidden="true">&rarr;</i> {{ reason.value_new_fmt }}</strong>
+                  <em class="{% if reason.value_delta_positive %}os-tax-yoy--up{% else %}os-tax-yoy--down{% endif %}">{{ reason.value_delta_pct_fmt }}</em>
+                </div>
+                <div class="os-tax-reason-history__details-col">
+                  <span>Effective tax rate</span>
+                  <strong>{{ reason.rate_old_fmt }} <i aria-hidden="true">&rarr;</i> {{ reason.rate_new_fmt }} <small>/ $1,000</small></strong>
+                  <em class="{% if reason.rate_effect_positive %}os-tax-yoy--up{% else %}os-tax-yoy--down{% endif %}">{{ reason.rate_delta_short_fmt }}</em>
+                  {% if reason.drivers %}
                   <div class="os-tax-reason-history__driver-list">
                     {% for driver in reason.drivers %}
                     <div class="os-tax-reason-history__driver">
@@ -310,15 +322,15 @@
                     </div>
                     {% endfor %}
                   </div>
-                  <p>{{ reason.driver_note }}</p>
-                </details>
-                {% else %}
-                <p class="os-tax-reason-history__driver-empty">Rate-driver detail is not available for this year pair.</p>
-                {% endif %}
+                  {% else %}
+                  <p class="os-tax-reason-history__driver-empty">No rate-driver detail for this year pair.</p>
+                  {% endif %}
+                </div>
               </div>
-            </article>
+            </details>
             {% endfor %}
           </div>
+          <p class="os-tax-reason-history__footnote">Bill, value, and rate effects are estimated using the parcel's current levy code and historical levy-rate files.</p>
         </div>
         {% endif %}
       </section>

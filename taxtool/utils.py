@@ -574,6 +574,10 @@ def build_history_story(history_rows):
     for breakdown in compute_yoy_breakdown(sorted(rows, key=lambda row: int(row["tax_year"]), reverse=True))[:7]:
         reason = describe_yoy_reason(breakdown)
         rate_delta = breakdown["rate_b"] - breakdown["rate_a"]
+        value_mag = abs(breakdown["value_effect"])
+        rate_mag = abs(breakdown["rate_effect"])
+        total_mag = value_mag + rate_mag
+        value_bar_pct = round(value_mag / total_mag * 100, 1) if total_mag else 50
         reason_history.append({
             "year_new": breakdown["year_b"],
             "year_old": breakdown["year_a"],
@@ -583,9 +587,19 @@ def build_history_story(history_rows):
             "delta_fmt": format_delta_currency(breakdown["delta_tax"]),
             "delta_positive": breakdown["delta_tax"] >= 0,
             "value_effect_fmt": format_delta_currency(breakdown["value_effect"]),
+            "value_effect_positive": breakdown["value_effect"] >= 0,
             "rate_effect_fmt": format_delta_currency(breakdown["rate_effect"]),
+            "rate_effect_positive": breakdown["rate_effect"] >= 0,
+            "value_bar_pct": value_bar_pct,
+            "rate_bar_pct": round(100 - value_bar_pct, 1),
+            "value_old_fmt": format_currency(breakdown["val_a"]),
+            "value_new_fmt": format_currency(breakdown["val_b"]),
             "value_delta_fmt": format_delta_currency(breakdown["delta_val"]),
             "value_delta_pct_fmt": format_delta_pct(breakdown["delta_val_pct"]),
+            "value_delta_positive": breakdown["delta_val"] >= 0,
+            "rate_old_fmt": f"${breakdown['rate_a']:.2f}",
+            "rate_new_fmt": f"${breakdown['rate_b']:.2f}",
+            "rate_delta_short_fmt": f"{'+' if rate_delta >= 0 else '-'}{abs(rate_delta):.2f}",
             "rate_delta_fmt": f"{'+' if rate_delta >= 0 else '-'}{abs(rate_delta):.2f} per $1,000",
         })
     first = rows[0]
