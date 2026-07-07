@@ -219,8 +219,6 @@ def tax_search(request):
     q = request.GET.get("q", "").strip()
     mode = request.GET.get("mode", "").strip()
     parcels = search_parcels(q) if len(q) >= 2 else []
-    if parcels:
-        cache_searched_parcels(parcels, query=q, source="search_result")
     template_name = "taxtool/_signup_suggestions.html" if mode == "signup" else "taxtool/_suggestions.html"
     return render(request, template_name, {"parcels": parcels, "q": q})
 

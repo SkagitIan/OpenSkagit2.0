@@ -8,15 +8,81 @@ def _dictfetchall(cursor):
     return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
 
-def search_parcels(q):
-    """Return up to 8 active parcels matching address or parcel number."""
-    q = q.strip()
-    if not q:
-        return []
-    pattern = f"%{q}%"
+_TOKEN_ALIASES = {
+    "N": ["N", "NORTH"],
+    "NORTH": ["NORTH", "N"],
+    "S": ["S", "SOUTH"],
+    "SOUTH": ["SOUTH", "S"],
+    "E": ["E", "EAST"],
+    "EAST": ["EAST", "E"],
+    "W": ["W", "WEST"],
+    "WEST": ["WEST", "W"],
+    "AVE": ["AVE", "AVENUE"],
+    "AVENUE": ["AVENUE", "AVE"],
+    "BLVD": ["BLVD", "BOULEVARD"],
+    "BOULEVARD": ["BOULEVARD", "BLVD"],
+    "DR": ["DR", "DRIVE"],
+    "DRIVE": ["DRIVE", "DR"],
+    "HWY": ["HWY", "HIGHWAY"],
+    "HIGHWAY": ["HIGHWAY", "HWY"],
+    "LN": ["LN", "LANE"],
+    "LANE": ["LANE", "LN"],
+    "PL": ["PL", "PLACE"],
+    "PLACE": ["PLACE", "PL"],
+    "RD": ["RD", "ROAD"],
+    "ROAD": ["ROAD", "RD"],
+    "ST": ["ST", "STREET"],
+    "STREET": ["STREET", "ST"],
+}
+
+
+def _search_tokens(q):
+    separators = "#,.;:/\\|()[]{}"
+    normalized = q.upper()
+    for char in separators:
+        normalized = normalized.replace(char, " ")
+    return [token for token in normalized.split() if token]
+
+
+def _token_variants(token):
+    return _TOKEN_ALIASES.get(token, [token])
+
+
+def _token_clause(field_sql, token, *, prefix=False):
+    variants = _token_variants(token)
+    operator = "LIKE"
+    clauses = [f"{field_sql} {operator} %s" for _ in variants]
+    if prefix:
+        params = [f"{variant}%" for variant in variants]
+    else:
+        params = [f"%{variant}%" for variant in variants]
+    return "(" + " OR ".join(clauses) + ")", params
+
+
+def _street_name_clause(tokens):
+    clauses = []
+    params = []
+    for token in tokens:
+        clause, clause_params = _token_clause("upper(situs_street_name)", token)
+        clauses.append(clause)
+        params.extend(clause_params)
+    return " AND ".join(clauses), params
+
+def _prefix_upper_bound(prefix):
+    if not prefix:
+        return None
+    if prefix.startswith("P") and prefix[1:].isdigit():
+        return "P" + str(int(prefix[1:]) + 1).zfill(len(prefix) - 1)
+    return prefix[:-1] + chr(ord(prefix[-1]) + 1)
+
+
+def _search_parcels_by_number(parcel_query):
+    upper_bound = _prefix_upper_bound(parcel_query)
+    range_filter = "parcel_number >= %s AND parcel_number < %s" if upper_bound else "parcel_number = %s"
+    params = [parcel_query, upper_bound] if upper_bound else [parcel_query]
     with connection.cursor() as cursor:
         cursor.execute(
-            """
+            f"""
             SELECT
                 parcel_number,
                 situs_street_number,
@@ -24,18 +90,95 @@ def search_parcels(q):
                 situs_city_state_zip
             FROM skagit_parcels
             WHERE inactive_date IS NULL
-              AND (
-                    parcel_number ILIKE %s
-                 OR situs_street_name ILIKE %s
-                 OR CONCAT(situs_street_number, ' ', situs_street_name) ILIKE %s
-              )
-            ORDER BY situs_street_name, situs_street_number
-            LIMIT 8
+              AND {range_filter}
+            ORDER BY parcel_number
+            LIMIT 12
             """,
-            [pattern, pattern, pattern],
+            params,
         )
         return _dictfetchall(cursor)
 
+
+def search_parcels(q):
+    """Return active parcels matching parcel number or flexible address tokens."""
+    q = q.strip()
+    if not q:
+        return []
+
+    tokens = _search_tokens(q)
+    if not tokens:
+        return []
+
+    normalized_query = " ".join(tokens)
+    parcel_query = normalized_query.replace(" ", "")
+    if parcel_query.startswith("P") and len(parcel_query) >= 2:
+        return _search_parcels_by_number(parcel_query)
+
+    numbered_address = tokens[0].isdigit() and len(tokens) > 1
+    address_expr = "upper(concat_ws(' ', situs_street_number, situs_street_name, situs_city_state_zip))"
+    street_expr = "upper(concat_ws(' ', situs_street_number, situs_street_name))"
+    where_parts = []
+    params = []
+
+    if numbered_address:
+        street_clause, street_params = _street_name_clause(tokens[1:])
+        where_parts.append(f"situs_street_number LIKE %s AND {street_clause}")
+        params.append(f"{tokens[0]}%")
+        params.extend(street_params)
+    else:
+        where_parts.append(f"{address_expr} LIKE %s")
+        params.append(f"%{normalized_query}%")
+
+    if parcel_query.isdigit() and len(parcel_query) >= 3:
+        where_parts.append("parcel_number LIKE %s")
+        params.append(f"P{parcel_query}%")
+
+    token_clauses = []
+    for token in tokens:
+        if token.isdigit():
+            token_clauses.append("situs_street_number LIKE %s")
+            params.append(f"{token}%")
+        else:
+            clause, clause_params = _token_clause(address_expr, token)
+            token_clauses.append(clause)
+            params.extend(clause_params)
+    if token_clauses:
+        where_parts.append("(" + " AND ".join(token_clauses) + ")")
+
+    where_sql = " OR ".join(f"({part})" for part in where_parts)
+
+    with connection.cursor() as cursor:
+        cursor.execute(
+            f"""
+            SELECT
+                parcel_number,
+                situs_street_number,
+                situs_street_name,
+                situs_city_state_zip
+            FROM skagit_parcels
+            WHERE inactive_date IS NULL
+              AND ({where_sql})
+            ORDER BY
+                CASE
+                    WHEN {street_expr} = %s THEN 0
+                    WHEN {street_expr} LIKE %s THEN 1
+                    WHEN {address_expr} LIKE %s THEN 2
+                    ELSE 3
+                END,
+                situs_street_name NULLS LAST,
+                NULLIF(regexp_replace(coalesce(situs_street_number, ''), '\\D', '', 'g'), '')::int NULLS LAST,
+                situs_street_number NULLS LAST,
+                parcel_number
+            LIMIT 12
+            """,
+            params
+            + [
+                normalized_query,
+                f"{normalized_query}%",
+                f"%{normalized_query}%",
+            ],
+        )
+        return _dictfetchall(cursor)
 
 def get_parcel(parcel_number):
     """Return a single active parcel record, or None."""
