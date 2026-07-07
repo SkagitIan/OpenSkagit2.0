@@ -40,7 +40,8 @@ def _font(size, bold=False):
 
 FONT_BRAND = _font(34, True)
 FONT_KICKER = _font(23, True)
-FONT_H1 = _font(54, True)
+FONT_H1 = _font(48, True)
+FONT_ADDRESS = _font(43, True)
 FONT_H2 = _font(40, True)
 FONT_BODY = _font(27)
 FONT_BODY_BOLD = _font(27, True)
@@ -142,10 +143,10 @@ def render_parcel_og_image(parcel_id):
     draw.rounded_rectangle((846, 66, 1096, 116), radius=16, fill="#f4fbfc", outline="#a7dbe3", width=2)
     draw.text((875, 78), f"Parcel {parcel_number}", font=FONT_MONO, fill=TEAL_DARK)
 
-    y = 176
-    for line in _wrap_text(draw, address.upper(), FONT_H1, 720, max_lines=2):
-        draw.text((86, y), line, font=FONT_H1, fill=INK)
-        y += 62
+    y = 178
+    for line in _wrap_text(draw, address.upper(), FONT_ADDRESS, 545, max_lines=3):
+        draw.text((86, y), line, font=FONT_ADDRESS, fill=INK)
+        y += 50
 
     latest = context.get("latest_change") or {}
     tax_year = latest.get("year_new") or parcel.get("tax_year") or "Current"
@@ -155,23 +156,25 @@ def render_parcel_og_image(parcel_id):
     if latest.get("delta_positive"):
         change_color = RED
 
-    draw.text((86, 344), f"{tax_year} Tax Shift", font=FONT_KICKER, fill=MUTED)
-    draw.text((86, 382), delta, font=FONT_H2, fill=change_color)
+    draw.text((86, 356), f"{tax_year} Tax Shift", font=FONT_KICKER, fill=MUTED)
+    draw.text((86, 394), delta, font=FONT_H2, fill=change_color)
     if pct:
-        draw.text((250, 393), f"/ {pct}", font=FONT_BODY_BOLD, fill=change_color)
+        draw.text((250, 405), f"/ {pct}", font=FONT_BODY_BOLD, fill=change_color)
 
     reason = latest.get("main_reason_heading") or (context.get("tax_shock") or {}).get("driver_label") or "Property tax report"
-    draw.rounded_rectangle((78, 476, 540, 540), radius=16, fill="#f6fbfb", outline=LINE, width=2)
-    draw.text((104, 496), _fit_text(draw, reason, FONT_BODY_BOLD, 410), font=FONT_BODY_BOLD, fill=INK)
+    draw.rounded_rectangle((78, 486, 588, 542), radius=16, fill="#f6fbfb", outline=LINE, width=2)
+    draw.text((104, 502), _fit_text(draw, "Main reason: " + reason, FONT_SMALL, 438), font=FONT_SMALL, fill=INK)
 
-    draw.text((675, 205), "Main drivers", font=FONT_KICKER, fill=MUTED)
-    driver_y = 254
+    draw.text((680, 192), "Main drivers", font=FONT_KICKER, fill=MUTED)
+    driver_y = 242
     for name, value in _driver_rows(context):
-        draw.rounded_rectangle((660, driver_y, 1086, driver_y + 70), radius=14, fill="#f8fbfc", outline=LINE, width=1)
-        draw.text((684, driver_y + 18), _fit_text(draw, name, FONT_SMALL, 270), font=FONT_SMALL, fill=INK)
+        draw.rounded_rectangle((660, driver_y, 1088, driver_y + 74), radius=14, fill="#f8fbfc", outline=LINE, width=1)
+        draw.text((684, driver_y + 20), _fit_text(draw, name, FONT_SMALL, 250), font=FONT_SMALL, fill=INK)
         value_color = RED if str(value).startswith("+") else TEAL_DARK
-        draw.text((958, driver_y + 18), _fit_text(draw, value, FONT_SMALL, 105), font=FONT_SMALL, fill=value_color)
-        driver_y += 86
+        value_text = _fit_text(draw, value, FONT_SMALL, 112)
+        value_w, _ = _text_size(draw, value_text, FONT_SMALL)
+        draw.text((1062 - value_w, driver_y + 20), value_text, font=FONT_SMALL, fill=value_color)
+        driver_y += 88
 
     draw.line((86, 560, 1114, 560), fill=LINE, width=2)
     draw.text((86, 574), "Public assessor, levy, and tax-history data for Skagit County", font=FONT_SMALL, fill=MUTED)
