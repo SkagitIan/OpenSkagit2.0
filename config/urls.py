@@ -24,6 +24,11 @@ def root_home(request):
 
 
 
+
+
+def sentry_debug(request):
+    division_by_zero = 1 / 0
+
 def robots_txt(request):
     site_url = _taxshift_site_url()
     body = "\n".join([
@@ -75,3 +80,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("health/", health),
 ]
+
+
+if getattr(settings, "SENTRY_DEBUG_ROUTE", False):
+    urlpatterns.append(path("sentry-debug/", sentry_debug, name="sentry_debug"))

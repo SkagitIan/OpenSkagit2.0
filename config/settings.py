@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 import dj_database_url
 import environ
+import sentry_sdk
 from dotenv import load_dotenv
 from django.core.exceptions import ImproperlyConfigured
 
@@ -18,6 +19,19 @@ SECRET_KEY = env(
 )
 
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
+SENTRY_DSN = env("SENTRY_DSN", default="")
+SENTRY_ENVIRONMENT = env("SENTRY_ENVIRONMENT", default="production" if not DEBUG else "development")
+SENTRY_SEND_DEFAULT_PII = env.bool("SENTRY_SEND_DEFAULT_PII", default=True)
+SENTRY_TRACES_SAMPLE_RATE = env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0)
+SENTRY_DEBUG_ROUTE = env.bool("SENTRY_DEBUG_ROUTE", default=False)
+
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        environment=SENTRY_ENVIRONMENT,
+        send_default_pii=SENTRY_SEND_DEFAULT_PII,
+        traces_sample_rate=SENTRY_TRACES_SAMPLE_RATE,
+    )
 
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "*").split(",") if host.strip()]
 TAXSHIFT_HOSTS = {"taxshift.co", "www.taxshift.co"}
