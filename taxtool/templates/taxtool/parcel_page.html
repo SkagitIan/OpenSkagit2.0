@@ -3,6 +3,17 @@
 
 {% block extra_head %}
 <style>body { background: #f6f8f8; }</style>
+{% if parcel %}
+<meta property="og:title" content="TaxShift for Parcel {{ parcel.parcel_number }}">
+<meta property="og:description" content="See how this property's taxes shifted and which districts drove the change.">
+<meta property="og:image" content="https://taxshift.co/og/parcel/{{ parcel.parcel_number }}.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TaxShift for Parcel {{ parcel.parcel_number }}">
+<meta name="twitter:description" content="See how this property's taxes shifted and which districts drove the change.">
+<meta name="twitter:image" content="https://taxshift.co/og/parcel/{{ parcel.parcel_number }}.png">
+{% endif %}
 {% endblock %}
 
 {% block content %}

@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.conf import settings
 from core.views import home as core_home
 from opportunity.views import staff_redirect
-from taxtool.views import tax_home
+from taxtool.views import tax_home, tax_parcel_og_image
 
 
 def _taxshift_site_url():
@@ -68,6 +68,7 @@ urlpatterns = [
     path("", root_home, name="home"),
     path("robots.txt", robots_txt, name="robots_txt"),
     path("sitemap.xml", sitemap_xml, name="sitemap_xml"),
+    path("og/parcel/<str:parcel_id>.png", tax_parcel_og_image, name="tax_parcel_og_image"),
     path("", include("core.urls")),
     path("", include("ask_agent.urls")),
     path("", include("land_ledger.urls")),

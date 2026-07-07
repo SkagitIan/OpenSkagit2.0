@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
+from django.http import HttpResponse
 from django.db.models import F, Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods, require_POST
@@ -25,6 +26,7 @@ from .queries import (
     get_parcel_history,
     get_data_methodology_stats,
 )
+from .og_images import render_parcel_og_image
 from .report import build_tax_report_context
 from .utils import (
     format_currency,
@@ -125,6 +127,13 @@ def cache_searched_parcels(parcels, query="", source="search_result"):
             ParcelSearchCache.objects.filter(pk=cache.pk).update(hit_count=1)
         else:
             ParcelSearchCache.objects.filter(pk=cache.pk).update(hit_count=F("hit_count") + 1)
+
+
+def tax_parcel_og_image(request, parcel_id):
+    image = render_parcel_og_image(parcel_id)
+    response = HttpResponse(image, content_type="image/png")
+    response["Cache-Control"] = "public, max-age=86400, stale-while-revalidate=604800"
+    return response
 
 def tax_home(request):
     return render(request, "taxtool/base.html", _taxshift_context())

@@ -15,3 +15,4 @@ pyshp
 pyproj
 pypdf
 sentry-sdk
+Pillow>=12,<13
