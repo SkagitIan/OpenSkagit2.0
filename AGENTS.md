@@ -2,6 +2,16 @@
 
 You are working inside OpenSkagit, a Django application prepared for Railway.
 
+## Windows Editing Rules
+
+This repo often runs in a Windows managed sandbox where `apply_patch` can fail with:
+
+`windows unelevated restricted-token sandbox cannot enforce split writable root sets directly`
+
+When that happens, do not retry `apply_patch`. Use a narrowly scoped PowerShell edit with repo-relative paths, then immediately run `git diff -- <changed files>` to verify the exact change.
+
+Keep sandbox/tool fallback chatter out of user-facing progress updates unless the user asks. Report only the final relevant outcome.
+
 ## Stack
 
 - Django 5
