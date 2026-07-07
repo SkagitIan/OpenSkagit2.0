@@ -210,11 +210,10 @@
         <div>
           <h2>How you compare</h2>
           <p>{{ exemption_context.comparison_intro }}</p>
+          <p class="os-tax-compare__verdict"><strong class="os-tax-compare__verdict-lead os-tax-compare__verdict-lead--{{ comparison.verdict_tone }}">{{ comparison.verdict }}</strong> {{ comparison.verdict_detail }}</p>
         </div>
 
         <div class="os-tax-rate-ruler-card os-tax-rate-ruler-card--{{ comparison.verdict_tone }}">
-          <p class="os-tax-rate-ruler-card__verdict"><strong>{{ comparison.verdict }}</strong> {{ comparison.verdict_detail }}</p>
-
           {% if comparison.your and comparison.county %}
           <div class="os-tax-rate-ruler" aria-label="Effective tax rate ruler">
             <div class="os-tax-rate-ruler__track">
@@ -338,7 +337,7 @@
       </section>
       {% endif %}
 
-      <section class="os-tax-story-card os-tax-signup-card taxshift-signup{% if parcel_is_tracked or request.user.is_authenticated %} os-tax-signup-card--tracked{% endif %}" aria-labelledby="parcel-track-heading">
+      <section class="os-tax-story-card os-tax-signup-card taxshift-signup{% if parcel_is_tracked %} os-tax-signup-card--tracked{% endif %}" aria-labelledby="parcel-track-heading">
         {% if parcel_is_tracked %}
         <div>
           <p class="taxshift-eyebrow">Tracking active</p>
