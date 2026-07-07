@@ -7764,3 +7764,82 @@ pre {
   .os-dash__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .os-dash__cols { grid-template-columns: minmax(0, 1fr); }
 }
+/* Parcel report mobile reason-card polish */
+@media (max-width: 640px) {
+  .os-tax-why--inside {
+    gap: 10px;
+  }
+
+  .os-tax-why--inside .os-tax-step,
+  .os-tax-why--inside .os-tax-step--rate {
+    grid-template-columns: 42px minmax(0, 1fr) !important;
+    gap: 10px 12px;
+    align-items: start;
+    padding: 14px;
+    border-radius: 8px;
+  }
+
+  .os-tax-why--inside .os-tax-step__num,
+  .os-tax-why--inside .os-tax-step--rate .os-tax-step__num {
+    grid-column: 1 !important;
+    grid-row: 1;
+    width: 34px;
+    height: 34px;
+    justify-self: start;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .os-tax-why--inside .os-tax-step__icon {
+    grid-column: 1 !important;
+    grid-row: 2;
+    width: 42px;
+    height: 42px;
+    justify-self: start;
+  }
+
+  .os-tax-why--inside .os-tax-step__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .os-tax-why--inside .os-tax-step__body {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    min-width: 0;
+  }
+
+  .os-tax-why--inside .os-tax-step h2,
+  .os-tax-why--inside .os-tax-step--rate h2 {
+    margin-bottom: 6px;
+    font-size: 21px;
+    line-height: 1.08;
+  }
+
+  .os-tax-why--inside .os-tax-step p {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .os-tax-why--inside .os-tax-step__effect,
+  .os-tax-why--inside .os-tax-step--rate .os-tax-step__effect {
+    grid-column: 2 !important;
+    grid-row: 3;
+    width: 100%;
+    margin-top: 2px;
+    padding: 0;
+    background: transparent;
+  }
+
+  .os-tax-why--inside .os-tax-step__effect strong,
+  .os-tax-why--inside .os-tax-step--rate .os-tax-step__effect strong {
+    font-size: 20px;
+    line-height: 1.15;
+  }
+
+  .os-tax-why--inside .os-tax-step__effect span {
+    margin-top: 3px;
+    font-size: 14px;
+  }
+}
