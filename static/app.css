@@ -3773,145 +3773,116 @@ pre {
   background: #f8fafc;
 }
 
-.os-tax-rate-verdict__yours {
-  margin-top: 8px;
-  color: #52647a;
-  font-size: 13px;
-  font-weight: 600;
-}
-
 .os-tax-rate-guide__note {
   margin: 0 !important;
   color: #64748b !important;
   font-size: 13px;
 }
 
-.os-tax-compare-map-section {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.os-tax-compare-map-wrap {
-  position: relative;
-  height: 360px;
-  border-radius: 10px;
-  overflow: hidden;
+.os-tax-rate-ruler-card {
+  padding: 18px;
   border: 1px solid #dbe7f4;
+  border-radius: 8px;
+  background: #f8fbff;
 }
 
-.os-tax-compare-map {
-  width: 100%;
-  height: 100%;
-  background: #eef2f4;
-}
-
-.os-tax-compare-map__loading {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  background: #eef2f4;
-  color: #64748b;
-  font-size: 13px;
-  pointer-events: none;
-}
-
-.os-tax-compare-map__loading[hidden] {
-  display: none;
-}
-
-.os-tax-compare-map__legend {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.os-tax-compare-map__legend-bar {
-  position: relative;
-  flex: 1;
-  height: 8px;
-  margin-top: 14px;
-}
-
-.os-tax-compare-map__legend-gradient {
+.os-tax-rate-ruler-card strong {
   display: block;
-  height: 100%;
-  border-radius: 999px;
-}
-
-.os-tax-compare-map__legend-tick {
-  position: absolute;
-  bottom: 100%;
-  transform: translateX(-50%);
-  margin-bottom: 4px;
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: #0b2146;
-  color: #ffffff;
-  font-size: 10px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.os-tax-compare-map__legend-tick::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  width: 1px;
-  height: 8px;
-  background: #0b2146;
-  transform: translateX(-50%);
-}
-
-.os-tcm-popup strong {
-  display: block;
-  margin-bottom: 2px;
   color: #0b2146;
   font-family: "DM Sans", sans-serif;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.os-tax-rate-ruler-card p {
+  margin-top: 6px;
+  color: #52647a;
   font-size: 14px;
 }
 
-.os-tcm-popup__code {
-  display: block;
-  color: #64748b;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+.os-tax-rate-ruler-card--typical {
+  border-color: #cfe3d4;
+  background: #f2faf4;
 }
 
-.os-tcm-popup__rate {
-  margin: 8px 0 2px;
-  font-size: 16px;
-  font-weight: 800;
-  color: #0b2146;
+.os-tax-rate-ruler-card--high {
+  border-color: #f4d0cb;
+  background: #fff6f4;
 }
 
-.os-tcm-popup__rate span {
-  font-size: 11px;
-  font-weight: 500;
-  color: #64748b;
+.os-tax-rate-ruler-card--low {
+  border-color: #cde7f1;
+  background: #f2fbff;
 }
 
-.os-tcm-popup__tone {
-  display: inline-block;
-  margin: 0;
-  padding: 2px 8px;
+.os-tax-rate-ruler {
+  margin-top: 18px;
+}
+
+.os-tax-rate-ruler__track {
+  position: relative;
+  height: 6px;
+  margin: 56px 0 48px;
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
+  background: linear-gradient(90deg, #cfe3d4 0%, #e8dfb8 50%, #f4d0cb 100%);
 }
 
-.os-tcm-popup__note {
-  margin: 8px 0 0;
-  color: #64748b;
-  font-size: 12px;
+.os-tax-rate-ruler__marker {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.os-tax-rate-ruler__pin {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(11, 33, 70, 0.35);
+  background: #5a6b7d;
+}
+
+.os-tax-rate-ruler__pin--you {
+  width: 18px;
+  height: 18px;
+  background: #0b2146;
+}
+
+.os-tax-rate-ruler__tag {
+  position: absolute;
+  left: 50%;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #5a6b7d;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.os-tax-rate-ruler__tag--above {
+  bottom: calc(100% + 10px);
+}
+
+.os-tax-rate-ruler__tag--below {
+  top: calc(100% + 10px);
+}
+
+.os-tax-rate-ruler__marker--you .os-tax-rate-ruler__tag {
+  background: #0b2146;
+}
+
+.os-tax-rate-ruler__axis {
+  display: flex;
+  justify-content: space-between;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .os-tax-line-chart {
@@ -4060,10 +4031,6 @@ pre {
   .os-tax-parcel-banner,
   .os-tax-compare {
     grid-template-columns: 1fr;
-  }
-
-  .os-tax-compare-map-wrap {
-    height: 280px;
   }
 
   .os-tax-money__content {

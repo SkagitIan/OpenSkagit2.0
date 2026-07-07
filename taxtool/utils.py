@@ -742,6 +742,8 @@ def build_comparison_context(
         "verdict_tone": verdict_tone,
         "basis_label": basis_label,
         "uses_taxable_value": use_taxable,
+        "axis_min_fmt": format_rate(min_rate),
+        "axis_max_fmt": format_rate(max_rate),
     }
 
 

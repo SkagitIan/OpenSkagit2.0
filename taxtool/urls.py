@@ -18,6 +18,5 @@ urlpatterns = [
     path("terms/", views.tax_terms, name="tax_terms"),
     path("parcel/<str:parcel_number>/", views.tax_parcel, name="tax_parcel"),
     path("parcel/<str:parcel_number>/yoy/", views.tax_yoy, name="tax_yoy"),
-    path("api/levy-areas/", views.tax_levy_area_map, name="tax_levy_area_map"),
     path("agency/<str:mcag>/", views.tax_agency, name="tax_agency"),
 ]

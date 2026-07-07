@@ -1,5 +1,4 @@
 {% load taxtool_extras %}
-{% load static %}
 <div id="main-content">
   <section class="os-tax-results os-tax-report">
     <div class="os-tax-report__top">
@@ -213,30 +212,31 @@
           <p>{{ exemption_context.comparison_intro }}</p>
         </div>
 
-        <div id="tax-compare-map-section" class="os-tax-compare-map-section" data-levy-areas-url="{% url 'tax_levy_area_map' %}" data-current-levy-code="{{ parcel.levy_code|default:'' }}">
-          <div class="os-tax-compare-map-wrap">
-            <div id="os-tcm-map" class="os-tax-compare-map"></div>
-            <p id="os-tcm-loading" class="os-tax-compare-map__loading">Loading the county comparison map&hellip;</p>
-          </div>
-          <div class="os-tax-compare-map__legend">
-            <span id="os-tcm-legend-min">&nbsp;</span>
-            <div class="os-tax-compare-map__legend-bar">
-              <span id="os-tcm-legend-gradient" class="os-tax-compare-map__legend-gradient"></span>
-              <span id="os-tcm-legend-median" class="os-tax-compare-map__legend-tick"></span>
+        <div class="os-tax-rate-ruler-card os-tax-rate-ruler-card--{{ comparison.verdict_tone }}">
+          <strong>{{ comparison.verdict }}</strong>
+          <p>{{ comparison.verdict_detail }}</p>
+
+          {% if comparison.your and comparison.county %}
+          <div class="os-tax-rate-ruler" aria-label="Effective tax rate ruler">
+            <div class="os-tax-rate-ruler__track">
+              <span class="os-tax-rate-ruler__marker os-tax-rate-ruler__marker--county" style="left: {{ comparison.county.position }}%">
+                <span class="os-tax-rate-ruler__pin os-tax-rate-ruler__pin--county"></span>
+                <span class="os-tax-rate-ruler__tag os-tax-rate-ruler__tag--above">County median<br>{{ comparison.county.short_rate_fmt }}</span>
+              </span>
+              <span class="os-tax-rate-ruler__marker os-tax-rate-ruler__marker--you" style="left: {{ comparison.your.position }}%">
+                <span class="os-tax-rate-ruler__pin os-tax-rate-ruler__pin--you"></span>
+                <span class="os-tax-rate-ruler__tag os-tax-rate-ruler__tag--below">You<br>{{ comparison.your.short_rate_fmt }}</span>
+              </span>
             </div>
-            <span id="os-tcm-legend-max">&nbsp;</span>
+            <div class="os-tax-rate-ruler__axis">
+              <span>{{ comparison.axis_min_fmt }}</span>
+              <span>{{ comparison.axis_max_fmt }}</span>
+            </div>
           </div>
+          {% endif %}
         </div>
 
-        <div class="os-tax-rate-report" aria-label="Effective tax rate comparison">
-          <div class="os-tax-rate-verdict os-tax-rate-verdict--{{ comparison.verdict_tone }}">
-            <span>About typical</span>
-            <strong>{{ comparison.verdict }}</strong>
-            <p>{{ comparison.verdict_detail }}</p>
-            {% if comparison.your %}
-            <p class="os-tax-rate-verdict__yours">Your rate: {{ comparison.your.short_rate_fmt }} per $1,000</p>
-            {% endif %}
-          </div>
+        <div class="os-tax-rate-report" aria-label="Why this bill changed">
           {% if history_story.growth_text %}
           <div class="os-tax-rate-verdict os-tax-rate-verdict--why">
             <span>Why it changed</span>
@@ -479,31 +479,6 @@
       point.addEventListener('blur', hide);
     });
   });
-
-  if (root.querySelector('#tax-compare-map-section')) {
-    if (!document.getElementById('os-tcm-leaflet-css')) {
-      const link = document.createElement('link');
-      link.id = 'os-tcm-leaflet-css';
-      link.rel = 'stylesheet';
-      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-      document.head.appendChild(link);
-    }
-
-    const runMapScript = () => {
-      const script = document.createElement('script');
-      script.src = '{% static "js/tax_compare_map.js" %}';
-      document.body.appendChild(script);
-    };
-
-    if (window.L) {
-      runMapScript();
-    } else {
-      const leaflet = document.createElement('script');
-      leaflet.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-      leaflet.onload = runMapScript;
-      document.body.appendChild(leaflet);
-    }
-  }
 })();
 </script>
 </div>
