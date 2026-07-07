@@ -7,24 +7,7 @@
 
 {% block content %}
 <div class="os-tax-v2 os-tax-v2--report-page">
-  <header class="taxshift-nav taxshift-nav--report">
-    <a href="https://taxshift.co/" class="taxshift-brand" aria-label="taxshift home">
-      <span class="taxshift-brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 36 36" width="36" height="36" role="img">
-          <path d="M4 17 18 5l14 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M9 16v15h8V21h5v10h5V16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M27 5v7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-      </span>
-      <span>taxshift</span>
-    </a>
-    <nav class="taxshift-nav__links" aria-label="Site navigation">
-      <a href="{% url 'tax_home' %}#how-it-works">How it works</a>
-      <a href="{% url 'tax_data_sources' %}">Data sources</a>
-      <a href="{% url 'tax_contact' %}">Contact</a>
-      <a class="taxshift-nav__cta" href="{% url 'tax_home' %}#snapshot">Free search</a>
-    </nav>
-  </header>
+  {% include "taxtool/_nav.html" with report_nav=True %}
 
   {% include "taxtool/_bill.html" %}
 
@@ -35,6 +18,8 @@
       <a href="{% url 'tax_home' %}">Tax tool</a>
       <a href="https://github.com/openskagit" target="_blank" rel="noopener">GitHub</a>
       <a href="{% url 'tax_contact' %}">Contact</a>
+      <a href="{% url 'tax_privacy' %}">Privacy</a>
+      <a href="{% url 'tax_terms' %}">Terms</a>
     </nav>
   </footer>
 </div>

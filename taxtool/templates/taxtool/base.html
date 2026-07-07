@@ -3,28 +3,12 @@
 
 {% block extra_head %}
 <style>body { background: #eef6f7; }</style>
+
 {% endblock %}
 
 {% block content %}
 <div class="taxshift-page">
-  <header class="taxshift-nav">
-    <a href="https://taxshift.co/" class="taxshift-brand" aria-label="taxshift home">
-      <span class="taxshift-brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 36 36" width="36" height="36" role="img">
-          <path d="M4 17 18 5l14 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M9 16v15h8V21h5v10h5V16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M27 5v7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-      </span>
-      <span>taxshift</span>
-    </a>
-    <nav class="taxshift-nav__links" aria-label="Site navigation">
-      <a href="#how-it-works">How it works</a>
-      <a href="{% url 'tax_data_sources' %}">Data sources</a>
-      <a href="{% url 'tax_contact' %}">Contact</a>
-      <a class="taxshift-nav__cta" href="#snapshot">Free search</a>
-    </nav>
-  </header>
+  {% include "taxtool/_nav.html" %}
 
   <main id="main-content">
     <section class="taxshift-hero" id="snapshot">
@@ -95,7 +79,11 @@
           <span>Address or parcel</span>
           <input type="text" name="address_or_parcel" placeholder="123 Maple Ave or P12345">
         </label>
+        {% if taxshift_turnstile_site_key %}
+        <div class="taxshift-captcha cf-turnstile" data-sitekey="{{ taxshift_turnstile_site_key }}"></div>
+        {% endif %}
         <button type="submit">Sign up to track tax shift</button>
+        <p class="taxshift-signup__fineprint">By signing up, you agree to the <a href="{% url 'tax_terms' %}">terms</a> and <a href="{% url 'tax_privacy' %}">privacy policy</a>.</p>
         <div id="signup-result" class="taxshift-signup__result" aria-live="polite"></div>
       </form>
     </section>
@@ -105,11 +93,6 @@
     </section>
   </main>
 
-  <footer class="taxshift-footer">
-    <span>taxshift</span>
-    <a href="/tax/">Tax tool</a>
-    <a href="https://openskagit.org/" target="_blank" rel="noopener">OpenSkagit</a>
-    <a href="{% url 'tax_contact' %}">Contact</a>
-  </footer>
+  {% include "taxtool/_footer.html" %}
 </div>
 {% endblock %}

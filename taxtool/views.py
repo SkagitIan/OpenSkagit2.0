@@ -1,13 +1,17 @@
 import logging
 import threading
 
+import requests
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
-from django.db.models import F
 from django.core.validators import validate_email
-from django.shortcuts import render
-from django.views.decorators.http import require_POST
+from django.db.models import F
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_http_methods, require_POST
 
 from core.views import CITY_PAGES
 from .models import ParcelSearchCache, TaxShiftSignup
@@ -34,6 +38,60 @@ from .utils import (
 logger = logging.getLogger(__name__)
 
 
+def _taxshift_context(**extra):
+    context = {
+        "city_pages": CITY_PAGES,
+        "taxshift_turnstile_site_key": getattr(settings, "TAXSHIFT_TURNSTILE_SITE_KEY", ""),
+    }
+    context.update(extra)
+    return context
+
+
+def _verify_turnstile(request):
+    site_key = getattr(settings, "TAXSHIFT_TURNSTILE_SITE_KEY", "")
+    secret_key = getattr(settings, "TAXSHIFT_TURNSTILE_SECRET_KEY", "")
+    if not site_key and not secret_key:
+        return True, ""
+    if not site_key or not secret_key:
+        return False, "CAPTCHA is not fully configured yet."
+
+    token = request.POST.get("cf-turnstile-response", "")
+    if not token:
+        return False, "Complete the CAPTCHA and try again."
+
+    try:
+        response = requests.post(
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+            data={
+                "secret": secret_key,
+                "response": token,
+                "remoteip": request.META.get("REMOTE_ADDR", ""),
+            },
+            timeout=5,
+        )
+        response.raise_for_status()
+        payload = response.json()
+    except requests.RequestException:
+        logger.exception("TaxShift Turnstile verification request failed")
+        return False, "CAPTCHA verification failed. Try again in a moment."
+
+    if not payload.get("success"):
+        logger.warning("TaxShift Turnstile rejected signup: %s", payload.get("error-codes"))
+        return False, "CAPTCHA verification failed. Try again."
+    return True, ""
+
+
+def _ensure_user_for_signup(signup):
+    user = signup.user
+    if not user:
+        user, created = User.objects.get_or_create(username=signup.email, defaults={"email": signup.email})
+        if created:
+            user.set_unusable_password()
+            user.save(update_fields=["password"])
+        signup.user = user
+        signup.save(update_fields=["user", "updated_at"])
+    return user
+
 def cache_searched_parcels(parcels, query="", source="search_result"):
     """Persist a lightweight cache of parcels users searched or opened."""
     for parcel in parcels:
@@ -57,7 +115,7 @@ def cache_searched_parcels(parcels, query="", source="search_result"):
             ParcelSearchCache.objects.filter(pk=cache.pk).update(hit_count=F("hit_count") + 1)
 
 def tax_home(request):
-    return render(request, "taxtool/base.html", {"city_pages": CITY_PAGES})
+    return render(request, "taxtool/base.html", _taxshift_context())
 
 
 def tax_data_sources(request):
@@ -76,16 +134,13 @@ def tax_data_sources(request):
     ):
         if key in stats and stats[key] is not None:
             stats[f"{key}_fmt"] = f"{int(stats[key]):,}"
-    return render(request, "taxtool/data_sources.html", {
-        "city_pages": CITY_PAGES,
-        "stats": stats,
-    })
+    return render(request, "taxtool/data_sources.html", _taxshift_context(stats=stats))
 
 
 
 
 def tax_contact(request):
-    context = {"city_pages": CITY_PAGES}
+    context = _taxshift_context()
 
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
@@ -128,7 +183,7 @@ def tax_contact(request):
                 recipient_list=["ian@openskagit.com"],
                 fail_silently=False,
             )
-            context = {"city_pages": CITY_PAGES, "success": True}
+            context = _taxshift_context(success=True)
 
     return render(request, "taxtool/contact.html", context)
 
@@ -163,6 +218,13 @@ def tax_signup(request):
     email = request.POST.get("email", "").strip().lower()
     address_or_parcel = request.POST.get("address_or_parcel", "").strip()
 
+    captcha_ok, captcha_message = _verify_turnstile(request)
+    if not captcha_ok:
+        return render(request, "taxtool/_signup_result.html", {
+            "success": False,
+            "message": captcha_message,
+        }, status=400)
+
     try:
         validate_email(email)
     except ValidationError:
@@ -193,7 +255,6 @@ def tax_signup(request):
 
 def tax_verify(request, token):
     from django.contrib.auth import login
-    from django.contrib.auth.models import User
     from django.core.signing import BadSignature, SignatureExpired
     from django.utils import timezone
 
@@ -219,10 +280,7 @@ def tax_verify(request, token):
             "message": "We couldn't find that signup anymore.",
         }, status=404)
 
-    user, created = User.objects.get_or_create(username=email, defaults={"email": email})
-    if created:
-        user.set_unusable_password()
-        user.save(update_fields=["password"])
+    user = _ensure_user_for_signup(signup)
 
     signup.is_verified = True
     signup.verified_at = timezone.now()
@@ -233,6 +291,101 @@ def tax_verify(request, token):
 
     return render(request, "taxtool/verify_result.html", {"success": True, "signup": signup})
 
+
+@require_http_methods(["GET", "POST"])
+def tax_login(request):
+    context = _taxshift_context()
+
+    if request.method == "POST":
+        email = request.POST.get("email", "").strip().lower()
+        context["email"] = email
+        try:
+            validate_email(email)
+        except ValidationError:
+            context["errors"] = ["Enter a valid email address."]
+            return render(request, "taxtool/login.html", context, status=400)
+
+        signup = TaxShiftSignup.objects.filter(email=email, is_verified=True).first()
+        if signup:
+            _ensure_user_for_signup(signup)
+            try:
+                from .notifications import send_login_email
+
+                send_login_email(signup)
+            except Exception:
+                logger.exception("TaxShift login email failed for %s", email)
+                context["errors"] = ["We could not send a login link just now. Try again in a moment."]
+                return render(request, "taxtool/login.html", context, status=500)
+
+        context["success"] = True
+        return render(request, "taxtool/login.html", context)
+
+    return render(request, "taxtool/login.html", context)
+
+
+def tax_login_token(request, token):
+    from django.contrib.auth import login
+    from django.core.signing import BadSignature, SignatureExpired
+
+    from .notifications import email_from_login_token
+
+    try:
+        email = email_from_login_token(token)
+    except SignatureExpired:
+        return render(request, "taxtool/login.html", _taxshift_context(
+            errors=["That login link has expired. Request a new link to continue."]
+        ), status=400)
+    except BadSignature:
+        return render(request, "taxtool/login.html", _taxshift_context(
+            errors=["That login link is invalid. Request a new link to continue."]
+        ), status=400)
+
+    signup = TaxShiftSignup.objects.filter(email=email, is_verified=True).first()
+    if not signup:
+        return render(request, "taxtool/login.html", _taxshift_context(
+            errors=["We could not find a verified TaxShift account for that link."]
+        ), status=404)
+
+    user = _ensure_user_for_signup(signup)
+    login(request, user, backend="django.contrib.auth.backends.ModelBackend")
+    return redirect("tax_account")
+
+
+@login_required(login_url="tax_login")
+@require_http_methods(["GET", "POST"])
+def tax_account(request):
+    if request.user.email:
+        TaxShiftSignup.objects.filter(
+            email__iexact=request.user.email,
+            is_verified=True,
+            user__isnull=True,
+        ).update(user=request.user)
+
+    signups = TaxShiftSignup.objects.filter(user=request.user, is_verified=True).order_by("-updated_at")
+
+    if request.method == "POST":
+        signup = get_object_or_404(signups, pk=request.POST.get("signup_id"))
+        wants_notifications = request.POST.get("is_active") == "on"
+        signup.is_active = wants_notifications
+        if wants_notifications:
+            signup.unsubscribed_at = None
+        else:
+            from django.utils import timezone
+
+            signup.unsubscribed_at = timezone.now()
+        signup.save(update_fields=["is_active", "unsubscribed_at", "updated_at"])
+        messages.success(request, "Notification preferences updated.")
+        return redirect("tax_account")
+
+    return render(request, "taxtool/account.html", _taxshift_context(signups=signups))
+
+
+def tax_privacy(request):
+    return render(request, "taxtool/privacy.html", _taxshift_context())
+
+
+def tax_terms(request):
+    return render(request, "taxtool/terms.html", _taxshift_context())
 
 def tax_unsubscribe(request, token):
     from django.core.signing import BadSignature, SignatureExpired
@@ -262,6 +415,7 @@ def tax_unsubscribe(request, token):
 def tax_parcel(request, parcel_number):
     template_name = "taxtool/_bill.html" if request.headers.get("HX-Request") else "taxtool/parcel_page.html"
     context = build_tax_report_context(parcel_number, city_pages=CITY_PAGES)
+    context["taxshift_turnstile_site_key"] = getattr(settings, "TAXSHIFT_TURNSTILE_SITE_KEY", "")
     parcel = context.get("parcel")
     if parcel:
         cache_searched_parcels([parcel], query=parcel_number, source="parcel_detail")

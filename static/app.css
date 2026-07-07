@@ -5973,7 +5973,7 @@ pre {
     justify-content: flex-start;
   }
 
-  .taxshift-nav__links a:not(.taxshift-nav__cta) {
+  .taxshift-nav__secondary {
     display: none;
   }
 
@@ -7207,4 +7207,201 @@ pre {
 
 .taxshift-verify__cta:hover {
   background: #0c8790;
+}
+
+/* TaxShift auth/account/legal additions */
+.taxshift-captcha,
+.taxshift-signup__fineprint {
+  grid-column: 1 / -1;
+}
+
+.taxshift-signup__fineprint {
+  color: rgba(255, 255, 255, 0.66) !important;
+  font-size: 12px;
+  line-height: 1.45 !important;
+}
+
+.taxshift-signup__fineprint a {
+  color: #9af0f6;
+  font-weight: 800;
+}
+
+.taxshift-account,
+.taxshift-legal {
+  width: min(100% - 40px, 980px);
+  margin: 24px auto 72px;
+}
+
+.taxshift-account__head,
+.taxshift-legal {
+  padding-top: clamp(24px, 5vw, 54px);
+}
+
+.taxshift-account__head h1,
+.taxshift-legal h1 {
+  margin: 0 0 12px;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(36px, 6vw, 58px);
+  line-height: 1.03;
+}
+
+.taxshift-account__head p,
+.taxshift-legal > p,
+.taxshift-legal section p {
+  color: #42536a;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.taxshift-account__messages,
+.taxshift-account__empty,
+.taxshift-account__parcel,
+.taxshift-legal section {
+  border: 1px solid rgba(8, 26, 53, 0.08);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(8, 26, 53, 0.08);
+}
+
+.taxshift-account__messages {
+  margin: 18px 0;
+  padding: 12px 14px;
+  color: #0b7b5c;
+  font-weight: 800;
+}
+
+.taxshift-account__messages p {
+  margin: 0;
+}
+
+.taxshift-account__list {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.taxshift-account__parcel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  padding: clamp(18px, 3vw, 26px);
+}
+
+.taxshift-account__parcel span {
+  color: #0e9aa4;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.taxshift-account__parcel h2 {
+  margin: 4px 0 6px;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 24px;
+  text-transform: none;
+}
+
+.taxshift-account__parcel h2 a {
+  color: inherit;
+}
+
+.taxshift-account__parcel p,
+.taxshift-account__empty p {
+  margin: 0;
+  color: #526173;
+  line-height: 1.55;
+}
+
+.taxshift-account__prefs {
+  display: grid;
+  gap: 12px;
+  justify-items: end;
+}
+
+.taxshift-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #20334f;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.taxshift-toggle input {
+  width: 18px;
+  height: 18px;
+}
+
+.taxshift-account__prefs button,
+.taxshift-account__empty a {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 7px;
+  background: #18b7ca;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.taxshift-account__empty {
+  margin-top: 22px;
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.taxshift-account__empty h2,
+.taxshift-legal h2 {
+  margin: 0 0 8px;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 22px;
+  text-transform: none;
+}
+
+.taxshift-account__empty a {
+  margin-top: 18px;
+}
+
+.taxshift-legal__updated {
+  margin-top: 0;
+  font-size: 13px !important;
+  font-weight: 800;
+}
+
+.taxshift-legal section {
+  margin-top: 16px;
+  padding: clamp(18px, 3vw, 26px);
+}
+
+.taxshift-legal section p {
+  margin: 0;
+}
+
+.taxshift-legal a {
+  color: #0e9aa4;
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .taxshift-account,
+  .taxshift-legal {
+    width: min(100% - 28px, 980px);
+  }
+
+  .taxshift-account__parcel {
+    grid-template-columns: 1fr;
+  }
+
+  .taxshift-account__prefs {
+    justify-items: start;
+  }
 }

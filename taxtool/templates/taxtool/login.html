@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Log in - taxshift.co{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #eef6f7; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="taxshift-page">
+  {% include "taxtool/_nav.html" %}
+
+  <main id="main-content">
+    <section class="taxshift-contact taxshift-auth" aria-labelledby="login-heading">
+      <div class="taxshift-contact__copy">
+        <p class="taxshift-eyebrow">Passwordless login</p>
+        <h1 id="login-heading">Get a secure sign-in link.</h1>
+        <p>Verified TaxShift accounts use email links instead of passwords. Enter the email you verified and we will send a fresh link.</p>
+      </div>
+
+      <form class="taxshift-contact__form" method="post">
+        {% csrf_token %}
+        {% if success %}
+          <p class="taxshift-contact__success">If that email has a verified TaxShift account, a login link is on its way.</p>
+        {% endif %}
+        {% if errors %}
+          <div class="taxshift-contact__errors" role="alert">
+            {% for error in errors %}<p>{{ error }}</p>{% endfor %}
+          </div>
+        {% endif %}
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" value="{{ email|default:'' }}" placeholder="you@example.com" required>
+        </label>
+        <button type="submit">Email me a login link</button>
+      </form>
+    </section>
+  </main>
+
+  {% include "taxtool/_footer.html" %}
+</div>
+{% endblock %}

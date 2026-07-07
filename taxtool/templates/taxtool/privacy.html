@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy - taxshift.co{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #eef6f7; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="taxshift-page">
+  {% include "taxtool/_nav.html" %}
+
+  <main class="taxshift-legal" id="main-content">
+    <p class="taxshift-eyebrow">Privacy policy</p>
+    <h1>Privacy Policy</h1>
+    <p class="taxshift-legal__updated">Last updated July 7, 2026</p>
+
+    <section>
+      <h2>What we collect</h2>
+      <p>TaxShift collects the email address you submit, the address or parcel number you ask us to track, verification and unsubscribe status, and basic records needed to deliver property-change notifications. TaxShift also displays public property, tax, assessor, auditor, levy, and agency finance data.</p>
+    </section>
+
+    <section>
+      <h2>How we use it</h2>
+      <p>We use your email to verify your account, send passwordless login links, deliver parcel notifications, manage preferences, respond to contact requests, and protect the signup form from abuse. We use parcel data to build tax snapshots and watch for public-record changes.</p>
+    </section>
+
+    <section>
+      <h2>Public records</h2>
+      <p>Property records shown by TaxShift come from public sources. Those records may include owner names, parcel identifiers, addresses, assessed values, taxes, levy details, and recorded-document references. TaxShift does not make public records private or remove them from their original sources.</p>
+    </section>
+
+    <section>
+      <h2>Service providers</h2>
+      <p>We use infrastructure and email providers to host the site, store application data, send email, and verify CAPTCHA challenges. Those providers process data only as needed to operate TaxShift.</p>
+    </section>
+
+    <section>
+      <h2>Your choices</h2>
+      <p>You can unsubscribe from parcel notifications from an email link or from your account page. You can contact us to ask about your TaxShift signup data.</p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>Questions about this policy can be sent through the <a href="{% url 'tax_contact' %}">contact form</a>.</p>
+    </section>
+  </main>
+
+  {% include "taxtool/_footer.html" %}
+</div>
+{% endblock %}

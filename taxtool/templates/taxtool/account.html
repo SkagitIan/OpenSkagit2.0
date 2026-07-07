@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Your TaxShift account{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #eef6f7; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="taxshift-page">
+  {% include "taxtool/_nav.html" %}
+
+  <main id="main-content">
+    <section class="taxshift-account" aria-labelledby="account-heading">
+      <div class="taxshift-account__head">
+        <p class="taxshift-eyebrow">Your account</p>
+        <h1 id="account-heading">Tracked parcels</h1>
+        <p>{{ request.user.email|default:request.user.username }}</p>
+      </div>
+
+      {% if messages %}
+        <div class="taxshift-account__messages">
+          {% for message in messages %}<p>{{ message }}</p>{% endfor %}
+        </div>
+      {% endif %}
+
+      {% if signups %}
+        <div class="taxshift-account__list">
+          {% for signup in signups %}
+            <article class="taxshift-account__parcel">
+              <div>
+                <span>Parcel</span>
+                {% if signup.parcel_number %}
+                  <h2><a href="{% url 'tax_parcel' signup.parcel_number %}">{{ signup.parcel_number }}</a></h2>
+                {% else %}
+                  <h2>Matching in progress</h2>
+                {% endif %}
+                <p>{{ signup.address_or_parcel|default:"No address or parcel was provided." }}</p>
+              </div>
+              <form method="post" class="taxshift-account__prefs">
+                {% csrf_token %}
+                <input type="hidden" name="signup_id" value="{{ signup.pk }}">
+                <label class="taxshift-toggle">
+                  <input type="checkbox" name="is_active" {% if signup.is_active %}checked{% endif %}>
+                  <span>Email notifications</span>
+                </label>
+                <button type="submit">Save preferences</button>
+              </form>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="taxshift-account__empty">
+          <h2>No verified tracked parcels yet.</h2>
+          <p>Search for a parcel, sign up for tracking, and verify your email to see it here.</p>
+          <a href="{% url 'tax_home' %}#snapshot">Find a parcel</a>
+        </div>
+      {% endif %}
+    </section>
+  </main>
+
+  {% include "taxtool/_footer.html" %}
+</div>
+{% endblock %}

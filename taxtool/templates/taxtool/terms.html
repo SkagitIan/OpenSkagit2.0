@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Terms - taxshift.co{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #eef6f7; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="taxshift-page">
+  {% include "taxtool/_nav.html" %}
+
+  <main class="taxshift-legal" id="main-content">
+    <p class="taxshift-eyebrow">Terms</p>
+    <h1>Terms of Use</h1>
+    <p class="taxshift-legal__updated">Last updated July 7, 2026</p>
+
+    <section>
+      <h2>Use of TaxShift</h2>
+      <p>TaxShift is an informational public-data tool for exploring property tax snapshots and parcel-change notifications. You agree to use it lawfully and not interfere with the service or attempt to bypass abuse-prevention controls.</p>
+    </section>
+
+    <section>
+      <h2>No official tax advice</h2>
+      <p>TaxShift is not a government office, tax advisor, attorney, title company, or appraisal service. Reports and notifications are informational only. Confirm important details with Skagit County, the relevant public agency, or a qualified professional before making decisions.</p>
+    </section>
+
+    <section>
+      <h2>Data limits</h2>
+      <p>TaxShift uses public records and reconstructed calculations. Data may be delayed, incomplete, approximate, or changed by the source after we display it. Agency allocation and year-over-year explanations are estimates built from available public data.</p>
+    </section>
+
+    <section>
+      <h2>Accounts and notifications</h2>
+      <p>Verified accounts use passwordless email links. You are responsible for access to your email account. Notifications can be disabled from email links or from your account page.</p>
+    </section>
+
+    <section>
+      <h2>Changes</h2>
+      <p>We may update these terms as TaxShift changes. Continued use of the service means you accept the current terms.</p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>Questions about these terms can be sent through the <a href="{% url 'tax_contact' %}">contact form</a>.</p>
+    </section>
+  </main>
+
+  {% include "taxtool/_footer.html" %}
+</div>
+{% endblock %}

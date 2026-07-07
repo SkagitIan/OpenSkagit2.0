@@ -126,6 +126,15 @@ def email_from_verification_token(token: str, max_age_seconds: int = 60 * 60 * 2
     return TimestampSigner(salt="taxshift-verify").unsign(token, max_age=max_age_seconds)
 
 
+def login_token(email: str) -> str:
+    return TimestampSigner(salt="taxshift-login").sign(email)
+
+
+def email_from_login_token(token: str, max_age_seconds: int = 60 * 20) -> str:
+    return TimestampSigner(salt="taxshift-login").unsign(token, max_age=max_age_seconds)
+
+
+
 # ---------------------------------------------------------------------------
 # Verification + snapshot-summary email — sent once, immediately after the
 # baseline snapshot is captured (see taxtool.snapshot.resolve_and_snapshot,
@@ -166,6 +175,41 @@ def send_verification_email(signup) -> None:
     signup.verification_email_sent_at = timezone.now()
     signup.save(update_fields=["verification_email_sent_at", "updated_at"])
 
+
+def send_login_email(signup) -> None:
+    """Send a passwordless login link for an already verified TaxShift account."""
+    from django.urls import reverse
+
+    site_url = getattr(settings, "TAXSHIFT_SITE_URL", "https://taxshift.co")
+    account_url = f"{site_url}{reverse('tax_account')}"
+    login_url = f"{site_url}{reverse('tax_login_token', args=[login_token(signup.email)])}"
+
+    subject = "Your TaxShift login link"
+    html_body = f"""<!doctype html>
+<html><head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#f6f8f8;font-family:Inter,system-ui,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f6f8f8;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border:1px solid #dfe7ee;border-radius:8px;overflow:hidden;">
+        <tr><td style="background:#042C53;padding:20px 28px;">
+          <span style="color:#fff;font-size:16px;font-weight:700;">OpenSkagit TaxShift</span>
+        </td></tr>
+        <tr><td style="padding:28px;">
+          <p style="margin:0 0 6px;font-size:13px;color:#00828A;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Passwordless login</p>
+          <h1 style="margin:0 0 12px;font-size:22px;color:#042C53;">Sign in to your TaxShift account.</h1>
+          <p style="margin:0 0 22px;font-size:14px;color:#3D4D5C;line-height:1.55;">
+            This link works for 20 minutes and opens your tracked parcels and notification preferences.
+          </p>
+          <table cellpadding="0" cellspacing="0"><tr><td style="border-radius:8px;background:#00828A;">
+            <a href="{login_url}" style="display:inline-block;padding:14px 28px;color:#fff;font-weight:700;font-size:15px;text-decoration:none;">Log in to TaxShift</a>
+          </td></tr></table>
+          <p style="margin:24px 0 0;font-size:13px;color:#617082;">If you are already signed in, go to <a href="{account_url}" style="color:#00828A;">your account</a>.</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>"""
+    _send_resend(signup.email, subject, html_body)
 
 def _snapshot_summary(signup) -> dict | None:
     """Pull together a human-readable snapshot for the verification email.

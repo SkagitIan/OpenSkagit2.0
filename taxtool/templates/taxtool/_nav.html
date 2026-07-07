@@ -1,0 +1,23 @@
+<header class="taxshift-nav{% if report_nav %} taxshift-nav--report{% endif %}">
+  <a href="{% url 'tax_home' %}" class="taxshift-brand" aria-label="taxshift home">
+    <span class="taxshift-brand__mark" aria-hidden="true">
+      <svg viewBox="0 0 36 36" width="36" height="36" role="img">
+        <path d="M4 17 18 5l14 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 16v15h8V21h5v10h5V16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M27 5v7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span>taxshift</span>
+  </a>
+  <nav class="taxshift-nav__links" aria-label="Site navigation">
+    <a class="taxshift-nav__secondary" href="{% url 'tax_home' %}#how-it-works">How it works</a>
+    <a class="taxshift-nav__secondary" href="{% url 'tax_data_sources' %}">Data sources</a>
+    <a class="taxshift-nav__secondary" href="{% url 'tax_contact' %}">Contact</a>
+    {% if request.user.is_authenticated %}
+      <a href="{% url 'tax_account' %}">Account</a>
+    {% else %}
+      <a href="{% url 'tax_login' %}">Log in</a>
+    {% endif %}
+    <a class="taxshift-nav__cta" href="{% url 'tax_home' %}#snapshot">Free search</a>
+  </nav>
+</header>

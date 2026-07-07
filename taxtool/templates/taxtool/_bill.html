@@ -337,7 +337,11 @@
             <span>Email</span>
             <input type="email" name="email" placeholder="you@example.com" required>
           </label>
+          {% if taxshift_turnstile_site_key %}
+          <div class="taxshift-captcha cf-turnstile" data-sitekey="{{ taxshift_turnstile_site_key }}"></div>
+          {% endif %}
           <button type="submit">Sign up to track this parcel</button>
+          <p class="taxshift-signup__fineprint">By signing up, you agree to the <a href="{% url 'tax_terms' %}">terms</a> and <a href="{% url 'tax_privacy' %}">privacy policy</a>.</p>
           <div id="parcel-signup-result" class="taxshift-signup__result" aria-live="polite"></div>
         </form>
       </section>

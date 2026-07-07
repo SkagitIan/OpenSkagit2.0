@@ -135,6 +135,8 @@ RESEND_FROM_EMAIL = env("RESEND_FROM_EMAIL", default="Parcel Book <parcelbook@op
 # product's domain or sender never silently affects the other's email links.
 TAXSHIFT_SITE_URL = env("TAXSHIFT_SITE_URL", default="https://taxshift.co")
 TAXSHIFT_FROM_EMAIL = env("TAXSHIFT_FROM_EMAIL", default="TaxShift <notifications@taxshift.co>")
+TAXSHIFT_TURNSTILE_SITE_KEY = env("TAXSHIFT_TURNSTILE_SITE_KEY", default="")
+TAXSHIFT_TURNSTILE_SECRET_KEY = env("TAXSHIFT_TURNSTILE_SECRET_KEY", default="")
 CSRF_TRUSTED_ORIGINS = [
     o for o in env("CSRF_TRUSTED_ORIGINS", default="").split(",") if o
 ]
