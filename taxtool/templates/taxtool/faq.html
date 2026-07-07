@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block title %}FAQ - taxshift.co{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #f7fbfc; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="taxshift-page taxshift-methodology-page taxshift-faq-page">
+  {% include "taxtool/_nav.html" %}
+
+  <main class="taxshift-methodology taxshift-faq" id="main-content">
+    <section class="taxshift-methodology__hero">
+      <p class="taxshift-eyebrow">FAQ</p>
+      <h1>Questions about TaxShift data and property tax snapshots.</h1>
+      <p>TaxShift turns public parcel, tax, levy, and agency finance records into a plain-English snapshot. The answers below explain what the page shows, where the data comes from, and what to do when something looks wrong.</p>
+    </section>
+
+    <section class="taxshift-methodology__section taxshift-faq__intro">
+      <h2>Start here</h2>
+      <p>The canonical methodology is the <a href="{% url 'tax_data_sources' %}">data sources page</a>. This FAQ is the practical version: what the numbers mean when you are looking at a parcel report.</p>
+    </section>
+
+    <section class="taxshift-methodology__section taxshift-faq__section">
+      <h2>Data sources and accuracy</h2>
+
+      <details>
+        <summary>Where does TaxShift get parcel data?</summary>
+        <p>Parcel identity, address, owner name, assessed value, taxable value, levy code, current tax amount, exemption indicators, acreage, sale summary, and property status come from the Skagit County Assessor parcel roll and public property-search records.</p>
+      </details>
+
+      <details>
+        <summary>Where does the tax history come from?</summary>
+        <p>Historical assessed values and tax amounts come from public parcel tax-history records. TaxShift stores tax year, value year, building value, land value, total value, and tax amount, then merges in the current roll when the current roll is newer than the loaded history table.</p>
+      </details>
+
+      <details>
+        <summary>Why might TaxShift differ from an official bill or assessor page?</summary>
+        <p>TaxShift is a public-data walkthrough, not the system of record. Source records can update after TaxShift loads them, history can lag the latest roll, and reconstructed agency allocations can differ from official statement lines. For official corrections, exemptions, valuation disputes, or appeals, contact your county assessor's office.</p>
+      </details>
+
+      <details>
+        <summary>Can TaxShift change my assessment or tax bill?</summary>
+        <p>No. TaxShift only displays and explains public records. It cannot update assessor records, change taxable value, adjust exemptions, file an appeal, or change a payment balance.</p>
+      </details>
+
+      <details>
+        <summary>What should I do if the owner, address, value, exemption, or tax amount looks wrong?</summary>
+        <p>Confirm the parcel number first, then contact your county assessor's office about assessment, ownership, mailing, address, exemption, or valuation questions. TaxShift can explain what public data it is reading, but the assessor's office controls official parcel records.</p>
+      </details>
+    </section>
+
+    <section class="taxshift-methodology__section taxshift-faq__section">
+      <h2>How sources are connected</h2>
+
+      <details>
+        <summary>How does TaxShift bridge parcel, GIS, tax, and agency data?</summary>
+        <p>The parcel number is the main key. TaxShift joins assessor parcel records to GIS parcel shapes by parcel ID, parcel tax summaries by parcel number, zoning by parcel number where available, and levy composition by the parcel's levy code and tax year.</p>
+      </details>
+
+      <details>
+        <summary>How do you connect levy lines to agencies?</summary>
+        <p>Each parcel has a levy code. TaxShift joins that code to levy-rate composition data, then uses a maintained crosswalk that maps levy short names to public agency names and Washington State Auditor reporting IDs where available.</p>
+      </details>
+
+      <details>
+        <summary>What are agency numbers and MCAG IDs?</summary>
+        <p>An MCAG is a Washington State Auditor reporting identifier for a local government or public agency. TaxShift uses MCAG IDs to connect taxing districts to Auditor financial data. Some levy lines do not map cleanly to an independent reporting agency, so TaxShift groups or labels them cautiously.</p>
+      </details>
+
+      <details>
+        <summary>Why do some agencies show more detail than others?</summary>
+        <p>Agency financial context appears when TaxShift can match a taxing district to Auditor financial data. If the match is missing, uncertain, or marked for review, the parcel report avoids overclaiming and may show the tax allocation without a detailed agency finance panel.</p>
+      </details>
+    </section>
+
+    <section class="taxshift-methodology__section taxshift-faq__section">
+      <h2>Parcel report sections</h2>
+
+      <details>
+        <summary>What does "Your tax bill went up/down" mean?</summary>
+        <p>It compares the newest displayed tax amount with the prior year in the available parcel history. If history is not available yet, TaxShift shows the current bill without a year-over-year explanation.</p>
+      </details>
+
+      <details>
+        <summary>How does TaxShift decide why the bill changed?</summary>
+        <p>The "why" section separates the change into value effect and effective-rate effect. Value effect estimates how much of the change came from assessed value moving. Rate effect estimates how much came from the effective tax rate moving. It is an explanatory estimate, not an official tax calculation.</p>
+      </details>
+
+      <details>
+        <summary>What is effective tax rate?</summary>
+        <p>Effective tax rate is the tax bill divided by property value, usually shown as dollars per $1,000 of value. TaxShift uses it because it lets people compare the burden across years and across properties even when values are different.</p>
+      </details>
+
+      <details>
+        <summary>Why use effective tax rate instead of only levy rates?</summary>
+        <p>A parcel's bill reflects several moving pieces: assessed value, taxable value, levy rates, exemptions, and sometimes special assessments or adjustments. Effective rate summarizes the resulting relationship between value and tax bill, which is useful for comparison and year-over-year explanations.</p>
+      </details>
+
+      <details>
+        <summary>What does "Where your money went" show?</summary>
+        <p>It reconstructs how the displayed tax bill is allocated across public agencies using levy rates, assessor values, and TaxShift's agency crosswalk. If the reconstructed total does not exactly match the displayed bill, TaxShift proportionally reconciles the agency rows to the bill total so the chart adds up.</p>
+      </details>
+
+      <details>
+        <summary>What is the "How you compare" rate check?</summary>
+        <p>It compares the parcel's effective tax rate with a county median benchmark. This is a broad comparison tool, not a statement that two properties have the same levy code, exemptions, services, or special assessments.</p>
+      </details>
+
+      <details>
+        <summary>What is "Your tax story"?</summary>
+        <p>It is the multi-year chart of assessed value and tax bill history for the parcel. The chart uses available public history records and may not exist for every parcel.</p>
+      </details>
+
+      <details>
+        <summary>How are exemptions handled?</summary>
+        <p>When TaxShift detects that taxable value is lower than assessed value or exemption fields are present, it calls that out. Exemptions can make value, rate, and agency allocation math less direct, so the report labels those effects as estimates.</p>
+      </details>
+    </section>
+
+    <section class="taxshift-methodology__section taxshift-faq__section">
+      <h2>Notifications and tracking</h2>
+
+      <details>
+        <summary>What happens when I sign up to track a parcel?</summary>
+        <p>TaxShift verifies your email, resolves the address or parcel to a parcel number, captures a baseline snapshot, and adds the parcel to your watchlist. You can manage tracking from your account page.</p>
+      </details>
+
+      <details>
+        <summary>How can TaxShift tell if a change has been made?</summary>
+        <p>After a baseline snapshot is captured, TaxShift compares watched parcels against completed assessor sync runs. If the sync records a change for that parcel, TaxShift queues a notification. It also watches for newly seen recorded-document signals tied to the parcel.</p>
+      </details>
+
+      <details>
+        <summary>What changes can trigger a notification?</summary>
+        <p>Notifications can be triggered by assessor data changes for a watched parcel or by newly seen auditor recording records associated with that parcel. The notification payload includes the changed table, change type, changed fields, or recorded-document details when available.</p>
+      </details>
+
+      <details>
+        <summary>Are notifications official notices?</summary>
+        <p>No. Notifications are screening signals based on public records TaxShift has loaded. They are not official notices from a county office, assessor, treasurer, auditor, court, or taxing district.</p>
+      </details>
+
+      <details>
+        <summary>Will I get every possible parcel change?</summary>
+        <p>No. TaxShift can only notify from sources it loads and compares. Public records may be delayed, corrected, unavailable, or outside the fields TaxShift tracks.</p>
+      </details>
+    </section>
+
+    <section class="taxshift-methodology__section taxshift-faq__section">
+      <h2>Disputes, appeals, and payments</h2>
+
+      <details>
+        <summary>How do I dispute an assessment or tax value?</summary>
+        <p>Contact your county assessor's office. TaxShift cannot file disputes, change values, decide exemption eligibility, or extend appeal deadlines.</p>
+      </details>
+
+      <details>
+        <summary>Can TaxShift explain my payment status or delinquency balance?</summary>
+        <p>TaxShift may display public tax and delinquency-related records where available, but payment status can change quickly. Confirm amounts due, deadlines, interest, and payment instructions with the responsible county office before acting.</p>
+      </details>
+
+      <details>
+        <summary>Can TaxShift tell me whether an agency spent money correctly?</summary>
+        <p>No. TaxShift provides public financial context from Auditor data where available. Spending categories are grouped for readability and are not an audit opinion, legal conclusion, or complete agency financial review.</p>
+      </details>
+    </section>
+  </main>
+
+  {% include "taxtool/_footer.html" %}
+</div>
+{% endblock %}

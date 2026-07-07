@@ -18,7 +18,13 @@
     {% endif %}
     <a class="taxshift-nav__resume" href="#" data-taxshift-last-parcel hidden>Return to parcel</a>
     {% if request.user.is_authenticated %}
-      <a href="{% url 'tax_account' %}">Account</a>
+      <div class="taxshift-nav__account" data-taxshift-account-menu>
+        <a href="{% url 'tax_account' %}">Account</a>
+        <span class="taxshift-nav__account-arrow" data-taxshift-account-arrow hidden aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+        <div class="taxshift-nav__account-menu" data-taxshift-account-dropdown hidden>
+          <a href="#" data-taxshift-account-parcel>Parcel</a>
+        </div>
+      </div>
     {% else %}
       <a href="{% url 'tax_login' %}">Log in</a>
     {% endif %}
@@ -60,9 +66,20 @@
       return;
     }
     link.href = parcel.url;
-    link.textContent = 'Return to parcel ' + parcel.parcelNumber;
+    link.textContent = parcel.parcelNumber;
     link.title = parcel.address ? 'Return to ' + parcel.address : 'Return to parcel ' + parcel.parcelNumber;
     link.hidden = false;
+
+    const accountArrow = document.querySelector('[data-taxshift-account-arrow]');
+    const accountDropdown = document.querySelector('[data-taxshift-account-dropdown]');
+    const accountParcel = document.querySelector('[data-taxshift-account-parcel]');
+    if (accountArrow) accountArrow.hidden = false;
+    if (accountDropdown) accountDropdown.hidden = false;
+    if (accountParcel) {
+      accountParcel.href = parcel.url;
+      accountParcel.textContent = parcel.parcelNumber;
+      accountParcel.title = parcel.address ? 'Open ' + parcel.address : 'Open parcel ' + parcel.parcelNumber;
+    }
   }
 
   function rememberCurrentParcel() {

@@ -5487,14 +5487,57 @@ pre {
 }
 
 .taxshift-nav__resume {
-  max-width: 210px;
+  max-width: 86px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-family: "JetBrains Mono", monospace;
   font-weight: 700;
 }
 
 .taxshift-nav__resume[hidden] {
+  display: none;
+}
+
+.taxshift-nav__account {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.taxshift-nav__account-arrow {
+  color: #132946;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.taxshift-nav__account-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 30;
+  min-width: 118px;
+  padding: 8px;
+  border: 1px solid rgba(19, 41, 70, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 16px 34px rgba(4, 44, 83, 0.16);
+}
+
+.taxshift-nav__account-menu[hidden] {
+  display: none;
+}
+
+.taxshift-nav__account-menu a {
+  display: block;
+  padding: 7px 9px;
+  border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  white-space: nowrap;
+}
+
+.taxshift-nav__account:not(:hover):not(:focus-within) .taxshift-nav__account-menu {
   display: none;
 }
 
@@ -6142,6 +6185,50 @@ pre {
   margin-top: 8px;
 }
 
+.taxshift-faq__intro a {
+  color: var(--os-teal);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.taxshift-faq__intro a:hover {
+  text-decoration: underline;
+}
+
+.taxshift-faq__section {
+  display: grid;
+  gap: 10px;
+}
+
+.taxshift-faq__section h2 {
+  margin-bottom: 4px;
+}
+
+.taxshift-faq__section details {
+  border: 1px solid rgba(8, 26, 53, 0.1);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.taxshift-faq__section summary {
+  cursor: pointer;
+  list-style-position: outside;
+  padding: 16px 18px;
+  color: #081a35;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.taxshift-faq__section details[open] summary {
+  border-bottom: 1px solid rgba(8, 26, 53, 0.08);
+}
+
+.taxshift-faq__section details p {
+  margin: 0;
+  padding: 16px 18px 18px;
+}
 .taxshift-data a,
 .os-tax-footnote a {
   color: var(--os-teal);

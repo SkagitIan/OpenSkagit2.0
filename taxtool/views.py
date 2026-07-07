@@ -149,6 +149,9 @@ def tax_data_sources(request):
     return render(request, "taxtool/data_sources.html", _taxshift_context(stats=stats))
 
 
+def tax_faq(request):
+    return render(request, "taxtool/faq.html", _taxshift_context())
+
 
 
 def tax_contact(request):
