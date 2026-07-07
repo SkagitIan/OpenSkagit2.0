@@ -5748,6 +5748,42 @@ pre {
   padding: 0 15px;
 }
 
+.taxshift-signup__search {
+  max-width: none;
+  margin: 0;
+}
+
+.taxshift-signup__search .taxshift-search__wrap {
+  min-height: 46px;
+  padding: 0 6px;
+}
+
+.taxshift-signup__search .taxshift-search__input {
+  min-height: 44px;
+  padding: 0;
+}
+
+.taxshift-signup__form .os-tax-suggestion {
+  min-height: 0;
+  display: block;
+  width: 100%;
+  padding: 13px 18px;
+  border: 0;
+  border-bottom: 1px solid rgba(223, 231, 238, 0.8);
+  border-radius: 0;
+  background: #ffffff;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.taxshift-signup__form .os-tax-suggestion:hover,
+.taxshift-signup__form .os-tax-suggestion:focus {
+  background: #f6fbfb;
+}
+
 .taxshift-signup__result {
   grid-column: 1 / -1;
   min-height: 20px;

@@ -1,0 +1,18 @@
+{% if parcels %}
+  {% for p in parcels %}
+  <button
+    type="button"
+    class="os-tax-suggestion"
+    data-signup-parcel-option
+    data-parcel-number="{{ p.parcel_number }}"
+    data-address="{{ p.situs_street_number }} {{ p.situs_street_name }}{% if p.situs_city_state_zip %}, {{ p.situs_city_state_zip }}{% endif %}"
+  >
+    <div class="os-tax-suggestion__addr">
+      {{ p.situs_street_number }} {{ p.situs_street_name }}{% if p.situs_city_state_zip %}, {{ p.situs_city_state_zip }}{% endif %}
+    </div>
+    <div class="os-tax-suggestion__parcel">{{ p.parcel_number }}</div>
+  </button>
+  {% endfor %}
+{% elif q|length >= 2 %}
+  <div class="os-tax-suggestions__empty">No parcels found for "{{ q }}"</div>
+{% endif %}

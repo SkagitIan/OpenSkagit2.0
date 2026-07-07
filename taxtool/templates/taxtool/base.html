@@ -69,15 +69,42 @@
         <h2 id="track-heading">Get notified when your snapshot changes.</h2>
         <p>Leave an email and, optionally, the property you care about. We will use it to roll out tax shift tracking and alerts.</p>
       </div>
-      <form class="taxshift-signup__form" hx-post="{% url 'tax_signup' %}" hx-target="#signup-result" hx-swap="innerHTML">
+      <form class="taxshift-signup__form" hx-post="{% url 'tax_signup' %}" hx-target="#signup-result" hx-swap="innerHTML" data-taxshift-home-signup>
         {% csrf_token %}
         <label>
           <span>Email</span>
           <input type="email" name="email" placeholder="you@example.com" required>
         </label>
-        <label>
+        <label class="taxshift-signup__parcel-field">
           <span>Address or parcel</span>
-          <input type="text" name="address_or_parcel" placeholder="123 Maple Ave or P12345">
+          <input type="hidden" name="requires_parcel" value="1">
+          <input type="hidden" name="source" value="taxshift_home">
+          <input type="hidden" name="parcel_number" data-signup-parcel-number>
+          <input type="hidden" name="address_or_parcel" data-signup-address>
+          <div class="taxshift-search taxshift-signup__search">
+            <div class="taxshift-search__wrap">
+              <svg class="taxshift-search__icon" width="21" height="21" viewBox="0 0 21 21" fill="none" aria-hidden="true">
+                <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>
+                <path d="M13.5 13.5 18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <input
+                id="tax-signup-parcel-search"
+                type="text"
+                name="q"
+                autocomplete="off"
+                placeholder="Enter your property address or parcel number"
+                hx-get="{% url 'tax_search' %}?mode=signup"
+                hx-trigger="keyup changed delay:300ms"
+                hx-target="#signup-parcel-suggestions"
+                hx-swap="innerHTML"
+                hx-include="#tax-signup-parcel-search"
+                class="taxshift-search__input"
+                data-signup-parcel-search
+                required
+              >
+            </div>
+            <div id="signup-parcel-suggestions" class="os-tax-suggestions taxshift-suggestions"></div>
+          </div>
         </label>
         {% if taxshift_turnstile_site_key %}
         <div class="taxshift-captcha cf-turnstile" data-sitekey="{{ taxshift_turnstile_site_key }}"></div>
@@ -95,4 +122,45 @@
 
   {% include "taxtool/_footer.html" %}
 </div>
+<script>
+(function () {
+  const form = document.querySelector('[data-taxshift-home-signup]');
+  if (!form) return;
+
+  const search = form.querySelector('[data-signup-parcel-search]');
+  const parcelNumber = form.querySelector('[data-signup-parcel-number]');
+  const address = form.querySelector('[data-signup-address]');
+  const suggestions = document.getElementById('signup-parcel-suggestions');
+
+  function clearSelection() {
+    parcelNumber.value = '';
+    address.value = '';
+    search.setCustomValidity('');
+  }
+
+  search.addEventListener('input', clearSelection);
+  suggestions?.addEventListener('click', (event) => {
+    const option = event.target.closest('[data-signup-parcel-option]');
+    if (!option) return;
+
+    const selectedAddress = option.dataset.address || '';
+    const selectedParcel = option.dataset.parcelNumber || '';
+    search.value = selectedAddress ? selectedAddress + ' / Parcel ' + selectedParcel : selectedParcel;
+    parcelNumber.value = selectedParcel;
+    address.value = search.value;
+    suggestions.innerHTML = '';
+    search.setCustomValidity('');
+  });
+
+  form.addEventListener('submit', (event) => {
+    if (!parcelNumber.value) {
+      event.preventDefault();
+      search.setCustomValidity('Select a parcel from the autocomplete results.');
+      search.reportValidity();
+      return;
+    }
+    search.setCustomValidity('');
+  });
+})();
+</script>
 {% endblock %}

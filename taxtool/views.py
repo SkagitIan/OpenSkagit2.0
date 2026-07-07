@@ -201,10 +201,12 @@ def tax_contact(request):
 
 def tax_search(request):
     q = request.GET.get("q", "").strip()
+    mode = request.GET.get("mode", "").strip()
     parcels = search_parcels(q) if len(q) >= 2 else []
     if parcels:
         cache_searched_parcels(parcels, query=q, source="search_result")
-    return render(request, "taxtool/_suggestions.html", {"parcels": parcels, "q": q})
+    template_name = "taxtool/_signup_suggestions.html" if mode == "signup" else "taxtool/_suggestions.html"
+    return render(request, template_name, {"parcels": parcels, "q": q})
 
 
 def _process_signup_async(signup_pk: int) -> None:
@@ -230,7 +232,8 @@ def tax_signup(request):
     email = request.POST.get("email", "").strip().lower()
     address_or_parcel = request.POST.get("address_or_parcel", "").strip()
     parcel_number = request.POST.get("parcel_number", "").strip().upper()
-    source = "parcel_detail" if parcel_number else "taxshift_home"
+    requires_parcel = request.POST.get("requires_parcel") == "1"
+    source = request.POST.get("source", "").strip() or ("parcel_detail" if parcel_number else "taxshift_home")
 
     if request.user.is_authenticated and not email:
         email = (request.user.email or request.user.username or "").strip().lower()
@@ -239,6 +242,9 @@ def tax_signup(request):
         validate_email(email)
     except ValidationError:
         return _signup_error_response(request, "Enter a valid email address.")
+
+    if requires_parcel and not parcel_number:
+        return _signup_error_response(request, "Select a parcel from the autocomplete results.")
 
     if parcel_number:
         parcel = get_parcel(parcel_number)
@@ -251,7 +257,8 @@ def tax_signup(request):
             if parcel.get("situs_city_state_zip"):
                 address = f"{address}, {parcel['situs_city_state_zip']}".strip(", ")
             address_or_parcel = f"{address} / Parcel {parcel_number}".strip()
-    else:
+
+    if source != "parcel_detail":
         captcha_ok, captcha_message = _verify_turnstile(request)
         if not captcha_ok:
             return _signup_error_response(request, captcha_message)
