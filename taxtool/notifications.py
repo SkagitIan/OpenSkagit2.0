@@ -142,7 +142,7 @@ def send_verification_email(signup) -> None:
     if signup.verification_email_sent_at:
         return
 
-    site_url = getattr(settings, "SITE_URL", "https://openskagit.org")
+    site_url = getattr(settings, "TAXSHIFT_SITE_URL", "https://taxshift.co")
     verify_url = f"{site_url}{reverse('tax_verify', args=[verification_token(signup.email)])}"
     unsubscribe_url = f"{site_url}{reverse('tax_unsubscribe', args=[unsubscribe_token(signup.email)])}"
     parcel_url = f"{site_url}{reverse('tax_parcel', args=[signup.parcel_number])}" if signup.parcel_number else ""
@@ -215,7 +215,7 @@ def send_pending_taxshift(stdout: IO | None = None) -> int:
 
     from .models import TaxShiftEmailTemplate, TaxShiftNotification, TaxShiftSignup
 
-    site_url = getattr(settings, "SITE_URL", "https://openskagit.org")
+    site_url = getattr(settings, "TAXSHIFT_SITE_URL", "https://taxshift.co")
     sent_count = 0
 
     signup_ids = (
@@ -270,7 +270,7 @@ def _send_resend(to_email: str, subject: str, html_body: str) -> None:
     import resend
 
     resend.api_key = settings.RESEND_API_KEY
-    from_addr = getattr(settings, "RESEND_FROM_EMAIL", "OpenSkagit <notifications@openskagit.org>")
+    from_addr = getattr(settings, "TAXSHIFT_FROM_EMAIL", "TaxShift <notifications@taxshift.co>")
     resend.Emails.send({
         "from": from_addr,
         "to": [to_email],
