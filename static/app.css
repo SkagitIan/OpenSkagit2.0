@@ -5720,13 +5720,26 @@ pre {
   margin: 0 auto 13px;
   display: grid;
   place-items: center;
+  border: 1px solid rgba(8, 26, 53, 0.08);
   border-radius: 999px;
   background: #081a35;
   color: #ffffff;
   font-family: "DM Sans", system-ui, sans-serif;
   font-weight: 800;
+  box-shadow: 0 10px 22px rgba(8, 26, 53, 0.12);
 }
 
+.taxshift-feature-row article:nth-child(1) .taxshift-feature-icon {
+  background: #0f766e;
+}
+
+.taxshift-feature-row article:nth-child(2) .taxshift-feature-icon {
+  background: #2563eb;
+}
+
+.taxshift-feature-row article:nth-child(3) .taxshift-feature-icon {
+  background: #7c3aed;
+}
 .taxshift-feature-row h2 {
   margin: 0 0 6px;
   color: #081a35;
@@ -5962,32 +5975,57 @@ pre {
 }
 
 .taxshift-data {
-  padding: 22px 0 42px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 18px;
+  margin-bottom: 42px;
+  padding: 14px 18px;
+  border: 1px solid rgba(8, 26, 53, 0.09);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.74);
   color: #5c6a7d;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.55;
+  box-shadow: 0 10px 26px rgba(8, 26, 53, 0.06);
 }
 
-.taxshift-data p {
-  max-width: 760px;
+.taxshift-data .taxshift-eyebrow {
+  flex: 0 0 auto;
+  margin: 0;
+  color: #0e9aa4;
+}
+
+.taxshift-data p:not(.taxshift-eyebrow) {
+  max-width: 820px;
   margin: 0;
 }
 
 .taxshift-footer {
-  min-height: 72px;
+  min-height: 88px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  padding: 22px;
+  gap: 24px;
+  padding: 24px;
   background: #060f18;
   color: rgba(255, 255, 255, 0.72);
   font-size: 13px;
 }
 
-.taxshift-footer span {
-  color: #ffffff;
-  font-weight: 800;
+.taxshift-footer__note {
+  max-width: 520px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}
+
+.taxshift-footer__links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .taxshift-footer a {
@@ -6084,8 +6122,21 @@ pre {
     font-size: 38px;
   }
 
+  .taxshift-data {
+    display: block;
+  }
+
+  .taxshift-data p:not(.taxshift-eyebrow) {
+    margin-top: 6px;
+  }
+
   .taxshift-footer {
     flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .taxshift-footer__links {
+    justify-content: flex-start;
   }
 }
 

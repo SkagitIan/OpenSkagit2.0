@@ -1,9 +1,10 @@
 <footer class="taxshift-footer">
-  <span>taxshift</span>
-  <a href="{% url 'tax_home' %}">Tax tool</a>
-  <a href="{% url 'tax_data_sources' %}">Data sources</a>
-  <a href="{% url 'tax_faq' %}">FAQ</a>
-  <a href="{% url 'tax_contact' %}">Contact</a>
-  <a href="{% url 'tax_privacy' %}">Privacy</a>
-  <a href="{% url 'tax_terms' %}">Terms</a>
+  <p class="taxshift-footer__note">An independent OpenSkagit project, not associated with any jurisdiction, built with public data.</p>
+  <nav class="taxshift-footer__links" aria-label="Footer navigation">
+    <a href="{% url 'tax_data_sources' %}">Data sources</a>
+    <a href="{% url 'tax_faq' %}">FAQ</a>
+    <a href="{% url 'tax_contact' %}">Contact</a>
+    <a href="{% url 'tax_privacy' %}">Privacy</a>
+    <a href="{% url 'tax_terms' %}">Terms</a>
+  </nav>
 </footer>

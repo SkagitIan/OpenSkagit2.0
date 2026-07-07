@@ -3,8 +3,17 @@
 
 {% block extra_head %}
 <style>body { background: #eef6f7; }</style>
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://taxshift.co/">
+<meta property="og:site_name" content="taxshift.co">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://taxshift.co/">
+<meta property="og:title" content="taxshift.co - Track your tax shift">
+<meta property="og:description" content="See why your property taxes shifted, what changed underneath the bill, and where your dollars go. Built from public data.">
 <meta property="og:image" content="https://taxshift.co/static/images/og-home.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="taxshift.co - Track your tax shift">
+<meta name="twitter:description" content="Search Skagit County property tax snapshots and track updates from public tax data.">
 <meta name="twitter:image" content="https://taxshift.co/static/images/og-home.png">
 
 {% endblock %}
@@ -119,7 +128,8 @@
     </section>
 
     <section class="taxshift-data" id="data-sources">
-      <p>Data sources include Skagit County Assessor property records, parcel tax history, reconstructed levy detail, Washington Department of Revenue levy workbooks, and Washington State Auditor financial data where available. <a href="{% url 'tax_data_sources' %}">Read how the data is built.</a></p>
+      <p class="taxshift-eyebrow">Data sources</p>
+      <p>Built from Skagit County Assessor records, parcel tax history, reconstructed levy detail, state levy workbooks, and public financial data where available. <a href="{% url 'tax_data_sources' %}">Read how the data is built.</a></p>
     </section>
   </main>
 

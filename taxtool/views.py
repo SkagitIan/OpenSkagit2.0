@@ -44,6 +44,10 @@ logger = logging.getLogger(__name__)
 def _taxshift_context(**extra):
     context = {
         "city_pages": CITY_PAGES,
+        "meta": {
+            "title": "taxshift.co - Track your tax shift",
+            "description": "Search Skagit County property tax snapshots, see what changed in your bill, and track updates from public assessor, levy, and financial data.",
+        },
         "taxshift_turnstile_site_key": getattr(settings, "TAXSHIFT_TURNSTILE_SITE_KEY", ""),
     }
     context.update(extra)
