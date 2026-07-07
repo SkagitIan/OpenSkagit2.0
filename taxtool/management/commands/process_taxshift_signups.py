@@ -8,14 +8,20 @@ for each one.
 
 This is the safety-net path: the tax_signup view already fires this same
 work immediately in a background thread on signup (see views.py), so most
-rows are resolved within seconds. This loop exists to catch anything that
-slips through (e.g. the web worker process was mid-restart when a signup
-came in), and to send the verification email for any row whose email
-hasn't gone out yet.
+rows are resolved within seconds. This command exists to catch the rare
+case that slips through (e.g. the web worker process was mid-restart when
+a signup came in), and to send the verification email for any row whose
+email hasn't gone out yet.
+
+Because it's a safety net for an occasional, low-volume form rather than
+a constant workload, production runs it with --once on a Railway Cron
+Schedule (see railway.taxshift-signups.json — every 5 minutes) instead of
+as an always-on service. The continuous-loop mode below is kept for local
+development convenience.
 
 Usage:
-    python manage.py process_taxshift_signups
-    python manage.py process_taxshift_signups --once
+    python manage.py process_taxshift_signups --once   # production (cron)
+    python manage.py process_taxshift_signups           # local dev loop
     python manage.py process_taxshift_signups --poll-seconds 30
 """
 from __future__ import annotations
