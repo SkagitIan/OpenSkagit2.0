@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% block title %}Staff Dashboard - taxshift.co{% endblock %}
+
+{% block extra_head %}
+<style>body { background: #f7f9fb; }</style>
+{% endblock %}
+
+{% block content %}
+<div class="taxshift-page">
+  {% include "taxtool/_nav.html" %}
+
+  <main id="main-content">
+    <section class="os-dash" aria-labelledby="dash-heading">
+      <div class="os-dash__head">
+        <p class="taxshift-eyebrow">Staff only</p>
+        <h1 id="dash-heading">TaxShift operations</h1>
+        <p class="os-dash__meta">Generated {{ generated_at|date:"M j, Y g:i A" }} UTC &middot; <a href="{% url 'admin:index' %}">Django admin</a></p>
+      </div>
+
+      <div class="os-dash__stats">
+        <div class="os-dash__stat">
+          <span class="os-dash__stat-num">{{ signups.total }}</span>
+          <span class="os-dash__stat-label">Total signups</span>
+        </div>
+        <div class="os-dash__stat">
+          <span class="os-dash__stat-num">{{ signups.verified }}</span>
+          <span class="os-dash__stat-label">Verified</span>
+        </div>
+        <div class="os-dash__stat">
+          <span class="os-dash__stat-num">{{ signups.active }}</span>
+          <span class="os-dash__stat-label">Subscribed</span>
+        </div>
+        <div class="os-dash__stat">
+          <span class="os-dash__stat-num">{{ parcels.distinct_parcels }}</span>
+          <span class="os-dash__stat-label">Parcels searched</span>
+        </div>
+        <div class="os-dash__stat">
+          <span class="os-dash__stat-num">{{ notifications.sent }}</span>
+          <span class="os-dash__stat-label">Notifications sent</span>
+        </div>
+      </div>
+
+      <div class="os-dash__panel">
+        <h2>Background jobs</h2>
+        <div class="os-dash__jobs">
+          <div class="os-dash__job {% if jobs.assessor_sync.healthy %}is-ok{% else %}is-bad{% endif %}">
+            <span class="os-dash__job-dot" aria-hidden="true"></span>
+            <div>
+              <strong>Assessor sync</strong>
+              {% with run=jobs.assessor_sync.runs.0 %}
+              {% if run %}
+                <p>{{ run.status }} &middot; {{ run.started_at|timesince }} ago{% if run.error %} &middot; {{ run.error|truncatechars:80 }}{% endif %}</p>
+              {% else %}
+                <p>No runs recorded.</p>
+              {% endif %}
+              {% endwith %}
+            </div>
+          </div>
+          <div class="os-dash__job {% if jobs.live_check.healthy %}is-ok{% else %}is-bad{% endif %}">
+            <span class="os-dash__job-dot" aria-hidden="true"></span>
+            <div>
+              <strong>Live parcel check</strong>
+              {% with run=jobs.live_check.runs.0 %}
+              {% if run %}
+                <p>{{ run.status }} &middot; {{ run.started_at|timesince }} ago{% if run.error %} &middot; {{ run.error|truncatechars:80 }}{% endif %}</p>
+              {% else %}
+                <p>No runs recorded.</p>
+              {% endif %}
+              {% endwith %}
+            </div>
+          </div>
+          <div class="os-dash__job {% if jobs.tax_statement.healthy %}is-ok{% else %}is-bad{% endif %}">
+            <span class="os-dash__job-dot" aria-hidden="true"></span>
+            <div>
+              <strong>Tax statement sync</strong>
+              {% with run=jobs.tax_statement.runs.0 %}
+              {% if run %}
+                <p>{{ run.get_status_display }} &middot; {{ run.started_at|timesince }} ago{% if run.errors %} &middot; {{ run.errors }} error(s){% endif %}</p>
+              {% else %}
+                <p>No runs recorded.</p>
+              {% endif %}
+              {% endwith %}
+            </div>
+          </div>
+        </div>
+        <p class="os-dash__panel-note">Full exception traces go to Sentry once <code>SENTRY_DSN</code> is set &mdash; this panel only reflects whether each job's own run record reports success.</p>
+      </div>
+
+      <div class="os-dash__panel">
+        <div class="os-dash__panel-head">
+          <h2>Notification signups</h2>
+          <div class="os-dash__substats">
+            <span>Resolved <strong>{{ signups.by_status.resolved }}</strong></span>
+            <span>Pending <strong>{{ signups.by_status.pending }}</strong></span>
+            <span>Unresolved <strong>{{ signups.by_status.unresolved }}</strong></span>
+            <span>Ambiguous <strong>{{ signups.by_status.ambiguous }}</strong></span>
+            <span>Unsubscribed <strong>{{ signups.unsubscribed }}</strong></span>
+          </div>
+        </div>
+
+        {% if signups.max_daily %}
+        <div class="os-dash__sparkline" role="img" aria-label="Signups per day over the last 14 days">
+          {% for day in signups.daily_counts %}
+          <span style="height: {% widthratio day.count signups.max_daily 100 %}%" title="{{ day.day }}: {{ day.count }}"></span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="os-dash__table-wrap">
+          <table class="os-dash__table">
+            <thead>
+              <tr><th>Email</th><th>Parcel</th><th>Status</th><th>Verified</th><th>Active</th><th>Signed up</th></tr>
+            </thead>
+            <tbody>
+              {% for s in signups.recent %}
+              <tr>
+                <td>{{ s.email }}</td>
+                <td>{% if s.parcel_number %}<a href="{% url 'tax_parcel' s.parcel_number %}">{{ s.parcel_number }}</a>{% else %}&mdash;{% endif %}</td>
+                <td><span class="os-dash__pill os-dash__pill--{{ s.resolution_status }}">{{ s.get_resolution_status_display }}</span></td>
+                <td>{% if s.is_verified %}&check;{% else %}&mdash;{% endif %}</td>
+                <td>{% if s.is_active %}&check;{% else %}&mdash;{% endif %}</td>
+                <td>{{ s.created_at|date:"M j, Y" }}</td>
+              </tr>
+              {% empty %}
+              <tr><td colspan="6">No signups yet.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="os-dash__panel">
+        <h2>Parcels searched</h2>
+        <p class="os-dash__panel-note">{{ parcels.total_searches }} total searches across {{ parcels.distinct_parcels }} distinct parcels.</p>
+        <div class="os-dash__cols">
+          <div>
+            <h3>Most searched</h3>
+            <div class="os-dash__table-wrap">
+              <table class="os-dash__table">
+                <thead><tr><th>Parcel</th><th>Address</th><th>Hits</th></tr></thead>
+                <tbody>
+                  {% for p in parcels.top_searched %}
+                  <tr>
+                    <td><a href="{% url 'tax_parcel' p.parcel_number %}">{{ p.parcel_number }}</a></td>
+                    <td>{{ p.address }}</td>
+                    <td>{{ p.hit_count }}</td>
+                  </tr>
+                  {% empty %}
+                  <tr><td colspan="3">No searches yet.</td></tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <h3>Most recent</h3>
+            <div class="os-dash__table-wrap">
+              <table class="os-dash__table">
+                <thead><tr><th>Parcel</th><th>Address</th><th>Last seen</th></tr></thead>
+                <tbody>
+                  {% for p in parcels.recent %}
+                  <tr>
+                    <td><a href="{% url 'tax_parcel' p.parcel_number %}">{{ p.parcel_number }}</a></td>
+                    <td>{{ p.address }}</td>
+                    <td>{{ p.last_seen_at|timesince }} ago</td>
+                  </tr>
+                  {% empty %}
+                  <tr><td colspan="3">No searches yet.</td></tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="os-dash__panel">
+        <div class="os-dash__panel-head">
+          <h2>Notifications</h2>
+          <div class="os-dash__substats">
+            <span>Queued <strong>{{ notifications.total }}</strong></span>
+            <span>Sent <strong>{{ notifications.sent }}</strong></span>
+            <span>Pending send <strong>{{ notifications.pending }}</strong></span>
+            <span>Assessor changes <strong>{{ notifications.assessor_change }}</strong></span>
+            <span>Auditor recordings <strong>{{ notifications.auditor_recording }}</strong></span>
+          </div>
+        </div>
+        <div class="os-dash__table-wrap">
+          <table class="os-dash__table">
+            <thead>
+              <tr><th>Signup</th><th>Parcel</th><th>Trigger</th><th>Sent</th><th>Queued</th></tr>
+            </thead>
+            <tbody>
+              {% for n in notifications.recent %}
+              <tr>
+                <td>{{ n.signup.email }}</td>
+                <td><a href="{% url 'tax_parcel' n.parcel_number %}">{{ n.parcel_number }}</a></td>
+                <td>{{ n.get_trigger_type_display }}</td>
+                <td>
+                  {% if n.sent_at %}{{ n.sent_at|date:"M j, g:i A" }}{% else %}<span class="os-dash__pill os-dash__pill--pending">Pending</span>{% endif %}
+                </td>
+                <td>{{ n.created_at|timesince }} ago</td>
+              </tr>
+              {% empty %}
+              <tr><td colspan="5">No notifications queued yet.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {% include "taxtool/_footer.html" %}
+</div>
+{% endblock %}

@@ -4,6 +4,7 @@ import threading
 import requests
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -524,3 +525,10 @@ def tax_agency(request, mcag):
         "surplus_positive": ((budget or {}).get("surplus_deficit") or 0) >= 0,
         "property_tax_pct": (budget or {}).get("property_tax_pct_of_revenue"),
     })
+
+
+@staff_member_required
+def tax_staff_dashboard(request):
+    from .dashboard import build_dashboard_context
+
+    return render(request, "taxtool/staff_dashboard.html", build_dashboard_context())

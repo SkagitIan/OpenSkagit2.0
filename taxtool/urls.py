@@ -8,6 +8,7 @@ urlpatterns = [
     path("login/", views.tax_login, name="tax_login"),
     path("login/<str:token>/", views.tax_login_token, name="tax_login_token"),
     path("account/", views.tax_account, name="tax_account"),
+    path("staff/", views.tax_staff_dashboard, name="tax_staff_dashboard"),
     path("unsubscribe/<str:token>/", views.tax_unsubscribe, name="tax_unsubscribe"),
     path("verify/<str:token>/", views.tax_verify, name="tax_verify"),
     path("contact/", views.tax_contact, name="tax_contact"),
