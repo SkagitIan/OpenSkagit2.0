@@ -22,6 +22,9 @@ Thumbs.db
 data/gis/raw/
 data/gis/extracted/
 
+# Generated feature exports (regenerate with export_geo_features_parquet).
+data/processed/
+
 # Large raw data dumps (not needed at runtime; regenerate static/data/*.geojson from these)
 data/*.zip
 data/*.har

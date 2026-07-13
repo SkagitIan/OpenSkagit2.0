@@ -8,6 +8,7 @@ from .models import (
     AuditorRecording,
     AuditorSyncQuery,
     GISSource,
+    ParcelGeoStaticFeature,
 )
 
 
@@ -160,6 +161,14 @@ class GISSourceAdmin(ReadOnlyAuditAdmin):
         "created_at",
         "updated_at",
     )
+
+
+@admin.register(ParcelGeoStaticFeature)
+class ParcelGeoStaticFeatureAdmin(ReadOnlyAuditAdmin):
+    list_display = ("parcel_number", "city_name", "school_district", "fire_district", "feature_status", "point_source", "updated_at")
+    list_filter = ("feature_status", "point_source", "city_name", "missing_coordinate_flag")
+    search_fields = ("parcel_number", "city_name", "school_district", "fire_district", "voting_precinct")
+    readonly_fields = [f.name for f in ParcelGeoStaticFeature._meta.get_fields() if f.name != "id"] + ["id"]
 
 
 @admin.register(AuditorSyncQuery)

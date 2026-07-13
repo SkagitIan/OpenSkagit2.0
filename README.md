@@ -118,3 +118,49 @@ the `gis_sources` table (`last_status`, `last_changed_at`, `last_error`, hashes)
 and is browsable read-only in the Django admin under **Assessor Sync → GIS
 sources**. Statuses are `never_synced`, `unchanged`, `changed`,
 `download_failed`, `extract_failed`, and `disabled`.
+
+## Static Parcel Geography Features
+
+`build_geo_features` builds one row per active parcel of precomputed geography
+that rarely changes -- containing city/comp-plan designation/school
+district/fire district/voting precinct, nearest road/public place/tide gate,
+and distance to five fixed city anchors (Mount Vernon, Burlington,
+Sedro-Woolley, Anacortes, La Conner). It reads the shapefiles
+`sync_gis_sources` already extracted under `data/gis/extracted/`, so run that
+command first. This step only computes static geography -- no regression
+models, no nearby-sales features, no GIS warehouse.
+
+Each parcel's point is resolved in order: assessor X/Y (not present in the
+current assessor export), the county's PNumbers point layer, or the parcel
+polygon's centroid as a fallback. All spatial work happens in EPSG:2926
+(Washington State Plane North, US feet), matching the source shapefiles;
+`lat`/`lon` are reprojected to WGS84 only for convenience.
+
+```powershell
+python manage.py build_geo_features
+```
+
+By default (`--missing-or-changed`) it rebuilds only parcels with no feature
+row yet, a changed resolved coordinate or point source, a prior `failed`
+status, or a stale `feature_version`. Other flags:
+
+```powershell
+python manage.py build_geo_features --full              # rebuild every active parcel
+python manage.py build_geo_features --parcel P123456     # rebuild one parcel
+python manage.py build_geo_features --limit 200          # cap how many parcels are rebuilt (testing)
+```
+
+The summary reports active parcels checked, parcels needing rebuild, parcels
+updated, parcels missing coordinates, parcels failed, and runtime. One bad
+parcel is marked `feature_status = failed` and never stops the rest of the
+run; parcels with no resolvable point are marked `missing_coordinates`.
+Results are browsable read-only in the Django admin under **Assessor Sync →
+Parcel geo static features**.
+
+### Export to Parquet
+
+```powershell
+python manage.py export_geo_features_parquet
+```
+
+Writes the full table to `data/processed/parcel_geo_static_features.parquet`.

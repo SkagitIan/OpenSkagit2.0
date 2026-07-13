@@ -14,6 +14,10 @@ resend
 pyshp
 pyproj
 PyYAML
+geopandas
+shapely
+pandas
+pyarrow
 pypdf
 sentry-sdk
 Pillow>=12,<13

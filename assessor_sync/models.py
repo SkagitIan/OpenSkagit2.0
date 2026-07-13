@@ -221,3 +221,68 @@ class AuditorSyncQuery(models.Model):
 
     def __str__(self):
         return f"{self.document_type} {self.start_date} to {self.end_date}"
+
+
+class ParcelGeoStaticFeature(models.Model):
+    """
+    One row per active parcel: precomputed geography that rarely changes
+    (containing city/district/precinct, nearest road/place/tide gate, distance
+    to fixed city anchors). Built by ``build_geo_features`` from the shapefiles
+    ``sync_gis_sources`` already downloaded and extracted.
+
+    This is static geography only -- no regression modeling, no nearby-sales
+    features, no GIS warehouse. Later steps build on top of this table.
+    """
+
+    STATUS_OK = "ok"
+    STATUS_MISSING_COORDINATES = "missing_coordinates"
+    STATUS_FAILED = "failed"
+
+    SOURCE_ASSESSOR_XY = "assessor_xy"
+    SOURCE_PARCEL_NUMBERS_POINT = "parcel_numbers_point"
+    SOURCE_PARCEL_CENTROID = "parcel_centroid"
+
+    parcel_number = models.TextField(unique=True)
+    prop_id = models.TextField(blank=True, null=True)
+
+    x = models.FloatField(blank=True, null=True)
+    y = models.FloatField(blank=True, null=True)
+    lat = models.FloatField(blank=True, null=True)
+    lon = models.FloatField(blank=True, null=True)
+    point_source = models.TextField(blank=True, null=True)
+
+    city_name = models.TextField(blank=True, null=True)
+    comp_plan_designation = models.TextField(blank=True, null=True)
+    school_district = models.TextField(blank=True, null=True)
+    fire_district = models.TextField(blank=True, null=True)
+    voting_precinct = models.TextField(blank=True, null=True)
+    historical_area_flag = models.BooleanField(default=False)
+
+    nearest_road_name = models.TextField(blank=True, null=True)
+    distance_to_nearest_road_feet = models.FloatField(blank=True, null=True)
+    distance_to_nearest_road_miles = models.FloatField(blank=True, null=True)
+
+    distance_to_mount_vernon_miles = models.FloatField(blank=True, null=True)
+    distance_to_burlington_miles = models.FloatField(blank=True, null=True)
+    distance_to_sedro_woolley_miles = models.FloatField(blank=True, null=True)
+    distance_to_anacortes_miles = models.FloatField(blank=True, null=True)
+    distance_to_la_conner_miles = models.FloatField(blank=True, null=True)
+
+    nearest_public_place_name = models.TextField(blank=True, null=True)
+    distance_to_nearest_public_place_miles = models.FloatField(blank=True, null=True)
+    distance_to_nearest_tide_gate_miles = models.FloatField(blank=True, null=True)
+
+    missing_coordinate_flag = models.BooleanField(default=False)
+    feature_status = models.TextField(default=STATUS_OK)
+    feature_version = models.IntegerField(default=1)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "parcel_geo_static_features"
+        ordering = ["parcel_number"]
+        indexes = [models.Index(fields=["feature_status"])]
+
+    def __str__(self):
+        return f"{self.parcel_number} ({self.feature_status})"
