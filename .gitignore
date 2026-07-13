@@ -17,6 +17,11 @@ django-runserver-*.log
 Thumbs.db
 .vscode/
 
+# GIS source files downloaded by sync_gis_sources (regenerated on demand).
+# The gis_sources.yaml config under data/gis/sources/ IS tracked.
+data/gis/raw/
+data/gis/extracted/
+
 # Large raw data dumps (not needed at runtime; regenerate static/data/*.geojson from these)
 data/*.zip
 data/*.har

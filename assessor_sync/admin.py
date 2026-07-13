@@ -7,6 +7,7 @@ from .models import (
     AssessorSyncRun,
     AuditorRecording,
     AuditorSyncQuery,
+    GISSource,
 )
 
 
@@ -132,6 +133,32 @@ class AuditorRecordingAdmin(ReadOnlyAuditAdmin):
         "last_seen_run",
         "first_seen_at",
         "last_seen_at",
+    )
+
+
+@admin.register(GISSource)
+class GISSourceAdmin(ReadOnlyAuditAdmin):
+    list_display = ("layer_name", "display_name", "enabled", "last_status", "last_downloaded_at", "last_changed_at")
+    list_filter = ("last_status", "enabled", "expected_geometry_type", "refresh_frequency")
+    search_fields = ("layer_name", "display_name", "url", "last_error")
+    readonly_fields = (
+        "id",
+        "layer_name",
+        "display_name",
+        "url",
+        "enabled",
+        "expected_geometry_type",
+        "refresh_frequency",
+        "raw_file_path",
+        "extracted_path",
+        "source_hash",
+        "previous_source_hash",
+        "last_downloaded_at",
+        "last_changed_at",
+        "last_status",
+        "last_error",
+        "created_at",
+        "updated_at",
     )
 
 

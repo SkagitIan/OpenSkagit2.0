@@ -52,3 +52,69 @@ python manage.py sync_assessor_data
 ```
 
 The included cron schedule is `0 10 * * *`, which Railway evaluates in UTC.
+
+## GIS Source Sync
+
+`sync_gis_sources` keeps clean local copies of Skagit County GIS source
+shapefiles and tracks whether each one changed. This is the foundation step for
+later parcel geographic feature work — it only downloads, hashes, unzips, and
+records sources. It does **not** build parcel features, import into PostGIS, or
+run analysis.
+
+### Where sources are configured
+
+Layers live in [`data/gis/sources/gis_sources.yaml`](data/gis/sources/gis_sources.yaml).
+Each entry has a `url`, `display_name`, `enabled` flag, `expected_geometry_type`,
+and `refresh_frequency`. Replace the placeholder URLs with the real Skagit GIS
+download URLs (see the [county GIS catalog](https://www.skagitcounty.net/Departments/GIS/Digital/main.htm))
+as they are confirmed. Set `enabled: false` to skip a layer without deleting it.
+
+Downloaded files are written under `data/gis/` (git-ignored):
+
+```text
+data/gis/raw/<layer>/source.zip        # raw download + source_hash.txt + downloaded_at.txt
+data/gis/extracted/<layer>/            # validated shapefile (.shp/.shx/.dbf/.prj, etc.)
+```
+
+### Run all sources
+
+```powershell
+python manage.py sync_gis_sources
+```
+
+Each enabled layer is downloaded, SHA-256 hashed, and compared to the hash
+stored in the `gis_sources` table. Only layers whose hash changed are
+re-extracted; the previous extracted folder is preserved until a new download
+**and** extraction both succeed. One failing layer never stops the others.
+
+### Run a single layer
+
+```powershell
+python manage.py sync_gis_sources --layer zoning
+```
+
+### Force a refresh
+
+Re-download and re-extract even when the hash looks unchanged:
+
+```powershell
+python manage.py sync_gis_sources --force
+```
+
+### Preview without writing
+
+```powershell
+python manage.py sync_gis_sources --dry-run
+```
+
+`--dry-run` reports what would happen without downloading, writing files, or
+touching the database.
+
+### Which layers changed
+
+The end-of-run summary lists changed, unchanged, failed, and disabled layers,
+plus each layer's raw and extracted paths. Per-layer status is also stored in
+the `gis_sources` table (`last_status`, `last_changed_at`, `last_error`, hashes)
+and is browsable read-only in the Django admin under **Assessor Sync → GIS
+sources**. Statuses are `never_synced`, `unchanged`, `changed`,
+`download_failed`, `extract_failed`, and `disabled`.

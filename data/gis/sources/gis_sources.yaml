@@ -1,0 +1,51 @@
+# Skagit County GIS source layers.
+#
+# Each entry describes one downloadable shapefile package (usually a .zip).
+# The `sync_gis_sources` management command reads this file, downloads each
+# enabled layer, hashes the raw download, and extracts the shapefile into
+# data/gis/extracted/<layer_name>/ when the source changes.
+#
+# This file only configures *where* source files come from. It does not build
+# parcel features or import anything into PostGIS.
+#
+# Skagit County GIS digital data catalog:
+#   https://www.skagitcounty.net/Departments/GIS/Digital/main.htm
+#
+# Replace the placeholder URLs below with the real download URLs as they are
+# confirmed. Set `enabled: false` to skip a layer without deleting its config.
+
+layers:
+  city_limits:
+    display_name: "City Limits"
+    url: "https://example.com/skagit/city_limits.zip"
+    enabled: true
+    expected_geometry_type: "Polygon"
+    refresh_frequency: "weekly"
+
+  zoning:
+    display_name: "Zoning"
+    url: "https://example.com/skagit/zoning.zip"
+    enabled: true
+    expected_geometry_type: "Polygon"
+    refresh_frequency: "weekly"
+
+  flood_zones:
+    display_name: "Flood Zones"
+    url: "https://example.com/skagit/flood_zones.zip"
+    enabled: true
+    expected_geometry_type: "Polygon"
+    refresh_frequency: "weekly"
+
+  roads:
+    display_name: "Roads"
+    url: "https://example.com/skagit/roads.zip"
+    enabled: true
+    expected_geometry_type: "LineString"
+    refresh_frequency: "weekly"
+
+  shoreline:
+    display_name: "Shoreline"
+    url: "https://example.com/skagit/shoreline.zip"
+    enabled: true
+    expected_geometry_type: "LineString"
+    refresh_frequency: "weekly"

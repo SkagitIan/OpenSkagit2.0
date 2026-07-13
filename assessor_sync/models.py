@@ -156,6 +156,48 @@ class AuditorRecording(models.Model):
         return f"{self.recording_number} {self.document_type}"
 
 
+class GISSource(models.Model):
+    """
+    Tracks one downloadable GIS source layer (usually a shapefile ZIP).
+
+    This table stores metadata about the *source file* only -- where it came
+    from, its hash, and whether it changed on the last sync. It never stores
+    individual GIS features or geometries. Later steps build parcel features
+    from the extracted shapefiles this table points at.
+    """
+
+    STATUS_NEVER_SYNCED = "never_synced"
+    STATUS_UNCHANGED = "unchanged"
+    STATUS_CHANGED = "changed"
+    STATUS_DOWNLOAD_FAILED = "download_failed"
+    STATUS_EXTRACT_FAILED = "extract_failed"
+    STATUS_DISABLED = "disabled"
+
+    layer_name = models.TextField(unique=True)
+    display_name = models.TextField(blank=True)
+    url = models.TextField(blank=True)
+    enabled = models.BooleanField(default=True)
+    expected_geometry_type = models.TextField(blank=True)
+    refresh_frequency = models.TextField(blank=True)
+    raw_file_path = models.TextField(blank=True)
+    extracted_path = models.TextField(blank=True)
+    source_hash = models.TextField(blank=True)
+    previous_source_hash = models.TextField(blank=True)
+    last_downloaded_at = models.DateTimeField(blank=True, null=True)
+    last_changed_at = models.DateTimeField(blank=True, null=True)
+    last_status = models.TextField(default=STATUS_NEVER_SYNCED)
+    last_error = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "gis_sources"
+        ordering = ["layer_name"]
+
+    def __str__(self):
+        return f"{self.layer_name} ({self.last_status})"
+
+
 class AuditorSyncQuery(models.Model):
     run = models.ForeignKey(AssessorSyncRun, on_delete=models.DO_NOTHING, db_column="run_id", related_name="auditor_queries")
     document_type = models.TextField()

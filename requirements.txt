@@ -13,6 +13,7 @@ requests
 resend
 pyshp
 pyproj
+PyYAML
 pypdf
 sentry-sdk
 Pillow>=12,<13
