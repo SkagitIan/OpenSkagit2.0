@@ -1,0 +1,1326 @@
+<title>Skagit Parcel Data — Full Schema Reference</title>
+<style>
+  @font-face {
+    font-family: "SysMono";
+    src: local("Cascadia Code"), local("SF Mono"), local("Consolas");
+  }
+
+  :root {
+    --paper: #eef2f0;
+    --paper-raised: #e2e9e5;
+    --ink: #10181c;
+    --ink-soft: #3a4548;
+    --slate: #5b6b6a;
+    --rule: #c7d1cc;
+    --spruce: #2f6f5e;
+    --spruce-soft: #e3ede9;
+    --ochre: #8a5f22;
+    --ochre-soft: #f3e6d0;
+    --card: #ffffff;
+    --shadow: rgba(16, 24, 28, 0.06);
+    --accent-glow: rgba(47, 111, 94, 0.14);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0f1517;
+      --paper-raised: #141c1e;
+      --ink: #e7edea;
+      --ink-soft: #b7c4c0;
+      --slate: #8fa09d;
+      --rule: #2a3538;
+      --spruce: #74c2a8;
+      --spruce-soft: #16241f;
+      --ochre: #e0ad63;
+      --ochre-soft: #2a2113;
+      --card: #131b1d;
+      --shadow: rgba(0, 0, 0, 0.35);
+      --accent-glow: rgba(116, 194, 168, 0.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1517;
+    --paper-raised: #141c1e;
+    --ink: #e7edea;
+    --ink-soft: #b7c4c0;
+    --slate: #8fa09d;
+    --rule: #2a3538;
+    --spruce: #74c2a8;
+    --spruce-soft: #16241f;
+    --ochre: #e0ad63;
+    --ochre-soft: #2a2113;
+    --card: #131b1d;
+    --shadow: rgba(0, 0, 0, 0.35);
+    --accent-glow: rgba(116, 194, 168, 0.12);
+  }
+  :root[data-theme="light"] {
+    --paper: #eef2f0;
+    --paper-raised: #e2e9e5;
+    --ink: #10181c;
+    --ink-soft: #3a4548;
+    --slate: #5b6b6a;
+    --rule: #c7d1cc;
+    --spruce: #2f6f5e;
+    --spruce-soft: #e3ede9;
+    --ochre: #8a5f22;
+    --ochre-soft: #f3e6d0;
+    --card: #ffffff;
+    --shadow: rgba(16, 24, 28, 0.06);
+    --accent-glow: rgba(47, 111, 94, 0.14);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: ui-sans-serif, "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  a { color: var(--spruce); }
+
+  .mono {
+    font-family: "SysMono", ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 0;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 28px 18px 40px 0;
+    border-right: 1px solid var(--rule);
+  }
+
+  .sidebar-title {
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--slate);
+    font-weight: 600;
+    margin: 0 0 14px 14px;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sidebar-group {
+    margin-top: 16px;
+  }
+  .sidebar-group:first-child { margin-top: 0; }
+
+  .sidebar-group-label {
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+    font-weight: 700;
+    padding: 4px 14px;
+  }
+
+  .sidebar a.tbl-link {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 14px;
+    border-radius: 7px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 13.2px;
+  }
+  .sidebar a.tbl-link:hover { background: var(--paper-raised); color: var(--ink); }
+  .sidebar a.tbl-link .n {
+    font-family: "SysMono", ui-monospace, monospace;
+    font-size: 10.5px;
+    color: var(--slate);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Main column ---------- */
+  main {
+    padding: 40px 28px 90px 32px;
+    min-width: 0;
+  }
+
+  header.page-head {
+    margin-bottom: 28px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--spruce);
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-size: 30px;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+    font-weight: 700;
+  }
+
+  .lede {
+    max-width: 62ch;
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin: 0 0 22px;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .stat .v {
+    font-family: "SysMono", ui-monospace, monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .stat .l {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  /* ---------- Key callout ---------- */
+  .keymap {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 40px;
+    box-shadow: 0 1px 2px var(--shadow);
+  }
+  .keymap h2 {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+    color: var(--slate);
+    font-weight: 700;
+  }
+  .keymap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .keyfam {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .keyfam .chip {
+    flex-shrink: 0;
+  }
+  .keyfam p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .keyfam .sample {
+    font-size: 12px;
+    color: var(--slate);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: "SysMono", ui-monospace, monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .chip.key { background: var(--ochre-soft); color: var(--ochre); }
+  .chip.count { background: var(--paper-raised); color: var(--ink-soft); }
+
+  .note {
+    font-size: 13px;
+    color: var(--slate);
+    margin: 14px 0 0;
+    padding-top: 12px;
+    border-top: 1px dashed var(--rule);
+  }
+  .note strong { color: var(--ink-soft); }
+
+  /* ---------- Category / table cards ---------- */
+  .category {
+    margin-bottom: 46px;
+    scroll-margin-top: 20px;
+  }
+  .category-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .category-head h2 {
+    font-size: 19px;
+    margin: 0;
+    font-weight: 700;
+  }
+  .category-head .desc {
+    font-size: 12.5px;
+    color: var(--slate);
+  }
+
+  .tbl-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 2px var(--shadow);
+    scroll-margin-top: 20px;
+    overflow: hidden;
+  }
+
+  .tbl-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .tbl-card > summary::-webkit-details-marker { display: none; }
+
+  .tbl-card > summary .caret {
+    color: var(--slate);
+    font-size: 11px;
+    transition: transform 0.15s ease;
+    flex-shrink: 0;
+  }
+  .tbl-card[open] > summary .caret { transform: rotate(90deg); }
+
+  .tbl-card > summary .tname {
+    font-family: "SysMono", ui-monospace, monospace;
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  .tbl-card > summary .purpose {
+    font-size: 12.5px;
+    color: var(--slate);
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .tbl-body {
+    border-top: 1px solid var(--rule);
+    padding: 4px 18px 16px;
+  }
+
+  table.cols {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.8px;
+  }
+  table.cols th {
+    text-align: left;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--slate);
+    font-weight: 600;
+    padding: 8px 10px 6px;
+    border-bottom: 1px solid var(--rule);
+  }
+  table.cols td {
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: baseline;
+  }
+  table.cols tr:last-child td { border-bottom: none; }
+  table.cols td.col-name {
+    font-family: "SysMono", ui-monospace, monospace;
+    color: var(--ink);
+  }
+  table.cols td.col-type {
+    font-family: "SysMono", ui-monospace, monospace;
+    color: var(--slate);
+  }
+  table.cols tr.is-key td.col-name {
+    color: var(--ochre);
+    font-weight: 700;
+  }
+  table.cols tr.is-key td.col-name::after {
+    content: " \1F511";
+    font-size: 10px;
+  }
+
+  .req-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+  }
+  .req-dot.opt {
+    background: transparent;
+    border: 1.4px solid var(--rule);
+  }
+
+  .footnote-block {
+    background: var(--paper-raised);
+    border-radius: 12px;
+    padding: 18px 22px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .footnote-block h2 {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    color: var(--slate);
+    font-weight: 700;
+  }
+  .footnote-block ul {
+    margin: 0;
+    padding-left: 18px;
+    columns: 2;
+    column-gap: 28px;
+  }
+  .footnote-block li {
+    margin-bottom: 6px;
+    break-inside: avoid;
+  }
+  .footnote-block .mono { color: var(--ink); }
+
+  @media (max-width: 880px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--rule); padding: 20px; }
+    main { padding: 28px 18px 60px; }
+    .footnote-block ul { columns: 1; }
+  }
+
+  :focus-visible { outline: 2px solid var(--spruce); outline-offset: 2px; }
+</style>
+
+<div class="shell">
+  <aside class="sidebar">
+    <p class="sidebar-title">Parcel Schema</p>
+    <nav>
+      <div class="sidebar-group">
+        <a class="tbl-link" href="#overview"><span>Overview &amp; join keys</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Core assessor record</div>
+        <a class="tbl-link" href="#assessor_rollup"><span>assessor_rollup</span><span class="n">83,646</span></a>
+        <a class="tbl-link" href="#skagit_parcels"><span>skagit_parcels</span><span class="n">83,638</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Land &amp; improvements</div>
+        <a class="tbl-link" href="#land"><span>land</span><span class="n">106,623</span></a>
+        <a class="tbl-link" href="#improvements"><span>improvements</span><span class="n">308,651</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Sales &amp; recordings</div>
+        <a class="tbl-link" href="#sales"><span>sales</span><span class="n">352,213</span></a>
+        <a class="tbl-link" href="#auditor_recordings"><span>auditor_recordings</span><span class="n">216</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Geography (PostGIS)</div>
+        <a class="tbl-link" href="#gis_skagit_parcels"><span>gis_skagit_parcels</span><span class="n">82,449</span></a>
+        <a class="tbl-link" href="#parcel_geo_static_features"><span>parcel_geo_static_features</span><span class="n">83,281</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Zoning</div>
+        <a class="tbl-link" href="#parcel_zoning"><span>parcel_zoning</span><span class="n">126,329</span></a>
+        <a class="tbl-link" href="#parcel_primary_zoning"><span>parcel_primary_zoning</span><span class="n">72,040</span></a>
+        <a class="tbl-link" href="#waza_zoning_zones"><span>waza_zoning_zones</span><span class="n">12,600</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Tax &amp; levy</div>
+        <a class="tbl-link" href="#v_parcel_tax_detail"><span>v_parcel_tax_detail</span><span class="n">1.43M</span></a>
+        <a class="tbl-link" href="#v_parcel_tax_summary"><span>v_parcel_tax_summary</span><span class="n">909.5K</span></a>
+        <a class="tbl-link" href="#tax_delinquency_taxstatement"><span>tax_delinquency_taxstatement</span><span class="n">58,306</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Historical values</div>
+        <a class="tbl-link" href="#skagit_parcel_history"><span>skagit_parcel_history</span><span class="n">2.49M</span></a>
+        <a class="tbl-link" href="#skagit_parcel_history_status"><span>..._status</span><span class="n">83,272</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Land ledger analysis</div>
+        <a class="tbl-link" href="#land_ledger_parcels"><span>land_ledger_parcels</span><span class="n">3,971</span></a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Reference / lookup</div>
+        <a class="tbl-link" href="#code_mappings"><span>code_mappings</span><span class="n">1,040</span></a>
+      </div>
+      <div class="sidebar-group">
+        <a class="tbl-link" href="#also-references"><span>Also references a parcel &rarr;</span></a>
+      </div>
+    </nav>
+  </aside>
+
+  <main>
+    <header class="page-head" id="overview">
+      <p class="eyebrow">OpenSkagit &middot; Postgres / PostGIS on Railway</p>
+      <h1>Every table that joins to a parcel</h1>
+      <p class="lede">
+        Skagit County publishes parcel data as several independently-loaded feeds &mdash; the assessor export,
+        the auditor's recorded-document index, the county's GIS parcel layer, WAZA zoning, and levy/tax rolls.
+        This is the full set, organized the way you'd actually pull one parcel's story: record &rarr; land &amp;
+        improvements &rarr; sales &amp; recordings &rarr; geometry &amp; zoning &rarr; tax history.
+      </p>
+      <div class="stat-row">
+        <div class="stat"><span class="v">20</span><span class="l">tables</span></div>
+        <div class="stat"><span class="v">~6.0M</span><span class="l">total rows</span></div>
+        <div class="stat"><span class="v">2</span><span class="l">join-key families</span></div>
+        <div class="stat"><span class="v">83,646</span><span class="l">parcels on record</span></div>
+      </div>
+    </header>
+
+    <section class="keymap">
+      <h2>Two join-key families, one identifier</h2>
+      <div class="keymap-grid">
+        <div class="keyfam">
+          <span class="chip key">parcel_number</span>
+          <p>Assessor-derived tables key on <code class="mono">parcel_number</code> &mdash; or a lowercase
+            <code class="mono">parcelnumber</code> on <span class="mono">land</span>/<span class="mono">improvements</span>,
+            inherited from the source export's column naming.
+            <span class="sample">e.g. <span class="mono">P74512</span></span></p>
+        </div>
+        <div class="keyfam">
+          <span class="chip key">parcel_id</span>
+          <p>GIS-derived tables (loaded from the county's shapefiles, not the assessor export) key on
+            <code class="mono">parcel_id</code> instead. <strong>Same value, same format</strong> &mdash;
+            verified: 77,304 of 83,646 assessor rows match a <span class="mono">gis_skagit_parcels.parcel_id</span> row directly.
+            <span class="sample">e.g. <span class="mono">P74512</span></span></p>
+        </div>
+      </div>
+      <p class="note"><strong>Coverage gap:</strong> not every <span class="mono">parcel_number</span> has a matching
+        <span class="mono">parcel_id</span> geometry &mdash; about 5,900 parcels (7%) have no GIS shape on file, which is
+        exactly what <span class="mono">parcel_geo_static_features.feature_status = 'missing_coordinates'</span> tracks.</p>
+    </section>
+
+    <!-- ============ CORE ASSESSOR RECORD ============ -->
+    <section class="category">
+      <div class="category-head">
+        <h2>Core assessor record</h2>
+        <span class="desc">start here for any parcel lookup</span>
+      </div>
+
+      <details class="tbl-card" id="assessor_rollup" open>
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">assessor_rollup</span>
+          <span class="purpose">The primary parcel record &mdash; owner, situs address, values, structure. Source-of-truth export; every value column is raw <span class="mono">text</span> plus a parallel <span class="mono">_num</span> column.</span>
+          <span class="chip count">83,646 rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">id</td><td class="col-type">bigint</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">aid</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">account_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">legal_description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situs_street_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situs_street_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situs_city_state_zip</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">old_street_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">old_street_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">old_city_state_zip</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_add_1</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_add_2</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_add_3</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_city</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_state</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_zip</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">exemptions</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">neighborhood_code</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">building_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">land_use</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">impr_land_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">unimpr_land_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">timber_land_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">assessed_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">taxable_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">total_market_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">acres</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_date</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_price</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_deed_type</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">total_taxes</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">year_built</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">living_area</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tot_special_assessments</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">general_taxes</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">inactive_date</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">buildingstyle</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">foundation</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">exterior_walls</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">roof_covering</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">roof_style</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">floor_covering</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">floor_construction</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">interior_finish</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">plumbing</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">garagesqft</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">heat_air_cond</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">fireplace</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">finishedbasement</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">number_of_bedrooms</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">eff_year_built</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">unfinishedbasement</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">fire_district</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">school_district</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">city_district</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">unit</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">levy_code</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">current_use_adjustment</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tide_land_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">senior_exemption_adjustment</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">township</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">range</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">section</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">quarter_section</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tax_year</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">appraisal_year</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">utilities</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tax_statement_taxable_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">proptype</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">hasseptic</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">land_use_code</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">land_use_description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">neighborhood_code_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">neighborhood_description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">utilities_codes</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">utilities_description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">assessed_value_num</td><td class="col-type">real</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">taxable_value_num</td><td class="col-type">real</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">total_market_value_num</td><td class="col-type">real</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">acres_num</td><td class="col-type">real</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_price_num</td><td class="col-type">real</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_date_iso</td><td class="col-type">text</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details class="tbl-card" id="skagit_parcels">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">skagit_parcels</span>
+          <span class="purpose">A typed mirror of assessor_rollup &mdash; same fields, but values/dates are real <span class="mono">numeric</span>/<span class="mono">date</span> columns instead of text. Prefer this over assessor_rollup for arithmetic or date filtering.</span>
+          <span class="chip count">83,638 rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">aid</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">account_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">legal_description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situs_street_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situs_street_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situs_city_state_zip</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">old_street_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">old_street_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">old_city_state_zip</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_add_1</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_add_2</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_add_3</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_city</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_state</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_zip</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">exemptions</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">neighborhood_code</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">building_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">land_use</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">impr_land_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">unimpr_land_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">timber_land_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">assessed_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">taxable_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">total_market_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">acres</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_date</td><td class="col-type">date</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_price</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_deed_type</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">total_taxes</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">year_built</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">living_area</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tot_special_assessments</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">general_taxes</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">inactive_date</td><td class="col-type">date</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">buildingstyle</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">foundation</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">exterior_walls</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">roof_covering</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">roof_style</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">floor_covering</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">floor_construction</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">interior_finish</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">plumbing</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">garagesqft</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">heat_air_cond</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">fireplace</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">finishedbasement</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">number_of_bedrooms</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">eff_year_built</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">unfinishedbasement</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">fire_district</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">school_district</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">city_district</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">unit</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">levy_code</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">current_use_adjustment</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tide_land_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">senior_exemption_adjustment</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">township</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">range</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">section</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">quarter_section</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tax_year</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">appraisal_year</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">utilities</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tax_statement_taxable_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">proptype</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">hasseptic</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">loaded_at</td><td class="col-type">timestamptz</td></tr>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ LAND & IMPROVEMENTS ============ -->
+    <section class="category">
+      <div class="category-head">
+        <h2>Land &amp; improvements</h2>
+        <span class="desc">one-to-many per parcel &mdash; a parcel can have several land segments and buildings</span>
+      </div>
+
+      <details class="tbl-card" id="land" open>
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">land</span>
+          <span class="purpose">Land segments &mdash; acreage, land type, market value, per segment.</span>
+          <span class="chip count">106,623 rows</span>
+          <span class="chip key">parcelnumber</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">id</td><td class="col-type">bigint</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcelnumber</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">prop_val_yr</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">land_seg_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">land_type</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">appr_meth</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">size_acres</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">size_square_feet</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">effective_front</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">actual_front</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">land_adj_factor</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">adj_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">mkt_unit_price</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">market_value</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">open_space_val</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">open_space_use_code_desc</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">ag_unit_price</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">os_appr_meth</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">land_seg_comment</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">size_acres_num</td><td class="col-type">real</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">market_value_num</td><td class="col-type">real</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details class="tbl-card" id="improvements" open>
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">improvements</span>
+          <span class="purpose">Buildings/structures &mdash; style, construction detail, condition, value, per improvement segment.</span>
+          <span class="chip count">308,651 rows</span>
+          <span class="chip key">parcelnumber</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">id</td><td class="col-type">bigint</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcelnumber</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">imprv_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">building_style</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">comment</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">imprv_val</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">new_const_year</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tot_living_area</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">segment_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">imprv_det_type_cd</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">imprv_det_class_cd</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">imprv_det_meth_cd</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">condition_cd</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">calc_area</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">unit_price</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">dep_pct</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">imprv_det_val</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">constructionstyle</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">foundation</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">exteriorwall</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">roofcovering</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">roofstyle</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">flooring</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">floorconstruction</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">interiorfinish</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">plumbing</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">appliances</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">heatingcooling</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">fireplace</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">rooms</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">bedrooms</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">effective_yr_blt</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">actual_year_built</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sketchpath</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">imprv_det_type_description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">imprv_det_class_description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">condition_description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">imprv_val_num</td><td class="col-type">real</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">living_area_num</td><td class="col-type">real</td></tr>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ SALES & RECORDINGS ============ -->
+    <section class="category">
+      <div class="category-head">
+        <h2>Sales &amp; recorded documents</h2>
+        <span class="desc">transaction history &mdash; assessor-reported sales, plus auditor-recorded deeds</span>
+      </div>
+
+      <details class="tbl-card" id="sales" open>
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">sales</span>
+          <span class="purpose">Sale price, date, buyer/seller, deed type &mdash; as reported in the assessor export.</span>
+          <span class="chip count">352,213 rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">id</td><td class="col-type">bigint</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">saleid</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">account_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">seller_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">buyer_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_price</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_date</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_type</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">recording_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">deed_type</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">deed_date</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">reval_area</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">excise_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_price_num</td><td class="col-type">real</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sale_date_iso</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">deed_date_iso</td><td class="col-type">text</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details class="tbl-card" id="auditor_recordings" open>
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">auditor_recordings</span>
+          <span class="purpose">Recorded documents from the county auditor's index (deeds, liens, easements &hellip;) &mdash; <span class="mono">parcel_number</span> is parsed out of free-text legal descriptions, so match rate is imperfect.</span>
+          <span class="chip count">216 rows</span>
+          <span class="chip key">parcel_number*</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">id</td><td class="col-type">bigint</td></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">recording_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">recorded_date</td><td class="col-type">date</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">document_type</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">signal_group</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">grantor</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">grantee</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">filer</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">comment</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">legal</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">parcel_text</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">assessor_url</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">pdf_url</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">reference_url</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">raw_row</td><td class="col-type">jsonb</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">first_seen_run_id</td><td class="col-type">bigint</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">last_seen_run_id</td><td class="col-type">bigint</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">first_seen_at</td><td class="col-type">timestamptz</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">last_seen_at</td><td class="col-type">timestamptz</td></tr>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ GEOGRAPHY ============ -->
+    <section class="category">
+      <div class="category-head">
+        <h2>Geography (PostGIS)</h2>
+        <span class="desc">geometry &amp; precomputed spatial features &mdash; keyed on <span class="mono">parcel_id</span></span>
+      </div>
+
+      <details class="tbl-card" id="gis_skagit_parcels" open>
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">gis_skagit_parcels</span>
+          <span class="purpose">The parcel polygon itself, loaded from the county's GIS shapefile &mdash; use this for anything that needs the actual boundary.</span>
+          <span class="chip count">82,449 rows</span>
+          <span class="chip key">parcel_id</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">geometry</td><td class="col-type">geometry (Polygon)</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">objectid</td><td class="col-type">bigint</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situsstno</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situsstname</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situscsz</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">ownername</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">citydistrict</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">landuse</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">acres</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">taxyear</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">appraisalyear</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">inactivedate</td><td class="col-type">double precision</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details class="tbl-card" id="parcel_geo_static_features" open>
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">parcel_geo_static_features</span>
+          <span class="purpose">Precomputed static geography &mdash; containing city/school/fire/precinct, nearest road/place/tide gate, distance to 5 city anchors. Built by <span class="mono">build_geo_features</span>.</span>
+          <span class="chip count">83,281 rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">id</td><td class="col-type">bigint</td></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">prop_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">x</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">y</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">lat</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">lon</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">point_source</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">city_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">comp_plan_designation</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">school_district</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">fire_district</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">voting_precinct</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">historical_area_flag</td><td class="col-type">boolean</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">nearest_road_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">distance_to_nearest_road_feet</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">distance_to_nearest_road_miles</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">distance_to_mount_vernon_miles</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">distance_to_burlington_miles</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">distance_to_sedro_woolley_miles</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">distance_to_anacortes_miles</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">distance_to_la_conner_miles</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">nearest_public_place_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">distance_to_nearest_public_place_miles</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">distance_to_nearest_tide_gate_miles</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">missing_coordinate_flag</td><td class="col-type">boolean</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">feature_status</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">feature_version</td><td class="col-type">integer</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">created_at</td><td class="col-type">timestamptz</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">updated_at</td><td class="col-type">timestamptz</td></tr>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ ZONING ============ -->
+    <section class="category">
+      <div class="category-head">
+        <h2>Zoning</h2>
+        <span class="desc">WAZA statewide zoning, overlaid onto parcels &mdash; a parcel can straddle more than one zone</span>
+      </div>
+
+      <details class="tbl-card" id="parcel_zoning">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">parcel_zoning</span>
+          <span class="purpose">Every zoning polygon a parcel overlaps, with the overlap area &amp; percent-of-parcel &mdash; one row per parcel &times; zone.</span>
+          <span class="chip count">126,329 rows</span>
+          <span class="chip key">parcel_id</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">citydistrict</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">landuse</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">acres</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">zoning_objectid</td><td class="col-type">bigint</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">jurisdiction</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">county</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">zone_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">zone_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">waza_general</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">waza_specific</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">reference_url</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">waza_spatial_normalization_date</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">parcel_area_sqft</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">overlap_area_sqft</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">percent_of_parcel</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">rn</td><td class="col-type">bigint</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">is_primary</td><td class="col-type">boolean</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details class="tbl-card" id="parcel_primary_zoning">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">parcel_primary_zoning</span>
+          <span class="purpose">Just the one zone with the largest overlap per parcel &mdash; the &ldquo;is_primary&rdquo; rows from parcel_zoning, pre-filtered for the common case.</span>
+          <span class="chip count">72,040 rows</span>
+          <span class="chip key">parcel_id</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">citydistrict</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">landuse</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">acres</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">jurisdiction</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">county</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">zone_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">zone_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">waza_general</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">waza_specific</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">percent_of_parcel</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">overlap_area_sqft</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">parcel_area_sqft</td><td class="col-type">double precision</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">reference_url</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">waza_spatial_normalization_date</td><td class="col-type">text</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details class="tbl-card" id="waza_zoning_zones">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">waza_zoning_zones</span>
+          <span class="purpose">The zoning polygons themselves (Washington Zoning Atlas), keyed by <span class="mono">zone_id</span> &mdash; not parcel-keyed directly; joined via parcel_zoning.</span>
+          <span class="chip count">12,600 rows</span>
+          <span class="chip key">zone_id</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">geometry</td><td class="col-type">geometry (Polygon)</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">source_objectid</td><td class="col-type">bigint</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">jurisdiction</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">county</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">zone_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">zone_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">waza_general</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">waza_specific</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">reference_url</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">waza_spatial_normalization_date</td><td class="col-type">text</td></tr>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ TAX & LEVY ============ -->
+    <section class="category">
+      <div class="category-head">
+        <h2>Tax &amp; levy</h2>
+        <span class="desc">current-year tax breakdown by taxing district, plus delinquency tracking</span>
+      </div>
+
+      <details class="tbl-card" id="v_parcel_tax_detail">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">v_parcel_tax_detail</span>
+          <span class="purpose">View &mdash; every taxing district's line item on a parcel's bill (rate, assessed value, tax amount), per year.</span>
+          <span class="chip count">1.43M rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">levy_code</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_tax_year</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">levy_year</td><td class="col-type">integer</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">levy_short</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">levy_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">category</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">rate</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">assessed_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tax_amount</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">entity_key</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">effective_mcag</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">reporting_status</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sao_legal_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sao_fit_url</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">review_needed</td><td class="col-type">boolean</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details class="tbl-card" id="v_parcel_tax_summary">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">v_parcel_tax_summary</span>
+          <span class="purpose">View &mdash; tax rolled up by agency instead of by individual levy line; lighter-weight than the detail view.</span>
+          <span class="chip count">909.5K rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">levy_code</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot opt"></span></td><td class="col-name">parcel_tax_year</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">reporting_status</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">agency_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">mcag</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">sao_fit_url</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">total_tax</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">pct_of_bill</td><td class="col-type">numeric</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details class="tbl-card" id="tax_delinquency_taxstatement">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">tax_delinquency_taxstatement</span>
+          <span class="purpose">Per-year tax statement scraped from the county's public payment portal &mdash; amounts due/paid, delinquency status.</span>
+          <span class="chip count">58,306 rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">id</td><td class="col-type">bigint</td></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tax_account_number</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">tax_year</td><td class="col-type">integer</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">owner_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">situs_address</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">levy_code</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">general_tax</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">special_assessments_fees</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">total_due</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">amount_paid</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">status</td><td class="col-type">varchar</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">lead_level</td><td class="col-type">varchar</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">delinquent_installment_count</td><td class="col-type">integer</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">unpaid_installment_count</td><td class="col-type">integer</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">oldest_due_date</td><td class="col-type">date</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">source_url</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">source_fetched_at</td><td class="col-type">timestamptz</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">raw_data</td><td class="col-type">jsonb</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">created_at</td><td class="col-type">timestamptz</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">updated_at</td><td class="col-type">timestamptz</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">last_run_id</td><td class="col-type">bigint</td></tr>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ HISTORY ============ -->
+    <section class="category">
+      <div class="category-head">
+        <h2>Historical values</h2>
+        <span class="desc">year-over-year assessed value &amp; tax, scraped one parcel at a time</span>
+      </div>
+
+      <details class="tbl-card" id="skagit_parcel_history">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">skagit_parcel_history</span>
+          <span class="purpose">One row per parcel &times; tax year &mdash; building/land/total value and tax amount, by far the largest table in the schema.</span>
+          <span class="chip count">2.49M rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">tax_year</td><td class="col-type">integer</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">value_year</td><td class="col-type">integer</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">building_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">land_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">total_value</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tax_amount</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">fetched_at</td><td class="col-type">timestamptz</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details class="tbl-card" id="skagit_parcel_history_status">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">skagit_parcel_history_status</span>
+          <span class="purpose">One row per parcel &mdash; tracks whether its history scrape succeeded, so re-runs skip what's already fetched.</span>
+          <span class="chip count">83,272 rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">status</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">fetched_at</td><td class="col-type">timestamptz</td></tr>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ LAND LEDGER ============ -->
+    <section class="category">
+      <div class="category-head">
+        <h2>Land ledger analysis</h2>
+        <span class="desc">computed opportunity/zoning-scenario layer &mdash; only parcels inside a covered city, not county-wide</span>
+      </div>
+
+      <details class="tbl-card" id="land_ledger_parcels">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">land_ledger_parcels</span>
+          <span class="purpose">Land Ledger's rebuilt-nightly analysis table &mdash; current vs. policy tax scenarios, productivity ranking. Small &amp; selective: 3,971 of 83,646 parcels.</span>
+          <span class="chip count">3,971 rows</span>
+          <span class="chip key">parcel_number</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">city_slug</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">city_name</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">parcel_number</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">address</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">acres</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">land_use</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">category</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">zone_id</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">zone_name</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">zone_group</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">current_tax</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">tax_per_acre</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">city_tax_pct</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">allowed_scenarios</td><td class="col-type">jsonb</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">policy_scenarios</td><td class="col-type">jsonb</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">scenario_results</td><td class="col-type">jsonb</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">current_opportunity_10yr</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">policy_opportunity_10yr</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">benchmark_source</td><td class="col-type">jsonb</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">geometry</td><td class="col-type">geometry</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">rebuilt_at</td><td class="col-type">timestamptz</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">productivity_percentile</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">productivity_label</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">city_current_opportunity_10yr</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">city_policy_opportunity_10yr</td><td class="col-type">numeric</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">exclusion_reasons</td><td class="col-type">jsonb</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">model_flags</td><td class="col-type">jsonb</td></tr>
+            <tr><td><span class="req-dot opt"></span></td><td class="col-name">assumption_version</td><td class="col-type">text</td></tr>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ REFERENCE ============ -->
+    <section class="category">
+      <div class="category-head">
+        <h2>Reference / lookup</h2>
+        <span class="desc">not parcel-keyed &mdash; decode the codes found in assessor_rollup</span>
+      </div>
+
+      <details class="tbl-card" id="code_mappings">
+        <summary>
+          <span class="caret">&#9656;</span>
+          <span class="tname">code_mappings</span>
+          <span class="purpose">Category + code &rarr; human-readable description (land use, neighborhood, utilities codes, &hellip;).</span>
+          <span class="chip count">1,040 rows</span>
+          <span class="chip key">category, code</span>
+        </summary>
+        <div class="tbl-body">
+          <table class="cols">
+            <tr><th></th><th>Column</th><th>Type</th></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">id</td><td class="col-type">bigint</td></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">category</td><td class="col-type">text</td></tr>
+            <tr class="is-key"><td><span class="req-dot"></span></td><td class="col-name">code</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">description</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">source</td><td class="col-type">text</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">created_at</td><td class="col-type">timestamptz</td></tr>
+            <tr><td><span class="req-dot"></span></td><td class="col-name">updated_at</td><td class="col-type">timestamptz</td></tr>
+          </table>
+        </div>
+      </details>
+      <p class="note" style="margin-top:-4px;"><span class="mono">code_descriptions</span> and <span class="mono">primary_use_codes</span> exist with the same purpose (source_file/code &rarr; description) but are currently empty (0 rows) &mdash; superseded by <span class="mono">code_mappings</span>.</p>
+    </section>
+
+    <!-- ============ FOOTNOTE ============ -->
+    <section class="footnote-block" id="also-references">
+      <h2>Also references a parcel (not full schema shown)</h2>
+      <p style="margin:0 0 12px;">User/app activity that points at a <span class="mono">parcel_number</span> rather than describing the parcel itself &mdash; watchlists, notifications, cached searches, and run-level logs:</p>
+      <ul>
+        <li><span class="mono">opportunity_opportunitysavedparcel</span> &mdash; a user's saved/watched parcel</li>
+        <li><span class="mono">opportunity_opportunitysearchfeedback</span> &mdash; feedback on a search result</li>
+        <li><span class="mono">opportunity_parcelwatchnotification</span> &mdash; queued watch-alert emails</li>
+        <li><span class="mono">taxtool_taxshiftnotification</span> &mdash; queued TaxShift alert emails</li>
+        <li><span class="mono">taxtool_taxshiftsignup</span> &mdash; a signup's tracked parcel/address</li>
+        <li><span class="mono">taxtool_parcelsearchcache</span> &mdash; cached parcel search results</li>
+        <li><span class="mono">tax_delinquency_taxstatementcheck</span> &mdash; per-check delinquency scrape log</li>
+        <li><span class="mono">tax_delinquency_taxstatementerror</span> &mdash; delinquency scrape errors</li>
+        <li><span class="mono">assessor_parcel_live_snapshots</span> &mdash; last-known live API values, for diffing</li>
+      </ul>
+    </section>
+  </main>
+</div>
