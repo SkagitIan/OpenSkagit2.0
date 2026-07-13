@@ -208,3 +208,65 @@ class ModelSFRSalesDataset(models.Model):
 
     def __str__(self):
         return f"{self.saleid} ({self.parcel_number})"
+
+
+class SFRDatasetBuildRun(models.Model):
+    """
+    One row per run of ``build_sfr_sales_model_dataset``.
+
+    Persisted (not just written to data/reports/) so a UI/dashboard can show
+    build history without depending on local files -- Railway's filesystem is
+    ephemeral between deploys and data/reports/ is gitignored.
+    """
+
+    STATUS_SUCCESS = "success"
+    STATUS_FAILED = "failed"
+
+    started_at = models.DateTimeField()
+    finished_at = models.DateTimeField(null=True)
+    status = models.TextField(default=STATUS_SUCCESS)
+    error = models.TextField(blank=True)
+
+    dataset_version = models.TextField(default=ModelSFRSalesDataset.DATASET_VERSION)
+    total_sales_loaded = models.IntegerField(null=True)
+    retained_sfr_sales = models.IntegerField(null=True)
+    excluded_by_reason = models.JSONField(default=list)
+
+    class Meta:
+        db_table = "sfr_dataset_build_runs"
+        ordering = ["-started_at"]
+
+    def __str__(self):
+        return f"Build {self.pk} ({self.status}, {self.retained_sfr_sales} retained)"
+
+
+class SFRRatioStudyRun(models.Model):
+    """
+    One row per run of ``run_sfr_baseline_ratio_study``, with the full model
+    comparison table stored as JSON so a UI can render it without re-running
+    the models or reading data/reports/ files.
+    """
+
+    STATUS_SUCCESS = "success"
+    STATUS_FAILED = "failed"
+
+    started_at = models.DateTimeField()
+    finished_at = models.DateTimeField(null=True)
+    status = models.TextField(default=STATUS_SUCCESS)
+    error = models.TextField(blank=True)
+
+    recent_years = models.IntegerField(null=True)
+    window_start_year = models.IntegerField(null=True)
+    window_end_year = models.IntegerField(null=True)
+    train_count = models.IntegerField(null=True)
+    test_count = models.IntegerField(null=True)
+    primary_model = models.TextField(blank=True)
+
+    model_comparison = models.JSONField(default=list)
+
+    class Meta:
+        db_table = "sfr_ratio_study_runs"
+        ordering = ["-started_at"]
+
+    def __str__(self):
+        return f"Ratio study {self.pk} ({self.status}, {self.test_count} test sales)"

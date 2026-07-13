@@ -16,8 +16,10 @@ from pathlib import Path
 import pandas as pd
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.utils import timezone
 
 from regression import ratio_study, reports_ratio_study
+from regression.models import SFRRatioStudyRun
 
 PRB_FORMULA_NOTE = (
     "PRB (Price-Related Bias) follows the IAAO Standard on Ratio Studies (2013): regress "
@@ -73,53 +75,77 @@ class Command(BaseCommand):
         if not input_path.exists():
             raise CommandError(f"{input_path} not found. Run 'python manage.py build_sfr_sales_model_dataset' first.")
 
-        df = pd.read_parquet(input_path)
-        total_loaded = len(df)
-        self.stdout.write(f"Loaded {total_loaded:,} SFR sales from {input_path}")
+        started_at = timezone.now()
+        run = SFRRatioStudyRun.objects.create(
+            started_at=started_at, status=SFRRatioStudyRun.STATUS_FAILED, recent_years=options["recent_years"]
+        )
 
-        recent_years = options["recent_years"]
-        window_note = "all sale years (no recency filter)"
-        if recent_years and recent_years > 0:
-            max_year = int(df["sale_year"].max())
-            min_year = max_year - recent_years + 1
-            df = df[df["sale_year"].between(min_year, max_year)].copy()
-            window_note = f"sale years {min_year}-{max_year} (--recent-years {recent_years})"
-            self.stdout.write(
-                f"Restricting to {window_note}: {len(df):,} of {total_loaded:,} sales "
-                "(older sales excluded -- see --help for why)."
-            )
+        try:
+            df = pd.read_parquet(input_path)
+            total_loaded = len(df)
+            self.stdout.write(f"Loaded {total_loaded:,} SFR sales from {input_path}")
 
-        df = ratio_study.prepare_features(df)
-        train_df, test_df = ratio_study.split_dataset(df)
-        self.stdout.write(f"Train: {len(train_df):,} sales, test: {len(test_df):,} sales (seed={ratio_study.RANDOM_SEED})")
+            recent_years = options["recent_years"]
+            window_note = "all sale years (no recency filter)"
+            window_start_year = None
+            window_end_year = None
+            if recent_years and recent_years > 0:
+                window_end_year = int(df["sale_year"].max())
+                window_start_year = window_end_year - recent_years + 1
+                df = df[df["sale_year"].between(window_start_year, window_end_year)].copy()
+                window_note = f"sale years {window_start_year}-{window_end_year} (--recent-years {recent_years})"
+                self.stdout.write(
+                    f"Restricting to {window_note}: {len(df):,} of {total_loaded:,} sales "
+                    "(older sales excluded -- see --help for why)."
+                )
 
-        predictions: dict[str, pd.Series] = {}
-        countywide: dict[str, dict] = {}
-        for model_name, predict_fn in ratio_study.MODELS.items():
-            predicted = predict_fn(train_df, test_df)
-            predictions[model_name] = predicted
-            countywide[model_name] = ratio_study.compute_ratio_metrics(predicted, test_df["sale_price"])
-            self.stdout.write(f"  {model_name}: n={countywide[model_name].get('sale_count', 0):,}")
+            df = ratio_study.prepare_features(df)
+            train_df, test_df = ratio_study.split_dataset(df)
+            self.stdout.write(f"Train: {len(train_df):,} sales, test: {len(test_df):,} sales (seed={ratio_study.RANDOM_SEED})")
 
-        # Group reports use the ridge regression model -- the most regularized
-        # of the two regressions and the model with the richest feature set.
-        primary_model = "ridge_regression"
-        primary_predicted = predictions[primary_model]
+            predictions: dict[str, pd.Series] = {}
+            countywide: dict[str, dict] = {}
+            for model_name, predict_fn in ratio_study.MODELS.items():
+                predicted = predict_fn(train_df, test_df)
+                predictions[model_name] = predicted
+                countywide[model_name] = ratio_study.compute_ratio_metrics(predicted, test_df["sale_price"])
+                self.stdout.write(f"  {model_name}: n={countywide[model_name].get('sale_count', 0):,}")
 
-        group_tables: dict[str, list[dict]] = {}
-        for group_col in ratio_study.GROUP_COLUMNS:
-            group_df = ratio_study.grouped_ratio_report(test_df, primary_predicted, group_col)
-            group_tables[group_col] = group_df.to_dict("records")
+            # Group reports use the ridge regression model -- the most regularized
+            # of the two regressions and the model with the richest feature set.
+            primary_model = "ridge_regression"
+            primary_predicted = predictions[primary_model]
 
-        top_misses = {
-            model_name: ratio_study.top_prediction_misses(test_df, predicted)
-            for model_name, predicted in predictions.items()
-        }
+            group_tables: dict[str, list[dict]] = {}
+            for group_col in ratio_study.GROUP_COLUMNS:
+                group_df = ratio_study.grouped_ratio_report(test_df, primary_predicted, group_col)
+                group_tables[group_col] = group_df.to_dict("records")
 
-        exclusion_summary = self._exclusion_summary()
+            top_misses = {
+                model_name: ratio_study.top_prediction_misses(test_df, predicted)
+                for model_name, predicted in predictions.items()
+            }
 
-        self._write_outputs(countywide, group_tables, exclusion_summary, top_misses, primary_model, window_note)
-        self._print_summary(countywide, primary_model, window_note)
+            exclusion_summary = self._exclusion_summary()
+
+            self._write_outputs(countywide, group_tables, exclusion_summary, top_misses, primary_model, window_note)
+            self._print_summary(countywide, primary_model, window_note)
+
+            model_comparison = [{"model": name, **metrics} for name, metrics in countywide.items()]
+            run.finished_at = timezone.now()
+            run.status = SFRRatioStudyRun.STATUS_SUCCESS
+            run.window_start_year = window_start_year
+            run.window_end_year = window_end_year
+            run.train_count = len(train_df)
+            run.test_count = len(test_df)
+            run.primary_model = primary_model
+            run.model_comparison = model_comparison
+            run.save()
+        except Exception as exc:
+            run.finished_at = timezone.now()
+            run.error = str(exc)[:2000]
+            run.save()
+            raise
 
     # ------------------------------------------------------------------
     def _exclusion_summary(self) -> list[dict]:

@@ -5,6 +5,8 @@ from .models import (
     ModelLandSummary,
     ModelSFRSalesDataset,
     ModelSFRSalesExclusion,
+    SFRDatasetBuildRun,
+    SFRRatioStudyRun,
 )
 
 
@@ -52,3 +54,17 @@ class ModelSFRSalesExclusionAdmin(ReadOnlyBuiltAdmin):
     list_filter = ("exclusion_reason",)
     search_fields = ("saleid", "parcel_number", "details")
     readonly_fields = [f.name for f in ModelSFRSalesExclusion._meta.get_fields()]
+
+
+@admin.register(SFRDatasetBuildRun)
+class SFRDatasetBuildRunAdmin(ReadOnlyBuiltAdmin):
+    list_display = ("id", "started_at", "status", "total_sales_loaded", "retained_sfr_sales")
+    list_filter = ("status",)
+    readonly_fields = [f.name for f in SFRDatasetBuildRun._meta.get_fields()]
+
+
+@admin.register(SFRRatioStudyRun)
+class SFRRatioStudyRunAdmin(ReadOnlyBuiltAdmin):
+    list_display = ("id", "started_at", "status", "window_start_year", "window_end_year", "test_count", "primary_model")
+    list_filter = ("status",)
+    readonly_fields = [f.name for f in SFRRatioStudyRun._meta.get_fields()]

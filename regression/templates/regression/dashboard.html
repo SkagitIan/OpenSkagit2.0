@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
+  <h1>SFR Regression Pipeline</h1>
+  <p>Staff-only status page for the SFR sales modeling dataset and baseline ratio study. Read-only -- everything here is rebuilt by
+    <code>build_sfr_sales_model_dataset</code> and <code>run_sfr_baseline_ratio_study</code>. See
+    <a href="/admin/regression/" target="_blank">Django admin</a> to browse full rows, and
+    <code>docs/sfr_modeling_dataset_plan.md</code> for the rules behind this pipeline.</p>
+
+  <h2>Current state</h2>
+  <table style="border-collapse: collapse; width: 100%; margin-bottom: 1.5rem;">
+    <tr><td style="padding:4px 12px 4px 0;">SFR sales dataset rows</td><td><strong>{{ dataset_count }}</strong></td></tr>
+    <tr><td style="padding:4px 12px 4px 0;">Excluded sales on file</td><td><strong>{{ exclusion_count }}</strong></td></tr>
+    <tr><td style="padding:4px 12px 4px 0;">Land summaries (parcels)</td><td><strong>{{ land_summary_count }}</strong></td></tr>
+    <tr><td style="padding:4px 12px 4px 0;">Improvement summaries (parcels)</td><td><strong>{{ improvement_summary_count }}</strong></td></tr>
+    {% if latest_build %}
+    <tr><td style="padding:4px 12px 4px 0;">Last dataset build</td>
+        <td><strong>{{ latest_build.status }}</strong> at {{ latest_build.started_at }}
+          {% if latest_build.status == "success" %}
+            &mdash; {{ latest_build.retained_sfr_sales }} retained of {{ latest_build.total_sales_loaded }} loaded
+          {% else %}
+            &mdash; {{ latest_build.error|default:"in progress or failed with no error recorded" }}
+          {% endif %}
+        </td></tr>
+    {% else %}
+    <tr><td style="padding:4px 12px 4px 0;">Last dataset build</td><td><em>never run</em></td></tr>
+    {% endif %}
+    {% if latest_ratio_study %}
+    <tr><td style="padding:4px 12px 4px 0;">Last ratio study</td>
+        <td><strong>{{ latest_ratio_study.status }}</strong> at {{ latest_ratio_study.started_at }}
+          &mdash; {{ latest_ratio_study.window_start_year }}-{{ latest_ratio_study.window_end_year }},
+          {{ latest_ratio_study.test_count }} test sales, primary model: {{ latest_ratio_study.primary_model }}
+        </td></tr>
+    {% else %}
+    <tr><td style="padding:4px 12px 4px 0;">Last ratio study</td><td><em>never run</em></td></tr>
+    {% endif %}
+  </table>
+
+  <h2>Latest model comparison (test set)</h2>
+  {% if model_comparison %}
+  <div style="overflow-x: auto;">
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.85rem;">
+    <thead>
+      <tr style="background:#f4f4f4;">
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Model</th>
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">n</th>
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Median ratio</th>
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">COD</th>
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">PRD</th>
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">PRB</th>
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Median APE</th>
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">% within 10%</th>
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">% within 15%</th>
+        <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">% within 20%</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in model_comparison %}
+      <tr>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.model }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.sale_count }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.median_ratio|floatformat:3 }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.cod|floatformat:1 }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.prd|floatformat:3 }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.prb|floatformat:3 }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.median_ape|floatformat:1 }}%</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.pct_within_10|floatformat:1 }}%</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.pct_within_15|floatformat:1 }}%</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.pct_within_20|floatformat:1 }}%</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:0.85rem; color:#555;">Baseline only &mdash; no IAAO compliance claim. Group breakdowns (by neighborhood/city/comp
+    plan/school district/sale year/price decile) are written to CSV under <code>data/reports/</code> by the ratio study command, not
+    shown here yet.</p>
+  {% else %}
+  <p><em>No successful ratio study run yet. Run <code>python manage.py run_sfr_baseline_ratio_study</code>.</em></p>
+  {% endif %}
+
+  <h2>Excluded sales by reason</h2>
+  {% if exclusion_breakdown %}
+  <table style="border-collapse: collapse; width: 100%; max-width: 500px; font-size: 0.85rem; margin-bottom: 1.5rem;">
+    {% for row in exclusion_breakdown %}
+    <tr>
+      <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.exclusion_reason }}</td>
+      <td style="border:1px solid #ddd; padding:4px 8px; text-align:right;">{{ row.count }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p><em>No exclusion data yet.</em></p>
+  {% endif %}
+
+  <h2>Recent dataset builds</h2>
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.85rem; margin-bottom: 1.5rem;">
+    <thead><tr style="background:#f4f4f4;">
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Started</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Status</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Loaded</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Retained</th>
+    </tr></thead>
+    <tbody>
+    {% for build in recent_builds %}
+      <tr>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ build.started_at }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ build.status }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ build.total_sales_loaded|default:"—" }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ build.retained_sfr_sales|default:"—" }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="4" style="border:1px solid #ddd; padding:4px 8px;"><em>None yet.</em></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Recent ratio study runs</h2>
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.85rem; margin-bottom: 1.5rem;">
+    <thead><tr style="background:#f4f4f4;">
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Started</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Status</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Window</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Train / Test</th>
+    </tr></thead>
+    <tbody>
+    {% for run in recent_ratio_studies %}
+      <tr>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ run.started_at }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ run.status }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ run.window_start_year|default:"—" }}-{{ run.window_end_year|default:"—" }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ run.train_count|default:"—" }} / {{ run.test_count|default:"—" }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="4" style="border:1px solid #ddd; padding:4px 8px;"><em>None yet.</em></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Sample dataset rows (most recent 15 sales)</h2>
+  <div style="overflow-x: auto;">
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.8rem;">
+    <thead><tr style="background:#f4f4f4;">
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Parcel</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Sale date</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Price</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Living area</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Year built</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">City</th>
+      <th style="border:1px solid #ddd; padding:4px 8px; text-align:left;">Neighborhood</th>
+    </tr></thead>
+    <tbody>
+    {% for row in sample_rows %}
+      <tr>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.parcel_number }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.sale_date }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">${{ row.sale_price|floatformat:0 }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.primary_living_area|floatformat:0 }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.primary_actual_year_built|floatformat:0 }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.city_name|default:"—" }}</td>
+        <td style="border:1px solid #ddd; padding:4px 8px;">{{ row.neighborhood_code|default:"—" }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="7" style="border:1px solid #ddd; padding:4px 8px;"><em>No rows yet -- run build_sfr_sales_model_dataset.</em></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+</section>
+{% endblock %}

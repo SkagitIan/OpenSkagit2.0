@@ -76,6 +76,7 @@ urlpatterns = [
     path("staff/tax-delinquency/", include("tax_delinquency.urls")),
     path("staff/opportunity/", staff_redirect, name="opportunity_dashboard"),
     path("staff/parcelbook/", include("parcelbook.urls")),
+    path("staff/regression/", include("regression.urls")),
     path("opportunity/", include("opportunity.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("admin/", admin.site.urls),

@@ -26,6 +26,7 @@ from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import connection, transaction
+from django.utils import timezone
 
 from regression import pipeline, reports
 from regression.models import (
@@ -33,6 +34,7 @@ from regression.models import (
     ModelLandSummary,
     ModelSFRSalesDataset,
     ModelSFRSalesExclusion,
+    SFRDatasetBuildRun,
 )
 
 
@@ -48,39 +50,54 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         dry_run = options["dry_run"]
+        started_at = timezone.now()
+        run = None if dry_run else SFRDatasetBuildRun.objects.create(started_at=started_at, status=SFRDatasetBuildRun.STATUS_FAILED)
 
-        self.stdout.write("Rebuilding model_land_summary and model_improvement_summary ...")
-        with connection.cursor() as cursor:
-            land_df = pipeline.fetch_land_summary(cursor)
-            improvement_df = pipeline.fetch_improvement_summary(cursor)
+        try:
+            self.stdout.write("Rebuilding model_land_summary and model_improvement_summary ...")
+            with connection.cursor() as cursor:
+                land_df = pipeline.fetch_land_summary(cursor)
+                improvement_df = pipeline.fetch_improvement_summary(cursor)
 
-        if not dry_run:
-            self._replace_table(ModelLandSummary, land_df)
-            self._replace_table(ModelImprovementSummary, improvement_df)
-        self.stdout.write(f"  land summary: {len(land_df):,} parcels")
-        self.stdout.write(f"  improvement summary: {len(improvement_df):,} parcels")
+            if not dry_run:
+                self._replace_table(ModelLandSummary, land_df)
+                self._replace_table(ModelImprovementSummary, improvement_df)
+            self.stdout.write(f"  land summary: {len(land_df):,} parcels")
+            self.stdout.write(f"  improvement summary: {len(improvement_df):,} parcels")
 
-        self.stdout.write("Running SFR classification diagnostic ...")
-        with connection.cursor() as cursor:
-            diagnostic = pipeline.fetch_sfr_classification_diagnostic(cursor)
+            self.stdout.write("Running SFR classification diagnostic ...")
+            with connection.cursor() as cursor:
+                diagnostic = pipeline.fetch_sfr_classification_diagnostic(cursor)
 
-        self.stdout.write("Joining sales to parcel/land/improvement/geo/zoning data ...")
-        with connection.cursor() as cursor:
-            joined_df = pipeline.fetch_sales_join(cursor)
+            self.stdout.write("Joining sales to parcel/land/improvement/geo/zoning data ...")
+            with connection.cursor() as cursor:
+                joined_df = pipeline.fetch_sales_join(cursor)
 
-        self.stdout.write("Classifying sales ...")
-        included_df, excluded_df = pipeline.classify_sales(joined_df)
-        dataset_df = pipeline.build_dataset_frame(included_df)
-        exclusion_df = pipeline.build_exclusion_frame(excluded_df)
+            self.stdout.write("Classifying sales ...")
+            included_df, excluded_df = pipeline.classify_sales(joined_df)
+            dataset_df = pipeline.build_dataset_frame(included_df)
+            exclusion_df = pipeline.build_exclusion_frame(excluded_df)
 
-        summary = reports.compute_dataset_summary(joined_df, dataset_df, exclusion_df)
+            summary = reports.compute_dataset_summary(joined_df, dataset_df, exclusion_df)
 
-        if not dry_run:
-            self._replace_table(ModelSFRSalesDataset, dataset_df)
-            self._replace_table(ModelSFRSalesExclusion, exclusion_df)
-            self._write_outputs(dataset_df, exclusion_df, summary, diagnostic)
+            if not dry_run:
+                self._replace_table(ModelSFRSalesDataset, dataset_df)
+                self._replace_table(ModelSFRSalesExclusion, exclusion_df)
+                self._write_outputs(dataset_df, exclusion_df, summary, diagnostic)
+                run.finished_at = timezone.now()
+                run.status = SFRDatasetBuildRun.STATUS_SUCCESS
+                run.total_sales_loaded = summary["total_sales_loaded"]
+                run.retained_sfr_sales = summary["retained_sfr_sales"]
+                run.excluded_by_reason = summary["excluded_by_reason"]
+                run.save()
 
-        self._print_summary(summary, dry_run=dry_run)
+            self._print_summary(summary, dry_run=dry_run)
+        except Exception as exc:
+            if run is not None:
+                run.finished_at = timezone.now()
+                run.error = str(exc)[:2000]
+                run.save()
+            raise
 
     # ------------------------------------------------------------------
     def _replace_table(self, model, df) -> None:
