@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "parcelbook",
     "zoning_mcp",
     "gis_mcp",
+    "regression",
 ]
 
 MIDDLEWARE = [

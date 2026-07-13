@@ -164,3 +164,57 @@ python manage.py export_geo_features_parquet
 ```
 
 Writes the full table to `data/processed/parcel_geo_static_features.parquet`.
+
+## SFR Sales Modeling Dataset & Baseline Ratio Study
+
+The `regression` app builds the first SFR (single-family residential) sales
+modeling dataset and a baseline valuation/ratio-study tool -- a prototype that
+proves `sales → clean SFR dataset → baseline models → ratio-study report`
+works end to end. No automated experiment loop, no AI-generated market areas,
+no IAAO compliance claim, and no update to official assessed values. See
+[`docs/sfr_modeling_dataset_plan.md`](docs/sfr_modeling_dataset_plan.md) for
+the full inclusion/exclusion rules and the real data evidence behind them.
+
+```powershell
+python manage.py build_sfr_sales_model_dataset
+```
+
+Rebuilds, in order: `model_land_summary` and `model_improvement_summary` (one
+row per parcel, aggregated with set-based SQL from the one-to-many `land` and
+`improvements` tables), then `model_sfr_sales_dataset` (one row per valid SFR
+sale) and `model_sfr_sales_exclusions` (every excluded sale with a reason).
+Reads only from source tables (`sales`, `land`, `improvements`,
+`skagit_parcels`, `assessor_rollup`, `parcel_geo_static_features`,
+`parcel_primary_zoning`) -- never writes to them. Also exports:
+
+- `data/processed/sfr_sales_model_dataset.parquet`
+- `data/processed/sfr_sales_exclusions.parquet`
+- `data/reports/sfr_sales_dataset_summary.{html,md}`
+- `data/reports/sfr_classification_diagnostic.md` (the distinct-value evidence behind the SFR rules)
+
+The dataset is labeled `dataset_version = 'prototype_current_characteristics'`
+everywhere -- it joins **current** parcel/improvement characteristics to
+**historical** sales, which can contain temporal leakage. Use `--dry-run` to
+preview the summary without writing anything.
+
+```powershell
+python manage.py run_sfr_baseline_ratio_study
+```
+
+Trains 4 baseline models on a fixed 80/20 split (seed 42): the existing
+assessed value, price-per-sqft by neighborhood, linear regression on log sale
+price, and ridge regression on log sale price. **Defaults to the most recent 5
+sale years** (`--recent-years`, pass `0` to disable) -- comparing today's
+assessed values/predictions against decades-old sale prices measures market
+appreciation, not model quality; on this data assessed/sale-price ratios run
+40x+ for 1960s sales and only settle near 1.0 in the last few years. Writes:
+
+- `data/reports/sfr_baseline_ratio_study.html`
+- `data/reports/sfr_baseline_model_summary.csv`
+- `data/reports/sfr_baseline_ratio_study_by_{neighborhood,city,comp_plan,school_district,sale_year,price_decile}.csv`
+
+Group reports (by neighborhood/city/comp plan/school district/sale year/price
+decile) use the ridge regression model. Every group table labels its sample
+size `normal` (n≥30), `provisional_low_sample` (15–29), or
+`insufficient_sample` (<15) rather than reporting a pass/fail number on a
+handful of sales. This is a baseline report only -- no IAAO compliance claim.

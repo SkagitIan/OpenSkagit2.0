@@ -25,6 +25,10 @@ data/gis/extracted/
 # Generated feature exports (regenerate with export_geo_features_parquet).
 data/processed/
 
+# Generated dataset/report artifacts (regenerate with build_sfr_sales_model_dataset
+# and run_sfr_baseline_ratio_study).
+data/reports/
+
 # Large raw data dumps (not needed at runtime; regenerate static/data/*.geojson from these)
 data/*.zip
 data/*.har

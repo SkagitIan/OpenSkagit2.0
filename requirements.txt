@@ -18,6 +18,7 @@ geopandas
 shapely
 pandas
 pyarrow
+scikit-learn
 pypdf
 sentry-sdk
 Pillow>=12,<13
