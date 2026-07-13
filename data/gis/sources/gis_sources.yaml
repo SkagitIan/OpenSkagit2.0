@@ -8,44 +8,120 @@
 # This file only configures *where* source files come from. It does not build
 # parcel features or import anything into PostGIS.
 #
-# Skagit County GIS digital data catalog:
-#   https://www.skagitcounty.net/Departments/GIS/Digital/main.htm
+# URLs below are Skagit County's public GIS FTP shapefile exports:
+#   https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/...
+# expected_geometry_type values were confirmed from the actual downloaded
+# shapefiles (via pyshp), not assumed, except where noted.
 #
-# Replace the placeholder URLs below with the real download URLs as they are
-# confirmed. Set `enabled: false` to skip a layer without deleting its config.
+# Set `enabled: false` to skip a layer without deleting its config.
 
 layers:
-  city_limits:
-    display_name: "City Limits"
-    url: "https://example.com/skagit/city_limits.zip"
+  parcels:
+    display_name: "Parcels"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/Parcels/parcels-shp.zip"
     enabled: true
     expected_geometry_type: "Polygon"
     refresh_frequency: "weekly"
 
+  parcel_numbers:
+    display_name: "Parcel Numbers"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/Parcels/PNumbers-shp.zip"
+    enabled: true
+    expected_geometry_type: "Point"
+    refresh_frequency: "weekly"
+
+  city_limits:
+    display_name: "City Limits"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/CityLimits/citylimits-shp.zip"
+    enabled: true
+    expected_geometry_type: "Polygon"
+    refresh_frequency: "weekly"
+
+  comp_plan:
+    display_name: "Comprehensive Plan"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/CompPlan/compplan-shp.zip"
+    enabled: true
+    expected_geometry_type: "Polygon"
+    refresh_frequency: "weekly"
+
+  historical:
+    display_name: "Historical Sites"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/Historical/historical-shp.zip"
+    enabled: true
+    expected_geometry_type: "Point"
+    refresh_frequency: "weekly"
+
+  tide_gates:
+    display_name: "Tide Gates"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGIS/TideGates/TideGates-shp.zip"
+    enabled: true
+    expected_geometry_type: "Point"
+    refresh_frequency: "weekly"
+
+  public_places:
+    display_name: "Public Places"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/PublicPlaces/PublicPlaces-shp.zip"
+    enabled: true
+    expected_geometry_type: "Point"
+    refresh_frequency: "weekly"
+
+  fire_districts:
+    display_name: "Fire Districts"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/Districts/FireDistricts/firedistricts-shp.zip"
+    enabled: true
+    expected_geometry_type: "Polygon"
+    refresh_frequency: "weekly"
+
+  school_districts:
+    display_name: "School Districts"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/Districts/SchoolDistricts/schooldistricts-shp.zip"
+    enabled: true
+    expected_geometry_type: "Polygon"
+    refresh_frequency: "weekly"
+
+  voting_precincts:
+    display_name: "Voting Precincts"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/Voting/votingprecincts-shp.zip"
+    enabled: true
+    expected_geometry_type: "Polygon"
+    refresh_frequency: "weekly"
+
+  roads:
+    display_name: "Roads (Named)"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/Roads/roads-named-shp.zip"
+    enabled: true
+    expected_geometry_type: "LineString"
+    refresh_frequency: "weekly"
+
+  address_ranges:
+    display_name: "Address Ranges"
+    url: "https://www.skagitcounty.net/GIS/FtpFiles/Documents/AccessGiS/AddressRanges/AddressRanges-shp.zip"
+    enabled: true
+    expected_geometry_type: "LineString"
+    refresh_frequency: "weekly"
+
+  # No confirmed direct shapefile URL yet. Skagit only exposes these through
+  # the live ArcGIS query API (Geocortex/CriticalAreas, Geocortex/
+  # ZoningLandUsePermits, Planning/DraftSMP_Service), not a packaged .zip --
+  # see the earlier discussion before enabling. `comp_plan` above likely
+  # already covers the zoning-districts need.
   zoning:
     display_name: "Zoning"
     url: "https://example.com/skagit/zoning.zip"
-    enabled: true
+    enabled: false
     expected_geometry_type: "Polygon"
     refresh_frequency: "weekly"
 
   flood_zones:
     display_name: "Flood Zones"
     url: "https://example.com/skagit/flood_zones.zip"
-    enabled: true
+    enabled: false
     expected_geometry_type: "Polygon"
-    refresh_frequency: "weekly"
-
-  roads:
-    display_name: "Roads"
-    url: "https://example.com/skagit/roads.zip"
-    enabled: true
-    expected_geometry_type: "LineString"
     refresh_frequency: "weekly"
 
   shoreline:
     display_name: "Shoreline"
     url: "https://example.com/skagit/shoreline.zip"
-    enabled: true
+    enabled: false
     expected_geometry_type: "LineString"
     refresh_frequency: "weekly"
