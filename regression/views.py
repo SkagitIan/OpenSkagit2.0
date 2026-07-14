@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Count
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.views.decorators.http import require_POST
 
+from . import ai_reasoning, background, compliance_runner
 from .models import (
     ModelImprovementSummary,
     ModelLandSummary,
@@ -46,11 +50,42 @@ def dashboard(request):
 
 @staff_member_required
 def neighborhoods(request):
-    latest_loop_run = SFRComplianceLoopRun.objects.order_by("-started_at").first()
+    running = background.is_run_in_progress()
+    recent_loop_runs = list(SFRComplianceLoopRun.objects.order_by("-started_at")[:5])
     segments = SFRSegmentModel.objects.order_by("-sample_count")
 
     context = {
-        "latest_loop_run": latest_loop_run,
+        "running": running,
+        "recent_loop_runs": recent_loop_runs,
         "segments": segments,
+        "recent_years": compliance_runner.DEFAULT_RECENT_YEARS,
+        "ai_model": ai_reasoning.AI_MODEL,
+        "ai_max_rounds": ai_reasoning.MAX_AI_ROUNDS,
     }
     return render(request, "regression/neighborhoods.html", context)
+
+
+@staff_member_required
+@require_POST
+def run_all_neighborhoods(request):
+    run = background.start_compliance_loop_run()
+    if run is None:
+        messages.warning(request, "A compliance loop run is already in progress -- wait for it to finish before starting another.")
+    else:
+        messages.success(request, "Started a whole-county compliance loop run in the background. This page will refresh automatically.")
+    return redirect(reverse("regression:neighborhoods"))
+
+
+@staff_member_required
+@require_POST
+def run_one_neighborhood(request):
+    segment_value = request.POST.get("segment_value", "")
+    if not segment_value:
+        messages.error(request, "No neighborhood specified.")
+        return redirect(reverse("regression:neighborhoods"))
+    run = background.start_compliance_loop_run(segment_scope=segment_value)
+    if run is None:
+        messages.warning(request, "A compliance loop run is already in progress -- wait for it to finish before starting another.")
+    else:
+        messages.success(request, f"Started a run for {segment_value} in the background. This page will refresh automatically.")
+    return redirect(reverse("regression:neighborhoods"))

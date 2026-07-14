@@ -4,19 +4,63 @@
 <section style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
   <h1>Neighborhood Compliance Loop</h1>
   <p><a href="{% url 'regression:dashboard' %}">&larr; Back to regression dashboard</a></p>
-  <p>One row per neighborhood, from the latest run of <code>run_neighborhood_compliance_loop</code>. Not an
-    IAAO compliance certification -- "compliant"/"provisional" mean the fitted model's COD/PRD/PRB cleared
-    the commonly-cited IAAO reference ranges for that sample size. No neighborhood is ever rolled up into a
-    broader model -- too-thin segments are dropped, not merged.</p>
+  <p>One row per neighborhood. Not an IAAO compliance certification -- "compliant"/"provisional" mean the fitted
+    model's COD/PRD/PRB cleared the commonly-cited IAAO reference ranges for that sample size. No neighborhood is
+    ever rolled up into a broader model -- too-thin segments are dropped, not merged.</p>
 
-  {% if latest_loop_run %}
-  <p>Last run: <strong>{{ latest_loop_run.status }}</strong> at {{ latest_loop_run.started_at }}
-    &mdash; {{ latest_loop_run.segments_compliant }} compliant, {{ latest_loop_run.segments_provisional }} provisional,
-    {{ latest_loop_run.segments_dropped }} dropped ({{ latest_loop_run.ai_calls_made }} AI-guided calls made).</p>
-  {% else %}
-  <p><em>No compliance loop run yet. Run <code>python manage.py run_neighborhood_compliance_loop</code>.</em></p>
-  {% endif %}
+  {% for message in messages %}
+    <p style="padding:8px 12px; border-radius:6px; background:{% if message.tags == 'success' %}#dafbe1{% elif message.tags == 'warning' %}#fff8c5{% else %}#ffebe9{% endif %};">{{ message }}</p>
+  {% endfor %}
 
+  <div style="border:1px solid #ddd; border-radius:8px; padding:12px 16px; margin-bottom:1.5rem; background:#fafafa;">
+    <p style="margin:0 0 8px 0;">
+      <strong>Current settings:</strong> last {{ recent_years }} sale years &bull;
+      AI model <code>{{ ai_model }}</code> &bull; up to {{ ai_max_rounds }} AI-guided rounds per neighborhood
+      (only used when the mechanical ridge/lasso ladder fails and the segment has &ge;15 sales).
+    </p>
+    {% if running %}
+      <p style="margin:0;"><strong>&#9679; Run in progress</strong>
+        {% if running.segment_scope %}for <code>{{ running.segment_scope }}</code>{% else %}(whole set){% endif %}
+        since {{ running.started_at }}. This page refreshes automatically.</p>
+    {% else %}
+      <form method="post" action="{% url 'regression:run_all_neighborhoods' %}" style="margin:0;">
+        {% csrf_token %}
+        <button type="submit" style="padding:8px 16px; font-weight:600; cursor:pointer;">Run whole set (all neighborhoods)</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <h2 style="margin-bottom:0.5rem;">Recent runs</h2>
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.85rem; margin-bottom: 1.5rem;">
+    <thead><tr style="background:#f4f4f4;">
+      <th style="border:1px solid #ddd; padding:6px 10px; text-align:left;">Started</th>
+      <th style="border:1px solid #ddd; padding:6px 10px; text-align:left;">Scope</th>
+      <th style="border:1px solid #ddd; padding:6px 10px; text-align:left;">Status</th>
+      <th style="border:1px solid #ddd; padding:6px 10px; text-align:left;">Window</th>
+      <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">Compliant</th>
+      <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">Provisional</th>
+      <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">Dropped</th>
+      <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">AI calls</th>
+    </tr></thead>
+    <tbody>
+    {% for run in recent_loop_runs %}
+      <tr>
+        <td style="border:1px solid #ddd; padding:6px 10px;">{{ run.started_at }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px;">{{ run.segment_scope|default:"whole set" }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px;">{{ run.status }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px;">{% if run.window_start_year %}{{ run.window_start_year }}-{{ run.window_end_year }}{% else %}&mdash;{% endif %}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:right;">{{ run.segments_compliant|default:"—" }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:right;">{{ run.segments_provisional|default:"—" }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:right;">{{ run.segments_dropped|default:"—" }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:right;">{{ run.ai_calls_made|default:"—" }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="8" style="border:1px solid #ddd; padding:6px 10px;"><em>No runs yet.</em></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h2 style="margin-bottom:0.5rem;">Current state (latest per-neighborhood result)</h2>
   <div style="overflow-x: auto;">
   <table style="border-collapse: collapse; width: 100%; font-size: 0.85rem;">
     <thead>
@@ -29,6 +73,7 @@
         <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">PRB</th>
         <th style="border:1px solid #ddd; padding:6px 10px; text-align:center;">Status</th>
         <th style="border:1px solid #ddd; padding:6px 10px; text-align:left;">Recommendation</th>
+        <th style="border:1px solid #ddd; padding:6px 10px;"></th>
       </tr>
     </thead>
     <tbody>
@@ -50,12 +95,29 @@
           {% endif %}
         </td>
         <td style="border:1px solid #ddd; padding:6px 10px;">{{ segment.recommendation }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:center;">
+          {% if not running %}
+          <form method="post" action="{% url 'regression:run_one_neighborhood' %}" style="margin:0;">
+            {% csrf_token %}
+            <input type="hidden" name="segment_value" value="{{ segment.segment_value }}">
+            <button type="submit" style="padding:3px 10px; cursor:pointer;" title="Re-run just this neighborhood">Run</button>
+          </form>
+          {% endif %}
+        </td>
       </tr>
     {% empty %}
-      <tr><td colspan="8" style="border:1px solid #ddd; padding:6px 10px;"><em>No segments yet -- run the compliance loop.</em></td></tr>
+      <tr><td colspan="9" style="border:1px solid #ddd; padding:6px 10px;"><em>No segments yet -- run the compliance loop.</em></td></tr>
     {% endfor %}
     </tbody>
   </table>
   </div>
 </section>
+
+{% if running %}
+<script>
+  window.setTimeout(function () {
+    window.location.reload();
+  }, 5000);
+</script>
+{% endif %}
 {% endblock %}

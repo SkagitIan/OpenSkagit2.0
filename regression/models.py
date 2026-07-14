@@ -349,16 +349,28 @@ class SFRSegmentModel(models.Model):
 class SFRComplianceLoopRun(models.Model):
     """
     One row per run of ``run_neighborhood_compliance_loop``, same run-log
-    pattern as ``SFRDatasetBuildRun`` / ``SFRRatioStudyRun``.
+    pattern as ``SFRDatasetBuildRun`` / ``SFRRatioStudyRun``. Can be started
+    either from the CLI or from the staff dashboard's "Run" buttons (see
+    regression/background.py) -- ``STATUS_RUNNING`` covers a run still in
+    progress in a background thread.
     """
 
+    STATUS_RUNNING = "running"
     STATUS_SUCCESS = "success"
     STATUS_FAILED = "failed"
 
     started_at = models.DateTimeField()
     finished_at = models.DateTimeField(null=True)
-    status = models.TextField(default=STATUS_SUCCESS)
+    status = models.TextField(default=STATUS_RUNNING)
     error = models.TextField(blank=True)
+
+    # Blank = whole-county run; otherwise the single neighborhood_code this
+    # run was scoped to (a per-row "Run" button on the dashboard).
+    segment_scope = models.TextField(blank=True)
+
+    recent_years = models.IntegerField(null=True)
+    window_start_year = models.IntegerField(null=True)
+    window_end_year = models.IntegerField(null=True)
 
     segments_attempted = models.IntegerField(null=True)
     segments_compliant = models.IntegerField(null=True)
@@ -371,4 +383,5 @@ class SFRComplianceLoopRun(models.Model):
         ordering = ["-started_at"]
 
     def __str__(self):
-        return f"Compliance loop {self.pk} ({self.status}, {self.segments_compliant} compliant)"
+        scope = self.segment_scope or "whole set"
+        return f"Compliance loop {self.pk} ({self.status}, {scope})"

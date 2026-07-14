@@ -165,11 +165,20 @@ def propose_adjustment(context: dict) -> dict:
     client = _anthropic_client()
     response = client.messages.create(
         model=AI_MODEL,
-        max_tokens=1500,
+        # Generous headroom: on claude-sonnet-5, adaptive thinking runs by
+        # default when `thinking` is omitted, and a too-small max_tokens can
+        # leave zero room for the actual JSON answer after thinking -- disable
+        # thinking explicitly (this is a bounded, single-decision structured
+        # output, not open-ended reasoning) and keep max_tokens generous
+        # regardless as a second safety margin.
+        max_tokens=4096,
+        thinking={"type": "disabled"},
         output_config={"format": {"type": "json_schema", "schema": _ADJUSTMENT_SCHEMA}},
         messages=[{"role": "user", "content": _prompt_for_context(context)}],
     )
-    text = next(block.text for block in response.content if block.type == "text")
+    text = next((block.text for block in response.content if block.type == "text"), None)
+    if text is None:
+        raise ValueError(f"No text block in Claude response (stop_reason={response.stop_reason!r}, content={response.content!r})")
     return json.loads(text)
 
 
