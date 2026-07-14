@@ -27,6 +27,13 @@ from sklearn.model_selection import train_test_split
 RANDOM_SEED = 42
 TEST_SIZE = 0.2
 
+# Broad zone-category tier from parcel_primary_zoning.waza_general, one-hot
+# encoded below in prepare_features(). Fixed list (not data-driven) so the
+# same dummy columns exist for every segment regardless of which categories
+# are actually present in that segment's sales.
+ZONING_GENERAL_CATEGORIES = ["RUR", "LIR", "NRL", "MR", "MXU", "IND", "OS", "COM", "PUB", "UND"]
+ZONING_FEATURE_COLUMNS = [f"zoning_is_{cat.lower()}" for cat in ZONING_GENERAL_CATEGORIES]
+
 FEATURE_COLUMNS = [
     "primary_living_area",
     "total_land_acres",
@@ -36,7 +43,7 @@ FEATURE_COLUMNS = [
     "has_basement",
     "distance_to_nearest_road_miles",
     "distance_to_nearest_city_miles",
-]
+] + ZONING_FEATURE_COLUMNS
 
 CITY_ANCHOR_COLUMNS = [
     "distance_to_mount_vernon_miles",
@@ -69,6 +76,8 @@ def prepare_features(df: pd.DataFrame) -> pd.DataFrame:
     df["distance_to_nearest_city_miles"] = df[CITY_ANCHOR_COLUMNS].min(axis=1)
     for flag in ("has_garage", "has_fireplace", "has_basement"):
         df[flag] = df[flag].fillna(False).astype(int)
+    for cat, col in zip(ZONING_GENERAL_CATEGORIES, ZONING_FEATURE_COLUMNS):
+        df[col] = (df["zoning_general_category"] == cat).astype(int)
     df["sale_price_decile"] = pd.qcut(df["sale_price"], 10, labels=False, duplicates="drop")
     return df
 

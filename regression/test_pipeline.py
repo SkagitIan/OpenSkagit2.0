@@ -90,6 +90,7 @@ _BASE_ROW = {
     "primary_zoning_code": "R3",
     "primary_zoning_description": "Residential",
     "primary_zoning_overlap_percent": 1.0,
+    "zoning_general_category": "RUR",
 }
 
 

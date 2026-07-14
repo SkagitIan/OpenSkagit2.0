@@ -193,6 +193,7 @@ class ModelSFRSalesDataset(models.Model):
     primary_zoning_code = models.TextField(null=True)
     primary_zoning_description = models.TextField(null=True)
     primary_zoning_overlap_percent = models.FloatField(null=True)
+    zoning_general_category = models.TextField(null=True)
 
     dataset_version = models.TextField(default=DATASET_VERSION)
     built_at = models.DateTimeField(auto_now=True)
@@ -270,3 +271,104 @@ class SFRRatioStudyRun(models.Model):
 
     def __str__(self):
         return f"Ratio study {self.pk} ({self.status}, {self.test_count} test sales)"
+
+
+class SFRSegmentExperiment(models.Model):
+    """
+    One row per (neighborhood, attempt) made by ``run_neighborhood_compliance_loop``.
+
+    Every attempt is logged, pass or fail, mechanical or AI-guided -- nothing
+    is silently discarded, matching the ``model_sfr_sales_exclusions`` pattern.
+    """
+
+    ATTEMPT_MECHANICAL_RIDGE = "mechanical_ridge"
+    ATTEMPT_MECHANICAL_RIDGE_GRID = "mechanical_ridge_grid"
+    ATTEMPT_MECHANICAL_LASSO = "mechanical_lasso"
+    ATTEMPT_AI_GUIDED = "ai_guided"
+
+    segment_value = models.TextField()
+    attempt_kind = models.TextField()
+    attempt_number = models.IntegerField()
+    train_count = models.IntegerField(null=True)
+    test_count = models.IntegerField(null=True)
+    metrics = models.JSONField(default=dict)
+    passed = models.BooleanField(default=False)
+    coefficients = models.JSONField(null=True, blank=True)
+    ai_rationale = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "sfr_segment_experiments"
+        indexes = [
+            models.Index(fields=["segment_value"]),
+            models.Index(fields=["attempt_kind"]),
+        ]
+        ordering = ["segment_value", "attempt_number"]
+
+    def __str__(self):
+        return f"{self.segment_value} attempt {self.attempt_number} ({self.attempt_kind}, passed={self.passed})"
+
+
+class SFRSegmentModel(models.Model):
+    """
+    One row per neighborhood -- the current best result of the compliance
+    loop. Holds everything needed to reproduce a price prediction without
+    re-fitting: coefficients, intercept, feature list (implicit in
+    ``coefficients``' keys), and the imputation values used.
+    """
+
+    STATUS_COMPLIANT = "compliant"
+    STATUS_PROVISIONAL = "provisional"
+    STATUS_DROPPED = "dropped"
+    STATUS_CHOICES = [
+        (STATUS_COMPLIANT, "Compliant"),
+        (STATUS_PROVISIONAL, "Provisional"),
+        (STATUS_DROPPED, "Dropped"),
+    ]
+
+    segment_value = models.TextField(unique=True)
+    model_name = models.TextField(blank=True)
+    coefficients = models.JSONField(null=True, blank=True)
+    feature_medians = models.JSONField(null=True, blank=True)
+    metrics = models.JSONField(default=dict)
+    sample_count = models.IntegerField(null=True)
+    status = models.TextField(choices=STATUS_CHOICES)
+    recommendation = models.TextField(blank=True)
+    attempts_made = models.IntegerField(default=0)
+    trained_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "sfr_segment_models"
+        indexes = [models.Index(fields=["status"])]
+        ordering = ["segment_value"]
+
+    def __str__(self):
+        return f"{self.segment_value} ({self.status})"
+
+
+class SFRComplianceLoopRun(models.Model):
+    """
+    One row per run of ``run_neighborhood_compliance_loop``, same run-log
+    pattern as ``SFRDatasetBuildRun`` / ``SFRRatioStudyRun``.
+    """
+
+    STATUS_SUCCESS = "success"
+    STATUS_FAILED = "failed"
+
+    started_at = models.DateTimeField()
+    finished_at = models.DateTimeField(null=True)
+    status = models.TextField(default=STATUS_SUCCESS)
+    error = models.TextField(blank=True)
+
+    segments_attempted = models.IntegerField(null=True)
+    segments_compliant = models.IntegerField(null=True)
+    segments_provisional = models.IntegerField(null=True)
+    segments_dropped = models.IntegerField(null=True)
+    ai_calls_made = models.IntegerField(null=True)
+
+    class Meta:
+        db_table = "sfr_compliance_loop_runs"
+        ordering = ["-started_at"]
+
+    def __str__(self):
+        return f"Compliance loop {self.pk} ({self.status}, {self.segments_compliant} compliant)"

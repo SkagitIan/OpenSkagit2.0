@@ -9,8 +9,10 @@ from .models import (
     ModelLandSummary,
     ModelSFRSalesDataset,
     ModelSFRSalesExclusion,
+    SFRComplianceLoopRun,
     SFRDatasetBuildRun,
     SFRRatioStudyRun,
+    SFRSegmentModel,
 )
 
 
@@ -40,3 +42,15 @@ def dashboard(request):
         "model_comparison": latest_ratio_study.model_comparison if latest_ratio_study else [],
     }
     return render(request, "regression/dashboard.html", context)
+
+
+@staff_member_required
+def neighborhoods(request):
+    latest_loop_run = SFRComplianceLoopRun.objects.order_by("-started_at").first()
+    segments = SFRSegmentModel.objects.order_by("-sample_count")
+
+    context = {
+        "latest_loop_run": latest_loop_run,
+        "segments": segments,
+    }
+    return render(request, "regression/neighborhoods.html", context)

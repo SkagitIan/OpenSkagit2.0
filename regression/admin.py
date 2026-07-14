@@ -5,8 +5,11 @@ from .models import (
     ModelLandSummary,
     ModelSFRSalesDataset,
     ModelSFRSalesExclusion,
+    SFRComplianceLoopRun,
     SFRDatasetBuildRun,
     SFRRatioStudyRun,
+    SFRSegmentExperiment,
+    SFRSegmentModel,
 )
 
 
@@ -68,3 +71,26 @@ class SFRRatioStudyRunAdmin(ReadOnlyBuiltAdmin):
     list_display = ("id", "started_at", "status", "window_start_year", "window_end_year", "test_count", "primary_model")
     list_filter = ("status",)
     readonly_fields = [f.name for f in SFRRatioStudyRun._meta.get_fields()]
+
+
+@admin.register(SFRSegmentExperiment)
+class SFRSegmentExperimentAdmin(ReadOnlyBuiltAdmin):
+    list_display = ("segment_value", "attempt_number", "attempt_kind", "train_count", "test_count", "passed")
+    list_filter = ("attempt_kind", "passed")
+    search_fields = ("segment_value",)
+    readonly_fields = [f.name for f in SFRSegmentExperiment._meta.get_fields()]
+
+
+@admin.register(SFRSegmentModel)
+class SFRSegmentModelAdmin(ReadOnlyBuiltAdmin):
+    list_display = ("segment_value", "status", "sample_count", "model_name", "attempts_made", "trained_at")
+    list_filter = ("status",)
+    search_fields = ("segment_value",)
+    readonly_fields = [f.name for f in SFRSegmentModel._meta.get_fields()]
+
+
+@admin.register(SFRComplianceLoopRun)
+class SFRComplianceLoopRunAdmin(ReadOnlyBuiltAdmin):
+    list_display = ("id", "started_at", "status", "segments_compliant", "segments_provisional", "segments_dropped", "ai_calls_made")
+    list_filter = ("status",)
+    readonly_fields = [f.name for f in SFRComplianceLoopRun._meta.get_fields()]

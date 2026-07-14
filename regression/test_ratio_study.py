@@ -73,6 +73,7 @@ class PrepareFeaturesTests(SimpleTestCase):
                 "distance_to_sedro_woolley_miles": [8.0, 3.0],
                 "distance_to_anacortes_miles": [15.0, 20.0],
                 "distance_to_la_conner_miles": [3.0, 12.0],
+                "zoning_general_category": ["RUR", None],
             }
         )
 
@@ -90,6 +91,14 @@ class PrepareFeaturesTests(SimpleTestCase):
         result = ratio_study.prepare_features(self._minimal_df())
         self.assertAlmostEqual(result.loc[0, "distance_to_nearest_city_miles"], 1.0)
         self.assertAlmostEqual(result.loc[1, "distance_to_nearest_city_miles"], 2.0)
+
+    def test_zoning_general_category_one_hot_encoded(self):
+        result = ratio_study.prepare_features(self._minimal_df())
+        self.assertEqual(result.loc[0, "zoning_is_rur"], 1)
+        self.assertEqual(result.loc[0, "zoning_is_com"], 0)
+        # Missing category -> every dummy column is 0, not an error.
+        self.assertEqual(result.loc[1, "zoning_is_rur"], 0)
+        self.assertEqual(result.loc[1, "zoning_is_com"], 0)
 
 
 class GroupedRatioReportTests(SimpleTestCase):

@@ -309,7 +309,8 @@ SELECT
 
     z.zone_id AS primary_zoning_code,
     z.zone_name AS primary_zoning_description,
-    z.percent_of_parcel AS primary_zoning_overlap_percent
+    z.percent_of_parcel AS primary_zoning_overlap_percent,
+    z.waza_general AS zoning_general_category
 FROM sales s
 LEFT JOIN active_parcel p ON p.parcel_number = s.parcel_number
 LEFT JOIN rollup_desc rd ON rd.parcel_number = s.parcel_number
@@ -495,6 +496,7 @@ def build_dataset_frame(included: pd.DataFrame) -> pd.DataFrame:
     out["primary_zoning_code"] = included["primary_zoning_code"]
     out["primary_zoning_description"] = included["primary_zoning_description"]
     out["primary_zoning_overlap_percent"] = included["primary_zoning_overlap_percent"]
+    out["zoning_general_category"] = included["zoning_general_category"]
 
     return out
 

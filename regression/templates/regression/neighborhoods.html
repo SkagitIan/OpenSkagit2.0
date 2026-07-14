@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
+  <h1>Neighborhood Compliance Loop</h1>
+  <p><a href="{% url 'regression:dashboard' %}">&larr; Back to regression dashboard</a></p>
+  <p>One row per neighborhood, from the latest run of <code>run_neighborhood_compliance_loop</code>. Not an
+    IAAO compliance certification -- "compliant"/"provisional" mean the fitted model's COD/PRD/PRB cleared
+    the commonly-cited IAAO reference ranges for that sample size. No neighborhood is ever rolled up into a
+    broader model -- too-thin segments are dropped, not merged.</p>
+
+  {% if latest_loop_run %}
+  <p>Last run: <strong>{{ latest_loop_run.status }}</strong> at {{ latest_loop_run.started_at }}
+    &mdash; {{ latest_loop_run.segments_compliant }} compliant, {{ latest_loop_run.segments_provisional }} provisional,
+    {{ latest_loop_run.segments_dropped }} dropped ({{ latest_loop_run.ai_calls_made }} AI-guided calls made).</p>
+  {% else %}
+  <p><em>No compliance loop run yet. Run <code>python manage.py run_neighborhood_compliance_loop</code>.</em></p>
+  {% endif %}
+
+  <div style="overflow-x: auto;">
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.85rem;">
+    <thead>
+      <tr style="background:#f4f4f4;">
+        <th style="border:1px solid #ddd; padding:6px 10px; text-align:left;">Neighborhood</th>
+        <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">n</th>
+        <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">Median ratio</th>
+        <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">COD</th>
+        <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">PRD</th>
+        <th style="border:1px solid #ddd; padding:6px 10px; text-align:right;">PRB</th>
+        <th style="border:1px solid #ddd; padding:6px 10px; text-align:center;">Status</th>
+        <th style="border:1px solid #ddd; padding:6px 10px; text-align:left;">Recommendation</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for segment in segments %}
+      <tr>
+        <td style="border:1px solid #ddd; padding:6px 10px;">{{ segment.segment_value }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:right;">{{ segment.sample_count }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:right;">{{ segment.metrics.median_ratio|floatformat:3 }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:right;">{{ segment.metrics.cod|floatformat:1 }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:right;">{{ segment.metrics.prd|floatformat:3 }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:right;">{{ segment.metrics.prb|floatformat:3 }}</td>
+        <td style="border:1px solid #ddd; padding:6px 10px; text-align:center;">
+          {% if segment.status == "compliant" %}
+            <span style="display:inline-block; padding:2px 10px; border-radius:10px; background:#dafbe1; color:#1a7f37; font-weight:600;">compliant</span>
+          {% elif segment.status == "provisional" %}
+            <span style="display:inline-block; padding:2px 10px; border-radius:10px; background:#fff8c5; color:#9a6700; font-weight:600;">provisional</span>
+          {% else %}
+            <span style="display:inline-block; padding:2px 10px; border-radius:10px; background:#ffebe9; color:#cf222e; font-weight:600;">dropped</span>
+          {% endif %}
+        </td>
+        <td style="border:1px solid #ddd; padding:6px 10px;">{{ segment.recommendation }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="8" style="border:1px solid #ddd; padding:6px 10px;"><em>No segments yet -- run the compliance loop.</em></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% endblock %}

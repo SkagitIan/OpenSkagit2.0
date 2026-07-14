@@ -19,6 +19,7 @@ shapely
 pandas
 pyarrow
 scikit-learn
+anthropic
 pypdf
 sentry-sdk
 Pillow>=12,<13
