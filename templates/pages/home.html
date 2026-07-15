@@ -55,7 +55,7 @@
         <div class="os-fingerprint__intro">
           <p class="os-fingerprint__eyebrow">Parcel fingerprint · {{ parcel_fingerprint.parcel_number }}</p>
           <h2 id="fingerprint-title">One parcel, fully connected.</h2>
-          <p>OpenSkagit connected {{ parcel_fingerprint.datasets }} public datasets to produce {{ parcel_fingerprint.data_points }} source values.</p>
+          <p>OpenSkagit connected {{ parcel_fingerprint.datasets }} public datasets to assemble {{ parcel_fingerprint.evidence_records }} meaningful evidence records.</p>
         </div>
 
         <div class="os-fingerprint__visual" aria-label="Parcel connected to public data sources">
@@ -76,26 +76,10 @@
 
         <div class="os-fingerprint__metrics">
           <div><strong>{{ parcel_fingerprint.datasets }}</strong><span>datasets</span></div>
-          <div><strong>{{ parcel_fingerprint.data_points }}</strong><span>source values</span></div>
+          <div><strong>{{ parcel_fingerprint.evidence_records }}</strong><span>evidence records</span></div>
           <div><strong>{{ parcel_fingerprint.spatial_matches }}</strong><span>spatial matches</span></div>
-          <div><strong>{{ parcel_fingerprint.hidden_relationships }}</strong><span>verified joins</span></div>
+          <div><strong>{{ parcel_fingerprint.verified_joins }}</strong><span>verified joins</span></div>
         </div>
-
-        <div class="os-fingerprint__discoveries">
-          <article>
-            <span>Zoning + geometry</span>
-            <p>Additional development capacity may exist.</p>
-          </article>
-          <article>
-            <span>Permits + improvements</span>
-            <p>Recent work may not yet appear in the assessor record.</p>
-          </article>
-          <article>
-            <span>Utilities + distance</span>
-            <p>Sewer infrastructure is approximately 240 feet away.</p>
-          </article>
-        </div>
-
         <a class="os-home-simple__button os-home-simple__button--primary os-fingerprint__cta" href="{% url 'tax_parcel' parcel_fingerprint.parcel_number %}">Open full parcel record</a>
       </div>
     </section>

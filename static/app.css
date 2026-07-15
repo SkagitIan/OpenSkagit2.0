@@ -8134,20 +8134,3 @@ pre {
 .os-fingerprint__metrics div { padding: 18px 20px; border-left: 2px solid var(--os-teal); background: #fff; }
 .os-fingerprint__metrics strong { display: block; color: var(--os-navy); font-size: 34px; font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; }
 .os-fingerprint__metrics span { display: block; margin-top: 8px; color: var(--os-muted); font-size: 12px; }
-.os-fingerprint__discoveries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.os-fingerprint__discoveries article { padding: 20px; border: 1px solid var(--os-border); border-radius: 12px; background: #fff; }
-.os-fingerprint__discoveries span { color: var(--os-teal-dk); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-.os-fingerprint__discoveries p { margin: 10px 0 0; color: var(--os-navy); font-size: 16px; line-height: 1.45; }
-.os-fingerprint__cta { display: inline-flex; margin-top: 30px; }
-@media (max-width: 640px) {
-  .os-fingerprint { padding: 60px 0 68px; }
-  .os-fingerprint__intro { margin-bottom: 28px; }
-  .os-fingerprint__intro > p:last-child { font-size: 15px; }
-  .os-fingerprint__visual { height: 350px; margin-bottom: 22px; }
-  .os-fingerprint__nodes { overflow-x: auto; padding: 0 12px; }
-  .os-fingerprint__node { width: 98px; }
-  .os-fingerprint__metrics { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 24px; }
-  .os-fingerprint__metrics div { padding: 14px; }
-  .os-fingerprint__metrics strong { font-size: 28px; }
-  .os-fingerprint__discoveries { grid-template-columns: 1fr; gap: 10px; }
-}

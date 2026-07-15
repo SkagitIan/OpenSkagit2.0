@@ -3,66 +3,44 @@ from django.shortcuts import render
 from django.http import Http404
 
 
-FINGERPRINT_PARCEL = "P96023"
+FINGERPRINT_PARCEL = "P62951"
 
 
 def parcel_fingerprint(parcel_number=FINGERPRINT_PARCEL):
-    """Build a parcel fingerprint from actual keyed and spatial relationships."""
+    """Build a parcel fingerprint from meaningful records and verified joins."""
     sources = [
         ("assessor_rollup", "parcel_number", "Assessor"),
         ("skagit_parcels", "parcel_number", "Parcel record"),
         ("gis_skagit_parcels", "parcel_id", "Parcel geometry"),
         ("sales", "parcel_number", "Sales"),
-        ("land", "parcelnumber", "Land segments"),
+        ("land", "parcelnumber", "Land"),
+        ("improvements", "parcelnumber", "Improvements"),
+        ("auditor_recordings", "parcel_number", "Documents"),
         ("parcel_primary_zoning", "parcel_id", "Zoning"),
-        ("parcel_zoning", "parcel_id", "Zoning overlaps"),
         ("parcel_geo_static_features", "parcel_number", "Geo features"),
-        ("v_land_ledger_source", "parcel_number", "Land Ledger source"),
+        ("v_land_ledger_source", "parcel_number", "Land Ledger"),
         ("v_parcel_tax_summary", "parcel_number", "Tax districts"),
         ("v_parcel_tax_detail", "parcel_number", "Tax detail"),
-        ("skagit_levy_composition", "levy_code", "Levy lines"),
         ("tax_delinquency_taxstatement", "parcel_number", "Tax status"),
-        ("skagit_parcel_history", "parcel_number", "Value history"),
+       ("skagit_parcel_history", "parcel_number", "Value history"),
     ]
-    spatial_tables = {"gis_skagit_parcels", "v_land_ledger_source", "parcel_geo_static_features"}
     available_tables = {item.name for item in connection.introspection.get_table_list(connection.cursor())}
+    row_counts = {}
     nodes = []
-    total_points = 0
+    spatial_tables = {"gis_skagit_parcels", "v_land_ledger_source", "parcel_geo_static_features"}
 
     try:
         with connection.cursor() as cursor:
-            levy_code = None
-            tax_year = None
-            cursor.execute(
-                'SELECT levy_code, tax_year FROM "skagit_parcels" WHERE "parcel_number" = %s',
-                [parcel_number],
-            )
-            parcel_row = cursor.fetchone()
-            if parcel_row:
-                levy_code, tax_year = parcel_row
-
             for table, key, label in sources:
                 if table not in available_tables:
                     continue
-                filter_value = parcel_number
-                filter_sql = f'"{key}" = %s'
-                params = [filter_value]
-                if table == "skagit_levy_composition":
-                    filter_sql = '"levy_code" = %s AND "tax_year" = %s'
-                    params = [levy_code, tax_year]
                 try:
-                    columns = [field.name for field in connection.introspection.get_table_description(cursor, table)]
-                    cursor.execute(f'SELECT * FROM "{table}" WHERE {filter_sql}', params)
-                    rows = cursor.fetchall()
-                    field_count = sum(
-                        sum(value not in (None, "") for column, value in zip(columns, row)
-                            if column not in {"id", "raw_data", "raw_row", "geometry"})
-                        for row in rows
-                    )
-                    total_points += field_count
-                    nodes.append({"label": label, "rows": len(rows), "points": field_count, "active": bool(rows)})
+                    cursor.execute(f'SELECT COUNT(*) FROM "{table}" WHERE "{key}" = %s', [parcel_number])
+                    count = cursor.fetchone()[0]
                 except Exception:
-                    nodes.append({"label": label, "rows": 0, "points": 0, "active": False})
+                    count = 0
+                row_counts[table] = count
+                nodes.append({"label": label, "rows": count, "active": bool(count)})
 
             cursor.execute(
                 'SELECT COUNT(*) FROM "waza_zoning_zones" z '
@@ -72,29 +50,37 @@ def parcel_fingerprint(parcel_number=FINGERPRINT_PARCEL):
             )
             waza_match = cursor.fetchone()[0] > 0
     except Exception:
-        nodes = [{"label": label, "rows": 0, "points": 0, "active": False} for _, _, label in sources]
+        row_counts = {}
+        nodes = [{"label": label, "rows": 0, "active": False} for _, _, label in sources]
         waza_match = False
 
     active_sources = sum(node["active"] for node in nodes)
-    spatial_matches = sum(node["active"] for node, (table, _, _) in zip(nodes, sources) if table in spatial_tables)
-    spatial_matches += int(waza_match)
-    relationships = sum([
-        any(node["active"] for node in nodes if node["label"] == "Parcel geometry") and waza_match,
-        any(node["active"] for node in nodes if node["label"] == "Zoning overlaps") and waza_match,
-        any(node["active"] for node in nodes if node["label"] == "Tax districts"),
-        any(node["active"] for node in nodes if node["label"] == "Value history"),
-        any(node["active"] for node in nodes if node["label"] == "Geo features"),
-        any(node["active"] for node in nodes if node["label"] == "Land Ledger source"),
-        any(node["active"] for node in nodes if node["label"] == "Sales"),
+    evidence_records = sum(row_counts.get(table, 0) for table in [
+        "assessor_rollup", "skagit_parcels", "gis_skagit_parcels", "land",
+        "parcel_primary_zoning", "parcel_geo_static_features", "v_land_ledger_source",
+        "tax_delinquency_taxstatement", "sales", "improvements", "v_parcel_tax_summary",
+        "v_parcel_tax_detail", "auditor_recordings", "skagit_parcel_history",
     ])
-    display_nodes = [node for node in nodes if node["active"]][:10] or nodes
+    spatial_matches = sum(row_counts.get(table, 0) > 0 for table in spatial_tables) + int(waza_match)
+    verified_joins = sum([
+        row_counts.get("assessor_rollup", 0) > 0 and row_counts.get("gis_skagit_parcels", 0) > 0,
+        row_counts.get("gis_skagit_parcels", 0) > 0 and waza_match,
+        row_counts.get("parcel_primary_zoning", 0) > 0,
+        row_counts.get("sales", 0) > 0,
+        row_counts.get("improvements", 0) > 0,
+        row_counts.get("v_parcel_tax_summary", 0) > 0 and row_counts.get("v_parcel_tax_detail", 0) > 0,
+        row_counts.get("auditor_recordings", 0) > 0,
+        row_counts.get("skagit_parcel_history", 0) > 0,
+        row_counts.get("parcel_geo_static_features", 0) > 0,
+        row_counts.get("v_land_ledger_source", 0) > 0,
+    ])
     return {
         "parcel_number": parcel_number,
-        "datasets": active_sources or len(sources),
-        "data_points": total_points,
+        "datasets": active_sources + int(waza_match) or len(sources),
+        "evidence_records": evidence_records,
         "spatial_matches": spatial_matches,
-        "hidden_relationships": relationships,
-        "nodes": display_nodes,
+        "verified_joins": verified_joins,
+        "nodes": [node for node in nodes if node["active"]][:10] or nodes,
     }
 CITY_PAGES = [
     {
