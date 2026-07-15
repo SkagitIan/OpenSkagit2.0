@@ -84,6 +84,7 @@ class OpportunityTab:
 TABS = [
     OpportunityTab("delinquent-tax-pressure", "Delinquent Tax Pressure", "Parcels where unpaid taxes may signal owner pressure or a need to resolve carrying costs.", "Signals show delinquent tax years and estimated past-due amount; sorted by tax pressure and redevelopment relevance."),
     OpportunityTab("vacant-buildable-lots", "Vacant Buildable Lots", "Residentially zoned parcels with little or no building value where a straightforward build may be possible.", "Signals show utility and frontage clues; sorted toward urban vacant lots with better service signals."),
+    OpportunityTab("assemblage-opportunities", "Parcel Assemblages", "Adjacent parcels that may form a larger development opportunity through connected ownership and parcel relationships.", "Graph patterns show connected parcel groups; review the full parcel record and source evidence before acting."),
     OpportunityTab("possible-lot-splits", "Possible Lot Splits", "Large residential lots that stand out against smaller nearby or same-zone lots and may have extra land capacity.", "Signals show theoretical capacity screens, not approved yield; sorted by oversize lots versus nearby median lots."),
     OpportunityTab("teardown-candidates", "Teardown Candidates", "Single-family parcels where the land value is high and the existing main dwelling appears low-value or obsolete.", "Signals show main dwelling condition/year and land-building ratio; manufactured homes, recent homes, and good-condition homes are excluded."),
 ]
@@ -104,6 +105,7 @@ FILTER_LABELS = {
 TAB_FILTER_KEYS = {
     "delinquent-tax-pressure": ["min_years", "min_due", "min_land_ratio", "improved", "place"],
     "vacant-buildable-lots": ["min_acres", "max_building", "place"],
+    "assemblage-opportunities": ["min_cluster"],
     "possible-lot-splits": ["min_acres", "max_building", "place"],
     "teardown-candidates": ["min_land_value", "max_building", "place"],
     "generated-opportunity": ["min_acres", "min_land_value", "max_building", "improved", "place"],
@@ -294,6 +296,8 @@ def fetch_tab_rows(
     raw_limit = limit if limit >= 1000 else limit * 5
     if tab_key == "vacant-buildable-lots":
         rows = _dedupe_rows(vacant_buildable_lots(filters, raw_limit))
+    elif tab_key == "assemblage-opportunities":
+        rows = _dedupe_rows(assemblage_opportunities(filters, raw_limit))
     elif tab_key == "possible-lot-splits":
         rows = _dedupe_rows(possible_lot_splits(filters, raw_limit))
     elif tab_key == "teardown-candidates":
