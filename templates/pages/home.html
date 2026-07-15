@@ -53,9 +53,8 @@
     <section class="os-fingerprint" aria-labelledby="fingerprint-title">
       <div class="os-home-simple__container">
         <div class="os-fingerprint__intro">
-          <p class="os-fingerprint__eyebrow">Parcel fingerprint · {{ parcel_fingerprint.parcel_number }}</p>
-          <h2 id="fingerprint-title">One parcel, fully connected.</h2>
-          <p>OpenSkagit connected {{ parcel_fingerprint.datasets }} public datasets to assemble {{ parcel_fingerprint.evidence_records }} meaningful evidence records.</p>
+          <p class="os-fingerprint__eyebrow">Parcel fingerprint</p>
+          <h2 id="fingerprint-title">Every parcel, fully connected.</h2>
         </div>
 
         <div class="os-fingerprint__visual" aria-label="Parcel connected to public data sources">
@@ -65,22 +64,15 @@
               <path d="M29 22 112 14 140 40 126 108 44 116 18 73Z"></path>
               <path d="m29 22 15 94M112 14 91 66l35 42M18 73l73-7 49-26"></path>
             </svg>
-            <span>one parcel</span>
+            <span>every parcel</span>
           </div>
           <div class="os-fingerprint__nodes">
             {% for node in parcel_fingerprint.nodes %}
-              <span class="os-fingerprint__node{% if node.active %} is-active{% endif %}">{{ node.label }}</span>
+              <span class="os-fingerprint__node{% if node.active %} is-active{% endif %}"><span>{{ node.label }}</span><strong>{{ node.count }}</strong></span>
             {% endfor %}
           </div>
         </div>
 
-        <div class="os-fingerprint__metrics">
-          <div><strong>{{ parcel_fingerprint.datasets }}</strong><span>datasets</span></div>
-          <div><strong>{{ parcel_fingerprint.evidence_records }}</strong><span>evidence records</span></div>
-          <div><strong>{{ parcel_fingerprint.spatial_matches }}</strong><span>spatial matches</span></div>
-          <div><strong>{{ parcel_fingerprint.verified_joins }}</strong><span>verified joins</span></div>
-        </div>
-        <a class="os-home-simple__button os-home-simple__button--primary os-fingerprint__cta" href="{% url 'tax_parcel' parcel_fingerprint.parcel_number %}">Open full parcel record</a>
       </div>
     </section>
     <section class="os-intelligence" aria-labelledby="property-intelligence-title">

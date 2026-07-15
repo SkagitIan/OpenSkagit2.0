@@ -4,11 +4,8 @@ from django.http import Http404
 from opportunity.public_intelligence import public_home_examples
 
 
-FINGERPRINT_PARCEL = "P62951"
-
-
-def parcel_fingerprint(parcel_number=FINGERPRINT_PARCEL):
-    """Build a parcel fingerprint from meaningful records and verified joins."""
+def parcel_fingerprint():
+    """Build a countywide parcel fingerprint from meaningful public records."""
     sources = [
         ("assessor_rollup", "parcel_number", "Assessor"),
         ("skagit_parcels", "parcel_number", "Parcel record"),
@@ -23,7 +20,7 @@ def parcel_fingerprint(parcel_number=FINGERPRINT_PARCEL):
         ("v_parcel_tax_summary", "parcel_number", "Tax districts"),
         ("v_parcel_tax_detail", "parcel_number", "Tax detail"),
         ("tax_delinquency_taxstatement", "parcel_number", "Tax status"),
-       ("skagit_parcel_history", "parcel_number", "Value history"),
+        ("skagit_parcel_history", "parcel_number", "Value history"),
     ]
     available_tables = {item.name for item in connection.introspection.get_table_list(connection.cursor())}
     row_counts = {}
@@ -36,23 +33,22 @@ def parcel_fingerprint(parcel_number=FINGERPRINT_PARCEL):
                 if table not in available_tables:
                     continue
                 try:
-                    cursor.execute(f'SELECT COUNT(*) FROM "{table}" WHERE "{key}" = %s', [parcel_number])
+                    cursor.execute(f'SELECT COUNT(*) FROM "{table}"')
                     count = cursor.fetchone()[0]
                 except Exception:
                     count = 0
                 row_counts[table] = count
-                nodes.append({"label": label, "rows": count, "active": bool(count)})
+                nodes.append({
+                    "label": label,
+                    "rows": count,
+                    "count": f"{count:,}",
+                    "active": bool(count),
+                })
 
-            cursor.execute(
-                'SELECT COUNT(*) FROM "waza_zoning_zones" z '
-                'JOIN "gis_skagit_parcels" g ON ST_Intersects(z.geometry, g.geometry) '
-                'WHERE g.parcel_id = %s',
-                [parcel_number],
-            )
-            waza_match = cursor.fetchone()[0] > 0
+            waza_match = "waza_zoning_zones" in available_tables and row_counts.get("gis_skagit_parcels", 0) > 0
     except Exception:
         row_counts = {}
-        nodes = [{"label": label, "rows": 0, "active": False} for _, _, label in sources]
+        nodes = [{"label": label, "rows": 0, "count": "0", "active": False} for _, _, label in sources]
         waza_match = False
 
     active_sources = sum(node["active"] for node in nodes)
@@ -76,7 +72,6 @@ def parcel_fingerprint(parcel_number=FINGERPRINT_PARCEL):
         row_counts.get("v_land_ledger_source", 0) > 0,
     ])
     return {
-        "parcel_number": parcel_number,
         "datasets": active_sources + int(waza_match) or len(sources),
         "evidence_records": evidence_records,
         "spatial_matches": spatial_matches,
