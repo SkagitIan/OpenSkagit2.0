@@ -217,6 +217,7 @@ class GeneratedSearch:
     assumptions: list[str]
     sql: str
     params: list[Any]
+    query_language: str = "sql"
 
 
 @dataclass(frozen=True)
@@ -234,6 +235,7 @@ class SearchPlan:
     assumptions: list[str]
     relaxation_order: list[str]
     needs_zoning_definitions: bool = False
+    execution_target: str = "sql"
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -250,6 +252,7 @@ class SearchPlan:
             "assumptions": self.assumptions,
             "relaxation_order": self.relaxation_order,
             "needs_zoning_definitions": self.needs_zoning_definitions,
+            "execution_target": self.execution_target,
         }
 
 
@@ -328,6 +331,8 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
         "approved_plan": plan.as_dict(),
         "warnings": [],
     }
+    if plan.execution_target == "graph":
+        return _run_graph_opportunity_search(search, prompt, plan, model)
     generated = None
     result_rows: list[dict[str, Any]] = []
     result_diagnostics: dict[str, Any] = {}
@@ -474,16 +479,48 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
     return search
 
 
+def _run_graph_opportunity_search(search: OpportunitySearch, prompt: str, plan: SearchPlan, model: str) -> OpportunitySearch:
+    try:
+        generated = _generate_cypher_from_plan(prompt, plan, model)
+        result_rows = _run_generated_search(prompt, generated)
+    except Exception as exc:  # noqa: BLE001
+        search.query_language = "cypher"
+        search.search_plan = _json_safe(plan.as_dict())
+        search.plan_review = {"approved_plan": _json_safe(plan.as_dict()), "execution_target": "graph"}
+        search.save(update_fields=["query_language", "search_plan", "plan_review", "updated_at"])
+        return _mark_error(search, _friendly_error(exc), model)
+    search.short_name = _opportunity_short_name(generated.short_name or generated.title or prompt)
+    search.title = generated.title[:220] or "Graph parcel search"
+    search.criteria_summary = generated.criteria_summary[:1600]
+    search.assumptions = _merged_assumptions(prompt, generated.assumptions)[:8]
+    search.search_plan = _json_safe(plan.as_dict())
+    search.plan_review = {"approved_plan": _json_safe(plan.as_dict()), "execution_target": "graph"}
+    search.result_diagnostics = {"engine": "kuzu", "row_count": len(result_rows), "query_language": "cypher"}
+    search.generated_sql = generated.sql
+    search.generated_params = []
+    search.query_language = "cypher"
+    search.model = model
+    search.result_rows = _json_safe(result_rows)
+    search.result_count = len(result_rows)
+    search.status = OpportunitySearch.STATUS_READY
+    search.error = ""
+    search.save(update_fields=["title", "criteria_summary", "assumptions", "search_plan", "plan_review", "result_diagnostics", "generated_sql", "generated_params", "query_language", "short_name", "model", "result_rows", "result_count", "status", "error", "updated_at"])
+    return search
+
 def refresh_opportunity_search(search: OpportunitySearch) -> OpportunitySearch:
     return run_ai_opportunity_search(search.user, search.prompt, search=search)
 
 
 def _run_generated_search(prompt: str, generated: GeneratedSearch) -> list[dict[str, Any]]:
-    validate_search_sql(generated.sql, generated.params)
-    explain_search_sql(generated.sql, generated.params)
-    raw_rows = execute_search_sql(generated.sql, generated.params, DEFAULT_RESULT_LIMIT)
+    if generated.query_language == "cypher":
+        from graph.cypher_tool import execute_cypher, validate_cypher
+        validate_cypher(generated.sql, limit=DEFAULT_RESULT_LIMIT)
+        raw_rows = execute_cypher(generated.sql, limit=DEFAULT_RESULT_LIMIT)
+    else:
+        validate_search_sql(generated.sql, generated.params)
+        explain_search_sql(generated.sql, generated.params)
+        raw_rows = execute_search_sql(generated.sql, generated.params, DEFAULT_RESULT_LIMIT)
     return apply_prompt_result_filters(prompt, hydrate_result_rows(raw_rows))
-
 
 def saved_searches_for_user(user, limit: int | None = None):
     qs = OpportunitySearch.objects.filter(user=user, saved_at__isnull=False).order_by("-saved_at", "-updated_at")
@@ -702,6 +739,21 @@ def _generate_search_from_plan(prompt: str, plan: SearchPlan, model: str, error_
     )
 
 
+def _generate_cypher_from_plan(prompt: str, plan: SearchPlan, model: str) -> GeneratedSearch:
+    response = _openai_client().responses.create(model=model, input=_build_cypher_prompt(prompt, plan), temperature=0.1, max_output_tokens=2200)
+    payload = _parse_json_object(_response_text(response))
+    if not payload.get("cypher"):
+        raise OpportunitySearchError("Graph search generation did not return Cypher.")
+    return GeneratedSearch(short_name=str(payload.get("short_name") or "Graph Search"), title=str(payload.get("title") or "Graph parcel search"), criteria_summary=str(payload.get("criteria_summary") or ""), assumptions=[str(item)[:240] for item in _as_list(payload.get("assumptions"))], sql=str(payload["cypher"]), params=[], query_language="cypher")
+
+def _build_cypher_prompt(prompt: str, plan: SearchPlan) -> str:
+    return f"""You generate read-only Kuzu Cypher for OpenSkagit parcel relationship searches. Return only JSON with short_name, title, criteria_summary, assumptions, and cypher.
+Graph schema: Parcel(pid, acres, land_use, zone_id, city_name, assessed_value, building_value, land_value, year_built, utilities, is_vacant_buildable, delinquent_years); Entity(entity_id, kind); OwnershipGroup(group_id); Recording(recording_number, document_type, signal_group, recorded_date). Relationships: OWNS Entity->Parcel, MEMBER_OF Entity->OwnershipGroup, ADJACENT_TO Parcel->Parcel(shared_boundary_ft), AFFECTS Recording->Parcel.
+Use graph relationships for adjacency, ownership, portfolio, assemblage, and recent-recording questions. Use SQL for ordinary attribute filters.
+Always MATCH and RETURN parcel_number as p.pid or an alias; never RETURN canonical_name, entity_id, group_id, mailing_key, mailing_address, owner_name, or owner. Do not use CREATE, MERGE, SET, DELETE, DETACH, DROP, COPY, CALL, or semicolons. A LIMIT will be enforced.
+Approved plan: {json.dumps(plan.as_dict(), default=str)}
+User prompt: {prompt}"""
+
 def _search_plan_from_payload(payload: dict[str, Any]) -> SearchPlan:
     intent_type = _normalized_intent_type(payload.get("intent_type"))
     return SearchPlan(
@@ -718,7 +770,12 @@ def _search_plan_from_payload(payload: dict[str, Any]) -> SearchPlan:
         assumptions=_string_list(payload.get("assumptions")),
         relaxation_order=_string_list(payload.get("relaxation_order")),
         needs_zoning_definitions=bool(payload.get("needs_zoning_definitions")),
+        execution_target=_execution_target(payload.get("execution_target")),
     )
+
+
+def _execution_target(value: Any) -> str:
+    return "graph" if str(value or "").strip().lower() == "graph" else "sql"
 
 
 def _normalized_intent_type(value: Any) -> str:
@@ -963,7 +1020,13 @@ def _fallback_search_plan(prompt: str) -> SearchPlan:
         assumptions=["Screening signals are approximate and do not determine legal use or permit feasibility."],
         relaxation_order=["specific zoning language", "size threshold", "exact place match"],
         needs_zoning_definitions=True,
+        execution_target="graph" if _looks_like_graph_prompt(prompt) else "sql",
     )
+
+
+def _looks_like_graph_prompt(prompt: str) -> bool:
+    tokens = _tokens(prompt)
+    return bool(tokens & {"adjacent", "adjacency", "neighbor", "neighbors", "connected", "assemblage", "ownership", "portfolio", "same-owner", "same"})
 
 
 def _investor_strategy_hint(prompt: str) -> str:
@@ -1057,7 +1120,7 @@ You are the planning stage for OpenSkagit Parcel Book. Users are real estate inv
 Do not write SQL. Infer the investor thesis from plain English and convert it into a structured search plan.
 
 Return only JSON with keys:
-intent_type, investor_strategy, asset_type, title, criteria_summary, asset_intent, location, hard_filters, soft_rankers, exclusions, assumptions, relaxation_order, needs_zoning_definitions.
+intent_type, investor_strategy, asset_type, title, criteria_summary, asset_intent, location, hard_filters, soft_rankers, exclusions, assumptions, relaxation_order, needs_zoning_definitions, execution_target.
 
 Allowed intent_type values:
 {", ".join(sorted(INTENT_TYPES))}
@@ -1072,6 +1135,7 @@ Planning rules:
 - Include a relaxation_order for zero-result handling.
 - Location should identify place text and a match_strategy using situs/GIS/zoning place fields.
 - Prefer a known intent_type over general_opportunity when the investor thesis is clear.
+- Set execution_target to graph for relationship, adjacency, common-control, ownership-group, assemblage, portfolio, or recording-neighborhood questions; set it to sql for ordinary parcel attribute filters. The graph is read-only and does not expose owner/entity/address identity.
 
 Schema and domain context:
 {SCHEMA_CONTEXT}
@@ -1096,7 +1160,7 @@ User prompt:
 def _build_plan_review_prompt(prompt: str, plan: SearchPlan) -> str:
     return f"""
 You are the critique stage for OpenSkagit Parcel Book AI search.
-Review and repair this search plan before SQL generation. Return a complete corrected plan as JSON with the same keys.
+Review and repair this search plan before SQL or Cypher generation. Return a complete corrected plan as JSON with the same keys.
 
 Critique checklist:
 - Is intent_type one of these allowed values: {", ".join(sorted(INTENT_TYPES))}?
@@ -1108,6 +1172,7 @@ Critique checklist:
 - Are wrong asset classes excluded?
 - Is there a sensible relaxation_order for zero rows?
 - Is location matching robust for unincorporated places?
+- Is execution_target graph for relationship/adjacency/ownership/recording questions and sql for ordinary attributes?
 
 User prompt:
 {prompt}

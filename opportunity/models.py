@@ -44,6 +44,7 @@ class OpportunitySearch(models.Model):
     plan_review = models.JSONField(default=dict)
     result_diagnostics = models.JSONField(default=dict)
     generated_sql = models.TextField(blank=True)
+    query_language = models.CharField(max_length=16, default="sql")
     generated_params = models.JSONField(default=list)
     model = models.TextField(blank=True)
     result_rows = models.JSONField(default=list)
