@@ -31,6 +31,7 @@ Keep major features isolated in their owning Django app:
 - `assessor_sync`: Skagit County Assessor import/sync commands, nightly sync audit models/admin, and Railway cron support.
 - `ask_agent`: `/ask/` UI endpoints, streaming responses, DuckDB analysis helpers, and OpenSkagit MCP tool integration.
 - `discovery_agent`: Current/discovery probes, Current draft model/admin, and discovery management commands.
+- `graph`: Internal parcel relationship graph entity resolution, adjacency, Kuzu builds, pattern results, and graph query tooling; no owner/entity/address identity may cross its public serving boundary.
 - `core`: shared site shell only: home/city pages, auth URL wiring, shared context processors, shared template tags, and legacy compatibility shims.
 
 Do not add new feature code to `core` when one of the feature apps above owns it. If a cross-feature helper is needed, prefer a small shared module only after checking whether one feature should own it.

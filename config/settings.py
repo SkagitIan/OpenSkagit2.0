@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "zoning_mcp",
     "gis_mcp",
     "regression",
+    "graph",
 ]
 
 MIDDLEWARE = [
