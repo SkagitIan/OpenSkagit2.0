@@ -982,6 +982,7 @@ def _fallback_search_plan(prompt: str) -> SearchPlan:
     residential = _requires_dwelling_asset(prompt)
     multiunit = _requires_multiunit_asset(prompt)
     bare_recreation = _requires_bare_recreation_land(prompt)
+    absentee_owner = _is_absentee_owner_prompt(prompt)
     hard_filters = ["active parcel"]
     exclusions = []
     if residential:
@@ -992,6 +993,8 @@ def _fallback_search_plan(prompt: str) -> SearchPlan:
     if bare_recreation:
         hard_filters.append("private vacant/undeveloped/recreation land evidence")
         exclusions.extend(["leased manufactured-home, condo/common-area, public/civic/open-space, existing dwelling parcels"])
+    if absentee_owner:
+        hard_filters.append("absentee/nonresident owner: normalized mailing address differs from situs address")
     if place:
         hard_filters.append(f"place match: {place}")
     if residential:
@@ -1065,8 +1068,8 @@ def _feedback_examples_context(user, prompt: str, limit: int = 6) -> str:
             continue
         examples.append((overlap, feedback))
     examples.sort(key=lambda item: (item[0], item[1].updated_at), reverse=True)
-
     lines = []
+
     for _overlap, feedback in examples[:limit]:
         prior_search = feedback.search
         label = "good match" if feedback.rating == OpportunitySearchFeedback.RATING_GOOD else "bad match"
@@ -1727,6 +1730,8 @@ def _merged_assumptions(prompt: str, assumptions: list[str]) -> list[str]:
 
 def _intent_context(prompt: str) -> str:
     lines = []
+    if _is_absentee_owner_prompt(prompt):
+        lines.append("Detected absentee-owner intent. Require a normalized owner mailing address that differs from the parcel situs address; use the assessor.parquet join instead of treating the term as a graph relationship.")
     if _requires_dwelling_asset(prompt):
         lines.append(
             "Detected residential dwelling asset intent. Require residential land_use_code or main dwelling improvements; exclude purely commercial/service/government/resource parcels unless explicitly requested."
@@ -1742,6 +1747,11 @@ def _intent_context(prompt: str) -> str:
     if not lines:
         lines.append("No extra deterministic intent rule detected; translate the prompt conservatively.")
     return "\n".join(f"- {line}" for line in lines)
+
+
+def _is_absentee_owner_prompt(prompt: str) -> bool:
+    normalized = (prompt or "").lower()
+    return bool(re.search(r"\b(absentee|nonresident|non-resident|mailing address differs|owner.*(?:lives|located|resides).*(?:away|outside|different))\b", normalized))
 
 
 def _requires_dwelling_asset(prompt: str) -> bool:
