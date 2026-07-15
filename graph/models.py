@@ -34,3 +34,20 @@ class GraphOwnershipGroup(models.Model):
     class Meta:
         db_table = "graph_ownership_groups"
         indexes = [models.Index(fields=["link_reason"], name="graph_group_reason_idx")]
+
+class GraphParcelAdjacency(models.Model):
+    pid_a = models.TextField()
+    pid_b = models.TextField()
+    shared_boundary_ft = models.FloatField()
+    class Meta:
+        db_table = "graph_parcel_adjacency"
+        constraints = [models.UniqueConstraint(fields=["pid_a", "pid_b"], name="graph_adjacency_pair_unique")]
+        indexes = [models.Index(fields=["pid_a"], name="graph_adjacency_a_idx"), models.Index(fields=["pid_b"], name="graph_adjacency_b_idx")]
+
+class GraphBuildState(models.Model):
+    key = models.CharField(max_length=64, primary_key=True)
+    source_hash = models.CharField(max_length=128, blank=True)
+    last_success_at = models.DateTimeField(blank=True, null=True)
+    summary = models.JSONField(default=dict)
+    class Meta:
+        db_table = "graph_build_state"
