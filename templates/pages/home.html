@@ -83,6 +83,39 @@
         <a class="os-home-simple__button os-home-simple__button--primary os-fingerprint__cta" href="{% url 'tax_parcel' parcel_fingerprint.parcel_number %}">Open full parcel record</a>
       </div>
     </section>
+    <section class="os-intelligence" aria-labelledby="property-intelligence-title">
+      <div class="os-home-simple__container">
+        <div class="os-intelligence__header">
+          <p class="os-intelligence__eyebrow">Property intelligence</p>
+          <h2 id="property-intelligence-title">Ask a property question. See how many parcels match.</h2>
+          <p>These are examples of the questions OpenSkagit can answer across assessment, improvements, sales, utilities, and zoning data.</p>
+        </div>
+
+        <div class="os-intelligence__rail" aria-label="Example property questions">
+          {% for example in property_intelligence_examples %}
+            <article class="os-intelligence__card">
+              <p class="os-intelligence__question">“{{ example.question }}”</p>
+              <div class="os-intelligence__count">
+                <strong>{{ example.count_label }}</strong>
+                <span>matching parcels</span>
+              </div>
+              <div class="os-intelligence__sources">
+                {% for source in example.source_context %}
+                  <span>{{ source }}</span>
+                {% endfor %}
+              </div>
+              {% if example.refreshed_at %}
+                <small>Updated {{ example.refreshed_at|date:"M j, Y" }}</small>
+              {% endif %}
+            </article>
+          {% empty %}
+            <p class="os-intelligence__empty">Property intelligence examples are being refreshed.</p>
+          {% endfor %}
+        </div>
+
+        <a class="os-home-simple__button os-intelligence__cta" href="{% url 'opportunity_login' %}">Sign in to run a private search</a>
+      </div>
+    </section>
     <section id="purpose" class="os-home-simple__section" aria-label="OpenSkagit purpose">
       <div class="os-home-simple__container">
         <div class="os-home-simple__section-head">

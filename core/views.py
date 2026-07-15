@@ -1,6 +1,7 @@
 ﻿from django.db import connection
 from django.shortcuts import render
 from django.http import Http404
+from opportunity.public_intelligence import public_home_examples
 
 
 FINGERPRINT_PARCEL = "P62951"
@@ -264,6 +265,7 @@ def home(request):
         "current_count": "1,247",
         "show_current_load_more": True,
         "parcel_fingerprint": parcel_fingerprint(),
+        "property_intelligence_examples": public_home_examples(),
     })
 
 

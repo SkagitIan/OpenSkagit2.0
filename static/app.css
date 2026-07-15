@@ -8134,3 +8134,100 @@ pre {
 .os-fingerprint__metrics div { padding: 18px 20px; border-left: 2px solid var(--os-teal); background: #fff; }
 .os-fingerprint__metrics strong { display: block; color: var(--os-navy); font-size: 34px; font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; }
 .os-fingerprint__metrics span { display: block; margin-top: 8px; color: var(--os-muted); font-size: 12px; }
+
+/* ============================================================
+   PUBLIC PROPERTY INTELLIGENCE
+   ============================================================ */
+.os-intelligence {
+  padding: 82px 0 92px;
+  background: #042c53;
+  color: #fff;
+}
+.os-intelligence__header { max-width: 650px; margin-bottom: 34px; }
+.os-intelligence__eyebrow {
+  margin: 0 0 12px;
+  color: #68d4d0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.os-intelligence__header h2 {
+  margin: 0 0 14px;
+  color: #fff;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1.12;
+  text-transform: none;
+}
+.os-intelligence__header p:last-child {
+  margin: 0;
+  color: rgba(255,255,255,.68);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.os-intelligence__rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 310px);
+  gap: 14px;
+  overflow-x: auto;
+  padding: 4px 2px 16px;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: rgba(104,212,208,.5) transparent;
+}
+.os-intelligence__card {
+  display: flex;
+  min-height: 285px;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  background: rgba(255,255,255,.07);
+  scroll-snap-align: start;
+}
+.os-intelligence__question {
+  min-height: 94px;
+  margin: 0 0 20px;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.os-intelligence__count { display: flex; align-items: baseline; gap: 8px; }
+.os-intelligence__count strong {
+  color: #68d4d0;
+  font-size: 32px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.os-intelligence__count span { color: rgba(255,255,255,.58); font-size: 12px; }
+.os-intelligence__sources { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+.os-intelligence__sources span {
+  padding: 5px 8px;
+  border: 1px solid rgba(104,212,208,.28);
+  border-radius: 999px;
+  color: rgba(255,255,255,.7);
+  font-size: 10px;
+}
+.os-intelligence__card small {
+  display: block;
+  margin-top: auto;
+  padding-top: 20px;
+  color: rgba(255,255,255,.42);
+  font-size: 11px;
+}
+.os-intelligence__empty { color: rgba(255,255,255,.64); }
+.os-intelligence__cta {
+  display: inline-flex;
+  margin-top: 26px;
+  border-color: rgba(104,212,208,.5);
+  background: #1aacb0;
+  color: #042c53;
+}
+@media (max-width: 640px) {
+  .os-intelligence { padding: 60px 0 68px; }
+  .os-intelligence__rail { grid-auto-columns: minmax(268px, 86vw); margin-right: -24px; }
+  .os-intelligence__card { min-height: 270px; }
+}

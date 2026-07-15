@@ -1,4 +1,4 @@
-from django.conf import settings
+﻿from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
@@ -226,3 +226,41 @@ class ParcelBookSyncNarrative(models.Model):
 
     def __str__(self):
         return f"Parcel Book narrative for report {self.assessor_sync_report_id}"
+
+class PublicIntelligenceExample(models.Model):
+    """Public-safe snapshot of a curated AI parcel search.
+
+    This stores no result rows or parcel identifiers. The linked
+    OpportunitySearch is used only as the refresh source.
+    """
+    search = models.ForeignKey(
+        OpportunitySearch,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="public_intelligence_examples",
+    )
+    slug = models.SlugField(max_length=96, unique=True)
+    question = models.TextField()
+    public_title = models.TextField(blank=True)
+    source_context = models.JSONField(default=list)
+    result_count = models.PositiveIntegerField(default=0)
+    count_is_capped = models.BooleanField(default=False)
+    refreshed_at = models.DateTimeField(null=True, blank=True)
+    sort_order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    status = models.CharField(max_length=16, default=OpportunitySearch.STATUS_READY)
+
+    class Meta:
+        ordering = ["sort_order", "slug"]
+        indexes = [
+            models.Index(fields=["is_active", "sort_order"], name="opp_pub_active_sort_idx"),
+            models.Index(fields=["status", "is_active"], name="opp_pub_status_idx"),
+        ]
+
+    @property
+    def count_label(self):
+        return f"{self.result_count:,}+" if self.count_is_capped else f"{self.result_count:,}"
+
+    def __str__(self):
+        return self.public_title or self.question
