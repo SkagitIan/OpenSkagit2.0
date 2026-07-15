@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 
 {% block title %}OpenSkagit | Skagit Valley. Understood.{% endblock %}
 
@@ -50,6 +50,55 @@
       </div>
     </section>
 
+    <section class="os-fingerprint" aria-labelledby="fingerprint-title">
+      <div class="os-home-simple__container">
+        <div class="os-fingerprint__intro">
+          <p class="os-fingerprint__eyebrow">Parcel fingerprint · {{ parcel_fingerprint.parcel_number }}</p>
+          <h2 id="fingerprint-title">One parcel, fully connected.</h2>
+          <p>OpenSkagit connected {{ parcel_fingerprint.datasets }} public datasets to produce {{ parcel_fingerprint.data_points }} source values.</p>
+        </div>
+
+        <div class="os-fingerprint__visual" aria-label="Parcel connected to public data sources">
+          <div class="os-fingerprint__lines" aria-hidden="true"></div>
+          <div class="os-fingerprint__parcel" aria-hidden="true">
+            <svg viewBox="0 0 160 130" role="img">
+              <path d="M29 22 112 14 140 40 126 108 44 116 18 73Z"></path>
+              <path d="m29 22 15 94M112 14 91 66l35 42M18 73l73-7 49-26"></path>
+            </svg>
+            <span>one parcel</span>
+          </div>
+          <div class="os-fingerprint__nodes">
+            {% for node in parcel_fingerprint.nodes %}
+              <span class="os-fingerprint__node{% if node.active %} is-active{% endif %}">{{ node.label }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="os-fingerprint__metrics">
+          <div><strong>{{ parcel_fingerprint.datasets }}</strong><span>datasets</span></div>
+          <div><strong>{{ parcel_fingerprint.data_points }}</strong><span>source values</span></div>
+          <div><strong>{{ parcel_fingerprint.spatial_matches }}</strong><span>spatial matches</span></div>
+          <div><strong>{{ parcel_fingerprint.hidden_relationships }}</strong><span>verified joins</span></div>
+        </div>
+
+        <div class="os-fingerprint__discoveries">
+          <article>
+            <span>Zoning + geometry</span>
+            <p>Additional development capacity may exist.</p>
+          </article>
+          <article>
+            <span>Permits + improvements</span>
+            <p>Recent work may not yet appear in the assessor record.</p>
+          </article>
+          <article>
+            <span>Utilities + distance</span>
+            <p>Sewer infrastructure is approximately 240 feet away.</p>
+          </article>
+        </div>
+
+        <a class="os-home-simple__button os-home-simple__button--primary os-fingerprint__cta" href="{% url 'tax_parcel' parcel_fingerprint.parcel_number %}">Open full parcel record</a>
+      </div>
+    </section>
     <section id="purpose" class="os-home-simple__section" aria-label="OpenSkagit purpose">
       <div class="os-home-simple__container">
         <div class="os-home-simple__section-head">

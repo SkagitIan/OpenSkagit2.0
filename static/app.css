@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: light;
   --ink: #182026;
   --muted: #67717a;
@@ -595,7 +595,7 @@ pre {
   font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* ── NAV V2 ── */
+/* â”€â”€ NAV V2 â”€â”€ */
 
 .os-nav-v2 {
   position: sticky;
@@ -717,7 +717,7 @@ pre {
   .os-nav-v2__links { display: none; }
 }
 
-/* ── HERO V2 ── */
+/* â”€â”€ HERO V2 â”€â”€ */
 
 .os-hero-v2 {
   position: relative;
@@ -836,7 +836,7 @@ pre {
   letter-spacing: 0.01em;
 }
 
-/* ── THE CURRENT ── */
+/* â”€â”€ THE CURRENT â”€â”€ */
 
 .os-current {
   background: var(--os-current);
@@ -900,7 +900,7 @@ pre {
   font-weight: 500;
 }
 
-/* ── FILTER PILLS ── */
+/* â”€â”€ FILTER PILLS â”€â”€ */
 
 .os-current__filters {
   display: flex;
@@ -934,7 +934,7 @@ pre {
   color: var(--os-teal);
 }
 
-/* ── STREAM FEED ── */
+/* â”€â”€ STREAM FEED â”€â”€ */
 
 .os-current__feed {
   display: grid;
@@ -946,7 +946,7 @@ pre {
   .os-current__feed { grid-template-columns: 1fr; }
 }
 
-/* ── STREAM CARD ── */
+/* â”€â”€ STREAM CARD â”€â”€ */
 
 .os-current-card {
   position: relative;
@@ -1038,7 +1038,7 @@ pre {
   margin-top: 3px;
 }
 
-/* ── LOAD MORE ── */
+/* â”€â”€ LOAD MORE â”€â”€ */
 
 .os-current__loadmore {
   margin-top: 16px;
@@ -1056,7 +1056,7 @@ pre {
 
 .os-current__loadmore-link:hover { color: rgba(255, 255, 255, 0.45); }
 
-/* ── FEATURE CARDS ── */
+/* â”€â”€ FEATURE CARDS â”€â”€ */
 
 .os-features {
   background: #f7f9fb;
@@ -1104,7 +1104,7 @@ pre {
   margin: 0;
 }
 
-/* ── CITY PILLS ── */
+/* â”€â”€ CITY PILLS â”€â”€ */
 
 .os-cities {
   background: #f7f9fb;
@@ -1143,7 +1143,7 @@ pre {
   color: var(--os-teal);
 }
 
-/* ── MISSION STRIP V2 ── */
+/* â”€â”€ MISSION STRIP V2 â”€â”€ */
 
 /* CITY PAGES */
 
@@ -2013,7 +2013,7 @@ pre {
   margin-top: 6px;
 }
 
-/* ── FOOTER V2 ── */
+/* â”€â”€ FOOTER V2 â”€â”€ */
 
 .os-footer-v2 {
   background: #060F18;
@@ -2083,7 +2083,7 @@ pre {
   margin: 0;
 }
 
-/* ── WORKSPACE GRID ── */
+/* â”€â”€ WORKSPACE GRID â”€â”€ */
 
 .os-ask-workspace {
   display: grid;
@@ -2096,7 +2096,7 @@ pre {
   .os-ask-workspace { grid-template-columns: 1fr; }
 }
 
-/* ── SHARED PANEL CHROME ── */
+/* â”€â”€ SHARED PANEL CHROME â”€â”€ */
 
 .os-ask-ai,
 .os-ask-sql-panel {
@@ -2114,7 +2114,7 @@ pre {
   margin: 0 0 18px;
 }
 
-/* ── FORMS ── */
+/* â”€â”€ FORMS â”€â”€ */
 
 .os-ask-ai__form,
 .os-ask-sql__form {
@@ -2151,7 +2151,7 @@ pre {
 
 .os-chips--sm { margin-top: -4px; }
 
-/* ── ANSWER ── */
+/* â”€â”€ ANSWER â”€â”€ */
 
 .os-ask-answer {
   margin-top: 20px;
@@ -2178,7 +2178,7 @@ pre {
   white-space: pre-wrap;
 }
 
-/* ── SQL DETAILS ── */
+/* â”€â”€ SQL DETAILS â”€â”€ */
 
 .os-ask-details {
   margin-top: 16px;
@@ -2201,12 +2201,12 @@ pre {
 .os-ask-details summary::-webkit-details-marker { display: none; }
 
 .os-ask-details summary::before {
-  content: "▶ ";
+  content: "â–¶ ";
   font-size: 10px;
   opacity: 0.5;
 }
 
-.os-ask-details[open] summary::before { content: "▼ "; }
+.os-ask-details[open] summary::before { content: "â–¼ "; }
 
 .os-ask-details__body {
   padding: 14px;
@@ -2234,7 +2234,7 @@ pre {
   line-height: 1.6;
 }
 
-/* ── RESULTS TABLE ── */
+/* â”€â”€ RESULTS TABLE â”€â”€ */
 
 .os-ask-results {
   margin-top: 16px;
@@ -2289,7 +2289,7 @@ pre {
 .os-ask-table tbody tr:last-child td { border-bottom: none; }
 .os-ask-table tbody tr:hover { background: var(--os-off-white); }
 
-/* ── SQL HINT ── */
+/* â”€â”€ SQL HINT â”€â”€ */
 
 .os-ask-sql-hint {
   margin-top: 14px;
@@ -2310,7 +2310,7 @@ pre {
   font-size: 11px;
 }
 
-/* ── ERROR ── */
+/* â”€â”€ ERROR â”€â”€ */
 
 .os-ask-error {
   margin-top: 14px;
@@ -2779,7 +2779,7 @@ pre {
   color: rgba(255, 255, 255, 0.36);
 }
 
-/* ── RESULTS (full-width section, light) ── */
+/* â”€â”€ RESULTS (full-width section, light) â”€â”€ */
 
 .os-tax-results {
   background: var(--os-off-white);
@@ -3084,7 +3084,7 @@ pre {
   50% { opacity: 0.45; }
 }
 
-/* ── AGENCY PANEL ── */
+/* â”€â”€ AGENCY PANEL â”€â”€ */
 
 .os-tax-agency-panel__back {
   display: inline-flex;
@@ -5562,7 +5562,7 @@ pre {
   width: min(100% - 36px, 1040px);
   margin: 14px auto 0;
   padding: clamp(18px, 3vw, 30px) 0 56px;
-  /* ::before is a rotateX() "grid floor" decoration — its rendered bounding
+  /* ::before is a rotateX() "grid floor" decoration â€” its rendered bounding
      box extends well past this section's edges even though nothing is
      visible there, which was blowing out the page's horizontal scroll
      range on mobile. Clip it to the section it's already meant to sit in. */
@@ -6322,7 +6322,7 @@ pre {
   gap: 16px;
   /* Without an explicit column track, this grid's implicit column defaults to
      "auto" sizing, which never shrinks below the max-content width of the
-     widest card inside it — that's what was forcing every card to ~700px
+     widest card inside it â€” that's what was forcing every card to ~700px
      wide and overflowing on mobile regardless of the shell's own width. */
   grid-template-columns: minmax(0, 1fr);
 }
@@ -6647,7 +6647,7 @@ pre {
 }
 
 /* Each row now has its own slot right beneath it (inline expand instead of
-   one shared panel far below the list) — collapse it to nothing when empty
+   one shared panel far below the list) â€” collapse it to nothing when empty
    so unclicked rows don't show a blank padded card. */
 .os-tax-agency-detail-slot:empty {
   display: none;
@@ -7431,7 +7431,7 @@ pre {
   }
 }
 
-/* Consolidated, non-!important rule for the "1" / "2" step badges — several
+/* Consolidated, non-!important rule for the "1" / "2" step badges â€” several
    earlier passes above styled .os-tax-step__num with CSS variables and
    !important overrides across duplicate blocks; pinning the colors here as
    plain hex removes any doubt about variable scope or cascade order. */
@@ -7457,7 +7457,7 @@ pre {
 }
 
 /* Qualified with .taxshift-modal (rather than a bare class) so these beat
-   .taxshift-signup__form button — the modal gets swapped inside that form's
+   .taxshift-signup__form button â€” the modal gets swapped inside that form's
    result slot, and a bare class selector loses to that descendant rule. */
 .taxshift-modal .taxshift-modal__close {
   position: absolute;
@@ -8062,4 +8062,92 @@ pre {
     margin-top: 3px;
     font-size: 14px;
   }
+}
+/* ============================================================
+   PARCEL FINGERPRINT
+   ============================================================ */
+.os-fingerprint {
+  padding: 86px 0 96px;
+  background: #f5f8fa;
+  border-top: 1px solid rgba(4,44,83,.08);
+}
+.os-fingerprint__intro { max-width: 620px; margin-bottom: 42px; }
+.os-fingerprint__eyebrow {
+  margin: 0 0 12px;
+  color: var(--os-teal-dk);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.os-fingerprint__intro h2 {
+  margin: 0 0 12px;
+  color: var(--os-navy);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  text-transform: none;
+}
+.os-fingerprint__intro > p:last-child { margin: 0; color: var(--os-slate); font-size: 17px; line-height: 1.6; }
+.os-fingerprint__visual {
+  position: relative;
+  width: min(100%, 760px);
+  height: 330px;
+  margin: 0 auto 34px;
+  border: 1px solid rgba(26,172,176,.18);
+  border-radius: 18px;
+  background: radial-gradient(circle at center, rgba(26,172,176,.14), rgba(255,255,255,.72) 31%, rgba(255,255,255,.2) 66%);
+  overflow: hidden;
+}
+.os-fingerprint__visual::before, .os-fingerprint__visual::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 250px; height: 250px;
+  border: 1px solid rgba(26,172,176,.14);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+}
+.os-fingerprint__visual::after { width: 160px; height: 160px; border-color: rgba(26,172,176,.22); }
+.os-fingerprint__lines { position: absolute; inset: 0; background: linear-gradient(28deg, transparent 49.8%, rgba(26,172,176,.22) 50%, transparent 50.3%), linear-gradient(-28deg, transparent 49.8%, rgba(26,172,176,.16) 50%, transparent 50.3%); opacity: .65; }
+.os-fingerprint__parcel {
+  position: absolute; left: 50%; top: 50%; z-index: 2;
+  display: grid; place-items: center; width: 190px; height: 160px;
+  padding: 14px; border: 1px solid rgba(4,44,83,.16); border-radius: 20px;
+  background: rgba(255,255,255,.92); box-shadow: 0 14px 36px rgba(4,44,83,.12);
+  transform: translate(-50%,-50%);
+}
+.os-fingerprint__parcel svg { width: 130px; height: 106px; }
+.os-fingerprint__parcel path { fill: rgba(26,172,176,.13); stroke: var(--os-teal-dk); stroke-width: 2; stroke-linejoin: round; }
+.os-fingerprint__parcel span { color: var(--os-navy); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+.os-fingerprint__nodes { position: absolute; inset: 0; z-index: 3; }
+.os-fingerprint__node {
+  position: absolute; display: grid; place-items: center; width: 108px; min-height: 34px;
+  padding: 7px 9px; border: 1px solid rgba(4,44,83,.12); border-radius: 999px;
+  background: rgba(255,255,255,.9); color: var(--os-slate); font-size: 11px; text-align: center;
+  box-shadow: 0 5px 16px rgba(4,44,83,.06);
+}
+.os-fingerprint__node.is-active { border-color: rgba(26,172,176,.55); color: var(--os-navy); }
+.os-fingerprint__node:nth-child(1){left:8%;top:15%}.os-fingerprint__node:nth-child(2){left:40%;top:8%}.os-fingerprint__node:nth-child(3){right:8%;top:16%}.os-fingerprint__node:nth-child(4){right:4%;top:48%}.os-fingerprint__node:nth-child(5){right:13%;bottom:13%}.os-fingerprint__node:nth-child(6){left:39%;bottom:8%}.os-fingerprint__node:nth-child(7){left:12%;bottom:13%}.os-fingerprint__node:nth-child(8){left:3%;top:48%}.os-fingerprint__node:nth-child(9){left:24%;top:26%}.os-fingerprint__node:nth-child(10){right:24%;top:27%}
+.os-fingerprint__metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 38px; }
+.os-fingerprint__metrics div { padding: 18px 20px; border-left: 2px solid var(--os-teal); background: #fff; }
+.os-fingerprint__metrics strong { display: block; color: var(--os-navy); font-size: 34px; font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; }
+.os-fingerprint__metrics span { display: block; margin-top: 8px; color: var(--os-muted); font-size: 12px; }
+.os-fingerprint__discoveries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.os-fingerprint__discoveries article { padding: 20px; border: 1px solid var(--os-border); border-radius: 12px; background: #fff; }
+.os-fingerprint__discoveries span { color: var(--os-teal-dk); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.os-fingerprint__discoveries p { margin: 10px 0 0; color: var(--os-navy); font-size: 16px; line-height: 1.45; }
+.os-fingerprint__cta { display: inline-flex; margin-top: 30px; }
+@media (max-width: 640px) {
+  .os-fingerprint { padding: 60px 0 68px; }
+  .os-fingerprint__intro { margin-bottom: 28px; }
+  .os-fingerprint__intro > p:last-child { font-size: 15px; }
+  .os-fingerprint__visual { height: 350px; margin-bottom: 22px; }
+  .os-fingerprint__nodes { overflow-x: auto; padding: 0 12px; }
+  .os-fingerprint__node { width: 98px; }
+  .os-fingerprint__metrics { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 24px; }
+  .os-fingerprint__metrics div { padding: 14px; }
+  .os-fingerprint__metrics strong { font-size: 28px; }
+  .os-fingerprint__discoveries { grid-template-columns: 1fr; gap: 10px; }
 }
