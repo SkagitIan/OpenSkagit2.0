@@ -4081,7 +4081,7 @@ pre {
   min-height: 100vh;
   background: #f6f8f8;
   color: var(--os-ink);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .os-home-simple__nav {
@@ -4354,7 +4354,7 @@ pre {
 }
 
 .os-home-simple__contact {
-  background: linear-gradient(180deg, #ffffff 0%, #e8f5f5 100%);
+  background: #ffffff;
   text-align: center;
 }
 
@@ -4380,10 +4380,85 @@ pre {
   font-size: 16px;
 }
 
+.os-home-simple__confidence {
+  padding: clamp(48px, 7vw, 72px) 0;
+  background: #042C53;
+  color: #ffffff;
+}
+
+.os-home-simple__confidence-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.os-home-simple__confidence-kicker {
+  margin-bottom: 12px;
+  color: #68d4d0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.os-home-simple__confidence h2 {
+  max-width: 620px;
+  margin-bottom: 14px;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(27px, 4vw, 36px);
+  line-height: 1.15;
+}
+
+.os-home-simple__confidence p {
+  max-width: 660px;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.os-home-simple__confidence-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.os-home-simple__confidence-list li {
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 4px solid #1AACB0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.os-home-simple__confidence-list strong,
+.os-home-simple__confidence-list span {
+  display: block;
+}
+
+.os-home-simple__confidence-list strong {
+  margin-bottom: 5px;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.os-home-simple__confidence-list span {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 @media (max-width: 880px) {
   .os-home-simple__cards,
   .os-home-simple__city-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .os-home-simple__confidence-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -8083,10 +8158,10 @@ pre {
 .os-fingerprint__intro h2 {
   margin: 0;
   color: var(--os-navy);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 400;
-  letter-spacing: -.03em;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(27px, 4vw, 36px);
+  font-weight: 700;
+  letter-spacing: 0;
   text-transform: none;
 }
 .os-fingerprint__intro > p:last-child { margin: 0; color: var(--os-slate); font-size: 17px; line-height: 1.6; }
@@ -8096,7 +8171,7 @@ pre {
   height: 330px;
   margin: 0 auto;
   border: 1px solid rgba(26,172,176,.18);
-  border-radius: 18px;
+  border-radius: 8px;
   background: radial-gradient(circle at center, rgba(26,172,176,.14), rgba(255,255,255,.72) 31%, rgba(255,255,255,.2) 66%);
   overflow: hidden;
 }
@@ -8114,7 +8189,7 @@ pre {
 .os-fingerprint__parcel {
   position: absolute; left: 50%; top: 50%; z-index: 2;
   display: grid; place-items: center; width: 190px; height: 160px;
-  padding: 14px; border: 1px solid rgba(4,44,83,.16); border-radius: 20px;
+  padding: 14px; border: 1px solid rgba(4,44,83,.16); border-radius: 8px;
   background: rgba(255,255,255,.92); box-shadow: 0 14px 36px rgba(4,44,83,.12);
   transform: translate(-50%,-50%);
 }
@@ -8151,11 +8226,11 @@ pre {
 .os-intelligence__header h2 {
   margin: 0 0 14px;
   color: #fff;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 400;
-  letter-spacing: -.03em;
-  line-height: 1.12;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(27px, 4vw, 36px);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.15;
   text-transform: none;
 }
 .os-intelligence__header p:last-child {
@@ -8180,7 +8255,7 @@ pre {
   flex-direction: column;
   padding: 22px;
   border: 1px solid rgba(255,255,255,.14);
-  border-radius: 14px;
+  border-radius: 8px;
   background: rgba(255,255,255,.07);
   scroll-snap-align: start;
 }
