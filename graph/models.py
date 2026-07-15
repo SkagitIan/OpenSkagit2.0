@@ -51,3 +51,21 @@ class GraphBuildState(models.Model):
     summary = models.JSONField(default=dict)
     class Meta:
         db_table = "graph_build_state"
+class GraphOpportunityResult(models.Model):
+    pattern_key = models.CharField(max_length=64)
+    parcel_number = models.TextField()
+    score = models.FloatField(default=0)
+    rank = models.PositiveIntegerField(default=0)
+    detail = models.JSONField(default=dict)
+    run_id = models.CharField(max_length=64)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "graph_opportunity_results"
+        constraints = [
+            models.UniqueConstraint(fields=["run_id", "pattern_key", "parcel_number"], name="graph_opportunity_run_pattern_pid_unique"),
+        ]
+        indexes = [
+            models.Index(fields=["pattern_key", "rank"], name="graph_opportunity_pattern_idx"),
+            models.Index(fields=["parcel_number"], name="graph_opportunity_pid_idx"),
+        ]

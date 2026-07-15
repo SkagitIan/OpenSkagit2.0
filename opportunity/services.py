@@ -668,6 +668,46 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
 
 
 def assemblage_opportunities(filters: dict[str, str], limit: int) -> list[dict[str, Any]]:
+    """Serve the assemblage tab from precomputed graph pattern results."""
+    from graph.models import GraphOpportunityResult
+
+    min_cluster = _int_filter(filters.get("min_cluster"), 2)
+    candidates = list(GraphOpportunityResult.objects.filter(pattern_key="assemblage").order_by("rank")[: max(limit * 3, limit)])
+    candidates = [candidate for candidate in candidates if int(candidate.detail.get("cluster_count") or 0) + 1 >= min_cluster][:limit]
+    if not candidates:
+        return []
+    parcel_numbers = [candidate.parcel_number for candidate in candidates]
+    base_rows = _fetch(
+        """
+        SELECT p.parcel_number, p.owner_name,
+               concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
+               COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
+               p.acres, p.assessed_value, p.building_value, p.land_use,
+               COALESCE(NULLIF(ar.impr_land_value, '')::numeric, 0) AS impr_land_value,
+               COALESCE(NULLIF(ar.unimpr_land_value, '')::numeric, 0) AS unimpr_land_value,
+               z.zone_id, z.zone_name, z.waza_general, z.waza_specific, z.reference_url,
+               geo.lat, geo.lon AS lng,
+               split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code
+        FROM skagit_parcels p
+        LEFT JOIN assessor_rollup ar ON ar.parcel_number = p.parcel_number
+        LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
+        LEFT JOIN parcel_geo_static_features geo ON geo.parcel_number = p.parcel_number
+        WHERE p.parcel_number = ANY(%s)
+        """,
+        [parcel_numbers],
+    )
+    by_parcel = {row["parcel_number"]: row for row in base_rows}
+    formatted = []
+    for candidate in candidates:
+        row = by_parcel.get(candidate.parcel_number)
+        if not row:
+            continue
+        row.update(candidate.detail)
+        row["score"] = candidate.score
+        formatted.append(_format_assemblage(row))
+    return formatted
+
+def _assemblage_opportunities_sql_legacy(filters: dict[str, str], limit: int) -> list[dict[str, Any]]:
     min_cluster = _int_filter(filters.get("min_cluster"), 2)
     sql = f"""
         WITH candidates AS (
