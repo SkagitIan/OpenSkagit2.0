@@ -1,4 +1,4 @@
-﻿from django.db import connection
+from django.db import connection
 from django.shortcuts import render
 from django.http import Http404
 from opportunity.public_intelligence import public_home_examples
