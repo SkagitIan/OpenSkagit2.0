@@ -31,6 +31,14 @@
       "env": {
         "DJANGO_SETTINGS_MODULE": "config.settings"
       }
+    },
+    "openskagit": {
+      "type": "stdio",
+      "command": "C:\\Users\\ian\\Desktop\\Factory\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "openskagit_tools.mcp_server"],
+      "env": {
+        "DJANGO_SETTINGS_MODULE": "config.settings"
+      }
     }
   }
 }

@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "gis_mcp",
     "regression",
     "graph",
+    "openskagit_tools.apps.OpenSkagitToolsConfig",
 ]
 
 MIDDLEWARE = [
@@ -111,6 +112,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
+ASGI_APPLICATION = "config.asgi.application"
 
 DATABASE_URL = (
     os.getenv("NEW_DATABASE_URL")
@@ -162,3 +164,9 @@ for origin in ("https://taxshift.co", "https://www.taxshift.co"):
         CSRF_TRUSTED_ORIGINS.append(origin)
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+OPENSKAGIT_PUBLIC_ORIGIN = env("OPENSKAGIT_PUBLIC_ORIGIN", default="https://openskagit.com").rstrip("/")
+OPENSKAGIT_MCP_CONNECTOR_URL = env(
+    "OPENSKAGIT_MCP_CONNECTOR_URL",
+    default=f"{OPENSKAGIT_PUBLIC_ORIGIN}/mcp/api/",
+)

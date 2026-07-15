@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}SkagitMCP | OpenSkagit{% endblock %}
+{% block extra_head %}
+  <meta name="description" content="Connect Claude and other AI agents to source-aware Skagit County parcel, GIS, and zoning tools.">
+  <link rel="icon" href="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png">
+  <link rel="stylesheet" href="{% static 'mcp.css' %}?v=20260715-1">
+{% endblock %}
+
+{% block content %}
+<div class="mcp-page">
+  <header class="mcp-nav">
+    <a class="mcp-brand" href="/" aria-label="OpenSkagit home">
+      <img src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png" alt="" width="34" height="34">
+      <span>OpenSkagit</span>
+    </a>
+    <a href="#request-access" class="mcp-nav__action">Request access</a>
+  </header>
+
+  <main>
+    <section class="mcp-hero">
+      <div class="mcp-hero__copy">
+        <div class="mcp-kicker"><span></span> Remote MCP · Private beta</div>
+        <h1>Give your agent<br><em>local intelligence.</em></h1>
+        <p>SkagitMCP connects Claude and other AI clients to {{ tool_count }} read-only tools for parcels, assessment history, spatial overlays, and cited zoning guidance.</p>
+        <div class="mcp-actions">
+          <a href="#request-access" class="mcp-button mcp-button--primary">Request credentials</a>
+          <a href="#catalog" class="mcp-button">Explore the catalog</a>
+        </div>
+      </div>
+      <div class="mcp-endpoint" aria-label="MCP connector endpoint">
+        <div class="mcp-endpoint__top"><span class="mcp-live"></span> Connector endpoint</div>
+        <code id="mcp-endpoint-value">{{ connector_url }}</code>
+        <button type="button" data-copy-target="mcp-endpoint-value">Copy URL</button>
+        <dl>
+          <div><dt>Transport</dt><dd>Streamable HTTP</dd></div>
+          <div><dt>Authentication</dt><dd>OAuth 2.1 + PKCE</dd></div>
+          <div><dt>Permission</dt><dd>Read-only</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="mcp-trust" aria-label="Service principles">
+      <span>Source-aware results</span><span>Reviewed access</span><span>Raw codes + readable labels</span><span>Screening, not legal advice</span>
+    </section>
+
+    <section class="mcp-section mcp-connect" id="connect">
+      <div class="mcp-section__intro">
+        <p class="mcp-eyebrow">Connect</p>
+        <h2>One URL. Explicit access.</h2>
+        <p>Approved users receive an OAuth client ID and secret. Credentials are individual, revocable, and never displayed on this public page.</p>
+      </div>
+      <div class="mcp-steps">
+        <article><span>01</span><h3>Request access</h3><p>Tell us which agent you use and what you want to build.</p></article>
+        <article><span>02</span><h3>Receive credentials</h3><p>After review, securely store the client ID and one-time client secret.</p></article>
+        <article><span>03</span><h3>Add the connector</h3><p>In Claude, open Customize → Connectors → Add custom connector and use the endpoint above.</p></article>
+      </div>
+      <div class="mcp-client-note">
+        <strong>Claude setup</strong>
+        <p>Enter <code>{{ connector_url }}</code> as the remote MCP URL. Under Advanced settings, enter the approved OAuth client ID and client secret, then connect and enable SkagitMCP for a conversation.</p>
+      </div>
+    </section>
+
+    <section class="mcp-section" id="catalog">
+      <div class="mcp-section__intro">
+        <p class="mcp-eyebrow">Tool catalog</p>
+        <h2>{{ tool_count }} focused tools, one coherent system.</h2>
+        <p>The catalog is generated from the same versioned registry used by the MCP server, so the public documentation and agent discovery stay aligned.</p>
+      </div>
+      <div class="mcp-groups">
+        {% for group in tool_groups %}
+        <section class="mcp-group">
+          <header><span>0{{ forloop.counter }}</span><h3>{{ group.label }}</h3><small>{{ group.tools|length }} tools</small></header>
+          <div class="mcp-tool-list">
+            {% for tool in group.tools %}
+            <article>
+              <code>{{ tool.name }}</code>
+              <p>{{ tool.description }}</p>
+              <span>read only</span>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="mcp-section mcp-request" id="request-access">
+      <div class="mcp-request__copy">
+        <p class="mcp-eyebrow">Private beta</p>
+        <h2>Request agent access.</h2>
+        <p>SkagitMCP currently approves access manually so usage, reliability, and source load can be monitored responsibly.</p>
+        <ul>
+          <li>Individual OAuth credentials</li>
+          <li>Read-only public-record tools</li>
+          <li>Revocable access and scoped permissions</li>
+          <li>No credential is sent automatically</li>
+        </ul>
+      </div>
+      <div class="mcp-form-card">
+        {% if submitted %}
+          <div class="mcp-success" role="status">
+            <span>✓</span>
+            <h3>Request received.</h3>
+            <p>We’ll review the use case and follow up at the email you provided.</p>
+          </div>
+        {% endif %}
+        <form method="post" action="#request-access" novalidate>
+          {% csrf_token %}
+          {{ form.website }}
+          {% if form.non_field_errors %}<div class="mcp-errors">{{ form.non_field_errors }}</div>{% endif %}
+          <div class="mcp-form-grid">
+            <label><span>Name</span>{{ form.name }}{{ form.name.errors }}</label>
+            <label><span>Email</span>{{ form.email }}{{ form.email.errors }}</label>
+            <label><span>Organization <small>optional</small></span>{{ form.organization }}{{ form.organization.errors }}</label>
+            <label><span>Agent or client</span>{{ form.agent_client }}{{ form.agent_client.errors }}</label>
+          </div>
+          <label><span>Intended use</span>{{ form.intended_use }}{{ form.intended_use.errors }}</label>
+          <label><span>Expected usage</span>{{ form.expected_volume }}{{ form.expected_volume.errors }}</label>
+          <label class="mcp-check">{{ form.agreed_to_terms }}<span>{{ form.agreed_to_terms.label }}</span>{{ form.agreed_to_terms.errors }}</label>
+          <button class="mcp-button mcp-button--primary" type="submit">Submit request</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="mcp-disclaimer">
+      <strong>Use with judgment.</strong>
+      <p>OpenSkagit organizes public information for research and screening. Outputs may be incomplete or stale and are not legal, permitting, engineering, appraisal, or entitlement determinations. Verify consequential decisions with the originating public agency.</p>
+    </section>
+  </main>
+
+  <footer class="mcp-footer"><a href="/">OpenSkagit.com</a><span>Skagit Valley public data, made usable.</span></footer>
+</div>
+<script>
+  document.querySelectorAll('[data-copy-target]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const value = document.getElementById(button.dataset.copyTarget)?.textContent?.trim();
+      if (!value) return;
+      await navigator.clipboard.writeText(value);
+      const original = button.textContent;
+      button.textContent = 'Copied';
+      setTimeout(() => button.textContent = original, 1400);
+    });
+  });
+</script>
+{% endblock %}

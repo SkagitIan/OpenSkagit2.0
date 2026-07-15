@@ -24,3 +24,6 @@ pypdf
 sentry-sdk
 Pillow>=12,<13
 kuzu==0.11.3
+mcp>=1.27,<2
+uvicorn>=0.49,<1
+cryptography>=45,<49

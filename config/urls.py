@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include, reverse
+from django.views.generic import RedirectView
 from django.http import HttpResponse
 from django.conf import settings
 from core.views import home as core_home
@@ -78,6 +79,9 @@ urlpatterns = [
     path("staff/parcelbook/", include("parcelbook.urls")),
     path("staff/regression/", include("regression.urls")),
     path("opportunity/", include("opportunity.urls")),
+    path("mcp/", include("openskagit_tools.urls")),
+    path("mCP", RedirectView.as_view(url="/mcp/", permanent=True)),
+    path("mCP/", RedirectView.as_view(url="/mcp/", permanent=True)),
     path("accounts/", include("django.contrib.auth.urls")),
     path("admin/", admin.site.urls),
     path("health/", health),

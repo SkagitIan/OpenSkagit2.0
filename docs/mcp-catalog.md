@@ -1,14 +1,41 @@
 # OpenSkagit MCP Catalog
 
-This project uses a remote Cloudflare Worker MCP server to give the OpenSkagit analyst agent live parcel, GIS, Census, soils, and ArcGIS context.
+> Current compatibility catalog: this document describes the existing Cloudflare Worker MCP contract. The cross-project inventory, target ownership, and consolidation decisions are documented in [the platform catalog](platform-catalog.md), [the consolidation plan](platform-consolidation-plan.md), and [the deprecation register](deprecation-register.md).
 
-Default endpoint:
+## Canonical Unified MCP
+
+Public catalog and access request:
 
 ```text
-https://skagit-agent-worker.ian-larsen-1976.workers.dev/mcp
+https://openskagit.com/mcp/
 ```
 
-The Django app connects to this server from `core.agent.answer_question()` through typed OpenAI Agents SDK function tools that call the Worker MCP `tools/call` JSON-RPC endpoint. The front end still calls Django; Django still runs the analyst agent; the analyst agent now has both local DuckDB tools and remote MCP-backed tools.
+Remote MCP endpoint for Claude and other compatible clients:
+
+```text
+https://openskagit.com/mcp/api/
+```
+
+The endpoint publishes 22 read-only parcel, GIS, and zoning tools from the versioned `openskagit_tools` registry. It uses Streamable HTTP, OAuth authorization-code flow with PKCE, approved client credentials, the `openskagit.read` scope, revocable grants, and encrypted client-secret storage. The catalog page is generated from the same registry used for MCP discovery.
+
+Access requests are reviewed in Django admin. Issue an approved Claude-compatible client with:
+
+```powershell
+python manage.py approve_mcp_access REQUEST_ID --name "Claude connector"
+```
+
+The command displays the client secret once. Keep `SECRET_KEY` stable because it protects stored OAuth client credentials. The public form never issues or displays a credential. See [MCP access operations](mcp-access-operations.md) for review, delivery, revocation, incident, and smoke-test procedures.
+
+For local development, the `.mcp.json` entry named `openskagit` starts the same registry over stdio. The older `assessor-mcp`, `gis-mcp`, and `zoning-mcp` entries remain temporarily as compatibility bridges. All unified results use the common `data`, `sources`, `freshness`, `warnings`, and `errors` envelope.
+
+### Standalone bearer deployment (fallback only)
+
+`railway.unified-mcp.json` remains available for an isolated fallback service using a static bearer token. It is not the canonical OpenSkagit.com connector. The canonical endpoint is served by the Django ASGI deployment so the catalog, approval records, OAuth provider, and MCP tools share one reviewed control plane.
+
+### Legacy Cloudflare compatibility
+
+The older Cloudflare Worker endpoint remains a compatibility dependency for existing Ask Agent behavior while its unique Census/soils capabilities and consumers are migrated. It is not the URL for new external connectors.
+
 
 ## Relationship To Existing Tools
 
