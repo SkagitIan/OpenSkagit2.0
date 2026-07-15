@@ -91,21 +91,12 @@
                 <strong>{{ example.count_label }}</strong>
                 <span>matching parcels</span>
               </div>
-              <div class="os-intelligence__sources">
-                {% for source in example.source_context %}
-                  <span>{{ source }}</span>
-                {% endfor %}
-              </div>
-              {% if example.refreshed_at %}
-                <small>Updated {{ example.refreshed_at|date:"M j, Y" }}</small>
-              {% endif %}
             </article>
           {% empty %}
             <p class="os-intelligence__empty">Property intelligence examples are being refreshed.</p>
           {% endfor %}
         </div>
 
-        <a class="os-home-simple__button os-intelligence__cta" href="{% url 'opportunity_login' %}">Sign in to run a private search</a>
       </div>
     </section>
     <section id="purpose" class="os-home-simple__section" aria-label="OpenSkagit purpose">
