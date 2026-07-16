@@ -8,6 +8,7 @@ from django.contrib.auth.views import redirect_to_login
 from django.db import connection
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.templatetags.static import static
 from django.views.decorators.http import require_GET
 
 
@@ -32,6 +33,41 @@ def field_map(request):
         return redirect_to_login(request.get_full_path(), "/login/")
     return render(request, "field_map/map.html")
 
+
+@require_GET
+def web_manifest(request):
+    response = JsonResponse({
+        "id": "/field/",
+        "name": "OpenSkagit Parcel Field Map",
+        "short_name": "Parcel Map",
+        "description": "Private field access to nearby Skagit County parcel and ownership records.",
+        "start_url": "/field/",
+        "scope": "/field/",
+        "display": "standalone",
+        "background_color": "#d9e3df",
+        "theme_color": "#173f3a",
+        "icons": [{
+            "src": static("field_map/icons/field-map-icon.svg"),
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable",
+        }],
+    })
+    response["Content-Type"] = "application/manifest+json"
+    response["Cache-Control"] = "public, max-age=3600"
+    return response
+
+
+@require_GET
+def service_worker(request):
+    response = render(
+        request,
+        "field_map/service-worker.js",
+        content_type="application/javascript",
+    )
+    response["Cache-Control"] = "no-cache"
+    response["Service-Worker-Allowed"] = "/field/"
+    return response
 
 def _parse_bbox(raw_bbox: str | None) -> tuple[float, float, float, float]:
     if not raw_bbox:

@@ -1,8 +1,12 @@
+import base64
+import hashlib
 import json
 from decimal import Decimal
 from unittest.mock import Mock, patch
 
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.staticfiles import finders
+from django.template.loader import get_template
 from django.test import RequestFactory, SimpleTestCase
 
 from . import views
@@ -125,3 +129,54 @@ class ParcelQueryTests(SimpleTestCase):
         self.assertIn("ST_Intersects(g.geometry, v.geometry)", sql)
         self.assertIn("p.inactive_date IS NULL", sql)
         self.assertEqual(params, [*bbox, views.MAX_FEATURES + 1])
+
+
+class PwaAssetTests(SimpleTestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_manifest_is_installable_and_scoped_to_field_map(self):
+        response = views.web_manifest(self.factory.get("/field/manifest.webmanifest"))
+        payload = json.loads(response.content)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "application/manifest+json")
+        self.assertEqual(payload["start_url"], "/field/")
+        self.assertEqual(payload["scope"], "/field/")
+        self.assertEqual(payload["display"], "standalone")
+        self.assertEqual(payload["icons"][0]["type"], "image/svg+xml")
+
+    def test_service_worker_has_field_scope_and_does_not_cache_private_api(self):
+        response = views.service_worker(self.factory.get("/field/service-worker.js"))
+        script = response.content.decode()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "application/javascript")
+        self.assertEqual(response["Service-Worker-Allowed"], "/field/")
+        self.assertEqual(response["Cache-Control"], "no-cache")
+        self.assertIn('url.pathname.startsWith("/field/api/")', script)
+        self.assertIn("/static/field_map/vendor/leaflet/leaflet.css", script)
+        self.assertNotIn("basemaps.cartocdn.com", script)
+        self.assertNotIn("basemap.nationalmap.gov", script)
+
+    def test_template_uses_only_self_hosted_leaflet(self):
+        source = get_template("field_map/map.html").template.source
+        self.assertIn("field_map/vendor/leaflet/leaflet.css", source)
+        self.assertIn("field_map/vendor/leaflet/leaflet.js", source)
+        self.assertIn("field_map:manifest", source)
+        self.assertNotIn("unpkg.com/leaflet", source)
+        self.assertNotIn("integrity=", source)
+
+    def test_leaflet_assets_and_pwa_icon_are_discoverable(self):
+        for asset in (
+            "field_map/vendor/leaflet/leaflet.css",
+            "field_map/vendor/leaflet/leaflet.js",
+            "field_map/vendor/leaflet/images/layers.png",
+            "field_map/icons/field-map-icon.svg",
+        ):
+            with self.subTest(asset=asset):
+                self.assertIsNotNone(finders.find(asset))
+
+    def test_leaflet_css_matches_official_1_9_4_checksum(self):
+        path = finders.find("field_map/vendor/leaflet/leaflet.css")
+        with open(path, "rb") as asset:
+            digest = base64.b64encode(hashlib.sha256(asset.read()).digest()).decode()
+        self.assertEqual(digest, "p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=")

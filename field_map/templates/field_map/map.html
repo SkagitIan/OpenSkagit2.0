@@ -5,7 +5,10 @@
 
 {% block extra_head %}
 <meta name="theme-color" content="#173f3a">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynhS2hvsYjMZGbMZbVgVfK8pA0N0=" crossorigin="">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="{% url 'field_map:manifest' %}">
+<link rel="icon" href="{% static 'field_map/icons/field-map-icon.svg' %}" type="image/svg+xml">
+<link rel="stylesheet" href="{% static 'field_map/vendor/leaflet/leaflet.css' %}">
 <link rel="stylesheet" href="{% static 'field_map/field_map.css' %}">
 {% endblock %}
 
@@ -45,6 +48,6 @@
 
   <noscript>This field map requires JavaScript.</noscript>
 </main>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="{% static 'field_map/vendor/leaflet/leaflet.js' %}"></script>
 <script src="{% static 'field_map/field_map.js' %}" defer></script>
 {% endblock %}
