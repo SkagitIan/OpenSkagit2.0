@@ -175,6 +175,14 @@ class PwaAssetTests(SimpleTestCase):
             with self.subTest(asset=asset):
                 self.assertIsNotNone(finders.find(asset))
 
+    def test_parcel_click_does_not_bubble_to_map_close_handler(self):
+        path = finders.find("field_map/field_map.js")
+        with open(path, "r", encoding="utf-8") as asset:
+            script = asset.read()
+        self.assertIn("bubblingMouseEvents:false", script)
+        self.assertIn('map.on("click",resetSelection)', script)
+        self.assertNotIn("stopPropagation(event.originalEvent)", script)
+
     def test_leaflet_css_matches_official_1_9_4_checksum(self):
         path = finders.find("field_map/vendor/leaflet/leaflet.css")
         with open(path, "rb") as asset:
