@@ -21,6 +21,7 @@ from openskagit_tools.mcp_server import build_http_server_from_env, build_oauth_
 from openskagit_tools.models import McpOAuthClient
 from openskagit_tools.oauth_provider import DjangoOAuthProvider
 from openskagit_tools.registry import TOOL_CONTRACTS, TOOL_CONTRACT_BY_NAME, get_tool_contract
+from openskagit_tools.telemetry import instrument_tool
 
 TEST_TOKEN = "test-token-with-at-least-thirty-two-characters"
 
@@ -31,7 +32,7 @@ class UnifiedToolContractTests(SimpleTestCase):
         self.assertEqual(set(TOOL_CONTRACT_BY_NAME), set(HANDLERS))
         self.assertTrue(all(contract.read_only for contract in TOOL_CONTRACTS))
         self.assertTrue(all(contract.contract_version == CONTRACT_VERSION for contract in TOOL_CONTRACTS))
-        self.assertEqual({contract.domain for contract in TOOL_CONTRACTS}, {"parcel", "gis", "zoning"})
+        self.assertEqual({contract.domain for contract in TOOL_CONTRACTS}, {"parcel", "gis", "context", "zoning"})
 
     def test_fastmcp_publishes_exactly_the_contract_registry(self):
         tools = asyncio.run(mcp.list_tools())
@@ -50,6 +51,20 @@ class UnifiedToolContractTests(SimpleTestCase):
     def test_unknown_tool_contract_is_rejected(self):
         with self.assertRaisesMessage(ValueError, "Unknown OpenSkagit tool"):
             get_tool_contract("not_a_tool")
+
+    @patch("openskagit_tools.telemetry.McpToolCall.objects.create")
+    def test_tool_telemetry_records_no_arguments_or_response_body(self, create_call):
+        def example(parcel_id: str) -> dict:
+            return {"freshness": {"as_of": "2020-2024", "status": "unknown"}, "errors": []}
+
+        result = instrument_tool(example, tool_name="context_get_census", caller_class="mcp-http-oauth")("P123")
+
+        self.assertEqual(result["errors"], [])
+        fields = create_call.call_args.kwargs
+        self.assertEqual(fields["tool_name"], "context_get_census")
+        self.assertEqual(fields["freshness_as_of"], "2020-2024")
+        self.assertNotIn("parcel_id", fields)
+        self.assertNotIn("result", fields)
 
     @patch.dict(
         os.environ,
@@ -96,6 +111,34 @@ class UnifiedToolContractTests(SimpleTestCase):
 
         build_report.assert_called_once_with("P123", "ADU")
         self.assertIn("not a legal", result["warnings"][0])
+
+    @patch("openskagit_tools.handlers.context_services.get_census_context")
+    def test_census_handler_uses_canonical_context_service(self, get_census_context):
+        get_census_context.return_value = {
+            "status": "ok",
+            "parcel": "P123",
+            "note": "Area-level estimate.",
+            "acs": {},
+        }
+
+        result = HANDLERS["context_get_census"]("P123")
+
+        get_census_context.assert_called_once_with("P123")
+        self.assertEqual(result["data"]["parcel"], "P123")
+        self.assertIn("Area-level", result["warnings"][0])
+
+    @patch("openskagit_tools.handlers.context_services.get_soils_context")
+    def test_soils_handler_exposes_upstream_failure_in_common_envelope(self, get_soils_context):
+        get_soils_context.return_value = {
+            "status": "error",
+            "parcel": "P123",
+            "error": "NRCS unavailable",
+        }
+
+        result = HANDLERS["context_get_soils"]("P123")
+
+        self.assertEqual(result["errors"][0]["code"], "upstream_context_error")
+        self.assertIn("NRCS unavailable", result["errors"][0]["message"])
 
 
 class UnifiedMcpAuthenticationTests(SimpleTestCase):

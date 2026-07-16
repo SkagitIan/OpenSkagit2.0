@@ -16,7 +16,7 @@ Remote MCP endpoint for Claude and other compatible clients:
 https://openskagit.com/mcp/api/
 ```
 
-The endpoint publishes 22 read-only parcel, GIS, and zoning tools from the versioned `openskagit_tools` registry. It uses Streamable HTTP, OAuth authorization-code flow with PKCE, approved client credentials, the `openskagit.read` scope, revocable grants, and encrypted client-secret storage. The catalog page is generated from the same registry used for MCP discovery.
+The endpoint publishes 24 read-only parcel, GIS, Census/soils, and zoning tools from the versioned `openskagit_tools` registry. It uses Streamable HTTP, OAuth authorization-code flow with PKCE, approved client credentials, the `openskagit.read` scope, revocable grants, and encrypted client-secret storage. The catalog page is generated from the same registry used for MCP discovery.
 
 Access requests are reviewed in Django admin. Issue an approved Claude-compatible client with:
 
@@ -34,7 +34,7 @@ For local development, the `.mcp.json` entry named `openskagit` starts the same 
 
 ### Legacy Cloudflare compatibility
 
-The older Cloudflare Worker endpoint remains a compatibility dependency for existing Ask Agent behavior while its unique Census/soils capabilities and consumers are migrated. It is not the URL for new external connectors.
+The older Cloudflare Worker endpoint remains reachable only as a compatibility surface for unmigrated consumers. Ask Agent and the canonical MCP now use Railway `context_mcp` for Census and soils. New external connectors must use `https://openskagit.com/mcp/api/`; the Worker is pending traffic verification and retirement, not new development.
 
 
 ## Relationship To Existing Tools

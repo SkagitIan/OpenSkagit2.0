@@ -1,7 +1,7 @@
 # OpenSkagit Platform Consolidation Plan
 
 Status: active
-Date: 2026-07-15
+Date: 2026-07-16
 Execution home: `OpenSkagit-railway`
 
 ## Execution Progress
@@ -15,6 +15,9 @@ Execution home: `OpenSkagit-railway`
 - 2026-07-15: added the public registry-backed catalog and reviewed access-request workflow at `/mcp/`.
 - 2026-07-15: integrated the canonical `/mcp/api/` endpoint, OAuth discovery, PKCE authorization, encrypted client credentials, and revocable grants into the Django ASGI deployment.
 - 2026-07-15: verified desktop/mobile browser behavior, form validation, OAuth discovery, and fail-closed unauthenticated MCP access.
+- 2026-07-16: migrated Census ACS and NRCS SSURGO behavior into `context_mcp`, published `context_get_census` and `context_get_soils`, and cut Ask Agent over to the same-process services.
+- 2026-07-16: corrected the legacy NRCS field join, added an ACS 2024 five-year Census Reporter fallback for deployments without a Census API key, and verified parcel P96023 against both upstreams.
+- 2026-07-16: added secret-free per-tool usage, latency, outcome, freshness, and caller-class telemetry plus a 30-day reporting command.
 
 ## Objective
 
@@ -179,6 +182,8 @@ Deliver:
 
 Exit when all public tools pass golden tests and normalized outputs shadow the old endpoint successfully.
 
+Current state: substantially complete for the published parcel, GIS, zoning, Census, and soils surface. Opportunity and explicit source-health tools remain future catalog additions.
+
 ### Phase 3: Consolidate sources and data
 
 Deliver:
@@ -225,12 +230,12 @@ A component may be deleted only when all apply:
 
 ## Immediate Next Actions
 
-1. Log into Cloudflare or supply a read-only token and complete Phase 0.
-2. Decide whether external MCP runs on Railway or as a thin Cloudflare gateway backed by Railway.
-3. Add contract tests for seven Cloudflare tools and local assessor/GIS/zoning tools.
-4. Implement common envelopes and unified registration.
-5. Freeze `cloudflared`, `skagit-pipeline`, and top-level `mcp` pending parity.
-6. Approve preliminary dispositions before destructive cleanup.
+1. Restore Cloudflare CLI authentication or supply a read-only token; export Worker traffic, routes, secret names, D1 counts, R2 inventory, and cron state.
+2. Collect 30 days of canonical MCP telemetry with `python manage.py report_mcp_usage --days 30` and compare it with Cloudflare Worker traffic.
+3. Migrate the remaining legacy property-search/composite consumers or explicitly discontinue them.
+4. Run D1/PostGIS field and row parity, export D1/R2, freeze writes, and begin the zero-traffic observation window.
+5. Remove separate MCP processes and Workers only after their register gates pass; then revoke component-only credentials.
+6. Add opportunity and source-health tools only where they represent stable, supported public contracts.
 
 ## Definition Of Done
 

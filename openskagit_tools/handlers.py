@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Callable
 
 from assessor_mcp import services as assessor_services
+from context_mcp import services as context_services
 from gis_mcp import services as gis_services
 from zoning_mcp import services as zoning_services
 
@@ -10,8 +11,15 @@ from .contracts import result_envelope
 from .registry import get_tool_contract
 
 
-def _result(tool_name: str, data: Any, *, warnings: list[str] | None = None) -> dict[str, Any]:
-    return result_envelope(data, contract=get_tool_contract(tool_name), warnings=warnings)
+def _result(
+    tool_name: str,
+    data: Any,
+    *,
+    warnings: list[str] | None = None,
+    errors: list[dict[str, Any]] | None = None,
+    as_of: str | None = None,
+) -> dict[str, Any]:
+    return result_envelope(data, contract=get_tool_contract(tool_name), warnings=warnings, errors=errors, as_of=as_of)
 
 
 def parcel_get_summary(parcel_id: str) -> dict[str, Any]:
@@ -76,6 +84,35 @@ def gis_query_layer(layer: str, where: str = "1=1", limit: int = 10, include_geo
     return _result("gis_query_layer", gis_services.query_gis_layer(layer, where, limit, include_geometry))
 
 
+def _context_result(tool_name: str, data: dict[str, Any]) -> dict[str, Any]:
+    status = data.get("status")
+    warnings: list[str] = []
+    errors: list[dict[str, Any]] = []
+    if data.get("note"):
+        warnings.append(str(data["note"]))
+    if status == "partial":
+        warnings.append("One or more upstream context levels failed; inspect data.errors.")
+    elif status == "error":
+        errors.append(
+            {
+                "code": "upstream_context_error",
+                "message": str(data.get("error") or "Context source failed."),
+                "stage": data.get("stage"),
+            }
+        )
+    release = data.get("release")
+    as_of = release.get("years") if isinstance(release, dict) else None
+    return _result(tool_name, data, warnings=warnings, errors=errors, as_of=as_of)
+
+
+def context_get_census(parcel_id: str) -> dict[str, Any]:
+    return _context_result("context_get_census", context_services.get_census_context(parcel_id))
+
+
+def context_get_soils(parcel_id: str) -> dict[str, Any]:
+    return _context_result("context_get_soils", context_services.get_soils_context(parcel_id))
+
+
 def zoning_resolve_parcel(parcel_id: str | None = None, address: str | None = None) -> dict[str, Any]:
     return _result("zoning_resolve_parcel", zoning_services.resolve_parcel(parcel_id=parcel_id, address=address))
 
@@ -124,5 +161,5 @@ def zoning_compare_zones(proposed_use: str, jurisdictions: list[str] | None = No
 HANDLERS: dict[str, Callable[..., dict[str, Any]]] = {
     name: value
     for name, value in globals().copy().items()
-    if callable(value) and name.startswith(("parcel_", "gis_", "zoning_"))
+    if callable(value) and name.startswith(("parcel_", "gis_", "context_", "zoning_"))
 }

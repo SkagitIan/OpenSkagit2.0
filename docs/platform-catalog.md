@@ -1,7 +1,7 @@
 # OpenSkagit Platform Catalog
 
 Status: working consolidation inventory
-Inventory date: 2026-07-15
+Inventory date: 2026-07-16
 Canonical project: `OpenSkagit-railway`
 Canonical analytical store: Railway PostgreSQL/PostGIS
 
@@ -38,7 +38,7 @@ This catalog records the logical capabilities and physical deployments that make
 
 - Phase 1 unified package: `openskagit_tools`
 - Contract version: `1.0`
-- Registered tools: 22 read-only parcel, GIS, and zoning tools
+- Registered tools: 24 read-only parcel, GIS, Census/soils, and zoning tools
 - Public catalog/access: `https://openskagit.com/mcp/`
 - Canonical remote endpoint: `https://openskagit.com/mcp/api/`
 - Transport: local stdio plus production Streamable HTTP in the Django ASGI deployment
@@ -99,6 +99,22 @@ Mutation tools such as saving searches, changing preferences, running syncs, or 
 
 Cloudflare D1 `skagit-parcels` is a duplicate parcel store and is not a target system of record. Production usage must be measured before retirement.
 
+The 2026-07-16 public baseline found 83,509 D1 parcel rows versus 83,391 active and 83,638 total PostGIS parcels. A golden D1 parcel had current assessor data embedded in a misplaced JSON field while its normalized analytical columns were null. D1 is neither count-identical nor shape-equivalent; preserve/export it for investigation, but do not use it as the canonical analytical source.
+
+### Context source ownership
+
+`context_mcp` is the canonical Census/soils implementation. Parcel geometry comes from PostGIS. Census geography matching uses the US Census geocoder; ACS data uses the official Census API when `CENSUS_API_KEY` is configured and otherwise the Census Reporter mirror pinned to ACS 2024 five-year estimates. Soils use NRCS Soil Data Access and the corrected `mapunit.farmlndcl` field. Ask Agent calls these services in-process rather than calling the legacy Worker.
+
+Verification on 2026-07-16 used parcel P96023: all four ACS levels returned from release `acs2024_5yr` and NRCS returned one intersecting map unit. The legacy Worker returned missing-key errors for ACS and an invalid-field error for soils.
+
+### Usage evidence
+
+`McpToolCall` records secret-free tool name, caller class, outcome, duration, freshness marker, and exception class. It deliberately excludes arguments, parcel IDs, credentials, and result bodies. Review the adoption window with:
+
+```powershell
+python manage.py report_mcp_usage --days 30
+```
+
 ## Deployment Catalog
 
 ### Railway
@@ -120,7 +136,7 @@ Cloudflare D1 `skagit-parcels` is a duplicate parcel store and is not a target s
 
 | Project | Worker | Function | Preliminary decision |
 | --- | --- | --- | --- |
-| `OpenSkagit/worker` | `skagit-agent-worker` | Property, GIS, Census, soils, HTTP MCP | Merge unique capabilities; bridge; retire or make thin proxy. |
+| `OpenSkagit/worker` | `skagit-agent-worker` | Property, GIS, Census, soils, HTTP MCP | Census/soils migrated; bridge remaining consumers; retire after zero-traffic evidence. |
 | `workers/arcgis-adapter` | `arcgis-adapter` | ArcGIS proxy | Merge; retire unless edge value is proven. |
 | `workers/web-adapter` | `web-adapter` | Web proxy | Keep only if Cloudflare egress is necessary. |
 | `workers/notify-adapter` | `notify-adapter` | Email/webhook delivery | Keep provisionally for isolation. |

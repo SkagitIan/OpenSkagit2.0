@@ -9,6 +9,8 @@ from typing import Any
 import duckdb
 import requests
 
+from context_mcp import services as context_services
+
 from .duck import connect, database_path
 
 READ_ONLY_TABLES = {
@@ -706,13 +708,13 @@ def answer_question(question: str) -> AnalysisResponse:
 
     @function_tool
     def get_census_context(parcel: str) -> dict[str, Any]:
-        """MCP: Get Census ACS area-level context matched by parcel centroid."""
-        return _call_openskagit_mcp_tool("get_census_context", {"parcel": parcel})
+        """Get Census ACS area-level context from the canonical same-process service."""
+        return context_services.get_census_context(parcel)
 
     @function_tool
     def get_soils_context(parcel: str) -> dict[str, Any]:
-        """MCP: Get NRCS SSURGO soil map units intersecting a parcel polygon."""
-        return _call_openskagit_mcp_tool("get_soils_context", {"parcel": parcel})
+        """Get NRCS SSURGO soil map units from the canonical same-process service."""
+        return context_services.get_soils_context(parcel)
 
     @function_tool
     def list_gis_layers() -> dict[str, Any]:
@@ -746,9 +748,9 @@ def answer_question(question: str) -> AnalysisResponse:
             "neighborhood_description, utilities_description, imprv_det_type_description, and condition_description. "
             "Use DuckDB for cohort analysis, rollups, sales ratios, comparable-sale summaries, and questions that need "
             "many parcels or historical tabular records. "
-            "Use the OpenSkagit Cloudflare MCP tools for live parcel lookup, parcel-specific property dossiers, GIS overlays, "
-            "ArcGIS layer metadata, zoning, critical areas, flood/environmental/service-district overlays, Census context, "
-            "and soils context. If the user gives an address, use search_parcels before parcel-specific MCP tools. "
+            "Use the OpenSkagit Cloudflare MCP compatibility tools for live parcel lookup, parcel-specific property dossiers, "
+            "GIS overlays, and ArcGIS layer metadata. Census and soils use canonical same-process services backed by PostGIS "
+            "parcel geometry. If the user gives an address, use search_parcels before parcel-specific tools. "
             "If an Address preflight note is included in the user message, rely on it before DuckDB code mappings. "
             "Do not treat reval area as a neighborhood. Census values are area-level estimates, not parcel-level facts. "
             "For regression-style questions, compute transparent DuckDB aggregates and explain limitations. "

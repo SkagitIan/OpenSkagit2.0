@@ -1,7 +1,7 @@
 # OpenSkagit Deprecation Register
 
-Status: preliminary decisions awaiting deployment verification and owner approval
-Date: 2026-07-15
+Status: active; safe migrations underway, destructive retirement awaiting traffic/data gates
+Date: 2026-07-16
 
 `DELETE` means remove deployment and source after every gate passes. It does not authorize immediate deletion before verification.
 
@@ -33,8 +33,8 @@ Date: 2026-07-15
 | Separate `zoning-mcp` process | `BRIDGE` -> `DELETE` | Unified MCP | All clients moved; compatibility window passed |
 | `mcp_django.py` | `KEEP`, local only | Admin tooling | Prove no public/production exposure |
 | `opportunity` | `KEEP` | Same | Maintain feature boundary |
-| `ask_agent` remote MCP bridge | `MERGE` | Direct services + external MCP client | Behavioral and fallback tests |
-| `OpenSkagit/worker` | `MERGE` -> `BRIDGE` -> `DELETE` or thin proxy | Railway context/GIS + unified MCP | Move unique behavior; cut routes; zero traffic |
+| `ask_agent` remote MCP bridge | `MERGE` (context cut over) | Direct services + external MCP client | Migrate remaining property/GIS tools; behavioral tests |
+| `OpenSkagit/worker` | `BRIDGE` -> `DELETE` | Railway context/GIS + unified MCP | Census/soils moved; migrate remaining consumers, cut routes, prove zero traffic |
 | `workers/arcgis-adapter` | `FREEZE` -> `DELETE` unless edge value proven | GIS/source client | Consumers, caching, CORS, rate-limit, egress evidence |
 | `workers/web-adapter` | `VERIFY` | Source client or thin proxy | Identify sources requiring Cloudflare egress |
 | `workers/notify-adapter` | `KEEP` provisionally | Notification boundary | Confirm usage; add auth, retries, ownership |
@@ -81,6 +81,15 @@ Date: 2026-07-15
 5. Move D1 consumers to PostGIS, freeze, observe, back up, and delete pipeline infrastructure.
 6. Remove separate MCP process entries after unified façade adoption.
 7. Review web/notification Workers based on measured value.
+
+## 2026-07-16 Gate Evidence
+
+- Replacement: canonical `context_get_census` and `context_get_soils` are implemented and covered by the unified registry tests.
+- Consumer cutover: Ask Agent now calls the Railway services in-process for Census and soils.
+- Parity/correction: P96023 returned ACS 2024 five-year results at four geography levels and one NRCS map unit. The replacement fixes the legacy Worker's missing Census key and invalid `muaggatt.farmlndcl` query.
+- Usage evidence: new canonical calls are recorded in `McpToolCall`; OAuth clients/grants already record last use.
+- Still open: authenticated Cloudflare traffic, route, secret-name, D1, R2, and cron export; remaining consumers; observation window; backups; route/binding removal; credential revocation.
+- Deletion decision: **not yet safe**. Public reachability is not proof of use or non-use.
 
 ## Approval Record
 

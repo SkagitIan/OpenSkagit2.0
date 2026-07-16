@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import McpAccessRequest, McpOAuthAuthorizationCode, McpOAuthClient, McpOAuthGrant
+from .models import McpAccessRequest, McpOAuthAuthorizationCode, McpOAuthClient, McpOAuthGrant, McpToolCall
 
 
 @admin.register(McpAccessRequest)
@@ -36,6 +36,17 @@ class McpOAuthGrantAdmin(admin.ModelAdmin):
     list_display = ("client", "active", "access_expires_at", "refresh_expires_at", "last_used_at", "created_at")
     list_filter = ("active", "created_at")
     readonly_fields = [field.name for field in McpOAuthGrant._meta.fields]
+
+    def has_add_permission(self, request):
+        return False
+
+
+@admin.register(McpToolCall)
+class McpToolCallAdmin(admin.ModelAdmin):
+    list_display = ("tool_name", "caller_class", "outcome", "duration_ms", "freshness_status", "called_at")
+    list_filter = ("caller_class", "outcome", "freshness_status", "called_at")
+    search_fields = ("tool_name", "error_class")
+    readonly_fields = [field.name for field in McpToolCall._meta.fields]
 
     def has_add_permission(self, request):
         return False

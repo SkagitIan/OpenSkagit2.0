@@ -135,3 +135,20 @@ class McpOAuthGrant(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+
+
+class McpToolCall(models.Model):
+    """Minimal, secret-free evidence for MCP adoption and reliability."""
+
+    tool_name = models.CharField(max_length=100, db_index=True)
+    caller_class = models.CharField(max_length=40, db_index=True)
+    outcome = models.CharField(max_length=20, db_index=True)
+    duration_ms = models.PositiveIntegerField()
+    freshness_status = models.CharField(max_length=20, default="unknown")
+    freshness_as_of = models.CharField(max_length=80, blank=True)
+    error_class = models.CharField(max_length=120, blank=True)
+    called_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ["-called_at"]
+        indexes = [models.Index(fields=["tool_name", "called_at"], name="mcp_tool_time_idx")]

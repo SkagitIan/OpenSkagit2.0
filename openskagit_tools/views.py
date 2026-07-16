@@ -12,7 +12,12 @@ from .forms import McpAccessRequestForm
 from .models import McpAccessRequest
 from .registry import TOOL_CONTRACTS
 
-DOMAIN_LABELS = {"parcel": "Parcel & assessor", "gis": "GIS & context", "zoning": "Zoning & feasibility"}
+DOMAIN_LABELS = {
+    "parcel": "Parcel & assessor",
+    "gis": "GIS & overlays",
+    "context": "Census & soils",
+    "zoning": "Zoning & feasibility",
+}
 
 
 def _client_ip(request) -> str | None:

@@ -14,16 +14,17 @@ django.setup()
 from .auth import READ_SCOPE, StaticBearerTokenVerifier  # noqa: E402
 from .handlers import HANDLERS  # noqa: E402
 from .registry import TOOL_CONTRACTS, TOOL_CONTRACT_BY_NAME  # noqa: E402
+from .telemetry import instrument_tool  # noqa: E402
 
 INSTRUCTIONS = """
-Read-only OpenSkagit parcel, GIS, and zoning tools.
+Read-only OpenSkagit parcel, GIS, Census/soils, and zoning tools.
 Use parcel tools for live county property facts, GIS tools for spatial screening,
 and zoning tools for cited planning context. Zoning and GIS outputs are not legal,
 permitting, engineering, appraisal, or entitlement determinations.
 """.strip()
 
 
-def _register_tools(server: FastMCP) -> FastMCP:
+def _register_tools(server: FastMCP, *, caller_class: str) -> FastMCP:
     if set(HANDLERS) != set(TOOL_CONTRACT_BY_NAME):
         missing_handlers = sorted(set(TOOL_CONTRACT_BY_NAME) - set(HANDLERS))
         missing_contracts = sorted(set(HANDLERS) - set(TOOL_CONTRACT_BY_NAME))
@@ -33,7 +34,7 @@ def _register_tools(server: FastMCP) -> FastMCP:
         )
     for contract in TOOL_CONTRACTS:
         server.add_tool(
-            HANDLERS[contract.name],
+            instrument_tool(HANDLERS[contract.name], tool_name=contract.name, caller_class=caller_class),
             name=contract.name,
             description=contract.description,
             structured_output=True,
@@ -48,7 +49,8 @@ def build_stdio_server() -> FastMCP:
             instructions=INSTRUCTIONS,
             json_response=True,
             stateless_http=True,
-        )
+        ),
+        caller_class="mcp-stdio",
     )
 
 
@@ -97,7 +99,8 @@ def build_http_server_from_env() -> FastMCP:
             stateless_http=True,
             token_verifier=verifier,
             auth=auth,
-        )
+        ),
+        caller_class="mcp-http-bearer",
     )
 
 
@@ -139,7 +142,8 @@ def build_oauth_http_server(
             ),
             auth_server_provider=provider,
             auth=auth,
-        )
+        ),
+        caller_class="mcp-http-oauth",
     )
 
 mcp = build_stdio_server()
