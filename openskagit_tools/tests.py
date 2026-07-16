@@ -205,10 +205,11 @@ class PublicMcpCatalogTests(SimpleTestCase):
         self.assertContains(response, "parcel_get_summary")
 
     def test_oauth_server_exposes_discovery_and_protocol_routes(self):
-        app = build_oauth_http_server(
+        server = build_oauth_http_server(
             public_origin="https://openskagit.com",
             provider=DjangoOAuthProvider(),
-        ).streamable_http_app()
+        )
+        app = server.streamable_http_app()
         paths = {route.path for route in app.routes}
 
         self.assertIn("/.well-known/oauth-authorization-server", paths)
@@ -216,3 +217,4 @@ class PublicMcpCatalogTests(SimpleTestCase):
         self.assertIn("/authorize", paths)
         self.assertIn("/token", paths)
         self.assertIn("/mcp/api/", paths)
+        self.assertEqual(server.settings.transport_security.allowed_hosts, ["openskagit.com"])

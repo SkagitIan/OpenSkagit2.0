@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 import django
 from mcp.server.auth.settings import AuthSettings, ClientRegistrationOptions, RevocationOptions
 from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp.server import TransportSecuritySettings
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
@@ -132,6 +133,10 @@ def build_oauth_http_server(
             streamable_http_path=endpoint_path,
             json_response=True,
             stateless_http=True,
+            transport_security=TransportSecuritySettings(
+                allowed_hosts=[urlparse(origin).netloc],
+                allowed_origins=[origin],
+            ),
             auth_server_provider=provider,
             auth=auth,
         )
