@@ -32,6 +32,7 @@ from .services import (
     is_public_or_civic_land_use,
     is_public_or_open_space_zone,
     is_resource_land_use,
+    land_use_code,
     mark_saved,
     risk_flags,
     utility_labels,
@@ -43,6 +44,9 @@ FEEDBACK_REASONS = OpportunitySearchFeedback.REASON_CHOICES
 _ACTIVE_SEARCH_IDS: set[int] = set()
 _ACTIVE_SEARCH_LOCK = threading.Lock()
 RESIDENTIAL_DWELLING_CODES = {"110", "111", "112", "113", "120", "130", "180", "181", "182", "185", "190"}
+EXCLUDED_AI_SEARCH_LAND_USE_CODES = {"0"}
+COMMERCIAL_LAND_USE_RANGES = ((510, 590), (610, 691))
+INDUSTRIAL_LAND_USE_RANGES = ((210, 360),)
 NONRESIDENTIAL_LAND_USE_PREFIXES = ("2", "3", "4", "5", "6", "7", "8")
 BARE_RECREATION_TERMS = {"bare", "raw", "unimproved", "undeveloped", "recreation", "recreational", "camp", "camping"}
 LAND_ASSET_TERMS = {"land", "lot", "lots", "parcel", "parcels", "acreage", "acres"}
@@ -576,6 +580,7 @@ def apply_prompt_result_filters(prompt: str, rows: list[dict[str, Any]]) -> list
         rows = [row for row in rows if _row_matches_prompt_place(row, place_terms)]
     if _requires_bare_recreation_land(prompt):
         rows = [row for row in rows if _has_bare_recreation_land_evidence(row)]
+    rows = [row for row in rows if not _is_excluded_ai_search_property(row)]
     if _requires_dwelling_asset(prompt):
         rows = [row for row in rows if _has_dwelling_evidence(row)]
     return rows
@@ -795,12 +800,16 @@ def parse_generated_search_response(text: str) -> dict[str, Any]:
 
 
 def _opportunity_short_name(value: str) -> str:
-    text = re.sub(r"[^A-Za-z0-9\s-]", "", value or "").strip()
+    text = re.sub(r"([a-z])([A-Z])", r"\1 \2", value or "")
+    text = re.sub(r"[_-]+", " ", text)
+    text = re.sub(r"[^A-Za-z0-9\s]", "", text).strip()
     text = re.sub(r"\s+", " ", text)
     words = text.split()
+    if len(words) <= 1 and len(text) > 18:
+        words = re.findall(r"[A-Z]?[a-z]+|[A-Z]+(?=[A-Z]|$)|\d+", value or "")
     if not words:
         return "Opportunity"
-    return " ".join(words[:3])[:60]
+    return " ".join(words[:3]).title()[:60]
 
 
 def _parse_json_object(text: str) -> dict[str, Any]:
@@ -1786,6 +1795,26 @@ def _extract_years_hint(prompt: str) -> int | None:
         return None
     years = int(match.group(1))
     return years if 1 <= years <= 50 else None
+
+
+def _is_excluded_ai_search_property(row: dict[str, Any]) -> bool:
+    code = str(row.get("land_use_code") or land_use_code(row.get("land_use")) or "").strip()
+    text = " ".join(
+        str(row.get(key) or "")
+        for key in ("land_use", "current_use", "zoning", "zone_name", "waza_general", "match_reasons")
+    ).upper()
+    if code in EXCLUDED_AI_SEARCH_LAND_USE_CODES or "PERSONAL PROPERTY" in text:
+        return True
+    try:
+        numeric_code = int(code)
+    except (TypeError, ValueError):
+        numeric_code = None
+    if numeric_code is not None:
+        if any(start <= numeric_code <= end for start, end in COMMERCIAL_LAND_USE_RANGES):
+            return True
+        if any(start <= numeric_code <= end for start, end in INDUSTRIAL_LAND_USE_RANGES):
+            return True
+    return "COMMERCIAL" in text or "INDUSTRIAL" in text
 
 
 def _has_bare_recreation_land_evidence(row: dict[str, Any]) -> bool:
