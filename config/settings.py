@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "gis_mcp",
     "regression",
     "graph",
+    "field_map",
     "openskagit_tools.apps.OpenSkagitToolsConfig",
 ]
 
