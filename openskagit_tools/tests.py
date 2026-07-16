@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 from unittest.mock import patch
 
@@ -22,11 +23,21 @@ from openskagit_tools.models import McpOAuthClient
 from openskagit_tools.oauth_provider import DjangoOAuthProvider
 from openskagit_tools.registry import TOOL_CONTRACTS, TOOL_CONTRACT_BY_NAME, get_tool_contract
 from openskagit_tools.telemetry import instrument_tool
+from openskagit_tools.management.commands.audit_legacy_d1 import _comparable, _embedded_assessor
 
 TEST_TOKEN = "test-token-with-at-least-thirty-two-characters"
 
 
 class UnifiedToolContractTests(SimpleTestCase):
+    def test_legacy_d1_audit_finds_misplaced_assessor_json(self):
+        payload = {"days_since_last_sale": json.dumps({"assessor": {"Assessed Value": "9,600"}})}
+
+        assessor, field = _embedded_assessor(payload)
+
+        self.assertEqual(field, "days_since_last_sale")
+        self.assertEqual(assessor["Assessed Value"], "9,600")
+        self.assertEqual(_comparable("9,600.00"), "9600")
+
     def test_registry_is_unique_read_only_and_has_handlers(self):
         self.assertEqual(len(TOOL_CONTRACTS), len(TOOL_CONTRACT_BY_NAME))
         self.assertEqual(set(TOOL_CONTRACT_BY_NAME), set(HANDLERS))
@@ -89,6 +100,37 @@ class UnifiedToolContractTests(SimpleTestCase):
         get_parcel_details.assert_called_once_with("P123")
         self.assertEqual(result["data"]["owner"], "Example")
         self.assertEqual(result["errors"], [])
+
+    @patch("openskagit_tools.handlers.assessor_services.search_parcels")
+    def test_parcel_search_uses_canonical_postgis_service(self, search_parcels):
+        search_parcels.return_value = {"query": "P123", "count": 1, "results": [{"parcel_id": "P123"}]}
+
+        result = HANDLERS["parcel_search"]("P123", 5)
+
+        search_parcels.assert_called_once_with("P123", 5)
+        self.assertEqual(result["data"]["results"][0]["parcel_id"], "P123")
+
+    @patch("assessor_mcp.services.connection")
+    def test_postgis_parcel_search_normalizes_exact_id_and_shapes_results(self, db_connection):
+        db_cursor = db_connection.cursor.return_value.__enter__.return_value
+        db_cursor.fetchall.return_value = [
+            ("P123", "123 MAIN ST", "MOUNT VERNON WA 98273", "(111) HOUSEHOLD", 100000, -122.3, 48.4, 1)
+        ]
+
+        from assessor_mcp.services import search_parcels
+
+        result = search_parcels("123", limit=5)
+
+        self.assertEqual(result["normalized_query"], "123")
+        self.assertEqual(result["total_matches"], 1)
+        self.assertEqual(result["results"][0]["parcel_id"], "P123")
+        self.assertIn("P123", db_cursor.execute.call_args.args[1])
+
+    def test_postgis_parcel_search_rejects_punctuation_only(self):
+        from assessor_mcp.services import search_parcels
+
+        with self.assertRaisesMessage(ValueError, "letters or numbers"):
+            search_parcels("---")
 
     @patch("openskagit_tools.handlers.gis_services.get_parcel_overlays")
     def test_gis_handler_preserves_partial_errors_as_warnings(self, get_parcel_overlays):

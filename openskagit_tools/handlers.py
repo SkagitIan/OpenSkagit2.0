@@ -22,6 +22,10 @@ def _result(
     return result_envelope(data, contract=get_tool_contract(tool_name), warnings=warnings, errors=errors, as_of=as_of)
 
 
+def parcel_search(query: str, limit: int = 10) -> dict[str, Any]:
+    return _result("parcel_search", assessor_services.search_parcels(query, limit))
+
+
 def parcel_get_summary(parcel_id: str) -> dict[str, Any]:
     return _result("parcel_get_summary", assessor_services.get_parcel_details(parcel_id))
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://railway.com/railway.schema.json",
-  "build": {"builder": "NIXPACKS"},
+  "build": {"builder": "DOCKERFILE", "dockerfilePath": "Dockerfile"},
   "deploy": {
     "startCommand": "python manage.py build_graph_entities && python manage.py build_parcel_adjacency && python manage.py build_parcel_graph && python manage.py run_graph_patterns",
     "cronSchedule": "0 12 * * *",

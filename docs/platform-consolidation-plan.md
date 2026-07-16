@@ -19,6 +19,9 @@ Execution home: `OpenSkagit-railway`
 - 2026-07-16: corrected the legacy NRCS field join, added an ACS 2024 five-year Census Reporter fallback for deployments without a Census API key, and verified parcel P96023 against both upstreams.
 - 2026-07-16: added secret-free per-tool usage, latency, outcome, freshness, and caller-class telemetry plus a 30-day reporting command.
 - 2026-07-16: production deployment `8289dc44-519e-4410-821a-05e6264ee7a0` passed authenticated discovery and Census/soils calls; telemetry recorded both successes and the test OAuth credentials were removed.
+- 2026-07-16: removed Railway Ask Agent's remaining legacy Worker calls; parcel search, assessor reports, GIS overlays, Census, and soils now use canonical same-process services.
+- 2026-07-16: added a deterministic D1/PostGIS audit command. A 25-parcel sample found zero complete normalized D1 records and misplaced assessor JSON in all 25, with 10 acreage mismatches and one sale-price mismatch.
+- 2026-07-16: replaced Nixpacks configurations with a repository-owned Dockerfile that declares no secret build arguments; production build verification remains required.
 
 ## Objective
 
@@ -233,7 +236,7 @@ A component may be deleted only when all apply:
 
 1. Restore Cloudflare CLI authentication or supply a read-only token; export Worker traffic, routes, secret names, D1 counts, R2 inventory, and cron state.
 2. Collect 30 days of canonical MCP telemetry with `python manage.py report_mcp_usage --days 30` and compare it with Cloudflare Worker traffic.
-3. Migrate the remaining legacy property-search/composite consumers or explicitly discontinue them.
+3. Identify external legacy property-search/composite consumers; the Railway Ask Agent consumer is migrated.
 4. Run D1/PostGIS field and row parity, export D1/R2, freeze writes, and begin the zero-traffic observation window.
 5. Remove separate MCP processes and Workers only after their register gates pass; then revoke component-only credentials.
 6. Add opportunity and source-health tools only where they represent stable, supported public contracts.

@@ -8,6 +8,7 @@ def _contract(name: str, domain: str, description: str, *source_ids: str) -> Too
 
 
 TOOL_CONTRACTS = (
+    _contract("parcel_search", "parcel", "Search active parcels by parcel ID or situs address.", "openskagit_postgis"),
     _contract("parcel_get_summary", "parcel", "Get current live assessor details for one Skagit parcel.", "skagit_property_onestop"),
     _contract("parcel_get_history", "parcel", "Get live year-over-year assessment history for one parcel.", "skagit_property_onestop"),
     _contract("parcel_get_sales", "parcel", "Get live transfer and sale history for one parcel.", "skagit_property_onestop"),

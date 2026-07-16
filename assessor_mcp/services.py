@@ -7,6 +7,7 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
+from django.db import connection
 
 ASSESSOR_BASE = "https://www.skagitcounty.net/Search/Property/Webservice.asmx"
 TIMEOUT = float(os.environ.get("ASSESSOR_MCP_TIMEOUT", 30))
@@ -36,6 +37,80 @@ def clean_parcel(value: str) -> str:
     if not re.fullmatch(r"P\d{1,10}", text):
         raise ValueError(f"Parcel must look like P96023, got: {value!r}")
     return text
+
+
+def search_parcels(query: str, limit: int = 10) -> dict[str, Any]:
+    """Search the canonical PostGIS parcel store by parcel ID or situs address."""
+
+    text = " ".join((query or "").strip().upper().split())
+    if not text:
+        raise ValueError("Parcel search query is required.")
+    count = min(max(int(limit or 10), 1), 25)
+    exact_parcel = clean_parcel(text) if re.fullmatch(r"P?\d{1,10}", text) else None
+    tokens = re.findall(r"[A-Z0-9]+", text)
+    if not tokens:
+        raise ValueError("Parcel search query must contain letters or numbers.")
+    address_sql = "upper(concat_ws(' ', p.situs_street_number, p.situs_street_name, p.situs_city_state_zip))"
+
+    if exact_parcel:
+        where_sql = "p.parcel_number = %s"
+        where_params: list[Any] = [exact_parcel]
+    else:
+        where_sql = " AND ".join(f"{address_sql} LIKE %s" for _ in tokens)
+        where_params = [f"%{token}%" for token in tokens]
+
+    sql = f"""
+        WITH matches AS (
+            SELECT
+                p.parcel_number,
+                nullif(trim(concat_ws(' ', p.situs_street_number, p.situs_street_name)), '') AS address,
+                p.situs_city_state_zip,
+                p.land_use,
+                p.total_market_value,
+                ST_X(ST_PointOnSurface(g.geometry)) AS longitude,
+                ST_Y(ST_PointOnSurface(g.geometry)) AS latitude,
+                count(*) OVER () AS total_matches,
+                CASE
+                    WHEN p.parcel_number = %s THEN 0
+                    WHEN {address_sql} = %s THEN 1
+                    WHEN {address_sql} LIKE %s THEN 2
+                    ELSE 3
+                END AS match_rank
+            FROM skagit_parcels p
+            LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
+            WHERE p.inactive_date IS NULL AND {where_sql}
+        )
+        SELECT parcel_number, address, situs_city_state_zip, land_use, total_market_value,
+               longitude, latitude, total_matches
+        FROM matches
+        ORDER BY match_rank, parcel_number
+        LIMIT %s
+    """
+    rank_params = [exact_parcel or "", text, f"{text}%"]
+    with connection.cursor() as cursor:
+        cursor.execute(sql, [*rank_params, *where_params, count])
+        rows = cursor.fetchall()
+
+    results = [
+        {
+            "parcel_id": row[0],
+            "label": " — ".join(value for value in (row[1], row[2], row[0]) if value),
+            "address": row[1],
+            "city_state_zip": row[2],
+            "land_use": row[3],
+            "total_market_value": row[4],
+            "longitude": float(row[5]) if row[5] is not None else None,
+            "latitude": float(row[6]) if row[6] is not None else None,
+        }
+        for row in rows
+    ]
+    return {
+        "query": query,
+        "normalized_query": text,
+        "count": len(results),
+        "total_matches": int(rows[0][7]) if rows else 0,
+        "results": results,
+    }
 
 
 # ---------------------------------------------------------------------------

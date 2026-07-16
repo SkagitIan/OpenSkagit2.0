@@ -16,7 +16,7 @@ Remote MCP endpoint for Claude and other compatible clients:
 https://openskagit.com/mcp/api/
 ```
 
-The endpoint publishes 24 read-only parcel, GIS, Census/soils, and zoning tools from the versioned `openskagit_tools` registry. It uses Streamable HTTP, OAuth authorization-code flow with PKCE, approved client credentials, the `openskagit.read` scope, revocable grants, and encrypted client-secret storage. The catalog page is generated from the same registry used for MCP discovery.
+The endpoint publishes 25 read-only parcel, GIS, Census/soils, and zoning tools from the versioned `openskagit_tools` registry. It uses Streamable HTTP, OAuth authorization-code flow with PKCE, approved client credentials, the `openskagit.read` scope, revocable grants, and encrypted client-secret storage. The catalog page is generated from the same registry used for MCP discovery.
 
 Access requests are reviewed in Django admin. Issue an approved Claude-compatible client with:
 
@@ -34,7 +34,7 @@ For local development, the `.mcp.json` entry named `openskagit` starts the same 
 
 ### Legacy Cloudflare compatibility
 
-The older Cloudflare Worker endpoint remains reachable only as a compatibility surface for unmigrated consumers. Ask Agent and the canonical MCP now use Railway `context_mcp` for Census and soils. New external connectors must use `https://openskagit.com/mcp/api/`; the Worker is pending traffic verification and retirement, not new development.
+The older Cloudflare Worker endpoint remains reachable only as a compatibility surface for externally unknown consumers. Ask Agent now uses canonical same-process PostGIS, assessor, GIS, Census, and soils services for its complete live tool surface. New external connectors must use `https://openskagit.com/mcp/api/`; the Worker is pending traffic verification and retirement, not new development.
 
 
 ## Relationship To Existing Tools
@@ -42,7 +42,7 @@ The older Cloudflare Worker endpoint remains reachable only as a compatibility s
 The agent has two classes of tools:
 
 - Local DuckDB function tools: `get_analysis_context` and `run_analysis_query`.
-- Remote MCP-backed tools: live Cloudflare Worker tools backed by county property pages, ArcGIS REST services, Census context, and soils services.
+- Same-process live tools backed by PostGIS, county property pages, ArcGIS REST services, Census context, and soils services.
 
 Use DuckDB for broad tabular analysis:
 
@@ -71,13 +71,11 @@ Environment variables:
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `OPENSKAGIT_ENABLE_MCP` | `true` | Set to `false` to disable the remote MCP server. |
-| `OPENSKAGIT_MCP_URL` | Cloudflare Worker `/mcp` URL | Streamable HTTP MCP endpoint. |
-| `OPENSKAGIT_MCP_BEARER_TOKEN` | empty | Optional bearer token. Must match the Worker `MCP_BEARER_TOKEN` secret if that secret is set. |
-| `OPENSKAGIT_MCP_TIMEOUT_SECONDS` | `15` | HTTP request timeout for MCP calls. |
-| `OPENSKAGIT_MCP_SSE_READ_TIMEOUT_SECONDS` | `60` | Stream/read timeout for MCP transport. |
+| `OPENSKAGIT_ENABLE_LIVE_TOOLS` | `true` | Set to `false` to run Ask Agent without live same-process parcel/GIS/context tools. |
+| `CONTEXT_MCP_TIMEOUT_SECONDS` | `25` | Census and NRCS upstream request timeout. |
+| `GIS_MCP_TIMEOUT_SECONDS` | `20` | ArcGIS upstream request timeout. |
 
-The Worker currently supports unauthenticated access unless `MCP_BEARER_TOKEN` is configured on the Worker.
+`OPENSKAGIT_ENABLE_MCP` remains a temporary compatibility alias for the live-tools toggle. Railway no longer needs a legacy Worker URL or bearer token for Ask Agent.
 
 ## MCP Transport And Bridge
 
@@ -106,9 +104,7 @@ Tool call request shape:
 }
 ```
 
-In this Django app, `core.agent._call_openskagit_mcp_tool()` sends these JSON-RPC messages. Each MCP catalog entry is exposed to the model as a typed function tool with the same name, and that function tool delegates to the remote MCP server.
-
-This bridge exists because the deployed Worker currently returns ordinary JSON-RPC HTTP responses and does not maintain the streaming session expected by the Agents SDK's built-in streamable HTTP MCP client.
+This request shape documents the legacy compatibility endpoint only. Railway application code no longer calls it; the authenticated canonical MCP uses the FastMCP Streamable HTTP transport at `/mcp/api/`.
 
 ## Tool Catalog
 
@@ -380,4 +376,4 @@ Use this order for countywide or market questions:
 - Do not treat reval area as neighborhood.
 - Do not present GIS overlays as final legal, permitting, engineering, environmental, or appraisal determinations.
 - State data-source limitations for Census, soils, and ArcGIS overlays.
-- If the MCP server is unavailable, set `OPENSKAGIT_ENABLE_MCP=false` to keep DuckDB-only analysis running.
+- If live upstream services are unavailable, set `OPENSKAGIT_ENABLE_LIVE_TOOLS=false` to keep DuckDB-only analysis running.

@@ -1,7 +1,8 @@
 {
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS"
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "Dockerfile"
   },
   "deploy": {
     "startCommand": "python manage.py migrate && python manage.py backfill_tax_statements --years 2023 2024 2025 2026 --delay ${TAX_DELINQUENCY_DELAY:-0.35}",

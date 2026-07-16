@@ -41,6 +41,7 @@ These facts come from source configuration and do not prove which account resour
 - D1 is therefore 118 rows above the active PostGIS population and 129 rows below the all-status PostGIS population. The difference must be classified before export/deletion; it is not evidence of simple parity.
 - Golden parcel P96023 exists in both stores. Its D1 normalized columns are largely null while current assessor values are embedded in a JSON field under an unrelated column, whereas PostGIS exposes the current assessed/market/land values as typed columns. This confirms that the deployed D1 shape is not an equivalent analytical source.
 - Public `/parcels`, `/health`, and `/parcel/P96023` routes respond, but the parcel payload does not match either checked-in `skagit-parcels` Worker implementation exactly. Authenticated deployed-version inventory is required to identify the actual production source revision.
+- A deterministic 25-parcel audit received all 25 D1 records without request failures. None had complete normalized core fields; every record embedded assessor JSON under `days_since_last_sale`. Recovered assessed, total-market, and building values matched PostGIS, while acreage mismatched for 10 records and sale price mismatched for one. Re-run with `python manage.py audit_legacy_d1 --sample-size 25`.
 
 ## Account-level blocker
 
@@ -48,7 +49,7 @@ Wrangler authentication is expired (`whoami` returns HTTP 400 / not logged in). 
 
 ## Railway hardening finding
 
-The Railway/Nixpacks build emitted Docker warnings that multiple runtime secrets are available as image-build `ARG`/`ENV` values, including application, R2, notification, and API credentials. No secret values were printed in the observed logs, but runtime secrets should be removed from the build environment and rotated after the build configuration is corrected.
+The Railway/Nixpacks build emitted Docker warnings that multiple runtime secrets were promoted into generated image-build `ARG`/`ENV` instructions, including application, R2, notification, and API credentials. No secret values were printed in the observed logs. All Railway config-as-code files now select a repository-owned Dockerfile that declares no secret build arguments; verify the production build logs, then rotate the affected credentials.
 
 ## Next retirement evidence
 

@@ -6,17 +6,15 @@ import time
 from dataclasses import dataclass
 from typing import Any, Callable
 
-import requests
 from django.core.management.base import BaseCommand, CommandError
 
-from ask_agent.agent import DEFAULT_OPENSKAGIT_MCP_URL, _call_openskagit_mcp_tool
-
+from openskagit_tools.handlers import HANDLERS
 
 Validator = Callable[[dict[str, Any]], None]
 
 
 @dataclass(frozen=True)
-class McpCatalogCase:
+class CatalogCase:
     name: str
     arguments: dict[str, Any]
     validator: Validator
@@ -30,189 +28,115 @@ def _require_keys(payload: dict[str, Any], keys: set[str]) -> None:
 
 def _validate_search(payload: dict[str, Any]) -> None:
     _require_keys(payload, {"query", "count", "results"})
-    if not isinstance(payload["results"], list):
-        raise ValueError("results is not a list")
 
 
-def _validate_property_context(payload: dict[str, Any]) -> None:
-    _require_keys(payload, {"parcel", "property", "gis"})
+def _validate_parcel(payload: dict[str, Any]) -> None:
+    if not (payload.get("parcel_id") or payload.get("parcel")):
+        raise ValueError("parcel response has no parcel identifier")
 
 
-def _validate_property_summary(payload: dict[str, Any]) -> None:
-    _require_keys(payload, {"parcel"})
-    if len(payload) < 2:
-        raise ValueError("property summary did not include any summary fields")
-
-
-def _validate_gis_overlays(payload: dict[str, Any]) -> None:
-    _require_keys(payload, {"parcel"})
-    if "layers" not in payload and "overlays" not in payload and "results" not in payload:
-        raise ValueError("GIS overlay response did not include layers, overlays, or results")
+def _validate_overlays(payload: dict[str, Any]) -> None:
+    _require_keys(payload, {"parcel", "overlays"})
 
 
 def _validate_census(payload: dict[str, Any]) -> None:
-    _require_keys(payload, {"parcel", "census"})
+    _require_keys(payload, {"parcel", "status", "acs"})
 
 
 def _validate_soils(payload: dict[str, Any]) -> None:
-    _require_keys(payload, {"parcel", "soils"})
+    _require_keys(payload, {"parcel", "status", "mapunits"})
 
 
-def _validate_layer_list(payload: dict[str, Any]) -> None:
+def _validate_layers(payload: dict[str, Any]) -> None:
     _require_keys(payload, {"default_bundles", "bundles", "layers"})
     if not payload["layers"]:
         raise ValueError("layer catalog is empty")
 
 
 class Command(BaseCommand):
-    help = "Run an end-to-end health check against every OpenSkagit MCP catalog tool."
+    help = "Run canonical same-process health checks for the unified OpenSkagit tool catalog."
 
     def add_arguments(self, parser):
-        parser.add_argument(
-            "--parcel",
-            default="P96023",
-            help="Parcel ID used for parcel-specific MCP checks. Default: P96023.",
-        )
-        parser.add_argument(
-            "--query",
-            default="P96023",
-            help="Address text or parcel number used for search_parcels. Default: P96023.",
-        )
-        parser.add_argument(
-            "--url",
-            default=None,
-            help="Optional MCP endpoint override. Also accepted through OPENSKAGIT_MCP_URL.",
-        )
-        parser.add_argument(
-            "--timeout",
-            type=float,
-            default=60,
-            help="Per-tool MCP HTTP timeout in seconds. Default: 60.",
-        )
-        parser.add_argument(
-            "--retries",
-            type=int,
-            default=1,
-            help="Number of retries after a failed tool call. Default: 1.",
-        )
-        parser.add_argument(
-            "--json",
-            action="store_true",
-            help="Print machine-readable JSON results.",
-        )
-        parser.add_argument(
-            "--stop-on-failure",
-            action="store_true",
-            help="Stop after the first failed MCP tool check.",
-        )
+        parser.add_argument("--parcel", default="P96023")
+        parser.add_argument("--query", default="P96023")
+        parser.add_argument("--timeout", type=float, default=60)
+        parser.add_argument("--retries", type=int, default=1)
+        parser.add_argument("--json", action="store_true")
+        parser.add_argument("--stop-on-failure", action="store_true")
 
     def handle(self, *args, **options):
-        if options["url"]:
-            os.environ["OPENSKAGIT_MCP_URL"] = options["url"]
-        os.environ["OPENSKAGIT_MCP_TIMEOUT_SECONDS"] = str(options["timeout"])
-
-        endpoint = options["url"] or DEFAULT_OPENSKAGIT_MCP_URL
-        parcel = str(options["parcel"]).strip().upper()
-        query = str(options["query"]).strip()
-        cases = self._cases(parcel, query)
-
-        results: list[dict[str, Any]] = []
+        os.environ["CONTEXT_MCP_TIMEOUT_SECONDS"] = str(options["timeout"])
+        os.environ["GIS_MCP_TIMEOUT_SECONDS"] = str(options["timeout"])
+        cases = self._cases(str(options["parcel"]).strip().upper(), str(options["query"]).strip())
+        results = []
         for case in cases:
-            result = self._run_case(case, retries=max(options["retries"], 0), quiet=options["json"])
+            result = self._run_case(case, max(options["retries"], 0), options["json"])
             results.append(result)
             if result["status"] != "ok" and options["stop_on_failure"]:
                 break
-
         if options["json"]:
-            self.stdout.write(json.dumps({"endpoint": endpoint, "parcel": parcel, "query": query, "results": results}, indent=2))
-
-        failures = [result for result in results if result["status"] != "ok"]
+            self.stdout.write(json.dumps({"endpoint": "canonical-in-process", "results": results}, indent=2))
+        failures = [row for row in results if row["status"] != "ok"]
         if failures:
-            failed_names = ", ".join(result["tool"] for result in failures)
-            raise CommandError(f"OpenSkagit MCP catalog check failed for: {failed_names}")
+            raise CommandError("Unified catalog check failed for: " + ", ".join(row["tool"] for row in failures))
+        self.stdout.write(self.style.SUCCESS(f"All {len(results)} canonical catalog checks passed."))
 
-        self.stdout.write(self.style.SUCCESS(f"All {len(results)} OpenSkagit MCP catalog checks passed."))
-
-    def _run_case(self, case: McpCatalogCase, retries: int, quiet: bool) -> dict[str, Any]:
-        attempts: list[dict[str, Any]] = []
+    def _run_case(self, case: CatalogCase, retries: int, quiet: bool) -> dict[str, Any]:
+        failures = []
         for attempt in range(retries + 1):
             started = time.perf_counter()
             try:
-                payload = _call_openskagit_mcp_tool(case.name, case.arguments)
+                envelope = HANDLERS[case.name](**case.arguments)
+                if envelope.get("errors"):
+                    raise RuntimeError(str(envelope["errors"]))
+                payload = envelope.get("data")
+                if not isinstance(payload, dict):
+                    raise ValueError("tool data is not an object")
                 case.validator(payload)
-                elapsed_ms = round((time.perf_counter() - started) * 1000)
                 result = {
                     "tool": case.name,
                     "status": "ok",
-                    "elapsed_ms": elapsed_ms,
-                    "attempt": attempt + 1,
-                    "summary": self._summarize_payload(payload),
+                    "elapsed_ms": round((time.perf_counter() - started) * 1000),
+                    "summary": self._summarize(payload),
                 }
-                if attempts:
-                    result["previous_failures"] = attempts
                 if not quiet:
-                    retry_text = f" attempt={attempt + 1}" if attempt else ""
-                    self.stdout.write(self.style.SUCCESS(f"OK {case.name} ({elapsed_ms} ms{retry_text}): {result['summary']}"))
+                    self.stdout.write(self.style.SUCCESS(f"OK {case.name} ({result['elapsed_ms']} ms): {result['summary']}"))
                 return result
             except Exception as exc:
-                elapsed_ms = round((time.perf_counter() - started) * 1000)
-                failure = {
+                failures.append({
                     "attempt": attempt + 1,
-                    "elapsed_ms": elapsed_ms,
-                    "error": self._format_error(exc),
-                }
-                attempts.append(failure)
+                    "elapsed_ms": round((time.perf_counter() - started) * 1000),
+                    "error": f"{type(exc).__name__}: {exc}",
+                })
                 if attempt < retries:
-                    time.sleep(min(2 ** attempt, 5))
-
-        result = {
-            "tool": case.name,
-            "status": "failed",
-            "elapsed_ms": attempts[-1]["elapsed_ms"],
-            "attempt": attempts[-1]["attempt"],
-            "error": attempts[-1]["error"],
-            "failures": attempts,
-        }
+                    time.sleep(min(2**attempt, 5))
+        result = {"tool": case.name, "status": "failed", "failures": failures}
         if not quiet:
-            self.stderr.write(self.style.ERROR(f"FAIL {case.name} ({result['elapsed_ms']} ms): {result['error']}"))
+            self.stderr.write(self.style.ERROR(f"FAIL {case.name}: {failures[-1]['error']}"))
         return result
 
-    def _cases(self, parcel: str, query: str) -> list[McpCatalogCase]:
+    def _cases(self, parcel: str, query: str) -> list[CatalogCase]:
         return [
-            McpCatalogCase("search_parcels", {"q": query}, _validate_search),
-            McpCatalogCase("get_property_summary", {"parcel": parcel, "raw": False}, _validate_property_summary),
-            McpCatalogCase(
-                "get_gis_overlays",
-                {"parcel": parcel, "bundles": "core", "layers": "zoning"},
-                _validate_gis_overlays,
+            CatalogCase("parcel_search", {"query": query, "limit": 5}, _validate_search),
+            CatalogCase("parcel_get_summary", {"parcel_id": parcel}, _validate_parcel),
+            CatalogCase("parcel_get_full_report", {"parcel_id": parcel}, _validate_parcel),
+            CatalogCase(
+                "gis_get_overlays",
+                {"parcel_id": parcel, "bundles": "core", "layers": "zoning", "include_parcel_geometry": False},
+                _validate_overlays,
             ),
-            McpCatalogCase("get_census_context", {"parcel": parcel}, _validate_census),
-            McpCatalogCase("get_soils_context", {"parcel": parcel}, _validate_soils),
-            McpCatalogCase("list_gis_layers", {}, _validate_layer_list),
-            McpCatalogCase(
-                "get_property_context",
-                {"parcel": parcel, "raw": False, "bundles": "core", "layers": "zoning"},
-                _validate_property_context,
-            ),
+            CatalogCase("context_get_census", {"parcel_id": parcel}, _validate_census),
+            CatalogCase("context_get_soils", {"parcel_id": parcel}, _validate_soils),
+            CatalogCase("gis_list_layers", {}, _validate_layers),
         ]
 
-    def _summarize_payload(self, payload: dict[str, Any]) -> str:
-        parts: list[str] = []
+    @staticmethod
+    def _summarize(payload: dict[str, Any]) -> str:
+        parts = []
         if "count" in payload:
             parts.append(f"count={payload['count']}")
-        if "parcel" in payload:
-            parts.append(f"parcel={payload['parcel']}")
-        if "layers" in payload and isinstance(payload["layers"], list):
-            parts.append(f"layers={len(payload['layers'])}")
-        if "bundles" in payload and isinstance(payload["bundles"], dict):
-            parts.append(f"bundles={len(payload['bundles'])}")
-        if "meta" in payload and isinstance(payload["meta"], dict):
-            tokens = payload["meta"].get("estimated_tokens")
-            if tokens is not None:
-                parts.append(f"estimated_tokens={tokens}")
-        return ", ".join(parts) or f"keys={','.join(sorted(payload.keys())[:8])}"
-
-    def _format_error(self, exc: Exception) -> str:
-        if isinstance(exc, requests.HTTPError) and exc.response is not None:
-            return f"HTTP {exc.response.status_code}: {exc.response.text[:500]}"
-        return f"{type(exc).__name__}: {exc}"
+        if payload.get("parcel") or payload.get("parcel_id"):
+            parts.append(f"parcel={payload.get('parcel') or payload.get('parcel_id')}")
+        if "mapunit_count" in payload:
+            parts.append(f"mapunits={payload['mapunit_count']}")
+        return ", ".join(parts) or "ok"

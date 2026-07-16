@@ -33,7 +33,7 @@ Date: 2026-07-16
 | Separate `zoning-mcp` process | `BRIDGE` -> `DELETE` | Unified MCP | All clients moved; compatibility window passed |
 | `mcp_django.py` | `KEEP`, local only | Admin tooling | Prove no public/production exposure |
 | `opportunity` | `KEEP` | Same | Maintain feature boundary |
-| `ask_agent` remote MCP bridge | `MERGE` (context cut over) | Direct services + external MCP client | Migrate remaining property/GIS tools; behavioral tests |
+| `ask_agent` remote MCP bridge | `DELETE` from Railway code | Direct same-process services | Completed; verify no external legacy consumers before Worker retirement |
 | `OpenSkagit/worker` | `BRIDGE` -> `DELETE` | Railway context/GIS + unified MCP | Census/soils moved; migrate remaining consumers, cut routes, prove zero traffic |
 | `workers/arcgis-adapter` | `FREEZE` -> `DELETE` unless edge value proven | GIS/source client | Consumers, caching, CORS, rate-limit, egress evidence |
 | `workers/web-adapter` | `VERIFY` | Source client or thin proxy | Identify sources requiring Cloudflare egress |
@@ -86,9 +86,10 @@ Date: 2026-07-16
 
 - Replacement: canonical `context_get_census` and `context_get_soils` are implemented and covered by the unified registry tests.
 - Consumer cutover: Ask Agent now calls the Railway services in-process for Census and soils.
+- Consumer cutover: Ask Agent's remaining parcel search, property report, GIS overlay, and layer catalog calls now use same-process services; Railway code contains no legacy Worker URL.
 - Parity/correction: P96023 returned ACS 2024 five-year results at four geography levels and one NRCS map unit. The replacement fixes the legacy Worker's missing Census key and invalid `muaggatt.farmlndcl` query.
 - Usage evidence: new canonical calls are recorded in `McpToolCall`; OAuth clients/grants already record last use.
-- Still open: authenticated Cloudflare traffic, route, secret-name, D1, R2, and cron export; remaining consumers; observation window; backups; route/binding removal; credential revocation.
+- Still open: authenticated Cloudflare traffic, route, secret-name, D1, R2, and cron export; external consumers; observation window; backups; route/binding removal; credential revocation.
 - Deletion decision: **not yet safe**. Public reachability is not proof of use or non-use.
 
 ## Approval Record

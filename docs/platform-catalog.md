@@ -38,7 +38,7 @@ This catalog records the logical capabilities and physical deployments that make
 
 - Phase 1 unified package: `openskagit_tools`
 - Contract version: `1.0`
-- Registered tools: 24 read-only parcel, GIS, Census/soils, and zoning tools
+- Registered tools: 25 read-only parcel, GIS, Census/soils, and zoning tools
 - Public catalog/access: `https://openskagit.com/mcp/`
 - Canonical remote endpoint: `https://openskagit.com/mcp/api/`
 - Transport: local stdio plus production Streamable HTTP in the Django ASGI deployment
@@ -114,6 +114,8 @@ Verification on 2026-07-16 used parcel P96023: all four ACS levels returned from
 ```powershell
 python manage.py report_mcp_usage --days 30
 ```
+
+Run the same-process source health suite with `python manage.py check_unified_mcp_catalog`. Compare the legacy D1 store without logging parcel payloads with `python manage.py audit_legacy_d1 --sample-size 25`.
 
 ## Deployment Catalog
 

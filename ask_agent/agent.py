@@ -7,9 +7,10 @@ from pathlib import Path
 from typing import Any
 
 import duckdb
-import requests
 
+from assessor_mcp import services as assessor_services
 from context_mcp import services as context_services
+from gis_mcp import services as gis_services
 
 from .duck import connect, database_path
 
@@ -79,8 +80,6 @@ LAND_USE_ALIASES = {
     "740": {"recreational activities", "recreational activity"},
 }
 
-DEFAULT_OPENSKAGIT_MCP_URL = "https://skagit-agent-worker.ian-larsen-1976.workers.dev/mcp"
-
 STREET_SUFFIXES = {
     "aly", "alley", "ave", "avenue", "blvd", "boulevard", "cir", "circle",
     "ct", "court", "dr", "drive", "hwy", "highway", "ln", "lane", "loop",
@@ -96,49 +95,10 @@ def _env_enabled(name: str, default: bool = True) -> bool:
     return value.lower() in ("1", "true", "yes", "on")
 
 
-def _call_openskagit_mcp_tool(
-    name: str,
-    arguments: dict[str, Any],
-    timeout_seconds: float | None = None,
-) -> dict[str, Any]:
-    """Call the Cloudflare Worker MCP JSON-RPC endpoint and return the tool payload."""
-    if not _env_enabled("OPENSKAGIT_ENABLE_MCP", default=True):
-        raise RuntimeError("OpenSkagit MCP tools are disabled by OPENSKAGIT_ENABLE_MCP=false.")
-
-    url = os.environ.get("OPENSKAGIT_MCP_URL", DEFAULT_OPENSKAGIT_MCP_URL).strip()
-    if not url:
-        raise RuntimeError("OPENSKAGIT_MCP_URL is empty.")
-
-    headers = {"content-type": "application/json"}
-    token = os.environ.get("OPENSKAGIT_MCP_BEARER_TOKEN", "").strip()
-    if token:
-        headers["authorization"] = f"Bearer {token}"
-
-    payload = {
-        "jsonrpc": "2.0",
-        "id": 1,
-        "method": "tools/call",
-        "params": {"name": name, "arguments": arguments},
-    }
-    timeout = timeout_seconds if timeout_seconds is not None else float(os.environ.get("OPENSKAGIT_MCP_TIMEOUT_SECONDS", "60"))
-    response = requests.post(url, json=payload, headers=headers, timeout=timeout)
-    response.raise_for_status()
-    message = response.json()
-    if "error" in message:
-        error = message["error"]
-        raise RuntimeError(error.get("message", str(error)) if isinstance(error, dict) else str(error))
-
-    result = message.get("result", {})
-    content = result.get("content", [])
-    if content and isinstance(content[0], dict) and content[0].get("type") == "text":
-        import json
-
-        text = content[0].get("text", "")
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError:
-            return {"text": text}
-    return {"result": result}
+def _live_tools_enabled() -> bool:
+    if "OPENSKAGIT_ENABLE_LIVE_TOOLS" in os.environ:
+        return _env_enabled("OPENSKAGIT_ENABLE_LIVE_TOOLS")
+    return _env_enabled("OPENSKAGIT_ENABLE_MCP", default=True)
 
 
 def schema_summary(db_path: Path | None = None, conn: duckdb.DuckDBPyConnection | None = None) -> str:
@@ -467,12 +427,11 @@ def _parcel_id_from_search_result(row: dict[str, Any]) -> str | None:
 
 def _address_lookup_context(question: str) -> str | None:
     address_query = _extract_address_query(question)
-    if not address_query or not _env_enabled("OPENSKAGIT_ENABLE_MCP", default=True):
+    if not address_query or not _live_tools_enabled():
         return None
 
     try:
-        timeout = float(os.environ.get("OPENSKAGIT_ADDRESS_PREFLIGHT_TIMEOUT_SECONDS", "12"))
-        payload = _call_openskagit_mcp_tool("search_parcels", {"q": address_query}, timeout_seconds=timeout)
+        payload = assessor_services.search_parcels(address_query)
     except Exception as exc:
         return (
             f"Address preflight: attempted search_parcels({address_query!r}) before analysis, "
@@ -669,8 +628,8 @@ def answer_question(question: str) -> AnalysisResponse:
 
     @function_tool
     def search_parcels(q: str) -> dict[str, Any]:
-        """MCP: Search Skagit County parcels by address text or parcel number."""
-        return _call_openskagit_mcp_tool("search_parcels", {"q": q})
+        """Search canonical PostGIS parcels by address text or parcel number."""
+        return assessor_services.search_parcels(q)
 
     @function_tool
     def get_property_context(
@@ -679,18 +638,21 @@ def answer_question(question: str) -> AnalysisResponse:
         bundles: str | None = None,
         layers: str | None = None,
     ) -> dict[str, Any]:
-        """MCP: Get a full parcel context packet with property summary and GIS overlays."""
-        args: dict[str, Any] = {"parcel": parcel, "raw": raw}
-        if bundles:
-            args["bundles"] = bundles
-        if layers:
-            args["layers"] = layers
-        return _call_openskagit_mcp_tool("get_property_context", args)
+        """Get a same-process parcel report and GIS overlay packet."""
+        parcel_id = assessor_services.clean_parcel(parcel)
+        return {
+            "parcel": parcel_id,
+            "property": assessor_services.get_full_parcel_report(parcel_id),
+            "gis": gis_services.get_parcel_overlays(parcel_id, bundles=bundles, layers=layers),
+            "raw_requested": raw,
+        }
 
     @function_tool
     def get_property_summary(parcel: str, raw: bool = False) -> dict[str, Any]:
-        """MCP: Get parsed assessor/property context for one parcel without GIS overlays."""
-        return _call_openskagit_mcp_tool("get_property_summary", {"parcel": parcel, "raw": raw})
+        """Get same-process live assessor/property context without GIS overlays."""
+        result = assessor_services.get_parcel_details(parcel)
+        result["raw_requested"] = raw
+        return result
 
     @function_tool
     def get_gis_overlays(
@@ -698,13 +660,8 @@ def answer_question(question: str) -> AnalysisResponse:
         bundles: str | None = None,
         layers: str | None = None,
     ) -> dict[str, Any]:
-        """MCP: Get GIS overlays intersecting a parcel."""
-        args: dict[str, Any] = {"parcel": parcel}
-        if bundles:
-            args["bundles"] = bundles
-        if layers:
-            args["layers"] = layers
-        return _call_openskagit_mcp_tool("get_gis_overlays", args)
+        """Get same-process GIS overlays intersecting a parcel."""
+        return gis_services.get_parcel_overlays(parcel, bundles=bundles, layers=layers)
 
     @function_tool
     def get_census_context(parcel: str) -> dict[str, Any]:
@@ -718,12 +675,12 @@ def answer_question(question: str) -> AnalysisResponse:
 
     @function_tool
     def list_gis_layers() -> dict[str, Any]:
-        """MCP: List available GIS overlay bundles and layer keys."""
-        return _call_openskagit_mcp_tool("list_gis_layers", {})
+        """List canonical GIS overlay bundles and layer keys."""
+        return gis_services.list_gis_layers()
 
     model = os.environ.get("OPENAI_MODEL", "gpt-4.1")
     tools = [get_analysis_context, run_analysis_query]
-    if _env_enabled("OPENSKAGIT_ENABLE_MCP", default=True):
+    if _live_tools_enabled():
         tools.extend([
             search_parcels,
             get_property_context,
@@ -748,9 +705,9 @@ def answer_question(question: str) -> AnalysisResponse:
             "neighborhood_description, utilities_description, imprv_det_type_description, and condition_description. "
             "Use DuckDB for cohort analysis, rollups, sales ratios, comparable-sale summaries, and questions that need "
             "many parcels or historical tabular records. "
-            "Use the OpenSkagit Cloudflare MCP compatibility tools for live parcel lookup, parcel-specific property dossiers, "
-            "GIS overlays, and ArcGIS layer metadata. Census and soils use canonical same-process services backed by PostGIS "
-            "parcel geometry. If the user gives an address, use search_parcels before parcel-specific tools. "
+            "Use canonical same-process OpenSkagit services for live parcel lookup, property dossiers, GIS overlays, "
+            "ArcGIS layer metadata, Census, and soils. Parcel search and context geometry use PostGIS. If the user gives "
+            "an address, use search_parcels before parcel-specific tools. "
             "If an Address preflight note is included in the user message, rely on it before DuckDB code mappings. "
             "Do not treat reval area as a neighborhood. Census values are area-level estimates, not parcel-level facts. "
             "For regression-style questions, compute transparent DuckDB aggregates and explain limitations. "
