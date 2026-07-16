@@ -49,7 +49,7 @@ Wrangler authentication is expired (`whoami` returns HTTP 400 / not logged in). 
 
 ## Railway hardening finding
 
-The Railway/Nixpacks build emitted Docker warnings that multiple runtime secrets were promoted into generated image-build `ARG`/`ENV` instructions, including application, R2, notification, and API credentials. No secret values were printed in the observed logs. All Railway config-as-code files now select a repository-owned Dockerfile that declares no secret build arguments; verify the production build logs, then rotate the affected credentials.
+The Railway/Nixpacks build emitted Docker warnings that multiple runtime secrets were promoted into generated image-build `ARG`/`ENV` instructions, including application, R2, notification, and API credentials. No secret values were printed in the observed logs. A repository-owned Dockerfile removed those warnings but was reverted after its command/static-file boundary caused a production 502. Railway is back on the proven Nixpacks configuration. Resolve build-variable isolation as a separate staged change with a non-production verification environment, then rotate affected credentials.
 
 ## Next retirement evidence
 

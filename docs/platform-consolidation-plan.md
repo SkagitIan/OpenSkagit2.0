@@ -21,7 +21,7 @@ Execution home: `OpenSkagit-railway`
 - 2026-07-16: production deployment `8289dc44-519e-4410-821a-05e6264ee7a0` passed authenticated discovery and Census/soils calls; telemetry recorded both successes and the test OAuth credentials were removed.
 - 2026-07-16: removed Railway Ask Agent's remaining legacy Worker calls; parcel search, assessor reports, GIS overlays, Census, and soils now use canonical same-process services.
 - 2026-07-16: added a deterministic D1/PostGIS audit command. A 25-parcel sample found zero complete normalized D1 records and misplaced assessor JSON in all 25, with 10 acreage mismatches and one sale-price mismatch.
-- 2026-07-16: replaced Nixpacks configurations with a repository-owned Dockerfile that declares no secret build arguments; production build verification remains required.
+- 2026-07-16: tested and reverted a repository-owned Docker build after its runtime command/static-file permissions caused a production 502. Railway returned to the previously proven Nixpacks build; build-variable hardening remains open.
 
 ## Objective
 
