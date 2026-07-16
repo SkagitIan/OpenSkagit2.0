@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     "gis_mcp",
     "regression",
     "graph",
-    "field_map",
 ]
 
 MIDDLEWARE = [

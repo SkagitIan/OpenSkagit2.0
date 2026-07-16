@@ -78,7 +78,6 @@ urlpatterns = [
     path("staff/parcelbook/", include("parcelbook.urls")),
     path("staff/regression/", include("regression.urls")),
     path("opportunity/", include("opportunity.urls")),
-    path("field/", include("field_map.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("admin/", admin.site.urls),
     path("health/", health),
