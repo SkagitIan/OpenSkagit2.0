@@ -18,6 +18,7 @@ Execution home: `OpenSkagit-railway`
 - 2026-07-16: migrated Census ACS and NRCS SSURGO behavior into `context_mcp`, published `context_get_census` and `context_get_soils`, and cut Ask Agent over to the same-process services.
 - 2026-07-16: corrected the legacy NRCS field join, added an ACS 2024 five-year Census Reporter fallback for deployments without a Census API key, and verified parcel P96023 against both upstreams.
 - 2026-07-16: added secret-free per-tool usage, latency, outcome, freshness, and caller-class telemetry plus a 30-day reporting command.
+- 2026-07-16: production deployment `8289dc44-519e-4410-821a-05e6264ee7a0` passed authenticated discovery and Census/soils calls; telemetry recorded both successes and the test OAuth credentials were removed.
 
 ## Objective
 

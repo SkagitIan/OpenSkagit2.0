@@ -10,6 +10,8 @@ This file separates observed production behavior from source configuration and u
 - Authentication: OAuth authorization code with PKCE, approved clients, `openskagit.read`, revocable grants
 - Tool registry after this migration: 24 read-only tools
 
+Deployment `8289dc44-519e-4410-821a-05e6264ee7a0` completed successfully. A short-lived OAuth client discovered all 24 tools and called both new context tools for P96023 without MCP errors. The client and grant were deleted immediately; secret-free telemetry retained one successful call for each tool (755 ms Census, 468 ms soils).
+
 ## Cloudflare public probes
 
 | Worker hostname | Root probe | Source-configured role | Disposition |
@@ -43,6 +45,10 @@ These facts come from source configuration and do not prove which account resour
 ## Account-level blocker
 
 Wrangler authentication is expired (`whoami` returns HTTP 400 / not logged in). Therefore traffic analytics, deployed versions, routes, secret names, D1 counts, R2 inventory, and cron execution history remain unverified. Restore Wrangler login or provide a read-only Cloudflare token before deleting any Worker or storage asset.
+
+## Railway hardening finding
+
+The Railway/Nixpacks build emitted Docker warnings that multiple runtime secrets are available as image-build `ARG`/`ENV` values, including application, R2, notification, and API credentials. No secret values were printed in the observed logs, but runtime secrets should be removed from the build environment and rotated after the build configuration is corrected.
 
 ## Next retirement evidence
 
