@@ -57,7 +57,9 @@ class UnifiedToolContractTests(SimpleTestCase):
         def example(parcel_id: str) -> dict:
             return {"freshness": {"as_of": "2020-2024", "status": "unknown"}, "errors": []}
 
-        result = instrument_tool(example, tool_name="context_get_census", caller_class="mcp-http-oauth")("P123")
+        result = asyncio.run(
+            instrument_tool(example, tool_name="context_get_census", caller_class="mcp-http-oauth")("P123")
+        )
 
         self.assertEqual(result["errors"], [])
         fields = create_call.call_args.kwargs

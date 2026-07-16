@@ -5,6 +5,8 @@ import time
 from functools import wraps
 from typing import Any, Callable
 
+from asgiref.sync import sync_to_async
+
 from .models import McpToolCall
 
 logger = logging.getLogger(__name__)
@@ -24,8 +26,7 @@ def _outcome(result: Any) -> str:
 def instrument_tool(handler: Callable[..., Any], *, tool_name: str, caller_class: str) -> Callable[..., Any]:
     """Record aggregate-use evidence without arguments, tokens, or response data."""
 
-    @wraps(handler)
-    def wrapped(*args, **kwargs):
+    def invoke_and_record(*args, **kwargs):
         started = time.perf_counter()
         result = None
         error_class = ""
@@ -51,5 +52,11 @@ def instrument_tool(handler: Callable[..., Any], *, tool_name: str, caller_class
                 )
             except Exception:
                 logger.exception("Unable to record MCP tool telemetry for %s", tool_name)
+
+    @wraps(handler)
+    async def wrapped(*args, **kwargs):
+        # FastMCP executes async callables on the event loop. Move the complete
+        # Django-backed tool invocation, including telemetry, to a sync thread.
+        return await sync_to_async(invoke_and_record, thread_sensitive=True)(*args, **kwargs)
 
     return wrapped
