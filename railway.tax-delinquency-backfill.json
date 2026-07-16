@@ -5,7 +5,7 @@
     "dockerfilePath": "Dockerfile"
   },
   "deploy": {
-    "startCommand": "python manage.py migrate && python manage.py backfill_tax_statements --years 2023 2024 2025 2026 --delay ${TAX_DELINQUENCY_DELAY:-0.35}",
+    "startCommand": "sh -c 'python manage.py migrate && python manage.py backfill_tax_statements --years 2023 2024 2025 2026 --delay ${TAX_DELINQUENCY_DELAY:-0.35}'",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 3
   }
