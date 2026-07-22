@@ -1,0 +1,207 @@
+{
+  "version": "2026.1",
+  "reviewed_on": "2026-07-22",
+  "documents": [
+    {
+      "jurisdiction": "skagit-county",
+      "fiscal_year": 2026,
+      "status": "preliminary",
+      "content_sha256": "68f68a5bd7eb915f8b59e55126ead2df00ecdfcc699519382667ebb891db0a98",
+      "complete_breakdown_sides": [],
+      "review_notes": [
+        "This is the County's preliminary budget presentation, not a consolidated adopted budget book.",
+        "General Fund totals are displayed in rounded millions; detailed all-funds totals are not stated in this source."
+      ],
+      "rows": [
+        {"side": "revenue", "amount": "73600000", "page_number": 11, "is_total": true, "scope": "general_fund", "category_name": "General Fund revenue", "source_note": "Approximate; source displays $73.6M."},
+        {"side": "expenditure", "amount": "84600000", "page_number": 11, "is_total": true, "scope": "general_fund", "category_name": "General Fund expenditures", "source_note": "Approximate; source displays $84.6M."}
+      ]
+    },
+    {
+      "jurisdiction": "anacortes",
+      "fiscal_year": 2026,
+      "status": "adopted",
+      "content_sha256": "55e63493a8f3d60d0016f6c85a6d89ce4d8023d0c128568fcd7741b017e81f71",
+      "complete_breakdown_sides": ["expenditure"],
+      "breakdown_tolerance": "2",
+      "review_notes": [
+        "Ordinance 5009 states one balanced revenue/appropriation amount for each fund and $115,485,921 across all funds.",
+        "The listed fund amounts sum to $115,485,919, two dollars below the printed ordinance total; the printed total is retained and the variance is disclosed."
+      ],
+      "rows": [
+        {"side": "revenue", "amount": "115485921", "page_number": 11, "is_total": true, "scope": "all_funds", "category_name": "All-funds revenue"},
+        {"side": "expenditure", "amount": "115485921", "page_number": 11, "is_total": true, "scope": "all_funds", "category_name": "All-funds appropriations"},
+        {"side": "expenditure", "amount": "43429240", "page_number": 11, "fund_code": "001", "fund_name": "General Fund"},
+        {"side": "expenditure", "amount": "2150146", "page_number": 11, "fund_code": "101", "fund_name": "Parks & Recreation Fund"},
+        {"side": "expenditure", "amount": "377462", "page_number": 11, "fund_code": "102", "fund_name": "Grandview Cemetery Fund"},
+        {"side": "expenditure", "amount": "1584905", "page_number": 11, "fund_code": "103", "fund_name": "Public Library Fund"},
+        {"side": "expenditure", "amount": "2062060", "page_number": 11, "fund_code": "104", "fund_name": "Street Maintenance Fund"},
+        {"side": "expenditure", "amount": "5447438", "page_number": 11, "fund_code": "105", "fund_name": "Arterial Street Construction"},
+        {"side": "expenditure", "amount": "524753", "page_number": 11, "fund_code": "107", "fund_name": "Washington Park Fund"},
+        {"side": "expenditure", "amount": "1625000", "page_number": 11, "fund_code": "108", "fund_name": "Parks Capital Improvement"},
+        {"side": "expenditure", "amount": "589619", "page_number": 11, "fund_code": "109", "fund_name": "Affordable Housing"},
+        {"side": "expenditure", "amount": "240000", "page_number": 11, "fund_code": "112", "fund_name": "Development Impact Fee"},
+        {"side": "expenditure", "amount": "275405", "page_number": 11, "fund_code": "113", "fund_name": "ACFL Management Fund"},
+        {"side": "expenditure", "amount": "150000", "page_number": 11, "fund_code": "114", "fund_name": "Forestland Endowment"},
+        {"side": "expenditure", "amount": "596500", "page_number": 11, "fund_code": "135", "fund_name": "Tourism Fund"},
+        {"side": "expenditure", "amount": "2640000", "page_number": 11, "fund_code": "335", "fund_name": "REET"},
+        {"side": "expenditure", "amount": "26121215", "page_number": 11, "fund_code": "401", "fund_name": "Water Fund"},
+        {"side": "expenditure", "amount": "14503851", "page_number": 11, "fund_code": "440", "fund_name": "Sewer Fund"},
+        {"side": "expenditure", "amount": "2788525", "page_number": 11, "fund_code": "445", "fund_name": "Storm Drainage Fund"},
+        {"side": "expenditure", "amount": "7393158", "page_number": 11, "fund_code": "450", "fund_name": "Sanitation Fund"},
+        {"side": "expenditure", "amount": "2942405", "page_number": 11, "fund_code": "501", "fund_name": "Equipment Rental Fund"},
+        {"side": "expenditure", "amount": "44237", "page_number": 11, "fund_code": "611", "fund_name": "Firemen's Pension Fund"}
+      ]
+    },
+    {
+      "jurisdiction": "burlington",
+      "fiscal_year": 2026,
+      "status": "adopted",
+      "content_sha256": "906738f86edb78287a07cebc9855b0edc4394f5fd75b79e5f61e84463c902255",
+      "complete_breakdown_sides": ["revenue", "expenditure"],
+      "review_notes": [
+        "Revenue excludes beginning balances; expenditures exclude ending fund balances.",
+        "The source reports category tables in thousands; stored values are converted to dollars."
+      ],
+      "rows": [
+        {"side": "revenue", "amount": "52341000", "page_number": 42, "is_total": true, "scope": "all_funds", "category_name": "Current-year revenue"},
+        {"side": "expenditure", "amount": "60656000", "page_number": 43, "is_total": true, "scope": "all_funds", "category_name": "Current-year expenditures"},
+        {"side": "revenue", "amount": "3564000", "page_number": 42, "category_name": "Property taxes"},
+        {"side": "revenue", "amount": "19424000", "page_number": 42, "category_name": "Sales and other taxes"},
+        {"side": "revenue", "amount": "976000", "page_number": 42, "category_name": "Licenses and permits"},
+        {"side": "revenue", "amount": "9854000", "page_number": 42, "category_name": "Intergovernmental"},
+        {"side": "revenue", "amount": "9607000", "page_number": 42, "category_name": "Charges for services"},
+        {"side": "revenue", "amount": "292000", "page_number": 42, "category_name": "Fines and penalties"},
+        {"side": "revenue", "amount": "1091000", "page_number": 42, "category_name": "Miscellaneous"},
+        {"side": "revenue", "amount": "89000", "page_number": 42, "category_name": "Other increases"},
+        {"side": "revenue", "amount": "7444000", "page_number": 42, "category_name": "Transfers"},
+        {"side": "expenditure", "amount": "21348000", "page_number": 43, "category_name": "Personnel services"},
+        {"side": "expenditure", "amount": "12163000", "page_number": 43, "category_name": "Supplies and services"},
+        {"side": "expenditure", "amount": "18708000", "page_number": 43, "category_name": "Capital outlay and projects"},
+        {"side": "expenditure", "amount": "828000", "page_number": 43, "category_name": "Debt service"},
+        {"side": "expenditure", "amount": "7444000", "page_number": 43, "category_name": "Transfers"},
+        {"side": "expenditure", "amount": "165000", "page_number": 43, "category_name": "Other decreases"}
+      ]
+    },
+    {
+      "jurisdiction": "concrete",
+      "fiscal_year": 2026,
+      "status": "adopted",
+      "content_sha256": "9c33d05214d35634467b4f4a1e7d427828b1390da611b272dc43033f9f98971a",
+      "complete_breakdown_sides": ["expenditure"],
+      "review_notes": [
+        "The thirteen listed fund appropriations sum to $3,319,275, matching pages 17 and 24.",
+        "Page 12 prints a conflicting $3,251,035 total; this appears to be a carried-forward figure and is disclosed rather than used."
+      ],
+      "rows": [
+        {"side": "expenditure", "amount": "3319275", "page_number": 24, "is_total": true, "scope": "all_funds", "category_name": "All-funds appropriations", "source_note": "Reconciled sum of listed funds; see review note about the conflicting page 12 printed total."},
+        {"side": "expenditure", "amount": "1377655", "page_number": 12, "fund_name": "General"},
+        {"side": "expenditure", "amount": "177250", "page_number": 12, "fund_name": "General Reserve"},
+        {"side": "expenditure", "amount": "205900", "page_number": 12, "fund_name": "Street"},
+        {"side": "expenditure", "amount": "25700", "page_number": 12, "fund_name": "Street Reserve"},
+        {"side": "expenditure", "amount": "60350", "page_number": 12, "fund_name": "Fire Reserve"},
+        {"side": "expenditure", "amount": "45600", "page_number": 12, "fund_name": "Capital Improvement"},
+        {"side": "expenditure", "amount": "98470", "page_number": 12, "fund_name": "Airport"},
+        {"side": "expenditure", "amount": "16650", "page_number": 12, "fund_name": "Airport Reserve"},
+        {"side": "expenditure", "amount": "282500", "page_number": 12, "fund_name": "Sewer Reserve"},
+        {"side": "expenditure", "amount": "640500", "page_number": 12, "fund_name": "Sewer"},
+        {"side": "expenditure", "amount": "285750", "page_number": 12, "fund_name": "Water"},
+        {"side": "expenditure", "amount": "100000", "page_number": 12, "fund_name": "Water Reserve"},
+        {"side": "expenditure", "amount": "2950", "page_number": 12, "fund_name": "Custodial"}
+      ]
+    },
+    {
+      "jurisdiction": "la-conner",
+      "fiscal_year": 2026,
+      "status": "adopted",
+      "content_sha256": "6c1f825ec37bfb2a4ada83fe73e1d28fc0c4871243faa1688b4076c6a642c703",
+      "complete_breakdown_sides": ["revenue", "expenditure"],
+      "review_notes": [
+        "The budget message labels the tables proposed, while the document itself is the December 9, 2025 final budget; values are retained exactly as presented."
+      ],
+      "rows": [
+        {"side": "revenue", "amount": "6460409", "page_number": 5, "is_total": true, "scope": "all_funds", "category_name": "Projected revenue"},
+        {"side": "expenditure", "amount": "7425909", "page_number": 3, "is_total": true, "scope": "all_funds", "category_name": "Budgeted expenditures"},
+        {"side": "revenue", "amount": "1287941", "page_number": 5, "fund_code": "001", "fund_name": "Current Expense"},
+        {"side": "revenue", "amount": "265185", "page_number": 5, "fund_code": "002", "fund_name": "Park & Port"},
+        {"side": "revenue", "amount": "222321", "page_number": 5, "fund_code": "003", "fund_name": "Facilities"},
+        {"side": "revenue", "amount": "2540", "page_number": 5, "fund_code": "004", "fund_name": "Public Art"},
+        {"side": "revenue", "amount": "349838", "page_number": 5, "fund_code": "005", "fund_name": "Street"},
+        {"side": "revenue", "amount": "161150", "page_number": 5, "fund_code": "123", "fund_name": "Hotel Motel Taxes"},
+        {"side": "revenue", "amount": "53800", "page_number": 5, "fund_code": "214", "fund_name": "2018 LTGO Fire Hall"},
+        {"side": "revenue", "amount": "0", "page_number": 5, "fund_code": "303", "fund_name": "Flood Control"},
+        {"side": "revenue", "amount": "30950", "page_number": 5, "fund_code": "304", "fund_name": "REET 1"},
+        {"side": "revenue", "amount": "30950", "page_number": 5, "fund_code": "305", "fund_name": "REET 2"},
+        {"side": "revenue", "amount": "1514471", "page_number": 5, "fund_code": "401", "fund_name": "Water"},
+        {"side": "revenue", "amount": "424710", "page_number": 5, "fund_code": "403", "fund_name": "Drainage"},
+        {"side": "revenue", "amount": "936359", "page_number": 5, "fund_code": "409", "fund_name": "Sewer"},
+        {"side": "revenue", "amount": "1180194", "page_number": 5, "fund_code": "412", "fund_name": "Sewer-Compost"},
+        {"side": "expenditure", "amount": "1455441", "page_number": 3, "fund_code": "001", "fund_name": "General Fund"},
+        {"side": "expenditure", "amount": "385304", "page_number": 3, "fund_code": "002", "fund_name": "Park & Port"},
+        {"side": "expenditure", "amount": "262515", "page_number": 3, "fund_code": "003", "fund_name": "Facilities"},
+        {"side": "expenditure", "amount": "4500", "page_number": 3, "fund_code": "004", "fund_name": "Public Art"},
+        {"side": "expenditure", "amount": "442166", "page_number": 3, "fund_code": "005", "fund_name": "Street"},
+        {"side": "expenditure", "amount": "260050", "page_number": 3, "fund_code": "123", "fund_name": "Hotel Motel Taxes"},
+        {"side": "expenditure", "amount": "39125", "page_number": 3, "fund_code": "214", "fund_name": "2018 LTGO Fire Hall"},
+        {"side": "expenditure", "amount": "0", "page_number": 3, "fund_code": "303", "fund_name": "Flood Prevention"},
+        {"side": "expenditure", "amount": "0", "page_number": 3, "fund_code": "304", "fund_name": "REET 1"},
+        {"side": "expenditure", "amount": "0", "page_number": 3, "fund_code": "305", "fund_name": "REET 2"},
+        {"side": "expenditure", "amount": "1695872", "page_number": 3, "fund_code": "401", "fund_name": "Water"},
+        {"side": "expenditure", "amount": "503158", "page_number": 3, "fund_code": "403", "fund_name": "Drainage"},
+        {"side": "expenditure", "amount": "1132250", "page_number": 3, "fund_code": "409", "fund_name": "Sewer"},
+        {"side": "expenditure", "amount": "1245528", "page_number": 3, "fund_code": "412", "fund_name": "Compost"}
+      ]
+    },
+    {
+      "jurisdiction": "mount-vernon",
+      "fiscal_year": 2026,
+      "status": "adopted",
+      "content_sha256": "c4c63f174a978ac894344bf119ee37a5a7c27ed20c8ea8207cd8a2599e4f997c",
+      "complete_breakdown_sides": ["expenditure"],
+      "review_notes": [
+        "The all-funds total and fund-group subtotals come from the adopted three-year citywide budget summary."
+      ],
+      "rows": [
+        {"side": "expenditure", "amount": "92979109", "page_number": 22, "is_total": true, "scope": "all_funds", "category_name": "Total budget - all funds"},
+        {"side": "expenditure", "amount": "42014843", "page_number": 21, "fund_name": "General Fund"},
+        {"side": "expenditure", "amount": "15442030", "page_number": 22, "fund_name": "Special Revenue Funds"},
+        {"side": "expenditure", "amount": "875355", "page_number": 22, "fund_name": "Debt Service Funds"},
+        {"side": "expenditure", "amount": "4020841", "page_number": 22, "fund_name": "Capital Projects Funds"},
+        {"side": "expenditure", "amount": "26734061", "page_number": 22, "fund_name": "Enterprise Funds"},
+        {"side": "expenditure", "amount": "3548579", "page_number": 22, "fund_name": "Internal Service Funds"},
+        {"side": "expenditure", "amount": "343400", "page_number": 22, "fund_name": "Fiduciary Funds"}
+      ]
+    },
+    {
+      "jurisdiction": "sedro-woolley",
+      "fiscal_year": 2026,
+      "status": "adopted",
+      "content_sha256": "7e5b83b61d8d553ec22cdf2a59c4ff41a90aa5f9a111b7c9343049035d8b8570",
+      "complete_breakdown_sides": ["revenue", "expenditure"],
+      "breakdown_tolerance": "1",
+      "review_notes": [
+        "The expenditure category lines sum to one dollar less than the printed total, a source rounding difference."
+      ],
+      "rows": [
+        {"side": "revenue", "amount": "39845204", "page_number": 31, "is_total": true, "scope": "all_funds", "category_name": "All-funds projected revenue"},
+        {"side": "expenditure", "amount": "37282857", "page_number": 33, "is_total": true, "scope": "all_funds", "category_name": "All-funds expenditures"},
+        {"side": "revenue", "amount": "5210073", "page_number": 31, "category_name": "Property tax"},
+        {"side": "revenue", "amount": "4326291", "page_number": 31, "category_name": "Sales tax"},
+        {"side": "revenue", "amount": "3631752", "page_number": 31, "category_name": "Other taxes"},
+        {"side": "revenue", "amount": "579144", "page_number": 31, "category_name": "Licenses and permits"},
+        {"side": "revenue", "amount": "6929957", "page_number": 31, "category_name": "Intergovernmental revenue"},
+        {"side": "revenue", "amount": "12500696", "page_number": 31, "category_name": "Charges for services"},
+        {"side": "revenue", "amount": "43962", "page_number": 31, "category_name": "Fines and forfeits"},
+        {"side": "revenue", "amount": "1939462", "page_number": 31, "category_name": "Miscellaneous revenue"},
+        {"side": "revenue", "amount": "4683867", "page_number": 31, "category_name": "Interfund transfers"},
+        {"side": "expenditure", "amount": "11368400", "page_number": 33, "category_name": "Salaries"},
+        {"side": "expenditure", "amount": "4188000", "page_number": 33, "category_name": "Benefits"},
+        {"side": "expenditure", "amount": "10658720", "page_number": 33, "category_name": "Other"},
+        {"side": "expenditure", "amount": "7100936", "page_number": 33, "category_name": "Capital"},
+        {"side": "expenditure", "amount": "1316308", "page_number": 33, "category_name": "Debt service"},
+        {"side": "expenditure", "amount": "3490631", "page_number": 33, "category_name": "Interfund transfers"},
+        {"side": "expenditure", "amount": "-840139", "page_number": 33, "category_name": "Indirect cost allocation"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Public budgets | OpenSkagit{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'budgets/budgets.css' %}?v=20260722-1">{% endblock %}
+{% block content %}
+<div class="os-budget-page">
+  <header class="os-nav-v2">
+    <a href="{% url 'home' %}" class="os-nav-v2__logo">OpenSkagit</a>
+    <nav class="os-nav-v2__links" aria-label="Site navigation">
+      <a href="{% url 'budgets:home' %}" aria-current="page">Budgets</a>
+      <a href="{% url 'tax_home' %}">Taxes</a>
+      <a href="{% url 'ask' %}">Ask</a>
+    </nav>
+  </header>
+  <main class="os-budget-page__container">
+    <section class="os-budget-page__intro">
+      <div>
+        <p class="os-budget-page__eyebrow">Skagit public budgets</p>
+        <h1>See what local government plans to collect and spend.</h1>
+        <p>Choose a jurisdiction and year. Results come from reviewed official budget documents.</p>
+      </div>
+      <form method="get" class="os-budget-filter" aria-label="Choose a public budget">
+        <label for="jurisdiction">Jurisdiction</label>
+        <select id="jurisdiction" name="jurisdiction" required>
+          <option value="">Choose one</option>
+          {% for item in jurisdictions %}<option value="{{ item.slug }}" {% if selected_jurisdiction.slug == item.slug %}selected{% endif %}>{{ item.name }}{% if not item.has_published_budget %}{% if item.has_imported_budget %} (under review){% else %} (2026 PDF not located){% endif %}{% endif %}</option>{% endfor %}
+        </select>
+        <label for="year">Year</label>
+        <select id="year" name="year">
+          <option value="">Current reviewed budget</option>
+          {% for item in available_years %}<option value="{{ item }}" {% if summary.document.fiscal_year == item %}selected{% endif %}>{{ item }}</option>{% endfor %}
+        </select>
+        <button type="submit">Show budget</button>
+      </form>
+    </section>
+
+    <section class="os-budget-coverage" aria-label="Budget coverage">
+      <strong>2026 coverage:</strong> Seven jurisdictions have reviewed source documents. Current PDFs have not been located for Hamilton or Lyman.
+    </section>
+
+    {% if error %}<section class="os-budget-notice" role="status">{{ error }}</section>{% endif %}
+
+    {% if summary %}
+    <section class="os-budget-results" aria-labelledby="budget-result-title">
+      <div class="os-budget-results__head">
+        <div><p>{{ summary.document.fiscal_year }} {{ summary.document.status_label }} budget</p><h2 id="budget-result-title">{{ summary.jurisdiction.name }}</h2></div>
+        <a href="{{ summary.document.source_url }}" target="_blank" rel="noopener noreferrer">Official document</a>
+      </div>
+      <div class="os-budget-metrics">
+        <article><span>Expected revenue</span><strong>{{ summary.totals_display.revenue }}</strong></article>
+        <article><span>Planned spending</span><strong>{{ summary.totals_display.expenditure }}</strong></article>
+        <article><span>Revenue less spending</span><strong>{{ summary.totals_display.difference }}</strong></article>
+      </div>
+      <p class="os-budget-caution">{{ summary.warning }}</p>
+      {% if breakdown.rows %}
+      <div class="os-budget-breakdown">
+        <h3>{% if not breakdown.complete %}Selected{% else %}Largest{% endif %} spending {{ breakdown_label }}</h3>
+        <div class="os-budget-table-wrap"><table>
+          <thead><tr><th scope="col">{{ breakdown_label|title }}</th><th scope="col">Amount</th><th scope="col"><span class="sr-only">Relative amount</span></th><th scope="col">Source</th></tr></thead>
+          <tbody>{% for row in breakdown.rows %}<tr><td>{{ row.name }}</td><td>{{ row.amount_display }}</td><td><span class="os-budget-bar" style="--bar-width: {{ row.bar_width }}%"></span></td><td>{% if row.pages %}<a href="{{ summary.document.source_url }}#page={{ row.pages.0 }}" target="_blank" rel="noopener noreferrer">p. {{ row.pages.0 }}</a>{% else %}Not cited{% endif %}</td></tr>{% endfor %}</tbody>
+        </table></div>
+      </div>
+      {% else %}<p class="os-budget-notice">A reviewed total is available, but a detailed breakdown is not yet defensible from this source.</p>{% endif %}
+      {% if summary.review_notes %}
+      <div class="os-budget-review-notes"><h3>Review notes</h3><ul>{% for note in summary.review_notes %}<li>{{ note }}</li>{% endfor %}</ul></div>
+      {% endif %}
+      <p class="os-budget-citation">Totals cited to {% for citation in summary.citations %}<a href="{{ citation.source_url }}#page={{ citation.page }}" target="_blank" rel="noopener noreferrer">{{ citation.side }} p. {{ citation.page }}</a>{% if not forloop.last %}; {% endif %}{% endfor %}.</p>
+    </section>
+    {% endif %}
+
+    <section class="os-budget-ask" aria-labelledby="budget-ask-title">
+      <div class="os-budget-ask__main">
+        <p class="os-budget-page__eyebrow">Ask the budget</p>
+        <h2 id="budget-ask-title">Ask a plain-language question.</h2>
+        <form action="{% url 'budgets:ask' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="jurisdiction" value="{{ selected_jurisdiction.slug|default:'' }}">
+          <input type="hidden" name="year" value="{{ summary.document.fiscal_year|default:'' }}">
+          <label for="question" class="sr-only">Budget question</label>
+          <textarea id="question" name="question" rows="3" placeholder="How much is budgeted for public safety?" required>{{ question }}</textarea>
+          <button type="submit">Ask</button>
+        </form>
+        {% if answer %}<div class="os-budget-answer" aria-live="polite"><h3>Answer</h3><p>{{ answer|urlize|linebreaksbr }}</p></div>{% endif %}
+      </div>
+      <aside class="os-budget-samples">
+        <h3>Sample questions</h3>
+        {% for prompt in sample_questions %}<button type="button" data-budget-question="{{ prompt }}">{{ prompt }}</button>{% endfor %}
+      </aside>
+    </section>
+  </main>
+</div>
+<script>
+  document.querySelectorAll('[data-budget-question]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var field = document.getElementById('question');
+      field.value = button.dataset.budgetQuestion;
+      field.focus();
+    });
+  });
+</script>
+{% endblock %}

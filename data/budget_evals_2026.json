@@ -1,0 +1,24 @@
+﻿{
+  "version": "2026.1",
+  "cases": [
+    {"id": "county-general-fund-revenue", "type": "summary", "jurisdiction": "skagit-county", "year": 2026, "side": "revenue", "expected": 73600000, "tolerance": 1, "page": 11, "question": "What is Skagit County's 2026 preliminary General Fund revenue?"},
+    {"id": "county-general-fund-spending", "type": "summary", "jurisdiction": "skagit-county", "year": 2026, "side": "expenditure", "expected": 84600000, "tolerance": 1, "page": 11, "question": "What is Skagit County's 2026 preliminary General Fund spending?"},
+    {"id": "anacortes-total-budget", "type": "summary", "jurisdiction": "anacortes", "year": 2026, "side": "expenditure", "expected": 115485921, "tolerance": 0, "page": 11, "question": "What is Anacortes's total adopted 2026 budget?"},
+    {"id": "anacortes-water-fund", "type": "breakdown", "jurisdiction": "anacortes", "year": 2026, "side": "expenditure", "group_by": "fund", "name": "Water Fund", "expected": 26121215, "tolerance": 0, "page": 11, "question": "How much did Anacortes appropriate to the Water Fund in 2026?"},
+    {"id": "burlington-revenue", "type": "summary", "jurisdiction": "burlington", "year": 2026, "side": "revenue", "expected": 52341000, "tolerance": 0, "page": 42, "question": "How much current-year revenue is in Burlington's 2026 adopted budget?"},
+    {"id": "burlington-spending", "type": "summary", "jurisdiction": "burlington", "year": 2026, "side": "expenditure", "expected": 60656000, "tolerance": 0, "page": 43, "question": "How much current-year spending is in Burlington's 2026 adopted budget?"},
+    {"id": "burlington-capital", "type": "breakdown", "jurisdiction": "burlington", "year": 2026, "side": "expenditure", "group_by": "category", "name": "Capital outlay and projects", "expected": 18708000, "tolerance": 0, "page": 43, "question": "How much does Burlington budget for capital outlay and projects in 2026?"},
+    {"id": "concrete-reconciled-total", "type": "summary", "jurisdiction": "concrete", "year": 2026, "side": "expenditure", "expected": 3319275, "tolerance": 0, "page": 24, "question": "What is Concrete's reconciled all-funds 2026 budget total?"},
+    {"id": "concrete-general-fund", "type": "breakdown", "jurisdiction": "concrete", "year": 2026, "side": "expenditure", "group_by": "fund", "name": "General", "expected": 1377655, "tolerance": 0, "page": 12, "question": "How much is Concrete's 2026 General Fund appropriation?"},
+    {"id": "laconner-revenue", "type": "summary", "jurisdiction": "la-conner", "year": 2026, "side": "revenue", "expected": 6460409, "tolerance": 0, "page": 5, "question": "What revenue does La Conner project for 2026?"},
+    {"id": "laconner-spending", "type": "summary", "jurisdiction": "la-conner", "year": 2026, "side": "expenditure", "expected": 7425909, "tolerance": 0, "page": 3, "question": "What are La Conner's total 2026 budgeted expenditures?"},
+    {"id": "laconner-water", "type": "breakdown", "jurisdiction": "la-conner", "year": 2026, "side": "expenditure", "group_by": "fund", "name": "Water", "expected": 1695872, "tolerance": 0, "page": 3, "question": "How much does La Conner budget for its Water fund in 2026?"},
+    {"id": "mount-vernon-total", "type": "summary", "jurisdiction": "mount-vernon", "year": 2026, "side": "expenditure", "expected": 92979109, "tolerance": 0, "page": 22, "question": "What is Mount Vernon's total all-funds 2026 adopted budget?"},
+    {"id": "mount-vernon-general-fund", "type": "breakdown", "jurisdiction": "mount-vernon", "year": 2026, "side": "expenditure", "group_by": "fund", "name": "General Fund", "expected": 42014843, "tolerance": 0, "page": 21, "question": "How much is Mount Vernon's General Fund budget for 2026?"},
+    {"id": "sedro-woolley-revenue", "type": "summary", "jurisdiction": "sedro-woolley", "year": 2026, "side": "revenue", "expected": 39845204, "tolerance": 0, "page": 31, "question": "What is Sedro-Woolley's projected all-funds revenue for 2026?"},
+    {"id": "sedro-woolley-spending", "type": "summary", "jurisdiction": "sedro-woolley", "year": 2026, "side": "expenditure", "expected": 37282857, "tolerance": 0, "page": 33, "question": "What are Sedro-Woolley's all-funds expenditures for 2026?"},
+    {"id": "sedro-woolley-capital", "type": "breakdown", "jurisdiction": "sedro-woolley", "year": 2026, "side": "expenditure", "group_by": "category", "name": "Capital", "expected": 7100936, "tolerance": 0, "page": 33, "question": "How much does Sedro-Woolley budget for capital in 2026?"},
+    {"id": "hamilton-unavailable", "type": "unavailable", "jurisdiction": "hamilton", "year": 2026, "question": "What is Hamilton's 2026 budget?"},
+    {"id": "lyman-unavailable", "type": "unavailable", "jurisdiction": "lyman", "year": 2026, "question": "What is Lyman's 2026 budget?"}
+  ]
+}

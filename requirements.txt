@@ -21,6 +21,7 @@ pyarrow
 scikit-learn
 anthropic
 pypdf
+django-storages[boto3]>=1.14,<2
 sentry-sdk
 Pillow>=12,<13
 kuzu==0.11.3

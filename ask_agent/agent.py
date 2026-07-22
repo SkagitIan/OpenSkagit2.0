@@ -11,6 +11,7 @@ import duckdb
 from assessor_mcp import services as assessor_services
 from context_mcp import services as context_services
 from gis_mcp import services as gis_services
+from budgets import services as budget_services
 
 from .duck import connect, database_path
 
@@ -535,6 +536,28 @@ def result_reality_checks(result: QueryResult | None) -> list[str]:
     return warnings[:6]
 
 
+def _query_table_names(sql: str) -> set[str]:
+    references = {
+        match.group(2).lower()
+        for match in re.finditer(
+            r'(?is)\b(?:from|join)\s+(?:"?([a-z_][a-z0-9_]*)"?\s*\.\s*)?"?([a-z_][a-z0-9_]*)"?',
+            sql,
+        )
+    }
+    ctes = {
+        match.group(1).lower()
+        for match in re.finditer(r'(?is)(?:\bwith\b|,)\s*"?([a-z_][a-z0-9_]*)"?\s+as\s*\(', sql)
+    }
+    return references - ctes
+
+
+def _uses_only_public_analysis_tables(sql: str) -> bool:
+    return all(
+        table in READ_ONLY_TABLES or table.startswith(("temp_", "analysis_"))
+        for table in _query_table_names(sql)
+    )
+
+
 def is_safe_select(sql: str) -> bool:
     stripped = _strip_sql(sql)
     if not re.match(r"(?is)^(select|with)\b", stripped):
@@ -542,7 +565,7 @@ def is_safe_select(sql: str) -> bool:
     if ";" in stripped:
         return False
     forbidden = r"\b(insert|update|delete|drop|alter|create|attach|detach|pragma|vacuum|copy|install|load|export|import)\b"
-    return re.search(forbidden, stripped, flags=re.IGNORECASE) is None
+    return re.search(forbidden, stripped, flags=re.IGNORECASE) is None and _uses_only_public_analysis_tables(stripped)
 
 
 def is_safe_analysis_sql(sql: str) -> bool:
@@ -551,8 +574,12 @@ def is_safe_analysis_sql(sql: str) -> bool:
         return False
     if is_safe_select(stripped):
         return True
-    if re.match(r"(?is)^create\s+(temporary|temp)\s+(table|view)\s+[a-z_][a-z0-9_]*\s+as\s+(select|with)\b", stripped):
-        return not _contains_persistent_mutation(stripped)
+    create_match = re.match(
+        r"(?is)^create\s+(temporary|temp)\s+(table|view)\s+[a-z_][a-z0-9_]*\s+as\s+(?P<query>(select|with)\b.*)$",
+        stripped,
+    )
+    if create_match:
+        return not _contains_persistent_mutation(stripped) and is_safe_select(create_match.group("query"))
     drop_match = re.match(r"(?is)^drop\s+(table|view)\s+(if\s+exists\s+)?([a-z_][a-z0-9_]*)$", stripped)
     if drop_match:
         name = drop_match.group(3).lower()
@@ -678,6 +705,42 @@ def answer_question(question: str) -> AnalysisResponse:
         """List canonical GIS overlay bundles and layer keys."""
         return gis_services.list_gis_layers()
 
+    @function_tool
+    def list_budget_jurisdictions() -> dict[str, Any]:
+        """List jurisdictions and years with reviewed public budget documents."""
+        return budget_services.budget_list_jurisdictions()
+
+    @function_tool
+    def get_budget_summary(jurisdiction: str, year: int | None = None) -> dict[str, Any]:
+        """Get reviewed totals and source metadata for an official public budget."""
+        return budget_services.budget_get_summary(jurisdiction, year)
+
+    @function_tool
+    def get_budget_breakdown(
+        jurisdiction: str,
+        year: int | None = None,
+        side: str = "expenditure",
+        group_by: str = "auto",
+        limit: int = 20,
+    ) -> dict[str, Any]:
+        """Group reviewed budget facts by the best available source dimension, or by fund, department, category, or account."""
+        return budget_services.budget_get_breakdown(jurisdiction, year, side, group_by, limit)
+
+    @function_tool
+    def get_budget_trend(jurisdiction: str, side: str = "expenditure") -> dict[str, Any]:
+        """Get reviewed multi-year budget totals for a jurisdiction."""
+        return budget_services.budget_get_trend(jurisdiction, side)
+
+    @function_tool
+    def compare_budget_jurisdictions(jurisdictions: list[str], year: int | None = None, side: str = "expenditure") -> dict[str, Any]:
+        """Compare reviewed totals across public jurisdictions."""
+        return budget_services.budget_compare_jurisdictions(jurisdictions, year, side)
+
+    @function_tool
+    def search_budget_documents(jurisdiction: str, query: str, year: int | None = None) -> dict[str, Any]:
+        """Search official budget document text and return page-numbered evidence."""
+        return budget_services.budget_search_documents(jurisdiction, query, year)
+
     model = os.environ.get("OPENAI_MODEL", "gpt-4.1")
     tools = [get_analysis_context, run_analysis_query]
     if _live_tools_enabled():
@@ -689,6 +752,12 @@ def answer_question(question: str) -> AnalysisResponse:
             get_census_context,
             get_soils_context,
             list_gis_layers,
+            list_budget_jurisdictions,
+            get_budget_summary,
+            get_budget_breakdown,
+            get_budget_trend,
+            compare_budget_jurisdictions,
+            search_budget_documents,
         ])
     agent = Agent(
         name="OpenSkagit DuckDB analyst",
@@ -706,7 +775,7 @@ def answer_question(question: str) -> AnalysisResponse:
             "Use DuckDB for cohort analysis, rollups, sales ratios, comparable-sale summaries, and questions that need "
             "many parcels or historical tabular records. "
             "Use canonical same-process OpenSkagit services for live parcel lookup, property dossiers, GIS overlays, "
-            "ArcGIS layer metadata, Census, and soils. Parcel search and context geometry use PostGIS. If the user gives "
+            "ArcGIS layer metadata, Census, soils, and reviewed public budgets. Use budget tools instead of generic SQL for budget questions; identify the fiscal year, document status, and whether a figure is all-funds or General Fund. Cite the official source URL and PDF page for every numeric budget claim. Parcel search and context geometry use PostGIS. If the user gives "
             "an address, use search_parcels before parcel-specific tools. "
             "If an Address preflight note is included in the user message, rely on it before DuckDB code mappings. "
             "Do not treat reval area as a neighborhood. Census values are area-level estimates, not parcel-level facts. "

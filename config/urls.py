@@ -72,6 +72,7 @@ urlpatterns = [
     path("og/parcel/<str:parcel_id>.png", tax_parcel_og_image, name="tax_parcel_og_image"),
     path("", include("core.urls")),
     path("", include("ask_agent.urls")),
+    path("budgets/", include("budgets.urls")),
     path("", include("land_ledger.urls")),
     path("tax/", include("taxtool.urls")),
     path("staff/tax-delinquency/", include("tax_delinquency.urls")),

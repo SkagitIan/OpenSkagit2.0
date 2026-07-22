@@ -17,6 +17,7 @@ DOMAIN_LABELS = {
     "gis": "GIS & overlays",
     "context": "Census & soils",
     "zoning": "Zoning & feasibility",
+    "budget": "Public budgets",
 }
 
 

@@ -1,0 +1,123 @@
+[
+  {
+    "jurisdiction": "skagit-county",
+    "fiscal_year": 2026,
+    "status": "preliminary",
+    "title": "Skagit County 2026 Preliminary Budget",
+    "landing_url": "https://www.skagitcounty.net/Departments/BudgetFinance/2026Budget.htm",
+    "pdf_url": "https://skagitcounty.net/BudgetFinance/Documents/2026Budget/2026%20Preliminary%20Budget%20%282%29.pdf",
+    "availability": "verified",
+    "verified_on": "2026-07-22",
+    "note": "The County adopted its 2026 budget on December 8, 2025, but its budget page still exposes the preliminary reports rather than a consolidated adopted budget book. Keep this version labeled preliminary."
+  },
+  {
+    "jurisdiction": "anacortes",
+    "fiscal_year": 2026,
+    "status": "adopted",
+    "title": "City of Anacortes 2026 Final Adopted Budget",
+    "landing_url": "https://www.anacorteswa.gov/827/Budget",
+    "pdf_url": "https://www.anacorteswa.gov/DocumentCenter/View/33719/2026-Budget-Book---Final-Adopted",
+    "availability": "verified",
+    "verified_on": "2026-07-22",
+    "note": "Official final adopted budget book."
+  },
+  {
+    "jurisdiction": "burlington",
+    "fiscal_year": 2026,
+    "status": "adopted",
+    "title": "City of Burlington 2026 Adopted Budget",
+    "landing_url": "https://burlingtonwa.gov/Archive.aspx?AMID=37",
+    "pdf_url": "https://burlingtonwa.gov/ArchiveCenter/ViewFile/Item/194",
+    "availability": "verified",
+    "verified_on": "2026-07-22",
+    "note": "Official archive copy; approximately 127 MB."
+  },
+  {
+    "jurisdiction": "concrete",
+    "fiscal_year": 2026,
+    "status": "adopted",
+    "title": "Town of Concrete 2026 Budget",
+    "landing_url": "https://www.townofconcrete.com/town-council-and-mayor/",
+    "pdf_url": "https://www.townofconcrete.com/wp-content/uploads/2026/01/2026-Budget-Document.pdf",
+    "availability": "verified",
+    "verified_on": "2026-07-22",
+    "note": "Official budget book; identifies Ordinance 898 as adopting the 2026 budget."
+  },
+  {
+    "jurisdiction": "concrete",
+    "fiscal_year": 2026,
+    "status": "adopted",
+    "title": "Town of Concrete January 2026 Final Adoption Packet",
+    "landing_url": "https://www.townofconcrete.com/town-council-and-mayor/",
+    "pdf_url": "https://www.townofconcrete.com/wp-content/uploads/2026/01/01-12-2026-Council-Packet.pdf",
+    "availability": "verified_supporting",
+    "verified_on": "2026-07-22",
+    "note": "Supporting council packet recording the budget hearing and Ordinance 898; the standalone adopted budget book is the preferred import."
+  },
+  {
+    "jurisdiction": "concrete",
+    "fiscal_year": 2026,
+    "status": "proposed",
+    "title": "Town of Concrete 2026 Budget Workshop Packet",
+    "landing_url": "https://www.townofconcrete.com/town-council-and-mayor/",
+    "pdf_url": "https://www.townofconcrete.com/wp-content/uploads/2025/11/11-08-2025-Council-Budget-Workshop-Packet.pdf",
+    "availability": "verified_supporting",
+    "verified_on": "2026-07-22",
+    "note": "Detailed proposed-budget workshop material; retain as provenance but do not prefer over the adopted budget book."
+  },
+  {
+    "jurisdiction": "hamilton",
+    "fiscal_year": 2026,
+    "status": null,
+    "title": "Town of Hamilton 2026 Budget",
+    "landing_url": "https://www.townofhamiltonwa.com/meeting-minutes/",
+    "pdf_url": "",
+    "availability": "not_found",
+    "verified_on": "2026-07-22",
+    "note": "No current budget PDF was found on the official site. Obtain directly from Town Hall or through a public-records request."
+  },
+  {
+    "jurisdiction": "la-conner",
+    "fiscal_year": 2026,
+    "status": "adopted",
+    "title": "Town of La Conner 2026 Final Budget",
+    "landing_url": "https://www.townoflaconner.org/156/Finance",
+    "pdf_url": "https://www.townoflaconner.org/DocumentCenter/View/2283/2026-Final-Budget-PDF",
+    "availability": "verified",
+    "verified_on": "2026-07-22",
+    "note": "Official final budget book."
+  },
+  {
+    "jurisdiction": "lyman",
+    "fiscal_year": 2026,
+    "status": null,
+    "title": "Town of Lyman 2026 Budget",
+    "landing_url": "https://townoflyman.com/council-meeting-minutes",
+    "pdf_url": "",
+    "availability": "not_found",
+    "verified_on": "2026-07-22",
+    "note": "No current budget PDF was found on the official site. Obtain directly from Town Hall or through a public-records request."
+  },
+  {
+    "jurisdiction": "mount-vernon",
+    "fiscal_year": 2026,
+    "status": "adopted",
+    "title": "City of Mount Vernon 2026 Adopted Budget",
+    "landing_url": "https://mountvernonwa.gov/137/Annual-Budgets",
+    "pdf_url": "https://mountvernonwa.gov/DocumentCenter/View/20136/2026-Budget-Book",
+    "availability": "verified",
+    "verified_on": "2026-07-22",
+    "note": "Official adopted budget PDF linked by the Finance Department."
+  },
+  {
+    "jurisdiction": "sedro-woolley",
+    "fiscal_year": 2026,
+    "status": "adopted",
+    "title": "City of Sedro-Woolley 2025-2026 Biennial Budget",
+    "landing_url": "https://www.sedro-woolley.gov/departments/finance/budget.php",
+    "pdf_url": "https://www.sedro-woolley.gov/Departments/Finance/Budget/2025-2026%20Biennial%20Budget%20Book.pdf",
+    "availability": "verified",
+    "verified_on": "2026-07-22",
+    "note": "Official biennial budget adopted by Ordinance 2082-24; later amendments should be stored as separate versions."
+  }
+]

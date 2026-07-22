@@ -46,6 +46,12 @@ TOOL_CONTRACTS = (
     _contract("zoning_get_overlays", "zoning", "Get zoning-related overlays and constraints for one parcel.", "openskagit_postgis", "skagit_county_gis"),
     _contract("zoning_build_feasibility", "zoning", "Build a cited screening report for a parcel and proposed use.", "openskagit_postgis", "openskagit_zoning_corpus", "skagit_county_gis"),
     _contract("zoning_compare_zones", "zoning", "Compare zones for a proposed use across optional jurisdictions.", "openskagit_zoning_corpus"),
+    _contract("budget_list_jurisdictions", "budget", "List jurisdictions and fiscal years with reviewed public budget data.", "local_budget_documents"),
+    _contract("budget_get_summary", "budget", "Get reviewed revenue, expenditure, and fund-balance totals from an official budget.", "local_budget_documents"),
+    _contract("budget_get_breakdown", "budget", "Group reviewed budget amounts by fund, department, or account.", "local_budget_documents"),
+    _contract("budget_get_trend", "budget", "Get a multi-year reviewed budget trend for one jurisdiction.", "local_budget_documents"),
+    _contract("budget_compare_jurisdictions", "budget", "Compare reviewed totals across up to twelve jurisdictions.", "local_budget_documents"),
+    _contract("budget_search_documents", "budget", "Search official budget PDF text with page-numbered evidence.", "local_budget_documents"),
 )
 
 TOOL_CONTRACT_BY_NAME = {contract.name: contract for contract in TOOL_CONTRACTS}

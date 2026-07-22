@@ -16,7 +16,7 @@ Remote MCP endpoint for Claude and other compatible clients:
 https://openskagit.com/mcp/api/
 ```
 
-The endpoint publishes 25 read-only parcel, GIS, Census/soils, and zoning tools from the versioned `openskagit_tools` registry. It uses Streamable HTTP, OAuth authorization-code flow with PKCE, approved client credentials, the `openskagit.read` scope, revocable grants, and encrypted client-secret storage. The catalog page is generated from the same registry used for MCP discovery.
+The endpoint publishes 31 read-only parcel, GIS, Census/soils, zoning, and public-budget tools from the versioned `openskagit_tools` registry. It uses Streamable HTTP, OAuth authorization-code flow with PKCE, approved client credentials, the `openskagit.read` scope, revocable grants, and encrypted client-secret storage. The catalog page is generated from the same registry used for MCP discovery.
 
 Access requests are reviewed in Django admin. Issue an approved Claude-compatible client with:
 
@@ -42,7 +42,7 @@ The older Cloudflare Worker endpoint remains reachable only as a compatibility s
 The agent has two classes of tools:
 
 - Local DuckDB function tools: `get_analysis_context` and `run_analysis_query`.
-- Same-process live tools backed by PostGIS, county property pages, ArcGIS REST services, Census context, and soils services.
+- Same-process live tools backed by PostGIS, county property pages, ArcGIS REST services, Census context, soils services, and reviewed official budget documents.
 
 Use DuckDB for broad tabular analysis:
 
@@ -62,6 +62,7 @@ Use MCP for live parcel and geospatial context:
 - Census area estimates matched by parcel centroid.
 - NRCS SSURGO soils context.
 - ArcGIS layer discovery and metadata.
+- Reviewed budget summaries, breakdowns, trends, comparisons, and page-cited document search.
 
 The tools are complementary. A typical parcel answer may use DuckDB for local comparable sales and MCP for parcel-specific overlays.
 
@@ -350,6 +351,19 @@ State and federal environmental/public-land context:
 - `tribal_lands`
 - `forest_practices`
 - `epa_superfund`
+
+## Public Budget Tools
+
+Budget tools expose only reviewed, published documents and normalized line items:
+
+- `budget_list_jurisdictions`
+- `budget_get_summary`
+- `budget_get_breakdown`
+- `budget_get_trend`
+- `budget_compare_jurisdictions`
+- `budget_search_documents`
+
+Use the current reviewed adopted or amended document by default. Always identify fiscal year and document status. Use page-numbered document search for narrative claims; do not describe revenue less expenditure as a surplus unless the official source does.
 
 ## Agent Decision Rules
 

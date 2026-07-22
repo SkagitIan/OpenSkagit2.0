@@ -43,7 +43,7 @@ class UnifiedToolContractTests(SimpleTestCase):
         self.assertEqual(set(TOOL_CONTRACT_BY_NAME), set(HANDLERS))
         self.assertTrue(all(contract.read_only for contract in TOOL_CONTRACTS))
         self.assertTrue(all(contract.contract_version == CONTRACT_VERSION for contract in TOOL_CONTRACTS))
-        self.assertEqual({contract.domain for contract in TOOL_CONTRACTS}, {"parcel", "gis", "context", "zoning"})
+        self.assertEqual({contract.domain for contract in TOOL_CONTRACTS}, {"parcel", "gis", "context", "zoning", "budget"})
 
     def test_fastmcp_publishes_exactly_the_contract_registry(self):
         tools = asyncio.run(mcp.list_tools())
@@ -132,6 +132,15 @@ class UnifiedToolContractTests(SimpleTestCase):
         with self.assertRaisesMessage(ValueError, "letters or numbers"):
             search_parcels("---")
 
+    @patch("openskagit_tools.handlers.budget_services.budget_get_summary")
+    def test_budget_handler_delegates_and_wraps_reviewed_service(self, get_summary):
+        get_summary.return_value = {"document": {"fiscal_year": 2026, "status": "adopted"}, "totals": {"expenditure": 10}}
+
+        result = HANDLERS["budget_get_summary"]("anacortes", 2026)
+
+        get_summary.assert_called_once_with("anacortes", 2026)
+        self.assertEqual(result["data"]["document"]["status"], "adopted")
+        self.assertEqual(result["freshness"]["as_of"], "2026")
     @patch("openskagit_tools.handlers.gis_services.get_parcel_overlays")
     def test_gis_handler_preserves_partial_errors_as_warnings(self, get_parcel_overlays):
         get_parcel_overlays.return_value = {

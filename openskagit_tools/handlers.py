@@ -6,6 +6,7 @@ from assessor_mcp import services as assessor_services
 from context_mcp import services as context_services
 from gis_mcp import services as gis_services
 from zoning_mcp import services as zoning_services
+from budgets import services as budget_services
 
 from .contracts import result_envelope
 from .registry import get_tool_contract
@@ -162,8 +163,48 @@ def zoning_compare_zones(proposed_use: str, jurisdictions: list[str] | None = No
     return _result("zoning_compare_zones", zoning_services.compare_zones_for_use(proposed_use, jurisdictions))
 
 
+def budget_list_jurisdictions() -> dict[str, Any]:
+    return _result("budget_list_jurisdictions", budget_services.budget_list_jurisdictions())
+
+
+def budget_get_summary(jurisdiction: str, year: int | None = None) -> dict[str, Any]:
+    return _result("budget_get_summary", budget_services.budget_get_summary(jurisdiction, year), as_of=str(year) if year else None)
+
+
+def budget_get_breakdown(
+    jurisdiction: str,
+    year: int | None = None,
+    side: str = "expenditure",
+    group_by: str = "auto",
+    limit: int = 20,
+) -> dict[str, Any]:
+    return _result(
+        "budget_get_breakdown",
+        budget_services.budget_get_breakdown(jurisdiction, year, side, group_by, limit),
+        as_of=str(year) if year else None,
+    )
+
+
+def budget_get_trend(jurisdiction: str, side: str = "expenditure") -> dict[str, Any]:
+    return _result("budget_get_trend", budget_services.budget_get_trend(jurisdiction, side))
+
+
+def budget_compare_jurisdictions(jurisdictions: list[str], year: int | None = None, side: str = "expenditure") -> dict[str, Any]:
+    return _result(
+        "budget_compare_jurisdictions",
+        budget_services.budget_compare_jurisdictions(jurisdictions, year, side),
+        as_of=str(year) if year else None,
+    )
+
+def budget_search_documents(jurisdiction: str, query: str, year: int | None = None, limit: int = 8) -> dict[str, Any]:
+    return _result(
+        "budget_search_documents",
+        budget_services.budget_search_documents(jurisdiction, query, year, limit),
+        as_of=str(year) if year else None,
+    )
+
 HANDLERS: dict[str, Callable[..., dict[str, Any]]] = {
     name: value
     for name, value in globals().copy().items()
-    if callable(value) and name.startswith(("parcel_", "gis_", "context_", "zoning_"))
+    if callable(value) and name.startswith(("parcel_", "gis_", "context_", "zoning_", "budget_"))
 }

@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "tax_delinquency",
     "opportunity",
     "ask_agent",
+    "budgets.apps.BudgetsConfig",
     "discovery_agent",
     "parcelbook",
     "zoning_mcp",
@@ -142,7 +143,63 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"},
+    "budget_pdfs": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "OPTIONS": {"location": MEDIA_ROOT, "base_url": MEDIA_URL},
+    },
+}
+
+BUDGET_MAX_PDF_MB = env.int("BUDGET_MAX_PDF_MB", default=200)
+BUDGET_PDF_DOWNLOAD_TIMEOUT_SECONDS = env.int("BUDGET_PDF_DOWNLOAD_TIMEOUT_SECONDS", default=180)
+if not 1 <= BUDGET_MAX_PDF_MB <= 500:
+    raise ImproperlyConfigured("BUDGET_MAX_PDF_MB must be between 1 and 500.")
+if not 10 <= BUDGET_PDF_DOWNLOAD_TIMEOUT_SECONDS <= 900:
+    raise ImproperlyConfigured("BUDGET_PDF_DOWNLOAD_TIMEOUT_SECONDS must be between 10 and 900.")
+
+BUDGET_PDF_STORAGE = env("BUDGET_PDF_STORAGE", default="local").strip().lower()
+if BUDGET_PDF_STORAGE == "r2":
+    r2_account_id = env("R2_ACCOUNT_ID", default="").strip()
+    r2_access_key_id = env("R2_ACCESS_KEY_ID", default="").strip()
+    r2_secret_access_key = env("R2_SECRET_ACCESS_KEY", default="").strip()
+    r2_budget_bucket = env("R2_BUDGET_BUCKET", default=env("R2_BUCKET", default="openskagit")).strip()
+    missing_r2_settings = [
+        name
+        for name, value in {
+            "R2_ACCOUNT_ID": r2_account_id,
+            "R2_ACCESS_KEY_ID": r2_access_key_id,
+            "R2_SECRET_ACCESS_KEY": r2_secret_access_key,
+            "R2_BUDGET_BUCKET/R2_BUCKET": r2_budget_bucket,
+        }.items()
+        if not value
+    ]
+    if missing_r2_settings:
+        raise ImproperlyConfigured(
+            "BUDGET_PDF_STORAGE=r2 requires: " + ", ".join(missing_r2_settings)
+        )
+    STORAGES["budget_pdfs"] = {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": r2_access_key_id,
+            "secret_key": r2_secret_access_key,
+            "bucket_name": r2_budget_bucket,
+            "endpoint_url": f"https://{r2_account_id}.r2.cloudflarestorage.com",
+            "region_name": "auto",
+            "addressing_style": "path",
+            "signature_version": "s3v4",
+            "default_acl": None,
+            "file_overwrite": True,
+            "querystring_auth": True,
+            "querystring_expire": 900,
+        },
+    }
+elif BUDGET_PDF_STORAGE != "local":
+    raise ImproperlyConfigured("BUDGET_PDF_STORAGE must be 'local' or 'r2'.")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 OPPORTUNITY_DASHBOARD_PASSWORD = env("OPPORTUNITY_DASHBOARD_PASSWORD", default="opportunity" if DEBUG else "")

@@ -17,9 +17,9 @@ from .registry import TOOL_CONTRACTS, TOOL_CONTRACT_BY_NAME  # noqa: E402
 from .telemetry import instrument_tool  # noqa: E402
 
 INSTRUCTIONS = """
-Read-only OpenSkagit parcel, GIS, Census/soils, and zoning tools.
+Read-only OpenSkagit parcel, GIS, Census/soils, zoning, and public-budget tools.
 Use parcel tools for live county property facts, GIS tools for spatial screening,
-and zoning tools for cited planning context. Zoning and GIS outputs are not legal,
+zoning tools for cited planning context, and budget tools for reviewed official budget documents. Zoning and GIS outputs are not legal,
 permitting, engineering, appraisal, or entitlement determinations.
 """.strip()
 
