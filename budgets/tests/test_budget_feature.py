@@ -266,6 +266,14 @@ class BudgetAgentHelperTests(TestCase):
         suggestions = _suggest_follow_ups(None)
         self.assertEqual(suggestions[0], "What are the largest spending categories?")
 
+    def test_build_budget_tools_is_public_for_reuse_by_other_agents(self):
+        # ask_agent imports this directly instead of hand-duplicating tool wrappers.
+        from budgets.agent import build_budget_tools
+
+        names = {tool.name for tool in build_budget_tools()}
+        self.assertEqual(len(names), 10)
+        self.assertIn("read_budget_pages", names)
+
 
 class _FakeToolCallItem:
     def __init__(self, name, arguments):

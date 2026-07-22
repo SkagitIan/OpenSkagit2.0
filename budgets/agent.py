@@ -43,7 +43,9 @@ def _plain_text_links(value: str) -> str:
     return re.sub(r'\[([^\]]+)\]\((https?://[^\s)]+)\)', r'\1: \2', value)
 
 
-def _build_tools():
+def build_budget_tools():
+    """Build the budget function-tools. Public so other agents (e.g. ask_agent) can reuse
+    the same tool set instead of hand-duplicating wrappers that drift out of sync."""
     from agents import function_tool
 
     @function_tool
@@ -136,7 +138,7 @@ def _build_agent():
         name="OpenSkagit budget analyst",
         model=os.environ.get("OPENAI_MODEL", "gpt-4.1"),
         instructions=INSTRUCTIONS,
-        tools=_build_tools(),
+        tools=build_budget_tools(),
     )
 
 

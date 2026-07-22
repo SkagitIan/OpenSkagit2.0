@@ -11,7 +11,6 @@ import duckdb
 from assessor_mcp import services as assessor_services
 from context_mcp import services as context_services
 from gis_mcp import services as gis_services
-from budgets import services as budget_services
 
 from .duck import connect, database_path
 
@@ -705,45 +704,13 @@ def answer_question(question: str) -> AnalysisResponse:
         """List canonical GIS overlay bundles and layer keys."""
         return gis_services.list_gis_layers()
 
-    @function_tool
-    def list_budget_jurisdictions() -> dict[str, Any]:
-        """List jurisdictions and years with reviewed public budget documents."""
-        return budget_services.budget_list_jurisdictions()
-
-    @function_tool
-    def get_budget_summary(jurisdiction: str, year: int | None = None) -> dict[str, Any]:
-        """Get reviewed totals and source metadata for an official public budget."""
-        return budget_services.budget_get_summary(jurisdiction, year)
-
-    @function_tool
-    def get_budget_breakdown(
-        jurisdiction: str,
-        year: int | None = None,
-        side: str = "expenditure",
-        group_by: str = "auto",
-        limit: int = 20,
-    ) -> dict[str, Any]:
-        """Group reviewed budget facts by the best available source dimension, or by fund, department, category, or account."""
-        return budget_services.budget_get_breakdown(jurisdiction, year, side, group_by, limit)
-
-    @function_tool
-    def get_budget_trend(jurisdiction: str, side: str = "expenditure") -> dict[str, Any]:
-        """Get reviewed multi-year budget totals for a jurisdiction."""
-        return budget_services.budget_get_trend(jurisdiction, side)
-
-    @function_tool
-    def compare_budget_jurisdictions(jurisdictions: list[str], year: int | None = None, side: str = "expenditure") -> dict[str, Any]:
-        """Compare reviewed totals across public jurisdictions."""
-        return budget_services.budget_compare_jurisdictions(jurisdictions, year, side)
-
-    @function_tool
-    def search_budget_documents(jurisdiction: str, query: str, year: int | None = None) -> dict[str, Any]:
-        """Search official budget document text and return page-numbered evidence."""
-        return budget_services.budget_search_documents(jurisdiction, query, year)
-
     model = os.environ.get("OPENAI_MODEL", "gpt-4.1")
     tools = [get_analysis_context, run_analysis_query]
     if _live_tools_enabled():
+        from budgets.agent import build_budget_tools
+        from opportunity.agent_tools import build_opportunity_tools
+        from zoning_mcp.agent_tools import build_zoning_tools
+
         tools.extend([
             search_parcels,
             get_property_context,
@@ -752,13 +719,10 @@ def answer_question(question: str) -> AnalysisResponse:
             get_census_context,
             get_soils_context,
             list_gis_layers,
-            list_budget_jurisdictions,
-            get_budget_summary,
-            get_budget_breakdown,
-            get_budget_trend,
-            compare_budget_jurisdictions,
-            search_budget_documents,
         ])
+        tools.extend(build_budget_tools())
+        tools.extend(build_zoning_tools())
+        tools.extend(build_opportunity_tools())
     agent = Agent(
         name="OpenSkagit DuckDB analyst",
         model=model,
@@ -775,11 +739,33 @@ def answer_question(question: str) -> AnalysisResponse:
             "Use DuckDB for cohort analysis, rollups, sales ratios, comparable-sale summaries, and questions that need "
             "many parcels or historical tabular records. "
             "Use canonical same-process OpenSkagit services for live parcel lookup, property dossiers, GIS overlays, "
-            "ArcGIS layer metadata, Census, soils, and reviewed public budgets. Use budget tools instead of generic SQL for budget questions; identify the fiscal year, document status, and whether a figure is all-funds or General Fund. Cite the official source URL and PDF page for every numeric budget claim. Parcel search and context geometry use PostGIS. If the user gives "
+            "ArcGIS layer metadata, Census, soils, reviewed public budgets, zoning, and investment-opportunity screening. "
+            "Parcel search and context geometry use PostGIS. If the user gives "
             "an address, use search_parcels before parcel-specific tools. "
             "If an Address preflight note is included in the user message, rely on it before DuckDB code mappings. "
             "Do not treat reval area as a neighborhood. Census values are area-level estimates, not parcel-level facts. "
             "For regression-style questions, compute transparent DuckDB aggregates and explain limitations. "
+            "\n\n"
+            "Budgets: use budget tools instead of generic SQL for budget questions. Identify the fiscal year, document "
+            "status (proposed/preliminary/adopted/amended), and whether a figure is all-funds or General Fund. Cite the "
+            "official source URL and PDF page for every numeric claim; a quote from document text must cite its page too. "
+            "Search a budget document, then read the specific pages before summarizing or quoting -- do not answer from a "
+            "short search snippet alone. Use calculate for arithmetic on cited figures instead of doing it mentally. When "
+            "comparing jurisdictions of different sizes, offer a per-capita comparison alongside the raw totals. Do not "
+            "call revenue minus expenditure a surplus unless the source explicitly defines it that way. If a jurisdiction "
+            "has no reviewed budget document (for example Hamilton or Lyman), say so plainly and do not guess."
+            "\n\n"
+            "Zoning: use zoning_resolve_parcel first when the user gives an address rather than a parcel number. "
+            "zoning_build_feasibility is the right single call for 'can I build/do X on this parcel' questions -- it "
+            "already chains zone profile, use status, development standards, and overlays. Zoning and feasibility "
+            "results are screening context only, not a legal, permitting, engineering, or entitlement determination -- "
+            "say so when giving a feasibility answer."
+            "\n\n"
+            "Opportunity screening: the screen_* tools each score and rank parcels for a specific investment thesis "
+            "(delinquent tax pressure, vacant buildable lots, possible lot splits, teardown candidates, or assemblage "
+            "clusters of adjacent commonly-owned parcels). These are heuristic screens over current assessor/GIS data, "
+            "not appraisals or investment advice -- present results as leads to investigate further, not conclusions."
+            "\n\n"
             "Answer from query results, keep answers concise, and state your assumptions."
         ),
         tools=tools,
