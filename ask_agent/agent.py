@@ -3,9 +3,11 @@ from __future__ import annotations
 import logging
 import os
 import re
+import threading
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from queue import Empty, Queue
+from typing import Any, Iterator
 
 import duckdb
 
@@ -54,6 +56,16 @@ class AnalysisResponse:
     sql: str | None = None
     reality_checks: list[str] | None = None
     response_id: str | None = None
+
+
+@dataclass
+class _RunState:
+    """Mutable state a turn's tool closures write to, shared between the sync
+    (answer_question) and streaming (stream_ask_turn) callers of _build_agent."""
+
+    last_result: QueryResult | None = None
+    last_sql: str | None = None
+    tool_result: QueryResult | None = None
 
 
 @dataclass(frozen=True)
@@ -539,6 +551,71 @@ def result_reality_checks(result: QueryResult | None) -> list[str]:
     return warnings[:6]
 
 
+_STATUS_VERBS = {
+    "get_analysis_context": "Reviewing the database schema…",
+    "run_analysis_query": "Running the analysis query…",
+    "search_parcels": "Searching parcels for “{q}”…",
+    "get_property_context": "Pulling the full property report for parcel {parcel}…",
+    "get_property_summary": "Pulling property details for parcel {parcel}…",
+    "get_gis_overlays": "Checking GIS overlays for parcel {parcel}…",
+    "get_census_context": "Checking Census context for parcel {parcel}…",
+    "get_soils_context": "Checking soil data for parcel {parcel}…",
+    "list_gis_layers": "Listing available GIS layers…",
+    "screen_delinquent_tax_pressure": "Screening for delinquent tax pressure…",
+    "screen_vacant_buildable_lots": "Screening vacant buildable lots…",
+    "screen_possible_lot_splits": "Screening possible lot splits…",
+    "screen_teardown_candidates": "Screening teardown candidates…",
+    "screen_assemblage_opportunities": "Screening for assemblage opportunities…",
+    "zoning_resolve_parcel": "Resolving the parcel's zoning jurisdiction…",
+    "zoning_get_profile": "Looking up the {zone_code} zone in {jurisdiction}…",
+    "zoning_lookup_use": "Checking whether {proposed_use} is allowed in {zone_code}…",
+    "zoning_list_allowed_uses": "Listing allowed uses for {zone_code}…",
+    "zoning_search_code": "Searching {jurisdiction} zoning code for “{query}”…",
+    "zoning_get_standards": "Checking development standards for {zone_code}…",
+    "zoning_get_overlays": "Checking zoning overlays for parcel {parcel_id}…",
+    "zoning_build_feasibility": "Building a feasibility screen for {proposed_use}…",
+    "zoning_compare_zones": "Comparing zones for {proposed_use}…",
+}
+
+
+def _status_message(tool_name: str, arguments: dict[str, Any]) -> str:
+    from budgets.agent import STATUS_VERBS as BUDGET_STATUS_VERBS
+
+    template = _STATUS_VERBS.get(tool_name) or BUDGET_STATUS_VERBS.get(tool_name, "Working on it…")
+    try:
+        return template.format(**arguments)
+    except (KeyError, IndexError):
+        return template.split("{")[0].strip() or "Working on it…"
+
+
+def _tabulate_tool_output(data: dict[str, Any]) -> QueryResult | None:
+    """Best-effort conversion of a tool's JSON dict output into a displayable table,
+    for tools (parcel search, opportunity screens, budget breakdowns, ...) that return
+    a list of dicts under a conventional key rather than going through run_analysis_query."""
+    for key in ("rows", "results", "parcels", "matches", "items"):
+        value = data.get(key)
+        if isinstance(value, list) and value and all(isinstance(item, dict) for item in value):
+            columns: list[str] = []
+            for row in value:
+                for column in row:
+                    if column not in columns:
+                        columns.append(column)
+            return QueryResult(columns=columns, rows=value)
+    return None
+
+
+def _build_footer(resolved_terms: list[ResolvedTerm], last_sql: str | None, checks: list[str]) -> str:
+    footer_parts: list[str] = []
+    if resolved_terms:
+        footer_parts.append(
+            "Resolved mappings: "
+            + ", ".join(f"{term.category}:{term.code} ({term.description})" for term in resolved_terms[:5])
+        )
+    if last_sql:
+        footer_parts.append("Reality checks: " + " ".join(checks))
+    return "\n\n" + "\n".join(footer_parts) if footer_parts else ""
+
+
 def _query_table_names(sql: str) -> set[str]:
     references = {
         match.group(2).lower()
@@ -601,40 +678,21 @@ def _strip_sql(sql: str) -> str:
     return sql.strip().rstrip(";").strip()
 
 
-def answer_question(question: str, previous_response_id: str | None = None) -> AnalysisResponse:
-    try:
-        from agents import Agent, MaxTurnsExceeded, Runner, function_tool
-    except Exception:
-        return AnalysisResponse(
-            "The OpenAI Agents SDK is not installed. Run: pip install openai-agents  "
-            "then set OPENAI_API_KEY in .env and try again.",
-            None,
-        )
+def _build_agent(question: str) -> tuple[Any, Path, duckdb.DuckDBPyConnection, list[ResolvedTerm], _RunState]:
+    """Build the OpenSkagit analyst Agent and its tool closures for one turn.
 
-    if not os.environ.get("OPENAI_API_KEY"):
-        return AnalysisResponse(
-            "OPENAI_API_KEY is not set. Add it to .env to enable AI analysis.",
-            None,
-        )
+    Shared by answer_question (sync) and stream_ask_turn (streaming) so the ~20
+    @function_tool wrappers aren't hand-duplicated between the two call styles.
+    Returns the connection so the caller controls exactly when it's closed --
+    stream_ask_turn's tool calls run on a background thread, so the connection
+    must stay open until that thread has finished with it.
+    """
+    from agents import Agent, function_tool
 
     db_path = database_path()
-    last_result: QueryResult | None = None
-    last_sql: str | None = None
-    address_context = _address_lookup_context(question)
-    try:
-        analysis_conn = connect(db_path)
-    except Exception as exc:
-        if address_context:
-            return AnalysisResponse(
-                "I found an address-style query, but the analytical database connection failed before I could build the full answer. "
-                f"{address_context}\n\nDatabase error: {type(exc).__name__}: {exc}",
-                None,
-            )
-        return AnalysisResponse(
-            f"Analysis failed before querying records: {type(exc).__name__}: {exc}",
-            None,
-        )
+    analysis_conn = connect(db_path)
     resolved_terms = resolve_terms(question, db_path, conn=analysis_conn)
+    state = _RunState()
 
     @function_tool
     def get_analysis_context() -> str:
@@ -644,14 +702,13 @@ def answer_question(question: str, previous_response_id: str | None = None) -> A
     @function_tool
     def run_analysis_query(sql: str) -> dict[str, Any]:
         """Run a guarded DuckDB analysis statement. Allows SELECT and CREATE TEMP TABLE/VIEW AS SELECT."""
-        nonlocal last_result, last_sql
-        last_sql = sql
-        last_result = execute_analysis_sql(sql, db_path=db_path, conn=analysis_conn)
-        checks = result_reality_checks(last_result)
+        state.last_sql = sql
+        state.last_result = execute_analysis_sql(sql, db_path=db_path, conn=analysis_conn)
+        checks = result_reality_checks(state.last_result)
         return {
-            "columns": last_result.columns,
-            "row_count": len(last_result.rows),
-            "rows": last_result.rows,
+            "columns": state.last_result.columns,
+            "row_count": len(state.last_result.rows),
+            "rows": state.last_result.rows,
             "reality_checks": checks,
             "instruction": "Use these rows and reality checks to continue the analysis or answer. Keep tool calls focused.",
         }
@@ -774,6 +831,40 @@ def answer_question(question: str, previous_response_id: str | None = None) -> A
         ),
         tools=tools,
     )
+    return agent, db_path, analysis_conn, resolved_terms, state
+
+
+def answer_question(question: str, previous_response_id: str | None = None) -> AnalysisResponse:
+    try:
+        from agents import MaxTurnsExceeded, Runner
+    except Exception:
+        return AnalysisResponse(
+            "The OpenAI Agents SDK is not installed. Run: pip install openai-agents  "
+            "then set OPENAI_API_KEY in .env and try again.",
+            None,
+        )
+
+    if not os.environ.get("OPENAI_API_KEY"):
+        return AnalysisResponse(
+            "OPENAI_API_KEY is not set. Add it to .env to enable AI analysis.",
+            None,
+        )
+
+    address_context = _address_lookup_context(question)
+    try:
+        agent, db_path, analysis_conn, resolved_terms, state = _build_agent(question)
+    except Exception as exc:
+        if address_context:
+            return AnalysisResponse(
+                "I found an address-style query, but the analytical database connection failed before I could build the full answer. "
+                f"{address_context}\n\nDatabase error: {type(exc).__name__}: {exc}",
+                None,
+            )
+        return AnalysisResponse(
+            f"Analysis failed before querying records: {type(exc).__name__}: {exc}",
+            None,
+        )
+
     try:
         agent_input = question
         if address_context:
@@ -794,13 +885,13 @@ def answer_question(question: str, previous_response_id: str | None = None) -> A
             logger.warning("Stale previous_response_id for ask_agent; retrying without it.", exc_info=True)
             result = Runner.run_sync(agent, agent_input, max_turns=20)
     except MaxTurnsExceeded:
-        if last_result is not None:
+        if state.last_result is not None:
             return AnalysisResponse(
                 "The agent ran too many tool steps; here are the latest query results. "
                 "Try asking a narrower question.",
-                last_result,
-                last_sql,
-                result_reality_checks(last_result),
+                state.last_result,
+                state.last_sql,
+                result_reality_checks(state.last_result),
             )
         return AnalysisResponse(
             "The agent ran too many steps without producing an answer. Try a narrower question.",
@@ -809,21 +900,147 @@ def answer_question(question: str, previous_response_id: str | None = None) -> A
     except Exception as exc:
         return AnalysisResponse(
             f"Analysis failed: {type(exc).__name__}: {exc}",
-            last_result,
-            last_sql,
-            result_reality_checks(last_result),
+            state.last_result,
+            state.last_sql,
+            result_reality_checks(state.last_result),
         )
     finally:
         analysis_conn.close()
 
-    checks = result_reality_checks(last_result)
-    footer_parts: list[str] = []
-    if resolved_terms:
-        footer_parts.append(
-            "Resolved mappings: "
-            + ", ".join(f"{term.category}:{term.code} ({term.description})" for term in resolved_terms[:5])
-        )
-    if last_sql:
-        footer_parts.append("Reality checks: " + " ".join(checks))
-    footer = "\n\n" + "\n".join(footer_parts) if footer_parts else ""
-    return AnalysisResponse(str(result.final_output) + footer, last_result, last_sql, checks, result.last_response_id)
+    checks = result_reality_checks(state.last_result)
+    footer = _build_footer(resolved_terms, state.last_sql, checks)
+    return AnalysisResponse(
+        str(result.final_output) + footer, state.last_result, state.last_sql, checks, result.last_response_id
+    )
+
+
+def stream_ask_turn(question: str, previous_response_id: str | None = None) -> Iterator[dict[str, Any]]:
+    """Yield status/final events for a question, for a streaming (SSE) view.
+
+    Mirrors budgets.agent.stream_budget_turn: bridges the openai-agents SDK's async
+    streaming Runner to a plain synchronous generator via a background thread and a
+    queue, so a sync Django/WSGI view can consume it chunk by chunk. Tool-call events
+    become real per-tool status messages instead of canned placeholders, and any
+    tool's tabular output (SQL rows, parcel search, opportunity screens, budget
+    breakdowns...) is surfaced as a structured result for inline table rendering.
+    """
+    if not question.strip():
+        yield {"type": "final", "answer": "Ask a question about Skagit County records.", "response_id": None}
+        return
+    if not os.environ.get("OPENAI_API_KEY"):
+        yield {
+            "type": "final",
+            "answer": "OPENAI_API_KEY is not set. Add it to .env to enable AI analysis.",
+            "response_id": None,
+        }
+        return
+    try:
+        from agents import MaxTurnsExceeded, Runner
+    except Exception:
+        yield {
+            "type": "final",
+            "answer": "The OpenAI Agents SDK is not installed. Run: pip install openai-agents  "
+            "then set OPENAI_API_KEY in .env and try again.",
+            "response_id": None,
+        }
+        return
+
+    import asyncio
+    import json
+
+    address_context = _address_lookup_context(question)
+    queue: Queue = Queue()
+    SENTINEL = object()
+
+    def _run() -> None:
+        async def _consume() -> None:
+            analysis_conn = None
+            state = None
+            try:
+                agent, db_path, analysis_conn, resolved_terms, state = _build_agent(question)
+                agent_input = f"{question}\n\n{address_context}" if address_context else question
+                result = Runner.run_streamed(
+                    agent,
+                    agent_input,
+                    max_turns=20,
+                    previous_response_id=previous_response_id,
+                    auto_previous_response_id=True,
+                )
+                async for event in result.stream_events():
+                    if event.type != "run_item_stream_event":
+                        continue
+                    if event.name == "tool_called":
+                        item = event.item
+                        tool_name = getattr(item, "tool_name", None) or "tool"
+                        raw_arguments = (
+                            getattr(item.raw_item, "arguments", None)
+                            if not isinstance(item.raw_item, dict)
+                            else item.raw_item.get("arguments")
+                        )
+                        try:
+                            arguments = json.loads(raw_arguments) if isinstance(raw_arguments, str) else (raw_arguments or {})
+                        except (TypeError, ValueError):
+                            arguments = {}
+                        queue.put({"type": "status", "message": _status_message(tool_name, arguments), "tool": tool_name})
+                    elif event.name == "tool_output":
+                        output = getattr(event.item, "output", None)
+                        if isinstance(output, dict):
+                            tabulated = _tabulate_tool_output(output)
+                            if tabulated is not None:
+                                state.tool_result = tabulated
+                checks = result_reality_checks(state.last_result)
+                footer = _build_footer(resolved_terms, state.last_sql, checks)
+                structured = state.last_result or state.tool_result
+                queue.put({
+                    "type": "final",
+                    "answer": str(result.final_output) + footer,
+                    "response_id": result.last_response_id,
+                    "sql": state.last_sql or "",
+                    "result": {"columns": structured.columns, "rows": structured.rows} if structured else None,
+                })
+            except MaxTurnsExceeded:
+                structured = state.last_result if state else None
+                if structured is not None:
+                    queue.put({
+                        "type": "final",
+                        "answer": "The agent ran too many tool steps; here are the latest query results. "
+                        "Try asking a narrower question.",
+                        "response_id": None,
+                        "sql": state.last_sql or "",
+                        "result": {"columns": structured.columns, "rows": structured.rows},
+                    })
+                else:
+                    queue.put({
+                        "type": "final",
+                        "answer": "The agent ran too many steps without producing an answer. Try a narrower question.",
+                        "response_id": None,
+                    })
+            except Exception as exc:
+                logger.exception("Streamed ask_agent run failed for question=%r", question)
+                structured = state.last_result if state else None
+                queue.put({
+                    "type": "final",
+                    "answer": f"Analysis failed: {type(exc).__name__}: {exc}",
+                    "response_id": None,
+                    "sql": (state.last_sql or "") if state else "",
+                    "result": {"columns": structured.columns, "rows": structured.rows} if structured else None,
+                })
+            finally:
+                if analysis_conn is not None:
+                    analysis_conn.close()
+                queue.put(SENTINEL)
+
+        asyncio.run(_consume())
+
+    thread = threading.Thread(target=_run, daemon=True)
+    thread.start()
+    while True:
+        try:
+            item = queue.get(timeout=15)
+        except Empty:
+            yield {"type": "heartbeat"}
+            continue
+        if item is SENTINEL:
+            break
+        yield item
+    thread.join(timeout=5)

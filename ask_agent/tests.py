@@ -10,7 +10,7 @@ from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 
 from ask_agent import conversation
-from ask_agent.agent import AnalysisResponse, QueryResult
+from ask_agent.agent import AnalysisResponse, QueryResult, _status_message, _tabulate_tool_output
 from ask_agent.models import AskMessage, AskThread
 
 
@@ -31,12 +31,13 @@ ASK_AGENT_LOCAL_TOOL_NAMES = {
 
 
 class LocalToolNameListStaysInSyncTests(SimpleTestCase):
-    def test_hardcoded_local_tool_names_match_answer_question_source(self):
+    def test_hardcoded_local_tool_names_match_build_agent_source(self):
         """Guards ASK_AGENT_LOCAL_TOOL_NAMES against silent drift: every name in the
-        list must still be a real @function_tool-decorated def inside answer_question."""
-        from ask_agent.agent import answer_question
+        list must still be a real @function_tool-decorated def inside _build_agent
+        (shared by both answer_question and stream_ask_turn)."""
+        from ask_agent.agent import _build_agent
 
-        source = inspect.getsource(answer_question)
+        source = inspect.getsource(_build_agent)
         defined = set(re.findall(r"@function_tool\s*\n\s*def (\w+)\(", source))
         self.assertEqual(defined, ASK_AGENT_LOCAL_TOOL_NAMES)
 
@@ -98,6 +99,36 @@ class SharedToolBuilderTests(SimpleTestCase):
         )
         duplicates = {name for name in all_names if all_names.count(name) > 1}
         self.assertEqual(duplicates, set(), f"duplicate tool names: {duplicates}")
+
+
+class StreamingHelperTests(SimpleTestCase):
+    def test_status_message_fills_in_known_tool_arguments(self):
+        message = _status_message("search_parcels", {"q": "123 Main St"})
+        self.assertEqual(message, "Searching parcels for “123 Main St”…")
+
+    def test_status_message_falls_back_to_prefix_when_argument_missing(self):
+        message = _status_message("get_property_context", {})
+        self.assertEqual(message, "Pulling the full property report for parcel")
+
+    def test_status_message_falls_back_to_generic_for_unknown_tool(self):
+        self.assertEqual(_status_message("some_unlisted_tool", {}), "Working on it…")
+
+    def test_status_message_reuses_budget_tool_status_verbs(self):
+        message = _status_message("search_all_budget_documents", {"search_terms": "public safety"})
+        self.assertIn("public safety", message)
+
+    def test_tabulate_tool_output_reads_rows_key(self):
+        result = _tabulate_tool_output({"rows": [{"parcel": "P1", "score": 5}, {"parcel": "P2", "score": 3}]})
+        self.assertEqual(result.columns, ["parcel", "score"])
+        self.assertEqual(len(result.rows), 2)
+
+    def test_tabulate_tool_output_reads_results_key(self):
+        result = _tabulate_tool_output({"query": "main st", "results": [{"parcel_id": "P1"}]})
+        self.assertEqual(result.columns, ["parcel_id"])
+
+    def test_tabulate_tool_output_returns_none_for_non_tabular_data(self):
+        self.assertIsNone(_tabulate_tool_output({"parcel": "P1", "property": {"nested": True}}))
+        self.assertIsNone(_tabulate_tool_output({"rows": []}))
 
 
 class ConversationHelperTests(TestCase):
@@ -213,23 +244,33 @@ class AskStreamViewTests(TestCase):
             events.append((name, data))
         return events
 
-    @patch("ask_agent.agent.answer_question")
-    def test_stream_creates_a_thread_and_emits_its_id_before_the_answer(self, answer_question):
-        answer_question.return_value = AnalysisResponse(answer="There are 12 parcels.", response_id="resp_1")
+    @patch("ask_agent.agent.stream_ask_turn")
+    def test_stream_creates_a_thread_and_emits_its_id_before_the_answer(self, stream_ask_turn):
+        stream_ask_turn.return_value = iter([
+            {"type": "status", "message": "Running the analysis query…", "tool": "run_analysis_query"},
+            {"type": "final", "answer": "There are 12 parcels.", "response_id": "resp_1", "sql": "", "result": None},
+        ])
         response = self.client.get(reverse("ask_stream"), {"prompt": "How many parcels?"})
         events = self._events(response)
         event_names = [name for name, _data in events]
 
         self.assertEqual(event_names[0], "thread")
+        self.assertIn("status", event_names)
         self.assertIn("answer", event_names)
         self.assertIn("done", event_names)
+        # Real per-tool status text, not one of the old canned thinking/querying/summarizing strings.
+        status_data = events[event_names.index("status")][1]
+        self.assertIn("Running the analysis query", status_data)
         thread = AskThread.objects.get()
         self.assertIn(str(thread.id), events[0][1])
+        self.assertEqual(thread.last_response_id, "resp_1")
 
-    @patch("ask_agent.agent.answer_question")
-    def test_stream_reuses_an_existing_thread_id(self, answer_question):
+    @patch("ask_agent.agent.stream_ask_turn")
+    def test_stream_reuses_an_existing_thread_id(self, stream_ask_turn):
         thread = conversation.create_thread("first question")
-        answer_question.return_value = AnalysisResponse(answer="answer two", response_id="resp_2")
+        stream_ask_turn.return_value = iter([
+            {"type": "final", "answer": "answer two", "response_id": "resp_2", "sql": "", "result": None},
+        ])
 
         response = self.client.get(reverse("ask_stream"), {"prompt": "follow up", "thread": str(thread.id)})
         # StreamingHttpResponse is lazy: the generator (and its DB writes) only runs once
@@ -239,7 +280,25 @@ class AskStreamViewTests(TestCase):
         self.assertIn(str(thread.id), events[0][1])
         self.assertEqual(AskThread.objects.count(), 1)
         self.assertEqual(thread.messages.count(), 2)  # follow-up user message + assistant answer
-        answer_question.assert_called_once_with("follow up", None)
+        stream_ask_turn.assert_called_once_with("follow up", None)
+
+    @patch("ask_agent.agent.stream_ask_turn")
+    def test_stream_persists_structured_result_from_final_event(self, stream_ask_turn):
+        stream_ask_turn.return_value = iter([
+            {
+                "type": "final",
+                "answer": "Here are the matches.",
+                "response_id": "resp_3",
+                "sql": "",
+                "result": {"columns": ["parcel_id", "address"], "rows": [{"parcel_id": "P1", "address": "1 Main St"}]},
+            },
+        ])
+        response = self.client.get(reverse("ask_stream"), {"prompt": "find parcels on Main St"})
+        self._events(response)
+
+        message = AskMessage.objects.get(role=AskMessage.Role.ASSISTANT)
+        self.assertEqual(message.structured_result["columns"], ["parcel_id", "address"])
+        self.assertEqual(message.structured_result["rows"][0]["parcel_id"], "P1")
 
     def test_stream_blank_prompt_does_not_touch_the_database(self):
         response = self.client.get(reverse("ask_stream"), {"prompt": ""})

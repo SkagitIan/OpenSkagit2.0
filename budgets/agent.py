@@ -198,7 +198,7 @@ def _classify_result(tool_name: str, data: dict[str, Any]) -> str | None:
     return None
 
 
-_STATUS_VERBS = {
+STATUS_VERBS = {
     "list_budget_jurisdictions": "Checking which jurisdictions have reviewed budgets…",
     "get_budget_summary": "Pulling reviewed totals for {jurisdiction_name}…",
     "get_budget_breakdown": "Breaking down {jurisdiction_name}'s budget…",
@@ -213,7 +213,7 @@ _STATUS_VERBS = {
 
 
 def _status_message(tool_name: str, arguments: dict[str, Any]) -> str:
-    template = _STATUS_VERBS.get(tool_name, "Working on it…")
+    template = STATUS_VERBS.get(tool_name, "Working on it…")
     try:
         return template.format(**arguments)
     except (KeyError, IndexError):

@@ -51,13 +51,25 @@ def ask_stream(request):
         yield _sse("thread", {"id": str(thread.id), "url": reverse("ask_thread", args=[thread.id])})
         conversation.append_user_message(thread, prompt)
 
-        yield _sse("status", {"message": "thinking"})
-        yield _sse("status", {"message": "querying"})
-        yield _sse("status", {"message": "summarizing"})
+        from .agent import AnalysisResponse, QueryResult, stream_ask_turn
 
-        from .agent import answer_question
+        final_event = {"answer": "Analysis is temporarily unavailable.", "response_id": None}
+        for event in stream_ask_turn(prompt, thread.last_response_id or None):
+            if event["type"] == "status":
+                yield _sse("status", {"message": event["message"]})
+            elif event["type"] == "heartbeat":
+                yield _sse("heartbeat", {})
+            elif event["type"] == "final":
+                final_event = event
 
-        analysis = answer_question(prompt, thread.last_response_id or None)
+        result_payload = final_event.get("result")
+        result = QueryResult(**result_payload) if result_payload else None
+        analysis = AnalysisResponse(
+            answer=final_event.get("answer", ""),
+            result=result,
+            sql=final_event.get("sql") or None,
+            response_id=final_event.get("response_id"),
+        )
         conversation.append_assistant_message(thread, analysis)
         html = render_to_string("partials/ask_messages.html", {
             "answer": analysis.answer,

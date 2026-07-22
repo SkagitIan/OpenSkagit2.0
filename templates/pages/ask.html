@@ -200,7 +200,7 @@
 
     source.addEventListener("status", function (event) {
       const data = JSON.parse(event.data);
-      statusMessage.querySelector("p").textContent = "OpenSkagit is " + data.message + "…";
+      statusMessage.querySelector("p").textContent = data.message;
     });
 
     source.addEventListener("answer", function (event) {
