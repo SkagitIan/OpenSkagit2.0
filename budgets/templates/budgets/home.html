@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Public budgets | OpenSkagit{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static 'budgets/budgets.css' %}?v=20260722-1">{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'budgets/budgets.css' %}?v=20260722-2">{% endblock %}
 {% block content %}
 <div class="os-budget-page">
   <header class="os-nav-v2">
@@ -17,7 +17,7 @@
       <div>
         <p class="os-budget-page__eyebrow">Skagit public budgets</p>
         <h1>See what local government plans to collect and spend.</h1>
-        <p>Choose a jurisdiction and year. Results come from reviewed official budget documents.</p>
+        <p>Choose a jurisdiction and year, or just ask below. Results come from reviewed official budget documents. <a href="{% url 'budgets:compare' %}">Compare jurisdictions side by side →</a></p>
       </div>
       <form method="get" class="os-budget-filter" aria-label="Choose a public budget">
         <label for="jurisdiction">Jurisdiction</label>
@@ -54,11 +54,28 @@
       <p class="os-budget-caution">{{ summary.warning }}</p>
       {% if breakdown.rows %}
       <div class="os-budget-breakdown">
-        <h3>{% if not breakdown.complete %}Selected{% else %}Largest{% endif %} spending {{ breakdown_label }}</h3>
-        <div class="os-budget-table-wrap"><table>
-          <thead><tr><th scope="col">{{ breakdown_label|title }}</th><th scope="col">Amount</th><th scope="col"><span class="sr-only">Relative amount</span></th><th scope="col">Source</th></tr></thead>
-          <tbody>{% for row in breakdown.rows %}<tr><td>{{ row.name }}</td><td>{{ row.amount_display }}</td><td><span class="os-budget-bar" style="--bar-width: {{ row.bar_width }}%"></span></td><td>{% if row.pages %}<a href="{{ summary.document.source_url }}#page={{ row.pages.0 }}" target="_blank" rel="noopener noreferrer">p. {{ row.pages.0 }}</a>{% else %}Not cited{% endif %}</td></tr>{% endfor %}</tbody>
+        <div class="os-budget-breakdown__head">
+          <h3>{% if not breakdown.complete %}Selected{% else %}Largest{% endif %} spending {{ breakdown_label }}</h3>
+          <div class="os-budget-breakdown__grouping" role="group" aria-label="Group by">
+            {% for grouping in breakdown_groupings %}<a href="?jurisdiction={{ selected_jurisdiction.slug }}{% if summary.document.fiscal_year %}&amp;year={{ summary.document.fiscal_year }}{% endif %}&amp;group_by={{ grouping }}" class="{% if breakdown.group_by == grouping %}is-active{% endif %}">{{ grouping|title }}</a>{% endfor %}
+          </div>
+        </div>
+        <div class="os-budget-breakdown__tools">
+          <label for="breakdown-filter" class="sr-only">Filter {{ breakdown_label }}</label>
+          <input type="search" id="breakdown-filter" placeholder="Filter {{ breakdown_label }}…" data-table-filter="breakdown-table">
+          <button type="button" data-csv-source="breakdown-table">Download CSV</button>
+        </div>
+        <div class="os-budget-table-wrap"><table id="breakdown-table" data-sortable="true">
+          <thead><tr>
+            <th scope="col" data-sort="text">{{ breakdown_label|title }}</th>
+            <th scope="col" data-sort="number">Amount</th>
+            <th scope="col" data-sort="number">% of total</th>
+            <th scope="col"><span class="sr-only">Relative amount</span></th>
+            <th scope="col">Source</th>
+          </tr></thead>
+          <tbody>{% for row in breakdown.rows %}<tr{% if row.is_extra %} class="os-budget-row--extra" hidden{% endif %}><td data-value="{{ row.name }}">{{ row.name }}</td><td data-value="{{ row.amount }}">{{ row.amount_display }}</td><td data-value="{{ row.percent_of_side_total|default:0 }}">{{ row.percent_display }}</td><td><span class="os-budget-bar" style="--bar-width: {{ row.bar_width }}%"></span></td><td>{% if row.pages %}<a href="{{ summary.document.source_url }}#page={{ row.pages.0 }}" target="_blank" rel="noopener noreferrer">p. {{ row.pages.0 }}</a>{% else %}Not cited{% endif %}</td></tr>{% endfor %}</tbody>
         </table></div>
+        {% if breakdown.rows|length > 10 %}<button type="button" class="os-budget-breakdown__show-all" data-show-all="breakdown-table">Show all {{ breakdown.rows|length }} {{ breakdown_label }}</button>{% endif %}
       </div>
       {% else %}<p class="os-budget-notice">A reviewed total is available, but a detailed breakdown is not yet defensible from this source.</p>{% endif %}
       {% if summary.review_notes %}
@@ -68,34 +85,38 @@
     </section>
     {% endif %}
 
-    <section class="os-budget-ask" aria-labelledby="budget-ask-title">
+    <section class="os-budget-ask" aria-labelledby="budget-ask-title"
+      id="budget-chat"
+      data-stream-url="{% url 'budgets:ask_stream' %}"
+      data-jurisdiction="{{ selected_jurisdiction.slug|default:'' }}"
+      data-year="{{ summary.document.fiscal_year|default:'' }}">
       <div class="os-budget-ask__main">
         <p class="os-budget-page__eyebrow">Ask the budget</p>
         <h2 id="budget-ask-title">Ask a plain-language question.</h2>
-        <form action="{% url 'budgets:ask' %}" method="post">
+        <div id="budget-thread" class="os-budget-thread" aria-live="polite">
+          {% if answer %}
+          <div class="os-budget-thread__turn">
+            {% if question %}<div class="os-budget-thread__question">{{ question }}</div>{% endif %}
+            <div class="os-budget-thread__answer">{{ answer|urlize|linebreaksbr }}</div>
+          </div>
+          {% endif %}
+        </div>
+        <div id="budget-status" class="os-budget-status" hidden aria-live="polite"></div>
+        <form action="{% url 'budgets:ask' %}" method="post" id="budget-ask-form">
           {% csrf_token %}
           <input type="hidden" name="jurisdiction" value="{{ selected_jurisdiction.slug|default:'' }}">
           <input type="hidden" name="year" value="{{ summary.document.fiscal_year|default:'' }}">
           <label for="question" class="sr-only">Budget question</label>
-          <textarea id="question" name="question" rows="3" placeholder="How much is budgeted for public safety?" required>{{ question }}</textarea>
+          <textarea id="question" name="question" rows="3" placeholder="How much is budgeted for public safety?" required></textarea>
           <button type="submit">Ask</button>
         </form>
-        {% if answer %}<div class="os-budget-answer" aria-live="polite"><h3>Answer</h3><p>{{ answer|urlize|linebreaksbr }}</p></div>{% endif %}
       </div>
-      <aside class="os-budget-samples">
+      <aside class="os-budget-samples" id="budget-samples">
         <h3>Sample questions</h3>
         {% for prompt in sample_questions %}<button type="button" data-budget-question="{{ prompt }}">{{ prompt }}</button>{% endfor %}
       </aside>
     </section>
   </main>
 </div>
-<script>
-  document.querySelectorAll('[data-budget-question]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      var field = document.getElementById('question');
-      field.value = button.dataset.budgetQuestion;
-      field.focus();
-    });
-  });
-</script>
+<script src="{% static 'budgets/budgets.js' %}?v=20260722-2" defer></script>
 {% endblock %}

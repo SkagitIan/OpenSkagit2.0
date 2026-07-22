@@ -19,6 +19,17 @@
     {"id": "sedro-woolley-spending", "type": "summary", "jurisdiction": "sedro-woolley", "year": 2026, "side": "expenditure", "expected": 37282857, "tolerance": 0, "page": 33, "question": "What are Sedro-Woolley's all-funds expenditures for 2026?"},
     {"id": "sedro-woolley-capital", "type": "breakdown", "jurisdiction": "sedro-woolley", "year": 2026, "side": "expenditure", "group_by": "category", "name": "Capital", "expected": 7100936, "tolerance": 0, "page": 33, "question": "How much does Sedro-Woolley budget for capital in 2026?"},
     {"id": "hamilton-unavailable", "type": "unavailable", "jurisdiction": "hamilton", "year": 2026, "question": "What is Hamilton's 2026 budget?"},
-    {"id": "lyman-unavailable", "type": "unavailable", "jurisdiction": "lyman", "year": 2026, "question": "What is Lyman's 2026 budget?"}
+    {"id": "lyman-unavailable", "type": "unavailable", "jurisdiction": "lyman", "year": 2026, "question": "What is Lyman's 2026 budget?"},
+    {"id": "hamilton-search-unavailable", "type": "unavailable", "check": "search", "jurisdiction": "hamilton", "year": 2026, "query": "budget"},
+    {"id": "lyman-per-capita-unavailable", "type": "unavailable", "check": "per_capita", "jurisdiction": "lyman", "year": 2026},
+
+    {"id": "search-all-water-fund", "type": "search_all", "query": "water fund", "jurisdiction_name": "City of Anacortes", "year": 2026},
+    {"id": "search-anacortes-water-fund-page", "type": "search", "jurisdiction": "anacortes", "year": 2026, "query": "water fund", "page": 11},
+    {"id": "read-anacortes-water-fund-page", "type": "read_pages", "jurisdiction": "anacortes", "year": 2026, "start_page": 11, "end_page": 11, "expected_substring": "Water Fund"},
+
+    {"id": "anacortes-per-capita-expenditure", "type": "per_capita", "jurisdictions": ["anacortes"], "jurisdiction": "anacortes", "year": 2026, "side": "expenditure", "expected": 6574.77, "tolerance": 0.5, "page": 11, "question": "How much does Anacortes spend per resident?"},
+    {"id": "mount-vernon-per-capita-expenditure", "type": "per_capita", "jurisdictions": ["mount-vernon"], "jurisdiction": "mount-vernon", "year": 2026, "side": "expenditure", "expected": 2618.47, "tolerance": 0.5, "page": 22, "question": "How much does Mount Vernon spend per resident?"},
+
+    {"id": "anacortes-water-fund-percent-of-total", "type": "percent_of_total", "jurisdiction": "anacortes", "year": 2026, "side": "expenditure", "group_by": "fund", "name": "Water Fund", "expected": 22.6, "tolerance": 0.2, "page": 11, "question": "What percent of Anacortes's total budget is the Water Fund?"}
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "source": "U.S. Census Bureau, 2020 Decennial Census (P.L. 94-171 Redistricting Data)",
+  "source_url": "https://www.census.gov/programs-surveys/decennial-census/decade/2020/2020-census-results.html",
+  "source_year": 2020,
+  "note": "2020 Census enumerated counts for the county and its incorporated places. These are the most recent complete-count figures; refresh with newer OFM postcensal estimates when available and update source_year accordingly.",
+  "jurisdictions": [
+    {"jurisdiction": "skagit-county", "population": 129205},
+    {"jurisdiction": "anacortes", "population": 17565},
+    {"jurisdiction": "burlington", "population": 8988},
+    {"jurisdiction": "concrete", "population": 705},
+    {"jurisdiction": "hamilton", "population": 302},
+    {"jurisdiction": "la-conner", "population": 891},
+    {"jurisdiction": "lyman", "population": 548},
+    {"jurisdiction": "mount-vernon", "population": 35509},
+    {"jurisdiction": "sedro-woolley", "population": 12299}
+  ]
+}

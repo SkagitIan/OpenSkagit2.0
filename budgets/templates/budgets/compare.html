@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Compare budgets | OpenSkagit{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'budgets/budgets.css' %}?v=20260722-2">{% endblock %}
+{% block content %}
+<div class="os-budget-page">
+  <header class="os-nav-v2">
+    <a href="{% url 'home' %}" class="os-nav-v2__logo">OpenSkagit</a>
+    <nav class="os-nav-v2__links" aria-label="Site navigation">
+      <a href="{% url 'budgets:home' %}">Budgets</a>
+      <a href="{% url 'tax_home' %}">Taxes</a>
+      <a href="{% url 'ask' %}">Ask</a>
+    </nav>
+  </header>
+  <main class="os-budget-page__container">
+    <section class="os-budget-page__intro">
+      <div>
+        <p class="os-budget-page__eyebrow">Skagit public budgets</p>
+        <h1>Compare jurisdictions side by side.</h1>
+        <p>Pick two or more jurisdictions to compare reviewed totals, with population-adjusted per-resident figures and page citations.</p>
+      </div>
+    </section>
+
+    <form method="get" class="os-compare-form" aria-label="Choose jurisdictions to compare">
+      <fieldset>
+        <legend>Jurisdictions</legend>
+        {% for item in jurisdictions %}
+        <label class="os-compare-form__check">
+          <input type="checkbox" name="jurisdictions" value="{{ item.slug }}" {% if item.slug in selected_slugs %}checked{% endif %}>
+          {{ item.name }}
+        </label>
+        {% endfor %}
+      </fieldset>
+      <div class="os-compare-form__side">
+        <label for="side">Compare</label>
+        <select id="side" name="side">
+          <option value="expenditure" {% if side == "expenditure" %}selected{% endif %}>Expenditure</option>
+          <option value="revenue" {% if side == "revenue" %}selected{% endif %}>Revenue</option>
+          <option value="fund_balance" {% if side == "fund_balance" %}selected{% endif %}>Fund balance</option>
+        </select>
+      </div>
+      <button type="submit">Compare</button>
+    </form>
+
+    {% if error %}<section class="os-budget-notice" role="status">{{ error }}</section>{% endif %}
+
+    {% if comparison %}
+    <section class="os-budget-results" aria-labelledby="compare-result-title">
+      <div class="os-budget-results__head">
+        <div><h2 id="compare-result-title">{{ side|title }} comparison</h2></div>
+        <button type="button" id="compare-csv" data-csv-source="compare-table">Download CSV</button>
+      </div>
+      <div class="os-budget-table-wrap">
+        <table id="compare-table" data-sortable="true">
+          <thead>
+            <tr>
+              <th scope="col" data-sort="text">Jurisdiction</th>
+              <th scope="col" data-sort="number">Year</th>
+              <th scope="col" data-sort="text">Status</th>
+              <th scope="col" data-sort="number">Amount</th>
+              <th scope="col" data-sort="number">Population</th>
+              <th scope="col" data-sort="number">Per resident</th>
+              <th scope="col">Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in comparison.rows %}
+            <tr>
+              <td data-value="{{ row.jurisdiction.name }}">{{ row.jurisdiction.name }}</td>
+              <td data-value="{{ row.year|default:0 }}">{{ row.year|default:"—" }}</td>
+              <td data-value="{{ row.status }}">{{ row.status|default:"—" }}</td>
+              <td data-value="{{ row.amount|default:0 }}">{{ row.amount_display }}</td>
+              <td data-value="{{ row.population|default:0 }}">{{ row.population_display }}</td>
+              <td data-value="{{ row.per_capita|default:0 }}">{{ row.per_capita_display }}</td>
+              <td>
+                {% if row.citations %}
+                  {% for citation in row.citations %}<a href="{{ row.source_url }}#page={{ citation.page }}" target="_blank" rel="noopener noreferrer">p. {{ citation.page }}</a>{% if not forloop.last %} {% endif %}{% endfor %}
+                {% elif row.source_url %}
+                  <a href="{{ row.source_url }}" target="_blank" rel="noopener noreferrer">Official document</a>
+                {% else %}Not cited{% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p class="os-budget-citation">
+        Population source:
+        {% for row in comparison.rows %}{% if row.population_source %}{{ row.jurisdiction.name }}: {{ row.population_source }} ({{ row.population_source_year }}){% if not forloop.last %}; {% endif %}{% endif %}{% endfor %}
+      </p>
+    </section>
+    {% endif %}
+  </main>
+</div>
+<script src="{% static 'budgets/budgets.js' %}?v=20260722-2" defer></script>
+{% endblock %}

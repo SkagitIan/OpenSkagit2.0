@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-import re
-from collections import defaultdict
+import ast
+import operator
 from decimal import Decimal
 from typing import Any
 
+from django.contrib.postgres.search import SearchHeadline, SearchQuery, SearchRank, SearchVector
 from django.db.models import Sum
 
 from .models import BudgetDocument, BudgetDocumentPage, BudgetJurisdiction, BudgetLineItem
@@ -16,6 +17,9 @@ STATUS_PRIORITY = {
     BudgetDocument.Status.PRELIMINARY: 2,
     BudgetDocument.Status.PROPOSED: 1,
 }
+
+MAX_READ_PAGES = 5
+SEARCH_CONFIG = "english"
 
 
 def _money(value: Decimal | None) -> float:
@@ -43,6 +47,10 @@ def _jurisdiction_payload(row: BudgetJurisdiction) -> dict[str, Any]:
             if documents.exists()
             else "no_current_source"
         ),
+        "population": row.population,
+        "population_source": row.population_source,
+        "population_source_year": row.population_source_year,
+        "population_source_url": row.population_source_url,
     }
 
 
@@ -133,7 +141,7 @@ def budget_get_summary(jurisdiction: str, year: int | None = None) -> dict[str, 
             "revenue": revenue,
             "expenditure": expenditure,
             "difference": revenue - expenditure if revenue is not None and expenditure is not None else None,
-            "fund_balance": totals.get(BudgetLineItem.Side.FUND_BALANCE),
+            "fund_balance": totals.get(BudgetLineItem.Side.FUND_BALANCE, 0),
         },
         "line_item_count": document.line_items.filter(reviewed=True, is_total=False).exclude(side=BudgetLineItem.Side.OTHER).count(),
         "source_pages": list(
@@ -184,6 +192,9 @@ def budget_get_breakdown(
         .annotate(amount=Sum("amount"))
         .order_by("-amount")[: max(1, min(limit, 100))]
     )
+    side_total = document.line_items.filter(
+        reviewed=True, is_total=True, side=side
+    ).aggregate(total=Sum("amount"))["total"]
     result_rows = []
     for row in rows:
         item_filter = {name_field: row[name_field], "side": side, "reviewed": True, "is_total": False}
@@ -196,10 +207,16 @@ def budget_get_breakdown(
             .values_list("page_number", flat=True)
             .distinct()
         )
+        percent_of_side_total = (
+            round(float(row["amount"]) / float(side_total) * 100, 1)
+            if side_total
+            else None
+        )
         result_rows.append({
             "code": row[code_field] if code_field is not None else "",
             "name": row[name_field] or "Not categorized",
             "amount": _money(row["amount"]),
+            "percent_of_side_total": percent_of_side_total,
             "pages": pages,
             "source_url": document.source_url,
             "notes": list(matching.exclude(source_note="").values_list("source_note", flat=True).distinct()),
@@ -208,6 +225,7 @@ def budget_get_breakdown(
         "jurisdiction": _jurisdiction_payload(owner),
         "document": _document_payload(document),
         "side": side,
+        "side_total": _money(side_total) if side_total is not None else None,
         "group_by": group_by,
         "rows": result_rows,
         "complete": side in (document.extracted_summary or {}).get("complete_breakdown_sides", []),
@@ -251,33 +269,185 @@ def budget_compare_jurisdictions(jurisdictions: list[str], year: int | None = No
     }
 
 
+def _search_pages(document: BudgetDocument, query: str, limit: int) -> list[dict[str, Any]]:
+    search_query = SearchQuery(query, config=SEARCH_CONFIG, search_type="websearch")
+    vector = SearchVector("text", config=SEARCH_CONFIG)
+    rows = (
+        BudgetDocumentPage.objects.filter(document=document)
+        .annotate(
+            search=vector,
+            rank=SearchRank(vector, search_query),
+            headline=SearchHeadline(
+                "text",
+                search_query,
+                config=SEARCH_CONFIG,
+                start_sel="",
+                stop_sel="",
+                max_words=60,
+                min_words=25,
+                max_fragments=1,
+            ),
+        )
+        # `ts_rank` floors near-zero (Postgres returns ~1e-20, not exactly 0) even for
+        # non-matching rows, so filter on the actual `@@` match rather than rank > 0.
+        .filter(search=search_query)
+        .order_by("-rank", "page_number")[: max(1, min(limit, 20))]
+    )
+    return [
+        {
+            "page": row.page_number,
+            "rank": round(float(row.rank), 4),
+            "snippet": " ".join(row.headline.split()),
+        }
+        for row in rows
+    ]
+
+
 def budget_search_documents(jurisdiction: str, query: str, year: int | None = None, limit: int = 8) -> dict[str, Any]:
+    if not query.strip():
+        raise ValueError("Use at least one descriptive search term.")
     owner = _resolve_jurisdiction(jurisdiction)
     document = _select_document(owner, year)
-    tokens = [token for token in re.findall(r"[a-z0-9]+", query.lower()) if len(token) > 2][:8]
-    if not tokens:
-        raise ValueError("Use at least one descriptive search term.")
-    matches = []
-    for page in BudgetDocumentPage.objects.filter(document=document).iterator():
-        lowered = page.text.lower()
-        score = sum(lowered.count(token) for token in tokens)
-        if not score:
-            continue
-        position = min((lowered.find(token) for token in tokens if token in lowered), default=0)
-        start = max(0, position - 180)
-        end = min(len(page.text), position + 420)
-        snippet = " ".join(page.text[start:end].split())
-        matches.append({"page": page.page_number, "score": score, "snippet": snippet})
-    matches.sort(key=lambda row: (-row["score"], row["page"]))
+    matches = _search_pages(document, query, limit)
     return {
         "jurisdiction": _jurisdiction_payload(owner),
         "document": _document_payload(document),
         "query": query,
-        "matches": matches[: max(1, min(limit, 20))],
+        "matches": matches,
     }
 
 
-def homepage_context(selected: str | None = None, year: int | None = None) -> dict[str, Any]:
+def budget_search_all_documents(query: str, year: int | None = None, limit_per_jurisdiction: int = 4) -> dict[str, Any]:
+    """Full-text search across every published jurisdiction's official budget document at once."""
+    if not query.strip():
+        raise ValueError("Use at least one descriptive search term.")
+    jurisdictions_searched = []
+    results = []
+    for owner in BudgetJurisdiction.objects.filter(active=True):
+        try:
+            document = _select_document(owner, year)
+        except ValueError:
+            continue
+        jurisdictions_searched.append(owner.name)
+        matches = _search_pages(document, query, limit_per_jurisdiction)
+        if matches:
+            results.append({
+                "jurisdiction": _jurisdiction_payload(owner),
+                "document": _document_payload(document),
+                "matches": matches,
+            })
+    results.sort(key=lambda row: max((m["rank"] for m in row["matches"]), default=0), reverse=True)
+    return {
+        "query": query,
+        "jurisdictions_searched": jurisdictions_searched,
+        "results": results,
+    }
+
+
+def budget_read_pages(jurisdiction: str, start_page: int, end_page: int, year: int | None = None) -> dict[str, Any]:
+    """Return full official page text for a small page range so the agent can read past a search snippet."""
+    owner = _resolve_jurisdiction(jurisdiction)
+    document = _select_document(owner, year)
+    if start_page < 1 or end_page < start_page:
+        raise ValueError("start_page must be at least 1 and end_page must not be before start_page.")
+    if document.page_count and start_page > document.page_count:
+        raise ValueError(f"{owner.name}'s {document.fiscal_year} document has only {document.page_count} pages.")
+    capped_end = min(end_page, start_page + MAX_READ_PAGES - 1, document.page_count or end_page)
+    pages = list(
+        BudgetDocumentPage.objects.filter(
+            document=document, page_number__gte=start_page, page_number__lte=capped_end
+        ).order_by("page_number")
+    )
+    if not pages:
+        raise ValueError(
+            f"No extracted page text for {owner.name} pages {start_page}-{capped_end}. "
+            f"The document has {document.page_count} pages."
+        )
+    return {
+        "jurisdiction": _jurisdiction_payload(owner),
+        "document": _document_payload(document),
+        "requested_range": [start_page, end_page],
+        "returned_range": [pages[0].page_number, pages[-1].page_number],
+        "capped": capped_end < end_page,
+        "pages": [{"page": page.page_number, "text": page.text} for page in pages],
+    }
+
+
+def budget_compare_per_capita(
+    jurisdictions: list[str], year: int | None = None, side: str = "expenditure"
+) -> dict[str, Any]:
+    """Compare reviewed totals per resident, citing the population source and vintage for each jurisdiction."""
+    comparison = budget_compare_jurisdictions(jurisdictions, year, side)
+    rows = []
+    for row in comparison["rows"]:
+        jurisdiction = row["jurisdiction"]
+        population = jurisdiction.get("population")
+        per_capita = (
+            round(row["amount"] / population, 2)
+            if row["available"] and population
+            else None
+        )
+        rows.append({
+            **row,
+            "population": population,
+            "population_source": jurisdiction.get("population_source"),
+            "population_source_year": jurisdiction.get("population_source_year"),
+            "per_capita": per_capita,
+        })
+    return {
+        "side": side,
+        "rows": sorted(rows, key=lambda row: (row["per_capita"] is not None, row["per_capita"] or 0), reverse=True),
+    }
+
+
+_SAFE_BIN_OPS = {
+    ast.Add: operator.add,
+    ast.Sub: operator.sub,
+    ast.Mult: operator.mul,
+    ast.Div: operator.truediv,
+    ast.FloorDiv: operator.floordiv,
+    ast.Mod: operator.mod,
+    ast.Pow: operator.pow,
+}
+_SAFE_UNARY_OPS = {ast.UAdd: operator.pos, ast.USub: operator.neg}
+
+
+def _safe_eval(node: ast.AST) -> float:
+    if isinstance(node, ast.Expression):
+        return _safe_eval(node.body)
+    if isinstance(node, ast.Constant):
+        if isinstance(node.value, (int, float)) and not isinstance(node.value, bool):
+            return node.value
+        raise ValueError("Only numbers are allowed in an expression.")
+    if isinstance(node, ast.BinOp) and type(node.op) in _SAFE_BIN_OPS:
+        left, right = _safe_eval(node.left), _safe_eval(node.right)
+        try:
+            return _SAFE_BIN_OPS[type(node.op)](left, right)
+        except ZeroDivisionError as exc:
+            raise ValueError("Division by zero.") from exc
+    if isinstance(node, ast.UnaryOp) and type(node.op) in _SAFE_UNARY_OPS:
+        return _SAFE_UNARY_OPS[type(node.op)](_safe_eval(node.operand))
+    raise ValueError("Expression may only contain numbers, + - * / // % **, and parentheses.")
+
+
+def calculate(expression: str) -> dict[str, Any]:
+    """Safely evaluate an arithmetic expression (numbers and + - * / // % ** only) so the agent never does mental math."""
+    if not expression or len(expression) > 200:
+        raise ValueError("Provide a short arithmetic expression, e.g. '115485921 / 17565'.")
+    try:
+        tree = ast.parse(expression, mode="eval")
+        result = _safe_eval(tree)
+    except (SyntaxError, ValueError) as exc:
+        raise ValueError(f"Could not evaluate {expression!r}: {exc}") from exc
+    return {"expression": expression, "result": result}
+
+
+def homepage_context(
+    selected: str | None = None,
+    year: int | None = None,
+    breakdown_group_by: str = "auto",
+    breakdown_limit: int = 10,
+) -> dict[str, Any]:
     jurisdictions = list(BudgetJurisdiction.objects.filter(active=True))
     for item in jurisdictions:
         item.has_published_budget = item.budget_documents.filter(published=True).exists()
@@ -290,7 +460,7 @@ def homepage_context(selected: str | None = None, year: int | None = None) -> di
         try:
             selected_row = _resolve_jurisdiction(selected)
             summary = budget_get_summary(selected_row.slug, year)
-            breakdown = budget_get_breakdown(selected_row.slug, year, limit=10)
+            breakdown = budget_get_breakdown(selected_row.slug, year, group_by=breakdown_group_by, limit=breakdown_limit)
         except ValueError as exc:
             error = str(exc)
     return {
