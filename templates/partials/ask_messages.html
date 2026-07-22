@@ -13,6 +13,31 @@
   <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
   <div class="os-ask-v2__bubble">
     <p>{{ answer|linebreaksbr }}</p>
+    {% if result and result.rows %}
+    <details class="os-ask-v2__results">
+      <summary>View {{ result.rows|length }} matching record{{ result.rows|length|pluralize }}</summary>
+      <div class="os-ask-v2__table-wrap">
+        <table class="os-ask-v2__table">
+          <thead>
+            <tr>
+              {% for column in result.columns %}
+                <th>{{ column }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in result.rows %}
+              <tr>
+                {% for column in result.columns %}
+                  <td>{{ row|dict_value:column }}</td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </details>
+    {% endif %}
   </div>
 </article>
 {% endif %}
@@ -22,15 +47,6 @@
   <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
   <div class="os-ask-v2__bubble os-ask-v2__bubble--error">
     <p>{{ error }}</p>
-  </div>
-</article>
-{% endif %}
-
-{% if result and result.rows %}
-<article class="os-ask-v2__message os-ask-v2__message--agent">
-  <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
-  <div class="os-ask-v2__bubble">
-    <p>Found {{ result.rows|length }} matching record{{ result.rows|length|pluralize }}.</p>
   </div>
 </article>
 {% endif %}

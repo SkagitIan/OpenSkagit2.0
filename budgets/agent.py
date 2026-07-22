@@ -43,7 +43,9 @@ def _plain_text_links(value: str) -> str:
     return re.sub(r'\[([^\]]+)\]\((https?://[^\s)]+)\)', r'\1: \2', value)
 
 
-def _build_tools():
+def build_budget_tools():
+    """Build the budget function-tools. Public so other agents (e.g. ask_agent) can reuse
+    the same tool set instead of hand-duplicating wrappers that drift out of sync."""
     from agents import function_tool
 
     @function_tool
@@ -136,7 +138,7 @@ def _build_agent():
         name="OpenSkagit budget analyst",
         model=os.environ.get("OPENAI_MODEL", "gpt-4.1"),
         instructions=INSTRUCTIONS,
-        tools=_build_tools(),
+        tools=build_budget_tools(),
     )
 
 
@@ -196,7 +198,7 @@ def _classify_result(tool_name: str, data: dict[str, Any]) -> str | None:
     return None
 
 
-_STATUS_VERBS = {
+STATUS_VERBS = {
     "list_budget_jurisdictions": "Checking which jurisdictions have reviewed budgets…",
     "get_budget_summary": "Pulling reviewed totals for {jurisdiction_name}…",
     "get_budget_breakdown": "Breaking down {jurisdiction_name}'s budget…",
@@ -211,7 +213,7 @@ _STATUS_VERBS = {
 
 
 def _status_message(tool_name: str, arguments: dict[str, Any]) -> str:
-    template = _STATUS_VERBS.get(tool_name, "Working on it…")
+    template = STATUS_VERBS.get(tool_name, "Working on it…")
     try:
         return template.format(**arguments)
     except (KeyError, IndexError):

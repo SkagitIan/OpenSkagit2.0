@@ -47,15 +47,20 @@
       </div>
 
       <section class="os-ask-v2__chat" aria-label="Ask OpenSkagit">
-        <div class="os-ask-v2__thread">
+        <div class="os-ask-v2__thread"
+          id="ask-thread"
+          data-thread-id="{{ thread.id|default:'' }}"
+          data-thread-url="{% if thread %}{% url 'ask_thread' thread.id %}{% endif %}">
+          {% if not thread_messages %}
           <article class="os-ask-v2__message os-ask-v2__message--agent">
             <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
             <div class="os-ask-v2__bubble">
               <p>What would you like to understand about Skagit County?</p>
             </div>
           </article>
+          {% endif %}
 
-          {% include "partials/ask_messages.html" %}
+          {% include "partials/ask_history.html" %}
         </div>
 
         {% if result and result.rows %}
@@ -84,14 +89,18 @@
         </details>
         {% endif %}
 
-        <form method="post" action="{% url 'ask' %}" class="os-ask-v2__form" data-stream-url="{% url 'ask_stream' %}">
+        {% if error %}
+        <p class="os-ask-v2__error">{{ error }}</p>
+        {% endif %}
+
+        <form method="post" action="{% if thread %}{% url 'ask_thread' thread.id %}{% else %}{% url 'ask' %}{% endif %}" class="os-ask-v2__form" data-stream-url="{% url 'ask_stream' %}">
           {% csrf_token %}
           <textarea
             name="prompt"
             rows="2"
             class="os-ask-v2__input"
             placeholder="Ask about a parcel, neighborhood, sale, tax district..."
-          >{{ prompt }}</textarea>
+          >{{ composer_prompt }}</textarea>
           <button type="submit" class="os-ask-v2__submit">Ask</button>
           <p class="os-ask-v2__hint">Enter to ask, Shift+Enter for a new line.</p>
           <p class="os-ask-v2__loading">OpenSkagit is checking the records…</p>
@@ -119,11 +128,12 @@
 <script>
 (function () {
   const form = document.querySelector(".os-ask-v2__form[data-stream-url]");
-  const thread = document.querySelector(".os-ask-v2__thread");
-  if (!form || !thread || !("EventSource" in window)) return;
+  const threadEl = document.getElementById("ask-thread");
+  if (!form || !threadEl || !("EventSource" in window)) return;
 
   const input = form.querySelector("[name=prompt]");
   const button = form.querySelector("button[type=submit]");
+  let currentThreadId = threadEl.dataset.threadId || "";
 
   input.addEventListener("keydown", function (event) {
     if (event.key !== "Enter" || event.shiftKey) return;
@@ -166,18 +176,31 @@
 
     const userMessage = messageHtml(prompt, "user");
     const statusMessage = messageHtml("OpenSkagit is thinking…", "agent");
-    thread.appendChild(userMessage);
-    thread.appendChild(statusMessage);
+    threadEl.appendChild(userMessage);
+    threadEl.appendChild(statusMessage);
     statusMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
     button.disabled = true;
     let completed = false;
-    const url = form.dataset.streamUrl + "?prompt=" + encodeURIComponent(prompt);
+    let url = form.dataset.streamUrl + "?prompt=" + encodeURIComponent(prompt);
+    if (currentThreadId) {
+      url += "&thread=" + encodeURIComponent(currentThreadId);
+    }
     const source = new EventSource(url);
+
+    source.addEventListener("thread", function (event) {
+      const data = JSON.parse(event.data);
+      const isNewThread = !currentThreadId;
+      currentThreadId = data.id;
+      if (isNewThread && data.url) {
+        window.history.pushState(null, "", data.url);
+        form.setAttribute("action", data.url);
+      }
+    });
 
     source.addEventListener("status", function (event) {
       const data = JSON.parse(event.data);
-      statusMessage.querySelector("p").textContent = "OpenSkagit is " + data.message + "…";
+      statusMessage.querySelector("p").textContent = data.message;
     });
 
     source.addEventListener("answer", function (event) {

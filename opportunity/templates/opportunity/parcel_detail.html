@@ -19,6 +19,9 @@
         {% endwith %}
         <a class="pb-button secondary" href="{{ parcel.parcel_url }}" target="_blank" rel="noopener">Source</a>
         {% if parcel.map_url %}<a class="pb-button secondary" href="{{ parcel.map_url }}" target="_blank" rel="noopener">Map</a>{% endif %}
+        {% with ask_prompt="Tell me about parcel "|add:parcel.parcel_number|add:" -- its zoning, budget-funded services, and recent sales." %}
+        <a class="pb-button secondary" href="{% url 'ask' %}?prompt={{ ask_prompt|urlencode }}">Ask about this parcel</a>
+        {% endwith %}
       </div>
     </div>
 

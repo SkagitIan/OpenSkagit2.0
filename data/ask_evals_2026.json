@@ -1,0 +1,42 @@
+{
+  "version": "2026.1",
+  "notes": "sql_guardrail/tabulate/status_message/reality_check cases are pure-function checks with no external dependencies and run by default. live_chat cases exercise the full agent (OPENAI_API_KEY plus a populated analytical database/live services) and only run with --live-chat.",
+  "cases": [
+    {"id": "guardrail-plain-select", "type": "sql_guardrail", "sql": "SELECT parcel_number, sale_price_num FROM sales WHERE sale_type = 'VALID SALE' LIMIT 10", "expected": true},
+    {"id": "guardrail-with-cte", "type": "sql_guardrail", "sql": "WITH recent AS (SELECT * FROM sales WHERE sale_date_iso >= '2024-01-01') SELECT * FROM recent", "expected": true},
+    {"id": "guardrail-create-temp-table", "type": "sql_guardrail", "sql": "CREATE TEMP TABLE temp_recent_sales AS SELECT * FROM sales WHERE sale_type = 'VALID SALE'", "expected": true},
+    {"id": "guardrail-create-temp-view", "type": "sql_guardrail", "sql": "CREATE TEMPORARY VIEW analysis_cohort AS SELECT * FROM assessor_rollup WHERE proptype = 'R'", "expected": true},
+    {"id": "guardrail-drop-temp-table", "type": "sql_guardrail", "sql": "DROP TABLE IF EXISTS temp_recent_sales", "expected": true},
+    {"id": "guardrail-drop-analysis-view", "type": "sql_guardrail", "sql": "DROP VIEW analysis_cohort", "expected": true},
+    {"id": "guardrail-blocks-insert", "type": "sql_guardrail", "sql": "INSERT INTO sales VALUES (1, 2, 3)", "expected": false},
+    {"id": "guardrail-blocks-update", "type": "sql_guardrail", "sql": "UPDATE assessor_rollup SET taxable_value_num = 0", "expected": false},
+    {"id": "guardrail-blocks-delete", "type": "sql_guardrail", "sql": "DELETE FROM sales WHERE sale_price_num > 0", "expected": false},
+    {"id": "guardrail-blocks-drop-persistent-table", "type": "sql_guardrail", "sql": "DROP TABLE sales", "expected": false},
+    {"id": "guardrail-blocks-alter", "type": "sql_guardrail", "sql": "ALTER TABLE sales ADD COLUMN note TEXT", "expected": false},
+    {"id": "guardrail-blocks-attach", "type": "sql_guardrail", "sql": "ATTACH 'secrets.db' AS secrets", "expected": false},
+    {"id": "guardrail-blocks-pragma", "type": "sql_guardrail", "sql": "PRAGMA database_list", "expected": false},
+    {"id": "guardrail-blocks-multi-statement", "type": "sql_guardrail", "sql": "SELECT 1; DROP TABLE sales", "expected": false},
+    {"id": "guardrail-blocks-unlisted-table", "type": "sql_guardrail", "sql": "SELECT * FROM budgetdocument", "expected": false},
+    {"id": "guardrail-blocks-persistent-create", "type": "sql_guardrail", "sql": "CREATE TABLE leaked AS SELECT * FROM sales", "expected": false},
+
+    {"id": "tabulate-rows-key", "type": "tabulate", "data": {"columns": ["parcel", "score"], "row_count": 2, "rows": [{"parcel": "P1", "score": 5}, {"parcel": "P2", "score": 3}]}, "expected_columns": ["parcel", "score"], "expected_row_count": 2},
+    {"id": "tabulate-results-key", "type": "tabulate", "data": {"query": "main st", "results": [{"parcel_id": "P1", "address": "1 Main St"}]}, "expected_columns": ["parcel_id", "address"], "expected_row_count": 1},
+    {"id": "tabulate-non-tabular-returns-none", "type": "tabulate", "data": {"parcel": "P1", "property": {"nested": true}}, "expected_columns": null, "expected_row_count": null},
+    {"id": "tabulate-empty-rows-returns-none", "type": "tabulate", "data": {"rows": []}, "expected_columns": null, "expected_row_count": null},
+
+    {"id": "status-search-parcels-fills-argument", "type": "status_message", "tool": "search_parcels", "arguments": {"q": "123 Main St"}, "expected_contains": "123 Main St"},
+    {"id": "status-property-context-falls-back-without-argument", "type": "status_message", "tool": "get_property_context", "arguments": {}, "expected_contains": "property report"},
+    {"id": "status-unknown-tool-falls-back-to-generic", "type": "status_message", "tool": "some_unlisted_tool", "arguments": {}, "expected_equals": "Working on it…"},
+    {"id": "status-reuses-budget-status-verbs", "type": "status_message", "tool": "search_all_budget_documents", "arguments": {"search_terms": "public safety"}, "expected_contains": "public safety"},
+    {"id": "status-zoning-feasibility-fills-argument", "type": "status_message", "tool": "zoning_build_feasibility", "arguments": {"parcel_id": "P1", "proposed_use": "duplex"}, "expected_contains": "duplex"},
+
+    {"id": "reality-check-empty-result-flags-no-rows", "type": "reality_check", "columns": ["parcel"], "rows": [], "expected_contains": "no rows"},
+    {"id": "reality-check-small-sample-flags-directional", "type": "reality_check", "columns": ["parcel"], "rows": [{"parcel": "P1"}, {"parcel": "P2"}], "expected_contains": "directional"},
+    {"id": "reality-check-high-null-column-flagged", "type": "reality_check", "columns": ["parcel", "sale_price_num"], "rows": [{"parcel": "P1", "sale_price_num": null}, {"parcel": "P2", "sale_price_num": null}, {"parcel": "P3", "sale_price_num": null}, {"parcel": "P4", "sale_price_num": 400000}, {"parcel": "P5", "sale_price_num": 410000}, {"parcel": "P6", "sale_price_num": 420000}, {"parcel": "P7", "sale_price_num": 430000}, {"parcel": "P8", "sale_price_num": 440000}, {"parcel": "P9", "sale_price_num": 450000}, {"parcel": "P10", "sale_price_num": 460000}], "expected_contains": "null or blank"},
+    {"id": "reality-check-out-of-range-price-flagged", "type": "reality_check", "columns": ["parcel", "sale_price_num"], "rows": [{"parcel": "P1", "sale_price_num": 0}, {"parcel": "P2", "sale_price_num": 400000}, {"parcel": "P3", "sale_price_num": 410000}, {"parcel": "P4", "sale_price_num": 420000}, {"parcel": "P5", "sale_price_num": 430000}, {"parcel": "P6", "sale_price_num": 440000}, {"parcel": "P7", "sale_price_num": 450000}, {"parcel": "P8", "sale_price_num": 460000}, {"parcel": "P9", "sale_price_num": 470000}, {"parcel": "P10", "sale_price_num": 480000}], "expected_contains": "outside a normal residential sale range"},
+
+    {"id": "live-largest-parcels-anacortes", "type": "live_chat", "question": "What are the five largest parcels by acreage in Anacortes?", "expected_keywords": ["acre"]},
+    {"id": "live-residential-sales-ratio", "type": "live_chat", "question": "What is the median sale-to-assessed ratio for valid residential sales since 2024?", "expected_keywords": ["ratio"]},
+    {"id": "live-budget-question-routes-to-budget-tools", "type": "live_chat", "question": "How much does Anacortes budget for its Water Fund in 2026?", "expected_keywords": ["water"]}
+  ]
+}
