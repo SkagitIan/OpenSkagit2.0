@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import inspect
+import json
 import re
 import uuid
 from decimal import Decimal
+from io import StringIO
 from unittest.mock import patch
 
+from django.core.management import call_command
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 
@@ -305,3 +308,23 @@ class AskStreamViewTests(TestCase):
         events = self._events(response)
         self.assertEqual([name for name, _ in events], ["answer", "done"])
         self.assertEqual(AskThread.objects.count(), 0)
+
+
+class EvalAskCommandTests(SimpleTestCase):
+    """The bundled deterministic eval cases (sql_guardrail/tabulate/status_message/
+    reality_check) are pure-function checks with no DB or OPENAI_API_KEY dependency,
+    so -- unlike --live-chat -- they can and should run as a real regression check here."""
+
+    def test_default_eval_cases_all_pass(self):
+        stdout = StringIO()
+        call_command("eval_ask", "--json", stdout=stdout)
+        report = json.loads(stdout.getvalue())
+        self.assertGreater(report["deterministic"]["total"], 0)
+        self.assertEqual(report["deterministic"]["failed"], 0)
+        self.assertIsNone(report["chat"])
+
+    def test_live_chat_cases_are_skipped_without_the_flag(self):
+        stdout = StringIO()
+        call_command("eval_ask", "--json", stdout=stdout)
+        report = json.loads(stdout.getvalue())
+        self.assertEqual(report["chat_results"], [])
