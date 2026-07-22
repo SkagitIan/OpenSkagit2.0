@@ -1,6 +1,6 @@
 from datetime import date
 from decimal import Decimal
-from unittest.mock import patch
+from unittest.mock import call, patch
 
 from django.core.management import call_command
 from django.core.management.base import CommandError
@@ -11,6 +11,7 @@ from budgets.agent import _plain_text_links
 from budgets.extraction import _candidate_amounts, parse_money
 from budgets.models import BudgetDocument, BudgetDocumentPage, BudgetJurisdiction, BudgetLineItem
 from budgets.services import budget_get_breakdown, budget_get_summary, budget_search_documents, budget_list_jurisdictions
+from budgets.views import _jurisdiction_from_question
 
 
 class BudgetServiceTests(TestCase):
@@ -89,6 +90,48 @@ class BudgetServiceTests(TestCase):
         draft.refresh_from_db()
         self.assertTrue(draft.published)
         self.assertTrue(draft.is_current)
+    @patch("budgets.views.answer_budget_turn")
+    def test_blank_chat_asks_what_the_citizen_wants_to_know(self, answer_question):
+        response = self.client.post(reverse("budgets:ask"), {"question": ""})
+        self.assertContains(response, "What would you like to know")
+        answer_question.assert_not_called()
+
+    @patch("budgets.views.answer_budget_turn")
+    def test_chat_asks_a_follow_up_when_jurisdiction_is_missing(self, answer_question):
+        response = self.client.post(reverse("budgets:ask"), {"question": "How much is budgeted for public safety?"})
+        self.assertContains(response, "Which jurisdiction do you mean?")
+        answer_question.assert_not_called()
+
+    def test_question_can_name_its_jurisdiction(self):
+        self.assertEqual(_jurisdiction_from_question("What does Sedro-Woolley spend?"), "sedro-woolley")
+        self.assertEqual(_jurisdiction_from_question("What is Skagit spending?"), "skagit-county")
+        self.assertEqual(_jurisdiction_from_question("How much is public safety?"), "")
+
+    @patch("budgets.views.answer_budget_turn")
+    def test_named_jurisdiction_uses_current_reviewed_year(self, answer_question):
+        answer_question.return_value = ("Reviewed answer", "resp_test")
+        self.client.post(reverse("budgets:ask"), {"question": "What does Sedro-Woolley spend?"})
+        answer_question.assert_called_once_with("What does Sedro-Woolley spend?", "sedro-woolley", 2026, None)
+
+    @patch("budgets.views.answer_budget_turn")
+    def test_chat_resolves_current_budget_to_reviewed_year(self, answer_question):
+        answer_question.return_value = ("Reviewed answer", "resp_test")
+        self.client.post(reverse("budgets:ask"), {"jurisdiction": "anacortes", "question": "What is spent?"})
+        answer_question.assert_called_once_with("What is spent?", "anacortes", 2026, None)
+
+    @patch("budgets.views.answer_budget_turn")
+    def test_follow_up_uses_previous_response_id(self, answer_question):
+        answer_question.side_effect = [("First answer", "resp_one"), ("Second answer", "resp_two")]
+        self.client.post(reverse("budgets:ask"), {"jurisdiction": "anacortes", "question": "What is spent?"})
+        self.client.post(reverse("budgets:ask"), {"jurisdiction": "anacortes", "question": "And revenue?"})
+        self.assertEqual(
+            answer_question.call_args_list,
+            [
+                call("What is spent?", "anacortes", 2026, None),
+                call("And revenue?", "anacortes", 2026, "resp_one"),
+            ],
+        )
+
     @patch.dict("os.environ", {"OPENAI_API_KEY": ""})
     def test_chat_has_clear_unconfigured_message(self):
         response = self.client.post(reverse("budgets:ask"), {"jurisdiction": "anacortes", "year": "2026", "question": "What is spent?"})

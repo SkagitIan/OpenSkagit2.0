@@ -12,14 +12,24 @@ def _plain_text_links(value: str) -> str:
 
 
 def answer_budget_question(question: str, jurisdiction: str = "", year: int | None = None) -> str:
+    answer, _ = answer_budget_turn(question, jurisdiction, year)
+    return answer
+
+
+def answer_budget_turn(
+    question: str,
+    jurisdiction: str = "",
+    year: int | None = None,
+    previous_response_id: str | None = None,
+) -> tuple[str, str | None]:
     if not question.strip():
-        return "Enter a budget question."
+        return "Enter a budget question.", None
     if not os.environ.get("OPENAI_API_KEY"):
-        return "Budget chat is not configured. You can still use the jurisdiction and year controls above."
+        return "Budget chat is not configured. You can still use the jurisdiction and year controls above.", None
     try:
         from agents import Agent, Runner, function_tool
     except ImportError:
-        return "Budget chat is temporarily unavailable."
+        return "Budget chat is temporarily unavailable.", None
 
     @function_tool
     def list_budget_jurisdictions() -> dict[str, Any]:
@@ -70,12 +80,18 @@ def answer_budget_question(question: str, jurisdiction: str = "", year: int | No
             "Always identify the jurisdiction, fiscal year, and whether the document is proposed, preliminary, adopted, or amended. "
             "For every numeric claim, cite the official source URL and the PDF page supplied by the tool. Clearly distinguish all-funds and General Fund figures. "
             "Cite the official source URL and page number when using document search. Do not call revenue minus expenditure a surplus "
-            "unless the source explicitly defines it that way. If reviewed data is unavailable, say so plainly and do not guess."
+            "unless the source explicitly defines it that way. If reviewed data is unavailable, say so plainly and do not guess. If required context is missing, ask one short follow-up question instead of choosing a jurisdiction or year."
         ),
         tools=[list_budget_jurisdictions, get_budget_summary, get_budget_breakdown, get_budget_trend, compare_budget_jurisdictions, search_budget_document],
     )
     try:
-        result = Runner.run_sync(agent, prompt, max_turns=10)
-        return _plain_text_links(str(result.final_output))
+        result = Runner.run_sync(
+            agent,
+            prompt,
+            max_turns=10,
+            previous_response_id=previous_response_id,
+            auto_previous_response_id=True,
+        )
+        return _plain_text_links(str(result.final_output)), result.last_response_id
     except Exception:
-        return "Budget chat is temporarily unavailable. The reviewed figures and official source links are still available above."
+        return "Budget chat is temporarily unavailable. The reviewed figures and official source links are still available above.", None
