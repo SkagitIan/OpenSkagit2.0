@@ -1,9 +1,14 @@
 from __future__ import annotations
 
 import os
+import re
 from typing import Any
 
 from . import services
+
+
+def _plain_text_links(value: str) -> str:
+    return re.sub(r'\[([^\]]+)\]\((https?://[^\s)]+)\)', r'\1: \2', value)
 
 
 def answer_budget_question(question: str, jurisdiction: str = "", year: int | None = None) -> str:
@@ -71,6 +76,6 @@ def answer_budget_question(question: str, jurisdiction: str = "", year: int | No
     )
     try:
         result = Runner.run_sync(agent, prompt, max_turns=10)
-        return str(result.final_output)
+        return _plain_text_links(str(result.final_output))
     except Exception:
         return "Budget chat is temporarily unavailable. The reviewed figures and official source links are still available above."

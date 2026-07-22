@@ -7,6 +7,7 @@ from django.core.management.base import CommandError
 from django.test import TestCase
 from django.urls import reverse
 
+from budgets.agent import _plain_text_links
 from budgets.extraction import _candidate_amounts, parse_money
 from budgets.models import BudgetDocument, BudgetDocumentPage, BudgetJurisdiction, BudgetLineItem
 from budgets.services import budget_get_breakdown, budget_get_summary, budget_search_documents, budget_list_jurisdictions
@@ -95,6 +96,10 @@ class BudgetServiceTests(TestCase):
 
 
 class BudgetExtractionTests(TestCase):
+    def test_markdown_source_link_is_rendered_as_safe_plain_url(self):
+        answer = '[Burlington budget, page 43 (PDF)](https://example.test/budget.pdf)'
+        self.assertEqual(_plain_text_links(answer), 'Burlington budget, page 43 (PDF): https://example.test/budget.pdf')
+
     def test_money_parser(self):
         self.assertEqual(parse_money("$1,234.50"), Decimal("1234.50"))
         self.assertEqual(parse_money("(250)"), Decimal("-250"))
