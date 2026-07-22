@@ -93,6 +93,11 @@
       <div class="os-budget-ask__main">
         <p class="os-budget-page__eyebrow">Ask the budget</p>
         <h2 id="budget-ask-title">Ask a plain-language question.</h2>
+        {% if selected_jurisdiction %}
+        {% with ask_prompt="How does "|add:selected_jurisdiction.name|add:"'s budget relate to local property records and zoning?" %}
+        <p class="os-budget-ask__crosslink"><a href="{% url 'ask' %}?prompt={{ ask_prompt|urlencode }}">Ask across parcels, zoning, and property records too &rarr;</a></p>
+        {% endwith %}
+        {% endif %}
         <div id="budget-thread" class="os-budget-thread" aria-live="polite">
           {% if answer %}
           <div class="os-budget-thread__turn">

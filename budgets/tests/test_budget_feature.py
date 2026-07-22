@@ -169,6 +169,9 @@ class BudgetServiceTests(TestCase):
         self.assertContains(response, "expenditure p. 1")
         self.assertContains(response, "How much is budgeted for public safety?")
         self.assertContains(response, "Official document")
+        # Cross-link into the consolidated /ask agent for cross-domain questions (Phase 5).
+        self.assertContains(response, "/ask/?prompt=")
+        self.assertContains(response, "Ask across parcels, zoning, and property records too")
 
     def test_publish_command_enforces_review_gate(self):
         draft = BudgetDocument.objects.create(
