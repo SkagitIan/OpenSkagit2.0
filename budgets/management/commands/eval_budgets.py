@@ -114,14 +114,67 @@ class Command(BaseCommand):
                 passed = passed and int(case["page"]) in pages
                 detail = f"actual={actual}, page={pages}"
             elif case_type == "unavailable":
+                check = case.get("check", "summary")
                 try:
-                    services.budget_get_summary(case["jurisdiction"], int(case["year"]))
+                    if check == "summary":
+                        services.budget_get_summary(case["jurisdiction"], int(case["year"]))
+                    elif check == "search":
+                        services.budget_search_documents(
+                            case["jurisdiction"], case.get("query", "budget"), int(case["year"])
+                        )
+                    elif check == "per_capita":
+                        services.budget_compare_per_capita(
+                            [case["jurisdiction"]], int(case["year"]), case.get("side", "expenditure")
+                        )
+                    else:
+                        return {"id": case.get("id", "unknown"), "passed": False, "detail": f"Unknown check {check!r}."}
                 except ValueError as exc:
                     passed = "No reviewed, published budget document" in str(exc)
                     detail = str(exc)
                 else:
                     passed = False
                     detail = "Unexpectedly returned published data."
+            elif case_type == "search":
+                result = services.budget_search_documents(case["jurisdiction"], case["query"], int(case["year"]))
+                pages = {row["page"] for row in result["matches"]}
+                passed = int(case["page"]) in pages
+                detail = f"pages={sorted(pages)}"
+            elif case_type == "search_all":
+                result = services.budget_search_all_documents(
+                    case["query"], int(case["year"]) if case.get("year") else None
+                )
+                names = {row["jurisdiction"]["name"] for row in result["results"]}
+                passed = case["jurisdiction_name"] in names
+                detail = f"jurisdictions_with_matches={sorted(names)}"
+            elif case_type == "read_pages":
+                result = services.budget_read_pages(
+                    case["jurisdiction"], int(case["start_page"]), int(case["end_page"]), int(case["year"])
+                )
+                text = " ".join(page["text"] for page in result["pages"])
+                passed = case["expected_substring"] in text
+                detail = f"returned_range={result['returned_range']}"
+            elif case_type == "per_capita":
+                result = services.budget_compare_per_capita(
+                    case["jurisdictions"], int(case["year"]), case.get("side", "expenditure")
+                )
+                row = next(
+                    (item for item in result["rows"] if item["jurisdiction"]["slug"] == case["jurisdiction"]),
+                    None,
+                )
+                actual = row["per_capita"] if row else None
+                passed = row is not None and self._close(actual, case["expected"], case.get("tolerance", 0))
+                detail = f"actual={actual}, population={row['population'] if row else None}"
+            elif case_type == "percent_of_total":
+                result = services.budget_get_breakdown(
+                    case["jurisdiction"], int(case["year"]), case["side"], case.get("group_by", "auto"), 100
+                )
+                row = next(
+                    (item for item in result["rows"] if item["name"].casefold() == case["name"].casefold()),
+                    None,
+                )
+                actual = row["percent_of_side_total"] if row else None
+                passed = row is not None and self._close(actual, case["expected"], case.get("tolerance", 0))
+                detail = f"actual={actual}"
             else:
                 return {"id": case.get("id", "unknown"), "passed": False, "detail": "Unknown type."}
         except Exception as exc:

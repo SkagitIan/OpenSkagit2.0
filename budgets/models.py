@@ -13,6 +13,10 @@ class BudgetJurisdiction(models.Model):
     kind = models.CharField(max_length=40, blank=True)
     official_url = models.URLField(blank=True)
     active = models.BooleanField(default=True)
+    population = models.PositiveIntegerField(blank=True, null=True)
+    population_source = models.CharField(max_length=300, blank=True)
+    population_source_year = models.PositiveSmallIntegerField(blank=True, null=True)
+    population_source_url = models.URLField(blank=True)
 
     class Meta:
         ordering = ["name"]
