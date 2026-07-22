@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 import re
 from dataclasses import dataclass
@@ -13,6 +14,8 @@ from context_mcp import services as context_services
 from gis_mcp import services as gis_services
 
 from .duck import connect, database_path
+
+logger = logging.getLogger(__name__)
 
 READ_ONLY_TABLES = {
     "assessor_rollup",
@@ -50,6 +53,7 @@ class AnalysisResponse:
     result: QueryResult | None = None
     sql: str | None = None
     reality_checks: list[str] | None = None
+    response_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -597,7 +601,7 @@ def _strip_sql(sql: str) -> str:
     return sql.strip().rstrip(";").strip()
 
 
-def answer_question(question: str) -> AnalysisResponse:
+def answer_question(question: str, previous_response_id: str | None = None) -> AnalysisResponse:
     try:
         from agents import Agent, MaxTurnsExceeded, Runner, function_tool
     except Exception:
@@ -774,7 +778,21 @@ def answer_question(question: str) -> AnalysisResponse:
         agent_input = question
         if address_context:
             agent_input = f"{question}\n\n{address_context}"
-        result = Runner.run_sync(agent, agent_input, max_turns=20)
+        try:
+            result = Runner.run_sync(
+                agent,
+                agent_input,
+                max_turns=20,
+                previous_response_id=previous_response_id,
+                auto_previous_response_id=True,
+            )
+        except Exception:
+            if previous_response_id is None:
+                raise
+            # previous_response_id can go stale (the Responses API only retains state for a
+            # limited window); retry once as a fresh turn rather than losing the answer entirely.
+            logger.warning("Stale previous_response_id for ask_agent; retrying without it.", exc_info=True)
+            result = Runner.run_sync(agent, agent_input, max_turns=20)
     except MaxTurnsExceeded:
         if last_result is not None:
             return AnalysisResponse(
@@ -808,4 +826,4 @@ def answer_question(question: str) -> AnalysisResponse:
     if last_sql:
         footer_parts.append("Reality checks: " + " ".join(checks))
     footer = "\n\n" + "\n".join(footer_parts) if footer_parts else ""
-    return AnalysisResponse(str(result.final_output) + footer, last_result, last_sql, checks)
+    return AnalysisResponse(str(result.final_output) + footer, last_result, last_sql, checks, result.last_response_id)

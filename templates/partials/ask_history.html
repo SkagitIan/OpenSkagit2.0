@@ -1,0 +1,43 @@
+{% load core_extras %}
+
+{% for message in thread_messages %}
+  {% if message.role == "user" %}
+  <article class="os-ask-v2__message os-ask-v2__message--user">
+    <div class="os-ask-v2__bubble">
+      <p>{{ message.content }}</p>
+    </div>
+  </article>
+  {% else %}
+  <article class="os-ask-v2__message os-ask-v2__message--agent">
+    <span class="os-ask-v2__avatar" aria-hidden="true">OS</span>
+    <div class="os-ask-v2__bubble">
+      <p>{{ message.content|linebreaksbr }}</p>
+      {% if message.structured_result.rows %}
+      <details class="os-ask-v2__results">
+        <summary>View {{ message.structured_result.rows|length }} matching record{{ message.structured_result.rows|length|pluralize }}</summary>
+        <div class="os-ask-v2__table-wrap">
+          <table class="os-ask-v2__table">
+            <thead>
+              <tr>
+                {% for column in message.structured_result.columns %}
+                  <th>{{ column }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in message.structured_result.rows %}
+                <tr>
+                  {% for column in message.structured_result.columns %}
+                    <td>{{ row|dict_value:column }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </details>
+      {% endif %}
+    </div>
+  </article>
+  {% endif %}
+{% endfor %}

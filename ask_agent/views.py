@@ -1,12 +1,14 @@
 import json
 
-from django.http import HttpResponseNotAllowed, StreamingHttpResponse
+from django.http import Http404, HttpResponseNotAllowed, StreamingHttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.http import urlencode
 
 from core.views import CITY_PAGES
+
+from . import conversation
 
 
 STARTER_PROMPTS = [
@@ -33,6 +35,7 @@ def _sse(event, data):
 
 def ask_stream(request):
     prompt = request.GET.get("prompt", "").strip()
+    thread_id = request.GET.get("thread", "").strip()
 
     def events():
         if not prompt:
@@ -41,13 +44,21 @@ def ask_stream(request):
             yield _sse("done", {})
             return
 
+        thread = conversation.get_thread(thread_id) if thread_id else None
+        is_new_thread = thread is None
+        if is_new_thread:
+            thread = conversation.create_thread(prompt)
+        yield _sse("thread", {"id": str(thread.id), "url": reverse("ask_thread", args=[thread.id])})
+        conversation.append_user_message(thread, prompt)
+
         yield _sse("status", {"message": "thinking"})
         yield _sse("status", {"message": "querying"})
         yield _sse("status", {"message": "summarizing"})
 
         from .agent import answer_question
 
-        analysis = answer_question(prompt)
+        analysis = answer_question(prompt, thread.last_response_id or None)
+        conversation.append_assistant_message(thread, analysis)
         html = render_to_string("partials/ask_messages.html", {
             "answer": analysis.answer,
             "analysis": analysis,
@@ -63,40 +74,39 @@ def ask_stream(request):
     return response
 
 
-def ask(request):
-    answer = None
-    analysis = None
-    result = None
-    sql = ""
-    prompt = ""
-    composer_prompt = request.GET.get("prompt", "").strip()
+def ask(request, thread_id=None):
+    thread = None
+    if thread_id is not None:
+        thread = conversation.get_thread(thread_id)
+        if thread is None:
+            raise Http404("No such conversation.")
+
+    composer_prompt = request.GET.get("prompt", "").strip() if thread is None else ""
     error = None
 
     if request.method == "POST":
         prompt = request.POST.get("prompt", "").strip()
-        composer_prompt = ""
         if prompt:
             from .agent import answer_question
-            analysis = answer_question(prompt)
-            answer = analysis.answer
-            result = analysis.result
-            sql = analysis.sql or ""
+
+            if thread is None:
+                thread = conversation.create_thread(prompt)
+            conversation.append_user_message(thread, prompt)
+            analysis = answer_question(prompt, thread.last_response_id or None)
+            conversation.append_assistant_message(thread, analysis)
+            # Post-redirect-get: avoids resubmitting the question on refresh, and gives
+            # the conversation a stable, bookmarkable URL even without JavaScript.
+            return redirect("ask_thread", thread_id=thread.id)
+        error = "Please enter a question."
 
     context = {
-        "answer": answer,
-        "analysis": analysis,
-        "result": result,
-        "sql": sql,
-        "prompt": prompt,
+        "thread": thread,
+        "thread_messages": list(thread.messages.all()) if thread is not None else [],
         "composer_prompt": composer_prompt,
         "error": error,
         "starter_prompts": STARTER_PROMPTS,
         "city_pages": CITY_PAGES,
     }
-
-    if request.headers.get("HX-Request") == "true":
-        return render(request, "partials/ask_messages.html", context)
-
     return render(request, "pages/ask.html", context)
 
 
