@@ -81,6 +81,7 @@ urlpatterns = [
     path("staff/regression/", include("regression.urls")),
     path("opportunity/", include("opportunity.urls")),
     path("field/", include("field_map.urls")),
+    path("livefire/", include("livefire.urls")),
     path("mcp/", include("openskagit_tools.urls")),
     path("mCP", RedirectView.as_view(url="/mcp/", permanent=True)),
     path("mCP/", RedirectView.as_view(url="/mcp/", permanent=True)),
