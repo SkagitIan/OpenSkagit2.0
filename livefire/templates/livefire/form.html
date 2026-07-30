@@ -1,0 +1,1 @@
+{% extends "livefire/base.html" %}{% block livefire_content %}<div class="narrow card"><h1>{{ title }}</h1><form method="post">{% csrf_token %}{{ form.as_div }}<div class="actions"><button>Save</button><a class="button secondary" href="javascript:history.back()">Cancel</a></div></form></div>{% endblock %}

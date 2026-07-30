@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "regression",
     "graph",
     "field_map",
+    "livefire",
     "openskagit_tools.apps.OpenSkagitToolsConfig",
 ]
 

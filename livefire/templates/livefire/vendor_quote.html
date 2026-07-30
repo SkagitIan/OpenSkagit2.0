@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<main class="lf-main"><div class="narrow card"><p class="eyebrow">SECURE VENDOR REQUEST</p><h1>Quote for {{ quote_request.item_name }}</h1><p>Requested from {{ quote_request.vendor_name }}. Your response is private.</p><form method="post">{% csrf_token %}{{ form.as_div }}<button>Submit quote</button></form></div></main>{% endblock %}
