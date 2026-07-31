@@ -2,6 +2,7 @@ from django.db import connection
 from django.shortcuts import render
 from django.http import Http404
 from opportunity.public_intelligence import public_home_examples
+from opportunity.services import latest_public_home_read
 
 
 def parcel_fingerprint():
@@ -261,6 +262,7 @@ def home(request):
         "show_current_load_more": True,
         "parcel_fingerprint": parcel_fingerprint(),
         "property_intelligence_examples": public_home_examples(),
+        "public_read": latest_public_home_read(),
     })
 
 

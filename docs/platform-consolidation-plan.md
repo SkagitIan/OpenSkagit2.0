@@ -22,6 +22,11 @@ Execution home: `OpenSkagit-railway`
 - 2026-07-16: removed Railway Ask Agent's remaining legacy Worker calls; parcel search, assessor reports, GIS overlays, Census, and soils now use canonical same-process services.
 - 2026-07-16: added a deterministic D1/PostGIS audit command. A 25-parcel sample found zero complete normalized D1 records and misplaced assessor JSON in all 25, with 10 acreage mismatches and one sale-price mismatch.
 - 2026-07-16: tested and reverted a repository-owned Docker build after its runtime command/static-file permissions caused a production 502. Railway returned to the previously proven Nixpacks build; build-variable hardening remains open.
+- 2026-07-16: verified the recovery deployment on Nixpacks (`/` and `/mcp/` HTTP 200; unauthenticated `/mcp/api/` correctly HTTP 401) and froze further production changes pending a non-production environment.
+- 2026-07-16: verified that active Railway services have no legacy Worker/adapter variables and the canonical source has no legacy consumer beyond the intentional read-only D1 audit.
+- 2026-07-16: separated the canonical Cloudflare DNS/proxy for `openskagit.com` from standalone `*.workers.dev` retirement; source Wrangler files declare no custom-domain route.
+- 2026-07-16: found the three adapter Workers publicly unauthenticated and confirmed no Railway callers, making them urgent freeze/retirement candidates after Cloudflare traffic verification.
+- 2026-07-16: verified the separate `SkagitIan/skagit-pipeline` workflow is disabled after repeated failed scheduled D1 imports; Worker cron and account-level traffic still require authenticated Cloudflare evidence.
 
 ## Objective
 

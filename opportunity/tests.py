@@ -153,6 +153,16 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertEqual(services._improvement_label("MA1.5F"), "one-and-a-half-story dwelling")
         self.assertEqual(services._improvement_label("MAIN AREA"), "main dwelling area")
 
+    def test_sync_narrative_prompt_uses_recent_field_notes_for_home_read(self):
+        prompt = services.build_sync_narrative_prompt(
+            "latest report",
+            {},
+            {},
+            [{"headline": "A quieter stretch", "preview_text": "The Valley is taking shape."}],
+        )
+        self.assertIn("Recent saved field notes JSON", prompt)
+        self.assertIn("The Valley is taking shape", prompt)
+        self.assertIn("public homepage", prompt)
     def test_sync_narrative_response_parser(self):
         parsed = services.parse_sync_narrative_response(
             '{"headline":"Fresh assessor changes","dek":"A local field note","narrative":"Several records changed overnight.",'

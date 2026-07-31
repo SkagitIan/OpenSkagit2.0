@@ -138,12 +138,14 @@ Run the same-process source health suite with `python manage.py check_unified_mc
 
 | Project | Worker | Function | Preliminary decision |
 | --- | --- | --- | --- |
-| `OpenSkagit/worker` | `skagit-agent-worker` | Property, GIS, Census, soils, HTTP MCP | Census/soils migrated; bridge remaining consumers; retire after zero-traffic evidence. |
-| `workers/arcgis-adapter` | `arcgis-adapter` | ArcGIS proxy | Merge; retire unless edge value is proven. |
-| `workers/web-adapter` | `web-adapter` | Web proxy | Keep only if Cloudflare egress is necessary. |
-| `workers/notify-adapter` | `notify-adapter` | Email/webhook delivery | Keep provisionally for isolation. |
-| `skagit-pipeline` | `skagit-parcels` | D1/R2 API, NL-to-SQL, geo cron | Freeze and retire after parity/traffic checks. |
-| `cloudflared` | `skagit-parcels` | Older D1 endpoint | Highest-priority deletion candidate after deployment check. |
+| `OpenSkagit/worker` | `skagit-agent-worker` | Property, GIS, Census, soils, HTTP MCP | Railway consumers are migrated; retire after Cloudflare external-traffic and route evidence. |
+| `workers/arcgis-adapter` | `arcgis-adapter` | Public unauthenticated ArcGIS proxy | Freeze; urgent retirement candidate after external-traffic verification. |
+| `workers/web-adapter` | `web-adapter` | Public unauthenticated web proxy | Freeze; retire unless measured external egress need is proven. |
+| `workers/notify-adapter` | `notify-adapter` | Public unauthenticated email/webhook delivery | Freeze; Railway has no caller; retire unless a verified external consumer exists. |
+| `skagit-pipeline` | `skagit-parcels` | D1/R2 API, NL-to-SQL, geo cron | GitHub writer is disabled after repeated failures; verify Worker cron/traffic, then export/observe/retire. |
+| `cloudflared` | `skagit-parcels` | Older D1 endpoint | Untracked local duplicate; verify deployed identity before deleting source or infrastructure. |
+
+The checked-in Wrangler configurations declare no `openskagit.com` custom route. The public domain's Cloudflare DNS/proxy to Railway is canonical infrastructure and is outside the standalone Worker retirement scope.
 
 ## Source Registry Consolidation
 

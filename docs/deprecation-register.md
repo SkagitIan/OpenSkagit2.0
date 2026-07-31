@@ -35,11 +35,11 @@ Date: 2026-07-16
 | `opportunity` | `KEEP` | Same | Maintain feature boundary |
 | `ask_agent` remote MCP bridge | `DELETE` from Railway code | Direct same-process services | Completed; verify no external legacy consumers before Worker retirement |
 | `OpenSkagit/worker` | `BRIDGE` -> `DELETE` | Railway context/GIS + unified MCP | Census/soils moved; migrate remaining consumers, cut routes, prove zero traffic |
-| `workers/arcgis-adapter` | `FREEZE` -> `DELETE` unless edge value proven | GIS/source client | Consumers, caching, CORS, rate-limit, egress evidence |
-| `workers/web-adapter` | `VERIFY` | Source client or thin proxy | Identify sources requiring Cloudflare egress |
-| `workers/notify-adapter` | `KEEP` provisionally | Notification boundary | Confirm usage; add auth, retries, ownership |
-| `skagit-pipeline` | `FREEZE` -> `DELETE` | PostGIS, assessor sync, unified tools | Parity, unique-field decision, cutover, backup, 30 zero-traffic days |
-| `cloudflared` | `VERIFY` -> `DELETE` | None | Confirm deployment; preserve unique data; remove routes |
+| `workers/arcgis-adapter` | `FREEZE` -> `DELETE` unless edge value proven | Direct canonical GIS/source client | Cloudflare traffic/routes and external consumers; public unauthenticated caller-selected upstream access makes this urgent |
+| `workers/web-adapter` | `FREEZE` -> `DELETE` unless egress need proven | Direct canonical source client | Cloudflare traffic/routes and external consumers; public unauthenticated caller-selected upstream access makes this urgent |
+| `workers/notify-adapter` | `FREEZE` -> `DELETE` unless external use proven | Railway notification services | Cloudflare traffic/routes and external consumers; current endpoint is public and unauthenticated, and Railway has no caller variable |
+| `skagit-pipeline` | `FREEZE` -> `DELETE` | PostGIS, assessor sync, unified tools | GitHub workflow is disabled after repeated failed D1 imports; still verify Worker cron/traffic, unique fields, backup, and 30 zero-traffic days |
+| `cloudflared` | `VERIFY` -> `DELETE` | None | Local directory is untracked and not a nested repository; confirm Cloudflare deployment identity, preserve unique data, remove routes |
 | Older `OpenSkagit/agent` | `MERGE` -> `ARCHIVE` -> `DELETE` | `ask_agent` + source registry | Migrate verifier/catalog; decide case-file retention |
 | `OpenSkagit/catalog` and `registry` | `MERGE` -> delete duplicates | One Railway source registry | Source-ID mapping and tests |
 | `OpenSkagit/frontend` | `VERIFY` -> `DELETE` | Railway UI | Confirm no deployed Pages site/users; preserve needed assets |
@@ -89,8 +89,13 @@ Date: 2026-07-16
 - Consumer cutover: Ask Agent's remaining parcel search, property report, GIS overlay, and layer catalog calls now use same-process services; Railway code contains no legacy Worker URL.
 - Parity/correction: P96023 returned ACS 2024 five-year results at four geography levels and one NRCS map unit. The replacement fixes the legacy Worker's missing Census key and invalid `muaggatt.farmlndcl` query.
 - Usage evidence: new canonical calls are recorded in `McpToolCall`; OAuth clients/grants already record last use.
+- Current usage baseline: the 30-day report contains only the three successful controlled OAuth smoke calls (`context_get_census`, `context_get_soils`, and `parcel_search`) and no failures. The adoption/observation window is therefore open, not complete.
 - Still open: authenticated Cloudflare traffic, route, secret-name, D1, R2, and cron export; external consumers; observation window; backups; route/binding removal; credential revocation.
 - Deletion decision: **not yet safe**. Public reachability is not proof of use or non-use.
+- Railway consumer evidence: active Railway services have no variables pointing to any legacy Worker or adapter, no legacy FastAPI agent is deployed, and canonical source retains only a read-only D1 audit URL.
+- Route boundary: source Wrangler files declare no `openskagit.com` custom route. Cloudflare still proxies the public domain to Railway; the zone/DNS proxy is a protected `KEEP`, separate from standalone Worker retirement.
+- Security evidence: the three adapter Workers respond without authentication and accept caller-selected upstream or delivery targets. Freeze immediately; retire after account traffic/route verification rather than extending them.
+- Writer evidence: the separate `SkagitIan/skagit-pipeline` GitHub workflow is disabled for inactivity. Its 2026-07-12 D1 import failed transactionally after repeated scheduled failures; Cloudflare Worker cron state remains unknown.
 
 ## Approval Record
 

@@ -51,6 +51,15 @@
       </div>
     </section>
 
+    {% if public_read.available %}
+    <section class="os-home-simple__section os-home-simple__read" aria-labelledby="open-read-title">
+      <div class="os-home-simple__container">
+        <p class="os-home-simple__section-head">The OpenSkagit Read</p>
+        <h2 id="open-read-title">A clearer view of Skagit Valley.</h2>
+        <p>{{ public_read.text }}</p>
+      </div>
+    </section>
+    {% endif %}
     <section class="os-fingerprint" aria-labelledby="fingerprint-title">
       <div class="os-home-simple__container">
         <div class="os-fingerprint__intro">

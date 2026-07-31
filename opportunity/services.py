@@ -1836,6 +1836,7 @@ def generate_sync_narrative_for_report(report_id: int, force: bool = False):
 
     summary = report.run.summary or {}
     brief_context = build_sync_brief_context(report.run)
+    recent_narratives = recent_sync_narrative_context(report)
     model = os.environ.get("OPENAI_SYNC_NARRATIVE_MODEL", os.environ.get("OPENAI_MODEL", "gpt-4.1-mini"))
     fallback = fallback_sync_narrative(summary, brief_context)
     payload = fallback | {"model": "", "generated_by_ai": False, "error": ""}
@@ -1848,7 +1849,9 @@ def generate_sync_narrative_for_report(report_id: int, force: bool = False):
 
             response = OpenAI().responses.create(
                 model=model,
-                input=build_sync_narrative_prompt(report.report_text or "", summary, brief_context),
+                input=build_sync_narrative_prompt(
+                    report.report_text or "", summary, brief_context, recent_narratives
+                ),
                 temperature=0.2,
                 max_output_tokens=1800,
             )
@@ -1892,13 +1895,52 @@ def generate_sync_narrative_for_report(report_id: int, force: bool = False):
     return narrative
 
 
+def recent_sync_narrative_context(report, limit: int = 8) -> list[dict[str, str]]:
+    """Return recent saved field notes as lightweight context for the next one."""
+    from .models import ParcelBookSyncNarrative
+
+    rows = (
+        ParcelBookSyncNarrative.objects
+        .exclude(assessor_sync_report=report)
+        .order_by("-created_at")
+        .values("headline", "dek", "narrative", "trend_line", "preview_text")[:limit]
+    )
+    return [
+        {
+            key: _clean_text(str(row.get(key) or ""))[:500]
+            for key in ("headline", "dek", "narrative", "trend_line", "preview_text")
+            if row.get(key)
+        }
+        for row in rows
+    ]
+
+
+def latest_public_home_read() -> dict[str, str | bool]:
+    """Return the latest stored sync read for the public homepage."""
+    try:
+        from .models import ParcelBookSyncNarrative
+
+        narrative = ParcelBookSyncNarrative.objects.first()
+        if not narrative:
+            return {"available": False}
+        return {
+            "available": True,
+            "headline": narrative.headline,
+            "text": narrative.preview_text or narrative.dek or narrative.narrative,
+            "updated_at": narrative.updated_at,
+        }
+    except Exception:
+        return {"available": False}
+
 def build_sync_narrative_prompt(
     report_text: str,
     summary: dict[str, Any],
     brief_context: dict[str, Any] | None = None,
+    recent_narratives: list[dict[str, str]] | None = None,
 ) -> str:
     auditor = (summary or {}).get("auditor") or {}
     brief_context = brief_context or {}
+    recent_narratives = recent_narratives or []
     return (
         "You are writing the morning OpenSkagit Parcel Book field note for Skagit County real estate investors, "
         "brokers, builders, and land watchers. Sound local, precise, and useful: more field-note analyst than "
@@ -1916,6 +1958,13 @@ def build_sync_narrative_prompt(
         f"Curated fresh-signal context JSON:\n{json.dumps(brief_context, default=str)[:14000]}\n\n"
         f"Assessor sync summary JSON:\n{json.dumps(summary, default=str)[:6000]}\n\n"
         f"Auditor sync summary JSON:\n{json.dumps(auditor, default=str)[:4000]}\n\n"
+        "Use the recent field notes to give the latest note a sense of continuity. Do not repeat their wording. "
+        "The newsletter fields may discuss the reporting window, but preview_text is homepage copy and must not contain dates, counts, "
+        "phrases like latest update/no changes/no activity, or a report-style announcement. "
+        "If there is a meaningful recurring signal, describe its direction without sounding like a bulletin. If there is not, "
+        "write a compelling evergreen statement about how OpenSkagit reads the Valley and connects small signals into context. "
+        "Make it interesting and observant without using hype or unsupported claims.\n\n"
+        f"Recent saved field notes JSON:\n{json.dumps(recent_narratives, default=str)[:9000]}\n\n"
         f"Latest admin assessor sync report:\n{report_text[:12000]}"
     )
 
@@ -2006,7 +2055,12 @@ def fallback_sync_narrative(summary: dict[str, Any], brief_context: dict[str, An
             "trend_line": "; ".join(top_groups) if top_groups else "No fresh signal cluster stood out in this window.",
             "disclaimer": SYNC_BRIEF_DISCLAIMER,
             "newsletter_subject": f"Skagit parcel field note: {headline}",
-            "preview_text": dek,
+            "preview_text": (
+                "OpenSkagit is watching the signals that accumulate across the Valley, "
+            "                from recorded documents and sales to the quieter signs of what may be taking shape."
+                if fresh_recordings or fresh_sales
+                            else "Not every local story arrives as a headline. OpenSkagit keeps watching the public record so the larger picture stays in view."
+            ),
             "generated": False,
         }
 
@@ -2040,7 +2094,7 @@ def fallback_sync_narrative(summary: dict[str, Any], brief_context: dict[str, An
         "trend_line": "",
         "disclaimer": SYNC_BRIEF_DISCLAIMER,
         "newsletter_subject": "Skagit parcel field note",
-        "preview_text": "Fresh public-record data is ready for review.",
+        "preview_text": "OpenSkagit keeps a running read on the Valley, connecting public records so the larger local picture stays in view.",
         "generated": False,
     }
 

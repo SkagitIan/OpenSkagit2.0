@@ -8,9 +8,9 @@ This file separates observed production behavior from source configuration and u
 - Authenticated MCP: `https://openskagit.com/mcp/api/`
 - Deployment owner: `OpenSkagit-railway` Django ASGI service
 - Authentication: OAuth authorization code with PKCE, approved clients, `openskagit.read`, revocable grants
-- Tool registry after this migration: 24 read-only tools
+- Tool registry after this migration: 25 read-only tools
 
-Deployment `8289dc44-519e-4410-821a-05e6264ee7a0` completed successfully. A short-lived OAuth client discovered all 24 tools and called both new context tools for P96023 without MCP errors. The client and grant were deleted immediately; secret-free telemetry retained one successful call for each tool (755 ms Census, 468 ms soils).
+The current recovery deployment `021b10ec-f20d-489b-9fc9-b663649e075d` completed successfully on the proven Nixpacks configuration. Read-only checks returned HTTP 200 for `/` and `/mcp/`, and the expected HTTP 401 for unauthenticated `/mcp/api/`. An authenticated short-lived OAuth client discovered all 25 tools, including `parcel_search`, and called the canonical parcel search without an MCP error. The client and grant were deleted immediately; secret-free telemetry retained the test calls.
 
 ## Cloudflare public probes
 
@@ -24,6 +24,8 @@ Deployment `8289dc44-519e-4410-821a-05e6264ee7a0` completed successfully. A shor
 
 The legacy Census endpoint matched the parcel to geographies but ACS requests failed because no Census API key was supplied. The legacy soils query failed because farmland classification was read from the wrong NRCS table. Both behaviors now have tested Railway replacements.
 
+Safe method probes and source inspection found that `arcgis-adapter`, `web-adapter`, and `notify-adapter` accept public unauthenticated requests. The ArcGIS and web adapters accept caller-selected upstream targets, and the notification adapter accepts caller-selected delivery targets. Current Railway services have no variables pointing to these adapters, and the old FastAPI agent that references them is not present in the deployed Railway service list. Treat all three as frozen urgent retirement candidates, but do not disable them until Cloudflare traffic/routes and external consumers are verified.
+
 ## Source-configured Cloudflare assets
 
 - Workers: `skagit-agent-worker`, `skagit-parcels`, `arcgis-adapter`, `web-adapter`, `notify-adapter`
@@ -33,6 +35,10 @@ The legacy Census endpoint matched the parcel to geographies but ACS requests fa
 - Pipeline cron: `30 11 * * *`
 
 These facts come from source configuration and do not prove which account resources or bindings remain active.
+
+None of the checked-in Wrangler files declares an `openskagit.com` custom route. The public site is separately proxied by Cloudflare to the Railway origin, as shown by Cloudflare response headers together with `X-Railway-Request-Id`. Retiring a standalone `*.workers.dev` Worker must never remove or change the `openskagit.com` DNS/proxy configuration.
+
+`OpenSkagit/skagit-pipeline` is a separate Git repository (`SkagitIan/skagit-pipeline`). Its `Weekly Parcel Ingest` GitHub Actions workflow is currently `disabled_inactivity`. The last scheduled run on 2026-07-12 generated the import successfully but failed in the remote D1 import step with `D1_RESET_DO`; Wrangler stated the failed transaction would return the database to its original state. The preceding scheduled runs also failed. This is evidence that the GitHub writer is effectively frozen, not evidence that the Worker cron or every other writer is inactive. The sibling `OpenSkagit/cloudflared` directory is untracked and is not a nested Git repository, so its local workflow file is not active from the parent repository.
 
 ## D1/PostGIS baseline
 
@@ -47,13 +53,17 @@ These facts come from source configuration and do not prove which account resour
 
 Wrangler authentication is expired (`whoami` returns HTTP 400 / not logged in). Therefore traffic analytics, deployed versions, routes, secret names, D1 counts, R2 inventory, and cron execution history remain unverified. Restore Wrangler login or provide a read-only Cloudflare token before deleting any Worker or storage asset.
 
+Railway consumer inspection is complete for the currently deployed project: the active web and job services have no legacy Worker/adapter URL variables, and no separate legacy FastAPI agent or standalone assessor/GIS/zoning MCP service appears in the service list. In canonical source, the only remaining `skagit-parcels` URL is the intentional read-only `audit_legacy_d1` default. External consumers outside Railway remain unknown until Cloudflare traffic can be exported.
+
+The production 30-day MCP usage report currently contains three successful controlled OAuth smoke calls and no failures: `context_get_census` (755 ms), `context_get_soils` (468 ms), and `parcel_search` (14 ms). No other canonical calls have been recorded yet. This proves telemetry and replacement execution, but it does not yet prove external adoption or satisfy a 30-day observation window.
+
 ## Railway hardening finding
 
 The Railway/Nixpacks build emitted Docker warnings that multiple runtime secrets were promoted into generated image-build `ARG`/`ENV` instructions, including application, R2, notification, and API credentials. No secret values were printed in the observed logs. A repository-owned Dockerfile removed those warnings but was reverted after its command/static-file boundary caused a production 502. Railway is back on the proven Nixpacks configuration. Resolve build-variable isolation as a separate staged change with a non-production verification environment, then rotate affected credentials.
 
 ## Next retirement evidence
 
-1. Export Cloudflare account inventory and 30-day traffic per route/Worker.
+1. Export Cloudflare account inventory and 30-day traffic per route/Worker without modifying the `openskagit.com` zone/proxy.
 2. Run `python manage.py report_mcp_usage --days 30` for the canonical endpoint.
 3. Identify and migrate every remaining caller of the Worker/property pipeline.
 4. Compare D1/PostGIS schema, counts, and a golden parcel sample; export D1/R2.
