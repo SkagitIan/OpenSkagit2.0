@@ -24,7 +24,8 @@ permitting, engineering, appraisal, or entitlement determinations.
 """.strip()
 
 
-def _register_tools(server: FastMCP, *, caller_class: str) -> FastMCP:
+def validate_tool_registry() -> None:
+    """Fail closed when public contracts and executable handlers diverge."""
     if set(HANDLERS) != set(TOOL_CONTRACT_BY_NAME):
         missing_handlers = sorted(set(TOOL_CONTRACT_BY_NAME) - set(HANDLERS))
         missing_contracts = sorted(set(HANDLERS) - set(TOOL_CONTRACT_BY_NAME))
@@ -32,6 +33,10 @@ def _register_tools(server: FastMCP, *, caller_class: str) -> FastMCP:
             f"Unified tool registry mismatch: missing_handlers={missing_handlers}, "
             f"missing_contracts={missing_contracts}"
         )
+
+
+def _register_tools(server: FastMCP, *, caller_class: str) -> FastMCP:
+    validate_tool_registry()
     for contract in TOOL_CONTRACTS:
         server.add_tool(
             instrument_tool(HANDLERS[contract.name], tool_name=contract.name, caller_class=caller_class),
@@ -145,6 +150,7 @@ def build_oauth_http_server(
         ),
         caller_class="mcp-http-oauth",
     )
+
 
 mcp = build_stdio_server()
 

@@ -10,6 +10,7 @@ from queue import Empty, Queue
 from typing import Any, Iterator
 
 import duckdb
+from django.conf import settings
 
 from assessor_mcp import services as assessor_services
 from context_mcp import services as context_services
@@ -114,7 +115,9 @@ def _env_enabled(name: str, default: bool = True) -> bool:
 def _live_tools_enabled() -> bool:
     if "OPENSKAGIT_ENABLE_LIVE_TOOLS" in os.environ:
         return _env_enabled("OPENSKAGIT_ENABLE_LIVE_TOOLS")
-    return _env_enabled("OPENSKAGIT_ENABLE_MCP", default=True)
+    if "OPENSKAGIT_ENABLE_MCP" in os.environ:
+        return _env_enabled("OPENSKAGIT_ENABLE_MCP")
+    return settings.OPENSKAGIT_ENVIRONMENT == "production"
 
 
 def schema_summary(db_path: Path | None = None, conn: duckdb.DuckDBPyConnection | None = None) -> str:

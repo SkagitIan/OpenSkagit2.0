@@ -1,0 +1,5 @@
+-c requirements.lock
+pip-tools==7.6.0
+ruff==0.15.22
+pip-audit==2.10.1
+detect-secrets==1.5.0

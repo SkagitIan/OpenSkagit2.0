@@ -1,0 +1,20 @@
+services:
+  postgis:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: openskagit_dev
+      POSTGRES_USER: openskagit_local
+      POSTGRES_PASSWORD: openskagit_local
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - openskagit_postgis_data:/var/lib/postgresql/data
+      - ./scripts/postgis/init-local.sql:/docker-entrypoint-initdb.d/10-init-local.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openskagit_local -d openskagit_dev"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  openskagit_postgis_data:

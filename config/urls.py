@@ -3,6 +3,7 @@ from django.urls import path, include, reverse
 from django.views.generic import RedirectView
 from django.http import HttpResponse
 from django.conf import settings
+from config.health import liveness, readiness
 from core.views import home as core_home
 from opportunity.views import staff_redirect
 from taxtool.views import tax_home, tax_parcel_og_image
@@ -11,9 +12,6 @@ from taxtool.views import tax_home, tax_parcel_og_image
 def _taxshift_site_url():
     return getattr(settings, "TAXSHIFT_SITE_URL", "https://taxshift.co").rstrip("/")
 
-
-def health(request):
-    return HttpResponse("ok")
 
 
 def root_home(request):
@@ -87,7 +85,9 @@ urlpatterns = [
     path("mCP/", RedirectView.as_view(url="/mcp/", permanent=True)),
     path("accounts/", include("django.contrib.auth.urls")),
     path("admin/", admin.site.urls),
-    path("health/", health),
+    path("health/", liveness, name="health"),
+    path("health/live/", liveness, name="health_liveness"),
+    path("health/ready/", readiness, name="health_readiness"),
 ]
 
 

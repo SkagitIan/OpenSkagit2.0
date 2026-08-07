@@ -53,8 +53,10 @@ Do not add new feature code to `core` when one of the feature apps above owns it
 
 ## Deployment Rules
 
-- Railway web deploy starts from `railway.json` or `Procfile`.
-- The web process must run migrations and collect static before Gunicorn starts.
+- `docs/PROD_MCP_PLAN.md` is authoritative for the production MCP release lifecycle.
+- `railway.json` is the canonical web manifest and must keep the public MCP on the Django ASGI/Uvicorn application.
+- `Procfile` is compatibility-only and must not be used as the production MCP web lifecycle because its WSGI process does not serve `/mcp/api/`.
+- Migrations and other one-time release work must move out of normal web startup under Phase 1 of the production plan. Until that change passes the release-candidate gate, preserve the currently deployed lifecycle rather than changing production startup without evidence.
 - The assessor sync cron service uses `railway.assessor-sync.json` and runs `python manage.py sync_assessor_data`.
 - Static files must work after `python manage.py collectstatic --noinput`.
 - The local app must boot with `python manage.py runserver`.

@@ -46,3 +46,6 @@ data/skagit_tax_load.py
 7422a400-f244-47c2-a473-52b7e6e0df45.png
 OpenSkagit civic data platform branding - Claude.html
 TASKS.md
+
+.env.local
+.cache/

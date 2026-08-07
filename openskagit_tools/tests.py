@@ -12,6 +12,7 @@ import httpx
 
 django.setup()
 
+from django.conf import settings
 from django.test import SimpleTestCase
 
 from openskagit_tools.auth import READ_SCOPE, StaticBearerTokenVerifier
@@ -296,7 +297,7 @@ class PublicMcpCatalogTests(SimpleTestCase):
         response = self.client.get("/mcp/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "https://openskagit.com/mcp/api/")
+        self.assertContains(response, settings.OPENSKAGIT_MCP_CONNECTOR_URL)
         self.assertContains(response, f"{len(TOOL_CONTRACTS)} read-only tools")
         self.assertContains(response, "parcel_get_summary")
 

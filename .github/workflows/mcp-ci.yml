@@ -1,0 +1,99 @@
+name: MCP CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - railway-django-scratch
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mcp-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    services:
+      postgis:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: openskagit_test
+          POSTGRES_USER: openskagit_ci
+          POSTGRES_PASSWORD: openskagit_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U openskagit_ci -d openskagit_test"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 30
+
+    env:
+      OPENSKAGIT_ENVIRONMENT: test
+      OPENSKAGIT_TEST_DATABASE_URL: postgresql://openskagit_ci:openskagit_ci@127.0.0.1:5432/openskagit_test
+      OPENSKAGIT_LOCAL_SECRET_KEY: ci-only-not-a-production-secret
+      OPENSKAGIT_LOCAL_PUBLIC_ORIGIN: http://127.0.0.1:8000
+      OPENSKAGIT_ENABLE_LIVE_TOOLS: "false"
+      BUDGET_PDF_STORAGE: local
+      EMAIL_BACKEND: django.core.mail.backends.locmem.EmailBackend
+      RESEND_API_KEY: ""
+      SENTRY_DSN: ""
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+
+      - name: Install native geospatial libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes gdal-bin libgdal-dev libgeos-dev libproj-dev
+
+      - name: Install pinned dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --requirement requirements.lock --requirement requirements-dev.lock
+          python -m pip check
+
+      - name: Lint Phase 1 control plane
+        run: |
+          python -m ruff check \
+            config \
+            openskagit_tools \
+            ask_agent/agent.py \
+            scripts/verify-secret-scan.py
+
+      - name: Scan MCP source and release configuration for secrets
+        run: python scripts/verify-secret-scan.py
+
+      - name: Audit the pinned runtime lock
+        run: python -m pip_audit --requirement requirements.lock --no-deps --progress-spinner off
+
+      - name: Bootstrap disposable PostGIS and apply migrations
+        run: |
+          python manage.py bootstrap_mcp_source_schema --with-sample
+          python manage.py migrate --noinput
+          python manage.py migrate --check
+          python manage.py check
+
+      - name: Run authenticated ASGI MCP smoke
+        run: python manage.py smoke_mcp_protocol
+
+      - name: Run Django tests on disposable PostGIS
+        run: python manage.py test --keepdb
+
+      - name: Build production-equivalent static and bytecode artifacts
+        run: |
+          python manage.py collectstatic --noinput
+          python -m compileall -q config openskagit_tools ask_agent manage.py
