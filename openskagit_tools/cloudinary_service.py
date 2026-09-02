@@ -36,7 +36,9 @@ class CloudinaryConfig:
     def from_environment(cls) -> "CloudinaryConfig":
         cloud_name = os.environ.get("CLOUDINARY_CLOUD_NAME", "").strip()
         api_key = os.environ.get("CLOUDINARY_API_KEY", "").strip() or os.environ.get("CLOUDINARY_API", "").strip()
-        api_secret = os.environ.get("CLOUDINARY_API_SECRET", "").strip() or os.environ.get("CLOUDINARY_SECRET", "").strip()
+        api_secret = (
+            os.environ.get("CLOUDINARY_API_SECRET", "").strip() or os.environ.get("CLOUDINARY_SECRET", "").strip()
+        )
         cloudinary_url = os.environ.get("CLOUDINARY_URL", "").strip()
         if cloudinary_url:
             parsed = urlparse(cloudinary_url)
@@ -45,7 +47,11 @@ class CloudinaryConfig:
             api_secret = api_secret or (parsed.password or "")
             if not cloud_name and parse_qs(parsed.query).get("cloud_name"):
                 cloud_name = parse_qs(parsed.query)["cloud_name"][0]
-        missing = [name for name, value in (("cloud name", cloud_name), ("API key", api_key), ("API secret", api_secret)) if not value]
+        missing = [
+            name
+            for name, value in (("cloud name", cloud_name), ("API key", api_key), ("API secret", api_secret))
+            if not value
+        ]
         if missing:
             raise CloudinaryError("Cloudinary configuration is missing: " + ", ".join(missing) + ".")
         return cls(cloud_name, api_key, api_secret)
@@ -57,7 +63,12 @@ def _signature(params: dict[str, str], secret: str) -> str:
 
 
 def _public_id(asset_type: str, digest: str, source_ids: list[str]) -> str:
-    folder = {"map": "maps", "property_card": "property_cards", "comparison": "comparisons", "infographic": "infographics"}.get(asset_type, "other")
+    folder = {
+        "map": "maps",
+        "property_card": "property_cards",
+        "comparison": "comparisons",
+        "infographic": "infographics",
+    }.get(asset_type, "other")
     subject = source_ids[0] if source_ids else "direct"
     return f"openskagit/visuals/{folder}/{subject}/{asset_type}_{digest}"
 
@@ -91,7 +102,15 @@ def get_asset_metadata(public_id: str) -> dict:
     return response.json()
 
 
-def upload_generated_asset(content: bytes, *, asset_type: str, digest: str, source_property_ids: list[str], metadata: dict[str, str], content_type: str = "image/svg+xml") -> dict:
+def upload_generated_asset(
+    content: bytes,
+    *,
+    asset_type: str,
+    digest: str,
+    source_property_ids: list[str],
+    metadata: dict[str, str],
+    content_type: str = "image/svg+xml",
+) -> dict:
     config = CloudinaryConfig.from_environment()
     public_id = _public_id(asset_type, digest, source_property_ids)
     existing = get_asset_metadata(public_id)
@@ -99,24 +118,51 @@ def upload_generated_asset(content: bytes, *, asset_type: str, digest: str, sour
         logger.info("cloudinary_asset_cache_hit", extra={"asset_type": asset_type, "public_id": public_id})
         secure_url = existing.get("secure_url") or _delivery_url(config, public_id)
         width, height = existing.get("width"), existing.get("height")
-        return {"cloudinary_public_id": public_id, "secure_url": secure_url, "source_url": secure_url, "width": width, "height": height, "cached": True}
+        return {
+            "cloudinary_public_id": public_id,
+            "secure_url": secure_url,
+            "source_url": secure_url,
+            "width": width,
+            "height": height,
+            "cached": True,
+        }
 
     timestamp = str(int(time.time()))
     sign_params = {"public_id": public_id, "timestamp": timestamp, "type": "upload"}
     signature = _signature(sign_params, config.api_secret)
     upload_url = f"https://api.cloudinary.com/v1_1/{config.cloud_name}/image/upload"
-    data = {**sign_params, "api_key": config.api_key, "signature": signature, "context": "|".join(f"{key}={value}" for key, value in sorted(metadata.items()))}
+    data = {
+        **sign_params,
+        "api_key": config.api_key,
+        "signature": signature,
+        "context": "|".join(f"{key}={value}" for key, value in sorted(metadata.items())),
+    }
     try:
-        response = requests.post(upload_url, data=data, files={"file": (f"{public_id.rsplit('/', 1)[-1]}.svg", content, content_type)}, timeout=30)
+        response = requests.post(
+            upload_url,
+            data=data,
+            files={"file": (f"{public_id.rsplit('/', 1)[-1]}.svg", content, content_type)},
+            timeout=30,
+        )
     except requests.RequestException as exc:
         logger.exception("cloudinary_asset_upload_failed", extra={"asset_type": asset_type, "public_id": public_id})
         raise CloudinaryError("Cloudinary upload failed due to a network error.") from exc
     if response.status_code >= 400:
-        logger.error("cloudinary_asset_upload_failed", extra={"asset_type": asset_type, "public_id": public_id, "status_code": response.status_code})
+        logger.error(
+            "cloudinary_asset_upload_failed",
+            extra={"asset_type": asset_type, "public_id": public_id, "status_code": response.status_code},
+        )
         raise CloudinaryError(f"Cloudinary upload failed with HTTP {response.status_code}.")
     result = response.json()
     logger.info("cloudinary_asset_uploaded", extra={"asset_type": asset_type, "public_id": public_id})
-    return {"cloudinary_public_id": public_id, "secure_url": result.get("secure_url") or _delivery_url(config, public_id), "source_url": result.get("secure_url"), "width": result.get("width"), "height": result.get("height"), "cached": False}
+    return {
+        "cloudinary_public_id": public_id,
+        "secure_url": result.get("secure_url") or _delivery_url(config, public_id),
+        "source_url": result.get("secure_url"),
+        "width": result.get("width"),
+        "height": result.get("height"),
+        "cached": False,
+    }
 
 
 def delete_asset(public_id: str) -> None:
@@ -125,7 +171,11 @@ def delete_asset(public_id: str) -> None:
     signature = _signature({"public_id": public_id, "timestamp": timestamp}, config.api_secret)
     url = f"https://api.cloudinary.com/v1_1/{config.cloud_name}/image/destroy"
     try:
-        response = requests.post(url, data={"public_id": public_id, "timestamp": timestamp, "api_key": config.api_key, "signature": signature}, timeout=15)
+        response = requests.post(
+            url,
+            data={"public_id": public_id, "timestamp": timestamp, "api_key": config.api_key, "signature": signature},
+            timeout=15,
+        )
     except requests.RequestException as exc:
         raise CloudinaryError("Cloudinary delete failed due to a network error.") from exc
     if response.status_code >= 400:

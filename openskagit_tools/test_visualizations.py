@@ -10,10 +10,19 @@ from .visualizations import ASPECTS, generate_infographic
 class VisualizationValidationTests(SimpleTestCase):
     def test_all_aspects_have_consistent_dimensions(self):
         for aspect, (width, height) in ASPECTS.items():
-            with patch("openskagit_tools.visualizations.default_storage.exists", return_value=True), patch(
-                "openskagit_tools.visualizations.default_storage.url", return_value="/media/example.svg"
-            ), patch("openskagit_tools.visualizations.upload_generated_asset", return_value={"cloudinary_public_id": "p", "secure_url": "https://example.test/p", "source_url": "https://example.test/p", "cached": False}), patch(
-                "openskagit_tools.visualizations.transformed_url", return_value="https://example.test/p.png"
+            with (
+                patch("openskagit_tools.visualizations.default_storage.exists", return_value=True),
+                patch("openskagit_tools.visualizations.default_storage.url", return_value="/media/example.svg"),
+                patch(
+                    "openskagit_tools.visualizations.upload_generated_asset",
+                    return_value={
+                        "cloudinary_public_id": "p",
+                        "secure_url": "https://example.test/p",
+                        "source_url": "https://example.test/p",
+                        "cached": False,
+                    },
+                ),
+                patch("openskagit_tools.visualizations.transformed_url", return_value="https://example.test/p.png"),
             ):
                 result = generate_infographic("big_number", "Observed difference", [48000], aspect_ratio=aspect)
             self.assertEqual((result["width"], result["height"]), (width, height))
@@ -28,11 +37,27 @@ class VisualizationValidationTests(SimpleTestCase):
             generate_infographic("scatter", "Values", [1])
 
     def test_infographic_preserves_provenance_metadata(self):
-        with patch("openskagit_tools.visualizations.default_storage.exists", return_value=True), patch(
-            "openskagit_tools.visualizations.default_storage.url", return_value="/media/example.svg"
-        ), patch("openskagit_tools.visualizations.upload_generated_asset", return_value={"cloudinary_public_id": "p", "secure_url": "https://example.test/p", "source_url": "https://example.test/p", "cached": False}), patch(
-            "openskagit_tools.visualizations.transformed_url", return_value="https://example.test/p.png"
+        with (
+            patch("openskagit_tools.visualizations.default_storage.exists", return_value=True),
+            patch("openskagit_tools.visualizations.default_storage.url", return_value="/media/example.svg"),
+            patch(
+                "openskagit_tools.visualizations.upload_generated_asset",
+                return_value={
+                    "cloudinary_public_id": "p",
+                    "secure_url": "https://example.test/p",
+                    "source_url": "https://example.test/p",
+                    "cached": False,
+                },
+            ),
+            patch("openskagit_tools.visualizations.transformed_url", return_value="https://example.test/p.png"),
         ):
-            result = generate_infographic("value_breakdown", "Value", [1, 2], ["Land", "House"], property_ids=["P123"], source_references=["assessed_value"])
+            result = generate_infographic(
+                "value_breakdown",
+                "Value",
+                [1, 2],
+                ["Land", "House"],
+                property_ids=["P123"],
+                source_references=["assessed_value"],
+            )
         self.assertEqual(result["source_property_ids"], ["P123"])
         self.assertEqual(result["fields_used"], ["assessed_value"])
