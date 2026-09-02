@@ -52,6 +52,10 @@ TOOL_CONTRACTS = (
     _contract("budget_get_trend", "budget", "Get a multi-year reviewed budget trend for one jurisdiction.", "local_budget_documents"),
     _contract("budget_compare_jurisdictions", "budget", "Compare reviewed totals across up to twelve jurisdictions.", "local_budget_documents"),
     _contract("budget_search_documents", "budget", "Search official budget PDF text with page-numbered evidence.", "local_budget_documents"),
+    _contract("generate_map", "visual", "Generate a static editorial map using available property and geographic data.", "openskagit_postgis", "skagit_county_gis"),
+    _contract("generate_property_card", "visual", "Generate a polished property summary graphic from authoritative parcel data.", "openskagit_postgis"),
+    _contract("generate_comparison", "visual", "Generate a visual comparison of two to four properties and selected fields.", "openskagit_postgis"),
+    _contract("generate_infographic", "visual", "Generate a simple, data-faithful infographic from supplied or property-backed values.", "openskagit_postgis"),
 )
 
 TOOL_CONTRACT_BY_NAME = {contract.name: contract for contract in TOOL_CONTRACTS}

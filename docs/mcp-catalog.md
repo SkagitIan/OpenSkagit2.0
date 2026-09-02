@@ -363,6 +363,17 @@ Budget tools expose only reviewed, published documents and normalized line items
 - `budget_compare_jurisdictions`
 - `budget_search_documents`
 
+## Property Visualization Tools
+
+The unified MCP also provides deterministic SVG assets for downstream editorial or video workflows:
+
+- `generate_map`
+- `generate_property_card`
+- `generate_comparison`
+- `generate_infographic`
+
+See [mcp-visual-tools.md](mcp-visual-tools.md) for inputs, modes, aspect ratios, response metadata, and examples.
+
 Use the current reviewed adopted or amended document by default. Always identify fiscal year and document status. Use page-numbered document search for narrative claims; do not describe revenue less expenditure as a surplus unless the official source does.
 
 ## Agent Decision Rules

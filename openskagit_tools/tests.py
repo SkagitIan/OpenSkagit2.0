@@ -44,7 +44,7 @@ class UnifiedToolContractTests(SimpleTestCase):
         self.assertEqual(set(TOOL_CONTRACT_BY_NAME), set(HANDLERS))
         self.assertTrue(all(contract.read_only for contract in TOOL_CONTRACTS))
         self.assertTrue(all(contract.contract_version == CONTRACT_VERSION for contract in TOOL_CONTRACTS))
-        self.assertEqual({contract.domain for contract in TOOL_CONTRACTS}, {"parcel", "gis", "context", "zoning", "budget"})
+        self.assertEqual({contract.domain for contract in TOOL_CONTRACTS}, {"parcel", "gis", "context", "zoning", "budget", "visual"})
 
     def test_fastmcp_publishes_exactly_the_contract_registry(self):
         tools = asyncio.run(mcp.list_tools())
