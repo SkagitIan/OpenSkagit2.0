@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import logging
 import re
 from datetime import datetime, timezone
 from typing import Any
@@ -12,6 +13,10 @@ from typing import Any
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.db import connection
+
+from .cloudinary_service import CloudinaryError, upload_generated_asset, transformed_url
+
+logger = logging.getLogger(__name__)
 
 ASPECTS = {"16:9": (1920, 1080), "9:16": (1080, 1920), "4:5": (1080, 1350), "1:1": (1080, 1080)}
 MAP_MODES = {"subject", "neighborhood", "comparables", "sales", "land", "aerial", "context"}
@@ -71,6 +76,10 @@ def _property_rows(row: dict[str, Any]) -> list[tuple[str, str, str]]:
     return [(label, _fmt(row.get(field), field), field) for label, field in fields if row.get(field) not in (None, "", [])]
 
 
+def _source_snapshot(value: Any) -> str:
+    return hashlib.sha256(json.dumps(value, sort_keys=True, default=str).encode("utf-8")).hexdigest()
+
+
 def _query_properties(ids: list[str]) -> tuple[list[dict[str, Any]], list[str]]:
     if not ids:
         return [], []
@@ -100,7 +109,20 @@ def _store(tool: str, payload: dict[str, Any], svg: str, width: int, height: int
     relative = f"visual_assets/{tool}_{digest}_{width}x{height}.svg"
     if not default_storage.exists(relative):
         default_storage.save(relative, ContentFile(svg.encode("utf-8")))
-    return {"success": True, "tool_name": tool, "asset_id": f"visual_{digest}", "asset_url": default_storage.url(relative), "asset_type": tool.removeprefix("generate_"), "format": "svg", "width": width, "height": height, "aspect_ratio": next((key for key, size in ASPECTS.items() if size == (width, height)), None), "generated_timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"), "source_property_ids": source_ids, "source_dataset": "openskagit_postgis", "fields_used": payload.get("fields_used", []), "warnings": warnings, "summary": payload.get("summary", "Generated editorial visual asset."), "storage_reference": relative}
+    asset_type = tool.removeprefix("generate_"); aspect_ratio = next((key for key, size in ASPECTS.items() if size == (width, height)), None)
+    result = {"success": True, "tool_name": tool, "asset_id": f"visual_{digest}", "asset_url": default_storage.url(relative), "asset_type": asset_type, "format": "svg", "width": width, "height": height, "aspect_ratio": aspect_ratio, "generated_timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"), "source_property_ids": source_ids, "source_dataset": "openskagit_postgis", "fields_used": payload.get("fields_used", []), "warnings": list(warnings), "summary": payload.get("summary", "Generated editorial visual asset."), "storage_reference": relative, "visual_style_version": STYLE_VERSION, "source_hash": digest}
+    metadata = {"asset_type": asset_type, "source_property_ids": ",".join(source_ids), "aspect_ratio": aspect_ratio or "", "width": str(width), "height": str(height), "visual_style_version": STYLE_VERSION, "source_hash": digest}
+    try:
+        cloud = upload_generated_asset(svg.encode("utf-8"), asset_type=asset_type, digest=digest, source_property_ids=source_ids, metadata=metadata)
+        result.update({"cloudinary_public_id": cloud["cloudinary_public_id"], "secure_url": cloud["secure_url"], "source_url": cloud.get("source_url"), "svg_url": cloud["secure_url"], "cached": cloud["cached"]})
+        preset = {"16:9": "youtube_landscape", "9:16": "vertical_video", "4:5": "instagram_portrait", "1:1": "square_social"}[aspect_ratio]
+        result["png_url"] = transformed_url(cloud["cloudinary_public_id"], preset, fmt="png")
+    except CloudinaryError as exc:
+        result["success"] = False
+        result["cloudinary_error"] = str(exc)
+        result["warnings"].append("Local visual was generated, but Cloudinary storage failed.")
+    logger.info("visual_asset_generated", extra={"asset_type": asset_type, "asset_id": result["asset_id"], "cached": result.get("cached", False), "cloudinary_public_id": result.get("cloudinary_public_id")})
+    return result
 
 
 def generate_property_card(property_id: str, mode: str = "subject", aspect_ratio: str = "16:9", title: str = "", subtitle: str = "", highlight_fields: list[str] | None = None, requested_fields: list[str] | None = None) -> dict[str, Any]:
@@ -143,7 +165,7 @@ def generate_comparison(subject_property_id: str, comparison_property_ids: list[
             value = next((v for _, v, f in _property_rows(row) if f == field), "Unavailable"); y = 425+n*82
             if highlight_fields and field in highlight_fields: body += f'<rect x="{x+12}" y="{y-30}" width="{colw-40}" height="65" rx="8" fill="{COLORS["gold"]}" opacity=".5"/>'
             body += _text(x+22, y, field.replace("_", " ").upper(), 14, fill=COLORS["muted"], weight="700") + _text(x+22, y+28, value, 24, weight="700")
-    payload = {"fields_used": fields, "summary": f"Comparison of {len(ordered)} properties.", "ids": [r["parcel_number"] for r in ordered]}
+    payload = {"fields_used": fields, "summary": f"Comparison of {len(ordered)} properties.", "ids": [r["parcel_number"] for r in ordered], "source_snapshot": _source_snapshot(ordered)}
     return _store("generate_comparison", payload, _svg(width, height, title, body), width, height, payload["ids"], warnings)
 
 
@@ -188,5 +210,5 @@ def generate_map(property_ids: list[str] | None = None, subject_property_id: str
     minx,maxx=min((p[0] for p in points),default=longitude or 0),max((p[0] for p in points),default=longitude or 0); miny,maxy=min((p[1] for p in points),default=latitude or 0),max((p[1] for p in points),default=latitude or 0); dx=max(maxx-minx,.01); dy=max(maxy-miny,.01)
     for idx,(x,y,pid) in enumerate(points): px=120+(x-minx)/dx*(width-240); py=320+(maxy-y)/dy*(height-500); selected=pid in (highlighted_properties or []) or pid==(subject["parcel_number"] if subject else ""); body += f'<circle cx="{px:.1f}" cy="{py:.1f}" r="{22 if selected else 14}" fill="{COLORS["accent"] if selected else COLORS["blue"]}" stroke="white" stroke-width="5"/>'+_text(px+28,py+8,"SUBJECT" if selected and subject and pid==subject["parcel_number"] else str(idx+1),18,weight="700")
     if annotation: body += _text(72,height-45,annotation,19,fill=COLORS["muted"])
-    payload={"fields_used":["longitude","latitude"],"summary":f"{mode.title()} map with {len(points)} located properties.","ids":[p[2] for p in points],"mode":mode}
+    payload={"fields_used":["longitude","latitude"],"summary":f"{mode.title()} map with {len(points)} located properties.","ids":[p[2] for p in points],"mode":mode,"source_snapshot":_source_snapshot(points)}
     return _store("generate_map",payload,_svg(width,height,title,body),width,height,payload["ids"],warnings)

@@ -205,20 +205,31 @@ def budget_search_documents(jurisdiction: str, query: str, year: int | None = No
     )
 
 
+def _visual_result(tool_name: str, function: Callable[..., dict[str, Any]], *args: Any) -> dict[str, Any]:
+    try:
+        data = function(*args)
+    except ValueError as exc:
+        return _result(tool_name, {}, errors=[{"code": "visual_generation_failed", "message": str(exc)}])
+    errors = []
+    if not data.get("success", True):
+        errors.append({"code": "cloudinary_upload_failed", "message": data.get("cloudinary_error", "Cloudinary storage failed.")})
+    return _result(tool_name, data, warnings=data.get("warnings", []), errors=errors)
+
+
 def generate_map(property_ids: list[str] | None = None, subject_property_id: str | None = None, latitude: float | None = None, longitude: float | None = None, mode: str = "subject", aspect_ratio: str = "16:9", title: str = "Property map", subtitle: str = "", highlighted_properties: list[str] | None = None, annotation: str = "") -> dict[str, Any]:
-    return _result("generate_map", visualizations.generate_map(property_ids, subject_property_id, latitude, longitude, mode, aspect_ratio, title, subtitle, highlighted_properties, annotation))
+    return _visual_result("generate_map", visualizations.generate_map, property_ids, subject_property_id, latitude, longitude, mode, aspect_ratio, title, subtitle, highlighted_properties, annotation)
 
 
 def generate_property_card(property_id: str, mode: str = "subject", aspect_ratio: str = "16:9", title: str = "", subtitle: str = "", highlight_fields: list[str] | None = None, requested_fields: list[str] | None = None) -> dict[str, Any]:
-    return _result("generate_property_card", visualizations.generate_property_card(property_id, mode, aspect_ratio, title, subtitle, highlight_fields, requested_fields))
+    return _visual_result("generate_property_card", visualizations.generate_property_card, property_id, mode, aspect_ratio, title, subtitle, highlight_fields, requested_fields)
 
 
 def generate_comparison(subject_property_id: str, comparison_property_ids: list[str], requested_fields: list[str] | None = None, aspect_ratio: str = "16:9", title: str = "Property comparison", subtitle: str = "", highlight_fields: list[str] | None = None, custom_labels: list[str] | None = None) -> dict[str, Any]:
-    return _result("generate_comparison", visualizations.generate_comparison(subject_property_id, comparison_property_ids, requested_fields, aspect_ratio, title, subtitle, highlight_fields, custom_labels))
+    return _visual_result("generate_comparison", visualizations.generate_comparison, subject_property_id, comparison_property_ids, requested_fields, aspect_ratio, title, subtitle, highlight_fields, custom_labels)
 
 
 def generate_infographic(infographic_type: str, title: str, values: list[Any] | None = None, labels: list[str] | None = None, subtitle: str = "", units: str = "", aspect_ratio: str = "16:9", highlighted_items: list[str] | None = None, annotation: str = "", property_ids: list[str] | None = None, source_references: list[str] | None = None) -> dict[str, Any]:
-    return _result("generate_infographic", visualizations.generate_infographic(infographic_type, title, values, labels, subtitle, units, aspect_ratio, highlighted_items, annotation, property_ids, source_references))
+    return _visual_result("generate_infographic", visualizations.generate_infographic, infographic_type, title, values, labels, subtitle, units, aspect_ratio, highlighted_items, annotation, property_ids, source_references)
 
 HANDLERS: dict[str, Callable[..., dict[str, Any]]] = {
     name: value

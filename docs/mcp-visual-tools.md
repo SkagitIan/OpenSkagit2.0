@@ -1,8 +1,10 @@
 # Property visualization MCP tools
 
-The unified OpenSkagit MCP exposes four read-only tools for producing deterministic, SVG-first editorial assets. They return the normal MCP envelope; the asset metadata is in `data` and includes `asset_id`, `asset_url`, `format`, dimensions, `aspect_ratio`, `source_property_ids`, `fields_used`, warnings, and a human-readable summary.
+The unified OpenSkagit MCP exposes four read-only tools for producing deterministic, SVG-first editorial assets. OpenSkagit creates the visual and Cloudinary provides durable storage, delivery, and derivatives. They return the normal MCP envelope; the asset metadata is in `data` and includes `asset_id`, `cloudinary_public_id`, `secure_url`, `svg_url`, `png_url`, `format`, dimensions, `aspect_ratio`, `source_property_ids`, `fields_used`, `cached`, warnings, and a human-readable summary.
 
-All tools support `16:9` (1920x1080), `9:16` (1080x1920), `4:5` (1080x1350), and `1:1` (1080x1080). Assets are stored through Django's configured default media storage and can be consumed by a later renderer. The same normalized input and source IDs produce the same asset filename and are reused when present.
+All tools support `16:9` (1920x1080), `9:16` (1080x1920), `4:5` (1080x1350), and `1:1` (1080x1080). A local SVG remains available as a fallback; configured Cloudinary storage is attempted automatically. The same normalized input, source IDs, and `visual_style_version` produce the same local hash and Cloudinary public ID and are reused when present.
+
+Cloudinary uses `openskagit/visuals/{maps|property_cards|comparisons|infographics}/{subject-or-direct}/{asset_type}_{hash}`. Required deployment settings are `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`; the existing `CLOUDINARY_API` and `CLOUDINARY_SECRET` aliases are also supported, as is a standard `CLOUDINARY_URL`. Secrets are never returned or logged. Delivery presets are `youtube_landscape`, `vertical_video`, `instagram_portrait`, `square_social`, and `thumbnail`; PNG URLs use `c_pad` plus automatic quality/format delivery so layouts are not destructively cropped. Property-backed map/comparison identities include a concise source-data snapshot hash, so changed source rows produce a new asset identity.
 
 `generate_map` accepts `subject_property_id`, `property_ids`, optional `latitude`/`longitude`, `mode`, titles, and highlighted properties. Modes are `subject`, `neighborhood`, `comparables`, `sales`, `land`, `aerial`, and `context`. Property IDs are resolved from active PostGIS/GIS parcel data; missing optional locations become warnings, while an unlocatable subject is an error. The current renderer is a clean editorial schematic map using authoritative parcel coordinates and does not scrape map tiles or aerial imagery.
 
@@ -31,3 +33,5 @@ Example calls:
 ```
 
 The response's outer `errors` array follows the standard OpenSkagit contract. Partial data is represented by a successful asset plus `warnings`; no unavailable property fact is guessed.
+
+If Cloudinary is unavailable, the visual service preserves the local SVG and returns `success: false` in the asset metadata plus an outer `cloudinary_upload_failed` error. Missing or invalid property/input data uses `visual_generation_failed`. Unit tests mock Cloudinary HTTP calls; manual integration checks should only be run with explicit deployment credentials.
