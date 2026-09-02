@@ -8,6 +8,8 @@ from gis_mcp import services as gis_services
 from zoning_mcp import services as zoning_services
 from budgets import services as budget_services
 from . import visualizations
+from . import narration
+from .cloudinary_service import CloudinaryError
 
 from .contracts import result_envelope
 from .registry import get_tool_contract
@@ -225,6 +227,18 @@ def _visual_result(tool_name: str, function: Callable[..., dict[str, Any]], *arg
     return _result(tool_name, data, warnings=data.get("warnings", []), errors=errors)
 
 
+def _narration_result(*args: Any) -> dict[str, Any]:
+    try:
+        data = narration.generate_narration(*args)
+    except ValueError as exc:
+        return _result("generate_narration", {}, errors=[{"code": "narration_input_invalid", "message": str(exc)}])
+    except narration.NarrationError as exc:
+        return _result("generate_narration", {}, errors=[{"code": "narration_generation_failed", "message": str(exc)}])
+    except CloudinaryError as exc:
+        return _result("generate_narration", {}, errors=[{"code": "cloudinary_upload_failed", "message": str(exc)}])
+    return _result("generate_narration", data, warnings=data.get("warnings", []))
+
+
 def generate_map(
     property_ids: list[str] | None = None,
     subject_property_id: str | None = None,
@@ -327,6 +341,19 @@ def generate_infographic(
         property_ids,
         source_references,
     )
+
+
+def generate_narration(
+    text: str,
+    voice_id: str | None = None,
+    voice: str | None = None,
+    style: str = "explainer",
+    output_format: str = "mp3_44100_128",
+    model: str = "eleven_multilingual_v2",
+    title: str = "",
+    force_regenerate: bool = False,
+) -> dict[str, Any]:
+    return _narration_result(text, voice_id, voice, style, output_format, model, title, force_regenerate)
 
 
 HANDLERS: dict[str, Callable[..., dict[str, Any]]] = {

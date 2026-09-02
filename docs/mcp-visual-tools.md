@@ -35,3 +35,9 @@ Example calls:
 The response's outer `errors` array follows the standard OpenSkagit contract. Partial data is represented by a successful asset plus `warnings`; no unavailable property fact is guessed.
 
 If Cloudinary is unavailable, the visual service preserves the local SVG and returns `success: false` in the asset metadata plus an outer `cloudinary_upload_failed` error. Missing or invalid property/input data uses `visual_generation_failed`. Unit tests mock Cloudinary HTTP calls; manual integration checks should only be run with explicit deployment credentials.
+
+`generate_narration` sends `output_format` as the documented ElevenLabs query parameter. It currently accepts scripts up to the configured limit as one request; automatic multi-request audio stitching is reserved for a future extension.
+
+## Narration
+
+`generate_narration` accepts approved `text` plus optional `voice_id`, friendly `voice` profile, `style` (`explainer`), `output_format`, `model`, `title`, and `force_regenerate`. It calls ElevenLabs' timestamped speech endpoint, preserves raw character alignment, and returns derived `word_timings` and sentence `segments` without rewriting the original script. The default model is `eleven_multilingual_v2`; the default output is `mp3_44100_128`. Configure `ELEVEN_LABS_API_KEY` and a voice through `ELEVEN_LABS_DEFAULT_VOICE_ID` (or `ELEVEN_LABS_EXPLAINER_VOICE_ID`). Audio is uploaded through the existing Cloudinary service as a `video` resource type under `openskagit/visuals/narration/{direct}/{asset_type}_{hash}`. The response includes `audio_url`, duration, voice/model/style metadata, cache status, alignment, provenance, and safe error categories. Text over the configured limit returns a validation error; automatic chunking is reserved for a future extension, so callers should currently submit scripts within the configured limit.

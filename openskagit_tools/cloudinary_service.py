@@ -68,14 +68,17 @@ def _public_id(asset_type: str, digest: str, source_ids: list[str]) -> str:
         "property_card": "property_cards",
         "comparison": "comparisons",
         "infographic": "infographics",
+        "narration": "narration",
     }.get(asset_type, "other")
     subject = source_ids[0] if source_ids else "direct"
     return f"openskagit/visuals/{folder}/{subject}/{asset_type}_{digest}"
 
 
-def _delivery_url(config: CloudinaryConfig, public_id: str, transformation: str = "") -> str:
+def _delivery_url(
+    config: CloudinaryConfig, public_id: str, transformation: str = "", resource_type: str = "image"
+) -> str:
     transform = f"{transformation}/" if transformation else ""
-    return f"https://res.cloudinary.com/{config.cloud_name}/image/upload/{transform}{public_id}"
+    return f"https://res.cloudinary.com/{config.cloud_name}/{resource_type}/upload/{transform}{public_id}"
 
 
 def transformed_url(public_id: str, preset: str, *, fmt: str = "auto") -> str:
@@ -88,9 +91,9 @@ def transformed_url(public_id: str, preset: str, *, fmt: str = "auto") -> str:
     return _delivery_url(config, public_id, transformation)
 
 
-def get_asset_metadata(public_id: str) -> dict:
+def get_asset_metadata(public_id: str, *, resource_type: str = "image") -> dict:
     config = CloudinaryConfig.from_environment()
-    url = f"https://api.cloudinary.com/v1_1/{config.cloud_name}/resources/image/upload/{public_id}"
+    url = f"https://api.cloudinary.com/v1_1/{config.cloud_name}/resources/{resource_type}/upload/{public_id}"
     try:
         response = requests.get(url, auth=(config.api_key, config.api_secret), timeout=15)
     except requests.RequestException as exc:
@@ -110,13 +113,14 @@ def upload_generated_asset(
     source_property_ids: list[str],
     metadata: dict[str, str],
     content_type: str = "image/svg+xml",
+    resource_type: str = "image",
 ) -> dict:
     config = CloudinaryConfig.from_environment()
     public_id = _public_id(asset_type, digest, source_property_ids)
-    existing = get_asset_metadata(public_id)
+    existing = get_asset_metadata(public_id, resource_type=resource_type)
     if existing:
         logger.info("cloudinary_asset_cache_hit", extra={"asset_type": asset_type, "public_id": public_id})
-        secure_url = existing.get("secure_url") or _delivery_url(config, public_id)
+        secure_url = existing.get("secure_url") or _delivery_url(config, public_id, resource_type=resource_type)
         width, height = existing.get("width"), existing.get("height")
         return {
             "cloudinary_public_id": public_id,
@@ -124,13 +128,16 @@ def upload_generated_asset(
             "source_url": secure_url,
             "width": width,
             "height": height,
+            "duration": existing.get("duration"),
+            "format": existing.get("format"),
+            "resource_type": existing.get("resource_type", resource_type),
             "cached": True,
         }
 
     timestamp = str(int(time.time()))
     sign_params = {"public_id": public_id, "timestamp": timestamp, "type": "upload"}
     signature = _signature(sign_params, config.api_secret)
-    upload_url = f"https://api.cloudinary.com/v1_1/{config.cloud_name}/image/upload"
+    upload_url = f"https://api.cloudinary.com/v1_1/{config.cloud_name}/{resource_type}/upload"
     data = {
         **sign_params,
         "api_key": config.api_key,
@@ -141,7 +148,13 @@ def upload_generated_asset(
         response = requests.post(
             upload_url,
             data=data,
-            files={"file": (f"{public_id.rsplit('/', 1)[-1]}.svg", content, content_type)},
+            files={
+                "file": (
+                    f"{public_id.rsplit('/', 1)[-1]}.{'mp3' if resource_type == 'video' else 'svg'}",
+                    content,
+                    content_type,
+                )
+            },
             timeout=30,
         )
     except requests.RequestException as exc:
@@ -157,19 +170,22 @@ def upload_generated_asset(
     logger.info("cloudinary_asset_uploaded", extra={"asset_type": asset_type, "public_id": public_id})
     return {
         "cloudinary_public_id": public_id,
-        "secure_url": result.get("secure_url") or _delivery_url(config, public_id),
+        "secure_url": result.get("secure_url") or _delivery_url(config, public_id, resource_type=resource_type),
         "source_url": result.get("secure_url"),
         "width": result.get("width"),
         "height": result.get("height"),
+        "duration": result.get("duration"),
+        "format": result.get("format"),
+        "resource_type": result.get("resource_type", resource_type),
         "cached": False,
     }
 
 
-def delete_asset(public_id: str) -> None:
+def delete_asset(public_id: str, *, resource_type: str = "image") -> None:
     config = CloudinaryConfig.from_environment()
     timestamp = str(int(time.time()))
     signature = _signature({"public_id": public_id, "timestamp": timestamp}, config.api_secret)
-    url = f"https://api.cloudinary.com/v1_1/{config.cloud_name}/image/destroy"
+    url = f"https://api.cloudinary.com/v1_1/{config.cloud_name}/{resource_type}/destroy"
     try:
         response = requests.post(
             url,

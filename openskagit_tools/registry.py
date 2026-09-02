@@ -56,6 +56,7 @@ TOOL_CONTRACTS = (
     _contract("generate_property_card", "visual", "Generate a polished property summary graphic from authoritative parcel data.", "openskagit_postgis"),
     _contract("generate_comparison", "visual", "Generate a visual comparison of two to four properties and selected fields.", "openskagit_postgis"),
     _contract("generate_infographic", "visual", "Generate a simple, data-faithful infographic from supplied or property-backed values.", "openskagit_postgis"),
+    _contract("generate_narration", "narration", "Generate narrated speech from supplied text and return durable audio plus synchronized timing data.", "elevenlabs", "cloudinary"),
 )
 
 TOOL_CONTRACT_BY_NAME = {contract.name: contract for contract in TOOL_CONTRACTS}
