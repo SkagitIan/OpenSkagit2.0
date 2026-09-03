@@ -741,3 +741,38 @@ class CurrentDraft(models.Model):
 
     def __str__(self):
         return self.question[:120]
+
+
+class HouseContentEpisode(models.Model):
+    """Durable staff catalog entry for a prepared or rendered house-content episode."""
+
+    class Status(models.TextChoices):
+        PREPARED = "prepared", "Prepared"
+        RENDERING = "rendering", "Rendering"
+        READY = "ready", "Ready"
+        FAILED = "failed", "Failed"
+
+    episode_id = models.SlugField(max_length=100, unique=True)
+    title = models.TextField()
+    description = models.TextField(blank=True)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PREPARED)
+    aspect_ratio = models.CharField(max_length=10, blank=True)
+    width = models.PositiveIntegerField(blank=True, null=True)
+    height = models.PositiveIntegerField(blank=True, null=True)
+    duration = models.FloatField(blank=True, null=True)
+    cloudinary_public_id = models.TextField(blank=True)
+    video_url = models.URLField(max_length=1000, blank=True)
+    thumbnail_url = models.URLField(max_length=1000, blank=True)
+    manifest = models.JSONField(default=dict, blank=True)
+    qa_results = models.JSONField(default=dict, blank=True)
+    warnings = models.JSONField(default=list, blank=True)
+    failure_reason = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-updated_at"]
+        indexes = [models.Index(fields=["status", "updated_at"])]
+
+    def __str__(self):
+        return self.title[:120]

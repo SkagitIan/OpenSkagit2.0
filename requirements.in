@@ -3,6 +3,7 @@ gunicorn
 dj-database-url
 whitenoise
 django-environ
+imageio-ffmpeg
 python-dotenv
 psycopg[binary]
 bs4

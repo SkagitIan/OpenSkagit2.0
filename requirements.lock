@@ -97,6 +97,8 @@ idna==3.18
     #   anyio
     #   httpx
     #   requests
+imageio-ffmpeg==0.6.0
+    # via -r requirements.in
 jiter==0.16.0
     # via
     #   anthropic

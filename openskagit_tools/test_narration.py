@@ -44,15 +44,30 @@ class NarrationTests(SimpleTestCase):
             patch.dict(
                 "os.environ", {"ELEVEN_LABS_API_KEY": "test-key", "ELEVEN_LABS_DEFAULT_VOICE_ID": "voice_12345678"}
             ),
-            patch("openskagit_tools.narration.requests.post", return_value=response),
-            patch("openskagit_tools.narration.upload_generated_asset", return_value=cloud),
+            patch("openskagit_tools.narration.requests.post", return_value=response) as eleven_post,
+            patch("openskagit_tools.narration.fetch_json_asset", return_value=None),
+            patch("openskagit_tools.narration.upload_generated_asset", return_value=cloud) as upload,
         ):
             result = generate_narration(text)
         self.assertEqual(result["original_script"], text)
         self.assertEqual(result["audio_url"], cloud["secure_url"])
         self.assertEqual(result["voice_id"], "voice_12345678")
         self.assertTrue(result["segments"])
-        self.assertEqual(response.call_args.kwargs["params"]["output_format"], "mp3_44100_128")
+        self.assertEqual(eleven_post.call_args.kwargs["params"]["output_format"], "mp3_44100_128")
+        self.assertEqual(upload.call_count, 2)
+        self.assertFalse(upload.call_args_list[0].kwargs["check_existing"])
+        self.assertEqual(upload.call_args_list[1].kwargs["asset_type"], "narration_metadata")
+
+    def test_cache_is_checked_before_elevenlabs(self):
+        cached = {"success": True, "asset_id": "narration_hash", "duration": 1.25, "cached": False}
+        with (
+            patch.dict("os.environ", {"ELEVEN_LABS_DEFAULT_VOICE_ID": "voice_12345678"}, clear=False),
+            patch("openskagit_tools.narration.fetch_json_asset", return_value=cached),
+            patch("openskagit_tools.narration.requests.post") as eleven_post,
+        ):
+            result = generate_narration("Most homes tell a story.")
+        self.assertTrue(result["cached"])
+        eleven_post.assert_not_called()
 
     def test_empty_text_is_rejected(self):
         with self.assertRaisesMessage(ValueError, "Narration text is required"):

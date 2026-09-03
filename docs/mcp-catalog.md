@@ -372,6 +372,7 @@ The unified MCP also provides deterministic SVG assets for downstream editorial 
 - `generate_comparison`
 - `generate_infographic`
 - `generate_narration`
+- `generate_video`
 
 See [mcp-visual-tools.md](mcp-visual-tools.md) for inputs, modes, aspect ratios, response metadata, and examples.
 

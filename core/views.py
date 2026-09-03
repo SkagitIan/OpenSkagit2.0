@@ -1,8 +1,10 @@
 from django.db import connection
 from django.shortcuts import render
 from django.http import Http404
+from django.contrib.admin.views.decorators import staff_member_required
 from opportunity.public_intelligence import public_home_examples
 from opportunity.services import latest_public_home_read
+from .models import HouseContentEpisode
 
 
 def parcel_fingerprint():
@@ -264,6 +266,32 @@ def home(request):
         "property_intelligence_examples": public_home_examples(),
         "public_read": latest_public_home_read(),
     })
+
+
+@staff_member_required
+def house_content_review(request):
+    """Staff-only read-only gallery for House Content Engine outputs."""
+    episodes = HouseContentEpisode.objects.filter(status=HouseContentEpisode.Status.READY)
+    finished_videos = [
+        {
+            "title": episode.title,
+            "description": episode.description,
+            "duration": _format_video_duration(episode.duration),
+            "url": episode.video_url,
+            "thumbnail_url": episode.thumbnail_url,
+            "episode_id": episode.episode_id,
+        }
+        for episode in episodes
+    ]
+    return render(request, "pages/staff_house_content.html", {"finished_videos": finished_videos})
+
+
+def _format_video_duration(duration):
+    if duration is None:
+        return ""
+    seconds = max(0, round(float(duration)))
+    minutes, seconds = divmod(seconds, 60)
+    return f"{minutes}:{seconds:02d}" if minutes else f"{seconds} sec"
 
 
 def city(request, slug):

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import logging
 import os
 import time
@@ -69,6 +70,9 @@ def _public_id(asset_type: str, digest: str, source_ids: list[str]) -> str:
         "comparison": "comparisons",
         "infographic": "infographics",
         "narration": "narration",
+        "narration_metadata": "narration",
+        "captions": "captions",
+        "video": "videos",
     }.get(asset_type, "other")
     subject = source_ids[0] if source_ids else "direct"
     return f"openskagit/visuals/{folder}/{subject}/{asset_type}_{digest}"
@@ -79,6 +83,33 @@ def _delivery_url(
 ) -> str:
     transform = f"{transformation}/" if transformation else ""
     return f"https://res.cloudinary.com/{config.cloud_name}/{resource_type}/upload/{transform}{public_id}"
+
+
+def delivery_url(
+    public_id: str, *, resource_type: str = "image", transformation: str = "", fmt: str | None = None
+) -> str:
+    """Build a delivery URL without consuming an Admin API request."""
+    config = CloudinaryConfig.from_environment()
+    suffix = f".{fmt}" if fmt else ""
+    return _delivery_url(config, public_id, transformation, resource_type) + suffix
+
+
+def fetch_json_asset(public_id: str) -> dict | None:
+    """Read a deterministic raw JSON sidecar through the delivery CDN."""
+    url = delivery_url(public_id, resource_type="raw")
+    try:
+        response = requests.get(url, timeout=15)
+    except requests.RequestException as exc:
+        raise CloudinaryError("Cloudinary cache lookup failed.") from exc
+    if response.status_code == 404:
+        return None
+    if response.status_code >= 400:
+        raise CloudinaryError(f"Cloudinary cache lookup failed with HTTP {response.status_code}.")
+    try:
+        value = response.json()
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise CloudinaryError("Cloudinary cache sidecar is malformed.") from exc
+    return value if isinstance(value, dict) else None
 
 
 def transformed_url(public_id: str, preset: str, *, fmt: str = "auto") -> str:
@@ -114,10 +145,14 @@ def upload_generated_asset(
     metadata: dict[str, str],
     content_type: str = "image/svg+xml",
     resource_type: str = "image",
+    filename_extension: str | None = None,
+    check_existing: bool = True,
 ) -> dict:
     config = CloudinaryConfig.from_environment()
     public_id = _public_id(asset_type, digest, source_property_ids)
-    existing = get_asset_metadata(public_id, resource_type=resource_type)
+    if resource_type == "raw" and filename_extension and not public_id.endswith(f".{filename_extension}"):
+        public_id = f"{public_id}.{filename_extension}"
+    existing = get_asset_metadata(public_id, resource_type=resource_type) if check_existing else {}
     if existing:
         logger.info("cloudinary_asset_cache_hit", extra={"asset_type": asset_type, "public_id": public_id})
         secure_url = existing.get("secure_url") or _delivery_url(config, public_id, resource_type=resource_type)
@@ -136,13 +171,14 @@ def upload_generated_asset(
 
     timestamp = str(int(time.time()))
     sign_params = {"public_id": public_id, "timestamp": timestamp, "type": "upload"}
-    signature = _signature(sign_params, config.api_secret)
+    context = "|".join(f"{key}={value}" for key, value in sorted(metadata.items()))
+    signature = _signature({**sign_params, "context": context}, config.api_secret)
     upload_url = f"https://api.cloudinary.com/v1_1/{config.cloud_name}/{resource_type}/upload"
     data = {
         **sign_params,
         "api_key": config.api_key,
         "signature": signature,
-        "context": "|".join(f"{key}={value}" for key, value in sorted(metadata.items())),
+        "context": context,
     }
     try:
         response = requests.post(
@@ -150,12 +186,12 @@ def upload_generated_asset(
             data=data,
             files={
                 "file": (
-                    f"{public_id.rsplit('/', 1)[-1]}.{'mp3' if resource_type == 'video' else 'svg'}",
+                    f"{public_id.rsplit('/', 1)[-1]}.{filename_extension or ('mp3' if resource_type == 'video' else 'svg')}",
                     content,
                     content_type,
                 )
             },
-            timeout=30,
+            timeout=120 if resource_type == "video" else 30,
         )
     except requests.RequestException as exc:
         logger.exception("cloudinary_asset_upload_failed", extra={"asset_type": asset_type, "public_id": public_id})

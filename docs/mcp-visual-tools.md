@@ -41,3 +41,34 @@ If Cloudinary is unavailable, the visual service preserves the local SVG and ret
 ## Narration
 
 `generate_narration` accepts approved `text` plus optional `voice_id`, friendly `voice` profile, `style` (`explainer`), `output_format`, `model`, `title`, and `force_regenerate`. It calls ElevenLabs' timestamped speech endpoint, preserves raw character alignment, and returns derived `word_timings` and sentence `segments` without rewriting the original script. The default model is `eleven_multilingual_v2`; the default output is `mp3_44100_128`. Configure `ELEVEN_LABS_API_KEY` and a voice through `ELEVEN_LABS_DEFAULT_VOICE_ID` (or `ELEVEN_LABS_EXPLAINER_VOICE_ID`). Audio is uploaded through the existing Cloudinary service as a `video` resource type under `openskagit/visuals/narration/{direct}/{asset_type}_{hash}`. The response includes `audio_url`, duration, voice/model/style metadata, cache status, alignment, provenance, and safe error categories. Text over the configured limit returns a validation error; automatic chunking is reserved for a future extension, so callers should currently submit scripts within the configured limit.
+
+## Video production
+
+`generate_video` is one public action with two internal stages. It first freezes narration, scene images, captions, and timing into an immutable render bundle. It then uses FFmpeg to compose a real MP4, decodes that file for technical QA, uploads the verified master to Cloudinary, and writes the durable episode catalog entry used by `/staff/house-content/`.
+
+There is no `base_video` or carrier. Each sequential scene owns the complete frame and supplies its own duration, so every episode may have a different length without manufacturing filler media. Version 3 intentionally supports `motion: "none"` and `transition: "cut"`; unsupported effects fail manifest validation before assets are downloaded. Captions and semantic overlays are burned locally from one ASS/SRT timeline rather than uploaded as dozens of Cloudinary image assets.
+
+The manifest supports `16:9` (`1920x1080`) and `9:16` (`1080x1920`). Narration and primary scene assets should include their Cloudinary public IDs and delivery URLs. Scene totals must match actual narration duration within `OPENSKAGIT_VIDEO_TIMING_TOLERANCE`; a small final-scene rounding difference is adjusted automatically, while material differences are rejected.
+
+An identical prepared bundle is reused on retry. An episode is complete only when the final MP4 passes technical QA, exists as a Cloudinary upload, and its `HouseContentEpisode` status is `ready`. Failed rendering or catalog persistence must not be reported as success.
+
+Example:
+
+```json
+{
+  "project": "county property explainer",
+  "title": "A property story",
+  "aspect_ratio": "9:16",
+  "captions": true,
+  "narration": {
+    "cloudinary_public_id": "openskagit/visuals/narration/direct/narration_hash",
+    "duration": 16.0,
+    "segments": [{"text": "A property story.", "start": 0.0, "end": 2.0}]
+  },
+  "scenes": [
+    {"id": "map", "duration": 5.0, "asset": "openskagit/visuals/maps/P1/map_hash", "motion": "none"},
+    {"id": "card", "duration": 5.0, "asset": "openskagit/visuals/property_cards/P1/card_hash", "transition": "cut", "overlays": [{"text": "$685,000", "start_offset": 1.0, "duration": 2.0, "style": "value"}]},
+    {"id": "comparison", "duration": 6.0, "asset": "openskagit/visuals/comparisons/P1/comparison_hash"}
+  ]
+}
+```

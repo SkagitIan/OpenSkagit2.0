@@ -14,7 +14,7 @@ from typing import Any
 
 import requests
 
-from .cloudinary_service import upload_generated_asset
+from .cloudinary_service import fetch_json_asset, upload_generated_asset
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +36,7 @@ def _voice_id(voice_id: str | None, voice: str | None) -> tuple[str, str]:
         "explainer": os.environ.get("ELEVEN_LABS_EXPLAINER_VOICE_ID", ""),
         "short_form": os.environ.get("ELEVEN_LABS_SHORT_FORM_VOICE_ID", ""),
     }
-    selected_name = voice or ("explainer" if not voice_id else "custom")
+    selected_name = voice or ("custom" if voice_id else "default")
     selected_id = voice_id or profiles.get(selected_name, "")
     if not selected_id:
         raise ValueError(
@@ -109,9 +109,6 @@ def generate_narration(
     if style not in STYLE_SETTINGS:
         raise ValueError(f"Unsupported narration style {style!r}. Use one of: {', '.join(STYLE_SETTINGS)}.")
     selected_voice, voice_name = _voice_id(voice_id, voice)
-    api_key = os.environ.get("ELEVEN_LABS_API_KEY", "").strip()
-    if not api_key:
-        raise NarrationError("ElevenLabs API configuration is missing.")
     identity = {
         "text": script,
         "voice_id": selected_voice,
@@ -123,6 +120,16 @@ def generate_narration(
     if force_regenerate:
         identity["regeneration_nonce"] = str(time.time_ns())
     digest = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:20]
+    cache_public_id = f"openskagit/visuals/narration/direct/narration_metadata_{digest}.json"
+    if not force_regenerate:
+        cached = fetch_json_asset(cache_public_id)
+        if cached:
+            cached["cached"] = True
+            logger.info("narration_cache_hit", extra={"asset_id": cached.get("asset_id")})
+            return cached
+    api_key = os.environ.get("ELEVEN_LABS_API_KEY", "").strip()
+    if not api_key:
+        raise NarrationError("ElevenLabs API configuration is missing.")
     payload = {
         "text": script,
         "model_id": model,
@@ -169,6 +176,7 @@ def generate_narration(
         },
         content_type="audio/mpeg",
         resource_type="video",
+        check_existing=False,
     )
     result = {
         "success": True,
@@ -206,6 +214,17 @@ def generate_narration(
     }
     logger.info(
         "narration_generated", extra={"asset_id": result["asset_id"], "duration": duration, "cached": cloud["cached"]}
+    )
+    upload_generated_asset(
+        json.dumps(result, sort_keys=True).encode("utf-8"),
+        asset_type="narration_metadata",
+        digest=digest,
+        source_property_ids=[],
+        metadata={"asset_type": "narration_metadata", "narration_asset_id": result["asset_id"]},
+        content_type="application/json",
+        resource_type="raw",
+        filename_extension="json",
+        check_existing=False,
     )
     return result
 

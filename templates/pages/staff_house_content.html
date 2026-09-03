@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}House Content Review | OpenSkagit{% endblock %}
+
+{% block extra_head %}<link rel="stylesheet" href="{% static 'house-content.css' %}?v=1">{% endblock %}
+
+{% block content %}
+<main class="hcr-shell">
+  <header class="hcr-topbar">
+    <div class="hcr-brand"><span class="hcr-mark">H</span><span>HOME VALUE BRIEF</span></div>
+    <div class="hcr-topbar__meta"><span>STAFF REVIEW</span><a href="/">Back to OpenSkagit</a></div>
+  </header>
+
+  <section class="hcr-hero">
+    <p class="hcr-eyebrow">House Content Engine</p>
+    <h1>Finished media and<br><em>design system</em>.</h1>
+    <p class="hcr-lede">A read-only workspace for reviewing generalized property stories, visual layouts, and finished videos before distribution.</p>
+  </section>
+
+  <section class="hcr-section" aria-labelledby="videos-title">
+    <div class="hcr-section__heading"><div><p class="hcr-eyebrow">Outputs</p><h2 id="videos-title">Finished videos</h2></div><span class="hcr-count">{{ finished_videos|length }} available</span></div>
+    <div class="hcr-video-grid">
+      {% for video in finished_videos %}
+      <article class="hcr-video-card">
+        <div class="hcr-video-card__frame"><video controls preload="metadata" src="{{ video.url }}"{% if video.thumbnail_url %} poster="{{ video.thumbnail_url }}"{% endif %}>Your browser does not support video playback.</video></div>
+        <div class="hcr-video-card__body"><div><h3>{{ video.title }}</h3><p>{{ video.description }}</p></div><span>{{ video.duration }}</span></div>
+        <a class="hcr-link" href="{{ video.url }}" target="_blank" rel="noopener">Open direct video <span>↗</span></a>
+      </article>
+      {% empty %}<p class="hcr-empty">No finished videos have been added yet.</p>{% endfor %}
+    </div>
+  </section>
+
+  <section class="hcr-section" aria-labelledby="layouts-title">
+    <div class="hcr-section__heading"><div><p class="hcr-eyebrow">Visual language</p><h2 id="layouts-title">Layout library</h2></div><p class="hcr-section__note">Static examples of the production primitives used by the visual MCP tools.</p></div>
+    <div class="hcr-layout-grid">
+      <article class="hcr-layout-card"><div class="hvb-preview hvb-preview--map"><div class="hvb-head"><span>H</span><b>HOME VALUE BRIEF</b><strong>Where similar homes are located</strong><small>Generalized residential comparison</small></div><div class="hvb-map-lines"></div><i class="hvb-pin hvb-pin--one"></i><i class="hvb-pin hvb-pin--two"></i><i class="hvb-pin hvb-pin--three"></i><div class="hvb-map-legend"><b>COMPARISON SET</b><span><i></i>Selected group</span><span><i></i>Nearby context</span></div></div><h3>Map / context</h3><p>Use when geography or neighborhood boundaries explain the finding.</p><code>generate_map · video_scene</code></article>
+      <article class="hcr-layout-card"><div class="hvb-preview hvb-preview--card"><div class="hvb-head"><span>H</span><b>HOME VALUE BRIEF</b><strong>Typical assessment profile</strong><small>Generalized residential example</small></div><div class="hvb-stat"><small>ASSESSED VALUE</small><b>$453,500</b></div><div class="hvb-mini-grid"><span>LAND <b>$195,100</b></span><span>BUILDING <b>$258,400</b></span><span>LIVING AREA <b>1,920 sq ft</b></span><span>YEAR BUILT <b>1998</b></span></div></div><h3>Property card</h3><p>Use for one compact, anonymized profile—not a full record dump.</p><code>generate_property_card · anonymized</code></article>
+      <article class="hcr-layout-card"><div class="hvb-preview hvb-preview--compare"><div class="hvb-head"><span>H</span><b>HOME VALUE BRIEF</b><strong>What changes between homes?</strong><small>Generalized comparison</small></div><div class="hvb-compare"><div><b>GROUP A</b><strong>$410k</strong><span>1,620 sq ft</span></div><em>VS</em><div><b>GROUP B</b><strong>$476k</strong><span>2,140 sq ft</span></div></div><div class="hvb-callout">Same question. Different outcome.</div></div><h3>Comparison</h3><p>Use when the reveal depends on two or more clearly defined groups.</p><code>generate_comparison · video_scene</code></article>
+      <article class="hcr-layout-card"><div class="hvb-preview hvb-preview--chart"><div class="hvb-head"><span>H</span><b>HOME VALUE BRIEF</b><strong>What makes up the assessment?</strong><small>Generalized residential assessment example</small></div><div class="hvb-bars"><span>LAND <i style="width:43%"></i><b>$195,100</b></span><span>BUILDING <i style="width:57%"></i><b>$258,400</b></span><span>TOTAL <i class="is-total" style="width:100%"></i><b>$453,500</b></span></div><div class="hvb-caption">The total is built from components.</div></div><h3>Infographic</h3><p>Use for one relationship, one major number, and one supporting annotation.</p><code>generate_infographic · bar · video_scene</code></article>
+    </div>
+  </section>
+
+  <section class="hcr-section hcr-section--last" aria-labelledby="rules-title"><div class="hcr-rules"><div><p class="hcr-eyebrow">Review rules</p><h2 id="rules-title">Readable, generalized, evidence-led.</h2></div><ul><li>Question first: bold, high-contrast, and easy to scan.</li><li>One primary visual per scene.</li><li>Captions stay in a dark, contrasting safe-zone container.</li><li>No parcel IDs, addresses, owners, or property-specific framing in public artwork.</li></ul></div></section>
+</main>
+{% endblock %}

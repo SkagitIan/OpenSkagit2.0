@@ -44,7 +44,7 @@ class UnifiedToolContractTests(SimpleTestCase):
         self.assertEqual(set(TOOL_CONTRACT_BY_NAME), set(HANDLERS))
         self.assertTrue(all(contract.read_only for contract in TOOL_CONTRACTS))
         self.assertTrue(all(contract.contract_version == CONTRACT_VERSION for contract in TOOL_CONTRACTS))
-        self.assertEqual({contract.domain for contract in TOOL_CONTRACTS}, {"parcel", "gis", "context", "zoning", "budget", "visual", "narration"})
+        self.assertEqual({contract.domain for contract in TOOL_CONTRACTS}, {"parcel", "gis", "context", "zoning", "budget", "visual", "narration", "video", "house"})
 
     def test_fastmcp_publishes_exactly_the_contract_registry(self):
         tools = asyncio.run(mcp.list_tools())
@@ -63,6 +63,17 @@ class UnifiedToolContractTests(SimpleTestCase):
     def test_unknown_tool_contract_is_rejected(self):
         with self.assertRaisesMessage(ValueError, "Unknown OpenSkagit tool"):
             get_tool_contract("not_a_tool")
+
+    def test_house_tools_expose_deterministic_gates(self):
+        cohort = HANDLERS["house_analyze_cohort"](
+            [{"parcel_number": "P1", "group": "a", "price": 10}, {"parcel_number": "P1", "group": "a", "price": 20}],
+            "group",
+            "price",
+        )
+        self.assertEqual(cohort["data"]["deduplicated_count"], 1)
+        self.assertTrue(HANDLERS["house_validate_public_artifact"]({"title": "Generalized example"})["data"]["valid"])
+        ledger = {"facts": [{"fact_id": "fact_a", "classification": "ANALYSIS", "display_text": "a", "narration_text": "a", "source_reference": "test", "confidence": "high", "approved_for_public_use": True}]}
+        self.assertEqual(HANDLERS["house_validate_fact_ledger"](ledger)["data"]["fact_count"], 1)
 
     @patch("openskagit_tools.telemetry.McpToolCall.objects.create")
     def test_tool_telemetry_records_no_arguments_or_response_body(self, create_call):

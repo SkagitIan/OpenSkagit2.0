@@ -9,6 +9,8 @@ from zoning_mcp import services as zoning_services
 from budgets import services as budget_services
 from . import visualizations
 from . import narration
+from . import video
+from . import house_content_engine
 from .cloudinary_service import CloudinaryError
 
 from .contracts import result_envelope
@@ -250,6 +252,7 @@ def generate_map(
     subtitle: str = "",
     highlighted_properties: list[str] | None = None,
     annotation: str = "",
+    presentation_mode: str = "standalone_social",
 ) -> dict[str, Any]:
     return _visual_result(
         "generate_map",
@@ -264,6 +267,7 @@ def generate_map(
         subtitle,
         highlighted_properties,
         annotation,
+        presentation_mode,
     )
 
 
@@ -275,6 +279,8 @@ def generate_property_card(
     subtitle: str = "",
     highlight_fields: list[str] | None = None,
     requested_fields: list[str] | None = None,
+    identity_mode: str = "subject",
+    presentation_mode: str = "standalone_social",
 ) -> dict[str, Any]:
     return _visual_result(
         "generate_property_card",
@@ -286,6 +292,8 @@ def generate_property_card(
         subtitle,
         highlight_fields,
         requested_fields,
+        identity_mode,
+        presentation_mode,
     )
 
 
@@ -298,6 +306,7 @@ def generate_comparison(
     subtitle: str = "",
     highlight_fields: list[str] | None = None,
     custom_labels: list[str] | None = None,
+    presentation_mode: str = "standalone_social",
 ) -> dict[str, Any]:
     return _visual_result(
         "generate_comparison",
@@ -310,6 +319,7 @@ def generate_comparison(
         subtitle,
         highlight_fields,
         custom_labels,
+        presentation_mode,
     )
 
 
@@ -325,6 +335,7 @@ def generate_infographic(
     annotation: str = "",
     property_ids: list[str] | None = None,
     source_references: list[str] | None = None,
+    presentation_mode: str = "standalone_social",
 ) -> dict[str, Any]:
     return _visual_result(
         "generate_infographic",
@@ -340,6 +351,7 @@ def generate_infographic(
         annotation,
         property_ids,
         source_references,
+        presentation_mode,
     )
 
 
@@ -356,8 +368,53 @@ def generate_narration(
     return _narration_result(text, voice_id, voice, style, output_format, model, title, force_regenerate)
 
 
+def generate_video(manifest: dict[str, Any]) -> dict[str, Any]:
+    try:
+        data = video.generate_video(manifest)
+    except video.VideoManifestError as exc:
+        return _result("generate_video", {}, errors=[{"code": "video_manifest_invalid", "message": str(exc)}])
+    except video.VideoRenderError as exc:
+        return _result("generate_video", {}, errors=[{"code": "video_render_failed", "message": str(exc)}])
+    except CloudinaryError as exc:
+        return _result("generate_video", {}, errors=[{"code": "cloudinary_publish_failed", "message": str(exc)}])
+    return _result("generate_video", data, warnings=data.get("warnings", []))
+
+
+def house_validate_fact_ledger(
+    ledger: dict[str, Any], story: dict[str, Any] | None = None, production: dict[str, Any] | None = None
+) -> dict[str, Any]:
+    try:
+        validated = house_content_engine.validate_fact_ledger(ledger, story=story, production=production)
+    except (ValueError, TypeError) as exc:
+        return _result("house_validate_fact_ledger", {}, errors=[{"code": "fact_ledger_invalid", "message": str(exc)}])
+    return _result("house_validate_fact_ledger", {"valid": True, "fact_count": len(validated.facts)})
+
+
+def house_validate_public_artifact(artifact: Any) -> dict[str, Any]:
+    try:
+        house_content_engine.validate_public_artifact(artifact)
+    except (ValueError, TypeError) as exc:
+        return _result("house_validate_public_artifact", {}, errors=[{"code": "privacy_validation_failed", "message": str(exc)}])
+    return _result("house_validate_public_artifact", {"valid": True})
+
+
+def house_analyze_cohort(
+    rows: list[dict[str, Any]], group_field: str, metric: str, unit: str = "parcel_number"
+) -> dict[str, Any]:
+    unique_rows = house_content_engine.deduplicate_rows(rows, unit=unit)
+    return _result(
+        "house_analyze_cohort",
+        {
+            "unit": unit,
+            "input_count": len(rows),
+            "deduplicated_count": len(unique_rows),
+            "groups": house_content_engine.group_summary(unique_rows, group_field=group_field, metric=metric),
+        },
+    )
+
+
 HANDLERS: dict[str, Callable[..., dict[str, Any]]] = {
     name: value
     for name, value in globals().copy().items()
-    if callable(value) and name.startswith(("parcel_", "gis_", "context_", "zoning_", "budget_", "generate_"))
+    if callable(value) and name.startswith(("parcel_", "gis_", "context_", "zoning_", "budget_", "generate_", "house_"))
 }
