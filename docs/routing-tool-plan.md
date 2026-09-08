@@ -17,10 +17,10 @@ and map geometry; it does not need turn-by-turn directions.
 
 ## Build sequence
 
-- [ ] **1. Stable routing foundation** — use the existing Django app, PostGIS
+- [x] **1. Stable routing foundation** — use the existing Django app, PostGIS
   database, Railway web service, private Valhalla service, Leaflet, and CARTO
   basemap. Replace full matrices with Valhalla `optimized_route` per route.
-- [ ] **2. Map presentation** — display a working street/aerial basemap,
+- [x] **2. Map presentation** — display a working street/aerial basemap,
   colored route polylines, numbered stops, route visibility, and selected-route
   highlighting.
 - [ ] **3. Saved workspace** — list recent imports and plans, reopen a plan by
