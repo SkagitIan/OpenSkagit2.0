@@ -11,7 +11,7 @@
   <section class="routing-controls">
     <form id="routing-import-form">{% csrf_token %}<label>GIS export <input type="file" name="file" accept=".csv,.xlsx" required></label><button>Import file</button></form>
     <div id="routing-import-status">Upload a CSV or XLSX export to begin.</div>
-    <div class="routing-options"><label>Stops per route <input id="routing-target" type="number" min="50" max="75" value="60"></label><label>Mode <select id="routing-mode"><option value="driving">Driving</option><option value="walking">Walking</option></select></label><button id="routing-create" type="button" disabled>Create routes</button></div>
+    <div class="routing-options"><label>Stops per route <input id="routing-target" type="number" min="50" max="75" value="60"></label><label>Mode <select id="routing-mode"><option value="driving">Driving</option><option value="walking">Walking</option></select></label><button id="routing-create" type="button" disabled>Create clusters</button><button id="routing-optimize" type="button" disabled>Optimize stop order</button></div>
     <div id="routing-summary"></div>
   </section>
   <div id="routing-map" aria-label="Optimized field routes"></div>

@@ -94,12 +94,49 @@ def create_plan(request):
     for item in items:
         source = item.get("source_data") or {}
         item["street_name"] = str(source.get("SitusStName") or source.get("street_name") or "").strip()
-    groups = cluster_and_order(items, target=target, mode=mode, matrix_factory=travel_matrix)
-    plan = RoutingPlan.objects.create(import_file=import_obj, mode=mode, target_stop_count=target, route_count=len(groups), summary={"valid_stops": len(items), "unassigned_stops": import_obj.rows.exclude(validation_status="valid").count()})
+    groups = cluster_and_order(items, target=target, mode=mode)
+    plan = RoutingPlan.objects.create(import_file=import_obj, mode=mode, target_stop_count=target, route_count=len(groups), status="clustered", algorithm_version="cluster-v1", summary={"valid_stops": len(items), "unassigned_stops": import_obj.rows.exclude(validation_status="valid").count()})
     for route_number, group in enumerate(groups, start=1):
         total = sum(distance((a["longitude"], a["latitude"]), (b["longitude"], b["latitude"])) for a, b in zip(group, group[1:]))
         route = RoutingRoute.objects.create(plan=plan, route_number=route_number, stop_count=len(group), estimated_distance_meters=total)
         RoutingStop.objects.bulk_create([RoutingStop(route=route, import_row_id=item["id"], sequence=sequence, parcel_id=item["parcel_id"], longitude=item["longitude"], latitude=item["latitude"], street_name=item.get("street_name", ""), coordinate_confidence="source_xy") for sequence, item in enumerate(group, start=1)])
+    return JsonResponse(_plan_payload(plan))
+
+
+@require_http_methods(["POST"])
+def optimize_plan(request, plan_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    plan = get_object_or_404(RoutingPlan, pk=plan_id)
+    for route in plan.routes.prefetch_related("stops"):
+        stops = list(route.stops.all())
+        items = [{"id": stop.id, "parcel_id": stop.parcel_id, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name} for stop in stops]
+        ordered = cluster_and_order(items, target=max(50, len(items)), mode=plan.mode, matrix_factory=travel_matrix)[0] if items else []
+        for sequence, item in enumerate(ordered, start=1):
+            RoutingStop.objects.filter(pk=item["id"]).update(sequence=sequence, manually_locked=False)
+    plan.status = "optimized"
+    plan.algorithm_version = "valhalla-matrix-v1"
+    plan.save(update_fields=["status", "algorithm_version"])
+    return JsonResponse(_plan_payload(plan))
+
+
+@require_http_methods(["POST"])
+def move_stop(request, plan_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    plan = get_object_or_404(RoutingPlan, pk=plan_id)
+    try:
+        body = json.loads(request.body or "{}")
+        stop = get_object_or_404(RoutingStop, pk=int(body["stop_id"]), route__plan=plan)
+        target_route = get_object_or_404(RoutingRoute, pk=int(body["target_route"]), plan=plan)
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+        return JsonResponse({"error": "A valid stop_id and target_route are required."}, status=400)
+    stop.route = target_route
+    stop.manually_locked = True
+    stop.sequence = target_route.stops.count() + 1
+    stop.save(update_fields=["route", "manually_locked", "sequence"])
+    plan.status = "clustered"
+    plan.save(update_fields=["status"])
     return JsonResponse(_plan_payload(plan))
 
 
