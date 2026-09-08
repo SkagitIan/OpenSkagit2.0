@@ -11,3 +11,12 @@ def route_csv(plan):
             row = stop.import_row
             writer.writerow([route.route_number, stop.sequence, stop.parcel_id, row.address, stop.longitude, stop.latitude, stop.street_side, stop.coordinate_confidence])
     return output.getvalue()
+
+
+def single_route_csv(route):
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["route_number", "stop_sequence", "parcel_id", "address", "longitude", "latitude", "street_side", "coordinate_confidence"])
+    for stop in route.stops.select_related("import_row").all():
+        writer.writerow([route.route_number, stop.sequence, stop.parcel_id, stop.import_row.address, stop.longitude, stop.latitude, stop.street_side, stop.coordinate_confidence])
+    return output.getvalue()

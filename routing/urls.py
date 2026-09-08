@@ -20,4 +20,5 @@ urlpatterns = [
     path("routes/plan/<int:plan_id>/available-stops/", views.available_stops, name="available_stops"),
     path("routes/plan/<int:plan_id>/", views.plan_detail, name="plan_detail"),
     path("routes/plan/<int:plan_id>/export/", views.export_plan, name="export_plan"),
+    path("routes/plan/<int:plan_id>/route/<int:route_id>/export/", views.export_route, name="export_route"),
 ]

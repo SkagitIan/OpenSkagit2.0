@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_GET, require_http_methods
 
 from .models import RoutingImport, RoutingImportRow, RoutingPlan, RoutingPlanRevision, RoutingRoute, RoutingStop
-from .services.exports import route_csv
+from .services.exports import route_csv, single_route_csv
 from .services.importers import infer_street_side, normalize_row, read_upload
 from .services.optimization import cluster_and_order, distance
 from .services.matrices import travel_matrix
@@ -329,4 +329,14 @@ def export_plan(request, plan_id):
         return HttpResponse("Staff sign-in is required.", status=403)
     response = HttpResponse(route_csv(get_object_or_404(RoutingPlan, pk=plan_id)), content_type="text/csv")
     response["Content-Disposition"] = f'attachment; filename="route-plan-{plan_id}.csv"'
+    return response
+
+
+@require_GET
+def export_route(request, plan_id, route_id):
+    if not _staff(request):
+        return HttpResponse("Staff sign-in is required.", status=403)
+    route = get_object_or_404(RoutingRoute, pk=route_id, plan_id=plan_id)
+    response = HttpResponse(single_route_csv(route), content_type="text/csv")
+    response["Content-Disposition"] = f'attachment; filename="route-plan-{plan_id}-route-{route.route_number}.csv"'
     return response
