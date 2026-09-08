@@ -78,3 +78,15 @@ class RoutingStop(models.Model):
     class Meta:
         ordering = ["route", "sequence"]
         constraints = [models.UniqueConstraint(fields=["route", "sequence"], name="unique_routing_stop_sequence")]
+
+
+class RoutingPlanRevision(models.Model):
+    plan = models.ForeignKey(RoutingPlan, on_delete=models.CASCADE, related_name="revisions")
+    revision_number = models.PositiveIntegerField()
+    action = models.CharField(max_length=32)
+    snapshot = models.JSONField(default=dict)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        constraints = [models.UniqueConstraint(fields=["plan", "revision_number"], name="unique_routing_revision_number")]
