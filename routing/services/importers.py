@@ -61,6 +61,14 @@ def _number(value):
         return None
 
 
+def infer_street_side(value):
+    """Infer the common odd/even side convention from a street number."""
+    match = re.search(r"\d+", str(value or ""))
+    if not match:
+        return ""
+    return "odd" if int(match.group()) % 2 else "even"
+
+
 def normalize_row(source):
     normalized = {ALIASES.get(clean_header(key), clean_header(key)): value for key, value in source.items()}
     x = _number(normalized.get("x"))
@@ -85,6 +93,7 @@ def normalize_row(source):
         "parcel_id": parcel_id, "address": address, "source_x": x, "source_y": y,
         "longitude": lon, "latitude": lat, "coordinate_source": coordinate_source,
         "street_name": str(normalized.get("street_name") or "").strip(),
+        "street_side": infer_street_side(normalized.get("street_number") or normalized.get("address")),
         "validation_status": "valid" if not notes else "review",
         "validation_notes": notes,
         "source_data": source,

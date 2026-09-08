@@ -2,7 +2,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest import TestCase
 
-from .services.importers import normalize_row, read_upload
+from .services.importers import infer_street_side, normalize_row, read_upload
 from .services.optimization import cluster_and_order
 
 
@@ -23,6 +23,11 @@ class ImporterTests(TestCase):
         self.assertEqual(file_type, "xlsx")
         self.assertEqual(len(headers), 70)
         self.assertEqual(len(rows), 310)
+
+    def test_infers_common_odd_even_street_side(self):
+        self.assertEqual(infer_street_side("1612"), "even")
+        self.assertEqual(infer_street_side("1630 ALPINE VIEW DRIVE"), "even")
+        self.assertEqual(infer_street_side("1613"), "odd")
 
 
 class OptimizationTests(TestCase):

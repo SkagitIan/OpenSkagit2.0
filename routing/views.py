@@ -7,7 +7,7 @@ from django.views.decorators.http import require_GET, require_http_methods
 
 from .models import RoutingImport, RoutingImportRow, RoutingPlan, RoutingPlanRevision, RoutingRoute, RoutingStop
 from .services.exports import route_csv
-from .services.importers import normalize_row, read_upload
+from .services.importers import infer_street_side, normalize_row, read_upload
 from .services.optimization import cluster_and_order, distance
 from .services.matrices import travel_matrix
 from .services.valhalla import optimized_order
@@ -108,12 +108,13 @@ def create_plan(request):
     for item in items:
         source = item.get("source_data") or {}
         item["street_name"] = str(source.get("SitusStName") or source.get("street_name") or "").strip()
+        item["street_side"] = str(source.get("street_side") or infer_street_side(source.get("SitusStNo") or source.get("street_number") or source.get("address"))).strip().lower()
     groups = cluster_and_order(items, target=target, mode=mode)
     plan = RoutingPlan.objects.create(import_file=import_obj, mode=mode, target_stop_count=target, route_count=len(groups), status="clustered", algorithm_version="cluster-v1", summary={"valid_stops": len(items), "unassigned_stops": import_obj.rows.exclude(validation_status="valid").count()})
     for route_number, group in enumerate(groups, start=1):
         total = sum(distance((a["longitude"], a["latitude"]), (b["longitude"], b["latitude"])) for a, b in zip(group, group[1:]))
         route = RoutingRoute.objects.create(plan=plan, route_number=route_number, stop_count=len(group), estimated_distance_meters=total)
-        RoutingStop.objects.bulk_create([RoutingStop(route=route, import_row_id=item["id"], sequence=sequence, parcel_id=item["parcel_id"], longitude=item["longitude"], latitude=item["latitude"], street_name=item.get("street_name", ""), coordinate_confidence="source_xy") for sequence, item in enumerate(group, start=1)])
+        RoutingStop.objects.bulk_create([RoutingStop(route=route, import_row_id=item["id"], sequence=sequence, parcel_id=item["parcel_id"], longitude=item["longitude"], latitude=item["latitude"], street_name=item.get("street_name", ""), street_side=item.get("street_side", ""), coordinate_confidence="source_xy") for sequence, item in enumerate(group, start=1)])
     _record_revision(plan, "clustered")
     return JsonResponse(_plan_payload(plan))
 
@@ -134,7 +135,7 @@ def optimize_plan(request, plan_id):
 
 def _optimize_route(route, plan):
         stops = list(route.stops.all())
-        items = [{"id": stop.id, "parcel_id": stop.parcel_id, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "locked": stop.manually_locked, "original_sequence": stop.sequence} for stop in stops]
+        items = [{"id": stop.id, "parcel_id": stop.parcel_id, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "locked": stop.manually_locked, "original_sequence": stop.sequence} for stop in stops]
         ordered = items
         shapes = []
         if items:
