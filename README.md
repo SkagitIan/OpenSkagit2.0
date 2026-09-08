@@ -121,6 +121,17 @@ sources**. Statuses are `never_synced`, `unchanged`, `changed`,
 
 ## Static Parcel Geography Features
 
+## Field route planner
+
+The staff-only route planner is available at `/field/routes/`. It accepts the
+internal GIS CSV/XLSX export, preserves the original rows, deduplicates parcel
+stops, and clusters valid points into 50–75-stop driving or walking groups.
+The local optimizer works without an external service. For road-network travel
+times, set `VALHALLA_URL` to a self-hosted Valhalla service; the application
+uses its matrix endpoint and otherwise falls back to local geographic distance.
+Route results and source imports are stored in the routing-specific tables and
+can be exported as CSV.
+
 `build_geo_features` builds one row per active parcel of precomputed geography
 that rarely changes -- containing city/comp-plan designation/school
 district/fire district/voting precinct, nearest road/public place/tide gate,

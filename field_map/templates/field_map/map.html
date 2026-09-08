@@ -16,6 +16,7 @@
 <main class="field-map-app" id="field-map-app" data-parcels-url="{% url 'field_map:parcels' %}" data-login-url="/login/?next=/field/">
   <header class="field-map-header">
     <div><span class="field-map-kicker">OpenSkagit</span><h1>Parcel Field Map</h1></div>
+    <a class="field-map-route-link" href="{% url 'routing:routes' %}">Plan routes</a>
     <form method="post" action="/logout/">{% csrf_token %}<input type="hidden" name="next" value="/login/"><button class="field-map-logout" type="submit" aria-label="Sign out">Sign out</button></form>
   </header>
 
