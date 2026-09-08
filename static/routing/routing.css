@@ -2,3 +2,4 @@
 .routing-result header{display:flex;align-items:center;gap:8px;justify-content:space-between}.routing-route-optimize{padding:4px 7px;border:1px solid #b8c9c4;border-radius:6px;background:#fff;color:#173f3a;font-size:11px}.routing-move-target{max-width:110px;padding:2px;border:1px solid #c4d0cc;border-radius:4px;background:#fff;font-size:10px}
 .routing-lock-stop{padding:2px 5px;border:1px solid #c4d0cc;border-radius:4px;background:#fff;color:#52605d;font-size:10px}
 .routing-remove-stop{padding:2px 5px;border:1px solid #e0b7ae;border-radius:4px;background:#fff;color:#a33d32;font-size:10px}
+.routing-app #routing-add-stop{display:flex;gap:8px;align-items:end;margin-top:10px}.routing-app #routing-add-stop[hidden]{display:none}.routing-app #routing-add-stop select{max-width:260px}

@@ -260,6 +260,16 @@ def add_stop(request, plan_id):
 
 
 @require_GET
+def available_stops(request, plan_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    plan = get_object_or_404(RoutingPlan, pk=plan_id)
+    assigned = RoutingStop.objects.filter(route__plan=plan).values("import_row_id")
+    rows = plan.import_file.rows.filter(validation_status="valid").exclude(id__in=assigned).order_by("parcel_id")[:1000]
+    return JsonResponse({"stops": [{"id": row.id, "parcel_id": row.parcel_id, "address": row.address} for row in rows]})
+
+
+@require_GET
 def plan_detail(request, plan_id):
     if not _staff(request):
         return JsonResponse({"error": "Staff sign-in is required."}, status=403)
