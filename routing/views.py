@@ -25,7 +25,7 @@ def _forbidden(request):
 def routes_page(request):
     if not _staff(request):
         return _forbidden(request)
-    return render(request, "routing/routes.html", {"imports": RoutingImport.objects.all()[:20]})
+    return render(request, "routing/routes.html", {"imports": RoutingImport.objects.all()[:20], "plans": RoutingPlan.objects.select_related("import_file")[:30]})
 
 
 @require_http_methods(["POST"])
@@ -71,9 +71,16 @@ def import_file(request):
 def _plan_payload(plan):
     routes = []
     for route in plan.routes.prefetch_related("stops__import_row"):
-        stops = [{"sequence": stop.sequence, "parcel_id": stop.parcel_id, "address": stop.import_row.address, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "confidence": stop.coordinate_confidence} for stop in route.stops.all()]
-        routes.append({"route_number": route.route_number, "stop_count": route.stop_count, "geometry": route.geometry, "stops": stops})
-    return {"plan_id": plan.id, "mode": plan.mode, "target_stop_count": plan.target_stop_count, "route_count": plan.route_count, "summary": plan.summary, "routes": routes}
+        stops = [{"id": stop.id, "sequence": stop.sequence, "parcel_id": stop.parcel_id, "address": stop.import_row.address, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "confidence": stop.coordinate_confidence, "manually_locked": stop.manually_locked} for stop in route.stops.all()]
+        routes.append({"id": route.id, "route_number": route.route_number, "stop_count": route.stop_count, "geometry": route.geometry, "stops": stops})
+    return {"plan_id": plan.id, "status": plan.status, "mode": plan.mode, "target_stop_count": plan.target_stop_count, "route_count": plan.route_count, "summary": plan.summary, "routes": routes}
+
+
+@require_GET
+def plans_list(request):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    return JsonResponse({"plans": [{"id": plan.id, "filename": plan.import_file.filename, "mode": plan.mode, "status": plan.status, "route_count": plan.route_count, "created_at": plan.created_at.isoformat()} for plan in RoutingPlan.objects.select_related("import_file")[:30]]})
 
 
 @require_http_methods(["POST"])
@@ -110,6 +117,14 @@ def optimize_plan(request, plan_id):
         return JsonResponse({"error": "Staff sign-in is required."}, status=403)
     plan = get_object_or_404(RoutingPlan, pk=plan_id)
     for route in plan.routes.prefetch_related("stops"):
+        _optimize_route(route, plan)
+    plan.status = "optimized"
+    plan.algorithm_version = "valhalla-optimized-route-v1"
+    plan.save(update_fields=["status", "algorithm_version"])
+    return JsonResponse(_plan_payload(plan))
+
+
+def _optimize_route(route, plan):
         stops = list(route.stops.all())
         items = [{"id": stop.id, "parcel_id": stop.parcel_id, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name} for stop in stops]
         ordered = items
@@ -126,8 +141,17 @@ def optimize_plan(request, plan_id):
         if shapes:
             route.geometry = {"encoded_polylines": shapes}
             route.save(update_fields=["geometry"])
+
+
+@require_http_methods(["POST"])
+def optimize_route(request, plan_id, route_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    plan = get_object_or_404(RoutingPlan, pk=plan_id)
+    route = get_object_or_404(RoutingRoute, pk=route_id, plan=plan)
+    _optimize_route(route, plan)
     plan.status = "optimized"
-    plan.algorithm_version = "valhalla-matrix-v1"
+    plan.algorithm_version = "valhalla-optimized-route-v1"
     plan.save(update_fields=["status", "algorithm_version"])
     return JsonResponse(_plan_payload(plan))
 

@@ -6,13 +6,14 @@
 <link rel="stylesheet" href="{% static 'routing/routing.css' %}">
 {% endblock %}
 {% block content %}
-<main class="routing-app" id="routing-app" data-import-url="{% url 'routing:import' %}" data-plan-url="{% url 'routing:create_plan' %}">
+<main class="routing-app" id="routing-app" data-import-url="{% url 'routing:import' %}" data-plan-url="{% url 'routing:create_plan' %}" data-plans-url="{% url 'routing:plans' %}">
   <header><div><span>OpenSkagit / Field</span><h1>Route planner</h1></div><a href="/field/">Parcel map</a></header>
   <section class="routing-controls">
     <form id="routing-import-form">{% csrf_token %}<label>GIS export <input type="file" name="file" accept=".csv,.xlsx" required></label><button>Import file</button></form>
     <div id="routing-import-status">Upload a CSV or XLSX export to begin.</div>
-    <div class="routing-options"><label>Stops per route <input id="routing-target" type="number" min="50" max="75" value="60"></label><label>Mode <select id="routing-mode"><option value="driving">Driving</option><option value="walking">Walking</option></select></label><button id="routing-create" type="button" disabled>Create clusters</button><button id="routing-optimize" type="button" disabled>Optimize stop order</button></div>
+    <div class="routing-options"><label>Stops per route <input id="routing-target" type="number" min="50" max="75" value="60"></label><label>Mode <select id="routing-mode"><option value="driving">Driving</option><option value="walking">Walking</option></select></label><button id="routing-create" type="button" disabled>Create clusters</button><button id="routing-optimize" type="button" disabled>Optimize all routes</button></div>
     <div id="routing-summary"></div>
+    <label>Saved plans <select id="routing-saved-plans"><option value="">Select a saved plan…</option>{% for plan in plans %}<option value="{{ plan.id }}">#{{ plan.id }} · {{ plan.import_file.filename }} · {{ plan.status }}</option>{% endfor %}</select></label>
   </section>
   <div id="routing-map" aria-label="Optimized field routes"></div>
   <section id="routing-results"></section>
