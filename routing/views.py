@@ -149,7 +149,7 @@ def _optimize_route(route, plan):
         if locked:
             ordered = [locked.get(sequence) or unlocked.pop(0) for sequence in range(1, len(items) + 1)]
         for sequence, item in enumerate(ordered, start=1):
-            RoutingStop.objects.filter(pk=item["id"]).update(sequence=sequence, manually_locked=False)
+            RoutingStop.objects.filter(pk=item["id"]).update(sequence=sequence)
         if shapes:
             route.geometry = {"encoded_polylines": shapes}
             route.save(update_fields=["geometry"])
