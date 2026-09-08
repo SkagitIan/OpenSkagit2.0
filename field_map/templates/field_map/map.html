@@ -50,5 +50,17 @@
   <noscript>This field map requires JavaScript.</noscript>
 </main>
 <script src="{% static 'field_map/vendor/leaflet/leaflet.js' %}"></script>
+<script>
+  (function () {
+    var originalTileLayer = L.tileLayer;
+    L.tileLayer = function (url, options) {
+      if (url.indexOf("basemaps.cartocdn.com") !== -1) {
+        url = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+        options = Object.assign({}, options, { attribution: "© OpenStreetMap contributors" });
+      }
+      return originalTileLayer(url, options);
+    };
+  }());
+</script>
 <script src="{% static 'field_map/field_map.js' %}" defer></script>
 {% endblock %}

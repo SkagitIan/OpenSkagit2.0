@@ -71,8 +71,8 @@ def import_file(request):
 def _plan_payload(plan):
     routes = []
     for route in plan.routes.prefetch_related("stops__import_row"):
-        stops = [{"id": stop.id, "import_row_id": stop.import_row_id, "sequence": stop.sequence, "parcel_id": stop.parcel_id, "address": stop.import_row.address, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "confidence": stop.coordinate_confidence, "manually_locked": stop.manually_locked} for stop in route.stops.all()]
-        routes.append({"id": route.id, "route_number": route.route_number, "stop_count": route.stop_count, "geometry": route.geometry, "stops": stops})
+        stops = [{"id": stop.id, "import_row_id": stop.import_row_id, "sequence": stop.sequence, "parcel_id": stop.parcel_id, "address": stop.import_row.address, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "confidence": stop.coordinate_confidence} for stop in route.stops.all()]
+        routes.append({"id": route.id, "route_number": route.route_number, "mode": route.mode, "stop_count": route.stop_count, "geometry": route.geometry, "stops": stops})
     latest_revision = plan.revisions.first()
     assigned_ids = [stop["id"] for route in routes for stop in route["stops"]]
     return {"plan_id": plan.id, "name": plan.name, "import_id": plan.import_file_id, "status": plan.status, "revision": latest_revision.revision_number if latest_revision else 0, "mode": plan.mode, "target_stop_count": plan.target_stop_count, "route_count": plan.route_count, "summary": plan.summary, "routes": routes, "assigned_stop_ids": assigned_ids}
@@ -115,7 +115,7 @@ def create_plan(request):
     plan = RoutingPlan.objects.create(name=name or f"{mode.title()} clusters · {import_obj.filename}", import_file=import_obj, mode=mode, target_stop_count=target, route_count=len(groups), status="clustered", algorithm_version="cluster-v1", summary={"valid_stops": len(items), "unassigned_stops": import_obj.rows.exclude(validation_status="valid").count()})
     for route_number, group in enumerate(groups, start=1):
         total = sum(distance((a["longitude"], a["latitude"]), (b["longitude"], b["latitude"])) for a, b in zip(group, group[1:]))
-        route = RoutingRoute.objects.create(plan=plan, route_number=route_number, stop_count=len(group), estimated_distance_meters=total)
+        route = RoutingRoute.objects.create(plan=plan, route_number=route_number, mode=mode, stop_count=len(group), estimated_distance_meters=total)
         RoutingStop.objects.bulk_create([RoutingStop(route=route, import_row_id=item["id"], sequence=sequence, parcel_id=item["parcel_id"], longitude=item["longitude"], latitude=item["latitude"], street_name=item.get("street_name", ""), street_side=item.get("street_side", ""), coordinate_confidence="source_xy") for sequence, item in enumerate(group, start=1)])
     _record_revision(plan, "clustered")
     return JsonResponse(_plan_payload(plan))
@@ -137,24 +137,17 @@ def optimize_plan(request, plan_id):
 
 def _optimize_route(route, plan):
     stops = list(route.stops.all())
-    items = [{"id": stop.id, "parcel_id": stop.parcel_id, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "locked": stop.manually_locked, "original_sequence": stop.sequence} for stop in stops]
+    items = [{"id": stop.id, "parcel_id": stop.parcel_id, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side} for stop in stops]
     ordered = items
     shapes = []
     if items:
         try:
-            indexes, shapes = optimized_order(items, plan.mode)
+            indexes, shapes = optimized_order(items, route.mode)
             if indexes:
                 ordered = [items[index] for index in indexes]
         except Exception:
-            ordered = cluster_and_order(items, target=max(50, len(items)), mode=plan.mode)[0]
+            ordered = cluster_and_order(items, target=max(50, len(items)), mode=route.mode)[0]
             shapes = []
-    locked = {item["original_sequence"]: item for item in items if item["locked"]}
-    unlocked = [item for item in ordered if not item["locked"]]
-    if locked:
-        ordered = [locked.get(sequence) or unlocked.pop(0) for sequence in range(1, len(items) + 1)]
-        # The Valhalla shape follows its own order, so it is unsafe after fixed
-        # positions are reinserted. The UI will draw a truthful fallback line.
-        shapes = []
     for sequence, item in enumerate(ordered, start=1):
         RoutingStop.objects.filter(pk=item["id"]).update(sequence=sequence)
     route.geometry = {"encoded_polylines": shapes} if shapes else None
@@ -184,6 +177,28 @@ def optimize_route(request, plan_id, route_id):
     plan.algorithm_version = "valhalla-optimized-route-v1"
     plan.save(update_fields=["status", "algorithm_version"])
     _record_revision(plan, "route_optimized")
+    return JsonResponse(_plan_payload(plan))
+
+
+@require_http_methods(["POST"])
+def set_route_mode(request, plan_id, route_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    plan = get_object_or_404(RoutingPlan, pk=plan_id)
+    route = get_object_or_404(RoutingRoute, pk=route_id, plan=plan)
+    try:
+        mode = json.loads(request.body or "{}").get("mode")
+    except json.JSONDecodeError:
+        mode = None
+    if mode not in {"driving", "walking"}:
+        return JsonResponse({"error": "Mode must be driving or walking."}, status=400)
+    if route.mode != mode:
+        route.mode = mode
+        route.geometry = None
+        route.save(update_fields=["mode", "geometry"])
+        plan.status = "clustered"
+        plan.save(update_fields=["status"])
+        _record_revision(plan, "route_mode_changed")
     return JsonResponse(_plan_payload(plan))
 
 
@@ -234,9 +249,8 @@ def move_stop(request, plan_id):
         return JsonResponse({"error": f"Route {target_route.route_number} is already at the {plan.target_stop_count}-stop target."}, status=400)
     source_route = stop.route
     stop.route = target_route
-    stop.manually_locked = True
     stop.sequence = target_route.stops.count() + 1
-    stop.save(update_fields=["route", "manually_locked", "sequence"])
+    stop.save(update_fields=["route", "sequence"])
     source_route.stop_count = source_route.stops.count()
     source_route.geometry = None
     source_route.save(update_fields=["stop_count", "geometry"])
@@ -246,20 +260,6 @@ def move_stop(request, plan_id):
     plan.status = "clustered"
     plan.save(update_fields=["status"])
     _record_revision(plan, "stop_moved")
-    return JsonResponse(_plan_payload(plan))
-
-
-@require_http_methods(["POST"])
-def lock_stop(request, plan_id, stop_id):
-    if not _staff(request):
-        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
-    plan = get_object_or_404(RoutingPlan, pk=plan_id)
-    stop = get_object_or_404(RoutingStop, pk=stop_id, route__plan=plan)
-    stop.manually_locked = not stop.manually_locked
-    stop.save(update_fields=["manually_locked"])
-    plan.status = "clustered"
-    plan.save(update_fields=["status"])
-    _record_revision(plan, "stop_locked" if stop.manually_locked else "stop_unlocked")
     return JsonResponse(_plan_payload(plan))
 
 
@@ -296,7 +296,7 @@ def add_stop(request, plan_id):
     if route.stops.count() >= plan.target_stop_count:
         return JsonResponse({"error": f"Route {route.route_number} is already at the {plan.target_stop_count}-stop target."}, status=400)
     source = row.source_data or {}
-    stop = RoutingStop.objects.create(route=route, import_row=row, sequence=route.stops.count() + 1, parcel_id=row.parcel_id, longitude=row.longitude, latitude=row.latitude, street_name=str(source.get("SitusStName") or source.get("street_name") or "").strip(), street_side=infer_street_side(source.get("SitusStNo") or source.get("street_number") or source.get("address")), coordinate_confidence="source_xy", manually_locked=True)
+    stop = RoutingStop.objects.create(route=route, import_row=row, sequence=route.stops.count() + 1, parcel_id=row.parcel_id, longitude=row.longitude, latitude=row.latitude, street_name=str(source.get("SitusStName") or source.get("street_name") or "").strip(), street_side=infer_street_side(source.get("SitusStNo") or source.get("street_number") or source.get("address")), coordinate_confidence="source_xy")
     route.stop_count = route.stops.count()
     route.geometry = None
     route.save(update_fields=["stop_count", "geometry"])

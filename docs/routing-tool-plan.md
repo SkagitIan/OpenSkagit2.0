@@ -11,8 +11,8 @@ and map geometry; it does not need turn-by-turn directions.
 
 1. Import and validate the original CSV/XLSX without losing source columns.
 2. Create geographic clusters only. Save the plan immediately.
-3. Review route cards and the map. Move, add, remove, lock, or split stops.
-4. Optimize one route or all unlocked routes on demand.
+3. Review route cards and the map. Move, add, remove, or split stops.
+4. Optimize one route or all routes on demand, using each route's selected mode.
 5. Save each optimization as a new plan revision and export the final order.
 
 ## Build sequence
@@ -26,7 +26,7 @@ and map geometry; it does not need turn-by-turn directions.
 - [x] **3. Saved workspace** — list recent imports and plans, reopen a plan by
   ID, show clustered/optimized status, timestamps, and algorithm version.
 - [x] **4. Route-level controls** — add optimize-this-route, optimize-all,
-  reset order, reverse order, lock/unlock, and per-route export controls.
+  reset order, reverse order, per-route mode, and per-route export controls.
 - [ ] **5. Editing** — moving stops between routes and adding/removing stops are
   stops from the imported set, route splitting/merging, and an edit history.
 - [ ] **6. Walking mode** — use pedestrian costing and add street-name and

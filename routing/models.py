@@ -53,6 +53,7 @@ class RoutingPlan(models.Model):
 class RoutingRoute(models.Model):
     plan = models.ForeignKey(RoutingPlan, on_delete=models.CASCADE, related_name="routes")
     route_number = models.PositiveIntegerField()
+    mode = models.CharField(max_length=16, choices=[("driving", "Driving"), ("walking", "Walking")], default="driving")
     stop_count = models.PositiveIntegerField(default=0)
     estimated_distance_meters = models.FloatField(null=True, blank=True)
     estimated_duration_seconds = models.FloatField(null=True, blank=True)

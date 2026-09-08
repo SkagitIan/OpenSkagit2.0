@@ -11,7 +11,7 @@ class RoutingImportAdmin(admin.ModelAdmin):
 
 @admin.register(RoutingPlan)
 class RoutingPlanAdmin(admin.ModelAdmin):
-    list_display = ("id", "mode", "target_stop_count", "route_count", "status", "created_at")
+    list_display = ("id", "name", "mode", "target_stop_count", "route_count", "status", "created_at")
 
 
 @admin.register(RoutingImportRow, RoutingRoute, RoutingStop)

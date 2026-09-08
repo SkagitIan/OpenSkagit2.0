@@ -51,6 +51,48 @@ def _two_opt(items, mode, matrix=None):
     return best
 
 
+def _balanced_geographic_groups(valid, count):
+    """Partition points into balanced, geographically compact groups.
+
+    The former angular sweep was fast but could split two adjacent parcels at
+    a wedge boundary. Capacity-balanced k-means keeps the route-size guarantee
+    while making proximity the primary assignment signal.
+    """
+    sizes = [len(valid) // count + (1 if i < len(valid) % count else 0) for i in range(count)]
+    seeds = [valid[0]]
+    while len(seeds) < count:
+        seeds.append(max(valid, key=lambda item: min(
+            distance((item["longitude"], item["latitude"]), (seed["longitude"], seed["latitude"]))
+            for seed in seeds
+        )))
+    centroids = [(item["longitude"], item["latitude"]) for item in seeds]
+    groups = [[] for _ in range(count)]
+    for _ in range(8):
+        groups = [[] for _ in range(count)]
+        ranked = []
+        for item in valid:
+            costs = sorted(
+                (distance((item["longitude"], item["latitude"]), centroid), index)
+                for index, centroid in enumerate(centroids)
+            )
+            margin = costs[1][0] - costs[0][0] if count > 1 else float("inf")
+            ranked.append((margin, item, costs))
+        for _, item, costs in sorted(ranked, key=lambda value: value[0], reverse=True):
+            for _, index in costs:
+                if len(groups[index]) < sizes[index]:
+                    groups[index].append(item)
+                    break
+        centroids = [
+            (
+                sum(item["longitude"] for item in group) / len(group),
+                sum(item["latitude"] for item in group) / len(group),
+            )
+            if group else centroids[index]
+            for index, group in enumerate(groups)
+        ]
+    return groups
+
+
 def cluster_and_order(items, target=60, mode="driving", matrix_factory=None):
     """Capacity-constrained geographic sweep followed by local route optimization."""
     valid = [item for item in items if item.get("longitude") is not None and item.get("latitude") is not None]
@@ -58,15 +100,10 @@ def cluster_and_order(items, target=60, mode="driving", matrix_factory=None):
         return []
     target = max(50, min(75, int(target)))
     count = math.ceil(len(valid) / target)
-    center_lon = sum(item["longitude"] for item in valid) / len(valid)
-    center_lat = sum(item["latitude"] for item in valid) / len(valid)
-    valid.sort(key=lambda item: math.atan2(item["latitude"] - center_lat, item["longitude"] - center_lon))
-    sizes = [len(valid) // count + (1 if i < len(valid) % count else 0) for i in range(count)]
-    groups, cursor = [], 0
-    for size in sizes:
-        group = valid[cursor:cursor + size]
-        cursor += size
+    groups = _balanced_geographic_groups(valid, count)
+    ordered_groups = []
+    for group in groups:
         matrix = matrix_factory(group, mode) if matrix_factory else None
         ordered = _two_opt(_nearest_neighbor(group, mode, matrix), mode, matrix)
-        groups.append(ordered)
-    return groups
+        ordered_groups.append(ordered)
+    return ordered_groups
