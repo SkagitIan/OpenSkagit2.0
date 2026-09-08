@@ -249,7 +249,8 @@ def add_stop(request, plan_id):
         return JsonResponse({"error": "That stop is already assigned to this plan."}, status=400)
     if route.stops.count() >= plan.target_stop_count:
         return JsonResponse({"error": f"Route {route.route_number} is already at the {plan.target_stop_count}-stop target."}, status=400)
-    stop = RoutingStop.objects.create(route=route, import_row=row, sequence=route.stops.count() + 1, parcel_id=row.parcel_id, longitude=row.longitude, latitude=row.latitude, street_name=str((row.source_data or {}).get("SitusStName") or "").strip(), coordinate_confidence="source_xy", manually_locked=True)
+    source = row.source_data or {}
+    stop = RoutingStop.objects.create(route=route, import_row=row, sequence=route.stops.count() + 1, parcel_id=row.parcel_id, longitude=row.longitude, latitude=row.latitude, street_name=str(source.get("SitusStName") or source.get("street_name") or "").strip(), street_side=infer_street_side(source.get("SitusStNo") or source.get("street_number") or source.get("address")), coordinate_confidence="source_xy", manually_locked=True)
     route.stop_count = route.stops.count()
     route.geometry = None
     route.save(update_fields=["stop_count", "geometry"])
