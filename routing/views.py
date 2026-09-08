@@ -75,7 +75,7 @@ def _plan_payload(plan):
         routes.append({"id": route.id, "route_number": route.route_number, "stop_count": route.stop_count, "geometry": route.geometry, "stops": stops})
     latest_revision = plan.revisions.first()
     assigned_ids = [stop["id"] for route in routes for stop in route["stops"]]
-    return {"plan_id": plan.id, "import_id": plan.import_file_id, "status": plan.status, "revision": latest_revision.revision_number if latest_revision else 0, "mode": plan.mode, "target_stop_count": plan.target_stop_count, "route_count": plan.route_count, "summary": plan.summary, "routes": routes, "assigned_stop_ids": assigned_ids}
+    return {"plan_id": plan.id, "name": plan.name, "import_id": plan.import_file_id, "status": plan.status, "revision": latest_revision.revision_number if latest_revision else 0, "mode": plan.mode, "target_stop_count": plan.target_stop_count, "route_count": plan.route_count, "summary": plan.summary, "routes": routes, "assigned_stop_ids": assigned_ids}
 
 
 def _record_revision(plan, action):
@@ -87,7 +87,7 @@ def _record_revision(plan, action):
 def plans_list(request):
     if not _staff(request):
         return JsonResponse({"error": "Staff sign-in is required."}, status=403)
-    return JsonResponse({"plans": [{"id": plan.id, "filename": plan.import_file.filename, "mode": plan.mode, "status": plan.status, "route_count": plan.route_count, "created_at": plan.created_at.isoformat()} for plan in RoutingPlan.objects.select_related("import_file")[:30]]})
+    return JsonResponse({"plans": [{"id": plan.id, "name": plan.name, "filename": plan.import_file.filename, "mode": plan.mode, "status": plan.status, "route_count": plan.route_count, "created_at": plan.created_at.isoformat()} for plan in RoutingPlan.objects.select_related("import_file")[:30]]})
 
 
 @require_http_methods(["POST"])
@@ -99,6 +99,7 @@ def create_plan(request):
         import_obj = get_object_or_404(RoutingImport, pk=int(body["import_id"]))
         mode = body.get("mode", "driving")
         target = max(50, min(75, int(body.get("target_stop_count", 60))))
+        name = str(body.get("name") or "").strip()[:160]
     except (KeyError, TypeError, ValueError, json.JSONDecodeError):
         return JsonResponse({"error": "A valid import_id and target_stop_count are required."}, status=400)
     raw_items = list(import_obj.rows.filter(validation_status="valid").values("id", "parcel_id", "address", "longitude", "latitude", "source_data"))
@@ -111,7 +112,7 @@ def create_plan(request):
         item["street_name"] = str(source.get("SitusStName") or source.get("street_name") or "").strip()
         item["street_side"] = str(source.get("street_side") or infer_street_side(source.get("SitusStNo") or source.get("street_number") or source.get("address"))).strip().lower()
     groups = cluster_and_order(items, target=target, mode=mode)
-    plan = RoutingPlan.objects.create(import_file=import_obj, mode=mode, target_stop_count=target, route_count=len(groups), status="clustered", algorithm_version="cluster-v1", summary={"valid_stops": len(items), "unassigned_stops": import_obj.rows.exclude(validation_status="valid").count()})
+    plan = RoutingPlan.objects.create(name=name or f"{mode.title()} clusters · {import_obj.filename}", import_file=import_obj, mode=mode, target_stop_count=target, route_count=len(groups), status="clustered", algorithm_version="cluster-v1", summary={"valid_stops": len(items), "unassigned_stops": import_obj.rows.exclude(validation_status="valid").count()})
     for route_number, group in enumerate(groups, start=1):
         total = sum(distance((a["longitude"], a["latitude"]), (b["longitude"], b["latitude"])) for a, b in zip(group, group[1:]))
         route = RoutingRoute.objects.create(plan=plan, route_number=route_number, stop_count=len(group), estimated_distance_meters=total)

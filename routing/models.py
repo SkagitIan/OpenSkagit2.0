@@ -37,6 +37,7 @@ class RoutingImportRow(models.Model):
 
 class RoutingPlan(models.Model):
     import_file = models.ForeignKey(RoutingImport, on_delete=models.CASCADE, related_name="plans")
+    name = models.CharField(max_length=160, blank=True)
     mode = models.CharField(max_length=16, choices=[("driving", "Driving"), ("walking", "Walking")])
     target_stop_count = models.PositiveIntegerField(default=60)
     route_count = models.PositiveIntegerField(default=0)
