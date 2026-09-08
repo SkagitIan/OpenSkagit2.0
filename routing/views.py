@@ -136,26 +136,29 @@ def optimize_plan(request, plan_id):
 
 
 def _optimize_route(route, plan):
-        stops = list(route.stops.all())
-        items = [{"id": stop.id, "parcel_id": stop.parcel_id, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "locked": stop.manually_locked, "original_sequence": stop.sequence} for stop in stops]
-        ordered = items
+    stops = list(route.stops.all())
+    items = [{"id": stop.id, "parcel_id": stop.parcel_id, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "locked": stop.manually_locked, "original_sequence": stop.sequence} for stop in stops]
+    ordered = items
+    shapes = []
+    if items:
+        try:
+            indexes, shapes = optimized_order(items, plan.mode)
+            if indexes:
+                ordered = [items[index] for index in indexes]
+        except Exception:
+            ordered = cluster_and_order(items, target=max(50, len(items)), mode=plan.mode)[0]
+            shapes = []
+    locked = {item["original_sequence"]: item for item in items if item["locked"]}
+    unlocked = [item for item in ordered if not item["locked"]]
+    if locked:
+        ordered = [locked.get(sequence) or unlocked.pop(0) for sequence in range(1, len(items) + 1)]
+        # The Valhalla shape follows its own order, so it is unsafe after fixed
+        # positions are reinserted. The UI will draw a truthful fallback line.
         shapes = []
-        if items:
-            try:
-                indexes, shapes = optimized_order(items, plan.mode)
-                if indexes:
-                    ordered = [items[index] for index in indexes]
-            except Exception:
-                ordered = cluster_and_order(items, target=max(50, len(items)), mode=plan.mode)[0]
-        locked = {item["original_sequence"]: item for item in items if item["locked"]}
-        unlocked = [item for item in ordered if not item["locked"]]
-        if locked:
-            ordered = [locked.get(sequence) or unlocked.pop(0) for sequence in range(1, len(items) + 1)]
-        for sequence, item in enumerate(ordered, start=1):
-            RoutingStop.objects.filter(pk=item["id"]).update(sequence=sequence)
-        if shapes:
-            route.geometry = {"encoded_polylines": shapes}
-            route.save(update_fields=["geometry"])
+    for sequence, item in enumerate(ordered, start=1):
+        RoutingStop.objects.filter(pk=item["id"]).update(sequence=sequence)
+    route.geometry = {"encoded_polylines": shapes} if shapes else None
+    route.save(update_fields=["geometry"])
 
 
 def _set_route_order(route, stop_ids):
