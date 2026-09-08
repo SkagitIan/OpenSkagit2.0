@@ -180,10 +180,21 @@ def move_stop(request, plan_id):
         target_route = get_object_or_404(RoutingRoute, pk=int(body["target_route"]), plan=plan)
     except (KeyError, TypeError, ValueError, json.JSONDecodeError):
         return JsonResponse({"error": "A valid stop_id and target_route are required."}, status=400)
+    if stop.route_id == target_route.id:
+        return JsonResponse(_plan_payload(plan))
+    if target_route.stops.count() >= plan.target_stop_count:
+        return JsonResponse({"error": f"Route {target_route.route_number} is already at the {plan.target_stop_count}-stop target."}, status=400)
+    source_route = stop.route
     stop.route = target_route
     stop.manually_locked = True
     stop.sequence = target_route.stops.count() + 1
     stop.save(update_fields=["route", "manually_locked", "sequence"])
+    source_route.stop_count = source_route.stops.count()
+    source_route.geometry = None
+    source_route.save(update_fields=["stop_count", "geometry"])
+    target_route.stop_count = target_route.stops.count()
+    target_route.geometry = None
+    target_route.save(update_fields=["stop_count", "geometry"])
     plan.status = "clustered"
     plan.save(update_fields=["status"])
     _record_revision(plan, "stop_moved")
