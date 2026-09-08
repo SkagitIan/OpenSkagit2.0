@@ -71,10 +71,11 @@ def import_file(request):
 def _plan_payload(plan):
     routes = []
     for route in plan.routes.prefetch_related("stops__import_row"):
-        stops = [{"id": stop.id, "sequence": stop.sequence, "parcel_id": stop.parcel_id, "address": stop.import_row.address, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "confidence": stop.coordinate_confidence, "manually_locked": stop.manually_locked} for stop in route.stops.all()]
+        stops = [{"id": stop.id, "import_row_id": stop.import_row_id, "sequence": stop.sequence, "parcel_id": stop.parcel_id, "address": stop.import_row.address, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "confidence": stop.coordinate_confidence, "manually_locked": stop.manually_locked} for stop in route.stops.all()]
         routes.append({"id": route.id, "route_number": route.route_number, "stop_count": route.stop_count, "geometry": route.geometry, "stops": stops})
     latest_revision = plan.revisions.first()
-    return {"plan_id": plan.id, "status": plan.status, "revision": latest_revision.revision_number if latest_revision else 0, "mode": plan.mode, "target_stop_count": plan.target_stop_count, "route_count": plan.route_count, "summary": plan.summary, "routes": routes}
+    assigned_ids = [stop["id"] for route in routes for stop in route["stops"]]
+    return {"plan_id": plan.id, "import_id": plan.import_file_id, "status": plan.status, "revision": latest_revision.revision_number if latest_revision else 0, "mode": plan.mode, "target_stop_count": plan.target_stop_count, "route_count": plan.route_count, "summary": plan.summary, "routes": routes, "assigned_stop_ids": assigned_ids}
 
 
 def _record_revision(plan, action):
@@ -213,6 +214,48 @@ def lock_stop(request, plan_id, stop_id):
     plan.status = "clustered"
     plan.save(update_fields=["status"])
     _record_revision(plan, "stop_locked" if stop.manually_locked else "stop_unlocked")
+    return JsonResponse(_plan_payload(plan))
+
+
+@require_http_methods(["POST"])
+def remove_stop(request, plan_id, stop_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    plan = get_object_or_404(RoutingPlan, pk=plan_id)
+    stop = get_object_or_404(RoutingStop, pk=stop_id, route__plan=plan)
+    route = stop.route
+    stop.delete()
+    route.stop_count = route.stops.count()
+    route.geometry = None
+    route.save(update_fields=["stop_count", "geometry"])
+    plan.status = "clustered"
+    plan.save(update_fields=["status"])
+    _record_revision(plan, "stop_removed")
+    return JsonResponse(_plan_payload(plan))
+
+
+@require_http_methods(["POST"])
+def add_stop(request, plan_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    plan = get_object_or_404(RoutingPlan, pk=plan_id)
+    try:
+        body = json.loads(request.body or "{}")
+        row = get_object_or_404(RoutingImportRow, pk=int(body["import_row_id"]), import_file=plan.import_file, validation_status="valid")
+        route = get_object_or_404(RoutingRoute, pk=int(body["target_route"]), plan=plan)
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+        return JsonResponse({"error": "A valid import_row_id and target_route are required."}, status=400)
+    if RoutingStop.objects.filter(route__plan=plan, import_row=row).exists():
+        return JsonResponse({"error": "That stop is already assigned to this plan."}, status=400)
+    if route.stops.count() >= plan.target_stop_count:
+        return JsonResponse({"error": f"Route {route.route_number} is already at the {plan.target_stop_count}-stop target."}, status=400)
+    stop = RoutingStop.objects.create(route=route, import_row=row, sequence=route.stops.count() + 1, parcel_id=row.parcel_id, longitude=row.longitude, latitude=row.latitude, street_name=str((row.source_data or {}).get("SitusStName") or "").strip(), coordinate_confidence="source_xy", manually_locked=True)
+    route.stop_count = route.stops.count()
+    route.geometry = None
+    route.save(update_fields=["stop_count", "geometry"])
+    plan.status = "clustered"
+    plan.save(update_fields=["status"])
+    _record_revision(plan, "stop_added")
     return JsonResponse(_plan_payload(plan))
 
 
