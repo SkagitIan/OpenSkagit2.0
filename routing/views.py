@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth.views import redirect_to_login
+from django.db import transaction
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_GET, require_http_methods
@@ -166,6 +167,14 @@ def _set_route_order(route, stop_ids):
     route.save(update_fields=["geometry"])
 
 
+def _renumber_route(route):
+    stops = list(route.stops.order_by("sequence", "id"))
+    for offset, stop in enumerate(stops, start=1):
+        RoutingStop.objects.filter(pk=stop.pk).update(sequence=10000 + offset)
+    for sequence, stop in enumerate(stops, start=1):
+        RoutingStop.objects.filter(pk=stop.pk).update(sequence=sequence)
+
+
 @require_http_methods(["POST"])
 def optimize_route(request, plan_id, route_id):
     if not _staff(request):
@@ -248,9 +257,12 @@ def move_stop(request, plan_id):
     if target_route.stops.count() >= plan.target_stop_count:
         return JsonResponse({"error": f"Route {target_route.route_number} is already at the {plan.target_stop_count}-stop target."}, status=400)
     source_route = stop.route
-    stop.route = target_route
-    stop.sequence = target_route.stops.count() + 1
-    stop.save(update_fields=["route", "sequence"])
+    with transaction.atomic():
+        stop.route = target_route
+        stop.sequence = 100000
+        stop.save(update_fields=["route", "sequence"])
+        _renumber_route(source_route)
+        _renumber_route(target_route)
     source_route.stop_count = source_route.stops.count()
     source_route.geometry = None
     source_route.save(update_fields=["stop_count", "geometry"])
