@@ -5,3 +5,4 @@
 .routing-app #routing-add-stop{display:flex;gap:8px;align-items:end;margin-top:10px}.routing-app #routing-add-stop[hidden]{display:none}.routing-app #routing-add-stop select{max-width:260px}
 .routing-route-toggle{accent-color:#176b5b}.routing-result header label{display:flex;align-items:center;gap:4px}
 .routing-result{cursor:pointer}.routing-result.is-selected{box-shadow:0 0 0 2px #176b5b,0 8px 18px rgba(23,63,58,.16)}
+.routing-route-reverse,.routing-route-reset{padding:4px 7px;border:1px solid #b8c9c4;border-radius:6px;background:#fff;color:#52605d;font-size:11px}

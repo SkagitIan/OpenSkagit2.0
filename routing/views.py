@@ -157,6 +157,18 @@ def _optimize_route(route, plan):
             route.save(update_fields=["geometry"])
 
 
+def _set_route_order(route, stop_ids):
+    stops = {stop.id: stop for stop in route.stops.all()}
+    ordered = [stops[stop_id] for stop_id in stop_ids if stop_id in stops]
+    ordered += [stop for stop in stops.values() if stop not in ordered]
+    for offset, stop in enumerate(ordered, start=1):
+        RoutingStop.objects.filter(pk=stop.id).update(sequence=offset + 10000)
+    for sequence, stop in enumerate(ordered, start=1):
+        RoutingStop.objects.filter(pk=stop.id).update(sequence=sequence)
+    route.geometry = None
+    route.save(update_fields=["geometry"])
+
+
 @require_http_methods(["POST"])
 def optimize_route(request, plan_id, route_id):
     if not _staff(request):
@@ -168,6 +180,36 @@ def optimize_route(request, plan_id, route_id):
     plan.algorithm_version = "valhalla-optimized-route-v1"
     plan.save(update_fields=["status", "algorithm_version"])
     _record_revision(plan, "route_optimized")
+    return JsonResponse(_plan_payload(plan))
+
+
+@require_http_methods(["POST"])
+def reverse_route(request, plan_id, route_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    plan = get_object_or_404(RoutingPlan, pk=plan_id)
+    route = get_object_or_404(RoutingRoute, pk=route_id, plan=plan)
+    _set_route_order(route, [stop.id for stop in reversed(list(route.stops.all()))])
+    plan.status = "clustered"
+    plan.save(update_fields=["status"])
+    _record_revision(plan, "route_reversed")
+    return JsonResponse(_plan_payload(plan))
+
+
+@require_http_methods(["POST"])
+def reset_route(request, plan_id, route_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    plan = get_object_or_404(RoutingPlan, pk=plan_id)
+    route = get_object_or_404(RoutingRoute, pk=route_id, plan=plan)
+    first_revision = plan.revisions.order_by("revision_number").first()
+    original = next((item for item in (first_revision.snapshot.get("routes", []) if first_revision else []) if item.get("id") == route.id), None)
+    if not original:
+        return JsonResponse({"error": "The original clustered order could not be found."}, status=409)
+    _set_route_order(route, [stop["id"] for stop in original.get("stops", [])])
+    plan.status = "clustered"
+    plan.save(update_fields=["status"])
+    _record_revision(plan, "route_reset")
     return JsonResponse(_plan_payload(plan))
 
 
