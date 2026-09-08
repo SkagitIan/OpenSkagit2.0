@@ -23,11 +23,11 @@ and map geometry; it does not need turn-by-turn directions.
 - [x] **2. Map presentation** — display a working street/aerial basemap,
   colored route polylines, numbered stops, route visibility, and selected-route
   highlighting.
-- [ ] **3. Saved workspace** — list recent imports and plans, reopen a plan by
+- [x] **3. Saved workspace** — list recent imports and plans, reopen a plan by
   ID, show clustered/optimized status, timestamps, and algorithm version.
-- [ ] **4. Route-level controls** — add optimize-this-route, optimize-all,
+- [x] **4. Route-level controls** — add optimize-this-route, optimize-all,
   reset order, reverse order, lock/unlock, and per-route export controls.
-- [ ] **5. Editing** — support moving stops between routes, adding/removing
+- [ ] **5. Editing** — moving stops between routes and adding/removing stops are
   stops from the imported set, route splitting/merging, and an edit history.
 - [ ] **6. Walking mode** — use pedestrian costing and add street-name and
   side-of-street sequencing heuristics, with a visible low-confidence warning.
@@ -47,6 +47,8 @@ and map geometry; it does not need turn-by-turn directions.
 
 ## Current implementation note
 
-The prototype has the import and persistence foundation. The next code pass
-should complete items 1–3 before expanding the editing UI. Existing unrelated
-worktree changes must remain outside routing commits.
+Creating clusters immediately saves a named `RoutingPlan` with route and stop
+records. Later optimization and field edits update that same plan and append a
+`RoutingPlanRevision` snapshot, so the plan can be reopened without repeating
+the import or clustering step. Existing unrelated worktree changes must remain
+outside routing commits.
