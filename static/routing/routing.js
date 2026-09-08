@@ -7,13 +7,14 @@
   var optimize = document.getElementById("routing-optimize"), target = document.getElementById("routing-target");
   var mode = document.getElementById("routing-mode"), results = document.getElementById("routing-results");
   var map = L.map("routing-map").setView([48.42, -122.35], 11), layers = {}, currentImport = null, currentPlan = null;
-  L.tileLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Assessor/PropertyMap/MapServer/tile/{z}/{y}/{x}", {maxZoom: 19, attribution: "Skagit County GIS"}).addTo(map);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {maxZoom: 20, attribution: "© OpenStreetMap contributors © CARTO"}).addTo(map);
   function csrf() { var m = document.cookie.match(/csrftoken=([^;]+)/); return m ? decodeURIComponent(m[1]) : ""; }
   function clear() { Object.keys(layers).forEach(function (key) { map.removeLayer(layers[key]); }); layers = {}; results.innerHTML = ""; }
   function draw(data) {
     clear(); var bounds = [];
     data.routes.forEach(function (route, index) {
       var color = ["#d05a3a", "#287c72", "#6d54a3", "#bc7d2d", "#2b6ca3", "#a33d72"][index % 6], group = L.layerGroup();
+      if (route.geometry && route.geometry.encoded_polylines) route.geometry.encoded_polylines.forEach(function (encoded) { var points = decode(encoded); if (points.length) L.polyline(points, {color: color, weight: 4, opacity: .75}).addTo(group); });
       route.stops.forEach(function (stop) { L.circleMarker([stop.latitude, stop.longitude], {radius: 7, color: color, fillColor: color, fillOpacity: .9, weight: 2}).bindTooltip(route.route_number + "." + stop.sequence + " " + (stop.parcel_id || "stop")).addTo(group); bounds.push([stop.latitude, stop.longitude]); });
       group.addTo(map); layers[route.route_number] = group;
       var html = '<article class="routing-result" style="border-left-color:' + color + '"><strong>Route ' + route.route_number + '</strong> · ' + route.stop_count + ' stops<ol>';
@@ -21,6 +22,17 @@
       results.insertAdjacentHTML("beforeend", html + "</ol></article>");
     });
     if (bounds.length) map.fitBounds(bounds, {padding: [20, 20]});
+  }
+  function decode(encoded) {
+    var points = [], index = 0, lat = 0, lon = 0;
+    while (index < encoded.length) {
+      var result = 0, shift = 0, byte;
+      do { byte = encoded.charCodeAt(index++) - 63; result |= (byte & 31) << shift; shift += 5; } while (byte >= 32);
+      lat += (result & 1) ? ~(result >> 1) : result >> 1; result = 0; shift = 0;
+      do { byte = encoded.charCodeAt(index++) - 63; result |= (byte & 31) << shift; shift += 5; } while (byte >= 32);
+      lon += (result & 1) ? ~(result >> 1) : result >> 1; points.push([lat / 1e6, lon / 1e6]);
+    }
+    return points;
   }
   function request(url, options) {
     options = options || {}; options.credentials = "same-origin"; options.headers = options.headers || {}; options.headers["X-CSRFToken"] = csrf();

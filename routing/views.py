@@ -10,6 +10,7 @@ from .services.exports import route_csv
 from .services.importers import normalize_row, read_upload
 from .services.optimization import cluster_and_order, distance
 from .services.matrices import travel_matrix
+from .services.valhalla import optimized_order
 
 
 def _staff(request):
@@ -71,7 +72,7 @@ def _plan_payload(plan):
     routes = []
     for route in plan.routes.prefetch_related("stops__import_row"):
         stops = [{"sequence": stop.sequence, "parcel_id": stop.parcel_id, "address": stop.import_row.address, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name, "street_side": stop.street_side, "confidence": stop.coordinate_confidence} for stop in route.stops.all()]
-        routes.append({"route_number": route.route_number, "stop_count": route.stop_count, "stops": stops})
+        routes.append({"route_number": route.route_number, "stop_count": route.stop_count, "geometry": route.geometry, "stops": stops})
     return {"plan_id": plan.id, "mode": plan.mode, "target_stop_count": plan.target_stop_count, "route_count": plan.route_count, "summary": plan.summary, "routes": routes}
 
 
@@ -111,9 +112,20 @@ def optimize_plan(request, plan_id):
     for route in plan.routes.prefetch_related("stops"):
         stops = list(route.stops.all())
         items = [{"id": stop.id, "parcel_id": stop.parcel_id, "longitude": stop.longitude, "latitude": stop.latitude, "street_name": stop.street_name} for stop in stops]
-        ordered = cluster_and_order(items, target=max(50, len(items)), mode=plan.mode, matrix_factory=travel_matrix)[0] if items else []
+        ordered = items
+        shapes = []
+        if items:
+            try:
+                indexes, shapes = optimized_order(items, plan.mode)
+                if indexes:
+                    ordered = [items[index] for index in indexes]
+            except Exception:
+                ordered = cluster_and_order(items, target=max(50, len(items)), mode=plan.mode)[0]
         for sequence, item in enumerate(ordered, start=1):
             RoutingStop.objects.filter(pk=item["id"]).update(sequence=sequence, manually_locked=False)
+        if shapes:
+            route.geometry = {"encoded_polylines": shapes}
+            route.save(update_fields=["geometry"])
     plan.status = "optimized"
     plan.algorithm_version = "valhalla-matrix-v1"
     plan.save(update_fields=["status", "algorithm_version"])
