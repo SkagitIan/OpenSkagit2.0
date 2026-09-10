@@ -405,6 +405,7 @@ let state = loadState() || {
 let map, parcelLayer, drawLayer;
 let selected = new Set();
 let parcelLayersById = new Map();
+let imageryCleanup = null;
 
 function persist(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -965,8 +966,18 @@ function closePhotoPreview(){
   document.getElementById("photoPreview")?.remove();
 }
 
+function closeImageryCompare(){
+  if(imageryCleanup){
+    const cleanup=imageryCleanup;
+    imageryCleanup=null;
+    cleanup();
+  }else{
+    document.getElementById("imageryCompare")?.remove();
+  }
+}
+
 function openImageryCompare(pid){
-  document.getElementById("imageryCompare")?.remove();
+  closeImageryCompare();
   const a=assignmentMap().get(pid) || {};
   const modal=document.createElement("div");
   modal.id="imageryCompare";
@@ -999,6 +1010,7 @@ function openImageryCompare(pid){
       if(!response.ok || !payload.found) throw new Error("No assessor sketch found");
       const bounds=parcelLayer ? parcelLayer.getBounds() : historic.getBounds();
       sketchOverlay=L.imageOverlay(payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true}).addTo(historic);
+      sketchOverlay.setZIndex(1000);
       sketchOverlay.once("load",()=>{const image=sketchOverlay.getElement();if(image){image.style.mixBlendMode="multiply";image.style.filter="grayscale(1) contrast(1.35)";}});
       sketchControl.classList.add("visible");
       sketchButton.textContent="Hide sketch";
@@ -1043,16 +1055,15 @@ function openImageryCompare(pid){
     L.marker(center).addTo(historic);
   }
   const close=()=>{
+    if(imageryCleanup===close) imageryCleanup=null;
     document.removeEventListener("keydown",onKey);
     modal.remove();
     try{current.remove();}catch(e){}
     try{historic.remove();}catch(e){}
   };
+  imageryCleanup=close;
   const onKey=e=>{if(e.key==="Escape")close();};
-  modal.addEventListener("pointerdown",e=>{
-    if(e.target.closest("#imageryClose")){e.preventDefault();e.stopPropagation();close();}
-  },true);
-  document.getElementById("imageryClose").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();close();},true);
+  document.getElementById("imageryClose").setAttribute("aria-label","Close aerial comparison");
   document.addEventListener("keydown",onKey);
 }
 
@@ -1314,6 +1325,21 @@ document.getElementById("exportProgress").addEventListener("click",exportProgres
 
 ["preRouteFilter","preShowFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderPreinspection));
 document.getElementById("preSearch").addEventListener("input",renderPreinspection);
+
+document.addEventListener("pointerdown",e=>{
+  if(e.target.closest("#imageryClose")){
+    e.preventDefault();
+    e.stopPropagation();
+    closeImageryCompare();
+  }
+},true);
+document.addEventListener("click",e=>{
+  if(e.target.closest("#imageryClose")){
+    e.preventDefault();
+    e.stopPropagation();
+    closeImageryCompare();
+  }
+},true);
 
 document.getElementById("preBody").addEventListener("mouseover",e=>{
   const target=e.target.closest("[data-parcel-hover]");
