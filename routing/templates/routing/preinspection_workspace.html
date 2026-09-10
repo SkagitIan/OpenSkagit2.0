@@ -1136,11 +1136,16 @@ function openImageryCompare(pid){
     modal.remove();
     try{current.remove();}catch(e){}
     try{historic.remove();}catch(e){}
+    renderPreinspection();
   };
   imageryCleanup=close;
   const onKey=e=>{if(e.key==="Escape")close();};
   const notesInput=document.getElementById("imageryNotes");
-  notesInput.addEventListener("input",()=>{inspection(pid).notes=notesInput.value;persist();});
+  notesInput.addEventListener("input",()=>{
+    inspection(pid).notes=notesInput.value;
+    document.querySelectorAll(`#preBody textarea[data-pid="${CSS.escape(pid)}"]`).forEach(field=>{field.value=notesInput.value;});
+    persist();
+  });
   document.getElementById("imageryClose").setAttribute("aria-label","Close aerial comparison");
   document.addEventListener("keydown",onKey);
 }
