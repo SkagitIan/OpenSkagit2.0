@@ -6,6 +6,7 @@ app_name = "routing"
 
 urlpatterns = [
     path("", views.workspace_page, name="workspace"),
+    path("sales-cycle/", views.sales_cycle, name="sales_cycle"),
     path("parcel/<str:parcel_id>/sketch/", views.parcel_sketch, name="parcel_sketch"),
     path("parcel/<str:parcel_id>/sketch/image/", views.parcel_sketch_image, name="parcel_sketch_image"),
     path("routes/", views.routes_page, name="routes"),

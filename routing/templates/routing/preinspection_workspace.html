@@ -133,6 +133,7 @@ tr.changed{background:#fffaf0}
 .address-copy.is-copied{border-color:#9fc9aa;background:#eff9e9;color:#416900}
 .unassign-action{flex:0 0 30px;width:30px;height:30px;border:1px solid #e7b0b0;border-radius:6px;background:#fff3f3;color:#a5222b;font-size:15px;line-height:1}
 .unassign-action:hover{background:#fbe0e0;border-color:#c95858}
+.recent-sale-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-left:4px;border-radius:50%;background:#c62828;color:#fff;font-size:12px;font-weight:800;line-height:1;vertical-align:middle;box-shadow:0 1px 2px rgba(120,0,0,.2)}
 .imagery-header-actions{display:flex;align-items:center;gap:5px;margin-left:auto}
 .imagery-compare-head .imagery-sketch-control{position:static;display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:0;background:transparent;border:0;max-width:none;font-size:11px}
 .imagery-compare-head .imagery-sketch-control button{width:auto;height:30px;padding:4px 7px;font-size:12px}
@@ -1165,6 +1166,25 @@ function parcelAddress(a){
   return [number,street,csz].filter(Boolean).join(", ").replace(/\s+/g," ").trim();
 }
 
+const salesCycleUrl="/routing/sales-cycle/";
+let recentSales={};
+let salesLookupInFlight=null;
+
+async function refreshRecentSales(){
+  const ids=[...new Set(state.assignment.map(a=>String(a.PARCELID||"").trim()).filter(Boolean))];
+  recentSales={};
+  if(!ids.length){renderPreinspection();return;}
+  if(salesLookupInFlight) return salesLookupInFlight;
+  const params=new URLSearchParams();
+  ids.forEach(pid=>params.append("parcel_id",pid));
+  salesLookupInFlight=fetch(`${salesCycleUrl}?${params.toString()}`,{credentials:"same-origin"})
+    .then(response=>{if(!response.ok) throw new Error("Sales lookup failed");return response.json();})
+    .then(payload=>{recentSales=payload.parcels||{};})
+    .catch(()=>{recentSales={};})
+    .finally(()=>{salesLookupInFlight=null;renderPreinspection();});
+  return salesLookupInFlight;
+}
+
 async function copyAddress(button,address){
   const original=button.textContent;
   try{
@@ -1247,6 +1267,8 @@ function renderPreinspection(){
       const s=inspection(pid);
       const complete=isComplete(pid);
       const addr=parcelAddress(a);
+      const sale=recentSales[pid];
+      const saleTitle=sale ? `Sale in current cycle: ${sale.count} sale${sale.count===1?"":"s"}; latest ${sale.latest_sale_date}` : "";
       if(showMode==="incomplete" && complete) return;
       if(showMode==="changes" && s.changes!=="yes") return;
       if(q && !(pid.toLowerCase().includes(q)||addr.toLowerCase().includes(q))) return;
@@ -1256,7 +1278,7 @@ function renderPreinspection(){
       if(complete) tr.classList.add("complete");
       if(s.changes==="yes") tr.classList.add("changed");
       tr.innerHTML=`
-        <td><span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span> <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
+        <td><span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span>${sale ? `<span class="recent-sale-badge" title="${escapeAttr(saleTitle)}" aria-label="${escapeAttr(saleTitle)}">$</span>` : ""} <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
         <td><button class="address-copy" type="button" data-copy-address="${escapeAttr(addr)}" aria-label="Copy address: ${escapeAttr(addr)}" title="Click to copy full address">${escapeHTML(addr || "—")}</button></td>
         <td style="text-align:center">
           <button class="photo-btn photo-action preinspection-action" type="button" data-photo="${escapeAttr(pid)}" title="Preview Skagit County property photo">▣</button>
@@ -1385,7 +1407,7 @@ document.querySelectorAll(".tab").forEach(btn=>{
     document.getElementById("preinspectionView").classList.toggle("active",v==="preinspection");
     document.querySelector(".statusbar").style.display = v==="routes" ? "flex" : "none";
     if(v==="routes") setTimeout(()=>map.invalidateSize(),50);
-    if(v==="preinspection") renderPreinspection();
+    if(v==="preinspection") { renderPreinspection(); refreshRecentSales(); }
   });
 });
 
@@ -1405,6 +1427,7 @@ document.getElementById("assignmentFile").addEventListener("change",e=>{
       persist();
       parcelLayer.clearLayers();
       renderRoutes(); renderPreinspection(); refreshStats(); updateMapMessage();
+      refreshRecentSales();
       fetchParcelPolygons();
     }catch(err){ alert(err.message); }
   };
@@ -1535,6 +1558,7 @@ if(state.assignment.length && !state.parcelGeoJSON){
 }
 renderRoutes();
 renderPreinspection();
+refreshRecentSales();
 refreshStats();
 updateMapMessage();
 refreshSetupVisibility();

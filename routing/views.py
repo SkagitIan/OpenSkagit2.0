@@ -5,7 +5,7 @@ import re
 import requests
 from PIL import Image, ImageChops
 from django.contrib.auth.views import redirect_to_login
-from django.db import transaction
+from django.db import DatabaseError, connection, transaction
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_GET, require_http_methods
@@ -38,6 +38,61 @@ def workspace_page(request):
     if not _staff(request):
         return _forbidden(request)
     return render(request, "routing/preinspection_workspace.html")
+
+
+# The current assessment cycle is May 1, 2026 through April 30, 2027.
+# Keep the end bound exclusive so ISO date and timestamp values are both handled.
+SALES_CYCLE_START = "2026-05-01"
+SALES_CYCLE_END_EXCLUSIVE = "2027-05-01"
+SALES_CYCLE_END_LABEL = "2027-04-30"
+
+
+@require_GET
+def sales_cycle(request):
+    """Return current-cycle sale flags for the parcels shown in the workspace."""
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+
+    parcel_ids = []
+    for value in request.GET.getlist("parcel_id"):
+        normalized = str(value or "").strip()
+        if normalized and normalized not in parcel_ids:
+            parcel_ids.append(normalized)
+    if len(parcel_ids) > 2000:
+        return JsonResponse({"error": "Too many parcels in one lookup."}, status=400)
+
+    sales = {}
+    if parcel_ids:
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT parcel_number, COUNT(*) AS sale_count, MAX(sale_date_iso) AS latest_sale_date
+                    FROM sales
+                    WHERE parcel_number = ANY(%s)
+                      AND sale_date_iso >= %s
+                      AND sale_date_iso < %s
+                    GROUP BY parcel_number
+                    """,
+                    [parcel_ids, SALES_CYCLE_START, SALES_CYCLE_END_EXCLUSIVE],
+                )
+                for parcel_number, sale_count, latest_sale_date in cursor.fetchall():
+                    key = str(parcel_number or "").strip()
+                    if key:
+                        sales[key] = {
+                            "count": int(sale_count),
+                            "latest_sale_date": str(latest_sale_date or ""),
+                        }
+        except DatabaseError:
+            return JsonResponse({"error": "Recent sales lookup is temporarily unavailable."}, status=503)
+
+    return JsonResponse(
+        {
+            "cycle_start": SALES_CYCLE_START,
+            "cycle_end": SALES_CYCLE_END_LABEL,
+            "parcels": sales,
+        }
+    )
 
 
 def _assessor_sketch_url(parcel_id):
