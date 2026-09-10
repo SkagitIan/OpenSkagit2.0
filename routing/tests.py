@@ -52,3 +52,12 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn("if(!(targetMap instanceof L.Map)) targetMap=activeSketchMap || current;", template)
         self.assertIn('sketchButton.addEventListener("click",()=>toggleSketch(activeSketchMap || current));', template)
         self.assertNotIn('sketchButton.addEventListener("click",toggleSketch);', template)
+
+    def test_preinspection_tracks_and_advances_active_parcel(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn('if(!Object.prototype.hasOwnProperty.call(state,"activeParcel")) state.activeParcel="";', template)
+        self.assertIn("function advanceActiveParcelFrom(pid)", template)
+        self.assertIn('if(shouldAdvance) advanceActiveParcelFrom(pid);', template)
+        self.assertIn('tr.classList.add("active-parcel");', template)
+        self.assertIn('row.scrollIntoView({behavior:"smooth",block:"center"});', template)
+        self.assertIn(".preinspection-table tbody tr.complete:not(.active-parcel){opacity:.45}", template)

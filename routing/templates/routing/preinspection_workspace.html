@@ -115,6 +115,15 @@ tr.changed{background:#fffaf0}
 .preinspection-table tbody tr:nth-child(even) td{background:#fbfdff}
 .preinspection-table tbody tr.complete td{background:#f5fbf6}
 .preinspection-table tbody tr.changed td{background:#fffaf0}
+.preinspection-table tbody tr{transition:opacity .16s ease,filter .16s ease,box-shadow .16s ease}
+.preinspection-table tbody tr.complete:not(.active-parcel){opacity:.45}
+.preinspection-table tbody tr.active-parcel{opacity:1;filter:none}
+.preinspection-table tbody tr.active-parcel td{background:#fff4c2 !important;box-shadow:inset 0 1px 0 rgba(230,167,0,.18),inset 0 -1px 0 rgba(230,167,0,.18)}
+.preinspection-table tbody tr.active-parcel td:first-child{border-left:6px solid #e6a700;padding-left:8px}
+.preinspection-table tbody tr.active-parcel .parcel-hover b,
+.preinspection-table tbody tr.active-parcel .address-copy{font-weight:800;color:var(--os-navy)}
+.preinspection-table tbody tr.row-pulse td{animation:activeParcelPulse .75s ease-out}
+@keyframes activeParcelPulse{0%{box-shadow:inset 0 0 0 999px rgba(230,167,0,.32)}100%{box-shadow:inset 0 1px 0 rgba(230,167,0,.18),inset 0 -1px 0 rgba(230,167,0,.18)}}
 .preinspection-action{box-shadow:0 1px 2px rgba(4,44,83,.08)}
 .parcel-link{background:#e0f3ff;border-color:#9bcfe8;color:#165d82}
 .photo-action{background:#fff0f6;border-color:#e5b4c8;color:#8a3e61}
@@ -134,6 +143,14 @@ tr.changed{background:#fffaf0}
 .unassign-action{flex:0 0 30px;width:30px;height:30px;border:1px solid #e7b0b0;border-radius:6px;background:#fff3f3;color:#a5222b;font-size:15px;line-height:1}
 .unassign-action:hover{background:#fbe0e0;border-color:#c95858}
 .recent-sale-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-left:4px;border-radius:50%;background:#c62828;color:#fff;font-size:12px;font-weight:800;line-height:1;vertical-align:middle;box-shadow:0 1px 2px rgba(120,0,0,.2)}
+.preinspection-table tbody tr:not(.active-parcel) .preinspection-action,
+.preinspection-table tbody tr:not(.active-parcel) .parcel-link,
+.preinspection-table tbody tr:not(.active-parcel) .streetview-icon,
+.preinspection-table tbody tr:not(.active-parcel) .redfin-link,
+.preinspection-table tbody tr:not(.active-parcel) .changes-action,
+.preinspection-table tbody tr:not(.active-parcel) .unassign-action{background:#f6f7f8;border-color:#d8dde3;color:#6a747c;box-shadow:none}
+.preinspection-table tbody tr:not(.active-parcel) .changes-action.on{font-weight:800}
+.preinspection-table tbody tr:not(.active-parcel) .recent-sale-badge{opacity:.7}
 .imagery-header-actions{display:flex;align-items:center;gap:5px;margin-left:auto}
 .imagery-compare-head .imagery-sketch-control{position:static;display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:0;background:transparent;border:0;max-width:none;font-size:11px}
 .imagery-compare-head .imagery-sketch-control button{width:auto;height:30px;padding:4px 7px;font-size:12px}
@@ -433,6 +450,7 @@ let state = loadState() || {
   routes:{},
   inspections:{}
 };
+if(!Object.prototype.hasOwnProperty.call(state,"activeParcel")) state.activeParcel="";
 
 let map, parcelLayer, drawLayer;
 let selected = new Set();
@@ -478,6 +496,87 @@ function inspection(pid){
 function isComplete(pid){
   const s = inspection(pid);
   return s.changes === "yes" || s.changes === "no";
+}
+
+function preinspectionFilters(){
+  return {
+    route:document.getElementById("preRouteFilter")?.value || "",
+    query:(document.getElementById("preSearch")?.value || "").trim().toLowerCase(),
+    show:document.getElementById("preShowFilter")?.value || "all"
+  };
+}
+
+function preinspectionRowsFor(filters=preinspectionFilters()){
+  const rows=[];
+  const routeNames=Object.keys(state.routes).sort(routeSort).filter(n=>!filters.route || n===filters.route);
+  routeNames.forEach(rtName=>{
+    const rt=state.routes[rtName];
+    walkingOrderForRoute(rt.parcels||[]).forEach(a=>{
+      const pid=a.PARCELID;
+      const complete=isComplete(pid);
+      const addr=parcelAddress(a);
+      if(filters.show==="incomplete" && complete) return;
+      if(filters.show==="changes" && inspection(pid).changes!=="yes") return;
+      if(filters.query && !(pid.toLowerCase().includes(filters.query)||addr.toLowerCase().includes(filters.query))) return;
+      rows.push({rtName,a,pid,complete,addr});
+    });
+  });
+  return rows;
+}
+
+function normalizeActiveParcel(rows){
+  const visible=new Set(rows.map(row=>row.pid));
+  if(state.activeParcel && visible.has(state.activeParcel) && !isComplete(state.activeParcel)) return;
+  const next=rows.find(row=>!row.complete);
+  state.activeParcel=next ? next.pid : "";
+}
+
+function findPreinspectionRow(pid){
+  let match=null;
+  document.querySelectorAll("#preBody tr[data-pid]").forEach(row=>{
+    if(row.dataset.pid===pid) match=row;
+  });
+  return match;
+}
+
+function paintActiveParcelInDom(pid){
+  document.querySelectorAll("#preBody tr[data-pid]").forEach(row=>{
+    row.classList.toggle("active-parcel",row.dataset.pid===pid);
+  });
+}
+
+function restoreActiveParcel(options={}){
+  const row=findPreinspectionRow(state.activeParcel);
+  if(!row) return;
+  paintActiveParcelInDom(state.activeParcel);
+  row.scrollIntoView({behavior:"smooth",block:"center"});
+  if(options.pulse){
+    row.classList.remove("row-pulse");
+    void row.offsetWidth;
+    row.classList.add("row-pulse");
+    window.setTimeout(()=>row.classList.remove("row-pulse"),850);
+  }
+}
+
+function setActiveParcel(pid,options={}){
+  if(!pid) return;
+  state.activeParcel=pid;
+  persist();
+  if(options.render) renderPreinspection();
+  if(options.scroll || options.pulse) requestAnimationFrame(()=>restoreActiveParcel(options));
+}
+
+function nextPreinspectionParcelAfter(pid){
+  const rows=preinspectionRowsFor();
+  const index=rows.findIndex(row=>row.pid===pid);
+  const after=index>=0 ? rows.slice(index+1) : rows;
+  return (after.find(row=>!row.complete) || rows.find(row=>!row.complete) || {}).pid || "";
+}
+
+function advanceActiveParcelFrom(pid){
+  const next=nextPreinspectionParcelAfter(pid);
+  if(next) setActiveParcel(next,{render:true,scroll:true,pulse:true});
+  else{renderPreinspection();refreshStats();}
 }
 
 function parseCSV(text){
@@ -967,11 +1066,14 @@ function skagitPhotoImageUrl(pid){
 }
 
 function openPhotoPreview(pid, anchor){
-  closePhotoPreview();
+  closePhotoPreview({quiet:true});
+  setActiveParcel(pid);
+  paintActiveParcelInDom(pid);
 
   const box=document.createElement("div");
   box.id="photoPreview";
   box.className="photo-preview";
+  box.dataset.pid=pid;
 
   const title=document.createElement("div");
   title.className="photo-preview-head";
@@ -993,19 +1095,22 @@ function openPhotoPreview(pid, anchor){
   },{passive:false});
   image.addEventListener("dblclick",e=>{e.preventDefault();scale=scale===1?2:1;image.style.transform=`scale(${scale})`;});
   image.addEventListener("error",()=>{image.alt="Photo unavailable";});
-  document.getElementById("photoClose").addEventListener("click",closePhotoPreview);
+  document.getElementById("photoClose").addEventListener("click",()=>closePhotoPreview());
   box.addEventListener("click",e=>{if(e.target===box)closePhotoPreview();});
 }
 
-function closePhotoPreview(){
-  document.getElementById("photoPreview")?.remove();
+function closePhotoPreview(options={}){
+  const box=document.getElementById("photoPreview");
+  const pid=box?.dataset.pid;
+  box?.remove();
+  if(pid && !options.quiet) setActiveParcel(pid,{render:true,scroll:true,pulse:true});
 }
 
-function closeImageryCompare(){
+function closeImageryCompare(options={}){
   if(imageryCleanup){
     const cleanup=imageryCleanup;
     imageryCleanup=null;
-    cleanup();
+    cleanup(options);
   }else{
     document.getElementById("imageryCompare")?.remove();
   }
@@ -1021,7 +1126,9 @@ function saveInspectionNotes(pid,value){
 }
 
 function openImageryCompare(pid){
-  closeImageryCompare();
+  closeImageryCompare({quiet:true});
+  setActiveParcel(pid);
+  paintActiveParcelInDom(pid);
   const a=assignmentMap().get(pid) || {};
   const modal=document.createElement("div");
   modal.id="imageryCompare";
@@ -1156,7 +1263,7 @@ function openImageryCompare(pid){
     L.marker(center).addTo(current);
     L.marker(center).addTo(historic);
   }
-  const close=()=>{
+  const close=(options={})=>{
     if(imageryCleanup===close) imageryCleanup=null;
     const notesInput=document.getElementById("imageryNotes");
     if(notesInput) saveInspectionNotes(pid,notesInput.value);
@@ -1165,6 +1272,7 @@ function openImageryCompare(pid){
     try{current.remove();}catch(e){}
     try{historic.remove();}catch(e){}
     renderPreinspection();
+    if(!options.quiet) requestAnimationFrame(()=>restoreActiveParcel({pulse:true}));
   };
   imageryCleanup=close;
   const onKey=e=>{if(e.key==="Escape")close();};
@@ -1271,33 +1379,23 @@ function hidePropertySnapshot(){document.getElementById("propertySnapshot")?.cla
 
 function renderPreinspection(){
   const body=document.getElementById("preBody");
-  const filter=document.getElementById("preRouteFilter").value;
-  const q=document.getElementById("preSearch").value.trim().toLowerCase();
-  const showMode=document.getElementById("preShowFilter").value;
+  const filters=preinspectionFilters();
 
   body.innerHTML="";
-  let shown=0;
-  const routeNames=Object.keys(state.routes).sort(routeSort).filter(n=>!filter || n===filter);
+  const rows=preinspectionRowsFor(filters);
+  normalizeActiveParcel(rows);
 
-  routeNames.forEach(rtName=>{
-    const rt=state.routes[rtName];
-    const rows=walkingOrderForRoute(rt.parcels||[]);
-    rows.forEach(a=>{
-      const pid=a.PARCELID;
-      const s=inspection(pid);
-      const complete=isComplete(pid);
-      const addr=parcelAddress(a);
-      const sale=recentSales[pid];
-      const saleTitle=sale ? `Sale in current cycle: ${sale.count} sale${sale.count===1?"":"s"}; latest ${sale.latest_sale_date}` : "";
-      if(showMode==="incomplete" && complete) return;
-      if(showMode==="changes" && s.changes!=="yes") return;
-      if(q && !(pid.toLowerCase().includes(q)||addr.toLowerCase().includes(q))) return;
-
-      shown++;
-      const tr=document.createElement("tr");
-      if(complete) tr.classList.add("complete");
-      if(s.changes==="yes") tr.classList.add("changed");
-      tr.innerHTML=`
+  rows.forEach(row=>{
+    const {a,pid,complete,addr}=row;
+    const s=inspection(pid);
+    const sale=recentSales[pid];
+    const saleTitle=sale ? `Sale in current cycle: ${sale.count} sale${sale.count===1?"":"s"}; latest ${sale.latest_sale_date}` : "";
+    const tr=document.createElement("tr");
+    tr.dataset.pid=pid;
+    if(complete) tr.classList.add("complete");
+    if(s.changes==="yes") tr.classList.add("changed");
+    if(pid===state.activeParcel) tr.classList.add("active-parcel");
+    tr.innerHTML=`
         <td><span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span>${sale ? `<span class="recent-sale-badge" title="${escapeAttr(saleTitle)}" aria-label="${escapeAttr(saleTitle)}">$</span>` : ""} <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
         <td><button class="address-copy" type="button" data-copy-address="${escapeAttr(addr)}" aria-label="Copy address: ${escapeAttr(addr)}" title="Click to copy full address">${escapeHTML(addr || "—")}</button></td>
         <td style="text-align:center">
@@ -1320,16 +1418,16 @@ function renderPreinspection(){
         </div></td>
         <td><div class="notes-cell"><textarea data-pid="${escapeAttr(pid)}" placeholder="Notes">${escapeHTML(s.notes||"")}</textarea><button class="unassign-action" type="button" data-unassign="${escapeAttr(pid)}" title="Remove this parcel from the route">🗑</button></div></td>
       `;
-      body.appendChild(tr);
-    });
+    body.appendChild(tr);
   });
 
-  if(!shown){
+  if(!rows.length){
     body.innerHTML='<tr><td colspan="8" class="empty">No parcels match the current route/filter.</td></tr>';
   }
-  document.getElementById("preSummary").textContent=`${shown} parcels shown`;
+  document.getElementById("preSummary").textContent=`${rows.length} parcels shown`;
 
   let scopeTotal=0, scopeComplete=0, scopeField=0;
+  const routeNames=Object.keys(state.routes).sort(routeSort).filter(n=>!filters.route || n===filters.route);
   routeNames.forEach(rtName=>{
     (state.routes[rtName]?.parcels || []).forEach(pid=>{
       scopeTotal++;
@@ -1512,11 +1610,36 @@ document.getElementById("preBody").addEventListener("mouseout",e=>{
   if(target && (!e.relatedTarget || !target.contains(e.relatedTarget))) hidePropertySnapshot();
 });
 
+document.getElementById("preBody").addEventListener("focusin",e=>{
+  const row=e.target.closest("tr[data-pid]");
+  if(!row) return;
+  state.activeParcel=row.dataset.pid;
+  persist();
+  paintActiveParcelInDom(state.activeParcel);
+});
+
 document.getElementById("preBody").addEventListener("click",e=>{
+  const row=e.target.closest("tr[data-pid]");
+  if(row && !e.target.closest("textarea")){
+    state.activeParcel=row.dataset.pid;
+    persist();
+    paintActiveParcelInDom(state.activeParcel);
+  }
+
+  const outbound=e.target.closest("a");
+  if(outbound && row){
+    window.addEventListener("focus",()=>{
+      renderPreinspection();
+      requestAnimationFrame(()=>restoreActiveParcel({pulse:true}));
+    },{once:true});
+    return;
+  }
+
   const btn=e.target.closest("button"); if(!btn)return;
 
   if(btn.dataset.copyAddress){
     copyAddress(btn,btn.dataset.copyAddress);
+    if(row) requestAnimationFrame(()=>restoreActiveParcel({pulse:true}));
     return;
   }
 
@@ -1537,13 +1660,18 @@ document.getElementById("preBody").addEventListener("click",e=>{
 
   const pid=btn.dataset.pid; if(!pid)return;
   const s=inspection(pid);
+  let shouldAdvance=false;
   if(btn.dataset.check){
     const k=btn.dataset.check;s[k]=!s[k];
   }else if(btn.dataset.change){
-    s.changes=s.changes===btn.dataset.change?"":btn.dataset.change;
+    const next=s.changes===btn.dataset.change?"":btn.dataset.change;
+    s.changes=next;
+    shouldAdvance=next==="yes" || next==="no";
   }
-  persist(); renderPreinspection();
+  persist();
   refreshParcelStyles();
+  if(shouldAdvance) advanceActiveParcelFrom(pid);
+  else setActiveParcel(pid,{render:true,scroll:true,pulse:true});
 });
 
 let photoHoverTimer=null;
