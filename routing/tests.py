@@ -45,3 +45,10 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn("function saveInspectionNotes(pid,value)", template)
         self.assertIn('if(notesInput) saveInspectionNotes(pid,notesInput.value);', template)
         self.assertIn('["input","change","blur"]', template)
+
+    def test_sketch_button_uses_a_leaflet_map_not_the_click_event(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn("let activeSketchMap=current;", template)
+        self.assertIn("if(!(targetMap instanceof L.Map)) targetMap=activeSketchMap || current;", template)
+        self.assertIn('sketchButton.addEventListener("click",()=>toggleSketch(activeSketchMap || current));', template)
+        self.assertNotIn('sketchButton.addEventListener("click",toggleSketch);', template)

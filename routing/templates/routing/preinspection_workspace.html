@@ -149,7 +149,10 @@ textarea{
 .pill{display:inline-block;padding:2px 7px;background:#eef2f6;border-radius:999px;font-size:12px}
 
 /* Leaflet */
-.leaflet-popup-content{font-size:12px}
+.leaflet-popup-pane{z-index:9000}
+.leaflet-popup-content-wrapper{border-radius:7px;box-shadow:0 10px 28px rgba(4,44,83,.22)}
+.leaflet-popup-content{font-size:12px;margin:8px 10px;min-width:190px;max-width:240px;overflow:visible}
+.leaflet-popup-content table{min-width:0;width:100%;table-layout:auto}
 .legend{
   background:#fff;border:1px solid #ccd4dc;border-radius:6px;padding:7px 9px;font-size:12px;line-height:1.6
 }
@@ -192,10 +195,11 @@ textarea{
 }
 
 
-.popup-actions{margin-top:8px;display:grid;gap:5px}
-.popup-data{width:100%;border-collapse:collapse;margin:5px 0 2px;font-size:11px}
-.popup-data th,.popup-data td{position:static;padding:2px 4px;border:0;border-bottom:1px solid #edf0f3;text-align:left;font-size:11px;text-transform:none}
-.popup-data th{width:38%;color:var(--os-muted);font-weight:600;background:transparent}
+.popup-actions{margin-top:6px;display:grid;gap:5px}
+.popup-data{width:100%;min-width:0;border-collapse:collapse;border-spacing:0;margin:0 0 2px;font-size:11px;line-height:1.25;table-layout:fixed}
+.popup-data th,.popup-data td{position:static;top:auto;z-index:auto;padding:2px 4px;border:0;border-bottom:1px solid #edf0f3;background:transparent;text-align:left;font-size:11px;text-transform:none;white-space:normal;vertical-align:top}
+.popup-data th{width:38%;color:var(--os-muted);font-weight:600}
+.popup-data td{color:var(--os-ink);font-weight:600;overflow-wrap:anywhere}
 .popup-route-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px}
 .popup-route-row select{min-width:0;border:1px solid var(--os-border);border-radius:5px;padding:5px;font-size:11px;background:#fff}
 .popup-move{
@@ -272,10 +276,10 @@ textarea{
 .imagery-sketch-control input{width:70px}
 .imagery-sketch-control button{border:1px solid var(--os-border);border-radius:5px;background:#fff;color:var(--os-navy);padding:4px 6px;font-size:11px;cursor:pointer}.imagery-sketch-control button:hover{background:var(--accent-soft)}
 .parcel-hover{position:relative;cursor:help;color:var(--os-navy);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
-.property-snapshot{position:fixed !important;z-index:2147483647;display:none;width:250px;padding:10px;background:#fff;border:1px solid var(--os-border);border-left:3px solid var(--os-teal);border-radius:8px;box-shadow:0 14px 32px rgba(4,44,83,.2);pointer-events:none}
+.property-snapshot{position:fixed !important;z-index:2147483647;display:none;width:250px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:10px;background:#fff;border:1px solid var(--os-border);border-left:3px solid var(--os-teal);border-radius:8px;box-shadow:0 14px 32px rgba(4,44,83,.2);pointer-events:none}
 .property-snapshot.visible{display:block}
 .property-snapshot h4{margin:0 0 7px;color:var(--os-navy);font-family:"DM Sans",Inter,sans-serif;font-size:13px}
-.snapshot-table{width:100%;border-collapse:collapse;font-size:11px}.snapshot-table th,.snapshot-table td{padding:4px 0;border-bottom:1px solid #edf0f3;text-align:left}.snapshot-table th{color:var(--os-muted);font-weight:600}.snapshot-table td{text-align:right;color:var(--os-ink);font-weight:600}
+.snapshot-table{width:100%;min-width:0;border-collapse:collapse;border-spacing:0;font-size:11px;line-height:1.25;table-layout:fixed}.snapshot-table th,.snapshot-table td{position:static;top:auto;z-index:auto;padding:4px 0;border:0;border-bottom:1px solid #edf0f3;background:transparent;text-align:left;text-transform:none;vertical-align:top}.snapshot-table th{width:43%;color:var(--os-muted);font-weight:600}.snapshot-table td{text-align:right;color:var(--os-ink);font-weight:600;overflow-wrap:anywhere}
 @media(max-width:700px){.imagery-compare-body{grid-template-columns:1fr;grid-template-rows:1fr 1fr}.imagery-pane{border-right:0;border-bottom:1px solid #d8dde3}.imagery-pane:last-child{border-bottom:0}}
 
 </style>
@@ -1029,10 +1033,15 @@ function openImageryCompare(pid){
   const center=parcelCenter ? [parcelCenter.lat,parcelCenter.lng] : [48.42,-122.33];
   const current=L.map("imageryCurrent",{zoomControl:true}).setView(center,18);
   const historic=L.map("imageryHistoric",{zoomControl:true}).setView(center,18);
-  const outlineStyle={color:"#ffe600",weight:3,opacity:1,fill:false,interactive:false};
+  current.createPane("sketchPane");
+  historic.createPane("sketchPane");
+  current.getPane("sketchPane").style.zIndex=650;
+  historic.getPane("sketchPane").style.zIndex=650;
+  const outlineStyle={color:"#ffe600",weight:3,opacity:1,fill:false};
   const parcelGeo=parcelLayer && parcelLayer.toGeoJSON ? parcelLayer.toGeoJSON() : null;
   let sketchOverlay=null;
   let sketchMap=null;
+  let activeSketchMap=current;
   let sketchOffset={x:0,y:0};
   const sketchControl=document.getElementById("imagerySketchControl");
   const sketchButton=document.getElementById("sketchToggle");
@@ -1041,10 +1050,12 @@ function openImageryCompare(pid){
   let sketchRotation=0;
   sketchControl.classList.add("visible");
   if(parcelGeo){
-    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:true}).addTo(current).on("click",()=>toggleSketch(current));
-    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:true}).addTo(historic).on("click",()=>toggleSketch(historic));
+    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:true}).addTo(current).on("click",()=>{activeSketchMap=current;toggleSketch(current);});
+    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:true}).addTo(historic).on("click",()=>{activeSketchMap=historic;toggleSketch(historic);});
   }
   async function toggleSketch(targetMap){
+    if(!(targetMap instanceof L.Map)) targetMap=activeSketchMap || current;
+    activeSketchMap=targetMap;
     if(sketchOverlay && sketchMap===targetMap){targetMap.removeLayer(sketchOverlay);sketchOverlay=null;sketchMap=null;sketchButton.textContent="Show sketch";return;}
     if(sketchOverlay && sketchMap){sketchMap.removeLayer(sketchOverlay);sketchOverlay=null;sketchMap=null;}
     sketchButton.disabled=true;
@@ -1056,8 +1067,8 @@ function openImageryCompare(pid){
       const bounds=parcelLayer ? parcelLayer.getBounds() : targetMap.getBounds();
       sketchMap=targetMap;
       sketchOffset={x:0,y:0};
-      sketchOverlay=L.imageOverlay(payload.image_url || payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true}).addTo(targetMap);
-      sketchOverlay.setZIndex(1000);
+      sketchOverlay=L.imageOverlay(payload.image_url || payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true,pane:"sketchPane"}).addTo(targetMap);
+      sketchOverlay.setZIndex(10000);
       sketchOverlay.once("load",applySketchTransform);
       sketchControl.classList.add("visible");
       sketchButton.textContent="Hide sketch";
@@ -1070,7 +1081,9 @@ function openImageryCompare(pid){
     image.style.mixBlendMode="multiply";
     image.style.filter="grayscale(1) contrast(1.35)";
     image.style.transformOrigin="center center";
-    image.style.transform=`translate(${sketchOffset.x}px,${sketchOffset.y}px) rotate(${sketchRotation}deg) scale(${Number(sketchScale.value)})`;
+    image.style.translate=`${sketchOffset.x}px ${sketchOffset.y}px`;
+    image.style.rotate=`${sketchRotation}deg`;
+    image.style.scale=String(Number(sketchScale.value));
     image.style.cursor="grab";
     image.style.pointerEvents="auto";
     if(image.dataset.dragReady)return;
@@ -1105,7 +1118,7 @@ function openImageryCompare(pid){
     if(action==="reset"){sketchRotation=0;sketchOffset={x:0,y:0};sketchScale.value="1";sketchOpacity.value="0.55";if(sketchOverlay)sketchOverlay.setOpacity(.55);}
     applySketchTransform();
   });
-  sketchButton.addEventListener("click",toggleSketch);
+  sketchButton.addEventListener("click",()=>toggleSketch(activeSketchMap || current));
   sketchOpacity.addEventListener("input",()=>{if(sketchOverlay)sketchOverlay.setOpacity(Number(sketchOpacity.value));});
   sketchScale.addEventListener("input",applySketchTransform);
   let syncing=false;
