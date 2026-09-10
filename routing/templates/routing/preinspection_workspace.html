@@ -128,6 +128,9 @@ tr.changed{background:#fffaf0}
 .changes-action.no.on{background:var(--green);border-color:#9fc9aa;color:var(--green-text)}
 .notes-cell{display:flex;align-items:center;gap:6px;min-width:290px}
 .notes-cell textarea{flex:1;min-width:0}
+.address-copy{display:inline-block;max-width:100%;padding:2px 4px;border:1px solid transparent;border-radius:5px;background:transparent;color:inherit;text-align:left;line-height:1.35;cursor:pointer}
+.address-copy:hover,.address-copy:focus-visible{border-color:#9bcfe8;background:#e0f3ff;color:#165d82;outline:none}
+.address-copy.is-copied{border-color:#9fc9aa;background:#eff9e9;color:#416900}
 .unassign-action{flex:0 0 30px;width:30px;height:30px;border:1px solid #e7b0b0;border-radius:6px;background:#fff3f3;color:#a5222b;font-size:15px;line-height:1}
 .unassign-action:hover{background:#fbe0e0;border-color:#c95858}
 .imagery-header-actions{display:flex;align-items:center;gap:5px;margin-left:auto}
@@ -1151,11 +1154,38 @@ function openImageryCompare(pid){
 }
 
 function redfinSearchUrl(a){
+  const address=parcelAddress(a);
+  return "https://www.redfin.com/search?location=" + encodeURIComponent(address || "Skagit County, WA") + "&market=seattle";
+}
+
+function parcelAddress(a){
   const number=String(a.SitusStNo||"").trim();
   const street=String(a.SitusStName||"").trim();
   const csz=String(a.SitusCSZ||"").trim();
-  const address=[number,street,csz].filter(Boolean).join(", ").replace(/\s+/g," ").trim();
-  return "https://www.redfin.com/search?location=" + encodeURIComponent(address || "Skagit County, WA") + "&market=seattle";
+  return [number,street,csz].filter(Boolean).join(", ").replace(/\s+/g," ").trim();
+}
+
+async function copyAddress(button,address){
+  const original=button.textContent;
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(address);
+    }else{
+      const helper=document.createElement("textarea");
+      helper.value=address; helper.setAttribute("readonly","");
+      helper.style.position="fixed"; helper.style.opacity="0";
+      document.body.appendChild(helper); helper.select();
+      if(!document.execCommand("copy")) throw new Error("Copy command failed");
+      helper.remove();
+    }
+    button.textContent="Copied";
+    button.classList.add("is-copied");
+    button.setAttribute("aria-label",`Copied address: ${address}`);
+    setTimeout(()=>{button.textContent=original;button.classList.remove("is-copied");button.setAttribute("aria-label",`Copy address: ${address}`);},1400);
+  }catch(error){
+    button.textContent="Copy failed";
+    setTimeout(()=>{button.textContent=original;},1400);
+  }
 }
 
 function assessorPropertyUrl(pid){
@@ -1216,7 +1246,7 @@ function renderPreinspection(){
       const pid=a.PARCELID;
       const s=inspection(pid);
       const complete=isComplete(pid);
-      const addr=(a.SitusStNo+" "+a.SitusStName).trim();
+      const addr=parcelAddress(a);
       if(showMode==="incomplete" && complete) return;
       if(showMode==="changes" && s.changes!=="yes") return;
       if(q && !(pid.toLowerCase().includes(q)||addr.toLowerCase().includes(q))) return;
@@ -1227,7 +1257,7 @@ function renderPreinspection(){
       if(s.changes==="yes") tr.classList.add("changed");
       tr.innerHTML=`
         <td><span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span> <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
-        <td>${escapeHTML(addr)}</td>
+        <td><button class="address-copy" type="button" data-copy-address="${escapeAttr(addr)}" aria-label="Copy address: ${escapeAttr(addr)}" title="Click to copy full address">${escapeHTML(addr || "—")}</button></td>
         <td style="text-align:center">
           <button class="photo-btn photo-action preinspection-action" type="button" data-photo="${escapeAttr(pid)}" title="Preview Skagit County property photo">▣</button>
         </td>
@@ -1441,6 +1471,11 @@ document.getElementById("preBody").addEventListener("mouseout",e=>{
 
 document.getElementById("preBody").addEventListener("click",e=>{
   const btn=e.target.closest("button"); if(!btn)return;
+
+  if(btn.dataset.copyAddress){
+    copyAddress(btn,btn.dataset.copyAddress);
+    return;
+  }
 
   if(btn.dataset.unassign){
     unassignParcel(btn.dataset.unassign);
