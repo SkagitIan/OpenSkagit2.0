@@ -112,6 +112,22 @@ tr.changed{background:#fffaf0}
 }
 .change-btn.yes.on{background:var(--amber);color:var(--amber-text);border-color:#e4c66f}
 .change-btn.no.on{background:var(--green);color:var(--green-text);border-color:#9fc9aa}
+.preinspection-table tbody tr:nth-child(even) td{background:#fbfdff}
+.preinspection-table tbody tr.complete td{background:#f5fbf6}
+.preinspection-table tbody tr.changed td{background:#fffaf0}
+.preinspection-action{box-shadow:0 1px 2px rgba(4,44,83,.08)}
+.parcel-link{background:#e0f3ff;border-color:#9bcfe8;color:#165d82}
+.photo-action{background:#fff0f6;border-color:#e5b4c8;color:#8a3e61}
+.photo-action:hover{background:#fbdce9;border-color:#c984a2}
+.aerial-action{background:#edf8e6;border-color:#acd08e;color:#416900}
+.aerial-action:hover{background:#dff0d2;border-color:#82ad5d}
+.streetview-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #efc58e;border-radius:6px;background:#fff3e2;color:#a95f16;font-size:17px;line-height:1;box-shadow:0 1px 2px rgba(4,44,83,.08)}
+.changes-action.yes{background:repeating-linear-gradient(135deg,#fff7dc 0,#fff7dc 7px,#f8e9b9 7px,#f8e9b9 9px);border-color:#e4c66f;color:#805200}
+.changes-action.no{background:repeating-linear-gradient(45deg,#eff9e9 0,#eff9e9 7px,#d8edc9 7px,#d8edc9 9px);border-color:#9fc9aa;color:#416900}
+.notes-cell{display:flex;align-items:center;gap:6px;min-width:290px}
+.notes-cell textarea{flex:1;min-width:0}
+.unassign-action{flex:0 0 30px;width:30px;height:30px;border:1px solid #e7b0b0;border-radius:6px;background:#fff3f3;color:#a5222b;font-size:15px;line-height:1}
+.unassign-action:hover{background:#fbe0e0;border-color:#c95858}
 textarea{
   width:100%;min-width:250px;min-height:30px;height:30px;resize:vertical;
   border:1px solid #d8dde3;border-radius:5px;padding:5px 7px
@@ -259,8 +275,6 @@ textarea{
     <button class="tab" data-view="preinspection">Preinspection</button>
   </div>
   <div class="spacer"></div>
-  <a class="btn" href="/">OpenSkagit home</a>
-  <a class="btn" href="/field/routes/">Database route planner</a>
 </header>
 
 <div class="statusbar">
@@ -359,7 +373,7 @@ textarea{
     </div>
 
     <div class="table-wrap">
-      <table>
+      <table class="preinspection-table">
         <thead>
           <tr>
             <th class="left">Parcel</th>
@@ -734,6 +748,9 @@ function moveParcelToRoute(pid,name){
 }
 
 function unassignParcel(pid){
+  const a=assignmentMap().get(pid) || {};
+  const addr=(a.SitusStNo+" "+a.SitusStName).trim();
+  if(!confirm(`Remove ${pid}${addr ? " — "+addr : ""} from this route? It will remain in the assignment as unassigned.`)) return;
   for(const rt of Object.values(state.routes)){
     rt.parcels=(rt.parcels||[]).filter(p=>p!==pid);
   }
@@ -1159,25 +1176,25 @@ function renderPreinspection(){
         <td><span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span> <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
         <td>${escapeHTML(addr)}</td>
         <td style="text-align:center">
-          <button class="photo-btn" type="button" data-photo="${escapeAttr(pid)}" title="Preview Skagit County property photo">▣</button>
+          <button class="photo-btn photo-action preinspection-action" type="button" data-photo="${escapeAttr(pid)}" title="Preview Skagit County property photo">▣</button>
         </td>
         <td style="text-align:center">
-          <div class="listing-cell"><button class="toggle ${s.aerial?"on":""}" data-pid="${escapeAttr(pid)}" data-check="aerial">${s.aerial?"✓":""}</button><button class="photo-btn" type="button" data-compare="${escapeAttr(pid)}" title="Compare current and historical aerial imagery">↔</button></div>
+          <button class="photo-btn aerial-action preinspection-action" type="button" data-compare="${escapeAttr(pid)}" title="Compare current and historical aerial imagery">↔</button>
         </td>
         <td style="text-align:center">
-          <button class="toggle ${s.streetView?"on":""}" data-pid="${escapeAttr(pid)}" data-check="streetView">${s.streetView?"✓":""}</button>
+          <span class="streetview-icon" title="Street view paused for now" aria-label="Street view paused">⌖</span>
         </td>
         <td>
           <div class="listing-cell">
-            <button class="toggle ${s.listing?"on":""}" data-pid="${escapeAttr(pid)}" data-check="listing">${s.listing?"✓":""}</button>
+          <button class="toggle ${s.listing?"on":""} preinspection-action" data-pid="${escapeAttr(pid)}" data-check="listing">${s.listing?"✓":""}</button>
             <a class="redfin-link" href="${redfinSearchUrl(a)}" target="_blank" rel="noopener noreferrer" title="Open this address on Redfin">R</a>
           </div>
         </td>
         <td><div class="change-group">
-          <button class="change-btn yes ${s.changes==="yes"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="yes">YES</button>
-          <button class="change-btn no ${s.changes==="no"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="no">NO</button>
+          <button class="change-btn yes changes-action ${s.changes==="yes"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="yes">YES</button>
+          <button class="change-btn no changes-action ${s.changes==="no"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="no">NO</button>
         </div></td>
-        <td><textarea data-pid="${escapeAttr(pid)}" placeholder="Notes">${escapeHTML(s.notes||"")}</textarea></td>
+        <td><div class="notes-cell"><textarea data-pid="${escapeAttr(pid)}" placeholder="Notes">${escapeHTML(s.notes||"")}</textarea><button class="unassign-action" type="button" data-unassign="${escapeAttr(pid)}" title="Remove this parcel from the route">🗑</button></div></td>
       `;
       body.appendChild(tr);
     });
@@ -1372,6 +1389,11 @@ document.getElementById("preBody").addEventListener("mouseout",e=>{
 
 document.getElementById("preBody").addEventListener("click",e=>{
   const btn=e.target.closest("button"); if(!btn)return;
+
+  if(btn.dataset.unassign){
+    unassignParcel(btn.dataset.unassign);
+    return;
+  }
 
   if(btn.dataset.compare){
     openImageryCompare(btn.dataset.compare);
