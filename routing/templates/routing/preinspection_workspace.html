@@ -238,9 +238,10 @@ textarea{
 .imagery-compare-body{display:grid;grid-template-columns:1fr 1fr;min-height:0;flex:1}
 .imagery-pane{position:relative;min-width:0;min-height:0;border-right:1px solid #d8dde3}.imagery-pane:last-child{border-right:0}
 .imagery-pane h3{position:absolute;z-index:2;top:8px;left:8px;margin:0;padding:5px 8px;background:rgba(255,255,255,.9);border-radius:5px;font-size:12px}.imagery-map{width:100%;height:100%;min-height:420px}
-.imagery-sketch-control{position:absolute;z-index:3;right:8px;top:8px;display:none;align-items:center;gap:5px;padding:5px 7px;background:rgba(255,255,255,.94);border:1px solid var(--os-border);border-radius:6px;font-size:11px}
+.imagery-sketch-control{position:absolute;z-index:3;right:8px;top:8px;display:none;align-items:center;gap:5px;flex-wrap:wrap;padding:5px 7px;background:rgba(255,255,255,.94);border:1px solid var(--os-border);border-radius:6px;font-size:11px;max-width:calc(100% - 16px)}
 .imagery-sketch-control.visible{display:flex}
 .imagery-sketch-control input{width:70px}
+.imagery-sketch-control button{border:1px solid var(--os-border);border-radius:5px;background:#fff;color:var(--os-navy);padding:4px 6px;font-size:11px;cursor:pointer}.imagery-sketch-control button:hover{background:var(--accent-soft)}
 .parcel-hover{position:relative;cursor:help;color:var(--os-navy);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
 .property-snapshot{position:fixed;z-index:100000;display:none;width:250px;padding:10px;background:#fff;border:1px solid var(--os-border);border-left:3px solid var(--os-teal);border-radius:8px;box-shadow:0 14px 32px rgba(4,44,83,.2);pointer-events:none}
 .property-snapshot.visible{display:block}
@@ -982,7 +983,7 @@ function openImageryCompare(pid){
   const modal=document.createElement("div");
   modal.id="imageryCompare";
   modal.className="imagery-compare";
-  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><span>Skagit aerial imagery comparison · Pictometry/Cyclomedia</span><button type="button" id="imageryClose">×</button></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2019</h3><div class="imagery-sketch-control" id="imagerySketchControl"><button type="button" id="sketchToggle">Show sketch</button><label>Opacity <input id="sketchOpacity" type="range" min="0.15" max="1" step="0.05" value="0.55"></label></div><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
+  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><span>Skagit aerial imagery comparison · Pictometry/Cyclomedia</span><button type="button" id="imageryClose">×</button></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2019</h3><div class="imagery-sketch-control" id="imagerySketchControl"><button type="button" id="sketchToggle">Show sketch</button><button type="button" data-sketch-action="rotate-left" title="Rotate sketch left">↶</button><button type="button" data-sketch-action="rotate-right" title="Rotate sketch right">↷</button><button type="button" data-sketch-action="reset" title="Reset sketch alignment">Reset</button><label>Opacity <input id="sketchOpacity" type="range" min="0.15" max="1" step="0.05" value="0.55"></label><label>Scale <input id="sketchScale" type="range" min="0.5" max="2" step="0.05" value="1"></label></div><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
   document.body.appendChild(modal);
   const parcelLayer=parcelLayersById.get(pid);
   const parcelCenter=parcelLayer ? parcelLayer.getBounds().getCenter() : null;
@@ -995,6 +996,8 @@ function openImageryCompare(pid){
   const sketchControl=document.getElementById("imagerySketchControl");
   const sketchButton=document.getElementById("sketchToggle");
   const sketchOpacity=document.getElementById("sketchOpacity");
+  const sketchScale=document.getElementById("sketchScale");
+  let sketchRotation=0;
   sketchControl.classList.add("visible");
   if(parcelGeo){
     L.geoJSON(parcelGeo,{style:outlineStyle,interactive:false}).addTo(current);
@@ -1011,14 +1014,31 @@ function openImageryCompare(pid){
       const bounds=parcelLayer ? parcelLayer.getBounds() : historic.getBounds();
       sketchOverlay=L.imageOverlay(payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true}).addTo(historic);
       sketchOverlay.setZIndex(1000);
-      sketchOverlay.once("load",()=>{const image=sketchOverlay.getElement();if(image){image.style.mixBlendMode="multiply";image.style.filter="grayscale(1) contrast(1.35)";}});
+      sketchOverlay.once("load",applySketchTransform);
       sketchControl.classList.add("visible");
       sketchButton.textContent="Hide sketch";
     }catch(error){alert(error.message || "The assessor sketch could not be loaded.");sketchButton.textContent="Show sketch";}
     sketchButton.disabled=false;
   }
+  function applySketchTransform(){
+    const image=sketchOverlay?.getElement();
+    if(!image)return;
+    image.style.mixBlendMode="multiply";
+    image.style.filter="grayscale(1) contrast(1.35)";
+    image.style.transformOrigin="center center";
+    image.style.transform=`rotate(${sketchRotation}deg) scale(${Number(sketchScale.value)})`;
+  }
+  sketchControl.addEventListener("click",e=>{
+    const action=e.target.closest("[data-sketch-action]")?.dataset.sketchAction;
+    if(!action)return;
+    if(action==="rotate-left")sketchRotation-=5;
+    if(action==="rotate-right")sketchRotation+=5;
+    if(action==="reset"){sketchRotation=0;sketchScale.value="1";sketchOpacity.value="0.55";if(sketchOverlay)sketchOverlay.setOpacity(.55);}
+    applySketchTransform();
+  });
   sketchButton.addEventListener("click",toggleSketch);
   sketchOpacity.addEventListener("input",()=>{if(sketchOverlay)sketchOverlay.setOpacity(Number(sketchOpacity.value));});
+  sketchScale.addEventListener("input",applySketchTransform);
   let syncing=false;
   const syncMaps=(source,target)=>{
     source.on("moveend zoomend",()=>{
