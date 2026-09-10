@@ -935,13 +935,15 @@ function openImageryCompare(pid){
   const modal=document.createElement("div");
   modal.id="imageryCompare";
   modal.className="imagery-compare";
-  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><span>Current imagery compared with 2020 historical NAIP imagery</span><button type="button" id="imageryClose">×</button></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2020</h3><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
+  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><span>Skagit aerial imagery comparison · Pictometry/Cyclomedia</span><button type="button" id="imageryClose">×</button></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2019</h3><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
   document.body.appendChild(modal);
   const parcelLayer=parcelLayersById.get(pid);
   const parcelCenter=parcelLayer ? parcelLayer.getBounds().getCenter() : null;
   const center=parcelCenter ? [parcelCenter.lat,parcelCenter.lng] : [48.42,-122.33];
   const current=L.map("imageryCurrent",{zoomControl:true}).setView(center,18);
   const historic=L.map("imageryHistoric",{zoomControl:true}).setView(center,18);
+  const pictometryBase="https://svc.pictometry.com/Image/36AB6FD9-8DC8-3133-7871-1347FB79B3E8/wmts";
+  const pictometryLayer=(layerId,attribution)=>L.tileLayer(`${pictometryBase}/${layerId}/default/GoogleMapsCompatible/{z}/{x}/{y}.png`,{tileSize:256,maxZoom:22,updateWhenZooming:false,keepBuffer:2,attribution});
   const skagitImageLayer=service=>L.GridLayer.extend({createTile:function(coords,done){
     const tile=document.createElement("img");
     tile.alt="Skagit County aerial imagery";
@@ -952,8 +954,14 @@ function openImageryCompare(pid){
     tile.src=service+"/exportImage?"+params.toString();
     return tile;
   }});
-  new (skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer"))({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2021"}).addTo(current);
-  new (skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2020_6inch/ImageServer"))({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2020"}).addTo(historic);
+  const currentPictometry=pictometryLayer("PICT-WASKAG25-qSfR3O1lit","Pictometry/Cyclomedia · 2025").addTo(current);
+  const historicPictometry=pictometryLayer("PICT-WASKAG19-MJtGoV8oof","Pictometry/Cyclomedia · 2019").addTo(historic);
+  const currentFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2021"});
+  const historicFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2020_6inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2020"});
+  let currentFallbackUsed=false;
+  let historicFallbackUsed=false;
+  currentPictometry.once("tileerror",()=>{if(!currentFallbackUsed){currentFallbackUsed=true;current.removeLayer(currentPictometry);currentFallback.addTo(current);}});
+  historicPictometry.once("tileerror",()=>{if(!historicFallbackUsed){historicFallbackUsed=true;historic.removeLayer(historicPictometry);historicFallback.addTo(historic);}});
   if(parcelCenter){
     L.marker(center).addTo(current);
     L.marker(center).addTo(historic);
