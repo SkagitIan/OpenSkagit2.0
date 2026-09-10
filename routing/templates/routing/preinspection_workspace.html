@@ -1038,7 +1038,7 @@ function openImageryCompare(pid){
       const payload=await response.json();
       if(!response.ok || !payload.found) throw new Error("No assessor sketch found");
       const bounds=parcelLayer ? parcelLayer.getBounds() : historic.getBounds();
-      sketchOverlay=L.imageOverlay(payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true}).addTo(historic);
+      sketchOverlay=L.imageOverlay(payload.image_url || payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true}).addTo(historic);
       sketchOverlay.setZIndex(1000);
       sketchOverlay.once("load",applySketchTransform);
       sketchControl.classList.add("visible");

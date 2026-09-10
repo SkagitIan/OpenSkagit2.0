@@ -7,6 +7,7 @@ app_name = "routing"
 urlpatterns = [
     path("", views.workspace_page, name="workspace"),
     path("parcel/<str:parcel_id>/sketch/", views.parcel_sketch, name="parcel_sketch"),
+    path("parcel/<str:parcel_id>/sketch/image/", views.parcel_sketch_image, name="parcel_sketch_image"),
     path("routes/", views.routes_page, name="routes"),
     path("routes/import/", views.import_file, name="import"),
     path("routes/plan/", views.create_plan, name="create_plan"),

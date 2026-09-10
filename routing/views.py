@@ -1,7 +1,9 @@
+import io
 import json
 import re
 
 import requests
+from PIL import Image, ImageChops
 from django.contrib.auth.views import redirect_to_login
 from django.db import transaction
 from django.http import HttpResponse, JsonResponse
@@ -38,6 +40,43 @@ def workspace_page(request):
     return render(request, "routing/preinspection_workspace.html")
 
 
+def _assessor_sketch_url(parcel_id):
+    normalized = str(parcel_id or "").strip().upper()
+    if not normalized:
+        return normalized, None, None
+    response = requests.post(
+        "https://www.skagitcounty.net/search/property/Webservice.asmx/fillPage",
+        headers={
+            "Content-Type": "application/json; charset=UTF-8",
+            "X-Requested-With": "XMLHttpRequest",
+            "Referer": "https://www.skagitcounty.net/search/property/",
+        },
+        json={"sValue": normalized, "ResultType": "Improvements"},
+        timeout=20,
+    )
+    response.raise_for_status()
+    payload = response.json()
+    markup = str(payload.get("d") or "") if isinstance(payload, dict) else ""
+    match = re.search(r'href=["\'](?P<path>/assessor/images/photos/[^"\']+\.(?:jpg|jpeg|png))["\']', markup, re.IGNORECASE)
+    return normalized, ("https://www.skagitcounty.net" + match.group("path") if match else None), response
+
+
+def _trim_sketch(image_bytes):
+    image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+    background = Image.new("RGB", image.size, "white")
+    difference = ImageChops.difference(image, background).convert("L")
+    # Ignore near-white anti-aliasing/noise, then retain a small visual margin.
+    bbox = difference.point(lambda value: 255 if value > 28 else 0).getbbox()
+    if bbox:
+        left, top, right, bottom = bbox
+        pad = max(12, int(min(image.size) * 0.025))
+        bbox = (max(0, left - pad), max(0, top - pad), min(image.width, right + pad), min(image.height, bottom + pad))
+        image = image.crop(bbox)
+    output = io.BytesIO()
+    image.save(output, format="JPEG", quality=94, optimize=True)
+    return output.getvalue()
+
+
 @require_GET
 def parcel_sketch(request, parcel_id):
     if not _staff(request):
@@ -46,29 +85,33 @@ def parcel_sketch(request, parcel_id):
     if not normalized:
         return JsonResponse({"error": "A parcel ID is required."}, status=400)
     try:
-        response = requests.post(
-            "https://www.skagitcounty.net/search/property/Webservice.asmx/fillPage",
-            headers={
-                "Content-Type": "application/json; charset=UTF-8",
-                "X-Requested-With": "XMLHttpRequest",
-                "Referer": "https://www.skagitcounty.net/search/property/",
-            },
-            json={"sValue": normalized, "ResultType": "Improvements"},
-            timeout=20,
-        )
-        response.raise_for_status()
-        payload = response.json()
-        markup = str(payload.get("d") or "") if isinstance(payload, dict) else ""
-        match = re.search(r'href=["\'](?P<path>/assessor/images/photos/[^"\']+\.(?:jpg|jpeg|png))["\']', markup, re.IGNORECASE)
+        normalized, source_url, _ = _assessor_sketch_url(normalized)
     except (requests.RequestException, ValueError) as exc:
         return JsonResponse({"error": "The assessor sketch service is unavailable.", "detail": str(exc)}, status=502)
-    if not match:
+    if not source_url:
         return JsonResponse({"found": False, "parcel_id": normalized})
     return JsonResponse({
         "found": True,
         "parcel_id": normalized,
-        "url": "https://www.skagitcounty.net" + match.group("path"),
+        "url": source_url,
+        "image_url": f"/routing/parcel/{normalized}/sketch/image/",
     })
+
+
+@require_GET
+def parcel_sketch_image(request, parcel_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    try:
+        normalized, source_url, _ = _assessor_sketch_url(parcel_id)
+        if not source_url:
+            return JsonResponse({"error": "No assessor sketch found."}, status=404)
+        response = requests.get(source_url, timeout=20)
+        response.raise_for_status()
+        content = _trim_sketch(response.content)
+    except (requests.RequestException, ValueError, OSError) as exc:
+        return JsonResponse({"error": "The assessor sketch image is unavailable.", "detail": str(exc)}, status=502)
+    return HttpResponse(content, content_type="image/jpeg", headers={"Cache-Control": "private, max-age=3600"})
 
 
 @require_http_methods(["POST"])
