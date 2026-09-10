@@ -205,17 +205,17 @@ textarea{
 }
 .photo-btn:hover{background:#e7f0f7;border-color:#5f829b}
 .photo-preview{
-  position:fixed;z-index:99999;left:2vw !important;top:2vh !important;width:96vw;height:96vh;
-  background:#fff;border:1px solid #aeb7c0;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.22);overflow:hidden
+  position:fixed;z-index:99999;inset:0;background:rgba(12,24,35,.78);display:flex;align-items:center;justify-content:center;
+  padding:4vh 4vw;box-sizing:border-box
 }
 .photo-preview-head{
-  height:34px;padding:6px 8px;border-bottom:1px solid #e1e5e9;display:flex;align-items:center;
-  justify-content:space-between;background:#f7f9fb;font-size:12px
+  position:absolute;z-index:2;left:4vw;right:4vw;top:1vh;height:34px;padding:6px 8px;display:flex;align-items:center;
+  justify-content:space-between;color:#fff;font-size:12px;text-shadow:0 1px 2px #000
 }
 .photo-preview-head button{
-  width:24px;height:24px;border:0;background:transparent;font-size:18px;line-height:20px;cursor:pointer
+  width:32px;height:32px;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:22px;line-height:20px;cursor:pointer
 }
-.photo-preview iframe{width:100%;height:calc(100% - 34px);border:0;background:#fff}
+.photo-preview img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;transition:transform .12s ease;cursor:zoom-in;user-select:none}
 .preinspection-map-wrap{margin:0 0 12px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .preinspection-map-head{padding:7px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);font-weight:700}
 #preinspection-map{height:260px}
@@ -896,6 +896,12 @@ function skagitPhotoUrl(pid){
   return "https://www.skagitcounty.net/Search/Property/ViewPic.aspx?id=" + encodeURIComponent(pid);
 }
 
+function skagitPhotoImageUrl(pid){
+  const digits=String(pid||"").replace(/\D/g,"");
+  const folder=digits.slice(-2).padStart(2,"0");
+  return "https://www.skagitcounty.net/Assessor/Images/Photos/" + folder + "/" + encodeURIComponent(pid) + ".jpg";
+}
+
 function openPhotoPreview(pid, anchor){
   closePhotoPreview();
 
@@ -908,21 +914,23 @@ function openPhotoPreview(pid, anchor){
   title.innerHTML=`<b>${escapeHTML(pid)}</b><button type="button" id="photoClose">×</button>`;
   box.appendChild(title);
 
-  const frame=document.createElement("iframe");
-  frame.src=skagitPhotoUrl(pid);
-  frame.title=`Skagit County property photo ${pid}`;
-  frame.loading="lazy";
-  box.appendChild(frame);
+  const image=document.createElement("img");
+  image.src=skagitPhotoImageUrl(pid);
+  image.alt=`Skagit County property photo ${pid}`;
+  image.draggable=false;
+  box.appendChild(image);
 
   document.body.appendChild(box);
-
-  const rect=anchor.getBoundingClientRect();
-  const left=Math.min(window.innerWidth-box.offsetWidth-12, Math.max(12, rect.left-160));
-  const top=Math.min(window.innerHeight-box.offsetHeight-12, Math.max(12, rect.bottom+8));
-  box.style.left=left+"px";
-  box.style.top=top+"px";
-
+  let scale=1;
+  image.addEventListener("wheel",e=>{
+    e.preventDefault();
+    scale=Math.max(1,Math.min(4,scale+(e.deltaY<0?.2:-.2)));
+    image.style.transform=`scale(${scale})`;
+  },{passive:false});
+  image.addEventListener("dblclick",e=>{e.preventDefault();scale=scale===1?2:1;image.style.transform=`scale(${scale})`;});
+  image.addEventListener("error",()=>{image.alt="Photo unavailable";});
   document.getElementById("photoClose").addEventListener("click",closePhotoPreview);
+  box.addEventListener("click",e=>{if(e.target===box)closePhotoPreview();});
 }
 
 function closePhotoPreview(){
@@ -942,6 +950,23 @@ function openImageryCompare(pid){
   const center=parcelCenter ? [parcelCenter.lat,parcelCenter.lng] : [48.42,-122.33];
   const current=L.map("imageryCurrent",{zoomControl:true}).setView(center,18);
   const historic=L.map("imageryHistoric",{zoomControl:true}).setView(center,18);
+  const outlineStyle={color:"#ffe600",weight:3,opacity:1,fill:false,interactive:false};
+  const parcelGeo=parcelLayer && parcelLayer.toGeoJSON ? parcelLayer.toGeoJSON() : null;
+  if(parcelGeo){
+    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:false}).addTo(current);
+    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:false}).addTo(historic);
+  }
+  let syncing=false;
+  const syncMaps=(source,target)=>{
+    source.on("moveend zoomend",()=>{
+      if(syncing)return;
+      syncing=true;
+      target.setView(source.getCenter(),source.getZoom(),{animate:false});
+      syncing=false;
+    });
+  };
+  syncMaps(current,historic);
+  syncMaps(historic,current);
   const pictometryBase="https://svc.pictometry.com/Image/36AB6FD9-8DC8-3133-7871-1347FB79B3E8/wmts";
   const pictometryLayer=(layerId,attribution)=>L.tileLayer(`${pictometryBase}/${layerId}/default/GoogleMapsCompatible/{z}/{x}/{y}.png`,{tileSize:256,maxZoom:22,updateWhenZooming:false,keepBuffer:2,attribution});
   const skagitImageLayer=service=>L.GridLayer.extend({createTile:function(coords,done){
@@ -966,12 +991,18 @@ function openImageryCompare(pid){
     L.marker(center).addTo(current);
     L.marker(center).addTo(historic);
   }
-  document.getElementById("imageryClose").addEventListener("click",()=>{current.remove();historic.remove();modal.remove();});
+  const close=()=>{current.remove();historic.remove();modal.remove();document.removeEventListener("keydown",onKey);};
+  const onKey=e=>{if(e.key==="Escape")close();};
+  document.getElementById("imageryClose").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();close();});
+  document.addEventListener("keydown",onKey);
 }
 
 function redfinSearchUrl(a){
-  const address=[a.SitusStNo,a.SitusStName,a.SitusCSZ].filter(Boolean).join(" ").replace(/\s+/g," ").trim();
-  return "https://www.redfin.com/search?location=" + encodeURIComponent(address);
+  const number=String(a.SitusStNo||"").trim();
+  const street=String(a.SitusStName||"").trim();
+  const csz=String(a.SitusCSZ||"").trim();
+  const address=[number,street,csz].filter(Boolean).join(", ").replace(/\s+/g," ").trim();
+  return "https://www.redfin.com/search?location=" + encodeURIComponent(address || "Skagit County, WA") + "&market=seattle";
 }
 
 function assessorPropertyUrl(pid){
