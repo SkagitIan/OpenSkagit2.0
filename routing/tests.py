@@ -61,3 +61,24 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn('tr.classList.add("active-parcel");', template)
         self.assertIn('row.scrollIntoView({behavior:"smooth",block:"center"});', template)
         self.assertIn(".preinspection-table tbody tr.complete:not(.active-parcel){opacity:.45}", template)
+
+    def test_field_routes_keep_appraisal_routes_and_support_ordered_copy(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn('data-view="fieldRoutes"', template)
+        self.assertIn('state.fieldRoutes={};', template)
+        self.assertIn('function addYesParcelToFieldRoute(pid)', template)
+        self.assertIn('if(next==="yes") addYesParcelToFieldRoute(pid);', template)
+        self.assertIn('function moveFieldParcel(pid,targetRoute,insertIndex=null)', template)
+        self.assertIn('const text=values.join("\\n");', template)
+        self.assertIn('String(pid).replace(/^P/i,"")', template)
+        self.assertIn('id="fieldRouteMap"', template)
+        self.assertIn('data-field-pid', template)
+        self.assertIn('data-field-route-drop', template)
+        self.assertIn('const targetRoute=stop?.dataset.fieldRoute || drop?.dataset.fieldRouteDrop;', template)
+
+    def test_field_route_map_renders_only_selected_route_and_legacy_yes_parcels_seed(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn('const route=state.fieldRoutes[routeName];', template)
+        self.assertIn('(route?.parcels||[]).forEach((pid,index)=>', template)
+        self.assertIn('const legacyYes=state.assignment.map(a=>a.PARCELID).filter(pid=>inspection(pid).changes==="yes");', template)
+        self.assertIn('state.fieldRoutes[legacyRoute].parcels=[...new Set(legacyYes)];', template)

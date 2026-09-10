@@ -58,6 +58,15 @@ input[type=file]{display:none}
   display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:0;
   min-height:720px;
 }
+.field-routes-layout{display:grid;grid-template-columns:minmax(280px,360px) minmax(0,1fr);gap:12px;height:calc(100vh - 122px);min-height:520px;padding:12px}
+.field-route-panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;min-height:0;box-shadow:0 5px 18px rgba(4,44,83,.08)}
+.field-route-panel h2{margin:0;color:var(--os-navy);font-size:18px}.field-route-panel .help{margin:4px 0 12px}
+.field-route-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;margin-bottom:10px}.field-route-controls input,.field-route-controls select{min-width:0;border:1px solid var(--line);border-radius:6px;padding:7px 8px;background:#fff}.field-route-controls button{border:1px solid #9bcfe8;background:#e0f3ff;color:#165d82;border-radius:6px;padding:7px 10px;font-weight:700;cursor:pointer}
+.field-route-actions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.field-route-actions button{border:1px solid var(--line);background:#f7f9fb;border-radius:6px;padding:7px 9px;color:var(--os-navy);font-weight:700;cursor:pointer}.field-route-actions button.primary{background:#dff1e8;border-color:#a7d1b7;color:#1f633e}
+.field-route-status{font-size:11px;color:var(--muted);min-height:18px;margin-bottom:8px}.field-route-list{overflow:auto;min-height:0;display:flex;flex-direction:column;gap:8px}.field-route-column{border:1px solid var(--line);border-radius:7px;padding:7px;background:#fff}.field-route-column.is-active{border-color:#8fc4d7;box-shadow:inset 0 0 0 1px #dff3fa}.field-route-column-head{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:6px;color:var(--os-navy);font-size:12px}.field-route-column-head span{color:var(--muted);font-size:10px}.field-route-drop{min-height:10px;display:flex;flex-direction:column;gap:5px;border-radius:5px}.field-route-drop.is-drop-target{background:#edf9f2;outline:1px dashed #2f8c72}.field-route-list.empty{border:1px dashed var(--line);border-radius:7px;padding:14px;color:var(--muted);font-size:12px}
+.field-stop{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:7px;border:1px solid #dce5eb;border-radius:7px;background:#fbfdff;padding:7px;cursor:grab}.field-stop:active{cursor:grabbing}.field-stop.is-dragging{opacity:.45}.field-stop.is-drop-target{border-color:#2f8c72;background:#edf9f2}.field-stop-number{width:25px;height:25px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#e0f3ff;color:#165d82;font:700 12px JetBrains Mono,monospace}.field-stop-main{min-width:0}.field-stop-main b{display:block;color:var(--os-navy);font:700 12px JetBrains Mono,monospace}.field-stop-main span{display:block;color:var(--muted);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.field-stop-remove{border:0;background:transparent;color:#a5222b;font-size:16px;cursor:pointer;padding:2px 4px}.field-route-map{min-height:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 5px 18px rgba(4,44,83,.08)}
+.field-unassigned-heading{font-size:11px;color:var(--muted);font-weight:700;margin:8px 2px 2px}.field-stop.unassigned{background:#fffaf0;border-style:dashed}.field-stop-marker{background:transparent;border:0}.field-stop-marker span{display:flex;width:27px;height:27px;align-items:center;justify-content:center;border-radius:50%;background:#165d82;color:#fff;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);font:700 11px JetBrains Mono,monospace}
+@media(max-width:900px){.field-routes-layout{grid-template-columns:1fr;height:auto}.field-route-map{height:58vh;min-height:420px}}
 #map{height:720px;background:#dde5ea}
 .side{
   background:#fff;border-left:1px solid var(--line);padding:14px;overflow:auto
@@ -307,6 +316,7 @@ textarea{
   <div class="tabs">
     <button class="tab active" data-view="routes">Route Management</button>
     <button class="tab" data-view="preinspection">Preinspection</button>
+    <button class="tab" data-view="fieldRoutes">Field Routes</button>
   </div>
   <div class="spacer"></div>
 </header>
@@ -428,6 +438,27 @@ textarea{
   </div>
 </section>
 
+<section id="fieldRoutesView" class="view">
+  <div class="field-routes-layout">
+    <aside class="field-route-panel">
+      <h2>Field Visit Routes</h2>
+      <div class="help">YES parcels stay on their appraisal route and are added here for field visits. Drag stops to set the driving order.</div>
+      <div class="field-route-controls">
+        <select id="fieldRouteSelect" aria-label="Selected field route"></select>
+        <button id="newFieldRoute" type="button">+ Route</button>
+      </div>
+      <div class="field-route-actions">
+        <button class="primary" id="copyFieldParcels" type="button">Copy parcel numbers</button>
+        <button id="showFieldUnassigned" type="button">Unassigned (<span id="fieldUnassignedCount">0</span>)</button>
+        <button id="deleteFieldRoute" type="button">Delete route</button>
+      </div>
+      <div id="fieldRouteStatus" class="field-route-status" role="status"></div>
+      <div id="fieldRouteList" class="field-route-list"></div>
+    </aside>
+    <div id="fieldRouteMap" class="field-route-map" aria-label="Selected field route map"></div>
+  </div>
+</section>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.18.0/dist/leaflet-geoman.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/turf.min.js"></script>
@@ -451,8 +482,11 @@ let state = loadState() || {
   inspections:{}
 };
 if(!Object.prototype.hasOwnProperty.call(state,"activeParcel")) state.activeParcel="";
+if(!state.fieldRoutes || typeof state.fieldRoutes!="object" || Array.isArray(state.fieldRoutes)) state.fieldRoutes={};
+if(!Array.isArray(state.fieldUnassigned)) state.fieldUnassigned=[];
+if(!Object.prototype.hasOwnProperty.call(state,"activeFieldRoute")) state.activeFieldRoute="";
 
-let map, parcelLayer, drawLayer;
+let map, parcelLayer, drawLayer, fieldRouteMap, fieldRouteLayer;
 let selected = new Set();
 let parcelLayersById = new Map();
 let imageryCleanup = null;
@@ -496,6 +530,126 @@ function inspection(pid){
 function isComplete(pid){
   const s = inspection(pid);
   return s.changes === "yes" || s.changes === "no";
+}
+
+function fieldRouteNames(){
+  return Object.keys(state.fieldRoutes).sort(routeSort);
+}
+
+function fieldRouteForParcel(pid){
+  return fieldRouteNames().find(name=>(state.fieldRoutes[name].parcels||[]).includes(pid)) || "";
+}
+
+function ensureFieldRoute(name="Field Route 1"){
+  name=String(name||"").trim();
+  if(!name) name="Field Route 1";
+  if(!state.fieldRoutes[name]){
+    state.fieldRoutes[name]={name,color:COLORS[fieldRouteNames().length % COLORS.length],parcels:[],updated:new Date().toISOString()};
+  }
+  return name;
+}
+
+function addYesParcelToFieldRoute(pid){
+  if(!pid || fieldRouteForParcel(pid)) return;
+  const routeName=ensureFieldRoute(fieldRouteNames()[0] || "Field Route 1");
+  const route=state.fieldRoutes[routeName];
+  route.parcels=route.parcels||[];
+  if(!route.parcels.includes(pid)) route.parcels.push(pid);
+  route.updated=new Date().toISOString();
+  state.activeFieldRoute=state.activeFieldRoute || routeName;
+  state.fieldUnassigned=(state.fieldUnassigned||[]).filter(value=>value!==pid);
+}
+
+function moveFieldParcel(pid,targetRoute,insertIndex=null){
+  if(!pid || !state.fieldRoutes[targetRoute]) return;
+  const sourceName=fieldRouteForParcel(pid);
+  if(sourceName){
+    state.fieldRoutes[sourceName].parcels=(state.fieldRoutes[sourceName].parcels||[]).filter(value=>value!==pid);
+  }else{
+    state.fieldUnassigned=(state.fieldUnassigned||[]).filter(value=>value!==pid);
+  }
+  const target=state.fieldRoutes[targetRoute];
+  target.parcels=target.parcels||[];
+  const index=insertIndex===null ? target.parcels.length : Math.max(0,Math.min(Number(insertIndex),target.parcels.length));
+  target.parcels.splice(index,0,pid);
+  target.updated=new Date().toISOString();
+  state.activeFieldRoute=targetRoute;
+}
+
+function fieldParcelRows(name){
+  const amap=assignmentMap();
+  return (state.fieldRoutes[name]?.parcels||[]).map(pid=>amap.get(pid)).filter(Boolean);
+}
+
+function initFieldRouteMap(){
+  if(fieldRouteMap || typeof L==="undefined") return;
+  fieldRouteMap=L.map("fieldRouteMap",{preferCanvas:true}).setView([48.42,-122.33],13);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:20,opacity:.62,attribution:"&copy; OpenStreetMap contributors"}).addTo(fieldRouteMap);
+  fieldRouteLayer=L.layerGroup().addTo(fieldRouteMap);
+}
+
+function renderFieldRouteMap(){
+  initFieldRouteMap();
+  if(!fieldRouteMap || !fieldRouteLayer) return;
+  fieldRouteLayer.clearLayers();
+  const routeName=state.activeFieldRoute;
+  const route=state.fieldRoutes[routeName];
+  const bounds=[];
+  (route?.parcels||[]).forEach((pid,index)=>{
+    const layer=parcelLayersById.get(pid);
+    if(layer?.toGeoJSON){
+      const geo=L.geoJSON(layer.toGeoJSON(),{style:{color:route.color||"#2f8c72",weight:2,fillColor:route.color||"#2f8c72",fillOpacity:.25}}).addTo(fieldRouteLayer);
+      geo.bindTooltip(`${index+1}. ${escapeHTML(pid)}`,{sticky:true});
+      const b=geo.getBounds(); if(b.isValid()){bounds.push(b);L.marker(b.getCenter(),{icon:L.divIcon({className:"field-stop-marker",html:`<span>${index+1}</span>`,iconSize:[28,28],iconAnchor:[14,14]})}).bindTooltip(`${index+1}. ${escapeHTML(pid)}`).addTo(fieldRouteLayer);}
+    }
+  });
+  if(bounds.length){const group=L.featureGroup(bounds.map(b=>L.rectangle(b,{weight:0,opacity:0,fillOpacity:0})));fieldRouteMap.fitBounds(group.getBounds().pad(.08));}
+}
+
+function renderFieldRoutes(){
+  const select=document.getElementById("fieldRouteSelect");
+  const list=document.getElementById("fieldRouteList");
+  const names=fieldRouteNames();
+  if(!names.length){
+    select.innerHTML='<option value="">No field routes</option>';
+    list.className="field-route-list empty";
+    list.textContent="Mark a parcel YES on the Preinspection page to create the first field route.";
+    document.getElementById("fieldUnassignedCount").textContent=String((state.fieldUnassigned||[]).length);
+    return;
+  }
+  if(!names.includes(state.activeFieldRoute)) state.activeFieldRoute=names[0];
+  select.innerHTML=names.map(name=>`<option value="${escapeAttr(name)}">${escapeHTML(name)} (${(state.fieldRoutes[name].parcels||[]).length})</option>`).join("");
+  select.value=state.activeFieldRoute;
+  const route=state.fieldRoutes[state.activeFieldRoute];
+  list.className="field-route-list";
+  const assignedMarkup=names.map(name=>{
+    const routeRows=fieldParcelRows(name);
+    const stops=routeRows.length ? routeRows.map((a,index)=>{
+      const pid=a.PARCELID, address=parcelAddress(a);
+      return `<div class="field-stop" draggable="true" data-field-route="${escapeAttr(name)}" data-field-pid="${escapeAttr(pid)}" data-field-index="${index}"><span class="field-stop-number">${index+1}</span><div class="field-stop-main"><b>${escapeHTML(pid.replace(/^P/i,""))}</b><span>${escapeHTML(address||"No address")}</span></div><button class="field-stop-remove" type="button" data-field-remove="${escapeAttr(pid)}" title="Remove from field route">×</button></div>`;
+    }).join("") : '<div class="help">Drop parcels here.</div>';
+    return `<section class="field-route-column ${name===state.activeFieldRoute?"is-active":""}" data-field-route-column="${escapeAttr(name)}"><div class="field-route-column-head"><b>${escapeHTML(name)}</b><span>${routeRows.length} stop${routeRows.length===1?"":"s"}</span></div><div class="field-route-drop" data-field-route-drop="${escapeAttr(name)}">${stops}</div></section>`;
+  }).join("");
+  const unassignedRows=(state.fieldUnassigned||[]).map(pid=>assignmentMap().get(pid)).filter(Boolean);
+  const unassignedMarkup=unassignedRows.length ? `<div class="field-unassigned-heading">Unassigned YES parcels — drag into this route</div>`+unassignedRows.map(a=>`<div class="field-stop unassigned" draggable="true" data-field-pid="${escapeAttr(a.PARCELID)}"><span class="field-stop-number">+</span><div class="field-stop-main"><b>${escapeHTML(a.PARCELID.replace(/^P/i,""))}</b><span>${escapeHTML(parcelAddress(a)||"No address")}</span></div><span></span></div>`).join("") : "";
+  list.innerHTML=assignedMarkup+unassignedMarkup;
+  document.getElementById("fieldUnassignedCount").textContent=String((state.fieldUnassigned||[]).length);
+  document.getElementById("fieldRouteStatus").textContent=`${(route?.parcels||[]).length} stop${(route?.parcels||[]).length===1?"":"s"} selected · drag within or between routes`;
+  renderFieldRouteMap();
+}
+
+function copyFieldParcelNumbers(){
+  const values=(state.fieldRoutes[state.activeFieldRoute]?.parcels||[]).map(pid=>String(pid).replace(/^P/i,""));
+  if(!values.length){document.getElementById("fieldRouteStatus").textContent="No parcel numbers to copy.";return;}
+  const text=values.join("\n");
+  const done=()=>{document.getElementById("fieldRouteStatus").textContent=`Copied ${values.length} parcel number${values.length===1?"":"s"} without the P prefix.`;};
+  if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));
+  else fallbackCopy(text,done);
+}
+
+function fallbackCopy(text,done){
+  const helper=document.createElement("textarea");helper.value=text;helper.setAttribute("readonly","");helper.style.position="fixed";helper.style.opacity="0";document.body.appendChild(helper);helper.select();
+  try{if(!document.execCommand("copy")) throw new Error("copy failed");done();}catch(e){document.getElementById("fieldRouteStatus").textContent="Copy failed. Select the route list and copy manually.";}finally{helper.remove();}
 }
 
 function preinspectionFilters(){
@@ -888,11 +1042,13 @@ function removeParcelFromAssignment(pid){
   if(!confirm(`Remove ${pid}${addr ? " — "+addr : ""} from this assignment?`)) return;
   state.assignment=state.assignment.filter(row=>row.PARCELID!==pid);
   for(const rt of Object.values(state.routes)) rt.parcels=(rt.parcels||[]).filter(p=>p!==pid);
+  for(const rt of Object.values(state.fieldRoutes)) rt.parcels=(rt.parcels||[]).filter(p=>p!==pid);
+  state.fieldUnassigned=(state.fieldUnassigned||[]).filter(p=>p!==pid);
   delete state.inspections[pid];
   selected.delete(pid);
   if(state.parcelGeoJSON) state.parcelGeoJSON.features=state.parcelGeoJSON.features.filter(f=>f.properties.PARCELID!==pid);
   persist();
-  renderRoutes(); renderPreinspection(); refreshSelectionUI(); refreshParcelStyles(); updateMapMessage();
+  renderRoutes(); renderPreinspection(); renderFieldRoutes(); refreshSelectionUI(); refreshParcelStyles(); updateMapMessage();
   const layer=parcelLayersById.get(pid);
   if(layer) parcelLayer.removeLayer(layer);
   parcelLayersById.delete(pid);
@@ -1523,9 +1679,11 @@ document.querySelectorAll(".tab").forEach(btn=>{
     const v=btn.dataset.view;
     document.getElementById("routesView").classList.toggle("active",v==="routes");
     document.getElementById("preinspectionView").classList.toggle("active",v==="preinspection");
+    document.getElementById("fieldRoutesView").classList.toggle("active",v==="fieldRoutes");
     document.querySelector(".statusbar").style.display = v==="routes" ? "flex" : "none";
     if(v==="routes") setTimeout(()=>map.invalidateSize(),50);
     if(v==="preinspection") { renderPreinspection(); refreshRecentSales(); }
+    if(v==="fieldRoutes") { renderFieldRoutes(); setTimeout(()=>fieldRouteMap?.invalidateSize(),50); }
   });
 });
 
@@ -1541,6 +1699,9 @@ document.getElementById("assignmentFile").addEventListener("change",e=>{
       state.assignment=assignment;
       state.parcelGeoJSON=null;
       state.routes={};
+      state.fieldRoutes={};
+      state.fieldUnassigned=[];
+      state.activeFieldRoute="";
       selected.clear();
       persist();
       parcelLayer.clearLayers();
@@ -1582,6 +1743,90 @@ document.getElementById("routeList").addEventListener("click",e=>{
 document.getElementById("exportBackup").addEventListener("click",exportBackup);
 document.getElementById("backupFile").addEventListener("change",e=>{if(e.target.files[0])restoreBackup(e.target.files[0])});
 document.getElementById("exportProgress").addEventListener("click",exportProgress);
+
+document.getElementById("fieldRouteSelect").addEventListener("change",e=>{
+  state.activeFieldRoute=e.target.value;
+  persist();
+  renderFieldRoutes();
+});
+document.getElementById("newFieldRoute").addEventListener("click",()=>{
+  const suggested=`Field Route ${fieldRouteNames().length+1}`;
+  const name=prompt("Name this field route:",suggested);
+  if(!name?.trim()) return;
+  const clean=name.trim();
+  if(state.fieldRoutes[clean]) return alert("That field route already exists.");
+  ensureFieldRoute(clean);
+  state.activeFieldRoute=clean;
+  persist();
+  renderFieldRoutes();
+});
+document.getElementById("copyFieldParcels").addEventListener("click",copyFieldParcelNumbers);
+document.getElementById("deleteFieldRoute").addEventListener("click",()=>{
+  const name=state.activeFieldRoute;
+  if(!name || !state.fieldRoutes[name]) return;
+  if(!confirm(`Delete ${name}? Its parcels will return to the unassigned field pool.`)) return;
+  const route=state.fieldRoutes[name];
+  (route.parcels||[]).forEach(pid=>{if(!state.fieldUnassigned.includes(pid)) state.fieldUnassigned.push(pid);});
+  delete state.fieldRoutes[name];
+  state.activeFieldRoute=fieldRouteNames()[0] || "";
+  persist();
+  renderFieldRoutes();
+});
+document.getElementById("showFieldUnassigned").addEventListener("click",()=>{
+  const count=(state.fieldUnassigned||[]).length;
+  document.getElementById("fieldRouteStatus").textContent=count ? `${count} YES parcel${count===1?"":"s"} are not assigned to a field route.` : "All YES parcels are assigned to a field route.";
+});
+document.getElementById("fieldRouteList").addEventListener("click",e=>{
+  const button=e.target.closest("[data-field-remove]");
+  if(!button) return;
+  const pid=button.dataset.fieldRemove;
+  const route=state.fieldRoutes[state.activeFieldRoute];
+  if(!route) return;
+  route.parcels=(route.parcels||[]).filter(value=>value!==pid);
+  if(!state.fieldUnassigned.includes(pid)) state.fieldUnassigned.push(pid);
+  route.updated=new Date().toISOString();
+  persist();
+  renderFieldRoutes();
+});
+document.getElementById("fieldRouteList").addEventListener("dragstart",e=>{
+  const stop=e.target.closest("[data-field-pid]");
+  if(!stop) return;
+  stop.classList.add("is-dragging");
+  e.dataTransfer.setData("text/plain",stop.dataset.fieldPid);
+  e.dataTransfer.effectAllowed="move";
+});
+document.getElementById("fieldRouteList").addEventListener("dragend",e=>e.target.closest("[data-field-pid]")?.classList.remove("is-dragging"));
+document.getElementById("fieldRouteList").addEventListener("dragover",e=>{
+  const stop=e.target.closest("[data-field-pid]");
+  const drop=e.target.closest("[data-field-route-drop]");
+  e.preventDefault();
+  document.querySelectorAll(".field-stop.is-drop-target,.field-route-drop.is-drop-target").forEach(node=>node.classList.remove("is-drop-target"));
+  (stop || drop)?.classList.add("is-drop-target");
+});
+document.getElementById("fieldRouteList").addEventListener("drop",e=>{
+  const stop=e.target.closest("[data-field-pid]");
+  const drop=e.target.closest("[data-field-route-drop]");
+  e.preventDefault();
+  const pid=e.dataTransfer.getData("text/plain");
+  const targetRoute=stop?.dataset.fieldRoute || drop?.dataset.fieldRouteDrop;
+  if(!pid || !targetRoute || !state.fieldRoutes[targetRoute]) return;
+  if(!stop){
+    moveFieldParcel(pid,targetRoute,null);
+    persist();
+    renderFieldRoutes();
+    return;
+  }
+  const route=state.fieldRoutes[targetRoute];
+  const oldIndex=(route.parcels||[]).indexOf(pid);
+  let insertIndex=Number(stop.dataset.fieldIndex);
+  const rect=stop.getBoundingClientRect();
+  if(e.clientY>rect.top+rect.height/2) insertIndex+=1;
+  if(oldIndex>=0 && oldIndex<insertIndex) insertIndex-=1;
+  moveFieldParcel(pid,targetRoute,insertIndex);
+  document.querySelectorAll(".field-stop.is-drop-target,.field-route-drop.is-drop-target").forEach(node=>node.classList.remove("is-drop-target"));
+  persist();
+  renderFieldRoutes();
+});
 
 ["preRouteFilter","preShowFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderPreinspection));
 document.getElementById("preSearch").addEventListener("input",renderPreinspection);
@@ -1666,6 +1911,7 @@ document.getElementById("preBody").addEventListener("click",e=>{
   }else if(btn.dataset.change){
     const next=s.changes===btn.dataset.change?"":btn.dataset.change;
     s.changes=next;
+    if(next==="yes") addYesParcelToFieldRoute(pid);
     shouldAdvance=next==="yes" || next==="no";
   }
   persist();
@@ -1699,6 +1945,15 @@ document.getElementById("resetWorkspace").addEventListener("click",()=>{
 });
 
 /* Init */
+if(!fieldRouteNames().length){
+  const legacyYes=state.assignment.map(a=>a.PARCELID).filter(pid=>inspection(pid).changes==="yes");
+  if(legacyYes.length){
+    const legacyRoute=ensureFieldRoute("Field Route 1");
+    state.fieldRoutes[legacyRoute].parcels=[...new Set(legacyYes)];
+    state.activeFieldRoute=legacyRoute;
+    persist();
+  }
+}
 initMap();
 
 if(state.assignment.length && !state.parcelGeoJSON){
@@ -1706,6 +1961,7 @@ if(state.assignment.length && !state.parcelGeoJSON){
 }
 renderRoutes();
 renderPreinspection();
+renderFieldRoutes();
 refreshRecentSales();
 refreshStats();
 updateMapMessage();
