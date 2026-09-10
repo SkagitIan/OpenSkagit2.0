@@ -122,8 +122,8 @@ tr.changed{background:#fffaf0}
 .aerial-action{background:#edf8e6;border-color:#acd08e;color:#416900}
 .aerial-action:hover{background:#dff0d2;border-color:#82ad5d}
 .streetview-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #efc58e;border-radius:6px;background:#fff3e2;color:#a95f16;font-size:17px;line-height:1;box-shadow:0 1px 2px rgba(4,44,83,.08)}
-.changes-action.yes{background:repeating-linear-gradient(135deg,#fff7dc 0,#fff7dc 7px,#f8e9b9 7px,#f8e9b9 9px);border-color:#e4c66f;color:#805200}
-.changes-action.no{background:repeating-linear-gradient(45deg,#eff9e9 0,#eff9e9 7px,#d8edc9 7px,#d8edc9 9px);border-color:#9fc9aa;color:#416900}
+.changes-action.yes{background:repeating-linear-gradient(135deg,#fff 0,#fff 7px,#f0f2f4 7px,#f0f2f4 9px);border-color:#cfd6dd;color:#4b5964}
+.changes-action.no{background:repeating-linear-gradient(45deg,#fff 0,#fff 7px,#f0f2f4 7px,#f0f2f4 9px);border-color:#cfd6dd;color:#4b5964}
 .changes-action.yes.on{background:var(--amber);border-color:#e4c66f;color:var(--amber-text)}
 .changes-action.no.on{background:var(--green);border-color:#9fc9aa;color:var(--green-text)}
 .notes-cell{display:flex;align-items:center;gap:6px;min-width:290px}
@@ -268,7 +268,7 @@ textarea{
 .imagery-sketch-control input{width:70px}
 .imagery-sketch-control button{border:1px solid var(--os-border);border-radius:5px;background:#fff;color:var(--os-navy);padding:4px 6px;font-size:11px;cursor:pointer}.imagery-sketch-control button:hover{background:var(--accent-soft)}
 .parcel-hover{position:relative;cursor:help;color:var(--os-navy);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
-.property-snapshot{position:fixed;z-index:100000;display:none;width:250px;padding:10px;background:#fff;border:1px solid var(--os-border);border-left:3px solid var(--os-teal);border-radius:8px;box-shadow:0 14px 32px rgba(4,44,83,.2);pointer-events:none}
+.property-snapshot{position:fixed !important;z-index:2147483647;display:none;width:250px;padding:10px;background:#fff;border:1px solid var(--os-border);border-left:3px solid var(--os-teal);border-radius:8px;box-shadow:0 14px 32px rgba(4,44,83,.2);pointer-events:none}
 .property-snapshot.visible{display:block}
 .property-snapshot h4{margin:0 0 7px;color:var(--os-navy);font-family:"DM Sans",Inter,sans-serif;font-size:13px}
 .snapshot-table{width:100%;border-collapse:collapse;font-size:11px}.snapshot-table th,.snapshot-table td{padding:4px 0;border-bottom:1px solid #edf0f3;text-align:left}.snapshot-table th{color:var(--os-muted);font-weight:600}.snapshot-table td{text-align:right;color:var(--os-ink);font-weight:600}
@@ -1019,6 +1019,8 @@ function openImageryCompare(pid){
   const outlineStyle={color:"#ffe600",weight:3,opacity:1,fill:false,interactive:false};
   const parcelGeo=parcelLayer && parcelLayer.toGeoJSON ? parcelLayer.toGeoJSON() : null;
   let sketchOverlay=null;
+  let sketchMap=null;
+  let sketchOffset={x:0,y:0};
   const sketchControl=document.getElementById("imagerySketchControl");
   const sketchButton=document.getElementById("sketchToggle");
   const sketchOpacity=document.getElementById("sketchOpacity");
@@ -1026,19 +1028,22 @@ function openImageryCompare(pid){
   let sketchRotation=0;
   sketchControl.classList.add("visible");
   if(parcelGeo){
-    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:false}).addTo(current);
-    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:true}).addTo(historic).on("click",toggleSketch);
+    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:true}).addTo(current).on("click",()=>toggleSketch(current));
+    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:true}).addTo(historic).on("click",()=>toggleSketch(historic));
   }
-  async function toggleSketch(){
-    if(sketchOverlay){historic.removeLayer(sketchOverlay);sketchOverlay=null;sketchButton.textContent="Show sketch";return;}
+  async function toggleSketch(targetMap){
+    if(sketchOverlay && sketchMap===targetMap){targetMap.removeLayer(sketchOverlay);sketchOverlay=null;sketchMap=null;sketchButton.textContent="Show sketch";return;}
+    if(sketchOverlay && sketchMap){sketchMap.removeLayer(sketchOverlay);sketchOverlay=null;sketchMap=null;}
     sketchButton.disabled=true;
     sketchButton.textContent="Loading…";
     try{
       const response=await fetch(`/routing/parcel/${encodeURIComponent(pid)}/sketch/`);
       const payload=await response.json();
       if(!response.ok || !payload.found) throw new Error("No assessor sketch found");
-      const bounds=parcelLayer ? parcelLayer.getBounds() : historic.getBounds();
-      sketchOverlay=L.imageOverlay(payload.image_url || payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true}).addTo(historic);
+      const bounds=parcelLayer ? parcelLayer.getBounds() : targetMap.getBounds();
+      sketchMap=targetMap;
+      sketchOffset={x:0,y:0};
+      sketchOverlay=L.imageOverlay(payload.image_url || payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true}).addTo(targetMap);
       sketchOverlay.setZIndex(1000);
       sketchOverlay.once("load",applySketchTransform);
       sketchControl.classList.add("visible");
@@ -1052,14 +1057,39 @@ function openImageryCompare(pid){
     image.style.mixBlendMode="multiply";
     image.style.filter="grayscale(1) contrast(1.35)";
     image.style.transformOrigin="center center";
-    image.style.transform=`rotate(${sketchRotation}deg) scale(${Number(sketchScale.value)})`;
+    image.style.transform=`translate(${sketchOffset.x}px,${sketchOffset.y}px) rotate(${sketchRotation}deg) scale(${Number(sketchScale.value)})`;
+    image.style.cursor="grab";
+    image.style.pointerEvents="auto";
+    if(image.dataset.dragReady)return;
+    image.dataset.dragReady="true";
+    let dragging=false;
+    let startX=0;
+    let startY=0;
+    image.addEventListener("pointerdown",event=>{
+      dragging=true; startX=event.clientX-sketchOffset.x; startY=event.clientY-sketchOffset.y;
+      image.style.cursor="grabbing"; image.setPointerCapture?.(event.pointerId);
+      event.preventDefault(); event.stopPropagation();
+    });
+    image.addEventListener("pointermove",event=>{
+      if(!dragging)return;
+      sketchOffset={x:event.clientX-startX,y:event.clientY-startY};
+      applySketchTransform();
+      event.preventDefault(); event.stopPropagation();
+    });
+    const stopDragging=event=>{
+      if(!dragging)return;
+      dragging=false; image.style.cursor="grab"; image.releasePointerCapture?.(event.pointerId);
+      event.preventDefault(); event.stopPropagation();
+    };
+    image.addEventListener("pointerup",stopDragging);
+    image.addEventListener("pointercancel",stopDragging);
   }
   sketchControl.addEventListener("click",e=>{
     const action=e.target.closest("[data-sketch-action]")?.dataset.sketchAction;
     if(!action)return;
-    if(action==="rotate-left")sketchRotation-=5;
-    if(action==="rotate-right")sketchRotation+=5;
-    if(action==="reset"){sketchRotation=0;sketchScale.value="1";sketchOpacity.value="0.55";if(sketchOverlay)sketchOverlay.setOpacity(.55);}
+    if(action==="rotate-left")sketchRotation-=90;
+    if(action==="rotate-right")sketchRotation+=90;
+    if(action==="reset"){sketchRotation=0;sketchOffset={x:0,y:0};sketchScale.value="1";sketchOpacity.value="0.55";if(sketchOverlay)sketchOverlay.setOpacity(.55);}
     applySketchTransform();
   });
   sketchButton.addEventListener("click",toggleSketch);
@@ -1149,10 +1179,17 @@ function showPropertySnapshot(pid,target){
   let card=document.getElementById("propertySnapshot");
   if(!card){card=document.createElement("div");card.id="propertySnapshot";card.className="property-snapshot";document.body.appendChild(card);}
   card.innerHTML=propertySnapshot(pid);
-  const rect=target.getBoundingClientRect();
-  card.style.left=Math.min(window.innerWidth-262,Math.max(8,rect.left)) + "px";
-  card.style.top=Math.min(window.innerHeight-190,Math.max(8,rect.bottom+8)) + "px";
   card.classList.add("visible");
+  const rect=target.getBoundingClientRect();
+  const margin=10;
+  const width=card.offsetWidth || 250;
+  const height=card.offsetHeight || 190;
+  const left=Math.max(margin,Math.min(window.innerWidth-width-margin,rect.left));
+  let top=rect.bottom+8;
+  if(top+height>window.innerHeight-margin) top=rect.top-height-8;
+  top=Math.max(margin,Math.min(window.innerHeight-height-margin,top));
+  card.style.left=left + "px";
+  card.style.top=top + "px";
 }
 
 function hidePropertySnapshot(){document.getElementById("propertySnapshot")?.classList.remove("visible");}
