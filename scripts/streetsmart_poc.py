@@ -17,16 +17,19 @@ import base64
 import json
 import math
 import os
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 import requests
 from PIL import Image
 
 
-WFS_URL = os.getenv("CYCLOMEDIA_WFS_URL", "https://atlasapi.cyclomedia.com/api/recording/wfs")
-TILE_BASE_URL = os.getenv("CYCLOMEDIA_TILE_BASE_URL", "https://atlasapi.cyclomedia.com/image/panorama/tiles/Tile")
+WFS_URL = os.getenv("CYCLOMEDIA_WFS_URL", "https://atlasapi.cyclomedia.com/recording/wfs")
+TILE_BASE_URL = os.getenv("CYCLOMEDIA_TILE_BASE_URL", "https://atlasapi2.cyclomedia.com/image/panorama/tiles/Tile")
+CLIENT_VERSION = os.getenv("CYCLOMEDIA_NAME_VERSION", "streetsmart_26.3.0")
 DEFAULT_RADIUS_METERS = 250.0
 TILE_ZOOM = 2
 TILE_SIZE = 512
@@ -52,10 +55,31 @@ def _auth_headers() -> dict[str, str]:
     if username or password:
         encoded = base64.b64encode(f"{username}:{password}".encode()).decode()
         return {"Authorization": f"Basic {encoded}", "Accept": "application/json"}
-    raise StreetSmartAuthError(
-        "No supported Cyclomedia credential supplied. Set CYCLOMEDIA_BEARER_TOKEN "
-        "or CYCLOMEDIA_USERNAME/CYCLOMEDIA_PASSWORD; browser cookies are not accepted."
+    raise StreetSmartAuthError("No OAuth/basic credential supplied for the authenticated imagery session")
+
+
+def _api_key() -> str:
+    key = os.getenv("CYCLOMEDIA_API_KEY", "").strip()
+    if not key:
+        raise StreetSmartAuthError(
+            "No Cyclomedia Atlas integration API key supplied. The temporary HAR apiKey "
+            "must not be reused; obtain a supported integration key from Cyclomedia."
+        )
+    return key
+
+
+def exchange_authorization_code(code: str, code_verifier: str, redirect_uri: str = "https://streetsmart.cyclomedia.com/login") -> dict[str, Any]:
+    """Exchange a caller-owned PKCE code without persisting the resulting token."""
+    client_id = os.getenv("CYCLOMEDIA_CLIENT_ID", "D61AE220-A48A-42F1-81BF-8FA3313F01A4").strip()
+    response = requests.post(
+        "https://identity.cyclomedia.com/connect/token",
+        data={"client_id": client_id, "code": code, "redirect_uri": redirect_uri, "code_verifier": code_verifier, "grant_type": "authorization_code"},
+        timeout=30,
     )
+    if response.status_code in (400, 401, 403):
+        raise StreetSmartAuthError(f"Cyclomedia OAuth code exchange failed with HTTP {response.status_code}")
+    response.raise_for_status()
+    return response.json()
 
 
 def _web_mercator(x: float, y: float, input_crs: int) -> tuple[float, float]:
@@ -78,25 +102,52 @@ def _dwithin_filter(x: float, y: float, radius_meters: float) -> str:
 </ogc:Filter>"""
 
 
+def _wfs_body(x: float, y: float, radius_meters: float) -> bytes:
+    return f'''<?xml version="1.0" encoding="UTF-8"?>
+<wfs:GetFeature service="WFS" version="1.1.0" resultType="results" outputFormat="text/xml; subtype=gml/3.1.1" xmlns:wfs="http://www.opengis.net/wfs" maxFeatures="100">
+  <wfs:Query typeName="atlas:Recording" srsName="EPSG:3857" xmlns:atlas="http://www.cyclomedia.com/atlas">
+    <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+      <ogc:And>
+        <ogc:DWithin>
+          <ogc:PropertyName>Recording/location</ogc:PropertyName>
+          <gml:Point srsName="EPSG:3857" xmlns:gml="http://www.opengis.net/gml"><gml:pos>{x} {y}</gml:pos></gml:Point>
+          <ogc:Distance units="http://www.opengeospatial.org/se/units/metre">{radius_meters}</ogc:Distance>
+        </ogc:DWithin>
+        <ogc:PropertyIsNull><ogc:PropertyName>expiredAt</ogc:PropertyName></ogc:PropertyIsNull>
+      </ogc:And>
+    </ogc:Filter>
+  </wfs:Query>
+</wfs:GetFeature>'''.encode("utf-8")
+
+
 def find_recordings(session: requests.Session, x: float, y: float, radius_meters: float) -> list[dict[str, Any]]:
-    params = {
-        "service": "WFS",
-        "version": "1.1.0",
-        "request": "GetFeature",
-        "typename": "atlas:Recording",
-        "srsname": "EPSG:3857",
-        "outputformat": "application/json",
-        "filter": _dwithin_filter(x, y, radius_meters),
-    }
-    response = session.get(WFS_URL, params=params, timeout=30)
+    params = {"apiKey": _api_key(), "nameVersion": CLIENT_VERSION}
+    response = session.post(WFS_URL, params=params, data=_wfs_body(x, y, radius_meters), headers={"Content-Type": "text/xml", "Accept": "text/xml"}, timeout=30)
     if response.status_code in (401, 403):
         raise StreetSmartAuthError(f"Cyclomedia WFS rejected credentials with HTTP {response.status_code}")
     response.raise_for_status()
-    payload = response.json()
-    if isinstance(payload, dict) and payload.get("exception"):
-        raise StreetSmartDataError(str(payload["exception"]))
-    features = payload.get("features", []) if isinstance(payload, dict) else []
-    return [feature for feature in features if isinstance(feature, dict)]
+    try:
+        root = ET.fromstring(response.content)
+    except ET.ParseError as exc:
+        raise StreetSmartDataError(f"Cyclomedia WFS returned invalid XML: {exc}") from exc
+    ns = {"atlas": "http://www.cyclomedia.com/atlas", "gml": "http://www.opengis.net/gml"}
+    features = []
+    for node in root.findall(".//atlas:Recording", ns):
+        props: dict[str, Any] = {}
+        geometry: dict[str, Any] | None = None
+        for child in node:
+            key = child.tag.rsplit("}", 1)[-1]
+            if key == "location":
+                pos = child.find(".//gml:pos", ns)
+                if pos is not None:
+                    coords = [float(part) for part in (pos.text or "").split()[:2]]
+                    geometry = {"type": "Point", "coordinates": coords}
+            elif key == "ownerInfo":
+                props[key] = {item.tag.rsplit("}", 1)[-1]: item.text for item in child}
+            elif child.text and child.text.strip():
+                props[key] = child.text.strip()
+        features.append({"type": "Feature", "geometry": geometry, "properties": props})
+    return [feature for feature in features if feature.get("geometry")]
 
 
 def _feature_recording(feature: dict[str, Any], subject_x: float, subject_y: float) -> dict[str, Any]:
@@ -152,7 +203,7 @@ def _face_for_relative_bearing(relative_degrees: float) -> str:
 
 
 def _tile_url(image_id: str, face: str, x: int, y: int, zoom: int = TILE_ZOOM) -> str:
-    return f"{TILE_BASE_URL}/{image_id}/{zoom}/{face}/{x}/{y}"
+    return f"{TILE_BASE_URL}/{image_id}/{zoom}/{face}/{x}/{y}?apiKey={quote(_api_key())}&nameVersion={quote(CLIENT_VERSION)}"
 
 
 def _download_face(session: requests.Session, image_id: str, face: str, zoom: int = TILE_ZOOM) -> Image.Image:
