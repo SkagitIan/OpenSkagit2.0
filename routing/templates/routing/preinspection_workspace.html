@@ -1007,6 +1007,15 @@ function closeImageryCompare(){
   }
 }
 
+function saveInspectionNotes(pid,value){
+  const notes=String(value ?? "");
+  inspection(pid).notes=notes;
+  persist();
+  document.querySelectorAll("textarea[data-pid]").forEach(field=>{
+    if(field.dataset.pid === pid && field.value !== notes) field.value=notes;
+  });
+}
+
 function openImageryCompare(pid){
   closeImageryCompare();
   const a=assignmentMap().get(pid) || {};
@@ -1136,6 +1145,8 @@ function openImageryCompare(pid){
   }
   const close=()=>{
     if(imageryCleanup===close) imageryCleanup=null;
+    const notesInput=document.getElementById("imageryNotes");
+    if(notesInput) saveInspectionNotes(pid,notesInput.value);
     document.removeEventListener("keydown",onKey);
     modal.remove();
     try{current.remove();}catch(e){}
@@ -1145,11 +1156,7 @@ function openImageryCompare(pid){
   imageryCleanup=close;
   const onKey=e=>{if(e.key==="Escape")close();};
   const notesInput=document.getElementById("imageryNotes");
-  notesInput.addEventListener("input",()=>{
-    inspection(pid).notes=notesInput.value;
-    document.querySelectorAll(`#preBody textarea[data-pid="${CSS.escape(pid)}"]`).forEach(field=>{field.value=notesInput.value;});
-    persist();
-  });
+  ["input","change","blur"].forEach(eventName=>notesInput.addEventListener(eventName,()=>saveInspectionNotes(pid,notesInput.value)));
   document.getElementById("imageryClose").setAttribute("aria-label","Close aerial comparison");
   document.addEventListener("keydown",onKey);
 }

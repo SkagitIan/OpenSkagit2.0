@@ -37,3 +37,11 @@ class OptimizationTests(TestCase):
         self.assertEqual(sum(map(len, groups)), 291)
         self.assertEqual([len(group) for group in groups], [59, 58, 58, 58, 58])
         self.assertTrue(all(50 <= len(group) <= 75 for group in groups))
+
+
+class PreinspectionWorkspaceTests(TestCase):
+    def test_aerial_notes_are_saved_on_input_and_before_modal_close(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn("function saveInspectionNotes(pid,value)", template)
+        self.assertIn('if(notesInput) saveInspectionNotes(pid,notesInput.value);', template)
+        self.assertIn('["input","change","blur"]', template)
