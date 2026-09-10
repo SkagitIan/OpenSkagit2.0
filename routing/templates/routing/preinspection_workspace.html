@@ -163,6 +163,10 @@ textarea{
   width:100%;border:1px solid #d8dde3;background:#fff;color:#7a1f1f;
   border-radius:5px;padding:5px 8px;font-size:11px;cursor:pointer
 }
+.popup-remove{
+  width:100%;border:1px solid #b61b27;background:#fff;color:#9b1c1c;
+  border-radius:5px;padding:5px 8px;font-size:11px;cursor:pointer
+}
 .listing-cell{display:flex;align-items:center;justify-content:center;gap:6px}
 .redfin-link{
   width:28px;height:28px;border-radius:6px;background:#d4202f;color:#fff;
@@ -170,6 +174,8 @@ textarea{
   font-weight:800;font-size:14px;border:1px solid #b61b27
 }
 .redfin-link:hover{background:#b61b27}
+.parcel-link{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:1px solid #9aa8b5;border-radius:5px;color:#1f5f8b;text-decoration:none;font-weight:800}
+.parcel-link:hover{background:#e7f0f7;border-color:#5f829b}
 
 
 .route-tools{
@@ -210,6 +216,9 @@ textarea{
   width:24px;height:24px;border:0;background:transparent;font-size:18px;line-height:20px;cursor:pointer
 }
 .photo-preview iframe{width:100%;height:calc(100% - 34px);border:0;background:#fff}
+.preinspection-map-wrap{margin:0 0 12px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.preinspection-map-head{padding:7px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);font-weight:700}
+#preinspection-map{height:260px}
 .imagery-compare{position:fixed;inset:2vh 2vw;z-index:99998;background:#fff;border:1px solid #aeb7c0;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.25);overflow:hidden;display:flex;flex-direction:column}
 .imagery-compare-head{min-height:42px;padding:7px 10px;border-bottom:1px solid #e1e5e9;display:flex;align-items:center;gap:10px;background:#f7f9fb;font-size:12px}
 .imagery-compare-head span{flex:1;color:var(--muted)}
@@ -328,11 +337,15 @@ textarea{
       <span class="pill field-pill" id="fieldSheetCount">0 field sheets</span>
     </div>
 
+    <div class="preinspection-map-wrap">
+      <div class="preinspection-map-head">Route plan overview</div>
+      <div id="preinspection-map" aria-label="Route plan overview map"></div>
+    </div>
+
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th class="left">Route</th>
             <th class="left">Parcel</th>
             <th class="left">Address</th>
             <th>Photo</th>
@@ -344,7 +357,7 @@ textarea{
           </tr>
         </thead>
         <tbody id="preBody">
-          <tr><td colspan="9" class="empty">Assign parcels to a route first.</td></tr>
+          <tr><td colspan="8" class="empty">Assign parcels to a route first.</td></tr>
         </tbody>
       </table>
     </div>
@@ -374,7 +387,7 @@ let state = loadState() || {
   inspections:{}
 };
 
-let map, parcelLayer, drawLayer;
+let map, parcelLayer, drawLayer, preMap, preMapLayer;
 let selected = new Set();
 let parcelLayersById = new Map();
 
@@ -512,6 +525,11 @@ function initMap(){
         unassignParcel(unassignBtn.dataset.popupUnassign);
       },{once:true});
     }
+
+    const removeBtn=el.querySelector("[data-popup-remove]");
+    if(removeBtn){
+      removeBtn.addEventListener("click",()=>removeParcelFromAssignment(removeBtn.dataset.popupRemove),{once:true});
+    }
   });
 
   const legend=L.control({position:"bottomleft"});
@@ -537,6 +555,7 @@ function parcelPopup(pid){
     <div class="popup-actions">
       <button class="popup-move" data-popup-move="${escapeAttr(pid)}">Move to ${escapeHTML(target)}</button>
       ${current!=="Unassigned" ? `<button class="popup-unassign" data-popup-unassign="${escapeAttr(pid)}">Remove from route</button>` : ""}
+      <button class="popup-remove" data-popup-remove="${escapeAttr(pid)}">🗑 Remove from assignment</button>
     </div>`;
 }
 
@@ -546,6 +565,9 @@ function parcelStyle(feature){
     return {color:"#7a4a00",weight:3,fillColor:"#ffd15a",fillOpacity:.72};
   }
   const rt=routeForParcel(pid);
+  if(isComplete(pid)){
+    return {color:"#235c35",weight:2.5,fillColor:"#6ca67d",fillOpacity:.72};
+  }
   if(rt){
     const color=state.routes[rt]?.color || "#2f6fa3";
     return {color:color,weight:2.1,fillColor:color,fillOpacity:.50};
@@ -695,6 +717,22 @@ function unassignParcel(pid){
     layer.closePopup();
     layer.openPopup();
   }
+}
+
+function removeParcelFromAssignment(pid){
+  const a=assignmentMap().get(pid) || {};
+  const addr=(a.SitusStNo+" "+a.SitusStName).trim();
+  if(!confirm(`Remove ${pid}${addr ? " — "+addr : ""} from this assignment?`)) return;
+  state.assignment=state.assignment.filter(row=>row.PARCELID!==pid);
+  for(const rt of Object.values(state.routes)) rt.parcels=(rt.parcels||[]).filter(p=>p!==pid);
+  delete state.inspections[pid];
+  selected.delete(pid);
+  if(state.parcelGeoJSON) state.parcelGeoJSON.features=state.parcelGeoJSON.features.filter(f=>f.properties.PARCELID!==pid);
+  persist();
+  renderRoutes(); renderPreinspection(); refreshSelectionUI(); refreshParcelStyles(); updateMapMessage();
+  const layer=parcelLayersById.get(pid);
+  if(layer) parcelLayer.removeLayer(layer);
+  parcelLayersById.delete(pid);
 }
 
 function toggleSelected(pid){
@@ -904,18 +942,18 @@ function openImageryCompare(pid){
   const center=parcelCenter ? [parcelCenter.lat,parcelCenter.lng] : [48.42,-122.33];
   const current=L.map("imageryCurrent",{zoomControl:true}).setView(center,18);
   const historic=L.map("imageryHistoric",{zoomControl:true}).setView(center,18);
-  L.tileLayer("https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}",{maxZoom:20,maxNativeZoom:16,attribution:"USGS The National Map"}).addTo(current);
-  const historicalLayer=L.GridLayer.extend({createTile:function(coords,done){
+  const skagitImageLayer=service=>L.GridLayer.extend({createTile:function(coords,done){
     const tile=document.createElement("img");
-    tile.alt="2020 historical aerial imagery";
+    tile.alt="Skagit County aerial imagery";
     tile.width=256; tile.height=256;
     const bounds=this._tileCoordsToBounds(coords);
-    const params=new URLSearchParams({bbox:[bounds.getWest(),bounds.getSouth(),bounds.getEast(),bounds.getNorth()].join(","),bboxSR:"3857",imageSR:"3857",size:"256,256",format:"jpg",f:"image",mosaicRule:JSON.stringify({where:"State = 'WA' AND Year = 2020",mosaicMethod:"ByAttribute",sortField:"acquisition_date",ascending:false})});
-    tile.onload=()=>done(null,tile); tile.onerror=()=>done(new Error("Historical imagery unavailable"),tile);
-    tile.src="https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPImagery/ImageServer/exportImage?"+params.toString();
+    const params=new URLSearchParams({bbox:[bounds.getWest(),bounds.getSouth(),bounds.getEast(),bounds.getNorth()].join(","),bboxSR:"3857",imageSR:"3857",size:"256,256",format:"jpg",f:"image"});
+    tile.onload=()=>done(null,tile); tile.onerror=()=>done(new Error("Skagit aerial imagery unavailable"),tile);
+    tile.src=service+"/exportImage?"+params.toString();
     return tile;
   }});
-  new historicalLayer({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"USGS / USDA NAIP 2020"}).addTo(historic);
+  new (skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer"))({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2021"}).addTo(current);
+  new (skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2020_6inch/ImageServer"))({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2020"}).addTo(historic);
   if(parcelCenter){
     L.marker(center).addTo(current);
     L.marker(center).addTo(historic);
@@ -926,6 +964,35 @@ function openImageryCompare(pid){
 function redfinSearchUrl(a){
   const address=[a.SitusStNo,a.SitusStName,a.SitusCSZ].filter(Boolean).join(" ").replace(/\s+/g," ").trim();
   return "https://www.redfin.com/search?location=" + encodeURIComponent(address);
+}
+
+function assessorPropertyUrl(pid){
+  return "https://www.skagitcounty.net/search/propertym/default.aspx?id=" + encodeURIComponent(pid);
+}
+
+function renderPreinspectionMap(){
+  if(!preMap){
+    preMap=L.map("preinspection-map",{zoomControl:true}).setView([48.42,-122.33],13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:20,attribution:"© OpenStreetMap contributors"}).addTo(preMap);
+    preMapLayer=L.featureGroup().addTo(preMap);
+  }
+  preMapLayer.clearLayers();
+  const bounds=[];
+  Object.values(state.routes).forEach(rt=>{
+    const color=rt.color || "#2f6fa3";
+    (rt.parcels||[]).forEach(pid=>{
+      const source=parcelLayersById.get(pid);
+      if(!source) return;
+      const copy=L.geoJSON(source.toGeoJSON(),{style:{color,weight:2,fillColor:color,fillOpacity:.38}}).addTo(preMapLayer);
+      const b=copy.getBounds();
+      if(b.isValid()) bounds.push(b);
+    });
+  });
+  if(bounds.length){
+    const combined=bounds.reduce((acc,b)=>acc.extend(b),L.latLngBounds(bounds[0]));
+    preMap.fitBounds(combined.pad(.08));
+  }
+  setTimeout(()=>preMap.invalidateSize(),50);
 }
 
 function renderPreinspection(){
@@ -955,8 +1022,7 @@ function renderPreinspection(){
       if(complete) tr.classList.add("complete");
       if(s.changes==="yes") tr.classList.add("changed");
       tr.innerHTML=`
-        <td>${escapeHTML(rtName)}</td>
-        <td><b>${escapeHTML(pid)}</b></td>
+        <td><b>${escapeHTML(pid)}</b> <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
         <td>${escapeHTML(addr)}</td>
         <td style="text-align:center">
           <button class="photo-btn" type="button" data-photo="${escapeAttr(pid)}" title="Preview Skagit County property photo">▣</button>
@@ -984,7 +1050,7 @@ function renderPreinspection(){
   });
 
   if(!shown){
-    body.innerHTML='<tr><td colspan="9" class="empty">No parcels match the current route/filter.</td></tr>';
+    body.innerHTML='<tr><td colspan="8" class="empty">No parcels match the current route/filter.</td></tr>';
   }
   document.getElementById("preSummary").textContent=`${shown} parcels shown`;
 
@@ -1000,6 +1066,7 @@ function renderPreinspection(){
   document.getElementById("preProgress").textContent=`${scopeComplete} / ${scopeTotal} complete`;
   document.getElementById("fieldSheetCount").textContent=`${scopeField} field sheet${scopeField===1?"":"s"}`;
   refreshStats();
+  renderPreinspectionMap();
 }
 
 
@@ -1167,6 +1234,7 @@ document.getElementById("preBody").addEventListener("click",e=>{
     s.changes=s.changes===btn.dataset.change?"":btn.dataset.change;
   }
   persist(); renderPreinspection();
+  refreshParcelStyles();
 });
 
 let photoHoverTimer=null;
