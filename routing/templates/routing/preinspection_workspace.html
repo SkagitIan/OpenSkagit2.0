@@ -124,10 +124,19 @@ tr.changed{background:#fffaf0}
 .streetview-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #efc58e;border-radius:6px;background:#fff3e2;color:#a95f16;font-size:17px;line-height:1;box-shadow:0 1px 2px rgba(4,44,83,.08)}
 .changes-action.yes{background:repeating-linear-gradient(135deg,#fff7dc 0,#fff7dc 7px,#f8e9b9 7px,#f8e9b9 9px);border-color:#e4c66f;color:#805200}
 .changes-action.no{background:repeating-linear-gradient(45deg,#eff9e9 0,#eff9e9 7px,#d8edc9 7px,#d8edc9 9px);border-color:#9fc9aa;color:#416900}
+.changes-action.yes.on{background:var(--amber);border-color:#e4c66f;color:var(--amber-text)}
+.changes-action.no.on{background:var(--green);border-color:#9fc9aa;color:var(--green-text)}
 .notes-cell{display:flex;align-items:center;gap:6px;min-width:290px}
 .notes-cell textarea{flex:1;min-width:0}
 .unassign-action{flex:0 0 30px;width:30px;height:30px;border:1px solid #e7b0b0;border-radius:6px;background:#fff3f3;color:#a5222b;font-size:15px;line-height:1}
 .unassign-action:hover{background:#fbe0e0;border-color:#c95858}
+.imagery-header-actions{display:flex;align-items:center;gap:5px;margin-left:auto}
+.imagery-compare-head .imagery-sketch-control{position:static;display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:0;background:transparent;border:0;max-width:none;font-size:11px}
+.imagery-compare-head .imagery-sketch-control button{width:auto;height:30px;padding:4px 7px;font-size:12px}
+.imagery-compare-head .imagery-sketch-control input{width:54px}
+.imagery-notes-bar{display:flex;align-items:center;gap:8px;padding:5px 10px;border-bottom:1px solid #e1e5e9;background:#fffdf3;font-size:11px;color:var(--muted)}
+.imagery-notes-bar label{font-weight:700;color:var(--os-navy);white-space:nowrap}
+.imagery-notes-bar input{flex:1;min-width:0;border:1px solid #e7dfb8;border-radius:5px;padding:5px 7px;background:#fff;font-size:12px}
 textarea{
   width:100%;min-width:250px;min-height:30px;height:30px;resize:vertical;
   border:1px solid #d8dde3;border-radius:5px;padding:5px 7px
@@ -247,13 +256,13 @@ textarea{
   width:32px;height:32px;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:22px;line-height:20px;cursor:pointer
 }
 .photo-preview img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;transition:transform .12s ease;cursor:zoom-in;user-select:none}
-.imagery-compare{position:fixed;inset:2vh 2vw;z-index:99998;background:#fff;border:1px solid var(--os-border);border-radius:8px;box-shadow:0 18px 45px rgba(4,44,83,.25);overflow:hidden;display:flex;flex-direction:column}
+.imagery-compare{position:fixed;inset:1vh 1vw;z-index:99998;background:#fff;border:1px solid var(--os-border);border-radius:8px;box-shadow:0 18px 45px rgba(4,44,83,.25);overflow:hidden;display:flex;flex-direction:column}
 .imagery-compare-head{position:relative;z-index:1000;min-height:42px;padding:7px 10px;border-bottom:1px solid #e1e5e9;display:flex;align-items:center;gap:10px;background:#f7f9fb;font-size:12px}
 .imagery-compare-head span{flex:1;color:var(--muted)}
 .imagery-compare-head button{position:relative;z-index:1001;width:34px;height:34px;border:1px solid var(--os-border);border-radius:8px;background:#fff;color:var(--os-navy);font-size:22px;cursor:pointer;pointer-events:auto}
 .imagery-compare-body{display:grid;grid-template-columns:1fr 1fr;min-height:0;flex:1}
-.imagery-pane{position:relative;min-width:0;min-height:0;border-right:1px solid #d8dde3}.imagery-pane:last-child{border-right:0}
-.imagery-pane h3{position:absolute;z-index:2;top:8px;left:8px;margin:0;padding:5px 8px;background:rgba(255,255,255,.9);border-radius:5px;font-size:12px}.imagery-map{width:100%;height:100%;min-height:420px}
+.imagery-pane{position:relative;min-width:0;min-height:0;height:100%;border-right:1px solid #d8dde3}.imagery-pane:last-child{border-right:0}
+.imagery-pane h3{position:absolute;z-index:2;top:8px;left:8px;margin:0;padding:5px 8px;background:rgba(255,255,255,.9);border-radius:5px;font-size:12px}.imagery-map{width:100%;height:100%;min-height:0}
 .imagery-sketch-control{position:absolute;z-index:3;right:8px;top:8px;display:none;align-items:center;gap:5px;flex-wrap:wrap;padding:5px 7px;background:rgba(255,255,255,.94);border:1px solid var(--os-border);border-radius:6px;font-size:11px;max-width:calc(100% - 16px)}
 .imagery-sketch-control.visible{display:flex}
 .imagery-sketch-control input{width:70px}
@@ -1000,7 +1009,7 @@ function openImageryCompare(pid){
   const modal=document.createElement("div");
   modal.id="imageryCompare";
   modal.className="imagery-compare";
-  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><span>Skagit aerial imagery comparison · Pictometry/Cyclomedia</span><button type="button" id="imageryClose">×</button></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2019</h3><div class="imagery-sketch-control" id="imagerySketchControl"><button type="button" id="sketchToggle">Show sketch</button><button type="button" data-sketch-action="rotate-left" title="Rotate sketch left">↶</button><button type="button" data-sketch-action="rotate-right" title="Rotate sketch right">↷</button><button type="button" data-sketch-action="reset" title="Reset sketch alignment">Reset</button><label>Opacity <input id="sketchOpacity" type="range" min="0.15" max="1" step="0.05" value="0.55"></label><label>Scale <input id="sketchScale" type="range" min="0.5" max="2" step="0.05" value="1"></label></div><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
+  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><div class="imagery-header-actions"><div class="imagery-sketch-control" id="imagerySketchControl"><button type="button" id="sketchToggle">Show sketch</button><button type="button" data-sketch-action="rotate-left" title="Rotate sketch left">↶</button><button type="button" data-sketch-action="rotate-right" title="Rotate sketch right">↷</button><button type="button" data-sketch-action="reset" title="Reset sketch alignment">Reset</button><label>Opacity <input id="sketchOpacity" type="range" min="0.15" max="1" step="0.05" value="0.55"></label><label>Scale <input id="sketchScale" type="range" min="0.5" max="2" step="0.05" value="1"></label></div><button type="button" id="imageryClose">×</button></div></div><div class="imagery-notes-bar"><label for="imageryNotes">Notes</label><input id="imageryNotes" type="text" value="${escapeAttr(inspection(pid).notes||"")}" placeholder="Quick observation…" autocomplete="off"></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2019</h3><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
   document.body.appendChild(modal);
   const parcelLayer=parcelLayersById.get(pid);
   const parcelCenter=parcelLayer ? parcelLayer.getBounds().getCenter() : null;
@@ -1100,6 +1109,8 @@ function openImageryCompare(pid){
   };
   imageryCleanup=close;
   const onKey=e=>{if(e.key==="Escape")close();};
+  const notesInput=document.getElementById("imageryNotes");
+  notesInput.addEventListener("input",()=>{inspection(pid).notes=notesInput.value;persist();});
   document.getElementById("imageryClose").setAttribute("aria-label","Close aerial comparison");
   document.addEventListener("keydown",onKey);
 }
@@ -1186,7 +1197,6 @@ function renderPreinspection(){
         </td>
         <td>
           <div class="listing-cell">
-          <button class="toggle ${s.listing?"on":""} preinspection-action" data-pid="${escapeAttr(pid)}" data-check="listing">${s.listing?"✓":""}</button>
             <a class="redfin-link" href="${redfinSearchUrl(a)}" target="_blank" rel="noopener noreferrer" title="Open this address on Redfin">R</a>
           </div>
         </td>
