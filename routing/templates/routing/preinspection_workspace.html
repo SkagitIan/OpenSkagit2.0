@@ -5,35 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Skagit Preinspection Workspace</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.18.0/dist/leaflet-geoman.css">
 
 <style>
 :root{
-  --bg:#f5f7fa; --panel:#fff; --text:#1f2937; --muted:#6b7280; --line:#d9dee6;
-  --accent:#1f5f8b; --accent-soft:#e7f0f7; --green:#e5f5e9; --green-text:#176b35;
+  --os-navy:#042C53; --os-current:#0A2E38; --os-teal:#00828A; --os-teal-bright:#1AACB0;
+  --os-green:#7DB61C; --os-blue:#0071BC; --os-gold:#FDB913; --os-slate:#3D4D5C;
+  --os-ink:#1f2937; --os-muted:#617082; --os-border:#dfe7ee; --os-surface:#fff; --os-soft:#f6f8f8;
+  --bg:var(--os-soft); --panel:var(--os-surface); --text:var(--os-ink); --muted:var(--os-muted); --line:var(--os-border);
+  --accent:var(--os-teal); --accent-soft:#e4f4f4; --green:#eaf5dc; --green-text:#416900;
   --amber:#fff3d6; --amber-text:#8a5a00; --red:#fde7e7; --red-text:#9b1c1c;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)}
+body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 header{
-  background:var(--panel); border-bottom:1px solid var(--line); padding:12px 16px;
+  background:var(--os-navy); border-bottom:1px solid #0b426e; padding:10px 16px;
   display:flex; align-items:center; gap:12px; flex-wrap:wrap;
 }
-header h1{font-size:18px;margin:0 12px 0 0}
+.brand{display:flex;align-items:center;gap:9px;color:#fff;text-decoration:none;margin-right:10px}
+.brand img{width:30px;height:30px;object-fit:contain}
+.brand strong{font-family:"DM Sans",Inter,sans-serif;font-size:18px;line-height:1}
+.brand small{color:#b9d5e8;font-size:11px;margin-left:2px}
 .tabs{display:flex;gap:6px}
 .tab{
-  border:1px solid var(--line); background:#fff; border-radius:7px; padding:8px 12px; color:var(--text)
+  border:1px solid rgba(255,255,255,.26); background:transparent; border-radius:8px; padding:8px 12px; color:#d7e7f1
 }
-.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab.active{background:var(--os-teal);border-color:var(--os-teal-bright);color:#fff}
 .spacer{flex:1}
 .btn,.file-label{
   border:1px solid var(--line); background:#fff; color:var(--text); border-radius:7px;
   padding:8px 11px; display:inline-flex; align-items:center; gap:6px
 }
-.btn.primary,.file-label.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary,.file-label.primary{background:var(--os-teal);border-color:var(--os-teal);color:#fff}
 .btn.danger{color:var(--red-text)}
 input[type=file]{display:none}
 .statusbar{
@@ -216,13 +226,10 @@ textarea{
   width:32px;height:32px;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:22px;line-height:20px;cursor:pointer
 }
 .photo-preview img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;transition:transform .12s ease;cursor:zoom-in;user-select:none}
-.preinspection-map-wrap{margin:0 0 12px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.preinspection-map-head{padding:7px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);font-weight:700}
-#preinspection-map{height:260px}
-.imagery-compare{position:fixed;inset:2vh 2vw;z-index:99998;background:#fff;border:1px solid #aeb7c0;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.25);overflow:hidden;display:flex;flex-direction:column}
-.imagery-compare-head{min-height:42px;padding:7px 10px;border-bottom:1px solid #e1e5e9;display:flex;align-items:center;gap:10px;background:#f7f9fb;font-size:12px}
+.imagery-compare{position:fixed;inset:2vh 2vw;z-index:99998;background:#fff;border:1px solid var(--os-border);border-radius:8px;box-shadow:0 18px 45px rgba(4,44,83,.25);overflow:hidden;display:flex;flex-direction:column}
+.imagery-compare-head{position:relative;z-index:1000;min-height:42px;padding:7px 10px;border-bottom:1px solid #e1e5e9;display:flex;align-items:center;gap:10px;background:#f7f9fb;font-size:12px}
 .imagery-compare-head span{flex:1;color:var(--muted)}
-.imagery-compare-head button{width:28px;height:28px;border:0;background:transparent;font-size:20px;cursor:pointer}
+.imagery-compare-head button{position:relative;z-index:1001;width:34px;height:34px;border:1px solid var(--os-border);border-radius:8px;background:#fff;color:var(--os-navy);font-size:22px;cursor:pointer;pointer-events:auto}
 .imagery-compare-body{display:grid;grid-template-columns:1fr 1fr;min-height:0;flex:1}
 .imagery-pane{position:relative;min-width:0;min-height:0;border-right:1px solid #d8dde3}.imagery-pane:last-child{border-right:0}
 .imagery-pane h3{position:absolute;z-index:2;top:8px;left:8px;margin:0;padding:5px 8px;background:rgba(255,255,255,.9);border-radius:5px;font-size:12px}.imagery-map{width:100%;height:100%;min-height:420px}
@@ -232,7 +239,7 @@ textarea{
 </head>
 <body>
 <header>
-  <h1>Skagit Preinspection Workspace</h1>
+  <a class="brand" href="/" aria-label="OpenSkagit home"><img src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png" alt="" width="30" height="30"><strong>OpenSkagit</strong><small>Routing workspace</small></a>
   <div class="tabs">
     <button class="tab active" data-view="routes">Route Management</button>
     <button class="tab" data-view="preinspection">Preinspection</button>
@@ -337,11 +344,6 @@ textarea{
       <span class="pill field-pill" id="fieldSheetCount">0 field sheets</span>
     </div>
 
-    <div class="preinspection-map-wrap">
-      <div class="preinspection-map-head">Route plan overview</div>
-      <div id="preinspection-map" aria-label="Route plan overview map"></div>
-    </div>
-
     <div class="table-wrap">
       <table>
         <thead>
@@ -387,7 +389,7 @@ let state = loadState() || {
   inspections:{}
 };
 
-let map, parcelLayer, drawLayer, preMap, preMapLayer;
+let map, parcelLayer, drawLayer;
 let selected = new Set();
 let parcelLayersById = new Map();
 
@@ -991,9 +993,17 @@ function openImageryCompare(pid){
     L.marker(center).addTo(current);
     L.marker(center).addTo(historic);
   }
-  const close=()=>{current.remove();historic.remove();modal.remove();document.removeEventListener("keydown",onKey);};
+  const close=()=>{
+    document.removeEventListener("keydown",onKey);
+    modal.remove();
+    try{current.remove();}catch(e){}
+    try{historic.remove();}catch(e){}
+  };
   const onKey=e=>{if(e.key==="Escape")close();};
-  document.getElementById("imageryClose").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();close();});
+  modal.addEventListener("pointerdown",e=>{
+    if(e.target.closest("#imageryClose")){e.preventDefault();e.stopPropagation();close();}
+  },true);
+  document.getElementById("imageryClose").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();close();},true);
   document.addEventListener("keydown",onKey);
 }
 
@@ -1007,31 +1017,6 @@ function redfinSearchUrl(a){
 
 function assessorPropertyUrl(pid){
   return "https://www.skagitcounty.net/search/propertym/default.aspx?id=" + encodeURIComponent(pid);
-}
-
-function renderPreinspectionMap(){
-  if(!preMap){
-    preMap=L.map("preinspection-map",{zoomControl:true}).setView([48.42,-122.33],13);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:20,attribution:"© OpenStreetMap contributors"}).addTo(preMap);
-    preMapLayer=L.featureGroup().addTo(preMap);
-  }
-  preMapLayer.clearLayers();
-  const bounds=[];
-  Object.values(state.routes).forEach(rt=>{
-    const color=rt.color || "#2f6fa3";
-    (rt.parcels||[]).forEach(pid=>{
-      const source=parcelLayersById.get(pid);
-      if(!source) return;
-      const copy=L.geoJSON(source.toGeoJSON(),{style:{color,weight:2,fillColor:color,fillOpacity:.38}}).addTo(preMapLayer);
-      const b=copy.getBounds();
-      if(b.isValid()) bounds.push(b);
-    });
-  });
-  if(bounds.length){
-    const combined=bounds.reduce((acc,b)=>acc.extend(b),L.latLngBounds(bounds[0]));
-    preMap.fitBounds(combined.pad(.08));
-  }
-  setTimeout(()=>preMap.invalidateSize(),50);
 }
 
 function renderPreinspection(){
@@ -1105,7 +1090,6 @@ function renderPreinspection(){
   document.getElementById("preProgress").textContent=`${scopeComplete} / ${scopeTotal} complete`;
   document.getElementById("fieldSheetCount").textContent=`${scopeField} field sheet${scopeField===1?"":"s"}`;
   refreshStats();
-  renderPreinspectionMap();
 }
 
 
