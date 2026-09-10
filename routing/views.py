@@ -1,5 +1,7 @@
 import json
+import re
 
+import requests
 from django.contrib.auth.views import redirect_to_login
 from django.db import transaction
 from django.http import HttpResponse, JsonResponse
@@ -34,6 +36,39 @@ def workspace_page(request):
     if not _staff(request):
         return _forbidden(request)
     return render(request, "routing/preinspection_workspace.html")
+
+
+@require_GET
+def parcel_sketch(request, parcel_id):
+    if not _staff(request):
+        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    normalized = str(parcel_id or "").strip().upper()
+    if not normalized:
+        return JsonResponse({"error": "A parcel ID is required."}, status=400)
+    try:
+        response = requests.post(
+            "https://www.skagitcounty.net/search/property/Webservice.asmx/fillPage",
+            headers={
+                "Content-Type": "application/json; charset=UTF-8",
+                "X-Requested-With": "XMLHttpRequest",
+                "Referer": "https://www.skagitcounty.net/search/property/",
+            },
+            json={"sValue": normalized, "ResultType": "Improvements"},
+            timeout=20,
+        )
+        response.raise_for_status()
+        payload = response.json()
+        markup = str(payload.get("d") or "") if isinstance(payload, dict) else ""
+        match = re.search(r'href=["\'](?P<path>/assessor/images/photos/[^"\']+\.(?:jpg|jpeg|png))["\']', markup, re.IGNORECASE)
+    except (requests.RequestException, ValueError) as exc:
+        return JsonResponse({"error": "The assessor sketch service is unavailable.", "detail": str(exc)}, status=502)
+    if not match:
+        return JsonResponse({"found": False, "parcel_id": normalized})
+    return JsonResponse({
+        "found": True,
+        "parcel_id": normalized,
+        "url": "https://www.skagitcounty.net" + match.group("path"),
+    })
 
 
 @require_http_methods(["POST"])

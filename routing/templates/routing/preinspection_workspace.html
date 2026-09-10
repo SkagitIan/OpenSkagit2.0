@@ -164,6 +164,11 @@ textarea{
 
 
 .popup-actions{margin-top:8px;display:grid;gap:5px}
+.popup-data{width:100%;border-collapse:collapse;margin:5px 0 2px;font-size:11px}
+.popup-data th,.popup-data td{position:static;padding:2px 4px;border:0;border-bottom:1px solid #edf0f3;text-align:left;font-size:11px;text-transform:none}
+.popup-data th{width:38%;color:var(--os-muted);font-weight:600;background:transparent}
+.popup-route-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px}
+.popup-route-row select{min-width:0;border:1px solid var(--os-border);border-radius:5px;padding:5px;font-size:11px;background:#fff}
 .popup-move{
   width:100%;border:1px solid #1f5f8b;background:#1f5f8b;color:#fff;
   border-radius:5px;padding:6px 8px;font-size:12px;font-weight:700;cursor:pointer
@@ -233,6 +238,14 @@ textarea{
 .imagery-compare-body{display:grid;grid-template-columns:1fr 1fr;min-height:0;flex:1}
 .imagery-pane{position:relative;min-width:0;min-height:0;border-right:1px solid #d8dde3}.imagery-pane:last-child{border-right:0}
 .imagery-pane h3{position:absolute;z-index:2;top:8px;left:8px;margin:0;padding:5px 8px;background:rgba(255,255,255,.9);border-radius:5px;font-size:12px}.imagery-map{width:100%;height:100%;min-height:420px}
+.imagery-sketch-control{position:absolute;z-index:3;right:8px;top:8px;display:none;align-items:center;gap:5px;padding:5px 7px;background:rgba(255,255,255,.94);border:1px solid var(--os-border);border-radius:6px;font-size:11px}
+.imagery-sketch-control.visible{display:flex}
+.imagery-sketch-control input{width:70px}
+.parcel-hover{position:relative;cursor:help;color:var(--os-navy);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+.property-snapshot{position:fixed;z-index:100000;display:none;width:250px;padding:10px;background:#fff;border:1px solid var(--os-border);border-left:3px solid var(--os-teal);border-radius:8px;box-shadow:0 14px 32px rgba(4,44,83,.2);pointer-events:none}
+.property-snapshot.visible{display:block}
+.property-snapshot h4{margin:0 0 7px;color:var(--os-navy);font-family:"DM Sans",Inter,sans-serif;font-size:13px}
+.snapshot-table{width:100%;border-collapse:collapse;font-size:11px}.snapshot-table th,.snapshot-table td{padding:4px 0;border-bottom:1px solid #edf0f3;text-align:left}.snapshot-table th{color:var(--os-muted);font-weight:600}.snapshot-table td{text-align:right;color:var(--os-ink);font-weight:600}
 @media(max-width:700px){.imagery-compare-body{grid-template-columns:1fr;grid-template-rows:1fr 1fr}.imagery-pane{border-right:0;border-bottom:1px solid #d8dde3}.imagery-pane:last-child{border-bottom:0}}
 
 </style>
@@ -457,7 +470,14 @@ function normalizeAssignment(rows){
   if(!rows.length) return [];
   const headers=rows[0].map(h=>h.trim());
   const idx=(name)=>headers.findIndex(h=>h.toLowerCase()===name.toLowerCase());
+  const firstIndex=(...names)=>names.map(idx).find(i=>i>=0) ?? -1;
   const p=idx("PARCELID"), no=idx("SitusStNo"), st=idx("SitusStName"), csz=idx("SitusCSZ"), hood=idx("NeighborCode"), x=idx("XCoordinate"), y=idx("YCoordinate");
+  const land=firstIndex("LandUse","Land Use","LandUseCode");
+  const owner=firstIndex("OwnerName","Owner Name","Owner","Owner1");
+  const building=firstIndex("BuildingValue","Building Value","ImprovementValue","Improvement Value");
+  const assessed=firstIndex("AssessedValue","Assessed Value","TotalValue","Total Value");
+  const landValue=firstIndex("LandValue","Land Value");
+  const tbd=idx("TBD");
   if(p<0) throw new Error("Assignment must contain PARCELID.");
   return rows.slice(1).filter(r=>r[p] && r[p].trim()).map(r=>({
     PARCELID:(r[p]||"").trim(),
@@ -466,7 +486,13 @@ function normalizeAssignment(rows){
     SitusCSZ:csz>=0?(r[csz]||"").trim():"",
     NeighborCode:hood>=0?(r[hood]||"").trim():"",
     XCoordinate:x>=0?(r[x]||"").trim():"",
-    YCoordinate:y>=0?(r[y]||"").trim():""
+    YCoordinate:y>=0?(r[y]||"").trim():"",
+    LandUse:land>=0?(r[land]||"").trim():"",
+    TBD:tbd>=0?(r[tbd]||"").trim():"",
+    OwnerName:owner>=0?(r[owner]||"").trim():"",
+    BuildingValue:building>=0?(r[building]||"").trim():"",
+    AssessedValue:assessed>=0?(r[assessed]||"").trim():"",
+    LandValue:landValue>=0?(r[landValue]||"").trim():""
   }));
 }
 
@@ -517,7 +543,8 @@ function initMap(){
     const moveBtn=el.querySelector("[data-popup-move]");
     if(moveBtn){
       moveBtn.addEventListener("click",()=>{
-        moveParcelToCurrentRoute(moveBtn.dataset.popupMove);
+        const route=el.querySelector("[data-popup-route]");
+        moveParcelToRoute(moveBtn.dataset.popupMove,route?.value || "");
       },{once:true});
     }
 
@@ -550,12 +577,11 @@ function initMap(){
 function parcelPopup(pid){
   const a=assignmentMap().get(pid) || {};
   const current=routeForParcel(pid) || "Unassigned";
-  const target=(document.getElementById("routeName")?.value || "").trim() || "Route";
   const addr=(a.SitusStNo+" "+a.SitusStName).trim();
-
-  return `<b>${escapeHTML(pid)}</b><br>${escapeHTML(addr)}<br>Route: ${escapeHTML(current)}
+  const routeOptions=Object.keys(state.routes).sort(routeSort).map(name=>`<option value="${escapeAttr(name)}" ${name===current?"selected":""}>${escapeHTML(name)}</option>`).join("");
+  return `<table class="popup-data"><tr><th>Parcel</th><td>${escapeHTML(pid)}</td></tr><tr><th>Address</th><td>${escapeHTML(addr || "—")}</td></tr><tr><th>LandUse</th><td>${escapeHTML(a.LandUse || "—")}</td></tr><tr><th>TBD</th><td>${escapeHTML(a.TBD || "—")}</td></tr><tr><th>Route</th><td>${escapeHTML(current)}</td></tr></table>
     <div class="popup-actions">
-      <button class="popup-move" data-popup-move="${escapeAttr(pid)}">Move to ${escapeHTML(target)}</button>
+      <div class="popup-route-row"><select data-popup-route="${escapeAttr(pid)}" aria-label="Destination route">${routeOptions || '<option value="">No routes yet</option>'}</select><button class="popup-move" data-popup-move="${escapeAttr(pid)}">Move</button></div>
       ${current!=="Unassigned" ? `<button class="popup-unassign" data-popup-unassign="${escapeAttr(pid)}">Remove from route</button>` : ""}
       <button class="popup-remove" data-popup-remove="${escapeAttr(pid)}">🗑 Remove from assignment</button>
     </div>`;
@@ -668,8 +694,8 @@ function selectByPolygon(drawGeoJSON){
 }
 
 
-function moveParcelToCurrentRoute(pid){
-  const name=(document.getElementById("routeName")?.value || "").trim();
+function moveParcelToRoute(pid,name){
+  name=(name || "").trim();
   if(!name) return alert("Enter the destination route name in the sidebar first.");
 
   // Remove parcel from all other routes.
@@ -945,7 +971,7 @@ function openImageryCompare(pid){
   const modal=document.createElement("div");
   modal.id="imageryCompare";
   modal.className="imagery-compare";
-  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><span>Skagit aerial imagery comparison · Pictometry/Cyclomedia</span><button type="button" id="imageryClose">×</button></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2019</h3><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
+  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><span>Skagit aerial imagery comparison · Pictometry/Cyclomedia</span><button type="button" id="imageryClose">×</button></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2019</h3><div class="imagery-sketch-control" id="imagerySketchControl"><button type="button" id="sketchToggle">Show sketch</button><label>Opacity <input id="sketchOpacity" type="range" min="0.15" max="1" step="0.05" value="0.55"></label></div><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
   document.body.appendChild(modal);
   const parcelLayer=parcelLayersById.get(pid);
   const parcelCenter=parcelLayer ? parcelLayer.getBounds().getCenter() : null;
@@ -954,10 +980,33 @@ function openImageryCompare(pid){
   const historic=L.map("imageryHistoric",{zoomControl:true}).setView(center,18);
   const outlineStyle={color:"#ffe600",weight:3,opacity:1,fill:false,interactive:false};
   const parcelGeo=parcelLayer && parcelLayer.toGeoJSON ? parcelLayer.toGeoJSON() : null;
+  let sketchOverlay=null;
+  const sketchControl=document.getElementById("imagerySketchControl");
+  const sketchButton=document.getElementById("sketchToggle");
+  const sketchOpacity=document.getElementById("sketchOpacity");
+  sketchControl.classList.add("visible");
   if(parcelGeo){
     L.geoJSON(parcelGeo,{style:outlineStyle,interactive:false}).addTo(current);
-    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:false}).addTo(historic);
+    L.geoJSON(parcelGeo,{style:outlineStyle,interactive:true}).addTo(historic).on("click",toggleSketch);
   }
+  async function toggleSketch(){
+    if(sketchOverlay){historic.removeLayer(sketchOverlay);sketchOverlay=null;sketchButton.textContent="Show sketch";return;}
+    sketchButton.disabled=true;
+    sketchButton.textContent="Loading…";
+    try{
+      const response=await fetch(`/routing/parcel/${encodeURIComponent(pid)}/sketch/`);
+      const payload=await response.json();
+      if(!response.ok || !payload.found) throw new Error("No assessor sketch found");
+      const bounds=parcelLayer ? parcelLayer.getBounds() : historic.getBounds();
+      sketchOverlay=L.imageOverlay(payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true}).addTo(historic);
+      sketchOverlay.once("load",()=>{const image=sketchOverlay.getElement();if(image){image.style.mixBlendMode="multiply";image.style.filter="grayscale(1) contrast(1.35)";}});
+      sketchControl.classList.add("visible");
+      sketchButton.textContent="Hide sketch";
+    }catch(error){alert(error.message || "The assessor sketch could not be loaded.");sketchButton.textContent="Show sketch";}
+    sketchButton.disabled=false;
+  }
+  sketchButton.addEventListener("click",toggleSketch);
+  sketchOpacity.addEventListener("input",()=>{if(sketchOverlay)sketchOverlay.setOpacity(Number(sketchOpacity.value));});
   let syncing=false;
   const syncMaps=(source,target)=>{
     source.on("moveend zoomend",()=>{
@@ -1019,6 +1068,36 @@ function assessorPropertyUrl(pid){
   return "https://www.skagitcounty.net/search/propertym/default.aspx?id=" + encodeURIComponent(pid);
 }
 
+function moneyValue(value){
+  const n=Number(String(value||"").replace(/[$,\s]/g,""));
+  return Number.isFinite(n) ? n : null;
+}
+
+function moneyText(value){
+  const n=moneyValue(value);
+  return n===null ? (value || "—") : n.toLocaleString("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0});
+}
+
+function propertySnapshot(pid){
+  const a=assignmentMap().get(pid) || {};
+  const assessed=moneyValue(a.AssessedValue);
+  const building=moneyValue(a.BuildingValue);
+  const land=moneyValue(a.LandValue) ?? (assessed!==null && building!==null ? assessed-building : null);
+  return `<h4>${escapeHTML(pid)}</h4><table class="snapshot-table"><tr><th>Owner</th><td>${escapeHTML(a.OwnerName || "—")}</td></tr><tr><th>Neighborhood</th><td>${escapeHTML(a.NeighborCode || "—")}</td></tr><tr><th>Building value</th><td>${escapeHTML(moneyText(a.BuildingValue))}</td></tr><tr><th>Assessed value</th><td>${escapeHTML(moneyText(a.AssessedValue))}</td></tr><tr><th>Land value</th><td>${escapeHTML(moneyText(land))}</td></tr></table>`;
+}
+
+function showPropertySnapshot(pid,target){
+  let card=document.getElementById("propertySnapshot");
+  if(!card){card=document.createElement("div");card.id="propertySnapshot";card.className="property-snapshot";document.body.appendChild(card);}
+  card.innerHTML=propertySnapshot(pid);
+  const rect=target.getBoundingClientRect();
+  card.style.left=Math.min(window.innerWidth-262,Math.max(8,rect.left)) + "px";
+  card.style.top=Math.min(window.innerHeight-190,Math.max(8,rect.bottom+8)) + "px";
+  card.classList.add("visible");
+}
+
+function hidePropertySnapshot(){document.getElementById("propertySnapshot")?.classList.remove("visible");}
+
 function renderPreinspection(){
   const body=document.getElementById("preBody");
   const filter=document.getElementById("preRouteFilter").value;
@@ -1046,7 +1125,7 @@ function renderPreinspection(){
       if(complete) tr.classList.add("complete");
       if(s.changes==="yes") tr.classList.add("changed");
       tr.innerHTML=`
-        <td><b>${escapeHTML(pid)}</b> <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
+        <td><span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span> <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
         <td>${escapeHTML(addr)}</td>
         <td style="text-align:center">
           <button class="photo-btn" type="button" data-photo="${escapeAttr(pid)}" title="Preview Skagit County property photo">▣</button>
@@ -1235,6 +1314,15 @@ document.getElementById("exportProgress").addEventListener("click",exportProgres
 
 ["preRouteFilter","preShowFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderPreinspection));
 document.getElementById("preSearch").addEventListener("input",renderPreinspection);
+
+document.getElementById("preBody").addEventListener("mouseover",e=>{
+  const target=e.target.closest("[data-parcel-hover]");
+  if(target) showPropertySnapshot(target.dataset.parcelHover,target);
+});
+document.getElementById("preBody").addEventListener("mouseout",e=>{
+  const target=e.target.closest("[data-parcel-hover]");
+  if(target && (!e.relatedTarget || !target.contains(e.relatedTarget))) hidePropertySnapshot();
+});
 
 document.getElementById("preBody").addEventListener("click",e=>{
   const btn=e.target.closest("button"); if(!btn)return;
