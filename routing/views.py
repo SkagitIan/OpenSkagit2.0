@@ -29,6 +29,13 @@ def routes_page(request):
     return render(request, "routing/routes.html", {"imports": RoutingImport.objects.all()[:20], "plans": RoutingPlan.objects.select_related("import_file")[:30]})
 
 
+@require_GET
+def workspace_page(request):
+    if not _staff(request):
+        return _forbidden(request)
+    return render(request, "routing/preinspection_workspace.html")
+
+
 @require_http_methods(["POST"])
 def import_file(request):
     if not _staff(request):

@@ -80,6 +80,7 @@ urlpatterns = [
     path("opportunity/", include("opportunity.urls")),
     path("field/", include("field_map.urls")),
     path("field/", include(("routing.urls", "routing"), namespace="routing")),
+    path("routing/", include(("routing.urls", "routing_workspace"), namespace="routing_workspace")),
     path("livefire/", include("livefire.urls")),
     path("mcp/", include("openskagit_tools.urls")),
     path("mCP", RedirectView.as_view(url="/mcp/", permanent=True)),

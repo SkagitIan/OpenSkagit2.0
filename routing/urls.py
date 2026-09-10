@@ -5,6 +5,7 @@ from . import views
 app_name = "routing"
 
 urlpatterns = [
+    path("", views.workspace_page, name="workspace"),
     path("routes/", views.routes_page, name="routes"),
     path("routes/import/", views.import_file, name="import"),
     path("routes/plan/", views.create_plan, name="create_plan"),

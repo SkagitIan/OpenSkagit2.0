@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skagit Preinspection Workspace</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.18.0/dist/leaflet-geoman.css">
+
+<style>
+:root{
+  --bg:#f5f7fa; --panel:#fff; --text:#1f2937; --muted:#6b7280; --line:#d9dee6;
+  --accent:#1f5f8b; --accent-soft:#e7f0f7; --green:#e5f5e9; --green-text:#176b35;
+  --amber:#fff3d6; --amber-text:#8a5a00; --red:#fde7e7; --red-text:#9b1c1c;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{
+  background:var(--panel); border-bottom:1px solid var(--line); padding:12px 16px;
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+}
+header h1{font-size:18px;margin:0 12px 0 0}
+.tabs{display:flex;gap:6px}
+.tab{
+  border:1px solid var(--line); background:#fff; border-radius:7px; padding:8px 12px; color:var(--text)
+}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.spacer{flex:1}
+.btn,.file-label{
+  border:1px solid var(--line); background:#fff; color:var(--text); border-radius:7px;
+  padding:8px 11px; display:inline-flex; align-items:center; gap:6px
+}
+.btn.primary,.file-label.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.danger{color:var(--red-text)}
+input[type=file]{display:none}
+.statusbar{
+  background:#fff;border-bottom:1px solid var(--line);padding:8px 16px;
+  display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted)
+}
+.view{display:none}
+.view.active{display:block}
+
+/* ROUTE MANAGEMENT */
+.route-layout{
+  display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:0;
+  min-height:720px;
+}
+#map{height:720px;background:#dde5ea}
+.side{
+  background:#fff;border-left:1px solid var(--line);padding:14px;overflow:auto
+}
+.side h2{font-size:16px;margin:0 0 8px}
+.side h3{font-size:13px;margin:18px 0 8px;text-transform:uppercase;color:var(--muted);letter-spacing:.04em}
+.help{font-size:13px;color:var(--muted);line-height:1.45}
+.field{margin:10px 0}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.field input,.field select{
+  width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 9px;background:#fff
+}
+.selection-box{
+  border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:12px;background:#fafbfc
+}
+.big{font-size:24px;font-weight:700}
+.route-list{display:flex;flex-direction:column;gap:6px}
+.route-row{
+  display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:center;
+  border:1px solid var(--line);border-radius:7px;padding:7px 8px;font-size:13px
+}
+.route-swatch{width:12px;height:12px;border-radius:3px;display:inline-block;margin-right:6px}
+.mini{border:1px solid var(--line);background:#fff;border-radius:5px;padding:4px 6px;font-size:12px}
+.warn{background:var(--amber);color:var(--amber-text);padding:8px;border-radius:6px;font-size:12px;margin-top:8px}
+.ok{background:var(--green);color:var(--green-text);padding:8px;border-radius:6px;font-size:12px;margin-top:8px}
+
+/* PREINSPECTION */
+.pre-wrap{padding:12px 16px 30px}
+.pre-toolbar{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px
+}
+.pre-toolbar select,.pre-toolbar input{
+  border:1px solid var(--line);border-radius:6px;padding:8px 9px;background:#fff
+}
+.table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:1100px}
+th{
+  position:sticky;top:0;background:#eef2f6;padding:8px 7px;border-bottom:1px solid var(--line);
+  font-size:12px;text-transform:uppercase;text-align:center;z-index:2
+}
+th.left{text-align:left}
+td{padding:5px 7px;border-bottom:1px solid #edf0f3;font-size:13px}
+tr.complete{background:#f5fbf6}
+tr.changed{background:#fffaf0}
+.toggle{
+  min-width:34px;height:30px;border:1px solid #cfd6dd;background:#fff;border-radius:6px;font-weight:700
+}
+.toggle.on{background:var(--accent-soft);border-color:#8eb0c7;color:#174968}
+.change-group{display:flex;gap:4px;justify-content:center}
+.change-btn{
+  width:42px;height:30px;border:1px solid #cfd6dd;background:#fff;border-radius:6px;font-size:12px;font-weight:700
+}
+.change-btn.yes.on{background:var(--amber);color:var(--amber-text);border-color:#e4c66f}
+.change-btn.no.on{background:var(--green);color:var(--green-text);border-color:#9fc9aa}
+textarea{
+  width:100%;min-width:250px;min-height:30px;height:30px;resize:vertical;
+  border:1px solid #d8dde3;border-radius:5px;padding:5px 7px
+}
+.empty{padding:35px;text-align:center;color:var(--muted)}
+.pill{display:inline-block;padding:2px 7px;background:#eef2f6;border-radius:999px;font-size:12px}
+
+/* Leaflet */
+.leaflet-popup-content{font-size:12px}
+.legend{
+  background:#fff;border:1px solid #ccd4dc;border-radius:6px;padding:7px 9px;font-size:12px;line-height:1.6
+}
+.legend i{width:11px;height:11px;display:inline-block;margin-right:6px;border-radius:2px}
+
+@media(max-width:900px){
+  .route-layout{grid-template-columns:1fr}
+  .side{border-left:0;border-top:1px solid var(--line)}
+  #map{height:560px}
+}
+
+.step-card{
+  display:flex; gap:10px; border:1px solid var(--line); border-radius:9px;
+  padding:10px; margin:10px 0; background:#fbfcfd;
+}
+.step-number{
+  flex:0 0 28px; width:28px; height:28px; border-radius:50%;
+  background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:14px;
+}
+.step-content{min-width:0;flex:1}
+.step-action{margin-top:8px;width:100%;justify-content:center}
+.draw-route-btn{
+  width:100%; margin-top:8px; border:2px solid #8b5a00; border-radius:8px;
+  padding:11px 12px; background:#ffd15a; color:#4f3600; font-weight:800;
+  letter-spacing:.02em;
+}
+.draw-route-btn:hover{background:#ffc936}
+.draw-route-btn:disabled{opacity:.45;cursor:not-allowed}
+.workspace-actions{display:grid;gap:6px}
+.workspace-actions .btn,.workspace-actions .file-label{width:100%;justify-content:center}
+.pre-toolbar.simple{
+  padding:2px 0 10px; margin:0; gap:7px; border:0; background:transparent;
+}
+.pre-toolbar.simple select,.pre-toolbar.simple input{height:36px}
+.leaflet-pm-toolbar .leaflet-buttons-control-button,
+.leaflet-control-container a.leaflet-control-button{
+  border:2px solid #5c4300 !important;
+  background-color:#ffd15a !important;
+}
+
+
+.popup-actions{margin-top:8px;display:grid;gap:5px}
+.popup-move{
+  width:100%;border:1px solid #1f5f8b;background:#1f5f8b;color:#fff;
+  border-radius:5px;padding:6px 8px;font-size:12px;font-weight:700;cursor:pointer
+}
+.popup-move:hover{background:#174968}
+.popup-unassign{
+  width:100%;border:1px solid #d8dde3;background:#fff;color:#7a1f1f;
+  border-radius:5px;padding:5px 8px;font-size:11px;cursor:pointer
+}
+.listing-cell{display:flex;align-items:center;justify-content:center;gap:6px}
+.redfin-link{
+  width:28px;height:28px;border-radius:6px;background:#d4202f;color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  font-weight:800;font-size:14px;border:1px solid #b61b27
+}
+.redfin-link:hover{background:#b61b27}
+
+
+.route-tools{
+  border:1px solid var(--line);border-radius:8px;padding:9px;margin:7px 0 10px;background:#fff
+}
+.route-tools-head{display:flex;flex-direction:column;gap:1px;margin-bottom:7px}
+.route-name-row{display:grid;grid-template-columns:1fr auto;gap:5px}
+.route-name-row input{min-width:0;border:1px solid var(--line);border-radius:6px;padding:7px 8px}
+.route-name-row .draw-route-btn{width:auto;margin:0;padding:7px 10px;white-space:nowrap}
+.selection-compact{
+  display:flex;justify-content:space-between;align-items:center;gap:7px;
+  margin-top:7px;padding-top:7px;border-top:1px solid #edf0f3
+}
+.selection-number{font-size:18px;font-weight:700}
+.selection-actions{display:flex;gap:4px}
+.selection-actions .btn{padding:5px 9px}
+.workspace-details{margin-top:9px;border-top:1px solid var(--line);padding-top:7px}
+.workspace-details summary{cursor:pointer;font-size:12px;color:var(--muted);font-weight:700}
+.workspace-details .workspace-actions{margin-top:6px}
+.route-name-target{cursor:pointer}
+.route-name-target:hover b{text-decoration:underline}
+.progress-pill{background:#e7f0f7;color:#174968;font-weight:700}
+.field-pill{background:#fff1cc;color:#805200;font-weight:700}
+.photo-btn{
+  width:30px;height:30px;border-radius:6px;border:1px solid #9aa8b5;background:#fff;
+  color:#36566f;font-size:16px;font-weight:700;cursor:pointer
+}
+.photo-btn:hover{background:#e7f0f7;border-color:#5f829b}
+.photo-preview{
+  position:fixed;z-index:99999;width:460px;height:380px;background:#fff;border:1px solid #aeb7c0;
+  border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.22);overflow:hidden
+}
+.photo-preview-head{
+  height:34px;padding:6px 8px;border-bottom:1px solid #e1e5e9;display:flex;align-items:center;
+  justify-content:space-between;background:#f7f9fb;font-size:12px
+}
+.photo-preview-head button{
+  width:24px;height:24px;border:0;background:transparent;font-size:18px;line-height:20px;cursor:pointer
+}
+.photo-preview iframe{width:100%;height:calc(100% - 34px);border:0;background:#fff}
+
+</style>
+</head>
+<body>
+<header>
+  <h1>Skagit Preinspection Workspace</h1>
+  <div class="tabs">
+    <button class="tab active" data-view="routes">Route Management</button>
+    <button class="tab" data-view="preinspection">Preinspection</button>
+  </div>
+  <div class="spacer"></div>
+  <a class="btn" href="/">OpenSkagit home</a>
+  <a class="btn" href="/field/routes/">Database route planner</a>
+</header>
+
+<div class="statusbar">
+  <span id="assignmentStat">Assignment: 0</span>
+  <span id="mappedStat">Mapped: 0</span>
+  <span id="assignedStat">Assigned: 0</span>
+  <span id="unassignedStat">Unassigned: 0</span>
+  <span id="completeStat">Preinspected: 0</span>
+</div>
+
+<section id="routesView" class="view active">
+  <div class="route-layout">
+    <div id="map"></div>
+
+    <aside class="side">
+      <h2>Route Management</h2>
+
+      <div id="setupSteps">
+        <div class="step-card" id="stepImport">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <b>Load annual assignment</b>
+            <div class="help">Start here. Parcel polygons load automatically after the CSV is imported.</div>
+            <label class="file-label primary step-action">
+              Import Assignment CSV
+              <input id="assignmentFile" type="file" accept=".csv,text/csv">
+            </label>
+          </div>
+        </div>
+
+        <div class="step-card" id="stepPolys">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <b>Parcel polygons</b>
+            <div id="mapMessage" class="help">Waiting for assignment.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="route-tools">
+        <div class="route-tools-head">
+          <b>Assign routes</b>
+          <span class="help">Draw an area or move parcels individually.</span>
+        </div>
+        <div class="route-name-row">
+          <input id="routeName" type="text" placeholder="Route 1" value="Route 1">
+          <button class="draw-route-btn" id="drawRouteBtn" type="button">✎ Draw Area</button>
+        </div>
+        <div class="selection-compact">
+          <div>
+            <span class="selection-number" id="selectionCount">0</span>
+            <span class="help">selected · <span id="selectionAlready">0</span> already assigned</span>
+          </div>
+          <div class="selection-actions">
+            <button class="btn primary" id="saveRoute">Assign</button>
+            <button class="btn" id="clearSelection">Clear</button>
+          </div>
+        </div>
+        <div id="selectionMessage"></div>
+      </div>
+
+      <h3>Routes</h3>
+      <div id="routeList" class="route-list"></div>
+
+      <details class="workspace-details">
+        <summary>Workspace tools</summary>
+        <div class="workspace-actions">
+          <button class="btn" id="exportBackup">Export Backup</button>
+          <label class="file-label">
+            Restore Backup
+            <input id="backupFile" type="file" accept=".json,application/json">
+          </label>
+          <button class="btn" id="exportProgress">Export Progress CSV</button>
+          <button class="btn danger" id="resetWorkspace">Reset Local Workspace</button>
+        </div>
+      </details>
+    </aside>
+  </div>
+</section>
+
+<section id="preinspectionView" class="view">
+  <div class="pre-wrap">
+    <div class="pre-toolbar simple">
+      <select id="preRouteFilter">
+        <option value="">All routes</option>
+      </select>
+      <input id="preSearch" type="text" placeholder="Search parcel or address">
+      <select id="preShowFilter" aria-label="Show parcels">
+        <option value="all">All parcels</option>
+        <option value="incomplete">Incomplete only</option>
+        <option value="changes">Changes only</option>
+      </select>
+      <span class="pill" id="preSummary">0 parcels</span>
+      <span class="pill progress-pill" id="preProgress">0 / 0 complete</span>
+      <span class="pill field-pill" id="fieldSheetCount">0 field sheets</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="left">Route</th>
+            <th class="left">Parcel</th>
+            <th class="left">Address</th>
+            <th>Photo</th>
+            <th>Aerial</th>
+            <th>Street View</th>
+            <th>Listing</th>
+            <th>Changes</th>
+            <th class="left">Notes</th>
+          </tr>
+        </thead>
+        <tbody id="preBody">
+          <tr><td colspan="9" class="empty">Assign parcels to a route first.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.18.0/dist/leaflet-geoman.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/turf.min.js"></script>
+
+<script>
+(() => {
+"use strict";
+
+const FEATURE_URL = "https://gis.skagitcountywa.gov/arcgis/rest/services/OpenData/AssessorDataParcels/FeatureServer/0/query";
+const STARTER_ASSIGNMENT = [];
+const CHECKS = ["aerial","streetView","listing"];
+const STORAGE_KEY = "skagit-preinspection-workspace-v1";
+const COLORS = ["#2f6fa3","#7b5aa6","#2f8c72","#b36b2c","#a44545","#5d7f3b","#8f5d75","#4d7f8e","#6f6f3c","#855f37"];
+
+let state = loadState() || {
+  version:1,
+  year:2026,
+  assignment:[],
+  parcelGeoJSON:null,
+  routes:{},
+  inspections:{}
+};
+
+let map, parcelLayer, drawLayer;
+let selected = new Set();
+let parcelLayersById = new Map();
+
+function persist(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  refreshStats();
+}
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
+
+function assignmentMap(){
+  return new Map(state.assignment.map(r => [String(r.PARCELID).trim(), r]));
+}
+
+function routeForParcel(pid){
+  for(const [name, rt] of Object.entries(state.routes)){
+    if((rt.parcels || []).includes(pid)) return name;
+  }
+  return "";
+}
+
+function allAssignedSet(){
+  const s = new Set();
+  Object.values(state.routes).forEach(r => (r.parcels || []).forEach(p => s.add(p)));
+  return s;
+}
+
+function inspection(pid){
+  if(!state.inspections[pid]){
+    state.inspections[pid] = {aerial:false,streetView:false,listing:false,changes:"",notes:""};
+  }
+  return state.inspections[pid];
+}
+
+function isComplete(pid){
+  const s = inspection(pid);
+  return s.changes === "yes" || s.changes === "no";
+}
+
+function parseCSV(text){
+  const rows=[]; let row=[], cell="", quoted=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i];
+    if(quoted){
+      if(ch === '"' && text[i+1] === '"'){cell+='"';i++}
+      else if(ch === '"') quoted=false;
+      else cell+=ch;
+    }else{
+      if(ch === '"') quoted=true;
+      else if(ch === ","){row.push(cell);cell=""}
+      else if(ch === "\n"){row.push(cell);rows.push(row);row=[];cell=""}
+      else if(ch !== "\r") cell+=ch;
+    }
+  }
+  if(cell.length || row.length){row.push(cell);rows.push(row)}
+  return rows;
+}
+
+function normalizeAssignment(rows){
+  if(!rows.length) return [];
+  const headers=rows[0].map(h=>h.trim());
+  const idx=(name)=>headers.findIndex(h=>h.toLowerCase()===name.toLowerCase());
+  const p=idx("PARCELID"), no=idx("SitusStNo"), st=idx("SitusStName"), csz=idx("SitusCSZ"), hood=idx("NeighborCode"), x=idx("XCoordinate"), y=idx("YCoordinate");
+  if(p<0) throw new Error("Assignment must contain PARCELID.");
+  return rows.slice(1).filter(r=>r[p] && r[p].trim()).map(r=>({
+    PARCELID:(r[p]||"").trim(),
+    SitusStNo:no>=0?(r[no]||"").trim():"",
+    SitusStName:st>=0?(r[st]||"").trim():"",
+    SitusCSZ:csz>=0?(r[csz]||"").trim():"",
+    NeighborCode:hood>=0?(r[hood]||"").trim():"",
+    XCoordinate:x>=0?(r[x]||"").trim():"",
+    YCoordinate:y>=0?(r[y]||"").trim():""
+  }));
+}
+
+function initMap(){
+  map = L.map("map", {preferCanvas:true}).setView([48.42,-122.33], 13);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom:20,
+    opacity:0.62,
+    attribution:'&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  parcelLayer = L.geoJSON(null,{
+    style: feature => parcelStyle(feature),
+    onEachFeature:(feature,layer)=>{
+      const pid=feature.properties.PARCELID;
+      parcelLayersById.set(pid,layer);
+      layer.on("click", ()=>{
+        toggleSelected(pid);
+      });
+      layer.bindPopup(()=>parcelPopup(pid));
+    }
+  }).addTo(map);
+
+  drawLayer = L.featureGroup().addTo(map);
+
+  map.pm.addControls({
+    position:"topleft",
+    drawMarker:false, drawCircleMarker:false, drawPolyline:false, drawRectangle:false,
+    drawCircle:false, drawText:false, drawPolygon:false,
+    editMode:true, dragMode:false, cutPolygon:false, removalMode:true, rotateMode:false
+  });
+
+  map.on("pm:create", e=>{
+    drawLayer.clearLayers();
+    drawLayer.addLayer(e.layer);
+    selectByPolygon(e.layer.toGeoJSON());
+  });
+
+  map.on("pm:edit", ()=>{
+    const layers=drawLayer.getLayers();
+    if(layers[0]) selectByPolygon(layers[0].toGeoJSON());
+  });
+
+  map.on("popupopen", e=>{
+    const el=e.popup.getElement();
+    if(!el) return;
+
+    const moveBtn=el.querySelector("[data-popup-move]");
+    if(moveBtn){
+      moveBtn.addEventListener("click",()=>{
+        moveParcelToCurrentRoute(moveBtn.dataset.popupMove);
+      },{once:true});
+    }
+
+    const unassignBtn=el.querySelector("[data-popup-unassign]");
+    if(unassignBtn){
+      unassignBtn.addEventListener("click",()=>{
+        unassignParcel(unassignBtn.dataset.popupUnassign);
+      },{once:true});
+    }
+  });
+
+  const legend=L.control({position:"bottomleft"});
+  legend.onAdd=()=>{
+    const div=L.DomUtil.create("div","legend");
+    div.innerHTML='<div><i style="background:#d9edf8;border:1px solid #174968"></i>Assignment / unassigned</div>'+
+                  '<div><i style="background:#ffd15a"></i>Selected</div>'+
+                  '<div><i style="background:#2f6fa3"></i>Assigned route</div>';
+    return div;
+  };
+  legend.addTo(map);
+
+  if(state.parcelGeoJSON) renderParcelGeoJSON();
+}
+
+function parcelPopup(pid){
+  const a=assignmentMap().get(pid) || {};
+  const current=routeForParcel(pid) || "Unassigned";
+  const target=(document.getElementById("routeName")?.value || "").trim() || "Route";
+  const addr=(a.SitusStNo+" "+a.SitusStName).trim();
+
+  return `<b>${escapeHTML(pid)}</b><br>${escapeHTML(addr)}<br>Route: ${escapeHTML(current)}
+    <div class="popup-actions">
+      <button class="popup-move" data-popup-move="${escapeAttr(pid)}">Move to ${escapeHTML(target)}</button>
+      ${current!=="Unassigned" ? `<button class="popup-unassign" data-popup-unassign="${escapeAttr(pid)}">Remove from route</button>` : ""}
+    </div>`;
+}
+
+function parcelStyle(feature){
+  const pid=feature.properties.PARCELID;
+  if(selected.has(pid)){
+    return {color:"#7a4a00",weight:3,fillColor:"#ffd15a",fillOpacity:.72};
+  }
+  const rt=routeForParcel(pid);
+  if(rt){
+    const color=state.routes[rt]?.color || "#2f6fa3";
+    return {color:color,weight:2.1,fillColor:color,fillOpacity:.50};
+  }
+  return {color:"#174968",weight:1.45,fillColor:"#d9edf8",fillOpacity:.42};
+}
+
+function refreshParcelStyles(){
+  parcelLayer.eachLayer(layer=>{
+    if(layer.feature) layer.setStyle(parcelStyle(layer.feature));
+  });
+}
+
+function renderParcelGeoJSON(){
+  parcelLayersById.clear();
+  parcelLayer.clearLayers();
+  parcelLayer.addData(state.parcelGeoJSON);
+  try{
+    const b=parcelLayer.getBounds();
+    if(b.isValid()) map.fitBounds(b.pad(.05));
+  }catch(e){}
+  refreshParcelStyles();
+  updateMapMessage();
+}
+
+async function fetchParcelPolygons(){
+  if(!state.assignment.length){
+    alert("Import an assignment first.");
+    return;
+  }
+  const btn=document.getElementById("drawRouteBtn");
+  btn.disabled=true;
+  const msg=document.getElementById("mapMessage");
+  msg.textContent="Loading parcel polygons from Skagit County…";
+
+  const ids=[...new Set(state.assignment.map(r=>r.PARCELID))];
+  const features=[];
+  const batchSize=70;
+
+  try{
+    for(let i=0;i<ids.length;i+=batchSize){
+      const batch=ids.slice(i,i+batchSize);
+      const where="PARCELID IN (" + batch.map(v=>"'"+v.replace(/'/g,"''")+"'").join(",") + ")";
+      const params=new URLSearchParams({
+        f:"geojson",
+        where,
+        outFields:"PARCELID,SitusStNo,SitusStName",
+        returnGeometry:"true",
+        outSR:"4326"
+      });
+      const res=await fetch(FEATURE_URL,{
+        method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+        body:params.toString()
+      });
+      if(!res.ok) throw new Error("Skagit parcel service returned "+res.status);
+      const gj=await res.json();
+      if(gj.error) throw new Error(gj.error.message || "ArcGIS query failed");
+      (gj.features||[]).forEach(f=>features.push(f));
+      msg.textContent=`Loaded ${features.length} of ${ids.length} parcel polygons…`;
+    }
+    state.parcelGeoJSON={type:"FeatureCollection",features};
+    persist();
+    renderParcelGeoJSON();
+  }catch(err){
+    console.error(err);
+    msg.textContent="Could not load parcel polygons. Check internet access and try again.";
+    alert("Parcel polygons could not be loaded. " + err.message);
+  }finally{
+    btn.disabled=false;
+  }
+}
+
+function updateMapMessage(){
+  refreshSetupVisibility();
+  const mapped=state.parcelGeoJSON?.features?.length || 0;
+  const total=state.assignment.length;
+  document.getElementById("mapMessage").textContent =
+    mapped ? `Ready — ${mapped} of ${total} assignment parcels mapped.` :
+    total ? "Loading parcel polygons automatically…" :
+            "Waiting for assignment.";
+}
+
+function selectByPolygon(drawGeoJSON){
+  if(!state.parcelGeoJSON) return alert("Load parcel polygons first.");
+  selected.clear();
+  const routePoly=drawGeoJSON;
+  for(const f of state.parcelGeoJSON.features){
+    try{
+      if(turf.booleanIntersects(f, routePoly)){
+        selected.add(f.properties.PARCELID);
+      }
+    }catch(e){}
+  }
+  refreshSelectionUI();
+}
+
+
+function moveParcelToCurrentRoute(pid){
+  const name=(document.getElementById("routeName")?.value || "").trim();
+  if(!name) return alert("Enter the destination route name in the sidebar first.");
+
+  // Remove parcel from all other routes.
+  for(const rt of Object.values(state.routes)){
+    rt.parcels=(rt.parcels||[]).filter(p=>p!==pid);
+  }
+
+  if(!state.routes[name]){
+    state.routes[name]={
+      name,
+      color:COLORS[Object.keys(state.routes).length % COLORS.length],
+      parcels:[],
+      updated:new Date().toISOString(),
+      boundary:null,
+      boundaries:[]
+    };
+  }
+
+  if(!state.routes[name].parcels.includes(pid)){
+    state.routes[name].parcels.push(pid);
+  }
+  state.routes[name].updated=new Date().toISOString();
+
+  persist();
+  renderRoutes();
+  renderPreinspection();
+  refreshParcelStyles();
+
+  const layer=parcelLayersById.get(pid);
+  if(layer){
+    layer.closePopup();
+    layer.openPopup();
+  }
+}
+
+function unassignParcel(pid){
+  for(const rt of Object.values(state.routes)){
+    rt.parcels=(rt.parcels||[]).filter(p=>p!==pid);
+  }
+  persist();
+  renderRoutes();
+  renderPreinspection();
+  refreshParcelStyles();
+
+  const layer=parcelLayersById.get(pid);
+  if(layer){
+    layer.closePopup();
+    layer.openPopup();
+  }
+}
+
+function toggleSelected(pid){
+  if(selected.has(pid)) selected.delete(pid);
+  else selected.add(pid);
+  refreshSelectionUI();
+}
+
+function refreshSelectionUI(){
+  document.getElementById("selectionCount").textContent=selected.size;
+  const assigned=allAssignedSet();
+  let already=0;
+  selected.forEach(p=>{if(assigned.has(p)) already++});
+  document.getElementById("selectionAlready").textContent=already;
+  refreshParcelStyles();
+
+  const m=document.getElementById("selectionMessage");
+  if(already){
+    m.className="warn";
+    m.textContent="Some selected parcels already belong to a route. Saving will move them to the new route.";
+  }else if(selected.size){
+    m.className="ok";
+    m.textContent="Selection is ready to assign.";
+  }else{
+    m.className="";
+    m.textContent="";
+  }
+}
+
+function saveRoute(){
+  const name=document.getElementById("routeName").value.trim();
+  if(!name) return alert("Enter a route name.");
+  if(!selected.size) return alert("Select parcels first.");
+
+  for(const [rtName,rt] of Object.entries(state.routes)){
+    if(rtName !== name){
+      rt.parcels=(rt.parcels||[]).filter(p=>!selected.has(p));
+    }
+  }
+
+  const existing=state.routes[name];
+  const existingParcels=new Set(existing?.parcels || []);
+  selected.forEach(p=>existingParcels.add(p));
+
+  const routeNames=Object.keys(state.routes);
+  const idx=routeNames.indexOf(name);
+  const newBoundary=drawLayer.getLayers()[0]?.toGeoJSON() || null;
+  const boundaries=[...(existing?.boundaries || (existing?.boundary ? [existing.boundary] : []))];
+  if(newBoundary) boundaries.push(newBoundary);
+
+  state.routes[name]={
+    name,
+    color: existing?.color || COLORS[(idx>=0?idx:routeNames.length)%COLORS.length],
+    parcels:[...existingParcels],
+    updated:new Date().toISOString(),
+    boundary:newBoundary || existing?.boundary || null,
+    boundaries
+  };
+
+  selected.clear();
+  drawLayer.clearLayers();
+  persist();
+  renderRoutes();
+  renderPreinspection();
+  refreshSelectionUI();
+  refreshParcelStyles();
+
+  const m=name.match(/^(.*?)(\d+)\s*$/);
+  if(m){
+    document.getElementById("routeName").value=(m[1] || "Route ") + (Number(m[2])+1);
+  }
+}
+
+function deleteRoute(name){
+  if(!confirm(`Delete ${name}? Parcels will become unassigned.`)) return;
+  delete state.routes[name];
+  persist();
+  renderRoutes();
+  renderPreinspection();
+  refreshParcelStyles();
+}
+
+function focusRoute(name){
+  const rt=state.routes[name];
+  if(!rt) return;
+  if((rt.boundaries && rt.boundaries.length) || rt.boundary){
+    const geoms=rt.boundaries?.length ? rt.boundaries : [rt.boundary];
+    const tmp=L.featureGroup(geoms.map(g=>L.geoJSON(g)));
+    const b=tmp.getBounds();
+    if(b.isValid()) map.fitBounds(b.pad(.1));
+  }else{
+    const layers=(rt.parcels||[]).map(p=>parcelLayersById.get(p)).filter(Boolean);
+    if(layers.length){
+      const fg=L.featureGroup(layers);
+      map.fitBounds(fg.getBounds().pad(.1));
+    }
+  }
+}
+
+function renderRoutes(){
+  const box=document.getElementById("routeList");
+  box.innerHTML="";
+  const names=Object.keys(state.routes).sort(routeSort);
+  if(!names.length){
+    box.innerHTML='<div class="help">No routes yet.</div>';
+  }
+  names.forEach(name=>{
+    const rt=state.routes[name];
+    const row=document.createElement("div");
+    row.className="route-row";
+    row.innerHTML=`
+      <div class="route-name-target" data-target-route="${escapeAttr(name)}"><span class="route-swatch" style="background:${rt.color}"></span><b>${escapeHTML(name)}</b><br>
+      <span style="color:var(--muted)">${(rt.parcels||[]).length} parcels</span></div>
+      <button class="mini" data-focus="${escapeAttr(name)}">View</button>
+      <button class="mini" data-delete="${escapeAttr(name)}">×</button>
+    `;
+    box.appendChild(row);
+  });
+
+  const filter=document.getElementById("preRouteFilter");
+  const current=filter.value;
+  filter.innerHTML='<option value="">All assigned routes</option>';
+  names.forEach(name=>{
+    const opt=document.createElement("option");
+    opt.value=name; opt.textContent=name;
+    filter.appendChild(opt);
+  });
+  if(names.includes(current)) filter.value=current;
+}
+
+function routeSort(a,b){
+  const na=Number((a.match(/\d+/)||["999999"])[0]);
+  const nb=Number((b.match(/\d+/)||["999999"])[0]);
+  return na-nb || a.localeCompare(b);
+}
+
+function walkingOrderForRoute(parcels){
+  const amap=assignmentMap();
+  const rows=parcels.map(p=>amap.get(p)).filter(Boolean).map(a=>({
+    ...a, n:Number((String(a.SitusStNo).match(/^\s*(\d+)/)||["999999"])[0])
+  }));
+  const groups=new Map();
+  rows.forEach(r=>{
+    if(!groups.has(r.SitusStName)) groups.set(r.SitusStName,[]);
+    groups.get(r.SitusStName).push(r);
+  });
+
+  const ordered=[];
+  [...groups.keys()].sort().forEach(st=>{
+    const g=groups.get(st);
+    const evens=g.filter(r=>r.n!==999999 && r.n%2===0).sort((a,b)=>a.n-b.n);
+    const odds=g.filter(r=>r.n!==999999 && r.n%2===1).sort((a,b)=>b.n-a.n);
+    const other=g.filter(r=>r.n===999999);
+    ordered.push(...evens,...odds,...other);
+  });
+  return ordered;
+}
+
+
+function skagitPhotoUrl(pid){
+  return "https://www.skagitcounty.net/Search/Property/ViewPic.aspx?id=" + encodeURIComponent(pid);
+}
+
+function openPhotoPreview(pid, anchor){
+  closePhotoPreview();
+
+  const box=document.createElement("div");
+  box.id="photoPreview";
+  box.className="photo-preview";
+
+  const title=document.createElement("div");
+  title.className="photo-preview-head";
+  title.innerHTML=`<b>${escapeHTML(pid)}</b><button type="button" id="photoClose">×</button>`;
+  box.appendChild(title);
+
+  const frame=document.createElement("iframe");
+  frame.src=skagitPhotoUrl(pid);
+  frame.title=`Skagit County property photo ${pid}`;
+  frame.loading="lazy";
+  box.appendChild(frame);
+
+  document.body.appendChild(box);
+
+  const rect=anchor.getBoundingClientRect();
+  const left=Math.min(window.innerWidth-box.offsetWidth-12, Math.max(12, rect.left-160));
+  const top=Math.min(window.innerHeight-box.offsetHeight-12, Math.max(12, rect.bottom+8));
+  box.style.left=left+"px";
+  box.style.top=top+"px";
+
+  document.getElementById("photoClose").addEventListener("click",closePhotoPreview);
+}
+
+function closePhotoPreview(){
+  document.getElementById("photoPreview")?.remove();
+}
+
+function redfinSearchUrl(a){
+  const address=[a.SitusStNo,a.SitusStName,a.SitusCSZ].filter(Boolean).join(" ").replace(/\s+/g," ").trim();
+  const query=`site:redfin.com "${address}"`;
+  return "https://www.google.com/search?btnI=1&q=" + encodeURIComponent(query);
+}
+
+function renderPreinspection(){
+  const body=document.getElementById("preBody");
+  const filter=document.getElementById("preRouteFilter").value;
+  const q=document.getElementById("preSearch").value.trim().toLowerCase();
+  const showMode=document.getElementById("preShowFilter").value;
+
+  body.innerHTML="";
+  let shown=0;
+  const routeNames=Object.keys(state.routes).sort(routeSort).filter(n=>!filter || n===filter);
+
+  routeNames.forEach(rtName=>{
+    const rt=state.routes[rtName];
+    const rows=walkingOrderForRoute(rt.parcels||[]);
+    rows.forEach(a=>{
+      const pid=a.PARCELID;
+      const s=inspection(pid);
+      const complete=isComplete(pid);
+      const addr=(a.SitusStNo+" "+a.SitusStName).trim();
+      if(showMode==="incomplete" && complete) return;
+      if(showMode==="changes" && s.changes!=="yes") return;
+      if(q && !(pid.toLowerCase().includes(q)||addr.toLowerCase().includes(q))) return;
+
+      shown++;
+      const tr=document.createElement("tr");
+      if(complete) tr.classList.add("complete");
+      if(s.changes==="yes") tr.classList.add("changed");
+      tr.innerHTML=`
+        <td>${escapeHTML(rtName)}</td>
+        <td><b>${escapeHTML(pid)}</b></td>
+        <td>${escapeHTML(addr)}</td>
+        <td style="text-align:center">
+          <button class="photo-btn" type="button" data-photo="${escapeAttr(pid)}" title="Preview Skagit County property photo">▣</button>
+        </td>
+        <td style="text-align:center">
+          <button class="toggle ${s.aerial?"on":""}" data-pid="${escapeAttr(pid)}" data-check="aerial">${s.aerial?"✓":""}</button>
+        </td>
+        <td style="text-align:center">
+          <button class="toggle ${s.streetView?"on":""}" data-pid="${escapeAttr(pid)}" data-check="streetView">${s.streetView?"✓":""}</button>
+        </td>
+        <td>
+          <div class="listing-cell">
+            <button class="toggle ${s.listing?"on":""}" data-pid="${escapeAttr(pid)}" data-check="listing">${s.listing?"✓":""}</button>
+            <a class="redfin-link" href="${redfinSearchUrl(a)}" target="_blank" rel="noopener noreferrer" title="Open this address on Redfin">R</a>
+          </div>
+        </td>
+        <td><div class="change-group">
+          <button class="change-btn yes ${s.changes==="yes"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="yes">YES</button>
+          <button class="change-btn no ${s.changes==="no"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="no">NO</button>
+        </div></td>
+        <td><textarea data-pid="${escapeAttr(pid)}" placeholder="Notes">${escapeHTML(s.notes||"")}</textarea></td>
+      `;
+      body.appendChild(tr);
+    });
+  });
+
+  if(!shown){
+    body.innerHTML='<tr><td colspan="9" class="empty">No parcels match the current route/filter.</td></tr>';
+  }
+  document.getElementById("preSummary").textContent=`${shown} parcels shown`;
+
+  let scopeTotal=0, scopeComplete=0, scopeField=0;
+  routeNames.forEach(rtName=>{
+    (state.routes[rtName]?.parcels || []).forEach(pid=>{
+      scopeTotal++;
+      const s=inspection(pid);
+      if(isComplete(pid)) scopeComplete++;
+      if(s.changes==="yes") scopeField++;
+    });
+  });
+  document.getElementById("preProgress").textContent=`${scopeComplete} / ${scopeTotal} complete`;
+  document.getElementById("fieldSheetCount").textContent=`${scopeField} field sheet${scopeField===1?"":"s"}`;
+  refreshStats();
+}
+
+
+function refreshSetupVisibility(){
+  const setup=document.getElementById("setupSteps");
+  if(!setup) return;
+  const ready=state.assignment.length>0 && !!state.parcelGeoJSON;
+  setup.style.display=ready ? "none" : "block";
+}
+
+function refreshStats(){
+  refreshSetupVisibility();
+  const total=state.assignment.length;
+  const mapped=state.parcelGeoJSON?.features?.length || 0;
+  const assigned=allAssignedSet().size;
+  let complete=0;
+  state.assignment.forEach(a=>{if(isComplete(a.PARCELID)) complete++});
+  document.getElementById("assignmentStat").textContent=`Assignment: ${total}`;
+  document.getElementById("mappedStat").textContent=`Mapped: ${mapped}`;
+  document.getElementById("assignedStat").textContent=`Assigned: ${assigned}`;
+  document.getElementById("unassignedStat").textContent=`Unassigned: ${Math.max(0,total-assigned)}`;
+  document.getElementById("completeStat").textContent=`Preinspected: ${complete}`;
+}
+
+function exportBackup(){
+  download(JSON.stringify(state,null,2),`Skagit_Preinspection_${state.year}_backup.json`,"application/json");
+}
+
+function restoreBackup(file){
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const obj=JSON.parse(r.result);
+      if(!obj.assignment || !obj.routes || !obj.inspections) throw new Error("Invalid workspace file");
+      state=obj;
+      persist();
+      if(state.parcelGeoJSON) renderParcelGeoJSON();
+      renderRoutes(); renderPreinspection(); refreshSelectionUI(); refreshStats();
+      alert("Workspace restored.");
+    }catch(e){ alert("Could not restore backup: "+e.message); }
+  };
+  r.readAsText(file);
+}
+
+function exportProgress(){
+  const rows=[["Route","PARCELID","Address","Aerial","StreetView","Listing","Changes","Notes","Complete"]];
+  Object.keys(state.routes).sort(routeSort).forEach(rt=>{
+    walkingOrderForRoute(state.routes[rt].parcels||[]).forEach(a=>{
+      const s=inspection(a.PARCELID);
+      rows.push([
+        rt,a.PARCELID,(a.SitusStNo+" "+a.SitusStName).trim(),
+        s.aerial?"Yes":"",s.streetView?"Yes":"",s.listing?"Yes":"",
+        s.changes==="yes"?"Yes":s.changes==="no"?"No":"",
+        s.notes||"",isComplete(a.PARCELID)?"Yes":"No"
+      ]);
+    });
+  });
+  const csv=rows.map(r=>r.map(csvEsc).join(",")).join("\r\n");
+  download(csv,`Skagit_Preinspection_${state.year}_progress.csv`,"text/csv");
+}
+
+function csvEsc(v){
+  const s=String(v??"");
+  return /[",\r\n]/.test(s)?`"${s.replace(/"/g,'""')}"`:s;
+}
+function download(content,name,type){
+  const blob=new Blob([content],{type});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download=name;a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function escapeHTML(s){
+  return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function escapeAttr(s){return escapeHTML(s)}
+
+/* Events */
+document.querySelectorAll(".tab").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const v=btn.dataset.view;
+    document.getElementById("routesView").classList.toggle("active",v==="routes");
+    document.getElementById("preinspectionView").classList.toggle("active",v==="preinspection");
+    document.querySelector(".statusbar").style.display = v==="routes" ? "flex" : "none";
+    if(v==="routes") setTimeout(()=>map.invalidateSize(),50);
+    if(v==="preinspection") renderPreinspection();
+  });
+});
+
+document.getElementById("assignmentFile").addEventListener("change",e=>{
+  const file=e.target.files[0]; if(!file)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const rows=parseCSV(r.result);
+      const assignment=normalizeAssignment(rows);
+      if(!assignment.length) throw new Error("No parcels found.");
+      if(state.assignment.length && !confirm("Replace the current assignment? Existing route/inspection data will be kept for matching parcel IDs.")) return;
+      state.assignment=assignment;
+      state.parcelGeoJSON=null;
+      state.routes={};
+      selected.clear();
+      persist();
+      parcelLayer.clearLayers();
+      renderRoutes(); renderPreinspection(); refreshStats(); updateMapMessage();
+      fetchParcelPolygons();
+    }catch(err){ alert(err.message); }
+  };
+  r.readAsText(file);
+});
+
+document.getElementById("drawRouteBtn").addEventListener("click",()=>{
+  if(!state.assignment.length) return alert("Step 1: import the annual assignment first.");
+  if(!state.parcelGeoJSON) return alert("Parcel polygons are still loading. Try again in a moment.");
+  drawLayer.clearLayers();
+  selected.clear();
+  refreshSelectionUI();
+  map.pm.enableDraw("Polygon",{
+    snappable:true,
+    snapDistance:20,
+    templineStyle:{color:"#7a4a00",weight:3},
+    hintlineStyle:{color:"#ffd15a",dashArray:[6,6]},
+    pathOptions:{color:"#7a4a00",weight:3,fillColor:"#ffd15a",fillOpacity:.15}
+  });
+});
+document.getElementById("saveRoute").addEventListener("click",saveRoute);
+document.getElementById("clearSelection").addEventListener("click",()=>{
+  selected.clear();drawLayer.clearLayers();refreshSelectionUI();
+});
+document.getElementById("routeList").addEventListener("click",e=>{
+  const target=e.target.closest("[data-target-route]");
+  if(target){
+    document.getElementById("routeName").value=target.dataset.targetRoute;
+  }
+  const f=e.target.dataset.focus,d=e.target.dataset.delete;
+  if(f)focusRoute(f);
+  if(d)deleteRoute(d);
+});
+document.getElementById("exportBackup").addEventListener("click",exportBackup);
+document.getElementById("backupFile").addEventListener("change",e=>{if(e.target.files[0])restoreBackup(e.target.files[0])});
+document.getElementById("exportProgress").addEventListener("click",exportProgress);
+
+["preRouteFilter","preShowFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderPreinspection));
+document.getElementById("preSearch").addEventListener("input",renderPreinspection);
+
+document.getElementById("preBody").addEventListener("click",e=>{
+  const btn=e.target.closest("button"); if(!btn)return;
+
+  if(btn.dataset.photo){
+    openPhotoPreview(btn.dataset.photo, btn);
+    return;
+  }
+
+  const pid=btn.dataset.pid; if(!pid)return;
+  const s=inspection(pid);
+  if(btn.dataset.check){
+    const k=btn.dataset.check;s[k]=!s[k];
+  }else if(btn.dataset.change){
+    s.changes=s.changes===btn.dataset.change?"":btn.dataset.change;
+  }
+  persist(); renderPreinspection();
+});
+
+let photoHoverTimer=null;
+document.getElementById("preBody").addEventListener("mouseover",e=>{
+  const btn=e.target.closest("[data-photo]");
+  if(!btn) return;
+  clearTimeout(photoHoverTimer);
+  photoHoverTimer=setTimeout(()=>openPhotoPreview(btn.dataset.photo,btn),350);
+});
+document.getElementById("preBody").addEventListener("mouseout",e=>{
+  const btn=e.target.closest("[data-photo]");
+  if(!btn) return;
+  clearTimeout(photoHoverTimer);
+});
+
+document.getElementById("preBody").addEventListener("input",e=>{
+  if(e.target.tagName!=="TEXTAREA")return;
+  const s=inspection(e.target.dataset.pid);s.notes=e.target.value;persist();
+});
+
+document.getElementById("resetWorkspace").addEventListener("click",()=>{
+  if(!confirm("Erase the local workspace, routes, and preinspection progress? Export a backup first if needed."))return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+});
+
+/* Init */
+initMap();
+
+if(state.assignment.length && !state.parcelGeoJSON){
+  fetchParcelPolygons();
+}
+renderRoutes();
+renderPreinspection();
+refreshStats();
+updateMapMessage();
+refreshSetupVisibility();
+})();
+</script>
+</body>
+</html>
