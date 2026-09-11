@@ -123,10 +123,11 @@ sources**. Statuses are `never_synced`, `unchanged`, `changed`,
 
 ## Field route planner
 
-The preinspection workspace is available at `/routing/` for staff use. It is
-the browser-based assignment, map routing, and field review workspace imported
-from the standalone HTML tool; its current progress is stored in the browser
-and can be backed up from the Workspace tools menu.
+The preinspection workspace is available at `/routing/` for authenticated users.
+Each user can create private, persistent workspaces for their own assignment,
+map routing, preinspection notes, and field routes. Existing browser backups can
+be imported from the workspace controls, and the Workspace tools menu still
+provides a local backup/export path.
 
 The staff-only route planner is available at `/field/routes/`. It accepts the
 internal GIS CSV/XLSX export, preserves the original rows, deduplicates parcel

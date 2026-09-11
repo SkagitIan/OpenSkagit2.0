@@ -1,4 +1,20 @@
 from django.db import models
+from django.conf import settings
+
+
+class PreinspectionWorkspace(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="preinspection_workspaces")
+    name = models.CharField(max_length=160)
+    year = models.PositiveIntegerField(default=2026)
+    state = models.JSONField(default=dict)
+    revision = models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    last_opened_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["-updated_at"]
+        indexes = [models.Index(fields=["owner", "updated_at"])]
 
 
 class RoutingImport(models.Model):

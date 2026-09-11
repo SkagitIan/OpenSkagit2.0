@@ -1,6 +1,20 @@
 from django.contrib import admin
 
-from .models import RoutingImport, RoutingImportRow, RoutingPlan, RoutingRoute, RoutingStop
+from .models import PreinspectionWorkspace, RoutingImport, RoutingImportRow, RoutingPlan, RoutingRoute, RoutingStop
+
+
+@admin.register(PreinspectionWorkspace)
+class PreinspectionWorkspaceAdmin(admin.ModelAdmin):
+    list_display = ("name", "owner", "year", "revision", "updated_at", "last_opened_at")
+    list_filter = ("year",)
+    search_fields = ("name", "owner__username", "owner__email")
+    readonly_fields = ("owner", "name", "year", "state", "revision", "created_at", "updated_at", "last_opened_at")
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(RoutingImport)

@@ -101,6 +101,7 @@ input[type=file]{display:none}
 .pre-toolbar select,.pre-toolbar input{
   border:1px solid var(--line);border-radius:6px;padding:8px 9px;background:#fff
 }
+.workspace-controls{display:flex;align-items:center;gap:5px;flex:1 1 100%;padding:7px 8px;border:1px solid #d9e6ee;border-radius:8px;background:#f7fbfd}.workspace-selector-label{font-size:11px;font-weight:800;color:var(--os-navy);white-space:nowrap}.workspace-controls select{min-width:210px;max-width:320px;height:32px;padding:5px 7px}.workspace-button{height:32px;border:1px solid #9bcfe8;border-radius:6px;background:#e0f3ff;color:#165d82;font-size:11px;font-weight:800;padding:0 9px;cursor:pointer}.workspace-save-status{margin-left:auto;color:var(--muted);font-size:11px;white-space:nowrap}.workspace-save-status.is-error{color:#a5222b;font-weight:700}.workspace-save-status.is-saved{color:#2f7b53}
 .table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:8px}
 table{border-collapse:collapse;width:100%;min-width:1100px}
 th{
@@ -310,7 +311,7 @@ textarea{
 
 </style>
 </head>
-<body>
+<body data-workspace-user-id="{{ request.user.id }}">
 <header>
   <a class="brand" href="/" aria-label="OpenSkagit home"><img src="https://res.cloudinary.com/dfz4bhlzs/image/upload/v1768253765/logoicon_c_crop_w_480_h_467_x_0_y_0-Picsart-BackgroundRemover_uklqfi.png" alt="" width="30" height="30"><strong>OpenSkagit</strong><small>Routing workspace</small></a>
   <div class="tabs">
@@ -402,6 +403,16 @@ textarea{
 <section id="preinspectionView" class="view">
   <div class="pre-wrap">
     <div class="pre-toolbar simple">
+      <div class="workspace-controls" id="workspaceControls">
+        <label class="workspace-selector-label" for="workspaceSelect">Workspace</label>
+        <select id="workspaceSelect" aria-label="Preinspection workspace"></select>
+        <button class="workspace-button" id="newWorkspace" type="button">New</button>
+        <button class="workspace-button" id="renameWorkspace" type="button">Rename</button>
+        <button class="workspace-button" id="deleteWorkspace" type="button">Delete</button>
+        <button class="workspace-button" id="importWorkspace" type="button">Import backup</button>
+        <input id="workspaceBackupFile" type="file" accept=".json,application/json" hidden>
+        <span id="workspaceSaveStatus" class="workspace-save-status" role="status">Loading…</span>
+      </div>
       <select id="preRouteFilter">
         <option value="">All routes</option>
       </select>
@@ -471,6 +482,8 @@ const FEATURE_URL = "https://gis.skagitcountywa.gov/arcgis/rest/services/OpenDat
 const STARTER_ASSIGNMENT = [];
 const CHECKS = ["aerial","streetView","listing"];
 const STORAGE_KEY = "skagit-preinspection-workspace-v1";
+const USER_CACHE_KEY = `skagit-preinspection-cache-user-${document.body.dataset.workspaceUserId || "unknown"}`;
+const WORKSPACE_API = "/routing/api/workspaces/";
 const COLORS = ["#2f6fa3","#7b5aa6","#2f8c72","#b36b2c","#a44545","#5d7f3b","#8f5d75","#4d7f8e","#6f6f3c","#855f37"];
 
 let state = loadState() || {
@@ -490,17 +503,192 @@ let map, parcelLayer, drawLayer, fieldRouteMap, fieldRouteLayer;
 let selected = new Set();
 let parcelLayersById = new Map();
 let imageryCleanup = null;
+let workspaceId = null;
+let workspaceRevision = null;
+let workspaceReady = false;
+let workspaceSaveTimer = null;
+let workspaceSaveInFlight = false;
+let workspaceSavePending = false;
 
 function persist(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  try{localStorage.setItem(USER_CACHE_KEY, JSON.stringify(state));}catch(e){}
   refreshStats();
+  queueWorkspaceSave();
 }
 
 function loadState(){
   try{
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(USER_CACHE_KEY);
     return raw ? JSON.parse(raw) : null;
   }catch(e){ return null; }
+}
+
+function legacyState(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){return null;}
+}
+
+function csrf(){
+  const match=document.cookie.match(/csrftoken=([^;]+)/);
+  return match ? decodeURIComponent(match[1]) : "";
+}
+
+async function workspaceRequest(url,options={}){
+  options.credentials="same-origin";
+  options.headers={...(options.headers||{}),"X-CSRFToken":csrf()};
+  const response=await fetch(url,options);
+  const text=await response.text();
+  let payload={};
+  try{payload=text ? JSON.parse(text) : {};}catch(e){throw new Error("The server returned an unexpected response.");}
+  if(!response.ok) throw Object.assign(new Error(payload.error || "Workspace request failed."),{status:response.status,payload});
+  return payload;
+}
+
+function workspaceStatus(text,kind=""){
+  const el=document.getElementById("workspaceSaveStatus");
+  if(!el)return;
+  el.textContent=text;
+  el.classList.toggle("is-error",kind==="error");
+  el.classList.toggle("is-saved",kind==="saved");
+}
+
+function cacheState(){try{localStorage.setItem(USER_CACHE_KEY,JSON.stringify(state));}catch(e){}}
+
+function workspaceStateForSave(){
+  // Parcel geometry is derived from the assignment and is intentionally kept
+  // out of the database payload; it is reloaded from Skagit GIS on open.
+  return {...state,parcelGeoJSON:null};
+}
+
+function queueWorkspaceSave(){
+  if(!workspaceReady || !workspaceId)return;
+  workspaceSavePending=true;
+  clearTimeout(workspaceSaveTimer);
+  workspaceSaveTimer=setTimeout(saveWorkspaceNow,500);
+  workspaceStatus("Saving…");
+}
+
+async function saveWorkspaceNow(){
+  clearTimeout(workspaceSaveTimer);
+  if(!workspaceReady || !workspaceId || workspaceSaveInFlight){workspaceSavePending=true;return;}
+  workspaceSavePending=false;
+  workspaceSaveInFlight=true;
+  try{
+    const payload=await workspaceRequest(`${WORKSPACE_API}${workspaceId}/state/`,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({revision:workspaceRevision,state:workspaceStateForSave()})});
+    workspaceRevision=payload.revision;
+    cacheState();
+    workspaceStatus("Saved","saved");
+  }catch(error){
+    if(error.status===409) workspaceStatus("Changed elsewhere — reload this workspace","error");
+    else workspaceStatus(error.message || "Save failed","error");
+  }finally{
+    workspaceSaveInFlight=false;
+    if(workspaceSavePending) queueWorkspaceSave();
+  }
+}
+
+function normalizeWorkspaceState(value){
+  const next=value && typeof value==="object" ? value : {};
+  if(!Array.isArray(next.assignment)) next.assignment=[];
+  if(!next.routes || typeof next.routes!=="object" || Array.isArray(next.routes)) next.routes={};
+  if(!next.inspections || typeof next.inspections!=="object" || Array.isArray(next.inspections)) next.inspections={};
+  if(!next.fieldRoutes || typeof next.fieldRoutes!=="object" || Array.isArray(next.fieldRoutes)) next.fieldRoutes={};
+  if(!Array.isArray(next.fieldUnassigned)) next.fieldUnassigned=[];
+  if(!Object.prototype.hasOwnProperty.call(next,"activeParcel")) next.activeParcel="";
+  if(!Object.prototype.hasOwnProperty.call(next,"activeFieldRoute")) next.activeFieldRoute="";
+  if(!Object.keys(next.fieldRoutes).length){
+    const legacyYes=next.assignment.map(row=>row.PARCELID).filter(pid=>(next.inspections[String(pid)]||{}).changes==="yes");
+    if(legacyYes.length){
+      next.fieldRoutes={"Field Route 1":{name:"Field Route 1",color:COLORS[0],parcels:[...new Set(legacyYes)],updated:new Date().toISOString()}};
+      next.activeFieldRoute="Field Route 1";
+    }
+  }
+  next.version=2;
+  return next;
+}
+
+function renderWorkspaceControls(workspaces=[]){
+  const select=document.getElementById("workspaceSelect");
+  if(!select)return;
+  select.innerHTML=workspaces.length ? workspaces.map(item=>`<option value="${item.id}">${escapeHTML(item.name)} · ${item.parcel_count} parcels</option>`).join("") : '<option value="">No workspaces</option>';
+  if(workspaceId) select.value=String(workspaceId);
+}
+
+function emptyWorkspaceState(){
+  return {version:2,year:new Date().getFullYear(),assignment:[],parcelGeoJSON:null,routes:{},inspections:{},fieldRoutes:{},fieldUnassigned:[],activeParcel:"",activeFieldRoute:""};
+}
+
+function refreshWorkspaceUI(){
+  selected.clear();
+  if(parcelLayer) parcelLayer.clearLayers();
+  parcelLayersById.clear();
+  if(state.parcelGeoJSON) renderParcelGeoJSON();
+  renderRoutes();
+  renderPreinspection();
+  renderFieldRoutes();
+  refreshSelectionUI();
+  refreshStats();
+  updateMapMessage();
+  refreshSetupVisibility();
+  if(state.assignment.length && !state.parcelGeoJSON) fetchParcelPolygons();
+  refreshRecentSales();
+}
+
+async function loadWorkspace(workspace){
+  workspaceReady=false;
+  const payload=await workspaceRequest(`${WORKSPACE_API}${workspace.id}/`);
+  workspaceId=payload.id;
+  workspaceRevision=payload.revision;
+  state=normalizeWorkspaceState(payload.state);
+  cacheState();
+  workspaceReady=true;
+  const list=await workspaceRequest(WORKSPACE_API);
+  renderWorkspaceControls(list.workspaces||[]);
+  workspaceStatus("Saved","saved");
+  refreshWorkspaceUI();
+}
+
+async function createWorkspace(name="Untitled workspace",initialState=null){
+  workspaceReady=false;
+  const newState=normalizeWorkspaceState(initialState || emptyWorkspaceState());
+  const payload=await workspaceRequest(WORKSPACE_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,year:newState.year||2026,state:newState})});
+  workspaceId=payload.id;
+  workspaceRevision=payload.revision;
+  state=normalizeWorkspaceState(payload.state);
+  cacheState();
+  workspaceReady=true;
+  workspaceStatus("Saved","saved");
+  const list=await workspaceRequest(WORKSPACE_API);
+  renderWorkspaceControls(list.workspaces||[]);
+  refreshWorkspaceUI();
+  return payload;
+}
+
+async function initializeWorkspaces(){
+  try{
+    const payload=await workspaceRequest(WORKSPACE_API);
+    const workspaces=payload.workspaces||[];
+    renderWorkspaceControls(workspaces);
+    if(workspaces.length){
+      await loadWorkspace(workspaces[0]);
+    }else{
+      await createWorkspace("My preinspection workspace");
+      const old=legacyState();
+      if(old?.assignment?.length && confirm("This browser has an older local assignment. Import it into your new database workspace?")){
+        state=normalizeWorkspaceState(old);
+        persist();
+        await saveWorkspaceNow();
+        refreshWorkspaceUI();
+        try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+      }
+    }
+  }catch(error){
+    workspaceStatus(error.message || "Workspace loading failed","error");
+    workspaceReady=false;
+    refreshWorkspaceUI();
+  }
 }
 
 function assignmentMap(){
@@ -1629,10 +1817,9 @@ function restoreBackup(file){
     try{
       const obj=JSON.parse(r.result);
       if(!obj.assignment || !obj.routes || !obj.inspections) throw new Error("Invalid workspace file");
-      state=obj;
+      state=normalizeWorkspaceState(obj);
       persist();
-      if(state.parcelGeoJSON) renderParcelGeoJSON();
-      renderRoutes(); renderPreinspection(); refreshSelectionUI(); refreshStats();
+      refreshWorkspaceUI();
       alert("Workspace restored.");
     }catch(e){ alert("Could not restore backup: "+e.message); }
   };
@@ -1743,6 +1930,40 @@ document.getElementById("routeList").addEventListener("click",e=>{
 document.getElementById("exportBackup").addEventListener("click",exportBackup);
 document.getElementById("backupFile").addEventListener("change",e=>{if(e.target.files[0])restoreBackup(e.target.files[0])});
 document.getElementById("exportProgress").addEventListener("click",exportProgress);
+document.getElementById("workspaceSelect").addEventListener("change",async e=>{
+  const id=Number(e.target.value);
+  if(!id || id===workspaceId)return;
+  await saveWorkspaceNow();
+  try{await loadWorkspace({id});}catch(error){workspaceStatus(error.message||"Workspace could not be loaded","error");}
+});
+document.getElementById("newWorkspace").addEventListener("click",async()=>{
+  const name=prompt("Name this workspace:",`Preinspection ${new Date().getFullYear()}`);
+  if(!name?.trim())return;
+  try{await saveWorkspaceNow();await createWorkspace(name.trim());}catch(error){workspaceStatus(error.message||"Workspace could not be created","error");}
+});
+document.getElementById("renameWorkspace").addEventListener("click",async()=>{
+  if(!workspaceId)return;
+  const current=document.getElementById("workspaceSelect").selectedOptions[0]?.textContent?.split(" · ")[0] || "Workspace";
+  const name=prompt("Rename this workspace:",current);
+  if(!name?.trim())return;
+  try{
+    await workspaceRequest(`${WORKSPACE_API}${workspaceId}/`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:name.trim()})});
+    const list=await workspaceRequest(WORKSPACE_API);
+    renderWorkspaceControls(list.workspaces||[]);
+    workspaceStatus("Name saved","saved");
+  }catch(error){workspaceStatus(error.message||"Workspace could not be renamed","error");}
+});
+document.getElementById("deleteWorkspace").addEventListener("click",async()=>{
+  if(!workspaceId || !confirm("Delete this workspace permanently? Export a backup first if needed."))return;
+  try{
+    await workspaceRequest(`${WORKSPACE_API}${workspaceId}/state/`,{method:"DELETE"});
+    const list=await workspaceRequest(WORKSPACE_API);
+    if(list.workspaces?.length) await loadWorkspace(list.workspaces[0]);
+    else await createWorkspace("My preinspection workspace");
+  }catch(error){workspaceStatus(error.message||"Workspace could not be deleted","error");}
+});
+document.getElementById("importWorkspace").addEventListener("click",()=>document.getElementById("workspaceBackupFile").click());
+document.getElementById("workspaceBackupFile").addEventListener("change",e=>{if(e.target.files[0])restoreBackup(e.target.files[0]);e.target.value="";});
 
 document.getElementById("fieldRouteSelect").addEventListener("change",e=>{
   state.activeFieldRoute=e.target.value;
@@ -1939,33 +2160,22 @@ document.getElementById("preBody").addEventListener("input",e=>{
 });
 
 document.getElementById("resetWorkspace").addEventListener("click",()=>{
-  if(!confirm("Erase the local workspace, routes, and preinspection progress? Export a backup first if needed."))return;
-  localStorage.removeItem(STORAGE_KEY);
-  location.reload();
+  if(!confirm("Clear this database workspace, routes, and preinspection progress? Export a backup first if needed."))return;
+  state=normalizeWorkspaceState({version:2,year:state.year||2026,assignment:[],parcelGeoJSON:null,routes:{},inspections:{},fieldRoutes:{},fieldUnassigned:[],activeParcel:"",activeFieldRoute:""});
+  persist();
+  refreshWorkspaceUI();
+  try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
 });
 
 /* Init */
-if(!fieldRouteNames().length){
-  const legacyYes=state.assignment.map(a=>a.PARCELID).filter(pid=>inspection(pid).changes==="yes");
-  if(legacyYes.length){
-    const legacyRoute=ensureFieldRoute("Field Route 1");
-    state.fieldRoutes[legacyRoute].parcels=[...new Set(legacyYes)];
-    state.activeFieldRoute=legacyRoute;
-    persist();
-  }
-}
 initMap();
-
-if(state.assignment.length && !state.parcelGeoJSON){
-  fetchParcelPolygons();
-}
 renderRoutes();
 renderPreinspection();
 renderFieldRoutes();
-refreshRecentSales();
 refreshStats();
 updateMapMessage();
 refreshSetupVisibility();
+initializeWorkspaces();
 })();
 </script>
 </body>

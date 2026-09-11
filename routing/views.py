@@ -8,9 +8,11 @@ from django.contrib.auth.views import redirect_to_login
 from django.db import DatabaseError, connection, transaction
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_http_methods
 
-from .models import RoutingImport, RoutingImportRow, RoutingPlan, RoutingPlanRevision, RoutingRoute, RoutingStop
+from .models import PreinspectionWorkspace, RoutingImport, RoutingImportRow, RoutingPlan, RoutingPlanRevision, RoutingRoute, RoutingStop
 from .services.exports import route_csv, single_route_csv
 from .services.importers import infer_street_side, normalize_row, read_upload
 from .services.optimization import cluster_and_order, distance
@@ -20,6 +22,10 @@ from .services.valhalla import optimized_order
 
 def _staff(request):
     return bool(request.user.is_authenticated and request.user.is_active and request.user.is_staff)
+
+
+def _workspace_user(request):
+    return bool(request.user.is_authenticated and request.user.is_active)
 
 
 def _forbidden(request):
@@ -34,10 +40,162 @@ def routes_page(request):
 
 
 @require_GET
+@ensure_csrf_cookie
 def workspace_page(request):
-    if not _staff(request):
+    if not _workspace_user(request):
         return _forbidden(request)
     return render(request, "routing/preinspection_workspace.html")
+
+
+DEFAULT_WORKSPACE_STATE = {
+    "version": 2,
+    "year": 2026,
+    "assignment": [],
+    "parcelGeoJSON": None,
+    "routes": {},
+    "inspections": {},
+    "fieldRoutes": {},
+    "fieldUnassigned": [],
+    "activeParcel": "",
+    "activeFieldRoute": "",
+}
+MAX_WORKSPACE_STATE_BYTES = 15 * 1024 * 1024
+
+
+def _workspace_queryset(request):
+    if request.user.is_superuser:
+        return PreinspectionWorkspace.objects.all()
+    return PreinspectionWorkspace.objects.filter(owner=request.user)
+
+
+def _workspace_summary(workspace):
+    state = workspace.state or {}
+    assignment = state.get("assignment") or []
+    inspections = state.get("inspections") or {}
+    complete = sum(
+        1
+        for row in assignment
+        if isinstance(row, dict)
+        and (inspections.get(str(row.get("PARCELID", ""))) or {}).get("changes") in {"yes", "no"}
+    )
+    return {
+        "id": workspace.id,
+        "name": workspace.name,
+        "year": workspace.year,
+        "revision": workspace.revision,
+        "created_at": workspace.created_at.isoformat(),
+        "updated_at": workspace.updated_at.isoformat(),
+        "last_opened_at": workspace.last_opened_at.isoformat() if workspace.last_opened_at else None,
+        "parcel_count": len(assignment),
+        "complete_count": complete,
+    }
+
+
+def _workspace_payload(workspace, include_state=False):
+    payload = _workspace_summary(workspace)
+    if include_state:
+        payload["state"] = workspace.state or dict(DEFAULT_WORKSPACE_STATE)
+    return payload
+
+
+def _json_body(request):
+    try:
+        return json.loads(request.body or "{}")
+    except (TypeError, json.JSONDecodeError):
+        return None
+
+
+def _valid_workspace_state(value):
+    if not isinstance(value, dict):
+        return None
+    state = dict(DEFAULT_WORKSPACE_STATE)
+    state.update(value)
+    state["version"] = 2
+    if not isinstance(state.get("assignment"), list) or not isinstance(state.get("routes"), dict) or not isinstance(state.get("inspections"), dict):
+        return None
+    if not isinstance(state.get("fieldRoutes"), dict) or not isinstance(state.get("fieldUnassigned"), list):
+        return None
+    return state
+
+
+@require_http_methods(["GET", "POST"])
+def workspace_collection(request):
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=401)
+    if request.method == "GET":
+        return JsonResponse({"workspaces": [_workspace_summary(workspace) for workspace in _workspace_queryset(request)]})
+
+    body = _json_body(request)
+    if body is None:
+        return JsonResponse({"error": "Request body must be valid JSON."}, status=400)
+    state = _valid_workspace_state(body.get("state") or dict(DEFAULT_WORKSPACE_STATE))
+    if state is None:
+        return JsonResponse({"error": "Workspace state has an invalid shape."}, status=400)
+    encoded = json.dumps(state, separators=(",", ":"))
+    if len(encoded.encode("utf-8")) > MAX_WORKSPACE_STATE_BYTES:
+        return JsonResponse({"error": "Workspace data is too large to save."}, status=413)
+    name = str(body.get("name") or "Untitled workspace").strip()[:160] or "Untitled workspace"
+    year = body.get("year", state.get("year", 2026))
+    try:
+        year = max(2000, min(2100, int(year)))
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "Year must be a valid number."}, status=400)
+    workspace = PreinspectionWorkspace.objects.create(owner=request.user, name=name, year=year, state=state)
+    return JsonResponse(_workspace_payload(workspace, include_state=True), status=201)
+
+
+@require_http_methods(["GET", "PATCH"])
+def workspace_detail(request, workspace_id):
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=401)
+    workspace = get_object_or_404(_workspace_queryset(request), pk=workspace_id)
+    if request.method == "PATCH":
+        body = _json_body(request)
+        if body is None:
+            return JsonResponse({"error": "Request body must be valid JSON."}, status=400)
+        name = str(body.get("name") or "").strip()[:160]
+        if not name:
+            return JsonResponse({"error": "Workspace name cannot be empty."}, status=400)
+        workspace.name = name
+        workspace.save(update_fields=["name", "updated_at"])
+        return JsonResponse(_workspace_payload(workspace))
+    workspace.last_opened_at = timezone.now()
+    workspace.save(update_fields=["last_opened_at"])
+    return JsonResponse(_workspace_payload(workspace, include_state=True))
+
+
+@require_http_methods(["PUT", "PATCH", "DELETE"])
+def workspace_state(request, workspace_id):
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=401)
+    workspace = get_object_or_404(_workspace_queryset(request), pk=workspace_id)
+    if request.method == "DELETE":
+        workspace.delete()
+        return JsonResponse({"deleted": True})
+
+    body = _json_body(request)
+    if body is None:
+        return JsonResponse({"error": "Request body must be valid JSON."}, status=400)
+    state = _valid_workspace_state(body.get("state"))
+    if state is None:
+        return JsonResponse({"error": "Workspace state has an invalid shape."}, status=400)
+    encoded = json.dumps(state, separators=(",", ":"))
+    if len(encoded.encode("utf-8")) > MAX_WORKSPACE_STATE_BYTES:
+        return JsonResponse({"error": "Workspace data is too large to save."}, status=413)
+    try:
+        expected_revision = int(body.get("revision"))
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "A workspace revision is required."}, status=400)
+    with transaction.atomic():
+        locked = _workspace_queryset(request).select_for_update().get(pk=workspace.id)
+        if locked.revision != expected_revision:
+            return JsonResponse({"error": "This workspace changed in another tab or session.", "revision": locked.revision}, status=409)
+        locked.state = state
+        locked.year = int(state.get("year") or locked.year)
+        locked.revision += 1
+        locked.save(update_fields=["state", "year", "revision", "updated_at"])
+        workspace = locked
+    return JsonResponse(_workspace_payload(workspace))
 
 
 # The current assessment cycle is May 1, 2026 through April 30, 2027.
@@ -50,8 +208,8 @@ SALES_CYCLE_END_LABEL = "2027-04-30"
 @require_GET
 def sales_cycle(request):
     """Return current-cycle sale flags for the parcels shown in the workspace."""
-    if not _staff(request):
-        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=403)
 
     parcel_ids = []
     for value in request.GET.getlist("parcel_id"):
@@ -134,8 +292,8 @@ def _trim_sketch(image_bytes):
 
 @require_GET
 def parcel_sketch(request, parcel_id):
-    if not _staff(request):
-        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=403)
     normalized = str(parcel_id or "").strip().upper()
     if not normalized:
         return JsonResponse({"error": "A parcel ID is required."}, status=400)
@@ -155,8 +313,8 @@ def parcel_sketch(request, parcel_id):
 
 @require_GET
 def parcel_sketch_image(request, parcel_id):
-    if not _staff(request):
-        return JsonResponse({"error": "Staff sign-in is required."}, status=403)
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=403)
     try:
         normalized, source_url, _ = _assessor_sketch_url(parcel_id)
         if not source_url:
