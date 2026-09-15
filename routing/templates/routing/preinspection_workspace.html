@@ -95,15 +95,13 @@ input[type=file]{display:none}
 
 /* PREINSPECTION */
 .pre-wrap{padding:12px 16px 30px}
-.pre-toolbar{
-  display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px
-}
+.pre-toolbar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
 .pre-toolbar select,.pre-toolbar input{
   border:1px solid var(--line);border-radius:6px;padding:8px 9px;background:#fff
 }
-.workspace-controls{display:flex;align-items:center;gap:5px;flex:1 1 100%;padding:7px 8px;border:1px solid #d9e6ee;border-radius:8px;background:#f7fbfd}.workspace-selector-label{font-size:11px;font-weight:800;color:var(--os-navy);white-space:nowrap}.workspace-controls select{min-width:210px;max-width:320px;height:32px;padding:5px 7px}.workspace-button{height:32px;border:1px solid #9bcfe8;border-radius:6px;background:#e0f3ff;color:#165d82;font-size:11px;font-weight:800;padding:0 9px;cursor:pointer}.workspace-save-status{margin-left:auto;color:var(--muted);font-size:11px;white-space:nowrap}.workspace-save-status.is-error{color:#a5222b;font-weight:700}.workspace-save-status.is-saved{color:#2f7b53}
+.workspace-controls{display:flex;align-items:center;gap:5px;flex:0 1 auto;min-width:0;padding:5px 7px;border:1px solid #d9e6ee;border-radius:8px;background:#f7fbfd}.workspace-selector-label{font-size:11px;font-weight:800;color:var(--os-navy);white-space:nowrap}.workspace-controls select{min-width:180px;max-width:260px;height:32px;padding:5px 7px}.workspace-button{display:inline-flex;align-items:center;gap:4px;height:32px;border:1px solid #9bcfe8;border-radius:6px;background:#e0f3ff;color:#165d82;font-size:11px;font-weight:800;padding:0 8px;cursor:pointer}.workspace-button:hover{background:#d1eefb}.workspace-save-status{margin-left:auto;color:var(--muted);font-size:11px;white-space:nowrap}.workspace-save-status.is-error{color:#a5222b;font-weight:700}.workspace-save-status.is-saved{color:#2f7b53}.tool-icon{display:inline-flex;width:15px;height:15px;align-items:center;justify-content:center}.tool-icon svg,.ui-icon{width:16px;height:16px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.pre-filter-group{display:flex;align-items:center;gap:6px;min-width:0}.pre-search-wrap{position:relative;display:flex;align-items:center}.pre-search-wrap .ui-icon{position:absolute;left:9px;color:var(--muted);pointer-events:none}.pre-search-wrap input{padding-left:31px}.pre-tool-status{display:flex;align-items:center;gap:5px;margin-left:auto;white-space:nowrap}
 .table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:8px}
-table{border-collapse:collapse;width:100%;min-width:1100px}
+table{border-collapse:collapse;width:100%;min-width:960px}
 th{
   position:sticky;top:0;background:#eef2f6;padding:8px 7px;border-bottom:1px solid var(--line);
   font-size:12px;text-transform:uppercase;text-align:center;z-index:2
@@ -140,7 +138,6 @@ tr.changed{background:#fffaf0}
 .photo-action:hover{background:#fbdce9;border-color:#c984a2}
 .aerial-action{background:#edf8e6;border-color:#acd08e;color:#416900}
 .aerial-action:hover{background:#dff0d2;border-color:#82ad5d}
-.streetview-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid #efc58e;border-radius:6px;background:#fff3e2;color:#a95f16;font-size:17px;line-height:1;box-shadow:0 1px 2px rgba(4,44,83,.08)}
 .changes-action.yes{background:repeating-linear-gradient(135deg,#fff 0,#fff 7px,#f0f2f4 7px,#f0f2f4 9px);border-color:#cfd6dd;color:#4b5964}
 .changes-action.no{background:repeating-linear-gradient(45deg,#fff 0,#fff 7px,#f0f2f4 7px,#f0f2f4 9px);border-color:#cfd6dd;color:#4b5964}
 .changes-action.yes.on{background:var(--amber);border-color:#e4c66f;color:var(--amber-text)}
@@ -155,8 +152,7 @@ tr.changed{background:#fffaf0}
 .recent-sale-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-left:4px;border-radius:50%;background:#c62828;color:#fff;font-size:12px;font-weight:800;line-height:1;vertical-align:middle;box-shadow:0 1px 2px rgba(120,0,0,.2)}
 .preinspection-table tbody tr:not(.active-parcel) .preinspection-action,
 .preinspection-table tbody tr:not(.active-parcel) .parcel-link,
-.preinspection-table tbody tr:not(.active-parcel) .streetview-icon,
-.preinspection-table tbody tr:not(.active-parcel) .redfin-link,
+.preinspection-table tbody tr:not(.active-parcel) .google-search-btn,
 .preinspection-table tbody tr:not(.active-parcel) .changes-action,
 .preinspection-table tbody tr:not(.active-parcel) .unassign-action{background:#f6f7f8;border-color:#d8dde3;color:#6a747c;box-shadow:none}
 .preinspection-table tbody tr:not(.active-parcel) .changes-action.on{font-weight:800}
@@ -243,12 +239,15 @@ textarea{
   border-radius:5px;padding:5px 8px;font-size:11px;cursor:pointer
 }
 .listing-cell{display:flex;align-items:center;justify-content:center;gap:6px}
-.redfin-link{
-  width:28px;height:28px;border-radius:6px;background:#d4202f;color:#fff;
-  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
-  font-weight:800;font-size:14px;border:1px solid #b61b27
+.google-search-btn{
+  width:28px;height:28px;padding:0;border-radius:6px;background:#fff;color:#174968;
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
+  border:1px solid #9aa8b5
 }
-.redfin-link:hover{background:#b61b27}
+.google-search-btn:hover{background:#eaf4f8;border-color:#5f829b}
+.google-search-modal{position:fixed;inset:2vh 2vw;z-index:99999;display:flex;flex-direction:column;background:#fff;border:1px solid var(--os-border);border-radius:9px;box-shadow:0 18px 45px rgba(4,44,83,.28);overflow:hidden}
+.google-search-head{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);background:#f7f9fb;color:var(--os-navy)}
+.google-search-head strong{white-space:nowrap}.google-search-form{display:flex;flex:1;gap:6px;min-width:0}.google-search-form input{flex:1;min-width:0;padding:7px 9px;border:1px solid var(--line);border-radius:6px}.google-search-form button,.google-search-close{border:1px solid var(--line);border-radius:6px;padding:6px 10px;background:#fff;color:var(--os-navy);font-weight:700;cursor:pointer}.google-search-form button{background:var(--os-teal);border-color:var(--os-teal);color:#fff}.google-search-close{font-size:19px;line-height:20px}.google-search-frame{width:100%;height:100%;min-height:0;flex:1;border:0;background:#fff}
 .parcel-link{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:1px solid #9aa8b5;border-radius:5px;color:#1f5f8b;text-decoration:none;font-weight:800}
 .parcel-link:hover{background:#e7f0f7;border-color:#5f829b}
 
@@ -270,6 +269,7 @@ textarea{
 .workspace-details{margin-top:9px;border-top:1px solid var(--line);padding-top:7px}
 .workspace-details summary{cursor:pointer;font-size:12px;color:var(--muted);font-weight:700}
 .workspace-details .workspace-actions{margin-top:6px}
+.routing-settings-modal{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(4,44,83,.42)}.routing-settings-card{width:min(520px,96vw);background:#fff;border:1px solid var(--os-border);border-radius:10px;box-shadow:0 18px 45px rgba(4,44,83,.28);overflow:hidden}.routing-settings-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:#f7f9fb;color:var(--os-navy)}.routing-settings-head b{margin-right:auto}.routing-settings-head button{border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--os-navy);font-size:18px;line-height:20px;padding:3px 8px;cursor:pointer}.routing-settings-body{padding:14px}.routing-settings-body label{display:block;margin-bottom:5px;color:var(--os-navy);font-size:12px;font-weight:700}.routing-settings-body input{width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 9px}.routing-settings-body p{margin:7px 0 0;color:var(--muted);font-size:11px;line-height:1.4}.routing-settings-foot{display:flex;justify-content:flex-end;gap:7px;padding:10px 14px;border-top:1px solid var(--line);background:#fbfcfd}.routing-settings-foot button{border:1px solid var(--line);border-radius:6px;padding:7px 11px;background:#fff;color:var(--os-navy);font-weight:700;cursor:pointer}.routing-settings-foot button.primary{background:var(--os-teal);border-color:var(--os-teal);color:#fff}
 .route-name-target{cursor:pointer}
 .route-name-target:hover b{text-decoration:underline}
 .progress-pill{background:#e7f0f7;color:#174968;font-weight:700}
@@ -279,18 +279,14 @@ textarea{
   color:#36566f;font-size:16px;font-weight:700;cursor:pointer
 }
 .photo-btn:hover{background:#e7f0f7;border-color:#5f829b}
-.photo-preview{
-  position:fixed;z-index:99999;inset:0;background:rgba(12,24,35,.78);display:flex;align-items:center;justify-content:center;
-  padding:4vh 4vw;box-sizing:border-box
-}
-.photo-preview-head{
-  position:absolute;z-index:2;left:4vw;right:4vw;top:1vh;height:34px;padding:6px 8px;display:flex;align-items:center;
-  justify-content:space-between;color:#fff;font-size:12px;text-shadow:0 1px 2px #000
-}
-.photo-preview-head button{
-  width:32px;height:32px;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:22px;line-height:20px;cursor:pointer
-}
-.photo-preview img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;transition:transform .12s ease;cursor:zoom-in;user-select:none}
+.streetsmart-compare{position:fixed;inset:1vh 1vw;z-index:99998;background:#fff;border:1px solid var(--os-border);border-radius:8px;box-shadow:0 18px 45px rgba(4,44,83,.25);overflow:hidden;display:flex;flex-direction:column}
+.streetsmart-head{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid #e1e5e9;background:#f7f9fb;color:var(--os-navy);font-size:12px}.streetsmart-head b{margin-right:auto}.streetsmart-head button{border:1px solid var(--os-border);border-radius:6px;background:#fff;color:var(--os-navy);padding:6px 8px;font-size:11px;cursor:pointer}.streetsmart-head button:disabled{opacity:.45;cursor:not-allowed}.streetsmart-head button.primary{background:var(--os-teal);border-color:var(--os-teal);color:#fff}.streetsmart-head button.close{font-size:18px;line-height:18px;padding:4px 8px}.streetsmart-step-group{display:flex;align-items:center;gap:3px}.streetsmart-step-group button{padding-left:6px;padding-right:6px}.streetsmart-step-count{min-width:76px;text-align:center;color:var(--muted);font-size:10px}
+.streetsmart-meta{display:flex;align-items:center;gap:10px;min-height:28px;padding:4px 10px;border-bottom:1px solid #e1e5e9;background:#fffdf3;color:var(--muted);font-size:11px}.streetsmart-status{margin-left:auto;text-align:right}.streetsmart-notes{display:flex;align-items:center;gap:8px;padding:5px 10px;border-bottom:1px solid #e1e5e9;background:#fffdf3;font-size:11px;color:var(--muted)}.streetsmart-notes label{font-weight:700;color:var(--os-navy);white-space:nowrap}.streetsmart-notes input{flex:1;min-width:0;border:1px solid #e7dfb8;border-radius:5px;padding:5px 7px;background:#fff;font-size:12px}
+.streetsmart-body{display:grid;grid-template-columns:1fr 1fr;min-height:0;flex:1}.streetsmart-pane{position:relative;min-width:0;min-height:0;height:100%;border-right:1px solid #d8dde3;background:#eef2f5;display:flex;flex-direction:column}.streetsmart-pane:last-child{border-right:0}.streetsmart-pane h3{margin:0;padding:8px 10px;background:#f7f9fb;border-bottom:1px solid #d8dde3;color:var(--os-navy);font-size:12px}.streetsmart-image-wrap{position:relative;min-height:0;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden}.streetsmart-pane img{max-width:100%;max-height:100%;object-fit:contain;display:block}.streetsmart-viewer-mount{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}.streetsmart-viewer-mount>div{width:100%!important;height:100%!important}.streetsmart-placeholder{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;padding:22px;background:#eef2f5;color:var(--muted);font-size:12px;text-align:center;line-height:1.5}.streetsmart-loading{opacity:.65}.streetsmart-view-group{display:flex;align-items:center;gap:3px}.streetsmart-view-group button{padding-left:6px;padding-right:6px}.streetsmart-view-label{min-width:62px;text-align:center;color:var(--muted);font-size:10px}
+.streetsmart-placeholder[hidden]{display:none!important}
+.streetsmart-loading-indicator{position:absolute;z-index:2;top:10px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid #b8cbd6;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 3px 10px rgba(4,44,83,.16);color:var(--os-navy);font-size:11px;white-space:nowrap}.streetsmart-loading-indicator[hidden]{display:none}.streetsmart-spinner{width:12px;height:12px;border:2px solid #c9d8df;border-top-color:var(--os-teal);border-radius:50%;animation:streetsmart-spin .75s linear infinite}@keyframes streetsmart-spin{to{transform:rotate(360deg)}}
+.streetsmart-aim-group{display:flex;align-items:center;gap:4px}.streetsmart-aim-group select{height:29px;max-width:92px;padding:3px 5px;border:1px solid var(--os-border);border-radius:5px;background:#fff;color:var(--os-navy);font-size:10px}.streetsmart-aim-group button{white-space:nowrap}
+@media(max-width:700px){.streetsmart-body{grid-template-columns:1fr;grid-template-rows:1fr 1fr}.streetsmart-pane{border-right:0;border-bottom:1px solid #d8dde3}.streetsmart-pane:last-child{border-bottom:0}.streetsmart-head{flex-wrap:wrap}.streetsmart-status{width:100%;order:3;text-align:left}}
 .imagery-compare{position:fixed;inset:1vh 1vw;z-index:99998;background:#fff;border:1px solid var(--os-border);border-radius:8px;box-shadow:0 18px 45px rgba(4,44,83,.25);overflow:hidden;display:flex;flex-direction:column}
 .imagery-compare-head{position:relative;z-index:1000;min-height:42px;padding:7px 10px;border-bottom:1px solid #e1e5e9;display:flex;align-items:center;gap:10px;background:#f7f9fb;font-size:12px}
 .imagery-compare-head span{flex:1;color:var(--muted)}
@@ -302,12 +298,17 @@ textarea{
 .imagery-sketch-control.visible{display:flex}
 .imagery-sketch-control input{width:70px}
 .imagery-sketch-control button{border:1px solid var(--os-border);border-radius:5px;background:#fff;color:var(--os-navy);padding:4px 6px;font-size:11px;cursor:pointer}.imagery-sketch-control button:hover{background:var(--accent-soft)}
+.import-filter-backdrop{position:fixed;inset:0;z-index:99990;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(4,44,83,.42)}
+.import-filter-modal{width:min(760px,96vw);max-height:min(760px,92vh);display:flex;flex-direction:column;background:#fff;border:1px solid var(--os-border);border-radius:10px;box-shadow:0 18px 45px rgba(4,44,83,.28);overflow:hidden}
+.import-filter-head{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:#f7f9fb}.import-filter-head h2{margin:0;color:var(--os-navy);font-size:17px}.import-filter-head p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4}.import-filter-close{margin-left:auto;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--os-navy);font-size:20px;width:30px;height:30px;line-height:1;cursor:pointer}
+.import-filter-body{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px;overflow:auto}.import-filter-group{min-width:0;border:1px solid var(--line);border-radius:8px;background:#fbfcfd}.import-filter-group-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;border-bottom:1px solid var(--line);color:var(--os-navy);font-size:12px;font-weight:700}.import-filter-group-head span{color:var(--muted);font-weight:500}.import-filter-actions{display:flex;gap:5px}.import-filter-actions button{border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--os-navy);padding:3px 6px;font-size:10px;cursor:pointer}.import-filter-options{max-height:300px;overflow:auto;padding:5px}.import-filter-option{display:flex;align-items:flex-start;gap:7px;padding:6px 5px;border-radius:5px;color:var(--os-ink);font-size:12px;line-height:1.3;cursor:pointer}.import-filter-option:hover{background:#eaf4f5}.import-filter-option input{flex:0 0 auto;margin-top:2px}.import-filter-option label{min-width:0;cursor:pointer}.import-filter-option small{color:var(--muted);white-space:nowrap;margin-left:3px}.import-filter-missing{padding:12px;color:var(--muted);font-size:12px}.import-filter-foot{display:flex;align-items:center;justify-content:flex-end;gap:7px;padding:11px 14px;border-top:1px solid var(--line);background:#fbfcfd}.import-filter-foot button{border:1px solid var(--line);border-radius:6px;padding:8px 12px;background:#fff;color:var(--os-navy);font-weight:700;cursor:pointer}.import-filter-foot button.primary{background:var(--os-teal);border-color:var(--os-teal);color:#fff}.import-filter-foot button:hover{filter:brightness(.97)}
 .parcel-hover{position:relative;cursor:help;color:var(--os-navy);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
 .property-snapshot{position:fixed !important;z-index:2147483647;display:none;width:250px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:10px;background:#fff;border:1px solid var(--os-border);border-left:3px solid var(--os-teal);border-radius:8px;box-shadow:0 14px 32px rgba(4,44,83,.2);pointer-events:none}
 .property-snapshot.visible{display:block}
 .property-snapshot h4{margin:0 0 7px;color:var(--os-navy);font-family:"DM Sans",Inter,sans-serif;font-size:13px}
 .snapshot-table{width:100%;min-width:0;border-collapse:collapse;border-spacing:0;font-size:11px;line-height:1.25;table-layout:fixed}.snapshot-table th,.snapshot-table td{position:static;top:auto;z-index:auto;padding:4px 0;border:0;border-bottom:1px solid #edf0f3;background:transparent;text-align:left;text-transform:none;vertical-align:top}.snapshot-table th{width:43%;color:var(--os-muted);font-weight:600}.snapshot-table td{text-align:right;color:var(--os-ink);font-weight:600;overflow-wrap:anywhere}
 @media(max-width:700px){.imagery-compare-body{grid-template-columns:1fr;grid-template-rows:1fr 1fr}.imagery-pane{border-right:0;border-bottom:1px solid #d8dde3}.imagery-pane:last-child{border-bottom:0}}
+@media(max-width:650px){.import-filter-body{grid-template-columns:1fr}.import-filter-options{max-height:220px}}
 
 </style>
 </head>
@@ -342,10 +343,10 @@ textarea{
           <div class="step-number">1</div>
           <div class="step-content">
             <b>Load annual assignment</b>
-            <div class="help">Start here. Parcel polygons load automatically after the CSV is imported.</div>
+            <div class="help">Start here. Parcel polygons load automatically after the assignment is imported.</div>
             <label class="file-label primary step-action">
-              Import Assignment CSV
-              <input id="assignmentFile" type="file" accept=".csv,text/csv">
+              Import Assignment CSV or XLSX
+              <input id="assignmentFile" type="file" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
             </label>
           </div>
         </div>
@@ -393,6 +394,7 @@ textarea{
             <input id="backupFile" type="file" accept=".json,application/json">
           </label>
           <button class="btn" id="exportProgress">Export Progress CSV</button>
+          <button class="btn" id="streetSmartSettings" type="button">StreetSmart save settings</button>
           <button class="btn danger" id="resetWorkspace">Reset Local Workspace</button>
         </div>
       </details>
@@ -402,29 +404,23 @@ textarea{
 
 <section id="preinspectionView" class="view">
   <div class="pre-wrap">
-    <div class="pre-toolbar simple">
+    <div class="pre-toolbar simple pre-toolset">
       <div class="workspace-controls" id="workspaceControls">
         <label class="workspace-selector-label" for="workspaceSelect">Workspace</label>
         <select id="workspaceSelect" aria-label="Preinspection workspace"></select>
-        <button class="workspace-button" id="newWorkspace" type="button">New</button>
-        <button class="workspace-button" id="renameWorkspace" type="button">Rename</button>
-        <button class="workspace-button" id="deleteWorkspace" type="button">Delete</button>
-        <button class="workspace-button" id="importWorkspace" type="button">Import backup</button>
+        <button class="workspace-button" id="newWorkspace" type="button" title="Create workspace"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span><span class="workspace-button-label">New</span></button>
+        <button class="workspace-button" id="renameWorkspace" type="button" title="Rename workspace"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 16 9.5-9.5 4 4L8 20H4zM14 6l2-2 4 4-2 2"/></svg></span><span class="workspace-button-label">Rename</span></button>
+        <button class="workspace-button" id="deleteWorkspace" type="button" title="Delete workspace"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg></span><span class="workspace-button-label">Delete</span></button>
+        <button class="workspace-button" id="importWorkspace" type="button" title="Import workspace backup"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12M8 11l4 4 4-4M5 20h14"/></svg></span><span class="workspace-button-label">Import</span></button>
         <input id="workspaceBackupFile" type="file" accept=".json,application/json" hidden>
         <span id="workspaceSaveStatus" class="workspace-save-status" role="status">Loading…</span>
       </div>
-      <select id="preRouteFilter">
-        <option value="">All routes</option>
-      </select>
-      <input id="preSearch" type="text" placeholder="Search parcel or address">
-      <select id="preShowFilter" aria-label="Show parcels">
-        <option value="all">All parcels</option>
-        <option value="incomplete">Incomplete only</option>
-        <option value="changes">Changes only</option>
-      </select>
-      <span class="pill" id="preSummary">0 parcels</span>
-      <span class="pill progress-pill" id="preProgress">0 / 0 complete</span>
-      <span class="pill field-pill" id="fieldSheetCount">0 field sheets</span>
+      <div class="pre-filter-group">
+        <select id="preRouteFilter" aria-label="Filter by route"><option value="">All routes</option></select>
+        <div class="pre-search-wrap"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="preSearch" type="text" placeholder="Search parcel or address" aria-label="Search parcel or address"></div>
+        <select id="preShowFilter" aria-label="Show parcels"><option value="all">All parcels</option><option value="incomplete">Incomplete only</option><option value="changes">Changes only</option></select>
+      </div>
+      <div class="pre-tool-status"><span class="pill" id="preSummary">0 parcels</span><span class="pill progress-pill" id="preProgress">0 / 0 complete</span><span class="pill field-pill" id="fieldSheetCount">0 field sheets</span></div>
     </div>
 
     <div class="table-wrap">
@@ -435,14 +431,13 @@ textarea{
             <th class="left">Address</th>
             <th>Photo</th>
             <th>Aerial</th>
-            <th>Street View</th>
             <th>Listing</th>
             <th>Changes</th>
             <th class="left">Notes</th>
           </tr>
         </thead>
         <tbody id="preBody">
-          <tr><td colspan="8" class="empty">Assign parcels to a route first.</td></tr>
+          <tr><td colspan="7" class="empty">Assign parcels to a route first.</td></tr>
         </tbody>
       </table>
     </div>
@@ -473,6 +468,7 @@ textarea{
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.18.0/dist/leaflet-geoman.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/turf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 <script>
 (() => {
@@ -480,7 +476,7 @@ textarea{
 
 const FEATURE_URL = "https://gis.skagitcountywa.gov/arcgis/rest/services/OpenData/AssessorDataParcels/FeatureServer/0/query";
 const STARTER_ASSIGNMENT = [];
-const CHECKS = ["aerial","streetView","listing"];
+const CHECKS = ["aerial","listing"];
 const STORAGE_KEY = "skagit-preinspection-workspace-v1";
 const USER_CACHE_KEY = `skagit-preinspection-cache-user-${document.body.dataset.workspaceUserId || "unknown"}`;
 const WORKSPACE_API = "/routing/api/workspaces/";
@@ -503,6 +499,7 @@ let map, parcelLayer, drawLayer, fieldRouteMap, fieldRouteLayer;
 let selected = new Set();
 let parcelLayersById = new Map();
 let imageryCleanup = null;
+let streetsmartCleanup = null;
 let workspaceId = null;
 let workspaceRevision = null;
 let workspaceReady = false;
@@ -552,6 +549,31 @@ function workspaceStatus(text,kind=""){
   el.textContent=text;
   el.classList.toggle("is-error",kind==="error");
   el.classList.toggle("is-saved",kind==="saved");
+}
+
+async function openStreetSmartSettings(){
+  const modal=document.createElement("div");
+  modal.className="routing-settings-modal";
+  modal.innerHTML=`<section class="routing-settings-card" role="dialog" aria-modal="true" aria-labelledby="routing-settings-title"><div class="routing-settings-head"><b id="routing-settings-title">StreetSmart save settings</b><button type="button" id="routingSettingsClose" aria-label="Close settings">×</button></div><div class="routing-settings-body"><label for="streetSmartImageRoot">Image save directory</label><input id="streetSmartImageRoot" type="text" placeholder="\\\\server\\share\\OpenSkagit\\StreetSmart"><p>The local Django process must be able to write to this directory. Use a Windows local path or UNC network path. This setting is saved to your user account.</p></div><div class="routing-settings-foot"><button type="button" id="routingSettingsCancel">Cancel</button><button type="button" class="primary" id="routingSettingsSave">Save setting</button></div></section>`;
+  document.body.appendChild(modal);
+  const input=modal.querySelector("#streetSmartImageRoot");
+  const close=()=>modal.remove();
+  modal.querySelector("#routingSettingsClose").addEventListener("click",close);
+  modal.querySelector("#routingSettingsCancel").addEventListener("click",close);
+  modal.addEventListener("click",event=>{if(event.target===modal)close();});
+  try{
+    const payload=await workspaceRequest("/routing/api/settings/");
+    input.value=payload.streetsmart_image_root || "";
+  }catch(error){workspaceStatus(error.message || "Settings could not be loaded","error");close();return;}
+  modal.querySelector("#routingSettingsSave").addEventListener("click",async()=>{
+    const button=modal.querySelector("#routingSettingsSave");
+    button.disabled=true;
+    try{
+      await workspaceRequest("/routing/api/settings/",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({streetsmart_image_root:input.value.trim()})});
+      workspaceStatus("StreetSmart save directory saved","saved");
+      close();
+    }catch(error){workspaceStatus(error.message || "Settings could not be saved","error");button.disabled=false;}
+  });
 }
 
 function cacheState(){try{localStorage.setItem(USER_CACHE_KEY,JSON.stringify(state));}catch(e){}}
@@ -633,7 +655,7 @@ function refreshWorkspaceUI(){
   updateMapMessage();
   refreshSetupVisibility();
   if(state.assignment.length && !state.parcelGeoJSON) fetchParcelPolygons();
-  refreshRecentSales();
+  // Temporarily paused until sales-cycle checks resume: refreshRecentSales();
 }
 
 async function loadWorkspace(workspace){
@@ -710,7 +732,7 @@ function allAssignedSet(){
 
 function inspection(pid){
   if(!state.inspections[pid]){
-    state.inspections[pid] = {aerial:false,streetView:false,listing:false,changes:"",notes:""};
+    state.inspections[pid] = {aerial:false,listing:false,changes:"",notes:""};
   }
   return state.inspections[pid];
 }
@@ -772,7 +794,7 @@ function fieldParcelRows(name){
 function initFieldRouteMap(){
   if(fieldRouteMap || typeof L==="undefined") return;
   fieldRouteMap=L.map("fieldRouteMap",{preferCanvas:true}).setView([48.42,-122.33],13);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:20,opacity:.62,attribution:"&copy; OpenStreetMap contributors"}).addTo(fieldRouteMap);
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:20,opacity:.62,attribution:"&copy; Esri, HERE, Garmin, Intermap, increment P Corp., GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), (c) OpenStreetMap contributors, and the GIS User Community"}).addTo(fieldRouteMap);
   fieldRouteLayer=L.layerGroup().addTo(fieldRouteMap);
 }
 
@@ -940,6 +962,62 @@ function parseCSV(text){
   return rows;
 }
 
+async function parseAssignmentFile(file){
+  if(/\.xlsx$/i.test(file.name)){
+    if(typeof XLSX === "undefined") throw new Error("The XLSX parser is unavailable. Check your local network connection and reload the page.");
+    const workbook=XLSX.read(await file.arrayBuffer(),{type:"array",cellDates:false});
+    const sheet=workbook.Sheets[workbook.SheetNames[0]];
+    if(!sheet) throw new Error("The XLSX file does not contain a worksheet.");
+    return XLSX.utils.sheet_to_json(sheet,{header:1,defval:"",raw:false});
+  }
+  return parseCSV(await file.text());
+}
+
+function openImportFilterDialog(rows){
+  const headers=(rows[0]||[]).map(value=>String(value??"").trim());
+  const idx=name=>headers.findIndex(header=>header.toLowerCase()===name.toLowerCase());
+  const fields=[{key:"LandUse",label:"LandUse"},{key:"NeighborCode",label:"Neighborhood code"}];
+  const groups=fields.map(field=>{
+    const column=idx(field.key);
+    const counts=new Map();
+    if(column>=0) rows.slice(1).forEach(row=>{
+      const value=String(row[column]??"").trim();
+      counts.set(value,(counts.get(value)||0)+1);
+    });
+    return {...field,column,values:[...counts.entries()].sort((a,b)=>a[0].localeCompare(b[0],undefined,{numeric:true,sensitivity:"base"}))};
+  });
+  const optionMarkup=group=>group.column<0
+    ? `<div class="import-filter-missing">This column was not found in the file.</div>`
+    : group.values.length
+      ? group.values.map(([value,count],index)=>`<div class="import-filter-option"><input type="checkbox" checked data-import-filter="${group.key}" data-import-filter-index="${index}" id="import-filter-${group.key}-${index}"><label for="import-filter-${group.key}-${index}">${escapeHTML(value||"(blank)")} <small>${count}</small></label></div>`).join("")
+      : `<div class="import-filter-missing">No values found.</div>`;
+  const modal=document.createElement("div");
+  modal.className="import-filter-backdrop";
+  modal.innerHTML=`<section class="import-filter-modal" role="dialog" aria-modal="true" aria-labelledby="import-filter-title"><div class="import-filter-head"><div><h2 id="import-filter-title">Filter assignment before loading</h2><p>All values are selected by default. Uncheck the LandUse or neighborhood codes you do not want to keep.</p></div><button type="button" class="import-filter-close" aria-label="Cancel import">×</button></div><div class="import-filter-body">${groups.map(group=>`<section class="import-filter-group" data-import-filter-group="${group.key}"><div class="import-filter-group-head"><div>${group.label} <span>${group.column<0?"":"("+group.values.length+")"}</span></div><div class="import-filter-actions"><button type="button" data-import-filter-action="all">Keep all</button><button type="button" data-import-filter-action="none">Clear</button></div></div><div class="import-filter-options">${optionMarkup(group)}</div></section>`).join("")}</div><div class="import-filter-foot"><button type="button" class="import-filter-cancel">Cancel</button><button type="button" class="primary import-filter-apply">Load selected parcels</button></div></section>`;
+  document.body.appendChild(modal);
+  return new Promise(resolve=>{
+    let settled=false;
+    const finish=value=>{if(settled)return;settled=true;modal.remove();resolve(value);};
+    modal.querySelectorAll("[data-import-filter-action]").forEach(button=>button.addEventListener("click",()=>{
+      const group=button.closest("[data-import-filter-group]");
+      group.querySelectorAll("input[data-import-filter]").forEach(input=>{input.checked=button.dataset.importFilterAction==="all";});
+    }));
+    modal.querySelector(".import-filter-apply").addEventListener("click",()=>{
+      const selected={};
+      groups.forEach(group=>{
+        if(group.column<0)return;
+        selected[group.key]=new Set([...modal.querySelectorAll(`input[data-import-filter="${group.key}"]:checked`)].map(input=>group.values[Number(input.dataset.importFilterIndex)]?.[0]??""));
+      });
+      const filtered=rows.filter((row,rowIndex)=>{
+        if(rowIndex===0)return true;
+        return groups.every(group=>group.column<0 || selected[group.key].has(String(row[group.column]??"").trim()));
+      });
+      finish(filtered);
+    });
+    modal.querySelectorAll(".import-filter-cancel,.import-filter-close").forEach(button=>button.addEventListener("click",()=>finish(null)));
+  });
+}
+
 function normalizeAssignment(rows){
   if(!rows.length) return [];
   const headers=rows[0].map(h=>h.trim());
@@ -972,10 +1050,10 @@ function normalizeAssignment(rows){
 
 function initMap(){
   map = L.map("map", {preferCanvas:true}).setView([48.42,-122.33], 13);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
     maxZoom:20,
     opacity:0.62,
-    attribution:'&copy; OpenStreetMap contributors'
+    attribution:'&copy; Esri, HERE, Garmin, Intermap, increment P Corp., GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), (c) OpenStreetMap contributors, and the GIS User Community'
   }).addTo(map);
 
   parcelLayer = L.geoJSON(null,{
@@ -1409,45 +1487,269 @@ function skagitPhotoImageUrl(pid){
   return "https://www.skagitcounty.net/Assessor/Images/Photos/" + folder + "/" + encodeURIComponent(pid) + ".jpg";
 }
 
-function openPhotoPreview(pid, anchor){
-  closePhotoPreview({quiet:true});
-  setActiveParcel(pid);
-  paintActiveParcelInDom(pid);
-
-  const box=document.createElement("div");
-  box.id="photoPreview";
-  box.className="photo-preview";
-  box.dataset.pid=pid;
-
-  const title=document.createElement("div");
-  title.className="photo-preview-head";
-  title.innerHTML=`<b>${escapeHTML(pid)}</b><button type="button" id="photoClose">×</button>`;
-  box.appendChild(title);
-
-  const image=document.createElement("img");
-  image.src=skagitPhotoImageUrl(pid);
-  image.alt=`Skagit County property photo ${pid}`;
-  image.draggable=false;
-  box.appendChild(image);
-
-  document.body.appendChild(box);
-  let scale=1;
-  image.addEventListener("wheel",e=>{
-    e.preventDefault();
-    scale=Math.max(1,Math.min(4,scale+(e.deltaY<0?.2:-.2)));
-    image.style.transform=`scale(${scale})`;
-  },{passive:false});
-  image.addEventListener("dblclick",e=>{e.preventDefault();scale=scale===1?2:1;image.style.transform=`scale(${scale})`;});
-  image.addEventListener("error",()=>{image.alt="Photo unavailable";});
-  document.getElementById("photoClose").addEventListener("click",()=>closePhotoPreview());
-  box.addEventListener("click",e=>{if(e.target===box)closePhotoPreview();});
+let streetSmartSdkPromise=null;
+function loadStreetSmartSdk(){
+  if(window.StreetSmartApi)return Promise.resolve(window.StreetSmartApi);
+  if(streetSmartSdkPromise)return streetSmartSdkPromise;
+  const scripts=[
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js",
+    "https://streetsmart.cyclomedia.com/api/v26.1/StreetSmartApi.js"
+  ];
+  const loadScript=src=>new Promise((resolve,reject)=>{
+    const script=document.createElement("script");
+    script.src=src;
+    // Fetch dependencies concurrently, but preserve React -> ReactDOM -> SDK execution order.
+    script.async=false;
+    script.onload=resolve;
+    script.onerror=()=>reject(new Error("StreetSmart viewer library failed to load."));
+    document.head.appendChild(script);
+  });
+  streetSmartSdkPromise=(async()=>{
+    await Promise.all(scripts.map(loadScript));
+    if(!window.StreetSmartApi)throw new Error("StreetSmart viewer library did not initialize.");
+    return window.StreetSmartApi;
+  })().catch(error=>{streetSmartSdkPromise=null;throw error;});
+  return streetSmartSdkPromise;
 }
 
-function closePhotoPreview(options={}){
-  const box=document.getElementById("photoPreview");
-  const pid=box?.dataset.pid;
-  box?.remove();
-  if(pid && !options.quiet) setActiveParcel(pid,{render:true,scroll:true,pulse:true});
+function warmStreetSmartSdkWhenIdle(){
+  const warm=()=>loadStreetSmartSdk().catch(error=>console.warn("StreetSmart SDK warm-up failed:",error.message));
+  if("requestIdleCallback" in window)window.requestIdleCallback(warm,{timeout:2500});
+  else window.setTimeout(warm,1200);
+}
+warmStreetSmartSdkWhenIdle();
+
+function closeStreetSmartCompare(options={}){
+  if(streetsmartCleanup){
+    const cleanup=streetsmartCleanup;
+    streetsmartCleanup=null;
+    cleanup(options);
+  }else{
+    document.getElementById("streetsmartCompare")?.remove();
+  }
+}
+
+async function openStreetSmartCompare(pid){
+  closeStreetSmartCompare({quiet:true});
+  setActiveParcel(pid);
+  paintActiveParcelInDom(pid);
+  const assignment=assignmentMap().get(pid) || {};
+  const modal=document.createElement("div");
+  modal.id="streetsmartCompare";
+  modal.className="streetsmart-compare";
+  modal.innerHTML=`<div class="streetsmart-head"><b>${escapeHTML(pid)} · image review</b><div class="streetsmart-view-group" aria-label="StreetSmart controls"><button type="button" data-streetsmart-step="-1" disabled title="Move to previous StreetSmart capture">‹ Previous</button><button type="button" data-streetsmart-step="1" disabled title="Move to next StreetSmart capture">Next ›</button><button type="button" data-streetsmart-view="zoom-out" disabled title="Zoom out">−</button><span class="streetsmart-view-label" id="streetsmartViewLabel">90°</span><button type="button" data-streetsmart-view="zoom-in" disabled title="Zoom in">+</button></div><button type="button" class="primary" id="streetsmartSave" disabled>Save StreetSmart JPG</button><button type="button" class="close" id="streetsmartClose" aria-label="Close StreetSmart comparison">×</button></div><div class="streetsmart-meta"><span id="streetsmartRecordingMeta">StreetSmart imagery will load here.</span><span id="streetsmartViewMeta">Drag to look around · scroll to zoom · Previous/Next moves between nearby captures</span><span class="streetsmart-status" id="streetsmartStatus" role="status"></span></div><div class="streetsmart-notes"><label for="streetsmartNotes">Notes</label><input id="streetsmartNotes" type="text" value="${escapeAttr(inspection(pid).notes||"")}" placeholder="Quick observation…" autocomplete="off"></div><div class="streetsmart-body"><section class="streetsmart-pane"><h3>Assessor static image</h3><div class="streetsmart-image-wrap"><img src="${escapeAttr(skagitPhotoImageUrl(pid))}" alt="Skagit County property photo ${escapeAttr(pid)}"></div></section><section class="streetsmart-pane"><h3>StreetSmart interactive panorama</h3><div class="streetsmart-image-wrap"><div class="streetsmart-viewer-mount" id="streetsmartViewer"></div><div class="streetsmart-loading-indicator" id="streetsmartLoadingIndicator" role="status"><span class="streetsmart-spinner" aria-hidden="true"></span><span>Loading StreetSmart viewer…</span></div><div class="streetsmart-placeholder" id="streetsmartPlaceholder">Connecting to StreetSmart…</div></div></section></div>`;
+  document.body.appendChild(modal);
+  const viewerMount=document.getElementById("streetsmartViewer");
+  const placeholder=document.getElementById("streetsmartPlaceholder");
+  const loadingIndicator=document.getElementById("streetsmartLoadingIndicator");
+  const status=document.getElementById("streetsmartStatus");
+  const recordingMeta=document.getElementById("streetsmartRecordingMeta");
+  const viewMeta=document.getElementById("streetsmartViewMeta");
+  const viewLabel=document.getElementById("streetsmartViewLabel");
+  const saveButton=document.getElementById("streetsmartSave");
+  const captureButtons=[...modal.querySelectorAll("[data-streetsmart-step]")];
+  const viewButtons=[...modal.querySelectorAll("[data-streetsmart-view]")];
+  const notesInput=document.getElementById("streetsmartNotes");
+  let recordingId="";
+  let recordingDate="";
+  let yaw=0;
+  let pitch=0;
+  let hfov=90;
+  let srs="2926";
+  let viewer=null;
+  let viewerConfig=null;
+  let viewerReady=false;
+  let closed=false;
+
+  const setStatus=(message,error=false)=>{status.textContent=message;status.style.color=error?"var(--red-text)":"var(--muted)";};
+  const getCurrentRecording=()=>viewer?.getRecording?.() || {};
+  const getCurrentOrientation=()=>viewer?.getOrientation?.() || {yaw,pitch,hFov:hfov};
+  const readRecordingId=recording=>String(recording?.imageId||recording?.imageID||recording?.imageid||recording?.image_id||recording?.ImageId||recording?.ImageID||recording?.recordingId||recording?.RecordingId||recording?.recording_id||recording?.id||recording?.getImageId?.()||"");
+  const updateRecordingMeta=recordingOverride=>{
+    if(!viewer)return;
+    const recording=recordingOverride||getCurrentRecording();
+    const nextRecordingId=readRecordingId(recording);
+    if(nextRecordingId)recordingId=nextRecordingId;
+    recordingDate=recording?.recordedAt||recording?.recordingDate||recording?.recording_date||recording?.date||recordingDate;
+    recordingMeta.textContent=recordingId?`Recording ${recordingId}${recordingDate?` · ${recordingDate}`:""}`:"StreetSmart panorama loaded";
+    saveButton.disabled=!viewerReady || !recordingId;
+  };
+  const updateViewerOrientation=()=>{
+    if(!viewer)return;
+    const orientation=getCurrentOrientation();
+    yaw=Number(orientation.yaw)||0;
+    pitch=Number(orientation.pitch)||0;
+    hfov=Number(orientation.hFov ?? orientation.hfov)||90;
+    updateViewMeta();
+  };
+  const updateViewMeta=()=>{
+    viewLabel.textContent=`${Math.round(hfov)}°`;
+    viewMeta.textContent="Drag image left/right to look around · scroll to zoom";
+  };
+  const setViewControlsEnabled=enabled=>[...viewButtons,...captureButtons].forEach(button=>button.disabled=!enabled);
+  const activateViewerForCaptureNavigation=()=>{
+    // StreetSmart only processes its documented arrow-key navigation shortcut
+    // while the pointer is over its interaction catcher. The toolbar sits
+    // outside that surface, so re-activate the viewer before forwarding keys.
+    const surface=viewerMount.querySelector("canvas, .ol-viewport, [role='application']")||viewerMount.firstElementChild||viewerMount;
+    surface.dispatchEvent(new MouseEvent("mouseover",{bubbles:true,clientX:Math.round(surface.getBoundingClientRect().left+surface.getBoundingClientRect().width/2),clientY:Math.round(surface.getBoundingClientRect().top+surface.getBoundingClientRect().height/2)}));
+  };
+  const dispatchCaptureNavigationKey=keyCode=>{
+    const key=keyCode===37?"ArrowLeft":"ArrowRight";
+    const event=new KeyboardEvent("keydown",{key,code:key,keyCode,which:keyCode,bubbles:true,cancelable:true});
+    // Chromium may expose keyCode as read-only/zero for constructed events.
+    try{Object.defineProperty(event,"keyCode",{get:()=>keyCode});}catch{}
+    try{Object.defineProperty(event,"which",{get:()=>keyCode});}catch{}
+    document.dispatchEvent(event);
+  };
+  captureButtons.forEach(button=>button.addEventListener("click",()=>{
+    if(!viewer)return;
+    const direction=Number(button.dataset.streetsmartStep);
+    const keyCode=direction<0?37:39;
+    activateViewerForCaptureNavigation();
+    dispatchCaptureNavigationKey(keyCode);
+  }));
+  viewButtons.forEach(button=>button.addEventListener("click",()=>{
+    if(!viewer)return;
+    const action=button.dataset.streetsmartView;
+    if(action==="zoom-in")viewer.zoomIn();
+    if(action==="zoom-out")viewer.zoomOut();
+  }));
+  saveButton.addEventListener("click",async()=>{
+    if(!viewerReady || !recordingId)return;
+    saveButton.disabled=true;
+    setStatus("Saving high-resolution JPG…");
+    try{
+      const orientation=getCurrentOrientation();
+      const response=await fetch(`/routing/parcel/${encodeURIComponent(pid)}/streetsmart/save/`,{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-CSRFToken":csrf()},body:JSON.stringify({recording_id:recordingId,yaw:Number(orientation.yaw)||yaw,pitch:Number(orientation.pitch)||pitch,hfov:Number(orientation.hFov ?? orientation.hfov)||hfov,srs})});
+      const payload=await response.json();
+      if(!response.ok || !payload.saved)throw new Error(payload.error || "The StreetSmart image could not be saved.");
+      setStatus(`Saved ${payload.filename}`);
+    }catch(error){setStatus(error.message || "Save failed",true);}
+    saveButton.disabled=!viewerReady || !recordingId;
+  });
+  const close=options=>{
+    if(closed)return;
+    closed=true;
+    if(streetsmartCleanup===close)streetsmartCleanup=null;
+    saveInspectionNotes(pid,notesInput.value);
+    if(viewer){
+      try{window.StreetSmartApi?.closeViewer?.(viewer.getId?.());}catch(error){}
+    }
+    try{window.StreetSmartApi?.destroy?.({targetElement:viewerMount,loginOauth:false});}catch(error){}
+    document.removeEventListener("keydown",onKey);
+    modal.remove();
+    renderPreinspection();
+    if(!options?.quiet)requestAnimationFrame(()=>restoreActiveParcel({pulse:true}));
+  };
+  const onKey=event=>{if(event.key==="Escape")close({});};
+  notesInput.addEventListener("input",()=>saveInspectionNotes(pid,notesInput.value));
+  notesInput.addEventListener("change",()=>saveInspectionNotes(pid,notesInput.value));
+  document.getElementById("streetsmartClose").addEventListener("click",()=>close({}));
+  document.addEventListener("keydown",onKey);
+  streetsmartCleanup=close;
+
+  const startedAt=performance.now();
+  const timings={};
+  let timingReported=false;
+  let viewLoadReported=false;
+  const reportReady=()=>{
+    if(timingReported)return;
+    timingReported=true;
+    const totalMs=Math.round(performance.now()-startedAt);
+    console.info("[StreetSmart load timing]",{parcel_id:pid,...timings,time_to_ready_ms:totalMs});
+    setStatus(`Ready · ${(totalMs/1000).toFixed(1)}s`);
+  };
+  const query=new URLSearchParams();
+  if(String(assignment.XCoordinate||"").trim() && String(assignment.YCoordinate||"").trim()){
+    query.set("x",String(assignment.XCoordinate).trim());
+    query.set("y",String(assignment.YCoordinate).trim());
+  }
+  try{
+    setStatus("Starting StreetSmart viewer…");
+    const configStartedAt=performance.now();
+    const sdkStartedAt=performance.now();
+    const configPromise=fetch(`/routing/parcel/${encodeURIComponent(pid)}/streetsmart/?${query}`,{credentials:"same-origin"})
+      .then(async response=>({response,payload:await response.json()}))
+      .then(({response,payload})=>{
+        timings.parcel_config_ms=Math.round(performance.now()-configStartedAt);
+        if(!response.ok || !payload.available)throw new Error(payload.error || "No StreetSmart imagery is available.");
+        return payload;
+      });
+    const sdkPromise=loadStreetSmartSdk().then(api=>{
+      timings.sdk_load_ms=Math.round(performance.now()-sdkStartedAt);
+      return api;
+    });
+    const [payload,api]=await Promise.all([configPromise,sdkPromise]);
+    viewerConfig=payload.viewer_config||null;
+    srs=String(payload.srs || "2926");
+    if(!payload.viewer_config?.api_key || !payload.viewer_config?.username || !payload.viewer_config?.password)throw new Error("StreetSmart API key and Basic-auth credentials are not configured.");
+    if(closed)return;
+    const spatialReference=`EPSG:${srs.replace(/^EPSG:/i,"")}`;
+    const initStartedAt=performance.now();
+    await api.init({targetElement:viewerMount,username:payload.viewer_config.username,password:payload.viewer_config.password,loginOauth:false,apiKey:payload.viewer_config.api_key,srs:spatialReference,locale:"en-US"});
+    timings.init_ms=Math.round(performance.now()-initStartedAt);
+    const captureNavigationShortcut=api.ShortCuts?.ShortcutNames?.movePanoramaWithArrowKeys;
+    if(captureNavigationShortcut)api.ShortCuts?.enableShortcut?.(captureNavigationShortcut);
+    if(closed){try{api.destroy?.({targetElement:viewerMount,loginOauth:false});}catch(error){}return;}
+    setStatus("Opening parcel panorama…");
+    const openStartedAt=performance.now();
+    const opened=await api.open({coordinate:[Number(payload.x),Number(payload.y)]},{viewerType:[api.ViewerType.PANORAMA],srs:spatialReference,panoramaViewer:{closable:false,maximizable:false,replace:true,recordingsVisible:true,timeTravelVisible:true,navbarVisible:false}});
+    timings.open_ms=Math.round(performance.now()-openStartedAt);
+    if(closed){try{api.destroy?.({targetElement:viewerMount,loginOauth:false});}catch(error){}return;}
+    viewer=Array.isArray(opened)?opened[0]:opened;
+    if(!viewer)throw new Error("StreetSmart did not return a panorama viewer for this location.");
+    viewer.lookAtCoordinate?.([Number(payload.x),Number(payload.y)],spatialReference);
+    const events=api.Events?.panoramaViewer||{};
+    if(events.VIEW_CHANGE)viewer.on?.(events.VIEW_CHANGE,updateViewerOrientation);
+    if(events.IMAGE_CHANGE)viewer.on?.(events.IMAGE_CHANGE,updateRecordingMeta);
+    if(events.RECORDING_LOADED)viewer.on?.(events.RECORDING_LOADED,event=>{
+      const loadedRecording=event?.detail?.recording;
+      updateRecordingMeta(loadedRecording);
+    });
+    if(events.VIEW_LOAD_END)viewer.on?.(events.VIEW_LOAD_END,()=>{
+      loadingIndicator.hidden=true;
+      if(!viewLoadReported){
+        viewLoadReported=true;
+        timings.view_load_end_ms=Math.round(performance.now()-startedAt);
+        console.info("[StreetSmart image timing]",{parcel_id:pid,...timings});
+      }
+      if(recordingId)reportReady();
+    });
+    viewerReady=true;
+    setViewControlsEnabled(true);
+    placeholder.hidden=true;
+    updateRecordingMeta();
+    updateViewerOrientation();
+    setStatus(recordingId?`Viewer opened · ${((performance.now()-startedAt)/1000).toFixed(1)}s`:"Loading panorama…");
+    if(recordingId){loadingIndicator.hidden=true;reportReady();}
+    else{
+      let attempts=0;
+      const recordingPoll=setInterval(()=>{
+        if(closed || recordingId || ++attempts>=100){
+          clearInterval(recordingPoll);
+          if(!closed){
+            updateRecordingMeta();
+            loadingIndicator.hidden=true;
+            if(recordingId)reportReady();
+            else setStatus("Panorama loaded, but recording details are unavailable. Saving is disabled.",true);
+          }
+          return;
+        }
+        updateRecordingMeta();
+        if(recordingId){clearInterval(recordingPoll);loadingIndicator.hidden=true;reportReady();}
+      },300);
+    }
+  }catch(error){
+    if(closed)return;
+    let message=String(error.message || "StreetSmart imagery is unavailable.");
+    for(const secret of [viewerConfig?.api_key,viewerConfig?.username,viewerConfig?.password].filter(Boolean))message=message.split(secret).join("[redacted]");
+    placeholder.hidden=false;
+    placeholder.textContent=message;
+    loadingIndicator.hidden=true;
+    setStatus("Unavailable",true);
+  }
 }
 
 function closeImageryCompare(options={}){
@@ -1626,9 +1928,33 @@ function openImageryCompare(pid){
   document.addEventListener("keydown",onKey);
 }
 
-function redfinSearchUrl(a){
-  const address=parcelAddress(a);
-  return "https://www.redfin.com/search?location=" + encodeURIComponent(address || "Skagit County, WA") + "&market=seattle";
+function googleSearchUrl(query){
+  return "https://www.google.com/search?igu=1&q=" + encodeURIComponent(String(query||"Skagit County, WA").trim());
+}
+
+function openGoogleSearchPreview(address,pid){
+  document.getElementById("googleSearchPreview")?.remove();
+  const modal=document.createElement("section");
+  modal.id="googleSearchPreview";
+  modal.className="google-search-modal";
+  modal.setAttribute("role","dialog");
+  modal.setAttribute("aria-modal","true");
+  modal.setAttribute("aria-label",`Google search preview for ${address||pid}`);
+  modal.innerHTML=`<div class="google-search-head"><strong>${escapeHTML(pid)} · Google search</strong><form class="google-search-form" id="googleSearchForm"><input id="googleSearchQuery" type="search" value="${escapeAttr(address||"Skagit County, WA")}" aria-label="Google search query"><button type="submit">Search</button></form><button class="google-search-close" type="button" aria-label="Close Google search preview">×</button></div><iframe class="google-search-frame" id="googleSearchFrame" title="Google search results" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  document.body.appendChild(modal);
+  const input=modal.querySelector("#googleSearchQuery");
+  const frame=modal.querySelector("#googleSearchFrame");
+  const close=()=>{document.removeEventListener("keydown",onKey);modal.remove();};
+  const onKey=event=>{if(event.key==="Escape")close();};
+  modal.querySelector(".google-search-close").addEventListener("click",close);
+  modal.addEventListener("click",event=>{if(event.target===modal)close();});
+  modal.querySelector("#googleSearchForm").addEventListener("submit",event=>{
+    event.preventDefault();
+    frame.src=googleSearchUrl(input.value);
+  });
+  document.addEventListener("keydown",onKey);
+  frame.src=googleSearchUrl(address||"Skagit County, WA");
+  input.focus();
 }
 
 function parcelAddress(a){
@@ -1698,7 +2024,9 @@ function propertySnapshot(pid){
   const a=assignmentMap().get(pid) || {};
   const assessed=moneyValue(a.AssessedValue);
   const building=moneyValue(a.BuildingValue);
-  const land=moneyValue(a.LandValue) ?? (assessed!==null && building!==null ? assessed-building : null);
+  const importedLand=moneyValue(a.LandValue);
+  const derivedLand=assessed!==null && building!==null ? assessed-building : null;
+  const land=importedLand !== null && importedLand > 0 ? importedLand : (derivedLand !== null && derivedLand >= 0 ? derivedLand : importedLand);
   return `<h4>${escapeHTML(pid)}</h4><table class="snapshot-table"><tr><th>Owner</th><td>${escapeHTML(a.OwnerName || "—")}</td></tr><tr><th>Neighborhood</th><td>${escapeHTML(a.NeighborCode || "—")}</td></tr><tr><th>Building value</th><td>${escapeHTML(moneyText(a.BuildingValue))}</td></tr><tr><th>Assessed value</th><td>${escapeHTML(moneyText(a.AssessedValue))}</td></tr><tr><th>Land value</th><td>${escapeHTML(moneyText(land))}</td></tr></table>`;
 }
 
@@ -1743,30 +2071,27 @@ function renderPreinspection(){
         <td><span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span>${sale ? `<span class="recent-sale-badge" title="${escapeAttr(saleTitle)}" aria-label="${escapeAttr(saleTitle)}">$</span>` : ""} <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
         <td><button class="address-copy" type="button" data-copy-address="${escapeAttr(addr)}" aria-label="Copy address: ${escapeAttr(addr)}" title="Click to copy full address">${escapeHTML(addr || "—")}</button></td>
         <td style="text-align:center">
-          <button class="photo-btn photo-action preinspection-action" type="button" data-photo="${escapeAttr(pid)}" title="Preview Skagit County property photo">▣</button>
+          <button class="photo-btn photo-action preinspection-action" type="button" data-photo="${escapeAttr(pid)}" title="Compare assessor photo with StreetSmart" aria-label="Compare assessor photo with StreetSmart">${uiIcon("camera")}</button>
         </td>
         <td style="text-align:center">
-          <button class="photo-btn aerial-action preinspection-action" type="button" data-compare="${escapeAttr(pid)}" title="Compare current and historical aerial imagery">↔</button>
-        </td>
-        <td style="text-align:center">
-          <span class="streetview-icon" title="Street view paused for now" aria-label="Street view paused">⌖</span>
+          <button class="photo-btn aerial-action preinspection-action" type="button" data-compare="${escapeAttr(pid)}" title="Compare current and historical aerial imagery" aria-label="Compare current and historical aerial imagery">${uiIcon("layers")}</button>
         </td>
         <td>
           <div class="listing-cell">
-            <a class="redfin-link" href="${redfinSearchUrl(a)}" target="_blank" rel="noopener noreferrer" title="Open this address on Redfin">R</a>
+            <button class="google-search-btn" type="button" data-google-search="${escapeAttr(addr||"")}" data-google-search-pid="${escapeAttr(pid)}" title="Search this address on Google" aria-label="Search this address on Google">${uiIcon("search")}</button>
           </div>
         </td>
         <td><div class="change-group">
           <button class="change-btn yes changes-action ${s.changes==="yes"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="yes">YES</button>
           <button class="change-btn no changes-action ${s.changes==="no"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="no">NO</button>
         </div></td>
-        <td><div class="notes-cell"><textarea data-pid="${escapeAttr(pid)}" placeholder="Notes">${escapeHTML(s.notes||"")}</textarea><button class="unassign-action" type="button" data-unassign="${escapeAttr(pid)}" title="Remove this parcel from the route">🗑</button></div></td>
+        <td><div class="notes-cell"><textarea data-pid="${escapeAttr(pid)}" placeholder="Notes">${escapeHTML(s.notes||"")}</textarea><button class="unassign-action" type="button" data-unassign="${escapeAttr(pid)}" title="Remove this parcel from the route" aria-label="Remove this parcel from the route">${uiIcon("trash")}</button></div></td>
       `;
     body.appendChild(tr);
   });
 
   if(!rows.length){
-    body.innerHTML='<tr><td colspan="8" class="empty">No parcels match the current route/filter.</td></tr>';
+    body.innerHTML='<tr><td colspan="7" class="empty">No parcels match the current route/filter.</td></tr>';
   }
   document.getElementById("preSummary").textContent=`${rows.length} parcels shown`;
 
@@ -1827,13 +2152,13 @@ function restoreBackup(file){
 }
 
 function exportProgress(){
-  const rows=[["Route","PARCELID","Address","Aerial","StreetView","Listing","Changes","Notes","Complete"]];
+  const rows=[["Route","PARCELID","Address","Aerial","Listing","Changes","Notes","Complete"]];
   Object.keys(state.routes).sort(routeSort).forEach(rt=>{
     walkingOrderForRoute(state.routes[rt].parcels||[]).forEach(a=>{
       const s=inspection(a.PARCELID);
       rows.push([
         rt,a.PARCELID,(a.SitusStNo+" "+a.SitusStName).trim(),
-        s.aerial?"Yes":"",s.streetView?"Yes":"",s.listing?"Yes":"",
+        s.aerial?"Yes":"",s.listing?"Yes":"",
         s.changes==="yes"?"Yes":s.changes==="no"?"No":"",
         s.notes||"",isComplete(a.PARCELID)?"Yes":"No"
       ]);
@@ -1857,6 +2182,16 @@ function escapeHTML(s){
   return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 function escapeAttr(s){return escapeHTML(s)}
+function uiIcon(name){
+  const paths={
+    camera:'<path d="M4 7h3l1.5-2h7L17 7h3v12H4z"/><circle cx="12" cy="13" r="3.5"/>',
+    layers:'<path d="m12 4 8 4-8 4-8-4 8-4Z"/><path d="m4 12 8 4 8-4M4 16l8 4 8-4"/>',
+    external:'<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6H4V5h6"/>',
+    search:'<circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/>',
+    trash:'<path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/>'
+  };
+  return `<svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">${paths[name]||""}</svg>`;
+}
 
 /* Events */
 document.querySelectorAll(".tab").forEach(btn=>{
@@ -1869,18 +2204,17 @@ document.querySelectorAll(".tab").forEach(btn=>{
     document.getElementById("fieldRoutesView").classList.toggle("active",v==="fieldRoutes");
     document.querySelector(".statusbar").style.display = v==="routes" ? "flex" : "none";
     if(v==="routes") setTimeout(()=>map.invalidateSize(),50);
-    if(v==="preinspection") { renderPreinspection(); refreshRecentSales(); }
+    if(v==="preinspection") { renderPreinspection(); /* sales-cycle lookup paused: refreshRecentSales(); */ }
     if(v==="fieldRoutes") { renderFieldRoutes(); setTimeout(()=>fieldRouteMap?.invalidateSize(),50); }
   });
 });
 
 document.getElementById("assignmentFile").addEventListener("change",e=>{
   const file=e.target.files[0]; if(!file)return;
-  const r=new FileReader();
-  r.onload=()=>{
+  parseAssignmentFile(file).then(rows=>openImportFilterDialog(rows)).then(filteredRows=>{
+    if(!filteredRows){e.target.value="";return;}
     try{
-      const rows=parseCSV(r.result);
-      const assignment=normalizeAssignment(rows);
+      const assignment=normalizeAssignment(filteredRows);
       if(!assignment.length) throw new Error("No parcels found.");
       if(state.assignment.length && !confirm("Replace the current assignment? Existing route/inspection data will be kept for matching parcel IDs.")) return;
       state.assignment=assignment;
@@ -1893,11 +2227,10 @@ document.getElementById("assignmentFile").addEventListener("change",e=>{
       persist();
       parcelLayer.clearLayers();
       renderRoutes(); renderPreinspection(); refreshStats(); updateMapMessage();
-      refreshRecentSales();
+      // Temporarily paused until sales-cycle checks resume: refreshRecentSales();
       fetchParcelPolygons();
     }catch(err){ alert(err.message); }
-  };
-  r.readAsText(file);
+  }).catch(err=>alert(err.message));
 });
 
 document.getElementById("drawRouteBtn").addEventListener("click",()=>{
@@ -1964,6 +2297,7 @@ document.getElementById("deleteWorkspace").addEventListener("click",async()=>{
 });
 document.getElementById("importWorkspace").addEventListener("click",()=>document.getElementById("workspaceBackupFile").click());
 document.getElementById("workspaceBackupFile").addEventListener("change",e=>{if(e.target.files[0])restoreBackup(e.target.files[0]);e.target.value="";});
+document.getElementById("streetSmartSettings").addEventListener("click",openStreetSmartSettings);
 
 document.getElementById("fieldRouteSelect").addEventListener("change",e=>{
   state.activeFieldRoute=e.target.value;
@@ -2103,6 +2437,11 @@ document.getElementById("preBody").addEventListener("click",e=>{
 
   const btn=e.target.closest("button"); if(!btn)return;
 
+  if(btn.dataset.googleSearchPid){
+    openGoogleSearchPreview(btn.dataset.googleSearch,btn.dataset.googleSearchPid);
+    return;
+  }
+
   if(btn.dataset.copyAddress){
     copyAddress(btn,btn.dataset.copyAddress);
     if(row) requestAnimationFrame(()=>restoreActiveParcel({pulse:true}));
@@ -2120,7 +2459,7 @@ document.getElementById("preBody").addEventListener("click",e=>{
   }
 
   if(btn.dataset.photo){
-    openPhotoPreview(btn.dataset.photo, btn);
+    openStreetSmartCompare(btn.dataset.photo);
     return;
   }
 
@@ -2139,19 +2478,6 @@ document.getElementById("preBody").addEventListener("click",e=>{
   refreshParcelStyles();
   if(shouldAdvance) advanceActiveParcelFrom(pid);
   else setActiveParcel(pid,{render:true,scroll:true,pulse:true});
-});
-
-let photoHoverTimer=null;
-document.getElementById("preBody").addEventListener("mouseover",e=>{
-  const btn=e.target.closest("[data-photo]");
-  if(!btn) return;
-  clearTimeout(photoHoverTimer);
-  photoHoverTimer=setTimeout(()=>openPhotoPreview(btn.dataset.photo,btn),350);
-});
-document.getElementById("preBody").addEventListener("mouseout",e=>{
-  const btn=e.target.closest("[data-photo]");
-  if(!btn) return;
-  clearTimeout(photoHoverTimer);
 });
 
 document.getElementById("preBody").addEventListener("input",e=>{

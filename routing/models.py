@@ -17,6 +17,12 @@ class PreinspectionWorkspace(models.Model):
         indexes = [models.Index(fields=["owner", "updated_at"])]
 
 
+class RoutingUserSettings(models.Model):
+    owner = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="routing_settings")
+    streetsmart_image_root = models.CharField(max_length=1024, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
 class RoutingImport(models.Model):
     filename = models.CharField(max_length=255)
     file_type = models.CharField(max_length=16)

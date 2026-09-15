@@ -1,12 +1,128 @@
 from pathlib import Path
+import json
 from types import SimpleNamespace
+from unittest.mock import Mock, patch
 
 from django.contrib.auth import get_user_model
-from django.test import Client, TestCase
+from django.db import InterfaceError
+from django.test import Client, RequestFactory, SimpleTestCase, TestCase
 
 from .models import PreinspectionWorkspace
 from .services.importers import infer_street_side, normalize_row, read_upload
 from .services.optimization import cluster_and_order
+from .services.streetsmart import (
+    StreetSmartConfigurationError,
+    list_recordings,
+    render_by_location,
+    render_recording,
+    safe_parcel_filename,
+    save_jpg,
+)
+
+
+class StreetSmartServiceTests(SimpleTestCase):
+    @patch("routing.views.connection.cursor", side_effect=InterfaceError("database connection unavailable"))
+    def test_sales_cycle_database_interface_failure_is_degraded_not_internal_error(self, cursor):
+        request = RequestFactory().get("/routing/sales-cycle/", {"parcel_id": "P2492"})
+        request.user = SimpleNamespace(is_authenticated=True, is_active=True)
+
+        from .views import sales_cycle
+
+        response = sales_cycle(request)
+        self.assertEqual(response.status_code, 503)
+        self.assertIn(b"temporarily unavailable", response.content)
+
+    @patch("routing.views._street_smart_coordinates", return_value=(1288931.1, 518163.8, "2926"))
+    @patch("routing.views.get_streetsmart_config")
+    def test_interactive_viewer_config_uses_basic_auth_without_client_id(self, get_config, coordinates):
+        get_config.return_value = SimpleNamespace(
+            api_configured=True,
+            api_key="test-api-key",
+            username="test-user",
+            password="test-password",
+        )
+        request = RequestFactory().get("/routing/parcel/P123/streetsmart/")
+        request.user = SimpleNamespace(is_authenticated=True, is_active=True)
+
+        from .views import parcel_streetsmart
+
+        response = parcel_streetsmart(request, "P123")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Cache-Control"], "no-store, private")
+        viewer_config = json.loads(response.content)["viewer_config"]
+        self.assertEqual(viewer_config, {
+            "api_key": "test-api-key",
+            "username": "test-user",
+            "password": "test-password",
+        })
+        self.assertNotIn("client_id", viewer_config)
+
+    @patch.dict("os.environ", {
+        "CYCLOMEDIA_API_KEY": "key",
+        "CYCLOMEDIA_USERNAME": "user",
+        "CYCLOMEDIA_PASSWORD": "password",
+    }, clear=False)
+    @patch("routing.services.streetsmart.requests.request")
+    def test_lists_recordings_and_parses_viewing_direction(self, request):
+        request.return_value = Mock(
+            ok=True,
+            content=b'<imagedirection_list><imagedirection recording-id="ABC123" recording-date="2026-01-02" viewing-direction="145.5" /></imagedirection_list>',
+        )
+        recordings = list_recordings(1288931.1, 518163.8, include_historic=True)
+        self.assertEqual(recordings[0]["recording_id"], "ABC123")
+        self.assertEqual(recordings[0]["viewing_direction"], 145.5)
+        self.assertIn("ListByLocation2D/2926/1288931.1/518163.8/", request.call_args.args[1])
+        self.assertEqual(request.call_args.kwargs["params"]["apiKey"], "key")
+        self.assertEqual(request.call_args.kwargs["params"]["IncludeHistoricRecordings"], "true")
+        self.assertEqual(request.call_args.kwargs["auth"], ("user", "password"))
+
+    @patch.dict("os.environ", {
+        "CYCLOMEDIA_API_KEY": "key",
+        "CYCLOMEDIA_USERNAME": "user",
+        "CYCLOMEDIA_PASSWORD": "password",
+    }, clear=False)
+    @patch("routing.services.streetsmart.requests.request")
+    def test_renders_jpg_with_requested_yaw(self, request):
+        request.return_value = Mock(ok=True, content=b"\xff\xd8street-smart-jpg", headers={"Recording-Id": "ABC123"})
+        rendered = render_recording("ABC123", yaw=180, pitch=-10, hfov=45, width=2048, height=1536, srs_name="EPSG:2926")
+        self.assertEqual(rendered["content"], b"\xff\xd8street-smart-jpg")
+        params = request.call_args.kwargs["params"]
+        self.assertEqual(params["yaw"], 180.0)
+        self.assertEqual(params["pitch"], -10.0)
+        self.assertEqual(params["hfov"], 45.0)
+        self.assertEqual(params["width"], 2048)
+        self.assertEqual(params["height"], 1536)
+        self.assertEqual(params["srsName"], "EPSG:2926")
+
+    @patch.dict("os.environ", {
+        "CYCLOMEDIA_API_KEY": "key",
+        "CYCLOMEDIA_USERNAME": "user",
+        "CYCLOMEDIA_PASSWORD": "password",
+    }, clear=False)
+    @patch("routing.services.streetsmart.requests.request")
+    def test_renders_by_location_and_uses_alternate_view_index(self, request):
+        request.return_value = Mock(
+            ok=True,
+            content=b"\xff\xd8street-smart-jpg",
+            headers={"Recording-Id": "XYZ789", "Recording-Date": "2026-06-23", "Render-Yaw": "142.5"},
+        )
+        rendered = render_by_location(1288931.1, 518163.8, srs="2926", index=0)
+        self.assertEqual(rendered["recording_id"], "XYZ789")
+        self.assertEqual(rendered["yaw"], "142.5")
+        self.assertIn("RenderByLocation2D/2926/1288931.1/518163.8/", request.call_args.args[1])
+        self.assertEqual(request.call_args.kwargs["params"]["index"], 0)
+
+    def test_streetsmart_requires_credentials(self):
+        with patch.dict("os.environ", {}, clear=True):
+            with self.assertRaises(StreetSmartConfigurationError):
+                list_recordings(1, 2)
+
+    def test_saves_one_sanitized_jpg_per_parcel(self):
+        with self.subTest("filename"):
+            self.assertEqual(safe_parcel_filename("p/123 test"), "P_123_TEST.jpg")
+        with self.subTest("save"):
+            with self.assertRaises(StreetSmartConfigurationError):
+                save_jpg("P123", b"\xff\xd8jpg", "")
 
 
 class ImporterTests(TestCase):
@@ -43,6 +159,44 @@ class OptimizationTests(TestCase):
 
 
 class PreinspectionWorkspaceTests(TestCase):
+    def test_streetsmart_review_uses_server_side_endpoints_and_keeps_assessor_image(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn("function openStreetSmartCompare(pid)", template)
+        self.assertIn("/streetsmart/", template)
+        self.assertIn("/streetsmart/save/", template)
+        self.assertIn("skagitPhotoImageUrl(pid)", template)
+        self.assertIn("Save StreetSmart JPG", template)
+        self.assertIn('data-streetsmart-view="zoom-in"', template)
+        self.assertIn("loadStreetSmartSdk()", template)
+        self.assertIn(".streetsmart-placeholder[hidden]{display:none!important}", template)
+        self.assertIn("function openGoogleSearchPreview(address,pid)", template)
+        self.assertIn("https://www.google.com/search?igu=1&q=", template)
+        self.assertIn('data-google-search-pid="${escapeAttr(pid)}"', template)
+        self.assertNotIn('target="_blank" rel="noopener noreferrer" title="Open this address on Redfin"', template)
+        self.assertIn("await Promise.all(scripts.map(loadScript))", template)
+        self.assertIn("warmStreetSmartSdkWhenIdle()", template)
+        self.assertIn("const [payload,api]=await Promise.all([configPromise,sdkPromise])", template)
+        self.assertIn('[StreetSmart load timing]', template)
+        self.assertIn("loginOauth:false", template)
+        self.assertIn("api.open({coordinate:[Number(payload.x),Number(payload.y)]}", template)
+        self.assertIn("viewer.lookAtCoordinate?.([Number(payload.x),Number(payload.y)]", template)
+        self.assertIn("viewer?.getOrientation?.()", template)
+        self.assertIn("viewer?.getRecording?.()", template)
+        self.assertIn("Saving high-resolution JPG", template)
+        self.assertIn('data-streetsmart-step="-1"', template)
+        self.assertIn('data-streetsmart-step="1"', template)
+        self.assertIn("movePanoramaWithArrowKeys", template)
+        self.assertIn('new KeyboardEvent("keydown"', template)
+        self.assertIn("activateViewerForCaptureNavigation()", template)
+        self.assertIn('new MouseEvent("mouseover"', template)
+        self.assertIn("document.dispatchEvent(event)", template)
+        self.assertNotIn("viewer.rotateLeft(15)", template)
+        self.assertNotIn("viewer.rotateRight(15)", template)
+        self.assertIn('data-streetsmart-view="zoom-in"', template)
+        self.assertIn('data-streetsmart-view="zoom-out"', template)
+        self.assertNotIn("streetsmartStepCount", template)
+        self.assertNotIn("streetsmartAimIndex", template)
+
     def test_aerial_notes_are_saved_on_input_and_before_modal_close(self):
         template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
         self.assertIn("function saveInspectionNotes(pid,value)", template)

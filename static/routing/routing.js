@@ -8,7 +8,7 @@
   showPlanView(false);
   advanced.addEventListener("toggle", function () { if (currentPlan) adjustTools.hidden = !advanced.open; });
   var colors = ["#d65345", "#16847a", "#7658b7", "#c48728", "#3378b8", "#b44b82"];
-  var street = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap contributors" }).addTo(map);
+  var street = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", { maxZoom: 20, attribution: "© Esri, HERE, Garmin, Intermap, increment P Corp., GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), (c) OpenStreetMap contributors, and the GIS User Community" }).addTo(map);
   var county = L.tileLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Basemaps/SkagitBasemap/MapServer/tile/{z}/{y}/{x}", { minZoom: 16, maxZoom: 22, maxNativeZoom: 22, opacity: .72, attribution: "Skagit County GIS / Esri" });
   var aerial = L.tileLayer("https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}", { maxZoom: 20, maxNativeZoom: 16, attribution: "USGS The National Map" });
   L.control.zoom({ position: "bottomleft" }).addTo(map);

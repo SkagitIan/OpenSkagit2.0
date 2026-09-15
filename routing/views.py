@@ -1,22 +1,33 @@
 import io
+import hashlib
 import json
 import re
-
 import requests
 from PIL import Image, ImageChops
 from django.contrib.auth.views import redirect_to_login
-from django.db import DatabaseError, connection, transaction
+from django.core.cache import cache
+from django.db import Error as DjangoDatabaseError, connection, transaction
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_http_methods
 
-from .models import PreinspectionWorkspace, RoutingImport, RoutingImportRow, RoutingPlan, RoutingPlanRevision, RoutingRoute, RoutingStop
+from .models import PreinspectionWorkspace, RoutingImport, RoutingImportRow, RoutingPlan, RoutingPlanRevision, RoutingRoute, RoutingStop, RoutingUserSettings
 from .services.exports import route_csv, single_route_csv
 from .services.importers import infer_street_side, normalize_row, read_upload
 from .services.optimization import cluster_and_order, distance
 from .services.matrices import travel_matrix
+from .services.streetsmart import (
+    StreetSmartConfigurationError,
+    StreetSmartError,
+    StreetSmartNoRecordingError,
+    get_config as get_streetsmart_config,
+    list_recordings,
+    render_by_location,
+    render_recording,
+    save_jpg,
+)
 from .services.valhalla import optimized_order
 
 
@@ -198,6 +209,24 @@ def workspace_state(request, workspace_id):
     return JsonResponse(_workspace_payload(workspace))
 
 
+@require_http_methods(["GET", "PATCH"])
+def routing_user_settings(request):
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=401)
+    settings_obj, _ = RoutingUserSettings.objects.get_or_create(owner=request.user)
+    if request.method == "GET":
+        return JsonResponse({"streetsmart_image_root": settings_obj.streetsmart_image_root})
+    body = _json_body(request)
+    if body is None:
+        return JsonResponse({"error": "Request body must be valid JSON."}, status=400)
+    image_root = str(body.get("streetsmart_image_root") or "").strip()
+    if len(image_root) > 1024:
+        return JsonResponse({"error": "The StreetSmart save directory is too long."}, status=400)
+    settings_obj.streetsmart_image_root = image_root
+    settings_obj.save(update_fields=["streetsmart_image_root", "updated_at"])
+    return JsonResponse({"saved": True, "streetsmart_image_root": image_root})
+
+
 # The current assessment cycle is May 1, 2026 through April 30, 2027.
 # Keep the end bound exclusive so ISO date and timestamp values are both handled.
 SALES_CYCLE_START = "2026-05-01"
@@ -241,7 +270,7 @@ def sales_cycle(request):
                             "count": int(sale_count),
                             "latest_sale_date": str(latest_sale_date or ""),
                         }
-        except DatabaseError:
+        except DjangoDatabaseError:
             return JsonResponse({"error": "Recent sales lookup is temporarily unavailable."}, status=503)
 
     return JsonResponse(
@@ -325,6 +354,213 @@ def parcel_sketch_image(request, parcel_id):
     except (requests.RequestException, ValueError, OSError) as exc:
         return JsonResponse({"error": "The assessor sketch image is unavailable.", "detail": str(exc)}, status=502)
     return HttpResponse(content, content_type="image/jpeg", headers={"Cache-Control": "private, max-age=3600"})
+
+
+def _street_smart_coordinates(request, parcel_id, payload=None):
+    payload = payload or {}
+    raw_x = payload.get("x") if payload.get("x") not in (None, "") else request.GET.get("x")
+    raw_y = payload.get("y") if payload.get("y") not in (None, "") else request.GET.get("y")
+    if raw_x not in (None, "") and raw_y not in (None, ""):
+        try:
+            return float(raw_x), float(raw_y), "2926"
+        except (TypeError, ValueError) as exc:
+            raise StreetSmartError("The parcel coordinates are not valid for StreetSmart lookup.") from exc
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT ST_X(ST_Transform(ST_Centroid(geometry), 2926)), "
+                "ST_Y(ST_Transform(ST_Centroid(geometry), 2926)) "
+                "FROM gis_skagit_parcels WHERE parcel_id = %s LIMIT 1",
+                [str(parcel_id).strip()],
+            )
+            row = cursor.fetchone()
+    except DjangoDatabaseError as exc:
+        raise StreetSmartError("The parcel location could not be looked up for StreetSmart.") from exc
+    if not row or row[0] is None or row[1] is None:
+        raise StreetSmartError("This parcel has no coordinates available for StreetSmart lookup.")
+    return float(row[0]), float(row[1]), "2926"
+
+
+def _street_smart_srs(value):
+    value = str(value or "2926").strip()
+    if not re.fullmatch(r"\d{4,6}", value):
+        raise StreetSmartError("The StreetSmart spatial reference is not valid.")
+    return value
+
+
+def _street_smart_render_options(values, high_resolution=False):
+    values = values or {}
+
+    def number(name, default):
+        raw = values.get(name, default)
+        return float(default) if raw in (None, "") else float(raw)
+
+    yaw = number("yaw", 0)
+    pitch = max(-90, min(90, number("pitch", 0)))
+    hfov = max(10, min(170, number("hfov", 90)))
+    if high_resolution:
+        width, height = 4096, 3072
+    else:
+        width = max(640, min(8192, int(number("width", 1600))))
+        height = max(480, min(8192, int(number("height", 1200))))
+    return {"yaw": yaw, "pitch": pitch, "hfov": hfov, "width": width, "height": height}
+
+
+def _street_smart_cache_key(kind, values):
+    serialized = json.dumps(values, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")
+    digest = hashlib.sha256(serialized).hexdigest()
+    return f"streetsmart:{kind}:{digest}"
+
+
+def _street_smart_image_headers(rendered, cache_status):
+    headers = {"Cache-Control": "private, max-age=1800", "X-StreetSmart-Cache": cache_status}
+    if not isinstance(rendered, dict):
+        return headers
+    if rendered.get("recording_id"):
+        headers["X-StreetSmart-Recording-Id"] = rendered["recording_id"]
+    if rendered.get("recording_date"):
+        headers["X-StreetSmart-Recording-Date"] = rendered["recording_date"]
+    for field in ("yaw", "pitch", "hfov"):
+        if rendered.get(field) is not None:
+            headers[f"X-StreetSmart-{field.title()}"] = str(rendered[field])
+    return headers
+
+
+def _street_smart_error_response(exc):
+    if isinstance(exc, StreetSmartConfigurationError):
+        return JsonResponse({"available": False, "configured": False, "error": str(exc)}, status=503)
+    if isinstance(exc, StreetSmartNoRecordingError):
+        return JsonResponse({"available": False, "configured": True, "error": str(exc)}, status=200)
+    return JsonResponse({"available": False, "configured": True, "error": str(exc)}, status=502)
+
+
+@require_GET
+def parcel_streetsmart(request, parcel_id):
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=403)
+    try:
+        x, y, srs = _street_smart_coordinates(request, parcel_id)
+        config = get_streetsmart_config()
+        if not config.api_configured:
+            raise StreetSmartConfigurationError(
+                "StreetSmart is not configured. Add the Cyclomedia API key and Basic-auth credentials to the local environment."
+            )
+        # The official Street Smart JavaScript SDK performs Basic authentication in
+        # the browser. Return these values only on-demand to an authenticated user;
+        # never render them into the static page or log this response.
+        response = JsonResponse(
+            {
+                "available": True,
+                "configured": True,
+                "parcel_id": str(parcel_id).strip().upper(),
+                "x": x,
+                "y": y,
+                "srs": srs,
+                "viewer_config": {
+                    "api_key": config.api_key,
+                    "username": config.username,
+                    "password": config.password,
+                },
+            }
+        )
+        response["Cache-Control"] = "no-store, private"
+        response["Pragma"] = "no-cache"
+        return response
+    except (StreetSmartConfigurationError, StreetSmartNoRecordingError, StreetSmartError) as exc:
+        return _street_smart_error_response(exc)
+
+
+@require_GET
+def parcel_streetsmart_image(request, parcel_id):
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=403)
+    recording_id = request.GET.get("recording_id", "").strip()
+    try:
+        render_options = _street_smart_render_options(request.GET)
+        view_mode = request.GET.get("mode", "recording").strip().lower()
+        if view_mode == "location":
+            x, y, srs = _street_smart_coordinates(request, parcel_id)
+            index = request.GET.get("index", "1")
+            cache_values = {
+                "mode": view_mode,
+                "x": x,
+                "y": y,
+                "index": index,
+                "srs": srs,
+                "width": render_options["width"],
+                "height": render_options["height"],
+                "hfov": render_options["hfov"],
+            }
+        elif view_mode == "recording":
+            if not recording_id:
+                return JsonResponse({"error": "A StreetSmart recording is required."}, status=400)
+            cache_values = {
+                "mode": view_mode,
+                "recording_id": recording_id,
+                "srs": _street_smart_srs(request.GET.get("srs", "2926")),
+                **render_options,
+            }
+        else:
+            return JsonResponse({"error": "The StreetSmart render mode is not valid."}, status=400)
+        image_cache_key = _street_smart_cache_key("preview", cache_values)
+        cached_render = cache.get(image_cache_key)
+        if cached_render is not None:
+            if not isinstance(cached_render, dict):  # tolerate cache entries from pre-metadata releases
+                cached_render = {"content": cached_render}
+            return HttpResponse(
+                cached_render["content"],
+                content_type="image/jpeg",
+                headers=_street_smart_image_headers(cached_render, "HIT"),
+            )
+        if view_mode == "location":
+            rendered = render_by_location(
+                x,
+                y,
+                srs=srs,
+                index=index,
+                width=render_options["width"],
+                height=render_options["height"],
+                hfov=render_options["hfov"],
+            )
+        else:
+            rendered = render_recording(
+                recording_id,
+                srs_name=f"EPSG:{cache_values['srs']}",
+                **render_options,
+            )
+        cache.set(image_cache_key, rendered, 1800)
+        return HttpResponse(
+            rendered["content"],
+            content_type="image/jpeg",
+            headers=_street_smart_image_headers(rendered, "MISS"),
+        )
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "The StreetSmart view direction is not valid."}, status=400)
+    except (StreetSmartConfigurationError, StreetSmartError) as exc:
+        return _street_smart_error_response(exc)
+
+
+@require_http_methods(["POST"])
+def save_streetsmart_image(request, parcel_id):
+    if not _workspace_user(request):
+        return JsonResponse({"error": "Sign-in is required."}, status=403)
+    payload = _json_body(request) or {}
+    recording_id = str(payload.get("recording_id") or "").strip()
+    try:
+        if not recording_id:
+            x, y, srs = _street_smart_coordinates(request, parcel_id, payload)
+            recording = list_recordings(x, y, srs=srs)[0]
+            recording_id = recording["recording_id"]
+            payload = {**payload, "yaw": recording["viewing_direction"] or 0}
+        render_options = _street_smart_render_options(payload, high_resolution=True)
+        rendered = render_recording(recording_id, srs_name=f"EPSG:{_street_smart_srs(payload.get('srs', '2926'))}", **render_options)
+        settings_obj, _ = RoutingUserSettings.objects.get_or_create(owner=request.user)
+        filename = save_jpg(parcel_id, rendered["content"], settings_obj.streetsmart_image_root)
+        return JsonResponse({"saved": True, "filename": filename, "recording_id": recording_id, **render_options})
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "The StreetSmart view direction is not valid."}, status=400)
+    except (StreetSmartConfigurationError, StreetSmartNoRecordingError, StreetSmartError) as exc:
+        return _street_smart_error_response(exc)
 
 
 @require_http_methods(["POST"])
