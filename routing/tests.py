@@ -312,15 +312,13 @@ class PreinspectionWorkspaceTests(TestCase):
         template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
         self.assertIn('Current · 2025', template)
         self.assertIn('Historical · 2019', template)
-        self.assertIn('const historicCounty2019=skagitImageLayer("https://geo.skagitcountywa.gov/server/rest/services/Images/SkagitCounty2019_9inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2019"}).addTo(historic);', template)
-        self.assertNotIn('PICT-WASKAG19-MJtGoV8oof', template)
-        self.assertNotIn('historicFallbackUsed', template)
+        self.assertIn('const historicPictometry=pictometryLayer("PICT-WASKAG19-MJtGoV8oof","Pictometry/Cyclomedia · 2019").addTo(historic);', template)
+        self.assertIn('SkagitCounty2020_6inch/ImageServer', template)
+        self.assertIn('historicPictometry.once("tileerror"', template)
         self.assertNotIn('HISTORICAL_AERIAL_LAYERS', template)
         self.assertNotIn('id="imageryHistoricYear"', template)
         self.assertNotIn('setHistoricalLayer', template)
-        self.assertIn('const sw=this._map.options.crs.project(bounds.getSouthWest())', template)
-        self.assertIn('const ne=this._map.options.crs.project(bounds.getNorthEast())', template)
-        self.assertIn('bbox:[sw.x,sw.y,ne.x,ne.y].join(",")', template)
+        self.assertIn('bbox:[bounds.getWest(),bounds.getSouth(),bounds.getEast(),bounds.getNorth()].join(",")', template)
 
 
 class WorkspaceApiTests(TestCase):

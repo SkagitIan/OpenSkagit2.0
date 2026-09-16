@@ -2008,8 +2008,8 @@ function openImageryCompare(pid){
   const historic=L.map("imageryHistoric",{zoomControl:true}).setView(center,18);
   current.createPane("sketchPane");
   historic.createPane("sketchPane");
-  current.getPane("sketchPane").style.zIndex=1000;
-  historic.getPane("sketchPane").style.zIndex=1000;
+  current.getPane("sketchPane").style.zIndex=650;
+  historic.getPane("sketchPane").style.zIndex=650;
   const outlineStyle={color:"#ffe600",weight:3,opacity:1,fill:false};
   const parcelGeo=parcelLayer && parcelLayer.toGeoJSON ? parcelLayer.toGeoJSON() : null;
   let sketchOverlay=null;
@@ -2120,18 +2120,19 @@ function openImageryCompare(pid){
     tile.alt="Skagit County aerial imagery";
     tile.width=256; tile.height=256;
     const bounds=this._tileCoordsToBounds(coords);
-    const sw=this._map.options.crs.project(bounds.getSouthWest());
-    const ne=this._map.options.crs.project(bounds.getNorthEast());
-    const params=new URLSearchParams({bbox:[sw.x,sw.y,ne.x,ne.y].join(","),bboxSR:"3857",imageSR:"3857",size:"256,256",format:"jpg",f:"image"});
+    const params=new URLSearchParams({bbox:[bounds.getWest(),bounds.getSouth(),bounds.getEast(),bounds.getNorth()].join(","),bboxSR:"3857",imageSR:"3857",size:"256,256",format:"jpg",f:"image"});
     tile.onload=()=>done(null,tile); tile.onerror=()=>done(new Error("Skagit aerial imagery unavailable"),tile);
     tile.src=service+"/exportImage?"+params.toString();
     return tile;
   }});
   const currentPictometry=pictometryLayer("PICT-WASKAG25-qSfR3O1lit","Pictometry/Cyclomedia · 2025").addTo(current);
   const currentFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2021"});
-  const historicCounty2019=skagitImageLayer("https://geo.skagitcountywa.gov/server/rest/services/Images/SkagitCounty2019_9inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2019"}).addTo(historic);
+  const historicPictometry=pictometryLayer("PICT-WASKAG19-MJtGoV8oof","Pictometry/Cyclomedia · 2019").addTo(historic);
+  const historicFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2020_6inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2020"});
   let currentFallbackUsed=false;
+  let historicFallbackUsed=false;
   currentPictometry.once("tileerror",()=>{if(!currentFallbackUsed){currentFallbackUsed=true;current.removeLayer(currentPictometry);currentFallback.addTo(current);}});
+  historicPictometry.once("tileerror",()=>{if(!historicFallbackUsed){historicFallbackUsed=true;historic.removeLayer(historicPictometry);historicFallback.addTo(historic);}});
   if(parcelCenter){
     L.marker(center).addTo(current);
     L.marker(center).addTo(historic);
