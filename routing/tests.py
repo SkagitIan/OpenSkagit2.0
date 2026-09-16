@@ -21,6 +21,24 @@ from .services.streetsmart import (
 
 
 class StreetSmartServiceTests(SimpleTestCase):
+    @patch("routing.views.connection.cursor")
+    def test_sales_cycle_returns_valid_priced_sales(self, cursor_factory):
+        cursor = cursor_factory.return_value.__enter__.return_value
+        cursor.fetchall.return_value = [("P2492", 2, "2026-06-15", 450000.0)]
+        request = RequestFactory().get("/routing/sales-cycle/", [("parcel_id", "P2492"), ("parcel_id", "P2492")])
+        request.user = SimpleNamespace(is_authenticated=True, is_active=True)
+
+        from .views import sales_cycle
+
+        response = sales_cycle(request)
+        payload = json.loads(response.content)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(payload["parcels"]["P2492"], {"count": 2, "latest_sale_date": "2026-06-15", "latest_sale_price": 450000.0})
+        query = cursor.execute.call_args.args[0]
+        self.assertIn("VALID SALE", query)
+        self.assertIn("sale_price_num > 0", query)
+        self.assertIn("sale_date_iso < %s", query)
+
     @patch("routing.views.connection.cursor", side_effect=InterfaceError("database connection unavailable"))
     def test_sales_cycle_database_interface_failure_is_degraded_not_internal_error(self, cursor):
         request = RequestFactory().get("/routing/sales-cycle/", {"parcel_id": "P2492"})
@@ -179,8 +197,13 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn('#map{height:100%;min-height:0;background:#dde5ea}', template)
         self.assertNotIn("showSaveFilePicker", template)
         self.assertIn("link.download=`${pid}.jpg`", template)
-        self.assertIn("await Promise.all(scripts.map(loadScript))", template)
-        self.assertIn("warmStreetSmartSdkWhenIdle()", template)
+        self.assertIn("const streetSmartScriptPromises=new Map()", template)
+        self.assertIn("for(const src of scripts)await loadStreetSmartScript(src)", template)
+        self.assertNotIn("warmStreetSmartSdkWhenIdle()", template)
+        self.assertIn("ensureStreetSmartSession", template)
+        self.assertIn("streetSmartRecordingCache", template)
+        self.assertIn("STREETSMART_SESSION_IDLE_TTL", template)
+        self.assertIn("timings.session_reused", template)
         self.assertIn("const [payload,api]=await Promise.all([configPromise,sdkPromise])", template)
         self.assertIn('[StreetSmart load timing]', template)
         self.assertIn("loginOauth:false", template)
@@ -202,6 +225,17 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn('data-streetsmart-view="zoom-out"', template)
         self.assertNotIn("streetsmartStepCount", template)
         self.assertNotIn("streetsmartAimIndex", template)
+
+    def test_sales_checker_runs_daily_for_assignment_and_flags_routes(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn('const SALES_CHECK_CACHE_KEY=', template)
+        self.assertIn('function salesAssignmentFingerprint(ids)', template)
+        self.assertIn('lastAttemptDate', template)
+        self.assertIn('refreshRecentSales();', template)
+        self.assertIn('salesForParcel(pid)', template)
+        self.assertIn('recent-sale-route-badge', template)
+        self.assertIn('retry tomorrow', template)
+        self.assertNotIn('sales-cycle lookup paused', template)
 
     def test_aerial_notes_are_saved_on_input_and_before_modal_close(self):
         template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
@@ -257,14 +291,21 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn('inspectionData.changes==="yes"', template)
         self.assertIn('inspectionData.notes||""', template)
 
-    def test_aerial_comparison_uses_skagit_2019_and_latest_listed_2025(self):
+    def test_aerial_comparison_offers_verified_skagit_historical_years(self):
         template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
         self.assertIn('Current · 2025', template)
         self.assertIn('Historical · 2019', template)
-        self.assertIn('PICT-WASKAG19-MJtGoV8oof', template)
+        self.assertIn('const HISTORICAL_AERIAL_LAYERS=[', template)
+        self.assertIn('id="imageryHistoricYear"', template)
+        self.assertIn('id="imageryHistoricStatus"', template)
+        for year in (2007, 2009, 2011, 2013, 2015, 2017, 2018, 2019, 2020, 2021):
+            self.assertIn(f'year:{year}', template)
+        self.assertIn('SkagitCounty2019_9inch/ImageServer', template)
         self.assertIn('SkagitCounty2020_6inch/ImageServer', template)
-        self.assertIn('historicPictometry.once("tileerror"', template)
-        self.assertIn('historic.invalidateSize();currentPictometry.redraw();historicPictometry.redraw()', template)
+        self.assertIn('const setHistoricalLayer=year=>', template)
+        self.assertIn('historicYearSelect.addEventListener("change"', template)
+        self.assertIn('imagery unavailable', template)
+        self.assertNotIn('PICT-WASKAG19-MJtGoV8oof', template)
 
 
 class WorkspaceApiTests(TestCase):
