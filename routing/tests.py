@@ -261,8 +261,9 @@ class PreinspectionWorkspaceTests(TestCase):
         template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
         self.assertIn('Current · 2025', template)
         self.assertIn('Historical · 2019', template)
+        self.assertIn('PICT-WASKAG19-MJtGoV8oof', template)
         self.assertIn('SkagitCounty2019_9inch/ImageServer', template)
-        self.assertNotIn('PICT-WASKAG19-MJtGoV8oof', template)
+        self.assertIn('historicPictometry.once("tileerror"', template)
         self.assertNotIn('SkagitCounty2020_6inch', template)
 
 
