@@ -310,6 +310,20 @@ textarea{
 .snapshot-table{width:100%;min-width:0;border-collapse:collapse;border-spacing:0;font-size:11px;line-height:1.25;table-layout:fixed}.snapshot-table th,.snapshot-table td{position:static;top:auto;z-index:auto;padding:4px 0;border:0;border-bottom:1px solid #edf0f3;background:transparent;text-align:left;text-transform:none;vertical-align:top}.snapshot-table th{width:43%;color:var(--os-muted);font-weight:600}.snapshot-table td{text-align:right;color:var(--os-ink);font-weight:600;overflow-wrap:anywhere}
 @media(max-width:700px){.imagery-compare-body{grid-template-columns:1fr;grid-template-rows:1fr 1fr}.imagery-pane{border-right:0;border-bottom:1px solid #d8dde3}.imagery-pane:last-child{border-bottom:0}}
 @media(max-width:650px){.import-filter-body{grid-template-columns:1fr}.import-filter-options{max-height:220px}}
+@page{size:auto;margin:12mm}
+@media print{
+  body{display:block!important;min-height:0!important;background:#fff!important}
+  body *{visibility:hidden!important}
+  #routingPrintSheet,#routingPrintSheet *{visibility:visible!important}
+  #routingPrintSheet{display:block!important;position:absolute;left:0;top:0;width:100%;padding:0!important;color:#111;font:11pt Arial,sans-serif}
+  #routingPrintSheet h1{margin:0 0 4mm;font-size:18pt}
+  #routingPrintSheet .print-meta{margin-bottom:5mm;color:#333;font-size:10pt}
+  #routingPrintSheet table{width:100%;min-width:0;border-collapse:collapse;table-layout:fixed}
+  #routingPrintSheet th,#routingPrintSheet td{padding:2.5mm;border:1px solid #777;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+  #routingPrintSheet th{position:static;background:#eee;color:#111;font-size:9pt}
+  #routingPrintSheet td.print-notes{white-space:pre-wrap;min-height:12mm}
+  #routingPrintSheet tr{break-inside:avoid}
+}
 
 </style>
 </head>
@@ -420,6 +434,7 @@ textarea{
         <select id="preRouteFilter" aria-label="Filter by route"><option value="">All routes</option></select>
         <div class="pre-search-wrap"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="preSearch" type="text" placeholder="Search parcel or address" aria-label="Search parcel or address"></div>
         <select id="preShowFilter" aria-label="Show parcels"><option value="all">All parcels</option><option value="incomplete">Incomplete only</option><option value="changes">Changes only</option></select>
+        <button class="btn" id="printCamaRoute" type="button" title="Print the selected route in preinspection order">Print CAMA route sheet</button>
       </div>
       <div class="pre-tool-status"><span class="pill" id="preSummary">0 parcels</span><span class="pill progress-pill" id="preProgress">0 / 0 complete</span><span class="pill field-pill" id="fieldSheetCount">0 field sheets</span></div>
     </div>
@@ -456,6 +471,7 @@ textarea{
       </div>
       <div class="field-route-actions">
         <button class="primary" id="copyFieldParcels" type="button">Copy parcel numbers</button>
+        <button id="printFieldRoute" type="button">Print field sheet</button>
         <button id="showFieldUnassigned" type="button">Unassigned (<span id="fieldUnassignedCount">0</span>)</button>
         <button id="deleteFieldRoute" type="button">Delete route</button>
       </div>
@@ -465,6 +481,8 @@ textarea{
     <div id="fieldRouteMap" class="field-route-map" aria-label="Selected field route map"></div>
   </div>
 </section>
+
+<section id="routingPrintSheet" hidden aria-live="polite"></section>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.18.0/dist/leaflet-geoman.min.js"></script>
@@ -476,6 +494,8 @@ textarea{
 "use strict";
 
 const FEATURE_URL = "https://gis.skagitcountywa.gov/arcgis/rest/services/OpenData/AssessorDataParcels/FeatureServer/0/query";
+const ROUTING_BASEMAP_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}";
+const ROUTING_BASEMAP_ATTRIBUTION = "&copy; Esri, HERE, Garmin, Intermap, increment P Corp., GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), (c) OpenStreetMap contributors, and the GIS User Community";
 const STARTER_ASSIGNMENT = [];
 const CHECKS = ["aerial","listing"];
 const STORAGE_KEY = "skagit-preinspection-workspace-v1";
@@ -507,6 +527,7 @@ let workspaceReady = false;
 let workspaceSaveTimer = null;
 let workspaceSaveInFlight = false;
 let workspaceSavePending = false;
+let parcelPolygonsLoading = false;
 
 function persist(){
   try{localStorage.setItem(USER_CACHE_KEY, JSON.stringify(state));}catch(e){}
@@ -781,8 +802,12 @@ function fieldParcelRows(name){
 function initFieldRouteMap(){
   if(fieldRouteMap || typeof L==="undefined") return;
   fieldRouteMap=L.map("fieldRouteMap",{preferCanvas:true}).setView([48.42,-122.33],13);
-  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:20,opacity:.62,attribution:"&copy; Esri, HERE, Garmin, Intermap, increment P Corp., GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), (c) OpenStreetMap contributors, and the GIS User Community"}).addTo(fieldRouteMap);
+  addRoutingBasemap(fieldRouteMap);
   fieldRouteLayer=L.layerGroup().addTo(fieldRouteMap);
+}
+
+function addRoutingBasemap(targetMap){
+  L.tileLayer(ROUTING_BASEMAP_URL,{maxZoom:20,opacity:.62,attribution:ROUTING_BASEMAP_ATTRIBUTION}).addTo(targetMap);
 }
 
 function renderFieldRouteMap(){
@@ -792,15 +817,19 @@ function renderFieldRouteMap(){
   const routeName=state.activeFieldRoute;
   const route=state.fieldRoutes[routeName];
   const bounds=[];
+  const featuresByParcel=new Map((state.parcelGeoJSON?.features||[]).map(feature=>[String(feature.properties?.PARCELID||"").trim().toUpperCase(),feature]));
   (route?.parcels||[]).forEach((pid,index)=>{
-    const layer=parcelLayersById.get(pid);
-    if(layer?.toGeoJSON){
-      const geo=L.geoJSON(layer.toGeoJSON(),{style:{color:route.color||"#2f8c72",weight:2,fillColor:route.color||"#2f8c72",fillOpacity:.25}}).addTo(fieldRouteLayer);
-      geo.bindTooltip(`${index+1}. ${escapeHTML(pid)}`,{sticky:true});
-      const b=geo.getBounds(); if(b.isValid()){bounds.push(b);L.marker(b.getCenter(),{icon:L.divIcon({className:"field-stop-marker",html:`<span>${index+1}</span>`,iconSize:[28,28],iconAnchor:[14,14]})}).bindTooltip(`${index+1}. ${escapeHTML(pid)}`).addTo(fieldRouteLayer);}
-    }
+    const feature=featuresByParcel.get(String(pid).trim().toUpperCase());
+    if(!feature) return;
+    const geo=L.geoJSON(feature,{style:{color:route.color||"#2f8c72",weight:2,fillColor:route.color||"#2f8c72",fillOpacity:.25}}).addTo(fieldRouteLayer);
+    geo.bindTooltip(`${index+1}. ${escapeHTML(pid)}`,{sticky:true});
+    const b=geo.getBounds(); if(b.isValid()){bounds.push(b);L.marker(b.getCenter(),{icon:L.divIcon({className:"field-stop-marker",html:`<span>${index+1}</span>`,iconSize:[28,28],iconAnchor:[14,14]})}).bindTooltip(`${index+1}. ${escapeHTML(pid)}`).addTo(fieldRouteLayer);}
   });
   if(bounds.length){const group=L.featureGroup(bounds.map(b=>L.rectangle(b,{weight:0,opacity:0,fillOpacity:0})));fieldRouteMap.fitBounds(group.getBounds().pad(.08));}
+  else if(route?.parcels?.length && !state.parcelGeoJSON){
+    document.getElementById("fieldRouteStatus").textContent="Loading Skagit parcel map data…";
+    if(state.assignment.length && !parcelPolygonsLoading) fetchParcelPolygons();
+  }
 }
 
 function renderFieldRoutes(){
@@ -1037,11 +1066,7 @@ function normalizeAssignment(rows){
 
 function initMap(){
   map = L.map("map", {preferCanvas:true}).setView([48.42,-122.33], 13);
-  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
-    maxZoom:20,
-    opacity:0.62,
-    attribution:'&copy; Esri, HERE, Garmin, Intermap, increment P Corp., GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), (c) OpenStreetMap contributors, and the GIS User Community'
-  }).addTo(map);
+  addRoutingBasemap(map);
 
   parcelLayer = L.geoJSON(null,{
     style: feature => parcelStyle(feature),
@@ -1161,10 +1186,12 @@ function renderParcelGeoJSON(){
 }
 
 async function fetchParcelPolygons(){
+  if(parcelPolygonsLoading) return;
   if(!state.assignment.length){
     alert("Import an assignment first.");
     return;
   }
+  parcelPolygonsLoading=true;
   const btn=document.getElementById("drawRouteBtn");
   btn.disabled=true;
   const msg=document.getElementById("mapMessage");
@@ -1199,11 +1226,13 @@ async function fetchParcelPolygons(){
     state.parcelGeoJSON={type:"FeatureCollection",features};
     persist();
     renderParcelGeoJSON();
+    renderFieldRoutes();
   }catch(err){
     console.error(err);
     msg.textContent="Could not load parcel polygons. Check internet access and try again.";
     alert("Parcel polygons could not be loaded. " + err.message);
   }finally{
+    parcelPolygonsLoading=false;
     btn.disabled=false;
   }
 }
@@ -1465,6 +1494,38 @@ function walkingOrderForRoute(parcels){
     ordered.push(...evens,...odds,...other);
   });
   return ordered;
+}
+
+function printRouteSheet(sheetType){
+  const isFieldSheet=sheetType==="field";
+  let routeName="";
+  let rows=[];
+  if(isFieldSheet){
+    routeName=state.activeFieldRoute;
+    const route=state.fieldRoutes[routeName];
+    if(!route){alert("Select a field route before printing.");return;}
+    rows=(route.parcels||[]).map(pid=>assignmentMap().get(pid)).filter(Boolean);
+  }else{
+    routeName=document.getElementById("preRouteFilter").value;
+    const route=state.routes[routeName];
+    if(!routeName || !route){alert("Select one preinspection route before printing.");return;}
+    rows=walkingOrderForRoute(route.parcels||[]);
+  }
+  if(!rows.length){alert("This route has no parcels to print.");return;}
+  const printRoot=document.getElementById("routingPrintSheet");
+  const heading=isFieldSheet?"CAMA field inspection sheet":"CAMA preinspection route sheet";
+  const records=rows.map((parcel,index)=>{
+    const pid=String(parcel.PARCELID||"");
+    const inspectionData=inspection(pid);
+    const fieldFlag=isFieldSheet || inspectionData.changes==="yes" ? "YES — FIELD INSPECTION" : inspectionData.changes==="no" ? "No" : "";
+    const address=parcelAddress(parcel);
+    return `<tr><td>${index+1}</td><td>${escapeHTML(pid)}</td><td>${escapeHTML(address)}</td><td>${escapeHTML(fieldFlag)}</td><td class="print-notes">${escapeHTML(inspectionData.notes||"")}</td></tr>`;
+  }).join("");
+  printRoot.innerHTML=`<h1>${heading}</h1><div class="print-meta"><strong>${escapeHTML(routeName)}</strong> · ${rows.length} parcels · Workspace year ${escapeHTML(state.year)} · Printed ${new Date().toLocaleDateString()}</div><table><thead><tr><th style="width:7%">Order</th><th style="width:19%">Parcel ID</th><th style="width:25%">Address</th><th style="width:20%">Field inspection</th><th>Notes / comments</th></tr></thead><tbody>${records}</tbody></table>`;
+  printRoot.hidden=false;
+  const cleanup=()=>{printRoot.hidden=true;printRoot.innerHTML="";};
+  window.addEventListener("afterprint",cleanup,{once:true});
+  window.print();
 }
 
 
@@ -1781,7 +1842,7 @@ function openImageryCompare(pid){
   const modal=document.createElement("div");
   modal.id="imageryCompare";
   modal.className="imagery-compare";
-  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><div class="imagery-header-actions"><div class="imagery-sketch-control" id="imagerySketchControl"><button type="button" id="sketchToggle">Show sketch</button><button type="button" data-sketch-action="rotate-left" title="Rotate sketch left">↶</button><button type="button" data-sketch-action="rotate-right" title="Rotate sketch right">↷</button><button type="button" data-sketch-action="reset" title="Reset sketch alignment">Reset</button><label>Opacity <input id="sketchOpacity" type="range" min="0.15" max="1" step="0.05" value="0.55"></label><label>Scale <input id="sketchScale" type="range" min="0.5" max="2" step="0.05" value="1"></label></div><button type="button" id="imageryClose">×</button></div></div><div class="imagery-notes-bar"><label for="imageryNotes">Notes</label><input id="imageryNotes" type="text" value="${escapeAttr(inspection(pid).notes||"")}" placeholder="Quick observation…" autocomplete="off"></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2019</h3><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
+  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><div class="imagery-header-actions"><div class="imagery-sketch-control" id="imagerySketchControl"><button type="button" id="sketchToggle">Show sketch</button><button type="button" data-sketch-action="rotate-left" title="Rotate sketch left">↶</button><button type="button" data-sketch-action="rotate-right" title="Rotate sketch right">↷</button><button type="button" data-sketch-action="reset" title="Reset sketch alignment">Reset</button><label>Opacity <input id="sketchOpacity" type="range" min="0.15" max="1" step="0.05" value="0.55"></label><label>Scale <input id="sketchScale" type="range" min="0.5" max="2" step="0.05" value="1"></label></div><button type="button" id="imageryClose">×</button></div></div><div class="imagery-notes-bar"><label for="imageryNotes">Notes</label><input id="imageryNotes" type="text" value="${escapeAttr(inspection(pid).notes||"")}" placeholder="Quick observation…" autocomplete="off"></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2020</h3><div class="imagery-map" id="imageryHistoric"></div></div></div>`;
   document.body.appendChild(modal);
   const parcelLayer=parcelLayersById.get(pid);
   const parcelCenter=parcelLayer ? parcelLayer.getBounds().getCenter() : null;
@@ -1900,13 +1961,10 @@ function openImageryCompare(pid){
     return tile;
   }});
   const currentPictometry=pictometryLayer("PICT-WASKAG25-qSfR3O1lit","Pictometry/Cyclomedia · 2025").addTo(current);
-  const historicPictometry=pictometryLayer("PICT-WASKAG19-MJtGoV8oof","Pictometry/Cyclomedia · 2019").addTo(historic);
   const currentFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2021"});
-  const historicFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2020_6inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2020"});
+  const historicCounty2020=skagitImageLayer("https://geo.skagitcountywa.gov/server/rest/services/Images/SkagitCounty2020_6inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2020"}).addTo(historic);
   let currentFallbackUsed=false;
-  let historicFallbackUsed=false;
   currentPictometry.once("tileerror",()=>{if(!currentFallbackUsed){currentFallbackUsed=true;current.removeLayer(currentPictometry);currentFallback.addTo(current);}});
-  historicPictometry.once("tileerror",()=>{if(!historicFallbackUsed){historicFallbackUsed=true;historic.removeLayer(historicPictometry);historicFallback.addTo(historic);}});
   if(parcelCenter){
     L.marker(center).addTo(current);
     L.marker(center).addTo(historic);
@@ -2297,6 +2355,8 @@ document.getElementById("newFieldRoute").addEventListener("click",()=>{
   renderFieldRoutes();
 });
 document.getElementById("copyFieldParcels").addEventListener("click",copyFieldParcelNumbers);
+document.getElementById("printCamaRoute").addEventListener("click",()=>printRouteSheet("preinspection"));
+document.getElementById("printFieldRoute").addEventListener("click",()=>printRouteSheet("field"));
 document.getElementById("deleteFieldRoute").addEventListener("click",()=>{
   const name=state.activeFieldRoute;
   if(!name || !state.fieldRoutes[name]) return;

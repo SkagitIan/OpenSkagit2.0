@@ -243,8 +243,26 @@ class PreinspectionWorkspaceTests(TestCase):
         template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
         self.assertIn('const route=state.fieldRoutes[routeName];', template)
         self.assertIn('(route?.parcels||[]).forEach((pid,index)=>', template)
+        self.assertIn('state.parcelGeoJSON?.features||[]', template)
+        self.assertIn('addRoutingBasemap(fieldRouteMap)', template)
         self.assertIn('const legacyYes=state.assignment.map(a=>a.PARCELID).filter(pid=>inspection(pid).changes==="yes");', template)
         self.assertIn('state.fieldRoutes[legacyRoute].parcels=[...new Set(legacyYes)];', template)
+
+    def test_cama_print_sheets_preserve_route_orders_and_include_notes_and_field_flags(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn('id="printCamaRoute"', template)
+        self.assertIn('id="printFieldRoute"', template)
+        self.assertIn('rows=walkingOrderForRoute(route.parcels||[])', template)
+        self.assertIn('rows=(route.parcels||[]).map(pid=>assignmentMap().get(pid)).filter(Boolean)', template)
+        self.assertIn('inspectionData.changes==="yes"', template)
+        self.assertIn('inspectionData.notes||""', template)
+
+    def test_aerial_comparison_uses_skagit_2020_and_latest_listed_2025(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn('Current · 2025', template)
+        self.assertIn('Historical · 2020', template)
+        self.assertIn('Images/SkagitCounty2020_6inch/ImageServer', template)
+        self.assertNotIn('PICT-WASKAG19', template)
 
 
 class WorkspaceApiTests(TestCase):
