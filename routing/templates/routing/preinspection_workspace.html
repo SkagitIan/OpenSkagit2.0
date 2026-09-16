@@ -100,6 +100,19 @@ input[type=file]{display:none}
 .pre-toolbar select,.pre-toolbar input{
   border:1px solid var(--line);border-radius:6px;padding:8px 9px;background:#fff
 }
+.pre-search-control{position:relative;display:flex;align-items:center}
+.pre-search-toggle,.pre-print-button{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--os-navy);cursor:pointer}
+.pre-search-toggle:hover,.pre-print-button:hover{background:#eaf4f8;border-color:#8eb0c7}
+.pre-search-toggle .ui-icon,.pre-print-button .ui-icon{width:17px;height:17px}
+.pre-search-popover{position:absolute;z-index:20;top:calc(100% + 6px);right:0;width:min(330px,calc(100vw - 30px));padding:7px;background:#fff;border:1px solid var(--os-border);border-radius:7px;box-shadow:0 8px 22px rgba(4,44,83,.2)}
+.pre-search-popover[hidden]{display:none}
+.pre-search-popover input{width:100%;box-sizing:border-box;padding:7px 8px}
+.pre-search-suggestions{max-height:260px;overflow:auto;margin-top:5px}
+.pre-search-suggestion{display:block;width:100%;padding:7px 8px;border:0;border-radius:5px;background:#fff;color:var(--os-ink);text-align:left;cursor:pointer;font-size:11px}
+.pre-search-suggestion:hover,.pre-search-suggestion:focus-visible{background:#eaf4f8;outline:none}
+.pre-search-suggestion b{display:block;color:var(--os-navy);font-family:JetBrains Mono,monospace;font-size:11px}
+.pre-search-suggestion span{display:block;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pre-search-empty{padding:8px;color:var(--muted);font-size:11px}
 .pre-view-toggle{display:inline-flex;align-items:center;gap:2px;padding:2px;border:1px solid var(--line);border-radius:7px;background:#f5f8fa}
 .pre-view-button{border:0;border-radius:5px;background:transparent;color:var(--muted);padding:6px 9px;font-size:11px;font-weight:700;cursor:pointer}
 .pre-view-button:hover{background:#eaf4f8;color:var(--os-navy)}
@@ -143,6 +156,8 @@ tr.changed{background:#fffaf0}
 .photo-action:hover{background:#fbdce9;border-color:#c984a2}
 .aerial-action{background:#edf8e6;border-color:#acd08e;color:#416900}
 .aerial-action:hover{background:#dff0d2;border-color:#82ad5d}
+.listing-action{background:#fff4d6;border-color:#e4c66f;color:#8a5a00}
+.listing-action:hover{background:#ffebad;border-color:#c89f35}
 .changes-action.yes{background:repeating-linear-gradient(135deg,#fff 0,#fff 7px,#f0f2f4 7px,#f0f2f4 9px);border-color:#cfd6dd;color:#4b5964}
 .changes-action.no{background:repeating-linear-gradient(45deg,#fff 0,#fff 7px,#f0f2f4 7px,#f0f2f4 9px);border-color:#cfd6dd;color:#4b5964}
 .changes-action.yes.on{background:var(--amber);border-color:#e4c66f;color:var(--amber-text)}
@@ -188,6 +203,9 @@ tr.changed{background:#fffaf0}
 .preinspection-table tbody tr:not(.active-parcel) .unassign-action{background:#f6f7f8;border-color:#d8dde3;color:#6a747c;box-shadow:none}
 .preinspection-table tbody tr:not(.active-parcel) .changes-action.on{font-weight:800}
 .preinspection-table tbody tr:not(.active-parcel) .recent-sale-badge{opacity:.7}
+.preinspection-table tbody tr:not(.active-parcel) .photo-action{background:#e6f1fb;border-color:#9fc4e4;color:var(--os-blue)}
+.preinspection-table tbody tr:not(.active-parcel) .aerial-action{background:#eaf5dc;border-color:#acd08e;color:#416900}
+.preinspection-table tbody tr:not(.active-parcel) .listing-action{background:#fff4d6;border-color:#e4c66f;color:#8a5a00}
 .imagery-header-actions{display:flex;align-items:center;gap:5px;margin-left:auto}
 .imagery-compare-head .imagery-sketch-control{position:static;display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:0;background:transparent;border:0;max-width:none;font-size:11px}
 .imagery-compare-head .imagery-sketch-control button{width:auto;height:30px;padding:4px 7px;font-size:12px}
@@ -322,17 +340,21 @@ textarea{
 .imagery-compare-head{position:relative;z-index:1000;min-height:42px;padding:7px 10px;border-bottom:1px solid #e1e5e9;display:flex;align-items:center;gap:10px;background:#f7f9fb;font-size:12px}
 .imagery-compare-head span{flex:1;color:var(--muted)}
 .imagery-compare-head button{position:relative;z-index:1001;width:34px;height:34px;border:1px solid var(--os-border);border-radius:8px;background:#fff;color:var(--os-navy);font-size:22px;cursor:pointer;pointer-events:auto}
-.imagery-compare-body{display:grid;grid-template-columns:1fr 1fr;min-height:0;flex:1}
+.imagery-compare-body{position:relative;display:grid;grid-template-columns:1fr 1fr;min-height:0;flex:1}
 .imagery-pane{position:relative;min-width:0;min-height:0;height:100%;border-right:1px solid #d8dde3}.imagery-pane:last-child{border-right:0}
 .imagery-pane h3{position:absolute;z-index:2;top:8px;left:8px;margin:0;padding:5px 8px;background:rgba(255,255,255,.9);border-radius:5px;font-size:12px}.imagery-map{width:100%;height:100%;min-height:0}
 .imagery-sketch-control{position:absolute;z-index:3;right:8px;top:8px;display:none;align-items:center;gap:5px;flex-wrap:wrap;padding:5px 7px;background:rgba(255,255,255,.94);border:1px solid var(--os-border);border-radius:6px;font-size:11px;max-width:calc(100% - 16px)}
 .imagery-sketch-control.visible{display:flex}
 .imagery-sketch-control input{width:70px}
 .imagery-sketch-control button{border:1px solid var(--os-border);border-radius:5px;background:#fff;color:var(--os-navy);padding:4px 6px;font-size:11px;cursor:pointer}.imagery-sketch-control button:hover{background:var(--accent-soft)}
-.imagery-history-control{position:absolute;z-index:3;right:8px;bottom:8px;display:flex;align-items:center;gap:6px;padding:6px 8px;background:rgba(255,255,255,.95);border:1px solid var(--os-border);border-radius:6px;box-shadow:0 2px 8px rgba(4,44,83,.14);font-size:11px}
-.imagery-history-control label{font-weight:700;color:var(--os-navy);white-space:nowrap}
-.imagery-history-control select{max-width:170px;border:1px solid var(--os-border);border-radius:4px;background:#fff;color:var(--os-ink);padding:4px 22px 4px 5px;font-size:11px}
-.imagery-history-status{max-width:155px;color:#9b1c1c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.imagery-sketch-rail{position:absolute;z-index:10000;left:50%;top:50%;display:none;flex-direction:column;align-items:center;gap:4px;transform:translate(-50%,-50%);padding:6px 5px;background:rgba(255,255,255,.96);border:1px solid var(--os-border);border-radius:9px;box-shadow:0 4px 14px rgba(4,44,83,.22)}
+.imagery-sketch-rail.visible{display:flex}
+.imagery-sketch-rail button{width:28px;height:28px;border:1px solid var(--os-border);border-radius:50%;background:#eaf5dc;color:#416900;font-size:16px;font-weight:800;line-height:1;cursor:pointer}
+.imagery-sketch-rail button:hover{background:#dff0c8;border-color:#82ad5d}
+.imagery-sketch-rail button[data-sketch-action="reset"]{width:auto;border-radius:5px;background:#fff;color:var(--os-navy);padding:3px 6px;font-size:10px}
+.imagery-sketch-rail label{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:9px;font-weight:700}
+.imagery-sketch-rail input{width:82px;margin:0}
+.imagery-sketch-value{min-width:35px;color:var(--os-navy);font:700 10px JetBrains Mono,monospace;text-align:center}
 .import-filter-backdrop{position:fixed;inset:0;z-index:99990;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(4,44,83,.42)}
 .import-filter-modal{width:min(760px,96vw);max-height:min(760px,92vh);display:flex;flex-direction:column;background:#fff;border:1px solid var(--os-border);border-radius:10px;box-shadow:0 18px 45px rgba(4,44,83,.28);overflow:hidden}
 .import-filter-head{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:#f7f9fb}.import-filter-head h2{margin:0;color:var(--os-navy);font-size:17px}.import-filter-head p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4}.import-filter-close{margin-left:auto;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--os-navy);font-size:20px;width:30px;height:30px;line-height:1;cursor:pointer}
@@ -466,9 +488,9 @@ textarea{
       </div>
       <div class="pre-filter-group">
         <select id="preRouteFilter" aria-label="Filter by route"><option value="">All routes</option></select>
-        <div class="pre-search-wrap"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="preSearch" type="text" placeholder="Search parcel or address" aria-label="Search parcel or address"></div>
+        <div class="pre-search-control"><button class="pre-search-toggle" id="preSearchToggle" type="button" title="Search parcels" aria-label="Open parcel search" aria-expanded="false"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></button><div class="pre-search-popover" id="preSearchPopover" hidden><input id="preSearch" type="text" placeholder="Search parcel or address" aria-label="Search parcel or address" autocomplete="off"><div id="preSearchSuggestions" class="pre-search-suggestions" role="listbox"></div></div></div>
         <select id="preShowFilter" aria-label="Show parcels"><option value="all">All parcels</option><option value="incomplete">Incomplete only</option><option value="changes">Changes only</option></select>
-        <button class="btn" id="printCamaRoute" type="button" title="Print the selected route in preinspection order">Print CAMA route sheet</button>
+        <button class="pre-print-button" id="printCamaRoute" type="button" title="Print the selected route in preinspection order" aria-label="Print CAMA route sheet"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V4h12v5M6 17H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M6 14h12v6H6z"/><path d="M18 12h.01"/></svg></button>
       </div>
       <div class="pre-view-toggle" role="group" aria-label="Parcel display mode">
         <button class="pre-view-button" type="button" data-pre-view-mode="list" aria-pressed="true">List</button>
@@ -942,6 +964,25 @@ function preinspectionFilters(){
     query:(document.getElementById("preSearch")?.value || "").trim().toLowerCase(),
     show:document.getElementById("preShowFilter")?.value || "all"
   };
+}
+
+function renderPreSearchSuggestions(){
+  const input=document.getElementById("preSearch");
+  const list=document.getElementById("preSearchSuggestions");
+  if(!input || !list)return;
+  const query=input.value.trim().toLowerCase();
+  if(!query){list.innerHTML='<div class="pre-search-empty">Type a parcel number or address.</div>';return;}
+  const rows=preinspectionRowsFor({...preinspectionFilters(),query:""}).filter(row=>row.pid.toLowerCase().includes(query)||row.addr.toLowerCase().includes(query)).slice(0,10);
+  list.innerHTML=rows.length ? rows.map(row=>`<button class="pre-search-suggestion" type="button" data-pre-search-pick="${escapeAttr(row.pid)}" role="option"><b>${escapeHTML(row.pid)}</b><span>${escapeHTML(row.addr||"No address")}</span></button>`).join("") : '<div class="pre-search-empty">No matching parcels.</div>';
+}
+
+function setPreSearchOpen(open){
+  const popover=document.getElementById("preSearchPopover");
+  const toggle=document.getElementById("preSearchToggle");
+  if(!popover || !toggle)return;
+  popover.hidden=!open;
+  toggle.setAttribute("aria-expanded",open?"true":"false");
+  if(open){renderPreSearchSuggestions();document.getElementById("preSearch")?.focus();}
 }
 
 function preinspectionRowsFor(filters=preinspectionFilters()){
@@ -1952,27 +1993,13 @@ function saveInspectionNotes(pid,value){
   });
 }
 
-const HISTORICAL_AERIAL_LAYERS=[
-  {year:2007,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2007/ImageServer"},
-  {year:2009,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2009/ImageServer"},
-  {year:2011,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2011_6inch/ImageServer"},
-  {year:2013,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2013_4inch/ImageServer"},
-  {year:2015,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2015_4inch/ImageServer"},
-  {year:2017,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2017_1foot/ImageServer"},
-  {year:2018,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2018_6inch/ImageServer"},
-  {year:2019,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2019_9inch/ImageServer",pictometryId:"PICT-WASKAG19-MJtGoV8oof"},
-  {year:2020,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2020_6inch/ImageServer"},
-  {year:2021,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer"}
-];
-
 function openImageryCompare(pid){
   document.getElementById("imageryCompare")?.remove();
   const a=assignmentMap().get(pid) || {};
-  const historicalOptions=HISTORICAL_AERIAL_LAYERS.map(layer=>`<option value="${layer.year}"${layer.year===2019?" selected":""}>${layer.year}</option>`).join("");
   const modal=document.createElement("div");
   modal.id="imageryCompare";
   modal.className="imagery-compare";
-  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><div class="imagery-header-actions"><div class="imagery-sketch-control" id="imagerySketchControl"><button type="button" id="sketchToggle">Show sketch</button><button type="button" data-sketch-action="rotate-left" title="Rotate sketch left">↶</button><button type="button" data-sketch-action="rotate-right" title="Rotate sketch right">↷</button><button type="button" data-sketch-action="reset" title="Reset sketch alignment">Reset</button><label>Opacity <input id="sketchOpacity" type="range" min="0.15" max="1" step="0.05" value="0.55"></label><label>Scale <input id="sketchScale" type="range" min="0.5" max="2" step="0.05" value="1"></label></div><button type="button" id="imageryClose">×</button></div></div><div class="imagery-notes-bar"><label for="imageryNotes">Notes</label><input id="imageryNotes" type="text" value="${escapeAttr(inspection(pid).notes||"")}" placeholder="Quick observation…" autocomplete="off"></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3 id="imageryHistoricTitle">Historical · 2019</h3><div class="imagery-map" id="imageryHistoric"></div><div class="imagery-history-control"><label for="imageryHistoricYear">Historical year</label><select id="imageryHistoricYear" aria-label="Historical aerial year">${historicalOptions}</select><span id="imageryHistoricStatus" class="imagery-history-status" role="status" aria-live="polite"></span></div></div></div>`;
+  modal.innerHTML=`<div class="imagery-compare-head"><b>${escapeHTML(pid)}</b><div class="imagery-header-actions"><div class="imagery-sketch-control" id="imagerySketchControl"><button type="button" id="sketchToggle">Show sketch</button></div><button type="button" id="imageryClose">×</button></div></div><div class="imagery-notes-bar"><label for="imageryNotes">Notes</label><input id="imageryNotes" type="text" value="${escapeAttr(inspection(pid).notes||"")}" placeholder="Quick observation…" autocomplete="off"></div><div class="imagery-compare-body"><div class="imagery-pane"><h3>Current · 2025</h3><div class="imagery-map" id="imageryCurrent"></div></div><div class="imagery-pane"><h3>Historical · 2019</h3><div class="imagery-map" id="imageryHistoric"></div></div><div class="imagery-sketch-rail" id="imagerySketchRail" aria-label="Sketch alignment tools"><button type="button" data-sketch-action="rotate-left" title="Rotate sketch left 15 degrees">↶</button><button type="button" data-sketch-action="rotate-right" title="Rotate sketch right 15 degrees">↷</button><label>Rotate <input id="sketchRotation" type="range" min="-180" max="180" step="1" value="0"><span class="imagery-sketch-value" id="sketchRotationValue">0°</span></label><button type="button" data-sketch-action="scale-down" title="Make sketch smaller">−</button><button type="button" data-sketch-action="scale-up" title="Make sketch larger">+</button><label>Opacity <input id="sketchOpacity" type="range" min="0.15" max="1" step="0.05" value="0.55"></label><button type="button" data-sketch-action="reset" title="Reset sketch alignment">Reset</button></div></div>`;
   document.body.appendChild(modal);
   const parcelLayer=parcelLayersById.get(pid);
   const parcelCenter=parcelLayer ? parcelLayer.getBounds().getCenter() : null;
@@ -1981,8 +2008,8 @@ function openImageryCompare(pid){
   const historic=L.map("imageryHistoric",{zoomControl:true}).setView(center,18);
   current.createPane("sketchPane");
   historic.createPane("sketchPane");
-  current.getPane("sketchPane").style.zIndex=650;
-  historic.getPane("sketchPane").style.zIndex=650;
+  current.getPane("sketchPane").style.zIndex=1000;
+  historic.getPane("sketchPane").style.zIndex=1000;
   const outlineStyle={color:"#ffe600",weight:3,opacity:1,fill:false};
   const parcelGeo=parcelLayer && parcelLayer.toGeoJSON ? parcelLayer.toGeoJSON() : null;
   let sketchOverlay=null;
@@ -1990,10 +2017,13 @@ function openImageryCompare(pid){
   let activeSketchMap=current;
   let sketchOffset={x:0,y:0};
   const sketchControl=document.getElementById("imagerySketchControl");
+  const sketchRail=document.getElementById("imagerySketchRail");
   const sketchButton=document.getElementById("sketchToggle");
   const sketchOpacity=document.getElementById("sketchOpacity");
-  const sketchScale=document.getElementById("sketchScale");
+  const sketchRotationInput=document.getElementById("sketchRotation");
+  const sketchRotationValue=document.getElementById("sketchRotationValue");
   let sketchRotation=0;
+  let sketchScaleValue=1;
   sketchControl.classList.add("visible");
   if(parcelGeo){
     L.geoJSON(parcelGeo,{style:outlineStyle,interactive:true}).addTo(current).on("click",()=>{activeSketchMap=current;toggleSketch(current);});
@@ -2002,7 +2032,7 @@ function openImageryCompare(pid){
   async function toggleSketch(targetMap){
     if(!(targetMap instanceof L.Map)) targetMap=activeSketchMap || current;
     activeSketchMap=targetMap;
-    if(sketchOverlay && sketchMap===targetMap){targetMap.removeLayer(sketchOverlay);sketchOverlay=null;sketchMap=null;sketchButton.textContent="Show sketch";return;}
+    if(sketchOverlay && sketchMap===targetMap){targetMap.removeLayer(sketchOverlay);sketchOverlay=null;sketchMap=null;sketchRail.classList.remove("visible");sketchButton.textContent="Show sketch";return;}
     if(sketchOverlay && sketchMap){sketchMap.removeLayer(sketchOverlay);sketchOverlay=null;sketchMap=null;}
     sketchButton.disabled=true;
     sketchButton.textContent="Loading…";
@@ -2016,6 +2046,7 @@ function openImageryCompare(pid){
       sketchOverlay=L.imageOverlay(payload.image_url || payload.url,bounds,{opacity:Number(sketchOpacity.value),interactive:false,crossOrigin:true,pane:"sketchPane"}).addTo(targetMap);
       sketchOverlay.setZIndex(10000);
       sketchOverlay.once("load",applySketchTransform);
+      sketchRail.classList.add("visible");
       sketchControl.classList.add("visible");
       sketchButton.textContent="Hide sketch";
     }catch(error){alert(error.message || "The assessor sketch could not be loaded.");sketchButton.textContent="Show sketch";}
@@ -2029,7 +2060,7 @@ function openImageryCompare(pid){
     image.style.transformOrigin="center center";
     image.style.translate=`${sketchOffset.x}px ${sketchOffset.y}px`;
     image.style.rotate=`${sketchRotation}deg`;
-    image.style.scale=String(Number(sketchScale.value));
+    image.style.scale=String(sketchScaleValue);
     image.style.cursor="grab";
     image.style.pointerEvents="auto";
     if(image.dataset.dragReady)return;
@@ -2056,17 +2087,21 @@ function openImageryCompare(pid){
     image.addEventListener("pointerup",stopDragging);
     image.addEventListener("pointercancel",stopDragging);
   }
-  sketchControl.addEventListener("click",e=>{
+  sketchRail.addEventListener("click",e=>{
     const action=e.target.closest("[data-sketch-action]")?.dataset.sketchAction;
     if(!action)return;
-    if(action==="rotate-left")sketchRotation-=90;
-    if(action==="rotate-right")sketchRotation+=90;
-    if(action==="reset"){sketchRotation=0;sketchOffset={x:0,y:0};sketchScale.value="1";sketchOpacity.value="0.55";if(sketchOverlay)sketchOverlay.setOpacity(.55);}
+    if(action==="rotate-left")sketchRotation=Math.max(-180,sketchRotation-15);
+    if(action==="rotate-right")sketchRotation=Math.min(180,sketchRotation+15);
+    if(action==="scale-down")sketchScaleValue=Math.max(.5,Math.round((sketchScaleValue-.1)*10)/10);
+    if(action==="scale-up")sketchScaleValue=Math.min(2,Math.round((sketchScaleValue+.1)*10)/10);
+    if(action==="reset"){sketchRotation=0;sketchOffset={x:0,y:0};sketchScaleValue=1;sketchOpacity.value="0.55";if(sketchOverlay)sketchOverlay.setOpacity(.55);}
+    sketchRotationInput.value=String(sketchRotation);
+    sketchRotationValue.textContent=`${sketchRotation}°`;
     applySketchTransform();
   });
   sketchButton.addEventListener("click",()=>toggleSketch(activeSketchMap || current));
   sketchOpacity.addEventListener("input",()=>{if(sketchOverlay)sketchOverlay.setOpacity(Number(sketchOpacity.value));});
-  sketchScale.addEventListener("input",applySketchTransform);
+  sketchRotationInput.addEventListener("input",()=>{sketchRotation=Number(sketchRotationInput.value);sketchRotationValue.textContent=`${sketchRotation}°`;applySketchTransform();});
   let syncing=false;
   const syncMaps=(source,target)=>{
     source.on("moveend zoomend",()=>{
@@ -2094,30 +2129,12 @@ function openImageryCompare(pid){
   }});
   const currentPictometry=pictometryLayer("PICT-WASKAG25-qSfR3O1lit","Pictometry/Cyclomedia · 2025").addTo(current);
   const currentFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2021"});
+  const historicPictometry=pictometryLayer("PICT-WASKAG19-MJtGoV8oof","Pictometry/Cyclomedia · 2019").addTo(historic);
+  const historicFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2020_6inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2020"});
   let currentFallbackUsed=false;
+  let historicFallbackUsed=false;
   currentPictometry.once("tileerror",()=>{if(!currentFallbackUsed){currentFallbackUsed=true;current.removeLayer(currentPictometry);currentFallback.addTo(current);}});
-  const historicYearSelect=document.getElementById("imageryHistoricYear");
-  const historicTitle=document.getElementById("imageryHistoricTitle");
-  const historicStatus=document.getElementById("imageryHistoricStatus");
-  let historicLayer=null;
-  const setHistoricalStatus=message=>{historicStatus.textContent=message||"";};
-  const setHistoricalLayer=year=>{
-    const selected=HISTORICAL_AERIAL_LAYERS.find(layer=>layer.year===Number(year)) || HISTORICAL_AERIAL_LAYERS.find(layer=>layer.year===2019);
-    historicYearSelect.value=String(selected.year);
-    historicTitle.textContent=`Historical · ${selected.year}`;
-    setHistoricalStatus("Loading…");
-    if(historicLayer){historic.removeLayer(historicLayer);historicLayer=null;}
-    const layer=selected.pictometryId
-      ? pictometryLayer(selected.pictometryId,`Pictometry/Cyclomedia · ${selected.year}`)
-      : skagitImageLayer(selected.service)({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:`Skagit County GIS · ${selected.year}`});
-    historicLayer=layer;
-    layer.once("tileload",()=>{if(historicLayer===layer)setHistoricalStatus("");});
-    layer.once("tileerror",()=>{if(historicLayer===layer)setHistoricalStatus(`${selected.year} imagery unavailable`);});
-    layer.addTo(historic);
-    requestAnimationFrame(()=>historic.invalidateSize());
-  };
-  historicYearSelect.addEventListener("change",()=>setHistoricalLayer(historicYearSelect.value));
-  setHistoricalLayer(2019);
+  historicPictometry.once("tileerror",()=>{if(!historicFallbackUsed){historicFallbackUsed=true;historic.removeLayer(historicPictometry);historicFallback.addTo(historic);}});
   if(parcelCenter){
     L.marker(center).addTo(current);
     L.marker(center).addTo(historic);
@@ -2315,7 +2332,7 @@ function renderPreinspection(){
     if(pid===state.activeParcel) tr.classList.add("active-parcel");
     const parcelIdentity=`<span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span>${sale ? `<span class="recent-sale-badge" title="${escapeAttr(saleTitle)}" aria-label="${escapeAttr(saleTitle)}">$</span>` : ""} <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a>`;
     const addressMarkup=`<button class="address-copy" type="button" data-copy-address="${escapeAttr(addr)}" aria-label="Copy address: ${escapeAttr(addr)}" title="Click to copy full address">${escapeHTML(addr || "—")}</button>`;
-    const toolMarkup=`<button class="photo-btn photo-action preinspection-action" type="button" data-photo="${escapeAttr(pid)}" title="Compare assessor photo with StreetSmart" aria-label="Compare assessor photo with StreetSmart">${uiIcon("camera")}</button><button class="photo-btn aerial-action preinspection-action" type="button" data-compare="${escapeAttr(pid)}" title="Compare current and historical aerial imagery" aria-label="Compare current and historical aerial imagery">${uiIcon("layers")}</button><div class="listing-cell"><button class="google-search-btn" type="button" data-google-search="${escapeAttr(addr||"")}" data-google-search-pid="${escapeAttr(pid)}" title="Search this address on Google" aria-label="Search this address on Google">${uiIcon("search")}</button></div>`;
+    const toolMarkup=`<button class="photo-btn photo-action preinspection-action" type="button" data-photo="${escapeAttr(pid)}" title="Compare assessor photo with StreetSmart" aria-label="Compare assessor photo with StreetSmart">${uiIcon("camera")}</button><button class="photo-btn aerial-action preinspection-action" type="button" data-compare="${escapeAttr(pid)}" title="Compare current and historical aerial imagery" aria-label="Compare current and historical aerial imagery">${uiIcon("layers")}</button><div class="listing-cell"><button class="google-search-btn listing-action" type="button" data-google-search="${escapeAttr(addr||"")}" data-google-search-pid="${escapeAttr(pid)}" title="Search this address on Google" aria-label="Search this address on Google">${uiIcon("search")}</button></div>`;
     const decisionMarkup=`<div class="change-group"><button class="change-btn yes changes-action ${s.changes==="yes"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="yes">YES</button><button class="change-btn no changes-action ${s.changes==="no"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="no">NO</button></div>`;
     const notesMarkup=`<textarea data-pid="${escapeAttr(pid)}" placeholder="Notes">${escapeHTML(s.notes||"")}</textarea><button class="unassign-action" type="button" data-unassign="${escapeAttr(pid)}" title="Remove this parcel from the route" aria-label="Remove this parcel from the route">${uiIcon("trash")}</button>`;
     if(preinspectionViewMode==="cards"){
@@ -2331,7 +2348,7 @@ function renderPreinspection(){
         </td>
         <td>
           <div class="listing-cell">
-            <button class="google-search-btn" type="button" data-google-search="${escapeAttr(addr||"")}" data-google-search-pid="${escapeAttr(pid)}" title="Search this address on Google" aria-label="Search this address on Google">${uiIcon("search")}</button>
+            <button class="google-search-btn listing-action" type="button" data-google-search="${escapeAttr(addr||"")}" data-google-search-pid="${escapeAttr(pid)}" title="Search this address on Google" aria-label="Search this address on Google">${uiIcon("search")}</button>
           </div>
         </td>
         <td>${decisionMarkup}</td>
@@ -2637,7 +2654,19 @@ document.getElementById("fieldRouteList").addEventListener("drop",e=>{
 
 document.querySelectorAll("[data-pre-view-mode]").forEach(button=>button.addEventListener("click",()=>setPreinspectionViewMode(button.dataset.preViewMode)));
 ["preRouteFilter","preShowFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderPreinspection));
-document.getElementById("preSearch").addEventListener("input",renderPreinspection);
+document.getElementById("preSearchToggle").addEventListener("click",()=>setPreSearchOpen(document.getElementById("preSearchPopover").hidden));
+document.getElementById("preSearch").addEventListener("focus",renderPreSearchSuggestions);
+document.getElementById("preSearch").addEventListener("input",()=>{renderPreSearchSuggestions();renderPreinspection();});
+document.getElementById("preSearchSuggestions").addEventListener("click",event=>{
+  const pick=event.target.closest("[data-pre-search-pick]");
+  if(!pick)return;
+  document.getElementById("preSearch").value=pick.dataset.preSearchPick;
+  renderPreSearchSuggestions();
+  renderPreinspection();
+});
+document.addEventListener("click",event=>{
+  if(!event.target.closest(".pre-search-control"))setPreSearchOpen(false);
+});
 
 document.addEventListener("pointerdown",e=>{
   if(e.target.closest("#imageryClose")){

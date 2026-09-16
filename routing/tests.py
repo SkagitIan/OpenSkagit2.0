@@ -248,6 +248,10 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn("let activeSketchMap=current;", template)
         self.assertIn("if(!(targetMap instanceof L.Map)) targetMap=activeSketchMap || current;", template)
         self.assertIn('sketchButton.addEventListener("click",()=>toggleSketch(activeSketchMap || current));', template)
+        self.assertIn('id="imagerySketchRail"', template)
+        self.assertIn('id="sketchRotation"', template)
+        self.assertIn('data-sketch-action="scale-up"', template)
+        self.assertIn('sketchRotation=Math.max(-180,sketchRotation-15)', template)
         self.assertNotIn('sketchButton.addEventListener("click",toggleSketch);', template)
 
     def test_preinspection_tracks_and_advances_active_parcel(self):
@@ -304,22 +308,16 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn('inspectionData.changes==="yes"', template)
         self.assertIn('inspectionData.notes||""', template)
 
-    def test_aerial_comparison_offers_verified_skagit_historical_years(self):
+    def test_aerial_comparison_restores_fixed_2019_historical_layer(self):
         template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
         self.assertIn('Current · 2025', template)
         self.assertIn('Historical · 2019', template)
-        self.assertIn('const HISTORICAL_AERIAL_LAYERS=[', template)
-        self.assertIn('id="imageryHistoricYear"', template)
-        self.assertIn('id="imageryHistoricStatus"', template)
-        for year in (2007, 2009, 2011, 2013, 2015, 2017, 2018, 2019, 2020, 2021):
-            self.assertIn(f'year:{year}', template)
-        self.assertIn('SkagitCounty2019_9inch/ImageServer', template)
+        self.assertIn('const historicPictometry=pictometryLayer("PICT-WASKAG19-MJtGoV8oof","Pictometry/Cyclomedia · 2019").addTo(historic);', template)
         self.assertIn('SkagitCounty2020_6inch/ImageServer', template)
-        self.assertIn('const setHistoricalLayer=year=>', template)
-        self.assertIn('historicYearSelect.addEventListener("change"', template)
-        self.assertIn('imagery unavailable', template)
-        self.assertIn('pictometryId:"PICT-WASKAG19-MJtGoV8oof"', template)
-        self.assertIn('selected.pictometryId', template)
+        self.assertIn('historicPictometry.once("tileerror"', template)
+        self.assertNotIn('HISTORICAL_AERIAL_LAYERS', template)
+        self.assertNotIn('id="imageryHistoricYear"', template)
+        self.assertNotIn('setHistoricalLayer', template)
         self.assertIn('const sw=this._map.options.crs.project(bounds.getSouthWest())', template)
         self.assertIn('const ne=this._map.options.crs.project(bounds.getNorthEast())', template)
         self.assertIn('bbox:[sw.x,sw.y,ne.x,ne.y].join(",")', template)
