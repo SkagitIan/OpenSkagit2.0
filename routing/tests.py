@@ -259,6 +259,19 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn('row.scrollIntoView({behavior:"smooth",block:"center"});', template)
         self.assertIn(".preinspection-table tbody tr.complete:not(.active-parcel){opacity:.45}", template)
 
+    def test_preinspection_supports_persisted_list_and_card_views(self):
+        template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
+        self.assertIn('data-pre-view-mode="list"', template)
+        self.assertIn('data-pre-view-mode="cards"', template)
+        self.assertIn("const PREINSPECTION_VIEW_MODE_KEY", template)
+        self.assertIn("function loadPreinspectionViewMode()", template)
+        self.assertIn('localStorage.setItem(PREINSPECTION_VIEW_MODE_KEY,preinspectionViewMode)', template)
+        self.assertIn('table.classList.toggle("cards-mode",preinspectionViewMode==="cards")', template)
+        self.assertIn('class="preinspection-card"', template)
+        for attribute in ('data-photo', 'data-compare', 'data-google-search', 'data-change', 'data-unassign', 'data-copy-address'):
+            self.assertIn(attribute, template)
+        self.assertIn('class="empty-row"', template)
+
     def test_field_routes_keep_appraisal_routes_and_support_ordered_copy(self):
         template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
         self.assertIn('data-view="fieldRoutes"', template)

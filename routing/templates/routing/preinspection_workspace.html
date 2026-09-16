@@ -100,6 +100,10 @@ input[type=file]{display:none}
 .pre-toolbar select,.pre-toolbar input{
   border:1px solid var(--line);border-radius:6px;padding:8px 9px;background:#fff
 }
+.pre-view-toggle{display:inline-flex;align-items:center;gap:2px;padding:2px;border:1px solid var(--line);border-radius:7px;background:#f5f8fa}
+.pre-view-button{border:0;border-radius:5px;background:transparent;color:var(--muted);padding:6px 9px;font-size:11px;font-weight:700;cursor:pointer}
+.pre-view-button:hover{background:#eaf4f8;color:var(--os-navy)}
+.pre-view-button[aria-pressed="true"]{background:var(--os-navy);color:#fff;box-shadow:0 1px 2px rgba(4,44,83,.16)}
 .workspace-controls{display:flex;align-items:center;gap:5px;flex:0 1 auto;min-width:0;padding:5px 7px;border:1px solid #d9e6ee;border-radius:8px;background:#f7fbfd}.workspace-selector-label{font-size:11px;font-weight:800;color:var(--os-navy);white-space:nowrap}.workspace-controls select{min-width:180px;max-width:260px;height:32px;padding:5px 7px}.workspace-button{display:inline-flex;align-items:center;gap:4px;height:32px;border:1px solid #9bcfe8;border-radius:6px;background:#e0f3ff;color:#165d82;font-size:11px;font-weight:800;padding:0 8px;cursor:pointer}.workspace-button:hover{background:#d1eefb}.workspace-save-status{margin-left:auto;color:var(--muted);font-size:11px;white-space:nowrap}.workspace-save-status.is-error{color:#a5222b;font-weight:700}.workspace-save-status.is-saved{color:#2f7b53}.tool-icon{display:inline-flex;width:15px;height:15px;align-items:center;justify-content:center}.tool-icon svg,.ui-icon{width:16px;height:16px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.pre-filter-group{display:flex;align-items:center;gap:6px;min-width:0}.pre-search-wrap{position:relative;display:flex;align-items:center}.pre-search-wrap .ui-icon{position:absolute;left:9px;color:var(--muted);pointer-events:none}.pre-search-wrap input{padding-left:31px}.pre-tool-status{display:flex;align-items:center;gap:5px;margin-left:auto;white-space:nowrap}
 .table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:8px}
 table{border-collapse:collapse;width:100%;min-width:960px}
@@ -145,6 +149,28 @@ tr.changed{background:#fffaf0}
 .changes-action.no.on{background:var(--green);border-color:#9fc9aa;color:var(--green-text)}
 .notes-cell{display:flex;align-items:center;gap:6px;min-width:290px}
 .notes-cell textarea{flex:1;min-width:0}
+.preinspection-table.cards-mode{display:block;min-width:0}
+.preinspection-table.cards-mode thead{display:none}
+.preinspection-table.cards-mode tbody{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:10px;padding:10px;background:#f7f9fb}
+.preinspection-table.cards-mode tbody tr{display:block;min-width:0;border:0}
+.preinspection-table.cards-mode tbody tr td{display:block;padding:0;border:0;background:transparent !important}
+.preinspection-table.cards-mode tbody tr.complete:not(.active-parcel){opacity:.58}
+.preinspection-card{display:flex;flex-direction:column;gap:8px;min-height:200px;padding:11px;background:#fff;border:1px solid var(--line);border-radius:9px;box-shadow:0 2px 7px rgba(4,44,83,.08)}
+.preinspection-card-header{display:flex;align-items:center;gap:5px;min-width:0;color:var(--os-navy)}
+.preinspection-card-header b{font-size:14px;overflow-wrap:anywhere}
+.preinspection-card-header .parcel-link{margin-left:auto;flex:0 0 auto}
+.preinspection-card-address{min-height:34px;color:var(--muted);font-size:12px}
+.preinspection-card-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding-top:2px;border-top:1px solid #edf0f3}
+.preinspection-card-tools button{flex:0 0 32px;width:32px;height:30px}
+.preinspection-card-tools .listing-cell{display:block}
+.preinspection-card-decision{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.preinspection-card-decision-label{color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
+.preinspection-card-notes{display:flex;align-items:flex-start;gap:6px;margin-top:auto}
+.preinspection-card-notes textarea{width:100%;min-width:0;min-height:46px}
+.preinspection-table.cards-mode tbody tr.active-parcel .preinspection-card{border-color:#e6a700;background:#fff4c2;box-shadow:0 0 0 2px rgba(230,167,0,.18),0 3px 10px rgba(230,167,0,.16)}
+.preinspection-table.cards-mode tbody tr.row-pulse .preinspection-card{animation:activeParcelPulse .75s ease-out}
+.preinspection-table.cards-mode tbody tr.empty-row{grid-column:1 / -1}
+.preinspection-table.cards-mode tbody tr.empty-row td{padding:35px;background:#fff !important}
 .address-copy{display:inline-block;max-width:100%;padding:2px 4px;border:1px solid transparent;border-radius:5px;background:transparent;color:inherit;text-align:left;line-height:1.35;cursor:pointer}
 .address-copy:hover,.address-copy:focus-visible{border-color:#9bcfe8;background:#e0f3ff;color:#165d82;outline:none}
 .address-copy.is-copied{border-color:#9fc9aa;background:#eff9e9;color:#416900}
@@ -444,6 +470,10 @@ textarea{
         <select id="preShowFilter" aria-label="Show parcels"><option value="all">All parcels</option><option value="incomplete">Incomplete only</option><option value="changes">Changes only</option></select>
         <button class="btn" id="printCamaRoute" type="button" title="Print the selected route in preinspection order">Print CAMA route sheet</button>
       </div>
+      <div class="pre-view-toggle" role="group" aria-label="Parcel display mode">
+        <button class="pre-view-button" type="button" data-pre-view-mode="list" aria-pressed="true">List</button>
+        <button class="pre-view-button" type="button" data-pre-view-mode="cards" aria-pressed="false">Cards</button>
+      </div>
       <div class="pre-tool-status"><span class="pill" id="preSummary">0 parcels</span><span class="pill progress-pill" id="preProgress">0 / 0 complete</span><span class="pill field-pill" id="fieldSheetCount">0 field sheets</span><span id="salesCheckStatus" class="sales-check-status" role="status">Sales check waits for an assignment</span></div>
     </div>
 
@@ -508,6 +538,7 @@ const STARTER_ASSIGNMENT = [];
 const CHECKS = ["aerial","listing"];
 const STORAGE_KEY = "skagit-preinspection-workspace-v1";
 const USER_CACHE_KEY = `skagit-preinspection-cache-user-${document.body.dataset.workspaceUserId || "unknown"}`;
+const PREINSPECTION_VIEW_MODE_KEY = `${USER_CACHE_KEY}-view-mode-v1`;
 const WORKSPACE_API = "/routing/api/workspaces/";
 const COLORS = ["#2f6fa3","#7b5aa6","#2f8c72","#b36b2c","#a44545","#5d7f3b","#8f5d75","#4d7f8e","#6f6f3c","#855f37"];
 
@@ -884,6 +915,25 @@ function copyFieldParcelNumbers(){
 function fallbackCopy(text,done){
   const helper=document.createElement("textarea");helper.value=text;helper.setAttribute("readonly","");helper.style.position="fixed";helper.style.opacity="0";document.body.appendChild(helper);helper.select();
   try{if(!document.execCommand("copy")) throw new Error("copy failed");done();}catch(e){document.getElementById("fieldRouteStatus").textContent="Copy failed. Select the route list and copy manually.";}finally{helper.remove();}
+}
+
+function loadPreinspectionViewMode(){
+  try{return localStorage.getItem(PREINSPECTION_VIEW_MODE_KEY)==="cards" ? "cards" : "list";}catch(e){return "list";}
+}
+
+let preinspectionViewMode=loadPreinspectionViewMode();
+
+function setPreinspectionViewMode(mode){
+  preinspectionViewMode=mode==="cards" ? "cards" : "list";
+  try{localStorage.setItem(PREINSPECTION_VIEW_MODE_KEY,preinspectionViewMode);}catch(e){}
+  renderPreinspection();
+}
+
+function updatePreinspectionViewToggle(){
+  document.querySelectorAll("[data-pre-view-mode]").forEach(button=>{
+    const selected=button.dataset.preViewMode===preinspectionViewMode;
+    button.setAttribute("aria-pressed",selected?"true":"false");
+  });
 }
 
 function preinspectionFilters(){
@@ -2239,8 +2289,11 @@ function hidePropertySnapshot(){document.getElementById("propertySnapshot")?.cla
 
 function renderPreinspection(){
   const body=document.getElementById("preBody");
+  const table=document.querySelector(".preinspection-table");
   const filters=preinspectionFilters();
 
+  table.classList.toggle("cards-mode",preinspectionViewMode==="cards");
+  updatePreinspectionViewToggle();
   body.innerHTML="";
   const rows=preinspectionRowsFor(filters);
   normalizeActiveParcel(rows);
@@ -2256,9 +2309,16 @@ function renderPreinspection(){
     if(complete) tr.classList.add("complete");
     if(s.changes==="yes") tr.classList.add("changed");
     if(pid===state.activeParcel) tr.classList.add("active-parcel");
-    tr.innerHTML=`
-        <td><span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span>${sale ? `<span class="recent-sale-badge" title="${escapeAttr(saleTitle)}" aria-label="${escapeAttr(saleTitle)}">$</span>` : ""} <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a></td>
-        <td><button class="address-copy" type="button" data-copy-address="${escapeAttr(addr)}" aria-label="Copy address: ${escapeAttr(addr)}" title="Click to copy full address">${escapeHTML(addr || "—")}</button></td>
+    const parcelIdentity=`<span class="parcel-hover" data-parcel-hover="${escapeAttr(pid)}"><b>${escapeHTML(pid)}</b></span>${sale ? `<span class="recent-sale-badge" title="${escapeAttr(saleTitle)}" aria-label="${escapeAttr(saleTitle)}">$</span>` : ""} <a class="parcel-link" href="${assessorPropertyUrl(pid)}" target="_blank" rel="noopener noreferrer" title="Open Skagit County assessor property">↗</a>`;
+    const addressMarkup=`<button class="address-copy" type="button" data-copy-address="${escapeAttr(addr)}" aria-label="Copy address: ${escapeAttr(addr)}" title="Click to copy full address">${escapeHTML(addr || "—")}</button>`;
+    const toolMarkup=`<button class="photo-btn photo-action preinspection-action" type="button" data-photo="${escapeAttr(pid)}" title="Compare assessor photo with StreetSmart" aria-label="Compare assessor photo with StreetSmart">${uiIcon("camera")}</button><button class="photo-btn aerial-action preinspection-action" type="button" data-compare="${escapeAttr(pid)}" title="Compare current and historical aerial imagery" aria-label="Compare current and historical aerial imagery">${uiIcon("layers")}</button><div class="listing-cell"><button class="google-search-btn" type="button" data-google-search="${escapeAttr(addr||"")}" data-google-search-pid="${escapeAttr(pid)}" title="Search this address on Google" aria-label="Search this address on Google">${uiIcon("search")}</button></div>`;
+    const decisionMarkup=`<div class="change-group"><button class="change-btn yes changes-action ${s.changes==="yes"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="yes">YES</button><button class="change-btn no changes-action ${s.changes==="no"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="no">NO</button></div>`;
+    const notesMarkup=`<textarea data-pid="${escapeAttr(pid)}" placeholder="Notes">${escapeHTML(s.notes||"")}</textarea><button class="unassign-action" type="button" data-unassign="${escapeAttr(pid)}" title="Remove this parcel from the route" aria-label="Remove this parcel from the route">${uiIcon("trash")}</button>`;
+    if(preinspectionViewMode==="cards"){
+      tr.innerHTML=`<td colspan="7"><article class="preinspection-card"><div class="preinspection-card-header">${parcelIdentity}</div><div class="preinspection-card-address">${addressMarkup}</div><div class="preinspection-card-tools" aria-label="Parcel tools">${toolMarkup}</div><div class="preinspection-card-decision"><span class="preinspection-card-decision-label">Changes</span>${decisionMarkup}</div><div class="preinspection-card-notes notes-cell">${notesMarkup}</div></article></td>`;
+    }else tr.innerHTML=`
+        <td>${parcelIdentity}</td>
+        <td>${addressMarkup}</td>
         <td style="text-align:center">
           <button class="photo-btn photo-action preinspection-action" type="button" data-photo="${escapeAttr(pid)}" title="Compare assessor photo with StreetSmart" aria-label="Compare assessor photo with StreetSmart">${uiIcon("camera")}</button>
         </td>
@@ -2270,17 +2330,14 @@ function renderPreinspection(){
             <button class="google-search-btn" type="button" data-google-search="${escapeAttr(addr||"")}" data-google-search-pid="${escapeAttr(pid)}" title="Search this address on Google" aria-label="Search this address on Google">${uiIcon("search")}</button>
           </div>
         </td>
-        <td><div class="change-group">
-          <button class="change-btn yes changes-action ${s.changes==="yes"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="yes">YES</button>
-          <button class="change-btn no changes-action ${s.changes==="no"?"on":""}" data-pid="${escapeAttr(pid)}" data-change="no">NO</button>
-        </div></td>
-        <td><div class="notes-cell"><textarea data-pid="${escapeAttr(pid)}" placeholder="Notes">${escapeHTML(s.notes||"")}</textarea><button class="unassign-action" type="button" data-unassign="${escapeAttr(pid)}" title="Remove this parcel from the route" aria-label="Remove this parcel from the route">${uiIcon("trash")}</button></div></td>
+        <td>${decisionMarkup}</td>
+        <td><div class="notes-cell">${notesMarkup}</div></td>
       `;
     body.appendChild(tr);
   });
 
   if(!rows.length){
-    body.innerHTML='<tr><td colspan="7" class="empty">No parcels match the current route/filter.</td></tr>';
+    body.innerHTML='<tr class="empty-row"><td colspan="7" class="empty">No parcels match the current route/filter.</td></tr>';
   }
   document.getElementById("preSummary").textContent=`${rows.length} parcels shown`;
 
@@ -2574,6 +2631,7 @@ document.getElementById("fieldRouteList").addEventListener("drop",e=>{
   renderFieldRoutes();
 });
 
+document.querySelectorAll("[data-pre-view-mode]").forEach(button=>button.addEventListener("click",()=>setPreinspectionViewMode(button.dataset.preViewMode)));
 ["preRouteFilter","preShowFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderPreinspection));
 document.getElementById("preSearch").addEventListener("input",renderPreinspection);
 
