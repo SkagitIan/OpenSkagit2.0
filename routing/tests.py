@@ -264,6 +264,7 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn('PICT-WASKAG19-MJtGoV8oof', template)
         self.assertIn('SkagitCounty2020_6inch/ImageServer', template)
         self.assertIn('historicPictometry.once("tileerror"', template)
+        self.assertIn('historic.invalidateSize();currentPictometry.redraw();historicPictometry.redraw()', template)
 
 
 class WorkspaceApiTests(TestCase):

@@ -1835,9 +1835,7 @@ function saveInspectionNotes(pid,value){
 }
 
 function openImageryCompare(pid){
-  closeImageryCompare({quiet:true});
-  setActiveParcel(pid);
-  paintActiveParcelInDom(pid);
+  document.getElementById("imageryCompare")?.remove();
   const a=assignmentMap().get(pid) || {};
   const modal=document.createElement("div");
   modal.id="imageryCompare";
@@ -1968,6 +1966,7 @@ function openImageryCompare(pid){
   let historicFallbackUsed=false;
   currentPictometry.once("tileerror",()=>{if(!currentFallbackUsed){currentFallbackUsed=true;current.removeLayer(currentPictometry);currentFallback.addTo(current);}});
   historicPictometry.once("tileerror",()=>{if(!historicFallbackUsed){historicFallbackUsed=true;historic.removeLayer(historicPictometry);historicFallback.addTo(historic);}});
+  requestAnimationFrame(()=>{current.invalidateSize();historic.invalidateSize();currentPictometry.redraw();historicPictometry.redraw();});
   if(parcelCenter){
     L.marker(center).addTo(current);
     L.marker(center).addTo(historic);
