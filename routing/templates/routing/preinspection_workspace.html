@@ -1953,7 +1953,10 @@ function openImageryCompare(pid){
     tile.alt="Skagit County aerial imagery";
     tile.width=256; tile.height=256;
     const bounds=this._tileCoordsToBounds(coords);
-    const params=new URLSearchParams({bbox:[bounds.getWest(),bounds.getSouth(),bounds.getEast(),bounds.getNorth()].join(","),bboxSR:"3857",imageSR:"3857",size:"256,256",format:"jpg",f:"image"});
+    // _tileCoordsToBounds returns Leaflet lat/lng values (EPSG:4326). Keep
+    // bboxSR honest; declaring these degree values as EPSG:3857 makes ArcGIS
+    // request a tiny/invalid extent and produces a blank fallback tile.
+    const params=new URLSearchParams({bbox:[bounds.getWest(),bounds.getSouth(),bounds.getEast(),bounds.getNorth()].join(","),bboxSR:"4326",imageSR:"3857",size:"256,256",format:"jpg",f:"image"});
     tile.onload=()=>done(null,tile); tile.onerror=()=>done(new Error("Skagit aerial imagery unavailable"),tile);
     tile.src=service+"/exportImage?"+params.toString();
     return tile;
