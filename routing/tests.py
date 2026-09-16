@@ -318,10 +318,11 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn('const setHistoricalLayer=year=>', template)
         self.assertIn('historicYearSelect.addEventListener("change"', template)
         self.assertIn('imagery unavailable', template)
+        self.assertIn('pictometryId:"PICT-WASKAG19-MJtGoV8oof"', template)
+        self.assertIn('selected.pictometryId', template)
         self.assertIn('const sw=this._map.options.crs.project(bounds.getSouthWest())', template)
         self.assertIn('const ne=this._map.options.crs.project(bounds.getNorthEast())', template)
         self.assertIn('bbox:[sw.x,sw.y,ne.x,ne.y].join(",")', template)
-        self.assertNotIn('PICT-WASKAG19-MJtGoV8oof', template)
 
 
 class WorkspaceApiTests(TestCase):

@@ -1960,7 +1960,7 @@ const HISTORICAL_AERIAL_LAYERS=[
   {year:2015,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2015_4inch/ImageServer"},
   {year:2017,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2017_1foot/ImageServer"},
   {year:2018,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2018_6inch/ImageServer"},
-  {year:2019,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2019_9inch/ImageServer"},
+  {year:2019,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2019_9inch/ImageServer",pictometryId:"PICT-WASKAG19-MJtGoV8oof"},
   {year:2020,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2020_6inch/ImageServer"},
   {year:2021,service:"https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer"}
 ];
@@ -2107,7 +2107,9 @@ function openImageryCompare(pid){
     historicTitle.textContent=`Historical · ${selected.year}`;
     setHistoricalStatus("Loading…");
     if(historicLayer){historic.removeLayer(historicLayer);historicLayer=null;}
-    const layer=skagitImageLayer(selected.service)({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:`Skagit County GIS · ${selected.year}`});
+    const layer=selected.pictometryId
+      ? pictometryLayer(selected.pictometryId,`Pictometry/Cyclomedia · ${selected.year}`)
+      : skagitImageLayer(selected.service)({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:`Skagit County GIS · ${selected.year}`});
     historicLayer=layer;
     layer.once("tileload",()=>{if(historicLayer===layer)setHistoricalStatus("");});
     layer.once("tileerror",()=>{if(historicLayer===layer)setHistoricalStatus(`${selected.year} imagery unavailable`);});
