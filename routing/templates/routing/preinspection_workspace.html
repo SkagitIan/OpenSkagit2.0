@@ -22,7 +22,7 @@
   --amber:#fff3d6; --amber-text:#8a5a00; --red:#fde7e7; --red-text:#9b1c1c;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 header{
@@ -52,11 +52,12 @@ input[type=file]{display:none}
 }
 .view{display:none}
 .view.active{display:block}
+#routesView.active{flex:1;min-height:0}
 
 /* ROUTE MANAGEMENT */
 .route-layout{
   display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:0;
-  min-height:720px;
+  height:100%;min-height:0;
 }
 .field-routes-layout{display:grid;grid-template-columns:minmax(280px,360px) minmax(0,1fr);gap:12px;height:calc(100vh - 122px);min-height:520px;padding:12px}
 .field-route-panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;min-height:0;box-shadow:0 5px 18px rgba(4,44,83,.08)}
@@ -67,7 +68,7 @@ input[type=file]{display:none}
 .field-stop{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:7px;border:1px solid #dce5eb;border-radius:7px;background:#fbfdff;padding:7px;cursor:grab}.field-stop:active{cursor:grabbing}.field-stop.is-dragging{opacity:.45}.field-stop.is-drop-target{border-color:#2f8c72;background:#edf9f2}.field-stop-number{width:25px;height:25px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#e0f3ff;color:#165d82;font:700 12px JetBrains Mono,monospace}.field-stop-main{min-width:0}.field-stop-main b{display:block;color:var(--os-navy);font:700 12px JetBrains Mono,monospace}.field-stop-main span{display:block;color:var(--muted);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.field-stop-remove{border:0;background:transparent;color:#a5222b;font-size:16px;cursor:pointer;padding:2px 4px}.field-route-map{min-height:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 5px 18px rgba(4,44,83,.08)}
 .field-unassigned-heading{font-size:11px;color:var(--muted);font-weight:700;margin:8px 2px 2px}.field-stop.unassigned{background:#fffaf0;border-style:dashed}.field-stop-marker{background:transparent;border:0}.field-stop-marker span{display:flex;width:27px;height:27px;align-items:center;justify-content:center;border-radius:50%;background:#165d82;color:#fff;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);font:700 11px JetBrains Mono,monospace}
 @media(max-width:900px){.field-routes-layout{grid-template-columns:1fr;height:auto}.field-route-map{height:58vh;min-height:420px}}
-#map{height:720px;background:#dde5ea}
+#map{height:100%;min-height:0;background:#dde5ea}
 .side{
   background:#fff;border-left:1px solid var(--line);padding:14px;overflow:auto
 }
@@ -394,7 +395,7 @@ textarea{
             <input id="backupFile" type="file" accept=".json,application/json">
           </label>
           <button class="btn" id="exportProgress">Export Progress CSV</button>
-          <button class="btn" id="streetSmartSettings" type="button">StreetSmart save settings</button>
+          <button class="btn" id="streetSmartSettings" type="button">StreetSmart save help</button>
           <button class="btn danger" id="resetWorkspace">Reset Local Workspace</button>
         </div>
       </details>
@@ -551,29 +552,15 @@ function workspaceStatus(text,kind=""){
   el.classList.toggle("is-saved",kind==="saved");
 }
 
-async function openStreetSmartSettings(){
+function openStreetSmartSettings(){
   const modal=document.createElement("div");
   modal.className="routing-settings-modal";
-  modal.innerHTML=`<section class="routing-settings-card" role="dialog" aria-modal="true" aria-labelledby="routing-settings-title"><div class="routing-settings-head"><b id="routing-settings-title">StreetSmart save settings</b><button type="button" id="routingSettingsClose" aria-label="Close settings">×</button></div><div class="routing-settings-body"><label for="streetSmartImageRoot">Image save directory</label><input id="streetSmartImageRoot" type="text" placeholder="\\\\server\\share\\OpenSkagit\\StreetSmart"><p>The local Django process must be able to write to this directory. Use a Windows local path or UNC network path. This setting is saved to your user account.</p></div><div class="routing-settings-foot"><button type="button" id="routingSettingsCancel">Cancel</button><button type="button" class="primary" id="routingSettingsSave">Save setting</button></div></section>`;
+  modal.innerHTML=`<section class="routing-settings-card" role="dialog" aria-modal="true" aria-labelledby="routing-settings-title"><div class="routing-settings-head"><b id="routing-settings-title">Saving StreetSmart images</b><button type="button" id="routingSettingsClose" aria-label="Close help">×</button></div><div class="routing-settings-body"><p>Images download from your browser, not to the web server. Set your browser’s download folder to your work network drive once, and each “Save StreetSmart JPG” click will save there without another prompt. Turn off “Ask where to save each file” in browser settings.</p></div><div class="routing-settings-foot"><button type="button" id="routingSettingsCancel">Close</button></div></section>`;
   document.body.appendChild(modal);
-  const input=modal.querySelector("#streetSmartImageRoot");
   const close=()=>modal.remove();
   modal.querySelector("#routingSettingsClose").addEventListener("click",close);
   modal.querySelector("#routingSettingsCancel").addEventListener("click",close);
   modal.addEventListener("click",event=>{if(event.target===modal)close();});
-  try{
-    const payload=await workspaceRequest("/routing/api/settings/");
-    input.value=payload.streetsmart_image_root || "";
-  }catch(error){workspaceStatus(error.message || "Settings could not be loaded","error");close();return;}
-  modal.querySelector("#routingSettingsSave").addEventListener("click",async()=>{
-    const button=modal.querySelector("#routingSettingsSave");
-    button.disabled=true;
-    try{
-      await workspaceRequest("/routing/api/settings/",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({streetsmart_image_root:input.value.trim()})});
-      workspaceStatus("StreetSmart save directory saved","saved");
-      close();
-    }catch(error){workspaceStatus(error.message || "Settings could not be saved","error");button.disabled=false;}
-  });
 }
 
 function cacheState(){try{localStorage.setItem(USER_CACHE_KEY,JSON.stringify(state));}catch(e){}}
@@ -1306,14 +1293,18 @@ function removeParcelFromAssignment(pid){
   const a=assignmentMap().get(pid) || {};
   const addr=(a.SitusStNo+" "+a.SitusStName).trim();
   if(!confirm(`Remove ${pid}${addr ? " — "+addr : ""} from this assignment?`)) return;
-  state.assignment=state.assignment.filter(row=>row.PARCELID!==pid);
-  for(const rt of Object.values(state.routes)) rt.parcels=(rt.parcels||[]).filter(p=>p!==pid);
-  for(const rt of Object.values(state.fieldRoutes)) rt.parcels=(rt.parcels||[]).filter(p=>p!==pid);
-  state.fieldUnassigned=(state.fieldUnassigned||[]).filter(p=>p!==pid);
+  const parcelKey=value=>String(value??"").trim().toUpperCase();
+  const removedKey=parcelKey(pid);
+  state.assignment=state.assignment.filter(row=>parcelKey(row.PARCELID)!==removedKey);
+  for(const rt of Object.values(state.routes)) rt.parcels=(rt.parcels||[]).filter(p=>parcelKey(p)!==removedKey);
+  for(const rt of Object.values(state.fieldRoutes)) rt.parcels=(rt.parcels||[]).filter(p=>parcelKey(p)!==removedKey);
+  state.fieldUnassigned=(state.fieldUnassigned||[]).filter(p=>parcelKey(p)!==removedKey);
   delete state.inspections[pid];
   selected.delete(pid);
-  if(state.parcelGeoJSON) state.parcelGeoJSON.features=state.parcelGeoJSON.features.filter(f=>f.properties.PARCELID!==pid);
+  if(state.parcelGeoJSON) state.parcelGeoJSON.features=state.parcelGeoJSON.features.filter(f=>parcelKey(f.properties.PARCELID)!==removedKey);
   persist();
+  clearTimeout(workspaceSaveTimer);
+  saveWorkspaceNow();
   renderRoutes(); renderPreinspection(); renderFieldRoutes(); refreshSelectionUI(); refreshParcelStyles(); updateMapMessage();
   const layer=parcelLayersById.get(pid);
   if(layer) parcelLayer.removeLayer(layer);
@@ -1623,9 +1614,20 @@ async function openStreetSmartCompare(pid){
     try{
       const orientation=getCurrentOrientation();
       const response=await fetch(`/routing/parcel/${encodeURIComponent(pid)}/streetsmart/save/`,{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-CSRFToken":csrf()},body:JSON.stringify({recording_id:recordingId,yaw:Number(orientation.yaw)||yaw,pitch:Number(orientation.pitch)||pitch,hfov:Number(orientation.hFov ?? orientation.hfov)||hfov,srs})});
-      const payload=await response.json();
-      if(!response.ok || !payload.saved)throw new Error(payload.error || "The StreetSmart image could not be saved.");
-      setStatus(`Saved ${payload.filename}`);
+      if(!response.ok){
+        const payload=await response.json().catch(()=>({}));
+        throw new Error(payload.error || "The StreetSmart image could not be generated.");
+      }
+      const image=await response.blob();
+      const url=URL.createObjectURL(image);
+      const link=document.createElement("a");
+      link.href=url;
+      link.download=`${pid}.jpg`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+      setStatus(`Saved ${pid}.jpg`);
     }catch(error){setStatus(error.message || "Save failed",true);}
     saveButton.disabled=!viewerReady || !recordingId;
   });
@@ -1929,32 +1931,11 @@ function openImageryCompare(pid){
 }
 
 function googleSearchUrl(query){
-  return "https://www.google.com/search?igu=1&q=" + encodeURIComponent(String(query||"Skagit County, WA").trim());
+  return "https://www.google.com/search?q=" + encodeURIComponent(String(query||"Skagit County, WA").trim());
 }
 
 function openGoogleSearchPreview(address,pid){
-  document.getElementById("googleSearchPreview")?.remove();
-  const modal=document.createElement("section");
-  modal.id="googleSearchPreview";
-  modal.className="google-search-modal";
-  modal.setAttribute("role","dialog");
-  modal.setAttribute("aria-modal","true");
-  modal.setAttribute("aria-label",`Google search preview for ${address||pid}`);
-  modal.innerHTML=`<div class="google-search-head"><strong>${escapeHTML(pid)} · Google search</strong><form class="google-search-form" id="googleSearchForm"><input id="googleSearchQuery" type="search" value="${escapeAttr(address||"Skagit County, WA")}" aria-label="Google search query"><button type="submit">Search</button></form><button class="google-search-close" type="button" aria-label="Close Google search preview">×</button></div><iframe class="google-search-frame" id="googleSearchFrame" title="Google search results" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
-  document.body.appendChild(modal);
-  const input=modal.querySelector("#googleSearchQuery");
-  const frame=modal.querySelector("#googleSearchFrame");
-  const close=()=>{document.removeEventListener("keydown",onKey);modal.remove();};
-  const onKey=event=>{if(event.key==="Escape")close();};
-  modal.querySelector(".google-search-close").addEventListener("click",close);
-  modal.addEventListener("click",event=>{if(event.target===modal)close();});
-  modal.querySelector("#googleSearchForm").addEventListener("submit",event=>{
-    event.preventDefault();
-    frame.src=googleSearchUrl(input.value);
-  });
-  document.addEventListener("keydown",onKey);
-  frame.src=googleSearchUrl(address||"Skagit County, WA");
-  input.focus();
+  window.open(googleSearchUrl(address||"Skagit County, WA"),"_blank","noopener,noreferrer");
 }
 
 function parcelAddress(a){

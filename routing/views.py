@@ -26,7 +26,7 @@ from .services.streetsmart import (
     list_recordings,
     render_by_location,
     render_recording,
-    save_jpg,
+    safe_parcel_filename,
 )
 from .services.valhalla import optimized_order
 
@@ -554,9 +554,11 @@ def save_streetsmart_image(request, parcel_id):
             payload = {**payload, "yaw": recording["viewing_direction"] or 0}
         render_options = _street_smart_render_options(payload, high_resolution=True)
         rendered = render_recording(recording_id, srs_name=f"EPSG:{_street_smart_srs(payload.get('srs', '2926'))}", **render_options)
-        settings_obj, _ = RoutingUserSettings.objects.get_or_create(owner=request.user)
-        filename = save_jpg(parcel_id, rendered["content"], settings_obj.streetsmart_image_root)
-        return JsonResponse({"saved": True, "filename": filename, "recording_id": recording_id, **render_options})
+        filename = safe_parcel_filename(parcel_id)
+        response = HttpResponse(rendered["content"], content_type="image/jpeg")
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        response["X-StreetSmart-Recording-ID"] = recording_id
+        return response
     except (TypeError, ValueError):
         return JsonResponse({"error": "The StreetSmart view direction is not valid."}, status=400)
     except (StreetSmartConfigurationError, StreetSmartNoRecordingError, StreetSmartError) as exc:
