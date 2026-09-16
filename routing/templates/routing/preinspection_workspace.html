@@ -1961,14 +1961,14 @@ function openImageryCompare(pid){
     tile.src=service+"/exportImage?"+params.toString();
     return tile;
   }});
-  const currentPictometry=pictometryLayer("PICT-WASKAG25-qSfR3O1lit","Pictometry/Cyclomedia · 2025").addTo(current);
   const currentFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2021"});
-  const historicPictometry=pictometryLayer("PICT-WASKAG19-MJtGoV8oof","Pictometry/Cyclomedia · 2019").addTo(historic);
   const historicFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2020_6inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2020"});
-  let currentFallbackUsed=false;
-  let historicFallbackUsed=false;
-  currentPictometry.once("tileerror",()=>{if(!currentFallbackUsed){currentFallbackUsed=true;current.removeLayer(currentPictometry);currentFallback.addTo(current);}});
-  historicPictometry.once("tileerror",()=>{if(!historicFallbackUsed){historicFallbackUsed=true;historic.removeLayer(historicPictometry);historicFallback.addTo(historic);}});
+  // Keep the county layer underneath both sources. Pictometry coverage can
+  // have occasional missing tiles; one tile error should not blank the pane.
+  currentFallback.addTo(current);
+  historicFallback.addTo(historic);
+  const currentPictometry=pictometryLayer("PICT-WASKAG25-qSfR3O1lit","Pictometry/Cyclomedia · 2025").addTo(current);
+  const historicPictometry=pictometryLayer("PICT-WASKAG19-MJtGoV8oof","Pictometry/Cyclomedia · 2019").addTo(historic);
   requestAnimationFrame(()=>{current.invalidateSize();historic.invalidateSize();currentPictometry.redraw();historicPictometry.redraw();});
   if(parcelCenter){
     L.marker(center).addTo(current);

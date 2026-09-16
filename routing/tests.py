@@ -263,8 +263,9 @@ class PreinspectionWorkspaceTests(TestCase):
         self.assertIn('Historical · 2019', template)
         self.assertIn('PICT-WASKAG19-MJtGoV8oof', template)
         self.assertIn('SkagitCounty2020_6inch/ImageServer', template)
-        self.assertIn('historicPictometry.once("tileerror"', template)
         self.assertIn('bboxSR:"4326",imageSR:"3857"', template)
+        self.assertIn('currentFallback.addTo(current);', template)
+        self.assertIn('historicFallback.addTo(historic);', template)
         self.assertIn('historic.invalidateSize();currentPictometry.redraw();historicPictometry.redraw()', template)
 
 
