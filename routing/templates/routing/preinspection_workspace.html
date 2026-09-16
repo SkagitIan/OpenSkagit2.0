@@ -2129,7 +2129,7 @@ function openImageryCompare(pid){
   }});
   const currentPictometry=pictometryLayer("PICT-WASKAG25-qSfR3O1lit","Pictometry/Cyclomedia · 2025").addTo(current);
   const currentFallback=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2021"});
-  const historicCounty2019=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2019_9inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2019"}).addTo(historic);
+  const historicCounty2019=skagitImageLayer("https://geo.skagitcountywa.gov/server/rest/services/Images/SkagitCounty2019_9inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2019"}).addTo(historic);
   let currentFallbackUsed=false;
   currentPictometry.once("tileerror",()=>{if(!currentFallbackUsed){currentFallbackUsed=true;current.removeLayer(currentPictometry);currentFallback.addTo(current);}});
   if(parcelCenter){

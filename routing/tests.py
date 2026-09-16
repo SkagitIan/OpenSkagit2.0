@@ -312,7 +312,7 @@ class PreinspectionWorkspaceTests(TestCase):
         template = (Path(__file__).parent / "templates" / "routing" / "preinspection_workspace.html").read_text(encoding="utf-8")
         self.assertIn('Current · 2025', template)
         self.assertIn('Historical · 2019', template)
-        self.assertIn('const historicCounty2019=skagitImageLayer("https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2019_9inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2019"}).addTo(historic);', template)
+        self.assertIn('const historicCounty2019=skagitImageLayer("https://geo.skagitcountywa.gov/server/rest/services/Images/SkagitCounty2019_9inch/ImageServer")({tileSize:256,maxZoom:20,updateWhenZooming:false,attribution:"Skagit County GIS · 2019"}).addTo(historic);', template)
         self.assertNotIn('PICT-WASKAG19-MJtGoV8oof', template)
         self.assertNotIn('historicFallbackUsed', template)
         self.assertNotIn('HISTORICAL_AERIAL_LAYERS', template)
