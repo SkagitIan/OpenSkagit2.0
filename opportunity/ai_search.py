@@ -19,6 +19,7 @@ from .models import OpportunitySearch, OpportunitySearchFeedback
 from .r2_search import (
     DuckDBR2OpportunityClient,
     R2SearchError,
+    _valid_lat_lng,
     generate_r2_search,
     run_generated_r2_search,
     validate_r2_search_sql,
@@ -542,9 +543,27 @@ def recent_searches_for_user(user, limit: int | None = None):
 
 def display_rows_for_search(search: OpportunitySearch, user, filters: dict[str, str] | None = None) -> list[dict[str, Any]]:
     rows = copy.deepcopy(search.result_rows or [])
+    for row in rows:
+        _repair_saved_row_geometry(row)
     rows = apply_prompt_result_filters(search.prompt, rows)
     rows = filter_generated_opportunity_rows(rows, filters or {})
     return mark_saved(rows, user)
+
+
+def _repair_saved_row_geometry(row: dict[str, Any]) -> None:
+    """Backfill map coordinates for result rows saved before EPSG:2926 support."""
+    parcel_data = row.get("parcel_data") if isinstance(row.get("parcel_data"), dict) else {}
+    lat, lng = _valid_lat_lng(
+        parcel_data.get("gis_y", row.get("lat")),
+        parcel_data.get("gis_x", row.get("lng")),
+    )
+    if lat is None or lng is None:
+        return
+    row["lat"] = lat
+    row["lng"] = lng
+    row["map_url"] = f"https://www.google.com/maps/search/?api=1&query={lat},{lng}"
+    row["map_embed_url"] = f"https://maps.google.com/maps?q={lat},{lng}&z=17&output=embed"
+    row["risk_flags"] = [flag for flag in row.get("risk_flags", []) if flag != "No parcel geometry"]
 
 
 def filter_generated_opportunity_rows(rows: list[dict[str, Any]], filters: dict[str, str]) -> list[dict[str, Any]]:

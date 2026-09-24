@@ -706,15 +706,34 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertEqual(row["assessed_value_fmt"], "$400,000")
         self.assertEqual(row["land_value_fmt"], "$150,000")
 
-    def test_r2_result_hydration_flags_invalid_geometry(self):
+    def test_r2_result_hydration_converts_state_plane_geometry(self):
         row = format_r2_result_row(
             "P2",
             {"parcel_number": "P2", "gis_x": 1200000, "gis_y": 500000, "land_use": "(911) UNDEVELOPED LAND"},
             {"parcel_number": "P2"},
         )
         self.assertEqual(row["location"], "n/a")
-        self.assertEqual(row["map_url"], "")
-        self.assertIn("No parcel geometry", row["risk_flags"])
+        self.assertIn("maps", row["map_url"])
+        self.assertIsNotNone(row["lat"])
+        self.assertIsNotNone(row["lng"])
+        self.assertNotIn("No parcel geometry", row["risk_flags"])
+
+    def test_saved_result_geometry_is_repaired_for_existing_searches(self):
+        from opportunity.ai_search import _repair_saved_row_geometry
+
+        row = {
+            "lat": None,
+            "lng": None,
+            "map_url": "",
+            "map_embed_url": "",
+            "risk_flags": ["No parcel geometry", "Unknown zoning"],
+            "parcel_data": {"gis_x": 1488653.0679, "gis_y": 555554.0426},
+        }
+        _repair_saved_row_geometry(row)
+        self.assertAlmostEqual(row["lat"], 48.5213043467, places=6)
+        self.assertAlmostEqual(row["lng"], -121.4595753124, places=6)
+        self.assertIn("maps", row["map_url"])
+        self.assertNotIn("No parcel geometry", row["risk_flags"])
 
     @tag("live")
     @unittest.skipUnless(os.environ.get("OPPORTUNITY_R2_LIVE_TESTS") == "1", "Set OPPORTUNITY_R2_LIVE_TESTS=1 to run live R2 smoke tests.")

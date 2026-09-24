@@ -130,8 +130,11 @@ Preferred fields:
 - `gis_x`
 - `gis_y`
 
-Only use `gis_x/gis_y` for maps when they are valid WGS84 longitude/latitude
-bounds. Otherwise preserve the existing no-geometry flag.
+`gis_x/gis_y` in the derived ParcelBook files originate from county
+`XCOORDINAT/YCOORDINAT` fields and are EPSG:2926 (Washington State Plane
+North, US feet). Convert them to WGS84 longitude/latitude before building
+map URLs. Do not treat projected values such as `1488653, 555554` as
+missing geometry.
 
 ## Asset Classes
 

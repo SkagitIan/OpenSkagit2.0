@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from django.conf import settings
+from pyproj import Transformer
 
 from .services import (
     ASSESSOR_DETAIL_URL,
@@ -926,7 +927,20 @@ def _valid_lat_lng(lat_value: Any, lng_value: Any) -> tuple[float | None, float 
         return None, None
     if -90 <= lat <= 90 and -180 <= lng <= 180:
         return lat, lng
+    # County XCOORDINAT/YCOORDINAT values are EPSG:2926 (Washington State
+    # Plane North, US feet), not WGS84 longitude/latitude. Convert them here
+    # so existing parquet builds immediately produce usable map links.
+    if 500_000 <= lng <= 2_000_000 and 0 <= lat <= 2_000_000:
+        try:
+            converted_lng, converted_lat = _STATE_PLANE_TO_WGS84.transform(lng, lat)
+        except Exception:
+            return None, None
+        if -90 <= converted_lat <= 90 and -180 <= converted_lng <= 180:
+            return converted_lat, converted_lng
     return None, None
+
+
+_STATE_PLANE_TO_WGS84 = Transformer.from_crs("EPSG:2926", "EPSG:4326", always_xy=True)
 
 
 def _coerce_number(value: Any) -> float | None:
