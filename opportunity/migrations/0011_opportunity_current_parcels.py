@@ -3,15 +3,10 @@ from django.db import migrations
 
 VIEW_SQL = """
 CREATE OR REPLACE VIEW opportunity_current_parcels AS
-WITH certified AS (
-    SELECT
-        ac.*,
-        'certified_snapshot'::text AS opportunity_value_source
-    FROM assessor_current_parcel ac
-),
-fallback_ranked AS (
+WITH fallback_ranked AS (
     SELECT
         ar.*,
+        'observed_latest_assessor_roll'::text AS opportunity_value_source,
         row_number() OVER (
             PARTITION BY trim(ar.parcel_number)
             ORDER BY ar.id DESC
@@ -23,34 +18,32 @@ fallback_ranked AS (
         WHERE trim(appraisal_year) ~ '^[0-9]+$'
     )
 ),
-source AS (
-    SELECT
-        parcel_number,
-        appraisal_year,
-        tax_year,
-        owner_name,
-        situs_street_number,
-        situs_street_name,
-        situs_city_state_zip,
-        neighborhood_code,
-        land_use_code,
-        land_use_description,
-        building_value,
-        improved_land_value,
-        unimproved_land_value,
-        timber_land_value,
-        assessed_value,
-        taxable_value,
-        total_market_value,
-        acres,
-        year_built,
-        living_area,
-        inactive_date,
-        proptype,
-        utilities,
-        opportunity_value_source
-    FROM certified
-    UNION ALL
+source (
+    parcel_number,
+    appraisal_year,
+    tax_year,
+    owner_name,
+    situs_street_number,
+    situs_street_name,
+    situs_city_state_zip,
+    neighborhood_code,
+    land_use_code,
+    land_use_description,
+    building_value,
+    improved_land_value,
+    unimproved_land_value,
+    timber_land_value,
+    assessed_value,
+    taxable_value,
+    total_market_value,
+    acres,
+    year_built,
+    living_area,
+    inactive_date,
+    proptype,
+    utilities,
+    opportunity_value_source
+) AS (
     SELECT
         trim(parcel_number),
         NULLIF(trim(appraisal_year), '')::integer,
@@ -75,10 +68,10 @@ source AS (
         NULLIF(inactive_date, ''),
         proptype,
         utilities,
-        'observed_latest_assessor_roll'::text
+        opportunity_value_source
     FROM fallback_ranked
     WHERE parcel_rank = 1
-      AND NOT EXISTS (SELECT 1 FROM certified)
+      AND trim(parcel_number) <> ''
 )
 SELECT
     p.aid,
@@ -167,7 +160,6 @@ LEFT JOIN source s ON trim(s.parcel_number) = trim(p.parcel_number);
 class Migration(migrations.Migration):
     dependencies = [
         ("opportunity", "0010_add_query_language"),
-        ("assessor_sync", "0006_normalize_certified_parcel_view"),
     ]
 
     operations = [
