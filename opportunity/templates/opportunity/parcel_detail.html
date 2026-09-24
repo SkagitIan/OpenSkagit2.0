@@ -35,7 +35,7 @@
         <article class="pb-kpi-card pb-kpi-card-teal">
           <span>Assessed value</span>
           <strong>{{ parcel.assessed_value_fmt }}</strong>
-          <small>Current assessor value</small>
+          <small>Appraisal roll {{ parcel.appraisal_year|default:"current" }}</small>
         </article>
         <article class="pb-kpi-card pb-kpi-card-gold">
           <span>Land value</span>

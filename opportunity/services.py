@@ -376,7 +376,7 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
                      WHEN 'one_late' THEN 2 WHEN 'watch' THEN 1 ELSE 0 END) AS lead_score,
                    MIN(current_statement.oldest_due_date) AS oldest_due_date
             FROM current_statement
-            JOIN skagit_parcels p ON p.parcel_number = current_statement.parcel_number
+            JOIN opportunity_current_parcels p ON p.parcel_number = current_statement.parcel_number
             LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
             JOIN LATERAL (
                 SELECT (value->>'year')::int AS tax_year,
@@ -428,7 +428,7 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
                  + LEAST(COALESCE(hist.value_5yr_growth_pct, 0), 100) / 4
                  - CASE WHEN COALESCE(p.building_value, 0) > 500000 THEN 35 ELSE 0 END AS score
         FROM due
-        JOIN skagit_parcels p ON p.parcel_number = due.parcel_number
+        JOIN opportunity_current_parcels p ON p.parcel_number = due.parcel_number
         LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         LEFT JOIN LATERAL (
@@ -482,7 +482,7 @@ def vacant_buildable_lots(filters: dict[str, str], limit: int) -> list[dict[str,
                  + CASE WHEN concat_ws(' ', p.situs_street_number, p.situs_street_name) <> '' THEN 20 ELSE 0 END
                  + CASE WHEN COALESCE(z.jurisdiction, z.citydistrict, p.city_district, '') <> '' THEN 20 ELSE 0 END
                  - COALESCE(p.building_value, 0) / 1000 AS score
-        FROM skagit_parcels p
+        FROM opportunity_current_parcels p
         LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         LEFT JOIN LATERAL (
@@ -521,7 +521,7 @@ def possible_lot_splits(filters: dict[str, str], limit: int) -> list[dict[str, A
         WITH residential AS (
             SELECT p.parcel_number, p.acres, COALESCE(z.citydistrict, p.city_district, z.jurisdiction, 'UNKNOWN') AS place_key,
                    COALESCE(z.zone_id, 'UNKNOWN') AS zone_key
-            FROM skagit_parcels p
+            FROM opportunity_current_parcels p
             LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
             WHERE p.inactive_date IS NULL
               AND COALESCE(p.assessed_value, 0) > 0
@@ -559,7 +559,7 @@ def possible_lot_splits(filters: dict[str, str], limit: int) -> list[dict[str, A
                (p.acres / NULLIF(c.nearby_median_acres, 0)) * 35
                  + CASE WHEN COALESCE(p.building_value, 0) <= 100000 THEN 30 ELSE 0 END
                  + CASE WHEN COALESCE(z.jurisdiction, z.citydistrict, p.city_district, '') <> '' THEN 20 ELSE 0 END AS score
-        FROM skagit_parcels p
+        FROM opportunity_current_parcels p
         JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         LEFT JOIN LATERAL (
@@ -619,7 +619,7 @@ def teardown_candidates(filters: dict[str, str], limit: int) -> list[dict[str, A
                         WHEN COALESCE(i.primary_effective_year, p.eff_year_built, p.year_built, 9999) < 1975 THEN 50000
                         ELSE 15000 END
                  - COALESCE(p.building_value, 0) AS score
-        FROM skagit_parcels p
+        FROM opportunity_current_parcels p
         LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         LEFT JOIN LATERAL (
@@ -687,13 +687,12 @@ def assemblage_opportunities(filters: dict[str, str], limit: int) -> list[dict[s
                concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
                COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
                p.acres, p.assessed_value, p.building_value, p.land_use,
-               COALESCE(NULLIF(ar.impr_land_value, '')::numeric, 0) AS impr_land_value,
-               COALESCE(NULLIF(ar.unimpr_land_value, '')::numeric, 0) AS unimpr_land_value,
+               COALESCE(p.impr_land_value, 0) AS impr_land_value,
+               COALESCE(p.unimpr_land_value, 0) AS unimpr_land_value,
                z.zone_id, z.zone_name, z.waza_general, z.waza_specific, z.reference_url,
                geo.lat, geo.lon AS lng,
                split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1) AS land_use_code
-        FROM skagit_parcels p
-        LEFT JOIN assessor_rollup ar ON ar.parcel_number = p.parcel_number
+        FROM opportunity_current_parcels p
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         LEFT JOIN parcel_geo_static_features geo ON geo.parcel_number = p.parcel_number
         WHERE p.parcel_number = ANY(%s)
@@ -728,7 +727,7 @@ def _assemblage_opportunities_sql_legacy(filters: dict[str, str], limit: int) ->
                        SELECT 1 FROM tax_delinquency_taxstatement t
                        WHERE t.parcel_number = p.parcel_number AND t.total_due > 0
                    ) AS has_delinquency
-            FROM skagit_parcels p
+            FROM opportunity_current_parcels p
             JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
             LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
             WHERE p.inactive_date IS NULL
@@ -1333,7 +1332,7 @@ def latest_sync_sales(
           ORDER BY s.sale_date_iso DESC NULLS LAST
           LIMIT 1
         ) s ON true
-        LEFT JOIN skagit_parcels p ON p.parcel_number = c.parcel_number
+        LEFT JOIN opportunity_current_parcels p ON p.parcel_number = c.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         ORDER BY c.created_at DESC
         {limit_sql}
@@ -1387,7 +1386,7 @@ def latest_sync_recorded_docs(run_id: int, limit: int | None = None) -> list[dic
           concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
           COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city
         FROM recording_changes rc
-        JOIN skagit_parcels p ON p.parcel_number = rc.parcel_number
+        JOIN opportunity_current_parcels p ON p.parcel_number = rc.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         WHERE COALESCE(rc.parcel_number, '') <> ''
         ORDER BY rc.created_at DESC
@@ -1431,7 +1430,7 @@ def latest_watchlist_alerts(run_id: int, user=None, limit: int = 8) -> list[dict
           COALESCE(NULLIF(p.situs_city_state_zip, ''), NULLIF(z.citydistrict, ''), NULLIF(z.jurisdiction, '')) AS city,
           p.land_use
         FROM events e
-        LEFT JOIN skagit_parcels p ON p.parcel_number = e.parcel_number
+        LEFT JOIN opportunity_current_parcels p ON p.parcel_number = e.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = e.parcel_number
         WHERE e.parcel_number = ANY(%s)
         ORDER BY e.created_at DESC
@@ -1497,7 +1496,7 @@ def latest_sync_activity(run_id: int, limit: int = 40) -> list[dict[str, Any]]:
           p.land_use,
           p.assessed_value
         FROM raw_events e
-        JOIN skagit_parcels p ON p.parcel_number = e.parcel_number
+        JOIN opportunity_current_parcels p ON p.parcel_number = e.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = e.parcel_number
         WHERE COALESCE(e.parcel_number, '') <> ''
         ORDER BY e.created_at DESC
@@ -1637,7 +1636,7 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
             """
             SELECT COUNT(*) AS new_filings
             FROM assessor_sync_changes c
-            JOIN skagit_parcels p
+            JOIN opportunity_current_parcels p
               ON p.parcel_number = COALESCE(NULLIF(c.new_row->>'parcel_number', ''), NULLIF(c.old_row->>'parcel_number', ''))
             WHERE c.run_id = %s
               AND c.table_name = 'auditor_recordings'
@@ -1664,7 +1663,7 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
             )
             SELECT COUNT(*) AS parcel_signals
             FROM normalized n
-            JOIN skagit_parcels p ON p.parcel_number = n.parcel_number
+            JOIN opportunity_current_parcels p ON p.parcel_number = n.parcel_number
             WHERE n.parcel_number <> ''
             """,
             [run.pk],
@@ -1690,7 +1689,7 @@ def latest_sync_metric_counts(run, user=None) -> dict[str, int]:
                 )
                 SELECT COUNT(*) AS watchlist_changes
                 FROM normalized n
-                JOIN skagit_parcels p ON p.parcel_number = n.parcel_number
+                JOIN opportunity_current_parcels p ON p.parcel_number = n.parcel_number
                 WHERE n.parcel_number = ANY(%s)
                 """,
                 [run.pk, list(saved)],
@@ -2270,6 +2269,8 @@ def parcel_summary(parcel_number: str) -> dict[str, Any] | None:
         "current_use": detail["current_use"],
         "assessed_value": detail["assessed_value"],
         "assessed_value_fmt": detail["assessed_value_fmt"],
+        "appraisal_year": detail.get("appraisal_year"),
+        "value_source": detail.get("opportunity_value_source"),
         "land_value_fmt": detail["land_value_fmt"],
         "building_value_fmt": detail["building_value_fmt"],
         "acres_fmt": detail["acres_fmt"],
@@ -2290,11 +2291,12 @@ def parcel_detail(parcel_number: str, include_dossier: bool = True, use_ai_feasi
                p.assessed_value, p.impr_land_value, p.unimpr_land_value, p.building_value,
                p.taxable_value, p.total_market_value, p.total_taxes, p.sale_date, p.sale_price, p.sale_deed_type,
                p.year_built, p.living_area, p.levy_code,
+               p.appraisal_year, p.opportunity_value_source,
                z.zone_id, z.zone_name, z.waza_general, z.waza_specific, z.reference_url,
                ST_Y(ST_Centroid(g.geometry)) AS lat, ST_X(ST_Centroid(g.geometry)) AS lng,
                ST_XMin(g.geometry::box3d) AS min_lng, ST_YMin(g.geometry::box3d) AS min_lat,
                ST_XMax(g.geometry::box3d) AS max_lng, ST_YMax(g.geometry::box3d) AS max_lat
-        FROM skagit_parcels p
+        FROM opportunity_current_parcels p
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
         WHERE p.parcel_number = %s

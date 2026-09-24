@@ -171,7 +171,7 @@ ALLOWED_TABLES = {
     "parcel_zoning",
     "sales",
     "skagit_parcel_history",
-    "skagit_parcels",
+    "opportunity_current_parcels",
     "tax_delinquency_taxstatement",
     "v_land_ledger_source",
     "v_parcel_tax_detail",
@@ -186,7 +186,7 @@ FORBIDDEN_SQL = re.compile(
 
 SCHEMA_CONTEXT = """
 Exact core columns:
-- skagit_parcels p: parcel_number, account_number, situs_street_number, situs_street_name, situs_city_state_zip, owner_name, building_value, land_use, impr_land_value, unimpr_land_value, assessed_value, taxable_value, total_market_value, acres, total_taxes, inactive_date, city_district, utilities, year_built, living_area, sale_date, sale_price, sale_deed_type
+- opportunity_current_parcels p: parcel_number, account_number, situs_street_number, situs_street_name, situs_city_state_zip, owner_name, building_value, land_use, impr_land_value, unimpr_land_value, assessed_value, taxable_value, total_market_value, acres, total_taxes, inactive_date, city_district, utilities, year_built, living_area, sale_date, sale_price, sale_deed_type
 - gis_skagit_parcels g: parcel_id, citydistrict, acres, geometry
 - parcel_primary_zoning z: parcel_id, citydistrict, acres, jurisdiction, zone_id, zone_name, waza_general, waza_specific, reference_url
 - assessor_rollup ar: parcel_number, land_use_code, land_use_description, neighborhood_code_id, neighborhood_description, utilities_codes, utilities_description
@@ -202,7 +202,7 @@ sales.sale_date_iso is a text ISO-date field. For date comparisons, guard and ca
 FALLBACK_SKILL_REFERENCE_CONTEXT = """
 OpenSkagit data dictionary essentials:
 - Use raw assessor codes and readable labels together when possible.
-- `skagit_parcels.land_use` commonly includes code and label, for example `(111) HOUSEHOLD, SFR, INSIDE CITY`, `(181) MH LEASED PROPERTY`, `(911) UNDEVELOPED LAND INCORPORATED`.
+- `opportunity_current_parcels.land_use` commonly includes code and label, for example `(111) HOUSEHOLD, SFR, INSIDE CITY`, `(181) MH LEASED PROPERTY`, `(911) UNDEVELOPED LAND INCORPORATED`.
 - Parse land-use code with split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1).
 - Key land-use meanings: 110/111/112/113 SFR/household; 120/130 multi-unit; 140 condo residential; 150 mobile home parks; 180 manufactured homes; 181 MH leased property; 182 multiple mobile homes; 185 MH with detached SFR; 190 vacation/cabin; 670 governmental; 680 schools; 740 recreational activities; 760 parks; 910 unimproved land; 911 undeveloped incorporated land; 912 undeveloped 2-4 family; 930 water areas; 940 open space; 970 condo moorage.
 - MH LEASED PROPERTY is not bare land; leased manufactured homes may exist without normal main-area dwelling improvements.
@@ -876,7 +876,7 @@ def _fallback_generated_search(prompt: str) -> GeneratedSearch | None:
                 CASE WHEN %s <> '' THEN 'matched requested place' END,
                 CASE WHEN z.zone_id IS NOT NULL THEN CONCAT(z.zone_id, ' zoning') END
             ], NULL) AS match_reasons
-        FROM skagit_parcels p
+        FROM opportunity_current_parcels p
         LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
         LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
         LEFT JOIN LATERAL (
@@ -931,7 +931,7 @@ def _fallback_multiunit_search(prompt: str) -> GeneratedSearch:
                 CASE WHEN multi.average_quality_count > 0 THEN 'average quality improvement signal' END,
                 CASE WHEN NOT recent_sale.has_recent_sale THEN 'no sale in requested period' END
             ], NULL) AS match_reasons
-        FROM skagit_parcels p
+        FROM opportunity_current_parcels p
         LEFT JOIN assessor_rollup ar ON ar.parcel_number = p.parcel_number
         LEFT JOIN LATERAL (
             SELECT
@@ -1216,13 +1216,13 @@ Rules:
 - Always return parcel_number. Optional useful columns are score and match_reasons.
 - For match_reasons, use ARRAY['reason one', 'reason two'] or array_remove(ARRAY[CASE WHEN ... THEN 'reason' END], NULL). Do not use FILTER on ARRAY expressions.
 - Keep result queries parcel-focused and cap expensive work before broad joins when possible.
-- Prefer skagit_parcels p for current parcel facts and active parcels: p.inactive_date IS NULL.
+- Prefer opportunity_current_parcels p for current parcel facts and active parcels: p.inactive_date IS NULL.
 - Join GIS and primary zoning as:
   LEFT JOIN gis_skagit_parcels g ON g.parcel_id = p.parcel_number
   LEFT JOIN parcel_primary_zoning z ON z.parcel_id = p.parcel_number
 - Use assessor_rollup for readable land_use_description, utilities_description, and neighborhood_description when helpful.
 - Utilities tokens include PWR, PWR-U, SEP, SEW, WTR-P, WTR-W, NONE.
-- skagit_parcels.land_use often looks like '(911) UNDEVELOPED LAND INCORPORATED'; parse the code with split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1).
+- opportunity_current_parcels.land_use often looks like '(911) UNDEVELOPED LAND INCORPORATED'; parse the code with split_part(ltrim(COALESCE(p.land_use, ''), '('), ')', 1).
 - sales.sale_date_iso is text, not a date column. Never compare s.sale_date_iso directly to CURRENT_DATE, DATE, timestamp, or interval expressions. Use a guarded cast such as s.sale_date_iso ~ '^\\d{{4}}-\\d{{2}}-\\d{{2}}$' AND NULLIF(s.sale_date_iso, '')::date >= CURRENT_DATE - INTERVAL '5 years'.
 - For no-home or vacant-like intent, use conservative screening signals such as low/zero p.building_value and/or NOT EXISTS main dwelling improvements.
 - For bare land, raw land, undeveloped land, recreation land, camp/camping land, or small recreational parcel intent, exclude MH LEASED PROPERTY, leased manufactured-home land, condos, condominium/common-area parcels, public/civic/government/school/church/cemetery parcels, public open-space zoning, zero-acre/no-geometry records, and parcels with residential dwelling evidence.
@@ -1265,7 +1265,7 @@ Core output shape example:
   "title": "Large vacant parcels near a named place",
   "criteria_summary": "Parcels matching acreage, improvement, utility, and location signals from the prompt.",
   "assumptions": ["Vacant means low assessor building value unless the prompt says otherwise."],
-  "sql": "SELECT p.parcel_number, 100 AS score, ARRAY['over acreage threshold'] AS match_reasons FROM skagit_parcels p WHERE p.inactive_date IS NULL AND p.acres > %s ORDER BY p.acres DESC",
+  "sql": "SELECT p.parcel_number, 100 AS score, ARRAY['over acreage threshold'] AS match_reasons FROM opportunity_current_parcels p WHERE p.inactive_date IS NULL AND p.acres > %s ORDER BY p.acres DESC",
   "params": [40]
 }}
 
@@ -1301,7 +1301,7 @@ def _skill_reference_context() -> str:
                 _extract_markdown_section(codes, "How To Use Codes"),
                 _extract_markdown_section(codes, "Improvement Fields"),
                 _extract_markdown_section(codes, "`land.land_type`"),
-                _extract_markdown_section(codes, "`skagit_parcels.land_use`"),
+                _extract_markdown_section(codes, "`opportunity_current_parcels.land_use`"),
                 _extract_markdown_section(codes, "`utilities` Mappings"),
                 _extract_markdown_section(codes, "`land_use` Mappings"),
             ]
