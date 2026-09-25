@@ -2902,7 +2902,12 @@ def parcel_value_history(parcel_number: str) -> list[dict[str, Any]]:
               )
             ORDER BY h.appraisal_year DESC, h.captured_at DESC, h.id DESC
         ), current_roll AS (
-            SELECT COALESCE(p.appraisal_year, NULLIF(p.tax_year, '')::integer) AS tax_year,
+            SELECT COALESCE(
+                       CASE WHEN trim(COALESCE(p.appraisal_year, '')) ~ '^[0-9]+$'
+                            THEN trim(p.appraisal_year)::integer END,
+                       CASE WHEN trim(COALESCE(p.tax_year, '')) ~ '^[0-9]+$'
+                            THEN trim(p.tax_year)::integer END
+                   ) AS tax_year,
                    p.assessed_value AS total_value,
                    COALESCE(p.impr_land_value, 0)
                      + COALESCE(p.unimpr_land_value, 0) AS land_value,
