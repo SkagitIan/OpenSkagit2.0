@@ -133,47 +133,22 @@
           </div>
         </section>
 
-        <div class="pb-map-media-grid">
-          <section class="pb-panel pb-parcel-map-card">
+        <section class="pb-panel pb-parcel-map-card pb-parcel-map-single">
             <div class="pb-card-head">
               <div>
                 <p class="pb-section-eyebrow">Map</p>
-                <h3>Parcel Map</h3>
+                <h3>Parcel location</h3>
               </div>
               {% if parcel.map_url %}<a class="pb-button secondary" href="{{ parcel.map_url }}" target="_blank" rel="noopener">Open map</a>{% endif %}
             </div>
-            {% if parcel.map_embed_url %}
-              <iframe class="pb-parcel-map" src="{{ parcel.map_embed_url }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map for {{ parcel.parcel_number }}"></iframe>
+            {% if parcel.lat and parcel.lng %}
+              <div class="pb-parcel-leaflet" id="parcel-map" data-lat="{{ parcel.lat }}" data-lng="{{ parcel.lng }}" aria-label="Interactive map for {{ parcel.parcel_number }}"></div>
             {% else %}
               <div class="pb-map-canvas pb-parcel-map-empty">
                 <span class="pb-muted">Map unavailable for this parcel.</span>
               </div>
             {% endif %}
-          </section>
-
-          <section class="pb-panel pb-aerial-card">
-            <div class="pb-card-head">
-              <div>
-                <p class="pb-section-eyebrow">Imagery</p>
-                <h3>Aerial</h3>
-              </div>
-            </div>
-            {% if parcel.aerial_image_url %}
-              <div class="pb-aerial-frame" data-aerial-frame>
-                <div class="pb-zoom-controls" aria-label="Aerial imagery zoom controls">
-                  <button type="button" data-zoom-out aria-label="Zoom aerial imagery out">-</button>
-                  <button type="button" data-zoom-in aria-label="Zoom aerial imagery in">+</button>
-                  <button type="button" data-zoom-reset aria-label="Reset aerial imagery zoom">Reset</button>
-                </div>
-                <img class="pb-aerial-image" src="{{ parcel.aerial_image_url }}" alt="Aerial imagery around parcel {{ parcel.parcel_number }}" loading="lazy" data-aerial-image>
-              </div>
-            {% else %}
-              <div class="pb-map-canvas pb-parcel-map-empty">
-                <span class="pb-muted">No aerial imagery extent available.</span>
-              </div>
-            {% endif %}
-          </section>
-        </div>
+        </section>
       </main>
 
       <aside class="pb-detail-rail">
@@ -362,30 +337,31 @@
     });
   });
 </script>
-<script>
+{% if parcel.lat and parcel.lng %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
     (() => {
-      const frame = document.querySelector("[data-aerial-frame]");
-      const image = document.querySelector("[data-aerial-image]");
-      if (!frame || !image) return;
-      let zoom = 1;
-      const applyZoom = () => {
-        image.style.transform = `scale(${zoom})`;
-        frame.dataset.zoomed = zoom > 1 ? "true" : "false";
-      };
-      frame.querySelector("[data-zoom-in]")?.addEventListener("click", () => {
-        zoom = Math.min(zoom + 0.25, 3);
-        applyZoom();
+      const element = document.getElementById("parcel-map");
+      if (!element || !window.L) return;
+      const center = [Number(element.dataset.lat), Number(element.dataset.lng)];
+      if (center.some(Number.isNaN)) return;
+      const map = L.map(element, { scrollWheelZoom: false }).setView(center, 17);
+      const street = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
+        maxZoom: 20,
+        attribution: "© Esri, HERE, Garmin, Intermap, NPS"
+      }).addTo(map);
+      const aerial = L.tileLayer("https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}", {
+        maxZoom: 20,
+        maxNativeZoom: 16,
+        attribution: "USGS The National Map"
       });
-      frame.querySelector("[data-zoom-out]")?.addEventListener("click", () => {
-        zoom = Math.max(zoom - 0.25, 1);
-        applyZoom();
-      });
-      frame.querySelector("[data-zoom-reset]")?.addEventListener("click", () => {
-        zoom = 1;
-        applyZoom();
-      });
+      L.marker(center).addTo(map).bindPopup("{{ parcel.parcel_number|escapejs }}").openPopup();
+      L.control.layers({ "Street": street, "Aerial": aerial }, null, { position: "topright" }).addTo(map);
+      setTimeout(() => map.invalidateSize(), 0);
     })();
   </script>
+{% endif %}
 
 {% include "opportunity/_chrome_close.html" %}
 {% endblock %}
