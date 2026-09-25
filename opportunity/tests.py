@@ -689,6 +689,7 @@ class OpportunityHelperTests(SimpleTestCase):
                 "land_use": "(111) HOUSEHOLD, SFR, INSIDE CITY",
                 "acres": 0.5,
                 "assessed_value": 400000,
+                "appraisal_year": 2027,
                 "assessor_building_value": 250000,
                 "improved_land_value": 150000,
                 "zoning_code_short": "R-5",
@@ -704,6 +705,7 @@ class OpportunityHelperTests(SimpleTestCase):
         self.assertIn("large lot", row["signal_labels"])
         self.assertIn("maps", row["map_url"])
         self.assertEqual(row["assessed_value_fmt"], "$400,000")
+        self.assertEqual(row["appraisal_year"], 2027)
         self.assertEqual(row["land_value_fmt"], "$150,000")
 
     def test_r2_result_hydration_converts_state_plane_geometry(self):
@@ -942,6 +944,12 @@ class OpportunityAuthTests(TestCase):
             self.assertEqual(response.status_code, 302)
             self.assertIn(reverse("opportunity_login"), response["Location"])
 
+    def test_logged_in_user_can_open_my_searches(self):
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_my_searches"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "My Searches")
+
     @patch("opportunity.views.dashboard_context", return_value={"tabs": services.TABS, "watchlist": [], "sync": {"metrics": [], "changes": []}})
     def test_logged_in_user_can_load_dashboard(self, dashboard_context):
         self.client.login(username="user", password="pass")
@@ -962,6 +970,31 @@ class OpportunityAuthTests(TestCase):
         self.client.login(username="user", password="pass")
         response = self.client.get(reverse("opportunity_parcel_detail", args=["P404"]))
         self.assertEqual(response.status_code, 404)
+
+    def test_live_gis_endpoint_requires_login(self):
+        response = self.client.get(reverse("opportunity_parcel_live_gis", args=["P123265"]))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse("opportunity_login"), response["Location"])
+
+    @patch("opportunity.views.parcel_live_gis_context", return_value={"status": "ok", "layers": [], "count": 0, "source": "live_arcgis"})
+    def test_live_gis_endpoint_uses_allowlisted_scope(self, live_context):
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_parcel_live_gis", args=["P123265"]) + "?scope=core")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Additional GIS Checks")
+        live_context.assert_called_once_with("P123265", scope="core")
+
+    def test_live_gis_endpoint_rejects_unknown_scope(self):
+        self.client.login(username="user", password="pass")
+        response = self.client.get(reverse("opportunity_parcel_live_gis", args=["P123265"]) + "?scope=anything")
+        self.assertEqual(response.status_code, 400)
+
+    @patch("gis_mcp.services.get_parcel_overlays", return_value={"overlays": []})
+    def test_live_gis_context_passes_server_side_layer_scope(self, get_parcel_overlays):
+        result = services.parcel_live_gis_context("P123265", scope="core")
+        self.assertEqual(result["source"], "live_arcgis")
+        get_parcel_overlays.assert_called_once()
+        self.assertEqual(get_parcel_overlays.call_args.kwargs["layers"], list(services.LIVE_GIS_SCOPES["core"]))
 
 
 @override_settings(ROOT_URLCONF="config.urls")

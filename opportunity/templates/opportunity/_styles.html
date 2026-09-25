@@ -274,6 +274,8 @@
   .pb-gis-feature-list > div { display: grid; gap: 2px; padding-bottom: 8px; border-bottom: 1px solid #edf2f6; }
   .pb-gis-feature-list strong { color: #16263a; font-size: 13px; overflow-wrap: anywhere; }
   .pb-gis-feature-list span { color: var(--os-muted); font-size: 12px; line-height: 1.35; overflow-wrap: anywhere; }
+  .pb-gis-loading { display: flex; align-items: center; gap: 10px; min-height: 54px; color: var(--os-muted); }
+  .pb-gis-loading.htmx-request { opacity: .72; }
   .pb-record-stack { display: grid; gap: 9px; max-height: 230px; overflow: auto; }
   .pb-record-stack > div { padding-bottom: 9px; border-bottom: 1px solid #edf2f6; }
   .pb-record-stack strong, .pb-record-stack span { display: block; }
@@ -454,6 +456,27 @@
   .pb-list-row > div:first-child, .pb-tax-main { display: grid; gap: 3px; }
   .pb-list-row strong, .pb-tax-row strong { color: #16263a; }
   .pb-list-row span, .pb-tax-row span { color: #53647a; font-size: 12px; }
+  .pb-investor-result-row { display: grid; grid-template-columns: minmax(180px, 1.05fr) minmax(250px, 1.25fr) minmax(190px, 1fr) auto; gap: 14px; align-items: center; border: 1px solid #e1ebf2; border-radius: 8px; background: #fff; padding: 13px; }
+  .pb-result-property, .pb-result-context { display: grid; gap: 4px; min-width: 0; }
+  .pb-result-property strong { color: #16263a; overflow-wrap: anywhere; }
+  .pb-result-property span, .pb-result-context small { color: #53647a; font-size: 12px; }
+  .pb-result-facts { display: grid; grid-template-columns: repeat(2, minmax(80px, 1fr)); gap: 8px 14px; min-width: 0; }
+  .pb-result-facts span { display: grid; gap: 2px; min-width: 0; }
+  .pb-result-facts strong { color: #16263a; font-size: 14px; white-space: nowrap; }
+  .pb-result-facts small { color: #65758a; font-size: 10px; line-height: 1.2; }
+  .pb-result-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: flex-end; }
+  .pb-result-actions .pb-button { min-height: 34px; padding: 7px 10px; font-size: 12px; }
+  .pb-data-note { color: #65758a; font-size: 11px; white-space: nowrap; }
+  .pb-search-details { margin-top: 10px; color: #526075; font-size: 12px; }
+  .pb-search-details summary { cursor: pointer; color: var(--pb-teal); font-weight: 800; }
+  .pb-search-details p { margin: 8px 0 0; }
+  .pb-search-list-panel { display: grid; gap: 8px; }
+  .pb-saved-search-main { display: grid; gap: 4px; min-width: 0; }
+  .pb-saved-search-main p { margin: 0; color: #53647a; font-size: 12px; overflow-wrap: anywhere; }
+  .pb-saved-search-meta { display: grid; gap: 3px; color: #53647a; font-size: 12px; }
+  .pb-saved-search-meta strong { color: #16263a; }
+  .pb-empty-state { display: grid; gap: 9px; justify-items: start; padding: 28px; border: 1px dashed #cfdce6; border-radius: 8px; color: #53647a; }
+  .pb-empty-state strong { color: #16263a; }
   .pb-list-values { display: grid; gap: 3px; }
   .pb-tax-row { grid-template-columns: minmax(220px, 1.3fr) 170px 150px minmax(150px, .8fr) auto; }
   .pb-tax-due { display: grid; gap: 7px; }
@@ -525,7 +548,7 @@
     .pb-hot, .pb-sync-brief, .pb-page-head, .pb-section-head, .pb-detail-grid, .pb-detail-grid-3, .pb-detail-sidecars, .pb-map-media-grid, .pb-compact-columns, .pb-dossier-metrics, .pb-dossier-grid, .pb-parcel-kpis, .pb-feasibility-grid { grid-template-columns: 1fr; flex-direction: column; }
     .pb-hot-stats { align-items: flex-start; flex-direction: column; gap: 8px; }
     .pb-facts { grid-template-columns: 1fr; }
-    .pb-list-row, .pb-tax-row, .pb-map-view { grid-template-columns: 1fr; }
+    .pb-list-row, .pb-tax-row, .pb-map-view, .pb-investor-result-row { grid-template-columns: 1fr; }
     .pb-ai-inline, .pb-ai-summary, .pb-saved-search-row, .pb-plan-grid { grid-template-columns: 1fr; }
     .pb-map-canvas { min-height: 340px; }
     .pb-topbar { align-items: center; justify-content: space-between; height: 58px; gap: 12px; padding: 10px 14px; flex-direction: row; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
@@ -787,7 +810,7 @@
     }
     .pb-button, .pb-button.secondary { width: 100%; min-height: 43px; }
 
-    .pb-list-row, .pb-tax-row, .pb-card, .pb-map-result-card, .pb-watch-card, .pb-data-source-card, .pb-saved-search-row {
+    .pb-list-row, .pb-tax-row, .pb-card, .pb-map-result-card, .pb-watch-card, .pb-data-source-card, .pb-saved-search-row, .pb-investor-result-row {
       padding: 12px;
       gap: 10px;
       border-radius: 8px;
@@ -801,6 +824,9 @@
     .pb-card-title { font-size: 16px; }
     .pb-card-location, .pb-list-row strong, .pb-tax-row strong { font-size: 14px; line-height: 1.35; }
     .pb-list-values, .pb-tax-values, .pb-tax-due { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+    .pb-result-actions { justify-content: stretch; }
+    .pb-result-actions > * { flex: 1 1 120px; }
+    .pb-result-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .pb-chip, .pb-pill, .pb-flag, .pb-year-badge { margin: 0 4px 5px 0; max-width: 100%; white-space: normal; line-height: 1.25; }
     .pb-icon-actions {
       justify-content: stretch;

@@ -10,12 +10,34 @@ from urllib.parse import urlencode
 
 from django.db import connection
 from django.urls import reverse
+from django.utils import timezone
 
 
 ASSESSOR_DETAIL_URL = "https://www.skagitcounty.net/search/property/default.aspx?id={parcel_number}"
 AUDITOR_RECORDING_SEARCH_URL = "https://www.skagitcounty.net/Search/Recording/default.aspx"
 AUDITOR_DOCUMENT_URL = "https://www.skagitcounty.net/AuditorRecording/Documents/RecordedDocuments/{year}/{month}/{day}/{recording_number}.pdf"
 LATEST_AERIAL_IMAGE_URL = "https://gis.skagitcountywa.gov/arcgis/rest/services/Images/SkagitCounty2021_3inch/ImageServer/exportImage"
+LIVE_GIS_SCOPES = {
+    "core": (
+        "uga",
+        "npdes",
+        "fema_flood",
+        "fema_floodway",
+        "skagit_wetlands",
+        "stream_buffer",
+        "watershed_basin",
+    ),
+    "expanded": (
+        "uga", "npdes", "wria", "watershed_basin", "surface_water_limited_stream", "stream_buffer",
+        "wellhead_protection", "big_lake_water_mitigation", "alluvial_fans", "slope_stability",
+        "landslide_areas", "aerial_interpreted_wetlands", "skagit_wetlands", "hydric_soils",
+        "fema_bfe", "fema_floodway", "fema_flood", "fema_panels", "landfill_influence",
+        "sewer_district", "dike_district", "drainage_district", "road_maintenance_district",
+        "group_a_water_systems", "group_a_b_wells", "mtca_cleanup_sites", "ust_facilities",
+        "wdfw_priority_habitats", "fema_nfhl_zones", "fema_nfhl_panels", "dnr_natural_heritage_current",
+        "dnr_managed_lands", "tribal_lands", "forest_practices", "epa_superfund",
+    ),
+}
 RECENT_RECORDING_DAYS = 90
 SYNC_BRIEF_DISCLAIMER = (
     "Public-record screening signals only. Confirm documents, title, zoning, access, taxes, and site conditions "
@@ -82,11 +104,12 @@ class OpportunityTab:
 
 
 TABS = [
-    OpportunityTab("delinquent-tax-pressure", "Delinquent Tax Pressure", "Parcels where unpaid taxes may signal owner pressure or a need to resolve carrying costs.", "Signals show delinquent tax years and estimated past-due amount; sorted by tax pressure and redevelopment relevance."),
-    OpportunityTab("vacant-buildable-lots", "Vacant Buildable Lots", "Residentially zoned parcels with little or no building value where a straightforward build may be possible.", "Signals show utility and frontage clues; sorted toward urban vacant lots with better service signals."),
-    OpportunityTab("assemblage-opportunities", "Parcel Assemblages", "Adjacent parcels that may form a larger development opportunity through connected ownership and parcel relationships.", "Graph patterns show connected parcel groups; review the full parcel record and source evidence before acting."),
-    OpportunityTab("possible-lot-splits", "Possible Lot Splits", "Large residential lots that stand out against smaller nearby or same-zone lots and may have extra land capacity.", "Signals show theoretical capacity screens, not approved yield; sorted by oversize lots versus nearby median lots."),
-    OpportunityTab("teardown-candidates", "Teardown Candidates", "Single-family parcels where the land value is high and the existing main dwelling appears low-value or obsolete.", "Signals show main dwelling condition/year and land-building ratio; manufactured homes, recent homes, and good-condition homes are excluded."),
+    OpportunityTab("delinquent-tax-pressure", "Tax Delinquency", "Parcels with unpaid property taxes or carrying-cost signals.", "Shows delinquent years and estimated past-due amounts from public records."),
+    OpportunityTab("vacant-buildable-lots", "Vacant Lots", "Residential parcels with little or no building value.", "Shows acreage, utilities, frontage, zoning, and current parcel facts."),
+    OpportunityTab("assemblage-opportunities", "Parcel Assemblages", "Nearby parcels that may be useful to review together.", "Shows connected parcel groups and the source records behind each result."),
+    OpportunityTab("possible-lot-splits", "Lot Split Candidates", "Large residential lots that stand out from nearby parcels.", "Shows acreage and nearby parcel context for further review."),
+    OpportunityTab("teardown-candidates", "Land and Older Homes", "Residential parcels with higher land value and lower-value improvements.", "Shows land, building, improvement, and sale facts from public records."),
+    OpportunityTab("bare-land-utilities", "Bare Land with Utilities", "Bare or lightly improved parcels with utility signals.", "Shows acreage, value, zoning, and utility tokens from public records."),
 ]
 TAB_LOOKUP = {tab.key: tab for tab in TABS}
 DEFAULT_TAB = TABS[0].key
@@ -108,6 +131,7 @@ TAB_FILTER_KEYS = {
     "assemblage-opportunities": ["min_cluster"],
     "possible-lot-splits": ["min_acres", "max_building", "place"],
     "teardown-candidates": ["min_land_value", "max_building", "place"],
+    "bare-land-utilities": ["min_acres", "max_building", "place"],
     "generated-opportunity": ["min_acres", "min_land_value", "max_building", "improved", "place"],
 }
 DATA_SOURCES = [
@@ -296,6 +320,8 @@ def fetch_tab_rows(
     raw_limit = limit if limit >= 1000 else limit * 5
     if tab_key == "vacant-buildable-lots":
         rows = _dedupe_rows(vacant_buildable_lots(filters, raw_limit))
+    elif tab_key == "bare-land-utilities":
+        rows = _dedupe_rows(vacant_buildable_lots(filters, raw_limit, require_utilities=True))
     elif tab_key == "assemblage-opportunities":
         rows = _dedupe_rows(assemblage_opportunities(filters, raw_limit))
     elif tab_key == "possible-lot-splits":
@@ -459,9 +485,10 @@ def delinquent_tax_pressure(filters: dict[str, str], limit: int) -> list[dict[st
     return [_format_delinquency(row) for row in _fetch(sql, [list(VACANT_OR_DWELLING_CODES), list(NON_BUILDER_CODES | EXEMPT_OR_COMMON_AREA_CODES), min_years, min_due, min_land_ratio, min_land_ratio, limit])]
 
 
-def vacant_buildable_lots(filters: dict[str, str], limit: int) -> list[dict[str, Any]]:
+def vacant_buildable_lots(filters: dict[str, str], limit: int, require_utilities: bool = False) -> list[dict[str, Any]]:
     min_acres = _decimal_filter(filters.get("min_acres"), Decimal("0.10"))
     max_building = _decimal_filter(filters.get("max_building"), Decimal("10000"))
+    utility_clause = "AND NULLIF(TRIM(COALESCE(p.utilities, '')), '') IS NOT NULL" if require_utilities else ""
     sql = f"""
         SELECT p.parcel_number,
                concat_ws(' ', p.situs_street_number, p.situs_street_name) AS address,
@@ -508,6 +535,7 @@ def vacant_buildable_lots(filters: dict[str, str], limit: int) -> list[dict[str,
           AND COALESCE(z.zone_name, '') NOT ILIKE '%%Natural Resource%%'
           AND {BUILDER_ZONE_EXCLUSION_SQL}
           AND {RESIDENTIAL_ZONE_SQL}
+          {utility_clause}
         ORDER BY score DESC NULLS LAST, p.acres DESC NULLS LAST
         LIMIT %s
     """
@@ -2335,7 +2363,7 @@ def parcel_detail(parcel_number: str, include_dossier: bool = True, use_ai_feasi
             "tax_pressure": parcel_tax_pressure(parcel_number),
             "sync_changes": parcel_sync_changes(parcel_number),
             "dossier": parcel_dossier(parcel_number) if include_dossier else {},
-            "gis_context": parcel_gis_context(parcel_number) if include_dossier else {},
+            "gis_context": parcel_local_gis_context(parcel_number) if include_dossier else {},
         }
     )
     item["feasibility"] = parcel_feasibility(item, use_ai=use_ai_feasibility) if include_dossier else {}
@@ -2496,22 +2524,13 @@ def zoning_definition_context(row: dict[str, Any]) -> dict[str, str]:
     }
 
 
-def parcel_gis_context(parcel_number: str) -> dict[str, Any]:
-    try:
-        from gis_mcp import services as gis_services
-
-        raw = gis_services.get_parcel_overlays(parcel_number, include_parcel_geometry=False)
-    except Exception as exc:
-        return {"status": "error", "error": str(exc)[:220], "layers": [], "count": 0}
-
+def _gis_layers_from_overlays(raw: dict[str, Any], source: str) -> dict[str, Any]:
     layers = []
     for overlay in raw.get("overlays") or []:
         features = overlay.get("features") or []
-        if not features:
-            continue
         rows = [_gis_feature_summary(feature.get("attributes") or {}) for feature in features[:4]]
         rows = [row for row in rows if row.get("primary") or row.get("details")]
-        if not rows:
+        if not rows and not overlay.get("error"):
             continue
         layers.append(
             {
@@ -2520,9 +2539,99 @@ def parcel_gis_context(parcel_number: str) -> dict[str, Any]:
                 "count": overlay.get("count") or len(features),
                 "exceeded": bool(overlay.get("exceededTransferLimit")),
                 "rows": rows,
+                "status": overlay.get("status") or "ok",
+                "error": overlay.get("error") or "",
             }
         )
-    return {"status": "ok", "layers": layers, "count": len(layers)}
+    return {"status": "ok", "source": source, "layers": layers, "count": len(layers)}
+
+
+def parcel_local_gis_context(parcel_number: str) -> dict[str, Any]:
+    parcel_number = parcel_number.upper()
+    layers = []
+    try:
+        primary = _fetch(
+            """
+            SELECT zone_id, zone_name, jurisdiction, waza_general, waza_specific,
+                   percent_of_parcel, reference_url
+            FROM parcel_primary_zoning
+            WHERE upper(parcel_id) = upper(%s)
+            LIMIT 1
+            """,
+            [parcel_number],
+        )
+        overlaps = parcel_zoning_overlaps(parcel_number)
+        zoning_rows = []
+        for row in primary + overlaps:
+            zoning_rows.append(
+                {
+                    "primary": row.get("zone_id") or row.get("zone_name") or "Zoning overlap",
+                    "details": [
+                        value for value in (
+                            row.get("definition") or row.get("zone_name"),
+                            row.get("jurisdiction"),
+                            row.get("percent_of_parcel_fmt"),
+                        ) if value
+                    ],
+                }
+            )
+        if zoning_rows:
+            layers.append({"key": "local_zoning", "label": "Local zoning", "count": len(zoning_rows), "rows": zoning_rows})
+    except Exception as exc:
+        return {"status": "error", "source": "local_postgis", "error": str(exc)[:220], "layers": [], "count": 0}
+
+    try:
+        static = _fetch(
+            """
+            SELECT city_name, school_district, fire_district, voting_precinct,
+                   nearest_road_name, distance_to_nearest_road_miles,
+                   nearest_public_place_name, distance_to_nearest_public_place_miles,
+                   distance_to_nearest_tide_gate_miles
+            FROM parcel_geo_static_features
+            WHERE upper(parcel_number) = upper(%s)
+            LIMIT 1
+            """,
+            [parcel_number],
+        )
+        if static:
+            row = static[0]
+            details = [
+                value for value in (
+                    row.get("city_name"),
+                    f"School: {row['school_district']}" if row.get("school_district") else "",
+                    f"Fire: {row['fire_district']}" if row.get("fire_district") else "",
+                    f"Precinct: {row['voting_precinct']}" if row.get("voting_precinct") else "",
+                    f"Nearest road: {row['nearest_road_name']}" if row.get("nearest_road_name") else "",
+                ) if value
+            ]
+            if details:
+                layers.append({"key": "local_static_geography", "label": "Static geography", "count": 1, "rows": [{"primary": parcel_number, "details": details}]})
+    except Exception:
+        # Older deployments may not have the optional static geography table.
+        pass
+    return {"status": "ok", "source": "local_postgis", "layers": layers, "count": len(layers)}
+
+
+def parcel_live_gis_context(parcel_number: str, scope: str = "core") -> dict[str, Any]:
+    scope = (scope or "core").strip().lower()
+    layer_keys = LIVE_GIS_SCOPES.get(scope)
+    if layer_keys is None:
+        raise ValueError("Unknown GIS scope")
+    try:
+        from gis_mcp import services as gis_services
+
+        raw = gis_services.get_parcel_overlays(parcel_number, layers=list(layer_keys), include_parcel_geometry=False)
+    except Exception as exc:
+        return {"status": "error", "source": "live_arcgis", "error": str(exc)[:220], "layers": [], "count": 0}
+    result = _gis_layers_from_overlays(raw, "live_arcgis")
+    result["scope"] = scope
+    result["retrieved_at"] = timezone.now()
+    return result
+
+
+def parcel_gis_context(parcel_number: str) -> dict[str, Any]:
+    """Backward-compatible alias for the local GIS context."""
+    return parcel_local_gis_context(parcel_number)
 
 
 def parcel_rollup_context(parcel_number: str) -> dict[str, Any]:
@@ -2770,13 +2879,57 @@ def _dossier_zoning_note(rows: list[dict[str, Any]]) -> str:
 def parcel_value_history(parcel_number: str) -> list[dict[str, Any]]:
     rows = _fetch(
         """
+        WITH fetched_history AS (
+            SELECT tax_year, total_value, land_value, building_value, tax_amount, 0 AS source_priority
+            FROM skagit_parcel_history
+            WHERE parcel_number = %s
+        ), assessor_history AS (
+            SELECT DISTINCT ON (h.appraisal_year)
+                   h.appraisal_year AS tax_year,
+                   h.assessed_value AS total_value,
+                   COALESCE(h.improved_land_value, 0)
+                     + COALESCE(h.unimproved_land_value, 0)
+                     + COALESCE(h.timber_land_value, 0) AS land_value,
+                   h.building_value,
+                   NULL::numeric AS tax_amount,
+                   1 AS source_priority
+            FROM assessor_roll_history h
+            WHERE upper(trim(h.parcel_number)) = %s
+              AND h.appraisal_year IS NOT NULL
+              AND h.appraisal_year > COALESCE(
+                  (SELECT max(f.tax_year) FROM fetched_history f),
+                  0
+              )
+            ORDER BY h.appraisal_year DESC, h.captured_at DESC, h.id DESC
+        ), current_roll AS (
+            SELECT COALESCE(p.appraisal_year, NULLIF(p.tax_year, '')::integer) AS tax_year,
+                   p.assessed_value AS total_value,
+                   COALESCE(p.impr_land_value, 0)
+                     + COALESCE(p.unimpr_land_value, 0) AS land_value,
+                   p.building_value,
+                   p.total_taxes AS tax_amount,
+                   2 AS source_priority
+            FROM opportunity_current_parcels p
+            WHERE upper(trim(p.parcel_number)) = %s
+        ), combined AS (
+            SELECT * FROM fetched_history
+            UNION ALL
+            SELECT * FROM assessor_history
+            UNION ALL
+            SELECT * FROM current_roll
+        ), deduped AS (
+            SELECT DISTINCT ON (tax_year)
+                   tax_year, total_value, land_value, building_value, tax_amount
+            FROM combined
+            WHERE tax_year IS NOT NULL
+            ORDER BY tax_year DESC, source_priority DESC
+        )
         SELECT tax_year, total_value, land_value, building_value, tax_amount
-        FROM skagit_parcel_history
-        WHERE parcel_number = %s
+        FROM deduped
         ORDER BY tax_year DESC
-        LIMIT 6
+        LIMIT 8
         """,
-        [parcel_number.upper()],
+        [parcel_number.upper(), parcel_number.upper(), parcel_number.upper()],
     )
     for row in rows:
         row["total_value_fmt"] = money(row.get("total_value"))
@@ -2807,6 +2960,7 @@ def parcel_value_history_chart(parcel_number: str) -> dict[str, Any]:
     value_polyline = []
     tax_polyline = []
     count = len(rows)
+    current_year = max((row.get("tax_year") for row in rows if row.get("tax_year") is not None), default=None)
     for index, row in enumerate(rows):
         x = left_pad + (plot_width * Decimal(index) / Decimal(max(count - 1, 1)))
         value = _decimal(row.get("total_value")) or Decimal("0")
@@ -2815,11 +2969,12 @@ def parcel_value_history_chart(parcel_number: str) -> dict[str, Any]:
         tax_y = _chart_y(tax, tax_min, tax_max, top_pad, plot_height)
         point = {
             "tax_year": row.get("tax_year"),
+            "is_current": row.get("tax_year") == current_year,
             "x": _svg_number(x),
             "value_y": _svg_number(value_y),
             "tax_y": _svg_number(tax_y),
             "total_value": int(value),
-            "tax_amount": int(tax),
+            "tax_amount": int(tax) if _decimal(row.get("tax_amount")) is not None else None,
             "total_value_fmt": money(value),
             "tax_amount_fmt": money(tax),
         }
@@ -2836,9 +2991,13 @@ def parcel_value_history_chart(parcel_number: str) -> dict[str, Any]:
         "value_max_fmt": money(value_max),
         "tax_min_fmt": money(tax_min),
         "tax_max_fmt": money(tax_max),
+        "start_year": points[0]["tax_year"],
         "labels_json": json.dumps([str(point["tax_year"]) for point in points]),
         "value_values_json": json.dumps([point["total_value"] for point in points]),
         "tax_values_json": json.dumps([point["tax_amount"] for point in points]),
+        "current_year": current_year,
+        "current_index": next((index for index, point in enumerate(points) if point["is_current"]), None),
+        "current_flags_json": json.dumps([point["is_current"] for point in points]),
     }
 
 

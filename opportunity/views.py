@@ -32,6 +32,7 @@ from .services import (
     latest_assessor_sync_summary,
     mark_saved,
     parcel_detail,
+    parcel_live_gis_context,
     tab_counts,
     watchlist_rows,
 )
@@ -162,6 +163,19 @@ def ai_search(request):
 
 
 @login_required(login_url=reverse_lazy("opportunity_login"))
+def my_searches(request):
+    return render(
+        request,
+        "opportunity/my_searches.html",
+        _chrome_context(request, {
+            "active_nav": "my_searches",
+            "searches": recent_searches_for_user(request.user),
+            "disclaimer": DISCLAIMER,
+        }),
+    )
+
+
+@login_required(login_url=reverse_lazy("opportunity_login"))
 def ai_search_detail(request, search_id):
     search = get_object_or_404(OpportunitySearch, pk=search_id, user=request.user)
     is_pending = search.status == OpportunitySearch.STATUS_DRAFT
@@ -254,18 +268,33 @@ def ai_search_feedback(request, search_id):
 @login_required(login_url=reverse_lazy("opportunity_login"))
 def parcel(request, parcel_number):
     is_saved = OpportunitySavedParcel.objects.filter(user=request.user, parcel_number=parcel_number.upper()).exists()
-    use_ai_feasibility = is_saved
-    detail = parcel_detail(parcel_number, include_dossier=is_saved, use_ai_feasibility=use_ai_feasibility)
+    detail = parcel_detail(parcel_number, include_dossier=True, use_ai_feasibility=False)
     if not detail:
         raise Http404("Parcel not found")
     detail["is_saved"] = is_saved
-    detail["is_locked"] = not is_saved
-    detail["ai_feasibility_requested"] = use_ai_feasibility
+    detail["is_locked"] = False
+    detail["ai_feasibility_requested"] = False
     detail["source_tab"] = ""
     return render(
         request,
         "opportunity/parcel_detail.html",
         _chrome_context(request, {"active_nav": "opportunities", "parcel": detail, "disclaimer": DISCLAIMER}),
+    )
+
+
+@login_required(login_url=reverse_lazy("opportunity_login"))
+def parcel_live_gis(request, parcel_number):
+    scope = (request.GET.get("scope") or "core").strip().lower()
+    if scope not in {"core", "expanded"}:
+        return HttpResponseBadRequest("Unknown GIS scope")
+    try:
+        context = parcel_live_gis_context(parcel_number, scope=scope)
+    except ValueError as exc:
+        return HttpResponseBadRequest(str(exc))
+    return render(
+        request,
+        "opportunity/partials/parcel_live_gis.html",
+        {"parcel_number": parcel_number.upper(), "gis_context": context, "scope": scope},
     )
 
 

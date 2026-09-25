@@ -1,0 +1,33 @@
+<section class="pb-panel pb-rail-panel pb-gis-panel" id="parcel-live-gis" aria-busy="false">
+  <p class="pb-section-eyebrow">Live checks</p>
+  <h3>Additional GIS Checks</h3>
+  <p class="pb-muted">Live ArcGIS overlays checked for {{ parcel_number }}{% if gis_context.retrieved_at %} at {{ gis_context.retrieved_at|date:"M j, Y g:i A" }}{% endif %}. These are informational screening results, not permitting or legal determinations.</p>
+  {% if gis_context.status == "error" %}
+    <p class="pb-muted">{{ gis_context.error }}</p>
+    <button class="pb-button secondary" type="button" hx-get="{% url 'opportunity_parcel_live_gis' parcel_number %}?scope={{ scope }}" hx-target="#parcel-live-gis" hx-swap="outerHTML">Retry</button>
+  {% elif gis_context.layers %}
+    <div class="pb-gis-layer-list">
+      {% for layer in gis_context.layers %}
+        <details>
+          <summary><span>{{ layer.label }}</span><small>{{ layer.count }}</small></summary>
+          <div class="pb-gis-feature-list">
+            {% if layer.error %}<p class="pb-muted">{{ layer.error }}</p>{% endif %}
+            {% for feature in layer.rows %}
+              <div>
+                <strong>{{ feature.primary }}</strong>
+                {% for detail in feature.details %}<span>{{ detail }}</span>{% endfor %}
+              </div>
+            {% empty %}
+              <p class="pb-muted">No intersecting features found.</p>
+            {% endfor %}
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="pb-muted">No live overlay hits found.</p>
+  {% endif %}
+  {% if scope == "core" %}
+    <button class="pb-button secondary" type="button" hx-get="{% url 'opportunity_parcel_live_gis' parcel_number %}?scope=expanded" hx-target="#parcel-live-gis" hx-swap="outerHTML">Load expanded GIS review</button>
+  {% endif %}
+</section>

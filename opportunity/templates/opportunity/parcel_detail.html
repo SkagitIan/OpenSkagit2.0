@@ -19,19 +19,10 @@
         {% endwith %}
         <a class="pb-button secondary" href="{{ parcel.parcel_url }}" target="_blank" rel="noopener">Source</a>
         {% if parcel.map_url %}<a class="pb-button secondary" href="{{ parcel.map_url }}" target="_blank" rel="noopener">Map</a>{% endif %}
-        {% with ask_prompt="Tell me about parcel "|add:parcel.parcel_number|add:" -- its zoning, budget-funded services, and recent sales." %}
-        <a class="pb-button secondary" href="{% url 'ask' %}?prompt={{ ask_prompt|urlencode }}">Ask about this parcel</a>
-        {% endwith %}
       </div>
     </div>
 
-    {% if parcel.is_locked %}
-      <div class="pb-unlock-card">
-        <h2>Heart this parcel to unlock the detail page.</h2>
-        <p class="pb-muted">Saved parcels get the deeper property dossier, zoning feasibility screen, sales, land segments, improvements, and map imagery tools.</p>
-      </div>
-    {% else %}
-      <div class="pb-parcel-kpis">
+    <div class="pb-parcel-kpis">
         <article class="pb-kpi-card pb-kpi-card-teal">
           <span>Assessed value</span>
           <strong>{{ parcel.assessed_value_fmt }}</strong>
@@ -52,11 +43,9 @@
           <strong>{{ parcel.total_taxes_fmt }}</strong>
           <small>{{ parcel.zoning }}</small>
         </article>
-      </div>
-    {% endif %}
+    </div>
   </section>
 
-  {% if not parcel.is_locked %}
     <div class="pb-detail-dashboard">
       <main class="pb-detail-workspace">
         <section class="pb-panel pb-chart-panel">
@@ -65,7 +54,7 @@
               <p class="pb-section-eyebrow">Trend</p>
               <h3>Value History</h3>
             </div>
-            <span class="pb-count-pill">2020-2025</span>
+            <span class="pb-count-pill">{{ parcel.history_chart.start_year }}-{{ parcel.history_chart.current_year }}</span>
           </div>
           {% if parcel.history_chart.has_data %}
             <div class="pb-history-chart">
@@ -76,65 +65,10 @@
           {% endif %}
         </section>
 
-        <section class="pb-panel pb-feasibility-panel">
-          <div class="pb-card-head">
-            <div>
-              <p class="pb-section-eyebrow">Build screen</p>
-              <h3>Feasibility</h3>
-            </div>
-          </div>
-          <div class="pb-feasibility">
-            <div class="pb-feasibility-summary">
-              <h4>{{ parcel.feasibility.headline }}</h4>
-              <p>{{ parcel.feasibility.summary }}</p>
-              {% if parcel.feasibility.note %}<p class="pb-muted">{{ parcel.feasibility.note }}</p>{% endif %}
-              {% if parcel.feasibility.sources %}
-                <div class="pb-source-links">
-                  {% for source in parcel.feasibility.sources %}
-                    <a href="{{ source }}" target="_blank" rel="noopener">Source {{ forloop.counter }}</a>
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
-            <div class="pb-feasibility-grid">
-              <div>
-                <h4>Likely Uses</h4>
-                <ul class="pb-plain-list">
-                  {% for item in parcel.feasibility.likely_uses %}
-                    <li>{{ item }}</li>
-                  {% empty %}
-                    <li>No allowed uses found in the zoning data.</li>
-                  {% endfor %}
-                </ul>
-              </div>
-              <div>
-                <h4>Constraints</h4>
-                <ul class="pb-plain-list">
-                  {% for item in parcel.feasibility.constraints %}
-                    <li>{{ item }}</li>
-                  {% empty %}
-                    <li>Review zoning, critical areas, utilities, and site standards.</li>
-                  {% endfor %}
-                </ul>
-              </div>
-              <div>
-                <h4>Next Steps</h4>
-                <ul class="pb-plain-list">
-                  {% for item in parcel.feasibility.next_steps %}
-                    <li>{{ item }}</li>
-                  {% empty %}
-                    <li>Confirm with source code and planning staff.</li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section class="pb-panel pb-dossier-panel">
           <div class="pb-card-head">
             <div>
-              <p class="pb-section-eyebrow">Dossier</p>
+              <p class="pb-section-eyebrow">Records</p>
               <h3>Parcel Records</h3>
             </div>
           </div>
@@ -148,7 +82,7 @@
             {% endfor %}
           </div>
           <div class="pb-dossier-disclosures">
-            <details open>
+            <details>
               <summary>Improvements</summary>
               <div class="pb-mini-table pb-mini-table-scroll">
                 {% for row in parcel.dossier.improvements %}
@@ -176,7 +110,7 @@
                 {% endfor %}
               </div>
             </details>
-            <details open>
+            <details>
               <summary>Zoning</summary>
               <div class="pb-mini-table">
                 {% for row in parcel.dossier.zoning_overlaps %}
@@ -209,7 +143,7 @@
               <iframe class="pb-parcel-map" src="{{ parcel.map_embed_url }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map for {{ parcel.parcel_number }}"></iframe>
             {% else %}
               <div class="pb-map-canvas pb-parcel-map-empty">
-                <span class="pb-muted">No parcel geometry available.</span>
+                <span class="pb-muted">Map unavailable for this parcel.</span>
               </div>
             {% endif %}
           </section>
@@ -262,7 +196,8 @@
 
         <section class="pb-panel pb-rail-panel pb-gis-panel">
           <p class="pb-section-eyebrow">GIS</p>
-          <h3>GIS Layers</h3>
+          <h3>Local GIS Summary</h3>
+          <p class="pb-muted">Source: OpenSkagit local PostGIS data.</p>
           {% if parcel.gis_context.layers %}
             <div class="pb-gis-layer-list">
               {% for layer in parcel.gis_context.layers %}
@@ -288,8 +223,24 @@
           {% elif parcel.gis_context.error %}
             <p class="pb-muted">{{ parcel.gis_context.error }}</p>
           {% else %}
-            <p class="pb-muted">No relevant GIS layer hits found for this parcel.</p>
+            <p class="pb-muted">No local GIS summary is available for this parcel.</p>
           {% endif %}
+        </section>
+
+        <section class="pb-panel pb-rail-panel pb-gis-panel" id="parcel-live-gis" aria-busy="true">
+          <p class="pb-section-eyebrow">Live checks</p>
+          <h3>Additional GIS Checks</h3>
+          <div id="parcel-live-gis-loading" class="pb-gis-loading" aria-live="polite">
+            <span class="pb-page-spinner" aria-hidden="true"></span>
+            <span>Checking live GIS overlays…</span>
+          </div>
+          <div
+            hx-get="{% url 'opportunity_parcel_live_gis' parcel.parcel_number %}?scope=core"
+            hx-trigger="revealed"
+            hx-target="#parcel-live-gis"
+            hx-swap="outerHTML"
+            hx-indicator="#parcel-live-gis-loading">
+          </div>
         </section>
 
         <section class="pb-panel pb-rail-panel">
@@ -314,16 +265,17 @@
         </section>
       </aside>
     </div>
-  {% endif %}
 </div>
 
-{% if parcel.history_chart.has_data and not parcel.is_locked %}
+{% if parcel.history_chart.has_data %}
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
   <script>
     (() => {
       const canvas = document.getElementById("parcel-value-history");
       if (!canvas || !window.Chart) return;
       const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+      const currentFlags = {{ parcel.history_chart.current_flags_json|safe }};
+      const currentColor = "#d14d72";
       new Chart(canvas, {
         type: "line",
         data: {
@@ -334,26 +286,28 @@
               data: {{ parcel.history_chart.value_values_json|safe }},
               borderColor: "#00828A",
               backgroundColor: "rgba(0, 130, 138, 0.12)",
-              pointBackgroundColor: "#ffffff",
-              pointBorderColor: "#00828A",
+              pointBorderColor: currentFlags.map((isCurrent) => isCurrent ? currentColor : "#00828A"),
+              pointBackgroundColor: currentFlags.map((isCurrent) => isCurrent ? currentColor : "#ffffff"),
               pointBorderWidth: 3,
               pointRadius: 5,
               pointHoverRadius: 7,
               tension: 0.28,
-              yAxisID: "value"
+              yAxisID: "value",
+              segment: { borderColor: (context) => currentFlags[context.p1DataIndex] ? currentColor : "#00828A" }
             },
             {
               label: "Tax amount",
               data: {{ parcel.history_chart.tax_values_json|safe }},
               borderColor: "#FDB913",
               backgroundColor: "rgba(253, 185, 19, 0.14)",
-              pointBackgroundColor: "#ffffff",
-              pointBorderColor: "#FDB913",
+              pointBorderColor: currentFlags.map((isCurrent) => isCurrent ? currentColor : "#FDB913"),
+              pointBackgroundColor: currentFlags.map((isCurrent) => isCurrent ? currentColor : "#ffffff"),
               pointBorderWidth: 3,
               pointRadius: 5,
               pointHoverRadius: 7,
               tension: 0.28,
-              yAxisID: "tax"
+              yAxisID: "tax",
+              segment: { borderColor: (context) => currentFlags[context.p1DataIndex] ? currentColor : "#FDB913" }
             }
           ]
         },
@@ -365,7 +319,9 @@
             legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
             tooltip: {
               callbacks: {
-                label: (context) => `${context.dataset.label}: ${currency.format(context.parsed.y || 0)}`
+                label: (context) => context.parsed.y == null
+                  ? `${context.dataset.label}: n/a`
+                  : `${context.dataset.label}: ${currency.format(context.parsed.y)}`
               }
             }
           },
@@ -400,8 +356,7 @@
     });
   });
 </script>
-{% if not parcel.is_locked %}
-  <script>
+<script>
     (() => {
       const frame = document.querySelector("[data-aerial-frame]");
       const image = document.querySelector("[data-aerial-image]");
@@ -425,7 +380,6 @@
       });
     })();
   </script>
-{% endif %}
 
 {% include "opportunity/_chrome_close.html" %}
 {% endblock %}
