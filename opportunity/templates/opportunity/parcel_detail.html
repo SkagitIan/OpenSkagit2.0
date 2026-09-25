@@ -351,10 +351,12 @@
         maxZoom: 20,
         attribution: "© Esri, HERE, Garmin, Intermap, NPS"
       }).addTo(map);
-      const aerial = L.tileLayer("https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}", {
-        maxZoom: 20,
-        maxNativeZoom: 16,
-        attribution: "USGS The National Map"
+      const aerial = L.tileLayer("https://svc.pictometry.com/Image/36AB6FD9-8DC8-3133-7871-1347FB79B3E8/wmts/PICT-WASKAG25-qSfR3O1lit/default/GoogleMapsCompatible/{z}/{x}/{y}.png", {
+        tileSize: 256,
+        maxZoom: 22,
+        updateWhenZooming: false,
+        keepBuffer: 2,
+        attribution: "Pictometry/Cyclomedia · 2025"
       });
       L.marker(center).addTo(map).bindPopup("{{ parcel.parcel_number|escapejs }}").openPopup();
       L.control.layers({ "Street": street, "Aerial": aerial }, null, { position: "topright" }).addTo(map);
