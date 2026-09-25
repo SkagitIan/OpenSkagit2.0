@@ -2880,18 +2880,24 @@ def parcel_value_history(parcel_number: str) -> list[dict[str, Any]]:
     rows = _fetch(
         """
         WITH fetched_history AS (
-            SELECT tax_year, total_value, land_value, building_value, tax_amount, 0 AS source_priority
+            SELECT tax_year, value_year, total_value, land_value, building_value, tax_amount,
+                   'published'::text AS tax_amount_status,
+                   'county_property_history'::text AS value_source,
+                   2 AS source_priority
             FROM skagit_parcel_history
             WHERE parcel_number = %s
         ), assessor_history AS (
             SELECT DISTINCT ON (h.appraisal_year)
                    h.appraisal_year AS tax_year,
+                   h.appraisal_year AS value_year,
                    h.assessed_value AS total_value,
                    COALESCE(h.improved_land_value, 0)
                      + COALESCE(h.unimproved_land_value, 0)
                      + COALESCE(h.timber_land_value, 0) AS land_value,
                    h.building_value,
                    NULL::numeric AS tax_amount,
+                   'unpublished'::text AS tax_amount_status,
+                   'assessor_roll_history'::text AS value_source,
                    1 AS source_priority
             FROM assessor_roll_history h
             WHERE upper(trim(h.parcel_number)) = %s
@@ -2908,12 +2914,20 @@ def parcel_value_history(parcel_number: str) -> list[dict[str, Any]]:
                        CASE WHEN trim(COALESCE(p.tax_year, '')) ~ '^[0-9]+$'
                             THEN trim(p.tax_year)::integer END
                    ) AS tax_year,
+                   COALESCE(
+                       CASE WHEN trim(COALESCE(p.appraisal_year, '')) ~ '^[0-9]+$'
+                            THEN trim(p.appraisal_year)::integer END,
+                       CASE WHEN trim(COALESCE(p.tax_year, '')) ~ '^[0-9]+$'
+                            THEN trim(p.tax_year)::integer END
+                   ) AS value_year,
                    p.assessed_value AS total_value,
                    COALESCE(p.impr_land_value, 0)
                      + COALESCE(p.unimpr_land_value, 0) AS land_value,
                    p.building_value,
-                   p.total_taxes AS tax_amount,
-                   2 AS source_priority
+                   NULL::numeric AS tax_amount,
+                   'unpublished'::text AS tax_amount_status,
+                   'opportunity_current_parcels'::text AS value_source,
+                   0 AS source_priority
             FROM opportunity_current_parcels p
             WHERE upper(trim(p.parcel_number)) = %s
         ), combined AS (
@@ -2924,12 +2938,14 @@ def parcel_value_history(parcel_number: str) -> list[dict[str, Any]]:
             SELECT * FROM current_roll
         ), deduped AS (
             SELECT DISTINCT ON (tax_year)
-                   tax_year, total_value, land_value, building_value, tax_amount
+                   tax_year, value_year, total_value, land_value, building_value, tax_amount,
+                   tax_amount_status, value_source
             FROM combined
-            WHERE tax_year IS NOT NULL
+            WHERE tax_year IS NOT NULL AND tax_year >= 2020
             ORDER BY tax_year DESC, source_priority DESC
         )
-        SELECT tax_year, total_value, land_value, building_value, tax_amount
+        SELECT tax_year, value_year, total_value, land_value, building_value, tax_amount,
+               tax_amount_status, value_source
         FROM deduped
         ORDER BY tax_year DESC
         LIMIT 8
@@ -2937,6 +2953,9 @@ def parcel_value_history(parcel_number: str) -> list[dict[str, Any]]:
         [parcel_number.upper(), parcel_number.upper(), parcel_number.upper()],
     )
     for row in rows:
+        row["tax_amount_status"] = row.get("tax_amount_status") or (
+            "published" if _decimal(row.get("tax_amount")) is not None else "unpublished"
+        )
         row["total_value_fmt"] = money(row.get("total_value"))
         row["tax_amount_fmt"] = money(row.get("tax_amount"))
     return rows
@@ -2957,9 +2976,10 @@ def parcel_value_history_chart(parcel_number: str) -> dict[str, Any]:
     plot_height = chart_height - top_pad - bottom_pad
 
     value_values = [_decimal(row.get("total_value")) or Decimal("0") for row in rows]
-    tax_values = [_decimal(row.get("tax_amount")) or Decimal("0") for row in rows]
+    tax_values = [_decimal(row.get("tax_amount")) for row in rows]
+    tax_bounds_values = [value for value in tax_values if value is not None] or [Decimal("0")]
     value_min, value_max = _chart_bounds(value_values)
-    tax_min, tax_max = _chart_bounds(tax_values)
+    tax_min, tax_max = _chart_bounds(tax_bounds_values)
 
     points = []
     value_polyline = []
@@ -2980,6 +3000,11 @@ def parcel_value_history_chart(parcel_number: str) -> dict[str, Any]:
             "tax_y": _svg_number(tax_y),
             "total_value": int(value),
             "tax_amount": int(tax) if _decimal(row.get("tax_amount")) is not None else None,
+            "value_year": row.get("value_year"),
+            "tax_amount_status": row.get("tax_amount_status") or (
+                "published" if _decimal(row.get("tax_amount")) is not None else "unpublished"
+            ),
+            "value_source": row.get("value_source"),
             "total_value_fmt": money(value),
             "tax_amount_fmt": money(tax),
         }
@@ -3000,6 +3025,8 @@ def parcel_value_history_chart(parcel_number: str) -> dict[str, Any]:
         "labels_json": json.dumps([str(point["tax_year"]) for point in points]),
         "value_values_json": json.dumps([point["total_value"] for point in points]),
         "tax_values_json": json.dumps([point["tax_amount"] for point in points]),
+        "tax_statuses_json": json.dumps([point["tax_amount_status"] for point in points]),
+        "has_unpublished_tax": any(point["tax_amount_status"] == "unpublished" for point in points),
         "current_year": current_year,
         "current_index": next((index for index, point in enumerate(points) if point["is_current"]), None),
         "current_flags_json": json.dumps([point["is_current"] for point in points]),

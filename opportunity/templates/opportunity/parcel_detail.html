@@ -60,6 +60,9 @@
             <div class="pb-history-chart">
               <canvas id="parcel-value-history" role="img" aria-label="Total value and tax amount history for {{ parcel.parcel_number }}"></canvas>
             </div>
+            {% if parcel.history_chart.has_unpublished_tax %}
+              <p class="pb-muted">2027 assessed value is available; the county has not published a 2027 tax bill.</p>
+            {% endif %}
           {% else %}
             <p class="pb-muted">No value history found.</p>
           {% endif %}
@@ -275,6 +278,7 @@
       if (!canvas || !window.Chart) return;
       const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
       const currentFlags = {{ parcel.history_chart.current_flags_json|safe }};
+      const taxStatuses = {{ parcel.history_chart.tax_statuses_json|safe }};
       const currentColor = "#d14d72";
       new Chart(canvas, {
         type: "line",
@@ -319,9 +323,11 @@
             legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
             tooltip: {
               callbacks: {
-                label: (context) => context.parsed.y == null
-                  ? `${context.dataset.label}: n/a`
-                  : `${context.dataset.label}: ${currency.format(context.parsed.y)}`
+                label: (context) => context.dataset.label === "Tax amount" && taxStatuses[context.dataIndex] === "unpublished"
+                  ? "Tax amount: Not published"
+                  : context.parsed.y == null
+                    ? `${context.dataset.label}: n/a`
+                    : `${context.dataset.label}: ${currency.format(context.parsed.y)}`
               }
             }
           },

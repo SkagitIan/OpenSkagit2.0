@@ -12,6 +12,7 @@ from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.test import SimpleTestCase, TestCase, override_settings, tag
 from django.urls import reverse
+from taxtool.management.commands.fetch_parcel_history import Command as FetchParcelHistoryCommand, parse_assessed_values
 
 from . import services
 from .ai_search import (
@@ -57,6 +58,41 @@ from .r2_search import (
 
 
 class OpportunityHelperTests(SimpleTestCase):
+    def test_chart_keeps_unpublished_tax_as_null(self):
+        rows = [
+            {"tax_year": year, "value_year": year, "total_value": 30000 + (year - 2020) * 1000,
+             "land_value": 30000, "building_value": 0,
+             "tax_amount": 348 if year == 2026 else (None if year == 2027 else 300),
+             "tax_amount_status": "unpublished" if year == 2027 else "published",
+             "value_source": "assessor_roll_history" if year == 2027 else "county_property_history"}
+            for year in range(2020, 2028)
+        ]
+        with patch.object(services, "parcel_value_history", return_value=list(reversed(rows))):
+            chart = services.parcel_value_history_chart("P123265")
+        self.assertEqual(chart["start_year"], 2020)
+        self.assertEqual(chart["current_year"], 2027)
+        self.assertEqual(chart["tax_values_json"].count("null"), 1)
+        self.assertTrue(chart["has_unpublished_tax"])
+        self.assertEqual(chart["points"][-1]["tax_amount_status"], "unpublished")
+
+    def test_assessed_values_parser_reads_2026_tax(self):
+        html = """
+        <h3>Assessed Values</h3><table><tr><th>Tax Year</th><th>Value Year</th>
+        <th>Building</th><th>Land</th><th>Total</th><th>Tax</th></tr>
+        <tr><td>2026</td><td>2025</td><td></td><td>$33,600</td><td>$33,600</td><td>$348</td></tr>
+        </table>
+        """
+        row = parse_assessed_values(html)[0]
+        self.assertEqual(row["tax_year"], 2026)
+        self.assertEqual(row["tax_amount"], Decimal("348"))
+
+    def test_history_command_accepts_targeted_refresh_options(self):
+        parser = __import__("argparse").ArgumentParser()
+        FetchParcelHistoryCommand().add_arguments(parser)
+        options = parser.parse_args(["--parcel", "P123265", "--refresh"])
+        self.assertEqual(options.parcel, "P123265")
+        self.assertTrue(options.refresh)
+
     def test_money_formats_empty_and_numeric_values(self):
         self.assertEqual(services.money(None), "$0")
         self.assertEqual(services.money(Decimal("123456.78")), "$123,457")

@@ -11,6 +11,7 @@ Usage:
     python manage.py fetch_parcel_history
     python manage.py fetch_parcel_history --limit 50 --delay 0.1
     python manage.py fetch_parcel_history --retry-errors
+    python manage.py fetch_parcel_history --parcel P123265 --refresh
 """
 from __future__ import annotations
 
@@ -21,7 +22,7 @@ import urllib.request
 from decimal import Decimal, InvalidOperation
 
 from bs4 import BeautifulSoup
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.db import connection
 
 API_URL = "https://www.skagitcounty.net/search/propertym/Webservice.asmx/fillPage"
@@ -122,31 +123,65 @@ class Command(BaseCommand):
                              help="Seconds to sleep between requests.")
         parser.add_argument("--retry-errors", action="store_true",
                              help="Re-attempt parcels previously marked 'error'.")
+        parser.add_argument("--parcel", type=str, default=None,
+                             help="Fetch only this parcel number.")
+        parser.add_argument("--refresh", action="store_true",
+                             help="Bypass status skip rules and refetch matching parcels.")
 
     def handle(self, *args, **options):
         limit = options["limit"]
         delay = options["delay"]
         retry_errors = options["retry_errors"]
+        requested_parcel = (options.get("parcel") or "").strip().upper() or None
+        refresh = options.get("refresh", False)
 
         with connection.cursor() as cursor:
             cursor.execute(CREATE_HISTORY_TABLE)
             cursor.execute(CREATE_STATUS_TABLE)
 
-        statuses_to_skip = ["ok", "no_data"] if not retry_errors else ["ok", "no_data", "error"]
-        placeholders = ", ".join(["%s"] * len(statuses_to_skip))
-        query = f"""
-            SELECT p.parcel_number
-            FROM skagit_parcels p
-            WHERE p.inactive_date IS NULL
-              AND p.parcel_number NOT IN (
-                  SELECT parcel_number FROM skagit_parcel_history_status
-                  WHERE status IN ({placeholders})
-              )
-            ORDER BY p.parcel_number
-        """
-        with connection.cursor() as cursor:
-            cursor.execute(query, statuses_to_skip)
-            pending = [row[0] for row in cursor.fetchall()]
+        if requested_parcel:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT p.parcel_number
+                    FROM skagit_parcels p
+                    WHERE p.inactive_date IS NULL
+                      AND upper(trim(p.parcel_number)) = %s
+                    LIMIT 1
+                    """,
+                    [requested_parcel],
+                )
+                row = cursor.fetchone()
+            if not row:
+                raise CommandError(f"Active parcel not found: {requested_parcel}")
+            pending = [row[0]]
+        elif refresh:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT p.parcel_number
+                    FROM skagit_parcels p
+                    WHERE p.inactive_date IS NULL
+                    ORDER BY p.parcel_number
+                    """
+                )
+                pending = [row[0] for row in cursor.fetchall()]
+        else:
+            statuses_to_skip = ["ok", "no_data", "error"] if not retry_errors else ["ok", "no_data"]
+            placeholders = ", ".join(["%s"] * len(statuses_to_skip))
+            query = f"""
+                SELECT p.parcel_number
+                FROM skagit_parcels p
+                WHERE p.inactive_date IS NULL
+                  AND p.parcel_number NOT IN (
+                      SELECT parcel_number FROM skagit_parcel_history_status
+                      WHERE status IN ({placeholders})
+                  )
+                ORDER BY p.parcel_number
+            """
+            with connection.cursor() as cursor:
+                cursor.execute(query, statuses_to_skip)
+                pending = [row[0] for row in cursor.fetchall()]
 
         if limit:
             pending = pending[:limit]
