@@ -140,12 +140,38 @@ def explore(request):
 def ai_search(request):
     error = ""
     prompt = ""
+    search_mode = OpportunitySearch.MODE_SEARCH
+    investigation_options = {
+        "max_candidates": 10,
+        "capital_preference": "not_specified",
+        "preferred_strategies": "",
+    }
     if request.method == "POST":
         prompt = (request.POST.get("prompt") or "").strip()
+        search_mode = request.POST.get("search_mode") or OpportunitySearch.MODE_SEARCH
+        if search_mode not in {OpportunitySearch.MODE_SEARCH, OpportunitySearch.MODE_INVESTIGATE}:
+            search_mode = OpportunitySearch.MODE_SEARCH
+        try:
+            max_candidates = int(request.POST.get("max_candidates") or 10)
+        except (TypeError, ValueError):
+            max_candidates = 10
+        investigation_options = {
+            "max_candidates": max(5, min(max_candidates, 20)),
+            "capital_preference": request.POST.get("capital_preference") or "not_specified",
+            "preferred_strategies": (request.POST.get("preferred_strategies") or "").strip()[:500],
+        }
         if not prompt:
             error = "Enter a natural-language search first."
         else:
-            search = start_ai_opportunity_search(request.user, prompt)
+            if search_mode == OpportunitySearch.MODE_SEARCH:
+                search = start_ai_opportunity_search(request.user, prompt)
+            else:
+                search = start_ai_opportunity_search(
+                    request.user,
+                    prompt,
+                    search_mode=search_mode,
+                    investigation_options=investigation_options,
+                )
             return redirect("opportunity_detail", search_id=search.pk)
 
     return render(
@@ -154,6 +180,8 @@ def ai_search(request):
         _chrome_context(request, {
             "active_nav": "ai_search",
             "prompt": prompt,
+            "search_mode": search_mode,
+            "investigation_options": investigation_options,
             "error": error,
             "recent_searches": recent_searches_for_user(request.user, limit=10),
             "saved_searches": saved_searches_for_user(request.user, limit=8),
@@ -194,6 +222,21 @@ def ai_search_detail(request, search_id):
         row["display_signal_labels"] = [label for label in row.get("signal_labels", []) if label not in common_signal_labels]
     zoning_outliers = _zoning_outliers(all_rows)
     rows = all_rows[(page - 1) * PAGE_SIZE:page * PAGE_SIZE]
+    investigation = search.investigation_result if isinstance(search.investigation_result, dict) else {}
+    if search.search_mode == OpportunitySearch.MODE_INVESTIGATE and investigation:
+        saved_parcels = set(
+            OpportunitySavedParcel.objects.filter(user=request.user).values_list("parcel_number", flat=True)
+        )
+        investigation = dict(investigation)
+        investigation["ranked_candidates"] = [
+            {
+                **candidate,
+                "source_tab": f"investigation:{search.pk}",
+                "source_tab_label": search.short_name or search.title or "Opportunity investigation",
+                "is_saved": candidate.get("parcel_number") in saved_parcels,
+            }
+            for candidate in investigation.get("ranked_candidates", [])
+        ]
     has_previous = page > 1
     has_next = len(all_rows) > page * PAGE_SIZE
     return render(
@@ -202,6 +245,8 @@ def ai_search_detail(request, search_id):
         _chrome_context(request, {
             "active_nav": "ai_search",
             "search": search,
+            "is_investigation": search.search_mode == OpportunitySearch.MODE_INVESTIGATE,
+            "investigation": investigation,
             "saved_opportunities": saved_searches_for_user(request.user, limit=12),
             "filter_specs": filter_specs_for_tab("generated-opportunity"),
             "filters": filters,

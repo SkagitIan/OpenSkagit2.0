@@ -31,6 +31,7 @@ from .ai_search import (
     validate_search_sql,
 )
 from .models import OpportunitySearch, OpportunitySearchFeedback
+from .investigator import run_investigation
 from .ai_evals import (
     EvalCaseResult,
     EvalFailure,
@@ -58,6 +59,66 @@ from .r2_search import (
 
 
 class OpportunityHelperTests(SimpleTestCase):
+    def test_investigator_returns_bounded_ranked_report_with_raw_codes_and_labels(self):
+        rows = [
+            {
+                "parcel_number": "P2",
+                "location": "2 MAIN ST, Sedro-Woolley",
+                "acres": 1.8,
+                "land_use_code": "911",
+                "land_use": "(911) UNDEVELOPED LAND INCORPORATED",
+                "current_use": "UNDEVELOPED LAND INCORPORATED",
+                "zoning": "R-5",
+                "zone_name": "Residential 5",
+                "waza_general": "LIR",
+                "assessed_value": 90000,
+                "building_value": 20000,
+                "land_value": 150000,
+                "risk_flags": ["No utility signal"],
+                "score": 20,
+            },
+            {
+                "parcel_number": "P1",
+                "location": "1 MAIN ST, Mount Vernon",
+                "acres": 0.1,
+                "land_use_code": "680",
+                "land_use": "(680) EDUCATION SERVICES (SCHOOLS)",
+                "zoning": "OS",
+                "zone_name": "Open Space",
+                "waza_general": "PUB",
+                "risk_flags": ["Public/open-space zoning"],
+                "score": 30,
+            },
+        ]
+        report = run_investigation("I have very limited capital and want unusual land opportunities", rows, options={"max_candidates": 5, "capital_preference": "very_limited"})
+        self.assertEqual(report["candidate_count"], 2)
+        self.assertLessEqual(report["investigated_count"], 5)
+        self.assertTrue(report["ranked_candidates"])
+        candidate = report["ranked_candidates"][0]
+        self.assertEqual(candidate["parcel_number"], "P2")
+        self.assertEqual(candidate["property"]["land_use_code"], "911")
+        self.assertIn("UNDEVELOPED LAND INCORPORATED", candidate["property"]["land_use"])
+        self.assertTrue(candidate["sources"])
+        self.assertTrue(report["rejected_candidates"])
+
+    def test_investigator_preserves_partial_lookup_errors(self):
+        rows = [{"parcel_number": "P3", "acres": 2, "land_use": "(911) UNDEVELOPED LAND INCORPORATED"}]
+
+        def lookup(_parcel):
+            raise RuntimeError("live detail unavailable")
+
+        report = run_investigation("Find an opportunity", rows, options={"max_candidates": 5}, deep_lookup=lookup)
+        self.assertEqual(report["investigated_count"], 1)
+        self.assertTrue(report["lookup_errors"])
+        self.assertEqual(report["ranked_candidates"][0]["parcel_number"], "P3")
+
+    def test_investigator_is_deterministic_for_same_evidence(self):
+        rows = [{"parcel_number": "P4", "acres": 1, "land_use": "(111) HOUSEHOLD, SFR", "building_value": 50000, "land_value": 200000, "year_built": 1975, "years_since_last_valid_sale": 25, "zoning": "R-5"}]
+        first = run_investigation("limited capital", rows, options={"max_candidates": 5})
+        second = run_investigation("limited capital", rows, options={"max_candidates": 5})
+        first["generated_at"] = second["generated_at"] = "same"
+        self.assertEqual(first, second)
+
     def test_chart_keeps_unpublished_tax_as_null(self):
         rows = [
             {"tax_year": year, "value_year": year, "total_value": 30000 + (year - 2020) * 1000,
@@ -1079,6 +1140,34 @@ class OpportunityAISearchTests(TestCase):
         response = self.client.get(reverse("opportunity_ai_search"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Search opportunities in plain English")
+        self.assertContains(response, "Investigate opportunities")
+
+    @patch("opportunity.views.start_ai_opportunity_search")
+    def test_investigation_mode_passes_bounded_options(self, start_ai_opportunity_search):
+        search = OpportunitySearch.objects.create(user=self.user, prompt="limited capital land", status=OpportunitySearch.STATUS_DRAFT)
+        start_ai_opportunity_search.return_value = search
+        self.client.login(username="user", password="pass")
+        response = self.client.post(
+            reverse("opportunity_ai_search"),
+            {
+                "prompt": "limited capital land",
+                "search_mode": "investigate",
+                "max_candidates": "20",
+                "capital_preference": "very_limited",
+                "preferred_strategies": "option, seller financing",
+            },
+        )
+        self.assertRedirects(response, reverse("opportunity_detail", args=[search.pk]))
+        start_ai_opportunity_search.assert_called_once_with(
+            self.user,
+            "limited capital land",
+            search_mode="investigate",
+            investigation_options={
+                "max_candidates": 20,
+                "capital_preference": "very_limited",
+                "preferred_strategies": "option, seller financing",
+            },
+        )
 
     def test_ai_search_page_lists_unsaved_pending_searches(self):
         OpportunitySearch.objects.create(

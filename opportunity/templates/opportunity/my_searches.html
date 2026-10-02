@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}My Searches | Parcel Book{% endblock %}
+
+{% block content %}
+{% include "opportunity/_chrome_open.html" %}
+
+<div class="pb-page-head">
+  <div>
+    <p class="pb-kicker">Organize</p>
+    <h1>My Searches</h1>
+    <p class="pb-muted">Keep useful parcel searches in one place.</p>
+  </div>
+  <a class="pb-button" href="{% url 'opportunity_ai_search' %}">New search</a>
+</div>
+
+<section class="pb-panel pb-search-list-panel">
+  {% for search in searches %}
+    <article class="pb-saved-search-row">
+      <div class="pb-saved-search-main">
+        <a class="pb-card-title" href="{% url 'opportunity_detail' search.pk %}">{{ search.short_name|default:search.title|default:"Parcel search" }}</a>
+        {% if search.search_mode == "investigate" %}<span class="pb-chip">Investigation</span>{% endif %}
+        <p>{{ search.criteria_summary|default:search.prompt|truncatechars:150 }}</p>
+      </div>
+      <div class="pb-saved-search-meta">
+        <strong>{{ search.result_count|default:0 }} result{{ search.result_count|default:0|pluralize }}</strong>
+        <span>Updated {{ search.updated_at|timesince }} ago</span>
+      </div>
+      <div class="pb-card-actions">
+        <a class="pb-button secondary" href="{% url 'opportunity_detail' search.pk %}">Open</a>
+        <form class="pb-loading-form" method="post" action="{% url 'opportunity_ai_search_refresh' search.pk %}" data-loading-label="Refreshing...">
+          {% csrf_token %}
+          <button class="pb-button secondary pb-loading-button" type="submit"><span class="pb-button-label">Refresh</span><span class="pb-button-spinner" aria-hidden="true"></span></button>
+        </form>
+        <form method="post" action="{% url 'opportunity_ai_search_delete' search.pk %}">
+          {% csrf_token %}
+          <button class="pb-link-button" type="submit">Delete</button>
+        </form>
+      </div>
+    </article>
+  {% empty %}
+    <div class="pb-empty-state">
+      <strong>No saved searches yet.</strong>
+      <span>Describe the parcels you want and save the search when the results look useful.</span>
+      <a class="pb-button" href="{% url 'opportunity_ai_search' %}">Search parcels</a>
+    </div>
+  {% endfor %}
+</section>
+
+<script>
+  document.querySelectorAll(".pb-loading-form").forEach(function (form) {
+    form.addEventListener("submit", function () {
+      var button = form.querySelector(".pb-loading-button");
+      if (!button) return;
+      button.disabled = true;
+      button.classList.add("is-loading");
+      var label = button.querySelector(".pb-button-label");
+      if (label) label.textContent = form.dataset.loadingLabel || "Working...";
+    });
+  });
+</script>
+
+{% include "opportunity/_chrome_close.html" %}
+{% endblock %}

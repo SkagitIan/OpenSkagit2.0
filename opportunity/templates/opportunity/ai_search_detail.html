@@ -9,7 +9,7 @@
 
 <div class="pb-page-head">
   <div>
-    <p class="pb-kicker">Opportunity</p>
+    <p class="pb-kicker">{% if is_investigation %}Opportunity investigation{% else %}Opportunity{% endif %}</p>
     <h1>{{ search.short_name|default:search.title|default:"Finding target parcels" }}</h1>
   </div>
 </div>
@@ -42,19 +42,21 @@
   {% else %}
     <div>
       <strong>{{ display_result_count }} result{{ display_result_count|pluralize }}</strong>
-      <p class="pb-muted"><span class="pb-query-label">Original prompt:</span> {{ search.prompt }}</p>
-      {% if search.criteria_summary %}
-        <p class="pb-muted">{{ search.criteria_summary }}</p>
-      {% endif %}
+      <p class="pb-muted">{{ search.criteria_summary|default:"Matching parcels based on your search." }}</p>
+      <details class="pb-search-details">
+        <summary>Search details</summary>
+        <p class="pb-muted">{{ search.prompt }}</p>
+        {% if search.assumptions %}<p class="pb-muted">{{ search.assumptions|join:", " }}</p>{% endif %}
+      </details>
     </div>
     <div class="pb-card-actions">
       {% if not search.is_saved %}
         <form method="post" action="{% url 'opportunity_ai_search_save' search.pk %}">
           {% csrf_token %}
-          <button class="pb-button" type="submit">Save this opportunity</button>
+          <button class="pb-button" type="submit">Save search</button>
         </form>
       {% else %}
-        <span class="pb-chip">Saved opportunity</span>
+        <span class="pb-chip">Saved search</span>
       {% endif %}
       <form class="pb-loading-form" method="post" action="{% url 'opportunity_ai_search_refresh' search.pk %}" data-loading-label="Refreshing...">
         {% csrf_token %}
@@ -75,21 +77,108 @@
 </section>
 
 {% if not is_pending and search.status != "error" %}
+{% if is_investigation %}
+<section class="pb-panel pb-investigation-report">
+  <div class="pb-investigation-header">
+    <div>
+      <p class="pb-section-eyebrow">Bounded research pass</p>
+      <h2>{{ investigation.result_count|default:0 }} parcels worth human review</h2>
+      <p class="pb-muted">Reviewed {{ investigation.investigated_count|default:0 }} of {{ investigation.candidate_count|default:0 }} deduplicated search candidates. These are screening signals, not determinations.</p>
+    </div>
+    <span class="pb-investigation-status pb-investigation-status-{{ search.investigation_status }}">{{ search.investigation_status|default:"not started" }}</span>
+  </div>
+  {% if investigation.global_warnings %}
+    <div class="pb-investigation-warnings">
+      {% for warning in investigation.global_warnings %}<span class="pb-flag">{{ warning }}</span>{% endfor %}
+    </div>
+  {% endif %}
+  {% if investigation.hypotheses %}
+    <div class="pb-investigation-hypotheses">
+      {% for hypothesis in investigation.hypotheses %}
+        <span class="pb-chip">{{ hypothesis.label }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <div class="pb-investigation-candidates">
+    {% for candidate in investigation.ranked_candidates %}
+      <article class="pb-investigation-candidate">
+        <div class="pb-investigation-candidate-head">
+          <div>
+            <span class="pb-investigation-rank">#{{ candidate.rank }}</span>
+            <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' candidate.parcel_number %}">{{ candidate.parcel_number }}</a>
+            <strong>{{ candidate.property.location|default:"Location not found" }}</strong>
+          </div>
+          <div class="pb-investigation-score">
+            <strong>{{ candidate.final_score }}</strong>
+            <span>screening score</span>
+          </div>
+        </div>
+        <div class="pb-investigation-facts">
+          <span><strong>{{ candidate.property.acres|default:"n/a" }}</strong><small>Acres</small></span>
+          <span><strong>{{ candidate.property.land_use_code|default:"n/a" }}</strong><small>Raw land-use code</small></span>
+          <span><strong>{{ candidate.property.land_use|default:candidate.property.current_use|default:"n/a" }}</strong><small>Land-use record</small></span>
+          <span><strong>{{ candidate.property.zoning|default:"n/a" }}</strong><small>Raw zoning</small></span>
+          <span><strong>{{ candidate.property.zone_name|default:"n/a" }}</strong><small>Zoning description</small></span>
+        </div>
+        <div class="pb-investigation-columns">
+          <div>
+            <h3>Why investigate</h3>
+            <ul>{% for item in candidate.why_it_survived %}<li>{{ item }}</li>{% empty %}<li>Limited supporting evidence was found.</li>{% endfor %}</ul>
+          </div>
+          <div>
+            <h3>What could kill the idea</h3>
+            <ul>{% for item in candidate.why_it_might_fail %}<li>{{ item }}</li>{% empty %}<li>Confirm the key unknowns before spending money.</li>{% endfor %}</ul>
+          </div>
+        </div>
+        <div class="pb-investigation-hypothesis-list">
+          {% for hypothesis in candidate.hypotheses %}
+            <details>
+              <summary><span>{{ hypothesis.name }}</span><b class="pb-investigation-hypothesis-{{ hypothesis.status }}">{{ hypothesis.status|cut:"_"|title }}</b></summary>
+              {% if hypothesis.evidence %}<p><strong>Evidence:</strong> {{ hypothesis.evidence|join:", " }}</p>{% endif %}
+              {% if hypothesis.contradictions %}<p><strong>Contradictions:</strong> {{ hypothesis.contradictions|join:", " }}</p>{% endif %}
+              {% if hypothesis.next_checks %}<p><strong>Next checks:</strong> {{ hypothesis.next_checks|join:", " }}</p>{% endif %}
+            </details>
+          {% endfor %}
+        </div>
+        {% if candidate.possible_structures %}
+          <div class="pb-investigation-structures"><strong>Possible structures to explore:</strong> {{ candidate.possible_structures|join:" " }}</div>
+        {% endif %}
+        {% if candidate.sources %}
+          <div class="pb-investigation-sources"><strong>Evidence sources:</strong>
+            {% for source in candidate.sources %}
+              <span title="{{ source.scope }}">{{ source.source_name|default:source.source_id }}</span>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+        <div class="pb-investigation-actions">
+          <a class="pb-button secondary" href="{% url 'opportunity_parcel_detail' candidate.parcel_number %}">View property</a>
+          {% include "opportunity/_save_form.html" with row=candidate %}
+        </div>
+      </article>
+    {% empty %}
+      <div class="pb-empty-state">
+        <strong>No candidates survived the investigation pass.</strong>
+        <span>Refresh the investigation or broaden the original search.</span>
+      </div>
+    {% endfor %}
+  </div>
+  {% if investigation.rejected_candidates %}
+    <details class="pb-investigation-rejected">
+      <summary>Rejected candidates ({{ investigation.rejected_candidates|length }})</summary>
+      <ul>{% for candidate in investigation.rejected_candidates %}<li><strong>{{ candidate.parcel_number }}</strong>: {{ candidate.why_might_fail|join:", " }}</li>{% endfor %}</ul>
+    </details>
+  {% endif %}
+</section>
+{% endif %}
 <section class="pb-panel">
   <div class="pb-results-toolbar">
     <div>
       <p class="pb-section-eyebrow">{{ search.short_name|default:"Opportunity" }}</p>
       <h2>{{ display_result_count }} parcel{{ display_result_count|pluralize }}</h2>
-      {% if common_signal_labels %}
-        <p class="pb-muted">Common signal: {% for label in common_signal_labels %}<span class="pb-pill">{{ label }}</span>{% endfor %}</p>
-      {% endif %}
-      {% if zoning_outliers %}
-        <p class="pb-muted">Zoning sanity check: {% for zoning in zoning_outliers %}<span class="pb-flag">{{ zoning }} appears once</span>{% endfor %}</p>
-      {% endif %}
+      <p class="pb-muted">Review the basics first, then open any property for its records.</p>
     </div>
     <div class="pb-view-toggle pb-view-toggle-light" aria-label="View">
       <a class="{% if view_mode == 'list' %}active{% endif %}" href="{% url 'opportunity_detail' search.pk %}?view=list">List</a>
-      <a class="{% if view_mode == 'card' %}active{% endif %}" href="{% url 'opportunity_detail' search.pk %}?view=card">Card</a>
       <a class="{% if view_mode == 'map' %}active{% endif %}" href="{% url 'opportunity_detail' search.pk %}?view=map">Map</a>
     </div>
   </div>
@@ -137,12 +226,12 @@
             {% if row.map_embed_url %}
               <iframe src="{{ row.map_embed_url }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map for {{ row.parcel_number }}"></iframe>
             {% else %}
-              <div class="pb-map-empty">No parcel geometry</div>
+              <div class="pb-map-empty">Map unavailable</div>
             {% endif %}
             <div>
               <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
               <div>{{ row.location }}</div>
-              <small>{{ row.zoning }} / {{ row.current_use }}</small>
+              <small>{{ row.zoning|default:"Zoning not found" }} / {{ row.current_use|default:"Current use not found" }}</small>
             </div>
             <div class="pb-icon-actions">
               {% if row.map_url %}<a class="pb-icon-button" href="{{ row.map_url }}" target="_blank" rel="noopener" title="Open map" aria-label="Open map for {{ row.parcel_number }}"><span class="pb-map-glyph"></span></a>{% endif %}
@@ -150,7 +239,7 @@
             </div>
           </article>
         {% empty %}
-          <p class="pb-muted">No parcels matched this AI search.</p>
+          <p class="pb-muted">No parcels matched this search. Try a broader description.</p>
         {% endfor %}
     </div>
   {% elif view_mode == "card" %}
@@ -186,30 +275,33 @@
   {% else %}
     <div class="pb-result-list">
       {% for row in rows %}
-        <article class="pb-list-row">
-          <div>
+        <article class="pb-investor-result-row">
+          <div class="pb-result-property">
             <a class="pb-card-title" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">{{ row.parcel_number }}</a>
-            <strong>{{ row.location }}</strong>
-            <span>{{ row.current_use }}</span>
+            <strong>{{ row.location|default:"Address not found" }}</strong>
+            <span>{{ row.current_use|default:"Current use not found" }}</span>
           </div>
-          <div>
-            <span class="pb-chip" title="{{ row.zone_definition }}">{{ row.zoning }}</span>
-            {% for signal in row.display_signal_labels|slice:":3" %}<span class="pb-pill">{{ signal }}</span>{% endfor %}
+          <div class="pb-result-facts">
+            <span><strong>{{ row.assessed_value_fmt|default:"n/a" }}</strong><small>Assessed{% if row.appraisal_year %} {{ row.appraisal_year }}{% endif %}</small></span>
+            <span><strong>{{ row.land_value_fmt|default:"n/a" }}</strong><small>Land value</small></span>
+            <span><strong>{{ row.building_value_fmt|default:"n/a" }}</strong><small>Building value</small></span>
+            <span><strong>{{ row.acres_fmt|default:"n/a" }}</strong><small>Acres</small></span>
           </div>
-          <div class="pb-list-values">
-            <strong>{{ row.assessed_value_fmt }}</strong>
-            <span>{{ row.acres_fmt }}</span>
+          <div class="pb-result-context">
+            <div>
+              <span class="pb-chip" title="{{ row.zone_definition }}">{{ row.zoning|default:"Zoning not found" }}</span>
+              {% if row.utilities %}<span class="pb-pill">{{ row.utilities }}</span>{% else %}<span class="pb-muted">Utilities not found</span>{% endif %}
+            </div>
+            {% if row.why_it_ranks %}<small>Matched because {{ row.why_it_ranks }}</small>{% endif %}
           </div>
-          <div>
-            {% for flag in row.risk_flags|slice:":2" %}<span class="pb-flag pb-flag-{{ forloop.counter }}">{{ flag }}</span>{% empty %}<span class="pb-muted">No flags</span>{% endfor %}
-          </div>
-          <div class="pb-icon-actions">
-            {% if row.map_url %}<a class="pb-icon-button" href="{{ row.map_url }}" target="_blank" rel="noopener" title="Open map" aria-label="Open map for {{ row.parcel_number }}"><span class="pb-map-glyph"></span></a>{% endif %}
+          <div class="pb-result-actions">
+            <a class="pb-button secondary" href="{% url 'opportunity_parcel_detail' row.parcel_number %}">View property</a>
+            {% if row.map_url %}<a class="pb-button secondary" href="{{ row.map_url }}" target="_blank" rel="noopener">Map</a>{% else %}<span class="pb-data-note">Map unavailable</span>{% endif %}
             {% include "opportunity/_save_form.html" %}
           </div>
         </article>
       {% empty %}
-        <p class="pb-muted">No parcels matched this AI search.</p>
+        <p class="pb-muted">No parcels matched this search. Try a broader description.</p>
       {% endfor %}
     </div>
   {% endif %}

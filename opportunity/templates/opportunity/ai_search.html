@@ -9,11 +9,33 @@
   {% if error %}<div class="pb-error">{{ error }}</div>{% endif %}
   <form class="pb-ai-form pb-loading-form" method="post" data-loading-label="Starting opportunity...">
     {% csrf_token %}
-    <label for="prompt">Search opportunities</label>
-    <textarea id="prompt" name="prompt" rows="4" placeholder="Describe acreage, location, zoning, tax, utility, value, improvement, sale, or other parcel signals.">{{ prompt }}</textarea>
+    <label for="search_mode">What should Parcel Book do?</label>
+    <select id="search_mode" name="search_mode">
+      <option value="search" {% if search_mode != "investigate" %}selected{% endif %}>Find matching parcels</option>
+      <option value="investigate" {% if search_mode == "investigate" %}selected{% endif %}>Investigate opportunities</option>
+    </select>
+    <label for="prompt">What kind of opportunity are you exploring?</label>
+    <textarea id="prompt" name="prompt" rows="4" placeholder="Try: I have limited capital. Find parcels where solving a constraint, improving the property, or structuring the deal could create an opportunity.">{{ prompt }}</textarea>
+    <div id="investigation-options" class="pb-investigation-options" {% if search_mode != "investigate" %}hidden{% endif %}>
+      <label for="max_candidates">Deep-review candidates</label>
+      <select id="max_candidates" name="max_candidates">
+        <option value="5" {% if investigation_options.max_candidates == 5 %}selected{% endif %}>5 parcels</option>
+        <option value="10" {% if investigation_options.max_candidates != 5 and investigation_options.max_candidates != 20 %}selected{% endif %}>10 parcels</option>
+        <option value="20" {% if investigation_options.max_candidates == 20 %}selected{% endif %}>20 parcels</option>
+      </select>
+      <label for="capital_preference">Capital preference</label>
+      <select id="capital_preference" name="capital_preference">
+        <option value="very_limited" {% if investigation_options.capital_preference == "very_limited" %}selected{% endif %}>Very limited capital</option>
+        <option value="moderate" {% if investigation_options.capital_preference == "moderate" %}selected{% endif %}>Moderate capital</option>
+        <option value="not_specified" {% if investigation_options.capital_preference != "very_limited" and investigation_options.capital_preference != "moderate" %}selected{% endif %}>Not specified</option>
+      </select>
+      <label for="preferred_strategies">Preferred strategies <span class="pb-muted">optional</span></label>
+      <input id="preferred_strategies" name="preferred_strategies" value="{{ investigation_options.preferred_strategies }}" placeholder="e.g. options, seller financing, subdivision, reuse">
+      <p class="pb-muted">The investigator reuses the search engine, reviews a bounded number of candidates, and reports signals to verify. It does not determine legal feasibility or profitability.</p>
+    </div>
     <div class="pb-card-actions">
       <button class="pb-button pb-loading-button" type="submit">
-        <span class="pb-button-label">Search</span>
+        <span class="pb-button-label">Search parcels</span>
         <span class="pb-button-spinner" aria-hidden="true"></span>
       </button>
     </div>
@@ -22,20 +44,62 @@
 
 <section class="pb-panel pb-saved-search-panel">
   <div class="pb-section-head">
-    <h2>Recent opportunity searches</h2>
+    <h2>Saved searches</h2>
+  </div>
+  <div class="pb-result-list">
+    {% for search in saved_searches %}
+      <article class="pb-saved-search-row">
+        <div>
+          <a class="pb-card-title" href="{% url 'opportunity_detail' search.pk %}">{{ search.short_name|default:search.title|default:"Parcel search" }}</a>
+          {% if search.search_mode == "investigate" %}<span class="pb-chip">Investigation</span>{% endif %}
+          <div class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</div>
+        </div>
+        <div class="pb-list-values">
+          <strong>{{ search.result_count }}</strong>
+          <span>result{{ search.result_count|pluralize }}</span>
+        </div>
+        <form method="post" action="{% url 'opportunity_ai_search_delete' search.pk %}">
+          {% csrf_token %}
+          <button class="pb-trash-button" type="submit" title="Delete saved search" aria-label="Delete {{ search.short_name|default:search.title|default:'saved search' }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 15h10l1-15"/><path d="M10 10v7"/><path d="M14 10v7"/></svg>
+          </button>
+        </form>
+      </article>
+    {% empty %}
+      <p class="pb-muted">Saved searches will appear here.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var mode = document.getElementById("search_mode");
+    var options = document.getElementById("investigation-options");
+    if (!mode || !options) return;
+    mode.addEventListener("change", function () {
+      options.hidden = mode.value !== "investigate";
+    });
+  }());
+</script>
+
+<section class="pb-panel pb-saved-search-panel">
+  <div class="pb-section-head">
+    <h2>Recent searches</h2>
+    <a class="pb-button secondary" href="{% url 'opportunity_my_searches' %}">View all searches</a>
   </div>
   <div class="pb-result-list">
     {% for search in recent_searches %}
       <article class="pb-saved-search-row">
         <div>
           <a class="pb-card-title" href="{% url 'opportunity_detail' search.pk %}">{{ search.short_name|default:search.title|default:"Finding target parcels" }}</a>
+          {% if search.search_mode == "investigate" %}<span class="pb-chip">Investigation</span>{% endif %}
           <div class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</div>
           {% if search.status == "draft" %}
             <span class="pb-pill">Finding parcels</span>
           {% elif search.status == "error" %}
             <span class="pb-flag">Needs another try</span>
           {% elif search.is_saved %}
-            <span class="pb-chip">Saved opportunity</span>
+            <span class="pb-chip">Saved search</span>
           {% endif %}
         </div>
         <div class="pb-list-values">
@@ -56,34 +120,6 @@
       </article>
     {% empty %}
       <p class="pb-muted">Your opportunity searches will appear here while they run and after they finish.</p>
-    {% endfor %}
-  </div>
-</section>
-
-<section class="pb-panel pb-saved-search-panel">
-  <div class="pb-section-head">
-    <h2>Saved opportunities</h2>
-  </div>
-  <div class="pb-result-list">
-    {% for search in saved_searches %}
-      <article class="pb-saved-search-row">
-        <div>
-          <a class="pb-card-title" href="{% url 'opportunity_detail' search.pk %}">{{ search.short_name|default:search.title|default:"Opportunity" }}</a>
-          <div class="pb-muted">{{ search.criteria_summary|default:search.prompt }}</div>
-        </div>
-        <div class="pb-list-values">
-          <strong>{{ search.result_count }}</strong>
-          <span>result{{ search.result_count|pluralize }}</span>
-        </div>
-        <form method="post" action="{% url 'opportunity_ai_search_delete' search.pk %}">
-          {% csrf_token %}
-          <button class="pb-trash-button" type="submit" title="Delete opportunity" aria-label="Delete {{ search.short_name|default:search.title|default:'opportunity' }}">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 15h10l1-15"/><path d="M10 10v7"/><path d="M14 10v7"/></svg>
-          </button>
-        </form>
-      </article>
-    {% empty %}
-      <p class="pb-muted">Saved opportunities will appear here.</p>
     {% endfor %}
   </div>
 </section>

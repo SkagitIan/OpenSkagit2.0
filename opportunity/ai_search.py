@@ -14,8 +14,10 @@ from typing import Any
 
 from django.conf import settings
 from django.db import DatabaseError, close_old_connections, connection, transaction
+from django.utils import timezone
 
 from .models import OpportunitySearch, OpportunitySearchFeedback
+from .investigator import run_investigation
 from .r2_search import (
     DuckDBR2OpportunityClient,
     R2SearchError,
@@ -265,12 +267,21 @@ class OpportunitySearchError(ValueError):
     pass
 
 
-def start_ai_opportunity_search(user, prompt: str) -> OpportunitySearch:
+def start_ai_opportunity_search(user, prompt: str, *, search_mode: str = OpportunitySearch.MODE_SEARCH, investigation_options: dict[str, Any] | None = None) -> OpportunitySearch:
     prompt = (prompt or "").strip()
     if not prompt:
         raise OpportunitySearchError("Enter a natural-language search first.")
 
-    search = OpportunitySearch.objects.create(user=user, prompt=prompt, status=OpportunitySearch.STATUS_DRAFT)
+    if search_mode not in {OpportunitySearch.MODE_SEARCH, OpportunitySearch.MODE_INVESTIGATE}:
+        search_mode = OpportunitySearch.MODE_SEARCH
+    search = OpportunitySearch.objects.create(
+        user=user,
+        prompt=prompt,
+        status=OpportunitySearch.STATUS_DRAFT,
+        search_mode=search_mode,
+        investigation_status=(OpportunitySearch.INVESTIGATION_DRAFT if search_mode == OpportunitySearch.MODE_INVESTIGATE else OpportunitySearch.INVESTIGATION_NOT_STARTED),
+        investigation_options=investigation_options if isinstance(investigation_options, dict) else {},
+    )
     transaction.on_commit(lambda: _start_ai_search_worker(search.pk))
     return search
 
@@ -278,7 +289,12 @@ def start_ai_opportunity_search(user, prompt: str) -> OpportunitySearch:
 def start_refresh_opportunity_search(search: OpportunitySearch) -> OpportunitySearch:
     search.status = OpportunitySearch.STATUS_DRAFT
     search.error = ""
-    search.save(update_fields=["status", "error", "updated_at"])
+    if search.search_mode == OpportunitySearch.MODE_INVESTIGATE:
+        search.investigation_status = OpportunitySearch.INVESTIGATION_DRAFT
+        search.investigation_result = {}
+        search.save(update_fields=["status", "error", "investigation_status", "investigation_result", "updated_at"])
+    else:
+        search.save(update_fields=["status", "error", "updated_at"])
     transaction.on_commit(lambda: _start_ai_search_worker(search.pk))
     return search
 
@@ -315,16 +331,22 @@ def _run_ai_search_worker(search_id: int) -> None:
             _ACTIVE_SEARCH_IDS.discard(search_id)
 
 
-def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | None = None) -> OpportunitySearch:
+def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | None = None, *, search_mode: str | None = None, investigation_options: dict[str, Any] | None = None) -> OpportunitySearch:
     prompt = (prompt or "").strip()
     if not prompt:
         raise OpportunitySearchError("Enter a natural-language search first.")
 
     search = search or OpportunitySearch.objects.create(user=user, prompt=prompt)
+    if search_mode in {OpportunitySearch.MODE_SEARCH, OpportunitySearch.MODE_INVESTIGATE}:
+        search.search_mode = search_mode
+    if investigation_options is not None:
+        search.investigation_options = investigation_options if isinstance(investigation_options, dict) else {}
+    if search.search_mode == OpportunitySearch.MODE_INVESTIGATE:
+        search.investigation_status = OpportunitySearch.INVESTIGATION_DRAFT
     search.prompt = prompt
     search.status = OpportunitySearch.STATUS_DRAFT
     search.error = ""
-    search.save(update_fields=["prompt", "status", "error", "updated_at"])
+    search.save(update_fields=["prompt", "status", "error", "search_mode", "investigation_options", "investigation_status", "updated_at"])
 
     model = _search_model()
     if not os.environ.get("OPENAI_API_KEY"):
@@ -481,6 +503,8 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
             "updated_at",
         ]
     )
+    if search.search_mode == OpportunitySearch.MODE_INVESTIGATE:
+        run_investigation_for_search(search)
     return search
 
 
@@ -510,10 +534,52 @@ def _run_graph_opportunity_search(search: OpportunitySearch, prompt: str, plan: 
     search.status = OpportunitySearch.STATUS_READY
     search.error = ""
     search.save(update_fields=["title", "criteria_summary", "assumptions", "search_plan", "plan_review", "result_diagnostics", "generated_sql", "generated_params", "query_language", "short_name", "model", "result_rows", "result_count", "status", "error", "updated_at"])
+    if search.search_mode == OpportunitySearch.MODE_INVESTIGATE:
+        run_investigation_for_search(search)
     return search
 
 def refresh_opportunity_search(search: OpportunitySearch) -> OpportunitySearch:
     return run_ai_opportunity_search(search.user, search.prompt, search=search)
+
+
+def run_investigation_for_search(search: OpportunitySearch) -> OpportunitySearch:
+    """Run the bounded second stage after the normal search has produced rows."""
+    if search.search_mode != OpportunitySearch.MODE_INVESTIGATE:
+        return search
+    try:
+        from .services import parcel_detail, parcel_live_gis_context
+
+        def deep_lookup(parcel_number: str) -> dict[str, Any] | None:
+            detail = parcel_detail(parcel_number, include_dossier=True, use_ai_feasibility=False)
+            if not detail:
+                return None
+            # Live overlays are limited to the reviewed shortlist; the broad
+            # search remains the inexpensive recall step.
+            detail["live_gis_context"] = parcel_live_gis_context(parcel_number, scope="core")
+            return detail
+
+        result = run_investigation(
+            search.prompt,
+            list(search.result_rows or [])[:DEFAULT_RESULT_LIMIT],
+            options=search.investigation_options,
+            deep_lookup=deep_lookup,
+        )
+        search.investigation_result = _json_safe(result)
+        search.investigation_status = OpportunitySearch.INVESTIGATION_READY if not result.get("lookup_errors") else OpportunitySearch.INVESTIGATION_PARTIAL
+    except Exception as exc:  # broad search remains useful if enrichment fails
+        search.investigation_status = OpportunitySearch.INVESTIGATION_ERROR
+        search.investigation_result = {
+            "goal": search.prompt,
+            "candidate_count": len(search.result_rows or []),
+            "investigated_count": 0,
+            "ranked_candidates": [],
+            "rejected_candidates": [],
+            "global_warnings": ["The broad search completed, but the investigation stage failed.", "Try refreshing the investigation."],
+            "error": _friendly_error(exc),
+        }
+    search.investigation_updated_at = timezone.now()
+    search.save(update_fields=["investigation_status", "investigation_result", "investigation_updated_at", "updated_at"])
+    return search
 
 
 def _run_generated_search(prompt: str, generated: GeneratedSearch) -> list[dict[str, Any]]:
@@ -1638,7 +1704,16 @@ def _mark_error(search: OpportunitySearch, error: str, model: str = "") -> Oppor
     search.model = model
     search.result_rows = []
     search.result_count = 0
-    search.save(update_fields=["status", "error", "model", "result_rows", "result_count", "updated_at"])
+    fields = ["status", "error", "model", "result_rows", "result_count", "updated_at"]
+    if search.search_mode == OpportunitySearch.MODE_INVESTIGATE:
+        search.investigation_status = OpportunitySearch.INVESTIGATION_ERROR
+        search.investigation_result = {
+            "goal": search.prompt,
+            "ranked_candidates": [],
+            "global_warnings": ["The broad search failed before investigation could begin."],
+        }
+        fields.extend(["investigation_status", "investigation_result"])
+    search.save(update_fields=fields)
     return search
 
 

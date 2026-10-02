@@ -25,6 +25,18 @@ class OpportunitySavedParcel(models.Model):
 
 
 class OpportunitySearch(models.Model):
+    MODE_SEARCH = "search"
+    MODE_INVESTIGATE = "investigate"
+    MODE_CHOICES = [
+        (MODE_SEARCH, "Find matching parcels"),
+        (MODE_INVESTIGATE, "Investigate opportunities"),
+    ]
+    INVESTIGATION_NOT_STARTED = "not_started"
+    INVESTIGATION_DRAFT = "draft"
+    INVESTIGATION_READY = "ready"
+    INVESTIGATION_PARTIAL = "partial"
+    INVESTIGATION_ERROR = "error"
+
     STATUS_DRAFT = "draft"
     STATUS_READY = "ready"
     STATUS_ERROR = "error"
@@ -45,6 +57,11 @@ class OpportunitySearch(models.Model):
     result_diagnostics = models.JSONField(default=dict)
     generated_sql = models.TextField(blank=True)
     query_language = models.CharField(max_length=16, default="sql")
+    search_mode = models.CharField(max_length=16, choices=MODE_CHOICES, default=MODE_SEARCH)
+    investigation_status = models.CharField(max_length=16, default=INVESTIGATION_NOT_STARTED)
+    investigation_options = models.JSONField(default=dict)
+    investigation_result = models.JSONField(default=dict)
+    investigation_updated_at = models.DateTimeField(null=True, blank=True)
     generated_params = models.JSONField(default=list)
     model = models.TextField(blank=True)
     result_rows = models.JSONField(default=list)
