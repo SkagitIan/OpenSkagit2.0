@@ -25,6 +25,22 @@ HYPOTHESES = {
     "low_capital_structure": "Low-capital structure candidate",
 }
 
+PUBLIC_OR_CIVIC_CODES = {"0", "450", "480", "670", "680", "760", "930", "970"}
+EXEMPT_OR_COMMON_AREA_CODES = {"0", "140", "500", "970"}
+PUBLIC_SCREENING_TERMS = (
+    "PARKS",
+    "PUBLIC",
+    "SCHOOL",
+    "CHURCH",
+    "CEMETERY",
+    "MOORAGE",
+    "COMMON AREA",
+    "RIGHT OF WAY",
+    "COUNTY",
+    "STATE LAND",
+    "PORT OF",
+)
+
 
 def run_investigation(
     prompt: str,
@@ -90,6 +106,28 @@ def run_investigation(
     }
 
 
+def screening_rejection(data: dict[str, Any]) -> str:
+    """Return a hard screening reason for parcels unsuitable for this MVP."""
+
+    land_use = str(data.get("land_use") or data.get("current_use") or "")
+    code = str(data.get("land_use_code") or _land_use_code(land_use)).strip()
+    text = " ".join(
+        str(data.get(key) or "")
+        for key in ("land_use", "current_use", "exemptions", "neighborhood_code", "zoning", "zone_name", "waza_general")
+    ).upper()
+    exemptions = str(data.get("exemptions") or "").strip().upper()
+    if exemptions and exemptions not in {"NONE", "NO", "N/A", "NA", "NULL"}:
+        return f"Assessor exemption signal: {exemptions}."
+    if code in PUBLIC_OR_CIVIC_CODES or code in EXEMPT_OR_COMMON_AREA_CODES:
+        return f"Land-use code {code} is public, civic, exempt, or common-area use."
+    if any(term in text for term in PUBLIC_SCREENING_TERMS) or "COMAREA" in text or "EXEMPT" in text:
+        return "The parcel record describes public, civic, common-area, or otherwise exempt land."
+    values = [_number(data.get(key)) for key in ("assessed_value", "land_value", "building_value")]
+    if all(value is not None for value in values) and all(value <= 0 for value in values):
+        return "The parcel has no positive assessed, land, or building value in the available record."
+    return ""
+
+
 def _normalize_options(options: dict[str, Any] | None) -> dict[str, Any]:
     options = options if isinstance(options, dict) else {}
     try:
@@ -132,6 +170,7 @@ def _dedupe_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def _evaluate_candidate(row: dict[str, Any], detail: dict[str, Any], options: dict[str, Any], prompt: str) -> dict[str, Any]:
     data = _combined_data(row, detail)
     parcel_number = str(data.get("parcel_number") or row.get("parcel_number") or "").strip().upper()
+    screening_reason = screening_rejection(data)
     hypotheses = []
     for key in options["hypotheses"]:
         hypotheses.append(_evaluate_hypothesis(key, data, detail, options))
@@ -142,12 +181,16 @@ def _evaluate_candidate(row: dict[str, Any], detail: dict[str, Any], options: di
     evidence_count = sum(len(item["evidence"]) for item in hypotheses)
     risk_flags = _list_values(data.get("risk_flags"))
     risk_score = min(4, len(contradictions) + min(2, len(risk_flags)))
+    if screening_reason:
+        risk_score = 4
     information_edge = min(4, len(supported) + (1 if any(item["next_checks"] for item in hypotheses) else 0))
     low_capital_fit = min(4, len([item for item in hypotheses if item["key"] in {"long_held_property", "distress_or_complexity", "low_capital_structure"} and item["status"] in {"supported", "weakly_supported"}]) + (1 if options["capital_preference"] == "very_limited" else 0))
     upside = min(4, len([item for item in hypotheses if item["key"] in {"underutilized_improvement", "additional_use_potential", "low_capital_structure"} and item["status"] in {"supported", "weakly_supported"}]))
     evidence_quality = min(4, len({source.get("source_id") for item in hypotheses for source in item.get("sources", [])}))
     final_score = information_edge + low_capital_fit + upside + evidence_quality - risk_score
-    if contradictions and not supported and final_score <= 1:
+    if screening_reason:
+        verdict = "rejected"
+    elif contradictions and not supported and final_score <= 1:
         verdict = "rejected"
     elif supported or weak:
         verdict = "worth_human_review"
@@ -157,6 +200,9 @@ def _evaluate_candidate(row: dict[str, Any], detail: dict[str, Any], options: di
     structures = _possible_structures(hypotheses, options)
     why_survived = _dedupe_text([evidence for item in hypotheses for evidence in item["evidence"]])[:5]
     why_might_fail = _dedupe_text([reason for item in hypotheses for reason in item["contradictions"] + item["next_checks"]])[:5]
+    if screening_reason:
+        why_might_fail.insert(0, screening_reason)
+        why_might_fail = _dedupe_text(why_might_fail)
     if not why_might_fail:
         why_might_fail = ["Key feasibility and deal terms still require human verification."]
 
@@ -293,7 +339,7 @@ def _combined_data(row: dict[str, Any], detail: dict[str, Any]) -> dict[str, Any
 
 
 def _property_snapshot(data: dict[str, Any]) -> dict[str, Any]:
-    return {key: data.get(key) for key in ("location", "city", "acres", "assessed_value", "building_value", "land_value", "land_use_code", "land_use", "current_use", "zoning", "zone_name", "waza_general", "utilities") if data.get(key) not in (None, "")}
+    return {key: data.get(key) for key in ("location", "city", "acres", "assessed_value", "building_value", "land_value", "land_use_code", "land_use", "current_use", "exemptions", "neighborhood_code", "zoning", "zone_name", "waza_general", "utilities") if data.get(key) not in (None, "")}
 
 
 def _possible_structures(hypotheses: list[dict[str, Any]], options: dict[str, Any]) -> list[str]:

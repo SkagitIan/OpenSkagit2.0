@@ -82,8 +82,14 @@
   <div class="pb-investigation-header">
     <div>
       <p class="pb-section-eyebrow">Bounded research pass</p>
-      <h2>{{ investigation.result_count|default:0 }} parcels worth human review</h2>
-      <p class="pb-muted">Reviewed {{ investigation.investigated_count|default:0 }} of {{ investigation.candidate_count|default:0 }} deduplicated search candidates. These are screening signals, not determinations.</p>
+      {% if investigation_in_progress %}
+        <h2>Investigation in progress</h2>
+        <p class="pb-muted">The broad search found {{ display_result_count }} screened candidates. Parcel details and GIS evidence are being checked before the shortlist is shown.</p>
+        <script>window.setTimeout(function () { window.location.reload(); }, 4000);</script>
+      {% else %}
+        <h2>{{ investigation.result_count|default:0 }} parcels worth human review</h2>
+        <p class="pb-muted">Reviewed {{ investigation.investigated_count|default:0 }} of {{ investigation.candidate_count|default:0 }} deduplicated search candidates. These are screening signals, not determinations.</p>
+      {% endif %}
     </div>
     <span class="pb-investigation-status pb-investigation-status-{{ search.investigation_status }}">{{ search.investigation_status|default:"not started" }}</span>
   </div>
@@ -156,10 +162,12 @@
         </div>
       </article>
     {% empty %}
+      {% if not investigation_in_progress %}
       <div class="pb-empty-state">
         <strong>No candidates survived the investigation pass.</strong>
         <span>Refresh the investigation or broaden the original search.</span>
       </div>
+      {% endif %}
     {% endfor %}
   </div>
   {% if investigation.rejected_candidates %}

@@ -247,6 +247,14 @@ def ai_search_detail(request, search_id):
             "search": search,
             "is_investigation": search.search_mode == OpportunitySearch.MODE_INVESTIGATE,
             "investigation": investigation,
+            "investigation_in_progress": (
+                search.search_mode == OpportunitySearch.MODE_INVESTIGATE
+                and search.status == OpportunitySearch.STATUS_READY
+                and search.investigation_status in {
+                    OpportunitySearch.INVESTIGATION_NOT_STARTED,
+                    OpportunitySearch.INVESTIGATION_DRAFT,
+                }
+            ),
             "saved_opportunities": saved_searches_for_user(request.user, limit=12),
             "filter_specs": filter_specs_for_tab("generated-opportunity"),
             "filters": filters,

@@ -21,6 +21,7 @@ from .ai_search import (
     _extract_markdown_section,
     _fallback_generated_search,
     _fallback_search_plan,
+    filter_investigation_rows,
     _needs_zoning_mcp_context,
     _proposed_uses_for_zoning,
     _skill_reference_context,
@@ -59,6 +60,43 @@ from .r2_search import (
 
 
 class OpportunityHelperTests(SimpleTestCase):
+    def test_investigation_filter_removes_exempt_public_and_zero_value_rows(self):
+        rows = [
+            {
+                "parcel_number": "PARK1",
+                "land_use": "(760) PARKS",
+                "assessed_value": 0,
+                "land_value": 0,
+                "building_value": 0,
+            },
+            {
+                "parcel_number": "CITY1",
+                "land_use": "(911) UNDEVELOPED LAND INCORPORATED",
+                "exemptions": "EX.CITY",
+                "assessed_value": 0,
+                "land_value": 0,
+                "building_value": 0,
+            },
+            {
+                "parcel_number": "COMMON1",
+                "land_use": "(740) RECREATIONAL ACTIVITIES",
+                "neighborhood_code": "(27COMAREA) ALL COUNTY COMMON AREA LAND",
+                "assessed_value": 0,
+                "land_value": 0,
+                "building_value": 0,
+            },
+            {
+                "parcel_number": "PRIVATE1",
+                "land_use": "(911) UNDEVELOPED LAND INCORPORATED",
+                "assessed_value": 90000,
+                "land_value": 120000,
+                "building_value": 0,
+                "acres": 1.2,
+            },
+        ]
+        filtered = filter_investigation_rows(rows)
+        self.assertEqual([row["parcel_number"] for row in filtered], ["PRIVATE1"])
+
     def test_investigator_returns_bounded_ranked_report_with_raw_codes_and_labels(self):
         rows = [
             {

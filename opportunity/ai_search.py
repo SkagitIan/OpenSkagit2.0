@@ -17,7 +17,7 @@ from django.db import DatabaseError, close_old_connections, connection, transact
 from django.utils import timezone
 
 from .models import OpportunitySearch, OpportunitySearchFeedback
-from .investigator import run_investigation
+from .investigator import run_investigation, screening_rejection
 from .r2_search import (
     DuckDBR2OpportunityClient,
     R2SearchError,
@@ -376,6 +376,13 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
                 _zoning_mcp_context(prompt, plan),
             ]
         )
+        if search.search_mode == OpportunitySearch.MODE_INVESTIGATE:
+            extra_context += (
+                "\n\nInvestigation screening guardrails:\n"
+                "- Exclude assessor-exempt, city/county/state, parks, public/civic, school, church, cemetery, moorage, right-of-way, common-area, and zero-value parcels.\n"
+                "- Preserve exemptions and neighborhood/common-area fields when available so the application can verify the guardrails.\n"
+                "- Prefer privately actionable parcels with positive assessed or land value and a plausible improvement, land-use, or deal-structure question."
+            )
         for attempt in range(3):
             try:
                 generated = generate_r2_search(
@@ -401,10 +408,14 @@ def run_ai_opportunity_search(user, prompt: str, search: OpportunitySearch | Non
                     limit=DEFAULT_RESULT_LIMIT,
                 )
                 result_rows = apply_prompt_result_filters(prompt, hydrated_rows)
+                if search.search_mode == OpportunitySearch.MODE_INVESTIGATE:
+                    before_investigation_screen = len(result_rows)
+                    result_rows = filter_investigation_rows(result_rows)
+                    result_diagnostics["investigation_screened_out_count"] = before_investigation_screen - len(result_rows)
                 result_diagnostics["attempt"] = attempt + 1
                 result_diagnostics["raw_row_count"] = len(raw_rows)
                 result_diagnostics["app_filtered_row_count"] = len(result_rows)
-                if not result_rows and attempt < 2:
+                if not result_rows and attempt < 2 and search.search_mode != OpportunitySearch.MODE_INVESTIGATE:
                     last_error = (
                         "The query returned zero parcel rows after app filters. Broaden conservatively while preserving the user's core asset intent. "
                         "Use derived/parcel_search.parquet for parcel facts and make suitability signals score or match_reasons instead of hard filters unless required."
@@ -560,7 +571,7 @@ def run_investigation_for_search(search: OpportunitySearch) -> OpportunitySearch
 
         result = run_investigation(
             search.prompt,
-            list(search.result_rows or [])[:DEFAULT_RESULT_LIMIT],
+            filter_investigation_rows(list(search.result_rows or []))[:DEFAULT_RESULT_LIMIT],
             options=search.investigation_options,
             deep_lookup=deep_lookup,
         )
@@ -612,6 +623,8 @@ def display_rows_for_search(search: OpportunitySearch, user, filters: dict[str, 
     for row in rows:
         _repair_saved_row_geometry(row)
     rows = apply_prompt_result_filters(search.prompt, rows)
+    if search.search_mode == OpportunitySearch.MODE_INVESTIGATE:
+        rows = filter_investigation_rows(rows)
     rows = filter_generated_opportunity_rows(rows, filters or {})
     return mark_saved(rows, user)
 
@@ -669,6 +682,21 @@ def apply_prompt_result_filters(prompt: str, rows: list[dict[str, Any]]) -> list
     if _requires_dwelling_asset(prompt):
         rows = [row for row in rows if _has_dwelling_evidence(row)]
     return rows
+
+
+def filter_investigation_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Keep the investigation pool focused on privately actionable records."""
+
+    return [row for row in rows if not screening_rejection(_investigation_row_data(row))]
+
+
+def _investigation_row_data(row: dict[str, Any]) -> dict[str, Any]:
+    parcel_data = row.get("parcel_data") if isinstance(row.get("parcel_data"), dict) else {}
+    data = {**parcel_data, **row}
+    for key in ("exemptions", "neighborhood_code", "assessed_value", "building_value", "land_value", "land_use", "land_use_code"):
+        if data.get(key) in (None, "") and parcel_data.get(key) not in (None, ""):
+            data[key] = parcel_data[key]
+    return data
 
 
 def record_search_feedback(

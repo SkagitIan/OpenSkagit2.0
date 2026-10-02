@@ -2349,6 +2349,7 @@ def parcel_detail(parcel_number: str, include_dossier: bool = True, use_ai_feasi
             "levy_code": row.get("levy_code") or "",
             "legal_description": row.get("legal_description") or "",
             "neighborhood_code": row.get("neighborhood_code") or "",
+            "exemptions": row.get("exemptions") or "",
             "owner_lines": _owner_lines(row),
             "feature_labels": feature_labels(row),
             "risk_flags": risk_flags(
