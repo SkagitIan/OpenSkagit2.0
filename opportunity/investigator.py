@@ -8,7 +8,9 @@ shortlist using fixed hypotheses and optional parcel-detail enrichment.
 from __future__ import annotations
 
 import re
-from datetime import datetime, timezone
+import math
+from datetime import date, datetime, timezone
+from decimal import Decimal
 from typing import Any, Callable
 
 
@@ -65,7 +67,13 @@ def run_investigation(
         detail: dict[str, Any] = {}
         if deep_lookup and parcel_number:
             try:
-                detail = deep_lookup(parcel_number) or {}
+                lookup_result = deep_lookup(parcel_number)
+                if lookup_result is None:
+                    detail = {}
+                elif isinstance(lookup_result, dict):
+                    detail = lookup_result
+                else:
+                    lookup_errors.append(f"{parcel_number}: invalid parcel detail payload ({type(lookup_result).__name__})")
             except Exception as exc:  # one stale/bad parcel must not stop the pass
                 lookup_errors.append(f"{parcel_number}: {type(exc).__name__}: {str(exc)[:180]}")
                 detail = {}
@@ -90,7 +98,7 @@ def run_investigation(
     if not candidates:
         warnings.append("The existing broad search returned no candidates to investigate.")
 
-    return {
+    return _json_safe({
         "goal": str(prompt or "").strip(),
         "options": options,
         "hypotheses": [{"key": key, "label": HYPOTHESES[key]} for key in options["hypotheses"]],
@@ -103,7 +111,7 @@ def run_investigation(
         "lookup_errors": lookup_errors[:20],
         "sources": [{"source_id": source_id} for source_id in sorted(source_ids) if source_id],
         "generated_at": now.isoformat(),
-    }
+    })
 
 
 def screening_rejection(data: dict[str, Any]) -> str:
@@ -246,11 +254,13 @@ def _evaluate_hypothesis(key: str, data: dict[str, Any], detail: dict[str, Any],
     zoning = " ".join(str(data.get(key) or "") for key in ("zoning", "zone_name", "waza_general", "waza_specific")).lower()
     risk_flags = " ".join(_list_values(data.get("risk_flags"))).lower()
     publicish = code in {"140", "500", "680", "970"} or any(term in land_use.lower() for term in ("public", "school", "church", "cemetery", "moorage", "condo"))
+    gis_context = detail.get("gis_context") if isinstance(detail.get("gis_context"), dict) else {}
+    dossier = detail.get("dossier") if isinstance(detail.get("dossier"), dict) else {}
 
     if key == "solvable_constraint":
         if any(term in risk_flags for term in ("utility", "zoning", "geometry", "resource", "frontage")):
             evidence.append("The current record contains a constraint or missing-evidence signal worth verifying.")
-        if detail.get("gis_context") or detail.get("gis_context", {}).get("layers"):
+        if gis_context:
             evidence.append("Parcel-level GIS context is available for a targeted constraint review.")
         if publicish:
             contradictions.append("The current use appears public, civic, condominium, or moorage-related.")
@@ -263,7 +273,7 @@ def _evaluate_hypothesis(key: str, data: dict[str, Any], detail: dict[str, Any],
             evidence.append(f"The primary improvement appears to date from about {int(year)}.")
         if any(term in risk_flags for term in ("low", "fair", "improvement")):
             evidence.append("The record includes an older, lower-condition, or otherwise notable improvement signal.")
-        if building <= 10000 and not detail.get("dossier"):
+        if building <= 10000 and not dossier:
             contradictions.append("The parcel appears vacant or has little improvement evidence, so this is not an improvement-reuse lead.")
         next_checks.extend(["Inspect improvement records and current physical condition.", "Compare land value, replacement cost, and plausible reuse before treating this as a teardown or conversion idea."])
     elif key == "additional_use_potential":
@@ -292,9 +302,9 @@ def _evaluate_hypothesis(key: str, data: dict[str, Any], detail: dict[str, Any],
         tax_pressure = detail.get("tax_pressure") or data.get("tax_pressure")
         if tax_pressure:
             evidence.append("Tax-pressure information is present in the parcel record.")
-        if len(detail.get("dossier", {}).get("land_segments", detail.get("land_segments", [])) or []) > 1:
+        if len(dossier.get("land_segments", detail.get("land_segments", [])) or []) > 1:
             evidence.append("The parcel has multiple land segments requiring interpretation.")
-        if len(detail.get("dossier", {}).get("improvements", detail.get("improvements", [])) or []) > 1:
+        if len(dossier.get("improvements", detail.get("improvements", [])) or []) > 1:
             evidence.append("The parcel has multiple improvement records requiring interpretation.")
         if not evidence:
             contradictions.append("No clear distress or unusual-record signal was found in the available evidence.")
@@ -330,7 +340,7 @@ def _evaluate_hypothesis(key: str, data: dict[str, Any], detail: dict[str, Any],
 def _combined_data(row: dict[str, Any], detail: dict[str, Any]) -> dict[str, Any]:
     parcel_data = row.get("parcel_data") if isinstance(row.get("parcel_data"), dict) else {}
     data = {**parcel_data, **row}
-    if detail:
+    if isinstance(detail, dict) and detail:
         data.update({key: value for key, value in detail.items() if value not in (None, "")})
         for key in ("parcel_number", "acres", "land_use", "land_use_code", "zoning", "zone_name", "waza_general", "assessed_value", "building_value", "land_value", "risk_flags", "utilities"):
             if detail.get(key) not in (None, ""):
@@ -412,3 +422,21 @@ def _dedupe_text(values: list[str]) -> list[str]:
             seen.add(value)
             result.append(value)
     return result
+
+
+def _json_safe(value: Any) -> Any:
+    """Convert report values to types accepted by strict JSON encoders."""
+
+    if isinstance(value, Decimal):
+        return float(value)
+    if isinstance(value, datetime | date):
+        return value.isoformat()
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    if isinstance(value, dict):
+        return {str(key): _json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple, set)):
+        return [_json_safe(item) for item in value]
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+    return str(value)

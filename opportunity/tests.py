@@ -157,6 +157,36 @@ class OpportunityHelperTests(SimpleTestCase):
         first["generated_at"] = second["generated_at"] = "same"
         self.assertEqual(first, second)
 
+    def test_investigator_tolerates_malformed_detail_and_returns_strict_json(self):
+        rows = [{
+            "parcel_number": "P5",
+            "acres": Decimal("1.2"),
+            "land_use": "(911) UNDEVELOPED LAND INCORPORATED",
+            "assessed_value": Decimal("100"),
+            "land_value": Decimal("100000"),
+            "building_value": Decimal("0"),
+        }]
+        report = run_investigation(
+            "limited capital",
+            rows,
+            options={"max_candidates": 5},
+            deep_lookup=lambda _parcel: {"gis_context": None, "dossier": "malformed", "retrieved_at": date(2026, 1, 1)},
+        )
+        json.dumps(report, allow_nan=False)
+        self.assertEqual(report["result_count"], 1)
+        self.assertEqual(report["ranked_candidates"][0]["property"]["acres"], 1.2)
+
+    def test_investigator_records_invalid_detail_payload_as_lookup_error(self):
+        report = run_investigation(
+            "limited capital",
+            [{"parcel_number": "P6", "acres": 1, "land_use": "(911) UNDEVELOPED LAND INCORPORATED"}],
+            options={"max_candidates": 5},
+            deep_lookup=lambda _parcel: ["not", "a", "detail", "mapping"],
+        )
+        self.assertEqual(report["investigated_count"], 1)
+        self.assertTrue(report["lookup_errors"])
+        self.assertIn("invalid parcel detail payload", report["lookup_errors"][0])
+
     def test_chart_keeps_unpublished_tax_as_null(self):
         rows = [
             {"tax_year": year, "value_year": year, "total_value": 30000 + (year - 2020) * 1000,
